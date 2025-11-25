@@ -162,7 +162,7 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"methods": schema.ListAttribute{
-							MarkdownDescription: "HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list.",
+							MarkdownDescription: "HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 							Optional: true,
 							ElementType: types.StringType,
 						},

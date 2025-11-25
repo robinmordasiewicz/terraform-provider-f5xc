@@ -90,7 +90,7 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 				ElementType: types.StringType,
 			},
 			"compliances": schema.ListAttribute{
-				MarkdownDescription: "Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery.",
+				MarkdownDescription: "Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

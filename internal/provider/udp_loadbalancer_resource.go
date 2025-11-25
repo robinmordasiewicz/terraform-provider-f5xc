@@ -164,6 +164,20 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Blocks: map[string]schema.Block{
 										"public_ip": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -182,6 +196,20 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -209,6 +237,20 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 										"virtual_network": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -223,6 +265,20 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Blocks: map[string]schema.Block{
 										"virtual_site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -241,6 +297,20 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Blocks: map[string]schema.Block{
 										"virtual_site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -251,9 +321,37 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 										"virtual_site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},

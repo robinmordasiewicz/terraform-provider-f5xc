@@ -262,7 +262,20 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										"interfaces": schema.ListNestedBlock{
 											MarkdownDescription: "Interface List. List of network interfaces.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -310,11 +323,39 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 											"node_name": schema.SingleNestedBlock{
 												MarkdownDescription: "Nodes. List of nodes on which BGP routing policy has to be applied",
+												Attributes: map[string]schema.Attribute{
+													"node": schema.ListAttribute{
+														MarkdownDescription: "Node of choice. Select BGP Session on which policy will be applied.",
+														Optional: true,
+														ElementType: types.StringType,
+													},
+												},
 											},
 											"object_refs": schema.ListNestedBlock{
 												MarkdownDescription: "BGP routing policy. Select route policy to apply.",
 												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{},
+													Attributes: map[string]schema.Attribute{
+														"kind": schema.StringAttribute{
+															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+															Optional: true,
+														},
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+														"uid": schema.StringAttribute{
+															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+															Optional: true,
+														},
+													},
 												},
 											},
 											"outbound": schema.SingleNestedBlock{

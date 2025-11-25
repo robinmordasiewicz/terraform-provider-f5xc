@@ -163,7 +163,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"metric": schema.ListAttribute{
-												MarkdownDescription: "Metrics. Choose one or more metrics to be included in the detection logic",
+												MarkdownDescription: "Metrics. Choose one or more metrics to be included in the detection logic. Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`. Defaults to `NO_METRICS`.",
 												Optional: true,
 												ElementType: types.StringType,
 											},
@@ -228,18 +228,49 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										"include_failed_login_activity": schema.SingleNestedBlock{
 											MarkdownDescription: "Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior",
+											Attributes: map[string]schema.Attribute{
+												"login_failures_threshold": schema.Int64Attribute{
+													MarkdownDescription: "Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious",
+													Optional: true,
+												},
+											},
 										},
 										"include_forbidden_activity": schema.SingleNestedBlock{
 											MarkdownDescription: "Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior",
+											Attributes: map[string]schema.Attribute{
+												"forbidden_requests_threshold": schema.Int64Attribute{
+													MarkdownDescription: "Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious",
+													Optional: true,
+												},
+											},
 										},
 										"include_ip_reputation": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 										},
 										"include_non_existent_url_activity_automatic": schema.SingleNestedBlock{
 											MarkdownDescription: "Non-existent URL Automatic Activity Settings.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"high": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"low": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"medium": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"include_non_existent_url_activity_custom": schema.SingleNestedBlock{
 											MarkdownDescription: "Non-existent URL Custom Activity Setting.",
+											Attributes: map[string]schema.Attribute{
+												"nonexistent_requests_threshold": schema.Int64Attribute{
+													MarkdownDescription: "Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious",
+													Optional: true,
+												},
+											},
 										},
 										"include_rate_limit": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",

@@ -133,9 +133,47 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									Blocks: map[string]schema.Block{
 										"elastic_ips": schema.SingleNestedBlock{
 											MarkdownDescription: "Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"refs": schema.ListNestedBlock{
+													MarkdownDescription: "Cloud Elastic IP Reference List. Reference to one or more cloud elastic ip objects",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"pools": schema.SingleNestedBlock{
 											MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+											Attributes: map[string]schema.Attribute{
+												"prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 								},
@@ -226,7 +264,28 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 										"refs": schema.ListNestedBlock{
 											MarkdownDescription: "Segment. Reference to Segment Object",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -256,9 +315,39 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									Blocks: map[string]schema.Block{
 										"destination_port": schema.SingleNestedBlock{
 											MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+											Attributes: map[string]schema.Attribute{
+												"port": schema.Int64Attribute{
+													MarkdownDescription: "Port. Exact Port to match",
+													Optional: true,
+												},
+												"port_ranges": schema.StringAttribute{
+													MarkdownDescription: "Port range. Port range to match",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"no_port_match": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"source_port": schema.SingleNestedBlock{
 											MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+											Attributes: map[string]schema.Attribute{
+												"port": schema.Int64Attribute{
+													MarkdownDescription: "Port. Exact Port to match",
+													Optional: true,
+												},
+												"port_ranges": schema.StringAttribute{
+													MarkdownDescription: "Port range. Port range to match",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"no_port_match": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 									},
 								},
@@ -269,9 +358,39 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 									Blocks: map[string]schema.Block{
 										"destination_port": schema.SingleNestedBlock{
 											MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+											Attributes: map[string]schema.Attribute{
+												"port": schema.Int64Attribute{
+													MarkdownDescription: "Port. Exact Port to match",
+													Optional: true,
+												},
+												"port_ranges": schema.StringAttribute{
+													MarkdownDescription: "Port range. Port range to match",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"no_port_match": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"source_port": schema.SingleNestedBlock{
 											MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+											Attributes: map[string]schema.Attribute{
+												"port": schema.Int64Attribute{
+													MarkdownDescription: "Port. Exact Port to match",
+													Optional: true,
+												},
+												"port_ranges": schema.StringAttribute{
+													MarkdownDescription: "Port range. Port range to match",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"no_port_match": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 									},
 								},
@@ -283,7 +402,28 @@ func (r *NatPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 										"refs": schema.ListNestedBlock{
 											MarkdownDescription: "Virtual Network Reference. Reference to virtual network",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},

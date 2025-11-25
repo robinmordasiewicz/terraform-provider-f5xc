@@ -178,7 +178,23 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 										"prefixes": schema.ListNestedBlock{
 											MarkdownDescription: "Prefix list. List of IP prefix",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"ip_prefixes": schema.StringAttribute{
+														MarkdownDescription: "IP Prefix. IP prefix to match on BGP route",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"equal_or_longer_than": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"exact_match": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"longer_than": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+												},
 											},
 										},
 									},

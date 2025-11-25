@@ -90,12 +90,12 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				ElementType: types.StringType,
 			},
 			"authentication_algos": schema.ListAttribute{
-				MarkdownDescription: "Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms.",
+				MarkdownDescription: "Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the aes-gcm or aes-ccm encryption algorithms. Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`. Defaults to `AUTH_ALG_DEFAULT`.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
 			"encryption_algos": schema.ListAttribute{
-				MarkdownDescription: "Encryption Algorithms. Choose one or more encryption algorithms.",
+				MarkdownDescription: "Encryption Algorithms. Choose one or more encryption algorithms. Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`. Defaults to `ENC_ALG_DEFAULT`.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -123,7 +123,7 @@ func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "[OneOf: dh_group_set, disable_pfs] Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile.",
 				Attributes: map[string]schema.Attribute{
 					"dh_groups": schema.ListAttribute{
-						MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile.",
+						MarkdownDescription: "Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile. Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`. Defaults to `DH_GROUP_DEFAULT`.",
 						Optional: true,
 						ElementType: types.StringType,
 					},

@@ -160,12 +160,53 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"custom_hash_algorithms": schema.SingleNestedBlock{
 										MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+										Attributes: map[string]schema.Attribute{
+											"hash_algorithms": schema.ListAttribute{
+												MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+										},
 									},
 									"disable_ocsp_stapling": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"private_key": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"blindfold_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional: true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														Optional: true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+												},
+											},
+											"clear_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														Optional: true,
+													},
+												},
+											},
+										},
 									},
 									"use_system_defaults": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -183,7 +224,33 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 									"interception_rules": schema.ListNestedBlock{
 										MarkdownDescription: "TLS Interception Rules. List of ordered rules to enable or disable for TLS interception",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"disable_interception": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"domain_match": schema.SingleNestedBlock{
+													MarkdownDescription: "Domains. Domains names",
+													Attributes: map[string]schema.Attribute{
+														"exact_value": schema.StringAttribute{
+															MarkdownDescription: "Exact Value. Exact domain name.",
+															Optional: true,
+														},
+														"regex_value": schema.StringAttribute{
+															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+															Optional: true,
+														},
+														"suffix_value": schema.StringAttribute{
+															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+															Optional: true,
+														},
+													},
+												},
+												"enable_interception": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 									},
 								},

@@ -170,12 +170,66 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 									Blocks: map[string]schema.Block{
 										"auth_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"blindfold_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													Attributes: map[string]schema.Attribute{
+														"decryption_provider": schema.StringAttribute{
+															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															Optional: true,
+														},
+														"location": schema.StringAttribute{
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															Optional: true,
+														},
+														"store_provider": schema.StringAttribute{
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+													},
+												},
+												"clear_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													Attributes: map[string]schema.Attribute{
+														"provider_ref": schema.StringAttribute{
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+														"url": schema.StringAttribute{
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"ipv4": schema.SingleNestedBlock{
 											MarkdownDescription: "IPv4 Peering. Configure BGP IPv4 peering for endpoints",
+											Attributes: map[string]schema.Attribute{
+												"aws_router_peer_address": schema.StringAttribute{
+													MarkdownDescription: "AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint",
+													Optional: true,
+												},
+												"router_peer_address": schema.StringAttribute{
+													MarkdownDescription: "Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint",
+													Optional: true,
+												},
+											},
 										},
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"system_generated_name": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -234,6 +288,16 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 									Blocks: map[string]schema.Block{
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"same_as_credential": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",

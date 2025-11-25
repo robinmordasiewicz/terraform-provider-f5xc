@@ -49,6 +49,9 @@ type DNSZoneResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Labels types.Map `tfsdk:"labels"`
+	PrimaryServers types.List `tfsdk:"primary_servers"`
+	TsigKeyAlgorithm types.String `tfsdk:"tsig_key_algorithm"`
+	TsigKeyName types.String `tfsdk:"tsig_key_name"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
 }
@@ -60,7 +63,7 @@ func (r *DNSZoneResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_zoneSchemaVersion,
-		MarkdownDescription: "Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a DNSZone resource in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSZone. Must be unique within the namespace.",
@@ -92,6 +95,19 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Optional: true,
 				ElementType: types.StringType,
 			},
+			"primary_servers": schema.ListAttribute{
+				MarkdownDescription: "DNS Primary Server IP.",
+				Optional: true,
+				ElementType: types.StringType,
+			},
+			"tsig_key_algorithm": schema.StringAttribute{
+				MarkdownDescription: "TSIG Key Algorithm. TSIG key value must be compatible with the specified algorithm - UNDEFINED: UNDEFINED - HMAC_MD5: HMAC_MD5 - HMAC_SHA1: HMAC_SHA1 - HMAC_SHA224: HMAC_SHA224 - HMAC_SHA256: HMAC_SHA256 - HMAC_SHA384: HMAC_SHA384 - HMAC_SHA512: HMAC_SHA512. Possible values are `HMAC_MD5`, `UNDEFINED`, `HMAC_SHA1`, `HMAC_SHA224`, `HMAC_SHA256`, `HMAC_SHA384`, `HMAC_SHA512`. Defaults to `UNDEFINED`.",
+				Optional: true,
+			},
+			"tsig_key_name": schema.StringAttribute{
+				MarkdownDescription: "TSIG Key Name. TSIG key name as used in TSIG protocol extension",
+				Optional: true,
+			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
 				Computed: true,
@@ -107,549 +123,38 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Update: true,
 				Delete: true,
 			}),
-			"primary": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: primary, secondary] PrimaryDNSCreateSpecType.",
+			"tsig_key_value": schema.SingleNestedBlock{
+				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
 				Attributes: map[string]schema.Attribute{
-					"allow_http_lb_managed_records": schema.BoolAttribute{
-						MarkdownDescription: "Option to allow user-created HTTP, TCP, and CDN load balancer related resource records to be automatically managed in a protected RRset.",
-						Optional: true,
-					},
 				},
 				Blocks: map[string]schema.Block{
-					"default_rr_set_group": schema.ListNestedBlock{
-						MarkdownDescription: "Add and manage DNS resource record sets part of Default set group.",
-						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-								"description": schema.StringAttribute{
-									MarkdownDescription: "Comment.",
-									Optional: true,
-								},
-								"ttl": schema.Int64Attribute{
-									MarkdownDescription: "Time to live.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"a_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSAResourceRecord. A Records",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-										"values": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1",
-											Optional: true,
-											ElementType: types.StringType,
-										},
-									},
-								},
-								"aaaa_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSAAAAResourceRecord. RecordSet for AAAA Records",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-										"values": schema.ListAttribute{
-											MarkdownDescription: "IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334",
-											Optional: true,
-											ElementType: types.StringType,
-										},
-									},
-								},
-								"afsdb_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS AFSDB Record. DNS AFSDB Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "AFSDB Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"alias_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSAliasResourceRecord.",
-									Attributes: map[string]schema.Attribute{
-										"value": schema.StringAttribute{
-											MarkdownDescription: "Domain. A valid domain name, for example: example.com",
-											Optional: true,
-										},
-									},
-								},
-								"caa_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSCAAResourceRecord.",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "CAA Record Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"cds_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS CDS Record. DNS CDS Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "DS Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"cert_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS CERT Record. DNS CERT Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "CERT Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"cname_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSCNAMEResourceRecord.",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-										"value": schema.StringAttribute{
-											MarkdownDescription: "Domain.",
-											Optional: true,
-										},
-									},
-								},
-								"ds_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS DS Record. DNS DS Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "DS Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"eui48_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS EUI48 Record. DNS EUI48 Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-										"value": schema.StringAttribute{
-											MarkdownDescription: "EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab",
-											Optional: true,
-										},
-									},
-								},
-								"eui64_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS EUI64 Record. DNS EUI64 Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-										"value": schema.StringAttribute{
-											MarkdownDescription: "EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef",
-											Optional: true,
-										},
-									},
-								},
-								"lb_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS Load Balancer Record. DNS Load Balancer Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"value": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
-										},
-									},
-								},
-								"loc_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS LOC Record. DNS LOC Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "LOC Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"mx_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSMXResourceRecord.",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "MX Record Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"naptr_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS NAPTR Record. DNS NAPTR Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "NAPTR Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"ns_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSNSResourceRecord.",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-										"values": schema.ListAttribute{
-											MarkdownDescription: "Name Servers.",
-											Optional: true,
-											ElementType: types.StringType,
-										},
-									},
-								},
-								"ptr_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSPTRResourceRecord.",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-										"values": schema.ListAttribute{
-											MarkdownDescription: "Domain Name.",
-											Optional: true,
-											ElementType: types.StringType,
-										},
-									},
-								},
-								"srv_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSSRVResourceRecord.",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "SRV Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"sshfp_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS SSHFP Record. DNS SSHFP Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "SSHFP Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"tlsa_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS TLSA Record. DNS TLSA Record",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"values": schema.ListNestedBlock{
-											MarkdownDescription: "TLSA Value.",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
-											},
-										},
-									},
-								},
-								"txt_record": schema.SingleNestedBlock{
-									MarkdownDescription: "DNSTXTResourceRecord.",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain.",
-											Optional: true,
-										},
-										"values": schema.ListAttribute{
-											MarkdownDescription: "Text.",
-											Optional: true,
-											ElementType: types.StringType,
-										},
-									},
-								},
-							},
-						},
-					},
-					"default_soa_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
-					},
-					"dnssec_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Disable.",
+					"blindfold_secret_info": schema.SingleNestedBlock{
+						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
 						Attributes: map[string]schema.Attribute{
-						},
-						Blocks: map[string]schema.Block{
-							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							"decryption_provider": schema.StringAttribute{
+								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+								Optional: true,
 							},
-							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable. DNSSEC enable",
+							"location": schema.StringAttribute{
+								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+								Optional: true,
 							},
-						},
-					},
-					"rr_set_group": schema.ListNestedBlock{
-						MarkdownDescription: "Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5.",
-						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-							},
-							Blocks: map[string]schema.Block{
-								"metadata": schema.SingleNestedBlock{
-									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
-									Attributes: map[string]schema.Attribute{
-										"description": schema.StringAttribute{
-											MarkdownDescription: "Description. Human readable description.",
-											Optional: true,
-										},
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-											Optional: true,
-										},
-									},
-								},
-								"rr_set": schema.ListNestedBlock{
-									MarkdownDescription: "Resource Record Sets. Collection of DNS resource record sets",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"description": schema.StringAttribute{
-												MarkdownDescription: "Comment.",
-												Optional: true,
-											},
-											"ttl": schema.Int64Attribute{
-												MarkdownDescription: "Time to live.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"a_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSAResourceRecord. A Records",
-											},
-											"aaaa_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSAAAAResourceRecord. RecordSet for AAAA Records",
-											},
-											"afsdb_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS AFSDB Record. DNS AFSDB Record",
-											},
-											"alias_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSAliasResourceRecord.",
-											},
-											"caa_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSCAAResourceRecord.",
-											},
-											"cds_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS CDS Record. DNS CDS Record",
-											},
-											"cert_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS CERT Record. DNS CERT Record",
-											},
-											"cname_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSCNAMEResourceRecord.",
-											},
-											"ds_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS DS Record. DNS DS Record",
-											},
-											"eui48_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS EUI48 Record. DNS EUI48 Record",
-											},
-											"eui64_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS EUI64 Record. DNS EUI64 Record",
-											},
-											"lb_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS Load Balancer Record. DNS Load Balancer Record",
-											},
-											"loc_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS LOC Record. DNS LOC Record",
-											},
-											"mx_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSMXResourceRecord.",
-											},
-											"naptr_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS NAPTR Record. DNS NAPTR Record",
-											},
-											"ns_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSNSResourceRecord.",
-											},
-											"ptr_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSPTRResourceRecord.",
-											},
-											"srv_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSSRVResourceRecord.",
-											},
-											"sshfp_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS SSHFP Record. DNS SSHFP Record",
-											},
-											"tlsa_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNS TLSA Record. DNS TLSA Record",
-											},
-											"txt_record": schema.SingleNestedBlock{
-												MarkdownDescription: "DNSTXTResourceRecord.",
-											},
-										},
-									},
-								},
+							"store_provider": schema.StringAttribute{
+								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+								Optional: true,
 							},
 						},
 					},
-					"soa_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "SOARecordParameterConfig.",
+					"clear_secret_info": schema.SingleNestedBlock{
+						MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 						Attributes: map[string]schema.Attribute{
-							"expire": schema.Int64Attribute{
-								MarkdownDescription: "Expire. expire value indicates when secondary nameservers should stop answering request for this zone if primary does not respond",
+							"provider_ref": schema.StringAttribute{
+								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
 								Optional: true,
 							},
-							"negative_ttl": schema.Int64Attribute{
-								MarkdownDescription: "Negative TTL. negative ttl value indicates how long to cache non-existent resource record for this zone",
+							"url": schema.StringAttribute{
+								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
 								Optional: true,
-							},
-							"refresh": schema.Int64Attribute{
-								MarkdownDescription: "Refresh interval. refresh value indicates when secondary nameservers should query for the SOA record to detect zone changes",
-								Optional: true,
-							},
-							"retry": schema.Int64Attribute{
-								MarkdownDescription: "Retry Interval. retry value indicates when secondary nameservers should retry to request the serial number if primary does not respond",
-								Optional: true,
-							},
-							"ttl": schema.Int64Attribute{
-								MarkdownDescription: "TTL. SOA record time to live (in seconds)",
-								Optional: true,
-							},
-						},
-					},
-				},
-
-			},
-			"secondary": schema.SingleNestedBlock{
-				MarkdownDescription: "SecondaryDNSCreateSpecType.",
-				Attributes: map[string]schema.Attribute{
-					"primary_servers": schema.ListAttribute{
-						MarkdownDescription: "DNS Primary Server IP.",
-						Optional: true,
-						ElementType: types.StringType,
-					},
-					"tsig_key_algorithm": schema.StringAttribute{
-						MarkdownDescription: "TSIG Key Algorithm. TSIG key value must be compatible with the specified algorithm - UNDEFINED: UNDEFINED - HMAC_MD5: HMAC_MD5 - HMAC_SHA1: HMAC_SHA1 - HMAC_SHA224: HMAC_SHA224 - HMAC_SHA256: HMAC_SHA256 - HMAC_SHA384: HMAC_SHA384 - HMAC_SHA512: HMAC_SHA512. Possible values are `HMAC_MD5`, `UNDEFINED`, `HMAC_SHA1`, `HMAC_SHA224`, `HMAC_SHA256`, `HMAC_SHA384`, `HMAC_SHA512`. Defaults to `UNDEFINED`.",
-						Optional: true,
-					},
-					"tsig_key_name": schema.StringAttribute{
-						MarkdownDescription: "TSIG Key Name. TSIG key name as used in TSIG protocol extension",
-						Optional: true,
-					},
-				},
-				Blocks: map[string]schema.Block{
-					"tsig_key_value": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
-						Attributes: map[string]schema.Attribute{
-						},
-						Blocks: map[string]schema.Block{
-							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
-								Attributes: map[string]schema.Attribute{
-									"decryption_provider": schema.StringAttribute{
-										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-										Optional: true,
-									},
-									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
-										Optional: true,
-									},
-									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
-									},
-								},
-							},
-							"clear_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
-								Attributes: map[string]schema.Attribute{
-									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
-										Optional: true,
-									},
-									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
-										Optional: true,
-									},
-								},
 							},
 						},
 					},

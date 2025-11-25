@@ -171,6 +171,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"public_ip": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -189,6 +203,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -216,6 +244,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"virtual_network": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -230,6 +272,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"virtual_site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -248,6 +304,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"virtual_site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -258,9 +328,37 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 										"virtual_site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -341,7 +439,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "Method List. List of methods values to match against.",
+											MarkdownDescription: "Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -360,24 +458,139 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"asn_list": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+											Attributes: map[string]schema.Attribute{
+												"as_numbers": schema.ListAttribute{
+													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"asn_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"asn_sets": schema.ListNestedBlock{
+													MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"client_selector": schema.SingleNestedBlock{
 											MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+											Attributes: map[string]schema.Attribute{
+												"expressions": schema.ListAttribute{
+													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+											Attributes: map[string]schema.Attribute{
+												"invert_matcher": schema.BoolAttribute{
+													MarkdownDescription: "Invert IP Matcher. Invert the match result.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"prefix_sets": schema.ListNestedBlock{
+													MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"ip_prefix_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Match List. List of IP Prefix strings to match against.",
+											Attributes: map[string]schema.Attribute{
+												"invert_match": schema.BoolAttribute{
+													MarkdownDescription: "Invert Match Result. Invert the match result.",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_threat_category_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Threat Category List Type. List of ip threat categories",
+											Attributes: map[string]schema.Attribute{
+												"ip_threat_categories": schema.ListAttribute{
+													MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"tls_fingerprint_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.",
+											Attributes: map[string]schema.Attribute{
+												"classes": schema.ListAttribute{
+													MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"excluded_values": schema.ListAttribute{
+													MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 								},
@@ -402,25 +615,173 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"cookie_matchers": schema.ListNestedBlock{
 											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"headers": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"jwt_claims": schema.ListNestedBlock{
 											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "JWT Claim Name. JWT claim name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"query_params": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"key": schema.StringAttribute{
+														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -475,24 +836,139 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"asn_list": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+											Attributes: map[string]schema.Attribute{
+												"as_numbers": schema.ListAttribute{
+													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"asn_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"asn_sets": schema.ListNestedBlock{
+													MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"client_selector": schema.SingleNestedBlock{
 											MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+											Attributes: map[string]schema.Attribute{
+												"expressions": schema.ListAttribute{
+													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+											Attributes: map[string]schema.Attribute{
+												"invert_matcher": schema.BoolAttribute{
+													MarkdownDescription: "Invert IP Matcher. Invert the match result.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"prefix_sets": schema.ListNestedBlock{
+													MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"ip_prefix_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Match List. List of IP Prefix strings to match against.",
+											Attributes: map[string]schema.Attribute{
+												"invert_match": schema.BoolAttribute{
+													MarkdownDescription: "Invert Match Result. Invert the match result.",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_threat_category_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Threat Category List Type. List of ip threat categories",
+											Attributes: map[string]schema.Attribute{
+												"ip_threat_categories": schema.ListAttribute{
+													MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"tls_fingerprint_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.",
+											Attributes: map[string]schema.Attribute{
+												"classes": schema.ListAttribute{
+													MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"excluded_values": schema.ListAttribute{
+													MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 								},
@@ -517,25 +993,173 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"cookie_matchers": schema.ListNestedBlock{
 											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"headers": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"jwt_claims": schema.ListNestedBlock{
 											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "JWT Claim Name. JWT claim name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"query_params": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"key": schema.StringAttribute{
+														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -576,7 +1200,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "Method List. List of methods values to match against.",
+											MarkdownDescription: "Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -595,24 +1219,139 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"asn_list": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+											Attributes: map[string]schema.Attribute{
+												"as_numbers": schema.ListAttribute{
+													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"asn_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"asn_sets": schema.ListNestedBlock{
+													MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"client_selector": schema.SingleNestedBlock{
 											MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+											Attributes: map[string]schema.Attribute{
+												"expressions": schema.ListAttribute{
+													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+											Attributes: map[string]schema.Attribute{
+												"invert_matcher": schema.BoolAttribute{
+													MarkdownDescription: "Invert IP Matcher. Invert the match result.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"prefix_sets": schema.ListNestedBlock{
+													MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"ip_prefix_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Match List. List of IP Prefix strings to match against.",
+											Attributes: map[string]schema.Attribute{
+												"invert_match": schema.BoolAttribute{
+													MarkdownDescription: "Invert Match Result. Invert the match result.",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_threat_category_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Threat Category List Type. List of ip threat categories",
+											Attributes: map[string]schema.Attribute{
+												"ip_threat_categories": schema.ListAttribute{
+													MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"tls_fingerprint_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.",
+											Attributes: map[string]schema.Attribute{
+												"classes": schema.ListAttribute{
+													MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"excluded_values": schema.ListAttribute{
+													MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 								},
@@ -631,6 +1370,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"ref_user_id": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 										"use_http_lb_user_id": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -662,25 +1415,173 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"cookie_matchers": schema.ListNestedBlock{
 											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"headers": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"jwt_claims": schema.ListNestedBlock{
 											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "JWT Claim Name. JWT claim name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"query_params": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"key": schema.StringAttribute{
+														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -715,15 +1616,355 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"api_endpoint": schema.SingleNestedBlock{
 											MarkdownDescription: "API Endpoint. This defines api endpoint",
+											Attributes: map[string]schema.Attribute{
+												"methods": schema.ListAttribute{
+													MarkdownDescription: "Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"path": schema.StringAttribute{
+													MarkdownDescription: "Path. Path to be matched",
+													Optional: true,
+												},
+											},
 										},
 										"api_groups": schema.SingleNestedBlock{
 											MarkdownDescription: "API Groups.",
+											Attributes: map[string]schema.Attribute{
+												"api_groups": schema.ListAttribute{
+													MarkdownDescription: "API Groups.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"client_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Client Matcher. Client conditions for matching a rule",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"any_client": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"any_ip": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"asn_list": schema.SingleNestedBlock{
+													MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+													Attributes: map[string]schema.Attribute{
+														"as_numbers": schema.ListAttribute{
+															MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"asn_matcher": schema.SingleNestedBlock{
+													MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"asn_sets": schema.ListNestedBlock{
+															MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"kind": schema.StringAttribute{
+																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		Optional: true,
+																	},
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		Optional: true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		Optional: true,
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		Optional: true,
+																	},
+																	"uid": schema.StringAttribute{
+																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"client_selector": schema.SingleNestedBlock{
+													MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+													Attributes: map[string]schema.Attribute{
+														"expressions": schema.ListAttribute{
+															MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"ip_matcher": schema.SingleNestedBlock{
+													MarkdownDescription: "IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+													Attributes: map[string]schema.Attribute{
+														"invert_matcher": schema.BoolAttribute{
+															MarkdownDescription: "Invert IP Matcher. Invert the match result.",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"prefix_sets": schema.ListNestedBlock{
+															MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"kind": schema.StringAttribute{
+																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		Optional: true,
+																	},
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		Optional: true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		Optional: true,
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		Optional: true,
+																	},
+																	"uid": schema.StringAttribute{
+																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"ip_prefix_list": schema.SingleNestedBlock{
+													MarkdownDescription: "IP Prefix Match List. List of IP Prefix strings to match against.",
+													Attributes: map[string]schema.Attribute{
+														"invert_match": schema.BoolAttribute{
+															MarkdownDescription: "Invert Match Result. Invert the match result.",
+															Optional: true,
+														},
+														"ip_prefixes": schema.ListAttribute{
+															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"ip_threat_category_list": schema.SingleNestedBlock{
+													MarkdownDescription: "IP Threat Category List Type. List of ip threat categories",
+													Attributes: map[string]schema.Attribute{
+														"ip_threat_categories": schema.ListAttribute{
+															MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"tls_fingerprint_matcher": schema.SingleNestedBlock{
+													MarkdownDescription: "TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.",
+													Attributes: map[string]schema.Attribute{
+														"classes": schema.ListAttribute{
+															MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"exact_values": schema.ListAttribute{
+															MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"excluded_values": schema.ListAttribute{
+															MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 										"request_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Request Matcher. Request conditions for matching a rule",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"cookie_matchers": schema.ListNestedBlock{
+													MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"invert_matcher": schema.BoolAttribute{
+																MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"check_not_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"check_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"item": schema.SingleNestedBlock{
+																MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+																Attributes: map[string]schema.Attribute{
+																	"exact_values": schema.ListAttribute{
+																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"regex_values": schema.ListAttribute{
+																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"transformers": schema.ListAttribute{
+																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"headers": schema.ListNestedBlock{
+													MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"invert_matcher": schema.BoolAttribute{
+																MarkdownDescription: "Invert Header Matcher. Invert the match result.",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"check_not_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"check_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"item": schema.SingleNestedBlock{
+																MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+																Attributes: map[string]schema.Attribute{
+																	"exact_values": schema.ListAttribute{
+																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"regex_values": schema.ListAttribute{
+																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"transformers": schema.ListAttribute{
+																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"jwt_claims": schema.ListNestedBlock{
+													MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"invert_matcher": schema.BoolAttribute{
+																MarkdownDescription: "Invert Matcher. Invert the match result.",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "JWT Claim Name. JWT claim name.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"check_not_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"check_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"item": schema.SingleNestedBlock{
+																MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+																Attributes: map[string]schema.Attribute{
+																	"exact_values": schema.ListAttribute{
+																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"regex_values": schema.ListAttribute{
+																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"transformers": schema.ListAttribute{
+																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"query_params": schema.ListNestedBlock{
+													MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"invert_matcher": schema.BoolAttribute{
+																MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
+																Optional: true,
+															},
+															"key": schema.StringAttribute{
+																MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"check_not_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"check_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"item": schema.SingleNestedBlock{
+																MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+																Attributes: map[string]schema.Attribute{
+																	"exact_values": schema.ListAttribute{
+																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"regex_values": schema.ListAttribute{
+																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"transformers": schema.ListAttribute{
+																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -803,24 +2044,139 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"asn_list": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+											Attributes: map[string]schema.Attribute{
+												"as_numbers": schema.ListAttribute{
+													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"asn_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"asn_sets": schema.ListNestedBlock{
+													MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"client_selector": schema.SingleNestedBlock{
 											MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+											Attributes: map[string]schema.Attribute{
+												"expressions": schema.ListAttribute{
+													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+											Attributes: map[string]schema.Attribute{
+												"invert_matcher": schema.BoolAttribute{
+													MarkdownDescription: "Invert IP Matcher. Invert the match result.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"prefix_sets": schema.ListNestedBlock{
+													MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"ip_prefix_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Match List. List of IP Prefix strings to match against.",
+											Attributes: map[string]schema.Attribute{
+												"invert_match": schema.BoolAttribute{
+													MarkdownDescription: "Invert Match Result. Invert the match result.",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_threat_category_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Threat Category List Type. List of ip threat categories",
+											Attributes: map[string]schema.Attribute{
+												"ip_threat_categories": schema.ListAttribute{
+													MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"tls_fingerprint_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.",
+											Attributes: map[string]schema.Attribute{
+												"classes": schema.ListAttribute{
+													MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"excluded_values": schema.ListAttribute{
+													MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 								},
@@ -839,6 +2195,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"ref_user_id": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 										"use_http_lb_user_id": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -870,25 +2240,173 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"cookie_matchers": schema.ListNestedBlock{
 											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"headers": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"jwt_claims": schema.ListNestedBlock{
 											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "JWT Claim Name. JWT claim name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"query_params": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"key": schema.StringAttribute{
+														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -936,6 +2454,63 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									"fall_through_mode_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Fall Through Mode. Define the fall through settings",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"open_api_validation_rules": schema.ListNestedBlock{
+												MarkdownDescription: "Custom Fall Through Rule List.",
+												NestedObject: schema.NestedBlockObject{
+													Attributes: map[string]schema.Attribute{
+														"api_group": schema.StringAttribute{
+															MarkdownDescription: "API Group. The API group which this validation applies to",
+															Optional: true,
+														},
+														"base_path": schema.StringAttribute{
+															MarkdownDescription: "Base Path. The base path which this validation applies to",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"action_block": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"action_report": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"action_skip": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"api_endpoint": schema.SingleNestedBlock{
+															MarkdownDescription: "API Endpoint. This defines api endpoint",
+															Attributes: map[string]schema.Attribute{
+																"methods": schema.ListAttribute{
+																	MarkdownDescription: "Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																	Optional: true,
+																	ElementType: types.StringType,
+																},
+																"path": schema.StringAttribute{
+																	MarkdownDescription: "Path. Path to be matched",
+																	Optional: true,
+																},
+															},
+														},
+														"metadata": schema.SingleNestedBlock{
+															MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+															Attributes: map[string]schema.Attribute{
+																"description": schema.StringAttribute{
+																	MarkdownDescription: "Description. Human readable description.",
+																	Optional: true,
+																},
+																"name": schema.StringAttribute{
+																	MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -952,6 +2527,23 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									"property_validation_settings_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Validation Property Settings. Custom property validation settings",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"query_parameters": schema.SingleNestedBlock{
+												MarkdownDescription: "Validation Settings For Query Parameters. Custom settings for query parameters validation",
+												Attributes: map[string]schema.Attribute{
+												},
+												Blocks: map[string]schema.Block{
+													"allow_additional_parameters": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"disallow_additional_parameters": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+												},
+											},
+										},
 									},
 									"property_validation_settings_default": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -965,6 +2557,21 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"response_validation_mode_active": schema.SingleNestedBlock{
 										MarkdownDescription: "Open API Validation Mode Active. Validation mode properties of response",
+										Attributes: map[string]schema.Attribute{
+											"response_validation_properties": schema.ListAttribute{
+												MarkdownDescription: "Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS`.",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+										},
+										Blocks: map[string]schema.Block{
+											"enforcement_block": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"enforcement_report": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+										},
 									},
 									"skip_response_validation": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -974,6 +2581,21 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									"validation_mode_active": schema.SingleNestedBlock{
 										MarkdownDescription: "Open API Validation Mode Active. Validation mode properties of request",
+										Attributes: map[string]schema.Attribute{
+											"request_validation_properties": schema.ListAttribute{
+												MarkdownDescription: "Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS`.",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+										},
+										Blocks: map[string]schema.Block{
+											"enforcement_block": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"enforcement_report": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+										},
 									},
 								},
 							},
@@ -994,6 +2616,63 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									"fall_through_mode_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Fall Through Mode. Define the fall through settings",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"open_api_validation_rules": schema.ListNestedBlock{
+												MarkdownDescription: "Custom Fall Through Rule List.",
+												NestedObject: schema.NestedBlockObject{
+													Attributes: map[string]schema.Attribute{
+														"api_group": schema.StringAttribute{
+															MarkdownDescription: "API Group. The API group which this validation applies to",
+															Optional: true,
+														},
+														"base_path": schema.StringAttribute{
+															MarkdownDescription: "Base Path. The base path which this validation applies to",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"action_block": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"action_report": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"action_skip": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"api_endpoint": schema.SingleNestedBlock{
+															MarkdownDescription: "API Endpoint. This defines api endpoint",
+															Attributes: map[string]schema.Attribute{
+																"methods": schema.ListAttribute{
+																	MarkdownDescription: "Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+																	Optional: true,
+																	ElementType: types.StringType,
+																},
+																"path": schema.StringAttribute{
+																	MarkdownDescription: "Path. Path to be matched",
+																	Optional: true,
+																},
+															},
+														},
+														"metadata": schema.SingleNestedBlock{
+															MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+															Attributes: map[string]schema.Attribute{
+																"description": schema.StringAttribute{
+																	MarkdownDescription: "Description. Human readable description.",
+																	Optional: true,
+																},
+																"name": schema.StringAttribute{
+																	MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -1020,12 +2699,79 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"api_endpoint": schema.SingleNestedBlock{
 											MarkdownDescription: "API Endpoint. This defines api endpoint",
+											Attributes: map[string]schema.Attribute{
+												"methods": schema.ListAttribute{
+													MarkdownDescription: "Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"path": schema.StringAttribute{
+													MarkdownDescription: "Path. Path to be matched",
+													Optional: true,
+												},
+											},
 										},
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"validation_mode": schema.SingleNestedBlock{
 											MarkdownDescription: "Validation Mode. x-required Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger)",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"response_validation_mode_active": schema.SingleNestedBlock{
+													MarkdownDescription: "Open API Validation Mode Active. Validation mode properties of response",
+													Attributes: map[string]schema.Attribute{
+														"response_validation_properties": schema.ListAttribute{
+															MarkdownDescription: "Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"enforcement_block": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"enforcement_report": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+												"skip_response_validation": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"skip_validation": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"validation_mode_active": schema.SingleNestedBlock{
+													MarkdownDescription: "Open API Validation Mode Active. Validation mode properties of request",
+													Attributes: map[string]schema.Attribute{
+														"request_validation_properties": schema.ListAttribute{
+															MarkdownDescription: "Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger). Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`. Defaults to `PROPERTY_QUERY_PARAMETERS`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"enforcement_block": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"enforcement_report": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -1043,6 +2789,23 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									"property_validation_settings_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Validation Property Settings. Custom property validation settings",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"query_parameters": schema.SingleNestedBlock{
+												MarkdownDescription: "Validation Settings For Query Parameters. Custom settings for query parameters validation",
+												Attributes: map[string]schema.Attribute{
+												},
+												Blocks: map[string]schema.Block{
+													"allow_additional_parameters": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"disallow_additional_parameters": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+												},
+											},
+										},
 									},
 									"property_validation_settings_default": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1095,15 +2858,199 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											},
 											"api_key": schema.SingleNestedBlock{
 												MarkdownDescription: "Api Key.",
+												Attributes: map[string]schema.Attribute{
+													"key": schema.StringAttribute{
+														MarkdownDescription: "Key.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"value": schema.SingleNestedBlock{
+														MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"blindfold_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																Attributes: map[string]schema.Attribute{
+																	"decryption_provider": schema.StringAttribute{
+																		MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																		Optional: true,
+																	},
+																	"location": schema.StringAttribute{
+																		MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																		Optional: true,
+																	},
+																	"store_provider": schema.StringAttribute{
+																		MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																},
+															},
+															"clear_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																Attributes: map[string]schema.Attribute{
+																	"provider_ref": schema.StringAttribute{
+																		MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																	"url": schema.StringAttribute{
+																		MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
 											},
 											"basic_auth": schema.SingleNestedBlock{
 												MarkdownDescription: "Basic Authentication.",
+												Attributes: map[string]schema.Attribute{
+													"user": schema.StringAttribute{
+														MarkdownDescription: "User.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"password": schema.SingleNestedBlock{
+														MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"blindfold_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																Attributes: map[string]schema.Attribute{
+																	"decryption_provider": schema.StringAttribute{
+																		MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																		Optional: true,
+																	},
+																	"location": schema.StringAttribute{
+																		MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																		Optional: true,
+																	},
+																	"store_provider": schema.StringAttribute{
+																		MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																},
+															},
+															"clear_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																Attributes: map[string]schema.Attribute{
+																	"provider_ref": schema.StringAttribute{
+																		MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																	"url": schema.StringAttribute{
+																		MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
 											},
 											"bearer_token": schema.SingleNestedBlock{
 												MarkdownDescription: "Bearer.",
+												Attributes: map[string]schema.Attribute{
+												},
+												Blocks: map[string]schema.Block{
+													"token": schema.SingleNestedBlock{
+														MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"blindfold_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																Attributes: map[string]schema.Attribute{
+																	"decryption_provider": schema.StringAttribute{
+																		MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																		Optional: true,
+																	},
+																	"location": schema.StringAttribute{
+																		MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																		Optional: true,
+																	},
+																	"store_provider": schema.StringAttribute{
+																		MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																},
+															},
+															"clear_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																Attributes: map[string]schema.Attribute{
+																	"provider_ref": schema.StringAttribute{
+																		MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																	"url": schema.StringAttribute{
+																		MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
 											},
 											"login_endpoint": schema.SingleNestedBlock{
 												MarkdownDescription: "Login Endpoint.",
+												Attributes: map[string]schema.Attribute{
+													"method": schema.StringAttribute{
+														MarkdownDescription: "HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+														Optional: true,
+													},
+													"path": schema.StringAttribute{
+														MarkdownDescription: "Path.",
+														Optional: true,
+													},
+													"token_response_key": schema.StringAttribute{
+														MarkdownDescription: "Token Response Key. Specifies how to handle the API response, extracting authentication tokens.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"json_payload": schema.SingleNestedBlock{
+														MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"blindfold_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																Attributes: map[string]schema.Attribute{
+																	"decryption_provider": schema.StringAttribute{
+																		MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																		Optional: true,
+																	},
+																	"location": schema.StringAttribute{
+																		MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																		Optional: true,
+																	},
+																	"store_provider": schema.StringAttribute{
+																		MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																},
+															},
+															"clear_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																Attributes: map[string]schema.Attribute{
+																	"provider_ref": schema.StringAttribute{
+																		MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																	"url": schema.StringAttribute{
+																		MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
 											},
 											"standard": schema.SingleNestedBlock{
 												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -1149,7 +3096,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"actions": schema.ListAttribute{
-							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule",
+							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule. Possible values are `SKIP_PROCESSING_WAF`, `SKIP_PROCESSING_BOT`, `SKIP_PROCESSING_MUM`, `SKIP_PROCESSING_IP_REPUTATION`, `SKIP_PROCESSING_API_PROTECTION`, `SKIP_PROCESSING_OAS_VALIDATION`, `SKIP_PROCESSING_DDOS_PROTECTION`, `SKIP_PROCESSING_THREAT_MESH`, `SKIP_PROCESSING_MALWARE_PROTECTION`. Defaults to `SKIP_PROCESSING_WAF`.",
 							Optional: true,
 							ElementType: types.StringType,
 						},
@@ -1294,7 +3241,60 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"exclude_list": schema.ListNestedBlock{
 										MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"any_domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Domains. Domains names",
+													Attributes: map[string]schema.Attribute{
+														"exact_value": schema.StringAttribute{
+															MarkdownDescription: "Exact Value. Exact domain name.",
+															Optional: true,
+														},
+														"regex_value": schema.StringAttribute{
+															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+															Optional: true,
+														},
+														"suffix_value": schema.StringAttribute{
+															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+															Optional: true,
+														},
+													},
+												},
+												"metadata": schema.SingleNestedBlock{
+													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+													Attributes: map[string]schema.Attribute{
+														"description": schema.StringAttribute{
+															MarkdownDescription: "Description. Human readable description.",
+															Optional: true,
+														},
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+															Optional: true,
+														},
+													},
+												},
+												"path": schema.SingleNestedBlock{
+													MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+													Attributes: map[string]schema.Attribute{
+														"path": schema.StringAttribute{
+															MarkdownDescription: "Exact. Exact path value to match",
+															Optional: true,
+														},
+														"prefix": schema.StringAttribute{
+															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+															Optional: true,
+														},
+														"regex": schema.StringAttribute{
+															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -1307,13 +3307,123 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"exclude_list": schema.ListNestedBlock{
 										MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"any_domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Domains. Domains names",
+													Attributes: map[string]schema.Attribute{
+														"exact_value": schema.StringAttribute{
+															MarkdownDescription: "Exact Value. Exact domain name.",
+															Optional: true,
+														},
+														"regex_value": schema.StringAttribute{
+															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+															Optional: true,
+														},
+														"suffix_value": schema.StringAttribute{
+															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+															Optional: true,
+														},
+													},
+												},
+												"metadata": schema.SingleNestedBlock{
+													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+													Attributes: map[string]schema.Attribute{
+														"description": schema.StringAttribute{
+															MarkdownDescription: "Description. Human readable description.",
+															Optional: true,
+														},
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+															Optional: true,
+														},
+													},
+												},
+												"path": schema.SingleNestedBlock{
+													MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+													Attributes: map[string]schema.Attribute{
+														"path": schema.StringAttribute{
+															MarkdownDescription: "Exact. Exact path value to match",
+															Optional: true,
+														},
+														"prefix": schema.StringAttribute{
+															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+															Optional: true,
+														},
+														"regex": schema.StringAttribute{
+															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 									"rules": schema.ListNestedBlock{
 										MarkdownDescription: "JavaScript Insertions. Required list of pages to insert Bot Defense client JavaScript.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"javascript_location": schema.StringAttribute{
+													MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD`.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"any_domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Domains. Domains names",
+													Attributes: map[string]schema.Attribute{
+														"exact_value": schema.StringAttribute{
+															MarkdownDescription: "Exact Value. Exact domain name.",
+															Optional: true,
+														},
+														"regex_value": schema.StringAttribute{
+															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+															Optional: true,
+														},
+														"suffix_value": schema.StringAttribute{
+															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+															Optional: true,
+														},
+													},
+												},
+												"metadata": schema.SingleNestedBlock{
+													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+													Attributes: map[string]schema.Attribute{
+														"description": schema.StringAttribute{
+															MarkdownDescription: "Description. Human readable description.",
+															Optional: true,
+														},
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+															Optional: true,
+														},
+													},
+												},
+												"path": schema.SingleNestedBlock{
+													MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+													Attributes: map[string]schema.Attribute{
+														"path": schema.StringAttribute{
+															MarkdownDescription: "Exact. Exact path value to match",
+															Optional: true,
+														},
+														"prefix": schema.StringAttribute{
+															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+															Optional: true,
+														},
+														"regex": schema.StringAttribute{
+															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -1325,6 +3435,49 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"mobile_identifier": schema.SingleNestedBlock{
 										MarkdownDescription: "Mobile Traffic Identifier. Mobile traffic identifier type.",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"headers": schema.ListNestedBlock{
+												MarkdownDescription: "Headers. Headers that can be used to identify mobile traffic.",
+												NestedObject: schema.NestedBlockObject{
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"check_not_present": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"check_present": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"item": schema.SingleNestedBlock{
+															MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+															Attributes: map[string]schema.Attribute{
+																"exact_values": schema.ListAttribute{
+																	MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																	Optional: true,
+																	ElementType: types.StringType,
+																},
+																"regex_values": schema.ListAttribute{
+																	MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																	Optional: true,
+																	ElementType: types.StringType,
+																},
+																"transformers": schema.ListAttribute{
+																	MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																	Optional: true,
+																	ElementType: types.StringType,
+																},
+															},
+														},
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -1333,7 +3486,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"http_methods": schema.ListAttribute{
-											MarkdownDescription: "HTTP Methods. List of HTTP methods.",
+											MarkdownDescription: "HTTP Methods. List of HTTP methods. Possible values are `METHOD_ANY`, `METHOD_GET`, `METHOD_POST`, `METHOD_PUT`, `METHOD_PATCH`, `METHOD_DELETE`, `METHOD_GET_DOCUMENT`. Defaults to `METHOD_ANY`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -1351,35 +3504,390 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"domain": schema.SingleNestedBlock{
 											MarkdownDescription: "Domains. Domains names",
+											Attributes: map[string]schema.Attribute{
+												"exact_value": schema.StringAttribute{
+													MarkdownDescription: "Exact Value. Exact domain name.",
+													Optional: true,
+												},
+												"regex_value": schema.StringAttribute{
+													MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+													Optional: true,
+												},
+												"suffix_value": schema.StringAttribute{
+													MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+													Optional: true,
+												},
+											},
 										},
 										"flow_label": schema.SingleNestedBlock{
 											MarkdownDescription: "Bot Defense Flow Label Category. Bot Defense Flow Label Category allows to associate traffic with selected category",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"account_management": schema.SingleNestedBlock{
+													MarkdownDescription: "Bot Defense Flow Label Account Management Category. Bot Defense Flow Label Account Management Category",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"create": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"password_reset": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+												"authentication": schema.SingleNestedBlock{
+													MarkdownDescription: "Bot Defense Flow Label Authentication Category. Bot Defense Flow Label Authentication Category",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"login": schema.SingleNestedBlock{
+															MarkdownDescription: "Bot Defense Transaction Result. Bot Defense Transaction Result",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"disable_transaction_result": schema.SingleNestedBlock{
+																	MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																},
+																"transaction_result": schema.SingleNestedBlock{
+																	MarkdownDescription: "Bot Defense Transaction Result Type. Bot Defense Transaction ResultType",
+																	Attributes: map[string]schema.Attribute{
+																	},
+																	Blocks: map[string]schema.Block{
+																		"failure_conditions": schema.ListNestedBlock{
+																			MarkdownDescription: "Failure Conditions. Failure Conditions",
+																			NestedObject: schema.NestedBlockObject{
+																				Attributes: map[string]schema.Attribute{
+																					"name": schema.StringAttribute{
+																						MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+																						Optional: true,
+																					},
+																					"regex_values": schema.ListAttribute{
+																						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																					"status": schema.StringAttribute{
+																						MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code Uri Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code Http Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode`.",
+																						Optional: true,
+																					},
+																				},
+																			},
+																		},
+																		"success_conditions": schema.ListNestedBlock{
+																			MarkdownDescription: "Success Conditions. Success Conditions",
+																			NestedObject: schema.NestedBlockObject{
+																				Attributes: map[string]schema.Attribute{
+																					"name": schema.StringAttribute{
+																						MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+																						Optional: true,
+																					},
+																					"regex_values": schema.ListAttribute{
+																						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																					"status": schema.StringAttribute{
+																						MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code Uri Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code Http Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode`.",
+																						Optional: true,
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+														"login_mfa": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"login_partner": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"logout": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"token_refresh": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+												"financial_services": schema.SingleNestedBlock{
+													MarkdownDescription: "Bot Defense Flow Label Financial Services Category. Bot Defense Flow Label Financial Services Category",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"apply": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"money_transfer": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+												"flight": schema.SingleNestedBlock{
+													MarkdownDescription: "Bot Defense Flow Label Flight Category. Bot Defense Flow Label Flight Category",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"checkin": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+												"profile_management": schema.SingleNestedBlock{
+													MarkdownDescription: "Bot Defense Flow Label Profile Management Category. Bot Defense Flow Label Profile Management Category",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"create": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"update": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"view": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+												"search": schema.SingleNestedBlock{
+													MarkdownDescription: "Bot Defense Flow Label Search Category. Bot Defense Flow Label Search Category",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"flight_search": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"product_search": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"reservation_search": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"room_search": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+												"shopping_gift_cards": schema.SingleNestedBlock{
+													MarkdownDescription: "Bot Defense Flow Label Shopping & Gift Cards Category. Bot Defense Flow Label Shopping & Gift Cards Category",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"gift_card_make_purchase_with_gift_card": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"gift_card_validation": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_add_to_cart": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_checkout": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_choose_seat": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_enter_drawing_submission": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_make_payment": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_order": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_price_inquiry": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_promo_code_validation": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_purchase_gift_card": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"shop_update_quantity": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+											},
 										},
 										"headers": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"mitigate_good_bots": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 										},
 										"mitigation": schema.SingleNestedBlock{
 											MarkdownDescription: "Bot Mitigation Action. Modify Bot Defense behavior for a matching request.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"block": schema.SingleNestedBlock{
+													MarkdownDescription: "Block bot mitigation. Block request and respond with custom content.",
+													Attributes: map[string]schema.Attribute{
+														"body": schema.StringAttribute{
+															MarkdownDescription: "Body. Custom body message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Your request was blocked' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Your request was blocked </p>'. Base64 encoded string for this html is 'LzxwPiBZb3VyIHJlcXVlc3Qgd2FzIGJsb2NrZWQgPC9wPg=='",
+															Optional: true,
+														},
+														"status": schema.StringAttribute{
+															MarkdownDescription: "HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code Uri Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code Http Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code. Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`. Defaults to `EmptyStatusCode`.",
+															Optional: true,
+														},
+													},
+												},
+												"flag": schema.SingleNestedBlock{
+													MarkdownDescription: "Select Flag Bot Mitigation Action. Flag mitigation action.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"append_headers": schema.SingleNestedBlock{
+															MarkdownDescription: "Append Flag Mitigation Headers. Append flag mitigation headers to forwarded request.",
+															Attributes: map[string]schema.Attribute{
+																"auto_type_header_name": schema.StringAttribute{
+																	MarkdownDescription: "Automation Type Header Name. A case-insensitive HTTP header name.",
+																	Optional: true,
+																},
+																"inference_header_name": schema.StringAttribute{
+																	MarkdownDescription: "Inference Header Name. A case-insensitive HTTP header name.",
+																	Optional: true,
+																},
+															},
+														},
+														"no_headers": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+												"redirect": schema.SingleNestedBlock{
+													MarkdownDescription: "Redirect bot mitigation. Redirect request to a custom URI.",
+													Attributes: map[string]schema.Attribute{
+														"uri": schema.StringAttribute{
+															MarkdownDescription: "URI. URI location for redirect may be relative or absolute.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"mobile": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 										},
 										"path": schema.SingleNestedBlock{
 											MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+											Attributes: map[string]schema.Attribute{
+												"path": schema.StringAttribute{
+													MarkdownDescription: "Exact. Exact path value to match",
+													Optional: true,
+												},
+												"prefix": schema.StringAttribute{
+													MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+													Optional: true,
+												},
+												"regex": schema.StringAttribute{
+													MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+													Optional: true,
+												},
+											},
 										},
 										"query_params": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"key": schema.StringAttribute{
+														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"undefined_flow_label": schema.SingleNestedBlock{
@@ -1390,6 +3898,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"web_mobile": schema.SingleNestedBlock{
 											MarkdownDescription: "Web and Mobile traffic type. Web and Mobile traffic type",
+											Attributes: map[string]schema.Attribute{
+												"mobile_identifier": schema.StringAttribute{
+													MarkdownDescription: "Mobile Identifier. Mobile identifier type - HEADERS: Headers Headers. The only possible value is `HEADERS`. Defaults to `HEADERS`.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -1439,12 +3953,50 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"domain": schema.SingleNestedBlock{
 											MarkdownDescription: "Domains. Domains names",
+											Attributes: map[string]schema.Attribute{
+												"exact_value": schema.StringAttribute{
+													MarkdownDescription: "Exact Value. Exact domain name.",
+													Optional: true,
+												},
+												"regex_value": schema.StringAttribute{
+													MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+													Optional: true,
+												},
+												"suffix_value": schema.StringAttribute{
+													MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+													Optional: true,
+												},
+											},
 										},
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"path": schema.SingleNestedBlock{
 											MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+											Attributes: map[string]schema.Attribute{
+												"path": schema.StringAttribute{
+													MarkdownDescription: "Exact. Exact path value to match",
+													Optional: true,
+												},
+												"prefix": schema.StringAttribute{
+													MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+													Optional: true,
+												},
+												"regex": schema.StringAttribute{
+													MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -1467,12 +4019,50 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"domain": schema.SingleNestedBlock{
 											MarkdownDescription: "Domains. Domains names",
+											Attributes: map[string]schema.Attribute{
+												"exact_value": schema.StringAttribute{
+													MarkdownDescription: "Exact Value. Exact domain name.",
+													Optional: true,
+												},
+												"regex_value": schema.StringAttribute{
+													MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+													Optional: true,
+												},
+												"suffix_value": schema.StringAttribute{
+													MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+													Optional: true,
+												},
+											},
 										},
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"path": schema.SingleNestedBlock{
 											MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+											Attributes: map[string]schema.Attribute{
+												"path": schema.StringAttribute{
+													MarkdownDescription: "Exact. Exact path value to match",
+													Optional: true,
+												},
+												"prefix": schema.StringAttribute{
+													MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+													Optional: true,
+												},
+												"regex": schema.StringAttribute{
+													MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -1492,12 +4082,50 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"domain": schema.SingleNestedBlock{
 											MarkdownDescription: "Domains. Domains names",
+											Attributes: map[string]schema.Attribute{
+												"exact_value": schema.StringAttribute{
+													MarkdownDescription: "Exact Value. Exact domain name.",
+													Optional: true,
+												},
+												"regex_value": schema.StringAttribute{
+													MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+													Optional: true,
+												},
+												"suffix_value": schema.StringAttribute{
+													MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+													Optional: true,
+												},
+											},
 										},
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"path": schema.SingleNestedBlock{
 											MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+											Attributes: map[string]schema.Attribute{
+												"path": schema.StringAttribute{
+													MarkdownDescription: "Exact. Exact path value to match",
+													Optional: true,
+												},
+												"prefix": schema.StringAttribute{
+													MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+													Optional: true,
+												},
+												"regex": schema.StringAttribute{
+													MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -1534,7 +4162,40 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"headers": schema.ListNestedBlock{
 										MarkdownDescription: "Headers. Headers that can be used to identify mobile traffic.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"check_not_present": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"check_present": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"item": schema.SingleNestedBlock{
+													MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+													Attributes: map[string]schema.Attribute{
+														"exact_values": schema.ListAttribute{
+															MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"regex_values": schema.ListAttribute{
+															MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"transformers": schema.ListAttribute{
+															MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -1651,7 +4312,60 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"exclude_list": schema.ListNestedBlock{
 										MarkdownDescription: "Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"any_domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Domains. Domains names",
+													Attributes: map[string]schema.Attribute{
+														"exact_value": schema.StringAttribute{
+															MarkdownDescription: "Exact Value. Exact domain name.",
+															Optional: true,
+														},
+														"regex_value": schema.StringAttribute{
+															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+															Optional: true,
+														},
+														"suffix_value": schema.StringAttribute{
+															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+															Optional: true,
+														},
+													},
+												},
+												"metadata": schema.SingleNestedBlock{
+													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+													Attributes: map[string]schema.Attribute{
+														"description": schema.StringAttribute{
+															MarkdownDescription: "Description. Human readable description.",
+															Optional: true,
+														},
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+															Optional: true,
+														},
+													},
+												},
+												"path": schema.SingleNestedBlock{
+													MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+													Attributes: map[string]schema.Attribute{
+														"path": schema.StringAttribute{
+															MarkdownDescription: "Exact. Exact path value to match",
+															Optional: true,
+														},
+														"prefix": schema.StringAttribute{
+															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+															Optional: true,
+														},
+														"regex": schema.StringAttribute{
+															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -1664,13 +4378,119 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"exclude_list": schema.ListNestedBlock{
 										MarkdownDescription: "Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"any_domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Domains. Domains names",
+													Attributes: map[string]schema.Attribute{
+														"exact_value": schema.StringAttribute{
+															MarkdownDescription: "Exact Value. Exact domain name.",
+															Optional: true,
+														},
+														"regex_value": schema.StringAttribute{
+															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+															Optional: true,
+														},
+														"suffix_value": schema.StringAttribute{
+															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+															Optional: true,
+														},
+													},
+												},
+												"metadata": schema.SingleNestedBlock{
+													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+													Attributes: map[string]schema.Attribute{
+														"description": schema.StringAttribute{
+															MarkdownDescription: "Description. Human readable description.",
+															Optional: true,
+														},
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+															Optional: true,
+														},
+													},
+												},
+												"path": schema.SingleNestedBlock{
+													MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+													Attributes: map[string]schema.Attribute{
+														"path": schema.StringAttribute{
+															MarkdownDescription: "Exact. Exact path value to match",
+															Optional: true,
+														},
+														"prefix": schema.StringAttribute{
+															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+															Optional: true,
+														},
+														"regex": schema.StringAttribute{
+															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 									"rules": schema.ListNestedBlock{
 										MarkdownDescription: "JavaScript Insertions. Required list of pages to insert Client-Side Defense client JavaScript.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"any_domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Domains. Domains names",
+													Attributes: map[string]schema.Attribute{
+														"exact_value": schema.StringAttribute{
+															MarkdownDescription: "Exact Value. Exact domain name.",
+															Optional: true,
+														},
+														"regex_value": schema.StringAttribute{
+															MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+															Optional: true,
+														},
+														"suffix_value": schema.StringAttribute{
+															MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+															Optional: true,
+														},
+													},
+												},
+												"metadata": schema.SingleNestedBlock{
+													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+													Attributes: map[string]schema.Attribute{
+														"description": schema.StringAttribute{
+															MarkdownDescription: "Description. Human readable description.",
+															Optional: true,
+														},
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+															Optional: true,
+														},
+													},
+												},
+												"path": schema.SingleNestedBlock{
+													MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+													Attributes: map[string]schema.Attribute{
+														"path": schema.StringAttribute{
+															MarkdownDescription: "Exact. Exact path value to match",
+															Optional: true,
+														},
+														"prefix": schema.StringAttribute{
+															MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+															Optional: true,
+														},
+														"regex": schema.StringAttribute{
+															MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -1862,7 +4682,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							MarkdownDescription: "DDoS Client Source Choice. DDoS Mitigation sources to be blocked",
 							Attributes: map[string]schema.Attribute{
 								"country_list": schema.ListAttribute{
-									MarkdownDescription: "Country List. Sources that are located in one of the countries in the given list",
+									MarkdownDescription: "Country List. Sources that are located in one of the countries in the given list. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE`.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -1892,7 +4712,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.",
 									Attributes: map[string]schema.Attribute{
 										"classes": schema.ListAttribute{
-											MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against.",
+											MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -2038,11 +4858,24 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									},
 									"default_subset": schema.SingleNestedBlock{
 										MarkdownDescription: "Origin Pool Default Subset. Default Subset definition",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"default_subset": schema.SingleNestedBlock{
+												MarkdownDescription: "Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists.",
+											},
+										},
 									},
 									"endpoint_subsets": schema.ListNestedBlock{
 										MarkdownDescription: "Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"keys": schema.ListAttribute{
+													MarkdownDescription: "Keys. List of keys that define a cluster subset class.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 									"fail_request": schema.SingleNestedBlock{
@@ -2057,6 +4890,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"header_transformation": schema.SingleNestedBlock{
 										MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"default_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"legacy_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"preserve_case_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"proper_case_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+										},
 									},
 								},
 							},
@@ -2165,9 +5014,64 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"site_locator": schema.SingleNestedBlock{
 											MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"site": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+												"virtual_site": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Snat Pool. Snat Pool configuration",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"no_snat_pool": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"snat_pool": schema.SingleNestedBlock{
+													MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+													Attributes: map[string]schema.Attribute{
+														"prefixes": schema.ListAttribute{
+															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -2178,6 +5082,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"endpoint": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -2202,9 +5120,64 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"site_locator": schema.SingleNestedBlock{
 											MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"site": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+												"virtual_site": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Snat Pool. Snat Pool configuration",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"no_snat_pool": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"snat_pool": schema.SingleNestedBlock{
+													MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+													Attributes: map[string]schema.Attribute{
+														"prefixes": schema.ListAttribute{
+															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 										"vk8s_networks": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2231,12 +5204,81 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"segment": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 										"site_locator": schema.SingleNestedBlock{
 											MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"site": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+												"virtual_site": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Snat Pool. Snat Pool configuration",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"no_snat_pool": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"snat_pool": schema.SingleNestedBlock{
+													MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+													Attributes: map[string]schema.Attribute{
+														"prefixes": schema.ListAttribute{
+															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -2261,12 +5303,81 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"segment": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 										"site_locator": schema.SingleNestedBlock{
 											MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"site": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+												"virtual_site": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Snat Pool. Snat Pool configuration",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"no_snat_pool": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"snat_pool": schema.SingleNestedBlock{
+													MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+													Attributes: map[string]schema.Attribute{
+														"prefixes": schema.ListAttribute{
+															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -2303,6 +5414,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"virtual_network": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -2317,6 +5442,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"private_network": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -2374,6 +5513,21 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+										Attributes: map[string]schema.Attribute{
+											"cipher_suites": schema.ListAttribute{
+												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+											"max_version": schema.StringAttribute{
+												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												Optional: true,
+											},
+											"min_version": schema.StringAttribute{
+												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												Optional: true,
+											},
+										},
 									},
 									"default_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -2397,7 +5551,71 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"tls_certificates": schema.ListNestedBlock{
 										MarkdownDescription: "mTLS Client Certificate. mTLS Client Certificate",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"certificate_url": schema.StringAttribute{
+													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
+													Optional: true,
+												},
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Description for the certificate",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"custom_hash_algorithms": schema.SingleNestedBlock{
+													MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+													Attributes: map[string]schema.Attribute{
+														"hash_algorithms": schema.ListAttribute{
+															MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"disable_ocsp_stapling": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"private_key": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"use_system_defaults": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 									},
 								},
@@ -2430,6 +5648,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										Attributes: map[string]schema.Attribute{
+											"name": schema.StringAttribute{
+												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												Optional: true,
+											},
+											"namespace": schema.StringAttribute{
+												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												Optional: true,
+											},
+											"tenant": schema.StringAttribute{
+												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												Optional: true,
+											},
+										},
 									},
 								},
 							},
@@ -2638,7 +5870,62 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"domains": schema.ListNestedBlock{
 										MarkdownDescription: "Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"domain": schema.StringAttribute{
+													MarkdownDescription: "Domain. Select the domain to execute API Crawling with given credentials.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"simple_login": schema.SingleNestedBlock{
+													MarkdownDescription: "Simple Login.",
+													Attributes: map[string]schema.Attribute{
+														"user": schema.StringAttribute{
+															MarkdownDescription: "User. Enter the username to assign credentials for the selected domain to crawl",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"password": schema.SingleNestedBlock{
+															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"blindfold_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																	Attributes: map[string]schema.Attribute{
+																		"decryption_provider": schema.StringAttribute{
+																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																			Optional: true,
+																		},
+																		"location": schema.StringAttribute{
+																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																			Optional: true,
+																		},
+																		"store_provider": schema.StringAttribute{
+																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																	},
+																},
+																"clear_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																	Attributes: map[string]schema.Attribute{
+																		"provider_ref": schema.StringAttribute{
+																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																		"url": schema.StringAttribute{
+																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -2664,9 +5951,30 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"code_base_integration": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 										"selected_repos": schema.SingleNestedBlock{
 											MarkdownDescription: "API Code Repositories. Select which API repositories represent the LB applications",
+											Attributes: map[string]schema.Attribute{
+												"api_code_repo": schema.ListAttribute{
+													MarkdownDescription: "API Code Repository. Code repository which contain API endpoints",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 								},
@@ -2786,7 +6094,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "IP Threat Category List. List of ip threat categories",
 				Attributes: map[string]schema.Attribute{
 					"ip_threat_categories": schema.ListAttribute{
-						MarkdownDescription: "List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied.",
+						MarkdownDescription: "List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -2967,6 +6275,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"header_transformation": schema.SingleNestedBlock{
 										MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"default_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"legacy_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"preserve_case_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"proper_case_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+										},
 									},
 								},
 							},
@@ -3018,6 +6342,21 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+										Attributes: map[string]schema.Attribute{
+											"cipher_suites": schema.ListAttribute{
+												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+											"max_version": schema.StringAttribute{
+												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												Optional: true,
+											},
+											"min_version": schema.StringAttribute{
+												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												Optional: true,
+											},
+										},
 									},
 									"default_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3045,18 +6384,53 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"crl": schema.SingleNestedBlock{
 										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										Attributes: map[string]schema.Attribute{
+											"name": schema.StringAttribute{
+												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												Optional: true,
+											},
+											"namespace": schema.StringAttribute{
+												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												Optional: true,
+											},
+											"tenant": schema.StringAttribute{
+												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												Optional: true,
+											},
+										},
 									},
 									"no_crl": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										Attributes: map[string]schema.Attribute{
+											"name": schema.StringAttribute{
+												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												Optional: true,
+											},
+											"namespace": schema.StringAttribute{
+												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												Optional: true,
+											},
+											"tenant": schema.StringAttribute{
+												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												Optional: true,
+											},
+										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+										Attributes: map[string]schema.Attribute{
+											"xfcc_header_elements": schema.ListAttribute{
+												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+										},
 									},
 								},
 							},
@@ -3086,12 +6460,53 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"custom_hash_algorithms": schema.SingleNestedBlock{
 											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+											Attributes: map[string]schema.Attribute{
+												"hash_algorithms": schema.ListAttribute{
+													MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"blindfold_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													Attributes: map[string]schema.Attribute{
+														"decryption_provider": schema.StringAttribute{
+															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															Optional: true,
+														},
+														"location": schema.StringAttribute{
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															Optional: true,
+														},
+														"store_provider": schema.StringAttribute{
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+													},
+												},
+												"clear_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													Attributes: map[string]schema.Attribute{
+														"provider_ref": schema.StringAttribute{
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+														"url": schema.StringAttribute{
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3106,6 +6521,21 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+										Attributes: map[string]schema.Attribute{
+											"cipher_suites": schema.ListAttribute{
+												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+											"max_version": schema.StringAttribute{
+												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												Optional: true,
+											},
+											"min_version": schema.StringAttribute{
+												MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												Optional: true,
+											},
+										},
 									},
 									"default_security": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -3133,18 +6563,53 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"crl": schema.SingleNestedBlock{
 										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										Attributes: map[string]schema.Attribute{
+											"name": schema.StringAttribute{
+												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												Optional: true,
+											},
+											"namespace": schema.StringAttribute{
+												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												Optional: true,
+											},
+											"tenant": schema.StringAttribute{
+												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												Optional: true,
+											},
+										},
 									},
 									"no_crl": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										Attributes: map[string]schema.Attribute{
+											"name": schema.StringAttribute{
+												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												Optional: true,
+											},
+											"namespace": schema.StringAttribute{
+												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												Optional: true,
+											},
+											"tenant": schema.StringAttribute{
+												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												Optional: true,
+											},
+										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+										Attributes: map[string]schema.Attribute{
+											"xfcc_header_elements": schema.ListAttribute{
+												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+										},
 									},
 								},
 							},
@@ -3223,6 +6688,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"header_transformation": schema.SingleNestedBlock{
 										MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"default_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"legacy_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"preserve_case_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"proper_case_header_transformation": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+										},
 									},
 								},
 							},
@@ -3334,7 +6815,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
 								Attributes: map[string]schema.Attribute{
 									"xfcc_header_elements": schema.ListAttribute{
-										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -3614,7 +7095,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"http_methods": schema.ListAttribute{
-									MarkdownDescription: "HTTP Methods. Methods to be matched",
+									MarkdownDescription: "HTTP Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -3643,6 +7124,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"domain": schema.SingleNestedBlock{
 											MarkdownDescription: "Domains. Domains names",
+											Attributes: map[string]schema.Attribute{
+												"exact_value": schema.StringAttribute{
+													MarkdownDescription: "Exact Value. Exact domain name.",
+													Optional: true,
+												},
+												"regex_value": schema.StringAttribute{
+													MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+													Optional: true,
+												},
+												"suffix_value": schema.StringAttribute{
+													MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -3788,9 +7283,33 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"blindfold_secret_info": schema.SingleNestedBlock{
 											MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+											Attributes: map[string]schema.Attribute{
+												"decryption_provider": schema.StringAttribute{
+													MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+													Optional: true,
+												},
+												"location": schema.StringAttribute{
+													MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+													Optional: true,
+												},
+												"store_provider": schema.StringAttribute{
+													MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+													Optional: true,
+												},
+											},
 										},
 										"clear_secret_info": schema.SingleNestedBlock{
 											MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+											Attributes: map[string]schema.Attribute{
+												"provider_ref": schema.StringAttribute{
+													MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+													Optional: true,
+												},
+												"url": schema.StringAttribute{
+													MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -3822,9 +7341,33 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"blindfold_secret_info": schema.SingleNestedBlock{
 											MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+											Attributes: map[string]schema.Attribute{
+												"decryption_provider": schema.StringAttribute{
+													MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+													Optional: true,
+												},
+												"location": schema.StringAttribute{
+													MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+													Optional: true,
+												},
+												"store_provider": schema.StringAttribute{
+													MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+													Optional: true,
+												},
+											},
 										},
 										"clear_secret_info": schema.SingleNestedBlock{
 											MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+											Attributes: map[string]schema.Attribute{
+												"provider_ref": schema.StringAttribute{
+													MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+													Optional: true,
+												},
+												"url": schema.StringAttribute{
+													MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -3917,9 +7460,33 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"blindfold_secret_info": schema.SingleNestedBlock{
 											MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+											Attributes: map[string]schema.Attribute{
+												"decryption_provider": schema.StringAttribute{
+													MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+													Optional: true,
+												},
+												"location": schema.StringAttribute{
+													MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+													Optional: true,
+												},
+												"store_provider": schema.StringAttribute{
+													MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+													Optional: true,
+												},
+											},
 										},
 										"clear_secret_info": schema.SingleNestedBlock{
 											MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+											Attributes: map[string]schema.Attribute{
+												"provider_ref": schema.StringAttribute{
+													MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+													Optional: true,
+												},
+												"url": schema.StringAttribute{
+													MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -3951,9 +7518,33 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"blindfold_secret_info": schema.SingleNestedBlock{
 											MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+											Attributes: map[string]schema.Attribute{
+												"decryption_provider": schema.StringAttribute{
+													MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+													Optional: true,
+												},
+												"location": schema.StringAttribute{
+													MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+													Optional: true,
+												},
+												"store_provider": schema.StringAttribute{
+													MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+													Optional: true,
+												},
+											},
 										},
 										"clear_secret_info": schema.SingleNestedBlock{
 											MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+											Attributes: map[string]schema.Attribute{
+												"provider_ref": schema.StringAttribute{
+													MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+													Optional: true,
+												},
+												"url": schema.StringAttribute{
+													MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -3982,7 +7573,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"country_codes": schema.ListAttribute{
-									MarkdownDescription: "Country Codes List. List of Country Codes",
+									MarkdownDescription: "Country Codes List. List of Country Codes. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE`.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -4017,7 +7608,28 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"asn_sets": schema.ListNestedBlock{
 											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -4044,7 +7656,28 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"prefix_sets": schema.ListNestedBlock{
 											MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -4174,9 +7807,426 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"spec": schema.SingleNestedBlock{
 											MarkdownDescription: "Challenge Rule Specification. A Challenge Rule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the rule if all predicates in the rule evaluate to true for that request. Any predicates that are not specified in a rule are implicitly considered to be true. If a request API matches a challenge rule, the configured challenge is enforced.",
+											Attributes: map[string]schema.Attribute{
+												"expiration_timestamp": schema.StringAttribute{
+													MarkdownDescription: "The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"any_asn": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"any_client": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"any_ip": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"arg_matchers": schema.ListNestedBlock{
+													MarkdownDescription: "A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"invert_matcher": schema.BoolAttribute{
+																MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"check_not_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"check_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"item": schema.SingleNestedBlock{
+																MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+																Attributes: map[string]schema.Attribute{
+																	"exact_values": schema.ListAttribute{
+																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"regex_values": schema.ListAttribute{
+																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"transformers": schema.ListAttribute{
+																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"asn_list": schema.SingleNestedBlock{
+													MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+													Attributes: map[string]schema.Attribute{
+														"as_numbers": schema.ListAttribute{
+															MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"asn_matcher": schema.SingleNestedBlock{
+													MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"asn_sets": schema.ListNestedBlock{
+															MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"kind": schema.StringAttribute{
+																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		Optional: true,
+																	},
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		Optional: true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		Optional: true,
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		Optional: true,
+																	},
+																	"uid": schema.StringAttribute{
+																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"body_matcher": schema.SingleNestedBlock{
+													MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+													Attributes: map[string]schema.Attribute{
+														"exact_values": schema.ListAttribute{
+															MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"regex_values": schema.ListAttribute{
+															MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"transformers": schema.ListAttribute{
+															MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"client_selector": schema.SingleNestedBlock{
+													MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+													Attributes: map[string]schema.Attribute{
+														"expressions": schema.ListAttribute{
+															MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"cookie_matchers": schema.ListNestedBlock{
+													MarkdownDescription: "A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"invert_matcher": schema.BoolAttribute{
+																MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"check_not_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"check_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"item": schema.SingleNestedBlock{
+																MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+																Attributes: map[string]schema.Attribute{
+																	"exact_values": schema.ListAttribute{
+																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"regex_values": schema.ListAttribute{
+																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"transformers": schema.ListAttribute{
+																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"disable_challenge": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"domain_matcher": schema.SingleNestedBlock{
+													MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+													Attributes: map[string]schema.Attribute{
+														"exact_values": schema.ListAttribute{
+															MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"regex_values": schema.ListAttribute{
+															MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"enable_captcha_challenge": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"enable_javascript_challenge": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"headers": schema.ListNestedBlock{
+													MarkdownDescription: "A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"invert_matcher": schema.BoolAttribute{
+																MarkdownDescription: "Invert Header Matcher. Invert the match result.",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"check_not_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"check_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"item": schema.SingleNestedBlock{
+																MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+																Attributes: map[string]schema.Attribute{
+																	"exact_values": schema.ListAttribute{
+																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"regex_values": schema.ListAttribute{
+																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"transformers": schema.ListAttribute{
+																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"http_method": schema.SingleNestedBlock{
+													MarkdownDescription: "HTTP Method Matcher. A http method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true.",
+													Attributes: map[string]schema.Attribute{
+														"invert_matcher": schema.BoolAttribute{
+															MarkdownDescription: "Invert Method Matcher. Invert the match result.",
+															Optional: true,
+														},
+														"methods": schema.ListAttribute{
+															MarkdownDescription: "Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"ip_matcher": schema.SingleNestedBlock{
+													MarkdownDescription: "IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+													Attributes: map[string]schema.Attribute{
+														"invert_matcher": schema.BoolAttribute{
+															MarkdownDescription: "Invert IP Matcher. Invert the match result.",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"prefix_sets": schema.ListNestedBlock{
+															MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"kind": schema.StringAttribute{
+																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		Optional: true,
+																	},
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		Optional: true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		Optional: true,
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		Optional: true,
+																	},
+																	"uid": schema.StringAttribute{
+																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"ip_prefix_list": schema.SingleNestedBlock{
+													MarkdownDescription: "IP Prefix Match List. List of IP Prefix strings to match against.",
+													Attributes: map[string]schema.Attribute{
+														"invert_match": schema.BoolAttribute{
+															MarkdownDescription: "Invert Match Result. Invert the match result.",
+															Optional: true,
+														},
+														"ip_prefixes": schema.ListAttribute{
+															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"path": schema.SingleNestedBlock{
+													MarkdownDescription: "Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions.",
+													Attributes: map[string]schema.Attribute{
+														"exact_values": schema.ListAttribute{
+															MarkdownDescription: "Exact Values. A list of exact path values to match the input HTTP path against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"invert_matcher": schema.BoolAttribute{
+															MarkdownDescription: "Invert Path Matcher. Invert the match result.",
+															Optional: true,
+														},
+														"prefix_values": schema.ListAttribute{
+															MarkdownDescription: "Prefix Values. A list of path prefix values to match the input HTTP path against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"regex_values": schema.ListAttribute{
+															MarkdownDescription: "Regex Values. A list of regular expressions to match the input HTTP path against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"suffix_values": schema.ListAttribute{
+															MarkdownDescription: "Suffix Values. A list of path suffix values to match the input HTTP path against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"transformers": schema.ListAttribute{
+															MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"query_params": schema.ListNestedBlock{
+													MarkdownDescription: "A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"invert_matcher": schema.BoolAttribute{
+																MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
+																Optional: true,
+															},
+															"key": schema.StringAttribute{
+																MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"check_not_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"check_present": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"item": schema.SingleNestedBlock{
+																MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+																Attributes: map[string]schema.Attribute{
+																	"exact_values": schema.ListAttribute{
+																		MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"regex_values": schema.ListAttribute{
+																		MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																	"transformers": schema.ListAttribute{
+																		MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"tls_fingerprint_matcher": schema.SingleNestedBlock{
+													MarkdownDescription: "TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.",
+													Attributes: map[string]schema.Attribute{
+														"classes": schema.ListAttribute{
+															MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"exact_values": schema.ListAttribute{
+															MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"excluded_values": schema.ListAttribute{
+															MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -4350,12 +8400,30 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"hours": schema.SingleNestedBlock{
 										MarkdownDescription: "Hours. Input Duration Hours",
+										Attributes: map[string]schema.Attribute{
+											"duration": schema.Int64Attribute{
+												MarkdownDescription: "Duration.",
+												Optional: true,
+											},
+										},
 									},
 									"minutes": schema.SingleNestedBlock{
 										MarkdownDescription: "Minutes. Input Duration Minutes",
+										Attributes: map[string]schema.Attribute{
+											"duration": schema.Int64Attribute{
+												MarkdownDescription: "Duration.",
+												Optional: true,
+											},
+										},
 									},
 									"seconds": schema.SingleNestedBlock{
 										MarkdownDescription: "Seconds. Input Duration Seconds",
+										Attributes: map[string]schema.Attribute{
+											"duration": schema.Int64Attribute{
+												MarkdownDescription: "Duration.",
+												Optional: true,
+											},
+										},
 									},
 								},
 							},
@@ -4730,12 +8798,72 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									Blocks: map[string]schema.Block{
 										"app_firewall": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 										"bot_defense_javascript_injection": schema.SingleNestedBlock{
 											MarkdownDescription: "Bot Defense Javascript Injection Configuration for inline deployments. Bot Defense Javascript Injection Configuration for inline bot defense deployments",
+											Attributes: map[string]schema.Attribute{
+												"javascript_location": schema.StringAttribute{
+													MarkdownDescription: "JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag. Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`. Defaults to `AFTER_HEAD`.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"javascript_tags": schema.ListNestedBlock{
+													MarkdownDescription: "JavaScript Tags. Select Add item to configure your javascript tag. If adding both Bot Adv and Fraud, the Bot Javascript should be added first.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"javascript_url": schema.StringAttribute{
+																MarkdownDescription: "URL. Please enter the full URL (include domain and path), or relative path.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"tag_attributes": schema.ListNestedBlock{
+																MarkdownDescription: "Tag Attributes. Add the tag attributes you want to include in your Javascript tag.",
+																NestedObject: schema.NestedBlockObject{
+																	Attributes: map[string]schema.Attribute{
+																		"javascript_tag": schema.StringAttribute{
+																			MarkdownDescription: "Tag Attribute Name. Select from one of the predefined tag attributes. Possible values are `JS_ATTR_ID`, `JS_ATTR_CID`, `JS_ATTR_CN`, `JS_ATTR_API_DOMAIN`, `JS_ATTR_API_URL`, `JS_ATTR_API_PATH`, `JS_ATTR_ASYNC`, `JS_ATTR_DEFER`. Defaults to `JS_ATTR_ID`.",
+																			Optional: true,
+																		},
+																		"tag_value": schema.StringAttribute{
+																			MarkdownDescription: "Value. Add the tag attribute value.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 										"buffer_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence.",
+											Attributes: map[string]schema.Attribute{
+												"disabled": schema.BoolAttribute{
+													MarkdownDescription: "Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
+													Optional: true,
+												},
+												"max_request_bytes": schema.Int64Attribute{
+													MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
+													Optional: true,
+												},
+											},
 										},
 										"common_buffering": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4745,9 +8873,65 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"cors_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: http://foo.example/examples/access-control/simpleXSInvocation.html Origin: http://foo.example HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: * Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/xml An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/post-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: http://foo.example Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: http://foo.example Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive",
+											Attributes: map[string]schema.Attribute{
+												"allow_credentials": schema.BoolAttribute{
+													MarkdownDescription: "Allow Credentials. Specifies whether the resource allows credentials",
+													Optional: true,
+												},
+												"allow_headers": schema.StringAttribute{
+													MarkdownDescription: "Allow Headers. Specifies the content for the access-control-allow-headers header",
+													Optional: true,
+												},
+												"allow_methods": schema.StringAttribute{
+													MarkdownDescription: "Allow Methods. Specifies the content for the access-control-allow-methods header",
+													Optional: true,
+												},
+												"allow_origin": schema.ListAttribute{
+													MarkdownDescription: "Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"allow_origin_regex": schema.ListAttribute{
+													MarkdownDescription: "Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"disabled": schema.BoolAttribute{
+													MarkdownDescription: "Disabled. Disable the CorsPolicy for a particular route. This is useful when virtual-host has CorsPolicy, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
+													Optional: true,
+												},
+												"expose_headers": schema.StringAttribute{
+													MarkdownDescription: "Expose Headers. Specifies the content for the access-control-expose-headers header",
+													Optional: true,
+												},
+												"maximum_age": schema.Int64Attribute{
+													MarkdownDescription: "Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours)",
+													Optional: true,
+												},
+											},
 										},
 										"csrf_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and compare their values. If the source origin is missing or origins do not match the request is rejected. The exception to this being if the source-origin has been added to they policy as valid. Because CSRF attacks specifically target state-changing requests, the policy only acts on the HTTP requests that have state-changing method (PUT,POST, etc.).",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"all_load_balancer_domains": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"custom_domain_list": schema.SingleNestedBlock{
+													MarkdownDescription: "Domain name list. List of domain names used for Host header matching",
+													Attributes: map[string]schema.Attribute{
+														"domains": schema.ListAttribute{
+															MarkdownDescription: "Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"disabled": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"default_retry_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -4787,35 +8971,348 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"mirror_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "Mirror Policy. MirrorPolicy is used for shadowing traffic from one origin pool to another. The approach used is 'fire and forget', meaning it will not wait for the shadow origin pool to respond before returning the response from the primary origin pool. All normal statistics are collected for the shadow origin pool making this feature useful for testing and troubleshooting.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"origin_pool": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+												"percent": schema.SingleNestedBlock{
+													MarkdownDescription: "Fractional Percent. Fraction used where sampling percentages are needed. example sampled requests",
+													Attributes: map[string]schema.Attribute{
+														"denominator": schema.StringAttribute{
+															MarkdownDescription: "Denominator. Denominator used in fraction where sampling percentages are needed. example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator. Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`. Defaults to `HUNDRED`.",
+															Optional: true,
+														},
+														"numerator": schema.Int64Attribute{
+															MarkdownDescription: "Numerator. sampled parts per denominator. If denominator was 10000, then value of 5 will be 5 in 10000",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"no_retry_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 										},
 										"regex_rewrite": schema.SingleNestedBlock{
 											MarkdownDescription: "Regex Match Rewrite. RegexMatchRewrite describes how to match a string and then produce a new string using a regular expression and a substitution string.",
+											Attributes: map[string]schema.Attribute{
+												"pattern": schema.StringAttribute{
+													MarkdownDescription: "Pattern. The regular expression used to find portions of a string that should be replaced.",
+													Optional: true,
+												},
+												"substitution": schema.StringAttribute{
+													MarkdownDescription: "Substitution. The string that should be substituted into matching portions of the subject string during a substitution operation to produce a new string.",
+													Optional: true,
+												},
+											},
 										},
 										"request_cookies_to_add": schema.ListNestedBlock{
 											MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. Name of the cookie in Cookie header.",
+														Optional: true,
+													},
+													"overwrite": schema.BoolAttribute{
+														MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+														Optional: true,
+													},
+													"value": schema.StringAttribute{
+														MarkdownDescription: "Value. Value of the Cookie header.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"secret_value": schema.SingleNestedBlock{
+														MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"blindfold_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																Attributes: map[string]schema.Attribute{
+																	"decryption_provider": schema.StringAttribute{
+																		MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																		Optional: true,
+																	},
+																	"location": schema.StringAttribute{
+																		MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																		Optional: true,
+																	},
+																	"store_provider": schema.StringAttribute{
+																		MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																},
+															},
+															"clear_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																Attributes: map[string]schema.Attribute{
+																	"provider_ref": schema.StringAttribute{
+																		MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																	"url": schema.StringAttribute{
+																		MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
 											},
 										},
 										"request_headers_to_add": schema.ListNestedBlock{
 											MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"append": schema.BoolAttribute{
+														MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. Name of the HTTP header.",
+														Optional: true,
+													},
+													"value": schema.StringAttribute{
+														MarkdownDescription: "Value. Value of the HTTP header.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"secret_value": schema.SingleNestedBlock{
+														MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"blindfold_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																Attributes: map[string]schema.Attribute{
+																	"decryption_provider": schema.StringAttribute{
+																		MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																		Optional: true,
+																	},
+																	"location": schema.StringAttribute{
+																		MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																		Optional: true,
+																	},
+																	"store_provider": schema.StringAttribute{
+																		MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																},
+															},
+															"clear_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																Attributes: map[string]schema.Attribute{
+																	"provider_ref": schema.StringAttribute{
+																		MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																	"url": schema.StringAttribute{
+																		MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
 											},
 										},
 										"response_cookies_to_add": schema.ListNestedBlock{
 											MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"add_domain": schema.StringAttribute{
+														MarkdownDescription: "Add Domain. Add domain attribute",
+														Optional: true,
+													},
+													"add_expiry": schema.StringAttribute{
+														MarkdownDescription: "Add expiry. Add expiry attribute",
+														Optional: true,
+													},
+													"add_path": schema.StringAttribute{
+														MarkdownDescription: "Add path. Add path attribute",
+														Optional: true,
+													},
+													"max_age_value": schema.Int64Attribute{
+														MarkdownDescription: "Add Max Age. Add max age attribute",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. Name of the cookie in Cookie header.",
+														Optional: true,
+													},
+													"overwrite": schema.BoolAttribute{
+														MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+														Optional: true,
+													},
+													"value": schema.StringAttribute{
+														MarkdownDescription: "Value. Value of the Cookie header.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"add_httponly": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"add_partitioned": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"add_secure": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_domain": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_expiry": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_httponly": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_max_age": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_partitioned": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_path": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_samesite": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_secure": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_value": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"samesite_lax": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"samesite_none": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"samesite_strict": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"secret_value": schema.SingleNestedBlock{
+														MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"blindfold_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																Attributes: map[string]schema.Attribute{
+																	"decryption_provider": schema.StringAttribute{
+																		MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																		Optional: true,
+																	},
+																	"location": schema.StringAttribute{
+																		MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																		Optional: true,
+																	},
+																	"store_provider": schema.StringAttribute{
+																		MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																},
+															},
+															"clear_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																Attributes: map[string]schema.Attribute{
+																	"provider_ref": schema.StringAttribute{
+																		MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																	"url": schema.StringAttribute{
+																		MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
 											},
 										},
 										"response_headers_to_add": schema.ListNestedBlock{
 											MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"append": schema.BoolAttribute{
+														MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. Name of the HTTP header.",
+														Optional: true,
+													},
+													"value": schema.StringAttribute{
+														MarkdownDescription: "Value. Value of the HTTP header.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"secret_value": schema.SingleNestedBlock{
+														MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"blindfold_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																Attributes: map[string]schema.Attribute{
+																	"decryption_provider": schema.StringAttribute{
+																		MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																		Optional: true,
+																	},
+																	"location": schema.StringAttribute{
+																		MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																		Optional: true,
+																	},
+																	"store_provider": schema.StringAttribute{
+																		MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																},
+															},
+															"clear_secret_info": schema.SingleNestedBlock{
+																MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																Attributes: map[string]schema.Attribute{
+																	"provider_ref": schema.StringAttribute{
+																		MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																		Optional: true,
+																	},
+																	"url": schema.StringAttribute{
+																		MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
 											},
 										},
 										"retract_cluster": schema.SingleNestedBlock{
@@ -4823,15 +9320,138 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"retry_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "Retry Policy. Retry policy configuration for route destination.",
+											Attributes: map[string]schema.Attribute{
+												"num_retries": schema.Int64Attribute{
+													MarkdownDescription: "Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry",
+													Optional: true,
+												},
+												"per_try_timeout": schema.Int64Attribute{
+													MarkdownDescription: "Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds",
+													Optional: true,
+												},
+												"retriable_status_codes": schema.ListAttribute{
+													MarkdownDescription: "Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"retry_condition": schema.ListAttribute{
+													MarkdownDescription: "Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.)",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"back_off": schema.SingleNestedBlock{
+													MarkdownDescription: "Retry BackOff Interval. Specifies parameters that control retry back off.",
+													Attributes: map[string]schema.Attribute{
+														"base_interval": schema.Int64Attribute{
+															MarkdownDescription: "Base Retry Interval. Specifies the base interval between retries in milliseconds",
+															Optional: true,
+														},
+														"max_interval": schema.Int64Attribute{
+															MarkdownDescription: "Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The default is 10 times the base_interval.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"specific_hash_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "Hash Policy List. List of hash policy rules",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"hash_policy": schema.ListNestedBlock{
+													MarkdownDescription: "Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"header_name": schema.StringAttribute{
+																MarkdownDescription: "Header Name. The name or key of the request header that will be used to obtain the hash key",
+																Optional: true,
+															},
+															"source_ip": schema.BoolAttribute{
+																MarkdownDescription: "Source IP. Hash based on source IP address",
+																Optional: true,
+															},
+															"terminal": schema.BoolAttribute{
+																MarkdownDescription: "Terminal. Specify if its a terminal policy",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"cookie": schema.SingleNestedBlock{
+																MarkdownDescription: "Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously.",
+																Attributes: map[string]schema.Attribute{
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced",
+																		Optional: true,
+																	},
+																	"path": schema.StringAttribute{
+																		MarkdownDescription: "Path. The name of the path for the cookie. If no path is specified here, no path will be set for the cookie",
+																		Optional: true,
+																	},
+																	"ttl": schema.Int64Attribute{
+																		MarkdownDescription: "TTL. If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"add_httponly": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"add_secure": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"ignore_httponly": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"ignore_samesite": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"ignore_secure": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"samesite_lax": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"samesite_none": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"samesite_strict": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 										"waf_exclusion_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 										"web_socket_config": schema.SingleNestedBlock{
 											MarkdownDescription: "Websocket Configuration. Configuration to allow Websocket Request headers of such upgrade looks like below 'connection', 'Upgrade' 'upgrade', 'websocket' With configuration to allow websocket upgrade, ADC will produce following response 'HTTP/1.1 101 Switching Protocols 'Upgrade': 'websocket' 'Connection': 'Upgrade'",
+											Attributes: map[string]schema.Attribute{
+												"use_websocket": schema.BoolAttribute{
+													MarkdownDescription: "Use Websocket. Specifies that the HTTP client connection to this route is allowed to upgrade to a WebSocket connection",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -4902,12 +9522,40 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										Blocks: map[string]schema.Block{
 											"cluster": schema.SingleNestedBlock{
 												MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+												},
 											},
 											"endpoint_subsets": schema.SingleNestedBlock{
 												MarkdownDescription: "Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured endpoint and discovered service, labels from discovered service takes precedence. List of key-value pairs that will be used as matching metadata. Only those origin servers of upstream origin pool which match this metadata will be selected for load balancing",
 											},
 											"pool": schema.SingleNestedBlock{
 												MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -4967,7 +9615,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "API Endpoint. This defines api endpoint",
 									Attributes: map[string]schema.Attribute{
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "Methods. Methods to be matched",
+											MarkdownDescription: "Methods. Methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -5050,6 +9698,71 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"api_crawler_config": schema.SingleNestedBlock{
 										MarkdownDescription: "Crawler Configure.",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"domains": schema.ListNestedBlock{
+												MarkdownDescription: "Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer.",
+												NestedObject: schema.NestedBlockObject{
+													Attributes: map[string]schema.Attribute{
+														"domain": schema.StringAttribute{
+															MarkdownDescription: "Domain. Select the domain to execute API Crawling with given credentials.",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"simple_login": schema.SingleNestedBlock{
+															MarkdownDescription: "Simple Login.",
+															Attributes: map[string]schema.Attribute{
+																"user": schema.StringAttribute{
+																	MarkdownDescription: "User. Enter the username to assign credentials for the selected domain to crawl",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"password": schema.SingleNestedBlock{
+																	MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																	Attributes: map[string]schema.Attribute{
+																	},
+																	Blocks: map[string]schema.Block{
+																		"blindfold_secret_info": schema.SingleNestedBlock{
+																			MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																			Attributes: map[string]schema.Attribute{
+																				"decryption_provider": schema.StringAttribute{
+																					MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																					Optional: true,
+																				},
+																				"location": schema.StringAttribute{
+																					MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																					Optional: true,
+																				},
+																				"store_provider": schema.StringAttribute{
+																					MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																					Optional: true,
+																				},
+																			},
+																		},
+																		"clear_secret_info": schema.SingleNestedBlock{
+																			MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																			Attributes: map[string]schema.Attribute{
+																				"provider_ref": schema.StringAttribute{
+																					MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																					Optional: true,
+																				},
+																				"url": schema.StringAttribute{
+																					MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
+										},
 									},
 									"disable_api_crawler": schema.SingleNestedBlock{
 										MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -5064,7 +9777,40 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"code_base_integrations": schema.ListNestedBlock{
 										MarkdownDescription: "Select Code Base Integrations.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"all_repos": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"code_base_integration": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+												"selected_repos": schema.SingleNestedBlock{
+													MarkdownDescription: "API Code Repositories. Select which API repositories represent the LB applications",
+													Attributes: map[string]schema.Attribute{
+														"api_code_repo": schema.ListAttribute{
+															MarkdownDescription: "API Code Repository. Code repository which contain API endpoints",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -5076,6 +9822,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"api_discovery_ref": schema.SingleNestedBlock{
 										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										Attributes: map[string]schema.Attribute{
+											"name": schema.StringAttribute{
+												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												Optional: true,
+											},
+											"namespace": schema.StringAttribute{
+												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												Optional: true,
+											},
+											"tenant": schema.StringAttribute{
+												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												Optional: true,
+											},
+										},
 									},
 								},
 							},
@@ -5135,7 +9895,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"actions": schema.ListAttribute{
-							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule",
+							MarkdownDescription: "Actions. Actions that should be taken when client identifier matches the rule. Possible values are `SKIP_PROCESSING_WAF`, `SKIP_PROCESSING_BOT`, `SKIP_PROCESSING_MUM`, `SKIP_PROCESSING_IP_REPUTATION`, `SKIP_PROCESSING_API_PROTECTION`, `SKIP_PROCESSING_OAS_VALIDATION`, `SKIP_PROCESSING_DDOS_PROTECTION`, `SKIP_PROCESSING_THREAT_MESH`, `SKIP_PROCESSING_MALWARE_PROTECTION`. Defaults to `SKIP_PROCESSING_WAF`.",
 							Optional: true,
 							ElementType: types.StringType,
 						},
@@ -5265,7 +10025,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											Optional: true,
 										},
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "Methods. methods to be matched",
+											MarkdownDescription: "Methods. methods to be matched. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -5291,9 +10051,91 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										},
 										"app_firewall_detection_control": schema.SingleNestedBlock{
 											MarkdownDescription: "App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"exclude_attack_type_contexts": schema.ListNestedBlock{
+													MarkdownDescription: "Attack Types. Attack Types to be excluded for the defined match criteria",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"context": schema.StringAttribute{
+																MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
+																Optional: true,
+															},
+															"context_name": schema.StringAttribute{
+																MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
+																Optional: true,
+															},
+															"exclude_attack_type": schema.StringAttribute{
+																MarkdownDescription: "Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK. Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`. Defaults to `ATTACK_TYPE_NONE`.",
+																Optional: true,
+															},
+														},
+													},
+												},
+												"exclude_bot_name_contexts": schema.ListNestedBlock{
+													MarkdownDescription: "Bot Names. Bot Names to be excluded for the defined match criteria",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"bot_name": schema.StringAttribute{
+																MarkdownDescription: "Bot Name.",
+																Optional: true,
+															},
+														},
+													},
+												},
+												"exclude_signature_contexts": schema.ListNestedBlock{
+													MarkdownDescription: "Signature IDs. Signature IDs to be excluded for the defined match criteria",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"context": schema.StringAttribute{
+																MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
+																Optional: true,
+															},
+															"context_name": schema.StringAttribute{
+																MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
+																Optional: true,
+															},
+															"signature_id": schema.Int64Attribute{
+																MarkdownDescription: "SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context.",
+																Optional: true,
+															},
+														},
+													},
+												},
+												"exclude_violation_contexts": schema.ListNestedBlock{
+													MarkdownDescription: "Violations. Violations to be excluded for the defined match criteria",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"context": schema.StringAttribute{
+																MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
+																Optional: true,
+															},
+															"context_name": schema.StringAttribute{
+																MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
+																Optional: true,
+															},
+															"exclude_violation": schema.StringAttribute{
+																MarkdownDescription: "App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY. Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`. Defaults to `VIOL_NONE`.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"waf_skip_processing": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",

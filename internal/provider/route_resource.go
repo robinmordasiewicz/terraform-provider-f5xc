@@ -159,7 +159,16 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											"tag_attributes": schema.ListNestedBlock{
 												MarkdownDescription: "Tag Attributes. Add the tag attributes you want to include in your Javascript tag.",
 												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{},
+													Attributes: map[string]schema.Attribute{
+														"javascript_tag": schema.StringAttribute{
+															MarkdownDescription: "Tag Attribute Name. Select from one of the predefined tag attributes. Possible values are `JS_ATTR_ID`, `JS_ATTR_CID`, `JS_ATTR_CN`, `JS_ATTR_API_DOMAIN`, `JS_ATTR_API_URL`, `JS_ATTR_API_PATH`, `JS_ATTR_ASYNC`, `JS_ATTR_DEFER`. Defaults to `JS_ATTR_ID`.",
+															Optional: true,
+														},
+														"tag_value": schema.StringAttribute{
+															MarkdownDescription: "Value. Add the tag attribute value.",
+															Optional: true,
+														},
+													},
 												},
 											},
 										},
@@ -292,9 +301,33 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional: true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														Optional: true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+												},
 											},
 											"clear_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -326,9 +359,33 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional: true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														Optional: true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+												},
 											},
 											"clear_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -421,9 +478,33 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional: true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														Optional: true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+												},
 											},
 											"clear_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -455,9 +536,33 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional: true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														Optional: true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+												},
 											},
 											"clear_secret_info": schema.SingleNestedBlock{
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -551,6 +656,13 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										},
 										"custom_domain_list": schema.SingleNestedBlock{
 											MarkdownDescription: "Domain name list. List of domain names used for Host header matching",
+											Attributes: map[string]schema.Attribute{
+												"domains": schema.ListAttribute{
+													MarkdownDescription: "Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"disabled": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -574,7 +686,28 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											"cluster": schema.ListNestedBlock{
 												MarkdownDescription: "Cluster. Indicates the upstream cluster to which the request should be sent. If the cluster does not exist ServiceUnavailable response will be sent",
 												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{},
+													Attributes: map[string]schema.Attribute{
+														"kind": schema.StringAttribute{
+															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+															Optional: true,
+														},
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+														"uid": schema.StringAttribute{
+															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+															Optional: true,
+														},
+													},
 												},
 											},
 											"endpoint_subsets": schema.SingleNestedBlock{
@@ -609,6 +742,46 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Blocks: map[string]schema.Block{
 											"cookie": schema.SingleNestedBlock{
 												MarkdownDescription: "Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously.",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced",
+														Optional: true,
+													},
+													"path": schema.StringAttribute{
+														MarkdownDescription: "Path. The name of the path for the cookie. If no path is specified here, no path will be set for the cookie",
+														Optional: true,
+													},
+													"ttl": schema.Int64Attribute{
+														MarkdownDescription: "TTL. If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"add_httponly": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"add_secure": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_httponly": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_samesite": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ignore_secure": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"samesite_lax": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"samesite_none": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"samesite_strict": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+												},
 											},
 										},
 									},
@@ -621,11 +794,42 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										"cluster": schema.ListNestedBlock{
 											MarkdownDescription: "Mirror Destination Cluster. Specifies the cluster to which the requests will be mirrored. The cluster object referred here must be present.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 										"percent": schema.SingleNestedBlock{
 											MarkdownDescription: "Fractional Percent. Fraction used where sampling percentages are needed. example sampled requests",
+											Attributes: map[string]schema.Attribute{
+												"denominator": schema.StringAttribute{
+													MarkdownDescription: "Denominator. Denominator used in fraction where sampling percentages are needed. example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator. Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`. Defaults to `HUNDRED`.",
+													Optional: true,
+												},
+												"numerator": schema.Int64Attribute{
+													MarkdownDescription: "Numerator. sampled parts per denominator. If denominator was 10000, then value of 5 will be 5 in 10000",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -687,6 +891,16 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Blocks: map[string]schema.Block{
 										"back_off": schema.SingleNestedBlock{
 											MarkdownDescription: "Retry BackOff Interval. Specifies parameters that control retry back off.",
+											Attributes: map[string]schema.Attribute{
+												"base_interval": schema.Int64Attribute{
+													MarkdownDescription: "Base Retry Interval. Specifies the base interval between retries in milliseconds",
+													Optional: true,
+												},
+												"max_interval": schema.Int64Attribute{
+													MarkdownDescription: "Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The default is 10 times the base_interval.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -799,7 +1013,28 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										"app_firewall": schema.ListNestedBlock{
 											MarkdownDescription: "Application Firewall. References to an Application Firewall configuration object",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},

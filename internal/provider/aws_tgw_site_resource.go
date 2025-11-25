@@ -215,6 +215,12 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Blocks: map[string]schema.Block{
 										"subnet_param": schema.SingleNestedBlock{
 											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+											Attributes: map[string]schema.Attribute{
+												"ipv4": schema.StringAttribute{
+													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -229,6 +235,12 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Blocks: map[string]schema.Block{
 										"subnet_param": schema.SingleNestedBlock{
 											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+											Attributes: map[string]schema.Attribute{
+												"ipv4": schema.StringAttribute{
+													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -246,6 +258,12 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Blocks: map[string]schema.Block{
 										"subnet_param": schema.SingleNestedBlock{
 											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+											Attributes: map[string]schema.Attribute{
+												"ipv4": schema.StringAttribute{
+													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -864,9 +882,51 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"global_vn": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"global_vn": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -890,6 +950,116 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
 											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them",
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"labels": schema.SingleNestedBlock{
+													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy",
+												},
+												"nexthop": schema.SingleNestedBlock{
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route",
+													Attributes: map[string]schema.Attribute{
+														"type": schema.StringAttribute{
+															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"interface": schema.ListNestedBlock{
+															MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"kind": schema.StringAttribute{
+																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		Optional: true,
+																	},
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		Optional: true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		Optional: true,
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		Optional: true,
+																	},
+																	"uid": schema.StringAttribute{
+																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+														"nexthop_address": schema.SingleNestedBlock{
+															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"ipv4": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+																	Attributes: map[string]schema.Attribute{
+																		"addr": schema.StringAttribute{
+																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+																			Optional: true,
+																		},
+																	},
+																},
+																"ipv6": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
+																	Attributes: map[string]schema.Attribute{
+																		"addr": schema.StringAttribute{
+																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+												"subnets": schema.ListNestedBlock{
+													MarkdownDescription: "Subnets. List of route prefixes",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"ipv4": schema.SingleNestedBlock{
+																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
+																Attributes: map[string]schema.Attribute{
+																	"plen": schema.Int64Attribute{
+																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
+																		Optional: true,
+																	},
+																	"prefix": schema.StringAttribute{
+																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
+																		Optional: true,
+																	},
+																},
+															},
+															"ipv6": schema.SingleNestedBlock{
+																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128",
+																Attributes: map[string]schema.Attribute{
+																	"plen": schema.Int64Attribute{
+																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
+																		Optional: true,
+																	},
+																	"prefix": schema.StringAttribute{
+																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -925,6 +1095,116 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
 											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them",
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"labels": schema.SingleNestedBlock{
+													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy",
+												},
+												"nexthop": schema.SingleNestedBlock{
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route",
+													Attributes: map[string]schema.Attribute{
+														"type": schema.StringAttribute{
+															MarkdownDescription: "Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"interface": schema.ListNestedBlock{
+															MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"kind": schema.StringAttribute{
+																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		Optional: true,
+																	},
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		Optional: true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		Optional: true,
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		Optional: true,
+																	},
+																	"uid": schema.StringAttribute{
+																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+														"nexthop_address": schema.SingleNestedBlock{
+															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"ipv4": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+																	Attributes: map[string]schema.Attribute{
+																		"addr": schema.StringAttribute{
+																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+																			Optional: true,
+																		},
+																	},
+																},
+																"ipv6": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
+																	Attributes: map[string]schema.Attribute{
+																		"addr": schema.StringAttribute{
+																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+												"subnets": schema.ListNestedBlock{
+													MarkdownDescription: "Subnets. List of route prefixes",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"ipv4": schema.SingleNestedBlock{
+																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
+																Attributes: map[string]schema.Attribute{
+																	"plen": schema.Int64Attribute{
+																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
+																		Optional: true,
+																	},
+																	"prefix": schema.StringAttribute{
+																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
+																		Optional: true,
+																	},
+																},
+															},
+															"ipv6": schema.SingleNestedBlock{
+																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128",
+																Attributes: map[string]schema.Attribute{
+																	"plen": schema.Int64Attribute{
+																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
+																		Optional: true,
+																	},
+																	"prefix": schema.StringAttribute{
+																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},

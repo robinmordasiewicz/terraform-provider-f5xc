@@ -134,7 +134,7 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: custom_hash_algorithms, disable_ocsp_stapling, use_system_defaults] Hash Algorithms. Specifies the hash algorithms to be used",
 				Attributes: map[string]schema.Attribute{
 					"hash_algorithms": schema.ListAttribute{
-						MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used.",
+						MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 						Optional: true,
 						ElementType: types.StringType,
 					},

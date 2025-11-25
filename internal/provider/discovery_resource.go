@@ -133,6 +133,59 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								Blocks: map[string]schema.Block{
 									"tls_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Client TLS Config. TLS config for client of discovery service",
+										Attributes: map[string]schema.Attribute{
+											"certificate": schema.StringAttribute{
+												MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
+												Optional: true,
+											},
+											"server_name": schema.StringAttribute{
+												MarkdownDescription: "SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used",
+												Optional: true,
+											},
+											"trusted_ca_url": schema.StringAttribute{
+												MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
+												Optional: true,
+											},
+										},
+										Blocks: map[string]schema.Block{
+											"key_url": schema.SingleNestedBlock{
+												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+												Attributes: map[string]schema.Attribute{
+												},
+												Blocks: map[string]schema.Block{
+													"blindfold_secret_info": schema.SingleNestedBlock{
+														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+														Attributes: map[string]schema.Attribute{
+															"decryption_provider": schema.StringAttribute{
+																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																Optional: true,
+															},
+															"location": schema.StringAttribute{
+																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																Optional: true,
+															},
+															"store_provider": schema.StringAttribute{
+																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																Optional: true,
+															},
+														},
+													},
+													"clear_secret_info": schema.SingleNestedBlock{
+														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+														Attributes: map[string]schema.Attribute{
+															"provider_ref": schema.StringAttribute{
+																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																Optional: true,
+															},
+															"url": schema.StringAttribute{
+																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -147,6 +200,40 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								Blocks: map[string]schema.Block{
 									"passwd_url": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"blindfold_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional: true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														Optional: true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+												},
+											},
+											"clear_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														Optional: true,
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -189,6 +276,59 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								Blocks: map[string]schema.Block{
 									"tls_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Client TLS Config. TLS config for client of discovery service",
+										Attributes: map[string]schema.Attribute{
+											"certificate": schema.StringAttribute{
+												MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
+												Optional: true,
+											},
+											"server_name": schema.StringAttribute{
+												MarkdownDescription: "SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used",
+												Optional: true,
+											},
+											"trusted_ca_url": schema.StringAttribute{
+												MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
+												Optional: true,
+											},
+										},
+										Blocks: map[string]schema.Block{
+											"key_url": schema.SingleNestedBlock{
+												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+												Attributes: map[string]schema.Attribute{
+												},
+												Blocks: map[string]schema.Block{
+													"blindfold_secret_info": schema.SingleNestedBlock{
+														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+														Attributes: map[string]schema.Attribute{
+															"decryption_provider": schema.StringAttribute{
+																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																Optional: true,
+															},
+															"location": schema.StringAttribute{
+																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																Optional: true,
+															},
+															"store_provider": schema.StringAttribute{
+																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																Optional: true,
+															},
+														},
+													},
+													"clear_secret_info": schema.SingleNestedBlock{
+														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+														Attributes: map[string]schema.Attribute{
+															"provider_ref": schema.StringAttribute{
+																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																Optional: true,
+															},
+															"url": schema.StringAttribute{
+																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -202,9 +342,33 @@ func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaReque
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										Attributes: map[string]schema.Attribute{
+											"decryption_provider": schema.StringAttribute{
+												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+												Optional: true,
+											},
+											"location": schema.StringAttribute{
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												Optional: true,
+											},
+											"store_provider": schema.StringAttribute{
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												Optional: true,
+											},
+										},
 									},
 									"clear_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+										Attributes: map[string]schema.Attribute{
+											"provider_ref": schema.StringAttribute{
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												Optional: true,
+											},
+											"url": schema.StringAttribute{
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												Optional: true,
+											},
+										},
 									},
 								},
 							},

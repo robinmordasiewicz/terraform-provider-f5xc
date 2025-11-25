@@ -119,12 +119,12 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria.",
 				Attributes: map[string]schema.Attribute{
 					"country_list": schema.ListAttribute{
-						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB.",
+						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE`.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"tls_fingerprint_classes": schema.ListAttribute{
-						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against.",
+						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -215,12 +215,12 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria.",
 				Attributes: map[string]schema.Attribute{
 					"country_list": schema.ListAttribute{
-						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB.",
+						MarkdownDescription: "Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB. Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`. Defaults to `COUNTRY_NONE`.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
 					"tls_fingerprint_classes": schema.ListAttribute{
-						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against.",
+						MarkdownDescription: "TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
 						Optional: true,
 						ElementType: types.StringType,
 					},
@@ -353,99 +353,805 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"api_group_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true.",
+											Attributes: map[string]schema.Attribute{
+												"invert_matcher": schema.BoolAttribute{
+													MarkdownDescription: "Invert String Matcher. Invert the match result.",
+													Optional: true,
+												},
+												"match": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"arg_matchers": schema.ListNestedBlock{
 											MarkdownDescription: "Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"asn_list": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+											Attributes: map[string]schema.Attribute{
+												"as_numbers": schema.ListAttribute{
+													MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"asn_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"asn_sets": schema.ListNestedBlock{
+													MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"body_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+											Attributes: map[string]schema.Attribute{
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"regex_values": schema.ListAttribute{
+													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"transformers": schema.ListAttribute{
+													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"bot_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"bot_skip_processing": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"client_name_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+											Attributes: map[string]schema.Attribute{
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"regex_values": schema.ListAttribute{
+													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"transformers": schema.ListAttribute{
+													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"client_selector": schema.SingleNestedBlock{
 											MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+											Attributes: map[string]schema.Attribute{
+												"expressions": schema.ListAttribute{
+													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"cookie_matchers": schema.ListNestedBlock{
 											MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"domain_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+											Attributes: map[string]schema.Attribute{
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"regex_values": schema.ListAttribute{
+													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"transformers": schema.ListAttribute{
+													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"headers": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Header Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"http_method": schema.SingleNestedBlock{
 											MarkdownDescription: "HTTP Method Matcher. A http method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true.",
+											Attributes: map[string]schema.Attribute{
+												"invert_matcher": schema.BoolAttribute{
+													MarkdownDescription: "Invert Method Matcher. Invert the match result.",
+													Optional: true,
+												},
+												"methods": schema.ListAttribute{
+													MarkdownDescription: "Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+											Attributes: map[string]schema.Attribute{
+												"invert_matcher": schema.BoolAttribute{
+													MarkdownDescription: "Invert IP Matcher. Invert the match result.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"prefix_sets": schema.ListNestedBlock{
+													MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"ip_prefix_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Prefix Match List. List of IP Prefix strings to match against.",
+											Attributes: map[string]schema.Attribute{
+												"invert_match": schema.BoolAttribute{
+													MarkdownDescription: "Invert Match Result. Invert the match result.",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefix strings.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ip_threat_category_list": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Threat Category List Type. List of ip threat categories",
+											Attributes: map[string]schema.Attribute{
+												"ip_threat_categories": schema.ListAttribute{
+													MarkdownDescription: "List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"ja4_tls_fingerprint": schema.SingleNestedBlock{
 											MarkdownDescription: "JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length.",
+											Attributes: map[string]schema.Attribute{
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"jwt_claims": schema.ListNestedBlock{
 											MarkdownDescription: "JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "JWT Claim Name. JWT claim name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"label_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name.",
+											Attributes: map[string]schema.Attribute{
+												"keys": schema.ListAttribute{
+													MarkdownDescription: "Keys. The list of label key names that have to match",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"mum_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Select Modification Action. Modify behavior for a matching request. The modification could be to entirely skip processing.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"default": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"skip_processing": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"path": schema.SingleNestedBlock{
 											MarkdownDescription: "Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions.",
+											Attributes: map[string]schema.Attribute{
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact path values to match the input HTTP path against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"invert_matcher": schema.BoolAttribute{
+													MarkdownDescription: "Invert Path Matcher. Invert the match result.",
+													Optional: true,
+												},
+												"prefix_values": schema.ListAttribute{
+													MarkdownDescription: "Prefix Values. A list of path prefix values to match the input HTTP path against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"regex_values": schema.ListAttribute{
+													MarkdownDescription: "Regex Values. A list of regular expressions to match the input HTTP path against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"suffix_values": schema.ListAttribute{
+													MarkdownDescription: "Suffix Values. A list of path suffix values to match the input HTTP path against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"transformers": schema.ListAttribute{
+													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"port_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true.",
+											Attributes: map[string]schema.Attribute{
+												"invert_matcher": schema.BoolAttribute{
+													MarkdownDescription: "Invert Port Matcher. Invert the match result.",
+													Optional: true,
+												},
+												"ports": schema.ListAttribute{
+													MarkdownDescription: "Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"query_params": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"invert_matcher": schema.BoolAttribute{
+														MarkdownDescription: "Invert Query Parameter Matcher. Invert the match result.",
+														Optional: true,
+													},
+													"key": schema.StringAttribute{
+														MarkdownDescription: "Query Parameter Name. A case-sensitive HTTP query parameter name.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"check_not_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"check_present": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"item": schema.SingleNestedBlock{
+														MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+														Attributes: map[string]schema.Attribute{
+															"exact_values": schema.ListAttribute{
+																MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"regex_values": schema.ListAttribute{
+																MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"transformers": schema.ListAttribute{
+																MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
 											},
 										},
 										"request_constraints": schema.SingleNestedBlock{
 											MarkdownDescription: "Request Constraints.",
+											Attributes: map[string]schema.Attribute{
+												"max_cookie_count_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Count for all Cookies that exceed this value.",
+													Optional: true,
+												},
+												"max_cookie_key_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Name Size per Cookie that exceed this value.",
+													Optional: true,
+												},
+												"max_cookie_value_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Value Size per Cookie that exceed this value.",
+													Optional: true,
+												},
+												"max_header_count_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Count for all Headers that exceed this value.",
+													Optional: true,
+												},
+												"max_header_key_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Name Size per Header that exceed this value.",
+													Optional: true,
+												},
+												"max_header_value_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Value Size per Header that exceed this value.",
+													Optional: true,
+												},
+												"max_parameter_count_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Parameter Count that exceed this value.",
+													Optional: true,
+												},
+												"max_parameter_name_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Parameter Name Size that exceed this value.",
+													Optional: true,
+												},
+												"max_parameter_value_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Parameter Value Size that exceed this value.",
+													Optional: true,
+												},
+												"max_query_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the URL Query Size that exceed this value.",
+													Optional: true,
+												},
+												"max_request_line_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Request Line Size that exceed this value.",
+													Optional: true,
+												},
+												"max_request_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the Request Size that exceed this value.",
+													Optional: true,
+												},
+												"max_url_size_exceeds": schema.Int64Attribute{
+													MarkdownDescription: "Match on the URL Size that exceed this value.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"max_cookie_count_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_cookie_key_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_cookie_value_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_header_count_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_header_key_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_header_value_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_parameter_count_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_parameter_name_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_parameter_value_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_query_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_request_line_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_request_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"max_url_size_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"segment_policy": schema.SingleNestedBlock{
 											MarkdownDescription: "Configure Segments. Configure source and destination segment for policy",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"dst_any": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"dst_segments": schema.SingleNestedBlock{
+													MarkdownDescription: "Segment List. List of references to Segments",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"segments": schema.ListNestedBlock{
+															MarkdownDescription: "Segments. Select list of segments",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		Optional: true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		Optional: true,
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"intra_segment": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"src_any": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"src_segments": schema.SingleNestedBlock{
+													MarkdownDescription: "Segment List. List of references to Segments",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"segments": schema.ListNestedBlock{
+															MarkdownDescription: "Segments. Select list of segments",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		Optional: true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		Optional: true,
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 										"tls_fingerprint_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values.",
+											Attributes: map[string]schema.Attribute{
+												"classes": schema.ListAttribute{
+													MarkdownDescription: "TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against. Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`. Defaults to `TLS_FINGERPRINT_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"excluded_values": schema.ListAttribute{
+													MarkdownDescription: "Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"user_identity_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+											Attributes: map[string]schema.Attribute{
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"regex_values": schema.ListAttribute{
+													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"waf_action": schema.SingleNestedBlock{
 											MarkdownDescription: "App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings.",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"app_firewall_detection_control": schema.SingleNestedBlock{
+													MarkdownDescription: "App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"exclude_attack_type_contexts": schema.ListNestedBlock{
+															MarkdownDescription: "Attack Types. Attack Types to be excluded for the defined match criteria",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"context": schema.StringAttribute{
+																		MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
+																		Optional: true,
+																	},
+																	"context_name": schema.StringAttribute{
+																		MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
+																		Optional: true,
+																	},
+																	"exclude_attack_type": schema.StringAttribute{
+																		MarkdownDescription: "Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK. Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`. Defaults to `ATTACK_TYPE_NONE`.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+														"exclude_bot_name_contexts": schema.ListNestedBlock{
+															MarkdownDescription: "Bot Names. Bot Names to be excluded for the defined match criteria",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"bot_name": schema.StringAttribute{
+																		MarkdownDescription: "Bot Name.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+														"exclude_signature_contexts": schema.ListNestedBlock{
+															MarkdownDescription: "Signature IDs. Signature IDs to be excluded for the defined match criteria",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"context": schema.StringAttribute{
+																		MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
+																		Optional: true,
+																	},
+																	"context_name": schema.StringAttribute{
+																		MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
+																		Optional: true,
+																	},
+																	"signature_id": schema.Int64Attribute{
+																		MarkdownDescription: "SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+														"exclude_violation_contexts": schema.ListNestedBlock{
+															MarkdownDescription: "Violations. Violations to be excluded for the defined match criteria",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"context": schema.StringAttribute{
+																		MarkdownDescription: "WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
+																		Optional: true,
+																	},
+																	"context_name": schema.StringAttribute{
+																		MarkdownDescription: "Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
+																		Optional: true,
+																	},
+																	"exclude_violation": schema.StringAttribute{
+																		MarkdownDescription: "App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY. Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`. Defaults to `VIOL_NONE`.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"waf_skip_processing": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 									},
 								},

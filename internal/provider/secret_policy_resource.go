@@ -156,9 +156,33 @@ func (r *SecretPolicyResource) Schema(ctx context.Context, req resource.SchemaRe
 									Blocks: map[string]schema.Block{
 										"client_name_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+											Attributes: map[string]schema.Attribute{
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"regex_values": schema.ListAttribute{
+													MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"transformers": schema.ListAttribute{
+													MarkdownDescription: "Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 										"client_selector": schema.SingleNestedBlock{
 											MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+											Attributes: map[string]schema.Attribute{
+												"expressions": schema.ListAttribute{
+													MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 								},

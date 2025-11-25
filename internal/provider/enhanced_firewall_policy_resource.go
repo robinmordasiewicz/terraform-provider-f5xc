@@ -205,7 +205,7 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
 									Attributes: map[string]schema.Attribute{
 										"applications": schema.ListAttribute{
-											MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP",
+											MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -232,7 +232,28 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -264,6 +285,20 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									Blocks: map[string]schema.Block{
 										"nfv_service": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -334,7 +369,28 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},

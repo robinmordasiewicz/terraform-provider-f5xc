@@ -142,7 +142,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
 							Attributes: map[string]schema.Attribute{
 								"applications": schema.ListAttribute{
-									MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP",
+									MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -321,7 +321,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
 							Attributes: map[string]schema.Attribute{
 								"applications": schema.ListAttribute{
-									MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP",
+									MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
 									Optional: true,
 									ElementType: types.StringType,
 								},

@@ -153,9 +153,71 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Blocks: map[string]schema.Block{
 										"policer_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Policer Reference. Reference to policer object",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"ref": schema.ListNestedBlock{
+													MarkdownDescription: "Reference. A policer direct reference",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"protocol_policer_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Protocol Policer Reference. Reference to policer object",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"ref": schema.ListNestedBlock{
+													MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -167,7 +229,28 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -275,9 +358,71 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 									Blocks: map[string]schema.Block{
 										"policer_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Policer Reference. Reference to policer object",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"ref": schema.ListNestedBlock{
+													MarkdownDescription: "Reference. A policer direct reference",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 										"protocol_policer_action": schema.SingleNestedBlock{
 											MarkdownDescription: "Protocol Policer Reference. Reference to policer object",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"ref": schema.ListNestedBlock{
+													MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -289,7 +434,28 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},

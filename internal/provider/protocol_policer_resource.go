@@ -152,7 +152,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "ICMP Packet Type. ICMP message type to match in packet",
 									Attributes: map[string]schema.Attribute{
 										"type": schema.ListAttribute{
-											MarkdownDescription: "ICMP type. ICMP message type to be matched in packet",
+											MarkdownDescription: "ICMP type. ICMP message type to be matched in packet. Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`. Defaults to `ECHO_REPLY`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -162,7 +162,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "TCP Packet Type. Specification of TCP flag to be matched in a TCP packet",
 									Attributes: map[string]schema.Attribute{
 										"flags": schema.ListAttribute{
-											MarkdownDescription: "TCP flags. TCP flag to be matched in a TCP packet",
+											MarkdownDescription: "TCP flags. TCP flag to be matched in a TCP packet. Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`. Defaults to `FIN`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},

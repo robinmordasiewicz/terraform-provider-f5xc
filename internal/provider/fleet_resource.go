@@ -261,7 +261,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Optional: true,
 								},
 								"owner": schema.StringAttribute{
-									MarkdownDescription: "Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM. Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`.",
+									MarkdownDescription: "Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM. Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`. Defaults to `DEVICE_OWNER_INVALID`.",
 									Optional: true,
 								},
 							},
@@ -278,7 +278,28 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										"interface": schema.ListNestedBlock{
 											MarkdownDescription: "Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if use is NETWORK_INTERFACE_USE_OUTSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL if use is NETWORK_INTERFACE_USE_INSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -778,9 +799,77 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Blocks: map[string]schema.Block{
 										"iscsi_chap_password": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"blindfold_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													Attributes: map[string]schema.Attribute{
+														"decryption_provider": schema.StringAttribute{
+															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															Optional: true,
+														},
+														"location": schema.StringAttribute{
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															Optional: true,
+														},
+														"store_provider": schema.StringAttribute{
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+													},
+												},
+												"clear_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													Attributes: map[string]schema.Attribute{
+														"provider_ref": schema.StringAttribute{
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+														"url": schema.StringAttribute{
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"password": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"blindfold_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													Attributes: map[string]schema.Attribute{
+														"decryption_provider": schema.StringAttribute{
+															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															Optional: true,
+														},
+														"location": schema.StringAttribute{
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															Optional: true,
+														},
+														"store_provider": schema.StringAttribute{
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+													},
+												},
+												"clear_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													Attributes: map[string]schema.Attribute{
+														"provider_ref": schema.StringAttribute{
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+														"url": schema.StringAttribute{
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -791,9 +880,657 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Blocks: map[string]schema.Block{
 										"netapp_backend_ontap_nas": schema.SingleNestedBlock{
 											MarkdownDescription: "Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS",
+											Attributes: map[string]schema.Attribute{
+												"auto_export_policy": schema.BoolAttribute{
+													MarkdownDescription: "Auto Export Policy. Enable automatic export policy creation and updating",
+													Optional: true,
+												},
+												"backend_name": schema.StringAttribute{
+													MarkdownDescription: "Storage Backend Name. Configuration of Backend Name. Driver is name + '_' + dataLIF",
+													Optional: true,
+												},
+												"client_certificate": schema.StringAttribute{
+													MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
+													Optional: true,
+												},
+												"data_lif_dns_name": schema.StringAttribute{
+													MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+													Optional: true,
+												},
+												"data_lif_ip": schema.StringAttribute{
+													MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given ip address",
+													Optional: true,
+												},
+												"limit_aggregate_usage": schema.StringAttribute{
+													MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
+													Optional: true,
+												},
+												"limit_volume_size": schema.StringAttribute{
+													MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size is above this value. Not enforced by default.",
+													Optional: true,
+												},
+												"management_lif_dns_name": schema.StringAttribute{
+													MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+													Optional: true,
+												},
+												"management_lif_ip": schema.StringAttribute{
+													MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given ip address",
+													Optional: true,
+												},
+												"nfs_mount_options": schema.StringAttribute{
+													MarkdownDescription: "NFS Mount Options. Comma-separated list of NFS mount options. Not enforced by default.",
+													Optional: true,
+												},
+												"region": schema.StringAttribute{
+													MarkdownDescription: "Backend Region. Virtual Pool Region",
+													Optional: true,
+												},
+												"storage_driver_name": schema.StringAttribute{
+													MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name",
+													Optional: true,
+												},
+												"storage_prefix": schema.StringAttribute{
+													MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated",
+													Optional: true,
+												},
+												"svm": schema.StringAttribute{
+													MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified",
+													Optional: true,
+												},
+												"trusted_ca_certificate": schema.StringAttribute{
+													MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
+													Optional: true,
+												},
+												"username": schema.StringAttribute{
+													MarkdownDescription: "Username. Username to connect to the cluster/SVM",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"auto_export_cidrs": schema.SingleNestedBlock{
+													MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+													Attributes: map[string]schema.Attribute{
+														"prefixes": schema.ListAttribute{
+															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"client_private_key": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"labels": schema.SingleNestedBlock{
+													MarkdownDescription: "Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
+												},
+												"password": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"storage": schema.ListNestedBlock{
+													MarkdownDescription: "Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"zone": schema.StringAttribute{
+																MarkdownDescription: "Virtual Pool Zone. Virtual Storage Pool zone definition.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"labels": schema.SingleNestedBlock{
+																MarkdownDescription: "Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection.",
+															},
+															"volume_defaults": schema.SingleNestedBlock{
+																MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration.",
+																Attributes: map[string]schema.Attribute{
+																	"adaptive_qos_policy": schema.StringAttribute{
+																		MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
+																		Optional: true,
+																	},
+																	"encryption": schema.BoolAttribute{
+																		MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
+																		Optional: true,
+																	},
+																	"export_policy": schema.StringAttribute{
+																		MarkdownDescription: "Export Policy. Export policy to use.",
+																		Optional: true,
+																	},
+																	"qos_policy": schema.StringAttribute{
+																		MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
+																		Optional: true,
+																	},
+																	"security_style": schema.StringAttribute{
+																		MarkdownDescription: "Security Style. Security style for new volumes.",
+																		Optional: true,
+																	},
+																	"snapshot_dir": schema.BoolAttribute{
+																		MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
+																		Optional: true,
+																	},
+																	"snapshot_policy": schema.StringAttribute{
+																		MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
+																		Optional: true,
+																	},
+																	"snapshot_reserve": schema.StringAttribute{
+																		MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+																		Optional: true,
+																	},
+																	"space_reserve": schema.StringAttribute{
+																		MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+																		Optional: true,
+																	},
+																	"split_on_clone": schema.BoolAttribute{
+																		MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+																		Optional: true,
+																	},
+																	"tiering_policy": schema.StringAttribute{
+																		MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+																		Optional: true,
+																	},
+																	"unix_permissions": schema.Int64Attribute{
+																		MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"no_qos": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																},
+															},
+														},
+													},
+												},
+												"volume_defaults": schema.SingleNestedBlock{
+													MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration.",
+													Attributes: map[string]schema.Attribute{
+														"adaptive_qos_policy": schema.StringAttribute{
+															MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
+															Optional: true,
+														},
+														"encryption": schema.BoolAttribute{
+															MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
+															Optional: true,
+														},
+														"export_policy": schema.StringAttribute{
+															MarkdownDescription: "Export Policy. Export policy to use.",
+															Optional: true,
+														},
+														"qos_policy": schema.StringAttribute{
+															MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
+															Optional: true,
+														},
+														"security_style": schema.StringAttribute{
+															MarkdownDescription: "Security Style. Security style for new volumes.",
+															Optional: true,
+														},
+														"snapshot_dir": schema.BoolAttribute{
+															MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
+															Optional: true,
+														},
+														"snapshot_policy": schema.StringAttribute{
+															MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
+															Optional: true,
+														},
+														"snapshot_reserve": schema.StringAttribute{
+															MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+															Optional: true,
+														},
+														"space_reserve": schema.StringAttribute{
+															MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+															Optional: true,
+														},
+														"split_on_clone": schema.BoolAttribute{
+															MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+															Optional: true,
+														},
+														"tiering_policy": schema.StringAttribute{
+															MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+															Optional: true,
+														},
+														"unix_permissions": schema.Int64Attribute{
+															MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"no_qos": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+											},
 										},
 										"netapp_backend_ontap_san": schema.SingleNestedBlock{
 											MarkdownDescription: "Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN",
+											Attributes: map[string]schema.Attribute{
+												"client_certificate": schema.StringAttribute{
+													MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
+													Optional: true,
+												},
+												"data_lif_dns_name": schema.StringAttribute{
+													MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+													Optional: true,
+												},
+												"data_lif_ip": schema.StringAttribute{
+													MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given ip address",
+													Optional: true,
+												},
+												"igroup_name": schema.StringAttribute{
+													MarkdownDescription: "iGroup Name. Name of the igroup for SAN volumes to use",
+													Optional: true,
+												},
+												"limit_aggregate_usage": schema.Int64Attribute{
+													MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
+													Optional: true,
+												},
+												"limit_volume_size": schema.Int64Attribute{
+													MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size in GBi is above this value. Not enforced by default.",
+													Optional: true,
+												},
+												"management_lif_dns_name": schema.StringAttribute{
+													MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+													Optional: true,
+												},
+												"management_lif_ip": schema.StringAttribute{
+													MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given ip address",
+													Optional: true,
+												},
+												"region": schema.StringAttribute{
+													MarkdownDescription: "Backend Region. Virtual Pool Region",
+													Optional: true,
+												},
+												"storage_driver_name": schema.StringAttribute{
+													MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name",
+													Optional: true,
+												},
+												"storage_prefix": schema.StringAttribute{
+													MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated",
+													Optional: true,
+												},
+												"svm": schema.StringAttribute{
+													MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified",
+													Optional: true,
+												},
+												"trusted_ca_certificate": schema.StringAttribute{
+													MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
+													Optional: true,
+												},
+												"username": schema.StringAttribute{
+													MarkdownDescription: "Username. Username to connect to the cluster/SVM",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"client_private_key": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"labels": schema.SingleNestedBlock{
+													MarkdownDescription: "Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
+												},
+												"no_chap": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"password": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"storage": schema.ListNestedBlock{
+													MarkdownDescription: "Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"zone": schema.StringAttribute{
+																MarkdownDescription: "Virtual Pool Zone. Virtual Storage Pool zone definition.",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"labels": schema.SingleNestedBlock{
+																MarkdownDescription: "Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection.",
+															},
+															"volume_defaults": schema.SingleNestedBlock{
+																MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration.",
+																Attributes: map[string]schema.Attribute{
+																	"adaptive_qos_policy": schema.StringAttribute{
+																		MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
+																		Optional: true,
+																	},
+																	"encryption": schema.BoolAttribute{
+																		MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
+																		Optional: true,
+																	},
+																	"export_policy": schema.StringAttribute{
+																		MarkdownDescription: "Export Policy. Export policy to use.",
+																		Optional: true,
+																	},
+																	"qos_policy": schema.StringAttribute{
+																		MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
+																		Optional: true,
+																	},
+																	"security_style": schema.StringAttribute{
+																		MarkdownDescription: "Security Style. Security style for new volumes.",
+																		Optional: true,
+																	},
+																	"snapshot_dir": schema.BoolAttribute{
+																		MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
+																		Optional: true,
+																	},
+																	"snapshot_policy": schema.StringAttribute{
+																		MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
+																		Optional: true,
+																	},
+																	"snapshot_reserve": schema.StringAttribute{
+																		MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+																		Optional: true,
+																	},
+																	"space_reserve": schema.StringAttribute{
+																		MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+																		Optional: true,
+																	},
+																	"split_on_clone": schema.BoolAttribute{
+																		MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+																		Optional: true,
+																	},
+																	"tiering_policy": schema.StringAttribute{
+																		MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+																		Optional: true,
+																	},
+																	"unix_permissions": schema.Int64Attribute{
+																		MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"no_qos": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																},
+															},
+														},
+													},
+												},
+												"use_chap": schema.SingleNestedBlock{
+													MarkdownDescription: "Device NetApp Backend ONTAP SAN CHAP Configuration. Device NetApp Backend ONTAP SAN CHAP configuration options for enabled CHAP",
+													Attributes: map[string]schema.Attribute{
+														"chap_target_username": schema.StringAttribute{
+															MarkdownDescription: "CHAP Target Username. Target username. Required if useCHAP=true",
+															Optional: true,
+														},
+														"chap_username": schema.StringAttribute{
+															MarkdownDescription: "CHAP Username. Inbound username. Required if useCHAP=true",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"chap_initiator_secret": schema.SingleNestedBlock{
+															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"blindfold_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																	Attributes: map[string]schema.Attribute{
+																		"decryption_provider": schema.StringAttribute{
+																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																			Optional: true,
+																		},
+																		"location": schema.StringAttribute{
+																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																			Optional: true,
+																		},
+																		"store_provider": schema.StringAttribute{
+																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																	},
+																},
+																"clear_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																	Attributes: map[string]schema.Attribute{
+																		"provider_ref": schema.StringAttribute{
+																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																		"url": schema.StringAttribute{
+																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+														"chap_target_initiator_secret": schema.SingleNestedBlock{
+															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"blindfold_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																	Attributes: map[string]schema.Attribute{
+																		"decryption_provider": schema.StringAttribute{
+																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																			Optional: true,
+																		},
+																		"location": schema.StringAttribute{
+																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																			Optional: true,
+																		},
+																		"store_provider": schema.StringAttribute{
+																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																	},
+																},
+																"clear_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																	Attributes: map[string]schema.Attribute{
+																		"provider_ref": schema.StringAttribute{
+																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																		"url": schema.StringAttribute{
+																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+												"volume_defaults": schema.SingleNestedBlock{
+													MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration.",
+													Attributes: map[string]schema.Attribute{
+														"adaptive_qos_policy": schema.StringAttribute{
+															MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
+															Optional: true,
+														},
+														"encryption": schema.BoolAttribute{
+															MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
+															Optional: true,
+														},
+														"export_policy": schema.StringAttribute{
+															MarkdownDescription: "Export Policy. Export policy to use.",
+															Optional: true,
+														},
+														"qos_policy": schema.StringAttribute{
+															MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
+															Optional: true,
+														},
+														"security_style": schema.StringAttribute{
+															MarkdownDescription: "Security Style. Security style for new volumes.",
+															Optional: true,
+														},
+														"snapshot_dir": schema.BoolAttribute{
+															MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
+															Optional: true,
+														},
+														"snapshot_policy": schema.StringAttribute{
+															MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
+															Optional: true,
+														},
+														"snapshot_reserve": schema.StringAttribute{
+															MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+															Optional: true,
+														},
+														"space_reserve": schema.StringAttribute{
+															MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+															Optional: true,
+														},
+														"split_on_clone": schema.BoolAttribute{
+															MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+															Optional: true,
+														},
+														"tiering_policy": schema.StringAttribute{
+															MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+															Optional: true,
+														},
+														"unix_permissions": schema.Int64Attribute{
+															MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"no_qos": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -816,6 +1553,179 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Blocks: map[string]schema.Block{
 										"arrays": schema.SingleNestedBlock{
 											MarkdownDescription: "Arrays Configuration. Device configuration for PSO Arrays",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"flash_array": schema.SingleNestedBlock{
+													MarkdownDescription: "Flash Arrays. Specify what storage flash arrays should be managed the plugin",
+													Attributes: map[string]schema.Attribute{
+														"default_fs_opt": schema.StringAttribute{
+															MarkdownDescription: "Default Filesystem Options. Block volume default mkfs options. Not recommended to change!",
+															Optional: true,
+														},
+														"default_fs_type": schema.StringAttribute{
+															MarkdownDescription: "Default Filesystem Type. Block volume default filesystem type. Not recommended to change!",
+															Optional: true,
+														},
+														"default_mount_opts": schema.ListAttribute{
+															MarkdownDescription: "Default Mount Options. Block volume default filesystem mount options. Not recommended to change!",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+														"disable_preempt_attachments": schema.BoolAttribute{
+															MarkdownDescription: "Disable Preempt Attachments. Enable/Disable attachment preemption!",
+															Optional: true,
+														},
+														"iscsi_login_timeout": schema.Int64Attribute{
+															MarkdownDescription: "iSCSI Login Timeout. iSCSI login timeout in seconds. Not recommended to change!",
+															Optional: true,
+														},
+														"san_type": schema.StringAttribute{
+															MarkdownDescription: "SAN Type. Block volume access protocol, either ISCSI or FC",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"flash_arrays": schema.ListNestedBlock{
+															MarkdownDescription: "Flash Arrays. For FlashArrays you must set the 'mgmt_endpoint' and 'api_token'",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"mgmt_dns_name": schema.StringAttribute{
+																		MarkdownDescription: "Management Endpoint Name. Management Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+																		Optional: true,
+																	},
+																	"mgmt_ip": schema.StringAttribute{
+																		MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given ip address",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"api_token": schema.SingleNestedBlock{
+																		MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"blindfold_secret_info": schema.SingleNestedBlock{
+																				MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																				Attributes: map[string]schema.Attribute{
+																					"decryption_provider": schema.StringAttribute{
+																						MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																						Optional: true,
+																					},
+																					"location": schema.StringAttribute{
+																						MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																						Optional: true,
+																					},
+																					"store_provider": schema.StringAttribute{
+																						MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																						Optional: true,
+																					},
+																				},
+																			},
+																			"clear_secret_info": schema.SingleNestedBlock{
+																				MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																				Attributes: map[string]schema.Attribute{
+																					"provider_ref": schema.StringAttribute{
+																						MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																						Optional: true,
+																					},
+																					"url": schema.StringAttribute{
+																						MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																						Optional: true,
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"labels": schema.SingleNestedBlock{
+																		MarkdownDescription: "Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner.",
+																	},
+																},
+															},
+														},
+													},
+												},
+												"flash_blade": schema.SingleNestedBlock{
+													MarkdownDescription: "Flash Blades. Specify what storage flash blades should be managed the plugin",
+													Attributes: map[string]schema.Attribute{
+														"enable_snapshot_directory": schema.BoolAttribute{
+															MarkdownDescription: "Enable Snapshot Directory. Enable/Disable FlashBlade snapshots",
+															Optional: true,
+														},
+														"export_rules": schema.StringAttribute{
+															MarkdownDescription: "NFS Export Rules. NFS Export rules",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"flash_blades": schema.ListNestedBlock{
+															MarkdownDescription: "Flash Blades. For FlashBlades you must set the 'mgmt_endpoint', 'api_token' and nfs_endpoint",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"mgmt_dns_name": schema.StringAttribute{
+																		MarkdownDescription: "Management Endpoint Name. Management Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+																		Optional: true,
+																	},
+																	"mgmt_ip": schema.StringAttribute{
+																		MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given ip address",
+																		Optional: true,
+																	},
+																	"nfs_endpoint_dns_name": schema.StringAttribute{
+																		MarkdownDescription: "NFS DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+																		Optional: true,
+																	},
+																	"nfs_endpoint_ip": schema.StringAttribute{
+																		MarkdownDescription: "NFS IP Address. Endpoint is reachable at the given ip address",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"api_token": schema.SingleNestedBlock{
+																		MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"blindfold_secret_info": schema.SingleNestedBlock{
+																				MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																				Attributes: map[string]schema.Attribute{
+																					"decryption_provider": schema.StringAttribute{
+																						MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																						Optional: true,
+																					},
+																					"location": schema.StringAttribute{
+																						MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																						Optional: true,
+																					},
+																					"store_provider": schema.StringAttribute{
+																						MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																						Optional: true,
+																					},
+																				},
+																			},
+																			"clear_secret_info": schema.SingleNestedBlock{
+																				MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																				Attributes: map[string]schema.Attribute{
+																					"provider_ref": schema.StringAttribute{
+																						MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																						Optional: true,
+																					},
+																					"url": schema.StringAttribute{
+																						MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																						Optional: true,
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"lables": schema.SingleNestedBlock{
+																		MarkdownDescription: "Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner.",
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -862,7 +1772,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"attrs": schema.ListAttribute{
-									MarkdownDescription: "Attributes. List of route attributes associated with the static route",
+									MarkdownDescription: "Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -883,11 +1793,54 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										"interface": schema.ListNestedBlock{
 											MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 										"nexthop_address": schema.SingleNestedBlock{
 											MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"ipv4": schema.SingleNestedBlock{
+													MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+													Attributes: map[string]schema.Attribute{
+														"addr": schema.StringAttribute{
+															MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+															Optional: true,
+														},
+													},
+												},
+												"ipv6": schema.SingleNestedBlock{
+													MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
+													Attributes: map[string]schema.Attribute{
+														"addr": schema.StringAttribute{
+															MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -899,9 +1852,29 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Blocks: map[string]schema.Block{
 											"ipv4": schema.SingleNestedBlock{
 												MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
+												Attributes: map[string]schema.Attribute{
+													"plen": schema.Int64Attribute{
+														MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
+														Optional: true,
+													},
+													"prefix": schema.StringAttribute{
+														MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
+														Optional: true,
+													},
+												},
 											},
 											"ipv6": schema.SingleNestedBlock{
 												MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128",
+												Attributes: map[string]schema.Attribute{
+													"plen": schema.Int64Attribute{
+														MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
+														Optional: true,
+													},
+													"prefix": schema.StringAttribute{
+														MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},

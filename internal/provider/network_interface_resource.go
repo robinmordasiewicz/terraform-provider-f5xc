@@ -242,7 +242,16 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 										"pools": schema.ListNestedBlock{
 											MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"end_ip": schema.StringAttribute{
+														MarkdownDescription: "Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200",
+														Optional: true,
+													},
+													"start_ip": schema.StringAttribute{
+														MarkdownDescription: "Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5",
+														Optional: true,
+													},
+												},
 											},
 										},
 										"same_as_dgw": schema.SingleNestedBlock{
@@ -285,9 +294,95 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 								Blocks: map[string]schema.Block{
 									"dns_config": schema.SingleNestedBlock{
 										MarkdownDescription: "IPV6DnsConfig.",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"configured_list": schema.SingleNestedBlock{
+												MarkdownDescription: "IPV6DnsList.",
+												Attributes: map[string]schema.Attribute{
+													"dns_list": schema.ListAttribute{
+														MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+														Optional: true,
+														ElementType: types.StringType,
+													},
+												},
+											},
+											"local_dns": schema.SingleNestedBlock{
+												MarkdownDescription: "IPV6LocalDnsAddress.",
+												Attributes: map[string]schema.Attribute{
+													"configured_address": schema.StringAttribute{
+														MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"first_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"last_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+												},
+											},
+										},
 									},
 									"stateful": schema.SingleNestedBlock{
 										MarkdownDescription: "DHCPIPV6 Stateful Server.",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"automatic_from_end": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"automatic_from_start": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"dhcp_networks": schema.ListNestedBlock{
+												MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+												NestedObject: schema.NestedBlockObject{
+													Attributes: map[string]schema.Attribute{
+														"network_prefix": schema.StringAttribute{
+															MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+															Optional: true,
+														},
+														"pool_settings": schema.StringAttribute{
+															MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"pools": schema.ListNestedBlock{
+															MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"end_ip": schema.StringAttribute{
+																		MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																		Optional: true,
+																	},
+																	"start_ip": schema.StringAttribute{
+																		MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
+											"fixed_ip_map": schema.SingleNestedBlock{
+												MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+											},
+											"interface_ip_map": schema.SingleNestedBlock{
+												MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+												Attributes: map[string]schema.Attribute{
+												},
+												Blocks: map[string]schema.Block{
+													"interface_ip_map": schema.SingleNestedBlock{
+														MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+													},
+												},
+											},
+										},
 									},
 								},
 							},

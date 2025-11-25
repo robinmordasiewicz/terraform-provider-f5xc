@@ -141,6 +141,40 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 								Blocks: map[string]schema.Block{
 									"password": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"blindfold_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional: true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														Optional: true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+												},
+											},
+											"clear_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														Optional: true,
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -200,11 +234,83 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 									"certificates": schema.ListNestedBlock{
 										MarkdownDescription: "Client Certificate. Client TLS Certificate required for mTLS authentication",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"kind": schema.StringAttribute{
+													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+												"uid": schema.StringAttribute{
+													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+													Optional: true,
+												},
+											},
 										},
 									},
 									"validation_params": schema.SingleNestedBlock{
 										MarkdownDescription: "TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification",
+										Attributes: map[string]schema.Attribute{
+											"skip_hostname_verification": schema.BoolAttribute{
+												MarkdownDescription: "Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname",
+												Optional: true,
+											},
+											"trusted_ca_url": schema.StringAttribute{
+												MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
+												Optional: true,
+											},
+											"verify_subject_alt_names": schema.ListAttribute{
+												MarkdownDescription: "List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+										},
+										Blocks: map[string]schema.Block{
+											"trusted_ca": schema.SingleNestedBlock{
+												MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
+												Attributes: map[string]schema.Attribute{
+												},
+												Blocks: map[string]schema.Block{
+													"trusted_ca_list": schema.ListNestedBlock{
+														MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"kind": schema.StringAttribute{
+																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																	Optional: true,
+																},
+																"name": schema.StringAttribute{
+																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	Optional: true,
+																},
+																"namespace": schema.StringAttribute{
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	Optional: true,
+																},
+																"tenant": schema.StringAttribute{
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	Optional: true,
+																},
+																"uid": schema.StringAttribute{
+																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -229,11 +335,126 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 									"tls_certificates": schema.ListNestedBlock{
 										MarkdownDescription: "TLS Certificates. Set of TLS certificates",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"certificate_url": schema.StringAttribute{
+													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
+													Optional: true,
+												},
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Description for the certificate",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"custom_hash_algorithms": schema.SingleNestedBlock{
+													MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+													Attributes: map[string]schema.Attribute{
+														"hash_algorithms": schema.ListAttribute{
+															MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"disable_ocsp_stapling": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"private_key": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"use_system_defaults": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 									},
 									"validation_params": schema.SingleNestedBlock{
 										MarkdownDescription: "TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification",
+										Attributes: map[string]schema.Attribute{
+											"skip_hostname_verification": schema.BoolAttribute{
+												MarkdownDescription: "Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname",
+												Optional: true,
+											},
+											"trusted_ca_url": schema.StringAttribute{
+												MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
+												Optional: true,
+											},
+											"verify_subject_alt_names": schema.ListAttribute{
+												MarkdownDescription: "List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+										},
+										Blocks: map[string]schema.Block{
+											"trusted_ca": schema.SingleNestedBlock{
+												MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
+												Attributes: map[string]schema.Attribute{
+												},
+												Blocks: map[string]schema.Block{
+													"trusted_ca_list": schema.ListNestedBlock{
+														MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"kind": schema.StringAttribute{
+																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																	Optional: true,
+																},
+																"name": schema.StringAttribute{
+																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	Optional: true,
+																},
+																"namespace": schema.StringAttribute{
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	Optional: true,
+																},
+																"tenant": schema.StringAttribute{
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	Optional: true,
+																},
+																"uid": schema.StringAttribute{
+																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -267,6 +488,40 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 								Blocks: map[string]schema.Block{
 									"secret_id": schema.SingleNestedBlock{
 										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"blindfold_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional: true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														Optional: true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+												},
+											},
+											"clear_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														Optional: true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														Optional: true,
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -277,9 +532,33 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										Attributes: map[string]schema.Attribute{
+											"decryption_provider": schema.StringAttribute{
+												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+												Optional: true,
+											},
+											"location": schema.StringAttribute{
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												Optional: true,
+											},
+											"store_provider": schema.StringAttribute{
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												Optional: true,
+											},
+										},
 									},
 									"clear_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+										Attributes: map[string]schema.Attribute{
+											"provider_ref": schema.StringAttribute{
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												Optional: true,
+											},
+											"url": schema.StringAttribute{
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												Optional: true,
+											},
+										},
 									},
 								},
 							},

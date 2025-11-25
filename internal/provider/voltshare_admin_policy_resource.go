@@ -202,7 +202,16 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 										"custom_list": schema.ListNestedBlock{
 											MarkdownDescription: "List of User Id(s). List of user id(s)",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"exact_value": schema.StringAttribute{
+														MarkdownDescription: "Exact User Id. exact_match contains user_id to match against.",
+														Optional: true,
+													},
+													"regex_pattern": schema.StringAttribute{
+														MarkdownDescription: "Regex For User Id. regex_values contains a regex pattern to match against.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -218,7 +227,16 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 										"custom_list": schema.ListNestedBlock{
 											MarkdownDescription: "List of User Id(s). List of user id(s)",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"exact_value": schema.StringAttribute{
+														MarkdownDescription: "Exact User Id. exact_match contains user_id to match against.",
+														Optional: true,
+													},
+													"regex_pattern": schema.StringAttribute{
+														MarkdownDescription: "Regex For User Id. regex_values contains a regex pattern to match against.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},

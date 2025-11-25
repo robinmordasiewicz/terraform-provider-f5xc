@@ -151,7 +151,37 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 										"http_list": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"exact_value": schema.StringAttribute{
+														MarkdownDescription: "Exact Values. Exact domain name",
+														Optional: true,
+													},
+													"path_exact_value": schema.StringAttribute{
+														MarkdownDescription: "Exact Path. Exact Path to match.",
+														Optional: true,
+													},
+													"path_prefix_value": schema.StringAttribute{
+														MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
+														Optional: true,
+													},
+													"path_regex_value": schema.StringAttribute{
+														MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
+														Optional: true,
+													},
+													"regex_value": schema.StringAttribute{
+														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+														Optional: true,
+													},
+													"suffix_value": schema.StringAttribute{
+														MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"any_path": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+												},
 											},
 										},
 									},
@@ -214,7 +244,20 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 										"tls_list": schema.ListNestedBlock{
 											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"exact_value": schema.StringAttribute{
+														MarkdownDescription: "Exact Value. Exact domain name.",
+														Optional: true,
+													},
+													"regex_value": schema.StringAttribute{
+														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+														Optional: true,
+													},
+													"suffix_value": schema.StringAttribute{
+														MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -289,7 +332,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
 									Attributes: map[string]schema.Attribute{
 										"applications": schema.ListAttribute{
-											MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP",
+											MarkdownDescription: "Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -322,7 +365,28 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 										"ref": schema.ListNestedBlock{
 											MarkdownDescription: "Reference. A list of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},

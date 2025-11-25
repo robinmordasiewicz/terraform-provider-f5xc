@@ -126,7 +126,7 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"attrs": schema.ListAttribute{
-							MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability",
+							MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
 							Optional: true,
 							ElementType: types.StringType,
 						},
@@ -162,7 +162,28 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 											"interface": schema.ListNestedBlock{
 												MarkdownDescription: "Interface. Interface reference on this node",
 												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{},
+													Attributes: map[string]schema.Attribute{
+														"kind": schema.StringAttribute{
+															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+															Optional: true,
+														},
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+														"uid": schema.StringAttribute{
+															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+															Optional: true,
+														},
+													},
 												},
 											},
 										},

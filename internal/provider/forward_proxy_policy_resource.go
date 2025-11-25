@@ -424,7 +424,37 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 										"http_list": schema.ListNestedBlock{
 											MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"exact_value": schema.StringAttribute{
+														MarkdownDescription: "Exact Values. Exact domain name",
+														Optional: true,
+													},
+													"path_exact_value": schema.StringAttribute{
+														MarkdownDescription: "Exact Path. Exact Path to match.",
+														Optional: true,
+													},
+													"path_prefix_value": schema.StringAttribute{
+														MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
+														Optional: true,
+													},
+													"path_regex_value": schema.StringAttribute{
+														MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
+														Optional: true,
+													},
+													"regex_value": schema.StringAttribute{
+														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+														Optional: true,
+													},
+													"suffix_value": schema.StringAttribute{
+														MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"any_path": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+												},
 											},
 										},
 									},
@@ -504,7 +534,20 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 										"tls_list": schema.ListNestedBlock{
 											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"exact_value": schema.StringAttribute{
+														MarkdownDescription: "Exact Value. Exact domain name.",
+														Optional: true,
+													},
+													"regex_value": schema.StringAttribute{
+														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+														Optional: true,
+													},
+													"suffix_value": schema.StringAttribute{
+														MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
@@ -513,7 +556,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "URL Category List Type. List of url categories",
 									Attributes: map[string]schema.Attribute{
 										"url_categories": schema.ListAttribute{
-											MarkdownDescription: "URL Categories. List of url categories to be selected",
+											MarkdownDescription: "URL Categories. List of url categories to be selected. Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`. Defaults to `UNCATEGORIZED`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},

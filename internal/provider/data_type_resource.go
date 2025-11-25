@@ -91,7 +91,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				ElementType: types.StringType,
 			},
 			"compliances": schema.ListAttribute{
-				MarkdownDescription: "Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach",
+				MarkdownDescription: "Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -174,6 +174,13 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									Blocks: map[string]schema.Block{
 										"exact_values": schema.SingleNestedBlock{
 											MarkdownDescription: "Exact Values. List of exact values to match.",
+											Attributes: map[string]schema.Attribute{
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. List of exact values to match.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 								},
@@ -192,6 +199,13 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									Blocks: map[string]schema.Block{
 										"exact_values": schema.SingleNestedBlock{
 											MarkdownDescription: "Exact Values. List of exact values to match.",
+											Attributes: map[string]schema.Attribute{
+												"exact_values": schema.ListAttribute{
+													MarkdownDescription: "Exact Values. List of exact values to match.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
 										},
 									},
 								},

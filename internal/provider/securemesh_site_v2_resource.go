@@ -251,7 +251,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -293,7 +567,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -335,7 +883,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -566,7 +1388,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -611,7 +1707,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -653,7 +2023,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -668,7 +2312,7 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality.",
 				Attributes: map[string]schema.Attribute{
 					"vip_vrrp_mode": schema.StringAttribute{
-						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`.",
+						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`. Defaults to `VIP_VRRP_INVALID`.",
 						Optional: true,
 					},
 				},
@@ -715,7 +2359,74 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static Routes.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"ip_address": schema.StringAttribute{
+													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"default_gateway": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"node_interface": schema.SingleNestedBlock{
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"list": schema.ListNestedBlock{
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"node": schema.StringAttribute{
+																		MarkdownDescription: "Node. Node name on this site",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"interface": schema.ListNestedBlock{
+																		MarkdownDescription: "Interface. Interface reference on this node",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"kind": schema.StringAttribute{
+																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					Optional: true,
+																				},
+																				"name": schema.StringAttribute{
+																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					Optional: true,
+																				},
+																				"namespace": schema.StringAttribute{
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					Optional: true,
+																				},
+																				"tenant": schema.StringAttribute{
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					Optional: true,
+																				},
+																				"uid": schema.StringAttribute{
+																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -728,7 +2439,74 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"ip_address": schema.StringAttribute{
+													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"default_gateway": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"node_interface": schema.SingleNestedBlock{
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"list": schema.ListNestedBlock{
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"node": schema.StringAttribute{
+																		MarkdownDescription: "Node. Node name on this site",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"interface": schema.ListNestedBlock{
+																		MarkdownDescription: "Interface. Interface reference on this node",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"kind": schema.StringAttribute{
+																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					Optional: true,
+																				},
+																				"name": schema.StringAttribute{
+																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					Optional: true,
+																				},
+																				"namespace": schema.StringAttribute{
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					Optional: true,
+																				},
+																				"tenant": schema.StringAttribute{
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					Optional: true,
+																				},
+																				"uid": schema.StringAttribute{
+																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -765,7 +2543,74 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static Routes.",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"ip_address": schema.StringAttribute{
+													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"default_gateway": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"node_interface": schema.SingleNestedBlock{
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"list": schema.ListNestedBlock{
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"node": schema.StringAttribute{
+																		MarkdownDescription: "Node. Node name on this site",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"interface": schema.ListNestedBlock{
+																		MarkdownDescription: "Interface. Interface reference on this node",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"kind": schema.StringAttribute{
+																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					Optional: true,
+																				},
+																				"name": schema.StringAttribute{
+																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					Optional: true,
+																				},
+																				"namespace": schema.StringAttribute{
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					Optional: true,
+																				},
+																				"tenant": schema.StringAttribute{
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					Optional: true,
+																				},
+																				"uid": schema.StringAttribute{
+																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -778,7 +2623,74 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"ip_address": schema.StringAttribute{
+													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"default_gateway": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"node_interface": schema.SingleNestedBlock{
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"list": schema.ListNestedBlock{
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"node": schema.StringAttribute{
+																		MarkdownDescription: "Node. Node name on this site",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"interface": schema.ListNestedBlock{
+																		MarkdownDescription: "Interface. Interface reference on this node",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"kind": schema.StringAttribute{
+																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					Optional: true,
+																				},
+																				"name": schema.StringAttribute{
+																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					Optional: true,
+																				},
+																				"namespace": schema.StringAttribute{
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					Optional: true,
+																				},
+																				"tenant": schema.StringAttribute{
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					Optional: true,
+																				},
+																				"uid": schema.StringAttribute{
+																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -855,7 +2767,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -897,7 +3083,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -953,7 +3413,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},
@@ -1148,7 +3882,281 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 										"interface_list": schema.ListNestedBlock{
 											MarkdownDescription: "Interfaces. Manage interfaces belonging to this node",
 											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{},
+												Attributes: map[string]schema.Attribute{
+													"description": schema.StringAttribute{
+														MarkdownDescription: "Interface Description. Description for this Interface",
+														Optional: true,
+													},
+													"mtu": schema.Int64Attribute{
+														MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+														Optional: true,
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Interface Name. Name of this Interface",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"bond_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Bond Device. Bond devices configuration for fleet",
+														Attributes: map[string]schema.Attribute{
+															"devices": schema.ListAttribute{
+																MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+															"link_polling_interval": schema.Int64Attribute{
+																MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+																Optional: true,
+															},
+															"link_up_delay": schema.Int64Attribute{
+																MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+																Optional: true,
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"active_backup": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"lacp": schema.SingleNestedBlock{
+																MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+																Attributes: map[string]schema.Attribute{
+																	"rate": schema.Int64Attribute{
+																		MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"dhcp_client": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"ethernet_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Ethernet Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site.",
+																Optional: true,
+															},
+															"mac": schema.StringAttribute{
+																MarkdownDescription: "MAC Address.",
+																Optional: true,
+															},
+														},
+													},
+													"ipv6_auto_config": schema.SingleNestedBlock{
+														MarkdownDescription: "IPV6AutoConfigType.",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"host": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"router": schema.SingleNestedBlock{
+																MarkdownDescription: "IPV6AutoConfigRouterType.",
+																Attributes: map[string]schema.Attribute{
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"dns_config": schema.SingleNestedBlock{
+																		MarkdownDescription: "IPV6DnsConfig.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"configured_list": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6DnsList.",
+																				Attributes: map[string]schema.Attribute{
+																					"dns_list": schema.ListAttribute{
+																						MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																						Optional: true,
+																						ElementType: types.StringType,
+																					},
+																				},
+																			},
+																			"local_dns": schema.SingleNestedBlock{
+																				MarkdownDescription: "IPV6LocalDnsAddress.",
+																				Attributes: map[string]schema.Attribute{
+																					"configured_address": schema.StringAttribute{
+																						MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"first_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																					"last_address": schema.SingleNestedBlock{
+																						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																					},
+																				},
+																			},
+																		},
+																	},
+																	"stateful": schema.SingleNestedBlock{
+																		MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																		Attributes: map[string]schema.Attribute{
+																		},
+																		Blocks: map[string]schema.Block{
+																			"automatic_from_end": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"automatic_from_start": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																			"dhcp_networks": schema.ListNestedBlock{
+																				MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																				NestedObject: schema.NestedBlockObject{
+																					Attributes: map[string]schema.Attribute{
+																						"network_prefix": schema.StringAttribute{
+																							MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																							Optional: true,
+																						},
+																						"pool_settings": schema.StringAttribute{
+																							MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																							Optional: true,
+																						},
+																					},
+																					Blocks: map[string]schema.Block{
+																						"pools": schema.ListNestedBlock{
+																							MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																							NestedObject: schema.NestedBlockObject{
+																								Attributes: map[string]schema.Attribute{
+																									"end_ip": schema.StringAttribute{
+																										MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																										Optional: true,
+																									},
+																									"start_ip": schema.StringAttribute{
+																										MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																										Optional: true,
+																									},
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"fixed_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			},
+																			"interface_ip_map": schema.SingleNestedBlock{
+																				MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"interface_ip_map": schema.SingleNestedBlock{
+																						MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					},
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+													"labels": schema.SingleNestedBlock{
+														MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+													},
+													"monitor": schema.SingleNestedBlock{
+														MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+													},
+													"monitor_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"network_option": schema.SingleNestedBlock{
+														MarkdownDescription: "Network Select. x-required Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional. Global VRFs are configured via Networking > Segments. A site can have multple Network Segments (global VRFs).",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"site_local_inside_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"site_local_network": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+													"no_ipv4_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"no_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_disabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"site_to_site_connectivity_interface_enabled": schema.SingleNestedBlock{
+														MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+													},
+													"static_ip": schema.SingleNestedBlock{
+														MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+														Attributes: map[string]schema.Attribute{
+															"default_gw": schema.StringAttribute{
+																MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																Optional: true,
+															},
+															"ip_address": schema.StringAttribute{
+																MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																Optional: true,
+															},
+														},
+													},
+													"static_ipv6_address": schema.SingleNestedBlock{
+														MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"cluster_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+																Attributes: map[string]schema.Attribute{
+																},
+																Blocks: map[string]schema.Block{
+																	"interface_ip_map": schema.SingleNestedBlock{
+																		MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	},
+																},
+															},
+															"node_static_ip": schema.SingleNestedBlock{
+																MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+																Attributes: map[string]schema.Attribute{
+																	"default_gw": schema.StringAttribute{
+																		MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																		Optional: true,
+																	},
+																	"ip_address": schema.StringAttribute{
+																		MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+													"vlan_interface": schema.SingleNestedBlock{
+														MarkdownDescription: "Vlan Interface.",
+														Attributes: map[string]schema.Attribute{
+															"device": schema.StringAttribute{
+																MarkdownDescription: "Parent Interface. Select a parent interface from the dropdown.",
+																Optional: true,
+															},
+															"vlan_id": schema.Int64Attribute{
+																MarkdownDescription: "VLAN ID. Configure the VLAN tag for this interface.",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 										},
 									},

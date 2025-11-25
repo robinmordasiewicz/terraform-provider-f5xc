@@ -163,9 +163,46 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 									Blocks: map[string]schema.Block{
 										"custom_routing": schema.SingleNestedBlock{
 											MarkdownDescription: "AWS Route Table List. AWS Route Table List",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"route_tables": schema.ListNestedBlock{
+													MarkdownDescription: "List of route tables. Route Tables",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"route_table_id": schema.StringAttribute{
+																MarkdownDescription: "Route table ID. Route table ID",
+																Optional: true,
+															},
+															"static_routes": schema.ListAttribute{
+																MarkdownDescription: "Static Routes. List of Static Routes",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
+											},
 										},
 										"default_route": schema.SingleNestedBlock{
 											MarkdownDescription: "Override Default Route Choice. Select Override Default Route Choice",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"all_route_tables": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"selective_route_tables": schema.SingleNestedBlock{
+													MarkdownDescription: "AWS Route Table. AWS Route Table",
+													Attributes: map[string]schema.Attribute{
+														"route_table_id": schema.ListAttribute{
+															MarkdownDescription: "Route table ID. Route table ID",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 										"labels": schema.SingleNestedBlock{
 											MarkdownDescription: "Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall.",
@@ -224,9 +261,46 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 									Blocks: map[string]schema.Block{
 										"custom_routing": schema.SingleNestedBlock{
 											MarkdownDescription: "List Azure Route Table with Static Route. List Azure Route Table with Static Route",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"route_tables": schema.ListNestedBlock{
+													MarkdownDescription: "List of route tables with static routes. Route Tables with static routes",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"route_table_id": schema.StringAttribute{
+																MarkdownDescription: "Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>",
+																Optional: true,
+															},
+															"static_routes": schema.ListAttribute{
+																MarkdownDescription: "Static Routes. List of Static Routes",
+																Optional: true,
+																ElementType: types.StringType,
+															},
+														},
+													},
+												},
+											},
 										},
 										"default_route": schema.SingleNestedBlock{
 											MarkdownDescription: "Override Default Route Choice. Select Override Default Route Choice",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"all_route_tables": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"selective_route_tables": schema.SingleNestedBlock{
+													MarkdownDescription: "Azure Route Table. Azure Route Table",
+													Attributes: map[string]schema.Attribute{
+														"route_table_id": schema.ListAttribute{
+															MarkdownDescription: "Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+											},
 										},
 										"labels": schema.SingleNestedBlock{
 											MarkdownDescription: "Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies.",

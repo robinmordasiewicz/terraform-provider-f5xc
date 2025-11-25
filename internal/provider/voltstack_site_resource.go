@@ -258,7 +258,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Optional: true,
 					},
 					"vip_vrrp_mode": schema.StringAttribute{
-						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`.",
+						MarkdownDescription: "VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`. Defaults to `VIP_VRRP_INVALID`.",
 						Optional: true,
 					},
 				},
@@ -366,9 +366,51 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"global_vn": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
 											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"global_vn": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -398,18 +440,446 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"dedicated_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "Dedicated Interface. Dedicated Interface Configuration",
+											Attributes: map[string]schema.Attribute{
+												"device": schema.StringAttribute{
+													MarkdownDescription: "Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE.",
+													Optional: true,
+												},
+												"mtu": schema.Int64Attribute{
+													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+													Optional: true,
+												},
+												"node": schema.StringAttribute{
+													MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node of the site.",
+													Optional: true,
+												},
+												"priority": schema.Int64Attribute{
+													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"cluster": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"is_primary": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"monitor": schema.SingleNestedBlock{
+													MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+												},
+												"monitor_disabled": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"not_primary": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"dedicated_management_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "Dedicated Management Interface. Dedicated Interface Configuration",
+											Attributes: map[string]schema.Attribute{
+												"device": schema.StringAttribute{
+													MarkdownDescription: "Interface Device. Name of the device for which interface is configured",
+													Optional: true,
+												},
+												"mtu": schema.Int64Attribute{
+													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+													Optional: true,
+												},
+												"node": schema.StringAttribute{
+													MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node of the site.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"cluster": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"ethernet_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "Ethernet Interface. Ethernet Interface Configuration",
+											Attributes: map[string]schema.Attribute{
+												"device": schema.StringAttribute{
+													MarkdownDescription: "Ethernet Device. Interface configuration for the ethernet device",
+													Optional: true,
+												},
+												"mtu": schema.Int64Attribute{
+													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+													Optional: true,
+												},
+												"node": schema.StringAttribute{
+													MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node.",
+													Optional: true,
+												},
+												"priority": schema.Int64Attribute{
+													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
+													Optional: true,
+												},
+												"vlan_id": schema.Int64Attribute{
+													MarkdownDescription: "VLAN Id. Configure a VLAN tagged ethernet interface",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"cluster": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"dhcp_client": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"dhcp_server": schema.SingleNestedBlock{
+													MarkdownDescription: "DHCPServerParametersType.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"automatic_from_end": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"automatic_from_start": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"dhcp_networks": schema.ListNestedBlock{
+															MarkdownDescription: "DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"dgw_address": schema.StringAttribute{
+																		MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway.",
+																		Optional: true,
+																	},
+																	"dns_address": schema.StringAttribute{
+																		MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server.",
+																		Optional: true,
+																	},
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24",
+																		Optional: true,
+																	},
+																	"pool_settings": schema.StringAttribute{
+																		MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"first_address": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"last_address": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"pools": schema.ListNestedBlock{
+																		MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"end_ip": schema.StringAttribute{
+																					MarkdownDescription: "Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200",
+																					Optional: true,
+																				},
+																				"start_ip": schema.StringAttribute{
+																					MarkdownDescription: "Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																	"same_as_dgw": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																},
+															},
+														},
+														"fixed_ip_map": schema.SingleNestedBlock{
+															MarkdownDescription: "Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client.",
+														},
+														"interface_ip_map": schema.SingleNestedBlock{
+															MarkdownDescription: "Interface IPv4 Assignments. Specify static IPv4 addresses per node.",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"interface_ip_map": schema.SingleNestedBlock{
+																	MarkdownDescription: "Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node.",
+																},
+															},
+														},
+													},
+												},
+												"ipv6_auto_config": schema.SingleNestedBlock{
+													MarkdownDescription: "IPV6AutoConfigType.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"host": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"router": schema.SingleNestedBlock{
+															MarkdownDescription: "IPV6AutoConfigRouterType.",
+															Attributes: map[string]schema.Attribute{
+																"network_prefix": schema.StringAttribute{
+																	MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"dns_config": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPV6DnsConfig.",
+																	Attributes: map[string]schema.Attribute{
+																	},
+																	Blocks: map[string]schema.Block{
+																		"configured_list": schema.SingleNestedBlock{
+																			MarkdownDescription: "IPV6DnsList.",
+																			Attributes: map[string]schema.Attribute{
+																				"dns_list": schema.ListAttribute{
+																					MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																					Optional: true,
+																					ElementType: types.StringType,
+																				},
+																			},
+																		},
+																		"local_dns": schema.SingleNestedBlock{
+																			MarkdownDescription: "IPV6LocalDnsAddress.",
+																			Attributes: map[string]schema.Attribute{
+																				"configured_address": schema.StringAttribute{
+																					MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																					Optional: true,
+																				},
+																			},
+																			Blocks: map[string]schema.Block{
+																				"first_address": schema.SingleNestedBlock{
+																					MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				},
+																				"last_address": schema.SingleNestedBlock{
+																					MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				},
+																			},
+																		},
+																	},
+																},
+																"stateful": schema.SingleNestedBlock{
+																	MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																	Attributes: map[string]schema.Attribute{
+																	},
+																	Blocks: map[string]schema.Block{
+																		"automatic_from_end": schema.SingleNestedBlock{
+																			MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																		},
+																		"automatic_from_start": schema.SingleNestedBlock{
+																			MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																		},
+																		"dhcp_networks": schema.ListNestedBlock{
+																			MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																			NestedObject: schema.NestedBlockObject{
+																				Attributes: map[string]schema.Attribute{
+																					"network_prefix": schema.StringAttribute{
+																						MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																						Optional: true,
+																					},
+																					"pool_settings": schema.StringAttribute{
+																						MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"pools": schema.ListNestedBlock{
+																						MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																						NestedObject: schema.NestedBlockObject{
+																							Attributes: map[string]schema.Attribute{
+																								"end_ip": schema.StringAttribute{
+																									MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																									Optional: true,
+																								},
+																								"start_ip": schema.StringAttribute{
+																									MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																									Optional: true,
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																		},
+																		"fixed_ip_map": schema.SingleNestedBlock{
+																			MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																		},
+																		"interface_ip_map": schema.SingleNestedBlock{
+																			MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																			Attributes: map[string]schema.Attribute{
+																			},
+																			Blocks: map[string]schema.Block{
+																				"interface_ip_map": schema.SingleNestedBlock{
+																					MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+												"is_primary": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"monitor": schema.SingleNestedBlock{
+													MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+												},
+												"monitor_disabled": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"no_ipv6_address": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"not_primary": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"site_local_inside_network": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"site_local_network": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"static_ip": schema.SingleNestedBlock{
+													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"cluster_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"interface_ip_map": schema.SingleNestedBlock{
+																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																},
+															},
+														},
+														"node_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+															Attributes: map[string]schema.Attribute{
+																"default_gw": schema.StringAttribute{
+																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																	Optional: true,
+																},
+																"ip_address": schema.StringAttribute{
+																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"static_ipv6_address": schema.SingleNestedBlock{
+													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"cluster_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"interface_ip_map": schema.SingleNestedBlock{
+																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																},
+															},
+														},
+														"node_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+															Attributes: map[string]schema.Attribute{
+																"default_gw": schema.StringAttribute{
+																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																	Optional: true,
+																},
+																"ip_address": schema.StringAttribute{
+																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"storage_network": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"untagged": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"labels": schema.SingleNestedBlock{
 											MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
 										},
 										"tunnel_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "Tunnel Interface. Tunnel Interface Configuration",
+											Attributes: map[string]schema.Attribute{
+												"mtu": schema.Int64Attribute{
+													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+													Optional: true,
+												},
+												"node": schema.StringAttribute{
+													MarkdownDescription: "Specific Node. Configuration will apply to a given device on the given node.",
+													Optional: true,
+												},
+												"priority": schema.Int64Attribute{
+													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"site_local_inside_network": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"site_local_network": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"static_ip": schema.SingleNestedBlock{
+													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"cluster_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"interface_ip_map": schema.SingleNestedBlock{
+																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																},
+															},
+														},
+														"node_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+															Attributes: map[string]schema.Attribute{
+																"default_gw": schema.StringAttribute{
+																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																	Optional: true,
+																},
+																"ip_address": schema.StringAttribute{
+																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"tunnel": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -444,7 +914,74 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static Routes. List of static routes",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"ip_address": schema.StringAttribute{
+													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"default_gateway": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"node_interface": schema.SingleNestedBlock{
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"list": schema.ListNestedBlock{
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"node": schema.StringAttribute{
+																		MarkdownDescription: "Node. Node name on this site",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"interface": schema.ListNestedBlock{
+																		MarkdownDescription: "Interface. Interface reference on this node",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"kind": schema.StringAttribute{
+																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					Optional: true,
+																				},
+																				"name": schema.StringAttribute{
+																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					Optional: true,
+																				},
+																				"namespace": schema.StringAttribute{
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					Optional: true,
+																				},
+																				"tenant": schema.StringAttribute{
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					Optional: true,
+																				},
+																				"uid": schema.StringAttribute{
+																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -457,7 +994,74 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"ip_address": schema.StringAttribute{
+													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"default_gateway": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"node_interface": schema.SingleNestedBlock{
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"list": schema.ListNestedBlock{
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"node": schema.StringAttribute{
+																		MarkdownDescription: "Node. Node name on this site",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"interface": schema.ListNestedBlock{
+																		MarkdownDescription: "Interface. Interface reference on this node",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"kind": schema.StringAttribute{
+																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					Optional: true,
+																				},
+																				"name": schema.StringAttribute{
+																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					Optional: true,
+																				},
+																				"namespace": schema.StringAttribute{
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					Optional: true,
+																				},
+																				"tenant": schema.StringAttribute{
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					Optional: true,
+																				},
+																				"uid": schema.StringAttribute{
+																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -506,7 +1110,74 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static Routes. List of static routes",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"ip_address": schema.StringAttribute{
+													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"default_gateway": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"node_interface": schema.SingleNestedBlock{
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"list": schema.ListNestedBlock{
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"node": schema.StringAttribute{
+																		MarkdownDescription: "Node. Node name on this site",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"interface": schema.ListNestedBlock{
+																		MarkdownDescription: "Interface. Interface reference on this node",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"kind": schema.StringAttribute{
+																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					Optional: true,
+																				},
+																				"name": schema.StringAttribute{
+																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					Optional: true,
+																				},
+																				"namespace": schema.StringAttribute{
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					Optional: true,
+																				},
+																				"tenant": schema.StringAttribute{
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					Optional: true,
+																				},
+																				"uid": schema.StringAttribute{
+																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -519,7 +1190,74 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									"static_routes": schema.ListNestedBlock{
 										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+												"ip_address": schema.StringAttribute{
+													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													Optional: true,
+												},
+												"ip_prefixes": schema.ListAttribute{
+													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
+													Optional: true,
+													ElementType: types.StringType,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"default_gateway": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"node_interface": schema.SingleNestedBlock{
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"list": schema.ListNestedBlock{
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"node": schema.StringAttribute{
+																		MarkdownDescription: "Node. Node name on this site",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"interface": schema.ListNestedBlock{
+																		MarkdownDescription: "Interface. Interface reference on this node",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"kind": schema.StringAttribute{
+																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					Optional: true,
+																				},
+																				"name": schema.StringAttribute{
+																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					Optional: true,
+																				},
+																				"namespace": schema.StringAttribute{
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					Optional: true,
+																				},
+																				"tenant": schema.StringAttribute{
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					Optional: true,
+																				},
+																				"uid": schema.StringAttribute{
+																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -562,7 +1300,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"attrs": schema.ListAttribute{
-											MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability",
+											MarkdownDescription: "Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
 											Optional: true,
 											ElementType: types.StringType,
 										},
@@ -582,6 +1320,50 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"node_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"list": schema.ListNestedBlock{
+													MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"node": schema.StringAttribute{
+																MarkdownDescription: "Node. Node name on this site",
+																Optional: true,
+															},
+														},
+														Blocks: map[string]schema.Block{
+															"interface": schema.ListNestedBlock{
+																MarkdownDescription: "Interface. Interface reference on this node",
+																NestedObject: schema.NestedBlockObject{
+																	Attributes: map[string]schema.Attribute{
+																		"kind": schema.StringAttribute{
+																			MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																			Optional: true,
+																		},
+																		"name": schema.StringAttribute{
+																			MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																			Optional: true,
+																		},
+																		"namespace": schema.StringAttribute{
+																			MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																			Optional: true,
+																		},
+																		"tenant": schema.StringAttribute{
+																			MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																			Optional: true,
+																		},
+																		"uid": schema.StringAttribute{
+																			MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -628,15 +1410,112 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"custom_storage": schema.SingleNestedBlock{
 											MarkdownDescription: "Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site.",
+											Attributes: map[string]schema.Attribute{
+												"yaml": schema.StringAttribute{
+													MarkdownDescription: "Storage Class YAML. K8s YAML for StorageClass",
+													Optional: true,
+												},
+											},
 										},
 										"hpe_storage": schema.SingleNestedBlock{
 											MarkdownDescription: "HPE Storage. Storage class Device configuration for HPE Storage",
+											Attributes: map[string]schema.Attribute{
+												"allow_mutations": schema.StringAttribute{
+													MarkdownDescription: "allowMutations. mutation can override specified parameters",
+													Optional: true,
+												},
+												"allow_overrides": schema.StringAttribute{
+													MarkdownDescription: "allowOverrides. PVC can override specified parameters",
+													Optional: true,
+												},
+												"dedupe_enabled": schema.BoolAttribute{
+													MarkdownDescription: "dedupeEnabled. Indicates that the volume should enable deduplication.",
+													Optional: true,
+												},
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
+													Optional: true,
+												},
+												"destroy_on_delete": schema.BoolAttribute{
+													MarkdownDescription: "destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted",
+													Optional: true,
+												},
+												"encrypted": schema.BoolAttribute{
+													MarkdownDescription: "encrypted. Indicates that the volume should be encrypted.",
+													Optional: true,
+												},
+												"folder": schema.StringAttribute{
+													MarkdownDescription: "folder. The name of the folder in which to place the volume.",
+													Optional: true,
+												},
+												"limit_iops": schema.StringAttribute{
+													MarkdownDescription: "limitIops. The IOPS limit of the volume.",
+													Optional: true,
+												},
+												"limit_mbps": schema.StringAttribute{
+													MarkdownDescription: "limitMbps. The IOPS limit of the volume.",
+													Optional: true,
+												},
+												"performance_policy": schema.StringAttribute{
+													MarkdownDescription: "performancePolicy. The name of the performance policy to assign to the volume.",
+													Optional: true,
+												},
+												"pool": schema.StringAttribute{
+													MarkdownDescription: "pool. The name of the pool in which to place the volume.",
+													Optional: true,
+												},
+												"protection_template": schema.StringAttribute{
+													MarkdownDescription: "protectionTemplate. The name of the performance policy to assign to the volume.",
+													Optional: true,
+												},
+												"secret_name": schema.StringAttribute{
+													MarkdownDescription: "Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information",
+													Optional: true,
+												},
+												"secret_namespace": schema.StringAttribute{
+													MarkdownDescription: "Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides",
+													Optional: true,
+												},
+												"sync_on_detach": schema.BoolAttribute{
+													MarkdownDescription: "syncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node.",
+													Optional: true,
+												},
+												"thick": schema.BoolAttribute{
+													MarkdownDescription: "thick. Indicates that the volume should be thick provisioned.",
+													Optional: true,
+												},
+											},
 										},
 										"netapp_trident": schema.SingleNestedBlock{
 											MarkdownDescription: "NetApp Trident Storage. Storage class Device configuration for NetApp Trident",
+											Attributes: map[string]schema.Attribute{
+												"storage_pools": schema.StringAttribute{
+													MarkdownDescription: "Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"selector": schema.SingleNestedBlock{
+													MarkdownDescription: "Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool.",
+												},
+											},
 										},
 										"pure_service_orchestrator": schema.SingleNestedBlock{
 											MarkdownDescription: "Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator",
+											Attributes: map[string]schema.Attribute{
+												"backend": schema.StringAttribute{
+													MarkdownDescription: "Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool.",
+													Optional: true,
+												},
+												"bandwidth_limit": schema.StringAttribute{
+													MarkdownDescription: "Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB.",
+													Optional: true,
+												},
+												"iops_limit": schema.Int64Attribute{
+													MarkdownDescription: "IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -666,12 +1545,960 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"hpe_storage": schema.SingleNestedBlock{
 											MarkdownDescription: "HPE Storage. Device configuration for HPE Storage",
+											Attributes: map[string]schema.Attribute{
+												"api_server_port": schema.Int64Attribute{
+													MarkdownDescription: "Storage server Port. Enter Storage Server Port",
+													Optional: true,
+												},
+												"iscsi_chap_user": schema.StringAttribute{
+													MarkdownDescription: "iscsi chapUser. chap Username to connect to the HPE storage",
+													Optional: true,
+												},
+												"storage_server_ip_address": schema.StringAttribute{
+													MarkdownDescription: "Storage Server IP address. Enter storage server IP address",
+													Optional: true,
+												},
+												"storage_server_name": schema.StringAttribute{
+													MarkdownDescription: "Storage Server Name. Enter storage server Name",
+													Optional: true,
+												},
+												"username": schema.StringAttribute{
+													MarkdownDescription: "Username. Username to connect to the HPE storage management IP",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"iscsi_chap_password": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"password": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 										"netapp_trident": schema.SingleNestedBlock{
 											MarkdownDescription: "NetApp Trident. Device configuration for NetApp Trident Storage",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"netapp_backend_ontap_nas": schema.SingleNestedBlock{
+													MarkdownDescription: "Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS",
+													Attributes: map[string]schema.Attribute{
+														"auto_export_policy": schema.BoolAttribute{
+															MarkdownDescription: "Auto Export Policy. Enable automatic export policy creation and updating",
+															Optional: true,
+														},
+														"backend_name": schema.StringAttribute{
+															MarkdownDescription: "Storage Backend Name. Configuration of Backend Name. Driver is name + '_' + dataLIF",
+															Optional: true,
+														},
+														"client_certificate": schema.StringAttribute{
+															MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
+															Optional: true,
+														},
+														"data_lif_dns_name": schema.StringAttribute{
+															MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+															Optional: true,
+														},
+														"data_lif_ip": schema.StringAttribute{
+															MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given ip address",
+															Optional: true,
+														},
+														"limit_aggregate_usage": schema.StringAttribute{
+															MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
+															Optional: true,
+														},
+														"limit_volume_size": schema.StringAttribute{
+															MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size is above this value. Not enforced by default.",
+															Optional: true,
+														},
+														"management_lif_dns_name": schema.StringAttribute{
+															MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+															Optional: true,
+														},
+														"management_lif_ip": schema.StringAttribute{
+															MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given ip address",
+															Optional: true,
+														},
+														"nfs_mount_options": schema.StringAttribute{
+															MarkdownDescription: "NFS Mount Options. Comma-separated list of NFS mount options. Not enforced by default.",
+															Optional: true,
+														},
+														"region": schema.StringAttribute{
+															MarkdownDescription: "Backend Region. Virtual Pool Region",
+															Optional: true,
+														},
+														"storage_driver_name": schema.StringAttribute{
+															MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name",
+															Optional: true,
+														},
+														"storage_prefix": schema.StringAttribute{
+															MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated",
+															Optional: true,
+														},
+														"svm": schema.StringAttribute{
+															MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified",
+															Optional: true,
+														},
+														"trusted_ca_certificate": schema.StringAttribute{
+															MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
+															Optional: true,
+														},
+														"username": schema.StringAttribute{
+															MarkdownDescription: "Username. Username to connect to the cluster/SVM",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"auto_export_cidrs": schema.SingleNestedBlock{
+															MarkdownDescription: "IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint",
+															Attributes: map[string]schema.Attribute{
+																"prefixes": schema.ListAttribute{
+																	MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+																	Optional: true,
+																	ElementType: types.StringType,
+																},
+															},
+														},
+														"client_private_key": schema.SingleNestedBlock{
+															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"blindfold_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																	Attributes: map[string]schema.Attribute{
+																		"decryption_provider": schema.StringAttribute{
+																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																			Optional: true,
+																		},
+																		"location": schema.StringAttribute{
+																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																			Optional: true,
+																		},
+																		"store_provider": schema.StringAttribute{
+																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																	},
+																},
+																"clear_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																	Attributes: map[string]schema.Attribute{
+																		"provider_ref": schema.StringAttribute{
+																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																		"url": schema.StringAttribute{
+																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+														"labels": schema.SingleNestedBlock{
+															MarkdownDescription: "Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
+														},
+														"password": schema.SingleNestedBlock{
+															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"blindfold_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																	Attributes: map[string]schema.Attribute{
+																		"decryption_provider": schema.StringAttribute{
+																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																			Optional: true,
+																		},
+																		"location": schema.StringAttribute{
+																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																			Optional: true,
+																		},
+																		"store_provider": schema.StringAttribute{
+																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																	},
+																},
+																"clear_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																	Attributes: map[string]schema.Attribute{
+																		"provider_ref": schema.StringAttribute{
+																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																		"url": schema.StringAttribute{
+																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+														"storage": schema.ListNestedBlock{
+															MarkdownDescription: "Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection.",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"zone": schema.StringAttribute{
+																		MarkdownDescription: "Virtual Pool Zone. Virtual Storage Pool zone definition.",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"labels": schema.SingleNestedBlock{
+																		MarkdownDescription: "Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection.",
+																	},
+																	"volume_defaults": schema.SingleNestedBlock{
+																		MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration.",
+																		Attributes: map[string]schema.Attribute{
+																			"adaptive_qos_policy": schema.StringAttribute{
+																				MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
+																				Optional: true,
+																			},
+																			"encryption": schema.BoolAttribute{
+																				MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
+																				Optional: true,
+																			},
+																			"export_policy": schema.StringAttribute{
+																				MarkdownDescription: "Export Policy. Export policy to use.",
+																				Optional: true,
+																			},
+																			"qos_policy": schema.StringAttribute{
+																				MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
+																				Optional: true,
+																			},
+																			"security_style": schema.StringAttribute{
+																				MarkdownDescription: "Security Style. Security style for new volumes.",
+																				Optional: true,
+																			},
+																			"snapshot_dir": schema.BoolAttribute{
+																				MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
+																				Optional: true,
+																			},
+																			"snapshot_policy": schema.StringAttribute{
+																				MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
+																				Optional: true,
+																			},
+																			"snapshot_reserve": schema.StringAttribute{
+																				MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+																				Optional: true,
+																			},
+																			"space_reserve": schema.StringAttribute{
+																				MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+																				Optional: true,
+																			},
+																			"split_on_clone": schema.BoolAttribute{
+																				MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+																				Optional: true,
+																			},
+																			"tiering_policy": schema.StringAttribute{
+																				MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+																				Optional: true,
+																			},
+																			"unix_permissions": schema.Int64Attribute{
+																				MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
+																				Optional: true,
+																			},
+																		},
+																		Blocks: map[string]schema.Block{
+																			"no_qos": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																		},
+																	},
+																},
+															},
+														},
+														"volume_defaults": schema.SingleNestedBlock{
+															MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration.",
+															Attributes: map[string]schema.Attribute{
+																"adaptive_qos_policy": schema.StringAttribute{
+																	MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
+																	Optional: true,
+																},
+																"encryption": schema.BoolAttribute{
+																	MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
+																	Optional: true,
+																},
+																"export_policy": schema.StringAttribute{
+																	MarkdownDescription: "Export Policy. Export policy to use.",
+																	Optional: true,
+																},
+																"qos_policy": schema.StringAttribute{
+																	MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
+																	Optional: true,
+																},
+																"security_style": schema.StringAttribute{
+																	MarkdownDescription: "Security Style. Security style for new volumes.",
+																	Optional: true,
+																},
+																"snapshot_dir": schema.BoolAttribute{
+																	MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
+																	Optional: true,
+																},
+																"snapshot_policy": schema.StringAttribute{
+																	MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
+																	Optional: true,
+																},
+																"snapshot_reserve": schema.StringAttribute{
+																	MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+																	Optional: true,
+																},
+																"space_reserve": schema.StringAttribute{
+																	MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+																	Optional: true,
+																},
+																"split_on_clone": schema.BoolAttribute{
+																	MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+																	Optional: true,
+																},
+																"tiering_policy": schema.StringAttribute{
+																	MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+																	Optional: true,
+																},
+																"unix_permissions": schema.Int64Attribute{
+																	MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"no_qos": schema.SingleNestedBlock{
+																	MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																},
+															},
+														},
+													},
+												},
+												"netapp_backend_ontap_san": schema.SingleNestedBlock{
+													MarkdownDescription: "Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN",
+													Attributes: map[string]schema.Attribute{
+														"client_certificate": schema.StringAttribute{
+															MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
+															Optional: true,
+														},
+														"data_lif_dns_name": schema.StringAttribute{
+															MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+															Optional: true,
+														},
+														"data_lif_ip": schema.StringAttribute{
+															MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given ip address",
+															Optional: true,
+														},
+														"igroup_name": schema.StringAttribute{
+															MarkdownDescription: "iGroup Name. Name of the igroup for SAN volumes to use",
+															Optional: true,
+														},
+														"limit_aggregate_usage": schema.Int64Attribute{
+															MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
+															Optional: true,
+														},
+														"limit_volume_size": schema.Int64Attribute{
+															MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size in GBi is above this value. Not enforced by default.",
+															Optional: true,
+														},
+														"management_lif_dns_name": schema.StringAttribute{
+															MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+															Optional: true,
+														},
+														"management_lif_ip": schema.StringAttribute{
+															MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given ip address",
+															Optional: true,
+														},
+														"region": schema.StringAttribute{
+															MarkdownDescription: "Backend Region. Virtual Pool Region",
+															Optional: true,
+														},
+														"storage_driver_name": schema.StringAttribute{
+															MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name",
+															Optional: true,
+														},
+														"storage_prefix": schema.StringAttribute{
+															MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated",
+															Optional: true,
+														},
+														"svm": schema.StringAttribute{
+															MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified",
+															Optional: true,
+														},
+														"trusted_ca_certificate": schema.StringAttribute{
+															MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
+															Optional: true,
+														},
+														"username": schema.StringAttribute{
+															MarkdownDescription: "Username. Username to connect to the cluster/SVM",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"client_private_key": schema.SingleNestedBlock{
+															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"blindfold_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																	Attributes: map[string]schema.Attribute{
+																		"decryption_provider": schema.StringAttribute{
+																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																			Optional: true,
+																		},
+																		"location": schema.StringAttribute{
+																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																			Optional: true,
+																		},
+																		"store_provider": schema.StringAttribute{
+																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																	},
+																},
+																"clear_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																	Attributes: map[string]schema.Attribute{
+																		"provider_ref": schema.StringAttribute{
+																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																		"url": schema.StringAttribute{
+																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+														"labels": schema.SingleNestedBlock{
+															MarkdownDescription: "Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
+														},
+														"no_chap": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"password": schema.SingleNestedBlock{
+															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"blindfold_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																	Attributes: map[string]schema.Attribute{
+																		"decryption_provider": schema.StringAttribute{
+																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																			Optional: true,
+																		},
+																		"location": schema.StringAttribute{
+																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																			Optional: true,
+																		},
+																		"store_provider": schema.StringAttribute{
+																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																	},
+																},
+																"clear_secret_info": schema.SingleNestedBlock{
+																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																	Attributes: map[string]schema.Attribute{
+																		"provider_ref": schema.StringAttribute{
+																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			Optional: true,
+																		},
+																		"url": schema.StringAttribute{
+																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+														"storage": schema.ListNestedBlock{
+															MarkdownDescription: "Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection.",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"zone": schema.StringAttribute{
+																		MarkdownDescription: "Virtual Pool Zone. Virtual Storage Pool zone definition.",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"labels": schema.SingleNestedBlock{
+																		MarkdownDescription: "Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection.",
+																	},
+																	"volume_defaults": schema.SingleNestedBlock{
+																		MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration.",
+																		Attributes: map[string]schema.Attribute{
+																			"adaptive_qos_policy": schema.StringAttribute{
+																				MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
+																				Optional: true,
+																			},
+																			"encryption": schema.BoolAttribute{
+																				MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
+																				Optional: true,
+																			},
+																			"export_policy": schema.StringAttribute{
+																				MarkdownDescription: "Export Policy. Export policy to use.",
+																				Optional: true,
+																			},
+																			"qos_policy": schema.StringAttribute{
+																				MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
+																				Optional: true,
+																			},
+																			"security_style": schema.StringAttribute{
+																				MarkdownDescription: "Security Style. Security style for new volumes.",
+																				Optional: true,
+																			},
+																			"snapshot_dir": schema.BoolAttribute{
+																				MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
+																				Optional: true,
+																			},
+																			"snapshot_policy": schema.StringAttribute{
+																				MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
+																				Optional: true,
+																			},
+																			"snapshot_reserve": schema.StringAttribute{
+																				MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+																				Optional: true,
+																			},
+																			"space_reserve": schema.StringAttribute{
+																				MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+																				Optional: true,
+																			},
+																			"split_on_clone": schema.BoolAttribute{
+																				MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+																				Optional: true,
+																			},
+																			"tiering_policy": schema.StringAttribute{
+																				MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+																				Optional: true,
+																			},
+																			"unix_permissions": schema.Int64Attribute{
+																				MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
+																				Optional: true,
+																			},
+																		},
+																		Blocks: map[string]schema.Block{
+																			"no_qos": schema.SingleNestedBlock{
+																				MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																			},
+																		},
+																	},
+																},
+															},
+														},
+														"use_chap": schema.SingleNestedBlock{
+															MarkdownDescription: "Device NetApp Backend ONTAP SAN CHAP Configuration. Device NetApp Backend ONTAP SAN CHAP configuration options for enabled CHAP",
+															Attributes: map[string]schema.Attribute{
+																"chap_target_username": schema.StringAttribute{
+																	MarkdownDescription: "CHAP Target Username. Target username. Required if useCHAP=true",
+																	Optional: true,
+																},
+																"chap_username": schema.StringAttribute{
+																	MarkdownDescription: "CHAP Username. Inbound username. Required if useCHAP=true",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"chap_initiator_secret": schema.SingleNestedBlock{
+																	MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																	Attributes: map[string]schema.Attribute{
+																	},
+																	Blocks: map[string]schema.Block{
+																		"blindfold_secret_info": schema.SingleNestedBlock{
+																			MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																			Attributes: map[string]schema.Attribute{
+																				"decryption_provider": schema.StringAttribute{
+																					MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																					Optional: true,
+																				},
+																				"location": schema.StringAttribute{
+																					MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																					Optional: true,
+																				},
+																				"store_provider": schema.StringAttribute{
+																					MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																					Optional: true,
+																				},
+																			},
+																		},
+																		"clear_secret_info": schema.SingleNestedBlock{
+																			MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																			Attributes: map[string]schema.Attribute{
+																				"provider_ref": schema.StringAttribute{
+																					MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																					Optional: true,
+																				},
+																				"url": schema.StringAttribute{
+																					MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+																"chap_target_initiator_secret": schema.SingleNestedBlock{
+																	MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																	Attributes: map[string]schema.Attribute{
+																	},
+																	Blocks: map[string]schema.Block{
+																		"blindfold_secret_info": schema.SingleNestedBlock{
+																			MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																			Attributes: map[string]schema.Attribute{
+																				"decryption_provider": schema.StringAttribute{
+																					MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																					Optional: true,
+																				},
+																				"location": schema.StringAttribute{
+																					MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																					Optional: true,
+																				},
+																				"store_provider": schema.StringAttribute{
+																					MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																					Optional: true,
+																				},
+																			},
+																		},
+																		"clear_secret_info": schema.SingleNestedBlock{
+																			MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																			Attributes: map[string]schema.Attribute{
+																				"provider_ref": schema.StringAttribute{
+																					MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																					Optional: true,
+																				},
+																				"url": schema.StringAttribute{
+																					MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+														"volume_defaults": schema.SingleNestedBlock{
+															MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration.",
+															Attributes: map[string]schema.Attribute{
+																"adaptive_qos_policy": schema.StringAttribute{
+																	MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name",
+																	Optional: true,
+																},
+																"encryption": schema.BoolAttribute{
+																	MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
+																	Optional: true,
+																},
+																"export_policy": schema.StringAttribute{
+																	MarkdownDescription: "Export Policy. Export policy to use.",
+																	Optional: true,
+																},
+																"qos_policy": schema.StringAttribute{
+																	MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name",
+																	Optional: true,
+																},
+																"security_style": schema.StringAttribute{
+																	MarkdownDescription: "Security Style. Security style for new volumes.",
+																	Optional: true,
+																},
+																"snapshot_dir": schema.BoolAttribute{
+																	MarkdownDescription: "Access to Snapshot Directory. Access to the .snapshot directory.",
+																	Optional: true,
+																},
+																"snapshot_policy": schema.StringAttribute{
+																	MarkdownDescription: "Snapshot Policy. Snapshot policy to use",
+																	Optional: true,
+																},
+																"snapshot_reserve": schema.StringAttribute{
+																	MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+																	Optional: true,
+																},
+																"space_reserve": schema.StringAttribute{
+																	MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+																	Optional: true,
+																},
+																"split_on_clone": schema.BoolAttribute{
+																	MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+																	Optional: true,
+																},
+																"tiering_policy": schema.StringAttribute{
+																	MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+																	Optional: true,
+																},
+																"unix_permissions": schema.Int64Attribute{
+																	MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"no_qos": schema.SingleNestedBlock{
+																	MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 										"pure_service_orchestrator": schema.SingleNestedBlock{
 											MarkdownDescription: "Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator",
+											Attributes: map[string]schema.Attribute{
+												"cluster_id": schema.StringAttribute{
+													MarkdownDescription: "Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores",
+													Optional: true,
+												},
+												"enable_storage_topology": schema.BoolAttribute{
+													MarkdownDescription: "Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi",
+													Optional: true,
+												},
+												"enable_strict_topology": schema.BoolAttribute{
+													MarkdownDescription: "Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"arrays": schema.SingleNestedBlock{
+													MarkdownDescription: "Arrays Configuration. Device configuration for PSO Arrays",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"flash_array": schema.SingleNestedBlock{
+															MarkdownDescription: "Flash Arrays. Specify what storage flash arrays should be managed the plugin",
+															Attributes: map[string]schema.Attribute{
+																"default_fs_opt": schema.StringAttribute{
+																	MarkdownDescription: "Default Filesystem Options. Block volume default mkfs options. Not recommended to change!",
+																	Optional: true,
+																},
+																"default_fs_type": schema.StringAttribute{
+																	MarkdownDescription: "Default Filesystem Type. Block volume default filesystem type. Not recommended to change!",
+																	Optional: true,
+																},
+																"default_mount_opts": schema.ListAttribute{
+																	MarkdownDescription: "Default Mount Options. Block volume default filesystem mount options. Not recommended to change!",
+																	Optional: true,
+																	ElementType: types.StringType,
+																},
+																"disable_preempt_attachments": schema.BoolAttribute{
+																	MarkdownDescription: "Disable Preempt Attachments. Enable/Disable attachment preemption!",
+																	Optional: true,
+																},
+																"iscsi_login_timeout": schema.Int64Attribute{
+																	MarkdownDescription: "iSCSI Login Timeout. iSCSI login timeout in seconds. Not recommended to change!",
+																	Optional: true,
+																},
+																"san_type": schema.StringAttribute{
+																	MarkdownDescription: "SAN Type. Block volume access protocol, either ISCSI or FC",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"flash_arrays": schema.ListNestedBlock{
+																	MarkdownDescription: "Flash Arrays. For FlashArrays you must set the 'mgmt_endpoint' and 'api_token'",
+																	NestedObject: schema.NestedBlockObject{
+																		Attributes: map[string]schema.Attribute{
+																			"mgmt_dns_name": schema.StringAttribute{
+																				MarkdownDescription: "Management Endpoint Name. Management Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+																				Optional: true,
+																			},
+																			"mgmt_ip": schema.StringAttribute{
+																				MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given ip address",
+																				Optional: true,
+																			},
+																		},
+																		Blocks: map[string]schema.Block{
+																			"api_token": schema.SingleNestedBlock{
+																				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"blindfold_secret_info": schema.SingleNestedBlock{
+																						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																						Attributes: map[string]schema.Attribute{
+																							"decryption_provider": schema.StringAttribute{
+																								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																								Optional: true,
+																							},
+																							"location": schema.StringAttribute{
+																								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																								Optional: true,
+																							},
+																							"store_provider": schema.StringAttribute{
+																								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																								Optional: true,
+																							},
+																						},
+																					},
+																					"clear_secret_info": schema.SingleNestedBlock{
+																						MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																						Attributes: map[string]schema.Attribute{
+																							"provider_ref": schema.StringAttribute{
+																								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																								Optional: true,
+																							},
+																							"url": schema.StringAttribute{
+																								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																								Optional: true,
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"labels": schema.SingleNestedBlock{
+																				MarkdownDescription: "Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner.",
+																			},
+																		},
+																	},
+																},
+															},
+														},
+														"flash_blade": schema.SingleNestedBlock{
+															MarkdownDescription: "Flash Blades. Specify what storage flash blades should be managed the plugin",
+															Attributes: map[string]schema.Attribute{
+																"enable_snapshot_directory": schema.BoolAttribute{
+																	MarkdownDescription: "Enable Snapshot Directory. Enable/Disable FlashBlade snapshots",
+																	Optional: true,
+																},
+																"export_rules": schema.StringAttribute{
+																	MarkdownDescription: "NFS Export Rules. NFS Export rules",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"flash_blades": schema.ListNestedBlock{
+																	MarkdownDescription: "Flash Blades. For FlashBlades you must set the 'mgmt_endpoint', 'api_token' and nfs_endpoint",
+																	NestedObject: schema.NestedBlockObject{
+																		Attributes: map[string]schema.Attribute{
+																			"mgmt_dns_name": schema.StringAttribute{
+																				MarkdownDescription: "Management Endpoint Name. Management Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+																				Optional: true,
+																			},
+																			"mgmt_ip": schema.StringAttribute{
+																				MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given ip address",
+																				Optional: true,
+																			},
+																			"nfs_endpoint_dns_name": schema.StringAttribute{
+																				MarkdownDescription: "NFS DNS Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+																				Optional: true,
+																			},
+																			"nfs_endpoint_ip": schema.StringAttribute{
+																				MarkdownDescription: "NFS IP Address. Endpoint is reachable at the given ip address",
+																				Optional: true,
+																			},
+																		},
+																		Blocks: map[string]schema.Block{
+																			"api_token": schema.SingleNestedBlock{
+																				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																				Attributes: map[string]schema.Attribute{
+																				},
+																				Blocks: map[string]schema.Block{
+																					"blindfold_secret_info": schema.SingleNestedBlock{
+																						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																						Attributes: map[string]schema.Attribute{
+																							"decryption_provider": schema.StringAttribute{
+																								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																								Optional: true,
+																							},
+																							"location": schema.StringAttribute{
+																								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																								Optional: true,
+																							},
+																							"store_provider": schema.StringAttribute{
+																								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																								Optional: true,
+																							},
+																						},
+																					},
+																					"clear_secret_info": schema.SingleNestedBlock{
+																						MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																						Attributes: map[string]schema.Attribute{
+																							"provider_ref": schema.StringAttribute{
+																								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																								Optional: true,
+																							},
+																							"url": schema.StringAttribute{
+																								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																								Optional: true,
+																							},
+																						},
+																					},
+																				},
+																			},
+																			"lables": schema.SingleNestedBlock{
+																				MarkdownDescription: "Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner.",
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -698,6 +2525,311 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"storage_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "Ethernet Interface. Ethernet Interface Configuration",
+											Attributes: map[string]schema.Attribute{
+												"device": schema.StringAttribute{
+													MarkdownDescription: "Ethernet Device. Interface configuration for the ethernet device",
+													Optional: true,
+												},
+												"mtu": schema.Int64Attribute{
+													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+													Optional: true,
+												},
+												"node": schema.StringAttribute{
+													MarkdownDescription: "Specific Node. Configuration will apply to a device on the given node.",
+													Optional: true,
+												},
+												"priority": schema.Int64Attribute{
+													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
+													Optional: true,
+												},
+												"vlan_id": schema.Int64Attribute{
+													MarkdownDescription: "VLAN Id. Configure a VLAN tagged ethernet interface",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"cluster": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"dhcp_client": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"dhcp_server": schema.SingleNestedBlock{
+													MarkdownDescription: "DHCPServerParametersType.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"automatic_from_end": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"automatic_from_start": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"dhcp_networks": schema.ListNestedBlock{
+															MarkdownDescription: "DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"dgw_address": schema.StringAttribute{
+																		MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway.",
+																		Optional: true,
+																	},
+																	"dns_address": schema.StringAttribute{
+																		MarkdownDescription: "Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server.",
+																		Optional: true,
+																	},
+																	"network_prefix": schema.StringAttribute{
+																		MarkdownDescription: "Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24",
+																		Optional: true,
+																	},
+																	"pool_settings": schema.StringAttribute{
+																		MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																		Optional: true,
+																	},
+																},
+																Blocks: map[string]schema.Block{
+																	"first_address": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"last_address": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																	"pools": schema.ListNestedBlock{
+																		MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																		NestedObject: schema.NestedBlockObject{
+																			Attributes: map[string]schema.Attribute{
+																				"end_ip": schema.StringAttribute{
+																					MarkdownDescription: "Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200",
+																					Optional: true,
+																				},
+																				"start_ip": schema.StringAttribute{
+																					MarkdownDescription: "Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5",
+																					Optional: true,
+																				},
+																			},
+																		},
+																	},
+																	"same_as_dgw": schema.SingleNestedBlock{
+																		MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																	},
+																},
+															},
+														},
+														"fixed_ip_map": schema.SingleNestedBlock{
+															MarkdownDescription: "Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client.",
+														},
+														"interface_ip_map": schema.SingleNestedBlock{
+															MarkdownDescription: "Interface IPv4 Assignments. Specify static IPv4 addresses per node.",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"interface_ip_map": schema.SingleNestedBlock{
+																	MarkdownDescription: "Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node.",
+																},
+															},
+														},
+													},
+												},
+												"ipv6_auto_config": schema.SingleNestedBlock{
+													MarkdownDescription: "IPV6AutoConfigType.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"host": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"router": schema.SingleNestedBlock{
+															MarkdownDescription: "IPV6AutoConfigRouterType.",
+															Attributes: map[string]schema.Attribute{
+																"network_prefix": schema.StringAttribute{
+																	MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"dns_config": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPV6DnsConfig.",
+																	Attributes: map[string]schema.Attribute{
+																	},
+																	Blocks: map[string]schema.Block{
+																		"configured_list": schema.SingleNestedBlock{
+																			MarkdownDescription: "IPV6DnsList.",
+																			Attributes: map[string]schema.Attribute{
+																				"dns_list": schema.ListAttribute{
+																					MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																					Optional: true,
+																					ElementType: types.StringType,
+																				},
+																			},
+																		},
+																		"local_dns": schema.SingleNestedBlock{
+																			MarkdownDescription: "IPV6LocalDnsAddress.",
+																			Attributes: map[string]schema.Attribute{
+																				"configured_address": schema.StringAttribute{
+																					MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																					Optional: true,
+																				},
+																			},
+																			Blocks: map[string]schema.Block{
+																				"first_address": schema.SingleNestedBlock{
+																					MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				},
+																				"last_address": schema.SingleNestedBlock{
+																					MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																				},
+																			},
+																		},
+																	},
+																},
+																"stateful": schema.SingleNestedBlock{
+																	MarkdownDescription: "DHCPIPV6 Stateful Server.",
+																	Attributes: map[string]schema.Attribute{
+																	},
+																	Blocks: map[string]schema.Block{
+																		"automatic_from_end": schema.SingleNestedBlock{
+																			MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																		},
+																		"automatic_from_start": schema.SingleNestedBlock{
+																			MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+																		},
+																		"dhcp_networks": schema.ListNestedBlock{
+																			MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																			NestedObject: schema.NestedBlockObject{
+																				Attributes: map[string]schema.Attribute{
+																					"network_prefix": schema.StringAttribute{
+																						MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																						Optional: true,
+																					},
+																					"pool_settings": schema.StringAttribute{
+																						MarkdownDescription: "Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
+																						Optional: true,
+																					},
+																				},
+																				Blocks: map[string]schema.Block{
+																					"pools": schema.ListNestedBlock{
+																						MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																						NestedObject: schema.NestedBlockObject{
+																							Attributes: map[string]schema.Attribute{
+																								"end_ip": schema.StringAttribute{
+																									MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																									Optional: true,
+																								},
+																								"start_ip": schema.StringAttribute{
+																									MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																									Optional: true,
+																								},
+																							},
+																						},
+																					},
+																				},
+																			},
+																		},
+																		"fixed_ip_map": schema.SingleNestedBlock{
+																			MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																		},
+																		"interface_ip_map": schema.SingleNestedBlock{
+																			MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																			Attributes: map[string]schema.Attribute{
+																			},
+																			Blocks: map[string]schema.Block{
+																				"interface_ip_map": schema.SingleNestedBlock{
+																					MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																				},
+																			},
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+												"is_primary": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"monitor": schema.SingleNestedBlock{
+													MarkdownDescription: "Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface.",
+												},
+												"monitor_disabled": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"no_ipv6_address": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"not_primary": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"site_local_inside_network": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"site_local_network": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"static_ip": schema.SingleNestedBlock{
+													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"cluster_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"interface_ip_map": schema.SingleNestedBlock{
+																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																},
+															},
+														},
+														"node_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+															Attributes: map[string]schema.Attribute{
+																"default_gw": schema.StringAttribute{
+																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																	Optional: true,
+																},
+																"ip_address": schema.StringAttribute{
+																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"static_ipv6_address": schema.SingleNestedBlock{
+													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"cluster_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+															Attributes: map[string]schema.Attribute{
+															},
+															Blocks: map[string]schema.Block{
+																"interface_ip_map": schema.SingleNestedBlock{
+																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																},
+															},
+														},
+														"node_static_ip": schema.SingleNestedBlock{
+															MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+															Attributes: map[string]schema.Attribute{
+																"default_gw": schema.StringAttribute{
+																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
+																	Optional: true,
+																},
+																"ip_address": schema.StringAttribute{
+																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"storage_network": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"untagged": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 									},
 								},
@@ -831,15 +2963,159 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"bfd_enabled": schema.SingleNestedBlock{
 											MarkdownDescription: "BFD. BFD parameters.",
+											Attributes: map[string]schema.Attribute{
+												"multiplier": schema.Int64Attribute{
+													MarkdownDescription: "Multiplier. Specify Number of missed packets to bring session down'",
+													Optional: true,
+												},
+												"receive_interval_milliseconds": schema.Int64Attribute{
+													MarkdownDescription: "Minimum Receive Interval. BFD receive interval timer, in milliseconds",
+													Optional: true,
+												},
+												"transmit_interval_milliseconds": schema.Int64Attribute{
+													MarkdownDescription: "Transmit Interval. BFD transmit interval timer, in milliseconds",
+													Optional: true,
+												},
+											},
 										},
 										"disable": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
 										},
 										"external": schema.SingleNestedBlock{
 											MarkdownDescription: "External BGP Peer. External BGP Peer parameters.",
+											Attributes: map[string]schema.Attribute{
+												"address": schema.StringAttribute{
+													MarkdownDescription: "Peer Address. Specify IPV4 peer address.",
+													Optional: true,
+												},
+												"address_ipv6": schema.StringAttribute{
+													MarkdownDescription: "Peer IPv6 Address. Specify peer IPv6 address.",
+													Optional: true,
+												},
+												"asn": schema.Int64Attribute{
+													MarkdownDescription: "ASN. Autonomous System Number for BGP peer",
+													Optional: true,
+												},
+												"md5_auth_key": schema.StringAttribute{
+													MarkdownDescription: "MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385)",
+													Optional: true,
+												},
+												"port": schema.Int64Attribute{
+													MarkdownDescription: "Peer Port. Peer TCP port number.",
+													Optional: true,
+												},
+												"subnet_begin_offset": schema.Int64Attribute{
+													MarkdownDescription: "Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet.",
+													Optional: true,
+												},
+												"subnet_begin_offset_v6": schema.Int64Attribute{
+													MarkdownDescription: "Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet.",
+													Optional: true,
+												},
+												"subnet_end_offset": schema.Int64Attribute{
+													MarkdownDescription: "Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet.",
+													Optional: true,
+												},
+												"subnet_end_offset_v6": schema.Int64Attribute{
+													MarkdownDescription: "Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"default_gateway": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"default_gateway_v6": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"disable": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"disable_v6": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"external_connector": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"family_inet": schema.SingleNestedBlock{
+													MarkdownDescription: "BGP Family Inet. Parameters for inet family.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"disable": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+														"enable": schema.SingleNestedBlock{
+															MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+														},
+													},
+												},
+												"from_site": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"from_site_v6": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"interface": schema.SingleNestedBlock{
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															Optional: true,
+														},
+														"namespace": schema.StringAttribute{
+															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															Optional: true,
+														},
+														"tenant": schema.StringAttribute{
+															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															Optional: true,
+														},
+													},
+												},
+												"interface_list": schema.SingleNestedBlock{
+													MarkdownDescription: "Interface List. List of network interfaces.",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"interfaces": schema.ListNestedBlock{
+															MarkdownDescription: "Interface List. List of network interfaces.",
+															NestedObject: schema.NestedBlockObject{
+																Attributes: map[string]schema.Attribute{
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		Optional: true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		Optional: true,
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		Optional: true,
+																	},
+																},
+															},
+														},
+													},
+												},
+												"no_authentication": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 										"metadata": schema.SingleNestedBlock{
 											MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+											Attributes: map[string]schema.Attribute{
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Human readable description.",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+													Optional: true,
+												},
+											},
 										},
 										"passive_mode_disabled": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",
@@ -849,6 +3125,65 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 										"routing_policies": schema.SingleNestedBlock{
 											MarkdownDescription: "BGP Routing Policy. List of rules which can be applied on all or particular nodes",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"route_policy": schema.ListNestedBlock{
+													MarkdownDescription: "BGP Routing policy. Route policy to be applied",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+														},
+														Blocks: map[string]schema.Block{
+															"all_nodes": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"inbound": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+															"node_name": schema.SingleNestedBlock{
+																MarkdownDescription: "Nodes. List of nodes on which BGP routing policy has to be applied",
+																Attributes: map[string]schema.Attribute{
+																	"node": schema.ListAttribute{
+																		MarkdownDescription: "Node of choice. Select BGP Session on which policy will be applied.",
+																		Optional: true,
+																		ElementType: types.StringType,
+																	},
+																},
+															},
+															"object_refs": schema.ListNestedBlock{
+																MarkdownDescription: "BGP routing policy. Select route policy to apply.",
+																NestedObject: schema.NestedBlockObject{
+																	Attributes: map[string]schema.Attribute{
+																		"kind": schema.StringAttribute{
+																			MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																			Optional: true,
+																		},
+																		"name": schema.StringAttribute{
+																			MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																			Optional: true,
+																		},
+																		"namespace": schema.StringAttribute{
+																			MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																			Optional: true,
+																		},
+																		"tenant": schema.StringAttribute{
+																			MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																			Optional: true,
+																		},
+																		"uid": schema.StringAttribute{
+																			MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+															"outbound": schema.SingleNestedBlock{
+																MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},

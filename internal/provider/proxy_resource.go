@@ -202,9 +202,38 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Blocks: map[string]schema.Block{
 									"buffer_policy": schema.SingleNestedBlock{
 										MarkdownDescription: "Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence.",
+										Attributes: map[string]schema.Attribute{
+											"disabled": schema.BoolAttribute{
+												MarkdownDescription: "Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
+												Optional: true,
+											},
+											"max_request_bytes": schema.Int64Attribute{
+												MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
+												Optional: true,
+											},
+										},
 									},
 									"compression_params": schema.SingleNestedBlock{
 										MarkdownDescription: "Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/json, application/xhtml+xml, image/svg+xml, text/css, text/html, text/plain, text/xml. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen.",
+										Attributes: map[string]schema.Attribute{
+											"content_length": schema.Int64Attribute{
+												MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30.",
+												Optional: true,
+											},
+											"content_type": schema.ListAttribute{
+												MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml'",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+											"disable_on_etag_header": schema.BoolAttribute{
+												MarkdownDescription: "Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed.",
+												Optional: true,
+											},
+											"remove_accept_encoding_header": schema.BoolAttribute{
+												MarkdownDescription: "Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter.",
+												Optional: true,
+											},
+										},
 									},
 									"custom_errors": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom http pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code and response code class matches for a request.",
@@ -218,25 +247,294 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									"request_cookies_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. Name of the cookie in Cookie header.",
+													Optional: true,
+												},
+												"overwrite": schema.BoolAttribute{
+													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+													Optional: true,
+												},
+												"value": schema.StringAttribute{
+													MarkdownDescription: "Value. Value of the Cookie header.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"secret_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 									"request_headers_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"append": schema.BoolAttribute{
+													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. Name of the HTTP header.",
+													Optional: true,
+												},
+												"value": schema.StringAttribute{
+													MarkdownDescription: "Value. Value of the HTTP header.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"secret_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 									"response_cookies_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"add_domain": schema.StringAttribute{
+													MarkdownDescription: "Add Domain. Add domain attribute",
+													Optional: true,
+												},
+												"add_expiry": schema.StringAttribute{
+													MarkdownDescription: "Add expiry. Add expiry attribute",
+													Optional: true,
+												},
+												"add_path": schema.StringAttribute{
+													MarkdownDescription: "Add path. Add path attribute",
+													Optional: true,
+												},
+												"max_age_value": schema.Int64Attribute{
+													MarkdownDescription: "Add Max Age. Add max age attribute",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. Name of the cookie in Cookie header.",
+													Optional: true,
+												},
+												"overwrite": schema.BoolAttribute{
+													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+													Optional: true,
+												},
+												"value": schema.StringAttribute{
+													MarkdownDescription: "Value. Value of the Cookie header.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"add_httponly": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"add_partitioned": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"add_secure": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_expiry": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_httponly": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_max_age": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_partitioned": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_path": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_samesite": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_secure": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"samesite_lax": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"samesite_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"samesite_strict": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"secret_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 									"response_headers_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"append": schema.BoolAttribute{
+													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. Name of the HTTP header.",
+													Optional: true,
+												},
+												"value": schema.StringAttribute{
+													MarkdownDescription: "Value. Value of the HTTP header.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"secret_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -287,9 +585,38 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Blocks: map[string]schema.Block{
 									"buffer_policy": schema.SingleNestedBlock{
 										MarkdownDescription: "Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence.",
+										Attributes: map[string]schema.Attribute{
+											"disabled": schema.BoolAttribute{
+												MarkdownDescription: "Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host",
+												Optional: true,
+											},
+											"max_request_bytes": schema.Int64Attribute{
+												MarkdownDescription: "Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response.",
+												Optional: true,
+											},
+										},
 									},
 									"compression_params": schema.SingleNestedBlock{
 										MarkdownDescription: "Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/json, application/xhtml+xml, image/svg+xml, text/css, text/html, text/plain, text/xml. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen.",
+										Attributes: map[string]schema.Attribute{
+											"content_length": schema.Int64Attribute{
+												MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30.",
+												Optional: true,
+											},
+											"content_type": schema.ListAttribute{
+												MarkdownDescription: "Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/json', 'application/xhtml+xml' 'image/svg+xml' 'text/css' 'text/html' 'text/plain' 'text/xml'",
+												Optional: true,
+												ElementType: types.StringType,
+											},
+											"disable_on_etag_header": schema.BoolAttribute{
+												MarkdownDescription: "Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed.",
+												Optional: true,
+											},
+											"remove_accept_encoding_header": schema.BoolAttribute{
+												MarkdownDescription: "Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter.",
+												Optional: true,
+											},
+										},
 									},
 									"custom_errors": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom http pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value of the map is string which represents custom HTTP responses. Specific response code takes preference when both response code and response code class matches for a request.",
@@ -303,25 +630,294 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									"request_cookies_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. Name of the cookie in Cookie header.",
+													Optional: true,
+												},
+												"overwrite": schema.BoolAttribute{
+													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+													Optional: true,
+												},
+												"value": schema.StringAttribute{
+													MarkdownDescription: "Value. Value of the Cookie header.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"secret_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 									"request_headers_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"append": schema.BoolAttribute{
+													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. Name of the HTTP header.",
+													Optional: true,
+												},
+												"value": schema.StringAttribute{
+													MarkdownDescription: "Value. Value of the HTTP header.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"secret_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 									"response_cookies_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"add_domain": schema.StringAttribute{
+													MarkdownDescription: "Add Domain. Add domain attribute",
+													Optional: true,
+												},
+												"add_expiry": schema.StringAttribute{
+													MarkdownDescription: "Add expiry. Add expiry attribute",
+													Optional: true,
+												},
+												"add_path": schema.StringAttribute{
+													MarkdownDescription: "Add path. Add path attribute",
+													Optional: true,
+												},
+												"max_age_value": schema.Int64Attribute{
+													MarkdownDescription: "Add Max Age. Add max age attribute",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. Name of the cookie in Cookie header.",
+													Optional: true,
+												},
+												"overwrite": schema.BoolAttribute{
+													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+													Optional: true,
+												},
+												"value": schema.StringAttribute{
+													MarkdownDescription: "Value. Value of the Cookie header.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"add_httponly": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"add_partitioned": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"add_secure": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_domain": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_expiry": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_httponly": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_max_age": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_partitioned": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_path": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_samesite": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_secure": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"ignore_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"samesite_lax": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"samesite_none": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"samesite_strict": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"secret_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 									"response_headers_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"append": schema.BoolAttribute{
+													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+													Optional: true,
+												},
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. Name of the HTTP header.",
+													Optional: true,
+												},
+												"value": schema.StringAttribute{
+													MarkdownDescription: "Value. Value of the HTTP header.",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"secret_value": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -337,14 +933,171 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									"tls_certificates": schema.ListNestedBlock{
 										MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"certificate_url": schema.StringAttribute{
+													MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
+													Optional: true,
+												},
+												"description": schema.StringAttribute{
+													MarkdownDescription: "Description. Description for the certificate",
+													Optional: true,
+												},
+											},
+											Blocks: map[string]schema.Block{
+												"custom_hash_algorithms": schema.SingleNestedBlock{
+													MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+													Attributes: map[string]schema.Attribute{
+														"hash_algorithms": schema.ListAttribute{
+															MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+															Optional: true,
+															ElementType: types.StringType,
+														},
+													},
+												},
+												"disable_ocsp_stapling": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+												"private_key": schema.SingleNestedBlock{
+													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+													Attributes: map[string]schema.Attribute{
+													},
+													Blocks: map[string]schema.Block{
+														"blindfold_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+															Attributes: map[string]schema.Attribute{
+																"decryption_provider": schema.StringAttribute{
+																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	Optional: true,
+																},
+																"location": schema.StringAttribute{
+																	MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																	Optional: true,
+																},
+																"store_provider": schema.StringAttribute{
+																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+															},
+														},
+														"clear_secret_info": schema.SingleNestedBlock{
+															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															Attributes: map[string]schema.Attribute{
+																"provider_ref": schema.StringAttribute{
+																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																	Optional: true,
+																},
+																"url": schema.StringAttribute{
+																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+												"use_system_defaults": schema.SingleNestedBlock{
+													MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+												},
+											},
 										},
 									},
 									"tls_config": schema.SingleNestedBlock{
 										MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+										Attributes: map[string]schema.Attribute{
+										},
+										Blocks: map[string]schema.Block{
+											"custom_security": schema.SingleNestedBlock{
+												MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+												Attributes: map[string]schema.Attribute{
+													"cipher_suites": schema.ListAttribute{
+														MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
+														Optional: true,
+														ElementType: types.StringType,
+													},
+													"max_version": schema.StringAttribute{
+														MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+														Optional: true,
+													},
+													"min_version": schema.StringAttribute{
+														MarkdownDescription: "TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+														Optional: true,
+													},
+												},
+											},
+											"default_security": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"low_security": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"medium_security": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+										},
 									},
 									"use_mtls": schema.SingleNestedBlock{
 										MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+										Attributes: map[string]schema.Attribute{
+											"client_certificate_optional": schema.BoolAttribute{
+												MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
+												Optional: true,
+											},
+											"trusted_ca_url": schema.StringAttribute{
+												MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+												Optional: true,
+											},
+										},
+										Blocks: map[string]schema.Block{
+											"crl": schema.SingleNestedBlock{
+												MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+												},
+											},
+											"no_crl": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"trusted_ca": schema.SingleNestedBlock{
+												MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														Optional: true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														Optional: true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														Optional: true,
+													},
+												},
+											},
+											"xfcc_disabled": schema.SingleNestedBlock{
+												MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+											},
+											"xfcc_options": schema.SingleNestedBlock{
+												MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+												Attributes: map[string]schema.Attribute{
+													"xfcc_header_elements": schema.ListAttribute{
+														MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+														Optional: true,
+														ElementType: types.StringType,
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -471,6 +1224,40 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Blocks: map[string]schema.Block{
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"blindfold_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													Attributes: map[string]schema.Attribute{
+														"decryption_provider": schema.StringAttribute{
+															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															Optional: true,
+														},
+														"location": schema.StringAttribute{
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															Optional: true,
+														},
+														"store_provider": schema.StringAttribute{
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+													},
+												},
+												"clear_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													Attributes: map[string]schema.Attribute{
+														"provider_ref": schema.StringAttribute{
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+														"url": schema.StringAttribute{
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -495,6 +1282,40 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Blocks: map[string]schema.Block{
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"blindfold_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													Attributes: map[string]schema.Attribute{
+														"decryption_provider": schema.StringAttribute{
+															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															Optional: true,
+														},
+														"location": schema.StringAttribute{
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															Optional: true,
+														},
+														"store_provider": schema.StringAttribute{
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+													},
+												},
+												"clear_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													Attributes: map[string]schema.Attribute{
+														"provider_ref": schema.StringAttribute{
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+														"url": schema.StringAttribute{
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -580,6 +1401,40 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										},
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"blindfold_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													Attributes: map[string]schema.Attribute{
+														"decryption_provider": schema.StringAttribute{
+															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															Optional: true,
+														},
+														"location": schema.StringAttribute{
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															Optional: true,
+														},
+														"store_provider": schema.StringAttribute{
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+													},
+												},
+												"clear_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													Attributes: map[string]schema.Attribute{
+														"provider_ref": schema.StringAttribute{
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+														"url": schema.StringAttribute{
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -604,6 +1459,40 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Blocks: map[string]schema.Block{
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											Attributes: map[string]schema.Attribute{
+											},
+											Blocks: map[string]schema.Block{
+												"blindfold_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													Attributes: map[string]schema.Attribute{
+														"decryption_provider": schema.StringAttribute{
+															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															Optional: true,
+														},
+														"location": schema.StringAttribute{
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															Optional: true,
+														},
+														"store_provider": schema.StringAttribute{
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+													},
+												},
+												"clear_secret_info": schema.SingleNestedBlock{
+													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													Attributes: map[string]schema.Attribute{
+														"provider_ref": schema.StringAttribute{
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															Optional: true,
+														},
+														"url": schema.StringAttribute{
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															Optional: true,
+														},
+													},
+												},
+											},
 										},
 									},
 								},
@@ -655,6 +1544,20 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -672,6 +1575,20 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Blocks: map[string]schema.Block{
 										"virtual_site": schema.SingleNestedBlock{
 											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -707,7 +1624,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
 								Attributes: map[string]schema.Attribute{
 									"hash_algorithms": schema.ListAttribute{
-										MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used.",
+										MarkdownDescription: "Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 										Optional: true,
 										ElementType: types.StringType,
 									},
@@ -723,9 +1640,33 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										Attributes: map[string]schema.Attribute{
+											"decryption_provider": schema.StringAttribute{
+												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+												Optional: true,
+											},
+											"location": schema.StringAttribute{
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												Optional: true,
+											},
+											"store_provider": schema.StringAttribute{
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												Optional: true,
+											},
+										},
 									},
 									"clear_secret_info": schema.SingleNestedBlock{
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+										Attributes: map[string]schema.Attribute{
+											"provider_ref": schema.StringAttribute{
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												Optional: true,
+											},
+											"url": schema.StringAttribute{
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												Optional: true,
+											},
+										},
 									},
 								},
 							},
@@ -753,6 +1694,20 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										},
 										"domain_match": schema.SingleNestedBlock{
 											MarkdownDescription: "Domains. Domains names",
+											Attributes: map[string]schema.Attribute{
+												"exact_value": schema.StringAttribute{
+													MarkdownDescription: "Exact Value. Exact domain name.",
+													Optional: true,
+												},
+												"regex_value": schema.StringAttribute{
+													MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+													Optional: true,
+												},
+												"suffix_value": schema.StringAttribute{
+													MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+													Optional: true,
+												},
+											},
 										},
 										"enable_interception": schema.SingleNestedBlock{
 											MarkdownDescription: "Empty. This can be used for messages where no values are needed",

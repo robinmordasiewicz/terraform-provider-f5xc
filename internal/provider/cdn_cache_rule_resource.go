@@ -179,22 +179,211 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 											"cache_headers": schema.ListNestedBlock{
 												MarkdownDescription: "Cache Headers. Configure cache rule headers to match the criteria",
 												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{},
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The http scheme used: http or https - USER_AGENT: User Agent The user agent string of the user agent. Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`. Defaults to `PROXY_HOST`.",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"operator": schema.SingleNestedBlock{
+															MarkdownDescription: "Operator.",
+															Attributes: map[string]schema.Attribute{
+																"contains": schema.StringAttribute{
+																	MarkdownDescription: "Contains. Field must contain",
+																	Optional: true,
+																},
+																"does_not_contain": schema.StringAttribute{
+																	MarkdownDescription: "Does Not Contain. Field must not contain",
+																	Optional: true,
+																},
+																"does_not_end_with": schema.StringAttribute{
+																	MarkdownDescription: "Does Not End With. Field must not end with",
+																	Optional: true,
+																},
+																"does_not_equal": schema.StringAttribute{
+																	MarkdownDescription: "Does Not Equal. Field must not equal",
+																	Optional: true,
+																},
+																"does_not_start_with": schema.StringAttribute{
+																	MarkdownDescription: "Does Not Start With. Field must not start with",
+																	Optional: true,
+																},
+																"endswith": schema.StringAttribute{
+																	MarkdownDescription: "Ends With. Field must end with",
+																	Optional: true,
+																},
+																"equals": schema.StringAttribute{
+																	MarkdownDescription: "Equals. Field must exactly match",
+																	Optional: true,
+																},
+																"match_regex": schema.StringAttribute{
+																	MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression",
+																	Optional: true,
+																},
+																"startswith": schema.StringAttribute{
+																	MarkdownDescription: "Starts With. Field must start with",
+																	Optional: true,
+																},
+															},
+														},
+													},
 												},
 											},
 											"cookie_matcher": schema.ListNestedBlock{
 												MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
 												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{},
+													Attributes: map[string]schema.Attribute{
+														"name": schema.StringAttribute{
+															MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"operator": schema.SingleNestedBlock{
+															MarkdownDescription: "Operator.",
+															Attributes: map[string]schema.Attribute{
+																"contains": schema.StringAttribute{
+																	MarkdownDescription: "Contains. Field must contain",
+																	Optional: true,
+																},
+																"does_not_contain": schema.StringAttribute{
+																	MarkdownDescription: "Does Not Contain. Field must not contain",
+																	Optional: true,
+																},
+																"does_not_end_with": schema.StringAttribute{
+																	MarkdownDescription: "Does Not End With. Field must not end with",
+																	Optional: true,
+																},
+																"does_not_equal": schema.StringAttribute{
+																	MarkdownDescription: "Does Not Equal. Field must not equal",
+																	Optional: true,
+																},
+																"does_not_start_with": schema.StringAttribute{
+																	MarkdownDescription: "Does Not Start With. Field must not start with",
+																	Optional: true,
+																},
+																"endswith": schema.StringAttribute{
+																	MarkdownDescription: "Ends With. Field must end with",
+																	Optional: true,
+																},
+																"equals": schema.StringAttribute{
+																	MarkdownDescription: "Equals. Field must exactly match",
+																	Optional: true,
+																},
+																"match_regex": schema.StringAttribute{
+																	MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression",
+																	Optional: true,
+																},
+																"startswith": schema.StringAttribute{
+																	MarkdownDescription: "Starts With. Field must start with",
+																	Optional: true,
+																},
+															},
+														},
+													},
 												},
 											},
 											"path_match": schema.SingleNestedBlock{
 												MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+												Attributes: map[string]schema.Attribute{
+												},
+												Blocks: map[string]schema.Block{
+													"operator": schema.SingleNestedBlock{
+														MarkdownDescription: "Operator.",
+														Attributes: map[string]schema.Attribute{
+															"contains": schema.StringAttribute{
+																MarkdownDescription: "Contains. Field must contain",
+																Optional: true,
+															},
+															"does_not_contain": schema.StringAttribute{
+																MarkdownDescription: "Does Not Contain. Field must not contain",
+																Optional: true,
+															},
+															"does_not_end_with": schema.StringAttribute{
+																MarkdownDescription: "Does Not End With. Field must not end with",
+																Optional: true,
+															},
+															"does_not_equal": schema.StringAttribute{
+																MarkdownDescription: "Does Not Equal. Field must not equal",
+																Optional: true,
+															},
+															"does_not_start_with": schema.StringAttribute{
+																MarkdownDescription: "Does Not Start With. Field must not start with",
+																Optional: true,
+															},
+															"endswith": schema.StringAttribute{
+																MarkdownDescription: "Ends With. Field must end with",
+																Optional: true,
+															},
+															"equals": schema.StringAttribute{
+																MarkdownDescription: "Equals. Field must exactly match",
+																Optional: true,
+															},
+															"match_regex": schema.StringAttribute{
+																MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression",
+																Optional: true,
+															},
+															"startswith": schema.StringAttribute{
+																MarkdownDescription: "Starts With. Field must start with",
+																Optional: true,
+															},
+														},
+													},
+												},
 											},
 											"query_parameters": schema.ListNestedBlock{
 												MarkdownDescription: "Query Parameters. List of (key, value) query parameters",
 												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{},
+													Attributes: map[string]schema.Attribute{
+														"key": schema.StringAttribute{
+															MarkdownDescription: "Key. Query parameter key In the above example, assignee_username is the key",
+															Optional: true,
+														},
+													},
+													Blocks: map[string]schema.Block{
+														"operator": schema.SingleNestedBlock{
+															MarkdownDescription: "Operator.",
+															Attributes: map[string]schema.Attribute{
+																"contains": schema.StringAttribute{
+																	MarkdownDescription: "Contains. Field must contain",
+																	Optional: true,
+																},
+																"does_not_contain": schema.StringAttribute{
+																	MarkdownDescription: "Does Not Contain. Field must not contain",
+																	Optional: true,
+																},
+																"does_not_end_with": schema.StringAttribute{
+																	MarkdownDescription: "Does Not End With. Field must not end with",
+																	Optional: true,
+																},
+																"does_not_equal": schema.StringAttribute{
+																	MarkdownDescription: "Does Not Equal. Field must not equal",
+																	Optional: true,
+																},
+																"does_not_start_with": schema.StringAttribute{
+																	MarkdownDescription: "Does Not Start With. Field must not start with",
+																	Optional: true,
+																},
+																"endswith": schema.StringAttribute{
+																	MarkdownDescription: "Ends With. Field must end with",
+																	Optional: true,
+																},
+																"equals": schema.StringAttribute{
+																	MarkdownDescription: "Equals. Field must exactly match",
+																	Optional: true,
+																},
+																"match_regex": schema.StringAttribute{
+																	MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression",
+																	Optional: true,
+																},
+																"startswith": schema.StringAttribute{
+																	MarkdownDescription: "Starts With. Field must start with",
+																	Optional: true,
+																},
+															},
+														},
+													},
 												},
 											},
 										},

@@ -247,7 +247,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Group Matcher. Select one or more known group names to match the incoming alert",
 							Attributes: map[string]schema.Attribute{
 								"groups": schema.ListAttribute{
-									MarkdownDescription: "Groups. Name of groups to match the alert",
+									MarkdownDescription: "Groups. Name of groups to match the alert. Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`. Defaults to `INFRASTRUCTURE`.",
 									Optional: true,
 									ElementType: types.StringType,
 								},
@@ -298,7 +298,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Severity Matcher. Select one or more severity levels to match the incoming alert",
 							Attributes: map[string]schema.Attribute{
 								"severities": schema.ListAttribute{
-									MarkdownDescription: "Severities. List of severity levels",
+									MarkdownDescription: "Severities. List of severity levels. Possible values are `MINOR`, `MAJOR`, `CRITICAL`. Defaults to `MINOR`.",
 									Optional: true,
 									ElementType: types.StringType,
 								},

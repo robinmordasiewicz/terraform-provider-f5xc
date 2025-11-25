@@ -278,7 +278,20 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 									"gpu_device": schema.ListNestedBlock{
 										MarkdownDescription: "GPU devices. List of GPU devices in server",
 										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{},
+											Attributes: map[string]schema.Attribute{
+												"id": schema.StringAttribute{
+													MarkdownDescription: "GPU ID. GPU ID",
+													Optional: true,
+												},
+												"processes": schema.StringAttribute{
+													MarkdownDescription: "Processes. GPU Processes",
+													Optional: true,
+												},
+												"product_name": schema.StringAttribute{
+													MarkdownDescription: "Product Name. GPU Product Name",
+													Optional: true,
+												},
+											},
 										},
 									},
 								},
@@ -331,11 +344,11 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 											ElementType: types.StringType,
 										},
 										"link_quality": schema.StringAttribute{
-											MarkdownDescription: "Link quality. Link quality determined by VER using different probes Unknown quality Link quality is good Link quality is poor Quality disabled. Possible values are `QUALITY_UNKNOWN`, `QUALITY_GOOD`, `QUALITY_POOR`, `QUALITY_DISABLED`.",
+											MarkdownDescription: "Link quality. Link quality determined by VER using different probes Unknown quality Link quality is good Link quality is poor Quality disabled. Possible values are `QUALITY_UNKNOWN`, `QUALITY_GOOD`, `QUALITY_POOR`, `QUALITY_DISABLED`. Defaults to `QUALITY_UNKNOWN`.",
 											Optional: true,
 										},
 										"link_type": schema.StringAttribute{
-											MarkdownDescription: "Link type. Link type of interface determined operationally Link type unknown Link type ethernet WiFi link of type 802.11ac WiFi link of type 802.11bgn Link type 4G WiFi link Wan link. Possible values are `LINK_TYPE_UNKNOWN`, `LINK_TYPE_ETHERNET`, `LINK_TYPE_WIFI_802_11AC`, `LINK_TYPE_WIFI_802_11BGN`, `LINK_TYPE_4G`, `LINK_TYPE_WIFI`, `LINK_TYPE_WAN`.",
+											MarkdownDescription: "Link type. Link type of interface determined operationally Link type unknown Link type ethernet WiFi link of type 802.11ac WiFi link of type 802.11bgn Link type 4G WiFi link Wan link. Possible values are `LINK_TYPE_UNKNOWN`, `LINK_TYPE_ETHERNET`, `LINK_TYPE_WIFI_802_11AC`, `LINK_TYPE_WIFI_802_11BGN`, `LINK_TYPE_4G`, `LINK_TYPE_WIFI`, `LINK_TYPE_WAN`. Defaults to `LINK_TYPE_UNKNOWN`.",
 											Optional: true,
 										},
 										"mac_address": schema.StringAttribute{
@@ -507,7 +520,7 @@ func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRe
 											Optional: true,
 										},
 										"usb_type": schema.StringAttribute{
-											MarkdownDescription: "USB Type. Type of USB device Unknown USB device type Internal USB present in Certified HW USB device present during node registration USB device that can be matched by USB rules. Possible values are `UNKNOWN_USB`, `INTERNAL`, `REGISTERED`, `CONFIGURABLE`.",
+											MarkdownDescription: "USB Type. Type of USB device Unknown USB device type Internal USB present in Certified HW USB device present during node registration USB device that can be matched by USB rules. Possible values are `UNKNOWN_USB`, `INTERNAL`, `REGISTERED`, `CONFIGURABLE`. Defaults to `UNKNOWN_USB`.",
 											Optional: true,
 										},
 										"vendor_name": schema.StringAttribute{

@@ -48,6 +48,8 @@ type EndpointResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	DNSName types.String `tfsdk:"dns_name"`
 	HealthCheckPort types.Int64 `tfsdk:"health_check_port"`
 	IP types.String `tfsdk:"ip"`
@@ -88,9 +90,17 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
+			},
+			"description": schema.StringAttribute{
+				MarkdownDescription: "Human readable description for the object.",
+				Optional: true,
+			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
 			},
 			"dns_name": schema.StringAttribute{
 				MarkdownDescription: "[OneOf: dns_name, dns_name_advanced, ip, service_info] Endpoint Name. Endpoint's ip address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
@@ -105,7 +115,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

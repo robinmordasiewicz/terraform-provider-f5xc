@@ -49,6 +49,7 @@ type IruleResourceModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Annotations types.Map `tfsdk:"annotations"`
 	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
 	Irule types.String `tfsdk:"irule"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
@@ -85,7 +86,7 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"annotations": schema.MapAttribute{
-				MarkdownDescription: "Annotations to apply to this resource.",
+				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional: true,
 				ElementType: types.StringType,
 			},
@@ -93,12 +94,16 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "Description for iRule. Specify Description for iRule",
 				Optional: true,
 			},
+			"disable": schema.BoolAttribute{
+				MarkdownDescription: "A value of true will administratively disable the object.",
+				Optional: true,
+			},
 			"irule": schema.StringAttribute{
 				MarkdownDescription: "irule. x-example: 'when DNS_REQUEST { if {([string tolower [DNS::question name]] equals 'www.internal.example.f5.com')} DNS::drop} irule content",
 				Optional: true,
 			},
 			"labels": schema.MapAttribute{
-				MarkdownDescription: "Labels to apply to this resource.",
+				MarkdownDescription: "Labels is a user defined key value map that can be attached to resources for organization and filtering.",
 				Optional: true,
 				ElementType: types.StringType,
 			},

@@ -6,8 +6,10 @@ on:
   push:
     branches:
       - main
+    # Note: 'docs/**' intentionally NOT ignored - when docs.yml's auto-PR merges,
+    # we want a new release to include the regenerated documentation.
+    # Manual docs commits are blocked by constitution check (CLAUDE.md Rule 1).
     paths-ignore:
-      - 'docs/**'
       - '*.md'
       - '.github/workflows/docs.yml'
 

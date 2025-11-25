@@ -42,11 +42,13 @@ resource "f5xc_irule" "example" {
 
 `namespace` - (Required) Namespace where the Irule will be created (`String`).
 
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
 
 `description` - (Optional) Description for iRule. Specify Description for iRule (`String`).
 
-`labels` - (Optional) Labels to apply to this resource (`Map`).
+`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+
+`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
 
 ### Spec Argument Reference
 

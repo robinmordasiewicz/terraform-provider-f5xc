@@ -56,9 +56,13 @@ resource "f5xc_policy_based_routing" "example" {
 
 `namespace` - (Required) Namespace where the PolicyBasedRouting will be created (`String`).
 
-`annotations` - (Optional) Annotations to apply to this resource (`Map`).
+`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
 
-`labels` - (Optional) Labels to apply to this resource (`Map`).
+`description` - (Optional) Human readable description for the object (`String`).
+
+`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+
+`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
 
 ### Spec Argument Reference
 

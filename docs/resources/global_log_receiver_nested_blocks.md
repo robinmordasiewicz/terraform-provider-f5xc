@@ -88,7 +88,7 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 <a id="aws-cloud-watch-receiver"></a>
 
-### AWS Cloud Watch Receiver
+**AWS Cloud Watch Receiver**
 
 `aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](#aws-cloud-watch-receiver-aws-cred) below.
 
@@ -102,9 +102,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `stream_name` - (Optional) Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time (`String`).
 
+---
+
 <a id="aws-cloud-watch-receiver-aws-cred"></a>
 
-### AWS Cloud Watch Receiver AWS Cred
+**AWS Cloud Watch Receiver AWS Cred**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -112,9 +114,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="aws-cloud-watch-receiver-batch"></a>
 
-### AWS Cloud Watch Receiver Batch
+**AWS Cloud Watch Receiver Batch**
 
 `max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
@@ -128,9 +132,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="aws-cloud-watch-receiver-compression"></a>
 
-### AWS Cloud Watch Receiver Compression
+**AWS Cloud Watch Receiver Compression**
 
 `compression_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -138,9 +144,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `compression_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="azure-event-hubs-receiver"></a>
 
-### Azure Event Hubs Receiver
+**Azure Event Hubs Receiver**
 
 `connection_string` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Connection String](#azure-event-hubs-receiver-connection-string) below.
 
@@ -148,17 +156,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `namespace` - (Optional) Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored (`String`).
 
+---
+
 <a id="azure-event-hubs-receiver-connection-string"></a>
 
-### Azure Event Hubs Receiver Connection String
+**Azure Event Hubs Receiver Connection String**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#azure-event-hubs-receiver-connection-string-clear-secret-info) below.
 
+---
+
 <a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info"></a>
 
-### Azure Event Hubs Receiver Connection String Blindfold Secret Info
+**Azure Event Hubs Receiver Connection String Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -166,17 +178,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="azure-event-hubs-receiver-connection-string-clear-secret-info"></a>
 
-### Azure Event Hubs Receiver Connection String Clear Secret Info
+**Azure Event Hubs Receiver Connection String Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="azure-receiver"></a>
 
-### Azure Receiver
+**Azure Receiver**
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#azure-receiver-batch) below.
 
@@ -188,9 +204,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `filename_options` - (Optional) Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file. See [Filename Options](#azure-receiver-filename-options) below.
 
+---
+
 <a id="azure-receiver-batch"></a>
 
-### Azure Receiver Batch
+**Azure Receiver Batch**
 
 `max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
@@ -204,9 +222,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="azure-receiver-compression"></a>
 
-### Azure Receiver Compression
+**Azure Receiver Compression**
 
 `compression_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -214,17 +234,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `compression_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="azure-receiver-connection-string"></a>
 
-### Azure Receiver Connection String
+**Azure Receiver Connection String**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#azure-receiver-connection-string-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#azure-receiver-connection-string-clear-secret-info) below.
 
+---
+
 <a id="azure-receiver-connection-string-blindfold-secret-info"></a>
 
-### Azure Receiver Connection String Blindfold Secret Info
+**Azure Receiver Connection String Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -232,17 +256,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="azure-receiver-connection-string-clear-secret-info"></a>
 
-### Azure Receiver Connection String Clear Secret Info
+**Azure Receiver Connection String Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="azure-receiver-filename-options"></a>
 
-### Azure Receiver Filename Options
+**Azure Receiver Filename Options**
 
 `custom_folder` - (Optional) Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i` (`String`).
 
@@ -250,9 +278,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `no_folder` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="datadog-receiver"></a>
 
-### Datadog Receiver
+**Datadog Receiver**
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#datadog-receiver-batch) below.
 
@@ -268,9 +298,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use TLS](#datadog-receiver-use-tls) below.
 
+---
+
 <a id="datadog-receiver-batch"></a>
 
-### Datadog Receiver Batch
+**Datadog Receiver Batch**
 
 `max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
@@ -284,9 +316,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="datadog-receiver-compression"></a>
 
-### Datadog Receiver Compression
+**Datadog Receiver Compression**
 
 `compression_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -294,17 +328,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `compression_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="datadog-receiver-datadog-api-key"></a>
 
-### Datadog Receiver Datadog API Key
+**Datadog Receiver Datadog API Key**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#datadog-receiver-datadog-api-key-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#datadog-receiver-datadog-api-key-clear-secret-info) below.
 
+---
+
 <a id="datadog-receiver-datadog-api-key-blindfold-secret-info"></a>
 
-### Datadog Receiver Datadog API Key Blindfold Secret Info
+**Datadog Receiver Datadog API Key Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -312,17 +350,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="datadog-receiver-datadog-api-key-clear-secret-info"></a>
 
-### Datadog Receiver Datadog API Key Clear Secret Info
+**Datadog Receiver Datadog API Key Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="datadog-receiver-use-tls"></a>
 
-### Datadog Receiver Use TLS
+**Datadog Receiver Use TLS**
 
 `disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -340,17 +382,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
+---
+
 <a id="datadog-receiver-use-tls-mtls-enable"></a>
 
-### Datadog Receiver Use TLS mTLS Enable
+**Datadog Receiver Use TLS mTLS Enable**
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
+---
+
 <a id="gcp-bucket-receiver"></a>
 
-### GCP Bucket Receiver
+**GCP Bucket Receiver**
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#gcp-bucket-receiver-batch) below.
 
@@ -362,9 +408,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `gcp_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [GCP Cred](#gcp-bucket-receiver-gcp-cred) below.
 
+---
+
 <a id="gcp-bucket-receiver-batch"></a>
 
-### GCP Bucket Receiver Batch
+**GCP Bucket Receiver Batch**
 
 `max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
@@ -378,9 +426,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="gcp-bucket-receiver-compression"></a>
 
-### GCP Bucket Receiver Compression
+**GCP Bucket Receiver Compression**
 
 `compression_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -388,9 +438,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `compression_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="gcp-bucket-receiver-filename-options"></a>
 
-### GCP Bucket Receiver Filename Options
+**GCP Bucket Receiver Filename Options**
 
 `custom_folder` - (Optional) Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i` (`String`).
 
@@ -398,9 +450,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `no_folder` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="gcp-bucket-receiver-gcp-cred"></a>
 
-### GCP Bucket Receiver GCP Cred
+**GCP Bucket Receiver GCP Cred**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -408,9 +462,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="http-receiver"></a>
 
-### HTTP Receiver
+**HTTP Receiver**
 
 `auth_basic` - (Optional) Basic Authentication Credentials. Authentication parameters to access HTPP Log Receiver Endpoint. See [Auth Basic](#http-receiver-auth-basic) below.
 
@@ -428,39 +484,49 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use TLS](#http-receiver-use-tls) below.
 
+---
+
 <a id="http-receiver-auth-basic"></a>
 
-### HTTP Receiver Auth Basic
+**HTTP Receiver Auth Basic**
 
 `password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#http-receiver-auth-basic-password) below.
 
 `user_name` - (Optional) User Name. HTTP Basic Auth User Name (`String`).
 
+---
+
 <a id="http-receiver-auth-basic-password"></a>
 
-### HTTP Receiver Auth Basic Password
+**HTTP Receiver Auth Basic Password**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
+
+---
 
 <a id="http-receiver-auth-token"></a>
 
-### HTTP Receiver Auth Token
+**HTTP Receiver Auth Token**
 
 `token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Token](#http-receiver-auth-token-token) below.
 
+---
+
 <a id="http-receiver-auth-token-token"></a>
 
-### HTTP Receiver Auth Token Token
+**HTTP Receiver Auth Token Token**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management (`Block`).
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted (`Block`).
 
+---
+
 <a id="http-receiver-batch"></a>
 
-### HTTP Receiver Batch
+**HTTP Receiver Batch**
 
 `max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
@@ -474,9 +540,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="http-receiver-compression"></a>
 
-### HTTP Receiver Compression
+**HTTP Receiver Compression**
 
 `compression_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -484,9 +552,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `compression_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="http-receiver-use-tls"></a>
 
-### HTTP Receiver Use TLS
+**HTTP Receiver Use TLS**
 
 `disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -504,17 +574,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
+---
+
 <a id="http-receiver-use-tls-mtls-enable"></a>
 
-### HTTP Receiver Use TLS mTLS Enable
+**HTTP Receiver Use TLS mTLS Enable**
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
+---
+
 <a id="kafka-receiver"></a>
 
-### Kafka Receiver
+**Kafka Receiver**
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#kafka-receiver-batch) below.
 
@@ -528,9 +602,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use TLS](#kafka-receiver-use-tls) below.
 
+---
+
 <a id="kafka-receiver-batch"></a>
 
-### Kafka Receiver Batch
+**Kafka Receiver Batch**
 
 `max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
@@ -544,9 +620,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="kafka-receiver-compression"></a>
 
-### Kafka Receiver Compression
+**Kafka Receiver Compression**
 
 `compression_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -554,9 +632,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `compression_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="kafka-receiver-use-tls"></a>
 
-### Kafka Receiver Use TLS
+**Kafka Receiver Use TLS**
 
 `disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -574,17 +654,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
+---
+
 <a id="kafka-receiver-use-tls-mtls-enable"></a>
 
-### Kafka Receiver Use TLS mTLS Enable
+**Kafka Receiver Use TLS mTLS Enable**
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
+---
+
 <a id="new-relic-receiver"></a>
 
-### New Relic Receiver
+**New Relic Receiver**
 
 `api_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [API Key](#new-relic-receiver-api-key) below.
 
@@ -592,17 +676,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `us` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="new-relic-receiver-api-key"></a>
 
-### New Relic Receiver API Key
+**New Relic Receiver API Key**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#new-relic-receiver-api-key-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#new-relic-receiver-api-key-clear-secret-info) below.
 
+---
+
 <a id="new-relic-receiver-api-key-blindfold-secret-info"></a>
 
-### New Relic Receiver API Key Blindfold Secret Info
+**New Relic Receiver API Key Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -610,23 +698,29 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="new-relic-receiver-api-key-clear-secret-info"></a>
 
-### New Relic Receiver API Key Clear Secret Info
+**New Relic Receiver API Key Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="ns-list"></a>
 
-### Ns List
+**Ns List**
 
 `namespaces` - (Optional) namespaces. List of namespaces to stream logs for (`List`).
 
+---
+
 <a id="qradar-receiver"></a>
 
-### Qradar Receiver
+**Qradar Receiver**
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#qradar-receiver-batch) below.
 
@@ -638,9 +732,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use TLS](#qradar-receiver-use-tls) below.
 
+---
+
 <a id="qradar-receiver-batch"></a>
 
-### Qradar Receiver Batch
+**Qradar Receiver Batch**
 
 `max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
@@ -654,9 +750,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="qradar-receiver-compression"></a>
 
-### Qradar Receiver Compression
+**Qradar Receiver Compression**
 
 `compression_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -664,9 +762,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `compression_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="qradar-receiver-use-tls"></a>
 
-### Qradar Receiver Use TLS
+**Qradar Receiver Use TLS**
 
 `disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -684,17 +784,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
+---
+
 <a id="qradar-receiver-use-tls-mtls-enable"></a>
 
-### Qradar Receiver Use TLS mTLS Enable
+**Qradar Receiver Use TLS mTLS Enable**
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
+---
+
 <a id="s3-receiver"></a>
 
-### S3 Receiver
+**S3 Receiver**
 
 `aws_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [AWS Cred](#s3-receiver-aws-cred) below.
 
@@ -708,9 +812,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `filename_options` - (Optional) Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file. See [Filename Options](#s3-receiver-filename-options) below.
 
+---
+
 <a id="s3-receiver-aws-cred"></a>
 
-### S3 Receiver AWS Cred
+**S3 Receiver AWS Cred**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -718,9 +824,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="s3-receiver-batch"></a>
 
-### S3 Receiver Batch
+**S3 Receiver Batch**
 
 `max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
@@ -734,9 +842,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="s3-receiver-compression"></a>
 
-### S3 Receiver Compression
+**S3 Receiver Compression**
 
 `compression_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -744,9 +854,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `compression_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="s3-receiver-filename-options"></a>
 
-### S3 Receiver Filename Options
+**S3 Receiver Filename Options**
 
 `custom_folder` - (Optional) Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i` (`String`).
 
@@ -754,9 +866,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `no_folder` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="splunk-receiver"></a>
 
-### Splunk Receiver
+**Splunk Receiver**
 
 `batch` - (Optional) Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint. See [Batch](#splunk-receiver-batch) below.
 
@@ -770,9 +884,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `use_tls` - (Optional) TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint. See [Use TLS](#splunk-receiver-use-tls) below.
 
+---
+
 <a id="splunk-receiver-batch"></a>
 
-### Splunk Receiver Batch
+**Splunk Receiver Batch**
 
 `max_bytes` - (Optional) Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes (`Number`).
 
@@ -786,9 +902,11 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `timeout_seconds_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="splunk-receiver-compression"></a>
 
-### Splunk Receiver Compression
+**Splunk Receiver Compression**
 
 `compression_default` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -796,17 +914,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `compression_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="splunk-receiver-splunk-hec-token"></a>
 
-### Splunk Receiver Splunk Hec Token
+**Splunk Receiver Splunk Hec Token**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#splunk-receiver-splunk-hec-token-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#splunk-receiver-splunk-hec-token-clear-secret-info) below.
 
+---
+
 <a id="splunk-receiver-splunk-hec-token-blindfold-secret-info"></a>
 
-### Splunk Receiver Splunk Hec Token Blindfold Secret Info
+**Splunk Receiver Splunk Hec Token Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -814,17 +936,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="splunk-receiver-splunk-hec-token-clear-secret-info"></a>
 
-### Splunk Receiver Splunk Hec Token Clear Secret Info
+**Splunk Receiver Splunk Hec Token Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="splunk-receiver-use-tls"></a>
 
-### Splunk Receiver Use TLS
+**Splunk Receiver Use TLS**
 
 `disable_verify_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -842,31 +968,39 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `trusted_ca_url` - (Optional) Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers (`String`).
 
+---
+
 <a id="splunk-receiver-use-tls-mtls-enable"></a>
 
-### Splunk Receiver Use TLS mTLS Enable
+**Splunk Receiver Use TLS mTLS Enable**
 
 `certificate` - (Optional) Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain (`String`).
 
 `key_url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
+---
+
 <a id="sumo-logic-receiver"></a>
 
-### Sumo Logic Receiver
+**Sumo Logic Receiver**
 
 `url` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [URL](#sumo-logic-receiver-url) below.
 
+---
+
 <a id="sumo-logic-receiver-url"></a>
 
-### Sumo Logic Receiver URL
+**Sumo Logic Receiver URL**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#sumo-logic-receiver-url-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#sumo-logic-receiver-url-clear-secret-info) below.
 
+---
+
 <a id="sumo-logic-receiver-url-blindfold-secret-info"></a>
 
-### Sumo Logic Receiver URL Blindfold Secret Info
+**Sumo Logic Receiver URL Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -874,17 +1008,21 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="sumo-logic-receiver-url-clear-secret-info"></a>
 
-### Sumo Logic Receiver URL Clear Secret Info
+**Sumo Logic Receiver URL Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -893,3 +1031,5 @@ For the main resource documentation, see [f5xc_global_log_receiver](./resources/
 `read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+
+---

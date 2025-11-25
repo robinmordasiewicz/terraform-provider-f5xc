@@ -64,31 +64,31 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 > **Note:** One of the arguments from this list "active_enhanced_firewall_policies, no_network_policy" must be set.
 
-`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
+`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](./securemesh_site_v2_nested_blocks#active-enhanced-firewall-policies) for details.
 
 `no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "active_forward_proxy_policies, no_forward_proxy" must be set.
 
-`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
+`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](./securemesh_site_v2_nested_blocks#active-forward-proxy-policies) for details.
 
 `no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`admin_user_credentials` - (Optional) Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access. See [Admin User Credentials](#admin-user-credentials) below for details.
+`admin_user_credentials` - (Optional) Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access. See [Admin User Credentials](./securemesh_site_v2_nested_blocks#admin-user-credentials) for details.
 
 > **Note:** One of the arguments from this list "aws, azure, baremetal, equinix, gcp, kvm, nutanix, oci, openstack, vmware" must be set.
 
-`aws` - (Optional) AWS Provider Type. AWS Provider Type. See [AWS](#aws) below for details.
+`aws` - (Optional) AWS Provider Type. AWS Provider Type. See [AWS](./securemesh_site_v2_nested_blocks#aws) for details.
 
-`azure` - (Optional) Azure Provider Type. Azure Provider Type. See [Azure](#azure) below for details.
+`azure` - (Optional) Azure Provider Type. Azure Provider Type. See [Azure](./securemesh_site_v2_nested_blocks#azure) for details.
 
-`baremetal` - (Optional) Baremetal Provider Type. Baremetal Provider Type. See [Baremetal](#baremetal) below for details.
+`baremetal` - (Optional) Baremetal Provider Type. Baremetal Provider Type. See [Baremetal](./securemesh_site_v2_nested_blocks#baremetal) for details.
 
-`equinix` - (Optional) Equinix Provider Type. Equinix Provider Type. See [Equinix](#equinix) below for details.
+`equinix` - (Optional) Equinix Provider Type. Equinix Provider Type. See [Equinix](./securemesh_site_v2_nested_blocks#equinix) for details.
 
-`gcp` - (Optional) GCP Provider Type. GCP Provider Type. See [GCP](#gcp) below for details.
+`gcp` - (Optional) GCP Provider Type. GCP Provider Type. See [GCP](./securemesh_site_v2_nested_blocks#gcp) for details.
 
-`kvm` - (Optional) KVM Provider Type. KVM Provider Type. See [Kvm](#kvm) below for details.
+`kvm` - (Optional) KVM Provider Type. KVM Provider Type. See [Kvm](./securemesh_site_v2_nested_blocks#kvm) for details.
 
 `nutanix` - (Optional) Nutanix Provider Type. Nutanix Provider Type (`Block`).
 
@@ -102,29 +102,29 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](./securemesh_site_v2_nested_blocks#blocked-services) for details.
 
 > **Note:** One of the arguments from this list "custom_proxy, f5_proxy" must be set.
 
-`custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy. See [Custom Proxy](#custom-proxy) below for details.
+`custom_proxy` - (Optional) Custom Enterprise Proxy. Custom Enterprise Proxy. See [Custom Proxy](./securemesh_site_v2_nested_blocks#custom-proxy) for details.
 
 `f5_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "custom_proxy_bypass, no_proxy_bypass" must be set.
 
-`custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy. See [Custom Proxy Bypass](#custom-proxy-bypass) below for details.
+`custom_proxy_bypass` - (Optional) Proxy Bypass. List of domains to bypass the proxy. See [Custom Proxy Bypass](./securemesh_site_v2_nested_blocks#custom-proxy-bypass) for details.
 
 `no_proxy_bypass` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "dc_cluster_group_sli, no_s2s_connectivity_sli" must be set.
 
-`dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Sli](#dc-cluster-group-sli) below for details.
+`dc_cluster_group_sli` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Sli](./securemesh_site_v2_nested_blocks#dc-cluster-group-sli) for details.
 
 `no_s2s_connectivity_sli` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 > **Note:** One of the arguments from this list "dc_cluster_group_slo, no_s2s_connectivity_slo, site_mesh_group_on_slo" must be set.
 
-`dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Slo](#dc-cluster-group-slo) below for details.
+`dc_cluster_group_slo` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group Slo](./securemesh_site_v2_nested_blocks#dc-cluster-group-slo) for details.
 
 `no_s2s_connectivity_slo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -142,7 +142,7 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 `enable_url_categorization` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site. See [DNS NTP Config](#dns-ntp-config) below for details.
+`dns_ntp_config` - (Optional) DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site. See [DNS NTP Config](./securemesh_site_v2_nested_blocks#dns-ntp-config) for details.
 
 `load_balancing` - (Optional) Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality (`Block`).
 

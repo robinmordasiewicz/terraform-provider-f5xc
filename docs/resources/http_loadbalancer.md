@@ -79,7 +79,7 @@ resource "f5xc_http_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "active_service_policies, no_service_policies, service_policies_from_namespace" must be set.
 
-`active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](#active-service-policies) below for details.
+`active_service_policies` - (Optional) Service Policy List. List of service policies. See [Active Service Policies](./http_loadbalancer_nested_blocks#active-service-policies) for details.
 
 `no_service_policies` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -89,15 +89,15 @@ resource "f5xc_http_loadbalancer" "example" {
 
 > **Note:** One of the arguments from this list "advertise_custom, advertise_on_public, advertise_on_public_default_vip, do_not_advertise" must be set.
 
-`advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](#advertise-custom) below for details.
+`advertise_custom` - (Optional) Advertise Custom. This defines a way to advertise a VIP on specific sites. See [Advertise Custom](./http_loadbalancer_nested_blocks#advertise-custom) for details.
 
-`advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](#advertise-on-public) below for details.
+`advertise_on_public` - (Optional) Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available. See [Advertise On Public](./http_loadbalancer_nested_blocks#advertise-on-public) for details.
 
 `advertise_on_public_default_vip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`api_protection_rules` - (Optional) API Protection Rules. API Protection Rules. See [API Protection Rules](#api-protection-rules) below for details.
+`api_protection_rules` - (Optional) API Protection Rules. API Protection Rules. See [API Protection Rules](./http_loadbalancer_nested_blocks#api-protection-rules) for details.
 
 > **Note:** One of the arguments from this list "api_rate_limit, disable_rate_limit, rate_limit" must be set.
 

@@ -76,7 +76,7 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 <a id="aws-parameters"></a>
 
-### AWS Parameters
+**AWS Parameters**
 
 `admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#aws-parameters-admin-password) below.
 
@@ -118,17 +118,21 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `vpc_id` - (Optional) Existing VPC ID. Existing VPC ID (`String`).
 
+---
+
 <a id="aws-parameters-admin-password"></a>
 
-### AWS Parameters Admin Password
+**AWS Parameters Admin Password**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#aws-parameters-admin-password-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#aws-parameters-admin-password-clear-secret-info) below.
 
+---
+
 <a id="aws-parameters-admin-password-blindfold-secret-info"></a>
 
-### AWS Parameters Admin Password Blindfold Secret Info
+**AWS Parameters Admin Password Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -136,17 +140,21 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="aws-parameters-admin-password-clear-secret-info"></a>
 
-### AWS Parameters Admin Password Clear Secret Info
+**AWS Parameters Admin Password Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="aws-parameters-aws-cred"></a>
 
-### AWS Parameters AWS Cred
+**AWS Parameters AWS Cred**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -154,9 +162,11 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="aws-parameters-az-nodes"></a>
 
-### AWS Parameters Az Nodes
+**AWS Parameters Az Nodes**
 
 `aws_az_name` - (Optional) AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region (`String`).
 
@@ -168,41 +178,51 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `workload_subnet` - (Optional) AWS Subnet. Parameters for AWS subnet. See [Workload Subnet](#aws-parameters-az-nodes-workload-subnet) below.
 
+---
+
 <a id="aws-parameters-az-nodes-inside-subnet"></a>
 
-### AWS Parameters Az Nodes Inside Subnet
+**AWS Parameters Az Nodes Inside Subnet**
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
 `subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+
+---
 
 <a id="aws-parameters-az-nodes-outside-subnet"></a>
 
-### AWS Parameters Az Nodes Outside Subnet
+**AWS Parameters Az Nodes Outside Subnet**
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
 `subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
+
+---
 
 <a id="aws-parameters-az-nodes-workload-subnet"></a>
 
-### AWS Parameters Az Nodes Workload Subnet
+**AWS Parameters Az Nodes Workload Subnet**
 
 `existing_subnet_id` - (Optional) Existing Subnet ID. Information about existing subnet ID (`String`).
 
 `subnet_param` - (Optional) New Cloud Subnet Parameters. Parameters for creating a new cloud subnet (`Block`).
 
+---
+
 <a id="aws-parameters-custom-security-group"></a>
 
-### AWS Parameters Custom Security Group
+**AWS Parameters Custom Security Group**
 
 `inside_security_group_id` - (Optional) Inside Security Group ID. Security Group ID to be attached to SLI(Site Local Inside) Interface (`String`).
 
 `outside_security_group_id` - (Optional) Outside Security Group ID. Security Group ID to be attached to SLO(Site Local Outside) Interface (`String`).
 
+---
+
 <a id="aws-parameters-existing-tgw"></a>
 
-### AWS Parameters Existing Tgw
+**AWS Parameters Existing Tgw**
 
 `tgw_asn` - (Optional) Enter TGW ASN. TGW ASN (`Number`).
 
@@ -210,25 +230,31 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `volterra_site_asn` - (Optional) Enter F5XC Site ASN. F5XC Site ASN (`Number`).
 
+---
+
 <a id="aws-parameters-new-tgw"></a>
 
-### AWS Parameters New Tgw
+**AWS Parameters New Tgw**
 
 `system_generated` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `user_assigned` - (Optional) TGW Assigned ASN Type. Information needed when ASNs are assigned by the user. See [User Assigned](#aws-parameters-new-tgw-user-assigned) below.
 
+---
+
 <a id="aws-parameters-new-tgw-user-assigned"></a>
 
-### AWS Parameters New Tgw User Assigned
+**AWS Parameters New Tgw User Assigned**
 
 `tgw_asn` - (Optional) Enter TGW ASN. TGW ASN. Allowed range for 16-bit private ASNs include 64512 to 65534 (`Number`).
 
 `volterra_site_asn` - (Optional) Enter F5XC Site ASN. F5XC Site ASN (`Number`).
 
+---
+
 <a id="aws-parameters-new-vpc"></a>
 
-### AWS Parameters New Vpc
+**AWS Parameters New Vpc**
 
 `autogenerate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -236,21 +262,27 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `primary_ipv4` - (Optional) Primary IPv4 CIDR block. IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block (`String`).
 
+---
+
 <a id="aws-parameters-tgw-cidr"></a>
 
-### AWS Parameters Tgw CIDR
+**AWS Parameters Tgw CIDR**
 
 `ipv4` - (Optional) IPv4 Subnet. IPv4 subnet prefix for this subnet (`String`).
 
+---
+
 <a id="blocked-services"></a>
 
-### Blocked Services
+**Blocked Services**
 
 `blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#blocked-services-blocked-sevice) below.
 
+---
+
 <a id="blocked-services-blocked-sevice"></a>
 
-### Blocked Services Blocked Sevice
+**Blocked Services Blocked Sevice**
 
 `dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -260,25 +292,31 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="coordinates"></a>
 
-### Coordinates
+**Coordinates**
 
 `latitude` - (Optional) Latitude. Latitude of the site location (`Number`).
 
 `longitude` - (Optional) Longitude. longitude of site location (`Number`).
 
+---
+
 <a id="custom-dns"></a>
 
-### Custom DNS
+**Custom DNS**
 
 `inside_nameserver` - (Optional) DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network (`String`).
 
 `outside_nameserver` - (Optional) DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network (`String`).
 
+---
+
 <a id="direct-connect-enabled"></a>
 
-### Direct Connect Enabled
+**Direct Connect Enabled**
 
 `auto_asn` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -288,9 +326,11 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `standard_vifs` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="direct-connect-enabled-hosted-vifs"></a>
 
-### Direct Connect Enabled Hosted Vifs
+**Direct Connect Enabled Hosted Vifs**
 
 `site_registration_over_direct_connect` - (Optional) CloudLink ADN Network Config. See [Site Registration Over Direct Connect](#direct-connect-enabled-hosted-vifs-site-registration-over-direct-connect) below.
 
@@ -298,15 +338,19 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `vif_list` - (Optional) List of Hosted VIF Config. List of Hosted VIF Config. See [Vif List](#direct-connect-enabled-hosted-vifs-vif-list) below.
 
+---
+
 <a id="direct-connect-enabled-hosted-vifs-site-registration-over-direct-connect"></a>
 
-### Direct Connect Enabled Hosted Vifs Site Registration Over Direct Connect
+**Direct Connect Enabled Hosted Vifs Site Registration Over Direct Connect**
 
 `cloudlink_network_name` - (Optional) Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support (`String`).
 
+---
+
 <a id="direct-connect-enabled-hosted-vifs-vif-list"></a>
 
-### Direct Connect Enabled Hosted Vifs Vif List
+**Direct Connect Enabled Hosted Vifs Vif List**
 
 `other_region` - (Optional) Other Region. Other Region (`String`).
 
@@ -314,17 +358,21 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `vif_id` - (Optional) VIF ID. AWS Direct Connect VIF ID that needs to be connected to the site (`String`).
 
+---
+
 <a id="kubernetes-upgrade-drain"></a>
 
-### Kubernetes Upgrade Drain
+**Kubernetes Upgrade Drain**
 
 `disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
+---
+
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
-### Kubernetes Upgrade Drain Enable Upgrade Drain
+**Kubernetes Upgrade Drain Enable Upgrade Drain**
 
 `disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -334,9 +382,11 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="log-receiver"></a>
 
-### Log Receiver
+**Log Receiver**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -344,41 +394,51 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="offline-survivability-mode"></a>
 
-### Offline Survivability Mode
+**Offline Survivability Mode**
 
 `enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="os"></a>
 
-### OS
+**OS**
 
 `default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
 
+---
+
 <a id="performance-enhancement-mode"></a>
 
-### Performance Enhancement Mode
+**Performance Enhancement Mode**
 
 `perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
 `perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
-### Performance Enhancement Mode Perf Mode L3 Enhanced
+**Performance Enhancement Mode Perf Mode L3 Enhanced**
 
 `jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="private-connectivity"></a>
 
-### Private Connectivity
+**Private Connectivity**
 
 `cloud_link` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Link](#private-connectivity-cloud-link) below.
 
@@ -386,9 +446,11 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `outside` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="private-connectivity-cloud-link"></a>
 
-### Private Connectivity Cloud Link
+**Private Connectivity Cloud Link**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -396,17 +458,21 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="sw"></a>
 
-### Sw
+**Sw**
 
 `default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
 
+---
+
 <a id="tgw-security"></a>
 
-### Tgw Security
+**Tgw Security**
 
 `active_east_west_service_policies` - (Optional) Active Service Policies. Active service policies for the east-west proxy. See [Active East West Service Policies](#tgw-security-active-east-west-service-policies) below.
 
@@ -426,63 +492,79 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="tgw-security-active-east-west-service-policies"></a>
 
-### Tgw Security Active East West Service Policies
+**Tgw Security Active East West Service Policies**
 
 `service_policies` - (Optional) Service Policies. A list of references to service_policy objects. See [Service Policies](#tgw-security-active-east-west-service-policies-service-policies) below.
 
+---
+
 <a id="tgw-security-active-east-west-service-policies-service-policies"></a>
 
-### Tgw Security Active East West Service Policies Service Policies
+**Tgw Security Active East West Service Policies Service Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---
 
 <a id="tgw-security-active-enhanced-firewall-policies"></a>
 
-### Tgw Security Active Enhanced Firewall Policies
+**Tgw Security Active Enhanced Firewall Policies**
 
 `enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
+---
+
 <a id="tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
-### Tgw Security Active Enhanced Firewall Policies Enhanced Firewall Policies
+**Tgw Security Active Enhanced Firewall Policies Enhanced Firewall Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---
 
 <a id="tgw-security-active-forward-proxy-policies"></a>
 
-### Tgw Security Active Forward Proxy Policies
+**Tgw Security Active Forward Proxy Policies**
 
 `forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#tgw-security-active-forward-proxy-policies-forward-proxy-policies) below.
 
+---
+
 <a id="tgw-security-active-forward-proxy-policies-forward-proxy-policies"></a>
 
-### Tgw Security Active Forward Proxy Policies Forward Proxy Policies
+**Tgw Security Active Forward Proxy Policies Forward Proxy Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---
 
 <a id="tgw-security-active-network-policies"></a>
 
-### Tgw Security Active Network Policies
+**Tgw Security Active Network Policies**
 
 `network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#tgw-security-active-network-policies-network-policies) below.
 
+---
+
 <a id="tgw-security-active-network-policies-network-policies"></a>
 
-### Tgw Security Active Network Policies Network Policies
+**Tgw Security Active Network Policies Network Policies**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -490,9 +572,11 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -502,9 +586,11 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
+---
+
 <a id="vn-config"></a>
 
-### Vn Config
+**Vn Config**
 
 `allowed_vip_port` - (Optional) Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site. See [Allowed VIP Port](#vn-config-allowed-vip-port) below.
 
@@ -532,9 +618,11 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="vn-config-allowed-vip-port"></a>
 
-### Vn Config Allowed VIP Port
+**Vn Config Allowed VIP Port**
 
 `custom_ports` - (Optional) Custom Ports. List of Custom port. See [Custom Ports](#vn-config-allowed-vip-port-custom-ports) below.
 
@@ -546,15 +634,19 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `use_https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="vn-config-allowed-vip-port-custom-ports"></a>
 
-### Vn Config Allowed VIP Port Custom Ports
+**Vn Config Allowed VIP Port Custom Ports**
 
 `port_ranges` - (Optional) Port Ranges. Port Ranges (`String`).
 
+---
+
 <a id="vn-config-allowed-vip-port-sli"></a>
 
-### Vn Config Allowed VIP Port Sli
+**Vn Config Allowed VIP Port Sli**
 
 `custom_ports` - (Optional) Custom Ports. List of Custom port. See [Custom Ports](#vn-config-allowed-vip-port-sli-custom-ports) below.
 
@@ -566,25 +658,31 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `use_https_port` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="vn-config-allowed-vip-port-sli-custom-ports"></a>
 
-### Vn Config Allowed VIP Port Sli Custom Ports
+**Vn Config Allowed VIP Port Sli Custom Ports**
 
 `port_ranges` - (Optional) Port Ranges. Port Ranges (`String`).
 
+---
+
 <a id="vn-config-dc-cluster-group-inside-vn"></a>
 
-### Vn Config Dc Cluster Group Inside Vn
+**Vn Config Dc Cluster Group Inside Vn**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
 `namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+
+---
 
 <a id="vn-config-dc-cluster-group-outside-vn"></a>
 
-### Vn Config Dc Cluster Group Outside Vn
+**Vn Config Dc Cluster Group Outside Vn**
 
 `name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
 
@@ -592,58 +690,76 @@ For the main resource documentation, see [f5xc_aws_tgw_site](./resources/aws_tgw
 
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
+---
+
 <a id="vn-config-global-network-list"></a>
 
-### Vn Config Global Network List
+**Vn Config Global Network List**
 
 `global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#vn-config-global-network-list-global-network-connections) below.
 
+---
+
 <a id="vn-config-global-network-list-global-network-connections"></a>
 
-### Vn Config Global Network List Global Network Connections
+**Vn Config Global Network List Global Network Connections**
 
 `sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
 `slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection (`Block`).
 
+---
+
 <a id="vn-config-inside-static-routes"></a>
 
-### Vn Config Inside Static Routes
+**Vn Config Inside Static Routes**
 
 `static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#vn-config-inside-static-routes-static-route-list) below.
 
+---
+
 <a id="vn-config-inside-static-routes-static-route-list"></a>
 
-### Vn Config Inside Static Routes Static Route List
+**Vn Config Inside Static Routes Static Route List**
 
 `custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
+
+---
 
 <a id="vn-config-outside-static-routes"></a>
 
-### Vn Config Outside Static Routes
+**Vn Config Outside Static Routes**
 
 `static_route_list` - (Optional) List of Static Routes. List of Static routes. See [Static Route List](#vn-config-outside-static-routes-static-route-list) below.
 
+---
+
 <a id="vn-config-outside-static-routes-static-route-list"></a>
 
-### Vn Config Outside Static Routes Static Route List
+**Vn Config Outside Static Routes Static Route List**
 
 `custom_static_route` - (Optional) Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them (`Block`).
 
 `simple_static_route` - (Optional) Simple Static Route. Use simple static route for prefix pointing to single interface in the network (`String`).
 
+---
+
 <a id="vpc-attachments"></a>
 
-### Vpc Attachments
+**Vpc Attachments**
 
 `vpc_list` - (Optional) VPC List. List of VPC attachments to transit gateway. See [Vpc List](#vpc-attachments-vpc-list) below.
 
+---
+
 <a id="vpc-attachments-vpc-list"></a>
 
-### Vpc Attachments Vpc List
+**Vpc Attachments Vpc List**
 
 `labels` - (Optional) Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall (`Block`).
 
 `vpc_id` - (Optional) VPC ID. Information about existing VPC (`String`).
+
+---

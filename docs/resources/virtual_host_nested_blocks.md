@@ -71,7 +71,7 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 <a id="advertise-policies"></a>
 
-### Advertise Policies
+**Advertise Policies**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -83,9 +83,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
+---
+
 <a id="authentication"></a>
 
-### Authentication
+**Authentication**
 
 `auth_config` - (Optional) Reference to Authentication Object. Reference to Authentication Config Object. See [Auth Config](#authentication-auth-config) below.
 
@@ -97,9 +99,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `use_auth_object_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="authentication-auth-config"></a>
 
-### Authentication Auth Config
+**Authentication Auth Config**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -111,9 +115,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
+---
+
 <a id="authentication-cookie-params"></a>
 
-### Authentication Cookie Params
+**Authentication Cookie Params**
 
 `auth_hmac` - (Optional) HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid. See [Auth HMAC](#authentication-cookie-params-auth-hmac) below.
 
@@ -125,9 +131,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours) (`Number`).
 
+---
+
 <a id="authentication-cookie-params-auth-hmac"></a>
 
-### Authentication Cookie Params Auth HMAC
+**Authentication Cookie Params Auth HMAC**
 
 `prim_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field (`Block`).
 
@@ -137,33 +145,41 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time (`String`).
 
+---
+
 <a id="buffer-policy"></a>
 
-### Buffer Policy
+**Buffer Policy**
 
 `disabled` - (Optional) Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
 
 `max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response (`Number`).
 
+---
+
 <a id="captcha-challenge"></a>
 
-### Captcha Challenge
+**Captcha Challenge**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
 `custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
 
+---
+
 <a id="coalescing-options"></a>
 
-### Coalescing Options
+**Coalescing Options**
 
 `default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
 `strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="compression-params"></a>
 
-### Compression Params
+**Compression Params**
 
 `content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
 
@@ -173,9 +189,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `remove_accept_encoding_header` - (Optional) Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter (`Bool`).
 
+---
+
 <a id="cors-policy"></a>
 
-### CORS Policy
+**CORS Policy**
 
 `allow_credentials` - (Optional) Allow Credentials. Specifies whether the resource allows credentials (`Bool`).
 
@@ -193,9 +211,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `maximum_age` - (Optional) Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours) (`Number`).
 
+---
+
 <a id="csrf-policy"></a>
 
-### CSRF Policy
+**CSRF Policy**
 
 `all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -203,15 +223,19 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="csrf-policy-custom-domain-list"></a>
 
-### CSRF Policy Custom Domain List
+**CSRF Policy Custom Domain List**
 
 `domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form (`List`).
 
+---
+
 <a id="dynamic-reverse-proxy"></a>
 
-### Dynamic Reverse Proxy
+**Dynamic Reverse Proxy**
 
 `connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
 
@@ -221,9 +245,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `resolve_endpoint_dynamically` - (Optional) Dynamic Endpoint Resolution. x-example : true In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyType is TCP_PROXY_WITH_SNI), virtual host will perform DNS resolution using the SNI. The DNS resolution is performed in the virtual network specified in outside_network_type or outside_network In both modes of operation(either using Host header or SNI), the DNS resolution could return multiple addresses. First IPv4 address from such returned list is used as endpoint for the request. The DNS response is cached for 60s by default (`Bool`).
 
+---
+
 <a id="dynamic-reverse-proxy-resolution-network"></a>
 
-### Dynamic Reverse Proxy Resolution Network
+**Dynamic Reverse Proxy Resolution Network**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -235,9 +261,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
+---
+
 <a id="http-protocol-options"></a>
 
-### HTTP Protocol Options
+**HTTP Protocol Options**
 
 `http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -245,15 +273,19 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="http-protocol-options-http-protocol-enable-v1-only"></a>
 
-### HTTP Protocol Options HTTP Protocol Enable V1 Only
+**HTTP Protocol Options HTTP Protocol Enable V1 Only**
 
 `header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
+---
+
 <a id="http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-### HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+**HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
 
 `default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -263,9 +295,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="js-challenge"></a>
 
-### Js Challenge
+**Js Challenge**
 
 `cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
 
@@ -273,9 +307,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
 
+---
+
 <a id="rate-limiter-allowed-prefixes"></a>
 
-### Rate Limiter Allowed Prefixes
+**Rate Limiter Allowed Prefixes**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -287,9 +323,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
+---
+
 <a id="request-cookies-to-add"></a>
 
-### Request Cookies To Add
+**Request Cookies To Add**
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
@@ -299,17 +337,21 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `value` - (Optional) Value. Value of the Cookie header (`String`).
 
+---
+
 <a id="request-cookies-to-add-secret-value"></a>
 
-### Request Cookies To Add Secret Value
+**Request Cookies To Add Secret Value**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#request-cookies-to-add-secret-value-clear-secret-info) below.
 
+---
+
 <a id="request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-### Request Cookies To Add Secret Value Blindfold Secret Info
+**Request Cookies To Add Secret Value Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -317,17 +359,21 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="request-cookies-to-add-secret-value-clear-secret-info"></a>
 
-### Request Cookies To Add Secret Value Clear Secret Info
+**Request Cookies To Add Secret Value Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="request-headers-to-add"></a>
 
-### Request Headers To Add
+**Request Headers To Add**
 
 `append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
 
@@ -337,17 +383,21 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `value` - (Optional) Value. Value of the HTTP header (`String`).
 
+---
+
 <a id="request-headers-to-add-secret-value"></a>
 
-### Request Headers To Add Secret Value
+**Request Headers To Add Secret Value**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#request-headers-to-add-secret-value-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#request-headers-to-add-secret-value-clear-secret-info) below.
 
+---
+
 <a id="request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-### Request Headers To Add Secret Value Blindfold Secret Info
+**Request Headers To Add Secret Value Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -355,17 +405,21 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="request-headers-to-add-secret-value-clear-secret-info"></a>
 
-### Request Headers To Add Secret Value Clear Secret Info
+**Request Headers To Add Secret Value Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="response-cookies-to-add"></a>
 
-### Response Cookies To Add
+**Response Cookies To Add**
 
 `add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
 
@@ -413,17 +467,21 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `value` - (Optional) Value. Value of the Cookie header (`String`).
 
+---
+
 <a id="response-cookies-to-add-secret-value"></a>
 
-### Response Cookies To Add Secret Value
+**Response Cookies To Add Secret Value**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#response-cookies-to-add-secret-value-clear-secret-info) below.
 
+---
+
 <a id="response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-### Response Cookies To Add Secret Value Blindfold Secret Info
+**Response Cookies To Add Secret Value Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -431,17 +489,21 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="response-cookies-to-add-secret-value-clear-secret-info"></a>
 
-### Response Cookies To Add Secret Value Clear Secret Info
+**Response Cookies To Add Secret Value Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="response-headers-to-add"></a>
 
-### Response Headers To Add
+**Response Headers To Add**
 
 `append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
 
@@ -451,17 +513,21 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `value` - (Optional) Value. Value of the HTTP header (`String`).
 
+---
+
 <a id="response-headers-to-add-secret-value"></a>
 
-### Response Headers To Add Secret Value
+**Response Headers To Add Secret Value**
 
 `blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#response-headers-to-add-secret-value-blindfold-secret-info) below.
 
 `clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#response-headers-to-add-secret-value-clear-secret-info) below.
 
+---
+
 <a id="response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-### Response Headers To Add Secret Value Blindfold Secret Info
+**Response Headers To Add Secret Value Blindfold Secret Info**
 
 `decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
 
@@ -469,17 +535,21 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
+---
+
 <a id="response-headers-to-add-secret-value-clear-secret-info"></a>
 
-### Response Headers To Add Secret Value Clear Secret Info
+**Response Headers To Add Secret Value Clear Secret Info**
 
 `provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
 
 `url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
 
+---
+
 <a id="retry-policy"></a>
 
-### Retry Policy
+**Retry Policy**
 
 `back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off. See [Back Off](#retry-policy-back-off) below.
 
@@ -491,17 +561,21 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `retry_condition` - (Optional) Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.) (`List`).
 
+---
+
 <a id="retry-policy-back-off"></a>
 
-### Retry Policy Back Off
+**Retry Policy Back Off**
 
 `base_interval` - (Optional) Base Retry Interval. Specifies the base interval between retries in milliseconds (`Number`).
 
 `max_interval` - (Optional) Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The default is 10 times the base_interval (`Number`).
 
+---
+
 <a id="routes"></a>
 
-### Routes
+**Routes**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -512,10 +586,12 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+---
 
 <a id="sensitive-data-policy"></a>
 
-### Sensitive Data Policy
+**Sensitive Data Policy**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -527,9 +603,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
+---
+
 <a id="slow-ddos-mitigation"></a>
 
-### Slow DDOS Mitigation
+**Slow DDOS Mitigation**
 
 `disable_request_timeout` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -537,9 +615,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `request_timeout` - (Optional) Custom Timeout (`Number`).
 
+---
+
 <a id="timeouts"></a>
 
-### Timeouts
+**Timeouts**
 
 `create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
@@ -549,9 +629,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
 
+---
+
 <a id="tls-cert-params"></a>
 
-### TLS Cert Params
+**TLS Cert Params**
 
 `certificates` - (Optional) Certificates. Set of certificates. See [Certificates](#tls-cert-params-certificates) below.
 
@@ -571,9 +653,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
 
+---
+
 <a id="tls-cert-params-certificates"></a>
 
-### TLS Cert Params Certificates
+**TLS Cert Params Certificates**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -585,9 +669,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
+---
+
 <a id="tls-cert-params-validation-params"></a>
 
-### TLS Cert Params Validation Params
+**TLS Cert Params Validation Params**
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
@@ -597,15 +683,19 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
 
+---
+
 <a id="tls-cert-params-validation-params-trusted-ca"></a>
 
-### TLS Cert Params Validation Params Trusted CA
+**TLS Cert Params Validation Params Trusted CA**
 
 `trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate (`Block`).
 
+---
+
 <a id="tls-parameters"></a>
 
-### TLS Parameters
+**TLS Parameters**
 
 `client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -617,9 +707,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added (`List`).
 
+---
+
 <a id="tls-parameters-common-params"></a>
 
-### TLS Parameters Common Params
+**TLS Parameters Common Params**
 
 `cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used (`List`).
 
@@ -631,9 +723,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#tls-parameters-common-params-validation-params) below.
 
+---
+
 <a id="tls-parameters-common-params-tls-certificates"></a>
 
-### TLS Parameters Common Params TLS Certificates
+**TLS Parameters Common Params TLS Certificates**
 
 `certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
 
@@ -647,9 +741,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="tls-parameters-common-params-validation-params"></a>
 
-### TLS Parameters Common Params Validation Params
+**TLS Parameters Common Params Validation Params**
 
 `skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
 
@@ -659,9 +755,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
 
+---
+
 <a id="user-identification"></a>
 
-### User Identification
+**User Identification**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -673,9 +771,11 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
 
+---
+
 <a id="waf-type"></a>
 
-### WAF Type
+**WAF Type**
 
 `app_firewall` - (Optional) App Firewall Reference. A list of references to the app_firewall configuration objects. See [App Firewall](#waf-type-app-firewall) below.
 
@@ -683,15 +783,19 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 
 `inherit_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
+---
+
 <a id="waf-type-app-firewall"></a>
 
-### WAF Type App Firewall
+**WAF Type App Firewall**
 
 `app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object. See [App Firewall](#waf-type-app-firewall-app-firewall) below.
 
+---
+
 <a id="waf-type-app-firewall-app-firewall"></a>
 
-### WAF Type App Firewall App Firewall
+**WAF Type App Firewall App Firewall**
 
 `kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
 
@@ -702,3 +806,5 @@ For the main resource documentation, see [f5xc_virtual_host](./resources/virtual
 `tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
 
 `uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+
+---

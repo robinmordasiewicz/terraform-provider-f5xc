@@ -101,41 +101,41 @@ resource "f5xc_aws_tgw_site" "example" {
 
 ### Spec Argument Reference
 
-`aws_parameters` - (Optional) AWS Service VPC and TGW. Setup AWS services VPC, transit gateway and site. See [AWS Parameters](#aws-parameters) below for details.
+`aws_parameters` - (Optional) AWS Service VPC and TGW. Setup AWS services VPC, transit gateway and site. See [AWS Parameters](./aws_tgw_site_nested_blocks#aws-parameters) for details.
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
 
 `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](./aws_tgw_site_nested_blocks#blocked-services) for details.
 
 `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
+`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](./aws_tgw_site_nested_blocks#coordinates) for details.
 
-`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
+`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](./aws_tgw_site_nested_blocks#custom-dns) for details.
 
 > **Note:** One of the arguments from this list "direct_connect_disabled, direct_connect_enabled, private_connectivity" must be set.
 
 `direct_connect_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`direct_connect_enabled` - (Optional) Direct Connect Configuration. Direct Connect Configuration. See [Direct Connect Enabled](#direct-connect-enabled) below for details.
+`direct_connect_enabled` - (Optional) Direct Connect Configuration. Direct Connect Configuration. See [Direct Connect Enabled](./aws_tgw_site_nested_blocks#direct-connect-enabled) for details.
 
 `private_connectivity` - (Optional) Private Connect Configuration. Private Connect Configuration (`Block`).
 
-`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](#kubernetes-upgrade-drain) below for details.
+`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded. See [Kubernetes Upgrade Drain](./aws_tgw_site_nested_blocks#kubernetes-upgrade-drain) for details.
 
 > **Note:** One of the arguments from this list "log_receiver, logs_streaming_disabled" must be set.
 
-`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](#log-receiver) below for details.
+`log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Log Receiver](./aws_tgw_site_nested_blocks#log-receiver) for details.
 
 `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen. See [Offline Survivability Mode](#offline-survivability-mode) below for details.
+`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen. See [Offline Survivability Mode](./aws_tgw_site_nested_blocks#offline-survivability-mode) for details.
 
-`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [OS](#os) below for details.
+`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions. See [OS](./aws_tgw_site_nested_blocks#os) for details.
 
-`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
+`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default. See [Performance Enhancement Mode](./aws_tgw_site_nested_blocks#performance-enhancement-mode) for details.
 
 `sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions (`Block`).
 

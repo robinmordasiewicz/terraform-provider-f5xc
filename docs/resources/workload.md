@@ -69,9 +69,9 @@ resource "f5xc_workload" "example" {
 
 > **Note:** One of the arguments from this list "job, service, simple_service, stateful_service" must be set.
 
-`job` - (Optional) Job Type. Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc. See [Job](#job) below for details.
+`job` - (Optional) Job Type. Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc. See [Job](./workload_nested_blocks#job) for details.
 
-`service` - (Optional) ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers, traditional SQL databases, etc. See [Service](#service) below for details.
+`service` - (Optional) ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers, traditional SQL databases, etc. See [Service](./workload_nested_blocks#service) for details.
 
 `simple_service` - (Optional) SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP (`Block`).
 

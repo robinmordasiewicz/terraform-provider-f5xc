@@ -74,15 +74,15 @@ resource "f5xc_global_log_receiver" "example" {
 
 > **Note:** One of the arguments from this list "aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver" must be set.
 
-`aws_cloud_watch_receiver` - (Optional) AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver. See [AWS Cloud Watch Receiver](#aws-cloud-watch-receiver) below for details.
+`aws_cloud_watch_receiver` - (Optional) AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver. See [AWS Cloud Watch Receiver](./global_log_receiver_nested_blocks#aws-cloud-watch-receiver) for details.
 
-`azure_event_hubs_receiver` - (Optional) Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver. See [Azure Event Hubs Receiver](#azure-event-hubs-receiver) below for details.
+`azure_event_hubs_receiver` - (Optional) Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver. See [Azure Event Hubs Receiver](./global_log_receiver_nested_blocks#azure-event-hubs-receiver) for details.
 
-`azure_receiver` - (Optional) Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver. See [Azure Receiver](#azure-receiver) below for details.
+`azure_receiver` - (Optional) Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver. See [Azure Receiver](./global_log_receiver_nested_blocks#azure-receiver) for details.
 
-`datadog_receiver` - (Optional) Datadog Configuration. Configuration for Datadog endpoint. See [Datadog Receiver](#datadog-receiver) below for details.
+`datadog_receiver` - (Optional) Datadog Configuration. Configuration for Datadog endpoint. See [Datadog Receiver](./global_log_receiver_nested_blocks#datadog-receiver) for details.
 
-`gcp_bucket_receiver` - (Optional) GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver. See [GCP Bucket Receiver](#gcp-bucket-receiver) below for details.
+`gcp_bucket_receiver` - (Optional) GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver. See [GCP Bucket Receiver](./global_log_receiver_nested_blocks#gcp-bucket-receiver) for details.
 
 `http_receiver` - (Optional) HTTP Configuration. Configuration for HTTP endpoint (`Block`).
 

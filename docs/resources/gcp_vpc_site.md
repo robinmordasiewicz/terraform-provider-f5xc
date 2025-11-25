@@ -93,21 +93,21 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 `address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
 
-`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-password) below for details.
+`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](./gcp_vpc_site_nested_blocks#admin-password) for details.
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
 
 `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](./gcp_vpc_site_nested_blocks#blocked-services) for details.
 
 `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`cloud_credentials` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Credentials](#cloud-credentials) below for details.
+`cloud_credentials` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Cloud Credentials](./gcp_vpc_site_nested_blocks#cloud-credentials) for details.
 
-`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
+`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](./gcp_vpc_site_nested_blocks#coordinates) for details.
 
-`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
+`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](./gcp_vpc_site_nested_blocks#custom-dns) for details.
 
 `disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
 
@@ -117,7 +117,7 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 > **Note:** One of the arguments from this list "ingress_egress_gw, ingress_gw, voltstack_cluster" must be set.
 
-`ingress_egress_gw` - (Optional) GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
+`ingress_egress_gw` - (Optional) GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site. See [Ingress Egress Gw](./gcp_vpc_site_nested_blocks#ingress-egress-gw) for details.
 
 `ingress_gw` - (Optional) GCP Ingress Gateway. Single interface GCP ingress site (`Block`).
 

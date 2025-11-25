@@ -94,7 +94,7 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
 
-`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](#admin-password) below for details.
+`admin_password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Admin Password](./azure_vnet_site_nested_blocks#admin-password) for details.
 
 > **Note:** One of the arguments from this list "alternate_region, azure_region" must be set.
 
@@ -102,25 +102,25 @@ resource "f5xc_azure_vnet_site" "example" {
 
 `azure_region` - (Optional) Recommended Azure Region Name. Name of the azure region which supports availability zones (`String`).
 
-`azure_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Azure Cred](#azure-cred) below for details.
+`azure_cred` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Azure Cred](./azure_vnet_site_nested_blocks#azure-cred) for details.
 
 > **Note:** One of the arguments from this list "block_all_services, blocked_services, default_blocked_services" must be set.
 
 `block_all_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
+`blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](./azure_vnet_site_nested_blocks#blocked-services) for details.
 
 `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
+`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](./azure_vnet_site_nested_blocks#coordinates) for details.
 
-`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](#custom-dns) below for details.
+`custom_dns` - (Optional) Custom DNS. Custom DNS is the configured for specify CE site. See [Custom DNS](./azure_vnet_site_nested_blocks#custom-dns) for details.
 
 `disk_size` - (Optional) Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB (`Number`).
 
 > **Note:** One of the arguments from this list "ingress_egress_gw, ingress_egress_gw_ar, ingress_gw, ingress_gw_ar, voltstack_cluster, voltstack_cluster_ar" must be set.
 
-`ingress_egress_gw` - (Optional) Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site. See [Ingress Egress Gw](#ingress-egress-gw) below for details.
+`ingress_egress_gw` - (Optional) Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site. See [Ingress Egress Gw](./azure_vnet_site_nested_blocks#ingress-egress-gw) for details.
 
 `ingress_egress_gw_ar` - (Optional) Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones (`Block`).
 

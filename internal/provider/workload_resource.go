@@ -879,7 +879,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional: true,
 																},
 																"connection_idle_timeout": schema.Int64Attribute{
-																	MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																	MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																	Optional: true,
 																},
 																"http_redirect": schema.BoolAttribute{
@@ -1291,7 +1291,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional: true,
 																},
 																"connection_idle_timeout": schema.Int64Attribute{
-																	MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																	MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																	Optional: true,
 																},
 																"http_redirect": schema.BoolAttribute{
@@ -1964,7 +1964,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional: true,
 																		},
 																		"connection_idle_timeout": schema.Int64Attribute{
-																			MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																			MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																			Optional: true,
 																		},
 																		"http_redirect": schema.BoolAttribute{
@@ -2376,7 +2376,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional: true,
 																		},
 																		"connection_idle_timeout": schema.Int64Attribute{
-																			MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																			MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																			Optional: true,
 																		},
 																		"http_redirect": schema.BoolAttribute{
@@ -2960,7 +2960,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional: true,
 															},
 															"connection_idle_timeout": schema.Int64Attribute{
-																MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																Optional: true,
 															},
 															"http_redirect": schema.BoolAttribute{
@@ -3372,7 +3372,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional: true,
 															},
 															"connection_idle_timeout": schema.Int64Attribute{
-																MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																Optional: true,
 															},
 															"http_redirect": schema.BoolAttribute{
@@ -5065,7 +5065,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional: true,
 																},
 																"connection_idle_timeout": schema.Int64Attribute{
-																	MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																	MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																	Optional: true,
 																},
 																"http_redirect": schema.BoolAttribute{
@@ -5477,7 +5477,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional: true,
 																},
 																"connection_idle_timeout": schema.Int64Attribute{
-																	MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																	MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																	Optional: true,
 																},
 																"http_redirect": schema.BoolAttribute{
@@ -6150,7 +6150,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional: true,
 																		},
 																		"connection_idle_timeout": schema.Int64Attribute{
-																			MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																			MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																			Optional: true,
 																		},
 																		"http_redirect": schema.BoolAttribute{
@@ -6562,7 +6562,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional: true,
 																		},
 																		"connection_idle_timeout": schema.Int64Attribute{
-																			MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																			MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																			Optional: true,
 																		},
 																		"http_redirect": schema.BoolAttribute{
@@ -7146,7 +7146,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional: true,
 															},
 															"connection_idle_timeout": schema.Int64Attribute{
-																MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																Optional: true,
 															},
 															"http_redirect": schema.BoolAttribute{
@@ -7558,7 +7558,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional: true,
 															},
 															"connection_idle_timeout": schema.Int64Attribute{
-																MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes.",
+																MarkdownDescription: "Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The  minutes. Defaults to `2`.",
 																Optional: true,
 															},
 															"http_redirect": schema.BoolAttribute{

@@ -91,7 +91,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				ElementType: types.StringType,
 			},
 			"connection_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds)",
+				MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The  (2 seconds). Defaults to `2000`.",
 				Optional: true,
 			},
 			"description": schema.StringAttribute{
@@ -227,7 +227,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										MarkdownDescription: "Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/json, application/xhtml+xml, image/svg+xml, text/css, text/html, text/plain, text/xml. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen.",
 										Attributes: map[string]schema.Attribute{
 											"content_length": schema.Int64Attribute{
-												MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30.",
+												MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30`.",
 												Optional: true,
 											},
 											"content_type": schema.ListAttribute{
@@ -263,7 +263,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Optional: true,
 												},
 												"overwrite": schema.BoolAttribute{
-													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
 													Optional: true,
 												},
 												"value": schema.StringAttribute{
@@ -317,7 +317,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"append": schema.BoolAttribute{
-													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 													Optional: true,
 												},
 												"name": schema.StringAttribute{
@@ -395,7 +395,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Optional: true,
 												},
 												"overwrite": schema.BoolAttribute{
-													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
 													Optional: true,
 												},
 												"value": schema.StringAttribute{
@@ -494,7 +494,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"append": schema.BoolAttribute{
-													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 													Optional: true,
 												},
 												"name": schema.StringAttribute{
@@ -610,7 +610,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										MarkdownDescription: "Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/json, application/xhtml+xml, image/svg+xml, text/css, text/html, text/plain, text/xml. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen.",
 										Attributes: map[string]schema.Attribute{
 											"content_length": schema.Int64Attribute{
-												MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30.",
+												MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30`.",
 												Optional: true,
 											},
 											"content_type": schema.ListAttribute{
@@ -646,7 +646,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Optional: true,
 												},
 												"overwrite": schema.BoolAttribute{
-													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
 													Optional: true,
 												},
 												"value": schema.StringAttribute{
@@ -700,7 +700,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"append": schema.BoolAttribute{
-													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 													Optional: true,
 												},
 												"name": schema.StringAttribute{
@@ -778,7 +778,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Optional: true,
 												},
 												"overwrite": schema.BoolAttribute{
-													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+													MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
 													Optional: true,
 												},
 												"value": schema.StringAttribute{
@@ -877,7 +877,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"append": schema.BoolAttribute{
-													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+													MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 													Optional: true,
 												},
 												"name": schema.StringAttribute{
@@ -1187,7 +1187,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								MarkdownDescription: "Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/json, application/xhtml+xml, image/svg+xml, text/css, text/html, text/plain, text/xml. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen.",
 								Attributes: map[string]schema.Attribute{
 									"content_length": schema.Int64Attribute{
-										MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30.",
+										MarkdownDescription: "Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30`.",
 										Optional: true,
 									},
 									"content_type": schema.ListAttribute{
@@ -1223,7 +1223,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"overwrite": schema.BoolAttribute{
-											MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+											MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
 											Optional: true,
 										},
 										"value": schema.StringAttribute{
@@ -1277,7 +1277,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
-											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
@@ -1355,7 +1355,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional: true,
 										},
 										"overwrite": schema.BoolAttribute{
-											MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+											MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
 											Optional: true,
 										},
 										"value": schema.StringAttribute{
@@ -1454,7 +1454,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
-											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{

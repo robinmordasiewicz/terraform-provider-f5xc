@@ -295,7 +295,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Optional: true,
 									},
 									"overwrite": schema.BoolAttribute{
-										MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+										MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
 										Optional: true,
 									},
 									"value": schema.StringAttribute{
@@ -349,7 +349,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"append": schema.BoolAttribute{
-										MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+										MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 										Optional: true,
 									},
 									"name": schema.StringAttribute{
@@ -427,7 +427,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Optional: true,
 									},
 									"overwrite": schema.BoolAttribute{
-										MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite",
+										MarkdownDescription: "Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values.  not overwrite. Defaults to `do`.",
 										Optional: true,
 									},
 									"value": schema.StringAttribute{
@@ -526,7 +526,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"append": schema.BoolAttribute{
-										MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+										MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 										Optional: true,
 									},
 									"name": schema.StringAttribute{
@@ -880,7 +880,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Retry Policy. Retry policy configuration for route destination.",
 									Attributes: map[string]schema.Attribute{
 										"num_retries": schema.Int64Attribute{
-											MarkdownDescription: "Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry",
+											MarkdownDescription: "Number of Retries. Specifies the allowed number of retries. Retries can be done any number of times. An exponential back-off algorithm is used between each retry. Defaults to `1`.",
 											Optional: true,
 										},
 										"per_try_timeout": schema.Int64Attribute{
@@ -907,7 +907,7 @@ func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Optional: true,
 												},
 												"max_interval": schema.Int64Attribute{
-													MarkdownDescription: "Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The default is 10 times the base_interval.",
+													MarkdownDescription: "Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The  times the base_interval. Defaults to `10`.",
 													Optional: true,
 												},
 											},

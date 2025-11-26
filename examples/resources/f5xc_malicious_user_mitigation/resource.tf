@@ -21,7 +21,7 @@ resource "f5xc_malicious_user_mitigation" "example" {
     threat_level = "HIGH"
     mitigation_action {
       block {
-        body   = "Access denied"
+        body = "Access denied"
         status = "403"
       }
     }

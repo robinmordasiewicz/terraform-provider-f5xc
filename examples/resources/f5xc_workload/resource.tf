@@ -20,8 +20,8 @@ resource "f5xc_workload" "example" {
   containers {
     name = "web"
     image {
-      name        = "nginx"
-      public      = {}
+      name       = "nginx"
+      public     = {}
       pull_policy = "IMAGE_PULL_POLICY_ALWAYS"
     }
   }

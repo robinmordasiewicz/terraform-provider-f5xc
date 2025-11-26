@@ -20,7 +20,7 @@ Manages new customer support ticket in our customer support provider system. in 
 # Basic Customer Support configuration
 resource "f5xc_customer_support" "example" {
   name      = "example-customer-support"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -20,7 +20,7 @@ Manages service_policy_rule creates a new object in the storage backend for meta
 # Basic Service Policy Rule configuration
 resource "f5xc_service_policy_rule" "example" {
   name      = "example-service-policy-rule"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

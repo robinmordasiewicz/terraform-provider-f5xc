@@ -20,7 +20,7 @@ Manages Category object, which is a grouping of APIKeys used for TPM provisionin
 # Basic Tpm Category configuration
 resource "f5xc_tpm_category" "example" {
   name      = "example-tpm-category"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

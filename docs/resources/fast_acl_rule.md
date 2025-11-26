@@ -20,7 +20,7 @@ Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP,
 # Basic Fast Acl Rule configuration
 resource "f5xc_fast_acl_rule" "example" {
   name      = "example-fast-acl-rule"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

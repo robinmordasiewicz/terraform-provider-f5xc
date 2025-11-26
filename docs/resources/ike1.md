@@ -20,7 +20,7 @@ Manages a Ike1 resource in F5 Distributed Cloud for ike phase1 profile configura
 # Basic Ike1 configuration
 resource "f5xc_ike1" "example" {
   name      = "example-ike1"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

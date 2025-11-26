@@ -20,7 +20,7 @@ Manages user_identification creates a new object in the storage backend for meta
 # Basic User Identification configuration
 resource "f5xc_user_identification" "example" {
   name      = "example-user-identification"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

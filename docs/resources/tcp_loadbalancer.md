@@ -20,7 +20,7 @@ Manages a TCPLoadBalancer resource in F5 Distributed Cloud for load balancing TC
 # Basic Tcp Loadbalancer configuration
 resource "f5xc_tcp_loadbalancer" "example" {
   name      = "example-tcp-loadbalancer"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"
@@ -43,7 +43,7 @@ resource "f5xc_tcp_loadbalancer" "example" {
   origin_pools_weights {
     pool {
       name      = "example-tcp-pool"
-      namespace = "system"
+      namespace = "staging"
     }
     weight = 1
   }

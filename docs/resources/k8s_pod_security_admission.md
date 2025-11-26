@@ -20,7 +20,7 @@ Manages k8s_pod_security_admission will create the object in the storage backend
 # Basic K8s Pod Security Admission configuration
 resource "f5xc_k8s_pod_security_admission" "example" {
   name      = "example-k8s-pod-security-admission"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

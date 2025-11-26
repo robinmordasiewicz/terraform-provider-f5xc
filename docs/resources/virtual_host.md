@@ -20,7 +20,7 @@ Manages virtual host in a given namespace. in F5 Distributed Cloud.
 # Basic Virtual Host configuration
 resource "f5xc_virtual_host" "example" {
   name      = "example-virtual-host"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

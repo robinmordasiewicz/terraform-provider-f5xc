@@ -20,7 +20,7 @@ Manages voltshare_admin_policy creates a new object in the storage backend for m
 # Basic Voltshare Admin Policy configuration
 resource "f5xc_voltshare_admin_policy" "example" {
   name      = "example-voltshare-admin-policy"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

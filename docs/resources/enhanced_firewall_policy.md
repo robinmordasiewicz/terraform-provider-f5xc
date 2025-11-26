@@ -20,7 +20,7 @@ Manages a EnhancedFirewallPolicy resource in F5 Distributed Cloud for enhanced f
 # Basic Enhanced Firewall Policy configuration
 resource "f5xc_enhanced_firewall_policy" "example" {
   name      = "example-enhanced-firewall-policy"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"
@@ -44,7 +44,7 @@ resource "f5xc_enhanced_firewall_policy" "example" {
       source_prefix_list {
         ip_prefix_set {
           name      = "trusted-ips"
-          namespace = "system"
+          namespace = "shared"
         }
       }
       all_traffic {}

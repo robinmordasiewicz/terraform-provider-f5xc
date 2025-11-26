@@ -20,7 +20,7 @@ Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy
 # Basic Policy Based Routing configuration
 resource "f5xc_policy_based_routing" "example" {
   name      = "example-policy-based-routing"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -20,7 +20,7 @@ Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-
 # Basic Bigip Irule configuration
 resource "f5xc_bigip_irule" "example" {
   name      = "example-bigip-irule"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

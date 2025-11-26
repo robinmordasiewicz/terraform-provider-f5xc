@@ -20,7 +20,7 @@ Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb polic
 # Basic Usb Policy configuration
 resource "f5xc_usb_policy" "example" {
   name      = "example-usb-policy"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

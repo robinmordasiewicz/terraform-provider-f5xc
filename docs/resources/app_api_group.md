@@ -20,7 +20,7 @@ Manages app_api_group creates a new object in the storage backend for metadata.n
 # Basic App Api Group configuration
 resource "f5xc_app_api_group" "example" {
   name      = "example-app-api-group"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

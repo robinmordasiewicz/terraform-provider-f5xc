@@ -20,7 +20,7 @@ Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate m
 # Basic Certificate configuration
 resource "f5xc_certificate" "example" {
   name      = "example-certificate"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

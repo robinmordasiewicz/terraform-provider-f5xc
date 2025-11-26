@@ -20,7 +20,7 @@ Manages a Segment resource in F5 Distributed Cloud for segment configuration.
 # Basic Segment configuration
 resource "f5xc_segment" "example" {
   name      = "example-segment"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

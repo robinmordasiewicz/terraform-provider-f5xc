@@ -20,7 +20,7 @@ Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when succ
 # Basic Tpm Api Key configuration
 resource "f5xc_tpm_api_key" "example" {
   name      = "example-tpm-api-key"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

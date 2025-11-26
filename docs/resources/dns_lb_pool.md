@@ -20,7 +20,7 @@ Manages DNS Load Balancer Pool in a given namespace. If one already exist it wil
 # Basic Dns Lb Pool configuration
 resource "f5xc_dns_lb_pool" "example" {
   name      = "example-dns-lb-pool"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

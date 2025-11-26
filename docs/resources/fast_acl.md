@@ -20,7 +20,7 @@ Manages `fast_acl` object, `fast_acl` object contains rules to protect site from
 # Basic Fast Acl configuration
 resource "f5xc_fast_acl" "example" {
   name      = "example-fast-acl"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

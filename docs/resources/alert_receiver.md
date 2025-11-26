@@ -20,7 +20,7 @@ Manages a AlertReceiver resource in F5 Distributed Cloud for alert notification 
 # Basic Alert Receiver configuration
 resource "f5xc_alert_receiver" "example" {
   name      = "example-alert-receiver"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

@@ -20,7 +20,7 @@ Manages DNS Zone in a given namespace. If one already exist it will give a error
 # Basic Dns Zone configuration
 resource "f5xc_dns_zone" "example" {
   name      = "example-dns-zone"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

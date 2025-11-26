@@ -20,7 +20,7 @@ Manages a Registration resource in F5 Distributed Cloud for vpm creates registra
 # Basic Registration configuration
 resource "f5xc_registration" "example" {
   name      = "example-registration"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

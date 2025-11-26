@@ -20,7 +20,7 @@ Manages a Discovery resource in F5 Distributed Cloud for api to create discovery
 # Basic Discovery configuration
 resource "f5xc_discovery" "example" {
   name      = "example-discovery"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

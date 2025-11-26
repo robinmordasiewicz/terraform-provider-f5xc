@@ -20,7 +20,7 @@ Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing H
 # Basic Http Loadbalancer configuration
 resource "f5xc_http_loadbalancer" "example" {
   name      = "example-http-loadbalancer"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"
@@ -107,7 +107,7 @@ resource "f5xc_http_loadbalancer" "example" {
   rate_limit {
     rate_limiter {
       name      = "example-rate-limiter"
-      namespace = "system"
+      namespace = "shared"
     }
     no_ip_allowed_list {}
   }
@@ -121,7 +121,7 @@ resource "f5xc_http_loadbalancer" "example" {
   active_service_policies {
     policies {
       name      = "example-service-policy"
-      namespace = "system"
+      namespace = "shared"
     }
   }
 
@@ -137,7 +137,7 @@ resource "f5xc_http_loadbalancer" "example" {
 
   user_identification {
     name      = "example-user-identification"
-    namespace = "system"
+    namespace = "shared"
   }
 
   // One of the arguments from this list "app_firewall disable_waf" must be set
@@ -169,7 +169,7 @@ resource "f5xc_http_loadbalancer" "example" {
   default_route_pools {
     pool {
       name      = "example-origin-pool"
-      namespace = "system"
+      namespace = "staging"
     }
     weight   = 1
     priority = 1

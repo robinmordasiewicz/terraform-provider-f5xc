@@ -20,7 +20,7 @@ Manages protocol_policer object, protocol_policer object contains list of L4 pro
 # Basic Protocol Policer configuration
 resource "f5xc_protocol_policer" "example" {
   name      = "example-protocol-policer"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

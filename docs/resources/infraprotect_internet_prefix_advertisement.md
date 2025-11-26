@@ -20,7 +20,7 @@ Manages DDoS transit Internet Prefix in F5 Distributed Cloud.
 # Basic Infraprotect Internet Prefix Advertisement configuration
 resource "f5xc_infraprotect_internet_prefix_advertisement" "example" {
   name      = "example-infraprotect-internet-prefix-advertisement"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

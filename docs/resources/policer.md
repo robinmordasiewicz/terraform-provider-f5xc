@@ -20,7 +20,7 @@ Manages new policer with traffic rate limits in F5 Distributed Cloud.
 # Basic Policer configuration
 resource "f5xc_policer" "example" {
   name      = "example-policer"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -20,7 +20,7 @@ Manages App type will create the configuration in namespace metadata.namespace i
 # Basic Cminstance configuration
 resource "f5xc_cminstance" "example" {
   name      = "example-cminstance"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

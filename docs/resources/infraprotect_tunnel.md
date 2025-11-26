@@ -20,7 +20,7 @@ Manages DDoS transit tunnel in F5 Distributed Cloud.
 # Basic Infraprotect Tunnel configuration
 resource "f5xc_infraprotect_tunnel" "example" {
   name      = "example-infraprotect-tunnel"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

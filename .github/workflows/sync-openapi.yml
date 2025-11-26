@@ -34,7 +34,28 @@ jobs:
       - name: Download and extract OpenAPI spec
         run: |
           mkdir -p ${{ env.SPEC_DIR }}
-          curl -sL -o openapi.zip "https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip"
+          # Retry logic with exponential backoff for transient network errors
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "::group::Download attempt $attempt of $max_attempts"
+            if curl -sL --fail --retry 2 --retry-delay 5 -o openapi.zip \
+                "https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip"; then
+              echo "Download successful"
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            attempt=$((attempt + 1))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((2 ** attempt * 5))
+              echo "::warning::Download failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            else
+              echo "::error::All $max_attempts download attempts failed"
+              exit 1
+            fi
+          done
           unzip -o openapi.zip -d ${{ env.SPEC_DIR }}
           rm openapi.zip
 

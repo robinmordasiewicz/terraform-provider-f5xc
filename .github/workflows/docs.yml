@@ -52,7 +52,28 @@ jobs:
 
       - name: Generate documentation
         run: |
-          tfplugindocs generate
+          # Retry logic with exponential backoff for transient network errors
+          # tfplugindocs downloads Terraform CLI from HashiCorp's checkpoint API
+          # which can occasionally timeout
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "::group::Attempt $attempt of $max_attempts"
+            if tfplugindocs generate; then
+              echo "Documentation generated successfully"
+              echo "::endgroup::"
+              exit 0
+            fi
+            echo "::endgroup::"
+            attempt=$((attempt + 1))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((2 ** attempt * 5))  # 10s, 20s exponential backoff
+              echo "::warning::tfplugindocs failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            fi
+          done
+          echo "::error::All $max_attempts attempts failed"
+          exit 1
 
       - name: Transform documentation for markdown compliance
         run: |

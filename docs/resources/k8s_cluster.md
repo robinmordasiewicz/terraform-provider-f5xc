@@ -77,45 +77,45 @@ resource "f5xc_k8s_cluster" "example" {
 
 -> **One of the following:**
 &#x2022; `cluster_scoped_access_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `cluster_scoped_access_permit` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `cluster_scoped_access_permit` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `cluster_wide_app_list` - Optional Block<br>Cluster Wide Application List. List of cluster wide applications<br>See [Cluster Wide App List](#cluster-wide-app-list) below for details.
-<br>&#x2022; `no_cluster_wide_apps` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_cluster_wide_apps` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `global_access_enable` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `no_global_access` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_global_access` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `insecure_registry_list` - Optional Block<br>Docker Insecure Registry List. List of docker insecure registries<br>See [Insecure Registry List](#insecure-registry-list) below for details.
-<br>&#x2022; `no_insecure_registries` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_insecure_registries` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `local_access_config` - Optional Block<br>Local Access Configuration. Parameters required to enable local access<br>See [Local Access Config](#local-access-config) below for details.
-<br>&#x2022; `no_local_access` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_local_access` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
 &#x2022; `use_custom_cluster_role_bindings` - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8s cluster<br>See [Use Custom Cluster Role Bindings](#use-custom-cluster-role-bindings) below for details.
-<br>&#x2022; `use_default_cluster_role_bindings` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `use_default_cluster_role_bindings` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `use_custom_cluster_role_list` - Optional Block<br>Cluster Role List. List of active cluster role list for a K8s cluster<br>See [Use Custom Cluster Role List](#use-custom-cluster-role-list) below for details.
-<br>&#x2022; `use_default_cluster_roles` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `use_default_cluster_roles` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `use_custom_pod_security_admission` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Use Custom Pod Security Admission](#use-custom-pod-security-admission) below for details.
-<br>&#x2022; `use_default_pod_security_admission` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `use_default_pod_security_admission` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `use_custom_psp_list` - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8s cluster<br>See [Use Custom Psp List](#use-custom-psp-list) below for details.
-<br>&#x2022; `use_default_psp` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `use_default_psp` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `vk8s_namespace_access_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `vk8s_namespace_access_permit` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `vk8s_namespace_access_permit` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 

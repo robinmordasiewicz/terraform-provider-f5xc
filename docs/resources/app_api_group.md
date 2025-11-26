@@ -68,8 +68,8 @@ resource "f5xc_app_api_group" "example" {
 
 -> **One of the following:**
 &#x2022; `bigip_virtual_server` - Optional Block<br>API Group Scope BIGIP Virtual Server. Set the scope of the API Group to a specific BIGIP Virtual Server<br>See [Bigip Virtual Server](#bigip-virtual-server) below for details.
-<br>&#x2022; `cdn_loadbalancer` - Optional Block<br>API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer<br>See [CDN Loadbalancer](#cdn-loadbalancer) below for details.
-<br>&#x2022; `http_loadbalancer` - Optional Block<br>API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer<br>See [HTTP Loadbalancer](#http-loadbalancer) below for details.
+<br><br>&#x2022; `cdn_loadbalancer` - Optional Block<br>API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer<br>See [CDN Loadbalancer](#cdn-loadbalancer) below for details.
+<br><br>&#x2022; `http_loadbalancer` - Optional Block<br>API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer<br>See [HTTP Loadbalancer](#http-loadbalancer) below for details.
 
 &#x2022; `elements` - Optional Block<br>API Group Elements. List of API group elements with methods and path regex for matching requests<br>See [Elements](#elements) below for details.
 

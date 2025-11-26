@@ -71,7 +71,7 @@ resource "f5xc_dns_zone" "example" {
 
 -> **One of the following:**
 &#x2022; `primary` - Optional Block<br>PrimaryDNSCreateSpecType<br>See [Primary](#primary) below for details.
-<br>&#x2022; `secondary` - Optional Block<br>SecondaryDNSCreateSpecType
+<br><br>&#x2022; `secondary` - Optional Block<br>SecondaryDNSCreateSpecType
 
 &#x2022; `timeouts` - Optional Block
 

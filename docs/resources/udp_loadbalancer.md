@@ -74,9 +74,9 @@ resource "f5xc_udp_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; `advertise_custom` - Optional Block<br>Advertise Custom. This defines a way to advertise a VIP on specific sites<br>See [Advertise Custom](#advertise-custom) below for details.
-<br>&#x2022; `advertise_on_public` - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-on-public) below for details.
-<br>&#x2022; `advertise_on_public_default_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `do_not_advertise` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `advertise_on_public` - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-on-public) below for details.
+<br><br>&#x2022; `advertise_on_public_default_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `do_not_advertise` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `dns_volterra_managed` - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain to be delegated to F5 Distributed Cloud using the Delegated Domain feature or a DNS CNAME record must be created in your DNS provider's portal
 
@@ -86,14 +86,14 @@ resource "f5xc_udp_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; `hash_policy_choice_random` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `hash_policy_choice_round_robin` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `hash_policy_choice_source_ip_stickiness` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `hash_policy_choice_round_robin` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `hash_policy_choice_source_ip_stickiness` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `idle_timeout` - Optional Number<br>Idle Timeout. The amount of time that a session can exist without upstream or downstream activity, in milliseconds
 
 -> **One of the following:**
 &#x2022; `listen_port` - Optional Number<br>Listen Port. Listen Port for this load balancer
-<br>&#x2022; `port_ranges` - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<br><br>&#x2022; `port_ranges` - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
 
 &#x2022; `origin_pools_weights` - Optional Block<br>Origin Pools. Origin pools with weights and priorities used for this load balancer<br>See [Origin Pools Weights](#origin-pools-weights) below for details.
 

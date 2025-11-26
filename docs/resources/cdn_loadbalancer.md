@@ -79,21 +79,21 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; `active_service_policies` - Optional Block<br>Service Policy List. List of service policies<br>See [Active Service Policies](#active-service-policies) below for details.
-<br>&#x2022; `no_service_policies` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `service_policies_from_namespace` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_service_policies` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `service_policies_from_namespace` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `api_rate_limit` - Optional Block<br>APIRateLimit<br>See [API Rate Limit](#api-rate-limit) below for details.
-<br>&#x2022; `disable_rate_limit` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `rate_limit` - Optional Block<br>RateLimitConfigType
+<br><br>&#x2022; `disable_rate_limit` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `rate_limit` - Optional Block<br>RateLimitConfigType
 
 -> **One of the following:**
 &#x2022; `api_specification` - Optional Block<br>API Specification and Validation. Settings for API specification (API definition, OpenAPI validation, etc.)
-<br>&#x2022; `disable_api_definition` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `disable_api_definition` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `app_firewall` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `disable_waf` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `disable_waf` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `blocked_clients` - Optional Block<br>Client Blocking Rules. Define rules to block IP Prefixes or AS numbers
 
@@ -101,14 +101,14 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; `captcha_challenge` - Optional Block<br>Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host
-<br>&#x2022; `enable_challenge` - Optional Block<br>Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users
-<br>&#x2022; `js_challenge` - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host
-<br>&#x2022; `no_challenge` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `policy_based_challenge` - Optional Block<br>Policy Based Challenge. Specifies the settings for policy rule based challenge
+<br><br>&#x2022; `enable_challenge` - Optional Block<br>Enable Malicious User Challenge. Configure auto mitigation i.e risk based challenges for malicious users
+<br><br>&#x2022; `js_challenge` - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host
+<br><br>&#x2022; `no_challenge` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `policy_based_challenge` - Optional Block<br>Policy Based Challenge. Specifies the settings for policy rule based challenge
 
 -> **One of the following:**
 &#x2022; `client_side_defense` - Optional Block<br>Client-Side Defense. This defines various configuration options for Client-Side Defense Policy
-<br>&#x2022; `disable_client_side_defense` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `disable_client_side_defense` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `cors_policy` - Optional Block<br>CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: `HTTP://foo.example/examples/access-control/simpleXSInvocation.HTML` Origin: `HTTP://foo.example` HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: * Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/XML An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/post-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: `HTTP://foo.example` Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: `HTTP://foo.example` Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive
 
@@ -124,23 +124,23 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; `default_sensitive_data_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `sensitive_data_policy` - Optional Block<br>Sensitive Data Discovery. Settings for data type policy
+<br><br>&#x2022; `sensitive_data_policy` - Optional Block<br>Sensitive Data Discovery. Settings for data type policy
 
 -> **One of the following:**
 &#x2022; `disable_api_discovery` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_api_discovery` - Optional Block<br>API Discovery Setting. Specifies the settings used for API discovery
+<br><br>&#x2022; `enable_api_discovery` - Optional Block<br>API Discovery Setting. Specifies the settings used for API discovery
 
 -> **One of the following:**
 &#x2022; `disable_ip_reputation` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_ip_reputation` - Optional Block<br>IP Threat Category List. List of IP threat categories
+<br><br>&#x2022; `enable_ip_reputation` - Optional Block<br>IP Threat Category List. List of IP threat categories
 
 -> **One of the following:**
 &#x2022; `disable_malicious_user_detection` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_malicious_user_detection` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enable_malicious_user_detection` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `disable_threat_mesh` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_threat_mesh` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enable_threat_mesh` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `domains` - Optional List<br>Domains. A list of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain]
 
@@ -148,15 +148,15 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; `http` - Optional Block<br>HTTP Choice. Choice for selecting HTTP proxy
-<br>&#x2022; `https` - Optional Block<br>BYOC HTTPS Choice. Choice for selecting CDN Distribution with bring your own certificates
-<br>&#x2022; `https_auto_cert` - Optional Block<br>HTTPS with Automatic Certificate. Choice for selecting HTTPS CDN distribution with bring your own certificates
+<br><br>&#x2022; `https` - Optional Block<br>BYOC HTTPS Choice. Choice for selecting CDN Distribution with bring your own certificates
+<br><br>&#x2022; `https_auto_cert` - Optional Block<br>HTTPS with Automatic Certificate. Choice for selecting HTTPS CDN distribution with bring your own certificates
 
 &#x2022; `jwt_validation` - Optional Block<br>JWT Validation. JWT Validation stops JWT replay attacks and JWT tampering by cryptographically verifying incoming JWTs before they are passed to your API origin. JWT Validation will also stop requests with expired tokens or tokens that are not yet valid
 
 -> **One of the following:**
 &#x2022; `l7_ddos_action_block` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `l7_ddos_action_default` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `l7_ddos_action_js_challenge` - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host
+<br><br>&#x2022; `l7_ddos_action_default` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `l7_ddos_action_js_challenge` - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host
 
 &#x2022; `origin_pool` - Optional Block<br>CDN Origin Pool. Origin Pool for the CDN distribution
 
@@ -166,7 +166,7 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; `slow_ddos_mitigation` - Optional Block<br>Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users
-<br>&#x2022; `system_default_timeouts` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `system_default_timeouts` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `timeouts` - Optional Block
 
@@ -174,7 +174,7 @@ resource "f5xc_cdn_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; `user_id_client_ip` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `user_identification` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+<br><br>&#x2022; `user_identification` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 &#x2022; `waf_exclusion` - Optional Block<br>WAF Exclusion
 

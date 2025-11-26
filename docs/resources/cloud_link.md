@@ -68,11 +68,11 @@ resource "f5xc_cloud_link" "example" {
 
 -> **One of the following:**
 &#x2022; `aws` - Optional Block<br>Amazon Web Services(AWS) CloudLink Provider. CloudLink for AWS Cloud Provider<br>See [AWS](#aws) below for details.
-<br>&#x2022; `gcp` - Optional Block<br>Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider<br>See [GCP](#gcp) below for details.
+<br><br>&#x2022; `gcp` - Optional Block<br>Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider<br>See [GCP](#gcp) below for details.
 
 -> **One of the following:**
 &#x2022; `disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enabled` - Optional Block<br>CloudLink ADN Network Config<br>See [Enabled](#enabled) below for details.
+<br><br>&#x2022; `enabled` - Optional Block<br>CloudLink ADN Network Config<br>See [Enabled](#enabled) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

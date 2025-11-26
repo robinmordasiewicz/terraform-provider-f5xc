@@ -66,7 +66,7 @@ resource "f5xc_infraprotect_asn" "example" {
 
 -> **One of the following:**
 &#x2022; `bgp_session_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `bgp_session_enabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `bgp_session_enabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

@@ -74,15 +74,15 @@ resource "f5xc_ike_phase1_profile" "example" {
 
 -> **One of the following:**
 &#x2022; `ike_keylifetime_hours` - Optional Block<br>Hours. Input Hours<br>See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
-<br>&#x2022; `ike_keylifetime_minutes` - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-<br>&#x2022; `use_default_keylifetime` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `ike_keylifetime_minutes` - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+<br><br>&#x2022; `use_default_keylifetime` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `prf` - Optional List  Defaults to `PRF_DEFAULT`<br>Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`<br>PseudoRandomFunction. Select PseudoRandomFunction for IKE SA
 
 -> **One of the following:**
 &#x2022; `reauth_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `reauth_timeout_days` - Optional Block<br>Days. Set Duration in days<br>See [Reauth Timeout Days](#reauth-timeout-days) below for details.
-<br>&#x2022; `reauth_timeout_hours` - Optional Block<br>Hours. Input Hours<br>See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
+<br><br>&#x2022; `reauth_timeout_days` - Optional Block<br>Days. Set Duration in days<br>See [Reauth Timeout Days](#reauth-timeout-days) below for details.
+<br><br>&#x2022; `reauth_timeout_hours` - Optional Block<br>Hours. Input Hours<br>See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

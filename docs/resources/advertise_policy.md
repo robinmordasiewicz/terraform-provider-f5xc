@@ -70,7 +70,7 @@ resource "f5xc_advertise_policy" "example" {
 
 -> **One of the following:**
 &#x2022; `port` - Optional Number<br>TCP/UDP Port. Port to advertise
-<br>&#x2022; `port_ranges` - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<br><br>&#x2022; `port_ranges` - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
 
 &#x2022; `protocol` - Optional String<br>Protocol. Protocol to advertise
 

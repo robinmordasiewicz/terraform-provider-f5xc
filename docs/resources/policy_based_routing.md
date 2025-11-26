@@ -68,7 +68,7 @@ resource "f5xc_policy_based_routing" "example" {
 
 -> **One of the following:**
 &#x2022; `forward_proxy_pbr` - Optional Block<br>L3/L4 routing rule. Network(L3/L4) routing policy rule<br>See [Forward Proxy Pbr](#forward-proxy-pbr) below for details.
-<br>&#x2022; `network_pbr` - Optional Block<br>Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule<br>See [Network Pbr](#network-pbr) below for details.
+<br><br>&#x2022; `network_pbr` - Optional Block<br>Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule<br>See [Network Pbr](#network-pbr) below for details.
 
 &#x2022; `forwarding_class_list` - Optional Block<br>Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match<br>See [Forwarding Class List](#forwarding-class-list) below for details.
 

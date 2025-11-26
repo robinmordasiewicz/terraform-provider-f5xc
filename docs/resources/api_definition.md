@@ -65,7 +65,7 @@ resource "f5xc_api_definition" "example" {
 
 -> **One of the following:**
 &#x2022; `mixed_schema_origin` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `strict_schema_origin` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `strict_schema_origin` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `non_api_endpoints` - Optional Block<br>API Discovery Exclusion List. List of Non-API Endpoints<br>See [Non API Endpoints](#non-api-endpoints) below for details.
 

@@ -71,41 +71,41 @@ resource "f5xc_fleet" "example" {
 
 -> **One of the following:**
 &#x2022; `allow_all_usb` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `deny_all_usb` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `usb_policy` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+<br><br>&#x2022; `deny_all_usb` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `usb_policy` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 &#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site<br>See [Blocked Services](#blocked-services) below for details.
 
 -> **One of the following:**
 &#x2022; `bond_device_list` - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
-<br>&#x2022; `no_bond_devices` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_bond_devices` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `dc_cluster_group` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#dc-cluster-group) below for details.
-<br>&#x2022; `dc_cluster_group_inside` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
-<br>&#x2022; `no_dc_cluster_group` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `dc_cluster_group_inside` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
+<br><br>&#x2022; `no_dc_cluster_group` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `default_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `device_list` - Optional Block<br>List of Devices. Add device for all interfaces belonging to this fleet<br>See [Device List](#device-list) below for details.
-<br>&#x2022; `interface_list` - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet<br>See [Interface List](#interface-list) below for details.
+<br><br>&#x2022; `device_list` - Optional Block<br>List of Devices. Add device for all interfaces belonging to this fleet<br>See [Device List](#device-list) below for details.
+<br><br>&#x2022; `interface_list` - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet<br>See [Interface List](#interface-list) below for details.
 
 -> **One of the following:**
 &#x2022; `default_sriov_interface` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `sriov_interfaces` - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration<br>See [Sriov Interfaces](#sriov-interfaces) below for details.
+<br><br>&#x2022; `sriov_interfaces` - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration<br>See [Sriov Interfaces](#sriov-interfaces) below for details.
 
 -> **One of the following:**
 &#x2022; `default_storage_class` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `storage_class_list` - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet<br>See [Storage Class List](#storage-class-list) below for details.
+<br><br>&#x2022; `storage_class_list` - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet<br>See [Storage Class List](#storage-class-list) below for details.
 
 -> **One of the following:**
 &#x2022; `disable_gpu` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_gpu` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_vgpu` - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU<br>See [Enable Vgpu](#enable-vgpu) below for details.
+<br><br>&#x2022; `enable_gpu` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enable_vgpu` - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU<br>See [Enable Vgpu](#enable-vgpu) below for details.
 
 -> **One of the following:**
 &#x2022; `disable_vm` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_vm` - Optional Block<br>VM Configuration. VMs support configuration
+<br><br>&#x2022; `enable_vm` - Optional Block<br>VM Configuration. VMs support configuration
 
 &#x2022; `enable_default_fleet_config_download` - Optional Bool<br>Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config
 
@@ -117,7 +117,7 @@ resource "f5xc_fleet" "example" {
 
 -> **One of the following:**
 &#x2022; `log_receiver` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Log Receiver](#log-receiver) below for details.
-<br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `network_connectors` - Optional Block<br>Network Connectors. Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet<br>See [Network Connectors](#network-connectors) below for details.
 
@@ -125,15 +125,15 @@ resource "f5xc_fleet" "example" {
 
 -> **One of the following:**
 &#x2022; `no_storage_device` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `storage_device_list` - Optional Block<br>Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet
+<br><br>&#x2022; `storage_device_list` - Optional Block<br>Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet
 
 -> **One of the following:**
 &#x2022; `no_storage_interfaces` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `storage_interface_list` - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet
+<br><br>&#x2022; `storage_interface_list` - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet
 
 -> **One of the following:**
 &#x2022; `no_storage_static_routes` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `storage_static_routes` - Optional Block<br>Storage Static Routes List. List of storage static routes
+<br><br>&#x2022; `storage_static_routes` - Optional Block<br>Storage Static Routes List. List of storage static routes
 
 &#x2022; `operating_system_version` - Optional String<br>Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config
 

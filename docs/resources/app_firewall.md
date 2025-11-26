@@ -78,29 +78,29 @@ resource "f5xc_app_firewall" "example" {
 
 -> **One of the following:**
 &#x2022; `ai_risk_based_blocking` - Optional Block<br>Risk-Based Blocking (Powered by AI) - Preview. All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode<br>See [Ai Risk Based Blocking](#ai-risk-based-blocking) below for details.
-<br>&#x2022; `default_detection_settings` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `detection_settings` - Optional Block<br>Detection Settings. Specifies detection settings to be used by WAF<br>See [Detection Settings](#detection-settings) below for details.
+<br><br>&#x2022; `default_detection_settings` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `detection_settings` - Optional Block<br>Detection Settings. Specifies detection settings to be used by WAF<br>See [Detection Settings](#detection-settings) below for details.
 
 -> **One of the following:**
 &#x2022; `allow_all_response_codes` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `allowed_response_codes` - Optional Block<br>Allowed Response Codes. List of HTTP response status codes that are allowed<br>See [Allowed Response Codes](#allowed-response-codes) below for details.
+<br><br>&#x2022; `allowed_response_codes` - Optional Block<br>Allowed Response Codes. List of HTTP response status codes that are allowed<br>See [Allowed Response Codes](#allowed-response-codes) below for details.
 
 -> **One of the following:**
 &#x2022; `blocking` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `monitoring` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `monitoring` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `blocking_page` - Optional Block<br>Custom Blocking Response Page. Custom blocking response page body<br>See [Blocking Page](#blocking-page) below for details.
-<br>&#x2022; `use_default_blocking_page` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `use_default_blocking_page` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `bot_protection_setting` - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#bot-protection-setting) below for details.
-<br>&#x2022; `default_bot_setting` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `default_bot_setting` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `custom_anonymization` - Optional Block<br>Anonymization Configuration. Anonymization settings which is a list of HTTP headers, parameters and cookies<br>See [Custom Anonymization](#custom-anonymization) below for details.
-<br>&#x2022; `default_anonymization` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `disable_anonymization` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `default_anonymization` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `disable_anonymization` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

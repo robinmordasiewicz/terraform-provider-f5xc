@@ -72,7 +72,7 @@ resource "f5xc_virtual_k8s" "example" {
 
 -> **One of the following:**
 &#x2022; `disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `isolated` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `isolated` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

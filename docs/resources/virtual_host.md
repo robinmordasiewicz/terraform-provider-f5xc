@@ -72,20 +72,20 @@ resource "f5xc_virtual_host" "example" {
 
 -> **One of the following:**
 &#x2022; `append_server_name` - Optional String<br>Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed
-<br>&#x2022; `default_header` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `pass_through` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `server_name` - Optional String<br>Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header
+<br><br>&#x2022; `default_header` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `pass_through` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `server_name` - Optional String<br>Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header
 
 -> **One of the following:**
 &#x2022; `authentication` - Optional Block<br>Authentication Details. Authentication related information. This allows to configure the URL to redirect after the authentication Authentication Object Reference, configuration of cookie params etc<br>See [Authentication](#authentication) below for details.
-<br>&#x2022; `no_authentication` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_authentication` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `buffer_policy` - Optional Block<br>Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence<br>See [Buffer Policy](#buffer-policy) below for details.
 
 -> **One of the following:**
 &#x2022; `captcha_challenge` - Optional Block<br>Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Captcha Challenge](#captcha-challenge) below for details.
-<br>&#x2022; `js_challenge` - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Js Challenge](#js-challenge) below for details.
-<br>&#x2022; `no_challenge` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `js_challenge` - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Js Challenge](#js-challenge) below for details.
+<br><br>&#x2022; `no_challenge` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `coalescing_options` - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#coalescing-options) below for details.
 
@@ -101,7 +101,7 @@ resource "f5xc_virtual_host" "example" {
 
 -> **One of the following:**
 &#x2022; `default_loadbalancer` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `non_default_loadbalancer` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `non_default_loadbalancer` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `disable_default_error_pages` - Optional Bool<br>Disable default error pages. An option to specify whether to disable using default F5XC error pages
 
@@ -109,7 +109,7 @@ resource "f5xc_virtual_host" "example" {
 
 -> **One of the following:**
 &#x2022; `disable_path_normalize` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_path_normalize` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enable_path_normalize` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `domains` - Optional List<br>Domains. A list of Domains (host/authority header) that will be matched to this Virtual Host. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the virtual host proxy type is TCP_PROXY_WITH_SNI/HTTPS_PROXY Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system
 
@@ -153,7 +153,7 @@ resource "f5xc_virtual_host" "example" {
 
 -> **One of the following:**
 &#x2022; `tls_cert_params` - Optional Block<br>Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store
-<br>&#x2022; `tls_parameters` - Optional Block<br>Downstream TLS Parameters. TLS configuration for downstream connections
+<br><br>&#x2022; `tls_parameters` - Optional Block<br>Downstream TLS Parameters. TLS configuration for downstream connections
 
 &#x2022; `user_identification` - Optional Block<br>User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited
 

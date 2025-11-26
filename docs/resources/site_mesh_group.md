@@ -71,12 +71,12 @@ resource "f5xc_site_mesh_group" "example" {
 
 -> **One of the following:**
 &#x2022; `disable_re_fallback` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_re_fallback` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enable_re_fallback` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `full_mesh` - Optional Block<br>Full Mesh. Details of Full Mesh Group Type<br>See [Full Mesh](#full-mesh) below for details.
-<br>&#x2022; `hub_mesh` - Optional Block<br>Hub Full Mesh. Details of Hub Full Mesh Group Type<br>See [Hub Mesh](#hub-mesh) below for details.
-<br>&#x2022; `spoke_mesh` - Optional Block<br>Spoke. Details of Spoke Mesh Group Type<br>See [Spoke Mesh](#spoke-mesh) below for details.
+<br><br>&#x2022; `hub_mesh` - Optional Block<br>Hub Full Mesh. Details of Hub Full Mesh Group Type<br>See [Hub Mesh](#hub-mesh) below for details.
+<br><br>&#x2022; `spoke_mesh` - Optional Block<br>Spoke. Details of Spoke Mesh Group Type<br>See [Spoke Mesh](#spoke-mesh) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

@@ -68,28 +68,28 @@ resource "f5xc_global_log_receiver" "example" {
 
 -> **One of the following:**
 &#x2022; `audit_logs` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `dns_logs` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `request_logs` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `security_events` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `dns_logs` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `request_logs` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `security_events` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `aws_cloud_watch_receiver` - Optional Block<br>AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver<br>See [AWS Cloud Watch Receiver](#aws-cloud-watch-receiver) below for details.
-<br>&#x2022; `azure_event_hubs_receiver` - Optional Block<br>Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver<br>See [Azure Event Hubs Receiver](#azure-event-hubs-receiver) below for details.
-<br>&#x2022; `azure_receiver` - Optional Block<br>Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver<br>See [Azure Receiver](#azure-receiver) below for details.
-<br>&#x2022; `datadog_receiver` - Optional Block<br>Datadog Configuration. Configuration for Datadog endpoint<br>See [Datadog Receiver](#datadog-receiver) below for details.
-<br>&#x2022; `gcp_bucket_receiver` - Optional Block<br>GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver<br>See [GCP Bucket Receiver](#gcp-bucket-receiver) below for details.
-<br>&#x2022; `http_receiver` - Optional Block<br>HTTP Configuration. Configuration for HTTP endpoint
-<br>&#x2022; `kafka_receiver` - Optional Block<br>Kafka Configuration. Kafka Configuration for Global Log Receiver
-<br>&#x2022; `new_relic_receiver` - Optional Block<br>NewRelic Configuration. Configuration for NewRelic endpoint
-<br>&#x2022; `qradar_receiver` - Optional Block<br>IBM QRadar Configuration. Configuration for IBM QRadar endpoint
-<br>&#x2022; `s3_receiver` - Optional Block<br>S3 Configuration. S3 Configuration for Global Log Receiver
-<br>&#x2022; `splunk_receiver` - Optional Block<br>Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint
-<br>&#x2022; `sumo_logic_receiver` - Optional Block<br>SumoLogic Configuration. Configuration for SumoLogic endpoint
+<br><br>&#x2022; `azure_event_hubs_receiver` - Optional Block<br>Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver<br>See [Azure Event Hubs Receiver](#azure-event-hubs-receiver) below for details.
+<br><br>&#x2022; `azure_receiver` - Optional Block<br>Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver<br>See [Azure Receiver](#azure-receiver) below for details.
+<br><br>&#x2022; `datadog_receiver` - Optional Block<br>Datadog Configuration. Configuration for Datadog endpoint<br>See [Datadog Receiver](#datadog-receiver) below for details.
+<br><br>&#x2022; `gcp_bucket_receiver` - Optional Block<br>GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver<br>See [GCP Bucket Receiver](#gcp-bucket-receiver) below for details.
+<br><br>&#x2022; `http_receiver` - Optional Block<br>HTTP Configuration. Configuration for HTTP endpoint
+<br><br>&#x2022; `kafka_receiver` - Optional Block<br>Kafka Configuration. Kafka Configuration for Global Log Receiver
+<br><br>&#x2022; `new_relic_receiver` - Optional Block<br>NewRelic Configuration. Configuration for NewRelic endpoint
+<br><br>&#x2022; `qradar_receiver` - Optional Block<br>IBM QRadar Configuration. Configuration for IBM QRadar endpoint
+<br><br>&#x2022; `s3_receiver` - Optional Block<br>S3 Configuration. S3 Configuration for Global Log Receiver
+<br><br>&#x2022; `splunk_receiver` - Optional Block<br>Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint
+<br><br>&#x2022; `sumo_logic_receiver` - Optional Block<br>SumoLogic Configuration. Configuration for SumoLogic endpoint
 
 -> **One of the following:**
 &#x2022; `ns_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `ns_current` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `ns_list` - Optional Block<br>Namespace List. Namespace List
+<br><br>&#x2022; `ns_current` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `ns_list` - Optional Block<br>Namespace List. Namespace List
 
 &#x2022; `timeouts` - Optional Block
 

@@ -57,25 +57,25 @@ resource "f5xc_proxy" "example" {
 
 -> **One of the following:**
 &#x2022; `active_forward_proxy_policies` - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br>&#x2022; `no_forward_proxy_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_forward_proxy_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `connection_timeout` - Optional Number  Defaults to `2000`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to upstream server.  The (2 seconds)
 
 -> **One of the following:**
 &#x2022; `do_not_advertise` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `site_virtual_sites` - Optional Block<br>Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites
+<br><br>&#x2022; `site_virtual_sites` - Optional Block<br>Advertise Site or Virtual Site. This defines a way to advertise a VIP on specific sites
 
 -> **One of the following:**
 &#x2022; `dynamic_proxy` - Optional Block<br>DynamicProxyType<br>See [Dynamic Proxy](#dynamic-proxy) below for details.
-<br>&#x2022; `http_proxy` - Optional Block<br>HTTP Connect Proxy. Parameters for HTTP Connect Proxy
+<br><br>&#x2022; `http_proxy` - Optional Block<br>HTTP Connect Proxy. Parameters for HTTP Connect Proxy
 
 -> **One of the following:**
 &#x2022; `no_interception` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `tls_intercept` - Optional Block<br>Configuration for TLS interception. Configuration to enable TLS interception
+<br><br>&#x2022; `tls_intercept` - Optional Block<br>Configuration for TLS interception. Configuration to enable TLS interception
 
 -> **One of the following:**
 &#x2022; `site_local_inside_network` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `site_local_network` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `site_local_network` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `timeouts` - Optional Block
 

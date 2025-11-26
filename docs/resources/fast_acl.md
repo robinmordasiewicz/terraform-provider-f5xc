@@ -70,7 +70,7 @@ resource "f5xc_fast_acl" "example" {
 
 -> **One of the following:**
 &#x2022; `re_acl` - Optional Block<br>Fast ACL for RE. Fast ACL definition for RE<br>See [RE ACL](#re-acl) below for details.
-<br>&#x2022; `site_acl` - Optional Block<br>Fast ACL for Site. Fast ACL definition for Site<br>See [Site ACL](#site-acl) below for details.
+<br><br>&#x2022; `site_acl` - Optional Block<br>Fast ACL for Site. Fast ACL definition for Site<br>See [Site ACL](#site-acl) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

@@ -68,40 +68,40 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 -> **One of the following:**
 &#x2022; `action_allow` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `action_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `action_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `destination_prefix_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `destination_prefix_single` - Optional String<br>Prefix. Prefix
+<br><br>&#x2022; `destination_prefix_single` - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
 &#x2022; `fragments_allow` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `fragments_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `fragments_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `protocol_ah` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `protocol_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `protocol_esp` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `protocol_gre` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `protocol_icmp` - Optional Block<br>ICMP Protocol. x-required ICMP Protocol<br>See [Protocol ICMP](#protocol-icmp) below for details.
-<br>&#x2022; `protocol_icmp6` - Optional Block<br>ICMP6 Protocol. x-required ICMP6 Protocol<br>See [Protocol Icmp6](#protocol-icmp6) below for details.
-<br>&#x2022; `protocol_ipv6` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `protocol_tcp` - Optional Block<br>TCP Protocol. x-required TCP Protocol<br>See [Protocol TCP](#protocol-tcp) below for details.
-<br>&#x2022; `protocol_udp` - Optional Block<br>UDP Protocol. x-required UDP Protocol<br>See [Protocol UDP](#protocol-udp) below for details.
+<br><br>&#x2022; `protocol_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `protocol_esp` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `protocol_gre` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `protocol_icmp` - Optional Block<br>ICMP Protocol. x-required ICMP Protocol<br>See [Protocol ICMP](#protocol-icmp) below for details.
+<br><br>&#x2022; `protocol_icmp6` - Optional Block<br>ICMP6 Protocol. x-required ICMP6 Protocol<br>See [Protocol Icmp6](#protocol-icmp6) below for details.
+<br><br>&#x2022; `protocol_ipv6` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `protocol_tcp` - Optional Block<br>TCP Protocol. x-required TCP Protocol<br>See [Protocol TCP](#protocol-tcp) below for details.
+<br><br>&#x2022; `protocol_udp` - Optional Block<br>UDP Protocol. x-required UDP Protocol<br>See [Protocol UDP](#protocol-udp) below for details.
 
 -> **One of the following:**
 &#x2022; `source_prefix_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `source_prefix_single` - Optional String<br>Prefix. Prefix
+<br><br>&#x2022; `source_prefix_single` - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
 &#x2022; `state_off` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `state_on` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `state_on` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
 &#x2022; `version_ipv4` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `version_ipv6` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `version_ipv6` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 

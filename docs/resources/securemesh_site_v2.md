@@ -68,54 +68,54 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 -> **One of the following:**
 &#x2022; `active_enhanced_firewall_policies` - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
-<br>&#x2022; `no_network_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_network_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `active_forward_proxy_policies` - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br>&#x2022; `no_forward_proxy` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_forward_proxy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `admin_user_credentials` - Optional Block<br>Admin User Credentials. Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access<br>See [Admin User Credentials](#admin-user-credentials) below for details.
 
 -> **One of the following:**
 &#x2022; `aws` - Optional Block<br>AWS Provider Type. AWS Provider Type<br>See [AWS](#aws) below for details.
-<br>&#x2022; `azure` - Optional Block<br>Azure Provider Type. Azure Provider Type<br>See [Azure](#azure) below for details.
-<br>&#x2022; `baremetal` - Optional Block<br>Baremetal Provider Type. Baremetal Provider Type
-<br>&#x2022; `equinix` - Optional Block<br>Equinix Provider Type. Equinix Provider Type
-<br>&#x2022; `gcp` - Optional Block<br>GCP Provider Type. GCP Provider Type
-<br>&#x2022; `kvm` - Optional Block<br>KVM Provider Type. KVM Provider Type
-<br>&#x2022; `nutanix` - Optional Block<br>Nutanix Provider Type. Nutanix Provider Type
-<br>&#x2022; `oci` - Optional Block<br>OCI Provider Type. OCI Provider Type
-<br>&#x2022; `openstack` - Optional Block<br>Openstack Provider Type. Openstack Provider Type
-<br>&#x2022; `vmware` - Optional Block<br>VMware Provider Type. VMware Provider Type
+<br><br>&#x2022; `azure` - Optional Block<br>Azure Provider Type. Azure Provider Type<br>See [Azure](#azure) below for details.
+<br><br>&#x2022; `baremetal` - Optional Block<br>Baremetal Provider Type. Baremetal Provider Type
+<br><br>&#x2022; `equinix` - Optional Block<br>Equinix Provider Type. Equinix Provider Type
+<br><br>&#x2022; `gcp` - Optional Block<br>GCP Provider Type. GCP Provider Type
+<br><br>&#x2022; `kvm` - Optional Block<br>KVM Provider Type. KVM Provider Type
+<br><br>&#x2022; `nutanix` - Optional Block<br>Nutanix Provider Type. Nutanix Provider Type
+<br><br>&#x2022; `oci` - Optional Block<br>OCI Provider Type. OCI Provider Type
+<br><br>&#x2022; `openstack` - Optional Block<br>Openstack Provider Type. Openstack Provider Type
+<br><br>&#x2022; `vmware` - Optional Block<br>VMware Provider Type. VMware Provider Type
 
 -> **One of the following:**
 &#x2022; `block_all_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site
+<br><br>&#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site
 
 -> **One of the following:**
 &#x2022; `custom_proxy` - Optional Block<br>Custom Enterprise Proxy. Custom Enterprise Proxy
-<br>&#x2022; `f5_proxy` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `f5_proxy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `custom_proxy_bypass` - Optional Block<br>Proxy Bypass. List of domains to bypass the proxy
-<br>&#x2022; `no_proxy_bypass` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_proxy_bypass` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `dc_cluster_group_sli` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `no_s2s_connectivity_sli` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_s2s_connectivity_sli` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `dc_cluster_group_slo` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `no_s2s_connectivity_slo` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `site_mesh_group_on_slo` - Optional Block<br>Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used
+<br><br>&#x2022; `no_s2s_connectivity_slo` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `site_mesh_group_on_slo` - Optional Block<br>Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used
 
 -> **One of the following:**
 &#x2022; `disable_ha` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_ha` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enable_ha` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `disable_url_categorization` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_url_categorization` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enable_url_categorization` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `dns_ntp_config` - Optional Block<br>DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site
 
@@ -125,7 +125,7 @@ resource "f5xc_securemesh_site_v2" "example" {
 
 -> **One of the following:**
 &#x2022; `log_receiver` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `offline_survivability_mode` - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 

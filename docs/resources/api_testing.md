@@ -72,8 +72,8 @@ resource "f5xc_api_testing" "example" {
 
 -> **One of the following:**
 &#x2022; `every_day` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `every_month` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `every_week` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `every_month` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `every_week` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

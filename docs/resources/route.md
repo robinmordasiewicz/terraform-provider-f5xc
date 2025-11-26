@@ -212,7 +212,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#routes-request-cookies-to-add-secret-value) below.
 
@@ -248,7 +248,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Request Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -320,7 +320,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -362,7 +362,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Response Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -600,7 +600,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off. See [Back Off](#routes-route-destination-retry-policy-back-off) below.
 
-`num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry (`Number`).
+`num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Retries can be done any number of times. An exponential back-off algorithm is used between each retry. Defaults to `1` (`Number`).
 
 `per_try_timeout` - (Optional) Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds (`Number`).
 
@@ -614,7 +614,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `base_interval` - (Optional) Base Retry Interval. Specifies the base interval between retries in milliseconds (`Number`).
 
-`max_interval` - (Optional) Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The default is 10 times the base_interval (`Number`).
+`max_interval` - (Optional) Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The times the base_interval. Defaults to `10` (`Number`).
 
 <a id="routes-route-destination-spdy-config"></a>
 

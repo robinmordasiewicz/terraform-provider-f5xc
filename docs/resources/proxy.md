@@ -59,7 +59,7 @@ resource "f5xc_proxy" "example" {
 &#x2022; `active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
 <br>&#x2022; `no_forward_proxy_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The (2 seconds). Defaults to `2000` (`Number`).
 
 -> **One of the following:**
 &#x2022; `do_not_advertise` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
@@ -173,7 +173,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dynamic Proxy HTTP Proxy More Option Compression Params**
 
-`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
+`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30` (`Number`).
 
 `content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML' (`List`).
 
@@ -187,7 +187,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value) below.
 
@@ -223,7 +223,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dynamic Proxy HTTP Proxy More Option Request Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -295,7 +295,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -337,7 +337,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dynamic Proxy HTTP Proxy More Option Response Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -427,7 +427,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dynamic Proxy HTTPS Proxy More Option Compression Params**
 
-`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
+`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30` (`Number`).
 
 `content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML' (`List`).
 
@@ -441,7 +441,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value) below.
 
@@ -477,7 +477,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dynamic Proxy HTTPS Proxy More Option Request Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -549,7 +549,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -591,7 +591,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dynamic Proxy HTTPS Proxy More Option Response Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -813,7 +813,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Proxy More Option Compression Params**
 
-`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
+`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30` (`Number`).
 
 `content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML' (`List`).
 
@@ -827,7 +827,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#http-proxy-more-option-request-cookies-to-add-secret-value) below.
 
@@ -863,7 +863,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Proxy More Option Request Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -935,7 +935,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -977,7 +977,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Proxy More Option Response Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 

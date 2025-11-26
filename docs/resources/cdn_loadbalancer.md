@@ -2386,7 +2386,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`exact_path` - (Optional) Path. Specifies the exact path to GraphQL endpoint. Default value is /GraphQL (`String`).
+`exact_path` - (Optional) Path. Specifies the exact path to GraphQL endpoint. Defaults to `/GraphQL` (`String`).
 
 `exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
@@ -3004,7 +3004,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Other Settings Header Options Request Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -3042,7 +3042,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Other Settings Header Options Response Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -3590,7 +3590,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_request_timeout` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`request_headers_timeout` - (Optional) Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds. This setting provides protection against Slowloris attacks (`Number`).
+`request_headers_timeout` - (Optional) Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The milliseconds. This setting provides protection against Slowloris attacks. Defaults to `10000` (`Number`).
 
 `request_timeout` - (Optional) Custom Timeout (`Number`).
 

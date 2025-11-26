@@ -3516,7 +3516,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `circuit_breaker` - (Optional) Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly. See [Circuit Breaker](#default-pool-advanced-options-circuit-breaker) below.
 
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The default value is 2 seconds (`Number`).
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The seconds. Defaults to `2` (`Number`).
 
 `default_circuit_breaker` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3538,7 +3538,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `http2_options` - (Optional) Http2 Protocol Options. Http2 Protocol options for upstream connections. See [Http2 Options](#default-pool-advanced-options-http2-options) below.
 
-`http_idle_timeout` - (Optional) HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 5 minutes (`Number`).
+`http_idle_timeout` - (Optional) HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The minutes. Defaults to `5` (`Number`).
 
 `no_panic_threshold` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -3616,15 +3616,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Default Pool Advanced Options Outlier Detection**
 
-`base_ejection_time` - (Optional) Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Defaults to 30000ms or 30s. Specified in milliseconds (`Number`).
+`base_ejection_time` - (Optional) Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Specified in milliseconds. Defaults to `30000ms` (`Number`).
 
-`consecutive_5xx` - (Optional) Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to 5 (`Number`).
+`consecutive_5xx` - (Optional) Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs. Defaults to `5` (`Number`).
 
-`consecutive_gateway_failure` - (Optional) Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to 5 (`Number`).
+`consecutive_gateway_failure` - (Optional) Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to `5` (`Number`).
 
-`interval` - (Optional) Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Defaults to 10000ms or 10s. Specified in milliseconds (`Number`).
+`interval` - (Optional) Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service. Specified in milliseconds. Defaults to `10000ms` (`Number`).
 
-`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. Defaults to 10% but will eject at least one host regardless of the value (`Number`).
+`max_ejection_percent` - (Optional) Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. but will eject at least one host regardless of the value. Defaults to `10%` (`Number`).
 
 <a id="default-pool-healthcheck"></a>
 
@@ -4404,7 +4404,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `any_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`exact_path` - (Optional) Path. Specifies the exact path to GraphQL endpoint. Default value is /GraphQL (`String`).
+`exact_path` - (Optional) Path. Specifies the exact path to GraphQL endpoint. Defaults to `/GraphQL` (`String`).
 
 `exact_value` - (Optional) Exact Value. Exact domain name (`String`).
 
@@ -4460,7 +4460,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#https-coalescing-options) below.
 
-`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The minutes. Defaults to `2` (`Number`).
 
 `default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -4748,7 +4748,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#https-auto-cert-coalescing-options) below.
 
-`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The default value is 2 minutes (`Number`).
+`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The minutes. Defaults to `2` (`Number`).
 
 `default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -5168,7 +5168,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **More Option Compression Params**
 
-`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The default value is 30 (`Number`).
+`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30` (`Number`).
 
 `content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML' (`List`).
 
@@ -5182,7 +5182,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#more-option-request-cookies-to-add-secret-value) below.
 
@@ -5218,7 +5218,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **More Option Request Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -5290,7 +5290,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -5332,7 +5332,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **More Option Response Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -6362,7 +6362,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#routes-simple-route-advanced-options-request-cookies-to-add-secret-value) below.
 
@@ -6398,7 +6398,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Simple Route Advanced Options Request Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -6470,7 +6470,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. Default value is do not overwrite (`Bool`).
+`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
 
 `samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
@@ -6512,7 +6512,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes Simple Route Advanced Options Response Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append (`Bool`).
+`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
 
 `name` - (Optional) Name. Name of the HTTP header (`String`).
 
@@ -6552,7 +6552,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off. See [Back Off](#routes-simple-route-advanced-options-retry-policy-back-off) below.
 
-`num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Defaults to 1. Retries can be done any number of times. An exponential back-off algorithm is used between each retry (`Number`).
+`num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Retries can be done any number of times. An exponential back-off algorithm is used between each retry. Defaults to `1` (`Number`).
 
 `per_try_timeout` - (Optional) Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds (`Number`).
 
@@ -6566,7 +6566,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `base_interval` - (Optional) Base Retry Interval. Specifies the base interval between retries in milliseconds (`Number`).
 
-`max_interval` - (Optional) Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The default is 10 times the base_interval (`Number`).
+`max_interval` - (Optional) Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The times the base_interval. Defaults to `10` (`Number`).
 
 <a id="routes-simple-route-advanced-options-specific-hash-policy"></a>
 
@@ -6900,7 +6900,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `disable_request_timeout` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 
-`request_headers_timeout` - (Optional) Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds. This setting provides protection against Slowloris attacks (`Number`).
+`request_headers_timeout` - (Optional) Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The milliseconds. This setting provides protection against Slowloris attacks. Defaults to `10000` (`Number`).
 
 `request_timeout` - (Optional) Custom Timeout (`Number`).
 

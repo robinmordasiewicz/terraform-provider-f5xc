@@ -124,7 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Oidc V10 Spec Type**
 
-`allowed_clock_skew` - (Optional) Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens. Default value is zero (`String`).
+`allowed_clock_skew` - (Optional) Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens. Defaults to `zero` (`String`).
 
 `authorization_url` - (Optional) Authorization URL. The authorization URL of your OIDC application (`String`).
 

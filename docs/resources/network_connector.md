@@ -87,9 +87,9 @@ In addition to all arguments above, the following attributes are exported:
 
 **Enable Forward Proxy**
 
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds) (`Number`).
+`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The (2 seconds). Defaults to `2000` (`Number`).
 
-`max_connect_attempts` - (Optional) Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to 1 (`Number`).
+`max_connect_attempts` - (Optional) Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to `1` (`Number`).
 
 `no_interception` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
 

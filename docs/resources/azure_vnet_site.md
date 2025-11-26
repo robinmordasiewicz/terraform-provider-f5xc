@@ -512,7 +512,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `other_subscription` - (Optional) Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription. See [Other Subscription](#ingress-egress-gw-hub-express-route-enabled-connections-other-subscription) below.
 
-`weight` - (Optional) Routing Weight. The weight (or priority) for the routes received from this connection. The default value is 10 (`Number`).
+`weight` - (Optional) Routing Weight. The weight (or priority) for the routes received from this connection. The. Defaults to `10` (`Number`).
 
 <a id="ingress-egress-gw-hub-express-route-enabled-connections-metadata"></a>
 
@@ -1060,7 +1060,7 @@ In addition to all arguments above, the following attributes are exported:
 
 `other_subscription` - (Optional) Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription. See [Other Subscription](#ingress-egress-gw-ar-hub-express-route-enabled-connections-other-subscription) below.
 
-`weight` - (Optional) Routing Weight. The weight (or priority) for the routes received from this connection. The default value is 10 (`Number`).
+`weight` - (Optional) Routing Weight. The weight (or priority) for the routes received from this connection. The. Defaults to `10` (`Number`).
 
 <a id="ingress-egress-gw-ar-hub-express-route-enabled-connections-metadata"></a>
 

@@ -31,8 +31,13 @@ type F5XCProvider struct {
 
 // F5XCProviderModel describes the provider data model.
 type F5XCProviderModel struct {
-	APIToken types.String `tfsdk:"api_token"`
-	APIURL   types.String `tfsdk:"api_url"`
+	APIToken     types.String `tfsdk:"api_token"`
+	APIURL       types.String `tfsdk:"api_url"`
+	APIP12File   types.String `tfsdk:"api_p12_file"`
+	P12Password  types.String `tfsdk:"p12_password"`
+	APICert      types.String `tfsdk:"api_cert"`
+	APIKey       types.String `tfsdk:"api_key"`
+	APICACert    types.String `tfsdk:"api_ca_cert"`
 }
 
 func (p *F5XCProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
@@ -46,14 +51,46 @@ func (p *F5XCProvider) Schema(ctx context.Context, req provider.SchemaRequest, r
 			"for load balancers, security policies, sites, and networking. Community-maintained provider " +
 			"built from public F5 API documentation.",
 		Attributes: map[string]schema.Attribute{
-			"api_token": schema.StringAttribute{
-				MarkdownDescription: "F5 Distributed Cloud API Token. Can also be set via F5XC_API_TOKEN environment variable.",
-				Optional:            true,
-				Sensitive:           true,
-			},
 			"api_url": schema.StringAttribute{
 				MarkdownDescription: "F5 Distributed Cloud API URL. Defaults to https://console.ves.volterra.io/api. " +
 					"Can also be set via F5XC_API_URL environment variable.",
+				Optional: true,
+			},
+			"api_token": schema.StringAttribute{
+				MarkdownDescription: "F5 Distributed Cloud API Token for token-based authentication. " +
+					"Can also be set via F5XC_API_TOKEN environment variable. " +
+					"Either api_token or api_p12_file/api_cert must be specified.",
+				Optional:  true,
+				Sensitive: true,
+			},
+			"api_p12_file": schema.StringAttribute{
+				MarkdownDescription: "Path to PKCS#12 certificate bundle file for certificate-based authentication. " +
+					"Can also be set via F5XC_API_P12_FILE environment variable. " +
+					"When using P12 authentication, p12_password must also be provided.",
+				Optional:  true,
+				Sensitive: false,
+			},
+			"p12_password": schema.StringAttribute{
+				MarkdownDescription: "Password for the PKCS#12 certificate bundle. " +
+					"Can also be set via F5XC_P12_PASSWORD environment variable.",
+				Optional:  true,
+				Sensitive: true,
+			},
+			"api_cert": schema.StringAttribute{
+				MarkdownDescription: "Path to PEM-encoded client certificate file for certificate-based authentication. " +
+					"Can also be set via F5XC_API_CERT environment variable. " +
+					"When using certificate authentication, api_key must also be provided.",
+				Optional: true,
+			},
+			"api_key": schema.StringAttribute{
+				MarkdownDescription: "Path to PEM-encoded client private key file for certificate-based authentication. " +
+					"Can also be set via F5XC_API_KEY environment variable.",
+				Optional:  true,
+				Sensitive: true,
+			},
+			"api_ca_cert": schema.StringAttribute{
+				MarkdownDescription: "Path to PEM-encoded CA certificate file for verifying the F5XC API server. " +
+					"Can also be set via F5XC_API_CA_CERT environment variable. Optional.",
 				Optional: true,
 			},
 		},
@@ -71,17 +108,36 @@ func (p *F5XCProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 		return
 	}
 
-	// Check for environment variables if not set in configuration
-	apiToken := os.Getenv("F5XC_API_TOKEN")
+	// Get configuration values from environment variables first
 	apiURL := os.Getenv("F5XC_API_URL")
+	apiToken := os.Getenv("F5XC_API_TOKEN")
+	apiP12File := os.Getenv("F5XC_API_P12_FILE")
+	p12Password := os.Getenv("F5XC_P12_PASSWORD")
+	apiCert := os.Getenv("F5XC_API_CERT")
+	apiKey := os.Getenv("F5XC_API_KEY")
+	apiCACert := os.Getenv("F5XC_API_CA_CERT")
 
 	// Configuration values override environment variables
+	if !config.APIURL.IsNull() {
+		apiURL = config.APIURL.ValueString()
+	}
 	if !config.APIToken.IsNull() {
 		apiToken = config.APIToken.ValueString()
 	}
-
-	if !config.APIURL.IsNull() {
-		apiURL = config.APIURL.ValueString()
+	if !config.APIP12File.IsNull() {
+		apiP12File = config.APIP12File.ValueString()
+	}
+	if !config.P12Password.IsNull() {
+		p12Password = config.P12Password.ValueString()
+	}
+	if !config.APICert.IsNull() {
+		apiCert = config.APICert.ValueString()
+	}
+	if !config.APIKey.IsNull() {
+		apiKey = config.APIKey.ValueString()
+	}
+	if !config.APICACert.IsNull() {
+		apiCACert = config.APICACert.ValueString()
 	}
 
 	// Set default API URL if not provided
@@ -89,26 +145,63 @@ func (p *F5XCProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 		apiURL = "https://console.ves.volterra.io/api"
 	}
 
-	// Validate that API token is provided
-	if apiToken == "" {
-		resp.Diagnostics.AddAttributeError(
-			path.Root("api_token"),
-			"Missing F5XC API Token",
-			"The provider cannot create the F5XC API client as there is a missing or empty value for the F5XC API token. "+
-				"Set the api_token value in the configuration or use the F5XC_API_TOKEN environment variable. "+
-				"If either is already set, ensure the value is not empty.",
+	var c *client.Client
+	var err error
+
+	// Determine authentication method
+	switch {
+	case apiP12File != "":
+		// P12 certificate authentication
+		if p12Password == "" {
+			resp.Diagnostics.AddAttributeError(
+				path.Root("p12_password"),
+				"Missing P12 Password",
+				"When using P12 certificate authentication (api_p12_file), the p12_password must be provided. "+
+					"Set the p12_password value in the configuration or use the F5XC_P12_PASSWORD environment variable.",
+			)
+			return
+		}
+		c, err = client.NewClientWithP12(apiURL, apiP12File, p12Password)
+		if err != nil {
+			resp.Diagnostics.AddError(
+				"Failed to Create F5XC Client",
+				"Could not create F5XC client with P12 certificate: "+err.Error(),
+			)
+			return
+		}
+		tflog.Info(ctx, "Configured F5XC client with P12 certificate authentication", map[string]any{"success": true, "api_url": apiURL})
+
+	case apiCert != "" && apiKey != "":
+		// PEM certificate/key authentication
+		c, err = client.NewClientWithCert(apiURL, apiCert, apiKey, apiCACert)
+		if err != nil {
+			resp.Diagnostics.AddError(
+				"Failed to Create F5XC Client",
+				"Could not create F5XC client with certificate: "+err.Error(),
+			)
+			return
+		}
+		tflog.Info(ctx, "Configured F5XC client with certificate authentication", map[string]any{"success": true, "api_url": apiURL})
+
+	case apiToken != "":
+		// API token authentication
+		c = client.NewClient(apiURL, apiToken)
+		tflog.Info(ctx, "Configured F5XC client with API token authentication", map[string]any{"success": true, "api_url": apiURL})
+
+	default:
+		resp.Diagnostics.AddError(
+			"Missing Authentication Configuration",
+			"The provider requires authentication. Please configure one of the following:\n"+
+				"  - api_token (or F5XC_API_TOKEN environment variable) for API token authentication\n"+
+				"  - api_p12_file and p12_password (or F5XC_API_P12_FILE and F5XC_P12_PASSWORD environment variables) for P12 certificate authentication\n"+
+				"  - api_cert and api_key (or F5XC_API_CERT and F5XC_API_KEY environment variables) for PEM certificate authentication",
 		)
 		return
 	}
 
-	// Create the F5XC client
-	c := client.NewClient(apiURL, apiToken)
-
 	// Make the client available during DataSource and Resource type Configure methods
 	resp.DataSourceData = c
 	resp.ResourceData = c
-
-	tflog.Info(ctx, "Configured F5XC client", map[string]any{"success": true, "api_url": apiURL})
 }
 
 func (p *F5XCProvider) Resources(ctx context.Context) []func() resource.Resource {

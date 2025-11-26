@@ -12,7 +12,13 @@ This is a community-maintained provider built from public F5 API documentation.
 
 ## Authenticating to F5 Distributed Cloud
 
-The F5XC Terraform provider supports authentication using an API Token. Learn more about [how to generate an API token](https://docs.cloud.f5.com/docs/how-to/user-mgmt/credentials).
+The F5XC Terraform provider supports multiple authentication methods:
+
+1. **API Token** - Simplest method using a personal API token
+2. **P12 Certificate** - Certificate-based authentication using PKCS#12 bundle
+3. **PEM Certificate** - Certificate-based authentication using separate cert/key files
+
+Learn more about [how to generate API credentials](https://docs.cloud.f5.com/docs/how-to/user-mgmt/credentials).
 
 ## Example Usage
 
@@ -20,43 +26,95 @@ The F5XC Terraform provider supports authentication using an API Token. Learn mo
 
 ## Argument Reference
 
-* `api_token` - (Required) F5 Distributed Cloud API Token (`String`, Sensitive). This can also be sourced from the `F5XC_API_TOKEN` environment variable.
+### Required (one of the following authentication methods)
 
-* `api_url` - (Optional) F5 Distributed Cloud API URL (`String`). Defaults to `https://console.ves.volterra.io/api`. This can also be sourced from the `F5XC_API_URL` environment variable.
+* `api_token` - F5 Distributed Cloud API Token (`String`, Sensitive). Can also be set via `F5XC_API_TOKEN` environment variable.
 
-### Authentication Options
+* `api_p12_file` - Path to PKCS#12 certificate bundle file (`String`). Can also be set via `F5XC_API_P12_FILE` environment variable. Requires `p12_password`.
 
-**Option 1: Provider Configuration**
+* `api_cert` and `api_key` - Paths to PEM-encoded certificate and private key files (`String`). Can also be set via `F5XC_API_CERT` and `F5XC_API_KEY` environment variables.
 
-Set credentials directly in the provider block:
+### Optional
+
+* `api_url` - F5 Distributed Cloud API URL (`String`). Defaults to `https://console.ves.volterra.io/api`. Can also be set via `F5XC_API_URL` environment variable.
+
+* `p12_password` - Password for PKCS#12 certificate bundle (`String`, Sensitive). Required when using `api_p12_file`. Can also be set via `F5XC_P12_PASSWORD` environment variable.
+
+* `api_ca_cert` - Path to PEM-encoded CA certificate file (`String`). Optional, used for server certificate verification. Can also be set via `F5XC_API_CA_CERT` environment variable.
+
+## Authentication Options
+
+### Option 1: API Token Authentication
+
+The simplest authentication method using a personal API token.
+
+**Provider Configuration:**
 
 ```hcl
 provider "f5xc" {
-  api_token = "your-api-token"
   api_url   = "https://your-tenant.console.ves.volterra.io/api"
+  api_token = var.f5xc_api_token
 }
 ```
 
-**Option 2: Environment Variables**
-
-Set credentials using environment variables:
+**Environment Variables:**
 
 ```bash
-export F5XC_API_TOKEN="your-api-token"
 export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export F5XC_API_TOKEN="your-api-token"
 ```
 
-Then configure the provider without credentials:
+### Option 2: P12 Certificate Authentication
+
+Certificate-based authentication using a PKCS#12 bundle downloaded from F5 Distributed Cloud.
+
+**Provider Configuration:**
 
 ```hcl
-provider "f5xc" {}
+provider "f5xc" {
+  api_url      = "https://your-tenant.console.ves.volterra.io/api"
+  api_p12_file = "/path/to/certificate.p12"
+  p12_password = var.f5xc_p12_password
+}
+```
+
+**Environment Variables:**
+
+```bash
+export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export F5XC_API_P12_FILE="/path/to/certificate.p12"
+export F5XC_P12_PASSWORD="your-p12-password"
+```
+
+### Option 3: PEM Certificate Authentication
+
+Certificate-based authentication using separate PEM-encoded certificate and key files.
+
+**Provider Configuration:**
+
+```hcl
+provider "f5xc" {
+  api_url     = "https://your-tenant.console.ves.volterra.io/api"
+  api_cert    = "/path/to/certificate.crt"
+  api_key     = "/path/to/private.key"
+  api_ca_cert = "/path/to/ca-certificate.crt"  # Optional
+}
+```
+
+**Environment Variables:**
+
+```bash
+export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+export F5XC_API_CERT="/path/to/certificate.crt"
+export F5XC_API_KEY="/path/to/private.key"
+export F5XC_API_CA_CERT="/path/to/ca-certificate.crt"  # Optional
 ```
 
 -> **Note:** Environment variables are the recommended approach for CI/CD pipelines and to avoid storing sensitive credentials in version control.
 
 ## Getting Started
 
-1. **Generate an API Token**: Navigate to your F5 Distributed Cloud console, go to **Administration** > **Personal Management** > **Credentials**, and create a new API Token.
+1. **Generate API Credentials**: Navigate to your F5 Distributed Cloud console, go to **Administration** > **Personal Management** > **Credentials**, and create either an API Token or download a certificate bundle.
 
 2. **Configure the Provider**: Add the provider configuration to your Terraform files using one of the authentication options above.
 

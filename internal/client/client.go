@@ -6,11 +6,17 @@ package client
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
+	"fmt"
 	"io"
 	"math"
 	"net/http"
+	"os"
 	"time"
+
+	"golang.org/x/crypto/pkcs12"
 
 	f5xcerrors "github.com/f5xc/terraform-provider-f5xc/internal/errors"
 )
@@ -24,10 +30,21 @@ const (
 	DefaultRateLimitDelay = 60 * time.Second
 )
 
+// AuthType represents the authentication method used by the client
+type AuthType int
+
+const (
+	// AuthTypeToken uses API token authentication
+	AuthTypeToken AuthType = iota
+	// AuthTypeCertificate uses TLS client certificate authentication
+	AuthTypeCertificate
+)
+
 // Client manages communication with the F5 Distributed Cloud API
 type Client struct {
 	BaseURL      string
 	APIToken     string
+	AuthType     AuthType
 	HTTPClient   *http.Client
 	MaxRetries   int
 	RetryWaitMin time.Duration
@@ -59,11 +76,110 @@ func WithRetryWait(min, max time.Duration) ClientOption {
 	}
 }
 
-// NewClient creates a new F5 Distributed Cloud API client
+// WithTLSConfig sets a custom TLS configuration on the HTTP client
+func WithTLSConfig(tlsConfig *tls.Config) ClientOption {
+	return func(c *Client) {
+		c.HTTPClient.Transport = &http.Transport{
+			TLSClientConfig: tlsConfig,
+		}
+		c.AuthType = AuthTypeCertificate
+	}
+}
+
+// LoadP12Certificate loads a PKCS#12 certificate file and returns a TLS config
+func LoadP12Certificate(p12File, password string) (*tls.Config, error) {
+	p12Data, err := os.ReadFile(p12File)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read P12 file: %w", err)
+	}
+
+	blocks, err := pkcs12.ToPEM(p12Data, password)
+	if err != nil {
+		return nil, fmt.Errorf("failed to decode P12 file: %w", err)
+	}
+
+	var pemKey, pemCert []byte
+	var caCerts []*x509.Certificate
+
+	for _, block := range blocks {
+		switch block.Type {
+		case "PRIVATE KEY":
+			pemKey = append(pemKey, []byte("-----BEGIN PRIVATE KEY-----\n")...)
+			pemKey = append(pemKey, block.Bytes...)
+			pemKey = append(pemKey, []byte("\n-----END PRIVATE KEY-----\n")...)
+		case "CERTIFICATE":
+			cert, err := x509.ParseCertificate(block.Bytes)
+			if err != nil {
+				return nil, fmt.Errorf("failed to parse certificate: %w", err)
+			}
+			// Check if this is a CA certificate or the client certificate
+			if cert.IsCA {
+				caCerts = append(caCerts, cert)
+			} else {
+				pemCert = append(pemCert, []byte("-----BEGIN CERTIFICATE-----\n")...)
+				pemCert = append(pemCert, block.Bytes...)
+				pemCert = append(pemCert, []byte("\n-----END CERTIFICATE-----\n")...)
+			}
+		}
+	}
+
+	if len(pemKey) == 0 || len(pemCert) == 0 {
+		return nil, fmt.Errorf("P12 file missing required key or certificate")
+	}
+
+	tlsCert, err := tls.X509KeyPair(pemCert, pemKey)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create X509 key pair: %w", err)
+	}
+
+	// Create CA pool
+	caCertPool := x509.NewCertPool()
+	for _, caCert := range caCerts {
+		caCertPool.AddCert(caCert)
+	}
+
+	tlsConfig := &tls.Config{
+		Certificates: []tls.Certificate{tlsCert},
+		RootCAs:      caCertPool,
+		MinVersion:   tls.VersionTLS12,
+	}
+
+	return tlsConfig, nil
+}
+
+// LoadCertificateKeyPair loads PEM-encoded certificate and key files
+func LoadCertificateKeyPair(certFile, keyFile, caFile string) (*tls.Config, error) {
+	tlsCert, err := tls.LoadX509KeyPair(certFile, keyFile)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load certificate/key pair: %w", err)
+	}
+
+	tlsConfig := &tls.Config{
+		Certificates: []tls.Certificate{tlsCert},
+		MinVersion:   tls.VersionTLS12,
+	}
+
+	if caFile != "" {
+		caCert, err := os.ReadFile(caFile)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read CA certificate: %w", err)
+		}
+		caCertPool := x509.NewCertPool()
+		if !caCertPool.AppendCertsFromPEM(caCert) {
+			return nil, fmt.Errorf("failed to parse CA certificate")
+		}
+		tlsConfig.RootCAs = caCertPool
+	}
+
+	return tlsConfig, nil
+}
+
+// NewClient creates a new F5 Distributed Cloud API client with token authentication
 func NewClient(baseURL, apiToken string, opts ...ClientOption) *Client {
 	c := &Client{
 		BaseURL:      baseURL,
 		APIToken:     apiToken,
+		AuthType:     AuthTypeToken,
 		MaxRetries:   DefaultMaxRetries,
 		RetryWaitMin: DefaultRetryWaitMin,
 		RetryWaitMax: DefaultRetryWaitMax,
@@ -77,6 +193,62 @@ func NewClient(baseURL, apiToken string, opts ...ClientOption) *Client {
 	}
 
 	return c
+}
+
+// NewClientWithP12 creates a new F5 Distributed Cloud API client with P12 certificate authentication
+func NewClientWithP12(baseURL, p12File, p12Password string, opts ...ClientOption) (*Client, error) {
+	tlsConfig, err := LoadP12Certificate(p12File, p12Password)
+	if err != nil {
+		return nil, err
+	}
+
+	c := &Client{
+		BaseURL:      baseURL,
+		AuthType:     AuthTypeCertificate,
+		MaxRetries:   DefaultMaxRetries,
+		RetryWaitMin: DefaultRetryWaitMin,
+		RetryWaitMax: DefaultRetryWaitMax,
+		HTTPClient: &http.Client{
+			Timeout: DefaultTimeout,
+			Transport: &http.Transport{
+				TLSClientConfig: tlsConfig,
+			},
+		},
+	}
+
+	for _, opt := range opts {
+		opt(c)
+	}
+
+	return c, nil
+}
+
+// NewClientWithCert creates a new F5 Distributed Cloud API client with PEM certificate authentication
+func NewClientWithCert(baseURL, certFile, keyFile, caFile string, opts ...ClientOption) (*Client, error) {
+	tlsConfig, err := LoadCertificateKeyPair(certFile, keyFile, caFile)
+	if err != nil {
+		return nil, err
+	}
+
+	c := &Client{
+		BaseURL:      baseURL,
+		AuthType:     AuthTypeCertificate,
+		MaxRetries:   DefaultMaxRetries,
+		RetryWaitMin: DefaultRetryWaitMin,
+		RetryWaitMax: DefaultRetryWaitMax,
+		HTTPClient: &http.Client{
+			Timeout: DefaultTimeout,
+			Transport: &http.Transport{
+				TLSClientConfig: tlsConfig,
+			},
+		},
+	}
+
+	for _, opt := range opts {
+		opt(c)
+	}
+
+	return c, nil
 }
 
 // Metadata represents common metadata fields
@@ -141,7 +313,11 @@ func (c *Client) doRequest(ctx context.Context, method, path string, body interf
 			return nil, f5xcerrors.WrapError(err, "request", "create")
 		}
 
-		req.Header.Set("Authorization", "APIToken "+c.APIToken)
+		// Only set Authorization header for token-based authentication
+		// Certificate-based authentication uses TLS client certificates instead
+		if c.AuthType == AuthTypeToken && c.APIToken != "" {
+			req.Header.Set("Authorization", "APIToken "+c.APIToken)
+		}
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Accept", "application/json")
 

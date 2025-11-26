@@ -35,7 +35,7 @@ resource "f5xc_http_loadbalancer" "example" {
 
   advertise_on_public_default_vip = true
 
-  // One of the arguments from this list "api_definition api_definitions api_specification disable_api_definition" must be set
+  // One of the arguments from this list "api_specification disable_api_definition" must be set
 
   disable_api_definition = true
 

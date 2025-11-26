@@ -16,6 +16,27 @@ import (
 	"strings"
 )
 
+// uppercaseAcronyms defines acronyms that should be fully uppercase
+var uppercaseAcronyms = map[string]bool{
+	"http": true, "https": true, "dns": true, "tcp": true, "udp": true,
+	"tls": true, "ssl": true, "api": true, "url": true, "uri": true,
+	"ip": true, "bgp": true, "jwt": true, "acl": true, "waf": true,
+	"cdn": true, "aws": true, "gcp": true, "vpc": true, "tgw": true,
+	"vnet": true, "ce": true, "re": true, "lb": true, "vip": true,
+	"sni": true, "cors": true, "xss": true, "csrf": true, "oidc": true,
+	"saml": true, "ssh": true, "nfs": true, "ntp": true, "pem": true,
+	"rsa": true, "ecdsa": true, "id": true, "apm": true, "irule": true,
+}
+
+// mixedCaseAcronyms defines acronyms with specific mixed case
+var mixedCaseAcronyms = map[string]string{
+	"mtls": "mTLS", "oauth": "OAuth", "graphql": "GraphQL",
+	"websocket": "WebSocket", "javascript": "JavaScript", "typescript": "TypeScript",
+	"github": "GitHub", "gitlab": "GitLab", "devops": "DevOps",
+	"fastcgi": "FastCGI", "modsecurity": "ModSecurity", "hashicorp": "HashiCorp",
+	"bigip": "BigIP",
+}
+
 type SchemaInfo struct {
 	ResourceName string
 	TypeName     string
@@ -1517,7 +1538,14 @@ func truncateDescription(desc string, maxLen int) string {
 func toHumanName(resourceName string) string {
 	words := strings.Split(resourceName, "_")
 	for i, word := range words {
-		words[i] = strings.Title(word)
+		lower := strings.ToLower(word)
+		if uppercaseAcronyms[lower] {
+			words[i] = strings.ToUpper(word)
+		} else if replacement, ok := mixedCaseAcronyms[lower]; ok {
+			words[i] = replacement
+		} else {
+			words[i] = strings.Title(word)
+		}
 	}
 	return strings.Join(words, " ")
 }

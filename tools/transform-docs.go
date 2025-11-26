@@ -215,6 +215,57 @@ var categoryPatterns = []struct {
 	{"usb_policy", "Service Mesh"},
 }
 
+// resourceAPIPathMap maps resource names to their F5 API documentation paths
+// Built dynamically from OpenAPI spec filenames at startup
+var resourceAPIPathMap = make(map[string]string)
+
+// buildResourceAPIPathMap scans the OpenAPI spec directory and builds a mapping
+// from resource names to their API documentation paths
+// Example: "http_loadbalancer" -> "views-http-loadbalancer"
+func buildResourceAPIPathMap() {
+	specDir := "docs/specifications/api"
+	files, err := filepath.Glob(filepath.Join(specDir, "*.json"))
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Warning: Could not scan OpenAPI specs: %v\n", err)
+		return
+	}
+
+	// Pattern: docs-cloud-f5-com.XXXX.public.ves.io.schema.{path}.ves-swagger.json
+	specRegex := regexp.MustCompile(`docs-cloud-f5-com\.\d+\.public\.ves\.io\.schema\.(.+)\.ves-swagger\.json`)
+
+	for _, file := range files {
+		base := filepath.Base(file)
+		matches := specRegex.FindStringSubmatch(base)
+		if matches == nil || len(matches) < 2 {
+			continue
+		}
+
+		// Extract schema path (e.g., "views.http_loadbalancer" or "namespace")
+		schemaPath := matches[1]
+
+		// Get resource name (last component of schema path)
+		parts := strings.Split(schemaPath, ".")
+		resourceName := parts[len(parts)-1]
+
+		// Convert schema path to URL format: dots -> hyphens, underscores -> hyphens
+		urlPath := strings.ReplaceAll(schemaPath, ".", "-")
+		urlPath = strings.ReplaceAll(urlPath, "_", "-")
+
+		resourceAPIPathMap[resourceName] = urlPath
+	}
+
+	fmt.Printf("Built API path mapping for %d resources\n", len(resourceAPIPathMap))
+}
+
+// getResourceAPIDocURL returns the F5 API documentation URL for a resource
+// Returns empty string if no mapping exists
+func getResourceAPIDocURL(resourceName string) string {
+	if urlPath, ok := resourceAPIPathMap[resourceName]; ok {
+		return fmt.Sprintf("https://docs.cloud.f5.com/docs-v2/api/%s", urlPath)
+	}
+	return ""
+}
+
 // getSubcategory returns the subcategory for a resource based on filename
 // Uses a three-tier approach:
 // 1. Check explicit overrides first (for exceptions)
@@ -268,6 +319,9 @@ type docWarning struct {
 // eliminates the need for page splitting functionality
 
 func main() {
+	// Build resource-to-API-path mapping from OpenAPI specs
+	buildResourceAPIPathMap()
+
 	docsDir := "docs/resources"
 	var docWarnings []docWarning
 
@@ -636,6 +690,10 @@ func convertNestedBlockAnchor(nestedPath string) string {
 func transformAnchorsOnly(filePath string, content string) error {
 	lines := strings.Split(content, "\n")
 
+	// Get resource name for API documentation link
+	resourceName := strings.TrimSuffix(filepath.Base(filePath), ".md")
+	apiDocURL := getResourceAPIDocURL(resourceName)
+
 	// First pass: identify which anchors have content in this file
 	anchorsWithContent := make(map[string]bool)
 	allAnchors := make(map[string]bool)
@@ -659,6 +717,14 @@ func transformAnchorsOnly(filePath string, content string) error {
 
 	for i := 0; i < len(lines); i++ {
 		line := lines[i]
+
+		// Replace generic API documentation link with resource-specific link
+		if strings.Contains(line, "F5 XC API Documentation") && apiDocURL != "" {
+			// Format the resource name for display (convert underscore to space and title case)
+			displayName := strings.ReplaceAll(resourceName, "_", " ")
+			displayName = strings.Title(displayName)
+			line = fmt.Sprintf("~> **Note** Please refer to [%s API docs](%s) to learn more.", displayName, apiDocURL)
+		}
 
 		// Check if this is an anchor line
 		if m := anchorRegex.FindStringSubmatch(line); m != nil {
@@ -828,16 +894,31 @@ func transformDoc(filePath string) error {
 	// Get subcategory for this resource
 	subcategory := getSubcategory(filePath)
 
-	// Write everything before Schema section, updating subcategory if needed
+	// Get resource name from file path for API documentation link
+	resourceName := strings.TrimSuffix(filepath.Base(filePath), ".md")
+	apiDocURL := getResourceAPIDocURL(resourceName)
+
+	// Generic API link pattern to replace
+	genericAPILink := "~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/)."
+
+	// Write everything before Schema section, updating subcategory and API link if needed
 	for i := 0; i < schemaStart; i++ {
 		line := lines[i]
 		// Replace empty subcategory with assigned category
 		if strings.HasPrefix(line, "subcategory:") && subcategory != "" {
 			line = fmt.Sprintf("subcategory: \"%s\"", subcategory)
 		}
+		// Replace generic API documentation link with resource-specific link
+		if strings.Contains(line, "F5 XC API Documentation") && apiDocURL != "" {
+			// Format the resource name for display (convert underscore to space and title case)
+			displayName := strings.ReplaceAll(resourceName, "_", " ")
+			displayName = strings.Title(displayName)
+			line = fmt.Sprintf("~> **Note** Please refer to [%s API docs](%s) to learn more.", displayName, apiDocURL)
+		}
 		output.WriteString(line)
 		output.WriteString("\n")
 	}
+	_ = genericAPILink // suppress unused variable warning (used for documentation)
 
 	// Process the Schema section
 	output.WriteString("## Argument Reference\n\n")

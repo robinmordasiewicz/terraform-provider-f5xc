@@ -49,6 +49,84 @@ type OneOfGroup struct {
 	Description string   // Description of the group
 }
 
+// NamespaceType represents the type of namespace a resource should use
+type NamespaceType int
+
+const (
+	NamespaceSystem      NamespaceType = iota // Infrastructure, sites, networks
+	NamespaceShared                           // Cross-app policies, security
+	NamespaceApplication                      // Application workloads (staging/production)
+)
+
+// getNamespaceForResource returns the appropriate namespace based on F5XC best practices:
+// - system: Infrastructure objects (sites, networks, fleet, cluster, cloud credentials)
+// - shared: Cross-app security policies (app_firewall, certificates, rate_limiters)
+// - application: App-specific workloads (load balancers, origin pools, healthchecks)
+func getNamespaceForResource(resourceName string) (NamespaceType, string) {
+	// System namespace: Infrastructure-level objects
+	systemResources := map[string]bool{
+		// Site resources
+		"aws_vpc_site": true, "azure_vnet_site": true, "gcp_vpc_site": true,
+		"securemesh_site": true, "securemesh_site_v2": true, "voltstack_site": true,
+		"aws_tgw_site": true,
+		// Network infrastructure
+		"virtual_network": true, "network_interface": true, "network_connector": true,
+		"subnet": true, "tunnel": true, "network_firewall": true,
+		// Fleet and cluster management
+		"fleet": true, "cluster": true, "dc_cluster_group": true, "site_mesh_group": true,
+		// Cloud infrastructure
+		"cloud_credentials": true, "cloud_connect": true, "cloud_link": true, "cloud_elastic_ip": true,
+		// BGP and routing
+		"bgp": true, "bgp_asn_set": true, "bgp_routing_policy": true, "route": true,
+		// Core system resources
+		"namespace": true, "virtual_site": true, "global_log_receiver": true,
+		"tenant_configuration": true, "tenant_profile": true, "role": true,
+		"k8s_cluster": true, "k8s_cluster_role": true, "k8s_cluster_role_binding": true,
+	}
+
+	// Shared namespace: Cross-team/application reusable resources
+	sharedResources := map[string]bool{
+		// Security policies
+		"app_firewall": true, "waf_exclusion_policy": true,
+		"service_policy": true, "service_policy_rule": true,
+		"sensitive_data_policy": true, "secret_policy": true, "secret_policy_rule": true,
+		// Certificates and trust
+		"certificate": true, "certificate_chain": true, "trusted_ca_list": true, "crl": true,
+		// Rate limiting
+		"rate_limiter": true, "rate_limiter_policy": true,
+		// User identification and mitigation
+		"user_identification": true, "malicious_user_mitigation": true,
+		// Bot defense
+		"bot_defense_app_infrastructure": true,
+		// API definitions (shared across apps)
+		"api_definition": true, "data_type": true,
+		// Network policy sets
+		"ip_prefix_set": true, "geo_location_set": true,
+		// Protocol inspection
+		"protocol_inspection": true, "protocol_policer": true,
+		// Forward proxy
+		"forward_proxy_policy": true,
+		// Alert configuration
+		"alert_policy": true, "alert_receiver": true,
+	}
+
+	if systemResources[resourceName] {
+		return NamespaceSystem, "system"
+	}
+	if sharedResources[resourceName] {
+		return NamespaceShared, "shared"
+	}
+	// Default to application namespace for workload resources
+	return NamespaceApplication, "staging"
+}
+
+// getNamespaceForReference returns the appropriate namespace for a resource reference
+// based on what type of resource is being referenced
+func getNamespaceForReference(referencedResourceType string) string {
+	_, ns := getNamespaceForResource(referencedResourceType)
+	return ns
+}
+
 func main() {
 	providerDir := "internal/provider"
 	examplesDir := "examples/resources"
@@ -242,11 +320,14 @@ func generateExample(resourceName string, schema *SchemaInfo) string {
 	sb.WriteString(fmt.Sprintf("# %s Resource Example\n", humanName))
 	sb.WriteString(fmt.Sprintf("# %s\n\n", schema.Description))
 
+	// Get the appropriate namespace for this resource type
+	_, namespace := getNamespaceForResource(resourceName)
+
 	// Generate basic example
 	sb.WriteString(fmt.Sprintf("# Basic %s configuration\n", humanName))
 	sb.WriteString(fmt.Sprintf("resource \"f5xc_%s\" \"example\" {\n", resourceName))
 	sb.WriteString(fmt.Sprintf("  name      = \"example-%s\"\n", strings.ReplaceAll(resourceName, "_", "-")))
-	sb.WriteString("  namespace = \"system\"\n\n")
+	sb.WriteString(fmt.Sprintf("  namespace = \"%s\"\n\n", namespace))
 
 	// Add labels
 	sb.WriteString("  labels = {\n")
@@ -319,7 +400,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  rate_limit {\n")
 		sb.WriteString("    rate_limiter {\n")
 		sb.WriteString("      name      = \"example-rate-limiter\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("rate_limiter")))
 		sb.WriteString("    }\n")
 		sb.WriteString("    no_ip_allowed_list {}\n")
 		sb.WriteString("  }\n\n")
@@ -329,7 +410,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  active_service_policies {\n")
 		sb.WriteString("    policies {\n")
 		sb.WriteString("      name      = \"example-service-policy\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("service_policy")))
 		sb.WriteString("    }\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  // One of the arguments from this list \"disable_threat_mesh enable_threat_mesh\" must be set\n\n")
@@ -339,12 +420,12 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  // One of the arguments from this list \"user_id_client_ip user_identification\" must be set\n\n")
 		sb.WriteString("  user_identification {\n")
 		sb.WriteString("    name      = \"example-user-identification\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("user_identification")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  // One of the arguments from this list \"app_firewall disable_waf\" must be set\n\n")
 		sb.WriteString("  app_firewall {\n")
 		sb.WriteString("    name      = \"example-app-firewall\"\n")
-		sb.WriteString("    namespace = \"shared\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("app_firewall")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  // One of the arguments from this list \"bot_defense bot_defense_advanced disable_bot_defense\" must be set\n\n")
 		sb.WriteString("  bot_defense {\n")
@@ -363,7 +444,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  default_route_pools {\n")
 		sb.WriteString("    pool {\n")
 		sb.WriteString("      name      = \"example-origin-pool\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("origin_pool")))
 		sb.WriteString("    }\n")
 		sb.WriteString("    weight   = 1\n")
 		sb.WriteString("    priority = 1\n")
@@ -391,7 +472,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("        // One of the arguments from this list \"site virtual_site\" must be set\n\n")
 		sb.WriteString("        site {\n")
 		sb.WriteString("          name      = \"example-site\"\n")
-		sb.WriteString("          namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("          namespace = \"%s\"\n", getNamespaceForReference("securemesh_site")))
 		sb.WriteString("        }\n")
 		sb.WriteString("      }\n")
 		sb.WriteString("    }\n")
@@ -413,7 +494,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  // Health check configuration\n")
 		sb.WriteString("  healthcheck {\n")
 		sb.WriteString("    name      = \"example-healthcheck\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("healthcheck")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  // Load balancing configuration\n")
 		sb.WriteString("  endpoint_selection     = \"LOCAL_PREFERRED\"\n")
@@ -475,7 +556,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # AWS credentials reference\n")
 		sb.WriteString("  aws_cred {\n")
 		sb.WriteString("    name      = \"aws-credentials\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("cloud_credentials")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # VPC configuration\n")
 		sb.WriteString("  vpc {\n")
@@ -512,7 +593,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Azure credentials reference\n")
 		sb.WriteString("  azure_cred {\n")
 		sb.WriteString("    name      = \"azure-credentials\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("cloud_credentials")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Resource group\n")
 		sb.WriteString("  resource_group = \"f5xc-rg\"\n\n")
@@ -551,7 +632,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # GCP credentials reference\n")
 		sb.WriteString("  cloud_credentials {\n")
 		sb.WriteString("    name      = \"gcp-credentials\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("cloud_credentials")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Instance type\n")
 		sb.WriteString("  instance_type = \"n1-standard-4\"\n\n")
@@ -596,7 +677,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  origin_pools_weights {\n")
 		sb.WriteString("    pool {\n")
 		sb.WriteString("      name      = \"example-tcp-pool\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("origin_pool")))
 		sb.WriteString("    }\n")
 		sb.WriteString("    weight = 1\n")
 		sb.WriteString("  }\n\n")
@@ -640,18 +721,18 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # DNS zone reference\n")
 		sb.WriteString("  dns_zone {\n")
 		sb.WriteString("    name      = \"example-dns-zone\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("dns_zone")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Rule-based load balancing\n")
 		sb.WriteString("  rule_list {\n")
 		sb.WriteString("    rules {\n")
 		sb.WriteString("      geo_location_set {\n")
 		sb.WriteString("        name      = \"us-geo\"\n")
-		sb.WriteString("        namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("        namespace = \"%s\"\n", getNamespaceForReference("geo_location_set")))
 		sb.WriteString("      }\n")
 		sb.WriteString("      pool {\n")
 		sb.WriteString("        name      = \"us-pool\"\n")
-		sb.WriteString("        namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("        namespace = \"%s\"\n", getNamespaceForReference("dns_lb_pool")))
 		sb.WriteString("      }\n")
 		sb.WriteString("      score = 100\n")
 		sb.WriteString("    }\n")
@@ -662,7 +743,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Alert receivers\n")
 		sb.WriteString("  receivers {\n")
 		sb.WriteString("    name      = \"slack-receiver\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("alert_receiver")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Alert routes\n")
 		sb.WriteString("  routes {\n")
@@ -709,7 +790,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  sli_to_global_dr {\n")
 		sb.WriteString("    global_vn {\n")
 		sb.WriteString("      name      = \"global-network\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("virtual_network")))
 		sb.WriteString("    }\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Disable forward proxy\n")
@@ -727,7 +808,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("      destinations {\n")
 		sb.WriteString("        cluster {\n")
 		sb.WriteString("          name      = \"api-cluster\"\n")
-		sb.WriteString("          namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("          namespace = \"%s\"\n", getNamespaceForReference("cluster")))
 		sb.WriteString("        }\n")
 		sb.WriteString("        weight = 100\n")
 		sb.WriteString("      }\n")
@@ -754,7 +835,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("    site {\n")
 		sb.WriteString("      ref {\n")
 		sb.WriteString("        name      = \"example-site\"\n")
-		sb.WriteString("        namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("        namespace = \"%s\"\n", getNamespaceForReference("securemesh_site")))
 		sb.WriteString("      }\n")
 		sb.WriteString("      network_type = \"VIRTUAL_NETWORK_SITE_LOCAL_INSIDE\"\n")
 		sb.WriteString("    }\n")
@@ -862,7 +943,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("      source_prefix_list {\n")
 		sb.WriteString("        ip_prefix_set {\n")
 		sb.WriteString("          name      = \"trusted-ips\"\n")
-		sb.WriteString("          namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("          namespace = \"%s\"\n", getNamespaceForReference("ip_prefix_set")))
 		sb.WriteString("        }\n")
 		sb.WriteString("      }\n")
 		sb.WriteString("      all_traffic {}\n")
@@ -898,7 +979,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Virtual site reference\n")
 		sb.WriteString("  virtual_site {\n")
 		sb.WriteString("    name      = \"example-virtual-site\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("virtual_site")))
 		sb.WriteString("  }\n")
 
 	case "voltstack_site":
@@ -906,7 +987,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Kubernetes configuration\n")
 		sb.WriteString("  k8s_cluster {\n")
 		sb.WriteString("    name      = \"example-k8s-cluster\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("k8s_cluster")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Master nodes configuration\n")
 		sb.WriteString("  master_nodes = [\"master1.example.com\"]\n\n")
@@ -928,13 +1009,13 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  use_custom_cluster_role_bindings {\n")
 		sb.WriteString("    cluster_role_bindings {\n")
 		sb.WriteString("      name      = \"admin-binding\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("k8s_cluster_role_binding")))
 		sb.WriteString("    }\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  cluster_wide_app_list {\n")
 		sb.WriteString("    cluster_wide_apps {\n")
 		sb.WriteString("      name      = \"nginx-ingress\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("k8s_cluster")))
 		sb.WriteString("    }\n")
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  local_access_config {\n")
@@ -947,14 +1028,14 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("\n  // Virtual site selection for workload deployment\n")
 		sb.WriteString("  vsite_refs {\n")
 		sb.WriteString("    name      = \"example-virtual-site\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("virtual_site")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  // One of the arguments from this list \"disabled isolated\" must be set\n\n")
 		sb.WriteString("  isolated {}\n\n")
 		sb.WriteString("  // Default workload flavor reference\n")
 		sb.WriteString("  default_flavor_ref {\n")
 		sb.WriteString("    name      = \"example-workload-flavor\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("workload_flavor")))
 		sb.WriteString("  }\n")
 
 	case "virtual_network":
@@ -974,11 +1055,11 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Network connectors\n")
 		sb.WriteString("  inside_virtual_network {\n")
 		sb.WriteString("    name      = \"inside-network\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("virtual_network")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  outside_virtual_network {\n")
 		sb.WriteString("    name      = \"outside-network\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("virtual_network")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Default config\n")
 		sb.WriteString("  default_config {}\n")
@@ -998,7 +1079,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  deploy_on_re {\n")
 		sb.WriteString("    virtual_site {\n")
 		sb.WriteString("      name      = \"example-virtual-site\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("virtual_site")))
 		sb.WriteString("    }\n")
 		sb.WriteString("  }\n")
 
@@ -1013,7 +1094,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  origin_pools_weights {\n")
 		sb.WriteString("    pool {\n")
 		sb.WriteString("      name      = \"dns-pool\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("origin_pool")))
 		sb.WriteString("    }\n")
 		sb.WriteString("    weight = 1\n")
 		sb.WriteString("  }\n\n")
@@ -1097,7 +1178,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Site reference\n")
 		sb.WriteString("  site {\n")
 		sb.WriteString("    name      = \"example-site\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("securemesh_site")))
 		sb.WriteString("  }\n")
 
 	case "tunnel":
@@ -1114,7 +1195,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # Site reference\n")
 		sb.WriteString("  site {\n")
 		sb.WriteString("    name      = \"example-site\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("securemesh_site")))
 		sb.WriteString("  }\n")
 
 	case "securemesh_site":
@@ -1142,7 +1223,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("  # AWS credentials\n")
 		sb.WriteString("  aws_cred {\n")
 		sb.WriteString("    name      = \"aws-credentials\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("cloud_credentials")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # VPC configuration\n")
 		sb.WriteString("  vpc {\n")
@@ -1261,11 +1342,14 @@ func isComplexResource(resourceName string) bool {
 func generateAdvancedExample(resourceName string, schema *SchemaInfo) string {
 	var sb strings.Builder
 
+	// Get the appropriate namespace for this resource type
+	_, namespace := getNamespaceForResource(resourceName)
+
 	humanName := toHumanName(resourceName)
 	sb.WriteString(fmt.Sprintf("\n# Advanced %s with additional configuration\n", humanName))
 	sb.WriteString(fmt.Sprintf("resource \"f5xc_%s\" \"advanced\" {\n", resourceName))
 	sb.WriteString(fmt.Sprintf("  name      = \"advanced-%s\"\n", strings.ReplaceAll(resourceName, "_", "-")))
-	sb.WriteString("  namespace = \"system\"\n\n")
+	sb.WriteString(fmt.Sprintf("  namespace = \"%s\"\n\n", namespace))
 
 	sb.WriteString("  labels = {\n")
 	sb.WriteString("    environment = \"staging\"\n")
@@ -1297,7 +1381,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("      site {\n")
 		sb.WriteString("        site {\n")
 		sb.WriteString("          name      = \"example-ce-site\"\n")
-		sb.WriteString("          namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("          namespace = \"%s\"\n", getNamespaceForReference("securemesh_site")))
 		sb.WriteString("        }\n")
 		sb.WriteString("        network = \"SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP\"\n")
 		sb.WriteString("      }\n")
@@ -1308,7 +1392,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("  default_route_pools {\n")
 		sb.WriteString("    pool {\n")
 		sb.WriteString("      name      = \"primary-pool\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("origin_pool")))
 		sb.WriteString("    }\n")
 		sb.WriteString("    weight   = 80\n")
 		sb.WriteString("    priority = 1\n")
@@ -1316,7 +1400,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("  default_route_pools {\n")
 		sb.WriteString("    pool {\n")
 		sb.WriteString("      name      = \"secondary-pool\"\n")
-		sb.WriteString("      namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("      namespace = \"%s\"\n", getNamespaceForReference("origin_pool")))
 		sb.WriteString("    }\n")
 		sb.WriteString("    weight   = 20\n")
 		sb.WriteString("    priority = 2\n")
@@ -1333,7 +1417,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("  # WAF configuration\n")
 		sb.WriteString("  app_firewall {\n")
 		sb.WriteString("    name      = \"example-waf\"\n")
-		sb.WriteString("    namespace = \"shared\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("app_firewall")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Service policies\n")
 		sb.WriteString("  active_service_policies {\n")
@@ -1386,7 +1470,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("      site_locator {\n")
 		sb.WriteString("        site {\n")
 		sb.WriteString("          name      = \"example-site\"\n")
-		sb.WriteString("          namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("          namespace = \"%s\"\n", getNamespaceForReference("securemesh_site")))
 		sb.WriteString("        }\n")
 		sb.WriteString("      }\n")
 		sb.WriteString("      vk8s_networks {}\n")
@@ -1408,7 +1492,7 @@ func addAdvancedConfig(sb *strings.Builder, resourceName string) {
 		sb.WriteString("  # Health check\n")
 		sb.WriteString("  healthcheck {\n")
 		sb.WriteString("    name      = \"example-healthcheck\"\n")
-		sb.WriteString("    namespace = \"system\"\n")
+		sb.WriteString(fmt.Sprintf("    namespace = \"%s\"\n", getNamespaceForReference("healthcheck")))
 		sb.WriteString("  }\n\n")
 		sb.WriteString("  # Advanced load balancing\n")
 		sb.WriteString("  endpoint_selection     = \"LOCAL_PREFERRED\"\n")

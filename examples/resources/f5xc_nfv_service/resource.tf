@@ -4,7 +4,7 @@
 # Basic Nfv Service configuration
 resource "f5xc_nfv_service" "example" {
   name      = "example-nfv-service"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

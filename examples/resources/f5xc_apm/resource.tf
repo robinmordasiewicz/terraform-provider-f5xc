@@ -4,7 +4,7 @@
 # Basic Apm configuration
 resource "f5xc_apm" "example" {
   name      = "example-apm"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

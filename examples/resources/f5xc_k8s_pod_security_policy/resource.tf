@@ -4,7 +4,7 @@
 # Basic K8s Pod Security Policy configuration
 resource "f5xc_k8s_pod_security_policy" "example" {
   name      = "example-k8s-pod-security-policy"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

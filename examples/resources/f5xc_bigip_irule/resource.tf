@@ -4,7 +4,7 @@
 # Basic Bigip Irule configuration
 resource "f5xc_bigip_irule" "example" {
   name      = "example-bigip-irule"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

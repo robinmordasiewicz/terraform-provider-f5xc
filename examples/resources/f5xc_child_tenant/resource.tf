@@ -4,7 +4,7 @@
 # Basic Child Tenant configuration
 resource "f5xc_child_tenant" "example" {
   name      = "example-child-tenant"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

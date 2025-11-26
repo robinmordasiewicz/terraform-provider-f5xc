@@ -4,7 +4,7 @@
 # Basic Healthcheck configuration
 resource "f5xc_healthcheck" "example" {
   name      = "example-healthcheck"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

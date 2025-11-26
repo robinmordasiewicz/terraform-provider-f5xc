@@ -4,7 +4,7 @@
 # Basic Ip Prefix Set configuration
 resource "f5xc_ip_prefix_set" "example" {
   name      = "example-ip-prefix-set"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

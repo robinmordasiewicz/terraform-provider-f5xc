@@ -4,7 +4,7 @@
 # Basic Dns Lb Health Check configuration
 resource "f5xc_dns_lb_health_check" "example" {
   name      = "example-dns-lb-health-check"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

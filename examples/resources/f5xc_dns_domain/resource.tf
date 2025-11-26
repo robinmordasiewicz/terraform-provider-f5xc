@@ -4,7 +4,7 @@
 # Basic Dns Domain configuration
 resource "f5xc_dns_domain" "example" {
   name      = "example-dns-domain"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

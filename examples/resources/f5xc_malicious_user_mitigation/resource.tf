@@ -4,7 +4,7 @@
 # Basic Malicious User Mitigation configuration
 resource "f5xc_malicious_user_mitigation" "example" {
   name      = "example-malicious-user-mitigation"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

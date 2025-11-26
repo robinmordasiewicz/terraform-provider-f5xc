@@ -4,7 +4,7 @@
 # Basic Api Credential configuration
 resource "f5xc_api_credential" "example" {
   name      = "example-api-credential"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

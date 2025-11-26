@@ -4,7 +4,7 @@
 # Basic Report Config configuration
 resource "f5xc_report_config" "example" {
   name      = "example-report-config"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

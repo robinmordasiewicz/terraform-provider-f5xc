@@ -4,7 +4,7 @@
 # Basic Rate Limiter Policy configuration
 resource "f5xc_rate_limiter_policy" "example" {
   name      = "example-rate-limiter-policy"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

@@ -4,7 +4,7 @@
 # Basic App Firewall configuration
 resource "f5xc_app_firewall" "example" {
   name      = "example-app-firewall"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

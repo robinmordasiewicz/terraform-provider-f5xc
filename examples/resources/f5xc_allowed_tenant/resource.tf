@@ -4,7 +4,7 @@
 # Basic Allowed Tenant configuration
 resource "f5xc_allowed_tenant" "example" {
   name      = "example-allowed-tenant"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

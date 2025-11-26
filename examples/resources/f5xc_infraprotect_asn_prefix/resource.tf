@@ -4,7 +4,7 @@
 # Basic Infraprotect Asn Prefix configuration
 resource "f5xc_infraprotect_asn_prefix" "example" {
   name      = "example-infraprotect-asn-prefix"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -4,7 +4,7 @@
 # Basic Irule configuration
 resource "f5xc_irule" "example" {
   name      = "example-irule"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

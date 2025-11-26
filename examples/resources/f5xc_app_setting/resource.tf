@@ -4,7 +4,7 @@
 # Basic App Setting configuration
 resource "f5xc_app_setting" "example" {
   name      = "example-app-setting"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

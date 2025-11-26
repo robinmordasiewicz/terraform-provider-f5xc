@@ -4,7 +4,7 @@
 # Basic Protocol Policer configuration
 resource "f5xc_protocol_policer" "example" {
   name      = "example-protocol-policer"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

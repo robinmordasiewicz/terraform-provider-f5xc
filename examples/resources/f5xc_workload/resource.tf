@@ -4,7 +4,7 @@
 # Basic Workload configuration
 resource "f5xc_workload" "example" {
   name      = "example-workload"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

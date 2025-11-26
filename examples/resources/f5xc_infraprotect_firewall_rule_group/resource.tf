@@ -4,7 +4,7 @@
 # Basic Infraprotect Firewall Rule Group configuration
 resource "f5xc_infraprotect_firewall_rule_group" "example" {
   name      = "example-infraprotect-firewall-rule-group"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

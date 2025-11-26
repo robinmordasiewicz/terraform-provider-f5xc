@@ -4,7 +4,7 @@
 # Basic Customer Support configuration
 resource "f5xc_customer_support" "example" {
   name      = "example-customer-support"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

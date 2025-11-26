@@ -4,7 +4,7 @@
 # Basic Code Base Integration configuration
 resource "f5xc_code_base_integration" "example" {
   name      = "example-code-base-integration"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -4,7 +4,7 @@
 # Basic Contact configuration
 resource "f5xc_contact" "example" {
   name      = "example-contact"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -4,7 +4,7 @@
 # Basic External Connector configuration
 resource "f5xc_external_connector" "example" {
   name      = "example-external-connector"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

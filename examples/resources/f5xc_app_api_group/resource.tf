@@ -4,7 +4,7 @@
 # Basic App Api Group configuration
 resource "f5xc_app_api_group" "example" {
   name      = "example-app-api-group"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

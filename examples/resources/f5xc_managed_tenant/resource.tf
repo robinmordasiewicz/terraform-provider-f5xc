@@ -4,7 +4,7 @@
 # Basic Managed Tenant configuration
 resource "f5xc_managed_tenant" "example" {
   name      = "example-managed-tenant"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -4,7 +4,7 @@
 # Basic Ticket Tracking System configuration
 resource "f5xc_ticket_tracking_system" "example" {
   name      = "example-ticket-tracking-system"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

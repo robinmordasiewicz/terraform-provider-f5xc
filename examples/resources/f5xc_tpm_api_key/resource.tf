@@ -4,7 +4,7 @@
 # Basic Tpm Api Key configuration
 resource "f5xc_tpm_api_key" "example" {
   name      = "example-tpm-api-key"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

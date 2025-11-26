@@ -4,7 +4,7 @@
 # Basic Virtual Host configuration
 resource "f5xc_virtual_host" "example" {
   name      = "example-virtual-host"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

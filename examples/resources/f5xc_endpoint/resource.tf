@@ -4,7 +4,7 @@
 # Basic Endpoint configuration
 resource "f5xc_endpoint" "example" {
   name      = "example-endpoint"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

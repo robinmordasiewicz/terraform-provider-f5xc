@@ -4,7 +4,7 @@
 # Basic Filter Set configuration
 resource "f5xc_filter_set" "example" {
   name      = "example-filter-set"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

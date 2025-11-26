@@ -4,7 +4,7 @@
 # Basic Address Allocator configuration
 resource "f5xc_address_allocator" "example" {
   name      = "example-address-allocator"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

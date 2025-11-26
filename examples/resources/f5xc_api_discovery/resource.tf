@@ -4,7 +4,7 @@
 # Basic Api Discovery configuration
 resource "f5xc_api_discovery" "example" {
   name      = "example-api-discovery"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

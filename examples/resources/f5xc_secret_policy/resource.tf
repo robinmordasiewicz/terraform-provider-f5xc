@@ -4,7 +4,7 @@
 # Basic Secret Policy configuration
 resource "f5xc_secret_policy" "example" {
   name      = "example-secret-policy"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

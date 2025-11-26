@@ -540,19 +540,25 @@ func generateClientTypes(resource *ResourceTemplate) error {
 
 func toTitleCase(s string) string {
 	acronyms := map[string]bool{
-		"http": true, "https": true, "api": true, "dns": true, "waf": true,
-		"tls": true, "tcp": true, "udp": true, "ssl": true, "aws": true,
-		"gcp": true, "vpc": true, "vnet": true, "tgw": true, "ike": true,
-		"vpn": true, "ip": true, "id": true, "url": true, "uri": true,
-		"ntp": true, "ssh": true, "ha": true, "s2s": true, "sli": true,
-		"slo": true, "oci": true, "kvm": true, "nfv": true, "bgp": true,
-		"cdn": true, "crl": true, "apm": true, "ipv6": true, "ipv4": true,
+		"http": true, "https": true, "dns": true, "tcp": true, "udp": true,
+		"tls": true, "ssl": true, "api": true, "url": true, "uri": true,
+		"ip": true, "bgp": true, "jwt": true, "acl": true, "waf": true,
+		"cdn": true, "aws": true, "gcp": true, "vpc": true, "tgw": true,
+		"vnet": true, "ce": true, "re": true, "lb": true, "vip": true,
+		"sni": true, "cors": true, "xss": true, "csrf": true, "oidc": true,
+		"saml": true, "ssh": true, "nfs": true, "ntp": true, "pem": true,
+		"rsa": true, "ecdsa": true, "id": true, "apm": true, "irule": true,
+		"tpm": true, "ike": true, "vpn": true, "ha": true, "s2s": true,
+		"sli": true, "slo": true, "oci": true, "kvm": true, "nfv": true,
+		"crl": true, "ipv6": true, "ipv4": true, "mtls": true, "graphql": true,
 	}
 
 	compounds := map[string]string{
 		"loadbalancer": "LoadBalancer",
 		"bigip":        "BigIP",
 		"firewall":     "Firewall",
+		"websocket":    "WebSocket",
+		"fastcgi":      "FastCGI",
 	}
 
 	parts := strings.Split(s, "_")

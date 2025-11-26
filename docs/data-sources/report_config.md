@@ -9,7 +9,7 @@ description: |-
 
 Manages a ReportConfig resource in F5 Distributed Cloud for report configuration is used to schedule report generation at a later point in time. configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Report Config API docs](https://docs.cloud.f5.com/docs-v2/api/report-config) to learn more.
 
 ## Example Usage
 

@@ -9,7 +9,7 @@ description: |-
 
 Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Azure Vnet Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-azure-vnet-site) to learn more.
 
 ## Example Usage
 

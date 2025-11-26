@@ -9,7 +9,7 @@ description: |-
 
 Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Forwarding Class API docs](https://docs.cloud.f5.com/docs-v2/api/forwarding-class) to learn more.
 
 ## Example Usage
 

@@ -9,7 +9,7 @@ description: |-
 
 Manages quota creates a given object from storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Quota API docs](https://docs.cloud.f5.com/docs-v2/api/quota) to learn more.
 
 ## Example Usage
 

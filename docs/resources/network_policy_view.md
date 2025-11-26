@@ -9,7 +9,7 @@ description: |-
 
 Manages a NetworkPolicyView resource in F5 Distributed Cloud for network policy view configuration.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Network Policy View API docs](https://docs.cloud.f5.com/docs-v2/api/views-network-policy-view) to learn more.
 
 ## Example Usage
 

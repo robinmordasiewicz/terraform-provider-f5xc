@@ -9,7 +9,7 @@ description: |-
 
 Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Tpm API Key API docs](https://docs.cloud.f5.com/docs-v2/api/tpm-api-key) to learn more.
 
 ## Example Usage
 

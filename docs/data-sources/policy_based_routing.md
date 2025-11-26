@@ -9,7 +9,7 @@ description: |-
 
 Manages a PolicyBasedRouting resource in F5 Distributed Cloud for network policy based routing create configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Policy Based Routing API docs](https://docs.cloud.f5.com/docs-v2/api/views-policy-based-routing) to learn more.
 
 ## Example Usage
 

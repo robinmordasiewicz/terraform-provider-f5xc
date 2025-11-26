@@ -9,7 +9,7 @@ description: |-
 
 Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Managed Tenant API docs](https://docs.cloud.f5.com/docs-v2/api/tenant-management-managed-tenant) to learn more.
 
 ## Example Usage
 

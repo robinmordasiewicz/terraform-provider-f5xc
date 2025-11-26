@@ -9,7 +9,7 @@ description: |-
 
 Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [K8s Pod Security Admission API docs](https://docs.cloud.f5.com/docs-v2/api/k8s-pod-security-admission) to learn more.
 
 ## Example Usage
 

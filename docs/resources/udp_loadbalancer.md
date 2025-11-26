@@ -9,7 +9,7 @@ description: |-
 
 Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [UDP Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-udp-loadbalancer) to learn more.
 
 ## Example Usage
 

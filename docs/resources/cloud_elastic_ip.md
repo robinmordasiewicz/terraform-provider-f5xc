@@ -9,7 +9,7 @@ description: |-
 
 Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Cloud Elastic IP API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-elastic-ip) to learn more.
 
 ## Example Usage
 

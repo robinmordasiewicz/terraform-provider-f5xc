@@ -9,7 +9,7 @@ description: |-
 
 Manages a ExternalConnector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [External Connector API docs](https://docs.cloud.f5.com/docs-v2/api/views-external-connector) to learn more.
 
 ## Example Usage
 

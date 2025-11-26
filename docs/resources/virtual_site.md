@@ -9,7 +9,7 @@ description: |-
 
 Manages virtual site object in given namespace in F5 Distributed Cloud.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Virtual Site API docs](https://docs.cloud.f5.com/docs-v2/api/virtual-site) to learn more.
 
 ## Example Usage
 

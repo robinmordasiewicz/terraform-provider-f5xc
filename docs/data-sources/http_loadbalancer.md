@@ -9,7 +9,7 @@ description: |-
 
 Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [HTTP Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-http-loadbalancer) to learn more.
 
 ## Example Usage
 

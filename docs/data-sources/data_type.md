@@ -9,7 +9,7 @@ description: |-
 
 Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Data Type API docs](https://docs.cloud.f5.com/docs-v2/api/data-type) to learn more.
 
 ## Example Usage
 

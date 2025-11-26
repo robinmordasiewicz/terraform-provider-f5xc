@@ -9,7 +9,7 @@ description: |-
 
 Manages DDoS transit ASN in F5 Distributed Cloud.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Infraprotect Asn API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-asn) to learn more.
 
 ## Example Usage
 

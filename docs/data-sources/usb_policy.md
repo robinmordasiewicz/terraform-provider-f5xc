@@ -9,7 +9,7 @@ description: |-
 
 Manages a UsbPolicy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Usb Policy API docs](https://docs.cloud.f5.com/docs-v2/api/usb-policy) to learn more.
 
 ## Example Usage
 

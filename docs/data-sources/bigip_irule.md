@@ -9,7 +9,7 @@ description: |-
 
 Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Bigip Irule API docs](https://docs.cloud.f5.com/docs-v2/api/bigip-irule) to learn more.
 
 ## Example Usage
 

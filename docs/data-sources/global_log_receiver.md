@@ -9,7 +9,7 @@ description: |-
 
 Manages a GlobalLogReceiver resource in F5 Distributed Cloud for global log aggregation settings.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Global Log Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/global-log-receiver) to learn more.
 
 ## Example Usage
 

@@ -9,7 +9,7 @@ description: |-
 
 Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [NAT Policy API docs](https://docs.cloud.f5.com/docs-v2/api/nat-policy) to learn more.
 
 ## Example Usage
 

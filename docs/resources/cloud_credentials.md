@@ -9,7 +9,7 @@ description: |-
 
 Manages a CloudCredentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Cloud Credentials API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-credentials) to learn more.
 
 ## Example Usage
 

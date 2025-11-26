@@ -9,7 +9,7 @@ description: |-
 
 Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Fast ACL API docs](https://docs.cloud.f5.com/docs-v2/api/fast-acl) to learn more.
 
 ## Example Usage
 

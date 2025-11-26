@@ -9,7 +9,7 @@ description: |-
 
 Manages endpoint will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Endpoint API docs](https://docs.cloud.f5.com/docs-v2/api/endpoint) to learn more.
 
 ## Example Usage
 

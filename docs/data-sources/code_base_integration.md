@@ -9,7 +9,7 @@ description: |-
 
 Manages integration details in F5 Distributed Cloud.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Code Base Integration API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-code-base-integration) to learn more.
 
 ## Example Usage
 

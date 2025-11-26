@@ -9,7 +9,7 @@ description: |-
 
 Manages a CloudConnect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Cloud Connect API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-connect) to learn more.
 
 ## Example Usage
 

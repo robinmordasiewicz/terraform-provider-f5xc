@@ -9,7 +9,7 @@ description: |-
 
 Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [API Definition API docs](https://docs.cloud.f5.com/docs-v2/api/views-api-definition) to learn more.
 
 ## Example Usage
 

@@ -9,7 +9,7 @@ description: |-
 
 Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Cminstance API docs](https://docs.cloud.f5.com/docs-v2/api/cminstance) to learn more.
 
 ## Example Usage
 

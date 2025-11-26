@@ -9,7 +9,7 @@ description: |-
 
 Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Address Allocator API docs](https://docs.cloud.f5.com/docs-v2/api/address-allocator) to learn more.
 
 ## Example Usage
 

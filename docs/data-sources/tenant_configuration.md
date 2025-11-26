@@ -9,7 +9,7 @@ description: |-
 
 Manages a TenantConfiguration resource in F5 Distributed Cloud for tenant configuration configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Tenant Configuration API docs](https://docs.cloud.f5.com/docs-v2/api/views-tenant-configuration) to learn more.
 
 ## Example Usage
 

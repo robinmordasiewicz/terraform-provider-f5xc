@@ -9,7 +9,7 @@ description: |-
 
 Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Advertise Policy API docs](https://docs.cloud.f5.com/docs-v2/api/advertise-policy) to learn more.
 
 ## Example Usage
 

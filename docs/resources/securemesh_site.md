@@ -9,7 +9,7 @@ description: |-
 
 Manages a SecuremeshSite resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
 
-~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Securemesh Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-securemesh-site) to learn more.
 
 ## Example Usage
 

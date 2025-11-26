@@ -9,7 +9,7 @@ description: |-
 
 Manages child_tenant config instance. Name of the object is the name of the child tenant to be created. in F5 Distributed Cloud.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Child Tenant API docs](https://docs.cloud.f5.com/docs-v2/api/tenant-management-child-tenant) to learn more.
 
 ## Example Usage
 

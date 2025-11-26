@@ -9,7 +9,7 @@ description: |-
 
 Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Route API docs](https://docs.cloud.f5.com/docs-v2/api/operate-route) to learn more.
 
 ## Example Usage
 

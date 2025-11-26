@@ -9,7 +9,7 @@ description: |-
 
 Manages new policer with traffic rate limits in F5 Distributed Cloud.
 
-~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
+~> **Note** Please refer to [Policer API docs](https://docs.cloud.f5.com/docs-v2/api/policer) to learn more.
 
 ## Example Usage
 

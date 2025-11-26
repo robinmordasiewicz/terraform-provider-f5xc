@@ -158,6 +158,9 @@ func main() {
 		os.Exit(1)
 	}
 
+	var generatedCount int
+	var formatErrors []string
+
 	for _, file := range files {
 		baseName := filepath.Base(file)
 		resourceName := strings.TrimSuffix(baseName, "_resource.go")
@@ -180,14 +183,40 @@ func main() {
 			continue
 		}
 
-		// Run terraform fmt to ensure proper formatting
+		// Run terraform fmt to ensure proper formatting and validate HCL syntax
+		// terraform fmt will fail if the file has syntax errors
 		cmd := exec.Command("terraform", "fmt", exampleFile)
-		if err := cmd.Run(); err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: terraform fmt failed for %s: %v\n", exampleFile, err)
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			errMsg := fmt.Sprintf("%s: %v", exampleFile, err)
+			if len(output) > 0 {
+				errMsg = fmt.Sprintf("%s\n%s", errMsg, string(output))
+			}
+			formatErrors = append(formatErrors, errMsg)
+			fmt.Fprintf(os.Stderr, "❌ Format/syntax error in %s: %v\n", exampleFile, err)
+			if len(output) > 0 {
+				fmt.Fprintf(os.Stderr, "   %s\n", string(output))
+			}
+		} else {
+			generatedCount++
+			fmt.Printf("✅ Generated: %s\n", exampleFile)
 		}
-
-		fmt.Printf("Generated: %s\n", exampleFile)
 	}
+
+	// Print summary
+	fmt.Printf("\n=== Generation Summary ===\n")
+	fmt.Printf("Successfully generated: %d examples\n", generatedCount)
+
+	if len(formatErrors) > 0 {
+		fmt.Printf("Format/syntax errors: %d\n", len(formatErrors))
+		fmt.Fprintf(os.Stderr, "\n❌ FAILED: %d example(s) have formatting or syntax errors:\n", len(formatErrors))
+		for _, err := range formatErrors {
+			fmt.Fprintf(os.Stderr, "  - %s\n", err)
+		}
+		os.Exit(1)
+	}
+
+	fmt.Printf("✅ All examples generated and validated successfully\n")
 }
 
 func parseResourceFile(filename string) *SchemaInfo {

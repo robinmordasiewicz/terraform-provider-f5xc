@@ -46,9 +46,9 @@ resource "f5xc_http_loadbalancer" "example" {
   // One of the arguments from this list "captcha_challenge enable_challenge js_challenge no_challenge policy_based_challenge" must be set
 
   js_challenge {
-    cookie_expiry     = 3600
-    custom_page       = ""
-    js_script_delay   = 5000
+    cookie_expiry   = 3600
+    custom_page     = ""
+    js_script_delay = 5000
   }
 
   domains = ["app.example.com", "www.example.com"]

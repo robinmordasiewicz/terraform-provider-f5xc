@@ -16,7 +16,7 @@ resource "f5xc_rate_limiter" "example" {
   }
 
   # Rate Limiter configuration
-  total_number  = 100
-  unit         = "MINUTE"
+  total_number     = 100
+  unit             = "MINUTE"
   burst_multiplier = 10
 }

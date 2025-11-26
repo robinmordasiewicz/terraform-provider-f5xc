@@ -52,29 +52,29 @@ resource "f5xc_cdn_cache_rule" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the CDNCacheRule. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the CDNCacheRule. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the CDNCacheRule will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the CDNCacheRule will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`cache_rules` - (Optional) Cache Rule. This defines a CDN Cache Rule. See [Cache Rules](#cache-rules) below for details.
+&#x2022; `cache_rules` - Optional Block<br>Cache Rule. This defines a CDN Cache Rule<br>See [Cache Rules](#cache-rules) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -82,191 +82,191 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cache Rules**
 
-`cache_bypass` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `cache_bypass` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`eligible_for_cache` - (Optional) Cache Action Options. List of options for Cache Action. See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
+&#x2022; `eligible_for_cache` - Optional Block<br>Cache Action Options. List of options for Cache Action<br>See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
 
-`rule_expression_list` - (Optional) Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs. See [Rule Expression List](#cache-rules-rule-expression-list) below.
+&#x2022; `rule_expression_list` - Optional Block<br>Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs<br>See [Rule Expression List](#cache-rules-rule-expression-list) below.
 
-`rule_name` - (Optional) Rule Name. Name of the Cache Rule (`String`).
+&#x2022; `rule_name` - Optional String<br>Rule Name. Name of the Cache Rule
 
 <a id="cache-rules-eligible-for-cache"></a>
 
 **Cache Rules Eligible For Cache**
 
-`scheme_proxy_host_request_uri` - (Optional) Cache TTL Enable Props. Cache TTL Enable Values. See [Scheme Proxy Host Request URI](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) below.
+&#x2022; `scheme_proxy_host_request_uri` - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host Request URI](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) below.
 
-`scheme_proxy_host_uri` - (Optional) Cache TTL Enable Props. Cache TTL Enable Values. See [Scheme Proxy Host URI](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) below.
+&#x2022; `scheme_proxy_host_uri` - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host URI](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) below.
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri"></a>
 
 **Cache Rules Eligible For Cache Scheme Proxy Host Request URI**
 
-`cache_override` - (Optional) Cache Override. Honour Cache Override (`Bool`).
+&#x2022; `cache_override` - Optional Bool<br>Cache Override. Honour Cache Override
 
-`cache_ttl` - (Optional) Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days (`String`).
+&#x2022; `cache_ttl` - Optional String<br>Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days
 
-`ignore_response_cookie` - (Optional) Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present (`Bool`).
+&#x2022; `ignore_response_cookie` - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri"></a>
 
 **Cache Rules Eligible For Cache Scheme Proxy Host URI**
 
-`cache_override` - (Optional) Cache Override. Honour Cache Override (`Bool`).
+&#x2022; `cache_override` - Optional Bool<br>Cache Override. Honour Cache Override
 
-`cache_ttl` - (Optional) Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days (`String`).
+&#x2022; `cache_ttl` - Optional String<br>Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days
 
-`ignore_response_cookie` - (Optional) Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present (`Bool`).
+&#x2022; `ignore_response_cookie` - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
 
 <a id="cache-rules-rule-expression-list"></a>
 
 **Cache Rules Rule Expression List**
 
-`cache_rule_expression` - (Optional) Terms. The Cache Rule Expression Terms that are ANDed. See [Cache Rule Expression](#cache-rules-rule-expression-list-cache-rule-expression) below.
+&#x2022; `cache_rule_expression` - Optional Block<br>Terms. The Cache Rule Expression Terms that are ANDed<br>See [Cache Rule Expression](#cache-rules-rule-expression-list-cache-rule-expression) below.
 
-`expression_name` - (Optional) Expression Name. Name of the Expressions items that are ANDed (`String`).
+&#x2022; `expression_name` - Optional String<br>Expression Name. Name of the Expressions items that are ANDed
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression"></a>
 
 **Cache Rules Rule Expression List Cache Rule Expression**
 
-`cache_headers` - (Optional) Cache Headers. Configure cache rule headers to match the criteria. See [Cache Headers](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) below.
+&#x2022; `cache_headers` - Optional Block<br>Cache Headers. Configure cache rule headers to match the criteria<br>See [Cache Headers](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) below.
 
-`cookie_matcher` - (Optional) Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true. See [Cookie Matcher](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher) below.
+&#x2022; `cookie_matcher` - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matcher](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher) below.
 
-`path_match` - (Optional) Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match. See [Path Match](#cache-rules-rule-expression-list-cache-rule-expression-path-match) below.
+&#x2022; `path_match` - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path Match](#cache-rules-rule-expression-list-cache-rule-expression-path-match) below.
 
-`query_parameters` - (Optional) Query Parameters. List of (key, value) query parameters. See [Query Parameters](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) below.
+&#x2022; `query_parameters` - Optional Block<br>Query Parameters. List of (key, value) query parameters<br>See [Query Parameters](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) below.
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers"></a>
 
 **Cache Rules Rule Expression List Cache Rule Expression Cache Headers**
 
-`name` - (Optional) Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent. Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`. Defaults to `PROXY_HOST` (`String`).
+&#x2022; `name` - Optional String  Defaults to `PROXY_HOST`<br>Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`<br>Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent
 
-`operator` - (Optional) Operator. See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) below.
+&#x2022; `operator` - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) below.
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator"></a>
 
 **Cache Rules Rule Expression List Cache Rule Expression Cache Headers Operator**
 
-`contains` - (Optional) Contains. Field must contain (`String`).
+&#x2022; `contains` - Optional String<br>Contains. Field must contain
 
-`does_not_contain` - (Optional) Does Not Contain. Field must not contain (`String`).
+&#x2022; `does_not_contain` - Optional String<br>Does Not Contain. Field must not contain
 
-`does_not_end_with` - (Optional) Does Not End With. Field must not end with (`String`).
+&#x2022; `does_not_end_with` - Optional String<br>Does Not End With. Field must not end with
 
-`does_not_equal` - (Optional) Does Not Equal. Field must not equal (`String`).
+&#x2022; `does_not_equal` - Optional String<br>Does Not Equal. Field must not equal
 
-`does_not_start_with` - (Optional) Does Not Start With. Field must not start with (`String`).
+&#x2022; `does_not_start_with` - Optional String<br>Does Not Start With. Field must not start with
 
-`endswith` - (Optional) Ends With. Field must end with (`String`).
+&#x2022; `endswith` - Optional String<br>Ends With. Field must end with
 
-`equals` - (Optional) Equals. Field must exactly match (`String`).
+&#x2022; `equals` - Optional String<br>Equals. Field must exactly match
 
-`match_regex` - (Optional) Matches Regex. Field matches PCRE 1 compliant regular expression (`String`).
+&#x2022; `match_regex` - Optional String<br>Matches Regex. Field matches PCRE 1 compliant regular expression
 
-`startswith` - (Optional) Starts With. Field must start with (`String`).
+&#x2022; `startswith` - Optional String<br>Starts With. Field must start with
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher"></a>
 
 **Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher**
 
-`name` - (Optional) Cookie Name. A case-sensitive cookie name (`String`).
+&#x2022; `name` - Optional String<br>Cookie Name. A case-sensitive cookie name
 
-`operator` - (Optional) Operator. See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator) below.
+&#x2022; `operator` - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator) below.
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator"></a>
 
 **Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher Operator**
 
-`contains` - (Optional) Contains. Field must contain (`String`).
+&#x2022; `contains` - Optional String<br>Contains. Field must contain
 
-`does_not_contain` - (Optional) Does Not Contain. Field must not contain (`String`).
+&#x2022; `does_not_contain` - Optional String<br>Does Not Contain. Field must not contain
 
-`does_not_end_with` - (Optional) Does Not End With. Field must not end with (`String`).
+&#x2022; `does_not_end_with` - Optional String<br>Does Not End With. Field must not end with
 
-`does_not_equal` - (Optional) Does Not Equal. Field must not equal (`String`).
+&#x2022; `does_not_equal` - Optional String<br>Does Not Equal. Field must not equal
 
-`does_not_start_with` - (Optional) Does Not Start With. Field must not start with (`String`).
+&#x2022; `does_not_start_with` - Optional String<br>Does Not Start With. Field must not start with
 
-`endswith` - (Optional) Ends With. Field must end with (`String`).
+&#x2022; `endswith` - Optional String<br>Ends With. Field must end with
 
-`equals` - (Optional) Equals. Field must exactly match (`String`).
+&#x2022; `equals` - Optional String<br>Equals. Field must exactly match
 
-`match_regex` - (Optional) Matches Regex. Field matches PCRE 1 compliant regular expression (`String`).
+&#x2022; `match_regex` - Optional String<br>Matches Regex. Field matches PCRE 1 compliant regular expression
 
-`startswith` - (Optional) Starts With. Field must start with (`String`).
+&#x2022; `startswith` - Optional String<br>Starts With. Field must start with
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-path-match"></a>
 
 **Cache Rules Rule Expression List Cache Rule Expression Path Match**
 
-`operator` - (Optional) Operator. See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) below.
+&#x2022; `operator` - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) below.
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator"></a>
 
 **Cache Rules Rule Expression List Cache Rule Expression Path Match Operator**
 
-`contains` - (Optional) Contains. Field must contain (`String`).
+&#x2022; `contains` - Optional String<br>Contains. Field must contain
 
-`does_not_contain` - (Optional) Does Not Contain. Field must not contain (`String`).
+&#x2022; `does_not_contain` - Optional String<br>Does Not Contain. Field must not contain
 
-`does_not_end_with` - (Optional) Does Not End With. Field must not end with (`String`).
+&#x2022; `does_not_end_with` - Optional String<br>Does Not End With. Field must not end with
 
-`does_not_equal` - (Optional) Does Not Equal. Field must not equal (`String`).
+&#x2022; `does_not_equal` - Optional String<br>Does Not Equal. Field must not equal
 
-`does_not_start_with` - (Optional) Does Not Start With. Field must not start with (`String`).
+&#x2022; `does_not_start_with` - Optional String<br>Does Not Start With. Field must not start with
 
-`endswith` - (Optional) Ends With. Field must end with (`String`).
+&#x2022; `endswith` - Optional String<br>Ends With. Field must end with
 
-`equals` - (Optional) Equals. Field must exactly match (`String`).
+&#x2022; `equals` - Optional String<br>Equals. Field must exactly match
 
-`match_regex` - (Optional) Matches Regex. Field matches PCRE 1 compliant regular expression (`String`).
+&#x2022; `match_regex` - Optional String<br>Matches Regex. Field matches PCRE 1 compliant regular expression
 
-`startswith` - (Optional) Starts With. Field must start with (`String`).
+&#x2022; `startswith` - Optional String<br>Starts With. Field must start with
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters"></a>
 
 **Cache Rules Rule Expression List Cache Rule Expression Query Parameters**
 
-`key` - (Optional) Key. Query parameter key In the above example, assignee_username is the key (`String`).
+&#x2022; `key` - Optional String<br>Key. Query parameter key In the above example, assignee_username is the key
 
-`operator` - (Optional) Operator. See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator) below.
+&#x2022; `operator` - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator) below.
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator"></a>
 
 **Cache Rules Rule Expression List Cache Rule Expression Query Parameters Operator**
 
-`contains` - (Optional) Contains. Field must contain (`String`).
+&#x2022; `contains` - Optional String<br>Contains. Field must contain
 
-`does_not_contain` - (Optional) Does Not Contain. Field must not contain (`String`).
+&#x2022; `does_not_contain` - Optional String<br>Does Not Contain. Field must not contain
 
-`does_not_end_with` - (Optional) Does Not End With. Field must not end with (`String`).
+&#x2022; `does_not_end_with` - Optional String<br>Does Not End With. Field must not end with
 
-`does_not_equal` - (Optional) Does Not Equal. Field must not equal (`String`).
+&#x2022; `does_not_equal` - Optional String<br>Does Not Equal. Field must not equal
 
-`does_not_start_with` - (Optional) Does Not Start With. Field must not start with (`String`).
+&#x2022; `does_not_start_with` - Optional String<br>Does Not Start With. Field must not start with
 
-`endswith` - (Optional) Ends With. Field must end with (`String`).
+&#x2022; `endswith` - Optional String<br>Ends With. Field must end with
 
-`equals` - (Optional) Equals. Field must exactly match (`String`).
+&#x2022; `equals` - Optional String<br>Equals. Field must exactly match
 
-`match_regex` - (Optional) Matches Regex. Field matches PCRE 1 compliant regular expression (`String`).
+&#x2022; `match_regex` - Optional String<br>Matches Regex. Field matches PCRE 1 compliant regular expression
 
-`startswith` - (Optional) Starts With. Field must start with (`String`).
+&#x2022; `startswith` - Optional String<br>Starts With. Field must start with
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

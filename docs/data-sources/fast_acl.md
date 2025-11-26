@@ -34,18 +34,18 @@ data "f5xc_fast_acl" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the FastACL (`String`).
+&#x2022; `name` - Required String<br>Name of the FastACL
 
-`namespace` - (Required) Namespace where the FastACL exists (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the FastACL exists
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations applied to this resource
 
-`description` - (Optional) Description of the FastACL (`String`).
+&#x2022; `description` - Optional String<br>Description of the FastACL
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
-`labels` - (Optional) Labels applied to this resource (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels applied to this resource

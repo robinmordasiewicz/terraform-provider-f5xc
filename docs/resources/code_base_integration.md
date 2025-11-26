@@ -52,29 +52,29 @@ resource "f5xc_code_base_integration" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the CodeBaseIntegration. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the CodeBaseIntegration. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the CodeBaseIntegration will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the CodeBaseIntegration will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`code_base_integration` - (Optional) Integration Data. Choose your code base (e.g. GitHub, GitLab, Bitbucket, Azure) and provide credentials and connection details. See [Code Base Integration](#code-base-integration) below for details.
+&#x2022; `code_base_integration` - Optional Block<br>Integration Data. Choose your code base (e.g. GitHub, GitLab, Bitbucket, Azure) and provide credentials and connection details<br>See [Code Base Integration](#code-base-integration) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -82,273 +82,273 @@ In addition to all arguments above, the following attributes are exported:
 
 **Code Base Integration**
 
-`azure_repos` - (Optional) Azure Repos Integration. See [Azure Repos](#code-base-integration-azure-repos) below.
+&#x2022; `azure_repos` - Optional Block<br>Azure Repos Integration<br>See [Azure Repos](#code-base-integration-azure-repos) below.
 
-`bitbucket` - (Optional) BitBucket Cloud Integration. See [Bitbucket](#code-base-integration-bitbucket) below.
+&#x2022; `bitbucket` - Optional Block<br>BitBucket Cloud Integration<br>See [Bitbucket](#code-base-integration-bitbucket) below.
 
-`bitbucket_server` - (Optional) BitBucket Server Integration. See [Bitbucket Server](#code-base-integration-bitbucket-server) below.
+&#x2022; `bitbucket_server` - Optional Block<br>BitBucket Server Integration<br>See [Bitbucket Server](#code-base-integration-bitbucket-server) below.
 
-`github` - (Optional) Github Integration. See [Github](#code-base-integration-github) below.
+&#x2022; `github` - Optional Block<br>Github Integration<br>See [Github](#code-base-integration-github) below.
 
-`github_enterprise` - (Optional) GitHub Enterprise Integration. See [Github Enterprise](#code-base-integration-github-enterprise) below.
+&#x2022; `github_enterprise` - Optional Block<br>GitHub Enterprise Integration<br>See [Github Enterprise](#code-base-integration-github-enterprise) below.
 
-`gitlab` - (Optional) GitLab Cloud Integration. See [Gitlab](#code-base-integration-gitlab) below.
+&#x2022; `gitlab` - Optional Block<br>GitLab Cloud Integration<br>See [Gitlab](#code-base-integration-gitlab) below.
 
-`gitlab_enterprise` - (Optional) GitLab Enterprise Integration. See [Gitlab Enterprise](#code-base-integration-gitlab-enterprise) below.
+&#x2022; `gitlab_enterprise` - Optional Block<br>GitLab Enterprise Integration<br>See [Gitlab Enterprise](#code-base-integration-gitlab-enterprise) below.
 
 <a id="code-base-integration-azure-repos"></a>
 
 **Code Base Integration Azure Repos**
 
-`access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-azure-repos-access-token) below.
+&#x2022; `access_token` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#code-base-integration-azure-repos-access-token) below.
 
 <a id="code-base-integration-azure-repos-access-token"></a>
 
 **Code Base Integration Azure Repos Access Token**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-azure-repos-access-token-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#code-base-integration-azure-repos-access-token-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-azure-repos-access-token-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-azure-repos-access-token-clear-secret-info) below.
 
 <a id="code-base-integration-azure-repos-access-token-blindfold-secret-info"></a>
 
 **Code Base Integration Azure Repos Access Token Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="code-base-integration-azure-repos-access-token-clear-secret-info"></a>
 
 **Code Base Integration Azure Repos Access Token Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="code-base-integration-bitbucket"></a>
 
 **Code Base Integration Bitbucket**
 
-`passwd` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd](#code-base-integration-bitbucket-passwd) below.
+&#x2022; `passwd` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd](#code-base-integration-bitbucket-passwd) below.
 
-`username` - (Optional) BitBucket Username (`String`).
+&#x2022; `username` - Optional String<br>BitBucket Username
 
 <a id="code-base-integration-bitbucket-passwd"></a>
 
 **Code Base Integration Bitbucket Passwd**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-bitbucket-passwd-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#code-base-integration-bitbucket-passwd-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-bitbucket-passwd-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-bitbucket-passwd-clear-secret-info) below.
 
 <a id="code-base-integration-bitbucket-passwd-blindfold-secret-info"></a>
 
 **Code Base Integration Bitbucket Passwd Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="code-base-integration-bitbucket-passwd-clear-secret-info"></a>
 
 **Code Base Integration Bitbucket Passwd Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="code-base-integration-bitbucket-server"></a>
 
 **Code Base Integration Bitbucket Server**
 
-`passwd` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Passwd](#code-base-integration-bitbucket-server-passwd) below.
+&#x2022; `passwd` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd](#code-base-integration-bitbucket-server-passwd) below.
 
-`url` - (Optional) BitBucket Server URL (`String`).
+&#x2022; `url` - Optional String<br>BitBucket Server URL
 
-`username` - (Optional) BitBucket Server Username (`String`).
+&#x2022; `username` - Optional String<br>BitBucket Server Username
 
-`verify_ssl` - (Optional) Verify SSL (`Bool`).
+&#x2022; `verify_ssl` - Optional Bool<br>Verify SSL
 
 <a id="code-base-integration-bitbucket-server-passwd"></a>
 
 **Code Base Integration Bitbucket Server Passwd**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-bitbucket-server-passwd-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#code-base-integration-bitbucket-server-passwd-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-bitbucket-server-passwd-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-bitbucket-server-passwd-clear-secret-info) below.
 
 <a id="code-base-integration-bitbucket-server-passwd-blindfold-secret-info"></a>
 
 **Code Base Integration Bitbucket Server Passwd Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="code-base-integration-bitbucket-server-passwd-clear-secret-info"></a>
 
 **Code Base Integration Bitbucket Server Passwd Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="code-base-integration-github"></a>
 
 **Code Base Integration Github**
 
-`access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-github-access-token) below.
+&#x2022; `access_token` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#code-base-integration-github-access-token) below.
 
-`username` - (Optional) GitHub Username (`String`).
+&#x2022; `username` - Optional String<br>GitHub Username
 
-`verify_ssl` - (Optional) GitHub Verify SSL (`Bool`).
+&#x2022; `verify_ssl` - Optional Bool<br>GitHub Verify SSL
 
 <a id="code-base-integration-github-access-token"></a>
 
 **Code Base Integration Github Access Token**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-github-access-token-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#code-base-integration-github-access-token-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-github-access-token-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-github-access-token-clear-secret-info) below.
 
 <a id="code-base-integration-github-access-token-blindfold-secret-info"></a>
 
 **Code Base Integration Github Access Token Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="code-base-integration-github-access-token-clear-secret-info"></a>
 
 **Code Base Integration Github Access Token Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="code-base-integration-github-enterprise"></a>
 
 **Code Base Integration Github Enterprise**
 
-`access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-github-enterprise-access-token) below.
+&#x2022; `access_token` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#code-base-integration-github-enterprise-access-token) below.
 
-`hostname` - (Optional) GitHub Hostname (`String`).
+&#x2022; `hostname` - Optional String<br>GitHub Hostname
 
-`username` - (Optional) GitHub Username (`String`).
+&#x2022; `username` - Optional String<br>GitHub Username
 
 <a id="code-base-integration-github-enterprise-access-token"></a>
 
 **Code Base Integration Github Enterprise Access Token**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-github-enterprise-access-token-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#code-base-integration-github-enterprise-access-token-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-github-enterprise-access-token-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-github-enterprise-access-token-clear-secret-info) below.
 
 <a id="code-base-integration-github-enterprise-access-token-blindfold-secret-info"></a>
 
 **Code Base Integration Github Enterprise Access Token Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="code-base-integration-github-enterprise-access-token-clear-secret-info"></a>
 
 **Code Base Integration Github Enterprise Access Token Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="code-base-integration-gitlab"></a>
 
 **Code Base Integration Gitlab**
 
-`access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-gitlab-access-token) below.
+&#x2022; `access_token` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#code-base-integration-gitlab-access-token) below.
 
 <a id="code-base-integration-gitlab-access-token"></a>
 
 **Code Base Integration Gitlab Access Token**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-gitlab-access-token-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#code-base-integration-gitlab-access-token-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-gitlab-access-token-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-gitlab-access-token-clear-secret-info) below.
 
 <a id="code-base-integration-gitlab-access-token-blindfold-secret-info"></a>
 
 **Code Base Integration Gitlab Access Token Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="code-base-integration-gitlab-access-token-clear-secret-info"></a>
 
 **Code Base Integration Gitlab Access Token Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="code-base-integration-gitlab-enterprise"></a>
 
 **Code Base Integration Gitlab Enterprise**
 
-`access_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Access Token](#code-base-integration-gitlab-enterprise-access-token) below.
+&#x2022; `access_token` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#code-base-integration-gitlab-enterprise-access-token) below.
 
-`url` - (Optional) GitLab URL (`String`).
+&#x2022; `url` - Optional String<br>GitLab URL
 
 <a id="code-base-integration-gitlab-enterprise-access-token"></a>
 
 **Code Base Integration Gitlab Enterprise Access Token**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#code-base-integration-gitlab-enterprise-access-token-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#code-base-integration-gitlab-enterprise-access-token-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#code-base-integration-gitlab-enterprise-access-token-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-gitlab-enterprise-access-token-clear-secret-info) below.
 
 <a id="code-base-integration-gitlab-enterprise-access-token-blindfold-secret-info"></a>
 
 **Code Base Integration Gitlab Enterprise Access Token Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="code-base-integration-gitlab-enterprise-access-token-clear-secret-info"></a>
 
 **Code Base Integration Gitlab Enterprise Access Token Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

@@ -38,47 +38,47 @@ resource "f5xc_contact" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the Contact. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the Contact. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the Contact will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the Contact will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`address1` - (Optional) Address Line 1 (`String`).
+&#x2022; `address1` - Optional String<br>Address Line 1
 
-`address2` - (Optional) Address Line 2 (`String`).
+&#x2022; `address2` - Optional String<br>Address Line 2
 
-`city` - (Optional) City (`String`).
+&#x2022; `city` - Optional String<br>City
 
-`contact_type` - (Optional) Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method). Possible values are `MAILING`, `BILLING`, `PAYMENT`. Defaults to `MAILING` (`String`).
+&#x2022; `contact_type` - Optional String  Defaults to `MAILING`<br>Possible values are `MAILING`, `BILLING`, `PAYMENT`<br>Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)
 
-`country` - (Optional) Country (`String`).
+&#x2022; `country` - Optional String<br>Country
 
-`county` - (Optional) County (`String`).
+&#x2022; `county` - Optional String<br>County
 
-`phone_number` - (Optional) Phone Number (`String`).
+&#x2022; `phone_number` - Optional String<br>Phone Number
 
-`state` - (Optional) State (`String`).
+&#x2022; `state` - Optional String<br>State
 
-`state_code` - (Optional) State Code (`String`).
+&#x2022; `state_code` - Optional String<br>State Code
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-`zip_code` - (Optional) ZIP code (`String`).
+&#x2022; `zip_code` - Optional String<br>ZIP code
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -86,13 +86,13 @@ In addition to all arguments above, the following attributes are exported:
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

@@ -52,33 +52,33 @@ resource "f5xc_addon_subscription" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the AddonSubscription. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the AddonSubscription. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the AddonSubscription will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the AddonSubscription will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`addon_service` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Addon Service](#addon-service) below for details.
+&#x2022; `addon_service` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Addon Service](#addon-service) below for details.
 
-`notification_preference` - (Optional) Notification Preference. NotificationPreference preference for receiving addon subscription notifications. See [Notification Preference](#notification-preference) below for details.
+&#x2022; `notification_preference` - Optional Block<br>Notification Preference. NotificationPreference preference for receiving addon subscription notifications<br>See [Notification Preference](#notification-preference) below for details.
 
-`status` - (Optional) Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION_DISABLE_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled. Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION_DISABLE_PENDING`, `SUBSCRIPTION_DISABLED`. Defaults to `SUBSCRIPTION_PENDING` (`String`).
+&#x2022; `status` - Optional String  Defaults to `SUBSCRIPTION_PENDING`<br>Possible values are `SUBSCRIPTION_PENDING`, `SUBSCRIPTION_ENABLED`, `SUBSCRIPTION_DISABLE_PENDING`, `SUBSCRIPTION_DISABLED`<br>Addon Subscription Type. Represents the different states of an addon subscription. - SUBSCRIPTION_PENDING: Subscription Pending Indicates that the subscription is pending enablement. - SUBSCRIPTION_ENABLED: Subscription Enabled Indicates that the subscription is currently enabled and active. - SUBSCRIPTION_DISABLE_PENDING: Subscription Disable Pending Indicates that the addon disable process is pending. - SUBSCRIPTION_DISABLED: Subscription Disabled Indicates that the addon has been disabled
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -86,45 +86,45 @@ In addition to all arguments above, the following attributes are exported:
 
 **Addon Service**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="notification-preference"></a>
 
 **Notification Preference**
 
-`emails` - (Optional) Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription. See [Emails](#notification-preference-emails) below.
+&#x2022; `emails` - Optional Block<br>Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription<br>See [Emails](#notification-preference-emails) below.
 
-`support_ticket_id` - (Optional) Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription. See [Support Ticket Id](#notification-preference-support-ticket-id) below.
+&#x2022; `support_ticket_id` - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket Id](#notification-preference-support-ticket-id) below.
 
 <a id="notification-preference-emails"></a>
 
 **Notification Preference Emails**
 
-`email_ids` - (Optional) Emails. Email ids associated with the Addon Subscription (`List`).
+&#x2022; `email_ids` - Optional List<br>Emails. Email ids associated with the Addon Subscription
 
 <a id="notification-preference-support-ticket-id"></a>
 
 **Notification Preference Support Ticket Id**
 
-`subscription_ticket_id` - (Optional) Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription (`String`).
+&#x2022; `subscription_ticket_id` - Optional String<br>Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription
 
-`unsubscription_ticket_id` - (Optional) Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription (`String`).
+&#x2022; `unsubscription_ticket_id` - Optional String<br>Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

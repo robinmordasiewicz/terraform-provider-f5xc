@@ -34,18 +34,18 @@ data "f5xc_infraprotect_asn_prefix" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the InfraprotectAsnPrefix (`String`).
+&#x2022; `name` - Required String<br>Name of the InfraprotectAsnPrefix
 
-`namespace` - (Required) Namespace where the InfraprotectAsnPrefix exists (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the InfraprotectAsnPrefix exists
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations applied to this resource
 
-`description` - (Optional) Description of the InfraprotectAsnPrefix (`String`).
+&#x2022; `description` - Optional String<br>Description of the InfraprotectAsnPrefix
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
-`labels` - (Optional) Labels applied to this resource (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels applied to this resource

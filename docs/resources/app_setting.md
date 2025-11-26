@@ -52,29 +52,29 @@ resource "f5xc_app_setting" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the AppSetting. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the AppSetting. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the AppSetting will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the AppSetting will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`app_type_settings` - (Optional) Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace. See [App Type Settings](#app-type-settings) below for details.
+&#x2022; `app_type_settings` - Optional Block<br>Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace<br>See [App Type Settings](#app-type-settings) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -82,141 +82,141 @@ In addition to all arguments above, the following attributes are exported:
 
 **App Type Settings**
 
-`app_type_ref` - (Optional) AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data. See [App Type Ref](#app-type-settings-app-type-ref) below.
+&#x2022; `app_type_ref` - Optional Block<br>AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data<br>See [App Type Ref](#app-type-settings-app-type-ref) below.
 
-`business_logic_markup_setting` - (Optional) API Discovery. Settings specifying how API Discovery will be performed. See [Business Logic Markup Setting](#app-type-settings-business-logic-markup-setting) below.
+&#x2022; `business_logic_markup_setting` - Optional Block<br>API Discovery. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#app-type-settings-business-logic-markup-setting) below.
 
-`timeseries_analyses_setting` - (Optional) DDOS Settings. Configuration for DDOS Detection. See [Timeseries Analyses Setting](#app-type-settings-timeseries-analyses-setting) below.
+&#x2022; `timeseries_analyses_setting` - Optional Block<br>DDOS Settings. Configuration for DDOS Detection<br>See [Timeseries Analyses Setting](#app-type-settings-timeseries-analyses-setting) below.
 
-`user_behavior_analysis_setting` - (Optional) User Behavior Analysis Setting. Configuration for user behavior analysis. See [User Behavior Analysis Setting](#app-type-settings-user-behavior-analysis-setting) below.
+&#x2022; `user_behavior_analysis_setting` - Optional Block<br>User Behavior Analysis Setting. Configuration for user behavior analysis<br>See [User Behavior Analysis Setting](#app-type-settings-user-behavior-analysis-setting) below.
 
 <a id="app-type-settings-app-type-ref"></a>
 
 **App Type Settings App Type Ref**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="app-type-settings-business-logic-markup-setting"></a>
 
 **App Type Settings Business Logic Markup Setting**
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `enable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="app-type-settings-timeseries-analyses-setting"></a>
 
 **App Type Settings Timeseries Analyses Setting**
 
-`metric_selectors` - (Optional) Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic. See [Metric Selectors](#app-type-settings-timeseries-analyses-setting-metric-selectors) below.
+&#x2022; `metric_selectors` - Optional Block<br>Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic<br>See [Metric Selectors](#app-type-settings-timeseries-analyses-setting-metric-selectors) below.
 
 <a id="app-type-settings-timeseries-analyses-setting-metric-selectors"></a>
 
 **App Type Settings Timeseries Analyses Setting Metric Selectors**
 
-`metric` - (Optional) Metrics. Choose one or more metrics to be included in the detection logic. Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`. Defaults to `NO_METRICS` (`List`).
+&#x2022; `metric` - Optional List  Defaults to `NO_METRICS`<br>Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`<br>Metrics. Choose one or more metrics to be included in the detection logic
 
-`metrics_source` - (Optional) Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations. Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS` (`String`).
+&#x2022; `metrics_source` - Optional String<br>Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`<br>Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations
 
 <a id="app-type-settings-user-behavior-analysis-setting"></a>
 
 **App Type Settings User Behavior Analysis Setting**
 
-`disable_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable_detection` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`disable_learning` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable_learning` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`enable_detection` - (Optional) Malicious User Detection Settings. Various factors about user activity are monitored and analysed to determine malicious users. These settings allow tuning those factors used by the system to detect malicious users. See [Enable Detection](#app-type-settings-user-behavior-analysis-setting-enable-detection) below.
+&#x2022; `enable_detection` - Optional Block<br>Malicious User Detection Settings. Various factors about user activity are monitored and analysed to determine malicious users. These settings allow tuning those factors used by the system to detect malicious users<br>See [Enable Detection](#app-type-settings-user-behavior-analysis-setting-enable-detection) below.
 
-`enable_learning` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `enable_learning` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection"></a>
 
 **App Type Settings User Behavior Analysis Setting Enable Detection**
 
-`bola_detection_automatic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `bola_detection_automatic` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`cooling_off_period` - (Optional) Cooling off period. Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none (`Number`).
+&#x2022; `cooling_off_period` - Optional Number<br>Cooling off period. Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none
 
-`exclude_bola_detection` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `exclude_bola_detection` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`exclude_bot_defense_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `exclude_bot_defense_activity` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`exclude_failed_login_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `exclude_failed_login_activity` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`exclude_forbidden_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `exclude_forbidden_activity` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`exclude_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `exclude_ip_reputation` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`exclude_non_existent_url_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `exclude_non_existent_url_activity` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`exclude_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `exclude_rate_limit` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`exclude_waf_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `exclude_waf_activity` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`include_bot_defense_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `include_bot_defense_activity` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`include_failed_login_activity` - (Optional) Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior. See [Include Failed Login Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) below.
+&#x2022; `include_failed_login_activity` - Optional Block<br>Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior<br>See [Include Failed Login Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) below.
 
-`include_forbidden_activity` - (Optional) Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior. See [Include Forbidden Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) below.
+&#x2022; `include_forbidden_activity` - Optional Block<br>Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior<br>See [Include Forbidden Activity](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) below.
 
-`include_ip_reputation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `include_ip_reputation` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`include_non_existent_url_activity_automatic` - (Optional) Non-existent URL Automatic Activity Settings. See [Include Non Existent URL Activity Automatic](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) below.
+&#x2022; `include_non_existent_url_activity_automatic` - Optional Block<br>Non-existent URL Automatic Activity Settings<br>See [Include Non Existent URL Activity Automatic](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) below.
 
-`include_non_existent_url_activity_custom` - (Optional) Non-existent URL Custom Activity Setting. See [Include Non Existent URL Activity Custom](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) below.
+&#x2022; `include_non_existent_url_activity_custom` - Optional Block<br>Non-existent URL Custom Activity Setting<br>See [Include Non Existent URL Activity Custom](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) below.
 
-`include_rate_limit` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `include_rate_limit` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`include_waf_activity` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `include_waf_activity` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity"></a>
 
 **App Type Settings User Behavior Analysis Setting Enable Detection Include Failed Login Activity**
 
-`login_failures_threshold` - (Optional) Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious (`Number`).
+&#x2022; `login_failures_threshold` - Optional Number<br>Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity"></a>
 
 **App Type Settings User Behavior Analysis Setting Enable Detection Include Forbidden Activity**
 
-`forbidden_requests_threshold` - (Optional) Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious (`Number`).
+&#x2022; `forbidden_requests_threshold` - Optional Number<br>Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic"></a>
 
 **App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Automatic**
 
-`high` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `high` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`low` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `low` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`medium` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `medium` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom"></a>
 
 **App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Custom**
 
-`nonexistent_requests_threshold` - (Optional) Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious (`Number`).
+&#x2022; `nonexistent_requests_threshold` - Optional Number<br>Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

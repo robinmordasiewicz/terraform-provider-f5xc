@@ -52,32 +52,32 @@ resource "f5xc_k8s_cluster_role" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the K8SClusterRole. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the K8SClusterRole. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the K8SClusterRole will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the K8SClusterRole will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; `k8s_cluster_role_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [K8s Cluster Role Selector](#k8s-cluster-role-selector) below for details.
-<br>&#x2022; `policy_rule_list` - (Optional) Policy Rule List. List of rules for role permissions. See [Policy Rule List](#policy-rule-list) below for details.
-<br>&#x2022; `yaml` - (Optional) K8s YAML. K8s YAML for ClusterRole (`String`).
+&#x2022; `k8s_cluster_role_selector` - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [K8s Cluster Role Selector](#k8s-cluster-role-selector) below for details.
+<br>&#x2022; `policy_rule_list` - Optional Block<br>Policy Rule List. List of rules for role permissions<br>See [Policy Rule List](#policy-rule-list) below for details.
+<br>&#x2022; `yaml` - Optional String<br>K8s YAML. K8s YAML for ClusterRole
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -85,53 +85,53 @@ In addition to all arguments above, the following attributes are exported:
 
 **K8s Cluster Role Selector**
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+&#x2022; `expressions` - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="policy-rule-list"></a>
 
 **Policy Rule List**
 
-`policy_rule` - (Optional) Policy Rules. List of rules for role permissions. See [Policy Rule](#policy-rule-list-policy-rule) below.
+&#x2022; `policy_rule` - Optional Block<br>Policy Rules. List of rules for role permissions<br>See [Policy Rule](#policy-rule-list-policy-rule) below.
 
 <a id="policy-rule-list-policy-rule"></a>
 
 **Policy Rule List Policy Rule**
 
-`non_resource_url_list` - (Optional) List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource. See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
+&#x2022; `non_resource_url_list` - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource<br>See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
 
-`resource_list` - (Optional) Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed. See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
+&#x2022; `resource_list` - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
 
 <a id="policy-rule-list-policy-rule-non-resource-url-list"></a>
 
 **Policy Rule List Policy Rule Non Resource URL List**
 
-`urls` - (Optional) Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex (`List`).
+&#x2022; `urls` - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex
 
-`verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations (`List`).
+&#x2022; `verbs` - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations
 
 <a id="policy-rule-list-policy-rule-resource-list"></a>
 
 **Policy Rule List Policy Rule Resource List**
 
-`api_groups` - (Optional) API Groups. Allowed list of API group that contains resources, all resources of a given API group (`List`).
+&#x2022; `api_groups` - Optional List<br>API Groups. Allowed list of API group that contains resources, all resources of a given API group
 
-`resource_instances` - (Optional) Resource Instances. Allowed list of resource instances within the resource types (`List`).
+&#x2022; `resource_instances` - Optional List<br>Resource Instances. Allowed list of resource instances within the resource types
 
-`resource_types` - (Optional) Resource Types. Allowed list of resource types within the API groups (`List`).
+&#x2022; `resource_types` - Optional List<br>Resource Types. Allowed list of resource types within the API groups
 
-`verbs` - (Optional) Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations (`List`).
+&#x2022; `verbs` - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

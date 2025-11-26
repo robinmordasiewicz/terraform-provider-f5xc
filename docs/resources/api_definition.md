@@ -45,39 +45,39 @@ resource "f5xc_api_definition" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the APIDefinition. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the APIDefinition. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the APIDefinition will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the APIDefinition will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`api_inventory_exclusion_list` - (Optional) API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory. See [API Inventory Exclusion List](#api-inventory-exclusion-list) below for details.
+&#x2022; `api_inventory_exclusion_list` - Optional Block<br>API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory<br>See [API Inventory Exclusion List](#api-inventory-exclusion-list) below for details.
 
-`api_inventory_inclusion_list` - (Optional) API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list. See [API Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
+&#x2022; `api_inventory_inclusion_list` - Optional Block<br>API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list<br>See [API Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
 
 -> **One of the following:**
-&#x2022; `mixed_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `strict_schema_origin` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `mixed_schema_origin` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `strict_schema_origin` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`non_api_endpoints` - (Optional) API Discovery Exclusion List. List of Non-API Endpoints. See [Non API Endpoints](#non-api-endpoints) below for details.
+&#x2022; `non_api_endpoints` - Optional Block<br>API Discovery Exclusion List. List of Non-API Endpoints<br>See [Non API Endpoints](#non-api-endpoints) below for details.
 
-`swagger_specs` - (Optional) File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API (`List`).
+&#x2022; `swagger_specs` - Optional List<br>File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -85,37 +85,37 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Inventory Exclusion List**
 
-`method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+&#x2022; `method` - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
-`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
+&#x2022; `path` - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
 <a id="api-inventory-inclusion-list"></a>
 
 **API Inventory Inclusion List**
 
-`method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+&#x2022; `method` - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
-`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
+&#x2022; `path` - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
 <a id="non-api-endpoints"></a>
 
 **Non API Endpoints**
 
-`method` - (Optional) HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY` (`String`).
+&#x2022; `method` - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
-`path` - (Optional) Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification (`String`).
+&#x2022; `path` - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

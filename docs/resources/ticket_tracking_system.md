@@ -48,29 +48,29 @@ resource "f5xc_ticket_tracking_system" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the TicketTrackingSystem. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the TicketTrackingSystem. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the TicketTrackingSystem will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the TicketTrackingSystem will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`jira_config` - (Optional) Jira Configuration Type. See [Jira Config](#jira-config) below for details.
+&#x2022; `jira_config` - Optional Block<br>Jira Configuration Type<br>See [Jira Config](#jira-config) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -78,29 +78,29 @@ In addition to all arguments above, the following attributes are exported:
 
 **Jira Config**
 
-`adhoc_rest_api` - (Optional) JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message. See [Adhoc REST API](#jira-config-adhoc-rest-api) below.
+&#x2022; `adhoc_rest_api` - Optional Block<br>JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message<br>See [Adhoc REST API](#jira-config-adhoc-rest-api) below.
 
 <a id="jira-config-adhoc-rest-api"></a>
 
 **Jira Config Adhoc REST API**
 
-`account_email` - (Optional) Account Email. Username (email) for the Atlassian account (`String`).
+&#x2022; `account_email` - Optional String<br>Account Email. Username (email) for the Atlassian account
 
-`api_token` - (Optional) API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value as an empty string (`String`).
+&#x2022; `api_token` - Optional String<br>API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value as an empty string
 
-`organization_domain` - (Optional) Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034 (`String`).
+&#x2022; `organization_domain` - Optional String<br>Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

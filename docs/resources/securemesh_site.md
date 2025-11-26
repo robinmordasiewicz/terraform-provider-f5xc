@@ -59,63 +59,63 @@ resource "f5xc_securemesh_site" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the SecuremeshSite. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the SecuremeshSite. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the SecuremeshSite will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the SecuremeshSite will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`address` - (Optional) Geographical Address. Site's geographical address that can be used to determine its latitude and longitude (`String`).
+&#x2022; `address` - Optional String<br>Geographical Address. Site's geographical address that can be used to determine its latitude and longitude
 
 -> **One of the following:**
-&#x2022; `blocked_services` - (Optional) Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site. See [Blocked Services](#blocked-services) below for details.
-<br>&#x2022; `default_blocked_services` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
+<br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; `bond_device_list` - (Optional) Bond Devices List. List of bond devices for this fleet. See [Bond Device List](#bond-device-list) below for details.
-<br>&#x2022; `no_bond_devices` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `bond_device_list` - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
+<br>&#x2022; `no_bond_devices` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`coordinates` - (Optional) Site Coordinates. Coordinates of the site which provides the site physical location. See [Coordinates](#coordinates) below for details.
-
--> **One of the following:**
-&#x2022; `custom_network_config` - (Optional) SmsNetworkConfiguration. See [Custom Network Config](#custom-network-config) below for details.
-<br>&#x2022; `default_network_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`kubernetes_upgrade_drain` - (Optional) Node by Node Upgrade. Specify how worker nodes within a site will be upgraded (`Block`).
+&#x2022; `coordinates` - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
 -> **One of the following:**
-&#x2022; `log_receiver` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name (`Block`).
-<br>&#x2022; `logs_streaming_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `custom_network_config` - Optional Block<br>SmsNetworkConfiguration<br>See [Custom Network Config](#custom-network-config) below for details.
+<br>&#x2022; `default_network_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`master_node_configuration` - (Optional) Master Nodes. Configuration of master nodes (`Block`).
+&#x2022; `kubernetes_upgrade_drain` - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded
 
-`offline_survivability_mode` - (Optional) Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen (`Block`).
+-> **One of the following:**
+&#x2022; `log_receiver` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+<br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`os` - (Optional) Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions (`Block`).
+&#x2022; `master_node_configuration` - Optional Block<br>Master Nodes. Configuration of master nodes
 
-`performance_enhancement_mode` - (Optional) Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default (`Block`).
+&#x2022; `offline_survivability_mode` - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 
-`sw` - (Optional) F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions (`Block`).
+&#x2022; `os` - Optional Block<br>Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
 
-`timeouts` - (Optional) (`Block`).
+&#x2022; `performance_enhancement_mode` - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default
 
-`volterra_certified_hw` - (Optional) Generic Server Certified Hardware. Name for generic server certified hardware to form this Secure Mesh site (`String`).
+&#x2022; `sw` - Optional Block<br>F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
 
-`worker_nodes` - (Optional) Worker Nodes. Names of worker nodes (`List`).
+&#x2022; `timeouts` - Optional Block
+
+&#x2022; `volterra_certified_hw` - Optional String<br>Generic Server Certified Hardware. Name for generic server certified hardware to form this Secure Mesh site
+
+&#x2022; `worker_nodes` - Optional List<br>Worker Nodes. Names of worker nodes
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -123,809 +123,809 @@ In addition to all arguments above, the following attributes are exported:
 
 **Blocked Services**
 
-`blocked_sevice` - (Optional) Disable Node Local Services. See [Blocked Sevice](#blocked-services-blocked-sevice) below.
+&#x2022; `blocked_sevice` - Optional Block<br>Disable Node Local Services<br>See [Blocked Sevice](#blocked-services-blocked-sevice) below.
 
 <a id="blocked-services-blocked-sevice"></a>
 
 **Blocked Services Blocked Sevice**
 
-`dns` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `dns` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
+&#x2022; `network_type` - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-`ssh` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ssh` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`web_user_interface` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `web_user_interface` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="bond-device-list"></a>
 
 **Bond Device List**
 
-`bond_devices` - (Optional) Bond Devices. List of bond devices. See [Bond Devices](#bond-device-list-bond-devices) below.
+&#x2022; `bond_devices` - Optional Block<br>Bond Devices. List of bond devices<br>See [Bond Devices](#bond-device-list-bond-devices) below.
 
 <a id="bond-device-list-bond-devices"></a>
 
 **Bond Device List Bond Devices**
 
-`active_backup` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `active_backup` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`devices` - (Optional) Member Ethernet Devices. Ethernet devices that will make up this bond (`List`).
+&#x2022; `devices` - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
 
-`lacp` - (Optional) LACP parameters. LACP parameters for the bond device. See [Lacp](#bond-device-list-bond-devices-lacp) below.
+&#x2022; `lacp` - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#bond-device-list-bond-devices-lacp) below.
 
-`link_polling_interval` - (Optional) Link Polling Interval. Link polling interval in milliseconds (`Number`).
+&#x2022; `link_polling_interval` - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
 
-`link_up_delay` - (Optional) Link Up Delay. Milliseconds wait before link is declared up (`Number`).
+&#x2022; `link_up_delay` - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
 
-`name` - (Optional) Bond Device Name. Name for the Bond. Ex 'bond0' (`String`).
+&#x2022; `name` - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
 
 <a id="bond-device-list-bond-devices-lacp"></a>
 
 **Bond Device List Bond Devices Lacp**
 
-`rate` - (Optional) LACP Packet Interval. Interval in seconds to transmit LACP packets (`Number`).
+&#x2022; `rate` - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="coordinates"></a>
 
 **Coordinates**
 
-`latitude` - (Optional) Latitude. Latitude of the site location (`Number`).
+&#x2022; `latitude` - Optional Number<br>Latitude. Latitude of the site location
 
-`longitude` - (Optional) Longitude. longitude of site location (`Number`).
+&#x2022; `longitude` - Optional Number<br>Longitude. longitude of site location
 
 <a id="custom-network-config"></a>
 
 **Custom Network Config**
 
-`active_enhanced_firewall_policies` - (Optional) Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion. See [Active Enhanced Firewall Policies](#custom-network-config-active-enhanced-firewall-policies) below.
+&#x2022; `active_enhanced_firewall_policies` - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#custom-network-config-active-enhanced-firewall-policies) below.
 
-`active_forward_proxy_policies` - (Optional) Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active. See [Active Forward Proxy Policies](#custom-network-config-active-forward-proxy-policies) below.
+&#x2022; `active_forward_proxy_policies` - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#custom-network-config-active-forward-proxy-policies) below.
 
-`active_network_policies` - (Optional) Active Firewall Policies Type. List of firewall policy views. See [Active Network Policies](#custom-network-config-active-network-policies) below.
+&#x2022; `active_network_policies` - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#custom-network-config-active-network-policies) below.
 
-`default_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`default_interface_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_interface_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`default_sli_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_sli_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`forward_proxy_allow_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `forward_proxy_allow_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`global_network_list` - (Optional) Global Network Connection List. List of global network connections. See [Global Network List](#custom-network-config-global-network-list) below.
+&#x2022; `global_network_list` - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#custom-network-config-global-network-list) below.
 
-`interface_list` - (Optional) List of Interface. Configure network interfaces for this Secure Mesh site. See [Interface List](#custom-network-config-interface-list) below.
+&#x2022; `interface_list` - Optional Block<br>List of Interface. Configure network interfaces for this Secure Mesh site<br>See [Interface List](#custom-network-config-interface-list) below.
 
-`no_forward_proxy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_forward_proxy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`no_global_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_global_network` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`no_network_policy` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_network_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`sli_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Sli Config](#custom-network-config-sli-config) below.
+&#x2022; `sli_config` - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Sli Config](#custom-network-config-sli-config) below.
 
-`slo_config` - (Optional) Site Local Network Configuration. Site local network configuration. See [Slo Config](#custom-network-config-slo-config) below.
+&#x2022; `slo_config` - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Slo Config](#custom-network-config-slo-config) below.
 
-`sm_connection_public_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `sm_connection_public_ip` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`sm_connection_pvt_ip` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `sm_connection_pvt_ip` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`tunnel_dead_timeout` - (Optional) Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used (`Number`).
+&#x2022; `tunnel_dead_timeout` - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
 
-`vip_vrrp_mode` - (Optional) VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`. Defaults to `VIP_VRRP_INVALID` (`String`).
+&#x2022; `vip_vrrp_mode` - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode
 
 <a id="custom-network-config-active-enhanced-firewall-policies"></a>
 
 **Custom Network Config Active Enhanced Firewall Policies**
 
-`enhanced_firewall_policies` - (Optional) Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active. See [Enhanced Firewall Policies](#custom-network-config-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
+&#x2022; `enhanced_firewall_policies` - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#custom-network-config-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 <a id="custom-network-config-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
 **Custom Network Config Active Enhanced Firewall Policies Enhanced Firewall Policies**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="custom-network-config-active-forward-proxy-policies"></a>
 
 **Custom Network Config Active Forward Proxy Policies**
 
-`forward_proxy_policies` - (Optional) Forward Proxy Policies. Ordered List of Forward Proxy Policies active. See [Forward Proxy Policies](#custom-network-config-active-forward-proxy-policies-forward-proxy-policies) below.
+&#x2022; `forward_proxy_policies` - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#custom-network-config-active-forward-proxy-policies-forward-proxy-policies) below.
 
 <a id="custom-network-config-active-forward-proxy-policies-forward-proxy-policies"></a>
 
 **Custom Network Config Active Forward Proxy Policies Forward Proxy Policies**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="custom-network-config-active-network-policies"></a>
 
 **Custom Network Config Active Network Policies**
 
-`network_policies` - (Optional) Firewall Policy. Ordered List of Firewall Policies active for this network firewall. See [Network Policies](#custom-network-config-active-network-policies-network-policies) below.
+&#x2022; `network_policies` - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#custom-network-config-active-network-policies-network-policies) below.
 
 <a id="custom-network-config-active-network-policies-network-policies"></a>
 
 **Custom Network Config Active Network Policies Network Policies**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="custom-network-config-global-network-list"></a>
 
 **Custom Network Config Global Network List**
 
-`global_network_connections` - (Optional) Global Network Connections. Global network connections. See [Global Network Connections](#custom-network-config-global-network-list-global-network-connections) below.
+&#x2022; `global_network_connections` - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#custom-network-config-global-network-list-global-network-connections) below.
 
 <a id="custom-network-config-global-network-list-global-network-connections"></a>
 
 **Custom Network Config Global Network List Global Network Connections**
 
-`sli_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Sli To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
+&#x2022; `sli_to_global_dr` - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
 
-`slo_to_global_dr` - (Optional) Global Network. Global network reference for direct connection. See [Slo To Global DR](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) below.
+&#x2022; `slo_to_global_dr` - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) below.
 
 <a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr"></a>
 
 **Custom Network Config Global Network List Global Network Connections Sli To Global DR**
 
-`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
+&#x2022; `global_vn` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
 <a id="custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
 
 **Custom Network Config Global Network List Global Network Connections Sli To Global DR Global Vn**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="custom-network-config-global-network-list-global-network-connections-slo-to-global-dr"></a>
 
 **Custom Network Config Global Network List Global Network Connections Slo To Global DR**
 
-`global_vn` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Global Vn](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
+&#x2022; `global_vn` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
 
 <a id="custom-network-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
 
 **Custom Network Config Global Network List Global Network Connections Slo To Global DR Global Vn**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="custom-network-config-interface-list"></a>
 
 **Custom Network Config Interface List**
 
-`interfaces` - (Optional) List of Interface. Configure network interfaces for this Secure Mesh site. See [Interfaces](#custom-network-config-interface-list-interfaces) below.
+&#x2022; `interfaces` - Optional Block<br>List of Interface. Configure network interfaces for this Secure Mesh site<br>See [Interfaces](#custom-network-config-interface-list-interfaces) below.
 
 <a id="custom-network-config-interface-list-interfaces"></a>
 
 **Custom Network Config Interface List Interfaces**
 
-`dc_cluster_group_connectivity_interface_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `dc_cluster_group_connectivity_interface_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`dc_cluster_group_connectivity_interface_enabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `dc_cluster_group_connectivity_interface_enabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`dedicated_interface` - (Optional) Dedicated Interface. Dedicated Interface Configuration. See [Dedicated Interface](#custom-network-config-interface-list-interfaces-dedicated-interface) below.
+&#x2022; `dedicated_interface` - Optional Block<br>Dedicated Interface. Dedicated Interface Configuration<br>See [Dedicated Interface](#custom-network-config-interface-list-interfaces-dedicated-interface) below.
 
-`dedicated_management_interface` - (Optional) Dedicated Management Interface. Dedicated Interface Configuration. See [Dedicated Management Interface](#custom-network-config-interface-list-interfaces-dedicated-management-interface) below.
+&#x2022; `dedicated_management_interface` - Optional Block<br>Dedicated Management Interface. Dedicated Interface Configuration<br>See [Dedicated Management Interface](#custom-network-config-interface-list-interfaces-dedicated-management-interface) below.
 
-`description` - (Optional) Interface Description. Description for this Interface (`String`).
+&#x2022; `description` - Optional String<br>Interface Description. Description for this Interface
 
-`ethernet_interface` - (Optional) Ethernet Interface. Ethernet Interface Configuration. See [Ethernet Interface](#custom-network-config-interface-list-interfaces-ethernet-interface) below.
+&#x2022; `ethernet_interface` - Optional Block<br>Ethernet Interface. Ethernet Interface Configuration<br>See [Ethernet Interface](#custom-network-config-interface-list-interfaces-ethernet-interface) below.
 
-`labels` - (Optional) Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy (`Block`).
+&#x2022; `labels` - Optional Block<br>Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy
 
 <a id="custom-network-config-interface-list-interfaces-dedicated-interface"></a>
 
 **Custom Network Config Interface List Interfaces Dedicated Interface**
 
-`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `cluster` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`device` - (Optional) Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE (`String`).
+&#x2022; `device` - Optional String<br>Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE
 
-`is_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `is_primary` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+&#x2022; `monitor` - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
 
-`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `monitor_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+&#x2022; `mtu` - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-`node` - (Optional) Specific Node. Configuration will apply to a device on the given node of the site (`String`).
+&#x2022; `node` - Optional String<br>Specific Node. Configuration will apply to a device on the given node of the site
 
-`not_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `not_primary` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`priority` - (Optional) Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority (`Number`).
+&#x2022; `priority` - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
 <a id="custom-network-config-interface-list-interfaces-dedicated-management-interface"></a>
 
 **Custom Network Config Interface List Interfaces Dedicated Management Interface**
 
-`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `cluster` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`device` - (Optional) Interface Device. Name of the device for which interface is configured (`String`).
+&#x2022; `device` - Optional String<br>Interface Device. Name of the device for which interface is configured
 
-`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+&#x2022; `mtu` - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-`node` - (Optional) Specific Node. Configuration will apply to a device on the given node of the site (`String`).
+&#x2022; `node` - Optional String<br>Specific Node. Configuration will apply to a device on the given node of the site
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface**
 
-`cluster` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `cluster` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`device` - (Optional) Ethernet Device. Interface configuration for the ethernet device (`String`).
+&#x2022; `device` - Optional String<br>Ethernet Device. Interface configuration for the ethernet device
 
-`dhcp_client` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `dhcp_client` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`dhcp_server` - (Optional) DHCPServerParametersType. See [DHCP Server](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server) below.
+&#x2022; `dhcp_server` - Optional Block<br>DHCPServerParametersType<br>See [DHCP Server](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server) below.
 
-`ipv6_auto_config` - (Optional) IPV6AutoConfigType. See [IPv6 Auto Config](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config) below.
+&#x2022; `ipv6_auto_config` - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config) below.
 
-`is_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `is_primary` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`monitor` - (Optional) Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface (`Block`).
+&#x2022; `monitor` - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
 
-`monitor_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `monitor_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`mtu` - (Optional) Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384 (`Number`).
+&#x2022; `mtu` - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-`no_ipv6_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_ipv6_address` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`node` - (Optional) Specific Node. Configuration will apply to a device on the given node (`String`).
+&#x2022; `node` - Optional String<br>Specific Node. Configuration will apply to a device on the given node
 
-`not_primary` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `not_primary` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`priority` - (Optional) Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority (`Number`).
+&#x2022; `priority` - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
-`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `site_local_inside_network` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `site_local_network` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`static_ip` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip) below.
+&#x2022; `static_ip` - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip) below.
 
-`static_ipv6_address` - (Optional) Static IP Parameters. Configure Static IP parameters. See [Static IPv6 Address](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address) below.
+&#x2022; `static_ipv6_address` - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address) below.
 
-`storage_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `storage_network` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`untagged` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `untagged` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`vlan_id` - (Optional) VLAN Id. Configure a VLAN tagged ethernet interface (`Number`).
+&#x2022; `vlan_id` - Optional Number<br>VLAN Id. Configure a VLAN tagged ethernet interface
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server**
 
-`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `automatic_from_end` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `automatic_from_start` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`dhcp_networks` - (Optional) DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses. See [DHCP Networks](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks) below.
+&#x2022; `dhcp_networks` - Optional Block<br>DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses<br>See [DHCP Networks](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks) below.
 
-`fixed_ip_map` - (Optional) Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client (`Block`).
+&#x2022; `fixed_ip_map` - Optional Block<br>Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client
 
-`interface_ip_map` - (Optional) Interface IPv4 Assignments. Specify static IPv4 addresses per node. See [Interface IP Map](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-interface-ip-map) below.
+&#x2022; `interface_ip_map` - Optional Block<br>Interface IPv4 Assignments. Specify static IPv4 addresses per node<br>See [Interface IP Map](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-interface-ip-map) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server DHCP Networks**
 
-`dgw_address` - (Optional) Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway (`String`).
+&#x2022; `dgw_address` - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway
 
-`dns_address` - (Optional) Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server (`String`).
+&#x2022; `dns_address` - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server
 
-`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `first_address` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `last_address` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`network_prefix` - (Optional) Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24 (`String`).
+&#x2022; `network_prefix` - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
 
-`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+&#x2022; `pool_settings` - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
-`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools) below.
+&#x2022; `pools` - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools) below.
 
-`same_as_dgw` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `same_as_dgw` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server DHCP Networks Pools**
 
-`end_ip` - (Optional) Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200 (`String`).
+&#x2022; `end_ip` - Optional String<br>Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200
 
-`start_ip` - (Optional) Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5 (`String`).
+&#x2022; `start_ip` - Optional String<br>Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-interface-ip-map"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server Interface IP Map**
 
-`interface_ip_map` - (Optional) Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node (`Block`).
+&#x2022; `interface_ip_map` - Optional Block<br>Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config**
 
-`host` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `host` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`router` - (Optional) IPV6AutoConfigRouterType. See [Router](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router) below.
+&#x2022; `router` - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router**
 
-`dns_config` - (Optional) IPV6DnsConfig. See [DNS Config](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config) below.
+&#x2022; `dns_config` - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config) below.
 
-`network_prefix` - (Optional) Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862 (`String`).
+&#x2022; `network_prefix` - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
 
-`stateful` - (Optional) DHCPIPV6 Stateful Server. See [Stateful](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful) below.
+&#x2022; `stateful` - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config**
 
-`configured_list` - (Optional) IPV6DnsList. See [Configured List](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) below.
+&#x2022; `configured_list` - Optional Block<br>IPV6DnsList<br>See [Configured List](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) below.
 
-`local_dns` - (Optional) IPV6LocalDnsAddress. See [Local DNS](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns) below.
+&#x2022; `local_dns` - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-configured-list"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config Configured List**
 
-`dns_list` - (Optional) DNS List. List of IPv6 Addresses acting as DNS servers (`List`).
+&#x2022; `dns_list` - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config Local DNS**
 
-`configured_address` - (Optional) Configured Address. Configured address from the network prefix is chosen as DNS server (`String`).
+&#x2022; `configured_address` - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
-`first_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `first_address` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`last_address` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `last_address` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful**
 
-`automatic_from_end` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `automatic_from_end` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`automatic_from_start` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `automatic_from_start` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`dhcp_networks` - (Optional) DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses. See [DHCP Networks](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) below.
+&#x2022; `dhcp_networks` - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) below.
 
-`fixed_ip_map` - (Optional) Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client (`Block`).
+&#x2022; `fixed_ip_map` - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
 
-`interface_ip_map` - (Optional) Interface IPv6 Assignments. Map of Interface IPv6 assignments per node. See [Interface IP Map](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) below.
+&#x2022; `interface_ip_map` - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks**
 
-`network_prefix` - (Optional) Network Prefix. Network Prefix to be used for IPv6 address auto configuration (`String`).
+&#x2022; `network_prefix` - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
-`pool_settings` - (Optional) Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS` (`String`).
+&#x2022; `pool_settings` - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
-`pools` - (Optional) DHCP Pools. List of non overlapping IP address ranges. See [Pools](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
+&#x2022; `pools` - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks Pools**
 
-`end_ip` - (Optional) Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix (`String`).
+&#x2022; `end_ip` - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
-`start_ip` - (Optional) Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5 (`String`).
+&#x2022; `start_ip` - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful Interface IP Map**
 
-`interface_ip_map` - (Optional) Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address (`Block`).
+&#x2022; `interface_ip_map` - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ip"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface Static IP**
 
-`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-cluster-static-ip) below.
+&#x2022; `cluster_static_ip` - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-cluster-static-ip) below.
 
-`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-node-static-ip) below.
+&#x2022; `node_static_ip` - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-node-static-ip) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-cluster-static-ip"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface Static IP Cluster Static IP**
 
-`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+&#x2022; `interface_ip_map` - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-node-static-ip"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface Static IP Node Static IP**
 
-`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+&#x2022; `default_gw` - Optional String<br>Default Gateway. IP address of the default gateway
 
-`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+&#x2022; `ip_address` - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address**
 
-`cluster_static_ip` - (Optional) Cluster: Static IP Parameters. Configure Static IP parameters for cluster. See [Cluster Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-cluster-static-ip) below.
+&#x2022; `cluster_static_ip` - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-cluster-static-ip) below.
 
-`node_static_ip` - (Optional) Node: Static IP Parameters. Configure Static IP parameters for a node. See [Node Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-node-static-ip) below.
+&#x2022; `node_static_ip` - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-node-static-ip) below.
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-cluster-static-ip"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address Cluster Static IP**
 
-`interface_ip_map` - (Optional) Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address (`Block`).
+&#x2022; `interface_ip_map` - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-node-static-ip"></a>
 
 **Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address Node Static IP**
 
-`default_gw` - (Optional) Default Gateway. IP address of the default gateway (`String`).
+&#x2022; `default_gw` - Optional String<br>Default Gateway. IP address of the default gateway
 
-`ip_address` - (Optional) IP address/Prefix Length. IP address of the interface and prefix length (`String`).
+&#x2022; `ip_address` - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
 
 <a id="custom-network-config-sli-config"></a>
 
 **Custom Network Config Sli Config**
 
-`dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#custom-network-config-sli-config-dc-cluster-group) below.
+&#x2022; `dc_cluster_group` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#custom-network-config-sli-config-dc-cluster-group) below.
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy (`Block`).
+&#x2022; `labels` - Optional Block<br>Network Labels. Add Labels for this network, these labels can be used in firewall policy
 
-`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
+&#x2022; `nameserver` - Optional String<br>DNS V4 Server. Optional DNS V4 server IP to be used for name resolution
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_dc_cluster_group` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_static_routes` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_v6_static_routes` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#custom-network-config-sli-config-static-routes) below.
+&#x2022; `static_routes` - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#custom-network-config-sli-config-static-routes) below.
 
-`static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#custom-network-config-sli-config-static-v6-routes) below.
+&#x2022; `static_v6_routes` - Optional Block<br>Static IPv6 Routes List. List of IPv6 static routes<br>See [Static V6 Routes](#custom-network-config-sli-config-static-v6-routes) below.
 
-`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
+&#x2022; `vip` - Optional String<br>Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP
 
 <a id="custom-network-config-sli-config-dc-cluster-group"></a>
 
 **Custom Network Config Sli Config Dc Cluster Group**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="custom-network-config-sli-config-static-routes"></a>
 
 **Custom Network Config Sli Config Static Routes**
 
-`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#custom-network-config-sli-config-static-routes-static-routes) below.
+&#x2022; `static_routes` - Optional Block<br>Static Routes. List of static routes<br>See [Static Routes](#custom-network-config-sli-config-static-routes-static-routes) below.
 
 <a id="custom-network-config-sli-config-static-routes-static-routes"></a>
 
 **Custom Network Config Sli Config Static Routes Static Routes**
 
-`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+&#x2022; `attrs` - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_gateway` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+&#x2022; `ip_address` - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
-`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
+&#x2022; `ip_prefixes` - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
 
-`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-network-config-sli-config-static-routes-static-routes-node-interface) below.
+&#x2022; `node_interface` - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#custom-network-config-sli-config-static-routes-static-routes-node-interface) below.
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface"></a>
 
 **Custom Network Config Sli Config Static Routes Static Routes Node Interface**
 
-`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) below.
+&#x2022; `list` - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) below.
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list"></a>
 
 **Custom Network Config Sli Config Static Routes Static Routes Node Interface List**
 
-`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface) below.
+&#x2022; `interface` - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface) below.
 
-`node` - (Optional) Node. Node name on this site (`String`).
+&#x2022; `node` - Optional String<br>Node. Node name on this site
 
 <a id="custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface"></a>
 
 **Custom Network Config Sli Config Static Routes Static Routes Node Interface List Interface**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="custom-network-config-sli-config-static-v6-routes"></a>
 
 **Custom Network Config Sli Config Static V6 Routes**
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#custom-network-config-sli-config-static-v6-routes-static-routes) below.
+&#x2022; `static_routes` - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#custom-network-config-sli-config-static-v6-routes-static-routes) below.
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes"></a>
 
 **Custom Network Config Sli Config Static V6 Routes Static Routes**
 
-`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+&#x2022; `attrs` - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_gateway` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+&#x2022; `ip_address` - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
-`ip_prefixes` - (Optional) IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes (`List`).
+&#x2022; `ip_prefixes` - Optional List<br>IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes
 
-`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) below.
+&#x2022; `node_interface` - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) below.
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface"></a>
 
 **Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface**
 
-`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) below.
+&#x2022; `list` - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) below.
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list"></a>
 
 **Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface List**
 
-`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-interface) below.
+&#x2022; `interface` - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-interface) below.
 
-`node` - (Optional) Node. Node name on this site (`String`).
+&#x2022; `node` - Optional String<br>Node. Node name on this site
 
 <a id="custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-interface"></a>
 
 **Custom Network Config Sli Config Static V6 Routes Static Routes Node Interface List Interface**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="custom-network-config-slo-config"></a>
 
 **Custom Network Config Slo Config**
 
-`dc_cluster_group` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Dc Cluster Group](#custom-network-config-slo-config-dc-cluster-group) below.
+&#x2022; `dc_cluster_group` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#custom-network-config-slo-config-dc-cluster-group) below.
 
-`labels` - (Optional) Network Labels. Add Labels for this network, these labels can be used in firewall policy (`Block`).
+&#x2022; `labels` - Optional Block<br>Network Labels. Add Labels for this network, these labels can be used in firewall policy
 
-`nameserver` - (Optional) DNS V4 Server. Optional DNS V4 server IP to be used for name resolution (`String`).
+&#x2022; `nameserver` - Optional String<br>DNS V4 Server. Optional DNS V4 server IP to be used for name resolution
 
-`no_dc_cluster_group` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_dc_cluster_group` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`no_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_static_routes` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`no_v6_static_routes` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_v6_static_routes` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`static_routes` - (Optional) Static Routes List. List of static routes. See [Static Routes](#custom-network-config-slo-config-static-routes) below.
+&#x2022; `static_routes` - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#custom-network-config-slo-config-static-routes) below.
 
-`static_v6_routes` - (Optional) Static IPv6 Routes List. List of IPv6 static routes. See [Static V6 Routes](#custom-network-config-slo-config-static-v6-routes) below.
+&#x2022; `static_v6_routes` - Optional Block<br>Static IPv6 Routes List. List of IPv6 static routes<br>See [Static V6 Routes](#custom-network-config-slo-config-static-v6-routes) below.
 
-`vip` - (Optional) Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP (`String`).
+&#x2022; `vip` - Optional String<br>Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP
 
 <a id="custom-network-config-slo-config-dc-cluster-group"></a>
 
 **Custom Network Config Slo Config Dc Cluster Group**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="custom-network-config-slo-config-static-routes"></a>
 
 **Custom Network Config Slo Config Static Routes**
 
-`static_routes` - (Optional) Static Routes. List of static routes. See [Static Routes](#custom-network-config-slo-config-static-routes-static-routes) below.
+&#x2022; `static_routes` - Optional Block<br>Static Routes. List of static routes<br>See [Static Routes](#custom-network-config-slo-config-static-routes-static-routes) below.
 
 <a id="custom-network-config-slo-config-static-routes-static-routes"></a>
 
 **Custom Network Config Slo Config Static Routes Static Routes**
 
-`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+&#x2022; `attrs` - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_gateway` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+&#x2022; `ip_address` - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
-`ip_prefixes` - (Optional) IP Prefixes. List of route prefixes that have common next hop and attributes (`List`).
+&#x2022; `ip_prefixes` - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
 
-`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-network-config-slo-config-static-routes-static-routes-node-interface) below.
+&#x2022; `node_interface` - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#custom-network-config-slo-config-static-routes-static-routes-node-interface) below.
 
 <a id="custom-network-config-slo-config-static-routes-static-routes-node-interface"></a>
 
 **Custom Network Config Slo Config Static Routes Static Routes Node Interface**
 
-`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list) below.
+&#x2022; `list` - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list) below.
 
 <a id="custom-network-config-slo-config-static-routes-static-routes-node-interface-list"></a>
 
 **Custom Network Config Slo Config Static Routes Static Routes Node Interface List**
 
-`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list-interface) below.
+&#x2022; `interface` - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list-interface) below.
 
-`node` - (Optional) Node. Node name on this site (`String`).
+&#x2022; `node` - Optional String<br>Node. Node name on this site
 
 <a id="custom-network-config-slo-config-static-routes-static-routes-node-interface-list-interface"></a>
 
 **Custom Network Config Slo Config Static Routes Static Routes Node Interface List Interface**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="custom-network-config-slo-config-static-v6-routes"></a>
 
 **Custom Network Config Slo Config Static V6 Routes**
 
-`static_routes` - (Optional) Static IPv6 Routes. List of IPv6 static routes. See [Static Routes](#custom-network-config-slo-config-static-v6-routes-static-routes) below.
+&#x2022; `static_routes` - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#custom-network-config-slo-config-static-v6-routes-static-routes) below.
 
 <a id="custom-network-config-slo-config-static-v6-routes-static-routes"></a>
 
 **Custom Network Config Slo Config Static V6 Routes Static Routes**
 
-`attrs` - (Optional) Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP` (`List`).
+&#x2022; `attrs` - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-`default_gateway` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_gateway` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ip_address` - (Optional) IP Address. Traffic matching the IP prefixes is sent to this IP Address (`String`).
+&#x2022; `ip_address` - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
-`ip_prefixes` - (Optional) IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes (`List`).
+&#x2022; `ip_prefixes` - Optional List<br>IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes
 
-`node_interface` - (Optional) NodeInterfaceType. On multinode site, this type holds the information about per node interfaces. See [Node Interface](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface) below.
+&#x2022; `node_interface` - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface) below.
 
 <a id="custom-network-config-slo-config-static-v6-routes-static-routes-node-interface"></a>
 
 **Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface**
 
-`list` - (Optional) Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface. See [List](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list) below.
+&#x2022; `list` - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list) below.
 
 <a id="custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list"></a>
 
 **Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface List**
 
-`interface` - (Optional) Interface. Interface reference on this node. See [Interface](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list-interface) below.
+&#x2022; `interface` - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list-interface) below.
 
-`node` - (Optional) Node. Node name on this site (`String`).
+&#x2022; `node` - Optional String<br>Node. Node name on this site
 
 <a id="custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list-interface"></a>
 
 **Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface List Interface**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="kubernetes-upgrade-drain"></a>
 
 **Kubernetes Upgrade Drain**
 
-`disable_upgrade_drain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable_upgrade_drain` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`enable_upgrade_drain` - (Optional) Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site. See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
+&#x2022; `enable_upgrade_drain` - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
 **Kubernetes Upgrade Drain Enable Upgrade Drain**
 
-`disable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable_vega_upgrade_mode` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`drain_max_unavailable_node_count` - (Optional) Node Batch Size Count (`Number`).
+&#x2022; `drain_max_unavailable_node_count` - Optional Number<br>Node Batch Size Count
 
-`drain_node_timeout` - (Optional) Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value) (`Number`).
+&#x2022; `drain_node_timeout` - Optional Number<br>Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value)
 
-`enable_vega_upgrade_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `enable_vega_upgrade_mode` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="log-receiver"></a>
 
 **Log Receiver**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="master-node-configuration"></a>
 
 **Master Node Configuration**
 
-`name` - (Optional) Name. Names of master node (`String`).
+&#x2022; `name` - Optional String<br>Name. Names of master node
 
-`public_ip` - (Optional) Public IP. IP Address of the master node. This IP will be used when other sites connect via Site Mesh Group (`String`).
+&#x2022; `public_ip` - Optional String<br>Public IP. IP Address of the master node. This IP will be used when other sites connect via Site Mesh Group
 
 <a id="offline-survivability-mode"></a>
 
 **Offline Survivability Mode**
 
-`enable_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `enable_offline_survivability_mode` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`no_offline_survivability_mode` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_offline_survivability_mode` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="os"></a>
 
 **OS**
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_os_version` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`operating_system_version` - (Optional) Operating System Version. Specify a OS version to be used e.g. 9.2024.6 (`String`).
+&#x2022; `operating_system_version` - Optional String<br>Operating System Version. Specify a OS version to be used e.g. 9.2024.6
 
 <a id="performance-enhancement-mode"></a>
 
 **Performance Enhancement Mode**
 
-`perf_mode_l3_enhanced` - (Optional) L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options. See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
+&#x2022; `perf_mode_l3_enhanced` - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
-`perf_mode_l7_enhanced` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `perf_mode_l7_enhanced` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
 **Performance Enhancement Mode Perf Mode L3 Enhanced**
 
-`jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `jumbo` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`no_jumbo` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_jumbo` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="sw"></a>
 
 **Sw**
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_sw_version` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`volterra_software_version` - (Optional) F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002 (`String`).
+&#x2022; `volterra_software_version` - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

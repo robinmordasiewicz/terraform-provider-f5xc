@@ -19,11 +19,11 @@ resource "f5xc_dns_zone" "example" {
   # Primary DNS zone
   primary {
     soa_record_parameters {
-      refresh = 86400
-      retry   = 7200
-      expire  = 3600000
-      ttl     = 86400
-      neg_ttl = 1800
+      refresh    = 86400
+      retry      = 7200
+      expire     = 3600000
+      ttl        = 86400
+      neg_ttl    = 1800
     }
     default_rr_set_group {}
     default_soa_parameters {}

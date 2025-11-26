@@ -19,7 +19,7 @@ resource "f5xc_app_firewall" "example" {
 
   blocking {}
 
-  // One of the arguments from this list "custom_blocking_page use_default_blocking_page" must be set
+  // One of the arguments from this list "blocking_page use_default_blocking_page" must be set
 
   use_default_blocking_page {}
 
@@ -31,7 +31,7 @@ resource "f5xc_app_firewall" "example" {
     good_bot_action       = "REPORT"
   }
 
-  // One of the arguments from this list "custom_detection_settings default_detection_settings" must be set
+  // One of the arguments from this list "ai_risk_based_blocking default_detection_settings detection_settings" must be set
 
   default_detection_settings {}
 

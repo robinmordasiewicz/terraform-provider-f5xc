@@ -1,0 +1,85 @@
+---
+page_title: "F5XC Provider"
+description: |-
+  Terraform provider for F5 Distributed Cloud (F5XC) enabling infrastructure as code for load balancers, security policies, sites, and networking. Community-maintained provider built from public F5 API documentation.
+---
+
+# F5XC Provider
+
+The F5XC Terraform provider enables infrastructure as code management for F5 Distributed Cloud (F5XC) resources. Configure HTTP/TCP load balancers, origin pools, application firewalls, service policies, cloud sites, and more through declarative Terraform configurations.
+
+This is a community-maintained provider built from public F5 API documentation.
+
+## Authenticating to F5 Distributed Cloud
+
+The F5XC Terraform provider supports authentication using an API Token. Learn more about [how to generate an API token](https://docs.cloud.f5.com/docs/how-to/user-mgmt/credentials).
+
+## Example Usage
+
+{{ tffile "examples/provider/provider.tf" }}
+
+## Argument Reference
+
+* `api_token` - (Required) F5 Distributed Cloud API Token (`String`, Sensitive). This can also be sourced from the `F5XC_API_TOKEN` environment variable.
+
+* `api_url` - (Optional) F5 Distributed Cloud API URL (`String`). Defaults to `https://console.ves.volterra.io/api`. This can also be sourced from the `F5XC_API_URL` environment variable.
+
+### Authentication Options
+
+**Option 1: Provider Configuration**
+
+Set credentials directly in the provider block:
+
+```hcl
+provider "f5xc" {
+  api_token = "your-api-token"
+  api_url   = "https://your-tenant.console.ves.volterra.io/api"
+}
+```
+
+**Option 2: Environment Variables**
+
+Set credentials using environment variables:
+
+```bash
+export F5XC_API_TOKEN="your-api-token"
+export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"
+```
+
+Then configure the provider without credentials:
+
+```hcl
+provider "f5xc" {}
+```
+
+-> **Note:** Environment variables are the recommended approach for CI/CD pipelines and to avoid storing sensitive credentials in version control.
+
+## Getting Started
+
+1. **Generate an API Token**: Navigate to your F5 Distributed Cloud console, go to **Administration** > **Personal Management** > **Credentials**, and create a new API Token.
+
+2. **Configure the Provider**: Add the provider configuration to your Terraform files using one of the authentication options above.
+
+3. **Create Resources**: Start managing F5XC resources like namespaces, load balancers, and origin pools.
+
+### Example: Create a Namespace
+
+```hcl
+resource "f5xc_namespace" "example" {
+  name = "my-namespace"
+}
+```
+
+### Example: Create an HTTP Load Balancer
+
+```hcl
+resource "f5xc_http_loadbalancer" "example" {
+  name      = "my-load-balancer"
+  namespace = "my-namespace"
+  domains   = ["example.com"]
+}
+```
+
+## Resources and Data Sources
+
+This provider includes {{ len .Resources }} resources and {{ len .DataSources }} data sources for managing F5 Distributed Cloud infrastructure. Browse the documentation sidebar for the complete list organized by category.

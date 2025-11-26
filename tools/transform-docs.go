@@ -720,9 +720,8 @@ func transformAnchorsOnly(filePath string, content string) error {
 
 		// Replace generic API documentation link with resource-specific link
 		if strings.Contains(line, "F5 XC API Documentation") && apiDocURL != "" {
-			// Format the resource name for display (convert underscore to space and title case)
-			displayName := strings.ReplaceAll(resourceName, "_", " ")
-			displayName = strings.Title(displayName)
+			// Format the resource name for display using toTitleCase for proper acronym handling
+			displayName := toTitleCase(resourceName)
 			line = fmt.Sprintf("~> **Note** Please refer to [%s API docs](%s) to learn more.", displayName, apiDocURL)
 		}
 
@@ -910,9 +909,8 @@ func transformDoc(filePath string) error {
 		}
 		// Replace generic API documentation link with resource-specific link
 		if strings.Contains(line, "F5 XC API Documentation") && apiDocURL != "" {
-			// Format the resource name for display (convert underscore to space and title case)
-			displayName := strings.ReplaceAll(resourceName, "_", " ")
-			displayName = strings.Title(displayName)
+			// Format the resource name for display using toTitleCase for proper acronym handling
+			displayName := toTitleCase(resourceName)
 			line = fmt.Sprintf("~> **Note** Please refer to [%s API docs](%s) to learn more.", displayName, apiDocURL)
 		}
 		output.WriteString(line)

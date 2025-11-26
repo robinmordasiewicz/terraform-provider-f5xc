@@ -52,40 +52,40 @@ resource "f5xc_network_firewall" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the NetworkFirewall. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the NetworkFirewall. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NetworkFirewall will be created
+&#x2022; `namespace` - Required String<br>Namespace where the NetworkFirewall will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
-<br><br>&#x2022; [`active_network_policies`](#active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
-<br><br>&#x2022; [`disable_network_policy`](#disable-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `active_enhanced_firewall_policies` - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
+<br><br>&#x2022; `active_network_policies` - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
+<br><br>&#x2022; `disable_network_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; [`active_fast_acls`](#active-fast-acls) - Optional Block<br>Active Fast ACL(s). List of Fast ACL(s)<br>See [Active Fast Acls](#active-fast-acls) below for details.
-<br><br>&#x2022; [`disable_fast_acl`](#disable-fast-acl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `active_fast_acls` - Optional Block<br>Active Fast ACL(s). List of Fast ACL(s)<br>See [Active Fast Acls](#active-fast-acls) below for details.
+<br><br>&#x2022; `disable_fast_acl` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; [`active_forward_proxy_policies`](#active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br><br>&#x2022; [`disable_forward_proxy_policy`](#disable-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `active_forward_proxy_policies` - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
+<br><br>&#x2022; `disable_forward_proxy_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -93,77 +93,77 @@ In addition to all arguments above, the following attributes are exported:
 
 **Active Enhanced Firewall Policies**
 
-&#x2022; [`enhanced_firewall_policies`](#enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
+&#x2022; `enhanced_firewall_policies` - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 <a id="active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
 **Active Enhanced Firewall Policies Enhanced Firewall Policies**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="active-fast-acls"></a>
 
 **Active Fast Acls**
 
-&#x2022; [`fast_acls`](#fast-acls) - Optional Block<br>Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall<br>See [Fast Acls](#active-fast-acls-fast-acls) below.
+&#x2022; `fast_acls` - Optional Block<br>Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall<br>See [Fast Acls](#active-fast-acls-fast-acls) below.
 
 <a id="active-fast-acls-fast-acls"></a>
 
 **Active Fast Acls Fast Acls**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="active-forward-proxy-policies"></a>
 
 **Active Forward Proxy Policies**
 
-&#x2022; [`forward_proxy_policies`](#forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
+&#x2022; `forward_proxy_policies` - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
 
 <a id="active-forward-proxy-policies-forward-proxy-policies"></a>
 
 **Active Forward Proxy Policies Forward Proxy Policies**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="active-network-policies"></a>
 
 **Active Network Policies**
 
-&#x2022; [`network_policies`](#network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#active-network-policies-network-policies) below.
+&#x2022; `network_policies` - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#active-network-policies-network-policies) below.
 
 <a id="active-network-policies-network-policies"></a>
 
 **Active Network Policies Network Policies**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

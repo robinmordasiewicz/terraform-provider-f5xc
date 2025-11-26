@@ -52,36 +52,36 @@ resource "f5xc_api_testing" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the APITesting. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the APITesting. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the APITesting will be created
+&#x2022; `namespace` - Required String<br>Namespace where the APITesting will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`custom_header_value`](#custom-header-value) - Optional String<br>Custom Header. Add x-f5-API-testing-identifier header value to prevent security flags on API testing traffic
+&#x2022; `custom_header_value` - Optional String<br>Custom Header. Add x-f5-API-testing-identifier header value to prevent security flags on API testing traffic
 
-&#x2022; [`domains`](#domains) - Optional Block<br>Testing Environments. Add and configure testing domains and credentials<br>See [Domains](#domains) below for details.
+&#x2022; `domains` - Optional Block<br>Testing Environments. Add and configure testing domains and credentials<br>See [Domains](#domains) below for details.
 
 -> **One of the following:**
-&#x2022; [`every_day`](#every-day) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`every_month`](#every-month) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`every_week`](#every-week) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `every_day` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `every_month` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `every_week` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -89,179 +89,179 @@ In addition to all arguments above, the following attributes are exported:
 
 **Domains**
 
-&#x2022; [`allow_destructive_methods`](#allow-destructive-methods) - Optional Bool<br>Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data
+&#x2022; `allow_destructive_methods` - Optional Bool<br>Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data
 
-&#x2022; [`credentials`](#credentials) - Optional Block<br>Credentials. Add credentials for API testing to use in the selected environment<br>See [Credentials](#domains-credentials) below.
+&#x2022; `credentials` - Optional Block<br>Credentials. Add credentials for API testing to use in the selected environment<br>See [Credentials](#domains-credentials) below.
 
-&#x2022; [`domain`](#domain) - Optional String<br>Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments
+&#x2022; `domain` - Optional String<br>Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments
 
 <a id="domains-credentials"></a>
 
 **Domains Credentials**
 
-&#x2022; [`admin`](#admin) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `admin` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`api_key`](#api-key) - Optional Block<br>API Key<br>See [API Key](#domains-credentials-api-key) below.
+&#x2022; `api_key` - Optional Block<br>API Key<br>See [API Key](#domains-credentials-api-key) below.
 
-&#x2022; [`basic_auth`](#basic-auth) - Optional Block<br>Basic Authentication<br>See [Basic Auth](#domains-credentials-basic-auth) below.
+&#x2022; `basic_auth` - Optional Block<br>Basic Authentication<br>See [Basic Auth](#domains-credentials-basic-auth) below.
 
-&#x2022; [`bearer_token`](#bearer-token) - Optional Block<br>Bearer<br>See [Bearer Token](#domains-credentials-bearer-token) below.
+&#x2022; `bearer_token` - Optional Block<br>Bearer<br>See [Bearer Token](#domains-credentials-bearer-token) below.
 
-&#x2022; [`credential_name`](#credential-name) - Optional String<br>Name. Enter a unique name for the credentials used in API testing
+&#x2022; `credential_name` - Optional String<br>Name. Enter a unique name for the credentials used in API testing
 
-&#x2022; [`login_endpoint`](#login-endpoint) - Optional Block<br>Login Endpoint<br>See [Login Endpoint](#domains-credentials-login-endpoint) below.
+&#x2022; `login_endpoint` - Optional Block<br>Login Endpoint<br>See [Login Endpoint](#domains-credentials-login-endpoint) below.
 
-&#x2022; [`standard`](#standard) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `standard` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="domains-credentials-api-key"></a>
 
 **Domains Credentials API Key**
 
-&#x2022; [`key`](#key) - Optional String<br>Key
+&#x2022; `key` - Optional String<br>Key
 
-&#x2022; [`value`](#value) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Value](#domains-credentials-api-key-value) below.
+&#x2022; `value` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Value](#domains-credentials-api-key-value) below.
 
 <a id="domains-credentials-api-key-value"></a>
 
 **Domains Credentials API Key Value**
 
-&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-api-key-value-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-api-key-value-blindfold-secret-info) below.
 
-&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-api-key-value-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-api-key-value-clear-secret-info) below.
 
 <a id="domains-credentials-api-key-value-blindfold-secret-info"></a>
 
 **Domains Credentials API Key Value Blindfold Secret Info**
 
-&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="domains-credentials-api-key-value-clear-secret-info"></a>
 
 **Domains Credentials API Key Value Clear Secret Info**
 
-&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="domains-credentials-basic-auth"></a>
 
 **Domains Credentials Basic Auth**
 
-&#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#domains-credentials-basic-auth-password) below.
+&#x2022; `password` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#domains-credentials-basic-auth-password) below.
 
-&#x2022; [`user`](#user) - Optional String<br>User
+&#x2022; `user` - Optional String<br>User
 
 <a id="domains-credentials-basic-auth-password"></a>
 
 **Domains Credentials Basic Auth Password**
 
-&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-basic-auth-password-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-basic-auth-password-blindfold-secret-info) below.
 
-&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-basic-auth-password-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-basic-auth-password-clear-secret-info) below.
 
 <a id="domains-credentials-basic-auth-password-blindfold-secret-info"></a>
 
 **Domains Credentials Basic Auth Password Blindfold Secret Info**
 
-&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="domains-credentials-basic-auth-password-clear-secret-info"></a>
 
 **Domains Credentials Basic Auth Password Clear Secret Info**
 
-&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="domains-credentials-bearer-token"></a>
 
 **Domains Credentials Bearer Token**
 
-&#x2022; [`token`](#token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#domains-credentials-bearer-token-token) below.
+&#x2022; `token` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#domains-credentials-bearer-token-token) below.
 
 <a id="domains-credentials-bearer-token-token"></a>
 
 **Domains Credentials Bearer Token Token**
 
-&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-bearer-token-token-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-bearer-token-token-blindfold-secret-info) below.
 
-&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-bearer-token-token-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-bearer-token-token-clear-secret-info) below.
 
 <a id="domains-credentials-bearer-token-token-blindfold-secret-info"></a>
 
 **Domains Credentials Bearer Token Token Blindfold Secret Info**
 
-&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="domains-credentials-bearer-token-token-clear-secret-info"></a>
 
 **Domains Credentials Bearer Token Token Clear Secret Info**
 
-&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="domains-credentials-login-endpoint"></a>
 
 **Domains Credentials Login Endpoint**
 
-&#x2022; [`json_payload`](#json-payload) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [JSON Payload](#domains-credentials-login-endpoint-json-payload) below.
+&#x2022; `json_payload` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [JSON Payload](#domains-credentials-login-endpoint-json-payload) below.
 
-&#x2022; [`method`](#method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+&#x2022; `method` - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
-&#x2022; [`path`](#path) - Optional String<br>Path
+&#x2022; `path` - Optional String<br>Path
 
-&#x2022; [`token_response_key`](#token-response-key) - Optional String<br>Token Response Key
+&#x2022; `token_response_key` - Optional String<br>Token Response Key
 
 <a id="domains-credentials-login-endpoint-json-payload"></a>
 
 **Domains Credentials Login Endpoint JSON Payload**
 
-&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) below.
 
-&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-login-endpoint-json-payload-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-credentials-login-endpoint-json-payload-clear-secret-info) below.
 
 <a id="domains-credentials-login-endpoint-json-payload-blindfold-secret-info"></a>
 
 **Domains Credentials Login Endpoint JSON Payload Blindfold Secret Info**
 
-&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="domains-credentials-login-endpoint-json-payload-clear-secret-info"></a>
 
 **Domains Credentials Login Endpoint JSON Payload Clear Secret Info**
 
-&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

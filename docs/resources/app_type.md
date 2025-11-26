@@ -52,31 +52,31 @@ resource "f5xc_app_type" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the AppType. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the AppType. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the AppType will be created
+&#x2022; `namespace` - Required String<br>Namespace where the AppType will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`business_logic_markup_setting`](#business-logic-markup-setting) - Optional Block<br>API Discovery Settings. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
+&#x2022; `business_logic_markup_setting` - Optional Block<br>API Discovery Settings. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
 
-&#x2022; [`features`](#features) - Optional Block<br>Features. List of various AI/ML features enabled<br>See [Features](#features) below for details.
+&#x2022; `features` - Optional Block<br>Features. List of various AI/ML features enabled<br>See [Features](#features) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -84,35 +84,35 @@ In addition to all arguments above, the following attributes are exported:
 
 **Business Logic Markup Setting**
 
-&#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `disable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`discovered_api_settings`](#discovered-api-settings) - Optional Block<br>Discovered API Settings. x-example: '2' Configure Discovered API Settings<br>See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
+&#x2022; `discovered_api_settings` - Optional Block<br>Discovered API Settings. x-example: '2' Configure Discovered API Settings<br>See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
 
-&#x2022; [`enable`](#enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `enable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="business-logic-markup-setting-discovered-api-settings"></a>
 
 **Business Logic Markup Setting Discovered API Settings**
 
-&#x2022; [`purge_duration_for_inactive_discovered_apis`](#purge-duration-for-inactive-discovered-apis) - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
+&#x2022; `purge_duration_for_inactive_discovered_apis` - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
 
 <a id="features"></a>
 
 **Features**
 
-&#x2022; [`type`](#type) - Optional String  Defaults to `BUSINESS_LOGIC_MARKUP`<br>Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`<br>AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis
+&#x2022; `type` - Optional String  Defaults to `BUSINESS_LOGIC_MARKUP`<br>Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`<br>AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

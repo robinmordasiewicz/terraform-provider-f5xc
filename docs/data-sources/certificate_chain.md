@@ -34,18 +34,18 @@ data "f5xc_certificate_chain" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the CertificateChain
+&#x2022; `name` - Required String<br>Name of the CertificateChain
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CertificateChain exists
+&#x2022; `namespace` - Required String<br>Namespace where the CertificateChain exists
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations applied to this resource
+&#x2022; `annotations` - Optional Map<br>Annotations applied to this resource
 
-&#x2022; [`description`](#description) - Optional String<br>Description of the CertificateChain
+&#x2022; `description` - Optional String<br>Description of the CertificateChain
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels applied to this resource
+&#x2022; `labels` - Optional Map<br>Labels applied to this resource

@@ -52,29 +52,29 @@ resource "f5xc_protocol_policer" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the ProtocolPolicer. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the ProtocolPolicer. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ProtocolPolicer will be created
+&#x2022; `namespace` - Required String<br>Namespace where the ProtocolPolicer will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`protocol_policer`](#protocol-policer) - Optional Block<br>Protocol Policer. List of L4 protocol match condition and associated traffic rate limits<br>See [Protocol Policer](#protocol-policer) below for details.
+&#x2022; `protocol_policer` - Optional Block<br>Protocol Policer. List of L4 protocol match condition and associated traffic rate limits<br>See [Protocol Policer](#protocol-policer) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -82,59 +82,59 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol Policer**
 
-&#x2022; [`policer`](#policer) - Optional Block<br>Policer. Reference to policer object to apply traffic rate limits<br>See [Policer](#protocol-policer-policer) below.
+&#x2022; `policer` - Optional Block<br>Policer. Reference to policer object to apply traffic rate limits<br>See [Policer](#protocol-policer-policer) below.
 
-&#x2022; [`protocol`](#protocol) - Optional Block<br>Protocol Type. Protocol and protocol specific flags to be matched in packet<br>See [Protocol](#protocol-policer-protocol) below.
+&#x2022; `protocol` - Optional Block<br>Protocol Type. Protocol and protocol specific flags to be matched in packet<br>See [Protocol](#protocol-policer-protocol) below.
 
 <a id="protocol-policer-policer"></a>
 
 **Protocol Policer Policer**
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="protocol-policer-protocol"></a>
 
 **Protocol Policer Protocol**
 
-&#x2022; [`dns`](#dns) - Optional Block<br>DNS Packets. Match all DNS packets inclusing UDP and TCP
+&#x2022; `dns` - Optional Block<br>DNS Packets. Match all DNS packets inclusing UDP and TCP
 
-&#x2022; [`icmp`](#icmp) - Optional Block<br>ICMP Packet Type. ICMP message type to match in packet<br>See [ICMP](#protocol-policer-protocol-icmp) below.
+&#x2022; `icmp` - Optional Block<br>ICMP Packet Type. ICMP message type to match in packet<br>See [ICMP](#protocol-policer-protocol-icmp) below.
 
-&#x2022; [`tcp`](#tcp) - Optional Block<br>TCP Packet Type. Specification of TCP flag to be matched in a TCP packet<br>See [TCP](#protocol-policer-protocol-tcp) below.
+&#x2022; `tcp` - Optional Block<br>TCP Packet Type. Specification of TCP flag to be matched in a TCP packet<br>See [TCP](#protocol-policer-protocol-tcp) below.
 
-&#x2022; [`udp`](#udp) - Optional Block<br>UDP Packets. Match all UDP packets
+&#x2022; `udp` - Optional Block<br>UDP Packets. Match all UDP packets
 
 <a id="protocol-policer-protocol-icmp"></a>
 
 **Protocol Policer Protocol ICMP**
 
-&#x2022; [`type`](#type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
+&#x2022; `type` - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
 
 <a id="protocol-policer-protocol-tcp"></a>
 
 **Protocol Policer Protocol TCP**
 
-&#x2022; [`flags`](#flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
+&#x2022; `flags` - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

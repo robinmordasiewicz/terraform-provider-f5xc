@@ -610,8 +610,15 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 	}
 
 	// Format default values per HashiCorp standards: "Defaults to `value`."
+	// First check for explicit default field, then try to extract from description text
 	if schema.Default != nil {
 		attr.Description = formatDefaultDescription(attr.Description, schema.Default)
+	} else {
+		// Try to extract default from description text (F5 XC often documents defaults this way)
+		extractedDefault, cleanedDesc := extractDefaultFromDescription(attr.Description)
+		if extractedDefault != nil {
+			attr.Description = formatDefaultDescription(cleanedDesc, extractedDefault)
+		}
 	}
 
 	// Determine type and extract nested attributes
@@ -770,6 +777,51 @@ func filterOptional(attrs []TerraformAttribute) []TerraformAttribute {
 		}
 	}
 	return result
+}
+
+// extractDefaultFromDescription attempts to extract a default value from description text.
+// This handles cases where F5 XC OpenAPI specs mention defaults in descriptions but don't use the default field.
+// Returns the extracted default value (or nil) and the cleaned description with default text removed.
+func extractDefaultFromDescription(desc string) (interface{}, string) {
+	if desc == "" {
+		return nil, desc
+	}
+
+	// Patterns to match defaults mentioned in description text
+	// Pattern 1: "Defaults to X" or "Default to X" with optional units (including "or Ys" alternative)
+	// Pattern 2: "Default value is X" or "Default value: X"
+	// Pattern 3: "defaults to X" (lowercase)
+	patterns := []string{
+		// Match "Defaults to 30000ms or 30s" or "Defaults to 30000ms" or "Defaults to true"
+		// Captures first value, removes optional " or Xs" alternative
+		`[Dd]efaults?\s+to\s+(\d+(?:ms|s|%)?|\d+\.\d+|true|false)(?:\s+or\s+\d+(?:ms|s)?)?`,
+		// Match "Default value is /graphql" or "Default value is true"
+		`[Dd]efault\s+value\s+(?:is|:)\s+([^\s.,]+)`,
+		// Match "default is 10" or "default: 10"
+		`[Dd]efault\s+(?:is|:)\s+(\d+(?:ms|s|%)?|\d+\.\d+|true|false)`,
+	}
+
+	for _, pattern := range patterns {
+		re := regexp.MustCompile(pattern)
+		match := re.FindStringSubmatch(desc)
+		if len(match) >= 2 {
+			defaultVal := strings.TrimSpace(match[1])
+			// Skip if it looks like a placeholder or invalid value
+			upperVal := strings.ToUpper(defaultVal)
+			if upperVal == "NONE" || upperVal == "INVALID" || upperVal == "UNKNOWN" || upperVal == "UNSPECIFIED" {
+				continue
+			}
+			// Remove the matched text from description to avoid duplication
+			cleanedDesc := re.ReplaceAllString(desc, "")
+			cleanedDesc = strings.TrimSpace(cleanedDesc)
+			// Clean up any trailing punctuation/whitespace artifacts
+			cleanedDesc = regexp.MustCompile(`\s+\.`).ReplaceAllString(cleanedDesc, ".")
+			cleanedDesc = regexp.MustCompile(`\.\s*\.`).ReplaceAllString(cleanedDesc, ".")
+			return defaultVal, cleanedDesc
+		}
+	}
+
+	return nil, desc
 }
 
 // formatDefaultDescription appends a default value to a description per HashiCorp standards.

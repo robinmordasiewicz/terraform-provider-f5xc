@@ -1004,10 +1004,12 @@ func transformDoc(filePath string) error {
 			bulletPrefix = ""
 		}
 
-		// Build the first line: bullet + name + Required/Optional + Type + defaults + specified in
+		// Build the first line: bullet + name (as link for blue color) + Required/Optional + Type + defaults + specified in
+		// Azure RM pattern: property names as markdown links render in blue
 		reqText := strings.Trim(attr.reqStr, "()")
+		anchorID := toAnchorName(attr.name)
 		var firstLine strings.Builder
-		firstLine.WriteString(fmt.Sprintf("%s`%s` - %s %s", bulletPrefix, attr.name, reqText, typeStr))
+		firstLine.WriteString(fmt.Sprintf("%s[`%s`](#%s) - %s %s", bulletPrefix, attr.name, anchorID, reqText, typeStr))
 		if defaultVal != "" {
 			firstLine.WriteString("  " + defaultVal)
 		}
@@ -1272,9 +1274,11 @@ func transformDoc(filePath string) error {
 					desc = strings.TrimSpace(desc)
 					desc = strings.TrimSuffix(desc, ".")
 
-					// Build the first line: bullet + name + Optional + Type + defaults + specified in
+					// Build the first line: bullet + name (as link for blue color) + Optional + Type + defaults + specified in
+					// Azure RM pattern: property names as markdown links render in blue
+					nestedAttrAnchor := toAnchorName(name)
 					var firstLine strings.Builder
-					firstLine.WriteString(fmt.Sprintf("&#x2022; `%s` - Optional %s", name, typeStr))
+					firstLine.WriteString(fmt.Sprintf("&#x2022; [`%s`](#%s) - Optional %s", name, nestedAttrAnchor, typeStr))
 					if defaultVal != "" {
 						firstLine.WriteString("  " + defaultVal)
 					}
@@ -1553,12 +1557,16 @@ func normalizeOneOfKey(constraint string) string {
 
 // extractDefaults extracts "Defaults to X" patterns from description
 // Returns the default value and the cleaned description
+// Azure RM pattern: default values wrapped in backticks render in red code style
 func extractDefaults(desc string) (defaultVal, cleanDesc string) {
 	// Match patterns like "Defaults to 30000ms or 30s" or "Defaults to `VALUE`"
 	defaultsRegex := regexp.MustCompile(`Defaults to ([^.]+?)(?:\.|$)`)
 	match := defaultsRegex.FindStringSubmatch(desc)
 	if match != nil {
-		defaultVal = "Defaults to " + strings.TrimSpace(match[1])
+		rawDefault := strings.TrimSpace(match[1])
+		// Wrap in backticks if not already wrapped (for red code styling)
+		formattedDefault := wrapDefaultInBackticks(rawDefault)
+		defaultVal = "Defaults to " + formattedDefault
 		cleanDesc = defaultsRegex.ReplaceAllString(desc, "")
 	} else {
 		cleanDesc = desc
@@ -1567,6 +1575,21 @@ func extractDefaults(desc string) (defaultVal, cleanDesc string) {
 	// Remove trailing period if present after cleaning
 	cleanDesc = strings.TrimSuffix(cleanDesc, ".")
 	return
+}
+
+// wrapDefaultInBackticks wraps a default value in backticks if not already wrapped
+// Handles formats like "VALUE" or "`VALUE`" or "30000ms" or "true"
+func wrapDefaultInBackticks(value string) string {
+	value = strings.TrimSpace(value)
+	if value == "" {
+		return value
+	}
+	// If already wrapped in backticks, keep as-is
+	if strings.HasPrefix(value, "`") && strings.HasSuffix(value, "`") {
+		return value
+	}
+	// Wrap in backticks for red code styling
+	return "`" + value + "`"
 }
 
 // extractSpecifiedIn extracts "Specified in X" patterns from description
@@ -1588,12 +1611,16 @@ func extractSpecifiedIn(desc string) (specifiedIn, cleanDesc string) {
 
 // extractPossibleValues extracts "Possible values are X, Y, Z" patterns from description
 // Returns the possible values string and the cleaned description
+// Azure RM pattern: enum values wrapped in backticks render in red code style
 func extractPossibleValues(desc string) (possibleValues, cleanDesc string) {
-	// Match patterns like "Possible values are `A`, `B`, `C`"
+	// Match patterns like "Possible values are A, B, C" or "Possible values are `A`, `B`, `C`"
 	valuesRegex := regexp.MustCompile(`Possible values are ([^.]+?)(?:\.|$)`)
 	match := valuesRegex.FindStringSubmatch(desc)
 	if match != nil {
-		possibleValues = "Possible values are " + strings.TrimSpace(match[1])
+		rawValues := strings.TrimSpace(match[1])
+		// Wrap each value in backticks if not already wrapped
+		formattedValues := wrapValuesInBackticks(rawValues)
+		possibleValues = "Possible values are " + formattedValues
 		cleanDesc = valuesRegex.ReplaceAllString(desc, "")
 	} else {
 		cleanDesc = desc
@@ -1601,6 +1628,38 @@ func extractPossibleValues(desc string) (possibleValues, cleanDesc string) {
 	cleanDesc = strings.TrimSpace(cleanDesc)
 	cleanDesc = strings.TrimSuffix(cleanDesc, ".")
 	return
+}
+
+// wrapValuesInBackticks wraps comma-separated values in backticks if not already wrapped
+// Handles formats like "VALUE1, VALUE2" or "`VALUE1`, `VALUE2`" or "VALUE1 or VALUE2"
+func wrapValuesInBackticks(values string) string {
+	// Split by comma or " or " to handle both formats
+	var parts []string
+	if strings.Contains(values, ", ") {
+		parts = strings.Split(values, ", ")
+	} else if strings.Contains(values, " or ") {
+		parts = strings.Split(values, " or ")
+	} else {
+		parts = []string{values}
+	}
+
+	var wrapped []string
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+		// Skip empty parts
+		if part == "" {
+			continue
+		}
+		// If already wrapped in backticks, keep as-is
+		if strings.HasPrefix(part, "`") && strings.HasSuffix(part, "`") {
+			wrapped = append(wrapped, part)
+		} else {
+			// Wrap in backticks for red code styling
+			wrapped = append(wrapped, "`"+part+"`")
+		}
+	}
+
+	return strings.Join(wrapped, ", ")
 }
 
 // NOTE: countH3Headings and shouldSplitToGuides functions removed

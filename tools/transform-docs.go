@@ -1007,7 +1007,8 @@ func transformDoc(filePath string) error {
 		// Build the first line: bullet + name + Required/Optional + Type + defaults + specified in
 		reqText := strings.Trim(attr.reqStr, "()")
 		var firstLine strings.Builder
-		firstLine.WriteString(fmt.Sprintf("%s`%s` - %s %s", bulletPrefix, attr.name, reqText, typeStr))
+		anchorID := toAnchorName(attr.name)
+		firstLine.WriteString(fmt.Sprintf("%s[`%s`](#%s) - %s %s", bulletPrefix, attr.name, anchorID, reqText, typeStr))
 		if defaultVal != "" {
 			firstLine.WriteString("  " + defaultVal)
 		}
@@ -1274,7 +1275,8 @@ func transformDoc(filePath string) error {
 
 					// Build the first line: bullet + name + Optional + Type + defaults + specified in
 					var firstLine strings.Builder
-					firstLine.WriteString(fmt.Sprintf("&#x2022; `%s` - Optional %s", name, typeStr))
+					nestedAttrAnchor := toAnchorName(name)
+					firstLine.WriteString(fmt.Sprintf("&#x2022; [`%s`](#%s) - Optional %s", name, nestedAttrAnchor, typeStr))
 					if defaultVal != "" {
 						firstLine.WriteString("  " + defaultVal)
 					}

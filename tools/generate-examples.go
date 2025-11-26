@@ -372,6 +372,9 @@ func generateExample(resourceName string, schema *SchemaInfo) string {
 	return sb.String()
 }
 
+// addResourceSpecificConfig adds resource-specific example configurations.
+// OneOf comments are manually curated to exclude deprecated options that are
+// no longer valid in the current API version.
 func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema *SchemaInfo) {
 	switch resourceName {
 	case "http_loadbalancer":

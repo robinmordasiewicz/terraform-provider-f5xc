@@ -52,29 +52,29 @@ resource "f5xc_bgp_routing_policy" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the BGPRoutingPolicy. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the BGPRoutingPolicy. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the BGPRoutingPolicy will be created
+&#x2022; `namespace` - Required String<br>Namespace where the BGPRoutingPolicy will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`rules`](#rules) - Optional Block<br>Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom<br>See [Rules](#rules) below for details.
+&#x2022; `rules` - Optional Block<br>Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom<br>See [Rules](#rules) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -82,79 +82,79 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules**
 
-&#x2022; [`action`](#action) - Optional Block<br>BGP Route Action. Action to be enforced if the BGP route matches the rule<br>See [Action](#rules-action) below.
+&#x2022; `action` - Optional Block<br>BGP Route Action. Action to be enforced if the BGP route matches the rule<br>See [Action](#rules-action) below.
 
-&#x2022; [`match`](#match) - Optional Block<br>BGP Route Match. Predicates which have to match information in route for action to be applied<br>See [Match](#rules-match) below.
+&#x2022; `match` - Optional Block<br>BGP Route Match. Predicates which have to match information in route for action to be applied<br>See [Match](#rules-match) below.
 
 <a id="rules-action"></a>
 
 **Rules Action**
 
-&#x2022; [`aggregate`](#aggregate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `aggregate` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`allow`](#allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `allow` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`as_path`](#as-path) - Optional String<br>AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic
+&#x2022; `as_path` - Optional String<br>AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic
 
-&#x2022; [`community`](#community) - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-action-community) below.
+&#x2022; `community` - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-action-community) below.
 
-&#x2022; [`deny`](#deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`local_preference`](#local-preference) - Optional Number<br>Local preference. BGP Local Preference is generally used to influence outgoing traffic
+&#x2022; `local_preference` - Optional Number<br>Local preference. BGP Local Preference is generally used to influence outgoing traffic
 
-&#x2022; [`metric`](#metric) - Optional Number<br>MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS
+&#x2022; `metric` - Optional Number<br>MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS
 
 <a id="rules-action-community"></a>
 
 **Rules Action Community**
 
-&#x2022; [`community`](#community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
+&#x2022; `community` - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
 
 <a id="rules-match"></a>
 
 **Rules Match**
 
-&#x2022; [`as_path`](#as-path) - Optional String<br>AS path to match. AS path can also be a regex, which will be matched against route information
+&#x2022; `as_path` - Optional String<br>AS path to match. AS path can also be a regex, which will be matched against route information
 
-&#x2022; [`community`](#community) - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-match-community) below.
+&#x2022; `community` - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-match-community) below.
 
-&#x2022; [`ip_prefixes`](#ip-prefixes) - Optional Block<br>BGP Prefix List. List of IP prefix and prefix length range match condition<br>See [IP Prefixes](#rules-match-ip-prefixes) below.
+&#x2022; `ip_prefixes` - Optional Block<br>BGP Prefix List. List of IP prefix and prefix length range match condition<br>See [IP Prefixes](#rules-match-ip-prefixes) below.
 
 <a id="rules-match-community"></a>
 
 **Rules Match Community**
 
-&#x2022; [`community`](#community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
+&#x2022; `community` - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
 
 <a id="rules-match-ip-prefixes"></a>
 
 **Rules Match IP Prefixes**
 
-&#x2022; [`prefixes`](#prefixes) - Optional Block<br>Prefix list. List of IP prefix<br>See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
+&#x2022; `prefixes` - Optional Block<br>Prefix list. List of IP prefix<br>See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
 
 <a id="rules-match-ip-prefixes-prefixes"></a>
 
 **Rules Match IP Prefixes Prefixes**
 
-&#x2022; [`equal_or_longer_than`](#equal-or-longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `equal_or_longer_than` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`exact_match`](#exact-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `exact_match` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`ip_prefixes`](#ip-prefixes) - Optional String<br>IP Prefix. IP prefix to match on BGP route
+&#x2022; `ip_prefixes` - Optional String<br>IP Prefix. IP prefix to match on BGP route
 
-&#x2022; [`longer_than`](#longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `longer_than` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

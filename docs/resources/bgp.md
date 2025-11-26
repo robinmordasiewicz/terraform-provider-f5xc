@@ -59,33 +59,33 @@ resource "f5xc_bgp" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the BGP. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the BGP. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the BGP will be created
+&#x2022; `namespace` - Required String<br>Namespace where the BGP will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`bgp_parameters`](#bgp-parameters) - Optional Block<br>BGP Parameters. BGP parameters for the local site<br>See [BGP Parameters](#bgp-parameters) below for details.
+&#x2022; `bgp_parameters` - Optional Block<br>BGP Parameters. BGP parameters for the local site<br>See [BGP Parameters](#bgp-parameters) below for details.
 
-&#x2022; [`peers`](#peers) - Optional Block<br>Peers. List of peers<br>See [Peers](#peers) below for details.
+&#x2022; `peers` - Optional Block<br>Peers. List of peers<br>See [Peers](#peers) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; [`where`](#where) - Optional Block<br>Site or Virtual Site Reference. VirtualSiteSiteRefSelector defines a union of reference to site or reference to virtual_site It used to refer site or a group of sites indicated by virtual site<br>See [Where](#where) below for details.
+&#x2022; `where` - Optional Block<br>Site or Virtual Site Reference. VirtualSiteSiteRefSelector defines a union of reference to site or reference to virtual_site It used to refer site or a group of sites indicated by virtual site<br>See [Where](#where) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -93,243 +93,243 @@ In addition to all arguments above, the following attributes are exported:
 
 **BGP Parameters**
 
-&#x2022; [`asn`](#asn) - Optional Number<br>ASN. Autonomous System Number
+&#x2022; `asn` - Optional Number<br>ASN. Autonomous System Number
 
-&#x2022; [`from_site`](#from-site) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `from_site` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`ip_address`](#ip-address) - Optional String<br>IP Address. Use the configured IPv4 Address as Router ID
+&#x2022; `ip_address` - Optional String<br>IP Address. Use the configured IPv4 Address as Router ID
 
-&#x2022; [`local_address`](#local-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `local_address` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="peers"></a>
 
 **Peers**
 
-&#x2022; [`bfd_disabled`](#bfd-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `bfd_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`bfd_enabled`](#bfd-enabled) - Optional Block<br>BFD. BFD parameters<br>See [Bfd Enabled](#peers-bfd-enabled) below.
+&#x2022; `bfd_enabled` - Optional Block<br>BFD. BFD parameters<br>See [Bfd Enabled](#peers-bfd-enabled) below.
 
-&#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `disable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`external`](#external) - Optional Block<br>External BGP Peer. External BGP Peer parameters<br>See [External](#peers-external) below.
+&#x2022; `external` - Optional Block<br>External BGP Peer. External BGP Peer parameters<br>See [External](#peers-external) below.
 
-&#x2022; [`label`](#label) - Optional String<br>Label. Specify whether this peer should be
+&#x2022; `label` - Optional String<br>Label. Specify whether this peer should be
 
-&#x2022; [`metadata`](#metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#peers-metadata) below.
+&#x2022; `metadata` - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#peers-metadata) below.
 
-&#x2022; [`passive_mode_disabled`](#passive-mode-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `passive_mode_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`passive_mode_enabled`](#passive-mode-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `passive_mode_enabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`routing_policies`](#routing-policies) - Optional Block<br>BGP Routing Policy. List of rules which can be applied on all or particular nodes<br>See [Routing Policies](#peers-routing-policies) below.
+&#x2022; `routing_policies` - Optional Block<br>BGP Routing Policy. List of rules which can be applied on all or particular nodes<br>See [Routing Policies](#peers-routing-policies) below.
 
 <a id="peers-bfd-enabled"></a>
 
 **Peers Bfd Enabled**
 
-&#x2022; [`multiplier`](#multiplier) - Optional Number<br>Multiplier. Specify Number of missed packets to bring session down'
+&#x2022; `multiplier` - Optional Number<br>Multiplier. Specify Number of missed packets to bring session down'
 
-&#x2022; [`receive_interval_milliseconds`](#receive-interval-milliseconds) - Optional Number<br>Minimum Receive Interval. BFD receive interval timer, in milliseconds
+&#x2022; `receive_interval_milliseconds` - Optional Number<br>Minimum Receive Interval. BFD receive interval timer, in milliseconds
 
-&#x2022; [`transmit_interval_milliseconds`](#transmit-interval-milliseconds) - Optional Number<br>Transmit Interval. BFD transmit interval timer, in milliseconds
+&#x2022; `transmit_interval_milliseconds` - Optional Number<br>Transmit Interval. BFD transmit interval timer, in milliseconds
 
 <a id="peers-external"></a>
 
 **Peers External**
 
-&#x2022; [`address`](#address) - Optional String<br>Peer Address. Specify IPv4 peer address
+&#x2022; `address` - Optional String<br>Peer Address. Specify IPv4 peer address
 
-&#x2022; [`address_ipv6`](#address-ipv6) - Optional String<br>Peer IPv6 Address. Specify peer IPv6 address
+&#x2022; `address_ipv6` - Optional String<br>Peer IPv6 Address. Specify peer IPv6 address
 
-&#x2022; [`asn`](#asn) - Optional Number<br>ASN. Autonomous System Number for BGP peer
+&#x2022; `asn` - Optional Number<br>ASN. Autonomous System Number for BGP peer
 
-&#x2022; [`default_gateway`](#default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `default_gateway` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`default_gateway_v6`](#default-gateway-v6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `default_gateway_v6` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `disable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`disable_v6`](#disable-v6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `disable_v6` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`external_connector`](#external-connector) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `external_connector` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`family_inet`](#family-inet) - Optional Block<br>BGP Family Inet. Parameters for inet family<br>See [Family Inet](#peers-external-family-inet) below.
+&#x2022; `family_inet` - Optional Block<br>BGP Family Inet. Parameters for inet family<br>See [Family Inet](#peers-external-family-inet) below.
 
-&#x2022; [`from_site`](#from-site) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `from_site` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`from_site_v6`](#from-site-v6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `from_site_v6` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`interface`](#interface) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Interface](#peers-external-interface) below.
+&#x2022; `interface` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Interface](#peers-external-interface) below.
 
-&#x2022; [`interface_list`](#interface-list) - Optional Block<br>Interface List. List of network interfaces<br>See [Interface List](#peers-external-interface-list) below.
+&#x2022; `interface_list` - Optional Block<br>Interface List. List of network interfaces<br>See [Interface List](#peers-external-interface-list) below.
 
-&#x2022; [`md5_auth_key`](#md5-auth-key) - Optional String<br>MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385)
+&#x2022; `md5_auth_key` - Optional String<br>MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385)
 
-&#x2022; [`no_authentication`](#no-authentication) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `no_authentication` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`port`](#port) - Optional Number<br>Peer Port. Peer TCP port number
+&#x2022; `port` - Optional Number<br>Peer Port. Peer TCP port number
 
-&#x2022; [`subnet_begin_offset`](#subnet-begin-offset) - Optional Number<br>Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet
+&#x2022; `subnet_begin_offset` - Optional Number<br>Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet
 
-&#x2022; [`subnet_begin_offset_v6`](#subnet-begin-offset-v6) - Optional Number<br>Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet
+&#x2022; `subnet_begin_offset_v6` - Optional Number<br>Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet
 
-&#x2022; [`subnet_end_offset`](#subnet-end-offset) - Optional Number<br>Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet
+&#x2022; `subnet_end_offset` - Optional Number<br>Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet
 
-&#x2022; [`subnet_end_offset_v6`](#subnet-end-offset-v6) - Optional Number<br>Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet
+&#x2022; `subnet_end_offset_v6` - Optional Number<br>Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet
 
 <a id="peers-external-family-inet"></a>
 
 **Peers External Family Inet**
 
-&#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `disable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable`](#enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `enable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="peers-external-interface"></a>
 
 **Peers External Interface**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="peers-external-interface-list"></a>
 
 **Peers External Interface List**
 
-&#x2022; [`interfaces`](#interfaces) - Optional Block<br>Interface List. List of network interfaces<br>See [Interfaces](#peers-external-interface-list-interfaces) below.
+&#x2022; `interfaces` - Optional Block<br>Interface List. List of network interfaces<br>See [Interfaces](#peers-external-interface-list-interfaces) below.
 
 <a id="peers-external-interface-list-interfaces"></a>
 
 **Peers External Interface List Interfaces**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="peers-metadata"></a>
 
 **Peers Metadata**
 
-&#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
+&#x2022; `description` - Optional String<br>Description. Human readable description
 
-&#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+&#x2022; `name` - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
 <a id="peers-routing-policies"></a>
 
 **Peers Routing Policies**
 
-&#x2022; [`route_policy`](#route-policy) - Optional Block<br>BGP Routing policy. Route policy to be applied<br>See [Route Policy](#peers-routing-policies-route-policy) below.
+&#x2022; `route_policy` - Optional Block<br>BGP Routing policy. Route policy to be applied<br>See [Route Policy](#peers-routing-policies-route-policy) below.
 
 <a id="peers-routing-policies-route-policy"></a>
 
 **Peers Routing Policies Route Policy**
 
-&#x2022; [`all_nodes`](#all-nodes) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `all_nodes` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`inbound`](#inbound) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `inbound` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`node_name`](#node-name) - Optional Block<br>Nodes. List of nodes on which BGP routing policy has to be applied<br>See [Node Name](#peers-routing-policies-route-policy-node-name) below.
+&#x2022; `node_name` - Optional Block<br>Nodes. List of nodes on which BGP routing policy has to be applied<br>See [Node Name](#peers-routing-policies-route-policy-node-name) below.
 
-&#x2022; [`object_refs`](#object-refs) - Optional Block<br>BGP routing policy. Select route policy to apply<br>See [Object Refs](#peers-routing-policies-route-policy-object-refs) below.
+&#x2022; `object_refs` - Optional Block<br>BGP routing policy. Select route policy to apply<br>See [Object Refs](#peers-routing-policies-route-policy-object-refs) below.
 
-&#x2022; [`outbound`](#outbound) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `outbound` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="peers-routing-policies-route-policy-node-name"></a>
 
 **Peers Routing Policies Route Policy Node Name**
 
-&#x2022; [`node`](#node) - Optional List<br>Node of choice. Select BGP Session on which policy will be applied
+&#x2022; `node` - Optional List<br>Node of choice. Select BGP Session on which policy will be applied
 
 <a id="peers-routing-policies-route-policy-object-refs"></a>
 
 **Peers Routing Policies Route Policy Object Refs**
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 <a id="where"></a>
 
 **Where**
 
-&#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
+&#x2022; `site` - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
-&#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
+&#x2022; `virtual_site` - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
 
 <a id="where-site"></a>
 
 **Where Site**
 
-&#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `disable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable_internet_vip`](#enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `enable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+&#x2022; `network_type` - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-&#x2022; [`ref`](#ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
+&#x2022; `ref` - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
 
 <a id="where-site-ref"></a>
 
 **Where Site Ref**
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="where-virtual-site"></a>
 
 **Where Virtual Site**
 
-&#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `disable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable_internet_vip`](#enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `enable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+&#x2022; `network_type` - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-&#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
+&#x2022; `ref` - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
 
 <a id="where-virtual-site-ref"></a>
 
 **Where Virtual Site Ref**
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 ## Import
 

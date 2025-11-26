@@ -52,35 +52,35 @@ resource "f5xc_cloud_link" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the CloudLink. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the CloudLink. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CloudLink will be created
+&#x2022; `namespace` - Required String<br>Namespace where the CloudLink will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; [`aws`](#aws) - Optional Block<br>Amazon Web Services(AWS) CloudLink Provider. CloudLink for AWS Cloud Provider<br>See [AWS](#aws) below for details.
-<br><br>&#x2022; [`gcp`](#gcp) - Optional Block<br>Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider<br>See [GCP](#gcp) below for details.
+&#x2022; `aws` - Optional Block<br>Amazon Web Services(AWS) CloudLink Provider. CloudLink for AWS Cloud Provider<br>See [AWS](#aws) below for details.
+<br><br>&#x2022; `gcp` - Optional Block<br>Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider<br>See [GCP](#gcp) below for details.
 
 -> **One of the following:**
-&#x2022; [`disabled`](#disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`enabled`](#enabled) - Optional Block<br>CloudLink ADN Network Config<br>See [Enabled](#enabled) below for details.
+&#x2022; `disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enabled` - Optional Block<br>CloudLink ADN Network Config<br>See [Enabled](#enabled) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -88,159 +88,159 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS**
 
-&#x2022; [`aws_cred`](#aws-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#aws-aws-cred) below.
+&#x2022; `aws_cred` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#aws-aws-cred) below.
 
-&#x2022; [`byoc`](#byoc) - Optional Block<br>Bring Your Own Connections. List of Bring You Own Connection<br>See [Byoc](#aws-byoc) below.
+&#x2022; `byoc` - Optional Block<br>Bring Your Own Connections. List of Bring You Own Connection<br>See [Byoc](#aws-byoc) below.
 
-&#x2022; [`custom_asn`](#custom-asn) - Optional Number<br>Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294
+&#x2022; `custom_asn` - Optional Number<br>Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294
 
 <a id="aws-aws-cred"></a>
 
 **AWS AWS Cred**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="aws-byoc"></a>
 
 **AWS Byoc**
 
-&#x2022; [`connections`](#connections) - Optional Block<br>Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs<br>See [Connections](#aws-byoc-connections) below.
+&#x2022; `connections` - Optional Block<br>Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs<br>See [Connections](#aws-byoc-connections) below.
 
 <a id="aws-byoc-connections"></a>
 
 **AWS Byoc Connections**
 
-&#x2022; [`auth_key`](#auth-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Auth Key](#aws-byoc-connections-auth-key) below.
+&#x2022; `auth_key` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Auth Key](#aws-byoc-connections-auth-key) below.
 
-&#x2022; [`bgp_asn`](#bgp-asn) - Optional Number<br>BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS
+&#x2022; `bgp_asn` - Optional Number<br>BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS
 
-&#x2022; [`connection_id`](#connection-id) - Optional String<br>Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection
+&#x2022; `connection_id` - Optional String<br>Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection
 
-&#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Peering. Configure BGP IPv4 peering for endpoints<br>See [IPv4](#aws-byoc-connections-ipv4) below.
+&#x2022; `ipv4` - Optional Block<br>IPv4 Peering. Configure BGP IPv4 peering for endpoints<br>See [IPv4](#aws-byoc-connections-ipv4) below.
 
-&#x2022; [`metadata`](#metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#aws-byoc-connections-metadata) below.
+&#x2022; `metadata` - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#aws-byoc-connections-metadata) below.
 
-&#x2022; [`region`](#region) - Optional String<br>Region. Region where the connection is setup
+&#x2022; `region` - Optional String<br>Region. Region where the connection is setup
 
-&#x2022; [`system_generated_name`](#system-generated-name) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `system_generated_name` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`tags`](#tags) - Optional Block<br>AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags
+&#x2022; `tags` - Optional Block<br>AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags
 
-&#x2022; [`user_assigned_name`](#user-assigned-name) - Optional String<br>User Assigned. User is managing the AWS resource name
+&#x2022; `user_assigned_name` - Optional String<br>User Assigned. User is managing the AWS resource name
 
-&#x2022; [`virtual_interface_type`](#virtual-interface-type) - Optional String  Defaults to `PRIVATE`<br>Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`
+&#x2022; `virtual_interface_type` - Optional String  Defaults to `PRIVATE`<br>Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`
 
-&#x2022; [`vlan`](#vlan) - Optional Number<br>Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection
+&#x2022; `vlan` - Optional Number<br>Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection
 
 <a id="aws-byoc-connections-auth-key"></a>
 
 **AWS Byoc Connections Auth Key**
 
-&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#aws-byoc-connections-auth-key-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#aws-byoc-connections-auth-key-blindfold-secret-info) below.
 
-&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#aws-byoc-connections-auth-key-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#aws-byoc-connections-auth-key-clear-secret-info) below.
 
 <a id="aws-byoc-connections-auth-key-blindfold-secret-info"></a>
 
 **AWS Byoc Connections Auth Key Blindfold Secret Info**
 
-&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="aws-byoc-connections-auth-key-clear-secret-info"></a>
 
 **AWS Byoc Connections Auth Key Clear Secret Info**
 
-&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="aws-byoc-connections-ipv4"></a>
 
 **AWS Byoc Connections IPv4**
 
-&#x2022; [`aws_router_peer_address`](#aws-router-peer-address) - Optional String<br>AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint
+&#x2022; `aws_router_peer_address` - Optional String<br>AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint
 
-&#x2022; [`router_peer_address`](#router-peer-address) - Optional String<br>Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint
+&#x2022; `router_peer_address` - Optional String<br>Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint
 
 <a id="aws-byoc-connections-metadata"></a>
 
 **AWS Byoc Connections Metadata**
 
-&#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
+&#x2022; `description` - Optional String<br>Description. Human readable description
 
-&#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+&#x2022; `name` - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
 <a id="enabled"></a>
 
 **Enabled**
 
-&#x2022; [`cloudlink_network_name`](#cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
+&#x2022; `cloudlink_network_name` - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
 
 <a id="gcp"></a>
 
 **GCP**
 
-&#x2022; [`byoc`](#byoc) - Optional Block<br>GCP Bring Your Own Connections. List of GCP Bring You Own Connections<br>See [Byoc](#gcp-byoc) below.
+&#x2022; `byoc` - Optional Block<br>GCP Bring Your Own Connections. List of GCP Bring You Own Connections<br>See [Byoc](#gcp-byoc) below.
 
-&#x2022; [`gcp_cred`](#gcp-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [GCP Cred](#gcp-gcp-cred) below.
+&#x2022; `gcp_cred` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [GCP Cred](#gcp-gcp-cred) below.
 
 <a id="gcp-byoc"></a>
 
 **GCP Byoc**
 
-&#x2022; [`connections`](#connections) - Optional Block<br>Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity<br>See [Connections](#gcp-byoc-connections) below.
+&#x2022; `connections` - Optional Block<br>Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity<br>See [Connections](#gcp-byoc-connections) below.
 
 <a id="gcp-byoc-connections"></a>
 
 **GCP Byoc Connections**
 
-&#x2022; [`interconnect_attachment_name`](#interconnect-attachment-name) - Optional String<br>Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment
+&#x2022; `interconnect_attachment_name` - Optional String<br>Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment
 
-&#x2022; [`metadata`](#metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#gcp-byoc-connections-metadata) below.
+&#x2022; `metadata` - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#gcp-byoc-connections-metadata) below.
 
-&#x2022; [`project`](#project) - Optional String<br>Specified Project. Specify a GCP Project for the interconnect attachment
+&#x2022; `project` - Optional String<br>Specified Project. Specify a GCP Project for the interconnect attachment
 
-&#x2022; [`region`](#region) - Optional String<br>Region. GCP Region in which the GCP Cloud Interconnect attachment is configured
+&#x2022; `region` - Optional String<br>Region. GCP Region in which the GCP Cloud Interconnect attachment is configured
 
-&#x2022; [`same_as_credential`](#same-as-credential) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `same_as_credential` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="gcp-byoc-connections-metadata"></a>
 
 **GCP Byoc Connections Metadata**
 
-&#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
+&#x2022; `description` - Optional String<br>Description. Human readable description
 
-&#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+&#x2022; `name` - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
 <a id="gcp-gcp-cred"></a>
 
 **GCP GCP Cred**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

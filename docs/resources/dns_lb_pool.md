@@ -52,40 +52,40 @@ resource "f5xc_dns_lb_pool" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the DNSLbPool. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the DNSLbPool. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the DNSLbPool will be created
+&#x2022; `namespace` - Required String<br>Namespace where the DNSLbPool will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; [`a_pool`](#a-pool) - Optional Block<br>Pool for A Record<br>See [A Pool](#a-pool) below for details.
-<br><br>&#x2022; [`aaaa_pool`](#aaaa-pool) - Optional Block<br>Pool for AAAA Record<br>See [Aaaa Pool](#aaaa-pool) below for details.
-<br><br>&#x2022; [`cname_pool`](#cname-pool) - Optional Block<br>Pool for CNAME Record<br>See [Cname Pool](#cname-pool) below for details.
-<br><br>&#x2022; [`mx_pool`](#mx-pool) - Optional Block<br>Pool for MX Record<br>See [Mx Pool](#mx-pool) below for details.
-<br><br>&#x2022; [`srv_pool`](#srv-pool) - Optional Block<br>Pool for SRV Record<br>See [Srv Pool](#srv-pool) below for details.
+&#x2022; `a_pool` - Optional Block<br>Pool for A Record<br>See [A Pool](#a-pool) below for details.
+<br><br>&#x2022; `aaaa_pool` - Optional Block<br>Pool for AAAA Record<br>See [Aaaa Pool](#aaaa-pool) below for details.
+<br><br>&#x2022; `cname_pool` - Optional Block<br>Pool for CNAME Record<br>See [Cname Pool](#cname-pool) below for details.
+<br><br>&#x2022; `mx_pool` - Optional Block<br>Pool for MX Record<br>See [Mx Pool](#mx-pool) below for details.
+<br><br>&#x2022; `srv_pool` - Optional Block<br>Pool for SRV Record<br>See [Srv Pool](#srv-pool) below for details.
 
-&#x2022; [`load_balancing_mode`](#load-balancing-mode) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`<br>LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority
+&#x2022; `load_balancing_mode` - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`<br>LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
-&#x2022; [`ttl`](#ttl) - Optional Number<br>TTL. Custom TTL in seconds (default 30) for responses from this pool
-<br><br>&#x2022; [`use_rrset_ttl`](#use-rrset-ttl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `ttl` - Optional Number<br>TTL. Custom TTL in seconds (default 30) for responses from this pool
+<br><br>&#x2022; `use_rrset_ttl` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -93,135 +93,135 @@ In addition to all arguments above, the following attributes are exported:
 
 **A Pool**
 
-&#x2022; [`disable_health_check`](#disable-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `disable_health_check` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`health_check`](#health-check) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Health Check](#a-pool-health-check) below.
+&#x2022; `health_check` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Health Check](#a-pool-health-check) below.
 
-&#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
+&#x2022; `max_answers` - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
-&#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#a-pool-members) below.
+&#x2022; `members` - Optional Block<br>Pool Members<br>See [Members](#a-pool-members) below.
 
 <a id="a-pool-health-check"></a>
 
 **A Pool Health Check**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="a-pool-members"></a>
 
 **A Pool Members**
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>Disable. A value of true will disable the pool-member
+&#x2022; `disable` - Optional Bool<br>Disable. A value of true will disable the pool-member
 
-&#x2022; [`ip_endpoint`](#ip-endpoint) - Optional String<br>Public IP. Public IP address
+&#x2022; `ip_endpoint` - Optional String<br>Public IP. Public IP address
 
-&#x2022; [`name`](#name) - Optional String<br>Name. Pool member name
+&#x2022; `name` - Optional String<br>Name. Pool member name
 
-&#x2022; [`priority`](#priority) - Optional Number<br>Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority
+&#x2022; `priority` - Optional Number<br>Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority
 
-&#x2022; [`ratio`](#ratio) - Optional Number<br>Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member
+&#x2022; `ratio` - Optional Number<br>Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member
 
 <a id="aaaa-pool"></a>
 
 **Aaaa Pool**
 
-&#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
+&#x2022; `max_answers` - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
-&#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#aaaa-pool-members) below.
+&#x2022; `members` - Optional Block<br>Pool Members<br>See [Members](#aaaa-pool-members) below.
 
 <a id="aaaa-pool-members"></a>
 
 **Aaaa Pool Members**
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>Disable. A value of true will disable the pool-member
+&#x2022; `disable` - Optional Bool<br>Disable. A value of true will disable the pool-member
 
-&#x2022; [`ip_endpoint`](#ip-endpoint) - Optional String<br>Public IP. Public IP address
+&#x2022; `ip_endpoint` - Optional String<br>Public IP. Public IP address
 
-&#x2022; [`name`](#name) - Optional String<br>Name. Pool member name
+&#x2022; `name` - Optional String<br>Name. Pool member name
 
-&#x2022; [`priority`](#priority) - Optional Number<br>Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority
+&#x2022; `priority` - Optional Number<br>Load Balancing Priority. Used if the pool’s load balancing mode is set to Priority
 
-&#x2022; [`ratio`](#ratio) - Optional Number<br>Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member
+&#x2022; `ratio` - Optional Number<br>Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member
 
 <a id="cname-pool"></a>
 
 **Cname Pool**
 
-&#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#cname-pool-members) below.
+&#x2022; `members` - Optional Block<br>Pool Members<br>See [Members](#cname-pool-members) below.
 
 <a id="cname-pool-members"></a>
 
 **Cname Pool Members**
 
-&#x2022; [`domain`](#domain) - Optional String<br>Domain
+&#x2022; `domain` - Optional String<br>Domain
 
-&#x2022; [`final_translation`](#final-translation) - Optional Bool<br>Final Translation. If this flag is true, the CNAME record will not be translated further
+&#x2022; `final_translation` - Optional Bool<br>Final Translation. If this flag is true, the CNAME record will not be translated further
 
-&#x2022; [`name`](#name) - Optional String<br>Name. Pool member name
+&#x2022; `name` - Optional String<br>Name. Pool member name
 
-&#x2022; [`ratio`](#ratio) - Optional Number<br>Load Balancing Ratio. Ratio
+&#x2022; `ratio` - Optional Number<br>Load Balancing Ratio. Ratio
 
 <a id="mx-pool"></a>
 
 **Mx Pool**
 
-&#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
+&#x2022; `max_answers` - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
-&#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#mx-pool-members) below.
+&#x2022; `members` - Optional Block<br>Pool Members<br>See [Members](#mx-pool-members) below.
 
 <a id="mx-pool-members"></a>
 
 **Mx Pool Members**
 
-&#x2022; [`domain`](#domain) - Optional String<br>Domain
+&#x2022; `domain` - Optional String<br>Domain
 
-&#x2022; [`name`](#name) - Optional String<br>Name. Pool member name
+&#x2022; `name` - Optional String<br>Name. Pool member name
 
-&#x2022; [`priority`](#priority) - Optional Number<br>MX Record Priority. MX Record priority
+&#x2022; `priority` - Optional Number<br>MX Record Priority. MX Record priority
 
-&#x2022; [`ratio`](#ratio) - Optional Number<br>Load Balancing Ratio. Load Balancing Ratio
+&#x2022; `ratio` - Optional Number<br>Load Balancing Ratio. Load Balancing Ratio
 
 <a id="srv-pool"></a>
 
 **Srv Pool**
 
-&#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
+&#x2022; `max_answers` - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
-&#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#srv-pool-members) below.
+&#x2022; `members` - Optional Block<br>Pool Members<br>See [Members](#srv-pool-members) below.
 
 <a id="srv-pool-members"></a>
 
 **Srv Pool Members**
 
-&#x2022; [`final_translation`](#final-translation) - Optional Bool<br>Final Translation. If this flag is true, the SRV record will not be translated further
+&#x2022; `final_translation` - Optional Bool<br>Final Translation. If this flag is true, the SRV record will not be translated further
 
-&#x2022; [`name`](#name) - Optional String<br>Name. Pool member name
+&#x2022; `name` - Optional String<br>Name. Pool member name
 
-&#x2022; [`port`](#port) - Optional Number<br>Port. Port on which the service can be found
+&#x2022; `port` - Optional Number<br>Port. Port on which the service can be found
 
-&#x2022; [`priority`](#priority) - Optional Number<br>Priority. Priority of the target. A lower number indicates a higher preference
+&#x2022; `priority` - Optional Number<br>Priority. Priority of the target. A lower number indicates a higher preference
 
-&#x2022; [`ratio`](#ratio) - Optional Number<br>Load Balancing Ratio. Ratio
+&#x2022; `ratio` - Optional Number<br>Load Balancing Ratio. Ratio
 
-&#x2022; [`target`](#target) - Optional String<br>Target. Domain name of the machine providing the service
+&#x2022; `target` - Optional String<br>Target. Domain name of the machine providing the service
 
-&#x2022; [`weight`](#weight) - Optional Number<br>Weight. Weight of the target. A higher number indicates a higher preference
+&#x2022; `weight` - Optional Number<br>Weight. Weight of the target. A higher number indicates a higher preference
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

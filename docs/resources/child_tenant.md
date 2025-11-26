@@ -52,39 +52,39 @@ resource "f5xc_child_tenant" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the ChildTenant. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the ChildTenant. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ChildTenant will be created
+&#x2022; `namespace` - Required String<br>Namespace where the ChildTenant will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`child_tenant_manager`](#child-tenant-manager) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Child Tenant Manager](#child-tenant-manager) below for details.
+&#x2022; `child_tenant_manager` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Child Tenant Manager](#child-tenant-manager) below for details.
 
-&#x2022; [`company_name`](#company-name) - Optional String<br>Company Name. Company name (enterprise only)
+&#x2022; `company_name` - Optional String<br>Company Name. Company name (enterprise only)
 
-&#x2022; [`contact_detail`](#contact-detail) - Optional Block<br>Contact. Instance of one single contact that can be used to communicate with customers. Depending on contact type we use these details to send general communication (regular, physical mail) or invoices<br>See [Contact Detail](#contact-detail) below for details.
+&#x2022; `contact_detail` - Optional Block<br>Contact. Instance of one single contact that can be used to communicate with customers. Depending on contact type we use these details to send general communication (regular, physical mail) or invoices<br>See [Contact Detail](#contact-detail) below for details.
 
-&#x2022; [`customer_info`](#customer-info) - Optional Block<br>Customer Info. Optional details for the new child tenant<br>See [Customer Info](#customer-info) below for details.
+&#x2022; `customer_info` - Optional Block<br>Customer Info. Optional details for the new child tenant<br>See [Customer Info](#customer-info) below for details.
 
-&#x2022; [`domain`](#domain) - Optional String<br>Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io
+&#x2022; `domain` - Optional String<br>Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io
 
-&#x2022; [`tenant_profile`](#tenant-profile) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Tenant Profile](#tenant-profile) below for details.
+&#x2022; `tenant_profile` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Tenant Profile](#tenant-profile) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -92,69 +92,69 @@ In addition to all arguments above, the following attributes are exported:
 
 **Child Tenant Manager**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="contact-detail"></a>
 
 **Contact Detail**
 
-&#x2022; [`address1`](#address1) - Optional String<br>Address Line 1
+&#x2022; `address1` - Optional String<br>Address Line 1
 
-&#x2022; [`address2`](#address2) - Optional String<br>Address Line 2
+&#x2022; `address2` - Optional String<br>Address Line 2
 
-&#x2022; [`city`](#city) - Optional String<br>City
+&#x2022; `city` - Optional String<br>City
 
-&#x2022; [`contact_type`](#contact-type) - Optional String  Defaults to `MAILING`<br>Possible values are `MAILING`, `BILLING`, `PAYMENT`<br>Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)
+&#x2022; `contact_type` - Optional String  Defaults to `MAILING`<br>Possible values are `MAILING`, `BILLING`, `PAYMENT`<br>Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)
 
-&#x2022; [`country`](#country) - Optional String<br>Country
+&#x2022; `country` - Optional String<br>Country
 
-&#x2022; [`county`](#county) - Optional String<br>County
+&#x2022; `county` - Optional String<br>County
 
-&#x2022; [`phone_number`](#phone-number) - Optional String<br>Phone Number
+&#x2022; `phone_number` - Optional String<br>Phone Number
 
-&#x2022; [`state`](#state) - Optional String<br>State
+&#x2022; `state` - Optional String<br>State
 
-&#x2022; [`state_code`](#state-code) - Optional String<br>State Code
+&#x2022; `state_code` - Optional String<br>State Code
 
-&#x2022; [`zip_code`](#zip-code) - Optional String<br>ZIP code
+&#x2022; `zip_code` - Optional String<br>ZIP code
 
 <a id="customer-info"></a>
 
 **Customer Info**
 
-&#x2022; [`additional_info`](#additional-info) - Optional String<br>Additional Info. Use this field for any additional information about the new child tenant
+&#x2022; `additional_info` - Optional String<br>Additional Info. Use this field for any additional information about the new child tenant
 
-&#x2022; [`email`](#email) - Optional String<br>Email
+&#x2022; `email` - Optional String<br>Email
 
-&#x2022; [`first_name`](#first-name) - Optional String<br>First Name
+&#x2022; `first_name` - Optional String<br>First Name
 
-&#x2022; [`last_name`](#last-name) - Optional String<br>Last Name
+&#x2022; `last_name` - Optional String<br>Last Name
 
 <a id="tenant-profile"></a>
 
 **Tenant Profile**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

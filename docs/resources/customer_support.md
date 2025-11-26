@@ -52,53 +52,53 @@ resource "f5xc_customer_support" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the CustomerSupport. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the CustomerSupport. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CustomerSupport will be created
+&#x2022; `namespace` - Required String<br>Namespace where the CustomerSupport will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Description. customer's description of the issue (free text)
+&#x2022; `description` - Optional String<br>Description. customer's description of the issue (free text)
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`category`](#category) - Optional String<br>Category. ticket area further narrows down the ticket - infrastructure, application, dashboards can be examples
+&#x2022; `category` - Optional String<br>Category. ticket area further narrows down the ticket - infrastructure, application, dashboards can be examples
 
-&#x2022; [`comments`](#comments) - Optional Block<br>Comments. Comments are all public comments on an issue. They'RE usually conversation between the support personnel and the customer<br>See [Comments](#comments) below for details.
+&#x2022; `comments` - Optional Block<br>Comments. Comments are all public comments on an issue. They'RE usually conversation between the support personnel and the customer<br>See [Comments](#comments) below for details.
 
-&#x2022; [`ongoing`](#ongoing) - Optional Bool<br>Ongoing. Ongoing is a flag that indicates whether the issue is ongoing or not
+&#x2022; `ongoing` - Optional Bool<br>Ongoing. Ongoing is a flag that indicates whether the issue is ongoing or not
 
-&#x2022; [`priority`](#priority) - Optional String  Defaults to `PRIORITY_UNKNOWN`<br>Possible values are `PRIORITY_UNKNOWN`, `PRIORITY_NORMAL`, `PRIORITY_HIGH`, `PRIORITY_URGENT`<br>Priority. Support ticket priority helps understand importance of the ticket and focus more on more critical issues. Unknown/empty priority Normal priority issue High priority issue Urgent priority issue
+&#x2022; `priority` - Optional String  Defaults to `PRIORITY_UNKNOWN`<br>Possible values are `PRIORITY_UNKNOWN`, `PRIORITY_NORMAL`, `PRIORITY_HIGH`, `PRIORITY_URGENT`<br>Priority. Support ticket priority helps understand importance of the ticket and focus more on more critical issues. Unknown/empty priority Normal priority issue High priority issue Urgent priority issue
 
-&#x2022; [`product_data`](#product-data) - Optional String<br>Product Data. Product data is a free text field that can be used to describe the issue in more detail
+&#x2022; `product_data` - Optional String<br>Product Data. Product data is a free text field that can be used to describe the issue in more detail
 
-&#x2022; [`relates_to`](#relates-to) - Optional Block<br>Ticket which this one relates to. Optional reference to any original ticket in case the ticket being created is a followup<br>See [Relates To](#relates-to) below for details.
+&#x2022; `relates_to` - Optional Block<br>Ticket which this one relates to. Optional reference to any original ticket in case the ticket being created is a followup<br>See [Relates To](#relates-to) below for details.
 
-&#x2022; [`service`](#service) - Optional String  Defaults to `SS_UNKNOWN`<br>Possible values are `SS_UNKNOWN`, `SS_ACCOUNT_PROTECTION`, `SS_ADMINISTRATION`, `SS_APPLICATION_TRAFFIC_INSIGHT`, `SS_AUDIT_LOGS_AND_ALERTS`, `SS_AUTHENTICATION_INTELLIGENCE`, `SS_BILLING`, `SS_CLIENT_SIDE_DEFENSE`, `SS_CLOUD_AND_EDGE_SITES`, `SS_DDOS_AND_TRANSIT_SERVICES`, `SS_DISTRIBUTED_APPS`, `SS_DNS_MANAGEMENT`, `SS_LOAD_BALANCERS`, `SS_SHARED_CONFIGURATION`, `SS_WEB_APP_AND_API_PROTECTION`, `SS_OTHER`, `SS_BOT_DEFENSE`, `SS_CDN`, `SS_OBSERVABILITY`, `SS_DELEGATED_ACCESS`, `SS_MULTI_CLOUD_NETWORK_CONNECT`, `SS_MULTI_CLOUD_APP_CONNECT`, `SS_BIG_IP_APM`, `SS_DATA_INTELLIGENCE`, `SS_NGINX_ONE`, `SS_WEB_APP_SCANNING`, `SS_ROUTED_DDOS`, `SS_MOBILE_APP_SHIELD`<br>Support Service. Indicates the list of support service Unknown Support Service Account Protection Support Service Administration Support Service Application Traffic Insight Support Service Audit Logs & Alerts Support Service Authentication Intelligence Support Service Billing Support Service Client Side Defense Support Service Cloud & Edge Sites Support Service deprecated: use SS_MULTI_CLOUD_NETWORK_CONNECT instead DDOS & Transit Support Service Deprecated: use SS_ROUTED_DDOS instead Distributed Apps Support Service DNS Management Support Service LoadBalancers Support Service deprecated: use SS_MULTI_CLOUD_APP_CONNECT instead Shared Configuration Support Service Web App & API Protection Support Service Other Support Service Bot Defense Support Service Content delivery network Support Service Observability Support Service Delegated Access Support Service Networking & security across clouds, edge and on-premises Connect apps across clouds, edge and on-premises using Load Balancers BIG-IP Access Policy Manager (APM) Data Intelligence Support Service NGINX One Support Service Web App Scanning Support Service Routed DDOS Support Service Mobile App Shield protects mobile apps from reverse engineering, tampering and malware
+&#x2022; `service` - Optional String  Defaults to `SS_UNKNOWN`<br>Possible values are `SS_UNKNOWN`, `SS_ACCOUNT_PROTECTION`, `SS_ADMINISTRATION`, `SS_APPLICATION_TRAFFIC_INSIGHT`, `SS_AUDIT_LOGS_AND_ALERTS`, `SS_AUTHENTICATION_INTELLIGENCE`, `SS_BILLING`, `SS_CLIENT_SIDE_DEFENSE`, `SS_CLOUD_AND_EDGE_SITES`, `SS_DDOS_AND_TRANSIT_SERVICES`, `SS_DISTRIBUTED_APPS`, `SS_DNS_MANAGEMENT`, `SS_LOAD_BALANCERS`, `SS_SHARED_CONFIGURATION`, `SS_WEB_APP_AND_API_PROTECTION`, `SS_OTHER`, `SS_BOT_DEFENSE`, `SS_CDN`, `SS_OBSERVABILITY`, `SS_DELEGATED_ACCESS`, `SS_MULTI_CLOUD_NETWORK_CONNECT`, `SS_MULTI_CLOUD_APP_CONNECT`, `SS_BIG_IP_APM`, `SS_DATA_INTELLIGENCE`, `SS_NGINX_ONE`, `SS_WEB_APP_SCANNING`, `SS_ROUTED_DDOS`, `SS_MOBILE_APP_SHIELD`<br>Support Service. Indicates the list of support service Unknown Support Service Account Protection Support Service Administration Support Service Application Traffic Insight Support Service Audit Logs & Alerts Support Service Authentication Intelligence Support Service Billing Support Service Client Side Defense Support Service Cloud & Edge Sites Support Service deprecated: use SS_MULTI_CLOUD_NETWORK_CONNECT instead DDOS & Transit Support Service Deprecated: use SS_ROUTED_DDOS instead Distributed Apps Support Service DNS Management Support Service LoadBalancers Support Service deprecated: use SS_MULTI_CLOUD_APP_CONNECT instead Shared Configuration Support Service Web App & API Protection Support Service Other Support Service Bot Defense Support Service Content delivery network Support Service Observability Support Service Delegated Access Support Service Networking & security across clouds, edge and on-premises Connect apps across clouds, edge and on-premises using Load Balancers BIG-IP Access Policy Manager (APM) Data Intelligence Support Service NGINX One Support Service Web App Scanning Support Service Routed DDOS Support Service Mobile App Shield protects mobile apps from reverse engineering, tampering and malware
 
-&#x2022; [`status`](#status) - Optional String  Defaults to `STATUS_UNKNOWN`<br>Possible values are `STATUS_UNKNOWN`, `STATUS_NEW`, `STATUS_OPEN`, `STATUS_PENDING`, `STATUS_ONHOLD`, `STATUS_SOLVED`, `STATUS_CLOSED`, `STATUS_FAILED`<br>Support Ticket Status. State of the ticket so the customers know if the problem is being looked into Unknown or empty support ticket status Indicates a new ticket, waiting to be assigned to an agent Indicates an open issues, actively being looked into Indicates a pending issue, an open issue not actively being looked into Indicates on issue that on-hold, waiting for more information Indicates a solved issue, waiting for customer's confirmation Indicates a closed issue, resolved and customer approved Indicates a failed ticket, a failed ticket didn't make it into Zendesk and a customer should create new one instead
+&#x2022; `status` - Optional String  Defaults to `STATUS_UNKNOWN`<br>Possible values are `STATUS_UNKNOWN`, `STATUS_NEW`, `STATUS_OPEN`, `STATUS_PENDING`, `STATUS_ONHOLD`, `STATUS_SOLVED`, `STATUS_CLOSED`, `STATUS_FAILED`<br>Support Ticket Status. State of the ticket so the customers know if the problem is being looked into Unknown or empty support ticket status Indicates a new ticket, waiting to be assigned to an agent Indicates an open issues, actively being looked into Indicates a pending issue, an open issue not actively being looked into Indicates on issue that on-hold, waiting for more information Indicates a solved issue, waiting for customer's confirmation Indicates a closed issue, resolved and customer approved Indicates a failed ticket, a failed ticket didn't make it into Zendesk and a customer should create new one instead
 
-&#x2022; [`subject`](#subject) - Optional String<br>Subject. subject of the ticket
+&#x2022; `subject` - Optional String<br>Subject. subject of the ticket
 
-&#x2022; [`timeline`](#timeline) - Optional String<br>Timeline. Timeline is a free text field that can be used to describe the issue in more detail
+&#x2022; `timeline` - Optional String<br>Timeline. Timeline is a free text field that can be used to describe the issue in more detail
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; [`topic`](#topic) - Optional String  Defaults to `TOPIC_UNKNOWN`<br>Possible values are `TOPIC_UNKNOWN`, `ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST`, `ACCOUNT_SUPPORT_TOPIC_ACCOUNT`, `ACCOUNT_SUPPORT_TOPIC_BILLING`, `ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE`, `ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP`, `ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE`, `ACCOUNT_SUPPORT_TOPIC_RMA`, `ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION`, `ACCOUNT_SUPPORT_TOPIC_OTHERS`, `TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES`, `TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE`, `TECHNICAL_SUPPORT_TOPIC_NEW_CONFIGURATION`, `TECHNICAL_SUPPORT_TOPIC_PRODUCT_QUESTION`, `TECHNICAL_SUPPORT_TOPIC_TROUBLESHOOTING`, `TECHNICAL_SUPPORT_TOPIC_OTHERS`, `INCIDENT_SUPPORT_TOPIC_LATENCY`, `INCIDENT_SUPPORT_TOPIC_PERFORMANCE_DEGRADATION`, `INCIDENT_SUPPORT_TOPIC_PARTIAL_OUTAGE`, `INCIDENT_SUPPORT_TOPIC_COMPLETE_OUTAGE`, `INCIDENT_SUPPORT_TOPIC_OTHERS`, `TASK_TOPIC_PLAN_TRANSITION`, `PROBLEM_TOPIC_SUPPORT_ALERT`, `QUESTION_TOPIC_INFRASTRUCTURE`, `TECHNICAL_SUPPORT_TOPIC_DELEGATED_DOMAIN_MIGRATION`<br>Support Topic. Support Topic indicates the list of topics for service tickets Unknown/empty priority ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST ACCOUNT_SUPPORT_TOPIC_ACCOUNT ACCOUNT_SUPPORT_TOPIC_BILLING ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE ACCOUNT_SUPPORT_TOPIC_RMA ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION ACCOUNT_SUPPORT_TOPIC_OTHERS TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE TECHNICAL_SUPPORT_TOPIC_NEW_CONFIGURATION TECHNICAL_SUPPORT_TOPIC_PRODUCT_QUESTION TECHNICAL_SUPPORT_TOPIC_TROUBLESHOOTING TECHNICAL_SUPPORT_TOPIC_OTHERS INCIDENT_SUPPORT_TOPIC_LATENCY INCIDENT_SUPPORT_TOPIC_PERFORMANCE_DEGRADATION INCIDENT_SUPPORT_TOPIC_PARTIAL_OUTAGE INCIDENT_SUPPORT_TOPIC_COMPLETE_OUTAGE INCIDENT_SUPPORT_TOPIC_OTHERS TASK_TOPIC_PLAN_TRANSITION PROBLEM_TOPIC_SUPPORT_ALERT QUESTION_TOPIC_INFRASTRUCTURE TECHNICAL_SUPPORT_TOPIC_DELEGATED_DOMAIN_MIGRATION
+&#x2022; `topic` - Optional String  Defaults to `TOPIC_UNKNOWN`<br>Possible values are `TOPIC_UNKNOWN`, `ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST`, `ACCOUNT_SUPPORT_TOPIC_ACCOUNT`, `ACCOUNT_SUPPORT_TOPIC_BILLING`, `ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE`, `ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP`, `ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE`, `ACCOUNT_SUPPORT_TOPIC_RMA`, `ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION`, `ACCOUNT_SUPPORT_TOPIC_OTHERS`, `TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES`, `TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE`, `TECHNICAL_SUPPORT_TOPIC_NEW_CONFIGURATION`, `TECHNICAL_SUPPORT_TOPIC_PRODUCT_QUESTION`, `TECHNICAL_SUPPORT_TOPIC_TROUBLESHOOTING`, `TECHNICAL_SUPPORT_TOPIC_OTHERS`, `INCIDENT_SUPPORT_TOPIC_LATENCY`, `INCIDENT_SUPPORT_TOPIC_PERFORMANCE_DEGRADATION`, `INCIDENT_SUPPORT_TOPIC_PARTIAL_OUTAGE`, `INCIDENT_SUPPORT_TOPIC_COMPLETE_OUTAGE`, `INCIDENT_SUPPORT_TOPIC_OTHERS`, `TASK_TOPIC_PLAN_TRANSITION`, `PROBLEM_TOPIC_SUPPORT_ALERT`, `QUESTION_TOPIC_INFRASTRUCTURE`, `TECHNICAL_SUPPORT_TOPIC_DELEGATED_DOMAIN_MIGRATION`<br>Support Topic. Support Topic indicates the list of topics for service tickets Unknown/empty priority ACCOUNT_SUPPORT_TOPIC_ACCESS_REQUEST ACCOUNT_SUPPORT_TOPIC_ACCOUNT ACCOUNT_SUPPORT_TOPIC_BILLING ACCOUNT_SUPPORT_TOPIC_BILLING_PLAN_CHANGE ACCOUNT_SUPPORT_TOPIC_PUBLIC_IP ACCOUNT_SUPPORT_TOPIC_QUOTA_INCREASE ACCOUNT_SUPPORT_TOPIC_RMA ACCOUNT_SUPPORT_TOPIC_TAX_EXEMPT_VERIFICATION ACCOUNT_SUPPORT_TOPIC_OTHERS TECHNICAL_SUPPORT_TOPIC_CONFIGURATION_CHANGES TECHNICAL_SUPPORT_TOPIC_ERROR_MESSAGE TECHNICAL_SUPPORT_TOPIC_NEW_CONFIGURATION TECHNICAL_SUPPORT_TOPIC_PRODUCT_QUESTION TECHNICAL_SUPPORT_TOPIC_TROUBLESHOOTING TECHNICAL_SUPPORT_TOPIC_OTHERS INCIDENT_SUPPORT_TOPIC_LATENCY INCIDENT_SUPPORT_TOPIC_PERFORMANCE_DEGRADATION INCIDENT_SUPPORT_TOPIC_PARTIAL_OUTAGE INCIDENT_SUPPORT_TOPIC_COMPLETE_OUTAGE INCIDENT_SUPPORT_TOPIC_OTHERS TASK_TOPIC_PLAN_TRANSITION PROBLEM_TOPIC_SUPPORT_ALERT QUESTION_TOPIC_INFRASTRUCTURE TECHNICAL_SUPPORT_TOPIC_DELEGATED_DOMAIN_MIGRATION
 
-&#x2022; [`tp_id`](#tp-id) - Optional String<br>Third Party ID. ID assigned to this ticket by our support provider
+&#x2022; `tp_id` - Optional String<br>Third Party ID. ID assigned to this ticket by our support provider
 
-&#x2022; [`type`](#type) - Optional String  Defaults to `TYPE_UNKNOWN`<br>Possible values are `TYPE_UNKNOWN`, `TYPE_PROBLEM`, `TYPE_TASK`, `TYPE_QUESTION`, `TYPE_INCIDENT`, `TYPE_TECHNICAL_SUPPORT`, `TYPE_ACCOUNT_SUPPORT`, `TYPE_INCIDENT_SUPPORT`<br>Support Ticket. Several types of issues are supported, such as problems, questions. Unknown or empty ticket type Indicates a problem (e.g. misconfiguration) Indicates a task (a request to do something) Indicates a question (billing, services related) Indicates an incident (something is not working) Indicates a technical support ticket Indicates an account support ticket Indicates an Incident support ticket
+&#x2022; `type` - Optional String  Defaults to `TYPE_UNKNOWN`<br>Possible values are `TYPE_UNKNOWN`, `TYPE_PROBLEM`, `TYPE_TASK`, `TYPE_QUESTION`, `TYPE_INCIDENT`, `TYPE_TECHNICAL_SUPPORT`, `TYPE_ACCOUNT_SUPPORT`, `TYPE_INCIDENT_SUPPORT`<br>Support Ticket. Several types of issues are supported, such as problems, questions. Unknown or empty ticket type Indicates a problem (e.g. misconfiguration) Indicates a task (a request to do something) Indicates a question (billing, services related) Indicates an incident (something is not working) Indicates a technical support ticket Indicates an account support ticket Indicates an Incident support ticket
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -106,57 +106,57 @@ In addition to all arguments above, the following attributes are exported:
 
 **Comments**
 
-&#x2022; [`attachment_ids`](#attachment-ids) - Optional List<br>Attachment IDs. Third party id of any attachment related to this ticket comment
+&#x2022; `attachment_ids` - Optional List<br>Attachment IDs. Third party id of any attachment related to this ticket comment
 
-&#x2022; [`attachments_info`](#attachments-info) - Optional Block<br>Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have<br>See [Attachments Info](#comments-attachments-info) below.
+&#x2022; `attachments_info` - Optional Block<br>Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have<br>See [Attachments Info](#comments-attachments-info) below.
 
-&#x2022; [`author_email`](#author-email) - Optional String<br>Email. Email of the author of the comment
+&#x2022; `author_email` - Optional String<br>Email. Email of the author of the comment
 
-&#x2022; [`author_name`](#author-name) - Optional String<br>Author. Author of the comment (as a name)
+&#x2022; `author_name` - Optional String<br>Author. Author of the comment (as a name)
 
-&#x2022; [`created_at`](#created-at) - Optional String<br>At. Comment creation time
+&#x2022; `created_at` - Optional String<br>At. Comment creation time
 
-&#x2022; [`html`](#html) - Optional String<br>Comment. Comment body as HTML
+&#x2022; `html` - Optional String<br>Comment. Comment body as HTML
 
-&#x2022; [`plain_text`](#plain-text) - Optional String<br>Comment. Comment body as plain text
+&#x2022; `plain_text` - Optional String<br>Comment. Comment body as plain text
 
 <a id="comments-attachments-info"></a>
 
 **Comments Attachments Info**
 
-&#x2022; [`attachment`](#attachment) - Optional String<br>Attachment data. Any binary attachment (such as screenshots, plain text files, PDFs) encoded as base64 if used over HTTP
+&#x2022; `attachment` - Optional String<br>Attachment data. Any binary attachment (such as screenshots, plain text files, PDFs) encoded as base64 if used over HTTP
 
-&#x2022; [`content_type`](#content-type) - Optional String<br>Content type. Mime content type of the attachment. Helps the UI to properly display the data
+&#x2022; `content_type` - Optional String<br>Content type. Mime content type of the attachment. Helps the UI to properly display the data
 
-&#x2022; [`filename`](#filename) - Optional String<br>Filename. Filename of the attachment as provided by the caller
+&#x2022; `filename` - Optional String<br>Filename. Filename of the attachment as provided by the caller
 
-&#x2022; [`tp_id`](#tp-id) - Optional String<br>3rd party ID. Optional ID as assigned by the 3rd party actually storing the data
+&#x2022; `tp_id` - Optional String<br>3rd party ID. Optional ID as assigned by the 3rd party actually storing the data
 
 <a id="relates-to"></a>
 
 **Relates To**
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

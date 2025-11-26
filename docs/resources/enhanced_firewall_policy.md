@@ -58,36 +58,36 @@ resource "f5xc_enhanced_firewall_policy" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the EnhancedFirewallPolicy. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the EnhancedFirewallPolicy. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the EnhancedFirewallPolicy will be created
+&#x2022; `namespace` - Required String<br>Namespace where the EnhancedFirewallPolicy will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; [`allow_all`](#allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`allowed_destinations`](#allowed-destinations) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Destinations](#allowed-destinations) below for details.
-<br><br>&#x2022; [`allowed_sources`](#allowed-sources) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Sources](#allowed-sources) below for details.
-<br><br>&#x2022; [`denied_destinations`](#denied-destinations) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Destinations](#denied-destinations) below for details.
-<br><br>&#x2022; [`denied_sources`](#denied-sources) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Sources](#denied-sources) below for details.
-<br><br>&#x2022; [`deny_all`](#deny-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`rule_list`](#rule-list) - Optional Block<br>Custom Enhanced Firewall Policy Rules. Custom Enhanced Firewall Policy Rules<br>See [Rule List](#rule-list) below for details.
+&#x2022; `allow_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `allowed_destinations` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Destinations](#allowed-destinations) below for details.
+<br><br>&#x2022; `allowed_sources` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Sources](#allowed-sources) below for details.
+<br><br>&#x2022; `denied_destinations` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Destinations](#denied-destinations) below for details.
+<br><br>&#x2022; `denied_sources` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Sources](#denied-sources) below for details.
+<br><br>&#x2022; `deny_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `rule_list` - Optional Block<br>Custom Enhanced Firewall Policy Rules. Custom Enhanced Firewall Policy Rules<br>See [Rule List](#rule-list) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -95,227 +95,227 @@ In addition to all arguments above, the following attributes are exported:
 
 **Allowed Destinations**
 
-&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
+&#x2022; `prefix` - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 <a id="allowed-sources"></a>
 
 **Allowed Sources**
 
-&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
+&#x2022; `prefix` - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 <a id="denied-destinations"></a>
 
 **Denied Destinations**
 
-&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
+&#x2022; `prefix` - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 <a id="denied-sources"></a>
 
 **Denied Sources**
 
-&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
+&#x2022; `prefix` - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 <a id="rule-list"></a>
 
 **Rule List**
 
-&#x2022; [`rules`](#rules) - Optional Block<br>List of Enhanced Firewall Policy Rules. Ordered List of Enhanced Firewall Policy Rules<br>See [Rules](#rule-list-rules) below.
+&#x2022; `rules` - Optional Block<br>List of Enhanced Firewall Policy Rules. Ordered List of Enhanced Firewall Policy Rules<br>See [Rules](#rule-list-rules) below.
 
 <a id="rule-list-rules"></a>
 
 **Rule List Rules**
 
-&#x2022; [`advanced_action`](#advanced-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Advanced Action](#rule-list-rules-advanced-action) below.
+&#x2022; `advanced_action` - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Advanced Action](#rule-list-rules-advanced-action) below.
 
-&#x2022; [`all_destinations`](#all-destinations) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `all_destinations` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`all_sli_vips`](#all-sli-vips) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `all_sli_vips` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`all_slo_vips`](#all-slo-vips) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `all_slo_vips` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`all_sources`](#all-sources) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `all_sources` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`all_tcp_traffic`](#all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `all_tcp_traffic` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`all_traffic`](#all-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `all_traffic` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`all_udp_traffic`](#all-udp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `all_udp_traffic` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`allow`](#allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `allow` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`applications`](#applications) - Optional Block<br>Applications. Application protocols like HTTP, SNMP<br>See [Applications](#rule-list-rules-applications) below.
+&#x2022; `applications` - Optional Block<br>Applications. Application protocols like HTTP, SNMP<br>See [Applications](#rule-list-rules-applications) below.
 
-&#x2022; [`deny`](#deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`destination_aws_vpc_ids`](#destination-aws-vpc-ids) - Optional Block<br>AWS VPC List. List of VPC Identifiers in AWS<br>See [Destination AWS Vpc Ids](#rule-list-rules-destination-aws-vpc-ids) below.
+&#x2022; `destination_aws_vpc_ids` - Optional Block<br>AWS VPC List. List of VPC Identifiers in AWS<br>See [Destination AWS Vpc Ids](#rule-list-rules-destination-aws-vpc-ids) below.
 
-&#x2022; [`destination_ip_prefix_set`](#destination-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [Destination IP Prefix Set](#rule-list-rules-destination-ip-prefix-set) below.
+&#x2022; `destination_ip_prefix_set` - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [Destination IP Prefix Set](#rule-list-rules-destination-ip-prefix-set) below.
 
-&#x2022; [`destination_label_selector`](#destination-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [Destination Label Selector](#rule-list-rules-destination-label-selector) below.
+&#x2022; `destination_label_selector` - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [Destination Label Selector](#rule-list-rules-destination-label-selector) below.
 
-&#x2022; [`destination_prefix_list`](#destination-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Destination Prefix List](#rule-list-rules-destination-prefix-list) below.
+&#x2022; `destination_prefix_list` - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Destination Prefix List](#rule-list-rules-destination-prefix-list) below.
 
-&#x2022; [`insert_service`](#insert-service) - Optional Block<br>Policy Action to Forward Traffic to External Service. Action to forward traffic to external service<br>See [Insert Service](#rule-list-rules-insert-service) below.
+&#x2022; `insert_service` - Optional Block<br>Policy Action to Forward Traffic to External Service. Action to forward traffic to external service<br>See [Insert Service](#rule-list-rules-insert-service) below.
 
-&#x2022; [`inside_destinations`](#inside-destinations) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `inside_destinations` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`inside_sources`](#inside-sources) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `inside_sources` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`label_matcher`](#label-matcher) - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#rule-list-rules-label-matcher) below.
+&#x2022; `label_matcher` - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#rule-list-rules-label-matcher) below.
 
-&#x2022; [`metadata`](#metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
+&#x2022; `metadata` - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
 
-&#x2022; [`outside_destinations`](#outside-destinations) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `outside_destinations` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`outside_sources`](#outside-sources) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; `outside_sources` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`protocol_port_range`](#protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rule-list-rules-protocol-port-range) below.
+&#x2022; `protocol_port_range` - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rule-list-rules-protocol-port-range) below.
 
-&#x2022; [`source_aws_vpc_ids`](#source-aws-vpc-ids) - Optional Block<br>AWS VPC List. List of VPC Identifiers in AWS<br>See [Source AWS Vpc Ids](#rule-list-rules-source-aws-vpc-ids) below.
+&#x2022; `source_aws_vpc_ids` - Optional Block<br>AWS VPC List. List of VPC Identifiers in AWS<br>See [Source AWS Vpc Ids](#rule-list-rules-source-aws-vpc-ids) below.
 
-&#x2022; [`source_ip_prefix_set`](#source-ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [Source IP Prefix Set](#rule-list-rules-source-ip-prefix-set) below.
+&#x2022; `source_ip_prefix_set` - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [Source IP Prefix Set](#rule-list-rules-source-ip-prefix-set) below.
 
-&#x2022; [`source_label_selector`](#source-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [Source Label Selector](#rule-list-rules-source-label-selector) below.
+&#x2022; `source_label_selector` - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [Source Label Selector](#rule-list-rules-source-label-selector) below.
 
-&#x2022; [`source_prefix_list`](#source-prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Source Prefix List](#rule-list-rules-source-prefix-list) below.
+&#x2022; `source_prefix_list` - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Source Prefix List](#rule-list-rules-source-prefix-list) below.
 
 <a id="rule-list-rules-advanced-action"></a>
 
 **Rule List Rules Advanced Action**
 
-&#x2022; [`action`](#action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
+&#x2022; `action` - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
 <a id="rule-list-rules-applications"></a>
 
 **Rule List Rules Applications**
 
-&#x2022; [`applications`](#applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
+&#x2022; `applications` - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
 
 <a id="rule-list-rules-destination-aws-vpc-ids"></a>
 
 **Rule List Rules Destination AWS Vpc Ids**
 
-&#x2022; [`vpc_id`](#vpc-id) - Optional List<br>AWS VPC List. List of VPC Identifiers in AWS
+&#x2022; `vpc_id` - Optional List<br>AWS VPC List. List of VPC Identifiers in AWS
 
 <a id="rule-list-rules-destination-ip-prefix-set"></a>
 
 **Rule List Rules Destination IP Prefix Set**
 
-&#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rule-list-rules-destination-ip-prefix-set-ref) below.
+&#x2022; `ref` - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rule-list-rules-destination-ip-prefix-set-ref) below.
 
 <a id="rule-list-rules-destination-ip-prefix-set-ref"></a>
 
 **Rule List Rules Destination IP Prefix Set Ref**
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="rule-list-rules-destination-label-selector"></a>
 
 **Rule List Rules Destination Label Selector**
 
-&#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+&#x2022; `expressions` - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="rule-list-rules-destination-prefix-list"></a>
 
 **Rule List Rules Destination Prefix List**
 
-&#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+&#x2022; `prefixes` - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="rule-list-rules-insert-service"></a>
 
 **Rule List Rules Insert Service**
 
-&#x2022; [`nfv_service`](#nfv-service) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Nfv Service](#rule-list-rules-insert-service-nfv-service) below.
+&#x2022; `nfv_service` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Nfv Service](#rule-list-rules-insert-service-nfv-service) below.
 
 <a id="rule-list-rules-insert-service-nfv-service"></a>
 
 **Rule List Rules Insert Service Nfv Service**
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="rule-list-rules-label-matcher"></a>
 
 **Rule List Rules Label Matcher**
 
-&#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
+&#x2022; `keys` - Optional List<br>Keys. The list of label key names that have to match
 
 <a id="rule-list-rules-metadata"></a>
 
 **Rule List Rules Metadata**
 
-&#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
+&#x2022; `description` - Optional String<br>Description. Human readable description
 
-&#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+&#x2022; `name` - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
 <a id="rule-list-rules-protocol-port-range"></a>
 
 **Rule List Rules Protocol Port Range**
 
-&#x2022; [`port_ranges`](#port-ranges) - Optional List<br>List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
+&#x2022; `port_ranges` - Optional List<br>List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
 
-&#x2022; [`protocol`](#protocol) - Optional String<br>Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and ICMP
+&#x2022; `protocol` - Optional String<br>Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and ICMP
 
 <a id="rule-list-rules-source-aws-vpc-ids"></a>
 
 **Rule List Rules Source AWS Vpc Ids**
 
-&#x2022; [`vpc_id`](#vpc-id) - Optional List<br>AWS VPC List. List of VPC Identifiers in AWS
+&#x2022; `vpc_id` - Optional List<br>AWS VPC List. List of VPC Identifiers in AWS
 
 <a id="rule-list-rules-source-ip-prefix-set"></a>
 
 **Rule List Rules Source IP Prefix Set**
 
-&#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rule-list-rules-source-ip-prefix-set-ref) below.
+&#x2022; `ref` - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rule-list-rules-source-ip-prefix-set-ref) below.
 
 <a id="rule-list-rules-source-ip-prefix-set-ref"></a>
 
 **Rule List Rules Source IP Prefix Set Ref**
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="rule-list-rules-source-label-selector"></a>
 
 **Rule List Rules Source Label Selector**
 
-&#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+&#x2022; `expressions` - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="rule-list-rules-source-prefix-list"></a>
 
 **Rule List Rules Source Prefix List**
 
-&#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+&#x2022; `prefixes` - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

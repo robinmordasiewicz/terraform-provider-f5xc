@@ -52,31 +52,31 @@ resource "f5xc_filter_set" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the FilterSet. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the FilterSet. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the FilterSet will be created
+&#x2022; `namespace` - Required String<br>Namespace where the FilterSet will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`context_key`](#context-key) - Optional String<br>Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable
+&#x2022; `context_key` - Optional String<br>Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable
 
-&#x2022; [`filter_fields`](#filter-fields) - Optional Block<br>Filter Fields. list of fields and their values selected by the user<br>See [Filter Fields](#filter-fields) below for details.
+&#x2022; `filter_fields` - Optional Block<br>Filter Fields. list of fields and their values selected by the user<br>See [Filter Fields](#filter-fields) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -84,53 +84,53 @@ In addition to all arguments above, the following attributes are exported:
 
 **Filter Fields**
 
-&#x2022; [`date_field`](#date-field) - Optional Block<br>Filter Date/Time Range Field. either an absolute time range or a relative time interval<br>See [Date Field](#filter-fields-date-field) below.
+&#x2022; `date_field` - Optional Block<br>Filter Date/Time Range Field. either an absolute time range or a relative time interval<br>See [Date Field](#filter-fields-date-field) below.
 
-&#x2022; [`field_id`](#field-id) - Optional String<br>Field ID. an identifier for the field that maps to some UI filter component
+&#x2022; `field_id` - Optional String<br>Field ID. an identifier for the field that maps to some UI filter component
 
-&#x2022; [`filter_expression_field`](#filter-expression-field) - Optional Block<br>Filter Expression Field<br>See [Filter Expression Field](#filter-fields-filter-expression-field) below.
+&#x2022; `filter_expression_field` - Optional Block<br>Filter Expression Field<br>See [Filter Expression Field](#filter-fields-filter-expression-field) below.
 
-&#x2022; [`string_field`](#string-field) - Optional Block<br>Filter String Field<br>See [String Field](#filter-fields-string-field) below.
+&#x2022; `string_field` - Optional Block<br>Filter String Field<br>See [String Field](#filter-fields-string-field) below.
 
 <a id="filter-fields-date-field"></a>
 
 **Filter Fields Date Field**
 
-&#x2022; [`absolute`](#absolute) - Optional Block<br>Date Range. Date range is for selecting a date range<br>See [Absolute](#filter-fields-date-field-absolute) below.
+&#x2022; `absolute` - Optional Block<br>Date Range. Date range is for selecting a date range<br>See [Absolute](#filter-fields-date-field-absolute) below.
 
-&#x2022; [`relative`](#relative) - Optional String<br>Relative. relative time duration
+&#x2022; `relative` - Optional String<br>Relative. relative time duration
 
 <a id="filter-fields-date-field-absolute"></a>
 
 **Filter Fields Date Field Absolute**
 
-&#x2022; [`end_date`](#end-date) - Optional String<br>End Date. Contains end date
+&#x2022; `end_date` - Optional String<br>End Date. Contains end date
 
-&#x2022; [`start_date`](#start-date) - Optional String<br>Start Date. Contains start date
+&#x2022; `start_date` - Optional String<br>Start Date. Contains start date
 
 <a id="filter-fields-filter-expression-field"></a>
 
 **Filter Fields Filter Expression Field**
 
-&#x2022; [`expression`](#expression) - Optional String<br>Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
+&#x2022; `expression` - Optional String<br>Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
 
 <a id="filter-fields-string-field"></a>
 
 **Filter Fields String Field**
 
-&#x2022; [`field_values`](#field-values) - Optional List<br>String Value(s)
+&#x2022; `field_values` - Optional List<br>String Value(s)
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

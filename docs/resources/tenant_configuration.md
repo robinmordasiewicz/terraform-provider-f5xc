@@ -52,33 +52,33 @@ resource "f5xc_tenant_configuration" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the TenantConfiguration. Must be unique within the namespace
+&#x2022; `name` - Required String<br>Name of the TenantConfiguration. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TenantConfiguration will be created
+&#x2022; `namespace` - Required String<br>Namespace where the TenantConfiguration will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`basic_configuration`](#basic-configuration) - Optional Block<br>BasicConfiguration<br>See [Basic Configuration](#basic-configuration) below for details.
+&#x2022; `basic_configuration` - Optional Block<br>BasicConfiguration<br>See [Basic Configuration](#basic-configuration) below for details.
 
-&#x2022; [`brute_force_detection_settings`](#brute-force-detection-settings) - Optional Block<br>BruteForceDetectionSettings<br>See [Brute Force Detection Settings](#brute-force-detection-settings) below for details.
+&#x2022; `brute_force_detection_settings` - Optional Block<br>BruteForceDetectionSettings<br>See [Brute Force Detection Settings](#brute-force-detection-settings) below for details.
 
-&#x2022; [`password_policy`](#password-policy) - Optional Block<br>PasswordPolicy<br>See [Password Policy](#password-policy) below for details.
+&#x2022; `password_policy` - Optional Block<br>PasswordPolicy<br>See [Password Policy](#password-policy) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -86,45 +86,45 @@ In addition to all arguments above, the following attributes are exported:
 
 **Basic Configuration**
 
-&#x2022; [`display_name`](#display-name) - Optional String<br>Display Name. Tenant display name in the login screen
+&#x2022; `display_name` - Optional String<br>Display Name. Tenant display name in the login screen
 
 <a id="brute-force-detection-settings"></a>
 
 **Brute Force Detection Settings**
 
-&#x2022; [`max_login_failures`](#max-login-failures) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
+&#x2022; `max_login_failures` - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
 
 <a id="password-policy"></a>
 
 **Password Policy**
 
-&#x2022; [`digits`](#digits) - Optional Number<br>Min Number Of Digits. The number of digits required to be in the password string
+&#x2022; `digits` - Optional Number<br>Min Number Of Digits. The number of digits required to be in the password string
 
-&#x2022; [`expire_password`](#expire-password) - Optional Number<br>Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password
+&#x2022; `expire_password` - Optional Number<br>Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password
 
-&#x2022; [`lowercase_characters`](#lowercase-characters) - Optional Number<br>Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string
+&#x2022; `lowercase_characters` - Optional Number<br>Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string
 
-&#x2022; [`minimum_length`](#minimum-length) - Optional Number<br>Minimum Length. Minimum length of password
+&#x2022; `minimum_length` - Optional Number<br>Minimum Length. Minimum length of password
 
-&#x2022; [`not_recently_used`](#not-recently-used) - Optional Number<br>Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password
+&#x2022; `not_recently_used` - Optional Number<br>Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password
 
-&#x2022; [`not_username`](#not-username) - Optional Bool<br>Not Username. When set, the password is not allowed to be the same as the username
+&#x2022; `not_username` - Optional Bool<br>Not Username. When set, the password is not allowed to be the same as the username
 
-&#x2022; [`special_characters`](#special-characters) - Optional Number<br>Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string
+&#x2022; `special_characters` - Optional Number<br>Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string
 
-&#x2022; [`uppercase_characters`](#uppercase-characters) - Optional Number<br>Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string
+&#x2022; `uppercase_characters` - Optional Number<br>Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

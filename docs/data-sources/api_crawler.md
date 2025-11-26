@@ -14,10 +14,10 @@ Manages a APICrawler resource in F5 Distributed Cloud.
 ## Example Usage
 
 ```terraform
-# Api Crawler Data Source Example
-# Retrieves information about an existing Api Crawler
+# API Crawler Data Source Example
+# Retrieves information about an existing API Crawler
 
-# Look up an existing Api Crawler by name
+# Look up an existing API Crawler by name
 data "f5xc_api_crawler" "example" {
   name      = "example-api-crawler"
   namespace = "system"

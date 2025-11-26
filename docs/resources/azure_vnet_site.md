@@ -14,10 +14,10 @@ Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites 
 ## Example Usage
 
 ```terraform
-# Azure Vnet Site Resource Example
+# Azure VNET Site Resource Example
 # Manages a AzureVNETSite resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
-# Basic Azure Vnet Site configuration
+# Basic Azure VNET Site configuration
 resource "f5xc_azure_vnet_site" "example" {
   name      = "example-azure-vnet-site"
   namespace = "system"

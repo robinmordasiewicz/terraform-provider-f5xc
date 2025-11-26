@@ -14,10 +14,10 @@ Manages a APITesting resource in F5 Distributed Cloud.
 ## Example Usage
 
 ```terraform
-# Api Testing Resource Example
+# API Testing Resource Example
 # Manages a APITesting resource in F5 Distributed Cloud.
 
-# Basic Api Testing configuration
+# Basic API Testing configuration
 resource "f5xc_api_testing" "example" {
   name      = "example-api-testing"
   namespace = "staging"

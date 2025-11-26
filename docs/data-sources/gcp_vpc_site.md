@@ -14,10 +14,10 @@ Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites wit
 ## Example Usage
 
 ```terraform
-# Gcp Vpc Site Data Source Example
-# Retrieves information about an existing Gcp Vpc Site
+# GCP VPC Site Data Source Example
+# Retrieves information about an existing GCP VPC Site
 
-# Look up an existing Gcp Vpc Site by name
+# Look up an existing GCP VPC Site by name
 data "f5xc_gcp_vpc_site" "example" {
   name      = "example-gcp-vpc-site"
   namespace = "system"

@@ -14,10 +14,10 @@ Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 ## Example Usage
 
 ```terraform
-# Apm Data Source Example
-# Retrieves information about an existing Apm
+# APM Data Source Example
+# Retrieves information about an existing APM
 
-# Look up an existing Apm by name
+# Look up an existing APM by name
 data "f5xc_apm" "example" {
   name      = "example-apm"
   namespace = "system"

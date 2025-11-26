@@ -14,10 +14,10 @@ Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer con
 ## Example Usage
 
 ```terraform
-# Cdn Cache Rule Resource Example
+# CDN Cache Rule Resource Example
 # Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
-# Basic Cdn Cache Rule configuration
+# Basic CDN Cache Rule configuration
 resource "f5xc_cdn_cache_rule" "example" {
   name      = "example-cdn-cache-rule"
   namespace = "staging"

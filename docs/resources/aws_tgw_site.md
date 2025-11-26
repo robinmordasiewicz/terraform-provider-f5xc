@@ -14,10 +14,10 @@ Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites con
 ## Example Usage
 
 ```terraform
-# Aws Tgw Site Resource Example
+# AWS TGW Site Resource Example
 # Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
-# Basic Aws Tgw Site configuration
+# Basic AWS TGW Site configuration
 resource "f5xc_aws_tgw_site" "example" {
   name      = "example-aws-tgw-site"
   namespace = "system"

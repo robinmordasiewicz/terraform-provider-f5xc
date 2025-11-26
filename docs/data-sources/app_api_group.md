@@ -14,10 +14,10 @@ Manages app_api_group creates a new object in the storage backend for metadata.n
 ## Example Usage
 
 ```terraform
-# App Api Group Data Source Example
-# Retrieves information about an existing App Api Group
+# App API Group Data Source Example
+# Retrieves information about an existing App API Group
 
-# Look up an existing App Api Group by name
+# Look up an existing App API Group by name
 data "f5xc_app_api_group" "example" {
   name      = "example-app-api-group"
   namespace = "system"

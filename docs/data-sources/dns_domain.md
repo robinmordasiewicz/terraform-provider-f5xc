@@ -14,10 +14,10 @@ Manages DNS Domain in a given namespace. If one already exist it will give a err
 ## Example Usage
 
 ```terraform
-# Dns Domain Data Source Example
-# Retrieves information about an existing Dns Domain
+# DNS Domain Data Source Example
+# Retrieves information about an existing DNS Domain
 
-# Look up an existing Dns Domain by name
+# Look up an existing DNS Domain by name
 data "f5xc_dns_domain" "example" {
   name      = "example-dns-domain"
   namespace = "system"

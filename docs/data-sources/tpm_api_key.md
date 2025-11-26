@@ -14,10 +14,10 @@ Manages a TpmAPIKey resource in F5 Distributed Cloud for apikey object when succ
 ## Example Usage
 
 ```terraform
-# Tpm Api Key Data Source Example
-# Retrieves information about an existing Tpm Api Key
+# Tpm API Key Data Source Example
+# Retrieves information about an existing Tpm API Key
 
-# Look up an existing Tpm Api Key by name
+# Look up an existing Tpm API Key by name
 data "f5xc_tpm_api_key" "example" {
   name      = "example-tpm-api-key"
   namespace = "system"

@@ -14,10 +14,10 @@ Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 ## Example Usage
 
 ```terraform
-# Apm Resource Example
+# APM Resource Example
 # Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
-# Basic Apm configuration
+# Basic APM configuration
 resource "f5xc_apm" "example" {
   name      = "example-apm"
   namespace = "staging"

@@ -14,10 +14,10 @@ Manages DNS Load Balancer Health Check in a given namespace. If one already exis
 ## Example Usage
 
 ```terraform
-# Dns Lb Health Check Data Source Example
-# Retrieves information about an existing Dns Lb Health Check
+# DNS LB Health Check Data Source Example
+# Retrieves information about an existing DNS LB Health Check
 
-# Look up an existing Dns Lb Health Check by name
+# Look up an existing DNS LB Health Check by name
 data "f5xc_dns_lb_health_check" "example" {
   name      = "example-dns-lb-health-check"
   namespace = "system"

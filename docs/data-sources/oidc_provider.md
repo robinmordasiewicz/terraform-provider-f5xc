@@ -14,10 +14,10 @@ Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype
 ## Example Usage
 
 ```terraform
-# Oidc Provider Data Source Example
-# Retrieves information about an existing Oidc Provider
+# OIDC Provider Data Source Example
+# Retrieves information about an existing OIDC Provider
 
-# Look up an existing Oidc Provider by name
+# Look up an existing OIDC Provider by name
 data "f5xc_oidc_provider" "example" {
   name      = "example-oidc-provider"
   namespace = "system"

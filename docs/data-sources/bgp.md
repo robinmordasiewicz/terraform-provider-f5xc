@@ -14,10 +14,10 @@ Manages a BGP resource in F5 Distributed Cloud for bgp object is the configurati
 ## Example Usage
 
 ```terraform
-# Bgp Data Source Example
-# Retrieves information about an existing Bgp
+# BGP Data Source Example
+# Retrieves information about an existing BGP
 
-# Look up an existing Bgp by name
+# Look up an existing BGP by name
 data "f5xc_bgp" "example" {
   name      = "example-bgp"
   namespace = "system"

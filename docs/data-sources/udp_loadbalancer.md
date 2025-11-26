@@ -14,10 +14,10 @@ Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UD
 ## Example Usage
 
 ```terraform
-# Udp Loadbalancer Data Source Example
-# Retrieves information about an existing Udp Loadbalancer
+# UDP Loadbalancer Data Source Example
+# Retrieves information about an existing UDP Loadbalancer
 
-# Look up an existing Udp Loadbalancer by name
+# Look up an existing UDP Loadbalancer by name
 data "f5xc_udp_loadbalancer" "example" {
   name      = "example-udp-loadbalancer"
   namespace = "system"

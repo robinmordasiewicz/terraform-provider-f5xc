@@ -14,10 +14,10 @@ Manages request specification. in F5 Distributed Cloud.
 ## Example Usage
 
 ```terraform
-# Api Credential Data Source Example
-# Retrieves information about an existing Api Credential
+# API Credential Data Source Example
+# Retrieves information about an existing API Credential
 
-# Look up an existing Api Credential by name
+# Look up an existing API Credential by name
 data "f5xc_api_credential" "example" {
   name      = "example-api-credential"
   namespace = "system"

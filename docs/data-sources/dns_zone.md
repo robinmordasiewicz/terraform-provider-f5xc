@@ -45,18 +45,18 @@ data "f5xc_dns_zone" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the DNSZone (`String`).
+&#x2022; `name` - Required String<br>Name of the DNSZone
 
-`namespace` - (Required) Namespace where the DNSZone exists (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the DNSZone exists
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations applied to this resource
 
-`description` - (Optional) Description of the DNSZone (`String`).
+&#x2022; `description` - Optional String<br>Description of the DNSZone
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
-`labels` - (Optional) Labels applied to this resource (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels applied to this resource

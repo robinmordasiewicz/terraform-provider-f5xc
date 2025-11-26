@@ -52,37 +52,37 @@ resource "f5xc_cminstance" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the Cminstance. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the Cminstance. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the Cminstance will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the Cminstance will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`api_token` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [API Token](#api-token) below for details.
+&#x2022; `api_token` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Token](#api-token) below for details.
 
-`ip` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IP](#ip) below for details.
+&#x2022; `ip` - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IP](#ip) below for details.
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#password) below for details.
+&#x2022; `password` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password) below for details.
 
-`port` - (Optional) Port. Port of the Central Manager instance to connect to (`Number`).
+&#x2022; `port` - Optional Number<br>Port. Port of the Central Manager instance to connect to
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-`username` - (Optional) Username. Username for the Central Manager instance (`String`).
+&#x2022; `username` - Optional String<br>Username. Username for the Central Manager instance
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -90,71 +90,71 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Token**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#api-token-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#api-token-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#api-token-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#api-token-clear-secret-info) below.
 
 <a id="api-token-blindfold-secret-info"></a>
 
 **API Token Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="api-token-clear-secret-info"></a>
 
 **API Token Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="ip"></a>
 
 **IP**
 
-`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+&#x2022; `addr` - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="password"></a>
 
 **Password**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#password-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#password-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#password-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#password-clear-secret-info) below.
 
 <a id="password-blindfold-secret-info"></a>
 
 **Password Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="password-clear-secret-info"></a>
 
 **Password Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

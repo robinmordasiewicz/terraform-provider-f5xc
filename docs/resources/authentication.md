@@ -52,31 +52,31 @@ resource "f5xc_authentication" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the Authentication. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the Authentication. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the Authentication will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the Authentication will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`cookie_params` - (Optional) Cookie Parameters. Specifies different cookie related config parameters for authentication. See [Cookie Params](#cookie-params) below for details.
+&#x2022; `cookie_params` - Optional Block<br>Cookie Parameters. Specifies different cookie related config parameters for authentication<br>See [Cookie Params](#cookie-params) below for details.
 
-`oidc_auth` - (Optional) OIDCAuthType. See [Oidc Auth](#oidc-auth) below for details.
+&#x2022; `oidc_auth` - Optional Block<br>OIDCAuthType<br>See [Oidc Auth](#oidc-auth) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -84,139 +84,139 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cookie Params**
 
-`auth_hmac` - (Optional) HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid. See [Auth HMAC](#cookie-params-auth-hmac) below.
+&#x2022; `auth_hmac` - Optional Block<br>HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid<br>See [Auth HMAC](#cookie-params-auth-hmac) below.
 
-`cookie_expiry` - (Optional) Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds (`Number`).
+&#x2022; `cookie_expiry` - Optional Number<br>Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds
 
-`cookie_refresh_interval` - (Optional) Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds (`Number`).
+&#x2022; `cookie_refresh_interval` - Optional Number<br>Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds
 
-`kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object (`Block`).
+&#x2022; `kms_key_hmac` - Optional Block<br>KMS Key Reference. Reference to KMS Key Object
 
-`session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours) (`Number`).
+&#x2022; `session_expiry` - Optional Number<br>Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours)
 
 <a id="cookie-params-auth-hmac"></a>
 
 **Cookie Params Auth HMAC**
 
-`prim_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Prim Key](#cookie-params-auth-hmac-prim-key) below.
+&#x2022; `prim_key` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Prim Key](#cookie-params-auth-hmac-prim-key) below.
 
-`prim_key_expiry` - (Optional) HMAC Primary Key Expiry. Primary HMAC Key Expiry time (`String`).
+&#x2022; `prim_key_expiry` - Optional String<br>HMAC Primary Key Expiry. Primary HMAC Key Expiry time
 
-`sec_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Sec Key](#cookie-params-auth-hmac-sec-key) below.
+&#x2022; `sec_key` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Sec Key](#cookie-params-auth-hmac-sec-key) below.
 
-`sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time (`String`).
+&#x2022; `sec_key_expiry` - Optional String<br>HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time
 
 <a id="cookie-params-auth-hmac-prim-key"></a>
 
 **Cookie Params Auth HMAC Prim Key**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#cookie-params-auth-hmac-prim-key-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#cookie-params-auth-hmac-prim-key-clear-secret-info) below.
 
 <a id="cookie-params-auth-hmac-prim-key-blindfold-secret-info"></a>
 
 **Cookie Params Auth HMAC Prim Key Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="cookie-params-auth-hmac-prim-key-clear-secret-info"></a>
 
 **Cookie Params Auth HMAC Prim Key Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="cookie-params-auth-hmac-sec-key"></a>
 
 **Cookie Params Auth HMAC Sec Key**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#cookie-params-auth-hmac-sec-key-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#cookie-params-auth-hmac-sec-key-clear-secret-info) below.
 
 <a id="cookie-params-auth-hmac-sec-key-blindfold-secret-info"></a>
 
 **Cookie Params Auth HMAC Sec Key Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="cookie-params-auth-hmac-sec-key-clear-secret-info"></a>
 
 **Cookie Params Auth HMAC Sec Key Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="oidc-auth"></a>
 
 **Oidc Auth**
 
-`client_secret` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Client Secret](#oidc-auth-client-secret) below.
+&#x2022; `client_secret` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Secret](#oidc-auth-client-secret) below.
 
-`oidc_auth_params` - (Optional) OIDCAuthParams. See [Oidc Auth Params](#oidc-auth-oidc-auth-params) below.
+&#x2022; `oidc_auth_params` - Optional Block<br>OIDCAuthParams<br>See [Oidc Auth Params](#oidc-auth-oidc-auth-params) below.
 
-`oidc_client_id` - (Optional) OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server (`String`).
+&#x2022; `oidc_client_id` - Optional String<br>OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server
 
-`oidc_well_known_config_url` - (Optional) Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints (`String`).
+&#x2022; `oidc_well_known_config_url` - Optional String<br>Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints
 
 <a id="oidc-auth-client-secret"></a>
 
 **Oidc Auth Client Secret**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#oidc-auth-client-secret-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#oidc-auth-client-secret-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#oidc-auth-client-secret-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#oidc-auth-client-secret-clear-secret-info) below.
 
 <a id="oidc-auth-client-secret-blindfold-secret-info"></a>
 
 **Oidc Auth Client Secret Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="oidc-auth-client-secret-clear-secret-info"></a>
 
 **Oidc Auth Client Secret Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="oidc-auth-oidc-auth-params"></a>
 
 **Oidc Auth Oidc Auth Params**
 
-`auth_endpoint_url` - (Optional) Authorization Endpoint. URL of the authorization server's authorization endpoint (`String`).
+&#x2022; `auth_endpoint_url` - Optional String<br>Authorization Endpoint. URL of the authorization server's authorization endpoint
 
-`end_session_endpoint_url` - (Optional) Logout Endpoint. URL of the authorization server's Logout endpoint (`String`).
+&#x2022; `end_session_endpoint_url` - Optional String<br>Logout Endpoint. URL of the authorization server's Logout endpoint
 
-`token_endpoint_url` - (Optional) Token Endpoint. URL of the authorization server's Token endpoint (`String`).
+&#x2022; `token_endpoint_url` - Optional String<br>Token Endpoint. URL of the authorization server's Token endpoint
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

@@ -52,31 +52,31 @@ resource "f5xc_app_type" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the AppType. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the AppType. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the AppType will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the AppType will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`business_logic_markup_setting` - (Optional) API Discovery Settings. Settings specifying how API Discovery will be performed. See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
+&#x2022; `business_logic_markup_setting` - Optional Block<br>API Discovery Settings. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
 
-`features` - (Optional) Features. List of various AI/ML features enabled. See [Features](#features) below for details.
+&#x2022; `features` - Optional Block<br>Features. List of various AI/ML features enabled<br>See [Features](#features) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -84,35 +84,35 @@ In addition to all arguments above, the following attributes are exported:
 
 **Business Logic Markup Setting**
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`discovered_api_settings` - (Optional) Discovered API Settings. x-example: '2' Configure Discovered API Settings. See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
+&#x2022; `discovered_api_settings` - Optional Block<br>Discovered API Settings. x-example: '2' Configure Discovered API Settings<br>See [Discovered API Settings](#business-logic-markup-setting-discovered-api-settings) below.
 
-`enable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `enable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="business-logic-markup-setting-discovered-api-settings"></a>
 
 **Business Logic Markup Setting Discovered API Settings**
 
-`purge_duration_for_inactive_discovered_apis` - (Optional) Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration (`Number`).
+&#x2022; `purge_duration_for_inactive_discovered_apis` - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
 
 <a id="features"></a>
 
 **Features**
 
-`type` - (Optional) AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis. Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`. Defaults to `BUSINESS_LOGIC_MARKUP` (`String`).
+&#x2022; `type` - Optional String  Defaults to `BUSINESS_LOGIC_MARKUP`<br>Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`<br>AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

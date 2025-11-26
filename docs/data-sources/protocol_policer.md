@@ -34,18 +34,18 @@ data "f5xc_protocol_policer" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the ProtocolPolicer (`String`).
+&#x2022; `name` - Required String<br>Name of the ProtocolPolicer
 
-`namespace` - (Required) Namespace where the ProtocolPolicer exists (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the ProtocolPolicer exists
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`annotations` - (Optional) Annotations applied to this resource (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations applied to this resource
 
-`description` - (Optional) Description of the ProtocolPolicer (`String`).
+&#x2022; `description` - Optional String<br>Description of the ProtocolPolicer
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
-`labels` - (Optional) Labels applied to this resource (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels applied to this resource

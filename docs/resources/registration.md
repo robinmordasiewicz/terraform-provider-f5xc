@@ -52,33 +52,33 @@ resource "f5xc_registration" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the Registration. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the Registration. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the Registration will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the Registration will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`infra` - (Optional) Infra Information. InfraMetadata stores information about instance infrastructure. See [Infra](#infra) below for details.
+&#x2022; `infra` - Optional Block<br>Infra Information. InfraMetadata stores information about instance infrastructure<br>See [Infra](#infra) below for details.
 
-`passport` - (Optional) Passport. Passport stores information about identification and node configuration provided by CE during registration. It can be manually updated by user during approval. See [Passport](#passport) below for details.
+&#x2022; `passport` - Optional Block<br>Passport. Passport stores information about identification and node configuration provided by CE during registration. It can be manually updated by user during approval<br>See [Passport](#passport) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-`token` - (Optional) Token. Token is used for machine and tenant identification (`String`).
+&#x2022; `token` - Optional String<br>Token. Token is used for machine and tenant identification
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -86,315 +86,315 @@ In addition to all arguments above, the following attributes are exported:
 
 **Infra**
 
-`availability_zone` - (Optional) Availability Zone. An Availability Zone is a high-availability offering that protects your applications and data from datacenter failures (`String`).
+&#x2022; `availability_zone` - Optional String<br>Availability Zone. An Availability Zone is a high-availability offering that protects your applications and data from datacenter failures
 
-`certified_hw` - (Optional) Certified Hardware. certified HW name used to map with F5XC certified_hardware definition (`String`).
+&#x2022; `certified_hw` - Optional String<br>Certified Hardware. certified HW name used to map with F5XC certified_hardware definition
 
-`domain` - (Optional) Instance Domain. Machine domain. It's used for Kubernetes cloud provider when domain must be different than Volterra (`String`).
+&#x2022; `domain` - Optional String<br>Instance Domain. Machine domain. It's used for Kubernetes cloud provider when domain must be different than Volterra
 
-`hostname` - (Optional) Hostname. Must be unique in entire cluster and same as OS settings. '.' (dots) are not allowed in hostname (`String`).
+&#x2022; `hostname` - Optional String<br>Hostname. Must be unique in entire cluster and same as OS settings. '.' (dots) are not allowed in hostname
 
-`hw_info` - (Optional) OS Info. OsInfo holds information about host OS and HW. See [Hw Info](#infra-hw-info) below.
+&#x2022; `hw_info` - Optional Block<br>OS Info. OsInfo holds information about host OS and HW<br>See [Hw Info](#infra-hw-info) below.
 
-`instance_id` - (Optional) Instance ID. Instance id (assigned by infrastructure provider) (`String`).
+&#x2022; `instance_id` - Optional String<br>Instance ID. Instance id (assigned by infrastructure provider)
 
-`interfaces` - (Optional) Interfaces. Machine interfaces present during registration time (`Block`).
+&#x2022; `interfaces` - Optional Block<br>Interfaces. Machine interfaces present during registration time
 
-`internet_proxy` - (Optional) Internet Proxy Configuration. Proxy describes options for HTTP or HTTPS proxy configurations. See [Internet Proxy](#infra-internet-proxy) below.
+&#x2022; `internet_proxy` - Optional Block<br>Internet Proxy Configuration. Proxy describes options for HTTP or HTTPS proxy configurations<br>See [Internet Proxy](#infra-internet-proxy) below.
 
-`machine_id` - (Optional) Machine ID. Machine id - generated by operating system (`String`).
+&#x2022; `machine_id` - Optional String<br>Machine ID. Machine id - generated by operating system
 
-`provider_ref` - (Optional) Infrastructure Provider. Infrastructure provider enum for registration. It describes where is instance running. Provider was not detected AWS cloud instance Google cloud instance Azure cloud instance VMWare VM KVM VM Other provider, which was not identified by system. F5XC HW device. IBM Cloud instance. Kubernetes cluster in AWS Kubernetes cluster in GCP Kubernetes cluster in Azure Kubernetes cluster in Vmware Kubernetes cluster in VMware Kubernetes cluster in Other provider Kubernetes cluster in Volterra Kubernetes cluster in IBM Cloud F5OS HW device. RSeries Device OCI Cloud Instance Nutanix instance Openstack Instance Equinix Instance. Possible values are `UNKNOWN`, `AWS`, `GOOGLE`, `AZURE`, `VMWARE`, `KVM`, `OTHER`, `VOLTERRA`, `IBMCLOUD`, `UNKNOWN_K8S`, `AWS_K8S`, `GCP_K8S`, `AZURE_K8S`, `VMWARE_K8S`, `KVM_K8S`, `OTHER_K8S`, `VOLTERRA_K8S`, `IBMCLOUD_K8S`, `F5OS`, `RSERIES`, `OCI`, `NUTANIX`, `OPENSTACK`, `EQUINIX` (`String`).
+&#x2022; `provider_ref` - Optional String<br>Possible values are `UNKNOWN`, `AWS`, `GOOGLE`, `AZURE`, `VMWARE`, `KVM`, `OTHER`, `VOLTERRA`, `IBMCLOUD`, `UNKNOWN_K8S`, `AWS_K8S`, `GCP_K8S`, `AZURE_K8S`, `VMWARE_K8S`, `KVM_K8S`, `OTHER_K8S`, `VOLTERRA_K8S`, `IBMCLOUD_K8S`, `F5OS`, `RSERIES`, `OCI`, `NUTANIX`, `OPENSTACK`, `EQUINIX`<br>Infrastructure Provider. Infrastructure provider enum for registration. It describes where is instance running. Provider was not detected AWS cloud instance Google cloud instance Azure cloud instance VMWare VM KVM VM Other provider, which was not identified by system. F5XC HW device. IBM Cloud instance. Kubernetes cluster in AWS Kubernetes cluster in GCP Kubernetes cluster in Azure Kubernetes cluster in Vmware Kubernetes cluster in VMware Kubernetes cluster in Other provider Kubernetes cluster in Volterra Kubernetes cluster in IBM Cloud F5OS HW device. RSeries Device OCI Cloud Instance Nutanix instance Openstack Instance Equinix Instance
 
-`sw_info` - (Optional) SW Info. SWInfo holds information about sw version. See [Sw Info](#infra-sw-info) below.
+&#x2022; `sw_info` - Optional Block<br>SW Info. SWInfo holds information about sw version<br>See [Sw Info](#infra-sw-info) below.
 
-`timestamp` - (Optional) Current (machine) time. It's used to verify machine have acceptable time difference from server (`String`).
+&#x2022; `timestamp` - Optional String<br>Current (machine) time. It's used to verify machine have acceptable time difference from server
 
-`zone` - (Optional) Region. Instance zone (or region), depends on provider (`String`).
+&#x2022; `zone` - Optional String<br>Region. Instance zone (or region), depends on provider
 
 <a id="infra-hw-info"></a>
 
 **Infra Hw Info**
 
-`bios` - (Optional) Bios Data. BIOS information. See [Bios](#infra-hw-info-bios) below.
+&#x2022; `bios` - Optional Block<br>Bios Data. BIOS information<br>See [Bios](#infra-hw-info-bios) below.
 
-`board` - (Optional) Board Details. Board information. See [Board](#infra-hw-info-board) below.
+&#x2022; `board` - Optional Block<br>Board Details. Board information<br>See [Board](#infra-hw-info-board) below.
 
-`chassis` - (Optional) Chassis Details. Chassis information. See [Chassis](#infra-hw-info-chassis) below.
+&#x2022; `chassis` - Optional Block<br>Chassis Details. Chassis information<br>See [Chassis](#infra-hw-info-chassis) below.
 
-`cpu` - (Optional) CPU Information. CPU information. See [CPU](#infra-hw-info-cpu) below.
+&#x2022; `cpu` - Optional Block<br>CPU Information. CPU information<br>See [CPU](#infra-hw-info-cpu) below.
 
-`gpu` - (Optional) GPU. GPU information on server. See [GPU](#infra-hw-info-gpu) below.
+&#x2022; `gpu` - Optional Block<br>GPU. GPU information on server<br>See [GPU](#infra-hw-info-gpu) below.
 
-`kernel` - (Optional) Kernel. Kernel information. See [Kernel](#infra-hw-info-kernel) below.
+&#x2022; `kernel` - Optional Block<br>Kernel. Kernel information<br>See [Kernel](#infra-hw-info-kernel) below.
 
-`memory` - (Optional) Memory Information. Memory information. See [Memory](#infra-hw-info-memory) below.
+&#x2022; `memory` - Optional Block<br>Memory Information. Memory information<br>See [Memory](#infra-hw-info-memory) below.
 
-`network` - (Optional) Network. List of network devices in server. See [Network](#infra-hw-info-network) below.
+&#x2022; `network` - Optional Block<br>Network. List of network devices in server<br>See [Network](#infra-hw-info-network) below.
 
-`numa_nodes` - (Optional) NUMA nodes count. Non-uniform memory access (NUMA) nodes count (`Number`).
+&#x2022; `numa_nodes` - Optional Number<br>NUMA nodes count. Non-uniform memory access (NUMA) nodes count
 
-`os` - (Optional) OS. Details of Operating System. See [OS](#infra-hw-info-os) below.
+&#x2022; `os` - Optional Block<br>OS. Details of Operating System<br>See [OS](#infra-hw-info-os) below.
 
-`product` - (Optional) Product Information. Product information. See [Product](#infra-hw-info-product) below.
+&#x2022; `product` - Optional Block<br>Product Information. Product information<br>See [Product](#infra-hw-info-product) below.
 
-`storage` - (Optional) Storage. List of storage devices in server. See [Storage](#infra-hw-info-storage) below.
+&#x2022; `storage` - Optional Block<br>Storage. List of storage devices in server<br>See [Storage](#infra-hw-info-storage) below.
 
-`usb` - (Optional) USB devices. List of USB devices in server. See [Usb](#infra-hw-info-usb) below.
+&#x2022; `usb` - Optional Block<br>USB devices. List of USB devices in server<br>See [Usb](#infra-hw-info-usb) below.
 
 <a id="infra-hw-info-bios"></a>
 
 **Infra Hw Info Bios**
 
-`date` - (Optional) Date. information from /sys/class/dmi/id/bios_date (`String`).
+&#x2022; `date` - Optional String<br>Date. information from /sys/class/dmi/id/bios_date
 
-`vendor` - (Optional) Vendor. information from /sys/class/dmi/id/bios_vendor (`String`).
+&#x2022; `vendor` - Optional String<br>Vendor. information from /sys/class/dmi/id/bios_vendor
 
-`version` - (Optional) Version. information from /sys/class/dmi/id/bios_version (`String`).
+&#x2022; `version` - Optional String<br>Version. information from /sys/class/dmi/id/bios_version
 
 <a id="infra-hw-info-board"></a>
 
 **Infra Hw Info Board**
 
-`asset_tag` - (Optional) Asset Tag. information from /sys/class/dmi/id/board_asset_tag (`String`).
+&#x2022; `asset_tag` - Optional String<br>Asset Tag. information from /sys/class/dmi/id/board_asset_tag
 
-`name` - (Optional) Name. information from /sys/class/dmi/id/board_name (`String`).
+&#x2022; `name` - Optional String<br>Name. information from /sys/class/dmi/id/board_name
 
-`serial` - (Optional) Serial Number. information from /sys/class/dmi/id/board_serial (`String`).
+&#x2022; `serial` - Optional String<br>Serial Number. information from /sys/class/dmi/id/board_serial
 
-`vendor` - (Optional) Vendor. information from /sys/class/dmi/id/board_vendor (`String`).
+&#x2022; `vendor` - Optional String<br>Vendor. information from /sys/class/dmi/id/board_vendor
 
-`version` - (Optional) Version. information from /sys/class/dmi/id/board_version (`String`).
+&#x2022; `version` - Optional String<br>Version. information from /sys/class/dmi/id/board_version
 
 <a id="infra-hw-info-chassis"></a>
 
 **Infra Hw Info Chassis**
 
-`asset_tag` - (Optional) Asset Tag. information from /sys/class/dmi/id/chassis_asset_tag (`String`).
+&#x2022; `asset_tag` - Optional String<br>Asset Tag. information from /sys/class/dmi/id/chassis_asset_tag
 
-`serial` - (Optional) Serial Number. information from /sys/class/dmi/id/chassis_serial (`String`).
+&#x2022; `serial` - Optional String<br>Serial Number. information from /sys/class/dmi/id/chassis_serial
 
-`type` - (Optional) Type. information from /sys/class/dmi/id/chassis_type (`Number`).
+&#x2022; `type` - Optional Number<br>Type. information from /sys/class/dmi/id/chassis_type
 
-`vendor` - (Optional) Vendor. information from /sys/class/dmi/id/chassis_vendor (`String`).
+&#x2022; `vendor` - Optional String<br>Vendor. information from /sys/class/dmi/id/chassis_vendor
 
-`version` - (Optional) Version. information from /sys/class/dmi/id/chassis_version (`String`).
+&#x2022; `version` - Optional String<br>Version. information from /sys/class/dmi/id/chassis_version
 
 <a id="infra-hw-info-cpu"></a>
 
 **Infra Hw Info CPU**
 
-`cache` - (Optional) Cache. CPU cache size in KB (`Number`).
+&#x2022; `cache` - Optional Number<br>Cache. CPU cache size in KB
 
-`cores` - (Optional) Cores. number of physical CPU cores (`Number`).
+&#x2022; `cores` - Optional Number<br>Cores. number of physical CPU cores
 
-`cpus` - (Optional) CPUs. number of physical CPUs (`Number`).
+&#x2022; `cpus` - Optional Number<br>CPUs. number of physical CPUs
 
-`model` - (Optional) Model. CPU model (`String`).
+&#x2022; `model` - Optional String<br>Model. CPU model
 
-`speed` - (Optional) Speed. CPU clock rate in MHz (`Number`).
+&#x2022; `speed` - Optional Number<br>Speed. CPU clock rate in MHz
 
-`threads` - (Optional) Threads. number of logical (HT) CPU cores (`Number`).
+&#x2022; `threads` - Optional Number<br>Threads. number of logical (HT) CPU cores
 
-`vendor` - (Optional) Vendor. CPU vendor (`String`).
+&#x2022; `vendor` - Optional String<br>Vendor. CPU vendor
 
 <a id="infra-hw-info-gpu"></a>
 
 **Infra Hw Info GPU**
 
-`cuda_version` - (Optional) Cuda Version. GPU Cuda Version (`String`).
+&#x2022; `cuda_version` - Optional String<br>Cuda Version. GPU Cuda Version
 
-`driver_version` - (Optional) Driver Version. GPU Driver Version (`String`).
+&#x2022; `driver_version` - Optional String<br>Driver Version. GPU Driver Version
 
-`gpu_device` - (Optional) GPU devices. List of GPU devices in server. See [GPU Device](#infra-hw-info-gpu-gpu-device) below.
+&#x2022; `gpu_device` - Optional Block<br>GPU devices. List of GPU devices in server<br>See [GPU Device](#infra-hw-info-gpu-gpu-device) below.
 
 <a id="infra-hw-info-gpu-gpu-device"></a>
 
 **Infra Hw Info GPU GPU Device**
 
-`id` - (Optional) GPU ID. GPU ID (`String`).
+&#x2022; `id` - Optional String<br>GPU ID. GPU ID
 
-`processes` - (Optional) Processes. GPU Processes (`String`).
+&#x2022; `processes` - Optional String<br>Processes. GPU Processes
 
-`product_name` - (Optional) Product Name. GPU Product Name (`String`).
+&#x2022; `product_name` - Optional String<br>Product Name. GPU Product Name
 
 <a id="infra-hw-info-kernel"></a>
 
 **Infra Hw Info Kernel**
 
-`architecture` - (Optional) Architecture. kernel architecture (`String`).
+&#x2022; `architecture` - Optional String<br>Architecture. kernel architecture
 
-`release` - (Optional) Release. kernel release (`String`).
+&#x2022; `release` - Optional String<br>Release. kernel release
 
-`version` - (Optional) Version. kernel version (`String`).
+&#x2022; `version` - Optional String<br>Version. kernel version
 
 <a id="infra-hw-info-memory"></a>
 
 **Infra Hw Info Memory**
 
-`size_mb` - (Optional) RAM. RAM size in MB (`Number`).
+&#x2022; `size_mb` - Optional Number<br>RAM. RAM size in MB
 
-`speed` - (Optional) Speed. RAM data rate in MT/s (`Number`).
+&#x2022; `speed` - Optional Number<br>Speed. RAM data rate in MT/s
 
-`type` - (Optional) Type. type of memory, eg. DDR4 (`String`).
+&#x2022; `type` - Optional String<br>Type. type of memory, eg. DDR4
 
 <a id="infra-hw-info-network"></a>
 
 **Infra Hw Info Network**
 
-`driver` - (Optional) Driver. driver of device, eg. e1000e (`String`).
+&#x2022; `driver` - Optional String<br>Driver. driver of device, eg. e1000e
 
-`ip_address` - (Optional) IP Address. IP address on interface (`List`).
+&#x2022; `ip_address` - Optional List<br>IP Address. IP address on interface
 
-`link_quality` - (Optional) Link quality. Link quality determined by VER using different probes Unknown quality Link quality is good Link quality is poor Quality disabled. Possible values are `QUALITY_UNKNOWN`, `QUALITY_GOOD`, `QUALITY_POOR`, `QUALITY_DISABLED`. Defaults to `QUALITY_UNKNOWN` (`String`).
+&#x2022; `link_quality` - Optional String  Defaults to `QUALITY_UNKNOWN`<br>Possible values are `QUALITY_UNKNOWN`, `QUALITY_GOOD`, `QUALITY_POOR`, `QUALITY_DISABLED`<br>Link quality. Link quality determined by VER using different probes Unknown quality Link quality is good Link quality is poor Quality disabled
 
-`link_type` - (Optional) Link type. Link type of interface determined operationally Link type unknown Link type ethernet WiFi link of type 802.11ac WiFi link of type 802.11bgn Link type 4G WiFi link Wan link. Possible values are `LINK_TYPE_UNKNOWN`, `LINK_TYPE_ETHERNET`, `LINK_TYPE_WIFI_802_11AC`, `LINK_TYPE_WIFI_802_11BGN`, `LINK_TYPE_4G`, `LINK_TYPE_WIFI`, `LINK_TYPE_WAN`. Defaults to `LINK_TYPE_UNKNOWN` (`String`).
+&#x2022; `link_type` - Optional String  Defaults to `LINK_TYPE_UNKNOWN`<br>Possible values are `LINK_TYPE_UNKNOWN`, `LINK_TYPE_ETHERNET`, `LINK_TYPE_WIFI_802_11AC`, `LINK_TYPE_WIFI_802_11BGN`, `LINK_TYPE_4G`, `LINK_TYPE_WIFI`, `LINK_TYPE_WAN`<br>Link type. Link type of interface determined operationally Link type unknown Link type ethernet WiFi link of type 802.11ac WiFi link of type 802.11bgn Link type 4G WiFi link Wan link
 
-`mac_address` - (Optional) MAC Address. mac address on interface (`String`).
+&#x2022; `mac_address` - Optional String<br>MAC Address. mac address on interface
 
-`name` - (Optional) Name. name of device, eg. eth0 (`String`).
+&#x2022; `name` - Optional String<br>Name. name of device, eg. eth0
 
-`port` - (Optional) Port. used port, eg. tp (`String`).
+&#x2022; `port` - Optional String<br>Port. used port, eg. tp
 
-`speed` - (Optional) Speed. device max supported speed in Mbps (`Number`).
+&#x2022; `speed` - Optional Number<br>Speed. device max supported speed in Mbps
 
 <a id="infra-hw-info-os"></a>
 
 **Infra Hw Info OS**
 
-`architecture` - (Optional) Architecture. Architecture of OS (`String`).
+&#x2022; `architecture` - Optional String<br>Architecture. Architecture of OS
 
-`name` - (Optional) Name. Name of OS (`String`).
+&#x2022; `name` - Optional String<br>Name. Name of OS
 
-`release` - (Optional) Release. Release of the OS (`String`).
+&#x2022; `release` - Optional String<br>Release. Release of the OS
 
-`vendor` - (Optional) Vendor. Vendor of OS (`String`).
+&#x2022; `vendor` - Optional String<br>Vendor. Vendor of OS
 
-`version` - (Optional) Version. Version of OS (`String`).
+&#x2022; `version` - Optional String<br>Version. Version of OS
 
 <a id="infra-hw-info-product"></a>
 
 **Infra Hw Info Product**
 
-`name` - (Optional) Name. product name, eg. for AWS m5a.xlarge. Info taken from /sys/class/dmi/id/product_name (`String`).
+&#x2022; `name` - Optional String<br>Name. product name, eg. for AWS m5a.xlarge. Info taken from /sys/class/dmi/id/product_name
 
-`serial` - (Optional) Serial Number. serial number, eg. for AWS ec254b6d-9676-1a51-8b10-21370dbdc3e5. Info taken from /sys/class/dmi/id/product_serial (`String`).
+&#x2022; `serial` - Optional String<br>Serial Number. serial number, eg. for AWS ec254b6d-9676-1a51-8b10-21370dbdc3e5. Info taken from /sys/class/dmi/id/product_serial
 
-`vendor` - (Optional) Vendor. vendor name, eg. for AWS Amazon EC2. Info taken from /sys/class/dmi/id/product_vendor (`String`).
+&#x2022; `vendor` - Optional String<br>Vendor. vendor name, eg. for AWS Amazon EC2. Info taken from /sys/class/dmi/id/product_vendor
 
-`version` - (Optional) Version. version name. Info taken from /sys/class/dmi/id/product_version (`String`).
+&#x2022; `version` - Optional String<br>Version. version name. Info taken from /sys/class/dmi/id/product_version
 
 <a id="infra-hw-info-storage"></a>
 
 **Infra Hw Info Storage**
 
-`driver` - (Optional) Driver. driver of device (`String`).
+&#x2022; `driver` - Optional String<br>Driver. driver of device
 
-`model` - (Optional) Model. model of device (`String`).
+&#x2022; `model` - Optional String<br>Model. model of device
 
-`name` - (Optional) Name. name of device, eg. nvme0n1 (`String`).
+&#x2022; `name` - Optional String<br>Name. name of device, eg. nvme0n1
 
-`serial` - (Optional) Serial Number. serial of device (`String`).
+&#x2022; `serial` - Optional String<br>Serial Number. serial of device
 
-`size_gb` - (Optional) Size(GB). device size in GB (`Number`).
+&#x2022; `size_gb` - Optional Number<br>Size(GB). device size in GB
 
-`vendor` - (Optional) Vendor. vendor of device (`String`).
+&#x2022; `vendor` - Optional String<br>Vendor. vendor of device
 
 <a id="infra-hw-info-usb"></a>
 
 **Infra Hw Info Usb**
 
-`address` - (Optional) Address. Address of the device on the bus in decimal (`Number`).
+&#x2022; `address` - Optional Number<br>Address. Address of the device on the bus in decimal
 
-`b_device_class` - (Optional) Class. The class of this device (`String`).
+&#x2022; `b_device_class` - Optional String<br>Class. The class of this device
 
-`b_device_protocol` - (Optional) Protocol. The protocol (within the sub-class) of this device (`String`).
+&#x2022; `b_device_protocol` - Optional String<br>Protocol. The protocol (within the sub-class) of this device
 
-`b_device_sub_class` - (Optional) Subclass. The sub-class (within the class) of this device (`String`).
+&#x2022; `b_device_sub_class` - Optional String<br>Subclass. The sub-class (within the class) of this device
 
-`b_max_packet_size` - (Optional) Max packet size. Maximum size of the control transfer (`Number`).
+&#x2022; `b_max_packet_size` - Optional Number<br>Max packet size. Maximum size of the control transfer
 
-`bcd_device` - (Optional) BCD Device. The device version (`String`).
+&#x2022; `bcd_device` - Optional String<br>BCD Device. The device version
 
-`bcd_usb` - (Optional) BCD Spec. USB Specification Release Number (`String`).
+&#x2022; `bcd_usb` - Optional String<br>BCD Spec. USB Specification Release Number
 
-`bus` - (Optional) Bus. The bus on which the device was detected in decimal (`Number`).
+&#x2022; `bus` - Optional Number<br>Bus. The bus on which the device was detected in decimal
 
-`description` - (Optional) Description. Device description (`String`).
+&#x2022; `description` - Optional String<br>Description. Device description
 
-`i_manufacturer` - (Optional) Manufacturer. Manufacturer name (`String`).
+&#x2022; `i_manufacturer` - Optional String<br>Manufacturer. Manufacturer name
 
-`i_product` - (Optional) Device product. Product name reported by device (`String`).
+&#x2022; `i_product` - Optional String<br>Device product. Product name reported by device
 
-`i_serial` - (Optional) iSerialNumber. Index of Serial Number String Descriptor (`String`).
+&#x2022; `i_serial` - Optional String<br>iSerialNumber. Index of Serial Number String Descriptor
 
-`id_product` - (Optional) Product ID. Product ID (Assigned by Manufacturer) in hex (`String`).
+&#x2022; `id_product` - Optional String<br>Product ID. Product ID (Assigned by Manufacturer) in hex
 
-`id_vendor` - (Optional) Vendor ID. Vendor ID (Assigned by USB Org) in hex (`String`).
+&#x2022; `id_vendor` - Optional String<br>Vendor ID. Vendor ID (Assigned by USB Org) in hex
 
-`port` - (Optional) Port. Port on which the device was detected in decimal (`Number`).
+&#x2022; `port` - Optional Number<br>Port. Port on which the device was detected in decimal
 
-`product_name` - (Optional) Product name. Product ID translated to name (if available) (`String`).
+&#x2022; `product_name` - Optional String<br>Product name. Product ID translated to name (if available)
 
-`speed` - (Optional) Speed. The negotiated operating speed for the device (`String`).
+&#x2022; `speed` - Optional String<br>Speed. The negotiated operating speed for the device
 
-`usb_type` - (Optional) USB Type. Type of USB device Unknown USB device type Internal USB present in Certified HW USB device present during node registration USB device that can be matched by USB rules. Possible values are `UNKNOWN_USB`, `INTERNAL`, `REGISTERED`, `CONFIGURABLE`. Defaults to `UNKNOWN_USB` (`String`).
+&#x2022; `usb_type` - Optional String  Defaults to `UNKNOWN_USB`<br>Possible values are `UNKNOWN_USB`, `INTERNAL`, `REGISTERED`, `CONFIGURABLE`<br>USB Type. Type of USB device Unknown USB device type Internal USB present in Certified HW USB device present during node registration USB device that can be matched by USB rules
 
-`vendor_name` - (Optional) Vendor name. Vendor ID translated to name (if available) (`String`).
+&#x2022; `vendor_name` - Optional String<br>Vendor name. Vendor ID translated to name (if available)
 
 <a id="infra-internet-proxy"></a>
 
 **Infra Internet Proxy**
 
-`http_proxy` - (Optional) HTTP PROXY. It will be used as the proxy URL for HTTP requests and HTTPS requests unless overridden by HTTPSProxy or NoProxy (`String`).
+&#x2022; `http_proxy` - Optional String<br>HTTP PROXY. It will be used as the proxy URL for HTTP requests and HTTPS requests unless overridden by HTTPSProxy or NoProxy
 
-`https_proxy` - (Optional) HTTPS PROXY. It will be used as the proxy URL for HTTPS requests unless overridden by NoProxy (`String`).
+&#x2022; `https_proxy` - Optional String<br>HTTPS PROXY. It will be used as the proxy URL for HTTPS requests unless overridden by NoProxy
 
-`no_proxy` - (Optional) NO PROXY. It specifies a string that contains comma-separated values specifying hosts that should be excluded from proxying. Each value is represented by an IP address prefix (1.2.3.4), an IP address prefix in CIDR notation (1.2.3.4/8), a domain name, or a special DNS label (*). An IP address prefix and domain name can also include a literal port number (1.2.3.4:80). A domain name matches that name and all subdomains. A domain name with a leading '.' matches subdomains only. For example 'foo.com' matches 'foo.com' and 'bar.foo.com'; '.y.com' matches 'x.y.com' but not 'y.com'. A single asterisk (*) indicates that no proxying should be done (`String`).
+&#x2022; `no_proxy` - Optional String<br>NO PROXY. It specifies a string that contains comma-separated values specifying hosts that should be excluded from proxying. Each value is represented by an IP address prefix (1.2.3.4), an IP address prefix in CIDR notation (1.2.3.4/8), a domain name, or a special DNS label (*). An IP address prefix and domain name can also include a literal port number (1.2.3.4:80). A domain name matches that name and all subdomains. A domain name with a leading '.' matches subdomains only. For example 'foo.com' matches 'foo.com' and 'bar.foo.com'; '.y.com' matches 'x.y.com' but not 'y.com'. A single asterisk (*) indicates that no proxying should be done
 
-`proxy_cacert_url` - (Optional) Proxy CA certificate URL. Allow optional different trust-store for proxy in HTTP CONNECT step by picking proxy CA certificate value (`String`).
+&#x2022; `proxy_cacert_url` - Optional String<br>Proxy CA certificate URL. Allow optional different trust-store for proxy in HTTP CONNECT step by picking proxy CA certificate value
 
 <a id="infra-sw-info"></a>
 
 **Infra Sw Info**
 
-`sw_version` - (Optional) SW Version. SW Version in the site (`String`).
+&#x2022; `sw_version` - Optional String<br>SW Version. SW Version in the site
 
 <a id="passport"></a>
 
 **Passport**
 
-`cluster_name` - (Optional) Cluster Name (`String`).
+&#x2022; `cluster_name` - Optional String<br>Cluster Name
 
-`cluster_size` - (Optional) Cluster Size. Defines how many master nodes is in the cluster, only 1 or 3 is allowed 1 - cluster have single master, without HA 3 - cluster have 3 masters, with HA, all nodes should be allowed at same time, cluster won't start until ALL nodes are ADMITTED 0 - same as 1 This value can't be changed after installation. It does not interact with auto-scaling as only pool nodes are scaled (`Number`).
+&#x2022; `cluster_size` - Optional Number<br>Cluster Size. Defines how many master nodes is in the cluster, only 1 or 3 is allowed 1 - cluster have single master, without HA 3 - cluster have 3 masters, with HA, all nodes should be allowed at same time, cluster won't start until ALL nodes are ADMITTED 0 - same as 1 This value can't be changed after installation. It does not interact with auto-scaling as only pool nodes are scaled
 
-`cluster_type` - (Optional) Cluster Type (`String`).
+&#x2022; `cluster_type` - Optional String<br>Cluster Type
 
-`default_os_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_os_version` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`default_sw_version` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_sw_version` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`latitude` - (Optional) Latitude. Geographic location of this site (`Number`).
+&#x2022; `latitude` - Optional Number<br>Latitude. Geographic location of this site
 
-`longitude` - (Optional) Longitude. Geographic location of this site (`Number`).
+&#x2022; `longitude` - Optional Number<br>Longitude. Geographic location of this site
 
-`operating_system_version` - (Optional) Operating System Version. Operating System Version is optional parameter, which allows to specify target SW version for particular site e.g. 7.2009.10 (`String`).
+&#x2022; `operating_system_version` - Optional String<br>Operating System Version. Operating System Version is optional parameter, which allows to specify target SW version for particular site e.g. 7.2009.10
 
-`private_network_name` - (Optional) Private Network Name. Private Network name for private access connectivity to F5XC ADN. It is used for PrivateLink, CloudLink and L3VPN (`String`).
+&#x2022; `private_network_name` - Optional String<br>Private Network Name. Private Network name for private access connectivity to F5XC ADN. It is used for PrivateLink, CloudLink and L3VPN
 
-`volterra_software_version` - (Optional) F5XC Software Version. F5XC Software Version is optional parameter, which allows to specify target SW version for particular site e.g. crt-20210329-1002 (`String`).
+&#x2022; `volterra_software_version` - Optional String<br>F5XC Software Version. F5XC Software Version is optional parameter, which allows to specify target SW version for particular site e.g. crt-20210329-1002
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

@@ -56,35 +56,35 @@ resource "f5xc_tunnel" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the Tunnel. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the Tunnel. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the Tunnel will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the Tunnel will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`local_ip` - (Optional) Local IP Address Selector. Defines the options to select local IP address and virtual network for tunnel object Options available are - 1. Local Interface - Network Interface from which IP address and network will be selected 2. IP Address - IP address and network can be configured explicitly. See [Local IP](#local-ip) below for details.
+&#x2022; `local_ip` - Optional Block<br>Local IP Address Selector. Defines the options to select local IP address and virtual network for tunnel object Options available are - 1. Local Interface - Network Interface from which IP address and network will be selected 2. IP Address - IP address and network can be configured explicitly<br>See [Local IP](#local-ip) below for details.
 
-`params` - (Optional) Tunnel Parameters. Tunnel configuration parameters for supported encapsulation 1. IPSec is supported with PSK for which PSK can be configured. See [Params](#params) below for details.
+&#x2022; `params` - Optional Block<br>Tunnel Parameters. Tunnel configuration parameters for supported encapsulation 1. IPSec is supported with PSK for which PSK can be configured<br>See [Params](#params) below for details.
 
-`remote_ip` - (Optional) Remote IP Address Selector. Defines the options to select remote IP address for tunnel object Options available are - 1. IP Address - Specifies the remote IP to which tunnel has to be connected 2. Remote endpoint - Is a map of IP address on per ver node basis. See [Remote IP](#remote-ip) below for details.
+&#x2022; `remote_ip` - Optional Block<br>Remote IP Address Selector. Defines the options to select remote IP address for tunnel object Options available are - 1. IP Address - Specifies the remote IP to which tunnel has to be connected 2. Remote endpoint - Is a map of IP address on per ver node basis<br>See [Remote IP](#remote-ip) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-`tunnel_type` - (Optional) Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type. Possible values are `IPSEC_PSK`, `GRE`. Defaults to `IPSEC_PSK` (`String`).
+&#x2022; `tunnel_type` - Optional String  Defaults to `IPSEC_PSK`<br>Possible values are `IPSEC_PSK`, `GRE`<br>Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -92,153 +92,153 @@ In addition to all arguments above, the following attributes are exported:
 
 **Local IP**
 
-`intf` - (Optional) Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet. See [Intf](#local-ip-intf) below.
+&#x2022; `intf` - Optional Block<br>Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet<br>See [Intf](#local-ip-intf) below.
 
-`ip_address` - (Optional) Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet. See [IP Address](#local-ip-ip-address) below.
+&#x2022; `ip_address` - Optional Block<br>Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet<br>See [IP Address](#local-ip-ip-address) below.
 
 <a id="local-ip-intf"></a>
 
 **Local IP Intf**
 
-`local_intf` - (Optional) Local Interface. Local interface to be used for filling in source information of IP and network for transport. See [Local Intf](#local-ip-intf-local-intf) below.
+&#x2022; `local_intf` - Optional Block<br>Local Interface. Local interface to be used for filling in source information of IP and network for transport<br>See [Local Intf](#local-ip-intf-local-intf) below.
 
 <a id="local-ip-intf-local-intf"></a>
 
 **Local IP Intf Local Intf**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="local-ip-ip-address"></a>
 
 **Local IP IP Address**
 
-`auto` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `auto` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ip_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [IP Address](#local-ip-ip-address-ip-address) below.
+&#x2022; `ip_address` - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [IP Address](#local-ip-ip-address-ip-address) below.
 
-`virtual_network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system. See [Virtual Network Type](#local-ip-ip-address-virtual-network-type) below.
+&#x2022; `virtual_network_type` - Optional Block<br>Virtual Network Type. Different types of virtual networks understood by the system<br>See [Virtual Network Type](#local-ip-ip-address-virtual-network-type) below.
 
 <a id="local-ip-ip-address-ip-address"></a>
 
 **Local IP IP Address IP Address**
 
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#local-ip-ip-address-ip-address-ipv4) below.
+&#x2022; `ipv4` - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#local-ip-ip-address-ip-address-ipv4) below.
 
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#local-ip-ip-address-ip-address-ipv6) below.
+&#x2022; `ipv6` - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#local-ip-ip-address-ip-address-ipv6) below.
 
 <a id="local-ip-ip-address-ip-address-ipv4"></a>
 
 **Local IP IP Address IP Address IPv4**
 
-`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+&#x2022; `addr` - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="local-ip-ip-address-ip-address-ipv6"></a>
 
 **Local IP IP Address IP Address IPv6**
 
-`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+&#x2022; `addr` - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="local-ip-ip-address-virtual-network-type"></a>
 
 **Local IP IP Address Virtual Network Type**
 
-`public` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `public` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`site_local` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `site_local` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`site_local_inside` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `site_local_inside` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="params"></a>
 
 **Params**
 
-`ipsec` - (Optional) IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE. See [Ipsec](#params-ipsec) below.
+&#x2022; `ipsec` - Optional Block<br>IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE<br>See [Ipsec](#params-ipsec) below.
 
 <a id="params-ipsec"></a>
 
 **Params Ipsec**
 
-`ipsec_psk` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Ipsec Psk](#params-ipsec-ipsec-psk) below.
+&#x2022; `ipsec_psk` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Ipsec Psk](#params-ipsec-ipsec-psk) below.
 
 <a id="params-ipsec-ipsec-psk"></a>
 
 **Params Ipsec Ipsec Psk**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#params-ipsec-ipsec-psk-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#params-ipsec-ipsec-psk-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#params-ipsec-ipsec-psk-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#params-ipsec-ipsec-psk-clear-secret-info) below.
 
 <a id="params-ipsec-ipsec-psk-blindfold-secret-info"></a>
 
 **Params Ipsec Ipsec Psk Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="params-ipsec-ipsec-psk-clear-secret-info"></a>
 
 **Params Ipsec Ipsec Psk Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="remote-ip"></a>
 
 **Remote IP**
 
-`endpoints` - (Optional) Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel. See [Endpoints](#remote-ip-endpoints) below.
+&#x2022; `endpoints` - Optional Block<br>Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel<br>See [Endpoints](#remote-ip-endpoints) below.
 
-`ip` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [IP](#remote-ip-ip) below.
+&#x2022; `ip` - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [IP](#remote-ip-ip) below.
 
 <a id="remote-ip-endpoints"></a>
 
 **Remote IP Endpoints**
 
-`endpoints` - (Optional) Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes (`Block`).
+&#x2022; `endpoints` - Optional Block<br>Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes
 
 <a id="remote-ip-ip"></a>
 
 **Remote IP IP**
 
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#remote-ip-ip-ipv4) below.
+&#x2022; `ipv4` - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#remote-ip-ip-ipv4) below.
 
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#remote-ip-ip-ipv6) below.
+&#x2022; `ipv6` - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#remote-ip-ip-ipv6) below.
 
 <a id="remote-ip-ip-ipv4"></a>
 
 **Remote IP IP IPv4**
 
-`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+&#x2022; `addr` - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="remote-ip-ip-ipv6"></a>
 
 **Remote IP IP IPv6**
 
-`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+&#x2022; `addr` - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

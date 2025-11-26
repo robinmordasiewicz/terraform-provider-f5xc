@@ -52,62 +52,62 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the InfraprotectFirewallRule. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the InfraprotectFirewallRule. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the InfraprotectFirewallRule will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the InfraprotectFirewallRule will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; `action_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `action_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `action_allow` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `action_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; `destination_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `destination_prefix_single` - (Optional) Prefix. Prefix (`String`).
+&#x2022; `destination_prefix_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `destination_prefix_single` - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
-&#x2022; `fragments_allow` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `fragments_deny` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `fragments_allow` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `fragments_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; `protocol_ah` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `protocol_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `protocol_esp` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `protocol_gre` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `protocol_icmp` - (Optional) ICMP Protocol. x-required ICMP Protocol. See [Protocol ICMP](#protocol-icmp) below for details.
-<br>&#x2022; `protocol_icmp6` - (Optional) ICMP6 Protocol. x-required ICMP6 Protocol. See [Protocol Icmp6](#protocol-icmp6) below for details.
-<br>&#x2022; `protocol_ipv6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `protocol_tcp` - (Optional) TCP Protocol. x-required TCP Protocol. See [Protocol TCP](#protocol-tcp) below for details.
-<br>&#x2022; `protocol_udp` - (Optional) UDP Protocol. x-required UDP Protocol. See [Protocol UDP](#protocol-udp) below for details.
+&#x2022; `protocol_ah` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `protocol_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `protocol_esp` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `protocol_gre` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `protocol_icmp` - Optional Block<br>ICMP Protocol. x-required ICMP Protocol<br>See [Protocol ICMP](#protocol-icmp) below for details.
+<br>&#x2022; `protocol_icmp6` - Optional Block<br>ICMP6 Protocol. x-required ICMP6 Protocol<br>See [Protocol Icmp6](#protocol-icmp6) below for details.
+<br>&#x2022; `protocol_ipv6` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `protocol_tcp` - Optional Block<br>TCP Protocol. x-required TCP Protocol<br>See [Protocol TCP](#protocol-tcp) below for details.
+<br>&#x2022; `protocol_udp` - Optional Block<br>UDP Protocol. x-required UDP Protocol<br>See [Protocol UDP](#protocol-udp) below for details.
 
 -> **One of the following:**
-&#x2022; `source_prefix_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `source_prefix_single` - (Optional) Prefix. Prefix (`String`).
+&#x2022; `source_prefix_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `source_prefix_single` - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
-&#x2022; `state_off` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `state_on` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `state_off` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `state_on` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
-&#x2022; `version_ipv4` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `version_ipv6` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `version_ipv4` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `version_ipv6` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -115,85 +115,85 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol ICMP**
 
-`echo_reply` - (Optional) Echo-Reply. Echo-Reply (`Bool`).
+&#x2022; `echo_reply` - Optional Bool<br>Echo-Reply. Echo-Reply
 
-`echo_request` - (Optional) Echo-Request. Echo-Request (`Bool`).
+&#x2022; `echo_request` - Optional Bool<br>Echo-Request. Echo-Request
 
-`parameter_problem` - (Optional) Parameter-Problem. Parameter-Problem (`Bool`).
+&#x2022; `parameter_problem` - Optional Bool<br>Parameter-Problem. Parameter-Problem
 
-`redirect` - (Optional) Redirect. Redirect (`Bool`).
+&#x2022; `redirect` - Optional Bool<br>Redirect. Redirect
 
-`source_quench` - (Optional) Source-Quench. Source-Quench (`Bool`).
+&#x2022; `source_quench` - Optional Bool<br>Source-Quench. Source-Quench
 
-`time_exceeded` - (Optional) Time-Exceeded. Time-Exceeded (`Bool`).
+&#x2022; `time_exceeded` - Optional Bool<br>Time-Exceeded. Time-Exceeded
 
-`unreachable` - (Optional) Unreachable. Unreachable (`Bool`).
+&#x2022; `unreachable` - Optional Bool<br>Unreachable. Unreachable
 
 <a id="protocol-icmp6"></a>
 
 **Protocol Icmp6**
 
-`destination_unreachable` - (Optional) Destination-Unreachable. Destination-Unreachable (`Bool`).
+&#x2022; `destination_unreachable` - Optional Bool<br>Destination-Unreachable. Destination-Unreachable
 
-`echo_reply` - (Optional) Echo-Reply. Echo-Reply (`Bool`).
+&#x2022; `echo_reply` - Optional Bool<br>Echo-Reply. Echo-Reply
 
-`echo_request` - (Optional) Echo-Request. Echo-Request (`Bool`).
+&#x2022; `echo_request` - Optional Bool<br>Echo-Request. Echo-Request
 
-`neighbor_advertisement` - (Optional) Neighbor-Advertisement. Neighbor-Advertisement (`Bool`).
+&#x2022; `neighbor_advertisement` - Optional Bool<br>Neighbor-Advertisement. Neighbor-Advertisement
 
-`neighbor_solicit` - (Optional) Neighbor-Solicit. Neighbor-Solicit (`Bool`).
+&#x2022; `neighbor_solicit` - Optional Bool<br>Neighbor-Solicit. Neighbor-Solicit
 
-`packet_too_big` - (Optional) Packet-Too-Big. Packet-Too-Big (`Bool`).
+&#x2022; `packet_too_big` - Optional Bool<br>Packet-Too-Big. Packet-Too-Big
 
-`parameter_problem` - (Optional) Parameter-Problem. Parameter-Problem (`Bool`).
+&#x2022; `parameter_problem` - Optional Bool<br>Parameter-Problem. Parameter-Problem
 
-`redirect` - (Optional) Redirect. Redirect (`Bool`).
+&#x2022; `redirect` - Optional Bool<br>Redirect. Redirect
 
-`router_advertisement` - (Optional) Router-Advertisement. Router-Advertisement (`Bool`).
+&#x2022; `router_advertisement` - Optional Bool<br>Router-Advertisement. Router-Advertisement
 
-`router_solicit` - (Optional) Router-Solicit. Router-Solicit (`Bool`).
+&#x2022; `router_solicit` - Optional Bool<br>Router-Solicit. Router-Solicit
 
-`time_exceeded` - (Optional) Time-Exceeded. Time-Exceeded (`Bool`).
+&#x2022; `time_exceeded` - Optional Bool<br>Time-Exceeded. Time-Exceeded
 
 <a id="protocol-tcp"></a>
 
 **Protocol TCP**
 
-`description` - (Optional) Description. Description (`String`).
+&#x2022; `description` - Optional String<br>Description. Description
 
-`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `destination_port_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`destination_port_range` - (Optional) Port Range. Port Range (`String`).
+&#x2022; `destination_port_range` - Optional String<br>Port Range. Port Range
 
-`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `source_port_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`source_port_range` - (Optional) Port Range. Port Range (`String`).
+&#x2022; `source_port_range` - Optional String<br>Port Range. Port Range
 
 <a id="protocol-udp"></a>
 
 **Protocol UDP**
 
-`description` - (Optional) Description. Description (`String`).
+&#x2022; `description` - Optional String<br>Description. Description
 
-`destination_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `destination_port_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`destination_port_range` - (Optional) Port Range. Port Range (`String`).
+&#x2022; `destination_port_range` - Optional String<br>Port Range. Port Range
 
-`source_port_all` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `source_port_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`source_port_range` - (Optional) Port Range. Port Range (`String`).
+&#x2022; `source_port_range` - Optional String<br>Port Range. Port Range
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

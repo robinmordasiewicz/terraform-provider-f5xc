@@ -61,42 +61,42 @@ resource "f5xc_healthcheck" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the Healthcheck. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the Healthcheck. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the Healthcheck will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the Healthcheck will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`healthy_threshold` - (Optional) Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy (`Number`).
+&#x2022; `healthy_threshold` - Optional Number<br>Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy
 
 -> **One of the following:**
-&#x2022; `http_health_check` - (Optional) HTTP Health Check. Healthy if 'get' method on URL 'HTTP(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request. See [HTTP Health Check](#http-health-check) below for details.
-<br>&#x2022; `tcp_health_check` - (Optional) TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>. See [TCP Health Check](#tcp-health-check) below for details.
-<br>&#x2022; `udp_icmp_health_check` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `http_health_check` - Optional Block<br>HTTP Health Check. Healthy if 'get' method on URL 'HTTP(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request<br>See [HTTP Health Check](#http-health-check) below for details.
+<br>&#x2022; `tcp_health_check` - Optional Block<br>TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response><br>See [TCP Health Check](#tcp-health-check) below for details.
+<br>&#x2022; `udp_icmp_health_check` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`interval` - (Optional) Interval. Time interval in seconds between two healthcheck requests (`Number`).
+&#x2022; `interval` - Optional Number<br>Interval. Time interval in seconds between two healthcheck requests
 
-`jitter_percent` - (Optional) Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests (`Number`).
+&#x2022; `jitter_percent` - Optional Number<br>Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests
 
-`timeout` - (Optional) Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure (`Number`).
+&#x2022; `timeout` - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-`unhealthy_threshold` - (Optional) Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for HTTP health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately (`Number`).
+&#x2022; `unhealthy_threshold` - Optional Number<br>Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for HTTP health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -104,39 +104,39 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Health Check**
 
-`expected_status_codes` - (Optional) Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-' (`List`).
+&#x2022; `expected_status_codes` - Optional List<br>Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'
 
-`headers` - (Optional) Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs (`Block`).
+&#x2022; `headers` - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs
 
-`host_header` - (Optional) Host Header Value. The value of the host header (`String`).
+&#x2022; `host_header` - Optional String<br>Host Header Value. The value of the host header
 
-`path` - (Optional) Path. Specifies the HTTP path that will be requested during health checking (`String`).
+&#x2022; `path` - Optional String<br>Path. Specifies the HTTP path that will be requested during health checking
 
-`request_headers_to_remove` - (Optional) Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers (`List`).
+&#x2022; `request_headers_to_remove` - Optional List<br>Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers
 
-`use_http2` - (Optional) Use HTTP2. If set, health checks will be made using HTTP/2 (`Bool`).
+&#x2022; `use_http2` - Optional Bool<br>Use HTTP2. If set, health checks will be made using HTTP/2
 
-`use_origin_server_name` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `use_origin_server_name` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="tcp-health-check"></a>
 
 **TCP Health Check**
 
-`expected_response` - (Optional) Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload (`String`).
+&#x2022; `expected_response` - Optional String<br>Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload
 
-`send_payload` - (Optional) Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload (`String`).
+&#x2022; `send_payload` - Optional String<br>Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

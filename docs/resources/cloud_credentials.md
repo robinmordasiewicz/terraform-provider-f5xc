@@ -49,34 +49,34 @@ resource "f5xc_cloud_credentials" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the CloudCredentials. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the CloudCredentials. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the CloudCredentials will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the CloudCredentials will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; `aws_assume_role` - (Optional) AWS Assume Role to Handle Delegated Access. AWS Assume Role to Handle Delegated Access. See [AWS Assume Role](#aws-assume-role) below for details.
-<br>&#x2022; `aws_secret_key` - (Optional) AWS Programmatic Access Credentials. AWS Programmatic Access Credentials type. See [AWS Secret Key](#aws-secret-key) below for details.
-<br>&#x2022; `azure_client_secret` - (Optional) Azure Client Secret. Azure Credentials Client Secret type. See [Azure Client Secret](#azure-client-secret) below for details.
-<br>&#x2022; `azure_pfx_certificate` - (Optional) Client Certificate. Azure Credentials Client Certificate type. See [Azure Pfx Certificate](#azure-pfx-certificate) below for details.
-<br>&#x2022; `gcp_cred_file` - (Optional) GCP Credentials. GCP Credentials type. See [GCP Cred File](#gcp-cred-file) below for details.
+&#x2022; `aws_assume_role` - Optional Block<br>AWS Assume Role to Handle Delegated Access. AWS Assume Role to Handle Delegated Access<br>See [AWS Assume Role](#aws-assume-role) below for details.
+<br>&#x2022; `aws_secret_key` - Optional Block<br>AWS Programmatic Access Credentials. AWS Programmatic Access Credentials type<br>See [AWS Secret Key](#aws-secret-key) below for details.
+<br>&#x2022; `azure_client_secret` - Optional Block<br>Azure Client Secret. Azure Credentials Client Secret type<br>See [Azure Client Secret](#azure-client-secret) below for details.
+<br>&#x2022; `azure_pfx_certificate` - Optional Block<br>Client Certificate. Azure Credentials Client Certificate type<br>See [Azure Pfx Certificate](#azure-pfx-certificate) below for details.
+<br>&#x2022; `gcp_cred_file` - Optional Block<br>GCP Credentials. GCP Credentials type<br>See [GCP Cred File](#gcp-cred-file) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -84,175 +84,175 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS Assume Role**
 
-`custom_external_id` - (Optional) External ID is Custom ID. External ID is Custom ID (`String`).
+&#x2022; `custom_external_id` - Optional String<br>External ID is Custom ID. External ID is Custom ID
 
-`duration_seconds` - (Optional) Role Session Duration Seconds. The duration, in seconds of the role session (`Number`).
+&#x2022; `duration_seconds` - Optional Number<br>Role Session Duration Seconds. The duration, in seconds of the role session
 
-`external_id_is_optional` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `external_id_is_optional` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`external_id_is_tenant_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `external_id_is_tenant_id` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`role_arn` - (Optional) IAM Role ARN. IAM Role ARN to assume the role (`String`).
+&#x2022; `role_arn` - Optional String<br>IAM Role ARN. IAM Role ARN to assume the role
 
-`session_name` - (Optional) Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console (`String`).
+&#x2022; `session_name` - Optional String<br>Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console
 
-`session_tags` - (Optional) Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role (`Block`).
+&#x2022; `session_tags` - Optional Block<br>Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role
 
 <a id="aws-secret-key"></a>
 
 **AWS Secret Key**
 
-`access_key` - (Optional) Access Key ID. Access key ID for your AWS account (`String`).
+&#x2022; `access_key` - Optional String<br>Access Key ID. Access key ID for your AWS account
 
-`secret_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Key](#aws-secret-key-secret-key) below.
+&#x2022; `secret_key` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Key](#aws-secret-key-secret-key) below.
 
 <a id="aws-secret-key-secret-key"></a>
 
 **AWS Secret Key Secret Key**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#aws-secret-key-secret-key-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#aws-secret-key-secret-key-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#aws-secret-key-secret-key-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#aws-secret-key-secret-key-clear-secret-info) below.
 
 <a id="aws-secret-key-secret-key-blindfold-secret-info"></a>
 
 **AWS Secret Key Secret Key Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="aws-secret-key-secret-key-clear-secret-info"></a>
 
 **AWS Secret Key Secret Key Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="azure-client-secret"></a>
 
 **Azure Client Secret**
 
-`client_id` - (Optional) Client ID. Client ID for your Azure service principal (`String`).
+&#x2022; `client_id` - Optional String<br>Client ID. Client ID for your Azure service principal
 
-`client_secret` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Client Secret](#azure-client-secret-client-secret) below.
+&#x2022; `client_secret` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Secret](#azure-client-secret-client-secret) below.
 
-`subscription_id` - (Optional) Subscription ID. Subscription ID for your Azure service principal (`String`).
+&#x2022; `subscription_id` - Optional String<br>Subscription ID. Subscription ID for your Azure service principal
 
-`tenant_id` - (Optional) Tenant ID. Tenant ID for your Azure service principal (`String`).
+&#x2022; `tenant_id` - Optional String<br>Tenant ID. Tenant ID for your Azure service principal
 
 <a id="azure-client-secret-client-secret"></a>
 
 **Azure Client Secret Client Secret**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#azure-client-secret-client-secret-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-client-secret-client-secret-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#azure-client-secret-client-secret-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-client-secret-client-secret-clear-secret-info) below.
 
 <a id="azure-client-secret-client-secret-blindfold-secret-info"></a>
 
 **Azure Client Secret Client Secret Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="azure-client-secret-client-secret-clear-secret-info"></a>
 
 **Azure Client Secret Client Secret Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="azure-pfx-certificate"></a>
 
 **Azure Pfx Certificate**
 
-`certificate_url` - (Optional) URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///<Base64 of certificate> format. Here <Base64 of certificate> is base64 of '.pfx' or '.p12' binary file (`String`).
+&#x2022; `certificate_url` - Optional String<br>URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///<Base64 of certificate> format. Here <Base64 of certificate> is base64 of '.pfx' or '.p12' binary file
 
-`client_id` - (Optional) Client ID. Client ID for your Azure service principal (`String`).
+&#x2022; `client_id` - Optional String<br>Client ID. Client ID for your Azure service principal
 
-`password` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Password](#azure-pfx-certificate-password) below.
+&#x2022; `password` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#azure-pfx-certificate-password) below.
 
-`subscription_id` - (Optional) Subscription ID. Subscription ID for your Azure service principal (`String`).
+&#x2022; `subscription_id` - Optional String<br>Subscription ID. Subscription ID for your Azure service principal
 
-`tenant_id` - (Optional) Tenant ID. Tenant ID for your Azure service principal (`String`).
+&#x2022; `tenant_id` - Optional String<br>Tenant ID. Tenant ID for your Azure service principal
 
 <a id="azure-pfx-certificate-password"></a>
 
 **Azure Pfx Certificate Password**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#azure-pfx-certificate-password-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-pfx-certificate-password-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#azure-pfx-certificate-password-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-pfx-certificate-password-clear-secret-info) below.
 
 <a id="azure-pfx-certificate-password-blindfold-secret-info"></a>
 
 **Azure Pfx Certificate Password Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="azure-pfx-certificate-password-clear-secret-info"></a>
 
 **Azure Pfx Certificate Password Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="gcp-cred-file"></a>
 
 **GCP Cred File**
 
-`credential_file` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Credential File](#gcp-cred-file-credential-file) below.
+&#x2022; `credential_file` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Credential File](#gcp-cred-file-credential-file) below.
 
 <a id="gcp-cred-file-credential-file"></a>
 
 **GCP Cred File Credential File**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#gcp-cred-file-credential-file-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#gcp-cred-file-credential-file-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#gcp-cred-file-credential-file-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#gcp-cred-file-credential-file-clear-secret-info) below.
 
 <a id="gcp-cred-file-credential-file-blindfold-secret-info"></a>
 
 **GCP Cred File Credential File Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="gcp-cred-file-credential-file-clear-secret-info"></a>
 
 **GCP Cred File Credential File Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

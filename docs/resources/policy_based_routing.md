@@ -52,33 +52,33 @@ resource "f5xc_policy_based_routing" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the PolicyBasedRouting. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the PolicyBasedRouting. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the PolicyBasedRouting will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the PolicyBasedRouting will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; `forward_proxy_pbr` - (Optional) L3/L4 routing rule. Network(L3/L4) routing policy rule. See [Forward Proxy Pbr](#forward-proxy-pbr) below for details.
-<br>&#x2022; `network_pbr` - (Optional) Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule. See [Network Pbr](#network-pbr) below for details.
+&#x2022; `forward_proxy_pbr` - Optional Block<br>L3/L4 routing rule. Network(L3/L4) routing policy rule<br>See [Forward Proxy Pbr](#forward-proxy-pbr) below for details.
+<br>&#x2022; `network_pbr` - Optional Block<br>Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule<br>See [Network Pbr](#network-pbr) below for details.
 
-`forwarding_class_list` - (Optional) Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match. See [Forwarding Class List](#forwarding-class-list) below for details.
+&#x2022; `forwarding_class_list` - Optional Block<br>Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match<br>See [Forwarding Class List](#forwarding-class-list) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -86,239 +86,239 @@ In addition to all arguments above, the following attributes are exported:
 
 **Forward Proxy Pbr**
 
-`forward_proxy_pbr_rules` - (Optional) L3/L4 routing rules. Network(L3/L4) routing policy rules. See [Forward Proxy Pbr Rules](#forward-proxy-pbr-forward-proxy-pbr-rules) below.
+&#x2022; `forward_proxy_pbr_rules` - Optional Block<br>L3/L4 routing rules. Network(L3/L4) routing policy rules<br>See [Forward Proxy Pbr Rules](#forward-proxy-pbr-forward-proxy-pbr-rules) below.
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules**
 
-`all_destinations` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `all_destinations` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`all_sources` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `all_sources` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`forwarding_class_list` - (Optional) Forwarding Class. Ordered list of forwarding Class to be used if no rule match. See [Forwarding Class List](#forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list) below.
+&#x2022; `forwarding_class_list` - Optional Block<br>Forwarding Class. Ordered list of forwarding Class to be used if no rule match<br>See [Forwarding Class List](#forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list) below.
 
-`http_list` - (Optional) URLListType. See [HTTP List](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list) below.
+&#x2022; `http_list` - Optional Block<br>URLListType<br>See [HTTP List](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list) below.
 
-`ip_prefix_set` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [IP Prefix Set](#forward-proxy-pbr-forward-proxy-pbr-rules-ip-prefix-set) below.
+&#x2022; `ip_prefix_set` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [IP Prefix Set](#forward-proxy-pbr-forward-proxy-pbr-rules-ip-prefix-set) below.
 
-`label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Label Selector](#forward-proxy-pbr-forward-proxy-pbr-rules-label-selector) below.
+&#x2022; `label_selector` - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#forward-proxy-pbr-forward-proxy-pbr-rules-label-selector) below.
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#forward-proxy-pbr-forward-proxy-pbr-rules-metadata) below.
+&#x2022; `metadata` - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#forward-proxy-pbr-forward-proxy-pbr-rules-metadata) below.
 
-`prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list) below.
+&#x2022; `prefix_list` - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list) below.
 
-`tls_list` - (Optional) DomainListType. See [TLS List](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list) below.
+&#x2022; `tls_list` - Optional Block<br>DomainListType<br>See [TLS List](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list) below.
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules Forwarding Class List**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-http-list"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List**
 
-`http_list` - (Optional) HTTP URLs. URLs for HTTP connections. See [HTTP List](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list) below.
+&#x2022; `http_list` - Optional Block<br>HTTP URLs. URLs for HTTP connections<br>See [HTTP List](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list) below.
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List HTTP List**
 
-`any_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `any_path` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`exact_value` - (Optional) Exact Values. Exact domain name (`String`).
+&#x2022; `exact_value` - Optional String<br>Exact Values. Exact domain name
 
-`path_exact_value` - (Optional) Exact Path. Exact Path to match (`String`).
+&#x2022; `path_exact_value` - Optional String<br>Exact Path. Exact Path to match
 
-`path_prefix_value` - (Optional) Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*' (`String`).
+&#x2022; `path_prefix_value` - Optional String<br>Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'
 
-`path_regex_value` - (Optional) Regex of Path. Regular Expression value for the Path to match (`String`).
+&#x2022; `path_regex_value` - Optional String<br>Regex of Path. Regular Expression value for the Path to match
 
-`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+&#x2022; `regex_value` - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
 
-`suffix_value` - (Optional) Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com' (`String`).
+&#x2022; `suffix_value` - Optional String<br>Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-ip-prefix-set"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules IP Prefix Set**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-label-selector"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules Label Selector**
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+&#x2022; `expressions` - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-metadata"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules Metadata**
 
-`description` - (Optional) Description. Human readable description (`String`).
+&#x2022; `description` - Optional String<br>Description. Human readable description
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+&#x2022; `name` - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules Prefix List**
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
+&#x2022; `prefixes` - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-tls-list"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules TLS List**
 
-`tls_list` - (Optional) TLS Domains. Domains in SNI for TLS connections. See [TLS List](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list-tls-list) below.
+&#x2022; `tls_list` - Optional Block<br>TLS Domains. Domains in SNI for TLS connections<br>See [TLS List](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list-tls-list) below.
 
 <a id="forward-proxy-pbr-forward-proxy-pbr-rules-tls-list-tls-list"></a>
 
 **Forward Proxy Pbr Forward Proxy Pbr Rules TLS List TLS List**
 
-`exact_value` - (Optional) Exact Value. Exact domain name (`String`).
+&#x2022; `exact_value` - Optional String<br>Exact Value. Exact domain name
 
-`regex_value` - (Optional) Regex Values of Domains. Regular Expression value for the domain name (`String`).
+&#x2022; `regex_value` - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
 
-`suffix_value` - (Optional) Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com' (`String`).
+&#x2022; `suffix_value` - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
 <a id="forwarding-class-list"></a>
 
 **Forwarding Class List**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="network-pbr"></a>
 
 **Network Pbr**
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `any` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Label Selector](#network-pbr-label-selector) below.
+&#x2022; `label_selector` - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#network-pbr-label-selector) below.
 
-`network_pbr_rules` - (Optional) L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule. See [Network Pbr Rules](#network-pbr-network-pbr-rules) below.
+&#x2022; `network_pbr_rules` - Optional Block<br>L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule<br>See [Network Pbr Rules](#network-pbr-network-pbr-rules) below.
 
-`prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#network-pbr-prefix-list) below.
+&#x2022; `prefix_list` - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#network-pbr-prefix-list) below.
 
 <a id="network-pbr-label-selector"></a>
 
 **Network Pbr Label Selector**
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+&#x2022; `expressions` - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="network-pbr-network-pbr-rules"></a>
 
 **Network Pbr Network Pbr Rules**
 
-`all_tcp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `all_tcp_traffic` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`all_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `all_traffic` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`all_udp_traffic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `all_udp_traffic` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`any` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `any` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`applications` - (Optional) Applications. Application protocols like HTTP, SNMP. See [Applications](#network-pbr-network-pbr-rules-applications) below.
+&#x2022; `applications` - Optional Block<br>Applications. Application protocols like HTTP, SNMP<br>See [Applications](#network-pbr-network-pbr-rules-applications) below.
 
-`dns_name` - (Optional) DNS Name to IP. Resolve hostname to get the IP (`String`).
+&#x2022; `dns_name` - Optional String<br>DNS Name to IP. Resolve hostname to get the IP
 
-`forwarding_class_list` - (Optional) Forwarding Classes. Ordered list of forwarding Class to be used if rule match. See [Forwarding Class List](#network-pbr-network-pbr-rules-forwarding-class-list) below.
+&#x2022; `forwarding_class_list` - Optional Block<br>Forwarding Classes. Ordered list of forwarding Class to be used if rule match<br>See [Forwarding Class List](#network-pbr-network-pbr-rules-forwarding-class-list) below.
 
-`ip_prefix_set` - (Optional) IP Prefix Set Reference. A list of references to ip_prefix_set objects. See [IP Prefix Set](#network-pbr-network-pbr-rules-ip-prefix-set) below.
+&#x2022; `ip_prefix_set` - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#network-pbr-network-pbr-rules-ip-prefix-set) below.
 
-`metadata` - (Optional) Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs. See [Metadata](#network-pbr-network-pbr-rules-metadata) below.
+&#x2022; `metadata` - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#network-pbr-network-pbr-rules-metadata) below.
 
-`prefix_list` - (Optional) IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint. See [Prefix List](#network-pbr-network-pbr-rules-prefix-list) below.
+&#x2022; `prefix_list` - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#network-pbr-network-pbr-rules-prefix-list) below.
 
-`protocol_port_range` - (Optional) Protocol and Port. Protocol and Port ranges. See [Protocol Port Range](#network-pbr-network-pbr-rules-protocol-port-range) below.
+&#x2022; `protocol_port_range` - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#network-pbr-network-pbr-rules-protocol-port-range) below.
 
 <a id="network-pbr-network-pbr-rules-applications"></a>
 
 **Network Pbr Network Pbr Rules Applications**
 
-`applications` - (Optional) Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP` (`List`).
+&#x2022; `applications` - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
 
 <a id="network-pbr-network-pbr-rules-forwarding-class-list"></a>
 
 **Network Pbr Network Pbr Rules Forwarding Class List**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="network-pbr-network-pbr-rules-ip-prefix-set"></a>
 
 **Network Pbr Network Pbr Rules IP Prefix Set**
 
-`ref` - (Optional) Reference. A list of references to ip_prefix_set objects. See [Ref](#network-pbr-network-pbr-rules-ip-prefix-set-ref) below.
+&#x2022; `ref` - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#network-pbr-network-pbr-rules-ip-prefix-set-ref) below.
 
 <a id="network-pbr-network-pbr-rules-ip-prefix-set-ref"></a>
 
 **Network Pbr Network Pbr Rules IP Prefix Set Ref**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="network-pbr-network-pbr-rules-metadata"></a>
 
 **Network Pbr Network Pbr Rules Metadata**
 
-`description` - (Optional) Description. Human readable description (`String`).
+&#x2022; `description` - Optional String<br>Description. Human readable description
 
-`name` - (Optional) Name. This is the name of the message. The value of name has to follow DNS-1035 format (`String`).
+&#x2022; `name` - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
 <a id="network-pbr-network-pbr-rules-prefix-list"></a>
 
 **Network Pbr Network Pbr Rules Prefix List**
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
+&#x2022; `prefixes` - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="network-pbr-network-pbr-rules-protocol-port-range"></a>
 
 **Network Pbr Network Pbr Rules Protocol Port Range**
 
-`port_ranges` - (Optional) List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 (`List`).
+&#x2022; `port_ranges` - Optional List<br>List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
 
-`protocol` - (Optional) Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and ICMP (`String`).
+&#x2022; `protocol` - Optional String<br>Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and ICMP
 
 <a id="network-pbr-prefix-list"></a>
 
 **Network Pbr Prefix List**
 
-`prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint (`List`).
+&#x2022; `prefixes` - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

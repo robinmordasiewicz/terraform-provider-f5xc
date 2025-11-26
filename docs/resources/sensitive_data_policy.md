@@ -48,33 +48,33 @@ resource "f5xc_sensitive_data_policy" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the SensitiveDataPolicy. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the SensitiveDataPolicy. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the SensitiveDataPolicy will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the SensitiveDataPolicy will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`compliances` - (Optional) Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX` (`List`).
+&#x2022; `compliances` - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery
 
-`custom_data_types` - (Optional) Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery. See [Custom Data Types](#custom-data-types) below for details.
+&#x2022; `custom_data_types` - Optional Block<br>Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery<br>See [Custom Data Types](#custom-data-types) below for details.
 
-`disabled_predefined_data_types` - (Optional) Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery (`List`).
+&#x2022; `disabled_predefined_data_types` - Optional List<br>Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -82,29 +82,29 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom Data Types**
 
-`custom_data_type_ref` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
+&#x2022; `custom_data_type_ref` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
 
 <a id="custom-data-types-custom-data-type-ref"></a>
 
 **Custom Data Types Custom Data Type Ref**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

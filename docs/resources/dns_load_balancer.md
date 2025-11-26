@@ -62,35 +62,35 @@ resource "f5xc_dns_load_balancer" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the DNSLoadBalancer. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the DNSLoadBalancer. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the DNSLoadBalancer will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the DNSLoadBalancer will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`fallback_pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Fallback Pool](#fallback-pool) below for details.
+&#x2022; `fallback_pool` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Fallback Pool](#fallback-pool) below for details.
 
-`record_type` - (Optional) Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV. Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`. Defaults to `A` (`String`).
+&#x2022; `record_type` - Optional String  Defaults to `A`<br>Possible values are `A`, `AAAA`, `MX`, `CNAME`, `SRV`<br>Resource Record Type. Resource Record Type - A: A - AAAA: AAAA - MX: MX - CNAME: CNAME - SRV: SRV
 
-`response_cache` - (Optional) Response Cache. Response Cache x-required. See [Response Cache](#response-cache) below for details.
+&#x2022; `response_cache` - Optional Block<br>Response Cache. Response Cache x-required<br>See [Response Cache](#response-cache) below for details.
 
-`rule_list` - (Optional) Load Balancing Rule List. List of the Load Balancing Rules. See [Rule List](#rule-list) below for details.
+&#x2022; `rule_list` - Optional Block<br>Load Balancing Rule List. List of the Load Balancing Rules<br>See [Rule List](#rule-list) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -98,151 +98,151 @@ In addition to all arguments above, the following attributes are exported:
 
 **Fallback Pool**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="response-cache"></a>
 
 **Response Cache**
 
-`default_response_cache_parameters` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_response_cache_parameters` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`disable` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`response_cache_parameters` - (Optional) Response Cache Parameters. See [Response Cache Parameters](#response-cache-response-cache-parameters) below.
+&#x2022; `response_cache_parameters` - Optional Block<br>Response Cache Parameters<br>See [Response Cache Parameters](#response-cache-response-cache-parameters) below.
 
 <a id="response-cache-response-cache-parameters"></a>
 
 **Response Cache Response Cache Parameters**
 
-`cache_cidr_ipv4` - (Optional) Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients (`Number`).
+&#x2022; `cache_cidr_ipv4` - Optional Number<br>Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients
 
-`cache_cidr_ipv6` - (Optional) Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients (`Number`).
+&#x2022; `cache_cidr_ipv6` - Optional Number<br>Length of IPv6 CIDR masks. Length of CIDR masks used to group IPv6 clients
 
-`cache_ttl` - (Optional) TTL. TTL for response cache (`Number`).
+&#x2022; `cache_ttl` - Optional Number<br>TTL. TTL for response cache
 
 <a id="rule-list"></a>
 
 **Rule List**
 
-`rules` - (Optional) Load Balancing Rules. Rules to perform load balancing. See [Rules](#rule-list-rules) below.
+&#x2022; `rules` - Optional Block<br>Load Balancing Rules. Rules to perform load balancing<br>See [Rules](#rule-list-rules) below.
 
 <a id="rule-list-rules"></a>
 
 **Rule List Rules**
 
-`asn_list` - (Optional) ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. See [Asn List](#rule-list-rules-asn-list) below.
+&#x2022; `asn_list` - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rule-list-rules-asn-list) below.
 
-`asn_matcher` - (Optional) ASN Matcher. Match any AS number contained in the list of bgp_asn_sets. See [Asn Matcher](#rule-list-rules-asn-matcher) below.
+&#x2022; `asn_matcher` - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rule-list-rules-asn-matcher) below.
 
-`geo_location_label_selector` - (Optional) Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE. See [Geo Location Label Selector](#rule-list-rules-geo-location-label-selector) below.
+&#x2022; `geo_location_label_selector` - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [Geo Location Label Selector](#rule-list-rules-geo-location-label-selector) below.
 
-`geo_location_set` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Geo Location Set](#rule-list-rules-geo-location-set) below.
+&#x2022; `geo_location_set` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Geo Location Set](#rule-list-rules-geo-location-set) below.
 
-`ip_prefix_list` - (Optional) IP Prefix Match List. List of IP Prefix strings to match against. See [IP Prefix List](#rule-list-rules-ip-prefix-list) below.
+&#x2022; `ip_prefix_list` - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#rule-list-rules-ip-prefix-list) below.
 
-`ip_prefix_set` - (Optional) IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true. See [IP Prefix Set](#rule-list-rules-ip-prefix-set) below.
+&#x2022; `ip_prefix_set` - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Prefix Set](#rule-list-rules-ip-prefix-set) below.
 
-`pool` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Pool](#rule-list-rules-pool) below.
+&#x2022; `pool` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Pool](#rule-list-rules-pool) below.
 
-`score` - (Optional) Score. When multiple load balancing rules match a query, the one with the highest score is chosen (`Number`).
+&#x2022; `score` - Optional Number<br>Score. When multiple load balancing rules match a query, the one with the highest score is chosen
 
 <a id="rule-list-rules-asn-list"></a>
 
 **Rule List Rules Asn List**
 
-`as_numbers` - (Optional) AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer (`List`).
+&#x2022; `as_numbers` - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="rule-list-rules-asn-matcher"></a>
 
 **Rule List Rules Asn Matcher**
 
-`asn_sets` - (Optional) BGP ASN Sets. A list of references to bgp_asn_set objects. See [Asn Sets](#rule-list-rules-asn-matcher-asn-sets) below.
+&#x2022; `asn_sets` - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rule-list-rules-asn-matcher-asn-sets) below.
 
 <a id="rule-list-rules-asn-matcher-asn-sets"></a>
 
 **Rule List Rules Asn Matcher Asn Sets**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="rule-list-rules-geo-location-label-selector"></a>
 
 **Rule List Rules Geo Location Label Selector**
 
-`expressions` - (Optional) Selector Expression. expressions contains the kubernetes style label expression for selections (`List`).
+&#x2022; `expressions` - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="rule-list-rules-geo-location-set"></a>
 
 **Rule List Rules Geo Location Set**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="rule-list-rules-ip-prefix-list"></a>
 
 **Rule List Rules IP Prefix List**
 
-`invert_match` - (Optional) Invert Match Result. Invert the match result (`Bool`).
+&#x2022; `invert_match` - Optional Bool<br>Invert Match Result. Invert the match result
 
-`ip_prefixes` - (Optional) IPv4 Prefix List. List of IPv4 prefix strings (`List`).
+&#x2022; `ip_prefixes` - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
 
 <a id="rule-list-rules-ip-prefix-set"></a>
 
 **Rule List Rules IP Prefix Set**
 
-`invert_matcher` - (Optional) Invert IP Matcher. Invert the match result (`Bool`).
+&#x2022; `invert_matcher` - Optional Bool<br>Invert IP Matcher. Invert the match result
 
-`prefix_sets` - (Optional) IP Prefix Sets. A list of references to ip_prefix_set objects. See [Prefix Sets](#rule-list-rules-ip-prefix-set-prefix-sets) below.
+&#x2022; `prefix_sets` - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#rule-list-rules-ip-prefix-set-prefix-sets) below.
 
 <a id="rule-list-rules-ip-prefix-set-prefix-sets"></a>
 
 **Rule List Rules IP Prefix Set Prefix Sets**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="rule-list-rules-pool"></a>
 
 **Rule List Rules Pool**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

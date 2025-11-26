@@ -52,35 +52,35 @@ resource "f5xc_data_type" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the DataType. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the DataType. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the DataType will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the DataType will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`compliances` - (Optional) Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX` (`List`).
+&#x2022; `compliances` - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach
 
-`is_pii` - (Optional) Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII) (`Bool`).
+&#x2022; `is_pii` - Optional Bool<br>Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)
 
-`is_sensitive_data` - (Optional) Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type (`Bool`).
+&#x2022; `is_sensitive_data` - Optional Bool<br>Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type
 
-`rules` - (Optional) Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response. See [Rules](#rules) below for details.
+&#x2022; `rules` - Optional Block<br>Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response<br>See [Rules](#rules) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -88,95 +88,95 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules**
 
-`key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#rules-key-pattern) below.
+&#x2022; `key_pattern` - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-pattern) below.
 
-`key_value_pattern` - (Optional) Key & Value Pattern. Search for specific key & value patterns in the specified sections. See [Key Value Pattern](#rules-key-value-pattern) below.
+&#x2022; `key_value_pattern` - Optional Block<br>Key & Value Pattern. Search for specific key & value patterns in the specified sections<br>See [Key Value Pattern](#rules-key-value-pattern) below.
 
-`value_pattern` - (Optional) Rule Pattern Type. test. See [Value Pattern](#rules-value-pattern) below.
+&#x2022; `value_pattern` - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-value-pattern) below.
 
 <a id="rules-key-pattern"></a>
 
 **Rules Key Pattern**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-pattern-exact-values) below.
+&#x2022; `exact_values` - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-pattern-exact-values) below.
 
-`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
+&#x2022; `regex_value` - Optional String<br>Regex Value. Search for values matching this regular expression
 
-`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
+&#x2022; `substring_value` - Optional String<br>Substring Search. Search for values that include this substring
 
 <a id="rules-key-pattern-exact-values"></a>
 
 **Rules Key Pattern Exact Values**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
+&#x2022; `exact_values` - Optional List<br>Exact Values. List of exact values to match
 
 <a id="rules-key-value-pattern"></a>
 
 **Rules Key Value Pattern**
 
-`key_pattern` - (Optional) Rule Pattern Type. test. See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
+&#x2022; `key_pattern` - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
 
-`value_pattern` - (Optional) Rule Pattern Type. test. See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
+&#x2022; `value_pattern` - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
 
 <a id="rules-key-value-pattern-key-pattern"></a>
 
 **Rules Key Value Pattern Key Pattern**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
+&#x2022; `exact_values` - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
 
-`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
+&#x2022; `regex_value` - Optional String<br>Regex Value. Search for values matching this regular expression
 
-`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
+&#x2022; `substring_value` - Optional String<br>Substring Search. Search for values that include this substring
 
 <a id="rules-key-value-pattern-key-pattern-exact-values"></a>
 
 **Rules Key Value Pattern Key Pattern Exact Values**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
+&#x2022; `exact_values` - Optional List<br>Exact Values. List of exact values to match
 
 <a id="rules-key-value-pattern-value-pattern"></a>
 
 **Rules Key Value Pattern Value Pattern**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
+&#x2022; `exact_values` - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
 
-`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
+&#x2022; `regex_value` - Optional String<br>Regex Value. Search for values matching this regular expression
 
-`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
+&#x2022; `substring_value` - Optional String<br>Substring Search. Search for values that include this substring
 
 <a id="rules-key-value-pattern-value-pattern-exact-values"></a>
 
 **Rules Key Value Pattern Value Pattern Exact Values**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
+&#x2022; `exact_values` - Optional List<br>Exact Values. List of exact values to match
 
 <a id="rules-value-pattern"></a>
 
 **Rules Value Pattern**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match. See [Exact Values](#rules-value-pattern-exact-values) below.
+&#x2022; `exact_values` - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-value-pattern-exact-values) below.
 
-`regex_value` - (Optional) Regex Value. Search for values matching this regular expression (`String`).
+&#x2022; `regex_value` - Optional String<br>Regex Value. Search for values matching this regular expression
 
-`substring_value` - (Optional) Substring Search. Search for values that include this substring (`String`).
+&#x2022; `substring_value` - Optional String<br>Substring Search. Search for values that include this substring
 
 <a id="rules-value-pattern-exact-values"></a>
 
 **Rules Value Pattern Exact Values**
 
-`exact_values` - (Optional) Exact Values. List of exact values to match (`List`).
+&#x2022; `exact_values` - Optional List<br>Exact Values. List of exact values to match
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

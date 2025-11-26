@@ -38,33 +38,33 @@ resource "f5xc_dns_compliance_checks" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the DNSComplianceChecks. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the DNSComplianceChecks. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the DNSComplianceChecks will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the DNSComplianceChecks will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`disallowed_query_type_list` - (Optional) Disallowed Query Type Values. Disallowed Query Type Values. Possible values are `QUERY`, `IQUERY`, `STATUS`, `NOTIFY`, `UPDATE`. Defaults to `QUERY` (`List`).
+&#x2022; `disallowed_query_type_list` - Optional List  Defaults to `QUERY`<br>Possible values are `QUERY`, `IQUERY`, `STATUS`, `NOTIFY`, `UPDATE`<br>Disallowed Query Type Values. Disallowed Query Type Values
 
-`disallowed_resource_record_type_list` - (Optional) Disallowed Resource Record Types. Disallowed Resource Record Type List. Possible values are `T`, `A`, `NS`, `MD`, `MF`, `CNAME`, `SOA`, `MB`, `MG`, `MR`, `NULL`, `WKS`, `PTR`, `HINFO`, `MINFO`, `MX`, `TXT`, `RP`, `AFSDB`, `X25`, `ISDN`, `RT`, `NSAP`, `NSAP_PTR`, `SIG`, `KEY`, `PX`, `GPOS`, `AAAA`, `LOC`, `NXT`, `EID`, `NIMLOC`, `SRV`, `ATMA`, `NAPTR`, `KX`, `CERT`, `A6`, `DNAME`, `SINK`, `OPT`, `APL`, `DS`, `SSHFP`, `IPSECKEY`, `RRSIG`, `NSEC`, `DNSKEY`, `DHCID`, `NSEC3`, `NSEC3PARAM`, `TLSA`, `SMIMEA`, `HIP`, `NINFO`, `RKEY`, `TALINK`, `CDS`, `CDNSKEY`, `OPENPGPKEY`, `CSYNC`, `SPF`, `UINFO`, `UID`, `GID`, `UNSPEC`, `NID`, `L32`, `L64`, `LP`, `EUI48`, `EUI64`, `TKEY`, `TSIG`, `IXFR`, `AXFR`, `MAILB`, `MAILA`, `URI`, `CAA`, `TA`, `DLV`. Defaults to `T` (`List`).
+&#x2022; `disallowed_resource_record_type_list` - Optional List  Defaults to `T`<br>Possible values are `T`, `A`, `NS`, `MD`, `MF`, `CNAME`, `SOA`, `MB`, `MG`, `MR`, `NULL`, `WKS`, `PTR`, `HINFO`, `MINFO`, `MX`, `TXT`, `RP`, `AFSDB`, `X25`, `ISDN`, `RT`, `NSAP`, `NSAP_PTR`, `SIG`, `KEY`, `PX`, `GPOS`, `AAAA`, `LOC`, `NXT`, `EID`, `NIMLOC`, `SRV`, `ATMA`, `NAPTR`, `KX`, `CERT`, `A6`, `DNAME`, `SINK`, `OPT`, `APL`, `DS`, `SSHFP`, `IPSECKEY`, `RRSIG`, `NSEC`, `DNSKEY`, `DHCID`, `NSEC3`, `NSEC3PARAM`, `TLSA`, `SMIMEA`, `HIP`, `NINFO`, `RKEY`, `TALINK`, `CDS`, `CDNSKEY`, `OPENPGPKEY`, `CSYNC`, `SPF`, `UINFO`, `UID`, `GID`, `UNSPEC`, `NID`, `L32`, `L64`, `LP`, `EUI48`, `EUI64`, `TKEY`, `TSIG`, `IXFR`, `AXFR`, `MAILB`, `MAILA`, `URI`, `CAA`, `TA`, `DLV`<br>Disallowed Resource Record Types. Disallowed Resource Record Type List
 
-`domain_denylist` - (Optional) Domain Deny list. List of domains to be denied by configuration object (`List`).
+&#x2022; `domain_denylist` - Optional List<br>Domain Deny list. List of domains to be denied by configuration object
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -72,13 +72,13 @@ In addition to all arguments above, the following attributes are exported:
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

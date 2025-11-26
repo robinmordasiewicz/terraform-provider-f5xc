@@ -52,118 +52,118 @@ resource "f5xc_virtual_host" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the VirtualHost. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the VirtualHost. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the VirtualHost will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the VirtualHost will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`add_location` - (Optional) Add Location. x-example: true Appends header x-volterra-location = <RE-site-name> in responses. This configuration is ignored on CE sites (`Bool`).
+&#x2022; `add_location` - Optional Bool<br>Add Location. x-example: true Appends header x-volterra-location = <RE-site-name> in responses. This configuration is ignored on CE sites
 
-`advertise_policies` - (Optional) Advertise Policies. Advertise Policy allows you to define networks or sites where you want a VIP for this virtual host to be advertised. Each Policy rule can have different parameters, like TLS configuration, ports, optionally IP address to be used for VIP. If advertise policy is not specified then no VIP is assigned for this virtual host. See [Advertise Policies](#advertise-policies) below for details.
-
--> **One of the following:**
-&#x2022; `append_server_name` - (Optional) Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed (`String`).
-<br>&#x2022; `default_header` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `pass_through` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `server_name` - (Optional) Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header (`String`).
+&#x2022; `advertise_policies` - Optional Block<br>Advertise Policies. Advertise Policy allows you to define networks or sites where you want a VIP for this virtual host to be advertised. Each Policy rule can have different parameters, like TLS configuration, ports, optionally IP address to be used for VIP. If advertise policy is not specified then no VIP is assigned for this virtual host<br>See [Advertise Policies](#advertise-policies) below for details.
 
 -> **One of the following:**
-&#x2022; `authentication` - (Optional) Authentication Details. Authentication related information. This allows to configure the URL to redirect after the authentication Authentication Object Reference, configuration of cookie params etc. See [Authentication](#authentication) below for details.
-<br>&#x2022; `no_authentication` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`buffer_policy` - (Optional) Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence. See [Buffer Policy](#buffer-policy) below for details.
-
--> **One of the following:**
-&#x2022; `captcha_challenge` - (Optional) Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host. See [Captcha Challenge](#captcha-challenge) below for details.
-<br>&#x2022; `js_challenge` - (Optional) Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host. See [Js Challenge](#js-challenge) below for details.
-<br>&#x2022; `no_challenge` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-
-`coalescing_options` - (Optional) TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS). See [Coalescing Options](#coalescing-options) below for details.
-
-`compression_params` - (Optional) Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/JSON, application/xhtml+XML, image/svg+XML, text/CSS, text/HTML, text/plain, text/XML. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen. See [Compression Params](#compression-params) below for details.
-
-`connection_idle_timeout` - (Optional) Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive. This is specified in milliseconds. The minutes. Defaults to `2` (`Number`).
-
-`cors_policy` - (Optional) CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: `HTTP://foo.example/examples/access-control/simpleXSInvocation.HTML` Origin: `HTTP://foo.example` HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: * Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/XML An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/post-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: `HTTP://foo.example` Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: `HTTP://foo.example` Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive. See [CORS Policy](#cors-policy) below for details.
-
-`csrf_policy` - (Optional) CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and compare their values. If the source origin is missing or origins do not match the request is rejected. The exception to this being if the source-origin has been added to they policy as valid. Because CSRF attacks specifically target state-changing requests, the policy only acts on the HTTP requests that have state-changing method (PUT,POST, etc.). See [CSRF Policy](#csrf-policy) below for details.
-
-`custom_errors` - (Optional) Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value is the uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Access Denied' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Access Denied </p>'. Base64 encoded string for this HTML is 'PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==' Specific response code takes preference when both response code and response code class matches for a request. The configured custom errors are only applicable for loadbalancer generated errors. Errors returned from upstream server is propagated as is. F5XC provides default error pages for the errors generated by the loadbalancer. Content of these pages are not editable. User has an option to disable the use of default F5XC error pages (`Block`).
+&#x2022; `append_server_name` - Optional String<br>Append Server Name if absent. Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed
+<br>&#x2022; `default_header` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `pass_through` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `server_name` - Optional String<br>Server Name. Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header
 
 -> **One of the following:**
-&#x2022; `default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `non_default_loadbalancer` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `authentication` - Optional Block<br>Authentication Details. Authentication related information. This allows to configure the URL to redirect after the authentication Authentication Object Reference, configuration of cookie params etc<br>See [Authentication](#authentication) below for details.
+<br>&#x2022; `no_authentication` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`disable_default_error_pages` - (Optional) Disable default error pages. An option to specify whether to disable using default F5XC error pages (`Bool`).
-
-`disable_dns_resolve` - (Optional) Disable DNS resolution. Disable DNS resolution for domains specified in the virtual host When the virtual host is configured as Dynamive Resolve Proxy (DRP), disable DNS resolution for domains configured. This configuration is suitable for HTTP CONNECT proxy (`Bool`).
+&#x2022; `buffer_policy` - Optional Block<br>Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence<br>See [Buffer Policy](#buffer-policy) below for details.
 
 -> **One of the following:**
-&#x2022; `disable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
-<br>&#x2022; `enable_path_normalize` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `captcha_challenge` - Optional Block<br>Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Captcha Challenge](#captcha-challenge) below for details.
+<br>&#x2022; `js_challenge` - Optional Block<br>Javascript Challenge Parameters. Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do Javascript Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have Javascript embedded in it. Loadbalancer chooses a set of random numbers for every new client and sends these numbers along with an encrypted answer with the request such that it embed these numbers as input in the Javascript. Javascript will run on the requestor browser and perform a complex Math operation. Script will submit the answer to loadbalancer. Loadbalancer will validate the answer by comparing the calculated answer with the decrypted answer (which was encrypted when it was sent back as reply) and allow the request to the upstream server only if the answer is correct. Loadbalancer will tag response header with a cookie to avoid Javascript challenge for subsequent requests. Javascript challenge serves following purposes * Validate that the request is coming via a browser that is capable for running Javascript * Force the browser to run a complex operation, f(X), that requires it to spend a large number of CPU cycles. This is to slow down a potential DOS attacker by making it difficult to launch a large request flood without having to spend even larger CPU cost at their end. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Js Challenge](#js-challenge) below for details.
+<br>&#x2022; `no_challenge` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`domains` - (Optional) Domains. A list of Domains (host/authority header) that will be matched to this Virtual Host. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the virtual host proxy type is TCP_PROXY_WITH_SNI/HTTPS_PROXY Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system (`List`).
+&#x2022; `coalescing_options` - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#coalescing-options) below for details.
 
-`dynamic_reverse_proxy` - (Optional) Dynamic Reverse Proxy Type. In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyType is TCP_PROXY_WITH_SNI), virtual host will perform DNS resolution using the SNI. The DNS resolution is performed in the virtual network specified in outside_network_type or outside_network In both modes of operation(either using Host header or SNI), the DNS resolution could return multiple addresses. First IPv4 address from such returned list is used as endpoint for the request. The DNS response is cached for 60s by default. See [Dynamic Reverse Proxy](#dynamic-reverse-proxy) below for details.
+&#x2022; `compression_params` - Optional Block<br>Compression Parameters. Enables loadbalancer to compress dispatched data from an upstream service upon client request. The content is compressed and then sent to the client with the appropriate headers if either response and request allow. Only GZIP compression is supported. By default compression will be skipped when: A request does NOT contain accept-encoding header. A request includes accept-encoding header, but it does not contain “gzip” or “*”. A request includes accept-encoding with “gzip” or “*” with the weight “q=0”. Note that the “gzip” will have a higher weight then “*”. For example, if accept-encoding is “gzip;q=0,*;q=1”, the filter will not compress. But if the header is set to “*;q=0,gzip;q=1”, the filter will compress. A request whose accept-encoding header includes “identity”. A response contains a content-encoding header. A response contains a cache-control header whose value includes “no-transform”. A response contains a transfer-encoding header whose value includes “gzip”. A response does not contain a content-type value that matches one of the selected mime-types, which default to application/javascript, application/JSON, application/xhtml+XML, image/svg+XML, text/CSS, text/HTML, text/plain, text/XML. Neither content-length nor transfer-encoding headers are present in the response. Response size is smaller than 30 bytes (only applicable when transfer-encoding is not chunked). When compression is applied: The content-length is removed from response headers. Response headers contain “transfer-encoding: chunked” and do not contain “content-encoding” header. The “vary: accept-encoding” header is inserted on every response. GZIP Compression Level: A value which is optimal balance between speed of compression and amount of compression is chosen<br>See [Compression Params](#compression-params) below for details.
 
-`http_protocol_options` - (Optional) HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections. See [HTTP Protocol Options](#http-protocol-options) below for details.
+&#x2022; `connection_idle_timeout` - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
 
-`idle_timeout` - (Optional) Idle timeout (in milliseconds). Idle timeout is the amount of time that the loadbalancer will allow a stream to exist with no upstream or downstream activity. Idle timeout and Proxy Type: HTTP_PROXY, HTTPS_PROXY: Idle timer is started when the first byte is received on the connection. Each time an encode/decode event for headers or data is processed for the stream, the timer will be reset. If the timeout fires, the stream is terminated with a 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise a stream reset occurs. The default idle timeout is 30 seconds TCP PROXY, TCP_PROXY_WITH_SNI, SMA_PROXY: The idle timeout is defined as the period in which there are no bytes sent or received on either the upstream or downstream connection. The default idle timeout is 1 hour. UDP PROXY: The idle timeout for sessions. Idle timeout is defined as the period in which there are no datagrams sent or received on the session. The default if not specified is 1 minute (`Number`).
+&#x2022; `cors_policy` - Optional Block<br>CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: `HTTP://foo.example/examples/access-control/simpleXSInvocation.HTML` Origin: `HTTP://foo.example` HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: * Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/XML An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/post-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: `HTTP://foo.example` Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: `HTTP://foo.example` Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive<br>See [CORS Policy](#cors-policy) below for details.
 
-`max_request_header_size` - (Optional) Maximum Request Header Size (KiB). The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response. The max configurable limit is 96 KiB, based on current implementation constraints. Note: a. This configuration parameter is applicable only for HTTP_PROXY and HTTPS_PROXY b. When multiple HTTP_PROXY virtual hosts share the same advertise policy, the effective 'maximum request header size' for such virtual hosts is the highest value configured on any of the virtual hosts (`Number`).
+&#x2022; `csrf_policy` - Optional Block<br>CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and compare their values. If the source origin is missing or origins do not match the request is rejected. The exception to this being if the source-origin has been added to they policy as valid. Because CSRF attacks specifically target state-changing requests, the policy only acts on the HTTP requests that have state-changing method (PUT,POST, etc.)<br>See [CSRF Policy](#csrf-policy) below for details.
 
-`proxy` - (Optional) Type of Proxy. ProxyType tells the type of proxy to install for the virtual host. Only the following combination of VirtualHosts within same AdvertisePolicy is permitted (None of them should have '*' in domains when used with other VirtualHosts in same AdvertisePolicy) 1. Multiple TCP_PROXY_WITH_SNI and multiple HTTPS_PROXY 2. Multiple HTTP_PROXY 3. Multiple HTTPS_PROXY 4. Multiple TCP_PROXY_WITH_SNI HTTPS_PROXY without TLS parameters is not permitted HTTP_PROXY/HTTPS_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY with empty domains is not permitted TCP_PROXY_WITH_SNI/SMA_PROXY should not have '*' in domains - HTTP_PROXY: HTTP_PROXY Install HTTP proxy. HTTP Proxy is the default proxy installed. - TCP_PROXY: TCP_PROXY Install TCP proxy - TCP_PROXY_WITH_SNI: TCP_PROXY_WITH_SNI Install TCP proxy with SNI Routing - TLS_TCP_PROXY: TCP_PROXY Install TCP proxy - TLS_TCP_PROXY_WITH_SNI: TCP_PROXY_WITH_SNI Install TCP proxy with SNI Routing - HTTPS_PROXY: HTTPS_PROXY Install HTTPS proxy - UDP_PROXY: UDP_PROXY Install UDP proxy - SMA_PROXY: SMA_PROXY Install Secret Management Access proxy - DNS_PROXY: DNS_PROXY Install DNS proxy - ZTNA_PROXY: ZTNA_PROXY Install ZTNA proxy.This is going to be deprecated with UZTNA_PROXY. - UZTNA_PROXY: UZTNA_PROXY Install UZTNA proxy. Possible values are `UDP_PROXY`, `SMA_PROXY`, `DNS_PROXY`, `ZTNA_PROXY`, `UZTNA_PROXY`. Defaults to `HTTP_PROXY` (`String`).
-
-`rate_limiter_allowed_prefixes` - (Optional) Rate Limiter Allowed Prefixes. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting. See [Rate Limiter Allowed Prefixes](#rate-limiter-allowed-prefixes) below for details.
-
-`request_cookies_to_add` - (Optional) Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied. See [Request Cookies To Add](#request-cookies-to-add) below for details.
-
-`request_cookies_to_remove` - (Optional) Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream (`List`).
-
-`request_headers_to_add` - (Optional) Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied. See [Request Headers To Add](#request-headers-to-add) below for details.
-
-`request_headers_to_remove` - (Optional) Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream (`List`).
-
-`response_cookies_to_add` - (Optional) Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied. See [Response Cookies To Add](#response-cookies-to-add) below for details.
-
-`response_cookies_to_remove` - (Optional) Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed (`List`).
-
-`response_headers_to_add` - (Optional) Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied (`Block`).
-
-`response_headers_to_remove` - (Optional) Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream (`List`).
-
-`retry_policy` - (Optional) Retry Policy. Retry policy configuration for route destination (`Block`).
-
-`routes` - (Optional) Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. For TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts, the route object only specifies the cluster/weighted-cluster as route destination without any match condition. In other words, match condition in route object is ignored for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts. Routes used for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts cannot have DirectResponse or Redirect as actions (`Block`).
-
-`sensitive_data_policy` - (Optional) Sensitive Data Discovery. References to sensitive_data_policy objects (`Block`).
-
-`slow_ddos_mitigation` - (Optional) Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users (`Block`).
-
-`timeouts` - (Optional) (`Block`).
+&#x2022; `custom_errors` - Optional Block<br>Custom Error Responses. Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx response code class 5 -- for 5xx response code class Value is the uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Access Denied' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Access Denied </p>'. Base64 encoded string for this HTML is 'PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==' Specific response code takes preference when both response code and response code class matches for a request. The configured custom errors are only applicable for loadbalancer generated errors. Errors returned from upstream server is propagated as is. F5XC provides default error pages for the errors generated by the loadbalancer. Content of these pages are not editable. User has an option to disable the use of default F5XC error pages
 
 -> **One of the following:**
-&#x2022; `tls_cert_params` - (Optional) Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store (`Block`).
-<br>&#x2022; `tls_parameters` - (Optional) Downstream TLS Parameters. TLS configuration for downstream connections (`Block`).
+&#x2022; `default_loadbalancer` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `non_default_loadbalancer` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`user_identification` - (Optional) User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited (`Block`).
+&#x2022; `disable_default_error_pages` - Optional Bool<br>Disable default error pages. An option to specify whether to disable using default F5XC error pages
 
-`waf_type` - (Optional) WAF Instance. WAF instance will be pointing to an app_firewall object (`Block`).
+&#x2022; `disable_dns_resolve` - Optional Bool<br>Disable DNS resolution. Disable DNS resolution for domains specified in the virtual host When the virtual host is configured as Dynamive Resolve Proxy (DRP), disable DNS resolution for domains configured. This configuration is suitable for HTTP CONNECT proxy
+
+-> **One of the following:**
+&#x2022; `disable_path_normalize` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br>&#x2022; `enable_path_normalize` - Optional Block<br>Empty. This can be used for messages where no values are needed
+
+&#x2022; `domains` - Optional List<br>Domains. A list of Domains (host/authority header) that will be matched to this Virtual Host. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the virtual host proxy type is TCP_PROXY_WITH_SNI/HTTPS_PROXY Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system
+
+&#x2022; `dynamic_reverse_proxy` - Optional Block<br>Dynamic Reverse Proxy Type. In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyType is TCP_PROXY_WITH_SNI), virtual host will perform DNS resolution using the SNI. The DNS resolution is performed in the virtual network specified in outside_network_type or outside_network In both modes of operation(either using Host header or SNI), the DNS resolution could return multiple addresses. First IPv4 address from such returned list is used as endpoint for the request. The DNS response is cached for 60s by default<br>See [Dynamic Reverse Proxy](#dynamic-reverse-proxy) below for details.
+
+&#x2022; `http_protocol_options` - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#http-protocol-options) below for details.
+
+&#x2022; `idle_timeout` - Optional Number<br>Idle timeout (in milliseconds). Idle timeout is the amount of time that the loadbalancer will allow a stream to exist with no upstream or downstream activity. Idle timeout and Proxy Type: HTTP_PROXY, HTTPS_PROXY: Idle timer is started when the first byte is received on the connection. Each time an encode/decode event for headers or data is processed for the stream, the timer will be reset. If the timeout fires, the stream is terminated with a 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise a stream reset occurs. The default idle timeout is 30 seconds TCP PROXY, TCP_PROXY_WITH_SNI, SMA_PROXY: The idle timeout is defined as the period in which there are no bytes sent or received on either the upstream or downstream connection. The default idle timeout is 1 hour. UDP PROXY: The idle timeout for sessions. Idle timeout is defined as the period in which there are no datagrams sent or received on the session. The default if not specified is 1 minute
+
+&#x2022; `max_request_header_size` - Optional Number<br>Maximum Request Header Size (KiB). The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response. The max configurable limit is 96 KiB, based on current implementation constraints. Note: a. This configuration parameter is applicable only for HTTP_PROXY and HTTPS_PROXY b. When multiple HTTP_PROXY virtual hosts share the same advertise policy, the effective 'maximum request header size' for such virtual hosts is the highest value configured on any of the virtual hosts
+
+&#x2022; `proxy` - Optional String  Defaults to `HTTP_PROXY`<br>Possible values are `UDP_PROXY`, `SMA_PROXY`, `DNS_PROXY`, `ZTNA_PROXY`, `UZTNA_PROXY`<br>Type of Proxy. ProxyType tells the type of proxy to install for the virtual host. Only the following combination of VirtualHosts within same AdvertisePolicy is permitted (None of them should have '*' in domains when used with other VirtualHosts in same AdvertisePolicy) 1. Multiple TCP_PROXY_WITH_SNI and multiple HTTPS_PROXY 2. Multiple HTTP_PROXY 3. Multiple HTTPS_PROXY 4. Multiple TCP_PROXY_WITH_SNI HTTPS_PROXY without TLS parameters is not permitted HTTP_PROXY/HTTPS_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY with empty domains is not permitted TCP_PROXY_WITH_SNI/SMA_PROXY should not have '*' in domains - HTTP_PROXY: HTTP_PROXY Install HTTP proxy. HTTP Proxy is the default proxy installed. - TCP_PROXY: TCP_PROXY Install TCP proxy - TCP_PROXY_WITH_SNI: TCP_PROXY_WITH_SNI Install TCP proxy with SNI Routing - TLS_TCP_PROXY: TCP_PROXY Install TCP proxy - TLS_TCP_PROXY_WITH_SNI: TCP_PROXY_WITH_SNI Install TCP proxy with SNI Routing - HTTPS_PROXY: HTTPS_PROXY Install HTTPS proxy - UDP_PROXY: UDP_PROXY Install UDP proxy - SMA_PROXY: SMA_PROXY Install Secret Management Access proxy - DNS_PROXY: DNS_PROXY Install DNS proxy - ZTNA_PROXY: ZTNA_PROXY Install ZTNA proxy.This is going to be deprecated with UZTNA_PROXY. - UZTNA_PROXY: UZTNA_PROXY Install UZTNA proxy
+
+&#x2022; `rate_limiter_allowed_prefixes` - Optional Block<br>Rate Limiter Allowed Prefixes. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting<br>See [Rate Limiter Allowed Prefixes](#rate-limiter-allowed-prefixes) below for details.
+
+&#x2022; `request_cookies_to_add` - Optional Block<br>Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied<br>See [Request Cookies To Add](#request-cookies-to-add) below for details.
+
+&#x2022; `request_cookies_to_remove` - Optional List<br>Remove Cookies from Cookie Header. List of keys of Cookies to be removed from the HTTP request being sent towards upstream
+
+&#x2022; `request_headers_to_add` - Optional Block<br>Add Request Headers. Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied<br>See [Request Headers To Add](#request-headers-to-add) below for details.
+
+&#x2022; `request_headers_to_remove` - Optional List<br>Remove Request Headers. List of keys of Headers to be removed from the HTTP request being sent towards upstream
+
+&#x2022; `response_cookies_to_add` - Optional Block<br>Add Set-Cookie Headers. Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied<br>See [Response Cookies To Add](#response-cookies-to-add) below for details.
+
+&#x2022; `response_cookies_to_remove` - Optional List<br>Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed
+
+&#x2022; `response_headers_to_add` - Optional Block<br>Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied
+
+&#x2022; `response_headers_to_remove` - Optional List<br>Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream
+
+&#x2022; `retry_policy` - Optional Block<br>Retry Policy. Retry policy configuration for route destination
+
+&#x2022; `routes` - Optional Block<br>Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. For TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts, the route object only specifies the cluster/weighted-cluster as route destination without any match condition. In other words, match condition in route object is ignored for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts. Routes used for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts cannot have DirectResponse or Redirect as actions
+
+&#x2022; `sensitive_data_policy` - Optional Block<br>Sensitive Data Discovery. References to sensitive_data_policy objects
+
+&#x2022; `slow_ddos_mitigation` - Optional Block<br>Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users
+
+&#x2022; `timeouts` - Optional Block
+
+-> **One of the following:**
+&#x2022; `tls_cert_params` - Optional Block<br>Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store
+<br>&#x2022; `tls_parameters` - Optional Block<br>Downstream TLS Parameters. TLS configuration for downstream connections
+
+&#x2022; `user_identification` - Optional Block<br>User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited
+
+&#x2022; `waf_type` - Optional Block<br>WAF Instance. WAF instance will be pointing to an app_firewall object
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -171,753 +171,753 @@ In addition to all arguments above, the following attributes are exported:
 
 **Advertise Policies**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="authentication"></a>
 
 **Authentication**
 
-`auth_config` - (Optional) Reference to Authentication Object. Reference to Authentication Config Object. See [Auth Config](#authentication-auth-config) below.
+&#x2022; `auth_config` - Optional Block<br>Reference to Authentication Object. Reference to Authentication Config Object<br>See [Auth Config](#authentication-auth-config) below.
 
-`cookie_params` - (Optional) Cookie Parameters. Specifies different cookie related config parameters for authentication. See [Cookie Params](#authentication-cookie-params) below.
+&#x2022; `cookie_params` - Optional Block<br>Cookie Parameters. Specifies different cookie related config parameters for authentication<br>See [Cookie Params](#authentication-cookie-params) below.
 
-`redirect_dynamic` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `redirect_dynamic` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`redirect_url` - (Optional) Configure Redirect URL. user can provide a URL for e.g `HTTPS://abc.xyz.com` where user gets redirected. This URL configured here must match with the redirect URL configured with the OIDC provider (`String`).
+&#x2022; `redirect_url` - Optional String<br>Configure Redirect URL. user can provide a URL for e.g `HTTPS://abc.xyz.com` where user gets redirected. This URL configured here must match with the redirect URL configured with the OIDC provider
 
-`use_auth_object_config` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `use_auth_object_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="authentication-auth-config"></a>
 
 **Authentication Auth Config**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="authentication-cookie-params"></a>
 
 **Authentication Cookie Params**
 
-`auth_hmac` - (Optional) HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid. See [Auth HMAC](#authentication-cookie-params-auth-hmac) below.
+&#x2022; `auth_hmac` - Optional Block<br>HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid<br>See [Auth HMAC](#authentication-cookie-params-auth-hmac) below.
 
-`cookie_expiry` - (Optional) Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds (`Number`).
+&#x2022; `cookie_expiry` - Optional Number<br>Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds
 
-`cookie_refresh_interval` - (Optional) Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds (`Number`).
+&#x2022; `cookie_refresh_interval` - Optional Number<br>Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds
 
-`kms_key_hmac` - (Optional) KMS Key Reference. Reference to KMS Key Object (`Block`).
+&#x2022; `kms_key_hmac` - Optional Block<br>KMS Key Reference. Reference to KMS Key Object
 
-`session_expiry` - (Optional) Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours) (`Number`).
+&#x2022; `session_expiry` - Optional Number<br>Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours)
 
 <a id="authentication-cookie-params-auth-hmac"></a>
 
 **Authentication Cookie Params Auth HMAC**
 
-`prim_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Prim Key](#authentication-cookie-params-auth-hmac-prim-key) below.
+&#x2022; `prim_key` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Prim Key](#authentication-cookie-params-auth-hmac-prim-key) below.
 
-`prim_key_expiry` - (Optional) HMAC Primary Key Expiry. Primary HMAC Key Expiry time (`String`).
+&#x2022; `prim_key_expiry` - Optional String<br>HMAC Primary Key Expiry. Primary HMAC Key Expiry time
 
-`sec_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Sec Key](#authentication-cookie-params-auth-hmac-sec-key) below.
+&#x2022; `sec_key` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Sec Key](#authentication-cookie-params-auth-hmac-sec-key) below.
 
-`sec_key_expiry` - (Optional) HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time (`String`).
+&#x2022; `sec_key_expiry` - Optional String<br>HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time
 
 <a id="authentication-cookie-params-auth-hmac-prim-key"></a>
 
 **Authentication Cookie Params Auth HMAC Prim Key**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#authentication-cookie-params-auth-hmac-prim-key-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#authentication-cookie-params-auth-hmac-prim-key-clear-secret-info) below.
 
 <a id="authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info"></a>
 
 **Authentication Cookie Params Auth HMAC Prim Key Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="authentication-cookie-params-auth-hmac-prim-key-clear-secret-info"></a>
 
 **Authentication Cookie Params Auth HMAC Prim Key Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="authentication-cookie-params-auth-hmac-sec-key"></a>
 
 **Authentication Cookie Params Auth HMAC Sec Key**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#authentication-cookie-params-auth-hmac-sec-key-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#authentication-cookie-params-auth-hmac-sec-key-clear-secret-info) below.
 
 <a id="authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info"></a>
 
 **Authentication Cookie Params Auth HMAC Sec Key Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="authentication-cookie-params-auth-hmac-sec-key-clear-secret-info"></a>
 
 **Authentication Cookie Params Auth HMAC Sec Key Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="buffer-policy"></a>
 
 **Buffer Policy**
 
-`disabled` - (Optional) Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
+&#x2022; `disabled` - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
 
-`max_request_bytes` - (Optional) Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response (`Number`).
+&#x2022; `max_request_bytes` - Optional Number<br>Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response
 
 <a id="captcha-challenge"></a>
 
 **Captcha Challenge**
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
+&#x2022; `cookie_expiry` - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
-`custom_page` - (Optional) Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
+&#x2022; `custom_page` - Optional String<br>Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='
 
 <a id="coalescing-options"></a>
 
 **Coalescing Options**
 
-`default_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_coalescing` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`strict_coalescing` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `strict_coalescing` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="compression-params"></a>
 
 **Compression Params**
 
-`content_length` - (Optional) Content Length. Minimum response length, in bytes, which will trigger compression. The. Defaults to `30` (`Number`).
+&#x2022; `content_length` - Optional Number  Defaults to `30`<br>Content Length. Minimum response length, in bytes, which will trigger compression. The
 
-`content_type` - (Optional) Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML' (`List`).
+&#x2022; `content_type` - Optional List<br>Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML'
 
-`disable_on_etag_header` - (Optional) Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed (`Bool`).
+&#x2022; `disable_on_etag_header` - Optional Bool<br>Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed
 
-`remove_accept_encoding_header` - (Optional) Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter (`Bool`).
+&#x2022; `remove_accept_encoding_header` - Optional Bool<br>Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter
 
 <a id="cors-policy"></a>
 
 **CORS Policy**
 
-`allow_credentials` - (Optional) Allow Credentials. Specifies whether the resource allows credentials (`Bool`).
+&#x2022; `allow_credentials` - Optional Bool<br>Allow Credentials. Specifies whether the resource allows credentials
 
-`allow_headers` - (Optional) Allow Headers. Specifies the content for the access-control-allow-headers header (`String`).
+&#x2022; `allow_headers` - Optional String<br>Allow Headers. Specifies the content for the access-control-allow-headers header
 
-`allow_methods` - (Optional) Allow Methods. Specifies the content for the access-control-allow-methods header (`String`).
+&#x2022; `allow_methods` - Optional String<br>Allow Methods. Specifies the content for the access-control-allow-methods header
 
-`allow_origin` - (Optional) Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
+&#x2022; `allow_origin` - Optional List<br>Allow Origin. Specifies the origins that will be allowed to do CORS requests. An origin is allowed if either allow_origin or allow_origin_regex match
 
-`allow_origin_regex` - (Optional) Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match (`List`).
+&#x2022; `allow_origin_regex` - Optional List<br>Allow Origin Regex. Specifies regex patterns that match allowed origins. An origin is allowed if either allow_origin or allow_origin_regex match
 
-`disabled` - (Optional) Disabled. Disable the CorsPolicy for a particular route. This is useful when virtual-host has CorsPolicy, but we need to disable it on a specific route. The value of this field is ignored for virtual-host (`Bool`).
+&#x2022; `disabled` - Optional Bool<br>Disabled. Disable the CorsPolicy for a particular route. This is useful when virtual-host has CorsPolicy, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
 
-`expose_headers` - (Optional) Expose Headers. Specifies the content for the access-control-expose-headers header (`String`).
+&#x2022; `expose_headers` - Optional String<br>Expose Headers. Specifies the content for the access-control-expose-headers header
 
-`maximum_age` - (Optional) Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours) (`Number`).
+&#x2022; `maximum_age` - Optional Number<br>Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours)
 
 <a id="csrf-policy"></a>
 
 **CSRF Policy**
 
-`all_load_balancer_domains` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `all_load_balancer_domains` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`custom_domain_list` - (Optional) Domain name list. List of domain names used for Host header matching. See [Custom Domain List](#csrf-policy-custom-domain-list) below.
+&#x2022; `custom_domain_list` - Optional Block<br>Domain name list. List of domain names used for Host header matching<br>See [Custom Domain List](#csrf-policy-custom-domain-list) below.
 
-`disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="csrf-policy-custom-domain-list"></a>
 
 **CSRF Policy Custom Domain List**
 
-`domains` - (Optional) Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form (`List`).
+&#x2022; `domains` - Optional List<br>Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form
 
 <a id="dynamic-reverse-proxy"></a>
 
 **Dynamic Reverse Proxy**
 
-`connection_timeout` - (Optional) Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The (2 seconds). Defaults to `2000` (`Number`).
+&#x2022; `connection_timeout` - Optional Number  Defaults to `2000`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to upstream server.  The (2 seconds)
 
-`resolution_network` - (Optional) Resolution Network. Reference to virtual network where the endpoint is resolved. Reference is valid only when the network type is VIRTUAL_NETWORK_PER_SITE or VIRTUAL_NETWORK_GLOBAL. It is ignored for all other network types. See [Resolution Network](#dynamic-reverse-proxy-resolution-network) below.
+&#x2022; `resolution_network` - Optional Block<br>Resolution Network. Reference to virtual network where the endpoint is resolved. Reference is valid only when the network type is VIRTUAL_NETWORK_PER_SITE or VIRTUAL_NETWORK_GLOBAL. It is ignored for all other network types<br>See [Resolution Network](#dynamic-reverse-proxy-resolution-network) below.
 
-`resolution_network_type` - (Optional) Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL` (`String`).
+&#x2022; `resolution_network_type` - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-`resolve_endpoint_dynamically` - (Optional) Dynamic Endpoint Resolution. x-example : true In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyType is TCP_PROXY_WITH_SNI), virtual host will perform DNS resolution using the SNI. The DNS resolution is performed in the virtual network specified in outside_network_type or outside_network In both modes of operation(either using Host header or SNI), the DNS resolution could return multiple addresses. First IPv4 address from such returned list is used as endpoint for the request. The DNS response is cached for 60s by default (`Bool`).
+&#x2022; `resolve_endpoint_dynamically` - Optional Bool<br>Dynamic Endpoint Resolution. x-example : true In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyType is TCP_PROXY_WITH_SNI), virtual host will perform DNS resolution using the SNI. The DNS resolution is performed in the virtual network specified in outside_network_type or outside_network In both modes of operation(either using Host header or SNI), the DNS resolution could return multiple addresses. First IPv4 address from such returned list is used as endpoint for the request. The DNS response is cached for 60s by default
 
 <a id="dynamic-reverse-proxy-resolution-network"></a>
 
 **Dynamic Reverse Proxy Resolution Network**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="http-protocol-options"></a>
 
 **HTTP Protocol Options**
 
-`http_protocol_enable_v1_only` - (Optional) HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections. See [HTTP Protocol Enable V1 Only](#http-protocol-options-http-protocol-enable-v1-only) below.
+&#x2022; `http_protocol_enable_v1_only` - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#http-protocol-options-http-protocol-enable-v1-only) below.
 
-`http_protocol_enable_v1_v2` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `http_protocol_enable_v1_v2` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`http_protocol_enable_v2_only` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `http_protocol_enable_v2_only` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="http-protocol-options-http-protocol-enable-v1-only"></a>
 
 **HTTP Protocol Options HTTP Protocol Enable V1 Only**
 
-`header_transformation` - (Optional) Header Transformation. Header Transformation options for HTTP/1.1 request/response headers. See [Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
+&#x2022; `header_transformation` - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
 **HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
 
-`default_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `default_header_transformation` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`legacy_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `legacy_header_transformation` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`preserve_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `preserve_case_header_transformation` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`proper_case_header_transformation` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `proper_case_header_transformation` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="js-challenge"></a>
 
 **Js Challenge**
 
-`cookie_expiry` - (Optional) Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge (`Number`).
+&#x2022; `cookie_expiry` - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
-`custom_page` - (Optional) Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4=' (`String`).
+&#x2022; `custom_page` - Optional String<br>Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='
 
-`js_script_delay` - (Optional) Javascript Delay. Delay introduced by Javascript, in milliseconds (`Number`).
+&#x2022; `js_script_delay` - Optional Number<br>Javascript Delay. Delay introduced by Javascript, in milliseconds
 
 <a id="rate-limiter-allowed-prefixes"></a>
 
 **Rate Limiter Allowed Prefixes**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="request-cookies-to-add"></a>
 
 **Request Cookies To Add**
 
-`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+&#x2022; `name` - Optional String<br>Name. Name of the cookie in Cookie header
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
+&#x2022; `overwrite` - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#request-cookies-to-add-secret-value) below.
+&#x2022; `secret_value` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#request-cookies-to-add-secret-value) below.
 
-`value` - (Optional) Value. Value of the Cookie header (`String`).
+&#x2022; `value` - Optional String<br>Value. Value of the Cookie header
 
 <a id="request-cookies-to-add-secret-value"></a>
 
 **Request Cookies To Add Secret Value**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#request-cookies-to-add-secret-value-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#request-cookies-to-add-secret-value-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#request-cookies-to-add-secret-value-clear-secret-info) below.
 
 <a id="request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
 **Request Cookies To Add Secret Value Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="request-cookies-to-add-secret-value-clear-secret-info"></a>
 
 **Request Cookies To Add Secret Value Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="request-headers-to-add"></a>
 
 **Request Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
+&#x2022; `append` - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
-`name` - (Optional) Name. Name of the HTTP header (`String`).
+&#x2022; `name` - Optional String<br>Name. Name of the HTTP header
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#request-headers-to-add-secret-value) below.
+&#x2022; `secret_value` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#request-headers-to-add-secret-value) below.
 
-`value` - (Optional) Value. Value of the HTTP header (`String`).
+&#x2022; `value` - Optional String<br>Value. Value of the HTTP header
 
 <a id="request-headers-to-add-secret-value"></a>
 
 **Request Headers To Add Secret Value**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#request-headers-to-add-secret-value-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#request-headers-to-add-secret-value-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#request-headers-to-add-secret-value-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#request-headers-to-add-secret-value-clear-secret-info) below.
 
 <a id="request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
 **Request Headers To Add Secret Value Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="request-headers-to-add-secret-value-clear-secret-info"></a>
 
 **Request Headers To Add Secret Value Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="response-cookies-to-add"></a>
 
 **Response Cookies To Add**
 
-`add_domain` - (Optional) Add Domain. Add domain attribute (`String`).
+&#x2022; `add_domain` - Optional String<br>Add Domain. Add domain attribute
 
-`add_expiry` - (Optional) Add expiry. Add expiry attribute (`String`).
+&#x2022; `add_expiry` - Optional String<br>Add expiry. Add expiry attribute
 
-`add_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `add_httponly` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`add_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `add_partitioned` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`add_path` - (Optional) Add path. Add path attribute (`String`).
+&#x2022; `add_path` - Optional String<br>Add path. Add path attribute
 
-`add_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `add_secure` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ignore_domain` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ignore_domain` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ignore_expiry` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ignore_expiry` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ignore_httponly` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ignore_httponly` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ignore_max_age` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ignore_max_age` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ignore_partitioned` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ignore_partitioned` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ignore_path` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ignore_path` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ignore_samesite` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ignore_samesite` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ignore_secure` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ignore_secure` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`ignore_value` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `ignore_value` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`max_age_value` - (Optional) Add Max Age. Add max age attribute (`Number`).
+&#x2022; `max_age_value` - Optional Number<br>Add Max Age. Add max age attribute
 
-`name` - (Optional) Name. Name of the cookie in Cookie header (`String`).
+&#x2022; `name` - Optional String<br>Name. Name of the cookie in Cookie header
 
-`overwrite` - (Optional) Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite. Defaults to `do` (`Bool`).
+&#x2022; `overwrite` - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
 
-`samesite_lax` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `samesite_lax` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`samesite_none` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `samesite_none` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`samesite_strict` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `samesite_strict` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#response-cookies-to-add-secret-value) below.
+&#x2022; `secret_value` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#response-cookies-to-add-secret-value) below.
 
-`value` - (Optional) Value. Value of the Cookie header (`String`).
+&#x2022; `value` - Optional String<br>Value. Value of the Cookie header
 
 <a id="response-cookies-to-add-secret-value"></a>
 
 **Response Cookies To Add Secret Value**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#response-cookies-to-add-secret-value-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#response-cookies-to-add-secret-value-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#response-cookies-to-add-secret-value-clear-secret-info) below.
 
 <a id="response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
 **Response Cookies To Add Secret Value Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="response-cookies-to-add-secret-value-clear-secret-info"></a>
 
 **Response Cookies To Add Secret Value Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="response-headers-to-add"></a>
 
 **Response Headers To Add**
 
-`append` - (Optional) Append. Should the value be appended? If true, the value is appended to existing values. not append. Defaults to `do` (`Bool`).
+&#x2022; `append` - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
-`name` - (Optional) Name. Name of the HTTP header (`String`).
+&#x2022; `name` - Optional String<br>Name. Name of the HTTP header
 
-`secret_value` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Secret Value](#response-headers-to-add-secret-value) below.
+&#x2022; `secret_value` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#response-headers-to-add-secret-value) below.
 
-`value` - (Optional) Value. Value of the HTTP header (`String`).
+&#x2022; `value` - Optional String<br>Value. Value of the HTTP header
 
 <a id="response-headers-to-add-secret-value"></a>
 
 **Response Headers To Add Secret Value**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#response-headers-to-add-secret-value-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#response-headers-to-add-secret-value-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#response-headers-to-add-secret-value-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#response-headers-to-add-secret-value-clear-secret-info) below.
 
 <a id="response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
 **Response Headers To Add Secret Value Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="response-headers-to-add-secret-value-clear-secret-info"></a>
 
 **Response Headers To Add Secret Value Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="retry-policy"></a>
 
 **Retry Policy**
 
-`back_off` - (Optional) Retry BackOff Interval. Specifies parameters that control retry back off. See [Back Off](#retry-policy-back-off) below.
+&#x2022; `back_off` - Optional Block<br>Retry BackOff Interval. Specifies parameters that control retry back off<br>See [Back Off](#retry-policy-back-off) below.
 
-`num_retries` - (Optional) Number of Retries. Specifies the allowed number of retries. Retries can be done any number of times. An exponential back-off algorithm is used between each retry. Defaults to `1` (`Number`).
+&#x2022; `num_retries` - Optional Number  Defaults to `1`<br>Number of Retries. Specifies the allowed number of retries. Retries can be done any number of times. An exponential back-off algorithm is used between each retry
 
-`per_try_timeout` - (Optional) Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds (`Number`).
+&#x2022; `per_try_timeout` - Optional Number<br>Per Try Timeout. Specifies a non-zero timeout per retry attempt. In milliseconds
 
-`retriable_status_codes` - (Optional) Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on (`List`).
+&#x2022; `retriable_status_codes` - Optional List<br>Status Code to Retry. HTTP status codes that should trigger a retry in addition to those specified by retry_on
 
-`retry_condition` - (Optional) Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.) (`List`).
+&#x2022; `retry_condition` - Optional List<br>Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.)
 
 <a id="retry-policy-back-off"></a>
 
 **Retry Policy Back Off**
 
-`base_interval` - (Optional) Base Retry Interval. Specifies the base interval between retries in milliseconds (`Number`).
+&#x2022; `base_interval` - Optional Number<br>Base Retry Interval. Specifies the base interval between retries in milliseconds
 
-`max_interval` - (Optional) Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The times the base_interval. Defaults to `10` (`Number`).
+&#x2022; `max_interval` - Optional Number  Defaults to `10`<br>Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The times the base_interval
 
 <a id="routes"></a>
 
 **Routes**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="sensitive-data-policy"></a>
 
 **Sensitive Data Policy**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="slow-ddos-mitigation"></a>
 
 **Slow DDOS Mitigation**
 
-`disable_request_timeout` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable_request_timeout` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`request_headers_timeout` - (Optional) Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The milliseconds. This setting provides protection against Slowloris attacks. Defaults to `10000` (`Number`).
+&#x2022; `request_headers_timeout` - Optional Number  Defaults to `10000`<br>Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The milliseconds. This setting provides protection against Slowloris attacks
 
-`request_timeout` - (Optional) Custom Timeout (`Number`).
+&#x2022; `request_timeout` - Optional Number<br>Custom Timeout
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 <a id="tls-cert-params"></a>
 
 **TLS Cert Params**
 
-`certificates` - (Optional) Certificates. Set of certificates. See [Certificates](#tls-cert-params-certificates) below.
+&#x2022; `certificates` - Optional Block<br>Certificates. Set of certificates<br>See [Certificates](#tls-cert-params-certificates) below.
 
-`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used (`List`).
+&#x2022; `cipher_suites` - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
 
-`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `client_certificate_optional` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `client_certificate_required` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`maximum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+&#x2022; `maximum_protocol_version` - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-`minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+&#x2022; `minimum_protocol_version` - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_client_certificate` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#tls-cert-params-validation-params) below.
+&#x2022; `validation_params` - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#tls-cert-params-validation-params) below.
 
-`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+&#x2022; `xfcc_header_elements` - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added
 
 <a id="tls-cert-params-certificates"></a>
 
 **TLS Cert Params Certificates**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="tls-cert-params-validation-params"></a>
 
 **TLS Cert Params Validation Params**
 
-`skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
+&#x2022; `skip_hostname_verification` - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
-`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#tls-cert-params-validation-params-trusted-ca) below.
+&#x2022; `trusted_ca` - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA](#tls-cert-params-validation-params-trusted-ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
+&#x2022; `trusted_ca_url` - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
 
-`verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
+&#x2022; `verify_subject_alt_names` - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
 <a id="tls-cert-params-validation-params-trusted-ca"></a>
 
 **TLS Cert Params Validation Params Trusted CA**
 
-`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA List](#tls-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
+&#x2022; `trusted_ca_list` - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
 
 <a id="tls-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
 **TLS Cert Params Validation Params Trusted CA Trusted CA List**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="tls-parameters"></a>
 
 **TLS Parameters**
 
-`client_certificate_optional` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `client_certificate_optional` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`client_certificate_required` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `client_certificate_required` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`common_params` - (Optional) TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store. See [Common Params](#tls-parameters-common-params) below.
+&#x2022; `common_params` - Optional Block<br>TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store<br>See [Common Params](#tls-parameters-common-params) below.
 
-`no_client_certificate` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `no_client_certificate` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`xfcc_header_elements` - (Optional) XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE` (`List`).
+&#x2022; `xfcc_header_elements` - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added
 
 <a id="tls-parameters-common-params"></a>
 
 **TLS Parameters Common Params**
 
-`cipher_suites` - (Optional) Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used (`List`).
+&#x2022; `cipher_suites` - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
 
-`maximum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+&#x2022; `maximum_protocol_version` - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-`minimum_protocol_version` - (Optional) TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO` (`String`).
+&#x2022; `minimum_protocol_version` - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-`tls_certificates` - (Optional) TLS Certificates. Set of TLS certificates. See [TLS Certificates](#tls-parameters-common-params-tls-certificates) below.
+&#x2022; `tls_certificates` - Optional Block<br>TLS Certificates. Set of TLS certificates<br>See [TLS Certificates](#tls-parameters-common-params-tls-certificates) below.
 
-`validation_params` - (Optional) TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification. See [Validation Params](#tls-parameters-common-params-validation-params) below.
+&#x2022; `validation_params` - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#tls-parameters-common-params-validation-params) below.
 
 <a id="tls-parameters-common-params-tls-certificates"></a>
 
 **TLS Parameters Common Params TLS Certificates**
 
-`certificate_url` - (Optional) Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers (`String`).
+&#x2022; `certificate_url` - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
-`custom_hash_algorithms` - (Optional) Hash Algorithms. Specifies the hash algorithms to be used. See [Custom Hash Algorithms](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) below.
+&#x2022; `custom_hash_algorithms` - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) below.
 
-`description` - (Optional) Description. Description for the certificate (`String`).
+&#x2022; `description` - Optional String<br>Description. Description for the certificate
 
-`disable_ocsp_stapling` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable_ocsp_stapling` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`private_key` - (Optional) Secret. SecretType is used in an object to indicate a sensitive/confidential field. See [Private Key](#tls-parameters-common-params-tls-certificates-private-key) below.
+&#x2022; `private_key` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#tls-parameters-common-params-tls-certificates-private-key) below.
 
-`use_system_defaults` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `use_system_defaults` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
 
 **TLS Parameters Common Params TLS Certificates Custom Hash Algorithms**
 
-`hash_algorithms` - (Optional) Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM` (`List`).
+&#x2022; `hash_algorithms` - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="tls-parameters-common-params-tls-certificates-private-key"></a>
 
 **TLS Parameters Common Params TLS Certificates Private Key**
 
-`blindfold_secret_info` - (Optional) Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management. See [Blindfold Secret Info](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) below.
+&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) below.
 
-`clear_secret_info` - (Optional) In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted. See [Clear Secret Info](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) below.
+&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) below.
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
 **TLS Parameters Common Params TLS Certificates Private Key Blindfold Secret Info**
 
-`decryption_provider` - (Optional) Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service (`String`).
+&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-`location` - (Optional) Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location (`String`).
+&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-`store_provider` - (Optional) Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-clear-secret-info"></a>
 
 **TLS Parameters Common Params TLS Certificates Private Key Clear Secret Info**
 
-`provider_ref` - (Optional) Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:/// (`String`).
+&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-`url` - (Optional) URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding (`String`).
+&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
 **TLS Parameters Common Params Validation Params**
 
-`skip_hostname_verification` - (Optional) Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname (`Bool`).
+&#x2022; `skip_hostname_verification` - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
-`trusted_ca` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA](#tls-parameters-common-params-validation-params-trusted-ca) below.
+&#x2022; `trusted_ca` - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA](#tls-parameters-common-params-validation-params-trusted-ca) below.
 
-`trusted_ca_url` - (Optional) Inline Root CA Certificate (legacy). Inline Root CA Certificate (`String`).
+&#x2022; `trusted_ca_url` - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
 
-`verify_subject_alt_names` - (Optional) List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate (`List`).
+&#x2022; `verify_subject_alt_names` - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
 
 **TLS Parameters Common Params Validation Params Trusted CA**
 
-`trusted_ca_list` - (Optional) Root CA Certificate Reference. Reference to Root CA Certificate. See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
+&#x2022; `trusted_ca_list` - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
 **TLS Parameters Common Params Validation Params Trusted CA Trusted CA List**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="user-identification"></a>
 
 **User Identification**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="waf-type"></a>
 
 **WAF Type**
 
-`app_firewall` - (Optional) App Firewall Reference. A list of references to the app_firewall configuration objects. See [App Firewall](#waf-type-app-firewall) below.
+&#x2022; `app_firewall` - Optional Block<br>App Firewall Reference. A list of references to the app_firewall configuration objects<br>See [App Firewall](#waf-type-app-firewall) below.
 
-`disable_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `disable_waf` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`inherit_waf` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `inherit_waf` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="waf-type-app-firewall"></a>
 
 **WAF Type App Firewall**
 
-`app_firewall` - (Optional) Application Firewall. References to an Application Firewall configuration object. See [App Firewall](#waf-type-app-firewall-app-firewall) below.
+&#x2022; `app_firewall` - Optional Block<br>Application Firewall. References to an Application Firewall configuration object<br>See [App Firewall](#waf-type-app-firewall-app-firewall) below.
 
 <a id="waf-type-app-firewall-app-firewall"></a>
 
 **WAF Type App Firewall App Firewall**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 ## Import
 

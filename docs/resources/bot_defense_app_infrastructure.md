@@ -52,35 +52,35 @@ resource "f5xc_bot_defense_app_infrastructure" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the BotDefenseAppInfrastructure. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the BotDefenseAppInfrastructure. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the BotDefenseAppInfrastructure will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the BotDefenseAppInfrastructure will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; `cloud_hosted` - (Optional) F5 Hosted. Infra F5 Hosted. See [Cloud Hosted](#cloud-hosted) below for details.
-<br>&#x2022; `data_center_hosted` - (Optional) F5 Hosted. Infra F5 Hosted. See [Data Center Hosted](#data-center-hosted) below for details.
+&#x2022; `cloud_hosted` - Optional Block<br>F5 Hosted. Infra F5 Hosted<br>See [Cloud Hosted](#cloud-hosted) below for details.
+<br>&#x2022; `data_center_hosted` - Optional Block<br>F5 Hosted. Infra F5 Hosted<br>See [Data Center Hosted](#data-center-hosted) below for details.
 
-`environment_type` - (Optional) Environment Type. Environment Type Production environment Testing environment. Possible values are `PRODUCTION`, `TESTING`. Defaults to `PRODUCTION` (`String`).
+&#x2022; `environment_type` - Optional String  Defaults to `PRODUCTION`<br>Possible values are `PRODUCTION`, `TESTING`<br>Environment Type. Environment Type Production environment Testing environment
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-`traffic_type` - (Optional) Traffic Type. Traffic Type Web traffic Mobile traffic. Possible values are `WEB`, `MOBILE`. Defaults to `WEB` (`String`).
+&#x2022; `traffic_type` - Optional String  Defaults to `WEB`<br>Possible values are `WEB`, `MOBILE`<br>Traffic Type. Traffic Type Web traffic Mobile traffic
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -88,73 +88,73 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cloud Hosted**
 
-`egress` - (Optional) Egress. Egress. See [Egress](#cloud-hosted-egress) below.
+&#x2022; `egress` - Optional Block<br>Egress. Egress<br>See [Egress](#cloud-hosted-egress) below.
 
-`infra_host_name` - (Optional) Infra Host Name. Infra Host Name (`String`).
+&#x2022; `infra_host_name` - Optional String<br>Infra Host Name. Infra Host Name
 
-`ingress` - (Optional) Ingress. Ingress. See [Ingress](#cloud-hosted-ingress) below.
+&#x2022; `ingress` - Optional Block<br>Ingress. Ingress<br>See [Ingress](#cloud-hosted-ingress) below.
 
-`region` - (Optional) Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`. Defaults to `US` (`String`).
+&#x2022; `region` - Optional String  Defaults to `US`<br>Possible values are `US`, `EU`, `ASIA`<br>Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region
 
 <a id="cloud-hosted-egress"></a>
 
 **Cloud Hosted Egress**
 
-`ip_address` - (Optional) IP Address. Egress IP address (`String`).
+&#x2022; `ip_address` - Optional String<br>IP Address. Egress IP address
 
-`location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1` (`String`).
+&#x2022; `location` - Optional String  Defaults to `AWS_AP_NORTHEAST_1`<br>Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`<br>Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2
 
 <a id="cloud-hosted-ingress"></a>
 
 **Cloud Hosted Ingress**
 
-`host_name` - (Optional) Ingress value. Ingress Host Name (`String`).
+&#x2022; `host_name` - Optional String<br>Ingress value. Ingress Host Name
 
-`ip_address` - (Optional) Ingress value. Ingress IP Address (`String`).
+&#x2022; `ip_address` - Optional String<br>Ingress value. Ingress IP Address
 
-`location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1` (`String`).
+&#x2022; `location` - Optional String  Defaults to `AWS_AP_NORTHEAST_1`<br>Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`<br>Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2
 
 <a id="data-center-hosted"></a>
 
 **Data Center Hosted**
 
-`egress` - (Optional) Egress. Egress. See [Egress](#data-center-hosted-egress) below.
+&#x2022; `egress` - Optional Block<br>Egress. Egress<br>See [Egress](#data-center-hosted-egress) below.
 
-`infra_host_name` - (Optional) Infra Host Name. Infra Host Name (`String`).
+&#x2022; `infra_host_name` - Optional String<br>Infra Host Name. Infra Host Name
 
-`ingress` - (Optional) Ingress. Ingress. See [Ingress](#data-center-hosted-ingress) below.
+&#x2022; `ingress` - Optional Block<br>Ingress. Ingress<br>See [Ingress](#data-center-hosted-ingress) below.
 
-`region` - (Optional) Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region. Possible values are `US`, `EU`, `ASIA`. Defaults to `US` (`String`).
+&#x2022; `region` - Optional String  Defaults to `US`<br>Possible values are `US`, `EU`, `ASIA`<br>Bot Defense Advanced Region. Defines a selection for Bot Defense Advanced region - US: US US region - EU: EU European Union region - ASIA: ASIA Asia region
 
 <a id="data-center-hosted-egress"></a>
 
 **Data Center Hosted Egress**
 
-`ip_address` - (Optional) IP Address. Egress IP address (`String`).
+&#x2022; `ip_address` - Optional String<br>IP Address. Egress IP address
 
-`location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1` (`String`).
+&#x2022; `location` - Optional String  Defaults to `AWS_AP_NORTHEAST_1`<br>Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`<br>Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2
 
 <a id="data-center-hosted-ingress"></a>
 
 **Data Center Hosted Ingress**
 
-`host_name` - (Optional) Ingress value. Ingress Host Name (`String`).
+&#x2022; `host_name` - Optional String<br>Ingress value. Ingress Host Name
 
-`ip_address` - (Optional) Ingress value. Ingress IP Address (`String`).
+&#x2022; `ip_address` - Optional String<br>Ingress value. Ingress IP Address
 
-`location` - (Optional) Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1` (`String`).
+&#x2022; `location` - Optional String  Defaults to `AWS_AP_NORTHEAST_1`<br>Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`<br>Location. Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1 GCP_ASIA_EAST_2 GCP_ASIA_NORTHEAST_1 GCP_ASIA_NORTHEAST_2 GCP_ASIA_NORTHEAST_3 GCP_ASIA_SOUTH_1 GCP_ASIA_SOUTHEAST_1 GCP_ASIA_SOUTHEAST_2 GCP_AUSTRALIA_SOUTHEAST_1 GCP_EUROPE_WEST_1 GCP_EUROPE_WEST_2 GCP_EUROPE_WEST_3 GCP_NORTHAMERICA_NORTHEAST_1 GCP_NORTHAMERICA_NORTHEAST_2 GCP_SOUTHAMERICA_EAST_1 GCP_SOUTHAMERICA_WEST_1 GCP_US_CENTRAL_1 GCP_US_EAST_1 GCP_US_EAST_4 GCP_US_WEST_1 GCP_US_WEST_2
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

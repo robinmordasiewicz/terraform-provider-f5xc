@@ -52,31 +52,31 @@ resource "f5xc_external_connector" "example" {
 
 ### Metadata Argument Reference
 
-`name` - (Required) Name of the ExternalConnector. Must be unique within the namespace (`String`).
+&#x2022; `name` - Required String<br>Name of the ExternalConnector. Must be unique within the namespace
 
-`namespace` - (Required) Namespace where the ExternalConnector will be created (`String`).
+&#x2022; `namespace` - Required String<br>Namespace where the ExternalConnector will be created
 
-`annotations` - (Optional) Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata (`Map`).
+&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-`description` - (Optional) Human readable description for the object (`String`).
+&#x2022; `description` - Optional String<br>Human readable description for the object
 
-`disable` - (Optional) A value of true will administratively disable the object (`Bool`).
+&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
 
-`labels` - (Optional) Labels is a user defined key value map that can be attached to resources for organization and filtering (`Map`).
+&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-`ce_site_reference` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [CE Site Reference](#ce-site-reference) below for details.
+&#x2022; `ce_site_reference` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CE Site Reference](#ce-site-reference) below for details.
 
-`ipsec` - (Optional) IPSec. External Connector with IPSec tunnel. See [Ipsec](#ipsec) below for details.
+&#x2022; `ipsec` - Optional Block<br>IPSec. External Connector with IPSec tunnel<br>See [Ipsec](#ipsec) below for details.
 
-`timeouts` - (Optional) See [Timeouts](#timeouts) below for details.
+&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-`id` - (Optional) Unique identifier for the resource (`String`).
+&#x2022; `id` - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -84,157 +84,157 @@ In addition to all arguments above, the following attributes are exported:
 
 **CE Site Reference**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="ipsec"></a>
 
 **Ipsec**
 
-`ike_parameters` - (Optional) IKE Parameters. IKE configuration parameters required for IPSec Connection type. See [Ike Parameters](#ipsec-ike-parameters) below.
+&#x2022; `ike_parameters` - Optional Block<br>IKE Parameters. IKE configuration parameters required for IPSec Connection type<br>See [Ike Parameters](#ipsec-ike-parameters) below.
 
-`ipsec_tunnel_parameters` - (Optional) Configure IPSec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment. See [Ipsec Tunnel Parameters](#ipsec-ipsec-tunnel-parameters) below.
+&#x2022; `ipsec_tunnel_parameters` - Optional Block<br>Configure IPSec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment<br>See [Ipsec Tunnel Parameters](#ipsec-ipsec-tunnel-parameters) below.
 
 <a id="ipsec-ike-parameters"></a>
 
 **Ipsec Ike Parameters**
 
-`dpd_disabled` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `dpd_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`dpd_keep_alive_timer` - (Optional) Keepalive Timer. See [Dpd Keep Alive Timer](#ipsec-ike-parameters-dpd-keep-alive-timer) below.
+&#x2022; `dpd_keep_alive_timer` - Optional Block<br>Keepalive Timer<br>See [Dpd Keep Alive Timer](#ipsec-ike-parameters-dpd-keep-alive-timer) below.
 
-`ike_phase1_profile` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ike Phase1 Profile](#ipsec-ike-parameters-ike-phase1-profile) below.
+&#x2022; `ike_phase1_profile` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Ike Phase1 Profile](#ipsec-ike-parameters-ike-phase1-profile) below.
 
-`ike_phase2_profile` - (Optional) Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name. See [Ike Phase2 Profile](#ipsec-ike-parameters-ike-phase2-profile) below.
+&#x2022; `ike_phase2_profile` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Ike Phase2 Profile](#ipsec-ike-parameters-ike-phase2-profile) below.
 
-`initiator` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `initiator` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`responder` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `responder` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`rm_hostname` - (Optional) Hostname. Configure an hostname Remote IKE ID (`String`).
+&#x2022; `rm_hostname` - Optional String<br>Hostname. Configure an hostname Remote IKE ID
 
-`rm_ip_address` - (Optional) IP Address. IP Address used to specify an IPv4 or IPv6 address. See [Rm IP Address](#ipsec-ike-parameters-rm-ip-address) below.
+&#x2022; `rm_ip_address` - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Rm IP Address](#ipsec-ike-parameters-rm-ip-address) below.
 
-`use_default_local_ike_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `use_default_local_ike_id` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`use_default_remote_ike_id` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `use_default_remote_ike_id` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ipsec-ike-parameters-dpd-keep-alive-timer"></a>
 
 **Ipsec Ike Parameters Dpd Keep Alive Timer**
 
-`timeout` - (Optional) Keepalive Timer (`Number`).
+&#x2022; `timeout` - Optional Number<br>Keepalive Timer
 
 <a id="ipsec-ike-parameters-ike-phase1-profile"></a>
 
 **Ipsec Ike Parameters Ike Phase1 Profile**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="ipsec-ike-parameters-ike-phase2-profile"></a>
 
 **Ipsec Ike Parameters Ike Phase2 Profile**
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="ipsec-ike-parameters-rm-ip-address"></a>
 
 **Ipsec Ike Parameters Rm IP Address**
 
-`ipv4` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [IPv4](#ipsec-ike-parameters-rm-ip-address-ipv4) below.
+&#x2022; `ipv4` - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipsec-ike-parameters-rm-ip-address-ipv4) below.
 
-`ipv6` - (Optional) IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'. See [IPv6](#ipsec-ike-parameters-rm-ip-address-ipv6) below.
+&#x2022; `ipv6` - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipsec-ike-parameters-rm-ip-address-ipv6) below.
 
 <a id="ipsec-ike-parameters-rm-ip-address-ipv4"></a>
 
 **Ipsec Ike Parameters Rm IP Address IPv4**
 
-`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+&#x2022; `addr` - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="ipsec-ike-parameters-rm-ip-address-ipv6"></a>
 
 **Ipsec Ike Parameters Rm IP Address IPv6**
 
-`addr` - (Optional) IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::' (`String`).
+&#x2022; `addr` - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="ipsec-ipsec-tunnel-parameters"></a>
 
 **Ipsec Ipsec Tunnel Parameters**
 
-`peer_ip_address` - (Optional) IPv4 Address. IPv4 Address in dot-decimal notation. See [Peer IP Address](#ipsec-ipsec-tunnel-parameters-peer-ip-address) below.
+&#x2022; `peer_ip_address` - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [Peer IP Address](#ipsec-ipsec-tunnel-parameters-peer-ip-address) below.
 
-`psk` - (Optional) Pre-Shared Key. The IKE pre-shared key (PSK) is required to ensure the IKE peers can authenticate one another within IKE phase 1 negotiation (`String`).
+&#x2022; `psk` - Optional String<br>Pre-Shared Key. The IKE pre-shared key (PSK) is required to ensure the IKE peers can authenticate one another within IKE phase 1 negotiation
 
-`segment` - (Optional) Segment Reference Type. Reference to Segment Object. See [Segment](#ipsec-ipsec-tunnel-parameters-segment) below.
+&#x2022; `segment` - Optional Block<br>Segment Reference Type. Reference to Segment Object<br>See [Segment](#ipsec-ipsec-tunnel-parameters-segment) below.
 
-`site_local_inside_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `site_local_inside_network` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`site_local_network` - (Optional) Empty. This can be used for messages where no values are needed (`Block`).
+&#x2022; `site_local_network` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-`tunnel_eps` - (Optional) Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses. See [Tunnel Eps](#ipsec-ipsec-tunnel-parameters-tunnel-eps) below.
+&#x2022; `tunnel_eps` - Optional Block<br>Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses<br>See [Tunnel Eps](#ipsec-ipsec-tunnel-parameters-tunnel-eps) below.
 
-`tunnel_mtu` - (Optional) MTU. The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented (`Number`).
+&#x2022; `tunnel_mtu` - Optional Number<br>MTU. The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented
 
 <a id="ipsec-ipsec-tunnel-parameters-peer-ip-address"></a>
 
 **Ipsec Ipsec Tunnel Parameters Peer IP Address**
 
-`addr` - (Optional) IPv4 Address. IPv4 Address in string form with dot-decimal notation (`String`).
+&#x2022; `addr` - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="ipsec-ipsec-tunnel-parameters-segment"></a>
 
 **Ipsec Ipsec Tunnel Parameters Segment**
 
-`refs` - (Optional) Segment. Reference to Segment Object. See [Refs](#ipsec-ipsec-tunnel-parameters-segment-refs) below.
+&#x2022; `refs` - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#ipsec-ipsec-tunnel-parameters-segment-refs) below.
 
 <a id="ipsec-ipsec-tunnel-parameters-segment-refs"></a>
 
 **Ipsec Ipsec Tunnel Parameters Segment Refs**
 
-`kind` - (Optional) Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route') (`String`).
+&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-`name` - (Optional) Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name (`String`).
+&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-`namespace` - (Optional) Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace (`String`).
+&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-`tenant` - (Optional) Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant (`String`).
+&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-`uid` - (Optional) UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid (`String`).
+&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="ipsec-ipsec-tunnel-parameters-tunnel-eps"></a>
 
 **Ipsec Ipsec Tunnel Parameters Tunnel Eps**
 
-`interface` - (Optional) Interface. For the chosen node, specify the interface that will be the tunnel source (`String`).
+&#x2022; `interface` - Optional String<br>Interface. For the chosen node, specify the interface that will be the tunnel source
 
-`local_tunnel_ip` - (Optional) Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e. the IP address of the tunnel on the CE node itself and a subnet prefix length (`String`).
+&#x2022; `local_tunnel_ip` - Optional String<br>Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e. the IP address of the tunnel on the CE node itself and a subnet prefix length
 
-`node` - (Optional) Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection (`String`).
+&#x2022; `node` - Optional String<br>Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection
 
-`remote_tunnel_ip` - (Optional) Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. the IP address of the tunnel on the remote gateway and a subnet prefix length (`String`).
+&#x2022; `remote_tunnel_ip` - Optional String<br>Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. the IP address of the tunnel on the remote gateway and a subnet prefix length
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-`create` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-`delete` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs (`String`).
+&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-`read` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled (`String`).
+&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-`update` - (Optional) A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours) (`String`).
+&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

@@ -52,39 +52,39 @@ resource "f5xc_tenant_profile" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; `name` - Required String<br>Name of the TenantProfile. Must be unique within the namespace
+&#x2022; [`name`](#name) - Required String<br>Name of the TenantProfile. Must be unique within the namespace
 
-&#x2022; `namespace` - Required String<br>Namespace where the TenantProfile will be created
+&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TenantProfile will be created
 
-&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; `description` - Optional String<br>Human readable description for the object
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; `ct_groups` - Optional Block<br>Child Tenant Groups. List of user groups to be created on child tenant<br>See [Ct Groups](#ct-groups) below for details.
+&#x2022; [`ct_groups`](#ct-groups) - Optional Block<br>Child Tenant Groups. List of user groups to be created on child tenant<br>See [Ct Groups](#ct-groups) below for details.
 
-&#x2022; `enable_support_access` - Optional Bool<br>Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support
+&#x2022; [`enable_support_access`](#enable-support-access) - Optional Bool<br>Support Access. Selecting Support Access will allow for F5XC Support teams to access the new Child Tenant for troubleshooting. Unselecting will pause access for XC Support
 
-&#x2022; `favicon` - Optional Block<br>File. Contains file data<br>See [Favicon](#favicon) below for details.
+&#x2022; [`favicon`](#favicon) - Optional Block<br>File. Contains file data<br>See [Favicon](#favicon) below for details.
 
-&#x2022; `logo` - Optional Block<br>File. Contains file data<br>See [Logo](#logo) below for details.
+&#x2022; [`logo`](#logo) - Optional Block<br>File. Contains file data<br>See [Logo](#logo) below for details.
 
-&#x2022; `plan` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Plan](#plan) below for details.
+&#x2022; [`plan`](#plan) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Plan](#plan) below for details.
 
-&#x2022; `support_email` - Optional String<br>Support Email. Support Email address for child tenant
+&#x2022; [`support_email`](#support-email) - Optional String<br>Support Email. Support Email address for child tenant
 
-&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; `id` - Optional String<br>Unique identifier for the resource
+&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -92,59 +92,59 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ct Groups**
 
-&#x2022; `name` - Optional String<br>Name. Name of the child tenant user group
+&#x2022; [`name`](#name) - Optional String<br>Name. Name of the child tenant user group
 
-&#x2022; `namespace_roles` - Optional Block<br>Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant<br>See [Namespace Roles](#ct-groups-namespace-roles) below.
+&#x2022; [`namespace_roles`](#namespace-roles) - Optional Block<br>Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant<br>See [Namespace Roles](#ct-groups-namespace-roles) below.
 
 <a id="ct-groups-namespace-roles"></a>
 
 **Ct Groups Namespace Roles**
 
-&#x2022; `namespace` - Optional String<br>Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces. The System, Shared, and Default namespaces will be created automatically
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces. The System, Shared, and Default namespaces will be created automatically
 
-&#x2022; `role` - Optional String<br>Role. User role that users in the newly created group will inherit
+&#x2022; [`role`](#role) - Optional String<br>Role. User role that users in the newly created group will inherit
 
 <a id="favicon"></a>
 
 **Favicon**
 
-&#x2022; `aws_s3` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`aws_s3`](#aws-s3) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `content` - Optional String<br>Content. Content of the file
+&#x2022; [`content`](#content) - Optional String<br>Content. Content of the file
 
-&#x2022; `content_type` - Optional String<br>Content Type. Content type of the file (MIME type)
+&#x2022; [`content_type`](#content-type) - Optional String<br>Content Type. Content type of the file (MIME type)
 
 <a id="logo"></a>
 
 **Logo**
 
-&#x2022; `aws_s3` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`aws_s3`](#aws-s3) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `content` - Optional String<br>Content. Content of the file
+&#x2022; [`content`](#content) - Optional String<br>Content. Content of the file
 
-&#x2022; `content_type` - Optional String<br>Content Type. Content type of the file (MIME type)
+&#x2022; [`content_type`](#content-type) - Optional String<br>Content Type. Content type of the file (MIME type)
 
 <a id="plan"></a>
 
 **Plan**
 
-&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

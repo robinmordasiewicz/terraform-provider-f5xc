@@ -52,41 +52,41 @@ resource "f5xc_infraprotect_tunnel" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; `name` - Required String<br>Name of the InfraprotectTunnel. Must be unique within the namespace
+&#x2022; [`name`](#name) - Required String<br>Name of the InfraprotectTunnel. Must be unique within the namespace
 
-&#x2022; `namespace` - Required String<br>Namespace where the InfraprotectTunnel will be created
+&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the InfraprotectTunnel will be created
 
-&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; `description` - Optional String<br>Human readable description for the object
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; `bandwidth` - Optional Block<br>Bandwidth Speed Configuration. Bandwidth max allowed<br>See [Bandwidth](#bandwidth) below for details.
+&#x2022; [`bandwidth`](#bandwidth) - Optional Block<br>Bandwidth Speed Configuration. Bandwidth max allowed<br>See [Bandwidth](#bandwidth) below for details.
 
-&#x2022; `bgp_information` - Optional Block<br>BGP. BGP information associated with a DDOS transit tunnel<br>See [BGP Information](#bgp-information) below for details.
+&#x2022; [`bgp_information`](#bgp-information) - Optional Block<br>BGP. BGP information associated with a DDOS transit tunnel<br>See [BGP Information](#bgp-information) below for details.
 
-&#x2022; `firewall_rule_group` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Firewall Rule Group](#firewall-rule-group) below for details.
+&#x2022; [`firewall_rule_group`](#firewall-rule-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Firewall Rule Group](#firewall-rule-group) below for details.
 
 -> **One of the following:**
-&#x2022; `gre_ipv4` - Optional Block<br>GRE IPv4 Tunnel. IPv4 Tunnel<br>See [Gre IPv4](#gre-ipv4) below for details.
-<br><br>&#x2022; `gre_ipv6` - Optional Block<br>GRE IPv6 Tunnel. IPv6 Tunnel<br>See [Gre IPv6](#gre-ipv6) below for details.
-<br><br>&#x2022; `ip_in_ip` - Optional Block<br>IP in IP Tunnel. IP in IP Tunnel<br>See [IP In IP](#ip-in-ip) below for details.
-<br><br>&#x2022; `ipv6_to_ipv6` - Optional Block<br>IPv6 to IPv6 Tunnel. IPv6 to IPv6 Tunnel<br>See [IPv6 To IPv6](#ipv6-to-ipv6) below for details.
+&#x2022; [`gre_ipv4`](#gre-ipv4) - Optional Block<br>GRE IPv4 Tunnel. IPv4 Tunnel<br>See [Gre IPv4](#gre-ipv4) below for details.
+<br><br>&#x2022; [`gre_ipv6`](#gre-ipv6) - Optional Block<br>GRE IPv6 Tunnel. IPv6 Tunnel<br>See [Gre IPv6](#gre-ipv6) below for details.
+<br><br>&#x2022; [`ip_in_ip`](#ip-in-ip) - Optional Block<br>IP in IP Tunnel. IP in IP Tunnel<br>See [IP In IP](#ip-in-ip) below for details.
+<br><br>&#x2022; [`ipv6_to_ipv6`](#ipv6-to-ipv6) - Optional Block<br>IPv6 to IPv6 Tunnel. IPv6 to IPv6 Tunnel<br>See [IPv6 To IPv6](#ipv6-to-ipv6) below for details.
 
-&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; `tunnel_location` - Optional Block<br>Location. Location of a DDOS transit tunnel<br>See [Tunnel Location](#tunnel-location) below for details.
+&#x2022; [`tunnel_location`](#tunnel-location) - Optional Block<br>Location. Location of a DDOS transit tunnel<br>See [Tunnel Location](#tunnel-location) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; `id` - Optional String<br>Unique identifier for the resource
+&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -94,129 +94,129 @@ In addition to all arguments above, the following attributes are exported:
 
 **Bandwidth**
 
-&#x2022; `bandwidth_max_mb` - Optional Number<br>Bandwidth Max in MB. Bandwidth max allowed
+&#x2022; [`bandwidth_max_mb`](#bandwidth-max-mb) - Optional Number<br>Bandwidth Max in MB. Bandwidth max allowed
 
 <a id="bgp-information"></a>
 
 **BGP Information**
 
-&#x2022; `asn` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Asn](#bgp-information-asn) below.
+&#x2022; [`asn`](#asn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Asn](#bgp-information-asn) below.
 
-&#x2022; `holddown_timer_seconds` - Optional Number<br>Hold down Timer. BGP hold down timer, in seconds
+&#x2022; [`holddown_timer_seconds`](#holddown-timer-seconds) - Optional Number<br>Hold down Timer. BGP hold down timer, in seconds
 
-&#x2022; `no_secret` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_secret`](#no-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `peer_secret_override` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Peer Secret Override](#bgp-information-peer-secret-override) below.
+&#x2022; [`peer_secret_override`](#peer-secret-override) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Peer Secret Override](#bgp-information-peer-secret-override) below.
 
-&#x2022; `use_default_secret` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`use_default_secret`](#use-default-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="bgp-information-asn"></a>
 
 **BGP Information Asn**
 
-&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="bgp-information-peer-secret-override"></a>
 
 **BGP Information Peer Secret Override**
 
-&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#bgp-information-peer-secret-override-blindfold-secret-info) below.
+&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#bgp-information-peer-secret-override-blindfold-secret-info) below.
 
-&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#bgp-information-peer-secret-override-clear-secret-info) below.
+&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#bgp-information-peer-secret-override-clear-secret-info) below.
 
 <a id="bgp-information-peer-secret-override-blindfold-secret-info"></a>
 
 **BGP Information Peer Secret Override Blindfold Secret Info**
 
-&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="bgp-information-peer-secret-override-clear-secret-info"></a>
 
 **BGP Information Peer Secret Override Clear Secret Info**
 
-&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="firewall-rule-group"></a>
 
 **Firewall Rule Group**
 
-&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="gre-ipv4"></a>
 
 **Gre IPv4**
 
-&#x2022; `customer_endpoint_ipv4` - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
+&#x2022; [`customer_endpoint_ipv4`](#customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
 
-&#x2022; `fragmentation_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`fragmentation_disabled`](#fragmentation-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `fragmentation_enabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`fragmentation_enabled`](#fragmentation-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `ipv6_interconnect_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`ipv6_interconnect_disabled`](#ipv6-interconnect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `ipv6_interconnect_enabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`ipv6_interconnect_enabled`](#ipv6-interconnect-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `keepalive_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`keepalive_disabled`](#keepalive-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `keepalive_enabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`keepalive_enabled`](#keepalive-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="gre-ipv6"></a>
 
 **Gre IPv6**
 
-&#x2022; `customer_endpoint_ipv6` - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
+&#x2022; [`customer_endpoint_ipv6`](#customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
 
-&#x2022; `ipv4_interconnect_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`ipv4_interconnect_disabled`](#ipv4-interconnect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `ipv4_interconnect_enabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`ipv4_interconnect_enabled`](#ipv4-interconnect-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="ip-in-ip"></a>
 
 **IP In IP**
 
-&#x2022; `customer_endpoint_ipv4` - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
+&#x2022; [`customer_endpoint_ipv4`](#customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
 
 <a id="ipv6-to-ipv6"></a>
 
 **IPv6 To IPv6**
 
-&#x2022; `customer_endpoint_ipv6` - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
+&#x2022; [`customer_endpoint_ipv6`](#customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 <a id="tunnel-location"></a>
 
 **Tunnel Location**
 
-&#x2022; `name` - Optional String<br>Location Name. Destination tunnel Location
+&#x2022; [`name`](#name) - Optional String<br>Location Name. Destination tunnel Location
 
-&#x2022; `zone1` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`zone1`](#zone1) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `zone2` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`zone2`](#zone2) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ## Import
 

@@ -52,31 +52,31 @@ resource "f5xc_k8s_pod_security_policy" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; `name` - Required String<br>Name of the K8SPodSecurityPolicy. Must be unique within the namespace
+&#x2022; [`name`](#name) - Required String<br>Name of the K8SPodSecurityPolicy. Must be unique within the namespace
 
-&#x2022; `namespace` - Required String<br>Namespace where the K8SPodSecurityPolicy will be created
+&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the K8SPodSecurityPolicy will be created
 
-&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; `description` - Optional String<br>Human readable description for the object
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; `psp_spec` - Optional Block<br>Pod Security Policy Specification. Form based pod security specification<br>See [Psp Spec](#psp-spec) below for details.
-<br><br>&#x2022; `yaml` - Optional String<br>K8s YAML. K8s YAML for Pod Security Policy
+&#x2022; [`psp_spec`](#psp-spec) - Optional Block<br>Pod Security Policy Specification. Form based pod security specification<br>See [Psp Spec](#psp-spec) below for details.
+<br><br>&#x2022; [`yaml`](#yaml) - Optional String<br>K8s YAML. K8s YAML for Pod Security Policy
 
-&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; `id` - Optional String<br>Unique identifier for the resource
+&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -84,169 +84,169 @@ In addition to all arguments above, the following attributes are exported:
 
 **Psp Spec**
 
-&#x2022; `allow_privilege_escalation` - Optional Bool<br>Allow Privilege Escalation. Pod can request to privilege escalation
+&#x2022; [`allow_privilege_escalation`](#allow-privilege-escalation) - Optional Bool<br>Allow Privilege Escalation. Pod can request to privilege escalation
 
-&#x2022; `allowed_capabilities` - Optional Block<br>Capability List. List of capabilities that docker container has<br>See [Allowed Capabilities](#psp-spec-allowed-capabilities) below.
+&#x2022; [`allowed_capabilities`](#allowed-capabilities) - Optional Block<br>Capability List. List of capabilities that docker container has<br>See [Allowed Capabilities](#psp-spec-allowed-capabilities) below.
 
-&#x2022; `allowed_csi_drivers` - Optional List<br>Allowed CSI drivers. Restrict the available CSI drivers for POD, default all drivers are available
+&#x2022; [`allowed_csi_drivers`](#allowed-csi-drivers) - Optional List<br>Allowed CSI drivers. Restrict the available CSI drivers for POD, default all drivers are available
 
-&#x2022; `allowed_flex_volumes` - Optional List<br>Allowed Flex Volumes. Restrict list of Flex volumes, default all volumes are allowed
+&#x2022; [`allowed_flex_volumes`](#allowed-flex-volumes) - Optional List<br>Allowed Flex Volumes. Restrict list of Flex volumes, default all volumes are allowed
 
-&#x2022; `allowed_host_paths` - Optional Block<br>Allowed Host Paths. Restrict list of host paths, default all host paths are allowed<br>See [Allowed Host Paths](#psp-spec-allowed-host-paths) below.
+&#x2022; [`allowed_host_paths`](#allowed-host-paths) - Optional Block<br>Allowed Host Paths. Restrict list of host paths, default all host paths are allowed<br>See [Allowed Host Paths](#psp-spec-allowed-host-paths) below.
 
-&#x2022; `allowed_proc_mounts` - Optional List<br>Allowed Proc Mounts. allowed list of proc mounts, empty list allows default proc mounts
+&#x2022; [`allowed_proc_mounts`](#allowed-proc-mounts) - Optional List<br>Allowed Proc Mounts. allowed list of proc mounts, empty list allows default proc mounts
 
-&#x2022; `allowed_unsafe_sysctls` - Optional List<br>Allowed Unsafe Sysctls. allowed list of unsafe sysctls, empty list allows none. supports prefix reg-ex
+&#x2022; [`allowed_unsafe_sysctls`](#allowed-unsafe-sysctls) - Optional List<br>Allowed Unsafe Sysctls. allowed list of unsafe sysctls, empty list allows none. supports prefix reg-ex
 
-&#x2022; `default_allow_privilege_escalation` - Optional Bool<br>Default Allow Privilege Escalation. Pod has permission for privilege escalation by default
+&#x2022; [`default_allow_privilege_escalation`](#default-allow-privilege-escalation) - Optional Bool<br>Default Allow Privilege Escalation. Pod has permission for privilege escalation by default
 
-&#x2022; `default_capabilities` - Optional Block<br>Capability List. List of capabilities that docker container has<br>See [Default Capabilities](#psp-spec-default-capabilities) below.
+&#x2022; [`default_capabilities`](#default-capabilities) - Optional Block<br>Capability List. List of capabilities that docker container has<br>See [Default Capabilities](#psp-spec-default-capabilities) below.
 
-&#x2022; `drop_capabilities` - Optional Block<br>Capability List. List of capabilities that docker container has<br>See [Drop Capabilities](#psp-spec-drop-capabilities) below.
+&#x2022; [`drop_capabilities`](#drop-capabilities) - Optional Block<br>Capability List. List of capabilities that docker container has<br>See [Drop Capabilities](#psp-spec-drop-capabilities) below.
 
-&#x2022; `forbidden_sysctls` - Optional List<br>Forbidden Sysctls. Forbidden list of sysctls, empty list forbids none. supports prefix reg-ex
+&#x2022; [`forbidden_sysctls`](#forbidden-sysctls) - Optional List<br>Forbidden Sysctls. Forbidden list of sysctls, empty list forbids none. supports prefix reg-ex
 
-&#x2022; `fs_group_strategy_options` - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Fs Group Strategy Options](#psp-spec-fs-group-strategy-options) below.
+&#x2022; [`fs_group_strategy_options`](#fs-group-strategy-options) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Fs Group Strategy Options](#psp-spec-fs-group-strategy-options) below.
 
-&#x2022; `host_ipc` - Optional Bool<br>Host IPC. Host IPC determines if the policy allows the use of host IPC in the pod spec
+&#x2022; [`host_ipc`](#host-ipc) - Optional Bool<br>Host IPC. Host IPC determines if the policy allows the use of host IPC in the pod spec
 
-&#x2022; `host_network` - Optional Bool<br>Host Network. Host Network determines if the policy allows the use of host network in the pod spec
+&#x2022; [`host_network`](#host-network) - Optional Bool<br>Host Network. Host Network determines if the policy allows the use of host network in the pod spec
 
-&#x2022; `host_pid` - Optional Bool<br>Host PID. Host PID determines if the policy allows the use of host PID in the pod spec
+&#x2022; [`host_pid`](#host-pid) - Optional Bool<br>Host PID. Host PID determines if the policy allows the use of host PID in the pod spec
 
-&#x2022; `host_port_ranges` - Optional String<br>Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed
+&#x2022; [`host_port_ranges`](#host-port-ranges) - Optional String<br>Host Ports Ranges. Host port ranges determines which ports ranges are allowed to be exposed
 
-&#x2022; `no_allowed_capabilities` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_allowed_capabilities`](#no-allowed-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `no_default_capabilities` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_default_capabilities`](#no-default-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `no_drop_capabilities` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_drop_capabilities`](#no-drop-capabilities) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `no_fs_groups` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_fs_groups`](#no-fs-groups) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `no_run_as_group` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_run_as_group`](#no-run-as-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `no_run_as_user` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_run_as_user`](#no-run-as-user) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `no_runtime_class` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_runtime_class`](#no-runtime-class) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `no_se_linux_options` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_se_linux_options`](#no-se-linux-options) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `no_supplemental_groups` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_supplemental_groups`](#no-supplemental-groups) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `privileged` - Optional Bool<br>Privileged. Privileged determines if a pod can request to be run as privileged
+&#x2022; [`privileged`](#privileged) - Optional Bool<br>Privileged. Privileged determines if a pod can request to be run as privileged
 
-&#x2022; `read_only_root_filesystem` - Optional Bool<br>Read Only Root Filesystem. Containers can only run with read only root filesystem
+&#x2022; [`read_only_root_filesystem`](#read-only-root-filesystem) - Optional Bool<br>Read Only Root Filesystem. Containers can only run with read only root filesystem
 
-&#x2022; `run_as_group` - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Run As Group](#psp-spec-run-as-group) below.
+&#x2022; [`run_as_group`](#run-as-group) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Run As Group](#psp-spec-run-as-group) below.
 
-&#x2022; `run_as_user` - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Run As User](#psp-spec-run-as-user) below.
+&#x2022; [`run_as_user`](#run-as-user) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Run As User](#psp-spec-run-as-user) below.
 
-&#x2022; `supplemental_groups` - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Supplemental Groups](#psp-spec-supplemental-groups) below.
+&#x2022; [`supplemental_groups`](#supplemental-groups) - Optional Block<br>ID(User,Group,FSGroup) Strategy. ID ranges and rules<br>See [Supplemental Groups](#psp-spec-supplemental-groups) below.
 
-&#x2022; `volumes` - Optional List<br>Volume. Allow List of volume plugins. Empty no volumes are allowed
+&#x2022; [`volumes`](#volumes) - Optional List<br>Volume. Allow List of volume plugins. Empty no volumes are allowed
 
 <a id="psp-spec-allowed-capabilities"></a>
 
 **Psp Spec Allowed Capabilities**
 
-&#x2022; `capabilities` - Optional List<br>Capability List. List of capabilities that docker container has
+&#x2022; [`capabilities`](#capabilities) - Optional List<br>Capability List. List of capabilities that docker container has
 
 <a id="psp-spec-allowed-host-paths"></a>
 
 **Psp Spec Allowed Host Paths**
 
-&#x2022; `path_prefix` - Optional String<br>Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support *
+&#x2022; [`path_prefix`](#path-prefix) - Optional String<br>Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support *
 
-&#x2022; `read_only` - Optional Bool<br>Read Only. This volume will be allowed to mount read only
+&#x2022; [`read_only`](#read-only) - Optional Bool<br>Read Only. This volume will be allowed to mount read only
 
 <a id="psp-spec-default-capabilities"></a>
 
 **Psp Spec Default Capabilities**
 
-&#x2022; `capabilities` - Optional List<br>Capability List. List of capabilities that docker container has
+&#x2022; [`capabilities`](#capabilities) - Optional List<br>Capability List. List of capabilities that docker container has
 
 <a id="psp-spec-drop-capabilities"></a>
 
 **Psp Spec Drop Capabilities**
 
-&#x2022; `capabilities` - Optional List<br>Capability List. List of capabilities that docker container has
+&#x2022; [`capabilities`](#capabilities) - Optional List<br>Capability List. List of capabilities that docker container has
 
 <a id="psp-spec-fs-group-strategy-options"></a>
 
 **Psp Spec Fs Group Strategy Options**
 
-&#x2022; `id_ranges` - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-fs-group-strategy-options-id-ranges) below.
+&#x2022; [`id_ranges`](#id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-fs-group-strategy-options-id-ranges) below.
 
-&#x2022; `rule` - Optional String<br>Rule. Rule indicated how the FS group ID range is used
+&#x2022; [`rule`](#rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
 <a id="psp-spec-fs-group-strategy-options-id-ranges"></a>
 
 **Psp Spec Fs Group Strategy Options Id Ranges**
 
-&#x2022; `max_id` - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
+&#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
-&#x2022; `min_id` - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
+&#x2022; [`min_id`](#min-id) - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
 
 <a id="psp-spec-run-as-group"></a>
 
 **Psp Spec Run As Group**
 
-&#x2022; `id_ranges` - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-run-as-group-id-ranges) below.
+&#x2022; [`id_ranges`](#id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-run-as-group-id-ranges) below.
 
-&#x2022; `rule` - Optional String<br>Rule. Rule indicated how the FS group ID range is used
+&#x2022; [`rule`](#rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
 <a id="psp-spec-run-as-group-id-ranges"></a>
 
 **Psp Spec Run As Group Id Ranges**
 
-&#x2022; `max_id` - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
+&#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
-&#x2022; `min_id` - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
+&#x2022; [`min_id`](#min-id) - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
 
 <a id="psp-spec-run-as-user"></a>
 
 **Psp Spec Run As User**
 
-&#x2022; `id_ranges` - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-run-as-user-id-ranges) below.
+&#x2022; [`id_ranges`](#id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-run-as-user-id-ranges) below.
 
-&#x2022; `rule` - Optional String<br>Rule. Rule indicated how the FS group ID range is used
+&#x2022; [`rule`](#rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
 <a id="psp-spec-run-as-user-id-ranges"></a>
 
 **Psp Spec Run As User Id Ranges**
 
-&#x2022; `max_id` - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
+&#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
-&#x2022; `min_id` - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
+&#x2022; [`min_id`](#min-id) - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
 
 <a id="psp-spec-supplemental-groups"></a>
 
 **Psp Spec Supplemental Groups**
 
-&#x2022; `id_ranges` - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-supplemental-groups-id-ranges) below.
+&#x2022; [`id_ranges`](#id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-supplemental-groups-id-ranges) below.
 
-&#x2022; `rule` - Optional String<br>Rule. Rule indicated how the FS group ID range is used
+&#x2022; [`rule`](#rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
 <a id="psp-spec-supplemental-groups-id-ranges"></a>
 
 **Psp Spec Supplemental Groups Id Ranges**
 
-&#x2022; `max_id` - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
+&#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
-&#x2022; `min_id` - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
+&#x2022; [`min_id`](#min-id) - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

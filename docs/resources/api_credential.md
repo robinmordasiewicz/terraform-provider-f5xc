@@ -47,35 +47,35 @@ resource "f5xc_api_credential" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; `name` - Required String<br>Name of the APICredential. Must be unique within the namespace
+&#x2022; [`name`](#name) - Required String<br>Name of the APICredential. Must be unique within the namespace
 
-&#x2022; `namespace` - Required String<br>Namespace where the APICredential will be created
+&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the APICredential will be created
 
-&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; `description` - Optional String<br>Human readable description for the object
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; `password` - Optional String<br>Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain
+&#x2022; [`password`](#password) - Optional String<br>Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain
 
-&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; `type` - Optional String  Defaults to `API_CERTIFICATE`<br>Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`<br>Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential)
+&#x2022; [`type`](#type) - Optional String  Defaults to `API_CERTIFICATE`<br>Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`<br>Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential)
 
-&#x2022; `virtual_k8s_name` - Optional String<br>vK8s Cluster. Name of virtual K8s cluster. Applicable for KUBE_CONFIG
+&#x2022; [`virtual_k8s_name`](#virtual-k8s-name) - Optional String<br>vK8s Cluster. Name of virtual K8s cluster. Applicable for KUBE_CONFIG
 
-&#x2022; `virtual_k8s_namespace` - Optional String<br>vK8s Namespace. Namespace of virtual K8s cluster. Applicable for KUBE_CONFIG
+&#x2022; [`virtual_k8s_namespace`](#virtual-k8s-namespace) - Optional String<br>vK8s Namespace. Namespace of virtual K8s cluster. Applicable for KUBE_CONFIG
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; `id` - Optional String<br>Unique identifier for the resource
+&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -83,13 +83,13 @@ In addition to all arguments above, the following attributes are exported:
 
 **Timeouts**
 
-&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

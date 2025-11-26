@@ -4,7 +4,7 @@
 # Basic Policer configuration
 resource "f5xc_policer" "example" {
   name      = "example-policer"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

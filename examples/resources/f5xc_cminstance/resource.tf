@@ -4,7 +4,7 @@
 # Basic Cminstance configuration
 resource "f5xc_cminstance" "example" {
   name      = "example-cminstance"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

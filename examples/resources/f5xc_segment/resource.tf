@@ -4,7 +4,7 @@
 # Basic Segment configuration
 resource "f5xc_segment" "example" {
   name      = "example-segment"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

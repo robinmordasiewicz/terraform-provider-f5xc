@@ -4,7 +4,7 @@
 # Basic Policy Based Routing configuration
 resource "f5xc_policy_based_routing" "example" {
   name      = "example-policy-based-routing"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -4,7 +4,7 @@
 # Basic Quota configuration
 resource "f5xc_quota" "example" {
   name      = "example-quota"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

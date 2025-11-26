@@ -4,7 +4,7 @@
 # Basic Addon Subscription configuration
 resource "f5xc_addon_subscription" "example" {
   name      = "example-addon-subscription"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

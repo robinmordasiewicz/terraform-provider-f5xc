@@ -4,7 +4,7 @@
 # Basic Advertise Policy configuration
 resource "f5xc_advertise_policy" "example" {
   name      = "example-advertise-policy"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

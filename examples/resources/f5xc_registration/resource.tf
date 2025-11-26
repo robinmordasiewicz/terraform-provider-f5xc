@@ -4,7 +4,7 @@
 # Basic Registration configuration
 resource "f5xc_registration" "example" {
   name      = "example-registration"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

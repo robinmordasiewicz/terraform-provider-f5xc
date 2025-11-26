@@ -4,7 +4,7 @@
 # Basic Tpm Manager configuration
 resource "f5xc_tpm_manager" "example" {
   name      = "example-tpm-manager"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

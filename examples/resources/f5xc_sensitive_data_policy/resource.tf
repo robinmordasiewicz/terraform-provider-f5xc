@@ -4,7 +4,7 @@
 # Basic Sensitive Data Policy configuration
 resource "f5xc_sensitive_data_policy" "example" {
   name      = "example-sensitive-data-policy"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

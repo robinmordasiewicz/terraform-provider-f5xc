@@ -4,7 +4,7 @@
 # Basic Dns Load Balancer configuration
 resource "f5xc_dns_load_balancer" "example" {
   name      = "example-dns-load-balancer"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"
@@ -21,7 +21,7 @@ resource "f5xc_dns_load_balancer" "example" {
   # DNS zone reference
   dns_zone {
     name      = "example-dns-zone"
-    namespace = "system"
+    namespace = "staging"
   }
 
   # Rule-based load balancing
@@ -29,11 +29,11 @@ resource "f5xc_dns_load_balancer" "example" {
     rules {
       geo_location_set {
         name      = "us-geo"
-        namespace = "system"
+        namespace = "shared"
       }
       pool {
         name      = "us-pool"
-        namespace = "system"
+        namespace = "staging"
       }
       score = 100
     }

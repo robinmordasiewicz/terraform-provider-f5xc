@@ -4,7 +4,7 @@
 # Basic Ike Phase2 Profile configuration
 resource "f5xc_ike_phase2_profile" "example" {
   name      = "example-ike-phase2-profile"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

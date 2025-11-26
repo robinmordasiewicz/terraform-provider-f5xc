@@ -4,7 +4,7 @@
 # Basic Service Policy configuration
 resource "f5xc_service_policy" "example" {
   name      = "example-service-policy"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

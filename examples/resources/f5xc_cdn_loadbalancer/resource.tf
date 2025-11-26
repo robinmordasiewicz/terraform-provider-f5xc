@@ -4,7 +4,7 @@
 # Basic Cdn Loadbalancer configuration
 resource "f5xc_cdn_loadbalancer" "example" {
   name      = "example-cdn-loadbalancer"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -4,7 +4,7 @@
 # Basic Api Crawler configuration
 resource "f5xc_api_crawler" "example" {
   name      = "example-api-crawler"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

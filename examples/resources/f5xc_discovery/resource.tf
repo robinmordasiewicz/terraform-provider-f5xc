@@ -4,7 +4,7 @@
 # Basic Discovery configuration
 resource "f5xc_discovery" "example" {
   name      = "example-discovery"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

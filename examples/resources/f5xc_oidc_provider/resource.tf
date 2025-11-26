@@ -4,7 +4,7 @@
 # Basic Oidc Provider configuration
 resource "f5xc_oidc_provider" "example" {
   name      = "example-oidc-provider"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

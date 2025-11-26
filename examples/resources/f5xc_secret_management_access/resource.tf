@@ -4,7 +4,7 @@
 # Basic Secret Management Access configuration
 resource "f5xc_secret_management_access" "example" {
   name      = "example-secret-management-access"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

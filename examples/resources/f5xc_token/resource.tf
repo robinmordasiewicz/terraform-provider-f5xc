@@ -4,7 +4,7 @@
 # Basic Token configuration
 resource "f5xc_token" "example" {
   name      = "example-token"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

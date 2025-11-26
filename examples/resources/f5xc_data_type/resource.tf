@@ -4,7 +4,7 @@
 # Basic Data Type configuration
 resource "f5xc_data_type" "example" {
   name      = "example-data-type"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

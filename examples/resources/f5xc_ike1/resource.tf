@@ -4,7 +4,7 @@
 # Basic Ike1 configuration
 resource "f5xc_ike1" "example" {
   name      = "example-ike1"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

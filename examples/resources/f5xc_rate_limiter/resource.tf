@@ -4,7 +4,7 @@
 # Basic Rate Limiter configuration
 resource "f5xc_rate_limiter" "example" {
   name      = "example-rate-limiter"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

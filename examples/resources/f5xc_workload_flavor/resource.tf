@@ -4,7 +4,7 @@
 # Basic Workload Flavor configuration
 resource "f5xc_workload_flavor" "example" {
   name      = "example-workload-flavor"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

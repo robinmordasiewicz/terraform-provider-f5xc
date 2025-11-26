@@ -4,7 +4,7 @@
 # Basic Trusted Ca List configuration
 resource "f5xc_trusted_ca_list" "example" {
   name      = "example-trusted-ca-list"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

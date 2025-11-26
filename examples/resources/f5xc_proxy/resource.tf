@@ -4,7 +4,7 @@
 # Basic Proxy configuration
 resource "f5xc_proxy" "example" {
   name      = "example-proxy"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

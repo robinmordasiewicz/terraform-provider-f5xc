@@ -217,6 +217,8 @@ This repository uses CI/CD automation extensively. Respect the automation - do n
 |----------------|--------------|----------|
 | `docs/resources/*.md` | `tfplugindocs` + `transform-docs.go` | `docs.yml` |
 | `docs/data-sources/*.md` | `tfplugindocs` + `transform-docs.go` | `docs.yml` |
+| `examples/resources/*/*.tf` | `generate-examples.go` | `docs.yml` |
+| `examples/data-sources/*/*.tf` | `generate-examples.go` | `docs.yml` |
 | `docs/api/*.md` | `generate-api-docs.go` | `pages.yml` |
 | `docs/nav-api.yml` | `generate-api-docs.go` | `pages.yml` |
 | `internal/provider/*_resource.go` | `generate-all-schemas.go` | `generate.yml` |
@@ -224,6 +226,8 @@ This repository uses CI/CD automation extensively. Respect the automation - do n
 | `site/` | `mkdocs build` | `pages.yml` |
 
 **Correct behavior**: Commit only source/tool changes. Let workflows generate artifacts.
+
+**Important**: Example files (`examples/`) are generated from `tools/generate-examples.go` and contain content derived from schema analysis. Never commit example files manually - modify the generator tool and let CI regenerate them.
 
 ### Rule 2: Understand the Workflow Chain
 
@@ -235,7 +239,7 @@ Source Change → Push to Branch → CI Workflow Runs → Auto-PR Created
 
 | Workflow | Trigger | Action | Creates PR? |
 |----------|---------|--------|-------------|
-| `docs.yml` | Changes to `internal/`, `docs/`, `templates/` | Regenerates provider docs | ✅ Yes |
+| `docs.yml` | Changes to `internal/`, `docs/`, `examples/`, `templates/`, `tools/` | Regenerates examples and provider docs | ✅ Yes |
 | `generate.yml` | Changes to `docs/specifications/api/` | Regenerates provider code | ✅ Yes |
 | `sync-openapi.yml` | Scheduled (daily) | Syncs OpenAPI specs from F5 | ✅ Yes |
 | `pages.yml` | Changes to `docs/`, `mkdocs.yml` | Builds & deploys MkDocs | ❌ Direct deploy |

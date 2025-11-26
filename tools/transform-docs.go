@@ -1063,8 +1063,8 @@ func transformDoc(filePath string) error {
 				// First attribute on next line (continuation of callout) with bullet
 				output.WriteString(fmt.Sprintf("&#x2022; %s\n", formatAttrLine(attr, true)))
 			} else {
-				// Subsequent attributes with <br> prefix and bullet for line breaks inside callout
-				output.WriteString(fmt.Sprintf("<br>&#x2022; %s\n", formatAttrLine(attr, true)))
+				// Subsequent attributes with <br><br> prefix for visual separation between properties
+				output.WriteString(fmt.Sprintf("<br><br>&#x2022; %s\n", formatAttrLine(attr, true)))
 			}
 		}
 		output.WriteString("\n")

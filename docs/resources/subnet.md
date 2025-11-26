@@ -68,8 +68,8 @@ resource "f5xc_subnet" "example" {
 
 -> **One of the following:**
 &#x2022; `connect_to_layer2` - Optional Block<br>Subnet connection to Layer2 Interface<br>See [Connect To Layer2](#connect-to-layer2) below for details.
-<br>&#x2022; `connect_to_slo` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `isolated_nw` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `connect_to_slo` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `isolated_nw` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `site_subnet_params` - Optional Block<br>Site Subnet Parameters. Configure subnet parameters per site<br>See [Site Subnet Params](#site-subnet-params) below for details.
 

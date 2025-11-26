@@ -68,10 +68,10 @@ resource "f5xc_dns_lb_pool" "example" {
 
 -> **One of the following:**
 &#x2022; `a_pool` - Optional Block<br>Pool for A Record<br>See [A Pool](#a-pool) below for details.
-<br>&#x2022; `aaaa_pool` - Optional Block<br>Pool for AAAA Record<br>See [Aaaa Pool](#aaaa-pool) below for details.
-<br>&#x2022; `cname_pool` - Optional Block<br>Pool for CNAME Record<br>See [Cname Pool](#cname-pool) below for details.
-<br>&#x2022; `mx_pool` - Optional Block<br>Pool for MX Record<br>See [Mx Pool](#mx-pool) below for details.
-<br>&#x2022; `srv_pool` - Optional Block<br>Pool for SRV Record<br>See [Srv Pool](#srv-pool) below for details.
+<br><br>&#x2022; `aaaa_pool` - Optional Block<br>Pool for AAAA Record<br>See [Aaaa Pool](#aaaa-pool) below for details.
+<br><br>&#x2022; `cname_pool` - Optional Block<br>Pool for CNAME Record<br>See [Cname Pool](#cname-pool) below for details.
+<br><br>&#x2022; `mx_pool` - Optional Block<br>Pool for MX Record<br>See [Mx Pool](#mx-pool) below for details.
+<br><br>&#x2022; `srv_pool` - Optional Block<br>Pool for SRV Record<br>See [Srv Pool](#srv-pool) below for details.
 
 &#x2022; `load_balancing_mode` - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `RATIO_MEMBER`, `STATIC_PERSIST`, `PRIORITY`<br>LoadBalancing Algorithm. - ROUND_ROBIN: Round-Robin Round Robin will ensure random equal distribution of requests among all pool members in a pool. - RATIO_MEMBER: Ratio-Member Ratio-Member performs load balancing of requests across the pool members based on the ratio assigned to each pool member - STATIC_PERSIST: Static-Persist The Static Persist load balancing method uses the persist mask, with the source IP address of the Local Domain Name Server (LDNS), in a deterministic algorithm to send requests to a specific pool member. If the DNS resolver passes ECS (EDNS-Client-Subnet) information, then a hash of it will be used, to send the client to the same pool member - PRIORITY: Priority The Priority load balancing method returns all available endpoints in a pool with the highest priority. Pool Members have a priority value, starting from zero, where a lower value means a higher priority
 
@@ -79,7 +79,7 @@ resource "f5xc_dns_lb_pool" "example" {
 
 -> **One of the following:**
 &#x2022; `ttl` - Optional Number<br>TTL. Custom TTL in seconds (default 30) for responses from this pool
-<br>&#x2022; `use_rrset_ttl` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `use_rrset_ttl` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 

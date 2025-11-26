@@ -68,18 +68,18 @@ resource "f5xc_forwarding_class" "example" {
 
 -> **One of the following:**
 &#x2022; `dscp` - Optional Block<br>DSCP Marking setting. DSCP marking setting as per RFC 2475<br>See [Dscp](#dscp) below for details.
-<br>&#x2022; `no_marking` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `tos_value` - Optional Number<br>TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low
+<br><br>&#x2022; `no_marking` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `tos_value` - Optional Number<br>TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low
 
 -> **One of the following:**
 &#x2022; `dscp_based_queue` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `queue_id_to_use` - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
+<br><br>&#x2022; `queue_id_to_use` - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
 
 &#x2022; `interface_group` - Optional String  Defaults to `ANY_AVAILABLE_INTERFACE`<br>Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`<br>Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3
 
 -> **One of the following:**
 &#x2022; `no_policer` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `policer` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Policer](#policer) below for details.
+<br><br>&#x2022; `policer` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Policer](#policer) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

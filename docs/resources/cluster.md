@@ -68,8 +68,8 @@ resource "f5xc_cluster" "example" {
 
 -> **One of the following:**
 &#x2022; `auto_http_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `http1_config` - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections<br>See [Http1 Config](#http1-config) below for details.
-<br>&#x2022; `http2_options` - Optional Block<br>Http2 Protocol Options. Http2 Protocol options for upstream connections<br>See [Http2 Options](#http2-options) below for details.
+<br><br>&#x2022; `http1_config` - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections<br>See [Http1 Config](#http1-config) below for details.
+<br><br>&#x2022; `http2_options` - Optional Block<br>Http2 Protocol Options. Http2 Protocol options for upstream connections<br>See [Http2 Options](#http2-options) below for details.
 
 &#x2022; `circuit_breaker` - Optional Block<br>Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly<br>See [Circuit Breaker](#circuit-breaker) below for details.
 
@@ -79,8 +79,8 @@ resource "f5xc_cluster" "example" {
 
 -> **One of the following:**
 &#x2022; `disable_proxy_protocol` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `proxy_protocol_v1` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `proxy_protocol_v2` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `proxy_protocol_v1` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `proxy_protocol_v2` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `endpoint_selection` - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered
 
@@ -98,7 +98,7 @@ resource "f5xc_cluster" "example" {
 
 -> **One of the following:**
 &#x2022; `no_panic_threshold` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `panic_threshold` - Optional Number<br>Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status
+<br><br>&#x2022; `panic_threshold` - Optional Number<br>Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status
 
 &#x2022; `outlier_detection` - Optional Block<br>Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied<br>See [Outlier Detection](#outlier-detection) below for details.
 

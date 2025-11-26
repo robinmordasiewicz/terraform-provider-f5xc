@@ -125,14 +125,14 @@ resource "f5xc_origin_pool" "example" {
 
 -> **One of the following:**
 &#x2022; `automatic_port` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `lb_port` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `port` - Optional Number<br>Port. Endpoint service is available on this port
+<br><br>&#x2022; `lb_port` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `port` - Optional Number<br>Port. Endpoint service is available on this port
 
 &#x2022; `endpoint_selection` - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered
 
 -> **One of the following:**
 &#x2022; `health_check_port` - Optional Number<br>Health check port. Port used for performing health check
-<br>&#x2022; `same_as_endpoint_port` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `same_as_endpoint_port` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `healthcheck` - Optional Block<br>Health Check object. Reference to healthcheck configuration objects<br>See [Healthcheck](#healthcheck) below for details.
 
@@ -140,7 +140,7 @@ resource "f5xc_origin_pool" "example" {
 
 -> **One of the following:**
 &#x2022; `no_tls` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `use_tls` - Optional Block<br>TLS Parameters for Origin Servers. Upstream TLS Parameters
+<br><br>&#x2022; `use_tls` - Optional Block<br>TLS Parameters for Origin Servers. Upstream TLS Parameters
 
 &#x2022; `origin_servers` - Optional Block<br>Origin Servers. List of origin servers in this pool<br>See [Origin Servers](#origin-servers) below for details.
 

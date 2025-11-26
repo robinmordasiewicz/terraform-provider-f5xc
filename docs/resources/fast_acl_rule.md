@@ -70,7 +70,7 @@ resource "f5xc_fast_acl_rule" "example" {
 
 -> **One of the following:**
 &#x2022; `ip_prefix_set` - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#ip-prefix-set) below for details.
-<br>&#x2022; `prefix` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#prefix) below for details.
+<br><br>&#x2022; `prefix` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#prefix) below for details.
 
 &#x2022; `port` - Optional Block<br>Source Ports. L4 port numbers to match<br>See [Port](#port) below for details.
 

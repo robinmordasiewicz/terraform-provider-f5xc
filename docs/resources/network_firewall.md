@@ -68,16 +68,16 @@ resource "f5xc_network_firewall" "example" {
 
 -> **One of the following:**
 &#x2022; `active_enhanced_firewall_policies` - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
-<br>&#x2022; `active_network_policies` - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
-<br>&#x2022; `disable_network_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `active_network_policies` - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
+<br><br>&#x2022; `disable_network_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `active_fast_acls` - Optional Block<br>Active Fast ACL(s). List of Fast ACL(s)<br>See [Active Fast Acls](#active-fast-acls) below for details.
-<br>&#x2022; `disable_fast_acl` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `disable_fast_acl` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `active_forward_proxy_policies` - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br>&#x2022; `disable_forward_proxy_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `disable_forward_proxy_policy` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

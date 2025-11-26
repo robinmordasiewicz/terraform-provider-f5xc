@@ -68,9 +68,9 @@ resource "f5xc_oidc_provider" "example" {
 
 -> **One of the following:**
 &#x2022; `azure_oidc_spec_type` - Optional Block<br>Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider<br>See [Azure Oidc Spec Type](#azure-oidc-spec-type) below for details.
-<br>&#x2022; `google_oidc_spec_type` - Optional Block<br>Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider<br>See [Google Oidc Spec Type](#google-oidc-spec-type) below for details.
-<br>&#x2022; `oidc_v10_spec_type` - Optional Block<br>OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider<br>See [Oidc V10 Spec Type](#oidc-v10-spec-type) below for details.
-<br>&#x2022; `okta_oidc_spec_type` - Optional Block<br>Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider<br>See [Okta Oidc Spec Type](#okta-oidc-spec-type) below for details.
+<br><br>&#x2022; `google_oidc_spec_type` - Optional Block<br>Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider<br>See [Google Oidc Spec Type](#google-oidc-spec-type) below for details.
+<br><br>&#x2022; `oidc_v10_spec_type` - Optional Block<br>OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider<br>See [Oidc V10 Spec Type](#oidc-v10-spec-type) below for details.
+<br><br>&#x2022; `okta_oidc_spec_type` - Optional Block<br>Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider<br>See [Okta Oidc Spec Type](#okta-oidc-spec-type) below for details.
 
 &#x2022; `provider_type` - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`<br>Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC
 

@@ -66,8 +66,8 @@ resource "f5xc_certificate" "example" {
 
 -> **One of the following:**
 &#x2022; `custom_hash_algorithms` - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#custom-hash-algorithms) below for details.
-<br>&#x2022; `disable_ocsp_stapling` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `use_system_defaults` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `disable_ocsp_stapling` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `use_system_defaults` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `private_key` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#private-key) below for details.
 

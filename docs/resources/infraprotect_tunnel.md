@@ -74,9 +74,9 @@ resource "f5xc_infraprotect_tunnel" "example" {
 
 -> **One of the following:**
 &#x2022; `gre_ipv4` - Optional Block<br>GRE IPv4 Tunnel. IPv4 Tunnel<br>See [Gre IPv4](#gre-ipv4) below for details.
-<br>&#x2022; `gre_ipv6` - Optional Block<br>GRE IPv6 Tunnel. IPv6 Tunnel<br>See [Gre IPv6](#gre-ipv6) below for details.
-<br>&#x2022; `ip_in_ip` - Optional Block<br>IP in IP Tunnel. IP in IP Tunnel<br>See [IP In IP](#ip-in-ip) below for details.
-<br>&#x2022; `ipv6_to_ipv6` - Optional Block<br>IPv6 to IPv6 Tunnel. IPv6 to IPv6 Tunnel<br>See [IPv6 To IPv6](#ipv6-to-ipv6) below for details.
+<br><br>&#x2022; `gre_ipv6` - Optional Block<br>GRE IPv6 Tunnel. IPv6 Tunnel<br>See [Gre IPv6](#gre-ipv6) below for details.
+<br><br>&#x2022; `ip_in_ip` - Optional Block<br>IP in IP Tunnel. IP in IP Tunnel<br>See [IP In IP](#ip-in-ip) below for details.
+<br><br>&#x2022; `ipv6_to_ipv6` - Optional Block<br>IPv6 to IPv6 Tunnel. IPv6 to IPv6 Tunnel<br>See [IPv6 To IPv6](#ipv6-to-ipv6) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

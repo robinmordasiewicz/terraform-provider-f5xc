@@ -74,12 +74,12 @@ resource "f5xc_enhanced_firewall_policy" "example" {
 
 -> **One of the following:**
 &#x2022; `allow_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `allowed_destinations` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Destinations](#allowed-destinations) below for details.
-<br>&#x2022; `allowed_sources` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Sources](#allowed-sources) below for details.
-<br>&#x2022; `denied_destinations` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Destinations](#denied-destinations) below for details.
-<br>&#x2022; `denied_sources` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Sources](#denied-sources) below for details.
-<br>&#x2022; `deny_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `rule_list` - Optional Block<br>Custom Enhanced Firewall Policy Rules. Custom Enhanced Firewall Policy Rules<br>See [Rule List](#rule-list) below for details.
+<br><br>&#x2022; `allowed_destinations` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Destinations](#allowed-destinations) below for details.
+<br><br>&#x2022; `allowed_sources` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Allowed Sources](#allowed-sources) below for details.
+<br><br>&#x2022; `denied_destinations` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Destinations](#denied-destinations) below for details.
+<br><br>&#x2022; `denied_sources` - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Denied Sources](#denied-sources) below for details.
+<br><br>&#x2022; `deny_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `rule_list` - Optional Block<br>Custom Enhanced Firewall Policy Rules. Custom Enhanced Firewall Policy Rules<br>See [Rule List](#rule-list) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

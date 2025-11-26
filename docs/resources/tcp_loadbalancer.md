@@ -77,46 +77,46 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; `active_service_policies` - Optional Block<br>Service Policy List. List of service policies<br>See [Active Service Policies](#active-service-policies) below for details.
-<br>&#x2022; `no_service_policies` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `service_policies_from_namespace` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_service_policies` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `service_policies_from_namespace` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `advertise_custom` - Optional Block<br>Advertise Custom. This defines a way to advertise a VIP on specific sites<br>See [Advertise Custom](#advertise-custom) below for details.
-<br>&#x2022; `advertise_on_public` - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-on-public) below for details.
-<br>&#x2022; `advertise_on_public_default_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `do_not_advertise` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `advertise_on_public` - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-on-public) below for details.
+<br><br>&#x2022; `advertise_on_public_default_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `do_not_advertise` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `default_lb_with_sni` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `no_sni` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `sni` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_sni` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `sni` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `dns_volterra_managed` - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by Volterra. This requires the domain to be delegated to F5XC using the Delegated Domain feature
 
 -> **One of the following:**
 &#x2022; `do_not_retract_cluster` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `retract_cluster` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `retract_cluster` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `domains` - Optional List<br>Domains. A list of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if SNI is activated on the given TCP Load Balancer. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system
 
 -> **One of the following:**
 &#x2022; `hash_policy_choice_least_active` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `hash_policy_choice_random` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `hash_policy_choice_round_robin` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `hash_policy_choice_source_ip_stickiness` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `hash_policy_choice_random` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `hash_policy_choice_round_robin` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `hash_policy_choice_source_ip_stickiness` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `idle_timeout` - Optional Number<br>Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds
 
 -> **One of the following:**
 &#x2022; `listen_port` - Optional Number<br>Listen Port. Listen Port for this load balancer
-<br>&#x2022; `port_ranges` - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<br><br>&#x2022; `port_ranges` - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
 
 &#x2022; `origin_pools_weights` - Optional Block<br>Origin Pools. Origin pools and weights used for this load balancer<br>See [Origin Pools Weights](#origin-pools-weights) below for details.
 
 -> **One of the following:**
 &#x2022; `tcp` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `tls_tcp` - Optional Block<br>BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates<br>See [TLS TCP](#tls-tcp) below for details.
-<br>&#x2022; `tls_tcp_auto_cert` - Optional Block<br>TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates
+<br><br>&#x2022; `tls_tcp` - Optional Block<br>BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates<br>See [TLS TCP](#tls-tcp) below for details.
+<br><br>&#x2022; `tls_tcp_auto_cert` - Optional Block<br>TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

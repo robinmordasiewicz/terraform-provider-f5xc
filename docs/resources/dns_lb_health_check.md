@@ -68,11 +68,11 @@ resource "f5xc_dns_lb_health_check" "example" {
 
 -> **One of the following:**
 &#x2022; `http_health_check` - Optional Block<br>HTTP Health Check<br>See [HTTP Health Check](#http-health-check) below for details.
-<br>&#x2022; `https_health_check` - Optional Block<br>HTTP Health Check<br>See [HTTPS Health Check](#https-health-check) below for details.
-<br>&#x2022; `icmp_health_check` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `tcp_health_check` - Optional Block<br>TCP Health Check<br>See [TCP Health Check](#tcp-health-check) below for details.
-<br>&#x2022; `tcp_hex_health_check` - Optional Block<br>TCP Hex Health Check<br>See [TCP Hex Health Check](#tcp-hex-health-check) below for details.
-<br>&#x2022; `udp_health_check` - Optional Block<br>UDP Health Check<br>See [UDP Health Check](#udp-health-check) below for details.
+<br><br>&#x2022; `https_health_check` - Optional Block<br>HTTP Health Check<br>See [HTTPS Health Check](#https-health-check) below for details.
+<br><br>&#x2022; `icmp_health_check` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `tcp_health_check` - Optional Block<br>TCP Health Check<br>See [TCP Health Check](#tcp-health-check) below for details.
+<br><br>&#x2022; `tcp_hex_health_check` - Optional Block<br>TCP Hex Health Check<br>See [TCP Hex Health Check](#tcp-hex-health-check) below for details.
+<br><br>&#x2022; `udp_health_check` - Optional Block<br>UDP Health Check<br>See [UDP Health Check](#udp-health-check) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

@@ -80,16 +80,16 @@ resource "f5xc_voltstack_site" "example" {
 
 -> **One of the following:**
 &#x2022; `allow_all_usb` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `deny_all_usb` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `usb_policy` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+<br><br>&#x2022; `deny_all_usb` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `usb_policy` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 -> **One of the following:**
 &#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
-<br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `bond_device_list` - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
-<br>&#x2022; `no_bond_devices` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_bond_devices` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `coordinates` - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
@@ -97,38 +97,38 @@ resource "f5xc_voltstack_site" "example" {
 
 -> **One of the following:**
 &#x2022; `custom_network_config` - Optional Block<br>VssNetworkConfiguration<br>See [Custom Network Config](#custom-network-config) below for details.
-<br>&#x2022; `default_network_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `default_network_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `custom_storage_config` - Optional Block<br>VssStorageConfiguration
-<br>&#x2022; `default_storage_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `default_storage_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `default_sriov_interface` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `sriov_interfaces` - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration
+<br><br>&#x2022; `sriov_interfaces` - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration
 
 -> **One of the following:**
 &#x2022; `disable_gpu` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_gpu` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_vgpu` - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU
+<br><br>&#x2022; `enable_gpu` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enable_vgpu` - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU
 
 -> **One of the following:**
 &#x2022; `disable_vm` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_vm` - Optional Block<br>VM Configuration. VMs support configuration
+<br><br>&#x2022; `enable_vm` - Optional Block<br>VM Configuration. VMs support configuration
 
 -> **One of the following:**
 &#x2022; `k8s_cluster` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `no_k8s_cluster` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_k8s_cluster` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `kubernetes_upgrade_drain` - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded
 
 -> **One of the following:**
 &#x2022; `local_control_plane` - Optional Block<br>Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc
-<br>&#x2022; `no_local_control_plane` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_local_control_plane` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `log_receiver` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `master_node_configuration` - Optional Block<br>Master Nodes. Configuration of master nodes
 

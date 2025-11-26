@@ -68,8 +68,8 @@ resource "f5xc_data_group" "example" {
 
 -> **One of the following:**
 &#x2022; `address_records` - Optional Block<br>Address Record. Data group with address record List<br>See [Address Records](#address-records) below for details.
-<br>&#x2022; `integer_records` - Optional Block<br>Integer record List. Data group with integer record List<br>See [Integer Records](#integer-records) below for details.
-<br>&#x2022; `string_records` - Optional Block<br>String record List. Data group with strings record List<br>See [String Records](#string-records) below for details.
+<br><br>&#x2022; `integer_records` - Optional Block<br>Integer record List. Data group with integer record List<br>See [Integer Records](#integer-records) below for details.
+<br><br>&#x2022; `string_records` - Optional Block<br>String record List. Data group with strings record List<br>See [String Records](#string-records) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

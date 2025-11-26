@@ -68,7 +68,7 @@ resource "f5xc_bot_defense_app_infrastructure" "example" {
 
 -> **One of the following:**
 &#x2022; `cloud_hosted` - Optional Block<br>F5 Hosted. Infra F5 Hosted<br>See [Cloud Hosted](#cloud-hosted) below for details.
-<br>&#x2022; `data_center_hosted` - Optional Block<br>F5 Hosted. Infra F5 Hosted<br>See [Data Center Hosted](#data-center-hosted) below for details.
+<br><br>&#x2022; `data_center_hosted` - Optional Block<br>F5 Hosted. Infra F5 Hosted<br>See [Data Center Hosted](#data-center-hosted) below for details.
 
 &#x2022; `environment_type` - Optional String  Defaults to `PRODUCTION`<br>Possible values are `PRODUCTION`, `TESTING`<br>Environment Type. Environment Type Production environment Testing environment
 

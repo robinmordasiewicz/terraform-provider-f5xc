@@ -68,7 +68,7 @@ resource "f5xc_cloud_connect" "example" {
 
 -> **One of the following:**
 &#x2022; `aws_tgw_site` - Optional Block<br>AWS TGW Site Type. Cloud Connect AWS TGW Site Type<br>See [AWS Tgw Site](#aws-tgw-site) below for details.
-<br>&#x2022; `azure_vnet_site` - Optional Block<br>Azure VNET Site Type. Cloud Connect Azure VNET Site Type<br>See [Azure Vnet Site](#azure-vnet-site) below for details.
+<br><br>&#x2022; `azure_vnet_site` - Optional Block<br>Azure VNET Site Type. Cloud Connect Azure VNET Site Type<br>See [Azure Vnet Site](#azure-vnet-site) below for details.
 
 &#x2022; `segment` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#segment) below for details.
 

@@ -68,15 +68,15 @@ resource "f5xc_nfv_service" "example" {
 
 -> **One of the following:**
 &#x2022; `disable_https_management` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `https_management` - Optional Block<br>HTTPS based management. HTTPS based configuration<br>See [HTTPS Management](#https-management) below for details.
+<br><br>&#x2022; `https_management` - Optional Block<br>HTTPS based management. HTTPS based configuration<br>See [HTTPS Management](#https-management) below for details.
 
 -> **One of the following:**
 &#x2022; `disable_ssh_access` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enabled_ssh_access` - Optional Block<br>SSH based management. SSH based configuration<br>See [Enabled SSH Access](#enabled-ssh-access) below for details.
+<br><br>&#x2022; `enabled_ssh_access` - Optional Block<br>SSH based management. SSH based configuration<br>See [Enabled SSH Access](#enabled-ssh-access) below for details.
 
 -> **One of the following:**
 &#x2022; `f5_big_ip_aws_service` - Optional Block<br>Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS<br>See [F5 Big IP AWS Service](#f5-big-ip-aws-service) below for details.
-<br>&#x2022; `palo_alto_fw_service` - Optional Block<br>Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration
+<br><br>&#x2022; `palo_alto_fw_service` - Optional Block<br>Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration
 
 &#x2022; `timeouts` - Optional Block
 

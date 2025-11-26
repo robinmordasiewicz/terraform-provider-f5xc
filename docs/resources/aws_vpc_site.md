@@ -103,8 +103,8 @@ resource "f5xc_aws_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; `block_all_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
-<br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
+<br><br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `coordinates` - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
@@ -112,32 +112,32 @@ resource "f5xc_aws_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; `custom_security_group` - Optional Block<br>Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#custom-security-group) below for details.
-<br>&#x2022; `f5xc_security_group` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `f5xc_security_group` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `direct_connect_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `direct_connect_enabled` - Optional Block<br>Direct Connect Configuration. Direct Connect Configuration<br>See [Direct Connect Enabled](#direct-connect-enabled) below for details.
-<br>&#x2022; `private_connectivity` - Optional Block<br>Private Connect Configuration. Private Connect Configuration
+<br><br>&#x2022; `direct_connect_enabled` - Optional Block<br>Direct Connect Configuration. Direct Connect Configuration<br>See [Direct Connect Enabled](#direct-connect-enabled) below for details.
+<br><br>&#x2022; `private_connectivity` - Optional Block<br>Private Connect Configuration. Private Connect Configuration
 
 -> **One of the following:**
 &#x2022; `disable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `enable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `disk_size` - Optional Number<br>Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB
 
 -> **One of the following:**
 &#x2022; `egress_gateway_default` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `egress_nat_gw` - Optional Block<br>AWS NAT Gateway choice. With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway<br>See [Egress NAT Gw](#egress-nat-gw) below for details.
-<br>&#x2022; `egress_virtual_private_gateway` - Optional Block<br>AWS Virtual Private Gateway choice. With this option, egress site traffic will be routed through an Virtual Private Gateway<br>See [Egress Virtual Private Gateway](#egress-virtual-private-gateway) below for details.
+<br><br>&#x2022; `egress_nat_gw` - Optional Block<br>AWS NAT Gateway choice. With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway<br>See [Egress NAT Gw](#egress-nat-gw) below for details.
+<br><br>&#x2022; `egress_virtual_private_gateway` - Optional Block<br>AWS Virtual Private Gateway choice. With this option, egress site traffic will be routed through an Virtual Private Gateway<br>See [Egress Virtual Private Gateway](#egress-virtual-private-gateway) below for details.
 
 -> **One of the following:**
 &#x2022; `f5_orchestrated_routing` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `manual_routing` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `manual_routing` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `ingress_egress_gw` - Optional Block<br>AWS Ingress/Egress Gateway. Two interface AWS ingress/egress site<br>See [Ingress Egress Gw](#ingress-egress-gw) below for details.
-<br>&#x2022; `ingress_gw` - Optional Block<br>AWS Ingress Gateway. Single interface AWS ingress site
-<br>&#x2022; `voltstack_cluster` - Optional Block<br>AWS App Stack Cluster. App Stack cluster of single interface AWS nodes
+<br><br>&#x2022; `ingress_gw` - Optional Block<br>AWS Ingress Gateway. Single interface AWS ingress site
+<br><br>&#x2022; `voltstack_cluster` - Optional Block<br>AWS App Stack Cluster. App Stack cluster of single interface AWS nodes
 
 &#x2022; `instance_type` - Optional String<br>AWS Instance Type for Node. Select Instance size based on performance needed
 
@@ -145,12 +145,12 @@ resource "f5xc_aws_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; `log_receiver` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `no_worker_nodes` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `nodes_per_az` - Optional Number<br>Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21
-<br>&#x2022; `total_nodes` - Optional Number<br>Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site
+<br><br>&#x2022; `nodes_per_az` - Optional Number<br>Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21
+<br><br>&#x2022; `total_nodes` - Optional Number<br>Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site
 
 &#x2022; `offline_survivability_mode` - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 

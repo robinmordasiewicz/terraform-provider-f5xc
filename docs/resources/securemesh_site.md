@@ -77,23 +77,23 @@ resource "f5xc_securemesh_site" "example" {
 
 -> **One of the following:**
 &#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
-<br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; `bond_device_list` - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
-<br>&#x2022; `no_bond_devices` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `no_bond_devices` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `coordinates` - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
 -> **One of the following:**
 &#x2022; `custom_network_config` - Optional Block<br>SmsNetworkConfiguration<br>See [Custom Network Config](#custom-network-config) below for details.
-<br>&#x2022; `default_network_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `default_network_config` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `kubernetes_upgrade_drain` - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded
 
 -> **One of the following:**
 &#x2022; `log_receiver` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `master_node_configuration` - Optional Block<br>Master Nodes. Configuration of master nodes
 

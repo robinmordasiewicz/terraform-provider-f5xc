@@ -66,12 +66,12 @@ resource "f5xc_network_connector" "example" {
 
 -> **One of the following:**
 &#x2022; `disable_forward_proxy` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `enable_forward_proxy` - Optional Block<br>Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
+<br><br>&#x2022; `enable_forward_proxy` - Optional Block<br>Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
 
 -> **One of the following:**
 &#x2022; `sli_to_global_dr` - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#sli-to-global-dr) below for details.
-<br>&#x2022; `sli_to_slo_snat` - Optional Block<br>SNAT Configuration. x-example: '' description<br>See [Sli To Slo Snat](#sli-to-slo-snat) below for details.
-<br>&#x2022; `slo_to_global_dr` - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#slo-to-global-dr) below for details.
+<br><br>&#x2022; `sli_to_slo_snat` - Optional Block<br>SNAT Configuration. x-example: '' description<br>See [Sli To Slo Snat](#sli-to-slo-snat) below for details.
+<br><br>&#x2022; `slo_to_global_dr` - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#slo-to-global-dr) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

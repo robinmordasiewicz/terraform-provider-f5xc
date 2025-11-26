@@ -60,11 +60,11 @@ resource "f5xc_alert_receiver" "example" {
 
 -> **One of the following:**
 &#x2022; `email` - Optional Block<br>Email Configuration<br>See [Email](#email) below for details.
-<br>&#x2022; `opsgenie` - Optional Block<br>OpsGenie Config. OpsGenie configuration to send alert notifications<br>See [Opsgenie](#opsgenie) below for details.
-<br>&#x2022; `pagerduty` - Optional Block<br>PagerDuty Config. PagerDuty configuration to send alert notifications<br>See [Pagerduty](#pagerduty) below for details.
-<br>&#x2022; `slack` - Optional Block<br>Slack Config. Slack configuration to send alert notifications<br>See [Slack](#slack) below for details.
-<br>&#x2022; `sms` - Optional Block<br>SMS Configuration<br>See [Sms](#sms) below for details.
-<br>&#x2022; `webhook` - Optional Block<br>Webhook Config. Webhook configuration to send alert notifications<br>See [Webhook](#webhook) below for details.
+<br><br>&#x2022; `opsgenie` - Optional Block<br>OpsGenie Config. OpsGenie configuration to send alert notifications<br>See [Opsgenie](#opsgenie) below for details.
+<br><br>&#x2022; `pagerduty` - Optional Block<br>PagerDuty Config. PagerDuty configuration to send alert notifications<br>See [Pagerduty](#pagerduty) below for details.
+<br><br>&#x2022; `slack` - Optional Block<br>Slack Config. Slack configuration to send alert notifications<br>See [Slack](#slack) below for details.
+<br><br>&#x2022; `sms` - Optional Block<br>SMS Configuration<br>See [Sms](#sms) below for details.
+<br><br>&#x2022; `webhook` - Optional Block<br>Webhook Config. Webhook configuration to send alert notifications<br>See [Webhook](#webhook) below for details.
 
 &#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

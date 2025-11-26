@@ -102,14 +102,14 @@ resource "f5xc_azure_vnet_site" "example" {
 
 -> **One of the following:**
 &#x2022; `alternate_region` - Optional String<br>Alternate Azure Region Name. Name of the azure region which does not support availability zones
-<br>&#x2022; `azure_region` - Optional String<br>Recommended Azure Region Name. Name of the azure region which supports availability zones
+<br><br>&#x2022; `azure_region` - Optional String<br>Recommended Azure Region Name. Name of the azure region which supports availability zones
 
 &#x2022; `azure_cred` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Azure Cred](#azure-cred) below for details.
 
 -> **One of the following:**
 &#x2022; `block_all_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
-<br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
+<br><br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `coordinates` - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
@@ -119,24 +119,24 @@ resource "f5xc_azure_vnet_site" "example" {
 
 -> **One of the following:**
 &#x2022; `ingress_egress_gw` - Optional Block<br>Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site<br>See [Ingress Egress Gw](#ingress-egress-gw) below for details.
-<br>&#x2022; `ingress_egress_gw_ar` - Optional Block<br>Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones
-<br>&#x2022; `ingress_gw` - Optional Block<br>Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region
-<br>&#x2022; `ingress_gw_ar` - Optional Block<br>Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site
-<br>&#x2022; `voltstack_cluster` - Optional Block<br>Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes
-<br>&#x2022; `voltstack_cluster_ar` - Optional Block<br>Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes
+<br><br>&#x2022; `ingress_egress_gw_ar` - Optional Block<br>Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones
+<br><br>&#x2022; `ingress_gw` - Optional Block<br>Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region
+<br><br>&#x2022; `ingress_gw_ar` - Optional Block<br>Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site
+<br><br>&#x2022; `voltstack_cluster` - Optional Block<br>Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes
+<br><br>&#x2022; `voltstack_cluster_ar` - Optional Block<br>Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes
 
 &#x2022; `kubernetes_upgrade_drain` - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded
 
 -> **One of the following:**
 &#x2022; `log_receiver` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `machine_type` - Optional String<br>Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced options
 
 -> **One of the following:**
 &#x2022; `no_worker_nodes` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `nodes_per_az` - Optional Number<br>Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21
-<br>&#x2022; `total_nodes` - Optional Number<br>Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site
+<br><br>&#x2022; `nodes_per_az` - Optional Number<br>Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21
+<br><br>&#x2022; `total_nodes` - Optional Number<br>Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site
 
 &#x2022; `offline_survivability_mode` - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 

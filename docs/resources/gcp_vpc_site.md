@@ -101,8 +101,8 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; `block_all_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
-<br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `blocked_services` - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
+<br><br>&#x2022; `default_blocked_services` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `cloud_credentials` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cloud Credentials](#cloud-credentials) below for details.
 
@@ -118,8 +118,8 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; `ingress_egress_gw` - Optional Block<br>GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site<br>See [Ingress Egress Gw](#ingress-egress-gw) below for details.
-<br>&#x2022; `ingress_gw` - Optional Block<br>GCP Ingress Gateway. Single interface GCP ingress site
-<br>&#x2022; `voltstack_cluster` - Optional Block<br>GCP App Stack Cluster. App Stack cluster of single interface GCP site
+<br><br>&#x2022; `ingress_gw` - Optional Block<br>GCP Ingress Gateway. Single interface GCP ingress site
+<br><br>&#x2022; `voltstack_cluster` - Optional Block<br>GCP App Stack Cluster. App Stack cluster of single interface GCP site
 
 &#x2022; `instance_type` - Optional String<br>GCP Instance Type for Node. Select Instance size based on performance needed
 
@@ -127,7 +127,7 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; `log_receiver` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; `logs_streaming_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; `offline_survivability_mode` - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
 
@@ -135,7 +135,7 @@ resource "f5xc_gcp_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; `private_connect_disabled` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br>&#x2022; `private_connectivity` - Optional Block<br>Private Connect Configuration. Private Connect Configuration
+<br><br>&#x2022; `private_connectivity` - Optional Block<br>Private Connect Configuration. Private Connect Configuration
 
 &#x2022; `ssh_key` - Optional String<br>Public SSH key. Public SSH key for accessing the site
 

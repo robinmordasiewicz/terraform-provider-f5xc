@@ -73,9 +73,9 @@ resource "f5xc_workload" "example" {
 
 -> **One of the following:**
 &#x2022; `job` - Optional Block<br>Job Type. Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc<br>See [Job](#job) below for details.
-<br>&#x2022; `service` - Optional Block<br>ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers, traditional SQL databases, etc<br>See [Service](#service) below for details.
-<br>&#x2022; `simple_service` - Optional Block<br>SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP
-<br>&#x2022; `stateful_service` - Optional Block<br>StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc
+<br><br>&#x2022; `service` - Optional Block<br>ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers, traditional SQL databases, etc<br>See [Service](#service) below for details.
+<br><br>&#x2022; `simple_service` - Optional Block<br>SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP
+<br><br>&#x2022; `stateful_service` - Optional Block<br>StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc
 
 &#x2022; `timeouts` - Optional Block
 

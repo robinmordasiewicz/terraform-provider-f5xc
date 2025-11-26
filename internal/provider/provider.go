@@ -42,8 +42,9 @@ func (p *F5XCProvider) Metadata(ctx context.Context, req provider.MetadataReques
 
 func (p *F5XCProvider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Terraform provider for F5 Distributed Cloud (F5XC). " +
-			"This is an open source community provider built from public F5 API documentation.",
+		MarkdownDescription: "Terraform provider for F5 Distributed Cloud (F5XC) enabling infrastructure as code " +
+			"for load balancers, security policies, sites, and networking. Community-maintained provider " +
+			"built from public F5 API documentation.",
 		Attributes: map[string]schema.Attribute{
 			"api_token": schema.StringAttribute{
 				MarkdownDescription: "F5 Distributed Cloud API Token. Can also be set via F5XC_API_TOKEN environment variable.",

@@ -64,37 +64,37 @@ resource "f5xc_discovery" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; `name` - Required String<br>Name of the Discovery. Must be unique within the namespace
+&#x2022; [`name`](#name) - Required String<br>Name of the Discovery. Must be unique within the namespace
 
-&#x2022; `namespace` - Required String<br>Namespace where the Discovery will be created
+&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Discovery will be created
 
-&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; `description` - Optional String<br>Human readable description for the object
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; `cluster_id` - Optional String<br>Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object
-<br><br>&#x2022; `no_cluster_id` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`cluster_id`](#cluster-id) - Optional String<br>Discovery cluster Identifier. Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object
+<br><br>&#x2022; [`no_cluster_id`](#no-cluster-id) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; `discovery_consul` - Optional Block<br>Consul Discovery Configuration. Discovery configuration for Hashicorp Consul<br>See [Discovery Consul](#discovery-consul) below for details.
-<br><br>&#x2022; `discovery_k8s` - Optional Block<br>K8S Discovery Configuration. Discovery configuration for K8s<br>See [Discovery K8s](#discovery-k8s) below for details.
+&#x2022; [`discovery_consul`](#discovery-consul) - Optional Block<br>Consul Discovery Configuration. Discovery configuration for Hashicorp Consul<br>See [Discovery Consul](#discovery-consul) below for details.
+<br><br>&#x2022; [`discovery_k8s`](#discovery-k8s) - Optional Block<br>K8S Discovery Configuration. Discovery configuration for K8s<br>See [Discovery K8s](#discovery-k8s) below for details.
 
-&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; `where` - Optional Block<br>Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules * Direct reference to virtual_network object * Site local network when refering to site object * All site local networks for sites selected by refering to virtual_site object<br>See [Where](#where) below for details.
+&#x2022; [`where`](#where) - Optional Block<br>Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules * Direct reference to virtual_network object * Site local network when refering to site object * All site local networks for sites selected by refering to virtual_site object<br>See [Where](#where) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; `id` - Optional String<br>Unique identifier for the resource
+&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -102,335 +102,335 @@ In addition to all arguments above, the following attributes are exported:
 
 **Discovery Consul**
 
-&#x2022; `access_info` - Optional Block<br>Hashicorp Consul Parameters. Hashicorp Consul API server information<br>See [Access Info](#discovery-consul-access-info) below.
+&#x2022; [`access_info`](#access-info) - Optional Block<br>Hashicorp Consul Parameters. Hashicorp Consul API server information<br>See [Access Info](#discovery-consul-access-info) below.
 
-&#x2022; `publish_info` - Optional Block<br>VIP Publish Configuration. Consul Configuration to publish VIPs<br>See [Publish Info](#discovery-consul-publish-info) below.
+&#x2022; [`publish_info`](#publish-info) - Optional Block<br>VIP Publish Configuration. Consul Configuration to publish VIPs<br>See [Publish Info](#discovery-consul-publish-info) below.
 
 <a id="discovery-consul-access-info"></a>
 
 **Discovery Consul Access Info**
 
-&#x2022; `connection_info` - Optional Block<br>REST API Config. Configuration details to access discovery service REST API<br>See [Connection Info](#discovery-consul-access-info-connection-info) below.
+&#x2022; [`connection_info`](#connection-info) - Optional Block<br>REST API Config. Configuration details to access discovery service REST API<br>See [Connection Info](#discovery-consul-access-info-connection-info) below.
 
-&#x2022; `http_basic_auth_info` - Optional Block<br>Hashicorp Consul Credentials. Authentication parameters to access Hashicorp Consul<br>See [HTTP Basic Auth Info](#discovery-consul-access-info-http-basic-auth-info) below.
+&#x2022; [`http_basic_auth_info`](#http-basic-auth-info) - Optional Block<br>Hashicorp Consul Credentials. Authentication parameters to access Hashicorp Consul<br>See [HTTP Basic Auth Info](#discovery-consul-access-info-http-basic-auth-info) below.
 
 <a id="discovery-consul-access-info-connection-info"></a>
 
 **Discovery Consul Access Info Connection Info**
 
-&#x2022; `api_server` - Optional String<br>API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair
+&#x2022; [`api_server`](#api-server) - Optional String<br>API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair
 
-&#x2022; `tls_info` - Optional Block<br>Client TLS Config. TLS config for client of discovery service<br>See [TLS Info](#discovery-consul-access-info-connection-info-tls-info) below.
+&#x2022; [`tls_info`](#tls-info) - Optional Block<br>Client TLS Config. TLS config for client of discovery service<br>See [TLS Info](#discovery-consul-access-info-connection-info-tls-info) below.
 
 <a id="discovery-consul-access-info-connection-info-tls-info"></a>
 
 **Discovery Consul Access Info Connection Info TLS Info**
 
-&#x2022; `certificate` - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
+&#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
-&#x2022; `key_url` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#discovery-consul-access-info-connection-info-tls-info-key-url) below.
+&#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#discovery-consul-access-info-connection-info-tls-info-key-url) below.
 
-&#x2022; `server_name` - Optional String<br>SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used
+&#x2022; [`server_name`](#server-name) - Optional String<br>SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used
 
-&#x2022; `trusted_ca_url` - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+&#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
 <a id="discovery-consul-access-info-connection-info-tls-info-key-url"></a>
 
 **Discovery Consul Access Info Connection Info TLS Info Key URL**
 
-&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-consul-access-info-connection-info-tls-info-key-url-blindfold-secret-info) below.
+&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-consul-access-info-connection-info-tls-info-key-url-blindfold-secret-info) below.
 
-&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-consul-access-info-connection-info-tls-info-key-url-clear-secret-info) below.
+&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-consul-access-info-connection-info-tls-info-key-url-clear-secret-info) below.
 
 <a id="discovery-consul-access-info-connection-info-tls-info-key-url-blindfold-secret-info"></a>
 
 **Discovery Consul Access Info Connection Info TLS Info Key URL Blindfold Secret Info**
 
-&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="discovery-consul-access-info-connection-info-tls-info-key-url-clear-secret-info"></a>
 
 **Discovery Consul Access Info Connection Info TLS Info Key URL Clear Secret Info**
 
-&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="discovery-consul-access-info-http-basic-auth-info"></a>
 
 **Discovery Consul Access Info HTTP Basic Auth Info**
 
-&#x2022; `passwd_url` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd URL](#discovery-consul-access-info-http-basic-auth-info-passwd-url) below.
+&#x2022; [`passwd_url`](#passwd-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd URL](#discovery-consul-access-info-http-basic-auth-info-passwd-url) below.
 
-&#x2022; `user_name` - Optional String<br>User Name. username in consul
+&#x2022; [`user_name`](#user-name) - Optional String<br>User Name. username in consul
 
 <a id="discovery-consul-access-info-http-basic-auth-info-passwd-url"></a>
 
 **Discovery Consul Access Info HTTP Basic Auth Info Passwd URL**
 
-&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-consul-access-info-http-basic-auth-info-passwd-url-blindfold-secret-info) below.
+&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-consul-access-info-http-basic-auth-info-passwd-url-blindfold-secret-info) below.
 
-&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-consul-access-info-http-basic-auth-info-passwd-url-clear-secret-info) below.
+&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-consul-access-info-http-basic-auth-info-passwd-url-clear-secret-info) below.
 
 <a id="discovery-consul-access-info-http-basic-auth-info-passwd-url-blindfold-secret-info"></a>
 
 **Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Blindfold Secret Info**
 
-&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="discovery-consul-access-info-http-basic-auth-info-passwd-url-clear-secret-info"></a>
 
 **Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Clear Secret Info**
 
-&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="discovery-consul-publish-info"></a>
 
 **Discovery Consul Publish Info**
 
-&#x2022; `disable` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `publish` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`publish`](#publish) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="discovery-k8s"></a>
 
 **Discovery K8s**
 
-&#x2022; `access_info` - Optional Block<br>K8s API Server. K8S API server access<br>See [Access Info](#discovery-k8s-access-info) below.
+&#x2022; [`access_info`](#access-info) - Optional Block<br>K8s API Server. K8S API server access<br>See [Access Info](#discovery-k8s-access-info) below.
 
-&#x2022; `default_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default_all`](#default-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `namespace_mapping` - Optional Block<br>K8S Namespace Mapping. Select the mapping between K8s namespaces from which services will be discovered and App Namespace to which the discovered services will be shared<br>See [Namespace Mapping](#discovery-k8s-namespace-mapping) below.
+&#x2022; [`namespace_mapping`](#namespace-mapping) - Optional Block<br>K8S Namespace Mapping. Select the mapping between K8s namespaces from which services will be discovered and App Namespace to which the discovered services will be shared<br>See [Namespace Mapping](#discovery-k8s-namespace-mapping) below.
 
-&#x2022; `publish_info` - Optional Block<br>VIP Publish Configurations. K8S Configuration to publish VIPs<br>See [Publish Info](#discovery-k8s-publish-info) below.
+&#x2022; [`publish_info`](#publish-info) - Optional Block<br>VIP Publish Configurations. K8S Configuration to publish VIPs<br>See [Publish Info](#discovery-k8s-publish-info) below.
 
 <a id="discovery-k8s-access-info"></a>
 
 **Discovery K8s Access Info**
 
-&#x2022; `connection_info` - Optional Block<br>REST API Config. Configuration details to access discovery service REST API<br>See [Connection Info](#discovery-k8s-access-info-connection-info) below.
+&#x2022; [`connection_info`](#connection-info) - Optional Block<br>REST API Config. Configuration details to access discovery service REST API<br>See [Connection Info](#discovery-k8s-access-info-connection-info) below.
 
-&#x2022; `isolated` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`isolated`](#isolated) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `kubeconfig_url` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Kubeconfig URL](#discovery-k8s-access-info-kubeconfig-url) below.
+&#x2022; [`kubeconfig_url`](#kubeconfig-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Kubeconfig URL](#discovery-k8s-access-info-kubeconfig-url) below.
 
-&#x2022; `reachable` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`reachable`](#reachable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="discovery-k8s-access-info-connection-info"></a>
 
 **Discovery K8s Access Info Connection Info**
 
-&#x2022; `api_server` - Optional String<br>API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair
+&#x2022; [`api_server`](#api-server) - Optional String<br>API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair
 
-&#x2022; `tls_info` - Optional Block<br>Client TLS Config. TLS config for client of discovery service<br>See [TLS Info](#discovery-k8s-access-info-connection-info-tls-info) below.
+&#x2022; [`tls_info`](#tls-info) - Optional Block<br>Client TLS Config. TLS config for client of discovery service<br>See [TLS Info](#discovery-k8s-access-info-connection-info-tls-info) below.
 
 <a id="discovery-k8s-access-info-connection-info-tls-info"></a>
 
 **Discovery K8s Access Info Connection Info TLS Info**
 
-&#x2022; `certificate` - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
+&#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
-&#x2022; `key_url` - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#discovery-k8s-access-info-connection-info-tls-info-key-url) below.
+&#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#discovery-k8s-access-info-connection-info-tls-info-key-url) below.
 
-&#x2022; `server_name` - Optional String<br>SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used
+&#x2022; [`server_name`](#server-name) - Optional String<br>SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used
 
-&#x2022; `trusted_ca_url` - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+&#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-key-url"></a>
 
 **Discovery K8s Access Info Connection Info TLS Info Key URL**
 
-&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info) below.
+&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info) below.
 
-&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info) below.
+&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info) below.
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info"></a>
 
 **Discovery K8s Access Info Connection Info TLS Info Key URL Blindfold Secret Info**
 
-&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info"></a>
 
 **Discovery K8s Access Info Connection Info TLS Info Key URL Clear Secret Info**
 
-&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="discovery-k8s-access-info-kubeconfig-url"></a>
 
 **Discovery K8s Access Info Kubeconfig URL**
 
-&#x2022; `blindfold_secret_info` - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info) below.
+&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info) below.
 
-&#x2022; `clear_secret_info` - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-k8s-access-info-kubeconfig-url-clear-secret-info) below.
+&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#discovery-k8s-access-info-kubeconfig-url-clear-secret-info) below.
 
 <a id="discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info"></a>
 
 **Discovery K8s Access Info Kubeconfig URL Blindfold Secret Info**
 
-&#x2022; `decryption_provider` - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; `location` - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; `store_provider` - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="discovery-k8s-access-info-kubeconfig-url-clear-secret-info"></a>
 
 **Discovery K8s Access Info Kubeconfig URL Clear Secret Info**
 
-&#x2022; `provider_ref` - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; `url` - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 <a id="discovery-k8s-namespace-mapping"></a>
 
 **Discovery K8s Namespace Mapping**
 
-&#x2022; `items` - Optional Block<br>Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex<br>See [Items](#discovery-k8s-namespace-mapping-items) below.
+&#x2022; [`items`](#items) - Optional Block<br>Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex<br>See [Items](#discovery-k8s-namespace-mapping-items) below.
 
 <a id="discovery-k8s-namespace-mapping-items"></a>
 
 **Discovery K8s Namespace Mapping Items**
 
-&#x2022; `namespace` - Optional String<br>F5XC Application Namespaces. Select a namespace
+&#x2022; [`namespace`](#namespace) - Optional String<br>F5XC Application Namespaces. Select a namespace
 
-&#x2022; `namespace_regex` - Optional String<br>K8S Namespaces. The regex here will be used to match K8s namespace(s)
+&#x2022; [`namespace_regex`](#namespace-regex) - Optional String<br>K8S Namespaces. The regex here will be used to match K8s namespace(s)
 
 <a id="discovery-k8s-publish-info"></a>
 
 **Discovery K8s Publish Info**
 
-&#x2022; `disable` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `dns_delegation` - Optional Block<br>K8SDelegationType<br>See [DNS Delegation](#discovery-k8s-publish-info-dns-delegation) below.
+&#x2022; [`dns_delegation`](#dns-delegation) - Optional Block<br>K8SDelegationType<br>See [DNS Delegation](#discovery-k8s-publish-info-dns-delegation) below.
 
-&#x2022; `publish` - Optional Block<br>K8SPublishType<br>See [Publish](#discovery-k8s-publish-info-publish) below.
+&#x2022; [`publish`](#publish) - Optional Block<br>K8SPublishType<br>See [Publish](#discovery-k8s-publish-info-publish) below.
 
-&#x2022; `publish_fqdns` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`publish_fqdns`](#publish-fqdns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="discovery-k8s-publish-info-dns-delegation"></a>
 
 **Discovery K8s Publish Info DNS Delegation**
 
-&#x2022; `dns_mode` - Optional String  Defaults to `CORE_DNS`<br>Possible values are `CORE_DNS`, `KUBE_DNS`<br>DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-DNS KubeDNS: External K8s cluster is running kube-DNS
+&#x2022; [`dns_mode`](#dns-mode) - Optional String  Defaults to `CORE_DNS`<br>Possible values are `CORE_DNS`, `KUBE_DNS`<br>DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-DNS KubeDNS: External K8s cluster is running kube-DNS
 
-&#x2022; `subdomain` - Optional String<br>Subdomain. The DNS subdomain for which F5XC will respond to DNS queries
+&#x2022; [`subdomain`](#subdomain) - Optional String<br>Subdomain. The DNS subdomain for which F5XC will respond to DNS queries
 
 <a id="discovery-k8s-publish-info-publish"></a>
 
 **Discovery K8s Publish Info Publish**
 
-&#x2022; `namespace` - Optional String<br>Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists
+&#x2022; [`namespace`](#namespace) - Optional String<br>Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 <a id="where"></a>
 
 **Where**
 
-&#x2022; `site` - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
+&#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
-&#x2022; `virtual_network` - Optional Block<br>Network Reference. This specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
+&#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Network Reference. This specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
 
-&#x2022; `virtual_site` - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
+&#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
 
 <a id="where-site"></a>
 
 **Where Site**
 
-&#x2022; `disable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `enable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`enable_internet_vip`](#enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `network_type` - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+&#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-&#x2022; `ref` - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
+&#x2022; [`ref`](#ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
 
 <a id="where-site-ref"></a>
 
 **Where Site Ref**
 
-&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="where-virtual-network"></a>
 
 **Where Virtual Network**
 
-&#x2022; `ref` - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
+&#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
 
 <a id="where-virtual-network-ref"></a>
 
 **Where Virtual Network Ref**
 
-&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 <a id="where-virtual-site"></a>
 
 **Where Virtual Site**
 
-&#x2022; `disable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `enable_internet_vip` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`enable_internet_vip`](#enable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `network_type` - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+&#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
-&#x2022; `ref` - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
+&#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
 
 <a id="where-virtual-site-ref"></a>
 
 **Where Virtual Site Ref**
 
-&#x2022; `kind` - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; `uid` - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 ## Import
 

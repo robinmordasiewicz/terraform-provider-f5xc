@@ -52,62 +52,62 @@ resource "f5xc_infraprotect_firewall_rule" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; `name` - Required String<br>Name of the InfraprotectFirewallRule. Must be unique within the namespace
+&#x2022; [`name`](#name) - Required String<br>Name of the InfraprotectFirewallRule. Must be unique within the namespace
 
-&#x2022; `namespace` - Required String<br>Namespace where the InfraprotectFirewallRule will be created
+&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the InfraprotectFirewallRule will be created
 
-&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; `description` - Optional String<br>Human readable description for the object
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; `action_allow` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `action_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`action_allow`](#action-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`action_deny`](#action-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; `destination_prefix_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `destination_prefix_single` - Optional String<br>Prefix. Prefix
+&#x2022; [`destination_prefix_all`](#destination-prefix-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`destination_prefix_single`](#destination-prefix-single) - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
-&#x2022; `fragments_allow` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `fragments_deny` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`fragments_allow`](#fragments-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`fragments_deny`](#fragments-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; `protocol_ah` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `protocol_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `protocol_esp` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `protocol_gre` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `protocol_icmp` - Optional Block<br>ICMP Protocol. x-required ICMP Protocol<br>See [Protocol ICMP](#protocol-icmp) below for details.
-<br><br>&#x2022; `protocol_icmp6` - Optional Block<br>ICMP6 Protocol. x-required ICMP6 Protocol<br>See [Protocol Icmp6](#protocol-icmp6) below for details.
-<br><br>&#x2022; `protocol_ipv6` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `protocol_tcp` - Optional Block<br>TCP Protocol. x-required TCP Protocol<br>See [Protocol TCP](#protocol-tcp) below for details.
-<br><br>&#x2022; `protocol_udp` - Optional Block<br>UDP Protocol. x-required UDP Protocol<br>See [Protocol UDP](#protocol-udp) below for details.
+&#x2022; [`protocol_ah`](#protocol-ah) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`protocol_all`](#protocol-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`protocol_esp`](#protocol-esp) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`protocol_gre`](#protocol-gre) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`protocol_icmp`](#protocol-icmp) - Optional Block<br>ICMP Protocol. x-required ICMP Protocol<br>See [Protocol ICMP](#protocol-icmp) below for details.
+<br><br>&#x2022; [`protocol_icmp6`](#protocol-icmp6) - Optional Block<br>ICMP6 Protocol. x-required ICMP6 Protocol<br>See [Protocol Icmp6](#protocol-icmp6) below for details.
+<br><br>&#x2022; [`protocol_ipv6`](#protocol-ipv6) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`protocol_tcp`](#protocol-tcp) - Optional Block<br>TCP Protocol. x-required TCP Protocol<br>See [Protocol TCP](#protocol-tcp) below for details.
+<br><br>&#x2022; [`protocol_udp`](#protocol-udp) - Optional Block<br>UDP Protocol. x-required UDP Protocol<br>See [Protocol UDP](#protocol-udp) below for details.
 
 -> **One of the following:**
-&#x2022; `source_prefix_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `source_prefix_single` - Optional String<br>Prefix. Prefix
+&#x2022; [`source_prefix_all`](#source-prefix-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`source_prefix_single`](#source-prefix-single) - Optional String<br>Prefix. Prefix
 
 -> **One of the following:**
-&#x2022; `state_off` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `state_on` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`state_off`](#state-off) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`state_on`](#state-on) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
-&#x2022; `version_ipv4` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `version_ipv6` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`version_ipv4`](#version-ipv4) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`version_ipv6`](#version-ipv6) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; `id` - Optional String<br>Unique identifier for the resource
+&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -115,85 +115,85 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol ICMP**
 
-&#x2022; `echo_reply` - Optional Bool<br>Echo-Reply. Echo-Reply
+&#x2022; [`echo_reply`](#echo-reply) - Optional Bool<br>Echo-Reply. Echo-Reply
 
-&#x2022; `echo_request` - Optional Bool<br>Echo-Request. Echo-Request
+&#x2022; [`echo_request`](#echo-request) - Optional Bool<br>Echo-Request. Echo-Request
 
-&#x2022; `parameter_problem` - Optional Bool<br>Parameter-Problem. Parameter-Problem
+&#x2022; [`parameter_problem`](#parameter-problem) - Optional Bool<br>Parameter-Problem. Parameter-Problem
 
-&#x2022; `redirect` - Optional Bool<br>Redirect. Redirect
+&#x2022; [`redirect`](#redirect) - Optional Bool<br>Redirect. Redirect
 
-&#x2022; `source_quench` - Optional Bool<br>Source-Quench. Source-Quench
+&#x2022; [`source_quench`](#source-quench) - Optional Bool<br>Source-Quench. Source-Quench
 
-&#x2022; `time_exceeded` - Optional Bool<br>Time-Exceeded. Time-Exceeded
+&#x2022; [`time_exceeded`](#time-exceeded) - Optional Bool<br>Time-Exceeded. Time-Exceeded
 
-&#x2022; `unreachable` - Optional Bool<br>Unreachable. Unreachable
+&#x2022; [`unreachable`](#unreachable) - Optional Bool<br>Unreachable. Unreachable
 
 <a id="protocol-icmp6"></a>
 
 **Protocol Icmp6**
 
-&#x2022; `destination_unreachable` - Optional Bool<br>Destination-Unreachable. Destination-Unreachable
+&#x2022; [`destination_unreachable`](#destination-unreachable) - Optional Bool<br>Destination-Unreachable. Destination-Unreachable
 
-&#x2022; `echo_reply` - Optional Bool<br>Echo-Reply. Echo-Reply
+&#x2022; [`echo_reply`](#echo-reply) - Optional Bool<br>Echo-Reply. Echo-Reply
 
-&#x2022; `echo_request` - Optional Bool<br>Echo-Request. Echo-Request
+&#x2022; [`echo_request`](#echo-request) - Optional Bool<br>Echo-Request. Echo-Request
 
-&#x2022; `neighbor_advertisement` - Optional Bool<br>Neighbor-Advertisement. Neighbor-Advertisement
+&#x2022; [`neighbor_advertisement`](#neighbor-advertisement) - Optional Bool<br>Neighbor-Advertisement. Neighbor-Advertisement
 
-&#x2022; `neighbor_solicit` - Optional Bool<br>Neighbor-Solicit. Neighbor-Solicit
+&#x2022; [`neighbor_solicit`](#neighbor-solicit) - Optional Bool<br>Neighbor-Solicit. Neighbor-Solicit
 
-&#x2022; `packet_too_big` - Optional Bool<br>Packet-Too-Big. Packet-Too-Big
+&#x2022; [`packet_too_big`](#packet-too-big) - Optional Bool<br>Packet-Too-Big. Packet-Too-Big
 
-&#x2022; `parameter_problem` - Optional Bool<br>Parameter-Problem. Parameter-Problem
+&#x2022; [`parameter_problem`](#parameter-problem) - Optional Bool<br>Parameter-Problem. Parameter-Problem
 
-&#x2022; `redirect` - Optional Bool<br>Redirect. Redirect
+&#x2022; [`redirect`](#redirect) - Optional Bool<br>Redirect. Redirect
 
-&#x2022; `router_advertisement` - Optional Bool<br>Router-Advertisement. Router-Advertisement
+&#x2022; [`router_advertisement`](#router-advertisement) - Optional Bool<br>Router-Advertisement. Router-Advertisement
 
-&#x2022; `router_solicit` - Optional Bool<br>Router-Solicit. Router-Solicit
+&#x2022; [`router_solicit`](#router-solicit) - Optional Bool<br>Router-Solicit. Router-Solicit
 
-&#x2022; `time_exceeded` - Optional Bool<br>Time-Exceeded. Time-Exceeded
+&#x2022; [`time_exceeded`](#time-exceeded) - Optional Bool<br>Time-Exceeded. Time-Exceeded
 
 <a id="protocol-tcp"></a>
 
 **Protocol TCP**
 
-&#x2022; `description` - Optional String<br>Description. Description
+&#x2022; [`description`](#description) - Optional String<br>Description. Description
 
-&#x2022; `destination_port_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`destination_port_all`](#destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `destination_port_range` - Optional String<br>Port Range. Port Range
+&#x2022; [`destination_port_range`](#destination-port-range) - Optional String<br>Port Range. Port Range
 
-&#x2022; `source_port_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`source_port_all`](#source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `source_port_range` - Optional String<br>Port Range. Port Range
+&#x2022; [`source_port_range`](#source-port-range) - Optional String<br>Port Range. Port Range
 
 <a id="protocol-udp"></a>
 
 **Protocol UDP**
 
-&#x2022; `description` - Optional String<br>Description. Description
+&#x2022; [`description`](#description) - Optional String<br>Description. Description
 
-&#x2022; `destination_port_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`destination_port_all`](#destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `destination_port_range` - Optional String<br>Port Range. Port Range
+&#x2022; [`destination_port_range`](#destination-port-range) - Optional String<br>Port Range. Port Range
 
-&#x2022; `source_port_all` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`source_port_all`](#source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `source_port_range` - Optional String<br>Port Range. Port Range
+&#x2022; [`source_port_range`](#source-port-range) - Optional String<br>Port Range. Port Range
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

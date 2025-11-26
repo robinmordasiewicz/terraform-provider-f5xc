@@ -84,13 +84,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules**
 
+A `rules` block supports the following:
+
 &#x2022; [`metadata`](#metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rules-metadata) below.
 
 &#x2022; [`spec`](#spec) - Optional Block<br>Rate Limiter Rule Specification. Shape of Rate Limiter Rule<br>See [Spec](#rules-spec) below.
 
 <a id="rules-metadata"></a>
 
-**Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -98,7 +102,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec"></a>
 
-**Rules Spec**
+**Spec**
+
+A `spec` block (within `rules`) supports the following:
 
 &#x2022; [`any_asn`](#any-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -132,19 +138,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-asn-list"></a>
 
-**Rules Spec Asn List**
+**Asn List**
+
+An `asn_list` block (within `rules.spec`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="rules-spec-asn-matcher"></a>
 
-**Rules Spec Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `rules.spec`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
 
 <a id="rules-spec-asn-matcher-asn-sets"></a>
 
-**Rules Spec Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `rules.spec.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -158,7 +170,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-country-list"></a>
 
-**Rules Spec Country List**
+**Country List**
+
+A `country_list` block (within `rules.spec`) supports the following:
 
 &#x2022; [`country_codes`](#country-codes) - Optional List  Defaults to `COUNTRY_NONE`<br>Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`<br>Country Codes List. List of Country Codes
 
@@ -166,7 +180,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-custom-rate-limiter"></a>
 
-**Rules Spec Custom Rate Limiter**
+**Custom Rate Limiter**
+
+A `custom_rate_limiter` block (within `rules.spec`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -176,7 +192,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-domain-matcher"></a>
 
-**Rules Spec Domain Matcher**
+**Domain Matcher**
+
+A `domain_matcher` block (within `rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -184,7 +202,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-headers"></a>
 
-**Rules Spec Headers**
+**Headers**
+
+A `headers` block (within `rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -198,7 +218,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-headers-item"></a>
 
-**Rules Spec Headers Item**
+**Item**
+
+An `item` block (within `rules.spec.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -208,7 +230,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-http-method"></a>
 
-**Rules Spec HTTP Method**
+**HTTP Method**
+
+A `http_method` block (within `rules.spec`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
@@ -216,7 +240,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-ip-matcher"></a>
 
-**Rules Spec IP Matcher**
+**IP Matcher**
+
+An `ip_matcher` block (within `rules.spec`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -224,7 +250,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-ip-matcher-prefix-sets"></a>
 
-**Rules Spec IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `rules.spec.ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -238,7 +266,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-ip-prefix-list"></a>
 
-**Rules Spec IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `rules.spec`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -246,7 +276,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-spec-path"></a>
 
-**Rules Spec Path**
+**Path**
+
+A `path` block (within `rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact path values to match the input HTTP path against
 
@@ -264,6 +296,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Server Name Matcher**
 
+A `server_name_matcher` block supports the following:
+
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
@@ -272,11 +306,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Server Selector**
 
+A `server_selector` block supports the following:
+
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

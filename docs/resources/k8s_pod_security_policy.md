@@ -84,6 +84,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Psp Spec**
 
+A `psp_spec` block supports the following:
+
 &#x2022; [`allow_privilege_escalation`](#allow-privilege-escalation) - Optional Bool<br>Allow Privilege Escalation. Pod can request to privilege escalation
 
 &#x2022; [`allowed_capabilities`](#allowed-capabilities) - Optional Block<br>Capability List. List of capabilities that docker container has<br>See [Allowed Capabilities](#psp-spec-allowed-capabilities) below.
@@ -148,13 +150,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-allowed-capabilities"></a>
 
-**Psp Spec Allowed Capabilities**
+**Allowed Capabilities**
+
+An `allowed_capabilities` block (within `psp_spec`) supports the following:
 
 &#x2022; [`capabilities`](#capabilities) - Optional List<br>Capability List. List of capabilities that docker container has
 
 <a id="psp-spec-allowed-host-paths"></a>
 
-**Psp Spec Allowed Host Paths**
+**Allowed Host Paths**
+
+An `allowed_host_paths` block (within `psp_spec`) supports the following:
 
 &#x2022; [`path_prefix`](#path-prefix) - Optional String<br>Host Path Prefix. Host path prefix is the path prefix that the host volume must match. It does not support *
 
@@ -162,19 +168,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-default-capabilities"></a>
 
-**Psp Spec Default Capabilities**
+**Default Capabilities**
+
+A `default_capabilities` block (within `psp_spec`) supports the following:
 
 &#x2022; [`capabilities`](#capabilities) - Optional List<br>Capability List. List of capabilities that docker container has
 
 <a id="psp-spec-drop-capabilities"></a>
 
-**Psp Spec Drop Capabilities**
+**Drop Capabilities**
+
+A `drop_capabilities` block (within `psp_spec`) supports the following:
 
 &#x2022; [`capabilities`](#capabilities) - Optional List<br>Capability List. List of capabilities that docker container has
 
 <a id="psp-spec-fs-group-strategy-options"></a>
 
-**Psp Spec Fs Group Strategy Options**
+**Fs Group Strategy Options**
+
+A `fs_group_strategy_options` block (within `psp_spec`) supports the following:
 
 &#x2022; [`id_ranges`](#id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-fs-group-strategy-options-id-ranges) below.
 
@@ -182,7 +194,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-fs-group-strategy-options-id-ranges"></a>
 
-**Psp Spec Fs Group Strategy Options Id Ranges**
+**Id Ranges**
+
+An `id_ranges` block (within `psp_spec.fs_group_strategy_options`) supports the following:
 
 &#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
@@ -190,7 +204,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-run-as-group"></a>
 
-**Psp Spec Run As Group**
+**Run As Group**
+
+A `run_as_group` block (within `psp_spec`) supports the following:
 
 &#x2022; [`id_ranges`](#id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-run-as-group-id-ranges) below.
 
@@ -198,7 +214,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-run-as-group-id-ranges"></a>
 
-**Psp Spec Run As Group Id Ranges**
+**Id Ranges**
+
+An `id_ranges` block (within `psp_spec.run_as_group`) supports the following:
 
 &#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
@@ -206,7 +224,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-run-as-user"></a>
 
-**Psp Spec Run As User**
+**Run As User**
+
+A `run_as_user` block (within `psp_spec`) supports the following:
 
 &#x2022; [`id_ranges`](#id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-run-as-user-id-ranges) below.
 
@@ -214,7 +234,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-run-as-user-id-ranges"></a>
 
-**Psp Spec Run As User Id Ranges**
+**Id Ranges**
+
+An `id_ranges` block (within `psp_spec.run_as_user`) supports the following:
 
 &#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
@@ -222,7 +244,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-supplemental-groups"></a>
 
-**Psp Spec Supplemental Groups**
+**Supplemental Groups**
+
+A `supplemental_groups` block (within `psp_spec`) supports the following:
 
 &#x2022; [`id_ranges`](#id-ranges) - Optional Block<br>ID Ranges. List of range of ID(s)<br>See [Id Ranges](#psp-spec-supplemental-groups-id-ranges) below.
 
@@ -230,7 +254,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="psp-spec-supplemental-groups-id-ranges"></a>
 
-**Psp Spec Supplemental Groups Id Ranges**
+**Id Ranges**
+
+An `id_ranges` block (within `psp_spec.supplemental_groups`) supports the following:
 
 &#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
@@ -239,6 +265,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

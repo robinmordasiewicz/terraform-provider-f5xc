@@ -84,6 +84,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **CE Site Reference**
 
+A `ce_site_reference` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -94,13 +96,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ipsec**
 
+An `ipsec` block supports the following:
+
 &#x2022; [`ike_parameters`](#ike-parameters) - Optional Block<br>IKE Parameters. IKE configuration parameters required for IPSec Connection type<br>See [Ike Parameters](#ipsec-ike-parameters) below.
 
 &#x2022; [`ipsec_tunnel_parameters`](#ipsec-tunnel-parameters) - Optional Block<br>Configure IPSec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment<br>See [Ipsec Tunnel Parameters](#ipsec-ipsec-tunnel-parameters) below.
 
 <a id="ipsec-ike-parameters"></a>
 
-**Ipsec Ike Parameters**
+**Ike Parameters**
+
+An `ike_parameters` block (within `ipsec`) supports the following:
 
 &#x2022; [`dpd_disabled`](#dpd-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -124,13 +130,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ipsec-ike-parameters-dpd-keep-alive-timer"></a>
 
-**Ipsec Ike Parameters Dpd Keep Alive Timer**
+**Dpd Keep Alive Timer**
+
+A `dpd_keep_alive_timer` block (within `ipsec.ike_parameters`) supports the following:
 
 &#x2022; [`timeout`](#timeout) - Optional Number<br>Keepalive Timer
 
 <a id="ipsec-ike-parameters-ike-phase1-profile"></a>
 
-**Ipsec Ike Parameters Ike Phase1 Profile**
+**Ike Phase1 Profile**
+
+An `ike_phase1_profile` block (within `ipsec.ike_parameters`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -140,7 +150,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ipsec-ike-parameters-ike-phase2-profile"></a>
 
-**Ipsec Ike Parameters Ike Phase2 Profile**
+**Ike Phase2 Profile**
+
+An `ike_phase2_profile` block (within `ipsec.ike_parameters`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -150,7 +162,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ipsec-ike-parameters-rm-ip-address"></a>
 
-**Ipsec Ike Parameters Rm IP Address**
+**Rm IP Address**
+
+A `rm_ip_address` block (within `ipsec.ike_parameters`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipsec-ike-parameters-rm-ip-address-ipv4) below.
 
@@ -158,19 +172,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ipsec-ike-parameters-rm-ip-address-ipv4"></a>
 
-**Ipsec Ike Parameters Rm IP Address IPv4**
+**IPv4**
+
+An `ipv4` block (within `ipsec.ike_parameters.rm_ip_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="ipsec-ike-parameters-rm-ip-address-ipv6"></a>
 
-**Ipsec Ike Parameters Rm IP Address IPv6**
+**IPv6**
+
+An `ipv6` block (within `ipsec.ike_parameters.rm_ip_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="ipsec-ipsec-tunnel-parameters"></a>
 
-**Ipsec Ipsec Tunnel Parameters**
+**Ipsec Tunnel Parameters**
+
+An `ipsec_tunnel_parameters` block (within `ipsec`) supports the following:
 
 &#x2022; [`peer_ip_address`](#peer-ip-address) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [Peer IP Address](#ipsec-ipsec-tunnel-parameters-peer-ip-address) below.
 
@@ -188,19 +208,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ipsec-ipsec-tunnel-parameters-peer-ip-address"></a>
 
-**Ipsec Ipsec Tunnel Parameters Peer IP Address**
+**Peer IP Address**
+
+A `peer_ip_address` block (within `ipsec.ipsec_tunnel_parameters`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="ipsec-ipsec-tunnel-parameters-segment"></a>
 
-**Ipsec Ipsec Tunnel Parameters Segment**
+**Segment**
+
+A `segment` block (within `ipsec.ipsec_tunnel_parameters`) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#ipsec-ipsec-tunnel-parameters-segment-refs) below.
 
 <a id="ipsec-ipsec-tunnel-parameters-segment-refs"></a>
 
-**Ipsec Ipsec Tunnel Parameters Segment Refs**
+**Refs**
+
+A `refs` block (within `ipsec.ipsec_tunnel_parameters.segment`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -214,7 +240,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ipsec-ipsec-tunnel-parameters-tunnel-eps"></a>
 
-**Ipsec Ipsec Tunnel Parameters Tunnel Eps**
+**Tunnel Eps**
+
+A `tunnel_eps` block (within `ipsec.ipsec_tunnel_parameters`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional String<br>Interface. For the chosen node, specify the interface that will be the tunnel source
 
@@ -227,6 +255,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

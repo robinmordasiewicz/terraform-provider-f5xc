@@ -75,6 +75,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Limits**
 
+A `limits` block supports the following:
+
 &#x2022; [`action_block`](#action-block) - Optional Block<br>Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold<br>See [Action Block](#limits-action-block) below.
 
 &#x2022; [`burst_multiplier`](#burst-multiplier) - Optional Number<br>Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate
@@ -93,7 +95,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="limits-action-block"></a>
 
-**Limits Action Block**
+**Action Block**
+
+An `action_block` block (within `limits`) supports the following:
 
 &#x2022; [`hours`](#hours) - Optional Block<br>Hours. Input Duration Hours<br>See [Hours](#limits-action-block-hours) below.
 
@@ -103,25 +107,33 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="limits-action-block-hours"></a>
 
-**Limits Action Block Hours**
+**Hours**
+
+A `hours` block (within `limits.action_block`) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
 <a id="limits-action-block-minutes"></a>
 
-**Limits Action Block Minutes**
+**Minutes**
+
+A `minutes` block (within `limits.action_block`) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
 <a id="limits-action-block-seconds"></a>
 
-**Limits Action Block Seconds**
+**Seconds**
+
+A `seconds` block (within `limits.action_block`) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -134,6 +146,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="user-identification"></a>
 
 **User Identification**
+
+An `user_identification` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

@@ -92,13 +92,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ct Groups**
 
+A `ct_groups` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the child tenant user group
 
 &#x2022; [`namespace_roles`](#namespace-roles) - Optional Block<br>Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant<br>See [Namespace Roles](#ct-groups-namespace-roles) below.
 
 <a id="ct-groups-namespace-roles"></a>
 
-**Ct Groups Namespace Roles**
+**Namespace Roles**
+
+A `namespace_roles` block (within `ct_groups`) supports the following:
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces. The System, Shared, and Default namespaces will be created automatically
 
@@ -107,6 +111,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="favicon"></a>
 
 **Favicon**
+
+A `favicon` block supports the following:
 
 &#x2022; [`aws_s3`](#aws-s3) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -118,6 +124,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Logo**
 
+A `logo` block supports the following:
+
 &#x2022; [`aws_s3`](#aws-s3) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`content`](#content) - Optional String<br>Content. Content of the file
@@ -128,6 +136,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Plan**
 
+A `plan` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -137,6 +147,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

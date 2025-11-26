@@ -94,11 +94,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Bandwidth**
 
+A `bandwidth` block supports the following:
+
 &#x2022; [`bandwidth_max_mb`](#bandwidth-max-mb) - Optional Number<br>Bandwidth Max in MB. Bandwidth max allowed
 
 <a id="bgp-information"></a>
 
 **BGP Information**
+
+A `bgp_information` block supports the following:
 
 &#x2022; [`asn`](#asn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Asn](#bgp-information-asn) below.
 
@@ -112,7 +116,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-information-asn"></a>
 
-**BGP Information Asn**
+**Asn**
+
+An `asn` block (within `bgp_information`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -122,7 +128,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-information-peer-secret-override"></a>
 
-**BGP Information Peer Secret Override**
+**Peer Secret Override**
+
+A `peer_secret_override` block (within `bgp_information`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#bgp-information-peer-secret-override-blindfold-secret-info) below.
 
@@ -130,7 +138,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-information-peer-secret-override-blindfold-secret-info"></a>
 
-**BGP Information Peer Secret Override Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `bgp_information.peer_secret_override`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -140,7 +150,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-information-peer-secret-override-clear-secret-info"></a>
 
-**BGP Information Peer Secret Override Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `bgp_information.peer_secret_override`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -149,6 +161,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="firewall-rule-group"></a>
 
 **Firewall Rule Group**
+
+A `firewall_rule_group` block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -159,6 +173,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="gre-ipv4"></a>
 
 **Gre IPv4**
+
+A `gre_ipv4` block supports the following:
 
 &#x2022; [`customer_endpoint_ipv4`](#customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
 
@@ -178,6 +194,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Gre IPv6**
 
+A `gre_ipv6` block supports the following:
+
 &#x2022; [`customer_endpoint_ipv6`](#customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
 
 &#x2022; [`ipv4_interconnect_disabled`](#ipv4-interconnect-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -188,17 +206,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **IP In IP**
 
+An `ip_in_ip` block supports the following:
+
 &#x2022; [`customer_endpoint_ipv4`](#customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
 
 <a id="ipv6-to-ipv6"></a>
 
 **IPv6 To IPv6**
 
+An `ipv6_to_ipv6` block supports the following:
+
 &#x2022; [`customer_endpoint_ipv6`](#customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -211,6 +235,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="tunnel-location"></a>
 
 **Tunnel Location**
+
+A `tunnel_location` block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Location Name. Destination tunnel Location
 

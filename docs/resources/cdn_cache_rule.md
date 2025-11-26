@@ -82,6 +82,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cache Rules**
 
+A `cache_rules` block supports the following:
+
 &#x2022; [`cache_bypass`](#cache-bypass) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`eligible_for_cache`](#eligible-for-cache) - Optional Block<br>Cache Action Options. List of options for Cache Action<br>See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
@@ -92,7 +94,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-eligible-for-cache"></a>
 
-**Cache Rules Eligible For Cache**
+**Eligible For Cache**
+
+An `eligible_for_cache` block (within `cache_rules`) supports the following:
 
 &#x2022; [`scheme_proxy_host_request_uri`](#scheme-proxy-host-request-uri) - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host Request URI](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) below.
 
@@ -100,7 +104,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri"></a>
 
-**Cache Rules Eligible For Cache Scheme Proxy Host Request URI**
+**Scheme Proxy Host Request URI**
+
+A `scheme_proxy_host_request_uri` block (within `cache_rules.eligible_for_cache`) supports the following:
 
 &#x2022; [`cache_override`](#cache-override) - Optional Bool<br>Cache Override. Honour Cache Override
 
@@ -110,7 +116,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri"></a>
 
-**Cache Rules Eligible For Cache Scheme Proxy Host URI**
+**Scheme Proxy Host URI**
+
+A `scheme_proxy_host_uri` block (within `cache_rules.eligible_for_cache`) supports the following:
 
 &#x2022; [`cache_override`](#cache-override) - Optional Bool<br>Cache Override. Honour Cache Override
 
@@ -120,7 +128,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list"></a>
 
-**Cache Rules Rule Expression List**
+**Rule Expression List**
+
+A `rule_expression_list` block (within `cache_rules`) supports the following:
 
 &#x2022; [`cache_rule_expression`](#cache-rule-expression) - Optional Block<br>Terms. The Cache Rule Expression Terms that are ANDed<br>See [Cache Rule Expression](#cache-rules-rule-expression-list-cache-rule-expression) below.
 
@@ -128,7 +138,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression"></a>
 
-**Cache Rules Rule Expression List Cache Rule Expression**
+**Cache Rule Expression**
+
+A `cache_rule_expression` block (within `cache_rules.rule_expression_list`) supports the following:
 
 &#x2022; [`cache_headers`](#cache-headers) - Optional Block<br>Cache Headers. Configure cache rule headers to match the criteria<br>See [Cache Headers](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) below.
 
@@ -140,7 +152,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers"></a>
 
-**Cache Rules Rule Expression List Cache Rule Expression Cache Headers**
+**Cache Headers**
+
+A `cache_headers` block (within `cache_rules.rule_expression_list.cache_rule_expression`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String  Defaults to `PROXY_HOST`<br>Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`<br>Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent
 
@@ -148,7 +162,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator"></a>
 
-**Cache Rules Rule Expression List Cache Rule Expression Cache Headers Operator**
+**Operator**
+
+An `operator` block (within `cache_rules.rule_expression_list.cache_rule_expression.cache_headers`) supports the following:
 
 &#x2022; [`contains`](#contains) - Optional String<br>Contains. Field must contain
 
@@ -170,7 +186,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher"></a>
 
-**Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher**
+**Cookie Matcher**
+
+A `cookie_matcher` block (within `cache_rules.rule_expression_list.cache_rule_expression`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Cookie Name. A case-sensitive cookie name
 
@@ -178,7 +196,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator"></a>
 
-**Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher Operator**
+**Operator**
+
+An `operator` block (within `cache_rules.rule_expression_list.cache_rule_expression.cookie_matcher`) supports the following:
 
 &#x2022; [`contains`](#contains) - Optional String<br>Contains. Field must contain
 
@@ -200,13 +220,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-path-match"></a>
 
-**Cache Rules Rule Expression List Cache Rule Expression Path Match**
+**Path Match**
+
+A `path_match` block (within `cache_rules.rule_expression_list.cache_rule_expression`) supports the following:
 
 &#x2022; [`operator`](#operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) below.
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator"></a>
 
-**Cache Rules Rule Expression List Cache Rule Expression Path Match Operator**
+**Operator**
+
+An `operator` block (within `cache_rules.rule_expression_list.cache_rule_expression.path_match`) supports the following:
 
 &#x2022; [`contains`](#contains) - Optional String<br>Contains. Field must contain
 
@@ -228,7 +252,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters"></a>
 
-**Cache Rules Rule Expression List Cache Rule Expression Query Parameters**
+**Query Parameters**
+
+A `query_parameters` block (within `cache_rules.rule_expression_list.cache_rule_expression`) supports the following:
 
 &#x2022; [`key`](#key) - Optional String<br>Key. Query parameter key In the above example, assignee_username is the key
 
@@ -236,7 +262,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator"></a>
 
-**Cache Rules Rule Expression List Cache Rule Expression Query Parameters Operator**
+**Operator**
+
+An `operator` block (within `cache_rules.rule_expression_list.cache_rule_expression.query_parameters`) supports the following:
 
 &#x2022; [`contains`](#contains) - Optional String<br>Contains. Field must contain
 
@@ -259,6 +287,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

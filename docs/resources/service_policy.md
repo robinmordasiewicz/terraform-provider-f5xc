@@ -95,6 +95,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Allow List**
 
+An `allow_list` block supports the following:
+
 &#x2022; [`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#allow-list-asn-list) below.
 
 &#x2022; [`asn_set`](#asn-set) - Optional Block<br>BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB<br>See [Asn Set](#allow-list-asn-set) below.
@@ -117,13 +119,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="allow-list-asn-list"></a>
 
-**Allow List Asn List**
+**Asn List**
+
+An `asn_list` block (within `allow_list`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="allow-list-asn-set"></a>
 
-**Allow List Asn Set**
+**Asn Set**
+
+An `asn_set` block (within `allow_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -133,7 +139,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="allow-list-ip-prefix-set"></a>
 
-**Allow List IP Prefix Set**
+**IP Prefix Set**
+
+An `ip_prefix_set` block (within `allow_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -143,13 +151,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="allow-list-prefix-list"></a>
 
-**Allow List Prefix List**
+**Prefix List**
+
+A `prefix_list` block (within `allow_list`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="deny-list"></a>
 
 **Deny List**
+
+A `deny_list` block supports the following:
 
 &#x2022; [`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#deny-list-asn-list) below.
 
@@ -173,13 +185,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="deny-list-asn-list"></a>
 
-**Deny List Asn List**
+**Asn List**
+
+An `asn_list` block (within `deny_list`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="deny-list-asn-set"></a>
 
-**Deny List Asn Set**
+**Asn Set**
+
+An `asn_set` block (within `deny_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -189,7 +205,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="deny-list-ip-prefix-set"></a>
 
-**Deny List IP Prefix Set**
+**IP Prefix Set**
+
+An `ip_prefix_set` block (within `deny_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -199,7 +217,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="deny-list-prefix-list"></a>
 
-**Deny List Prefix List**
+**Prefix List**
+
+A `prefix_list` block (within `deny_list`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
@@ -207,11 +227,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List**
 
+A `rule_list` block supports the following:
+
 &#x2022; [`rules`](#rules) - Optional Block<br>Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list<br>See [Rules](#rule-list-rules) below.
 
 <a id="rule-list-rules"></a>
 
-**Rule List Rules**
+**Rules**
+
+A `rules` block (within `rule_list`) supports the following:
 
 &#x2022; [`metadata`](#metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
 
@@ -219,7 +243,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-metadata"></a>
 
-**Rule List Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -227,7 +253,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec"></a>
 
-**Rule List Rules Spec**
+**Spec**
+
+A `spec` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
 
@@ -297,7 +325,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-api-group-matcher"></a>
 
-**Rule List Rules Spec API Group Matcher**
+**API Group Matcher**
+
+An `api_group_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert String Matcher. Invert the match result
 
@@ -305,7 +335,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-arg-matchers"></a>
 
-**Rule List Rules Spec Arg Matchers**
+**Arg Matchers**
+
+An `arg_matchers` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -319,7 +351,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-arg-matchers-item"></a>
 
-**Rule List Rules Spec Arg Matchers Item**
+**Item**
+
+An `item` block (within `rule_list.rules.spec.arg_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -329,19 +363,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-asn-list"></a>
 
-**Rule List Rules Spec Asn List**
+**Asn List**
+
+An `asn_list` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="rule-list-rules-spec-asn-matcher"></a>
 
-**Rule List Rules Spec Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rule-list-rules-spec-asn-matcher-asn-sets) below.
 
 <a id="rule-list-rules-spec-asn-matcher-asn-sets"></a>
 
-**Rule List Rules Spec Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `rule_list.rules.spec.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -355,7 +395,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-body-matcher"></a>
 
-**Rule List Rules Spec Body Matcher**
+**Body Matcher**
+
+A `body_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -365,7 +407,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-bot-action"></a>
 
-**Rule List Rules Spec Bot Action**
+**Bot Action**
+
+A `bot_action` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`bot_skip_processing`](#bot-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -373,7 +417,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-client-name-matcher"></a>
 
-**Rule List Rules Spec Client Name Matcher**
+**Client Name Matcher**
+
+A `client_name_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -383,13 +429,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-client-selector"></a>
 
-**Rule List Rules Spec Client Selector**
+**Client Selector**
+
+A `client_selector` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="rule-list-rules-spec-cookie-matchers"></a>
 
-**Rule List Rules Spec Cookie Matchers**
+**Cookie Matchers**
+
+A `cookie_matchers` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -403,7 +453,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-cookie-matchers-item"></a>
 
-**Rule List Rules Spec Cookie Matchers Item**
+**Item**
+
+An `item` block (within `rule_list.rules.spec.cookie_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -413,7 +465,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-domain-matcher"></a>
 
-**Rule List Rules Spec Domain Matcher**
+**Domain Matcher**
+
+A `domain_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -423,7 +477,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-headers"></a>
 
-**Rule List Rules Spec Headers**
+**Headers**
+
+A `headers` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -437,7 +493,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-headers-item"></a>
 
-**Rule List Rules Spec Headers Item**
+**Item**
+
+An `item` block (within `rule_list.rules.spec.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -447,7 +505,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-http-method"></a>
 
-**Rule List Rules Spec HTTP Method**
+**HTTP Method**
+
+A `http_method` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
@@ -455,7 +515,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-ip-matcher"></a>
 
-**Rule List Rules Spec IP Matcher**
+**IP Matcher**
+
+An `ip_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -463,7 +525,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-ip-matcher-prefix-sets"></a>
 
-**Rule List Rules Spec IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `rule_list.rules.spec.ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -477,7 +541,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-ip-prefix-list"></a>
 
-**Rule List Rules Spec IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -485,19 +551,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-ip-threat-category-list"></a>
 
-**Rule List Rules Spec IP Threat Category List**
+**IP Threat Category List**
+
+An `ip_threat_category_list` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
 <a id="rule-list-rules-spec-ja4-tls-fingerprint"></a>
 
-**Rule List Rules Spec Ja4 TLS Fingerprint**
+**Ja4 TLS Fingerprint**
+
+A `ja4_tls_fingerprint` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
 
 <a id="rule-list-rules-spec-jwt-claims"></a>
 
-**Rule List Rules Spec JWT Claims**
+**JWT Claims**
+
+A `jwt_claims` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -511,7 +583,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-jwt-claims-item"></a>
 
-**Rule List Rules Spec JWT Claims Item**
+**Item**
+
+An `item` block (within `rule_list.rules.spec.jwt_claims`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -521,13 +595,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-label-matcher"></a>
 
-**Rule List Rules Spec Label Matcher**
+**Label Matcher**
+
+A `label_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
 
 <a id="rule-list-rules-spec-mum-action"></a>
 
-**Rule List Rules Spec Mum Action**
+**Mum Action**
+
+A `mum_action` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`default`](#default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -535,7 +613,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-path"></a>
 
-**Rule List Rules Spec Path**
+**Path**
+
+A `path` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact path values to match the input HTTP path against
 
@@ -551,7 +631,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-port-matcher"></a>
 
-**Rule List Rules Spec Port Matcher**
+**Port Matcher**
+
+A `port_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Port Matcher. Invert the match result
 
@@ -559,7 +641,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-query-params"></a>
 
-**Rule List Rules Spec Query Params**
+**Query Params**
+
+A `query_params` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -573,7 +657,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-query-params-item"></a>
 
-**Rule List Rules Spec Query Params Item**
+**Item**
+
+An `item` block (within `rule_list.rules.spec.query_params`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -583,7 +669,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-request-constraints"></a>
 
-**Rule List Rules Spec Request Constraints**
+**Request Constraints**
+
+A `request_constraints` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`max_cookie_count_exceeds`](#max-cookie-count-exceeds) - Optional Number<br>Match on the Count for all Cookies that exceed this value
 
@@ -639,7 +727,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-segment-policy"></a>
 
-**Rule List Rules Spec Segment Policy**
+**Segment Policy**
+
+A `segment_policy` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`dst_any`](#dst-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -653,13 +743,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-segment-policy-dst-segments"></a>
 
-**Rule List Rules Spec Segment Policy Dst Segments**
+**Dst Segments**
+
+A `dst_segments` block (within `rule_list.rules.spec.segment_policy`) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#rule-list-rules-spec-segment-policy-dst-segments-segments) below.
 
 <a id="rule-list-rules-spec-segment-policy-dst-segments-segments"></a>
 
-**Rule List Rules Spec Segment Policy Dst Segments Segments**
+**Segments**
+
+A `segments` block (within `rule_list.rules.spec.segment_policy.dst_segments`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -669,13 +763,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-segment-policy-src-segments"></a>
 
-**Rule List Rules Spec Segment Policy Src Segments**
+**Src Segments**
+
+A `src_segments` block (within `rule_list.rules.spec.segment_policy`) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#rule-list-rules-spec-segment-policy-src-segments-segments) below.
 
 <a id="rule-list-rules-spec-segment-policy-src-segments-segments"></a>
 
-**Rule List Rules Spec Segment Policy Src Segments Segments**
+**Segments**
+
+A `segments` block (within `rule_list.rules.spec.segment_policy.src_segments`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -685,7 +783,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-tls-fingerprint-matcher"></a>
 
-**Rule List Rules Spec TLS Fingerprint Matcher**
+**TLS Fingerprint Matcher**
+
+A `tls_fingerprint_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`classes`](#classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
@@ -695,7 +795,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-user-identity-matcher"></a>
 
-**Rule List Rules Spec User Identity Matcher**
+**User Identity Matcher**
+
+An `user_identity_matcher` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -703,7 +805,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-waf-action"></a>
 
-**Rule List Rules Spec WAF Action**
+**WAF Action**
+
+A `waf_action` block (within `rule_list.rules.spec`) supports the following:
 
 &#x2022; [`app_firewall_detection_control`](#app-firewall-detection-control) - Optional Block<br>App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#rule-list-rules-spec-waf-action-app-firewall-detection-control) below.
 
@@ -713,7 +817,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control"></a>
 
-**Rule List Rules Spec WAF Action App Firewall Detection Control**
+**App Firewall Detection Control**
+
+An `app_firewall_detection_control` block (within `rule_list.rules.spec.waf_action`) supports the following:
 
 &#x2022; [`exclude_attack_type_contexts`](#exclude-attack-type-contexts) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-attack-type-contexts) below.
 
@@ -725,7 +831,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-attack-type-contexts"></a>
 
-**Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Attack Type Contexts**
+**Exclude Attack Type Contexts**
+
+An `exclude_attack_type_contexts` block (within `rule_list.rules.spec.waf_action.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -735,13 +843,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-bot-name-contexts"></a>
 
-**Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Bot Name Contexts**
+**Exclude Bot Name Contexts**
+
+An `exclude_bot_name_contexts` block (within `rule_list.rules.spec.waf_action.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`bot_name`](#bot-name) - Optional String<br>Bot Name
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-signature-contexts"></a>
 
-**Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Signature Contexts**
+**Exclude Signature Contexts**
+
+An `exclude_signature_contexts` block (within `rule_list.rules.spec.waf_action.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -751,7 +863,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-violation-contexts"></a>
 
-**Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Violation Contexts**
+**Exclude Violation Contexts**
+
+An `exclude_violation_contexts` block (within `rule_list.rules.spec.waf_action.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -763,6 +877,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Server Name Matcher**
 
+A `server_name_matcher` block supports the following:
+
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
@@ -771,11 +887,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Server Selector**
 
+A `server_selector` block supports the following:
+
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

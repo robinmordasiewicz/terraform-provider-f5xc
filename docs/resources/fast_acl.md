@@ -86,6 +86,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol Policer**
 
+A `protocol_policer` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -95,6 +97,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="re-acl"></a>
 
 **RE ACL**
+
+A `re_acl` block supports the following:
 
 &#x2022; [`all_public_vips`](#all-public-vips) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -106,7 +110,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="re-acl-fast-acl-rules"></a>
 
-**RE ACL Fast ACL Rules**
+**Fast ACL Rules**
+
+A `fast_acl_rules` block (within `re_acl`) supports the following:
 
 &#x2022; [`action`](#action) - Optional Block<br>Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic<br>See [Action](#re-acl-fast-acl-rules-action) below.
 
@@ -120,7 +126,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="re-acl-fast-acl-rules-action"></a>
 
-**RE ACL Fast ACL Rules Action**
+**Action**
+
+An `action` block (within `re_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`policer_action`](#policer-action) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#re-acl-fast-acl-rules-action-policer-action) below.
 
@@ -130,13 +138,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="re-acl-fast-acl-rules-action-policer-action"></a>
 
-**RE ACL Fast ACL Rules Action Policer Action**
+**Policer Action**
+
+A `policer_action` block (within `re_acl.fast_acl_rules.action`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#re-acl-fast-acl-rules-action-policer-action-ref) below.
 
 <a id="re-acl-fast-acl-rules-action-policer-action-ref"></a>
 
-**RE ACL Fast ACL Rules Action Policer Action Ref**
+**Ref**
+
+A `ref` block (within `re_acl.fast_acl_rules.action.policer_action`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -150,13 +162,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="re-acl-fast-acl-rules-action-protocol-policer-action"></a>
 
-**RE ACL Fast ACL Rules Action Protocol Policer Action**
+**Protocol Policer Action**
+
+A `protocol_policer_action` block (within `re_acl.fast_acl_rules.action`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#re-acl-fast-acl-rules-action-protocol-policer-action-ref) below.
 
 <a id="re-acl-fast-acl-rules-action-protocol-policer-action-ref"></a>
 
-**RE ACL Fast ACL Rules Action Protocol Policer Action Ref**
+**Ref**
+
+A `ref` block (within `re_acl.fast_acl_rules.action.protocol_policer_action`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -170,13 +186,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="re-acl-fast-acl-rules-ip-prefix-set"></a>
 
-**RE ACL Fast ACL Rules IP Prefix Set**
+**IP Prefix Set**
+
+An `ip_prefix_set` block (within `re_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#re-acl-fast-acl-rules-ip-prefix-set-ref) below.
 
 <a id="re-acl-fast-acl-rules-ip-prefix-set-ref"></a>
 
-**RE ACL Fast ACL Rules IP Prefix Set Ref**
+**Ref**
+
+A `ref` block (within `re_acl.fast_acl_rules.ip_prefix_set`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -190,7 +210,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="re-acl-fast-acl-rules-metadata"></a>
 
-**RE ACL Fast ACL Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `re_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -198,7 +220,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="re-acl-fast-acl-rules-port"></a>
 
-**RE ACL Fast ACL Rules Port**
+**Port**
+
+A `port` block (within `re_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`all`](#all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -208,13 +232,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="re-acl-fast-acl-rules-prefix"></a>
 
-**RE ACL Fast ACL Rules Prefix**
+**Prefix**
+
+A `prefix` block (within `re_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 <a id="re-acl-selected-tenant-vip"></a>
 
-**RE ACL Selected Tenant VIP**
+**Selected Tenant VIP**
+
+A `selected_tenant_vip` block (within `re_acl`) supports the following:
 
 &#x2022; [`default_tenant_vip`](#default-tenant-vip) - Optional Bool<br>Include Tenant VIP. Include tenant VIP in list of specific VIP(s)
 
@@ -222,7 +250,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="re-acl-selected-tenant-vip-public-ip-refs"></a>
 
-**RE ACL Selected Tenant VIP Public IP Refs**
+**Public IP Refs**
+
+A `public_ip_refs` block (within `re_acl.selected_tenant_vip`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -233,6 +263,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="site-acl"></a>
 
 **Site ACL**
+
+A `site_acl` block supports the following:
 
 &#x2022; [`all_services`](#all-services) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -248,7 +280,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-acl-fast-acl-rules"></a>
 
-**Site ACL Fast ACL Rules**
+**Fast ACL Rules**
+
+A `fast_acl_rules` block (within `site_acl`) supports the following:
 
 &#x2022; [`action`](#action) - Optional Block<br>Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic<br>See [Action](#site-acl-fast-acl-rules-action) below.
 
@@ -262,7 +296,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-acl-fast-acl-rules-action"></a>
 
-**Site ACL Fast ACL Rules Action**
+**Action**
+
+An `action` block (within `site_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`policer_action`](#policer-action) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#site-acl-fast-acl-rules-action-policer-action) below.
 
@@ -272,13 +308,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-acl-fast-acl-rules-action-policer-action"></a>
 
-**Site ACL Fast ACL Rules Action Policer Action**
+**Policer Action**
+
+A `policer_action` block (within `site_acl.fast_acl_rules.action`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#site-acl-fast-acl-rules-action-policer-action-ref) below.
 
 <a id="site-acl-fast-acl-rules-action-policer-action-ref"></a>
 
-**Site ACL Fast ACL Rules Action Policer Action Ref**
+**Ref**
+
+A `ref` block (within `site_acl.fast_acl_rules.action.policer_action`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -292,13 +332,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-acl-fast-acl-rules-action-protocol-policer-action"></a>
 
-**Site ACL Fast ACL Rules Action Protocol Policer Action**
+**Protocol Policer Action**
+
+A `protocol_policer_action` block (within `site_acl.fast_acl_rules.action`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#site-acl-fast-acl-rules-action-protocol-policer-action-ref) below.
 
 <a id="site-acl-fast-acl-rules-action-protocol-policer-action-ref"></a>
 
-**Site ACL Fast ACL Rules Action Protocol Policer Action Ref**
+**Ref**
+
+A `ref` block (within `site_acl.fast_acl_rules.action.protocol_policer_action`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -312,13 +356,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-acl-fast-acl-rules-ip-prefix-set"></a>
 
-**Site ACL Fast ACL Rules IP Prefix Set**
+**IP Prefix Set**
+
+An `ip_prefix_set` block (within `site_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#site-acl-fast-acl-rules-ip-prefix-set-ref) below.
 
 <a id="site-acl-fast-acl-rules-ip-prefix-set-ref"></a>
 
-**Site ACL Fast ACL Rules IP Prefix Set Ref**
+**Ref**
+
+A `ref` block (within `site_acl.fast_acl_rules.ip_prefix_set`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -332,7 +380,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-acl-fast-acl-rules-metadata"></a>
 
-**Site ACL Fast ACL Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `site_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -340,7 +390,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-acl-fast-acl-rules-port"></a>
 
-**Site ACL Fast ACL Rules Port**
+**Port**
+
+A `port` block (within `site_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`all`](#all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -350,13 +402,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-acl-fast-acl-rules-prefix"></a>
 
-**Site ACL Fast ACL Rules Prefix**
+**Prefix**
+
+A `prefix` block (within `site_acl.fast_acl_rules`) supports the following:
 
 &#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

@@ -155,13 +155,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Admin Password**
 
+An `admin_password` block supports the following:
+
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#admin-password-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#admin-password-clear-secret-info) below.
 
 <a id="admin-password-blindfold-secret-info"></a>
 
-**Admin Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `admin_password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -171,7 +175,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="admin-password-clear-secret-info"></a>
 
-**Admin Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `admin_password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -181,11 +187,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Blocked Services**
 
+A `blocked_services` block supports the following:
+
 &#x2022; [`blocked_sevice`](#blocked-sevice) - Optional Block<br>Disable Node Local Services<br>See [Blocked Sevice](#blocked-services-blocked-sevice) below.
 
 <a id="blocked-services-blocked-sevice"></a>
 
-**Blocked Services Blocked Sevice**
+**Blocked Sevice**
+
+A `blocked_sevice` block (within `blocked_services`) supports the following:
 
 &#x2022; [`dns`](#dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -199,6 +209,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cloud Credentials**
 
+A `cloud_credentials` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -209,6 +221,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Coordinates**
 
+A `coordinates` block supports the following:
+
 &#x2022; [`latitude`](#latitude) - Optional Number<br>Latitude. Latitude of the site location
 
 &#x2022; [`longitude`](#longitude) - Optional Number<br>Longitude. longitude of site location
@@ -217,6 +231,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom DNS**
 
+A `custom_dns` block supports the following:
+
 &#x2022; [`inside_nameserver`](#inside-nameserver) - Optional String<br>DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network
 
 &#x2022; [`outside_nameserver`](#outside-nameserver) - Optional String<br>DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network
@@ -224,6 +240,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="ingress-egress-gw"></a>
 
 **Ingress Egress Gw**
+
+An `ingress_egress_gw` block supports the following:
 
 &#x2022; [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#ingress-egress-gw-active-enhanced-firewall-policies) below.
 
@@ -277,13 +295,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-active-enhanced-firewall-policies"></a>
 
-**Ingress Egress Gw Active Enhanced Firewall Policies**
+**Active Enhanced Firewall Policies**
+
+An `active_enhanced_firewall_policies` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`enhanced_firewall_policies`](#enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 <a id="ingress-egress-gw-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
-**Ingress Egress Gw Active Enhanced Firewall Policies Enhanced Firewall Policies**
+**Enhanced Firewall Policies**
+
+An `enhanced_firewall_policies` block (within `ingress_egress_gw.active_enhanced_firewall_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -293,13 +315,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-active-forward-proxy-policies"></a>
 
-**Ingress Egress Gw Active Forward Proxy Policies**
+**Active Forward Proxy Policies**
+
+An `active_forward_proxy_policies` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`forward_proxy_policies`](#forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies) below.
 
 <a id="ingress-egress-gw-active-forward-proxy-policies-forward-proxy-policies"></a>
 
-**Ingress Egress Gw Active Forward Proxy Policies Forward Proxy Policies**
+**Forward Proxy Policies**
+
+A `forward_proxy_policies` block (within `ingress_egress_gw.active_forward_proxy_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -309,13 +335,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-active-network-policies"></a>
 
-**Ingress Egress Gw Active Network Policies**
+**Active Network Policies**
+
+An `active_network_policies` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`network_policies`](#network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#ingress-egress-gw-active-network-policies-network-policies) below.
 
 <a id="ingress-egress-gw-active-network-policies-network-policies"></a>
 
-**Ingress Egress Gw Active Network Policies Network Policies**
+**Network Policies**
+
+A `network_policies` block (within `ingress_egress_gw.active_network_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -325,7 +355,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-dc-cluster-group-inside-vn"></a>
 
-**Ingress Egress Gw Dc Cluster Group Inside Vn**
+**Dc Cluster Group Inside Vn**
+
+A `dc_cluster_group_inside_vn` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -335,7 +367,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-dc-cluster-group-outside-vn"></a>
 
-**Ingress Egress Gw Dc Cluster Group Outside Vn**
+**Dc Cluster Group Outside Vn**
+
+A `dc_cluster_group_outside_vn` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -345,13 +379,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-global-network-list"></a>
 
-**Ingress Egress Gw Global Network List**
+**Global Network List**
+
+A `global_network_list` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`global_network_connections`](#global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#ingress-egress-gw-global-network-list-global-network-connections) below.
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections"></a>
 
-**Ingress Egress Gw Global Network List Global Network Connections**
+**Global Network Connections**
+
+A `global_network_connections` block (within `ingress_egress_gw.global_network_list`) supports the following:
 
 &#x2022; [`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr) below.
 
@@ -359,13 +397,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr"></a>
 
-**Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR**
+**Sli To Global DR**
+
+A `sli_to_global_dr` block (within `ingress_egress_gw.global_network_list.global_network_connections`) supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
 
-**Ingress Egress Gw Global Network List Global Network Connections Sli To Global DR Global Vn**
+**Global Vn**
+
+A `global_vn` block (within `ingress_egress_gw.global_network_list.global_network_connections.sli_to_global_dr`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -375,13 +417,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr"></a>
 
-**Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR**
+**Slo To Global DR**
+
+A `slo_to_global_dr` block (within `ingress_egress_gw.global_network_list.global_network_connections`) supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
 
 <a id="ingress-egress-gw-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
 
-**Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR Global Vn**
+**Global Vn**
+
+A `global_vn` block (within `ingress_egress_gw.global_network_list.global_network_connections.slo_to_global_dr`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -391,7 +437,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-network"></a>
 
-**Ingress Egress Gw Inside Network**
+**Inside Network**
+
+An `inside_network` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`existing_network`](#existing-network) - Optional Block<br>GCP existing VPC network Type. Name of existing VPC network<br>See [Existing Network](#ingress-egress-gw-inside-network-existing-network) below.
 
@@ -401,25 +449,33 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-network-existing-network"></a>
 
-**Ingress Egress Gw Inside Network Existing Network**
+**Existing Network**
+
+An `existing_network` block (within `ingress_egress_gw.inside_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>GCP VPC Network Name. Name for your GCP VPC Network
 
 <a id="ingress-egress-gw-inside-network-new-network"></a>
 
-**Ingress Egress Gw Inside Network New Network**
+**New Network**
+
+A `new_network` block (within `ingress_egress_gw.inside_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>GCP VPC Network Name. Name for your GCP VPC Network
 
 <a id="ingress-egress-gw-inside-static-routes"></a>
 
-**Ingress Egress Gw Inside Static Routes**
+**Inside Static Routes**
+
+An `inside_static_routes` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`static_route_list`](#static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-inside-static-routes-static-route-list) below.
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List**
+**Static Route List**
+
+A `static_route_list` block (within `ingress_egress_gw.inside_static_routes`) supports the following:
 
 &#x2022; [`custom_static_route`](#custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route) below.
 
@@ -427,7 +483,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route**
+**Custom Static Route**
+
+A `custom_static_route` block (within `ingress_egress_gw.inside_static_routes.static_route_list`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
@@ -439,7 +497,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop**
+**Nexthop**
+
+A `nexthop` block (within `ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
@@ -449,7 +509,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Interface**
+**Interface**
+
+An `interface` block (within `ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -463,7 +525,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+**Nexthop Address**
+
+A `nexthop_address` block (within `ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -471,19 +535,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+**IPv4**
+
+An `ipv4` block (within `ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+**IPv6**
+
+An `ipv6` block (within `ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets**
+**Subnets**
+
+A `subnets` block (within `ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -491,7 +561,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv4**
+**IPv4**
+
+An `ipv4` block (within `ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -499,7 +571,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
 
-**Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv6**
+**IPv6**
+
+An `ipv6` block (within `ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -507,7 +581,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-subnet"></a>
 
-**Ingress Egress Gw Inside Subnet**
+**Inside Subnet**
+
+An `inside_subnet` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`existing_subnet`](#existing-subnet) - Optional Block<br>GCP existing subnet Type. Name of existing GCP subnet<br>See [Existing Subnet](#ingress-egress-gw-inside-subnet-existing-subnet) below.
 
@@ -515,13 +591,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-inside-subnet-existing-subnet"></a>
 
-**Ingress Egress Gw Inside Subnet Existing Subnet**
+**Existing Subnet**
+
+An `existing_subnet` block (within `ingress_egress_gw.inside_subnet`) supports the following:
 
 &#x2022; [`subnet_name`](#subnet-name) - Optional String<br>VPC Subnet Name. Name of your subnet in VPC network
 
 <a id="ingress-egress-gw-inside-subnet-new-subnet"></a>
 
-**Ingress Egress Gw Inside Subnet New Subnet**
+**New Subnet**
+
+A `new_subnet` block (within `ingress_egress_gw.inside_subnet`) supports the following:
 
 &#x2022; [`primary_ipv4`](#primary-ipv4) - Optional String<br>IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space
 
@@ -529,7 +609,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-network"></a>
 
-**Ingress Egress Gw Outside Network**
+**Outside Network**
+
+An `outside_network` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`existing_network`](#existing-network) - Optional Block<br>GCP existing VPC network Type. Name of existing VPC network<br>See [Existing Network](#ingress-egress-gw-outside-network-existing-network) below.
 
@@ -539,25 +621,33 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-network-existing-network"></a>
 
-**Ingress Egress Gw Outside Network Existing Network**
+**Existing Network**
+
+An `existing_network` block (within `ingress_egress_gw.outside_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>GCP VPC Network Name. Name for your GCP VPC Network
 
 <a id="ingress-egress-gw-outside-network-new-network"></a>
 
-**Ingress Egress Gw Outside Network New Network**
+**New Network**
+
+A `new_network` block (within `ingress_egress_gw.outside_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>GCP VPC Network Name. Name for your GCP VPC Network
 
 <a id="ingress-egress-gw-outside-static-routes"></a>
 
-**Ingress Egress Gw Outside Static Routes**
+**Outside Static Routes**
+
+An `outside_static_routes` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`static_route_list`](#static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#ingress-egress-gw-outside-static-routes-static-route-list) below.
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List**
+**Static Route List**
+
+A `static_route_list` block (within `ingress_egress_gw.outside_static_routes`) supports the following:
 
 &#x2022; [`custom_static_route`](#custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route) below.
 
@@ -565,7 +655,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route**
+**Custom Static Route**
+
+A `custom_static_route` block (within `ingress_egress_gw.outside_static_routes.static_route_list`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
@@ -577,7 +669,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop**
+**Nexthop**
+
+A `nexthop` block (within `ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
@@ -587,7 +681,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Interface**
+**Interface**
+
+An `interface` block (within `ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -601,7 +697,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+**Nexthop Address**
+
+A `nexthop_address` block (within `ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -609,19 +707,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+**IPv4**
+
+An `ipv4` block (within `ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+**IPv6**
+
+An `ipv6` block (within `ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets**
+**Subnets**
+
+A `subnets` block (within `ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -629,7 +733,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv4**
+**IPv4**
+
+An `ipv4` block (within `ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -637,7 +743,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
 
-**Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv6**
+**IPv6**
+
+An `ipv6` block (within `ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -645,7 +753,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-subnet"></a>
 
-**Ingress Egress Gw Outside Subnet**
+**Outside Subnet**
+
+An `outside_subnet` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`existing_subnet`](#existing-subnet) - Optional Block<br>GCP existing subnet Type. Name of existing GCP subnet<br>See [Existing Subnet](#ingress-egress-gw-outside-subnet-existing-subnet) below.
 
@@ -653,13 +763,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-outside-subnet-existing-subnet"></a>
 
-**Ingress Egress Gw Outside Subnet Existing Subnet**
+**Existing Subnet**
+
+An `existing_subnet` block (within `ingress_egress_gw.outside_subnet`) supports the following:
 
 &#x2022; [`subnet_name`](#subnet-name) - Optional String<br>VPC Subnet Name. Name of your subnet in VPC network
 
 <a id="ingress-egress-gw-outside-subnet-new-subnet"></a>
 
-**Ingress Egress Gw Outside Subnet New Subnet**
+**New Subnet**
+
+A `new_subnet` block (within `ingress_egress_gw.outside_subnet`) supports the following:
 
 &#x2022; [`primary_ipv4`](#primary-ipv4) - Optional String<br>IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space
 
@@ -667,7 +781,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-performance-enhancement-mode"></a>
 
-**Ingress Egress Gw Performance Enhancement Mode**
+**Performance Enhancement Mode**
+
+A `performance_enhancement_mode` block (within `ingress_egress_gw`) supports the following:
 
 &#x2022; [`perf_mode_l3_enhanced`](#perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
@@ -675,7 +791,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-egress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
-**Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced**
+**Perf Mode L3 Enhanced**
+
+A `perf_mode_l3_enhanced` block (within `ingress_egress_gw.performance_enhancement_mode`) supports the following:
 
 &#x2022; [`jumbo`](#jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -684,6 +802,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="ingress-gw"></a>
 
 **Ingress Gw**
+
+An `ingress_gw` block supports the following:
 
 &#x2022; [`gcp_certified_hw`](#gcp-certified-hw) - Optional String<br>GCP Certified Hardware. Name for GCP certified hardware
 
@@ -699,7 +819,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-gw-local-network"></a>
 
-**Ingress Gw Local Network**
+**Local Network**
+
+A `local_network` block (within `ingress_gw`) supports the following:
 
 &#x2022; [`existing_network`](#existing-network) - Optional Block<br>GCP existing VPC network Type. Name of existing VPC network<br>See [Existing Network](#ingress-gw-local-network-existing-network) below.
 
@@ -709,19 +831,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-gw-local-network-existing-network"></a>
 
-**Ingress Gw Local Network Existing Network**
+**Existing Network**
+
+An `existing_network` block (within `ingress_gw.local_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>GCP VPC Network Name. Name for your GCP VPC Network
 
 <a id="ingress-gw-local-network-new-network"></a>
 
-**Ingress Gw Local Network New Network**
+**New Network**
+
+A `new_network` block (within `ingress_gw.local_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>GCP VPC Network Name. Name for your GCP VPC Network
 
 <a id="ingress-gw-local-subnet"></a>
 
-**Ingress Gw Local Subnet**
+**Local Subnet**
+
+A `local_subnet` block (within `ingress_gw`) supports the following:
 
 &#x2022; [`existing_subnet`](#existing-subnet) - Optional Block<br>GCP existing subnet Type. Name of existing GCP subnet<br>See [Existing Subnet](#ingress-gw-local-subnet-existing-subnet) below.
 
@@ -729,13 +857,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-gw-local-subnet-existing-subnet"></a>
 
-**Ingress Gw Local Subnet Existing Subnet**
+**Existing Subnet**
+
+An `existing_subnet` block (within `ingress_gw.local_subnet`) supports the following:
 
 &#x2022; [`subnet_name`](#subnet-name) - Optional String<br>VPC Subnet Name. Name of your subnet in VPC network
 
 <a id="ingress-gw-local-subnet-new-subnet"></a>
 
-**Ingress Gw Local Subnet New Subnet**
+**New Subnet**
+
+A `new_subnet` block (within `ingress_gw.local_subnet`) supports the following:
 
 &#x2022; [`primary_ipv4`](#primary-ipv4) - Optional String<br>IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space
 
@@ -743,7 +875,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-gw-performance-enhancement-mode"></a>
 
-**Ingress Gw Performance Enhancement Mode**
+**Performance Enhancement Mode**
+
+A `performance_enhancement_mode` block (within `ingress_gw`) supports the following:
 
 &#x2022; [`perf_mode_l3_enhanced`](#perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
@@ -751,7 +885,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ingress-gw-performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
-**Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced**
+**Perf Mode L3 Enhanced**
+
+A `perf_mode_l3_enhanced` block (within `ingress_gw.performance_enhancement_mode`) supports the following:
 
 &#x2022; [`jumbo`](#jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -761,13 +897,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Kubernetes Upgrade Drain**
 
+A `kubernetes_upgrade_drain` block supports the following:
+
 &#x2022; [`disable_upgrade_drain`](#disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`enable_upgrade_drain`](#enable-upgrade-drain) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
-**Kubernetes Upgrade Drain Enable Upgrade Drain**
+**Enable Upgrade Drain**
+
+An `enable_upgrade_drain` block (within `kubernetes_upgrade_drain`) supports the following:
 
 &#x2022; [`disable_vega_upgrade_mode`](#disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -781,6 +921,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Log Receiver**
 
+A `log_receiver` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -791,6 +933,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Offline Survivability Mode**
 
+An `offline_survivability_mode` block supports the following:
+
 &#x2022; [`enable_offline_survivability_mode`](#enable-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`no_offline_survivability_mode`](#no-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -798,6 +942,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="os"></a>
 
 **OS**
+
+An `os` block supports the following:
 
 &#x2022; [`default_os_version`](#default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -807,6 +953,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Private Connectivity**
 
+A `private_connectivity` block supports the following:
+
 &#x2022; [`cloud_link`](#cloud-link) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cloud Link](#private-connectivity-cloud-link) below.
 
 &#x2022; [`inside`](#inside) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -815,7 +963,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="private-connectivity-cloud-link"></a>
 
-**Private Connectivity Cloud Link**
+**Cloud Link**
+
+A `cloud_link` block (within `private_connectivity`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -827,6 +977,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sw**
 
+A `sw` block supports the following:
+
 &#x2022; [`default_sw_version`](#default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`volterra_software_version`](#volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
@@ -834,6 +986,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -846,6 +1000,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="voltstack-cluster"></a>
 
 **Voltstack Cluster**
+
+A `voltstack_cluster` block supports the following:
 
 &#x2022; [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#voltstack-cluster-active-enhanced-firewall-policies) below.
 
@@ -895,13 +1051,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-active-enhanced-firewall-policies"></a>
 
-**Voltstack Cluster Active Enhanced Firewall Policies**
+**Active Enhanced Firewall Policies**
+
+An `active_enhanced_firewall_policies` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`enhanced_firewall_policies`](#enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 <a id="voltstack-cluster-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
-**Voltstack Cluster Active Enhanced Firewall Policies Enhanced Firewall Policies**
+**Enhanced Firewall Policies**
+
+An `enhanced_firewall_policies` block (within `voltstack_cluster.active_enhanced_firewall_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -911,13 +1071,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-active-forward-proxy-policies"></a>
 
-**Voltstack Cluster Active Forward Proxy Policies**
+**Active Forward Proxy Policies**
+
+An `active_forward_proxy_policies` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`forward_proxy_policies`](#forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies) below.
 
 <a id="voltstack-cluster-active-forward-proxy-policies-forward-proxy-policies"></a>
 
-**Voltstack Cluster Active Forward Proxy Policies Forward Proxy Policies**
+**Forward Proxy Policies**
+
+A `forward_proxy_policies` block (within `voltstack_cluster.active_forward_proxy_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -927,13 +1091,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-active-network-policies"></a>
 
-**Voltstack Cluster Active Network Policies**
+**Active Network Policies**
+
+An `active_network_policies` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`network_policies`](#network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#voltstack-cluster-active-network-policies-network-policies) below.
 
 <a id="voltstack-cluster-active-network-policies-network-policies"></a>
 
-**Voltstack Cluster Active Network Policies Network Policies**
+**Network Policies**
+
+A `network_policies` block (within `voltstack_cluster.active_network_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -943,7 +1111,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-dc-cluster-group"></a>
 
-**Voltstack Cluster Dc Cluster Group**
+**Dc Cluster Group**
+
+A `dc_cluster_group` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -953,13 +1123,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-global-network-list"></a>
 
-**Voltstack Cluster Global Network List**
+**Global Network List**
+
+A `global_network_list` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`global_network_connections`](#global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#voltstack-cluster-global-network-list-global-network-connections) below.
 
 <a id="voltstack-cluster-global-network-list-global-network-connections"></a>
 
-**Voltstack Cluster Global Network List Global Network Connections**
+**Global Network Connections**
+
+A `global_network_connections` block (within `voltstack_cluster.global_network_list`) supports the following:
 
 &#x2022; [`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr) below.
 
@@ -967,13 +1141,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr"></a>
 
-**Voltstack Cluster Global Network List Global Network Connections Sli To Global DR**
+**Sli To Global DR**
+
+A `sli_to_global_dr` block (within `voltstack_cluster.global_network_list.global_network_connections`) supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
 
-**Voltstack Cluster Global Network List Global Network Connections Sli To Global DR Global Vn**
+**Global Vn**
+
+A `global_vn` block (within `voltstack_cluster.global_network_list.global_network_connections.sli_to_global_dr`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -983,13 +1161,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr"></a>
 
-**Voltstack Cluster Global Network List Global Network Connections Slo To Global DR**
+**Slo To Global DR**
+
+A `slo_to_global_dr` block (within `voltstack_cluster.global_network_list.global_network_connections`) supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
 
 <a id="voltstack-cluster-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
 
-**Voltstack Cluster Global Network List Global Network Connections Slo To Global DR Global Vn**
+**Global Vn**
+
+A `global_vn` block (within `voltstack_cluster.global_network_list.global_network_connections.slo_to_global_dr`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -999,7 +1181,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-k8s-cluster"></a>
 
-**Voltstack Cluster K8s Cluster**
+**K8s Cluster**
+
+A `k8s_cluster` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1009,13 +1193,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-outside-static-routes"></a>
 
-**Voltstack Cluster Outside Static Routes**
+**Outside Static Routes**
+
+An `outside_static_routes` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`static_route_list`](#static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#voltstack-cluster-outside-static-routes-static-route-list) below.
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List**
+**Static Route List**
+
+A `static_route_list` block (within `voltstack_cluster.outside_static_routes`) supports the following:
 
 &#x2022; [`custom_static_route`](#custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route) below.
 
@@ -1023,7 +1211,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route**
+**Custom Static Route**
+
+A `custom_static_route` block (within `voltstack_cluster.outside_static_routes.static_route_list`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
@@ -1035,7 +1225,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop**
+**Nexthop**
+
+A `nexthop` block (within `voltstack_cluster.outside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
@@ -1045,7 +1237,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Interface**
+**Interface**
+
+An `interface` block (within `voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1059,7 +1253,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+**Nexthop Address**
+
+A `nexthop_address` block (within `voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -1067,19 +1263,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+**IPv4**
+
+An `ipv4` block (within `voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+**IPv6**
+
+An `ipv6` block (within `voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets**
+**Subnets**
+
+A `subnets` block (within `voltstack_cluster.outside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -1087,7 +1289,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv4**
+**IPv4**
+
+An `ipv4` block (within `voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -1095,7 +1299,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
 
-**Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv6**
+**IPv6**
+
+An `ipv6` block (within `voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -1103,7 +1309,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-site-local-network"></a>
 
-**Voltstack Cluster Site Local Network**
+**Site Local Network**
+
+A `site_local_network` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`existing_network`](#existing-network) - Optional Block<br>GCP existing VPC network Type. Name of existing VPC network<br>See [Existing Network](#voltstack-cluster-site-local-network-existing-network) below.
 
@@ -1113,19 +1321,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-site-local-network-existing-network"></a>
 
-**Voltstack Cluster Site Local Network Existing Network**
+**Existing Network**
+
+An `existing_network` block (within `voltstack_cluster.site_local_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>GCP VPC Network Name. Name for your GCP VPC Network
 
 <a id="voltstack-cluster-site-local-network-new-network"></a>
 
-**Voltstack Cluster Site Local Network New Network**
+**New Network**
+
+A `new_network` block (within `voltstack_cluster.site_local_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>GCP VPC Network Name. Name for your GCP VPC Network
 
 <a id="voltstack-cluster-site-local-subnet"></a>
 
-**Voltstack Cluster Site Local Subnet**
+**Site Local Subnet**
+
+A `site_local_subnet` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`existing_subnet`](#existing-subnet) - Optional Block<br>GCP existing subnet Type. Name of existing GCP subnet<br>See [Existing Subnet](#voltstack-cluster-site-local-subnet-existing-subnet) below.
 
@@ -1133,13 +1347,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-site-local-subnet-existing-subnet"></a>
 
-**Voltstack Cluster Site Local Subnet Existing Subnet**
+**Existing Subnet**
+
+An `existing_subnet` block (within `voltstack_cluster.site_local_subnet`) supports the following:
 
 &#x2022; [`subnet_name`](#subnet-name) - Optional String<br>VPC Subnet Name. Name of your subnet in VPC network
 
 <a id="voltstack-cluster-site-local-subnet-new-subnet"></a>
 
-**Voltstack Cluster Site Local Subnet New Subnet**
+**New Subnet**
+
+A `new_subnet` block (within `voltstack_cluster.site_local_subnet`) supports the following:
 
 &#x2022; [`primary_ipv4`](#primary-ipv4) - Optional String<br>IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space
 
@@ -1147,13 +1365,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="voltstack-cluster-storage-class-list"></a>
 
-**Voltstack Cluster Storage Class List**
+**Storage Class List**
+
+A `storage_class_list` block (within `voltstack_cluster`) supports the following:
 
 &#x2022; [`storage_classes`](#storage-classes) - Optional Block<br>List of Storage Classes. List of custom storage classes<br>See [Storage Classes](#voltstack-cluster-storage-class-list-storage-classes) below.
 
 <a id="voltstack-cluster-storage-class-list-storage-classes"></a>
 
-**Voltstack Cluster Storage Class List Storage Classes**
+**Storage Classes**
+
+A `storage_classes` block (within `voltstack_cluster.storage_class_list`) supports the following:
 
 &#x2022; [`default_storage_class`](#default-storage-class) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8s cluster
 

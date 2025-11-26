@@ -92,19 +92,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Local IP**
 
+A `local_ip` block supports the following:
+
 &#x2022; [`intf`](#intf) - Optional Block<br>Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet<br>See [Intf](#local-ip-intf) below.
 
 &#x2022; [`ip_address`](#ip-address) - Optional Block<br>Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet<br>See [IP Address](#local-ip-ip-address) below.
 
 <a id="local-ip-intf"></a>
 
-**Local IP Intf**
+**Intf**
+
+An `intf` block (within `local_ip`) supports the following:
 
 &#x2022; [`local_intf`](#local-intf) - Optional Block<br>Local Interface. Local interface to be used for filling in source information of IP and network for transport<br>See [Local Intf](#local-ip-intf-local-intf) below.
 
 <a id="local-ip-intf-local-intf"></a>
 
-**Local IP Intf Local Intf**
+**Local Intf**
+
+A `local_intf` block (within `local_ip.intf`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -118,7 +124,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-ip-ip-address"></a>
 
-**Local IP IP Address**
+**IP Address**
+
+An `ip_address` block (within `local_ip`) supports the following:
 
 &#x2022; [`auto`](#auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -128,7 +136,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-ip-ip-address-ip-address"></a>
 
-**Local IP IP Address IP Address**
+**IP Address**
+
+An `ip_address` block (within `local_ip.ip_address`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#local-ip-ip-address-ip-address-ipv4) below.
 
@@ -136,19 +146,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-ip-ip-address-ip-address-ipv4"></a>
 
-**Local IP IP Address IP Address IPv4**
+**IPv4**
+
+An `ipv4` block (within `local_ip.ip_address.ip_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="local-ip-ip-address-ip-address-ipv6"></a>
 
-**Local IP IP Address IP Address IPv6**
+**IPv6**
+
+An `ipv6` block (within `local_ip.ip_address.ip_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="local-ip-ip-address-virtual-network-type"></a>
 
-**Local IP IP Address Virtual Network Type**
+**Virtual Network Type**
+
+A `virtual_network_type` block (within `local_ip.ip_address`) supports the following:
 
 &#x2022; [`public`](#public) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -160,17 +176,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Params**
 
+A `params` block supports the following:
+
 &#x2022; [`ipsec`](#ipsec) - Optional Block<br>IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE<br>See [Ipsec](#params-ipsec) below.
 
 <a id="params-ipsec"></a>
 
-**Params Ipsec**
+**Ipsec**
+
+An `ipsec` block (within `params`) supports the following:
 
 &#x2022; [`ipsec_psk`](#ipsec-psk) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Ipsec Psk](#params-ipsec-ipsec-psk) below.
 
 <a id="params-ipsec-ipsec-psk"></a>
 
-**Params Ipsec Ipsec Psk**
+**Ipsec Psk**
+
+An `ipsec_psk` block (within `params.ipsec`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#params-ipsec-ipsec-psk-blindfold-secret-info) below.
 
@@ -178,7 +200,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="params-ipsec-ipsec-psk-blindfold-secret-info"></a>
 
-**Params Ipsec Ipsec Psk Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `params.ipsec.ipsec_psk`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -188,7 +212,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="params-ipsec-ipsec-psk-clear-secret-info"></a>
 
-**Params Ipsec Ipsec Psk Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `params.ipsec.ipsec_psk`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -198,19 +224,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Remote IP**
 
+A `remote_ip` block supports the following:
+
 &#x2022; [`endpoints`](#endpoints) - Optional Block<br>Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel<br>See [Endpoints](#remote-ip-endpoints) below.
 
 &#x2022; [`ip`](#ip) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [IP](#remote-ip-ip) below.
 
 <a id="remote-ip-endpoints"></a>
 
-**Remote IP Endpoints**
+**Endpoints**
+
+An `endpoints` block (within `remote_ip`) supports the following:
 
 &#x2022; [`endpoints`](#endpoints) - Optional Block<br>Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes
 
 <a id="remote-ip-ip"></a>
 
-**Remote IP IP**
+**IP**
+
+An `ip` block (within `remote_ip`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#remote-ip-ip-ipv4) below.
 
@@ -218,19 +250,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="remote-ip-ip-ipv4"></a>
 
-**Remote IP IP IPv4**
+**IPv4**
+
+An `ipv4` block (within `remote_ip.ip`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="remote-ip-ip-ipv6"></a>
 
-**Remote IP IP IPv6**
+**IPv6**
+
+An `ipv6` block (within `remote_ip.ip`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

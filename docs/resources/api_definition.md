@@ -85,6 +85,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Inventory Exclusion List**
 
+An `api_inventory_exclusion_list` block supports the following:
+
 &#x2022; [`method`](#method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 &#x2022; [`path`](#path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
@@ -92,6 +94,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="api-inventory-inclusion-list"></a>
 
 **API Inventory Inclusion List**
+
+An `api_inventory_inclusion_list` block supports the following:
 
 &#x2022; [`method`](#method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
@@ -101,6 +105,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Non API Endpoints**
 
+A `non_api_endpoints` block supports the following:
+
 &#x2022; [`method`](#method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 &#x2022; [`path`](#path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
@@ -108,6 +114,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

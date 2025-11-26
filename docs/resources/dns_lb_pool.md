@@ -93,6 +93,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **A Pool**
 
+An `a_pool` block supports the following:
+
 &#x2022; [`disable_health_check`](#disable-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`health_check`](#health-check) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Health Check](#a-pool-health-check) below.
@@ -103,7 +105,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="a-pool-health-check"></a>
 
-**A Pool Health Check**
+**Health Check**
+
+A `health_check` block (within `a_pool`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -113,7 +117,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="a-pool-members"></a>
 
-**A Pool Members**
+**Members**
+
+A `members` block (within `a_pool`) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Bool<br>Disable. A value of true will disable the pool-member
 
@@ -129,13 +135,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Aaaa Pool**
 
+An `aaaa_pool` block supports the following:
+
 &#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#aaaa-pool-members) below.
 
 <a id="aaaa-pool-members"></a>
 
-**Aaaa Pool Members**
+**Members**
+
+A `members` block (within `aaaa_pool`) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Bool<br>Disable. A value of true will disable the pool-member
 
@@ -151,11 +161,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cname Pool**
 
+A `cname_pool` block supports the following:
+
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#cname-pool-members) below.
 
 <a id="cname-pool-members"></a>
 
-**Cname Pool Members**
+**Members**
+
+A `members` block (within `cname_pool`) supports the following:
 
 &#x2022; [`domain`](#domain) - Optional String<br>Domain
 
@@ -169,13 +183,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Mx Pool**
 
+A `mx_pool` block supports the following:
+
 &#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#mx-pool-members) below.
 
 <a id="mx-pool-members"></a>
 
-**Mx Pool Members**
+**Members**
+
+A `members` block (within `mx_pool`) supports the following:
 
 &#x2022; [`domain`](#domain) - Optional String<br>Domain
 
@@ -189,13 +207,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Srv Pool**
 
+A `srv_pool` block supports the following:
+
 &#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#srv-pool-members) below.
 
 <a id="srv-pool-members"></a>
 
-**Srv Pool Members**
+**Members**
+
+A `members` block (within `srv_pool`) supports the following:
 
 &#x2022; [`final_translation`](#final-translation) - Optional Bool<br>Final Translation. If this flag is true, the SRV record will not be translated further
 
@@ -214,6 +236,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

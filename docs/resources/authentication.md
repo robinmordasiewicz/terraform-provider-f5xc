@@ -84,6 +84,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cookie Params**
 
+A `cookie_params` block supports the following:
+
 &#x2022; [`auth_hmac`](#auth-hmac) - Optional Block<br>HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid<br>See [Auth HMAC](#cookie-params-auth-hmac) below.
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds
@@ -96,7 +98,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cookie-params-auth-hmac"></a>
 
-**Cookie Params Auth HMAC**
+**Auth HMAC**
+
+An `auth_hmac` block (within `cookie_params`) supports the following:
 
 &#x2022; [`prim_key`](#prim-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Prim Key](#cookie-params-auth-hmac-prim-key) below.
 
@@ -108,7 +112,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cookie-params-auth-hmac-prim-key"></a>
 
-**Cookie Params Auth HMAC Prim Key**
+**Prim Key**
+
+A `prim_key` block (within `cookie_params.auth_hmac`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
 
@@ -116,7 +122,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cookie-params-auth-hmac-prim-key-blindfold-secret-info"></a>
 
-**Cookie Params Auth HMAC Prim Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `cookie_params.auth_hmac.prim_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -126,7 +134,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cookie-params-auth-hmac-prim-key-clear-secret-info"></a>
 
-**Cookie Params Auth HMAC Prim Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `cookie_params.auth_hmac.prim_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -134,7 +144,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cookie-params-auth-hmac-sec-key"></a>
 
-**Cookie Params Auth HMAC Sec Key**
+**Sec Key**
+
+A `sec_key` block (within `cookie_params.auth_hmac`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
 
@@ -142,7 +154,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cookie-params-auth-hmac-sec-key-blindfold-secret-info"></a>
 
-**Cookie Params Auth HMAC Sec Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `cookie_params.auth_hmac.sec_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -152,7 +166,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cookie-params-auth-hmac-sec-key-clear-secret-info"></a>
 
-**Cookie Params Auth HMAC Sec Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `cookie_params.auth_hmac.sec_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -161,6 +177,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="oidc-auth"></a>
 
 **Oidc Auth**
+
+An `oidc_auth` block supports the following:
 
 &#x2022; [`client_secret`](#client-secret) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Secret](#oidc-auth-client-secret) below.
 
@@ -172,7 +190,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oidc-auth-client-secret"></a>
 
-**Oidc Auth Client Secret**
+**Client Secret**
+
+A `client_secret` block (within `oidc_auth`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#oidc-auth-client-secret-blindfold-secret-info) below.
 
@@ -180,7 +200,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oidc-auth-client-secret-blindfold-secret-info"></a>
 
-**Oidc Auth Client Secret Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `oidc_auth.client_secret`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -190,7 +212,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oidc-auth-client-secret-clear-secret-info"></a>
 
-**Oidc Auth Client Secret Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `oidc_auth.client_secret`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -198,7 +222,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oidc-auth-oidc-auth-params"></a>
 
-**Oidc Auth Oidc Auth Params**
+**Oidc Auth Params**
+
+An `oidc_auth_params` block (within `oidc_auth`) supports the following:
 
 &#x2022; [`auth_endpoint_url`](#auth-endpoint-url) - Optional String<br>Authorization Endpoint. URL of the authorization server's authorization endpoint
 
@@ -209,6 +235,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

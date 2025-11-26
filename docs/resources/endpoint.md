@@ -96,6 +96,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **DNS Name Advanced**
 
+A `dns_name_advanced` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Endpoint DNS Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
 
 &#x2022; [`refresh_interval`](#refresh-interval) - Optional Number<br>DNS Refresh Interval. Interval for DNS refresh in seconds
@@ -103,6 +105,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="service-info"></a>
 
 **Service Info**
+
+A `service_info` block supports the following:
 
 &#x2022; [`discovery_type`](#discovery-type) - Optional String  Defaults to `INVALID_DISCOVERY`<br>Possible values are `INVALID_DISCOVERY`, `K8S`, `CONSUL`, `CLASSIC_BIGIP`, `THIRD_PARTY`<br>Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic BIG-IP Clusters Discover for Third Party Application
 
@@ -112,7 +116,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-info-service-selector"></a>
 
-**Service Info Service Selector**
+**Service Selector**
+
+A `service_selector` block (within `service_info`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -120,19 +126,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Snat Pool**
 
+A `snat_pool` block supports the following:
+
 &#x2022; [`no_snat_pool`](#no-snat-pool) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#snat-pool-snat-pool) below.
 
 <a id="snat-pool-snat-pool"></a>
 
-**Snat Pool Snat Pool**
+**Snat Pool**
+
+A `snat_pool` block (within `snat_pool`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -146,6 +158,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Where**
 
+A `where` block supports the following:
+
 &#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
 &#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Network Reference. This specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
@@ -154,7 +168,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site"></a>
 
-**Where Site**
+**Site**
+
+A `site` block (within `where`) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -166,7 +182,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site-ref"></a>
 
-**Where Site Ref**
+**Ref**
+
+A `ref` block (within `where.site`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -180,13 +198,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-network"></a>
 
-**Where Virtual Network**
+**Virtual Network**
+
+A `virtual_network` block (within `where`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
 
 <a id="where-virtual-network-ref"></a>
 
-**Where Virtual Network Ref**
+**Ref**
+
+A `ref` block (within `where.virtual_network`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -200,7 +222,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site"></a>
 
-**Where Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `where`) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -212,7 +236,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site-ref"></a>
 
-**Where Virtual Site Ref**
+**Ref**
+
+A `ref` block (within `where.virtual_site`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

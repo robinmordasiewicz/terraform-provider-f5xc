@@ -89,6 +89,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Static Routes**
 
+A `static_routes` block supports the following:
+
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
 &#x2022; [`default_gateway`](#default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -101,13 +103,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="static-routes-node-interface"></a>
 
-**Static Routes Node Interface**
+**Node Interface**
+
+A `node_interface` block (within `static_routes`) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#static-routes-node-interface-list) below.
 
 <a id="static-routes-node-interface-list"></a>
 
-**Static Routes Node Interface List**
+**List**
+
+A `list` block (within `static_routes.node_interface`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#static-routes-node-interface-list-interface) below.
 
@@ -115,7 +121,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="static-routes-node-interface-list-interface"></a>
 
-**Static Routes Node Interface List Interface**
+**Interface**
+
+An `interface` block (within `static_routes.node_interface.list`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -130,6 +138,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

@@ -84,6 +84,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Filter Fields**
 
+A `filter_fields` block supports the following:
+
 &#x2022; [`date_field`](#date-field) - Optional Block<br>Filter Date/Time Range Field. either an absolute time range or a relative time interval<br>See [Date Field](#filter-fields-date-field) below.
 
 &#x2022; [`field_id`](#field-id) - Optional String<br>Field ID. an identifier for the field that maps to some UI filter component
@@ -94,7 +96,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="filter-fields-date-field"></a>
 
-**Filter Fields Date Field**
+**Date Field**
+
+A `date_field` block (within `filter_fields`) supports the following:
 
 &#x2022; [`absolute`](#absolute) - Optional Block<br>Date Range. Date range is for selecting a date range<br>See [Absolute](#filter-fields-date-field-absolute) below.
 
@@ -102,7 +106,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="filter-fields-date-field-absolute"></a>
 
-**Filter Fields Date Field Absolute**
+**Absolute**
+
+An `absolute` block (within `filter_fields.date_field`) supports the following:
 
 &#x2022; [`end_date`](#end-date) - Optional String<br>End Date. Contains end date
 
@@ -110,19 +116,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="filter-fields-filter-expression-field"></a>
 
-**Filter Fields Filter Expression Field**
+**Filter Expression Field**
+
+A `filter_expression_field` block (within `filter_fields`) supports the following:
 
 &#x2022; [`expression`](#expression) - Optional String<br>Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
 
 <a id="filter-fields-string-field"></a>
 
-**Filter Fields String Field**
+**String Field**
+
+A `string_field` block (within `filter_fields`) supports the following:
 
 &#x2022; [`field_values`](#field-values) - Optional List<br>String Value(s)
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

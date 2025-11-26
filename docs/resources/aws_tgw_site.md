@@ -157,6 +157,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS Parameters**
 
+An `aws_parameters` block supports the following:
+
 &#x2022; [`admin_password`](#admin-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#aws-parameters-admin-password) below.
 
 &#x2022; [`aws_cred`](#aws-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#aws-parameters-aws-cred) below.
@@ -199,7 +201,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-admin-password"></a>
 
-**AWS Parameters Admin Password**
+**Admin Password**
+
+An `admin_password` block (within `aws_parameters`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#aws-parameters-admin-password-blindfold-secret-info) below.
 
@@ -207,7 +211,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-admin-password-blindfold-secret-info"></a>
 
-**AWS Parameters Admin Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `aws_parameters.admin_password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -217,7 +223,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-admin-password-clear-secret-info"></a>
 
-**AWS Parameters Admin Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `aws_parameters.admin_password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -225,7 +233,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-aws-cred"></a>
 
-**AWS Parameters AWS Cred**
+**AWS Cred**
+
+An `aws_cred` block (within `aws_parameters`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -235,7 +245,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-az-nodes"></a>
 
-**AWS Parameters Az Nodes**
+**Az Nodes**
+
+An `az_nodes` block (within `aws_parameters`) supports the following:
 
 &#x2022; [`aws_az_name`](#aws-az-name) - Optional String<br>AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region
 
@@ -249,7 +261,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-az-nodes-inside-subnet"></a>
 
-**AWS Parameters Az Nodes Inside Subnet**
+**Inside Subnet**
+
+An `inside_subnet` block (within `aws_parameters.az_nodes`) supports the following:
 
 &#x2022; [`existing_subnet_id`](#existing-subnet-id) - Optional String<br>Existing Subnet ID. Information about existing subnet ID
 
@@ -257,13 +271,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-az-nodes-inside-subnet-subnet-param"></a>
 
-**AWS Parameters Az Nodes Inside Subnet Subnet Param**
+**Subnet Param**
+
+A `subnet_param` block (within `aws_parameters.az_nodes.inside_subnet`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 <a id="aws-parameters-az-nodes-outside-subnet"></a>
 
-**AWS Parameters Az Nodes Outside Subnet**
+**Outside Subnet**
+
+An `outside_subnet` block (within `aws_parameters.az_nodes`) supports the following:
 
 &#x2022; [`existing_subnet_id`](#existing-subnet-id) - Optional String<br>Existing Subnet ID. Information about existing subnet ID
 
@@ -271,13 +289,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-az-nodes-outside-subnet-subnet-param"></a>
 
-**AWS Parameters Az Nodes Outside Subnet Subnet Param**
+**Subnet Param**
+
+A `subnet_param` block (within `aws_parameters.az_nodes.outside_subnet`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 <a id="aws-parameters-az-nodes-workload-subnet"></a>
 
-**AWS Parameters Az Nodes Workload Subnet**
+**Workload Subnet**
+
+A `workload_subnet` block (within `aws_parameters.az_nodes`) supports the following:
 
 &#x2022; [`existing_subnet_id`](#existing-subnet-id) - Optional String<br>Existing Subnet ID. Information about existing subnet ID
 
@@ -285,13 +307,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-az-nodes-workload-subnet-subnet-param"></a>
 
-**AWS Parameters Az Nodes Workload Subnet Subnet Param**
+**Subnet Param**
+
+A `subnet_param` block (within `aws_parameters.az_nodes.workload_subnet`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 <a id="aws-parameters-custom-security-group"></a>
 
-**AWS Parameters Custom Security Group**
+**Custom Security Group**
+
+A `custom_security_group` block (within `aws_parameters`) supports the following:
 
 &#x2022; [`inside_security_group_id`](#inside-security-group-id) - Optional String<br>Inside Security Group ID. Security Group ID to be attached to SLI(Site Local Inside) Interface
 
@@ -299,7 +325,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-existing-tgw"></a>
 
-**AWS Parameters Existing Tgw**
+**Existing Tgw**
+
+An `existing_tgw` block (within `aws_parameters`) supports the following:
 
 &#x2022; [`tgw_asn`](#tgw-asn) - Optional Number<br>Enter TGW ASN. TGW ASN
 
@@ -309,7 +337,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-new-tgw"></a>
 
-**AWS Parameters New Tgw**
+**New Tgw**
+
+A `new_tgw` block (within `aws_parameters`) supports the following:
 
 &#x2022; [`system_generated`](#system-generated) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -317,7 +347,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-new-tgw-user-assigned"></a>
 
-**AWS Parameters New Tgw User Assigned**
+**User Assigned**
+
+An `user_assigned` block (within `aws_parameters.new_tgw`) supports the following:
 
 &#x2022; [`tgw_asn`](#tgw-asn) - Optional Number<br>Enter TGW ASN. TGW ASN. Allowed range for 16-bit private ASNs include 64512 to 65534
 
@@ -325,7 +357,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-new-vpc"></a>
 
-**AWS Parameters New Vpc**
+**New Vpc**
+
+A `new_vpc` block (within `aws_parameters`) supports the following:
 
 &#x2022; [`autogenerate`](#autogenerate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -335,7 +369,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-parameters-tgw-cidr"></a>
 
-**AWS Parameters Tgw CIDR**
+**Tgw CIDR**
+
+A `tgw_cidr` block (within `aws_parameters`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
@@ -343,11 +379,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Blocked Services**
 
+A `blocked_services` block supports the following:
+
 &#x2022; [`blocked_sevice`](#blocked-sevice) - Optional Block<br>Disable Node Local Services<br>See [Blocked Sevice](#blocked-services-blocked-sevice) below.
 
 <a id="blocked-services-blocked-sevice"></a>
 
-**Blocked Services Blocked Sevice**
+**Blocked Sevice**
+
+A `blocked_sevice` block (within `blocked_services`) supports the following:
 
 &#x2022; [`dns`](#dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -361,6 +401,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Coordinates**
 
+A `coordinates` block supports the following:
+
 &#x2022; [`latitude`](#latitude) - Optional Number<br>Latitude. Latitude of the site location
 
 &#x2022; [`longitude`](#longitude) - Optional Number<br>Longitude. longitude of site location
@@ -369,6 +411,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom DNS**
 
+A `custom_dns` block supports the following:
+
 &#x2022; [`inside_nameserver`](#inside-nameserver) - Optional String<br>DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network
 
 &#x2022; [`outside_nameserver`](#outside-nameserver) - Optional String<br>DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network
@@ -376,6 +420,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="direct-connect-enabled"></a>
 
 **Direct Connect Enabled**
+
+A `direct_connect_enabled` block supports the following:
 
 &#x2022; [`auto_asn`](#auto-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -387,7 +433,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="direct-connect-enabled-hosted-vifs"></a>
 
-**Direct Connect Enabled Hosted Vifs**
+**Hosted Vifs**
+
+A `hosted_vifs` block (within `direct_connect_enabled`) supports the following:
 
 &#x2022; [`site_registration_over_direct_connect`](#site-registration-over-direct-connect) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Direct Connect](#direct-connect-enabled-hosted-vifs-site-registration-over-direct-connect) below.
 
@@ -397,13 +445,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="direct-connect-enabled-hosted-vifs-site-registration-over-direct-connect"></a>
 
-**Direct Connect Enabled Hosted Vifs Site Registration Over Direct Connect**
+**Site Registration Over Direct Connect**
+
+A `site_registration_over_direct_connect` block (within `direct_connect_enabled.hosted_vifs`) supports the following:
 
 &#x2022; [`cloudlink_network_name`](#cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
 
 <a id="direct-connect-enabled-hosted-vifs-vif-list"></a>
 
-**Direct Connect Enabled Hosted Vifs Vif List**
+**Vif List**
+
+A `vif_list` block (within `direct_connect_enabled.hosted_vifs`) supports the following:
 
 &#x2022; [`other_region`](#other-region) - Optional String<br>Other Region. Other Region
 
@@ -415,13 +467,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Kubernetes Upgrade Drain**
 
+A `kubernetes_upgrade_drain` block supports the following:
+
 &#x2022; [`disable_upgrade_drain`](#disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`enable_upgrade_drain`](#enable-upgrade-drain) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
-**Kubernetes Upgrade Drain Enable Upgrade Drain**
+**Enable Upgrade Drain**
+
+An `enable_upgrade_drain` block (within `kubernetes_upgrade_drain`) supports the following:
 
 &#x2022; [`disable_vega_upgrade_mode`](#disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -435,6 +491,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Log Receiver**
 
+A `log_receiver` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -445,6 +503,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Offline Survivability Mode**
 
+An `offline_survivability_mode` block supports the following:
+
 &#x2022; [`enable_offline_survivability_mode`](#enable-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`no_offline_survivability_mode`](#no-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -452,6 +512,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="os"></a>
 
 **OS**
+
+An `os` block supports the following:
 
 &#x2022; [`default_os_version`](#default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -461,13 +523,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Performance Enhancement Mode**
 
+A `performance_enhancement_mode` block supports the following:
+
 &#x2022; [`perf_mode_l3_enhanced`](#perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
 &#x2022; [`perf_mode_l7_enhanced`](#perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
-**Performance Enhancement Mode Perf Mode L3 Enhanced**
+**Perf Mode L3 Enhanced**
+
+A `perf_mode_l3_enhanced` block (within `performance_enhancement_mode`) supports the following:
 
 &#x2022; [`jumbo`](#jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -477,6 +543,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Private Connectivity**
 
+A `private_connectivity` block supports the following:
+
 &#x2022; [`cloud_link`](#cloud-link) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cloud Link](#private-connectivity-cloud-link) below.
 
 &#x2022; [`inside`](#inside) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -485,7 +553,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="private-connectivity-cloud-link"></a>
 
-**Private Connectivity Cloud Link**
+**Cloud Link**
+
+A `cloud_link` block (within `private_connectivity`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -497,6 +567,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sw**
 
+A `sw` block supports the following:
+
 &#x2022; [`default_sw_version`](#default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`volterra_software_version`](#volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
@@ -504,6 +576,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="tgw-security"></a>
 
 **Tgw Security**
+
+A `tgw_security` block supports the following:
 
 &#x2022; [`active_east_west_service_policies`](#active-east-west-service-policies) - Optional Block<br>Active Service Policies. Active service policies for the east-west proxy<br>See [Active East West Service Policies](#tgw-security-active-east-west-service-policies) below.
 
@@ -525,13 +599,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tgw-security-active-east-west-service-policies"></a>
 
-**Tgw Security Active East West Service Policies**
+**Active East West Service Policies**
+
+An `active_east_west_service_policies` block (within `tgw_security`) supports the following:
 
 &#x2022; [`service_policies`](#service-policies) - Optional Block<br>Service Policies. A list of references to service_policy objects<br>See [Service Policies](#tgw-security-active-east-west-service-policies-service-policies) below.
 
 <a id="tgw-security-active-east-west-service-policies-service-policies"></a>
 
-**Tgw Security Active East West Service Policies Service Policies**
+**Service Policies**
+
+A `service_policies` block (within `tgw_security.active_east_west_service_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -541,13 +619,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tgw-security-active-enhanced-firewall-policies"></a>
 
-**Tgw Security Active Enhanced Firewall Policies**
+**Active Enhanced Firewall Policies**
+
+An `active_enhanced_firewall_policies` block (within `tgw_security`) supports the following:
 
 &#x2022; [`enhanced_firewall_policies`](#enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 <a id="tgw-security-active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
-**Tgw Security Active Enhanced Firewall Policies Enhanced Firewall Policies**
+**Enhanced Firewall Policies**
+
+An `enhanced_firewall_policies` block (within `tgw_security.active_enhanced_firewall_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -557,13 +639,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tgw-security-active-forward-proxy-policies"></a>
 
-**Tgw Security Active Forward Proxy Policies**
+**Active Forward Proxy Policies**
+
+An `active_forward_proxy_policies` block (within `tgw_security`) supports the following:
 
 &#x2022; [`forward_proxy_policies`](#forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#tgw-security-active-forward-proxy-policies-forward-proxy-policies) below.
 
 <a id="tgw-security-active-forward-proxy-policies-forward-proxy-policies"></a>
 
-**Tgw Security Active Forward Proxy Policies Forward Proxy Policies**
+**Forward Proxy Policies**
+
+A `forward_proxy_policies` block (within `tgw_security.active_forward_proxy_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -573,13 +659,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tgw-security-active-network-policies"></a>
 
-**Tgw Security Active Network Policies**
+**Active Network Policies**
+
+An `active_network_policies` block (within `tgw_security`) supports the following:
 
 &#x2022; [`network_policies`](#network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#tgw-security-active-network-policies-network-policies) below.
 
 <a id="tgw-security-active-network-policies-network-policies"></a>
 
-**Tgw Security Active Network Policies Network Policies**
+**Network Policies**
+
+A `network_policies` block (within `tgw_security.active_network_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -590,6 +680,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -602,6 +694,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="vn-config"></a>
 
 **Vn Config**
+
+A `vn_config` block supports the following:
 
 &#x2022; [`allowed_vip_port`](#allowed-vip-port) - Optional Block<br>Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port](#vn-config-allowed-vip-port) below.
 
@@ -631,7 +725,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-allowed-vip-port"></a>
 
-**Vn Config Allowed VIP Port**
+**Allowed VIP Port**
+
+An `allowed_vip_port` block (within `vn_config`) supports the following:
 
 &#x2022; [`custom_ports`](#custom-ports) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#vn-config-allowed-vip-port-custom-ports) below.
 
@@ -645,13 +741,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-allowed-vip-port-custom-ports"></a>
 
-**Vn Config Allowed VIP Port Custom Ports**
+**Custom Ports**
+
+A `custom_ports` block (within `vn_config.allowed_vip_port`) supports the following:
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port Ranges. Port Ranges
 
 <a id="vn-config-allowed-vip-port-sli"></a>
 
-**Vn Config Allowed VIP Port Sli**
+**Allowed VIP Port Sli**
+
+An `allowed_vip_port_sli` block (within `vn_config`) supports the following:
 
 &#x2022; [`custom_ports`](#custom-ports) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#vn-config-allowed-vip-port-sli-custom-ports) below.
 
@@ -665,13 +765,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-allowed-vip-port-sli-custom-ports"></a>
 
-**Vn Config Allowed VIP Port Sli Custom Ports**
+**Custom Ports**
+
+A `custom_ports` block (within `vn_config.allowed_vip_port_sli`) supports the following:
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port Ranges. Port Ranges
 
 <a id="vn-config-dc-cluster-group-inside-vn"></a>
 
-**Vn Config Dc Cluster Group Inside Vn**
+**Dc Cluster Group Inside Vn**
+
+A `dc_cluster_group_inside_vn` block (within `vn_config`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -681,7 +785,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-dc-cluster-group-outside-vn"></a>
 
-**Vn Config Dc Cluster Group Outside Vn**
+**Dc Cluster Group Outside Vn**
+
+A `dc_cluster_group_outside_vn` block (within `vn_config`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -691,13 +797,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-global-network-list"></a>
 
-**Vn Config Global Network List**
+**Global Network List**
+
+A `global_network_list` block (within `vn_config`) supports the following:
 
 &#x2022; [`global_network_connections`](#global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#vn-config-global-network-list-global-network-connections) below.
 
 <a id="vn-config-global-network-list-global-network-connections"></a>
 
-**Vn Config Global Network List Global Network Connections**
+**Global Network Connections**
+
+A `global_network_connections` block (within `vn_config.global_network_list`) supports the following:
 
 &#x2022; [`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#vn-config-global-network-list-global-network-connections-sli-to-global-dr) below.
 
@@ -705,13 +815,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-global-network-list-global-network-connections-sli-to-global-dr"></a>
 
-**Vn Config Global Network List Global Network Connections Sli To Global DR**
+**Sli To Global DR**
+
+A `sli_to_global_dr` block (within `vn_config.global_network_list.global_network_connections`) supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#vn-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
 <a id="vn-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn"></a>
 
-**Vn Config Global Network List Global Network Connections Sli To Global DR Global Vn**
+**Global Vn**
+
+A `global_vn` block (within `vn_config.global_network_list.global_network_connections.sli_to_global_dr`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -721,13 +835,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-global-network-list-global-network-connections-slo-to-global-dr"></a>
 
-**Vn Config Global Network List Global Network Connections Slo To Global DR**
+**Slo To Global DR**
+
+A `slo_to_global_dr` block (within `vn_config.global_network_list.global_network_connections`) supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#vn-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
 
 <a id="vn-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn"></a>
 
-**Vn Config Global Network List Global Network Connections Slo To Global DR Global Vn**
+**Global Vn**
+
+A `global_vn` block (within `vn_config.global_network_list.global_network_connections.slo_to_global_dr`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -737,13 +855,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-inside-static-routes"></a>
 
-**Vn Config Inside Static Routes**
+**Inside Static Routes**
+
+An `inside_static_routes` block (within `vn_config`) supports the following:
 
 &#x2022; [`static_route_list`](#static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#vn-config-inside-static-routes-static-route-list) below.
 
 <a id="vn-config-inside-static-routes-static-route-list"></a>
 
-**Vn Config Inside Static Routes Static Route List**
+**Static Route List**
+
+A `static_route_list` block (within `vn_config.inside_static_routes`) supports the following:
 
 &#x2022; [`custom_static_route`](#custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#vn-config-inside-static-routes-static-route-list-custom-static-route) below.
 
@@ -751,7 +873,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-inside-static-routes-static-route-list-custom-static-route"></a>
 
-**Vn Config Inside Static Routes Static Route List Custom Static Route**
+**Custom Static Route**
+
+A `custom_static_route` block (within `vn_config.inside_static_routes.static_route_list`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
@@ -763,7 +887,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop"></a>
 
-**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop**
+**Nexthop**
+
+A `nexthop` block (within `vn_config.inside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
@@ -773,7 +899,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
 
-**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Interface**
+**Interface**
+
+An `interface` block (within `vn_config.inside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -787,7 +915,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
 
-**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+**Nexthop Address**
+
+A `nexthop_address` block (within `vn_config.inside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -795,19 +925,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
 
-**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+**IPv4**
+
+An `ipv4` block (within `vn_config.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="vn-config-inside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
 
-**Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+**IPv6**
+
+An `ipv6` block (within `vn_config.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="vn-config-inside-static-routes-static-route-list-custom-static-route-subnets"></a>
 
-**Vn Config Inside Static Routes Static Route List Custom Static Route Subnets**
+**Subnets**
+
+A `subnets` block (within `vn_config.inside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#vn-config-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -815,7 +951,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-inside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
 
-**Vn Config Inside Static Routes Static Route List Custom Static Route Subnets IPv4**
+**IPv4**
+
+An `ipv4` block (within `vn_config.inside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -823,7 +961,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-inside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
 
-**Vn Config Inside Static Routes Static Route List Custom Static Route Subnets IPv6**
+**IPv6**
+
+An `ipv6` block (within `vn_config.inside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -831,13 +971,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-outside-static-routes"></a>
 
-**Vn Config Outside Static Routes**
+**Outside Static Routes**
+
+An `outside_static_routes` block (within `vn_config`) supports the following:
 
 &#x2022; [`static_route_list`](#static-route-list) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#vn-config-outside-static-routes-static-route-list) below.
 
 <a id="vn-config-outside-static-routes-static-route-list"></a>
 
-**Vn Config Outside Static Routes Static Route List**
+**Static Route List**
+
+A `static_route_list` block (within `vn_config.outside_static_routes`) supports the following:
 
 &#x2022; [`custom_static_route`](#custom-static-route) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#vn-config-outside-static-routes-static-route-list-custom-static-route) below.
 
@@ -845,7 +989,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route"></a>
 
-**Vn Config Outside Static Routes Static Route List Custom Static Route**
+**Custom Static Route**
+
+A `custom_static_route` block (within `vn_config.outside_static_routes.static_route_list`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
@@ -857,7 +1003,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop"></a>
 
-**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop**
+**Nexthop**
+
+A `nexthop` block (within `vn_config.outside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-interface) below.
 
@@ -867,7 +1015,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-interface"></a>
 
-**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Interface**
+**Interface**
+
+An `interface` block (within `vn_config.outside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -881,7 +1031,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address"></a>
 
-**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address**
+**Nexthop Address**
+
+A `nexthop_address` block (within `vn_config.outside_static_routes.static_route_list.custom_static_route.nexthop`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4) below.
 
@@ -889,19 +1041,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv4"></a>
 
-**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4**
+**IPv4**
+
+An `ipv4` block (within `vn_config.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route-nexthop-nexthop-address-ipv6"></a>
 
-**Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6**
+**IPv6**
+
+An `ipv6` block (within `vn_config.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route-subnets"></a>
 
-**Vn Config Outside Static Routes Static Route List Custom Static Route Subnets**
+**Subnets**
+
+A `subnets` block (within `vn_config.outside_static_routes.static_route_list.custom_static_route`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#vn-config-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4) below.
 
@@ -909,7 +1067,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route-subnets-ipv4"></a>
 
-**Vn Config Outside Static Routes Static Route List Custom Static Route Subnets IPv4**
+**IPv4**
+
+An `ipv4` block (within `vn_config.outside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -917,7 +1077,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vn-config-outside-static-routes-static-route-list-custom-static-route-subnets-ipv6"></a>
 
-**Vn Config Outside Static Routes Static Route List Custom Static Route Subnets IPv6**
+**IPv6**
+
+An `ipv6` block (within `vn_config.outside_static_routes.static_route_list.custom_static_route.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -927,11 +1089,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Vpc Attachments**
 
+A `vpc_attachments` block supports the following:
+
 &#x2022; [`vpc_list`](#vpc-list) - Optional Block<br>VPC List. List of VPC attachments to transit gateway<br>See [Vpc List](#vpc-attachments-vpc-list) below.
 
 <a id="vpc-attachments-vpc-list"></a>
 
-**Vpc Attachments Vpc List**
+**Vpc List**
+
+A `vpc_list` block (within `vpc_attachments`) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional Block<br>Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall
 

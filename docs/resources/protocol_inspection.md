@@ -86,13 +86,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Enable Disable Compliance Checks**
 
+An `enable_disable_compliance_checks` block supports the following:
+
 &#x2022; [`disable_compliance_checks`](#disable-compliance-checks) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`enable_compliance_checks`](#enable-compliance-checks) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
 
 <a id="enable-disable-compliance-checks-enable-compliance-checks"></a>
 
-**Enable Disable Compliance Checks Enable Compliance Checks**
+**Enable Compliance Checks**
+
+An `enable_compliance_checks` block (within `enable_disable_compliance_checks`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -104,6 +108,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Enable Disable Signatures**
 
+An `enable_disable_signatures` block supports the following:
+
 &#x2022; [`disable_signature`](#disable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`enable_signature`](#enable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -111,6 +117,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

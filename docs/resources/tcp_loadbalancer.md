@@ -132,11 +132,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Active Service Policies**
 
+An `active_service_policies` block supports the following:
+
 &#x2022; [`policies`](#policies) - Optional Block<br>Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are evaluated. Otherwise, the next policy is evaluated. If all policies are evaluated and none match, then the request will be denied by default<br>See [Policies](#active-service-policies-policies) below.
 
 <a id="active-service-policies-policies"></a>
 
-**Active Service Policies Policies**
+**Policies**
+
+A `policies` block (within `active_service_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -148,11 +152,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Advertise Custom**
 
+An `advertise_custom` block supports the following:
+
 &#x2022; [`advertise_where`](#advertise-where) - Optional Block<br>List of Sites to Advertise. Where should this load balancer be available<br>See [Advertise Where](#advertise-custom-advertise-where) below.
 
 <a id="advertise-custom-advertise-where"></a>
 
-**Advertise Custom Advertise Where**
+**Advertise Where**
+
+An `advertise_where` block (within `advertise_custom`) supports the following:
 
 &#x2022; [`advertise_on_public`](#advertise-on-public) - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-custom-advertise-where-advertise-on-public) below.
 
@@ -174,13 +182,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-advertise-on-public"></a>
 
-**Advertise Custom Advertise Where Advertise On Public**
+**Advertise On Public**
+
+An `advertise_on_public` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`public_ip`](#public-ip) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#advertise-custom-advertise-where-advertise-on-public-public-ip) below.
 
 <a id="advertise-custom-advertise-where-advertise-on-public-public-ip"></a>
 
-**Advertise Custom Advertise Where Advertise On Public Public IP**
+**Public IP**
+
+A `public_ip` block (within `advertise_custom.advertise_where.advertise_on_public`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -190,7 +202,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-site"></a>
 
-**Advertise Custom Advertise Where Site**
+**Site**
+
+A `site` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
@@ -200,7 +214,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-site-site"></a>
 
-**Advertise Custom Advertise Where Site Site**
+**Site**
+
+A `site` block (within `advertise_custom.advertise_where.site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -210,7 +226,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-network"></a>
 
-**Advertise Custom Advertise Where Virtual Network**
+**Virtual Network**
+
+A `virtual_network` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`default_v6_vip`](#default-v6-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -224,7 +242,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-network-virtual-network"></a>
 
-**Advertise Custom Advertise Where Virtual Network Virtual Network**
+**Virtual Network**
+
+A `virtual_network` block (within `advertise_custom.advertise_where.virtual_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -234,7 +254,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site"></a>
 
-**Advertise Custom Advertise Where Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`network`](#network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
@@ -242,7 +264,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site-virtual-site"></a>
 
-**Advertise Custom Advertise Where Virtual Site Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `advertise_custom.advertise_where.virtual_site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -252,7 +276,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site-with-vip"></a>
 
-**Advertise Custom Advertise Where Virtual Site With VIP**
+**Virtual Site With VIP**
+
+A `virtual_site_with_vip` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
@@ -262,7 +288,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site-with-vip-virtual-site"></a>
 
-**Advertise Custom Advertise Where Virtual Site With VIP Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `advertise_custom.advertise_where.virtual_site_with_vip`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -272,7 +300,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-vk8s-service"></a>
 
-**Advertise Custom Advertise Where Vk8s Service**
+**Vk8s Service**
+
+A `vk8s_service` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#advertise-custom-advertise-where-vk8s-service-site) below.
 
@@ -280,7 +310,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-vk8s-service-site"></a>
 
-**Advertise Custom Advertise Where Vk8s Service Site**
+**Site**
+
+A `site` block (within `advertise_custom.advertise_where.vk8s_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -290,7 +322,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-vk8s-service-virtual-site"></a>
 
-**Advertise Custom Advertise Where Vk8s Service Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `advertise_custom.advertise_where.vk8s_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -302,11 +336,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Advertise On Public**
 
+An `advertise_on_public` block supports the following:
+
 &#x2022; [`public_ip`](#public-ip) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#advertise-on-public-public-ip) below.
 
 <a id="advertise-on-public-public-ip"></a>
 
-**Advertise On Public Public IP**
+**Public IP**
+
+A `public_ip` block (within `advertise_on_public`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -317,6 +355,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="origin-pools-weights"></a>
 
 **Origin Pools Weights**
+
+An `origin_pools_weights` block supports the following:
 
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cluster](#origin-pools-weights-cluster) below.
 
@@ -330,7 +370,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-pools-weights-cluster"></a>
 
-**Origin Pools Weights Cluster**
+**Cluster**
+
+A `cluster` block (within `origin_pools_weights`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -340,7 +382,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-pools-weights-pool"></a>
 
-**Origin Pools Weights Pool**
+**Pool**
+
+A `pool` block (within `origin_pools_weights`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -351,6 +395,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -364,13 +410,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **TLS TCP**
 
+A `tls_tcp` block supports the following:
+
 &#x2022; [`tls_cert_params`](#tls-cert-params) - Optional Block<br>TLS Parameters. Select TLS Parameters and Certificates<br>See [TLS Cert Params](#tls-tcp-tls-cert-params) below.
 
 &#x2022; [`tls_parameters`](#tls-parameters) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [TLS Parameters](#tls-tcp-tls-parameters) below.
 
 <a id="tls-tcp-tls-cert-params"></a>
 
-**TLS TCP TLS Cert Params**
+**TLS Cert Params**
+
+A `tls_cert_params` block (within `tls_tcp`) supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#tls-tcp-tls-cert-params-certificates) below.
 
@@ -382,7 +432,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-cert-params-certificates"></a>
 
-**TLS TCP TLS Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `tls_tcp.tls_cert_params`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -392,7 +444,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-cert-params-tls-config"></a>
 
-**TLS TCP TLS Cert Params TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `tls_tcp.tls_cert_params`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#tls-tcp-tls-cert-params-tls-config-custom-security) below.
 
@@ -404,7 +458,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-cert-params-tls-config-custom-security"></a>
 
-**TLS TCP TLS Cert Params TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `tls_tcp.tls_cert_params.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -414,7 +470,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-cert-params-use-mtls"></a>
 
-**TLS TCP TLS Cert Params Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `tls_tcp.tls_cert_params`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -432,7 +490,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-cert-params-use-mtls-crl"></a>
 
-**TLS TCP TLS Cert Params Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `tls_tcp.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -442,7 +502,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-cert-params-use-mtls-trusted-ca"></a>
 
-**TLS TCP TLS Cert Params Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `tls_tcp.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -452,13 +514,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-cert-params-use-mtls-xfcc-options"></a>
 
-**TLS TCP TLS Cert Params Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `tls_tcp.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="tls-tcp-tls-parameters"></a>
 
-**TLS TCP TLS Parameters**
+**TLS Parameters**
+
+A `tls_parameters` block (within `tls_tcp`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -470,7 +536,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-tls-certificates"></a>
 
-**TLS TCP TLS Parameters TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `tls_tcp.tls_parameters`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -486,13 +554,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
 
-**TLS TCP TLS Parameters TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `tls_tcp.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="tls-tcp-tls-parameters-tls-certificates-private-key"></a>
 
-**TLS TCP TLS Parameters TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `tls_tcp.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tls-tcp-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -500,7 +572,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**TLS TCP TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `tls_tcp.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -510,7 +584,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
 
-**TLS TCP TLS Parameters TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `tls_tcp.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -518,7 +594,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-tls-config"></a>
 
-**TLS TCP TLS Parameters TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `tls_tcp.tls_parameters`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#tls-tcp-tls-parameters-tls-config-custom-security) below.
 
@@ -530,7 +608,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-tls-config-custom-security"></a>
 
-**TLS TCP TLS Parameters TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `tls_tcp.tls_parameters.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -540,7 +620,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-use-mtls"></a>
 
-**TLS TCP TLS Parameters Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `tls_tcp.tls_parameters`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -558,7 +640,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-use-mtls-crl"></a>
 
-**TLS TCP TLS Parameters Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `tls_tcp.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -568,7 +652,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-use-mtls-trusted-ca"></a>
 
-**TLS TCP TLS Parameters Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `tls_tcp.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -578,13 +664,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-tls-parameters-use-mtls-xfcc-options"></a>
 
-**TLS TCP TLS Parameters Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `tls_tcp.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="tls-tcp-auto-cert"></a>
 
 **TLS TCP Auto Cert**
+
+A `tls_tcp_auto_cert` block supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -594,7 +684,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-auto-cert-tls-config"></a>
 
-**TLS TCP Auto Cert TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `tls_tcp_auto_cert`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#tls-tcp-auto-cert-tls-config-custom-security) below.
 
@@ -606,7 +698,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-auto-cert-tls-config-custom-security"></a>
 
-**TLS TCP Auto Cert TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `tls_tcp_auto_cert.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -616,7 +710,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-auto-cert-use-mtls"></a>
 
-**TLS TCP Auto Cert Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `tls_tcp_auto_cert`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -634,7 +730,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-auto-cert-use-mtls-crl"></a>
 
-**TLS TCP Auto Cert Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `tls_tcp_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -644,7 +742,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-auto-cert-use-mtls-trusted-ca"></a>
 
-**TLS TCP Auto Cert Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `tls_tcp_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -654,7 +754,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-tcp-auto-cert-use-mtls-xfcc-options"></a>
 
-**TLS TCP Auto Cert Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `tls_tcp_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 

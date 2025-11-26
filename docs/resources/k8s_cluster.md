@@ -129,11 +129,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cluster Wide App List**
 
+A `cluster_wide_app_list` block supports the following:
+
 &#x2022; [`cluster_wide_apps`](#cluster-wide-apps) - Optional Block<br>Cluster Wide Application List. List of cluster wide applications<br>See [Cluster Wide Apps](#cluster-wide-app-list-cluster-wide-apps) below.
 
 <a id="cluster-wide-app-list-cluster-wide-apps"></a>
 
-**Cluster Wide App List Cluster Wide Apps**
+**Cluster Wide Apps**
+
+A `cluster_wide_apps` block (within `cluster_wide_app_list`) supports the following:
 
 &#x2022; [`argo_cd`](#argo-cd) - Optional Block<br>Argo CD configuration. description Parameters for Argo Continuous Deployment(CD) application<br>See [Argo Cd](#cluster-wide-app-list-cluster-wide-apps-argo-cd) below.
 
@@ -145,13 +149,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd"></a>
 
-**Cluster Wide App List Cluster Wide Apps Argo Cd**
+**Argo Cd**
+
+An `argo_cd` block (within `cluster_wide_app_list.cluster_wide_apps`) supports the following:
 
 &#x2022; [`local_domain`](#local-domain) - Optional Block<br>Local Access Configuration. Parameters required to enable local access<br>See [Local Domain](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) below.
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain"></a>
 
-**Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain**
+**Local Domain**
+
+A `local_domain` block (within `cluster_wide_app_list.cluster_wide_apps.argo_cd`) supports the following:
 
 &#x2022; [`default_port`](#default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -163,7 +171,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password"></a>
 
-**Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password**
+**Password**
+
+A `password` block (within `cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) below.
 
@@ -171,7 +181,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info"></a>
 
-**Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -181,7 +193,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info"></a>
 
-**Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -191,11 +205,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Insecure Registry List**
 
+An `insecure_registry_list` block supports the following:
+
 &#x2022; [`insecure_registries`](#insecure-registries) - Optional List<br>Docker Insecure Registry List. List of docker insecure registries in format 'example.com:5000'
 
 <a id="local-access-config"></a>
 
 **Local Access Config**
+
+A `local_access_config` block supports the following:
 
 &#x2022; [`default_port`](#default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -206,6 +224,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -219,11 +239,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Use Custom Cluster Role Bindings**
 
+An `use_custom_cluster_role_bindings` block supports the following:
+
 &#x2022; [`cluster_role_bindings`](#cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8s cluster<br>See [Cluster Role Bindings](#use-custom-cluster-role-bindings-cluster-role-bindings) below.
 
 <a id="use-custom-cluster-role-bindings-cluster-role-bindings"></a>
 
-**Use Custom Cluster Role Bindings Cluster Role Bindings**
+**Cluster Role Bindings**
+
+A `cluster_role_bindings` block (within `use_custom_cluster_role_bindings`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -235,11 +259,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Use Custom Cluster Role List**
 
+An `use_custom_cluster_role_list` block supports the following:
+
 &#x2022; [`cluster_roles`](#cluster-roles) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8s cluster<br>See [Cluster Roles](#use-custom-cluster-role-list-cluster-roles) below.
 
 <a id="use-custom-cluster-role-list-cluster-roles"></a>
 
-**Use Custom Cluster Role List Cluster Roles**
+**Cluster Roles**
+
+A `cluster_roles` block (within `use_custom_cluster_role_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -251,6 +279,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Use Custom Pod Security Admission**
 
+An `use_custom_pod_security_admission` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -261,11 +291,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Use Custom Psp List**
 
+An `use_custom_psp_list` block supports the following:
+
 &#x2022; [`pod_security_policies`](#pod-security-policies) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8s cluster<br>See [Pod Security Policies](#use-custom-psp-list-pod-security-policies) below.
 
 <a id="use-custom-psp-list-pod-security-policies"></a>
 
-**Use Custom Psp List Pod Security Policies**
+**Pod Security Policies**
+
+A `pod_security_policies` block (within `use_custom_psp_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 

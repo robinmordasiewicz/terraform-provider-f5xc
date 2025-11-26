@@ -92,6 +92,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Child Tenant Manager**
 
+A `child_tenant_manager` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -101,6 +103,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="contact-detail"></a>
 
 **Contact Detail**
+
+A `contact_detail` block supports the following:
 
 &#x2022; [`address1`](#address1) - Optional String<br>Address Line 1
 
@@ -126,6 +130,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Customer Info**
 
+A `customer_info` block supports the following:
+
 &#x2022; [`additional_info`](#additional-info) - Optional String<br>Additional Info. Use this field for any additional information about the new child tenant
 
 &#x2022; [`email`](#email) - Optional String<br>Email
@@ -138,6 +144,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Tenant Profile**
 
+A `tenant_profile` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -147,6 +155,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

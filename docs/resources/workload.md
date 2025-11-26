@@ -91,6 +91,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Job**
 
+A `job` block supports the following:
+
 &#x2022; [`configuration`](#configuration) - Optional Block<br>Configuration Parameters. Configuration parameters of the workload<br>See [Configuration](#job-configuration) below.
 
 &#x2022; [`containers`](#containers) - Optional Block<br>Containers. Containers to use for the job<br>See [Containers](#job-containers) below.
@@ -103,13 +105,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-configuration"></a>
 
-**Job Configuration**
+**Configuration**
+
+A `configuration` block (within `job`) supports the following:
 
 &#x2022; [`parameters`](#parameters) - Optional Block<br>Parameters. Parameters for the workload<br>See [Parameters](#job-configuration-parameters) below.
 
 <a id="job-configuration-parameters"></a>
 
-**Job Configuration Parameters**
+**Parameters**
+
+A `parameters` block (within `job.configuration`) supports the following:
 
 &#x2022; [`env_var`](#env-var) - Optional Block<br>Environment Variable. Environment Variable<br>See [Env Var](#job-configuration-parameters-env-var) below.
 
@@ -117,7 +123,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-configuration-parameters-env-var"></a>
 
-**Job Configuration Parameters Env Var**
+**Env Var**
+
+An `env_var` block (within `job.configuration.parameters`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of Environment Variable
 
@@ -125,7 +133,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-configuration-parameters-file"></a>
 
-**Job Configuration Parameters File**
+**File**
+
+A `file` block (within `job.configuration.parameters`) supports the following:
 
 &#x2022; [`data`](#data) - Optional String<br>Data. File data
 
@@ -137,7 +147,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-configuration-parameters-file-mount"></a>
 
-**Job Configuration Parameters File Mount**
+**Mount**
+
+A `mount` block (within `job.configuration.parameters.file`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -147,7 +159,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers"></a>
 
-**Job Containers**
+**Containers**
+
+A `containers` block (within `job`) supports the following:
 
 &#x2022; [`args`](#args) - Optional List<br>Arguments. Arguments to the entrypoint. Overrides the docker image's CMD
 
@@ -171,7 +185,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-custom-flavor"></a>
 
-**Job Containers Custom Flavor**
+**Custom Flavor**
+
+A `custom_flavor` block (within `job.containers`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -181,7 +197,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-image"></a>
 
-**Job Containers Image**
+**Image**
+
+An `image` block (within `job.containers`) supports the following:
 
 &#x2022; [`container_registry`](#container-registry) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#job-containers-image-container-registry) below.
 
@@ -193,7 +211,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-image-container-registry"></a>
 
-**Job Containers Image Container Registry**
+**Container Registry**
+
+A `container_registry` block (within `job.containers.image`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -203,7 +223,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-liveness-check"></a>
 
-**Job Containers Liveness Check**
+**Liveness Check**
+
+A `liveness_check` block (within `job.containers`) supports the following:
 
 &#x2022; [`exec_health_check`](#exec-health-check) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#job-containers-liveness-check-exec-health-check) below.
 
@@ -223,13 +245,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-liveness-check-exec-health-check"></a>
 
-**Job Containers Liveness Check Exec Health Check**
+**Exec Health Check**
+
+An `exec_health_check` block (within `job.containers.liveness_check`) supports the following:
 
 &#x2022; [`command`](#command) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
 
 <a id="job-containers-liveness-check-http-health-check"></a>
 
-**Job Containers Liveness Check HTTP Health Check**
+**HTTP Health Check**
+
+A `http_health_check` block (within `job.containers.liveness_check`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
@@ -241,7 +267,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-liveness-check-http-health-check-port"></a>
 
-**Job Containers Liveness Check HTTP Health Check Port**
+**Port**
+
+A `port` block (within `job.containers.liveness_check.http_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -249,13 +277,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-liveness-check-tcp-health-check"></a>
 
-**Job Containers Liveness Check TCP Health Check**
+**TCP Health Check**
+
+A `tcp_health_check` block (within `job.containers.liveness_check`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Block<br>Port. Port<br>See [Port](#job-containers-liveness-check-tcp-health-check-port) below.
 
 <a id="job-containers-liveness-check-tcp-health-check-port"></a>
 
-**Job Containers Liveness Check TCP Health Check Port**
+**Port**
+
+A `port` block (within `job.containers.liveness_check.tcp_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -263,7 +295,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-readiness-check"></a>
 
-**Job Containers Readiness Check**
+**Readiness Check**
+
+A `readiness_check` block (within `job.containers`) supports the following:
 
 &#x2022; [`exec_health_check`](#exec-health-check) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#job-containers-readiness-check-exec-health-check) below.
 
@@ -283,13 +317,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-readiness-check-exec-health-check"></a>
 
-**Job Containers Readiness Check Exec Health Check**
+**Exec Health Check**
+
+An `exec_health_check` block (within `job.containers.readiness_check`) supports the following:
 
 &#x2022; [`command`](#command) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
 
 <a id="job-containers-readiness-check-http-health-check"></a>
 
-**Job Containers Readiness Check HTTP Health Check**
+**HTTP Health Check**
+
+A `http_health_check` block (within `job.containers.readiness_check`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
@@ -301,7 +339,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-readiness-check-http-health-check-port"></a>
 
-**Job Containers Readiness Check HTTP Health Check Port**
+**Port**
+
+A `port` block (within `job.containers.readiness_check.http_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -309,13 +349,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-containers-readiness-check-tcp-health-check"></a>
 
-**Job Containers Readiness Check TCP Health Check**
+**TCP Health Check**
+
+A `tcp_health_check` block (within `job.containers.readiness_check`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Block<br>Port. Port<br>See [Port](#job-containers-readiness-check-tcp-health-check-port) below.
 
 <a id="job-containers-readiness-check-tcp-health-check-port"></a>
 
-**Job Containers Readiness Check TCP Health Check Port**
+**Port**
+
+A `port` block (within `job.containers.readiness_check.tcp_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -323,7 +367,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-deploy-options"></a>
 
-**Job Deploy Options**
+**Deploy Options**
+
+A `deploy_options` block (within `job`) supports the following:
 
 &#x2022; [`all_res`](#all-res) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -339,13 +385,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-deploy-options-deploy-ce-sites"></a>
 
-**Job Deploy Options Deploy CE Sites**
+**Deploy CE Sites**
+
+A `deploy_ce_sites` block (within `job.deploy_options`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>List of Customer Sites to Deploy. Which customer sites should this workload be deployed<br>See [Site](#job-deploy-options-deploy-ce-sites-site) below.
 
 <a id="job-deploy-options-deploy-ce-sites-site"></a>
 
-**Job Deploy Options Deploy CE Sites Site**
+**Site**
+
+A `site` block (within `job.deploy_options.deploy_ce_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -355,13 +405,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-deploy-options-deploy-ce-virtual-sites"></a>
 
-**Job Deploy Options Deploy CE Virtual Sites**
+**Deploy CE Virtual Sites**
+
+A `deploy_ce_virtual_sites` block (within `job.deploy_options`) supports the following:
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#job-deploy-options-deploy-ce-virtual-sites-virtual-site) below.
 
 <a id="job-deploy-options-deploy-ce-virtual-sites-virtual-site"></a>
 
-**Job Deploy Options Deploy CE Virtual Sites Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `job.deploy_options.deploy_ce_virtual_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -371,13 +425,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-deploy-options-deploy-re-sites"></a>
 
-**Job Deploy Options Deploy RE Sites**
+**Deploy RE Sites**
+
+A `deploy_re_sites` block (within `job.deploy_options`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed<br>See [Site](#job-deploy-options-deploy-re-sites-site) below.
 
 <a id="job-deploy-options-deploy-re-sites-site"></a>
 
-**Job Deploy Options Deploy RE Sites Site**
+**Site**
+
+A `site` block (within `job.deploy_options.deploy_re_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -387,13 +445,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-deploy-options-deploy-re-virtual-sites"></a>
 
-**Job Deploy Options Deploy RE Virtual Sites**
+**Deploy RE Virtual Sites**
+
+A `deploy_re_virtual_sites` block (within `job.deploy_options`) supports the following:
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#job-deploy-options-deploy-re-virtual-sites-virtual-site) below.
 
 <a id="job-deploy-options-deploy-re-virtual-sites-virtual-site"></a>
 
-**Job Deploy Options Deploy RE Virtual Sites Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `job.deploy_options.deploy_re_virtual_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -403,7 +465,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-volumes"></a>
 
-**Job Volumes**
+**Volumes**
+
+A `volumes` block (within `job`) supports the following:
 
 &#x2022; [`empty_dir`](#empty-dir) - Optional Block<br>Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#job-volumes-empty-dir) below.
 
@@ -415,7 +479,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-volumes-empty-dir"></a>
 
-**Job Volumes Empty Dir**
+**Empty Dir**
+
+An `empty_dir` block (within `job.volumes`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-empty-dir-mount) below.
 
@@ -423,7 +489,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-volumes-empty-dir-mount"></a>
 
-**Job Volumes Empty Dir Mount**
+**Mount**
+
+A `mount` block (within `job.volumes.empty_dir`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -433,7 +501,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-volumes-host-path"></a>
 
-**Job Volumes Host Path**
+**Host Path**
+
+A `host_path` block (within `job.volumes`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-host-path-mount) below.
 
@@ -441,7 +511,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-volumes-host-path-mount"></a>
 
-**Job Volumes Host Path Mount**
+**Mount**
+
+A `mount` block (within `job.volumes.host_path`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -451,7 +523,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-volumes-persistent-volume"></a>
 
-**Job Volumes Persistent Volume**
+**Persistent Volume**
+
+A `persistent_volume` block (within `job.volumes`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-persistent-volume-mount) below.
 
@@ -459,7 +533,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-volumes-persistent-volume-mount"></a>
 
-**Job Volumes Persistent Volume Mount**
+**Mount**
+
+A `mount` block (within `job.volumes.persistent_volume`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -469,7 +545,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="job-volumes-persistent-volume-storage"></a>
 
-**Job Volumes Persistent Volume Storage**
+**Storage**
+
+A `storage` block (within `job.volumes.persistent_volume`) supports the following:
 
 &#x2022; [`access_mode`](#access-mode) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts
 
@@ -482,6 +560,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="service"></a>
 
 **Service**
+
+A `service` block supports the following:
 
 &#x2022; [`advertise_options`](#advertise-options) - Optional Block<br>Advertise Options. Advertise options are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#service-advertise-options) below.
 
@@ -499,7 +579,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options"></a>
 
-**Service Advertise Options**
+**Advertise Options**
+
+An `advertise_options` block (within `service`) supports the following:
 
 &#x2022; [`advertise_custom`](#advertise-custom) - Optional Block<br>Advertise on specific sites. Advertise this workload via loadbalancer on specific sites<br>See [Advertise Custom](#service-advertise-options-advertise-custom) below.
 
@@ -511,7 +593,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom"></a>
 
-**Service Advertise Options Advertise Custom**
+**Advertise Custom**
+
+An `advertise_custom` block (within `service.advertise_options`) supports the following:
 
 &#x2022; [`advertise_where`](#advertise-where) - Optional Block<br>List of Sites to Advertise. Where should this load balancer be available<br>See [Advertise Where](#service-advertise-options-advertise-custom-advertise-where) below.
 
@@ -519,7 +603,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-advertise-where"></a>
 
-**Service Advertise Options Advertise Custom Advertise Where**
+**Advertise Where**
+
+An `advertise_where` block (within `service.advertise_options.advertise_custom`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#service-advertise-options-advertise-custom-advertise-where-site) below.
 
@@ -529,7 +615,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-advertise-where-site"></a>
 
-**Service Advertise Options Advertise Custom Advertise Where Site**
+**Site**
+
+A `site` block (within `service.advertise_options.advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
@@ -539,7 +627,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-advertise-where-site-site"></a>
 
-**Service Advertise Options Advertise Custom Advertise Where Site Site**
+**Site**
+
+A `site` block (within `service.advertise_options.advertise_custom.advertise_where.site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -549,7 +639,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-advertise-where-virtual-site"></a>
 
-**Service Advertise Options Advertise Custom Advertise Where Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `service.advertise_options.advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`network`](#network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
@@ -557,7 +649,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-advertise-where-virtual-site-virtual-site"></a>
 
-**Service Advertise Options Advertise Custom Advertise Where Virtual Site Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `service.advertise_options.advertise_custom.advertise_where.virtual_site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -567,7 +661,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-advertise-where-vk8s-service"></a>
 
-**Service Advertise Options Advertise Custom Advertise Where Vk8s Service**
+**Vk8s Service**
+
+A `vk8s_service` block (within `service.advertise_options.advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#service-advertise-options-advertise-custom-advertise-where-vk8s-service-site) below.
 
@@ -575,7 +671,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-advertise-where-vk8s-service-site"></a>
 
-**Service Advertise Options Advertise Custom Advertise Where Vk8s Service Site**
+**Site**
+
+A `site` block (within `service.advertise_options.advertise_custom.advertise_where.vk8s_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -585,7 +683,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-advertise-where-vk8s-service-virtual-site"></a>
 
-**Service Advertise Options Advertise Custom Advertise Where Vk8s Service Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `service.advertise_options.advertise_custom.advertise_where.vk8s_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -595,7 +695,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports"></a>
 
-**Service Advertise Options Advertise Custom Ports**
+**Ports**
+
+A `ports` block (within `service.advertise_options.advertise_custom`) supports the following:
 
 &#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#service-advertise-options-advertise-custom-ports-http-loadbalancer) below.
 
@@ -605,7 +707,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer**
+**HTTP Loadbalancer**
+
+A `http_loadbalancer` block (within `service.advertise_options.advertise_custom.ports`) supports the following:
 
 &#x2022; [`default_route`](#default-route) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#service-advertise-options-advertise-custom-ports-http-loadbalancer-default-route) below.
 
@@ -621,7 +725,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-default-route"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Default Route**
+**Default Route**
+
+A `default_route` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -631,7 +737,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-http"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTP**
+**HTTP**
+
+A `http` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
 
@@ -641,7 +749,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS**
+**HTTPS**
+
+A `https` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -679,7 +789,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-coalescing-options"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -687,7 +799,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -697,13 +811,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -715,7 +833,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params**
+**TLS Cert Params**
+
+A `tls_cert_params` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-certificates) below.
 
@@ -727,7 +847,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-certificates"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -737,7 +859,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
 
@@ -749,7 +873,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -759,7 +885,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -777,7 +905,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -787,7 +917,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -797,13 +929,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters**
+**TLS Parameters**
+
+A `tls_parameters` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -815,7 +951,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -831,13 +969,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -845,7 +987,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -855,7 +999,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -863,7 +1009,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
 
@@ -875,7 +1023,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -885,7 +1035,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -903,7 +1055,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -913,7 +1067,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -923,13 +1079,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert**
+**HTTPS Auto Cert**
+
+A `https_auto_cert` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -969,7 +1129,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-coalescing-options"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -977,7 +1139,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -987,13 +1151,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1005,7 +1173,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
 
@@ -1017,7 +1187,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -1027,7 +1199,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -1045,7 +1219,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1055,7 +1231,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1065,19 +1243,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes**
+**Specific Routes**
+
+A `specific_routes` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`routes`](#routes) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes) below.
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes**
+**Routes**
+
+A `routes` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes`) supports the following:
 
 &#x2022; [`custom_route_object`](#custom-route-object) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object) below.
 
@@ -1089,13 +1273,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+**Custom Route Object**
+
+A `custom_route_object` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`route_ref`](#route-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+**Route Ref**
+
+A `route_ref` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.custom_route_object`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1105,7 +1293,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+**Direct Response Route**
+
+A `direct_response_route` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
 
@@ -1119,7 +1309,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+**Headers**
+
+A `headers` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -1133,7 +1325,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1143,7 +1337,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+**Path**
+
+A `path` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -1153,7 +1349,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+**Route Direct Response**
+
+A `route_direct_response` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
@@ -1161,7 +1359,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route**
+**Redirect Route**
+
+A `redirect_route` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
 
@@ -1175,7 +1375,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+**Headers**
+
+A `headers` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -1189,7 +1391,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1199,7 +1403,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+**Path**
+
+A `path` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -1209,7 +1415,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+**Route Redirect**
+
+A `route_redirect` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`host_redirect`](#host-redirect) - Optional String<br>Host. swap host part of incoming URL in redirect URL
 
@@ -1229,7 +1437,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route**
+**Simple Route**
+
+A `simple_route` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1243,7 +1453,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
 
-**Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+**Path**
+
+A `path` block (within `service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.simple_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -1253,7 +1465,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-port"></a>
 
-**Service Advertise Options Advertise Custom Ports Port**
+**Port**
+
+A `port` block (within `service.advertise_options.advertise_custom.ports`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#service-advertise-options-advertise-custom-ports-port-info) below.
 
@@ -1261,7 +1475,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-port-info"></a>
 
-**Service Advertise Options Advertise Custom Ports Port Info**
+**Info**
+
+An `info` block (within `service.advertise_options.advertise_custom.ports.port`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -1273,7 +1489,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-custom-ports-tcp-loadbalancer"></a>
 
-**Service Advertise Options Advertise Custom Ports TCP Loadbalancer**
+**TCP Loadbalancer**
+
+A `tcp_loadbalancer` block (within `service.advertise_options.advertise_custom.ports`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
 
@@ -1281,7 +1499,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-in-cluster"></a>
 
-**Service Advertise Options Advertise In Cluster**
+**Advertise In Cluster**
+
+An `advertise_in_cluster` block (within `service.advertise_options`) supports the following:
 
 &#x2022; [`multi_ports`](#multi-ports) - Optional Block<br>Multiple Ports. Multiple ports<br>See [Multi Ports](#service-advertise-options-advertise-in-cluster-multi-ports) below.
 
@@ -1289,13 +1509,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-in-cluster-multi-ports"></a>
 
-**Service Advertise Options Advertise In Cluster Multi Ports**
+**Multi Ports**
+
+A `multi_ports` block (within `service.advertise_options.advertise_in_cluster`) supports the following:
 
 &#x2022; [`ports`](#ports) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#service-advertise-options-advertise-in-cluster-multi-ports-ports) below.
 
 <a id="service-advertise-options-advertise-in-cluster-multi-ports-ports"></a>
 
-**Service Advertise Options Advertise In Cluster Multi Ports Ports**
+**Ports**
+
+A `ports` block (within `service.advertise_options.advertise_in_cluster.multi_ports`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#service-advertise-options-advertise-in-cluster-multi-ports-ports-info) below.
 
@@ -1303,7 +1527,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-in-cluster-multi-ports-ports-info"></a>
 
-**Service Advertise Options Advertise In Cluster Multi Ports Ports Info**
+**Info**
+
+An `info` block (within `service.advertise_options.advertise_in_cluster.multi_ports.ports`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -1315,13 +1541,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-in-cluster-port"></a>
 
-**Service Advertise Options Advertise In Cluster Port**
+**Port**
+
+A `port` block (within `service.advertise_options.advertise_in_cluster`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#service-advertise-options-advertise-in-cluster-port-info) below.
 
 <a id="service-advertise-options-advertise-in-cluster-port-info"></a>
 
-**Service Advertise Options Advertise In Cluster Port Info**
+**Info**
+
+An `info` block (within `service.advertise_options.advertise_in_cluster.port`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -1333,7 +1563,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public"></a>
 
-**Service Advertise Options Advertise On Public**
+**Advertise On Public**
+
+An `advertise_on_public` block (within `service.advertise_options`) supports the following:
 
 &#x2022; [`multi_ports`](#multi-ports) - Optional Block<br>Advertise Multiple Ports. Advertise multiple ports<br>See [Multi Ports](#service-advertise-options-advertise-on-public-multi-ports) below.
 
@@ -1341,13 +1573,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports**
+**Multi Ports**
+
+A `multi_ports` block (within `service.advertise_options.advertise_on_public`) supports the following:
 
 &#x2022; [`ports`](#ports) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#service-advertise-options-advertise-on-public-multi-ports-ports) below.
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports**
+**Ports**
+
+A `ports` block (within `service.advertise_options.advertise_on_public.multi_ports`) supports the following:
 
 &#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer) below.
 
@@ -1357,7 +1593,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer**
+**HTTP Loadbalancer**
+
+A `http_loadbalancer` block (within `service.advertise_options.advertise_on_public.multi_ports.ports`) supports the following:
 
 &#x2022; [`default_route`](#default-route) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-default-route) below.
 
@@ -1373,7 +1611,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-default-route"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Default Route**
+**Default Route**
+
+A `default_route` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1383,7 +1623,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-http"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTP**
+**HTTP**
+
+A `http` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
 
@@ -1393,7 +1635,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS**
+**HTTPS**
+
+A `https` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -1431,7 +1675,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-coalescing-options"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1439,7 +1685,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -1449,13 +1697,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1467,7 +1719,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params**
+**TLS Cert Params**
+
+A `tls_cert_params` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-certificates) below.
 
@@ -1479,7 +1733,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-certificates"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1489,7 +1745,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
 
@@ -1501,7 +1759,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -1511,7 +1771,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -1529,7 +1791,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1539,7 +1803,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1549,13 +1815,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters**
+**TLS Parameters**
+
+A `tls_parameters` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1567,7 +1837,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -1583,13 +1855,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -1597,7 +1873,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1607,7 +1885,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1615,7 +1895,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
 
@@ -1627,7 +1909,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -1637,7 +1921,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -1655,7 +1941,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1665,7 +1953,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1675,13 +1965,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert**
+**HTTPS Auto Cert**
+
+A `https_auto_cert` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -1721,7 +2015,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-coalescing-options"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1729,7 +2025,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -1739,13 +2037,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1757,7 +2059,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
 
@@ -1769,7 +2073,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -1779,7 +2085,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -1797,7 +2105,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1807,7 +2117,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1817,19 +2129,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes**
+**Specific Routes**
+
+A `specific_routes` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`routes`](#routes) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes) below.
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes**
+**Routes**
+
+A `routes` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes`) supports the following:
 
 &#x2022; [`custom_route_object`](#custom-route-object) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object) below.
 
@@ -1841,13 +2159,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+**Custom Route Object**
+
+A `custom_route_object` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`route_ref`](#route-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+**Route Ref**
+
+A `route_ref` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.custom_route_object`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1857,7 +2179,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+**Direct Response Route**
+
+A `direct_response_route` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
 
@@ -1871,7 +2195,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+**Headers**
+
+A `headers` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -1885,7 +2211,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1895,7 +2223,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+**Path**
+
+A `path` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -1905,7 +2235,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+**Route Direct Response**
+
+A `route_direct_response` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
@@ -1913,7 +2245,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route**
+**Redirect Route**
+
+A `redirect_route` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
 
@@ -1927,7 +2261,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+**Headers**
+
+A `headers` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -1941,7 +2277,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1951,7 +2289,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+**Path**
+
+A `path` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -1961,7 +2301,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+**Route Redirect**
+
+A `route_redirect` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`host_redirect`](#host-redirect) - Optional String<br>Host. swap host part of incoming URL in redirect URL
 
@@ -1981,7 +2323,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route**
+**Simple Route**
+
+A `simple_route` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1995,7 +2339,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+**Path**
+
+A `path` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.simple_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -2005,7 +2351,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-port"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports Port**
+**Port**
+
+A `port` block (within `service.advertise_options.advertise_on_public.multi_ports.ports`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#service-advertise-options-advertise-on-public-multi-ports-ports-port-info) below.
 
@@ -2013,7 +2361,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-port-info"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports Port Info**
+**Info**
+
+An `info` block (within `service.advertise_options.advertise_on_public.multi_ports.ports.port`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -2025,7 +2375,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-multi-ports-ports-tcp-loadbalancer"></a>
 
-**Service Advertise Options Advertise On Public Multi Ports Ports TCP Loadbalancer**
+**TCP Loadbalancer**
+
+A `tcp_loadbalancer` block (within `service.advertise_options.advertise_on_public.multi_ports.ports`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
 
@@ -2033,7 +2385,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port"></a>
 
-**Service Advertise Options Advertise On Public Port**
+**Port**
+
+A `port` block (within `service.advertise_options.advertise_on_public`) supports the following:
 
 &#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#service-advertise-options-advertise-on-public-port-http-loadbalancer) below.
 
@@ -2043,7 +2397,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer**
+**HTTP Loadbalancer**
+
+A `http_loadbalancer` block (within `service.advertise_options.advertise_on_public.port`) supports the following:
 
 &#x2022; [`default_route`](#default-route) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#service-advertise-options-advertise-on-public-port-http-loadbalancer-default-route) below.
 
@@ -2059,7 +2415,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-default-route"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Default Route**
+**Default Route**
+
+A `default_route` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2069,7 +2427,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-http"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTP**
+**HTTP**
+
+A `http` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
 
@@ -2079,7 +2439,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS**
+**HTTPS**
+
+A `https` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -2117,7 +2479,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-coalescing-options"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2125,7 +2489,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -2135,13 +2501,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2153,7 +2523,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params**
+**TLS Cert Params**
+
+A `tls_cert_params` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-certificates) below.
 
@@ -2165,7 +2537,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-certificates"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2175,7 +2549,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
 
@@ -2187,7 +2563,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -2197,7 +2575,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -2215,7 +2595,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2225,7 +2607,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2235,13 +2619,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters**
+**TLS Parameters**
+
+A `tls_parameters` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2253,7 +2641,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -2269,13 +2659,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -2283,7 +2677,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -2293,7 +2689,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -2301,7 +2699,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
 
@@ -2313,7 +2713,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -2323,7 +2725,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -2341,7 +2745,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2351,7 +2757,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2361,13 +2769,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert**
+**HTTPS Auto Cert**
+
+A `https_auto_cert` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -2407,7 +2819,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-coalescing-options"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2415,7 +2829,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -2425,13 +2841,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2443,7 +2863,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
 
@@ -2455,7 +2877,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -2465,7 +2889,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -2483,7 +2909,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2493,7 +2921,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2503,19 +2933,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes**
+**Specific Routes**
+
+A `specific_routes` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`routes`](#routes) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes) below.
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes**
+**Routes**
+
+A `routes` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes`) supports the following:
 
 &#x2022; [`custom_route_object`](#custom-route-object) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object) below.
 
@@ -2527,13 +2963,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+**Custom Route Object**
+
+A `custom_route_object` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`route_ref`](#route-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+**Route Ref**
+
+A `route_ref` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.custom_route_object`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2543,7 +2983,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+**Direct Response Route**
+
+A `direct_response_route` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
 
@@ -2557,7 +2999,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+**Headers**
+
+A `headers` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -2571,7 +3015,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2581,7 +3027,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+**Path**
+
+A `path` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -2591,7 +3039,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+**Route Direct Response**
+
+A `route_direct_response` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
@@ -2599,7 +3049,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route**
+**Redirect Route**
+
+A `redirect_route` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
 
@@ -2613,7 +3065,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+**Headers**
+
+A `headers` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -2627,7 +3081,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2637,7 +3093,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+**Path**
+
+A `path` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -2647,7 +3105,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+**Route Redirect**
+
+A `route_redirect` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`host_redirect`](#host-redirect) - Optional String<br>Host. swap host part of incoming URL in redirect URL
 
@@ -2667,7 +3127,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route**
+**Simple Route**
+
+A `simple_route` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2681,7 +3143,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
 
-**Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+**Path**
+
+A `path` block (within `service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.simple_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -2691,13 +3155,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-port"></a>
 
-**Service Advertise Options Advertise On Public Port Port**
+**Port**
+
+A `port` block (within `service.advertise_options.advertise_on_public.port`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#service-advertise-options-advertise-on-public-port-port-info) below.
 
 <a id="service-advertise-options-advertise-on-public-port-port-info"></a>
 
-**Service Advertise Options Advertise On Public Port Port Info**
+**Info**
+
+An `info` block (within `service.advertise_options.advertise_on_public.port.port`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -2709,7 +3177,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-advertise-options-advertise-on-public-port-tcp-loadbalancer"></a>
 
-**Service Advertise Options Advertise On Public Port TCP Loadbalancer**
+**TCP Loadbalancer**
+
+A `tcp_loadbalancer` block (within `service.advertise_options.advertise_on_public.port`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
 
@@ -2717,13 +3187,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-configuration"></a>
 
-**Service Configuration**
+**Configuration**
+
+A `configuration` block (within `service`) supports the following:
 
 &#x2022; [`parameters`](#parameters) - Optional Block<br>Parameters. Parameters for the workload<br>See [Parameters](#service-configuration-parameters) below.
 
 <a id="service-configuration-parameters"></a>
 
-**Service Configuration Parameters**
+**Parameters**
+
+A `parameters` block (within `service.configuration`) supports the following:
 
 &#x2022; [`env_var`](#env-var) - Optional Block<br>Environment Variable. Environment Variable<br>See [Env Var](#service-configuration-parameters-env-var) below.
 
@@ -2731,7 +3205,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-configuration-parameters-env-var"></a>
 
-**Service Configuration Parameters Env Var**
+**Env Var**
+
+An `env_var` block (within `service.configuration.parameters`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of Environment Variable
 
@@ -2739,7 +3215,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-configuration-parameters-file"></a>
 
-**Service Configuration Parameters File**
+**File**
+
+A `file` block (within `service.configuration.parameters`) supports the following:
 
 &#x2022; [`data`](#data) - Optional String<br>Data. File data
 
@@ -2751,7 +3229,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-configuration-parameters-file-mount"></a>
 
-**Service Configuration Parameters File Mount**
+**Mount**
+
+A `mount` block (within `service.configuration.parameters.file`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -2761,7 +3241,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers"></a>
 
-**Service Containers**
+**Containers**
+
+A `containers` block (within `service`) supports the following:
 
 &#x2022; [`args`](#args) - Optional List<br>Arguments. Arguments to the entrypoint. Overrides the docker image's CMD
 
@@ -2785,7 +3267,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-custom-flavor"></a>
 
-**Service Containers Custom Flavor**
+**Custom Flavor**
+
+A `custom_flavor` block (within `service.containers`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2795,7 +3279,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-image"></a>
 
-**Service Containers Image**
+**Image**
+
+An `image` block (within `service.containers`) supports the following:
 
 &#x2022; [`container_registry`](#container-registry) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#service-containers-image-container-registry) below.
 
@@ -2807,7 +3293,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-image-container-registry"></a>
 
-**Service Containers Image Container Registry**
+**Container Registry**
+
+A `container_registry` block (within `service.containers.image`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2817,7 +3305,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-liveness-check"></a>
 
-**Service Containers Liveness Check**
+**Liveness Check**
+
+A `liveness_check` block (within `service.containers`) supports the following:
 
 &#x2022; [`exec_health_check`](#exec-health-check) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#service-containers-liveness-check-exec-health-check) below.
 
@@ -2837,13 +3327,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-liveness-check-exec-health-check"></a>
 
-**Service Containers Liveness Check Exec Health Check**
+**Exec Health Check**
+
+An `exec_health_check` block (within `service.containers.liveness_check`) supports the following:
 
 &#x2022; [`command`](#command) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
 
 <a id="service-containers-liveness-check-http-health-check"></a>
 
-**Service Containers Liveness Check HTTP Health Check**
+**HTTP Health Check**
+
+A `http_health_check` block (within `service.containers.liveness_check`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
@@ -2855,7 +3349,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-liveness-check-http-health-check-port"></a>
 
-**Service Containers Liveness Check HTTP Health Check Port**
+**Port**
+
+A `port` block (within `service.containers.liveness_check.http_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -2863,13 +3359,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-liveness-check-tcp-health-check"></a>
 
-**Service Containers Liveness Check TCP Health Check**
+**TCP Health Check**
+
+A `tcp_health_check` block (within `service.containers.liveness_check`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Block<br>Port. Port<br>See [Port](#service-containers-liveness-check-tcp-health-check-port) below.
 
 <a id="service-containers-liveness-check-tcp-health-check-port"></a>
 
-**Service Containers Liveness Check TCP Health Check Port**
+**Port**
+
+A `port` block (within `service.containers.liveness_check.tcp_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -2877,7 +3377,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-readiness-check"></a>
 
-**Service Containers Readiness Check**
+**Readiness Check**
+
+A `readiness_check` block (within `service.containers`) supports the following:
 
 &#x2022; [`exec_health_check`](#exec-health-check) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#service-containers-readiness-check-exec-health-check) below.
 
@@ -2897,13 +3399,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-readiness-check-exec-health-check"></a>
 
-**Service Containers Readiness Check Exec Health Check**
+**Exec Health Check**
+
+An `exec_health_check` block (within `service.containers.readiness_check`) supports the following:
 
 &#x2022; [`command`](#command) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
 
 <a id="service-containers-readiness-check-http-health-check"></a>
 
-**Service Containers Readiness Check HTTP Health Check**
+**HTTP Health Check**
+
+A `http_health_check` block (within `service.containers.readiness_check`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
@@ -2915,7 +3421,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-readiness-check-http-health-check-port"></a>
 
-**Service Containers Readiness Check HTTP Health Check Port**
+**Port**
+
+A `port` block (within `service.containers.readiness_check.http_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -2923,13 +3431,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-containers-readiness-check-tcp-health-check"></a>
 
-**Service Containers Readiness Check TCP Health Check**
+**TCP Health Check**
+
+A `tcp_health_check` block (within `service.containers.readiness_check`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Block<br>Port. Port<br>See [Port](#service-containers-readiness-check-tcp-health-check-port) below.
 
 <a id="service-containers-readiness-check-tcp-health-check-port"></a>
 
-**Service Containers Readiness Check TCP Health Check Port**
+**Port**
+
+A `port` block (within `service.containers.readiness_check.tcp_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -2937,7 +3449,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-deploy-options"></a>
 
-**Service Deploy Options**
+**Deploy Options**
+
+A `deploy_options` block (within `service`) supports the following:
 
 &#x2022; [`all_res`](#all-res) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2953,13 +3467,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-deploy-options-deploy-ce-sites"></a>
 
-**Service Deploy Options Deploy CE Sites**
+**Deploy CE Sites**
+
+A `deploy_ce_sites` block (within `service.deploy_options`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>List of Customer Sites to Deploy. Which customer sites should this workload be deployed<br>See [Site](#service-deploy-options-deploy-ce-sites-site) below.
 
 <a id="service-deploy-options-deploy-ce-sites-site"></a>
 
-**Service Deploy Options Deploy CE Sites Site**
+**Site**
+
+A `site` block (within `service.deploy_options.deploy_ce_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2969,13 +3487,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-deploy-options-deploy-ce-virtual-sites"></a>
 
-**Service Deploy Options Deploy CE Virtual Sites**
+**Deploy CE Virtual Sites**
+
+A `deploy_ce_virtual_sites` block (within `service.deploy_options`) supports the following:
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#service-deploy-options-deploy-ce-virtual-sites-virtual-site) below.
 
 <a id="service-deploy-options-deploy-ce-virtual-sites-virtual-site"></a>
 
-**Service Deploy Options Deploy CE Virtual Sites Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `service.deploy_options.deploy_ce_virtual_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2985,13 +3507,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-deploy-options-deploy-re-sites"></a>
 
-**Service Deploy Options Deploy RE Sites**
+**Deploy RE Sites**
+
+A `deploy_re_sites` block (within `service.deploy_options`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed<br>See [Site](#service-deploy-options-deploy-re-sites-site) below.
 
 <a id="service-deploy-options-deploy-re-sites-site"></a>
 
-**Service Deploy Options Deploy RE Sites Site**
+**Site**
+
+A `site` block (within `service.deploy_options.deploy_re_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3001,13 +3527,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-deploy-options-deploy-re-virtual-sites"></a>
 
-**Service Deploy Options Deploy RE Virtual Sites**
+**Deploy RE Virtual Sites**
+
+A `deploy_re_virtual_sites` block (within `service.deploy_options`) supports the following:
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#service-deploy-options-deploy-re-virtual-sites-virtual-site) below.
 
 <a id="service-deploy-options-deploy-re-virtual-sites-virtual-site"></a>
 
-**Service Deploy Options Deploy RE Virtual Sites Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `service.deploy_options.deploy_re_virtual_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3017,7 +3547,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-volumes"></a>
 
-**Service Volumes**
+**Volumes**
+
+A `volumes` block (within `service`) supports the following:
 
 &#x2022; [`empty_dir`](#empty-dir) - Optional Block<br>Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#service-volumes-empty-dir) below.
 
@@ -3029,7 +3561,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-volumes-empty-dir"></a>
 
-**Service Volumes Empty Dir**
+**Empty Dir**
+
+An `empty_dir` block (within `service.volumes`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-empty-dir-mount) below.
 
@@ -3037,7 +3571,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-volumes-empty-dir-mount"></a>
 
-**Service Volumes Empty Dir Mount**
+**Mount**
+
+A `mount` block (within `service.volumes.empty_dir`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -3047,7 +3583,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-volumes-host-path"></a>
 
-**Service Volumes Host Path**
+**Host Path**
+
+A `host_path` block (within `service.volumes`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-host-path-mount) below.
 
@@ -3055,7 +3593,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-volumes-host-path-mount"></a>
 
-**Service Volumes Host Path Mount**
+**Mount**
+
+A `mount` block (within `service.volumes.host_path`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -3065,7 +3605,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-volumes-persistent-volume"></a>
 
-**Service Volumes Persistent Volume**
+**Persistent Volume**
+
+A `persistent_volume` block (within `service.volumes`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-persistent-volume-mount) below.
 
@@ -3073,7 +3615,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-volumes-persistent-volume-mount"></a>
 
-**Service Volumes Persistent Volume Mount**
+**Mount**
+
+A `mount` block (within `service.volumes.persistent_volume`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -3083,7 +3627,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="service-volumes-persistent-volume-storage"></a>
 
-**Service Volumes Persistent Volume Storage**
+**Storage**
+
+A `storage` block (within `service.volumes.persistent_volume`) supports the following:
 
 &#x2022; [`access_mode`](#access-mode) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts
 
@@ -3096,6 +3642,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="simple-service"></a>
 
 **Simple Service**
+
+A `simple_service` block supports the following:
 
 &#x2022; [`configuration`](#configuration) - Optional Block<br>Configuration Parameters. Configuration parameters of the workload<br>See [Configuration](#simple-service-configuration) below.
 
@@ -3113,13 +3661,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-configuration"></a>
 
-**Simple Service Configuration**
+**Configuration**
+
+A `configuration` block (within `simple_service`) supports the following:
 
 &#x2022; [`parameters`](#parameters) - Optional Block<br>Parameters. Parameters for the workload<br>See [Parameters](#simple-service-configuration-parameters) below.
 
 <a id="simple-service-configuration-parameters"></a>
 
-**Simple Service Configuration Parameters**
+**Parameters**
+
+A `parameters` block (within `simple_service.configuration`) supports the following:
 
 &#x2022; [`env_var`](#env-var) - Optional Block<br>Environment Variable. Environment Variable<br>See [Env Var](#simple-service-configuration-parameters-env-var) below.
 
@@ -3127,7 +3679,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-configuration-parameters-env-var"></a>
 
-**Simple Service Configuration Parameters Env Var**
+**Env Var**
+
+An `env_var` block (within `simple_service.configuration.parameters`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of Environment Variable
 
@@ -3135,7 +3689,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-configuration-parameters-file"></a>
 
-**Simple Service Configuration Parameters File**
+**File**
+
+A `file` block (within `simple_service.configuration.parameters`) supports the following:
 
 &#x2022; [`data`](#data) - Optional String<br>Data. File data
 
@@ -3147,7 +3703,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-configuration-parameters-file-mount"></a>
 
-**Simple Service Configuration Parameters File Mount**
+**Mount**
+
+A `mount` block (within `simple_service.configuration.parameters.file`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -3157,7 +3715,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container"></a>
 
-**Simple Service Container**
+**Container**
+
+A `container` block (within `simple_service`) supports the following:
 
 &#x2022; [`args`](#args) - Optional List<br>Arguments. Arguments to the entrypoint. Overrides the docker image's CMD
 
@@ -3181,7 +3741,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-custom-flavor"></a>
 
-**Simple Service Container Custom Flavor**
+**Custom Flavor**
+
+A `custom_flavor` block (within `simple_service.container`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3191,7 +3753,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-image"></a>
 
-**Simple Service Container Image**
+**Image**
+
+An `image` block (within `simple_service.container`) supports the following:
 
 &#x2022; [`container_registry`](#container-registry) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#simple-service-container-image-container-registry) below.
 
@@ -3203,7 +3767,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-image-container-registry"></a>
 
-**Simple Service Container Image Container Registry**
+**Container Registry**
+
+A `container_registry` block (within `simple_service.container.image`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3213,7 +3779,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-liveness-check"></a>
 
-**Simple Service Container Liveness Check**
+**Liveness Check**
+
+A `liveness_check` block (within `simple_service.container`) supports the following:
 
 &#x2022; [`exec_health_check`](#exec-health-check) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#simple-service-container-liveness-check-exec-health-check) below.
 
@@ -3233,13 +3801,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-liveness-check-exec-health-check"></a>
 
-**Simple Service Container Liveness Check Exec Health Check**
+**Exec Health Check**
+
+An `exec_health_check` block (within `simple_service.container.liveness_check`) supports the following:
 
 &#x2022; [`command`](#command) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
 
 <a id="simple-service-container-liveness-check-http-health-check"></a>
 
-**Simple Service Container Liveness Check HTTP Health Check**
+**HTTP Health Check**
+
+A `http_health_check` block (within `simple_service.container.liveness_check`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
@@ -3251,7 +3823,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-liveness-check-http-health-check-port"></a>
 
-**Simple Service Container Liveness Check HTTP Health Check Port**
+**Port**
+
+A `port` block (within `simple_service.container.liveness_check.http_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -3259,13 +3833,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-liveness-check-tcp-health-check"></a>
 
-**Simple Service Container Liveness Check TCP Health Check**
+**TCP Health Check**
+
+A `tcp_health_check` block (within `simple_service.container.liveness_check`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Block<br>Port. Port<br>See [Port](#simple-service-container-liveness-check-tcp-health-check-port) below.
 
 <a id="simple-service-container-liveness-check-tcp-health-check-port"></a>
 
-**Simple Service Container Liveness Check TCP Health Check Port**
+**Port**
+
+A `port` block (within `simple_service.container.liveness_check.tcp_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -3273,7 +3851,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-readiness-check"></a>
 
-**Simple Service Container Readiness Check**
+**Readiness Check**
+
+A `readiness_check` block (within `simple_service.container`) supports the following:
 
 &#x2022; [`exec_health_check`](#exec-health-check) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#simple-service-container-readiness-check-exec-health-check) below.
 
@@ -3293,13 +3873,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-readiness-check-exec-health-check"></a>
 
-**Simple Service Container Readiness Check Exec Health Check**
+**Exec Health Check**
+
+An `exec_health_check` block (within `simple_service.container.readiness_check`) supports the following:
 
 &#x2022; [`command`](#command) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
 
 <a id="simple-service-container-readiness-check-http-health-check"></a>
 
-**Simple Service Container Readiness Check HTTP Health Check**
+**HTTP Health Check**
+
+A `http_health_check` block (within `simple_service.container.readiness_check`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
@@ -3311,7 +3895,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-readiness-check-http-health-check-port"></a>
 
-**Simple Service Container Readiness Check HTTP Health Check Port**
+**Port**
+
+A `port` block (within `simple_service.container.readiness_check.http_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -3319,13 +3905,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-container-readiness-check-tcp-health-check"></a>
 
-**Simple Service Container Readiness Check TCP Health Check**
+**TCP Health Check**
+
+A `tcp_health_check` block (within `simple_service.container.readiness_check`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Block<br>Port. Port<br>See [Port](#simple-service-container-readiness-check-tcp-health-check-port) below.
 
 <a id="simple-service-container-readiness-check-tcp-health-check-port"></a>
 
-**Simple Service Container Readiness Check TCP Health Check Port**
+**Port**
+
+A `port` block (within `simple_service.container.readiness_check.tcp_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -3333,7 +3923,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-enabled"></a>
 
-**Simple Service Enabled**
+**Enabled**
+
+An `enabled` block (within `simple_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the volume
 
@@ -3341,7 +3933,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-enabled-persistent-volume"></a>
 
-**Simple Service Enabled Persistent Volume**
+**Persistent Volume**
+
+A `persistent_volume` block (within `simple_service.enabled`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#simple-service-enabled-persistent-volume-mount) below.
 
@@ -3349,7 +3943,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-enabled-persistent-volume-mount"></a>
 
-**Simple Service Enabled Persistent Volume Mount**
+**Mount**
+
+A `mount` block (within `simple_service.enabled.persistent_volume`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -3359,7 +3955,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-enabled-persistent-volume-storage"></a>
 
-**Simple Service Enabled Persistent Volume Storage**
+**Storage**
+
+A `storage` block (within `simple_service.enabled.persistent_volume`) supports the following:
 
 &#x2022; [`access_mode`](#access-mode) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts
 
@@ -3371,7 +3969,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="simple-service-simple-advertise"></a>
 
-**Simple Service Simple Advertise**
+**Simple Advertise**
+
+A `simple_advertise` block (within `simple_service`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Load Balancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system
 
@@ -3380,6 +3980,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="stateful-service"></a>
 
 **Stateful Service**
+
+A `stateful_service` block supports the following:
 
 &#x2022; [`advertise_options`](#advertise-options) - Optional Block<br>Advertise Options. Advertise options are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#stateful-service-advertise-options) below.
 
@@ -3399,7 +4001,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options"></a>
 
-**Stateful Service Advertise Options**
+**Advertise Options**
+
+An `advertise_options` block (within `stateful_service`) supports the following:
 
 &#x2022; [`advertise_custom`](#advertise-custom) - Optional Block<br>Advertise on specific sites. Advertise this workload via loadbalancer on specific sites<br>See [Advertise Custom](#stateful-service-advertise-options-advertise-custom) below.
 
@@ -3411,7 +4015,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom"></a>
 
-**Stateful Service Advertise Options Advertise Custom**
+**Advertise Custom**
+
+An `advertise_custom` block (within `stateful_service.advertise_options`) supports the following:
 
 &#x2022; [`advertise_where`](#advertise-where) - Optional Block<br>List of Sites to Advertise. Where should this load balancer be available<br>See [Advertise Where](#stateful-service-advertise-options-advertise-custom-advertise-where) below.
 
@@ -3419,7 +4025,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-advertise-where"></a>
 
-**Stateful Service Advertise Options Advertise Custom Advertise Where**
+**Advertise Where**
+
+An `advertise_where` block (within `stateful_service.advertise_options.advertise_custom`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#stateful-service-advertise-options-advertise-custom-advertise-where-site) below.
 
@@ -3429,7 +4037,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-advertise-where-site"></a>
 
-**Stateful Service Advertise Options Advertise Custom Advertise Where Site**
+**Site**
+
+A `site` block (within `stateful_service.advertise_options.advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
@@ -3439,7 +4049,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-advertise-where-site-site"></a>
 
-**Stateful Service Advertise Options Advertise Custom Advertise Where Site Site**
+**Site**
+
+A `site` block (within `stateful_service.advertise_options.advertise_custom.advertise_where.site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3449,7 +4061,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-advertise-where-virtual-site"></a>
 
-**Stateful Service Advertise Options Advertise Custom Advertise Where Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `stateful_service.advertise_options.advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`network`](#network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
@@ -3457,7 +4071,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-advertise-where-virtual-site-virtual-site"></a>
 
-**Stateful Service Advertise Options Advertise Custom Advertise Where Virtual Site Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `stateful_service.advertise_options.advertise_custom.advertise_where.virtual_site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3467,7 +4083,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service"></a>
 
-**Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service**
+**Vk8s Service**
+
+A `vk8s_service` block (within `stateful_service.advertise_options.advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service-site) below.
 
@@ -3475,7 +4093,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service-site"></a>
 
-**Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service Site**
+**Site**
+
+A `site` block (within `stateful_service.advertise_options.advertise_custom.advertise_where.vk8s_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3485,7 +4105,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-advertise-where-vk8s-service-virtual-site"></a>
 
-**Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `stateful_service.advertise_options.advertise_custom.advertise_where.vk8s_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3495,7 +4117,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports**
+**Ports**
+
+A `ports` block (within `stateful_service.advertise_options.advertise_custom`) supports the following:
 
 &#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer) below.
 
@@ -3505,7 +4129,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer**
+**HTTP Loadbalancer**
+
+A `http_loadbalancer` block (within `stateful_service.advertise_options.advertise_custom.ports`) supports the following:
 
 &#x2022; [`default_route`](#default-route) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-default-route) below.
 
@@ -3521,7 +4147,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-default-route"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Default Route**
+**Default Route**
+
+A `default_route` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3531,7 +4159,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-http"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTP**
+**HTTP**
+
+A `http` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
 
@@ -3541,7 +4171,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS**
+**HTTPS**
+
+A `https` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -3579,7 +4211,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-coalescing-options"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3587,7 +4221,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -3597,13 +4233,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3615,7 +4255,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params**
+**TLS Cert Params**
+
+A `tls_cert_params` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-certificates) below.
 
@@ -3627,7 +4269,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-certificates"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3637,7 +4281,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
 
@@ -3649,7 +4295,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -3659,7 +4307,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -3677,7 +4327,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3687,7 +4339,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3697,13 +4351,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters**
+**TLS Parameters**
+
+A `tls_parameters` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3715,7 +4373,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -3731,13 +4391,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -3745,7 +4409,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -3755,7 +4421,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -3763,7 +4431,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
 
@@ -3775,7 +4445,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -3785,7 +4457,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -3803,7 +4477,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3813,7 +4489,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3823,13 +4501,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert**
+**HTTPS Auto Cert**
+
+A `https_auto_cert` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -3869,7 +4551,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-coalescing-options"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3877,7 +4561,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -3887,13 +4573,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3905,7 +4595,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
 
@@ -3917,7 +4609,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -3927,7 +4621,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -3945,7 +4641,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3955,7 +4653,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3965,19 +4665,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes**
+**Specific Routes**
+
+A `specific_routes` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`routes`](#routes) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes) below.
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes**
+**Routes**
+
+A `routes` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes`) supports the following:
 
 &#x2022; [`custom_route_object`](#custom-route-object) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object) below.
 
@@ -3989,13 +4695,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+**Custom Route Object**
+
+A `custom_route_object` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`route_ref`](#route-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+**Route Ref**
+
+A `route_ref` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.custom_route_object`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4005,7 +4715,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+**Direct Response Route**
+
+A `direct_response_route` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
 
@@ -4019,7 +4731,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+**Headers**
+
+A `headers` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -4033,7 +4747,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4043,7 +4759,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+**Path**
+
+A `path` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -4053,7 +4771,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+**Route Direct Response**
+
+A `route_direct_response` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
@@ -4061,7 +4781,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route**
+**Redirect Route**
+
+A `redirect_route` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
 
@@ -4075,7 +4797,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+**Headers**
+
+A `headers` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -4089,7 +4813,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4099,7 +4825,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+**Path**
+
+A `path` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -4109,7 +4837,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+**Route Redirect**
+
+A `route_redirect` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`host_redirect`](#host-redirect) - Optional String<br>Host. swap host part of incoming URL in redirect URL
 
@@ -4129,7 +4859,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route**
+**Simple Route**
+
+A `simple_route` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4143,7 +4875,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+**Path**
+
+A `path` block (within `stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.simple_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -4153,7 +4887,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-port"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports Port**
+**Port**
+
+A `port` block (within `stateful_service.advertise_options.advertise_custom.ports`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#stateful-service-advertise-options-advertise-custom-ports-port-info) below.
 
@@ -4161,7 +4897,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-port-info"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports Port Info**
+**Info**
+
+An `info` block (within `stateful_service.advertise_options.advertise_custom.ports.port`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -4173,7 +4911,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-custom-ports-tcp-loadbalancer"></a>
 
-**Stateful Service Advertise Options Advertise Custom Ports TCP Loadbalancer**
+**TCP Loadbalancer**
+
+A `tcp_loadbalancer` block (within `stateful_service.advertise_options.advertise_custom.ports`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
 
@@ -4181,7 +4921,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-in-cluster"></a>
 
-**Stateful Service Advertise Options Advertise In Cluster**
+**Advertise In Cluster**
+
+An `advertise_in_cluster` block (within `stateful_service.advertise_options`) supports the following:
 
 &#x2022; [`multi_ports`](#multi-ports) - Optional Block<br>Multiple Ports. Multiple ports<br>See [Multi Ports](#stateful-service-advertise-options-advertise-in-cluster-multi-ports) below.
 
@@ -4189,13 +4931,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-in-cluster-multi-ports"></a>
 
-**Stateful Service Advertise Options Advertise In Cluster Multi Ports**
+**Multi Ports**
+
+A `multi_ports` block (within `stateful_service.advertise_options.advertise_in_cluster`) supports the following:
 
 &#x2022; [`ports`](#ports) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#stateful-service-advertise-options-advertise-in-cluster-multi-ports-ports) below.
 
 <a id="stateful-service-advertise-options-advertise-in-cluster-multi-ports-ports"></a>
 
-**Stateful Service Advertise Options Advertise In Cluster Multi Ports Ports**
+**Ports**
+
+A `ports` block (within `stateful_service.advertise_options.advertise_in_cluster.multi_ports`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#stateful-service-advertise-options-advertise-in-cluster-multi-ports-ports-info) below.
 
@@ -4203,7 +4949,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-in-cluster-multi-ports-ports-info"></a>
 
-**Stateful Service Advertise Options Advertise In Cluster Multi Ports Ports Info**
+**Info**
+
+An `info` block (within `stateful_service.advertise_options.advertise_in_cluster.multi_ports.ports`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -4215,13 +4963,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-in-cluster-port"></a>
 
-**Stateful Service Advertise Options Advertise In Cluster Port**
+**Port**
+
+A `port` block (within `stateful_service.advertise_options.advertise_in_cluster`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#stateful-service-advertise-options-advertise-in-cluster-port-info) below.
 
 <a id="stateful-service-advertise-options-advertise-in-cluster-port-info"></a>
 
-**Stateful Service Advertise Options Advertise In Cluster Port Info**
+**Info**
+
+An `info` block (within `stateful_service.advertise_options.advertise_in_cluster.port`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -4233,7 +4985,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public"></a>
 
-**Stateful Service Advertise Options Advertise On Public**
+**Advertise On Public**
+
+An `advertise_on_public` block (within `stateful_service.advertise_options`) supports the following:
 
 &#x2022; [`multi_ports`](#multi-ports) - Optional Block<br>Advertise Multiple Ports. Advertise multiple ports<br>See [Multi Ports](#stateful-service-advertise-options-advertise-on-public-multi-ports) below.
 
@@ -4241,13 +4995,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports**
+**Multi Ports**
+
+A `multi_ports` block (within `stateful_service.advertise_options.advertise_on_public`) supports the following:
 
 &#x2022; [`ports`](#ports) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports**
+**Ports**
+
+A `ports` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports`) supports the following:
 
 &#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer) below.
 
@@ -4257,7 +5015,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer**
+**HTTP Loadbalancer**
+
+A `http_loadbalancer` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports`) supports the following:
 
 &#x2022; [`default_route`](#default-route) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-default-route) below.
 
@@ -4273,7 +5033,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-default-route"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Default Route**
+**Default Route**
+
+A `default_route` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4283,7 +5045,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-http"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTP**
+**HTTP**
+
+A `http` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
 
@@ -4293,7 +5057,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS**
+**HTTPS**
+
+A `https` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -4331,7 +5097,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-coalescing-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4339,7 +5107,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -4349,13 +5119,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4367,7 +5141,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params**
+**TLS Cert Params**
+
+A `tls_cert_params` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-certificates) below.
 
@@ -4379,7 +5155,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-certificates"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4389,7 +5167,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
 
@@ -4401,7 +5181,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -4411,7 +5193,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -4429,7 +5213,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4439,7 +5225,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4449,13 +5237,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters**
+**TLS Parameters**
+
+A `tls_parameters` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4467,7 +5259,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -4483,13 +5277,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -4497,7 +5295,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -4507,7 +5307,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -4515,7 +5317,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
 
@@ -4527,7 +5331,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -4537,7 +5343,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -4555,7 +5363,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4565,7 +5375,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4575,13 +5387,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert**
+**HTTPS Auto Cert**
+
+A `https_auto_cert` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -4621,7 +5437,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-coalescing-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4629,7 +5447,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -4639,13 +5459,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4657,7 +5481,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
 
@@ -4669,7 +5495,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -4679,7 +5507,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -4697,7 +5527,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4707,7 +5539,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4717,19 +5551,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes**
+**Specific Routes**
+
+A `specific_routes` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`) supports the following:
 
 &#x2022; [`routes`](#routes) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes**
+**Routes**
+
+A `routes` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes`) supports the following:
 
 &#x2022; [`custom_route_object`](#custom-route-object) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object) below.
 
@@ -4741,13 +5581,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+**Custom Route Object**
+
+A `custom_route_object` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`route_ref`](#route-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+**Route Ref**
+
+A `route_ref` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.custom_route_object`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4757,7 +5601,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+**Direct Response Route**
+
+A `direct_response_route` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
 
@@ -4771,7 +5617,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+**Headers**
+
+A `headers` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -4785,7 +5633,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4795,7 +5645,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+**Path**
+
+A `path` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -4805,7 +5657,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+**Route Direct Response**
+
+A `route_direct_response` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
@@ -4813,7 +5667,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route**
+**Redirect Route**
+
+A `redirect_route` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
 
@@ -4827,7 +5683,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+**Headers**
+
+A `headers` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -4841,7 +5699,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4851,7 +5711,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+**Path**
+
+A `path` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -4861,7 +5723,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+**Route Redirect**
+
+A `route_redirect` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`host_redirect`](#host-redirect) - Optional String<br>Host. swap host part of incoming URL in redirect URL
 
@@ -4881,7 +5745,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route**
+**Simple Route**
+
+A `simple_route` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4895,7 +5761,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+**Path**
+
+A `path` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.simple_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -4905,7 +5773,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-port"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports Port**
+**Port**
+
+A `port` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-port-info) below.
 
@@ -4913,7 +5783,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-port-info"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports Port Info**
+**Info**
+
+An `info` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports.port`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -4925,7 +5797,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-multi-ports-ports-tcp-loadbalancer"></a>
 
-**Stateful Service Advertise Options Advertise On Public Multi Ports Ports TCP Loadbalancer**
+**TCP Loadbalancer**
+
+A `tcp_loadbalancer` block (within `stateful_service.advertise_options.advertise_on_public.multi_ports.ports`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
 
@@ -4933,7 +5807,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port**
+**Port**
+
+A `port` block (within `stateful_service.advertise_options.advertise_on_public`) supports the following:
 
 &#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer) below.
 
@@ -4943,7 +5819,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer**
+**HTTP Loadbalancer**
+
+A `http_loadbalancer` block (within `stateful_service.advertise_options.advertise_on_public.port`) supports the following:
 
 &#x2022; [`default_route`](#default-route) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-default-route) below.
 
@@ -4959,7 +5837,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-default-route"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Default Route**
+**Default Route**
+
+A `default_route` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4969,7 +5849,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-http"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTP**
+**HTTP**
+
+A `http` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
 
@@ -4979,7 +5861,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS**
+**HTTPS**
+
+A `https` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -5017,7 +5901,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-coalescing-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5025,7 +5911,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -5035,13 +5923,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5053,7 +5945,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params**
+**TLS Cert Params**
+
+A `tls_cert_params` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-certificates) below.
 
@@ -5065,7 +5959,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-certificates"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5075,7 +5971,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config-custom-security) below.
 
@@ -5087,7 +5985,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-tls-config-custom-security"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -5097,7 +5997,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -5115,7 +6017,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-crl"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5125,7 +6029,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-trusted-ca"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5135,13 +6041,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-cert-params-use-mtls-xfcc-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters**
+**TLS Parameters**
+
+A `tls_parameters` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5153,7 +6063,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -5169,13 +6081,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -5183,7 +6099,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -5193,7 +6111,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -5201,7 +6121,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config-custom-security) below.
 
@@ -5213,7 +6135,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-tls-config-custom-security"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -5223,7 +6147,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -5241,7 +6167,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-crl"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5251,7 +6179,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-trusted-ca"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5261,13 +6191,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-tls-parameters-use-mtls-xfcc-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert**
+**HTTPS Auto Cert**
+
+A `https_auto_cert` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -5307,7 +6241,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-coalescing-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5315,7 +6251,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -5325,13 +6263,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5343,7 +6285,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config-custom-security) below.
 
@@ -5355,7 +6299,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-tls-config-custom-security"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -5365,7 +6311,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -5383,7 +6331,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-crl"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5393,7 +6343,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-trusted-ca"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5403,19 +6355,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-https-auto-cert-use-mtls-xfcc-options"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes**
+**Specific Routes**
+
+A `specific_routes` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`) supports the following:
 
 &#x2022; [`routes`](#routes) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes**
+**Routes**
+
+A `routes` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes`) supports the following:
 
 &#x2022; [`custom_route_object`](#custom-route-object) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object) below.
 
@@ -5427,13 +6385,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object**
+**Custom Route Object**
+
+A `custom_route_object` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`route_ref`](#route-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-custom-route-object-route-ref"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref**
+**Route Ref**
+
+A `route_ref` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.custom_route_object`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5443,7 +6405,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route**
+**Direct Response Route**
+
+A `direct_response_route` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-headers) below.
 
@@ -5457,7 +6421,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-headers"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers**
+**Headers**
+
+A `headers` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -5471,7 +6437,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-incoming-port"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5481,7 +6449,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-path"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Path**
+**Path**
+
+A `path` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -5491,7 +6461,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response**
+**Route Direct Response**
+
+A `route_direct_response` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`) supports the following:
 
 &#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
@@ -5499,7 +6471,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route**
+**Redirect Route**
+
+A `redirect_route` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-headers) below.
 
@@ -5513,7 +6487,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-headers"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Headers**
+**Headers**
+
+A `headers` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -5527,7 +6503,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-incoming-port"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5537,7 +6515,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-path"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Path**
+**Path**
+
+A `path` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -5547,7 +6527,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-redirect-route-route-redirect"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect**
+**Route Redirect**
+
+A `route_redirect` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`) supports the following:
 
 &#x2022; [`host_redirect`](#host-redirect) - Optional String<br>Host. swap host part of incoming URL in redirect URL
 
@@ -5567,7 +6549,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route**
+**Simple Route**
+
+A `simple_route` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`) supports the following:
 
 &#x2022; [`auto_host_rewrite`](#auto-host-rewrite) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5581,7 +6565,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-simple-route-path"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route Path**
+**Path**
+
+A `path` block (within `stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.simple_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -5591,13 +6577,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-port"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port Port**
+**Port**
+
+A `port` block (within `stateful_service.advertise_options.advertise_on_public.port`) supports the following:
 
 &#x2022; [`info`](#info) - Optional Block<br>Port Information. Port information<br>See [Info](#stateful-service-advertise-options-advertise-on-public-port-port-info) below.
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-port-info"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port Port Info**
+**Info**
+
+An `info` block (within `stateful_service.advertise_options.advertise_on_public.port.port`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port. Port the workload can be reached on
 
@@ -5609,7 +6599,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-advertise-options-advertise-on-public-port-tcp-loadbalancer"></a>
 
-**Stateful Service Advertise Options Advertise On Public Port TCP Loadbalancer**
+**TCP Loadbalancer**
+
+A `tcp_loadbalancer` block (within `stateful_service.advertise_options.advertise_on_public.port`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
 
@@ -5617,13 +6609,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-configuration"></a>
 
-**Stateful Service Configuration**
+**Configuration**
+
+A `configuration` block (within `stateful_service`) supports the following:
 
 &#x2022; [`parameters`](#parameters) - Optional Block<br>Parameters. Parameters for the workload<br>See [Parameters](#stateful-service-configuration-parameters) below.
 
 <a id="stateful-service-configuration-parameters"></a>
 
-**Stateful Service Configuration Parameters**
+**Parameters**
+
+A `parameters` block (within `stateful_service.configuration`) supports the following:
 
 &#x2022; [`env_var`](#env-var) - Optional Block<br>Environment Variable. Environment Variable<br>See [Env Var](#stateful-service-configuration-parameters-env-var) below.
 
@@ -5631,7 +6627,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-configuration-parameters-env-var"></a>
 
-**Stateful Service Configuration Parameters Env Var**
+**Env Var**
+
+An `env_var` block (within `stateful_service.configuration.parameters`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of Environment Variable
 
@@ -5639,7 +6637,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-configuration-parameters-file"></a>
 
-**Stateful Service Configuration Parameters File**
+**File**
+
+A `file` block (within `stateful_service.configuration.parameters`) supports the following:
 
 &#x2022; [`data`](#data) - Optional String<br>Data. File data
 
@@ -5651,7 +6651,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-configuration-parameters-file-mount"></a>
 
-**Stateful Service Configuration Parameters File Mount**
+**Mount**
+
+A `mount` block (within `stateful_service.configuration.parameters.file`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -5661,7 +6663,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers"></a>
 
-**Stateful Service Containers**
+**Containers**
+
+A `containers` block (within `stateful_service`) supports the following:
 
 &#x2022; [`args`](#args) - Optional List<br>Arguments. Arguments to the entrypoint. Overrides the docker image's CMD
 
@@ -5685,7 +6689,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-custom-flavor"></a>
 
-**Stateful Service Containers Custom Flavor**
+**Custom Flavor**
+
+A `custom_flavor` block (within `stateful_service.containers`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5695,7 +6701,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-image"></a>
 
-**Stateful Service Containers Image**
+**Image**
+
+An `image` block (within `stateful_service.containers`) supports the following:
 
 &#x2022; [`container_registry`](#container-registry) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#stateful-service-containers-image-container-registry) below.
 
@@ -5707,7 +6715,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-image-container-registry"></a>
 
-**Stateful Service Containers Image Container Registry**
+**Container Registry**
+
+A `container_registry` block (within `stateful_service.containers.image`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5717,7 +6727,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-liveness-check"></a>
 
-**Stateful Service Containers Liveness Check**
+**Liveness Check**
+
+A `liveness_check` block (within `stateful_service.containers`) supports the following:
 
 &#x2022; [`exec_health_check`](#exec-health-check) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#stateful-service-containers-liveness-check-exec-health-check) below.
 
@@ -5737,13 +6749,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-liveness-check-exec-health-check"></a>
 
-**Stateful Service Containers Liveness Check Exec Health Check**
+**Exec Health Check**
+
+An `exec_health_check` block (within `stateful_service.containers.liveness_check`) supports the following:
 
 &#x2022; [`command`](#command) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
 
 <a id="stateful-service-containers-liveness-check-http-health-check"></a>
 
-**Stateful Service Containers Liveness Check HTTP Health Check**
+**HTTP Health Check**
+
+A `http_health_check` block (within `stateful_service.containers.liveness_check`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
@@ -5755,7 +6771,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-liveness-check-http-health-check-port"></a>
 
-**Stateful Service Containers Liveness Check HTTP Health Check Port**
+**Port**
+
+A `port` block (within `stateful_service.containers.liveness_check.http_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -5763,13 +6781,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-liveness-check-tcp-health-check"></a>
 
-**Stateful Service Containers Liveness Check TCP Health Check**
+**TCP Health Check**
+
+A `tcp_health_check` block (within `stateful_service.containers.liveness_check`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Block<br>Port. Port<br>See [Port](#stateful-service-containers-liveness-check-tcp-health-check-port) below.
 
 <a id="stateful-service-containers-liveness-check-tcp-health-check-port"></a>
 
-**Stateful Service Containers Liveness Check TCP Health Check Port**
+**Port**
+
+A `port` block (within `stateful_service.containers.liveness_check.tcp_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -5777,7 +6799,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-readiness-check"></a>
 
-**Stateful Service Containers Readiness Check**
+**Readiness Check**
+
+A `readiness_check` block (within `stateful_service.containers`) supports the following:
 
 &#x2022; [`exec_health_check`](#exec-health-check) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#stateful-service-containers-readiness-check-exec-health-check) below.
 
@@ -5797,13 +6821,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-readiness-check-exec-health-check"></a>
 
-**Stateful Service Containers Readiness Check Exec Health Check**
+**Exec Health Check**
+
+An `exec_health_check` block (within `stateful_service.containers.readiness_check`) supports the following:
 
 &#x2022; [`command`](#command) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
 
 <a id="stateful-service-containers-readiness-check-http-health-check"></a>
 
-**Stateful Service Containers Readiness Check HTTP Health Check**
+**HTTP Health Check**
+
+A `http_health_check` block (within `stateful_service.containers.readiness_check`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
@@ -5815,7 +6843,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-readiness-check-http-health-check-port"></a>
 
-**Stateful Service Containers Readiness Check HTTP Health Check Port**
+**Port**
+
+A `port` block (within `stateful_service.containers.readiness_check.http_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -5823,13 +6853,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-containers-readiness-check-tcp-health-check"></a>
 
-**Stateful Service Containers Readiness Check TCP Health Check**
+**TCP Health Check**
+
+A `tcp_health_check` block (within `stateful_service.containers.readiness_check`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Block<br>Port. Port<br>See [Port](#stateful-service-containers-readiness-check-tcp-health-check-port) below.
 
 <a id="stateful-service-containers-readiness-check-tcp-health-check-port"></a>
 
-**Stateful Service Containers Readiness Check TCP Health Check Port**
+**Port**
+
+A `port` block (within `stateful_service.containers.readiness_check.tcp_health_check`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Port Name. Port Name
 
@@ -5837,7 +6871,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-deploy-options"></a>
 
-**Stateful Service Deploy Options**
+**Deploy Options**
+
+A `deploy_options` block (within `stateful_service`) supports the following:
 
 &#x2022; [`all_res`](#all-res) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5853,13 +6889,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-deploy-options-deploy-ce-sites"></a>
 
-**Stateful Service Deploy Options Deploy CE Sites**
+**Deploy CE Sites**
+
+A `deploy_ce_sites` block (within `stateful_service.deploy_options`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>List of Customer Sites to Deploy. Which customer sites should this workload be deployed<br>See [Site](#stateful-service-deploy-options-deploy-ce-sites-site) below.
 
 <a id="stateful-service-deploy-options-deploy-ce-sites-site"></a>
 
-**Stateful Service Deploy Options Deploy CE Sites Site**
+**Site**
+
+A `site` block (within `stateful_service.deploy_options.deploy_ce_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5869,13 +6909,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-deploy-options-deploy-ce-virtual-sites"></a>
 
-**Stateful Service Deploy Options Deploy CE Virtual Sites**
+**Deploy CE Virtual Sites**
+
+A `deploy_ce_virtual_sites` block (within `stateful_service.deploy_options`) supports the following:
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#stateful-service-deploy-options-deploy-ce-virtual-sites-virtual-site) below.
 
 <a id="stateful-service-deploy-options-deploy-ce-virtual-sites-virtual-site"></a>
 
-**Stateful Service Deploy Options Deploy CE Virtual Sites Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `stateful_service.deploy_options.deploy_ce_virtual_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5885,13 +6929,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-deploy-options-deploy-re-sites"></a>
 
-**Stateful Service Deploy Options Deploy RE Sites**
+**Deploy RE Sites**
+
+A `deploy_re_sites` block (within `stateful_service.deploy_options`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed<br>See [Site](#stateful-service-deploy-options-deploy-re-sites-site) below.
 
 <a id="stateful-service-deploy-options-deploy-re-sites-site"></a>
 
-**Stateful Service Deploy Options Deploy RE Sites Site**
+**Site**
+
+A `site` block (within `stateful_service.deploy_options.deploy_re_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5901,13 +6949,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-deploy-options-deploy-re-virtual-sites"></a>
 
-**Stateful Service Deploy Options Deploy RE Virtual Sites**
+**Deploy RE Virtual Sites**
+
+A `deploy_re_virtual_sites` block (within `stateful_service.deploy_options`) supports the following:
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#stateful-service-deploy-options-deploy-re-virtual-sites-virtual-site) below.
 
 <a id="stateful-service-deploy-options-deploy-re-virtual-sites-virtual-site"></a>
 
-**Stateful Service Deploy Options Deploy RE Virtual Sites Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `stateful_service.deploy_options.deploy_re_virtual_sites`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5917,7 +6969,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-persistent-volumes"></a>
 
-**Stateful Service Persistent Volumes**
+**Persistent Volumes**
+
+A `persistent_volumes` block (within `stateful_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the volume
 
@@ -5925,7 +6979,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-persistent-volumes-persistent-volume"></a>
 
-**Stateful Service Persistent Volumes Persistent Volume**
+**Persistent Volume**
+
+A `persistent_volume` block (within `stateful_service.persistent_volumes`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#stateful-service-persistent-volumes-persistent-volume-mount) below.
 
@@ -5933,7 +6989,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-persistent-volumes-persistent-volume-mount"></a>
 
-**Stateful Service Persistent Volumes Persistent Volume Mount**
+**Mount**
+
+A `mount` block (within `stateful_service.persistent_volumes.persistent_volume`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -5943,7 +7001,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-persistent-volumes-persistent-volume-storage"></a>
 
-**Stateful Service Persistent Volumes Persistent Volume Storage**
+**Storage**
+
+A `storage` block (within `stateful_service.persistent_volumes.persistent_volume`) supports the following:
 
 &#x2022; [`access_mode`](#access-mode) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts
 
@@ -5955,7 +7015,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-volumes"></a>
 
-**Stateful Service Volumes**
+**Volumes**
+
+A `volumes` block (within `stateful_service`) supports the following:
 
 &#x2022; [`empty_dir`](#empty-dir) - Optional Block<br>Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#stateful-service-volumes-empty-dir) below.
 
@@ -5965,7 +7027,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-volumes-empty-dir"></a>
 
-**Stateful Service Volumes Empty Dir**
+**Empty Dir**
+
+An `empty_dir` block (within `stateful_service.volumes`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#stateful-service-volumes-empty-dir-mount) below.
 
@@ -5973,7 +7037,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-volumes-empty-dir-mount"></a>
 
-**Stateful Service Volumes Empty Dir Mount**
+**Mount**
+
+A `mount` block (within `stateful_service.volumes.empty_dir`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -5983,7 +7049,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-volumes-host-path"></a>
 
-**Stateful Service Volumes Host Path**
+**Host Path**
+
+A `host_path` block (within `stateful_service.volumes`) supports the following:
 
 &#x2022; [`mount`](#mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#stateful-service-volumes-host-path-mount) below.
 
@@ -5991,7 +7059,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="stateful-service-volumes-host-path-mount"></a>
 
-**Stateful Service Volumes Host Path Mount**
+**Mount**
+
+A `mount` block (within `stateful_service.volumes.host_path`) supports the following:
 
 &#x2022; [`mode`](#mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
@@ -6002,6 +7072,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

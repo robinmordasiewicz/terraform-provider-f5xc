@@ -80,11 +80,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Email**
 
+An `email` block supports the following:
+
 &#x2022; [`email`](#email) - Optional String<br>Email. Email id of the user
 
 <a id="opsgenie"></a>
 
 **Opsgenie**
+
+An `opsgenie` block supports the following:
 
 &#x2022; [`api_key`](#api-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Key](#opsgenie-api-key) below.
 
@@ -92,7 +96,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="opsgenie-api-key"></a>
 
-**Opsgenie API Key**
+**API Key**
+
+An `api_key` block (within `opsgenie`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#opsgenie-api-key-blindfold-secret-info) below.
 
@@ -100,7 +106,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="opsgenie-api-key-blindfold-secret-info"></a>
 
-**Opsgenie API Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `opsgenie.api_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -110,7 +118,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="opsgenie-api-key-clear-secret-info"></a>
 
-**Opsgenie API Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `opsgenie.api_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -120,13 +130,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Pagerduty**
 
+A `pagerduty` block supports the following:
+
 &#x2022; [`routing_key`](#routing-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Routing Key](#pagerduty-routing-key) below.
 
 &#x2022; [`url`](#url) - Optional String<br>Pager Duty URL. URL to send API requests to
 
 <a id="pagerduty-routing-key"></a>
 
-**Pagerduty Routing Key**
+**Routing Key**
+
+A `routing_key` block (within `pagerduty`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#pagerduty-routing-key-blindfold-secret-info) below.
 
@@ -134,7 +148,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="pagerduty-routing-key-blindfold-secret-info"></a>
 
-**Pagerduty Routing Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `pagerduty.routing_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -144,7 +160,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="pagerduty-routing-key-clear-secret-info"></a>
 
-**Pagerduty Routing Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `pagerduty.routing_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -154,13 +172,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Slack**
 
+A `slack` block supports the following:
+
 &#x2022; [`channel`](#channel) - Optional String<br>Channel. Channel or user to send notifications to
 
 &#x2022; [`url`](#url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [URL](#slack-url) below.
 
 <a id="slack-url"></a>
 
-**Slack URL**
+**URL**
+
+An `url` block (within `slack`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#slack-url-blindfold-secret-info) below.
 
@@ -168,7 +190,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="slack-url-blindfold-secret-info"></a>
 
-**Slack URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `slack.url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -178,7 +202,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="slack-url-clear-secret-info"></a>
 
-**Slack URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `slack.url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -188,11 +214,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sms**
 
+A `sms` block supports the following:
+
 &#x2022; [`contact_number`](#contact-number) - Optional String<br>Contact Number. Contact number of the user in ITU E.164 format [+]\[country code][subscriber number including area code]
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -206,13 +236,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Webhook**
 
+A `webhook` block supports the following:
+
 &#x2022; [`http_config`](#http-config) - Optional Block<br>HTTP Configuration. Configuration for HTTP endpoint<br>See [HTTP Config](#webhook-http-config) below.
 
 &#x2022; [`url`](#url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [URL](#webhook-url) below.
 
 <a id="webhook-http-config"></a>
 
-**Webhook HTTP Config**
+**HTTP Config**
+
+A `http_config` block (within `webhook`) supports the following:
 
 &#x2022; [`auth_token`](#auth-token) - Optional Block<br>Access Token. Authentication Token for access<br>See [Auth Token](#webhook-http-config-auth-token) below.
 
@@ -232,13 +266,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-auth-token"></a>
 
-**Webhook HTTP Config Auth Token**
+**Auth Token**
+
+An `auth_token` block (within `webhook.http_config`) supports the following:
 
 &#x2022; [`token`](#token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#webhook-http-config-auth-token-token) below.
 
 <a id="webhook-http-config-auth-token-token"></a>
 
-**Webhook HTTP Config Auth Token Token**
+**Token**
+
+A `token` block (within `webhook.http_config.auth_token`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#webhook-http-config-auth-token-token-blindfold-secret-info) below.
 
@@ -246,7 +284,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-auth-token-token-blindfold-secret-info"></a>
 
-**Webhook HTTP Config Auth Token Token Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `webhook.http_config.auth_token.token`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -256,7 +296,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-auth-token-token-clear-secret-info"></a>
 
-**Webhook HTTP Config Auth Token Token Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `webhook.http_config.auth_token.token`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -264,7 +306,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-basic-auth"></a>
 
-**Webhook HTTP Config Basic Auth**
+**Basic Auth**
+
+A `basic_auth` block (within `webhook.http_config`) supports the following:
 
 &#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#webhook-http-config-basic-auth-password) below.
 
@@ -272,7 +316,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-basic-auth-password"></a>
 
-**Webhook HTTP Config Basic Auth Password**
+**Password**
+
+A `password` block (within `webhook.http_config.basic_auth`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#webhook-http-config-basic-auth-password-blindfold-secret-info) below.
 
@@ -280,7 +326,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-basic-auth-password-blindfold-secret-info"></a>
 
-**Webhook HTTP Config Basic Auth Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `webhook.http_config.basic_auth.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -290,7 +338,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-basic-auth-password-clear-secret-info"></a>
 
-**Webhook HTTP Config Basic Auth Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `webhook.http_config.basic_auth.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -298,13 +348,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-client-cert-obj"></a>
 
-**Webhook HTTP Config Client Cert Obj**
+**Client Cert Obj**
+
+A `client_cert_obj` block (within `webhook.http_config`) supports the following:
 
 &#x2022; [`use_tls_obj`](#use-tls-obj) - Optional Block<br>Certificate Object. Reference to client certificate object<br>See [Use TLS Obj](#webhook-http-config-client-cert-obj-use-tls-obj) below.
 
 <a id="webhook-http-config-client-cert-obj-use-tls-obj"></a>
 
-**Webhook HTTP Config Client Cert Obj Use TLS Obj**
+**Use TLS Obj**
+
+An `use_tls_obj` block (within `webhook.http_config.client_cert_obj`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -318,7 +372,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-use-tls"></a>
 
-**Webhook HTTP Config Use TLS**
+**Use TLS**
+
+An `use_tls` block (within `webhook.http_config`) supports the following:
 
 &#x2022; [`disable_sni`](#disable-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -334,19 +390,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-http-config-use-tls-use-server-verification"></a>
 
-**Webhook HTTP Config Use TLS Use Server Verification**
+**Use Server Verification**
+
+An `use_server_verification` block (within `webhook.http_config.use_tls`) supports the following:
 
 &#x2022; [`ca_cert_obj`](#ca-cert-obj) - Optional Block<br>CA Certificate Object. Configuration for CA certificate<br>See [CA Cert Obj](#webhook-http-config-use-tls-use-server-verification-ca-cert-obj) below.
 
 <a id="webhook-http-config-use-tls-use-server-verification-ca-cert-obj"></a>
 
-**Webhook HTTP Config Use TLS Use Server Verification CA Cert Obj**
+**CA Cert Obj**
+
+A `ca_cert_obj` block (within `webhook.http_config.use_tls.use_server_verification`) supports the following:
 
 &#x2022; [`trusted_ca`](#trusted-ca) - Optional Block<br>Certificate Object. Reference to client certificate object<br>See [Trusted CA](#webhook-http-config-use-tls-use-server-verification-ca-cert-obj-trusted-ca) below.
 
 <a id="webhook-http-config-use-tls-use-server-verification-ca-cert-obj-trusted-ca"></a>
 
-**Webhook HTTP Config Use TLS Use Server Verification CA Cert Obj Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `webhook.http_config.use_tls.use_server_verification.ca_cert_obj`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -360,7 +422,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-url"></a>
 
-**Webhook URL**
+**URL**
+
+An `url` block (within `webhook`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#webhook-url-blindfold-secret-info) below.
 
@@ -368,7 +432,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-url-blindfold-secret-info"></a>
 
-**Webhook URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `webhook.url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -378,7 +444,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="webhook-url-clear-secret-info"></a>
 
-**Webhook URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `webhook.url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 

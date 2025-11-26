@@ -94,6 +94,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Full Mesh**
 
+A `full_mesh` block supports the following:
+
 &#x2022; [`control_and_data_plane_mesh`](#control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`data_plane_mesh`](#data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -101,6 +103,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="hub-mesh"></a>
 
 **Hub Mesh**
+
+A `hub_mesh` block supports the following:
 
 &#x2022; [`control_and_data_plane_mesh`](#control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -110,6 +114,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Spoke Mesh**
 
+A `spoke_mesh` block supports the following:
+
 &#x2022; [`control_and_data_plane_mesh`](#control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`data_plane_mesh`](#data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -118,7 +124,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="spoke-mesh-hub-mesh-group"></a>
 
-**Spoke Mesh Hub Mesh Group**
+**Hub Mesh Group**
+
+A `hub_mesh_group` block (within `spoke_mesh`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -129,6 +137,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -141,6 +151,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="virtual-site"></a>
 
 **Virtual Site**
+
+A `virtual_site` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

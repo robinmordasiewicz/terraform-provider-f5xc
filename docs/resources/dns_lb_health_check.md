@@ -88,6 +88,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Health Check**
 
+A `http_health_check` block supports the following:
+
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
 &#x2022; [`health_check_secondary_port`](#health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
@@ -99,6 +101,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="https-health-check"></a>
 
 **HTTPS Health Check**
+
+A `https_health_check` block supports the following:
 
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
@@ -112,6 +116,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **TCP Health Check**
 
+A `tcp_health_check` block supports the following:
+
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
 &#x2022; [`health_check_secondary_port`](#health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
@@ -123,6 +129,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="tcp-hex-health-check"></a>
 
 **TCP Hex Health Check**
+
+A `tcp_hex_health_check` block supports the following:
 
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
@@ -136,6 +144,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Timeouts**
 
+A `timeouts` block supports the following:
+
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 &#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
@@ -147,6 +157,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="udp-health-check"></a>
 
 **UDP Health Check**
+
+An `udp_health_check` block supports the following:
 
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 

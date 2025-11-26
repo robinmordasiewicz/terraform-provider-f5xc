@@ -88,6 +88,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cloud Hosted**
 
+A `cloud_hosted` block supports the following:
+
 &#x2022; [`egress`](#egress) - Optional Block<br>Egress. Egress<br>See [Egress](#cloud-hosted-egress) below.
 
 &#x2022; [`infra_host_name`](#infra-host-name) - Optional String<br>Infra Host Name. Infra Host Name
@@ -98,7 +100,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cloud-hosted-egress"></a>
 
-**Cloud Hosted Egress**
+**Egress**
+
+An `egress` block (within `cloud_hosted`) supports the following:
 
 &#x2022; [`ip_address`](#ip-address) - Optional String<br>IP Address. Egress IP address
 
@@ -106,7 +110,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cloud-hosted-ingress"></a>
 
-**Cloud Hosted Ingress**
+**Ingress**
+
+An `ingress` block (within `cloud_hosted`) supports the following:
 
 &#x2022; [`host_name`](#host-name) - Optional String<br>Ingress value. Ingress Host Name
 
@@ -118,6 +124,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Data Center Hosted**
 
+A `data_center_hosted` block supports the following:
+
 &#x2022; [`egress`](#egress) - Optional Block<br>Egress. Egress<br>See [Egress](#data-center-hosted-egress) below.
 
 &#x2022; [`infra_host_name`](#infra-host-name) - Optional String<br>Infra Host Name. Infra Host Name
@@ -128,7 +136,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="data-center-hosted-egress"></a>
 
-**Data Center Hosted Egress**
+**Egress**
+
+An `egress` block (within `data_center_hosted`) supports the following:
 
 &#x2022; [`ip_address`](#ip-address) - Optional String<br>IP Address. Egress IP address
 
@@ -136,7 +146,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="data-center-hosted-ingress"></a>
 
-**Data Center Hosted Ingress**
+**Ingress**
+
+An `ingress` block (within `data_center_hosted`) supports the following:
 
 &#x2022; [`host_name`](#host-name) - Optional String<br>Ingress value. Ingress Host Name
 
@@ -147,6 +159,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

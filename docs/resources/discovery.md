@@ -102,13 +102,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Discovery Consul**
 
+A `discovery_consul` block supports the following:
+
 &#x2022; [`access_info`](#access-info) - Optional Block<br>Hashicorp Consul Parameters. Hashicorp Consul API server information<br>See [Access Info](#discovery-consul-access-info) below.
 
 &#x2022; [`publish_info`](#publish-info) - Optional Block<br>VIP Publish Configuration. Consul Configuration to publish VIPs<br>See [Publish Info](#discovery-consul-publish-info) below.
 
 <a id="discovery-consul-access-info"></a>
 
-**Discovery Consul Access Info**
+**Access Info**
+
+An `access_info` block (within `discovery_consul`) supports the following:
 
 &#x2022; [`connection_info`](#connection-info) - Optional Block<br>REST API Config. Configuration details to access discovery service REST API<br>See [Connection Info](#discovery-consul-access-info-connection-info) below.
 
@@ -116,7 +120,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-connection-info"></a>
 
-**Discovery Consul Access Info Connection Info**
+**Connection Info**
+
+A `connection_info` block (within `discovery_consul.access_info`) supports the following:
 
 &#x2022; [`api_server`](#api-server) - Optional String<br>API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair
 
@@ -124,7 +130,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-connection-info-tls-info"></a>
 
-**Discovery Consul Access Info Connection Info TLS Info**
+**TLS Info**
+
+A `tls_info` block (within `discovery_consul.access_info.connection_info`) supports the following:
 
 &#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
@@ -136,7 +144,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-connection-info-tls-info-key-url"></a>
 
-**Discovery Consul Access Info Connection Info TLS Info Key URL**
+**Key URL**
+
+A `key_url` block (within `discovery_consul.access_info.connection_info.tls_info`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-consul-access-info-connection-info-tls-info-key-url-blindfold-secret-info) below.
 
@@ -144,7 +154,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-connection-info-tls-info-key-url-blindfold-secret-info"></a>
 
-**Discovery Consul Access Info Connection Info TLS Info Key URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `discovery_consul.access_info.connection_info.tls_info.key_url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -154,7 +166,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-connection-info-tls-info-key-url-clear-secret-info"></a>
 
-**Discovery Consul Access Info Connection Info TLS Info Key URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `discovery_consul.access_info.connection_info.tls_info.key_url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -162,7 +176,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-http-basic-auth-info"></a>
 
-**Discovery Consul Access Info HTTP Basic Auth Info**
+**HTTP Basic Auth Info**
+
+A `http_basic_auth_info` block (within `discovery_consul.access_info`) supports the following:
 
 &#x2022; [`passwd_url`](#passwd-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd URL](#discovery-consul-access-info-http-basic-auth-info-passwd-url) below.
 
@@ -170,7 +186,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-http-basic-auth-info-passwd-url"></a>
 
-**Discovery Consul Access Info HTTP Basic Auth Info Passwd URL**
+**Passwd URL**
+
+A `passwd_url` block (within `discovery_consul.access_info.http_basic_auth_info`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-consul-access-info-http-basic-auth-info-passwd-url-blindfold-secret-info) below.
 
@@ -178,7 +196,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-http-basic-auth-info-passwd-url-blindfold-secret-info"></a>
 
-**Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `discovery_consul.access_info.http_basic_auth_info.passwd_url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -188,7 +208,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-access-info-http-basic-auth-info-passwd-url-clear-secret-info"></a>
 
-**Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `discovery_consul.access_info.http_basic_auth_info.passwd_url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -196,7 +218,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-consul-publish-info"></a>
 
-**Discovery Consul Publish Info**
+**Publish Info**
+
+A `publish_info` block (within `discovery_consul`) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -205,6 +229,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="discovery-k8s"></a>
 
 **Discovery K8s**
+
+A `discovery_k8s` block supports the following:
 
 &#x2022; [`access_info`](#access-info) - Optional Block<br>K8s API Server. K8S API server access<br>See [Access Info](#discovery-k8s-access-info) below.
 
@@ -216,7 +242,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info"></a>
 
-**Discovery K8s Access Info**
+**Access Info**
+
+An `access_info` block (within `discovery_k8s`) supports the following:
 
 &#x2022; [`connection_info`](#connection-info) - Optional Block<br>REST API Config. Configuration details to access discovery service REST API<br>See [Connection Info](#discovery-k8s-access-info-connection-info) below.
 
@@ -228,7 +256,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-connection-info"></a>
 
-**Discovery K8s Access Info Connection Info**
+**Connection Info**
+
+A `connection_info` block (within `discovery_k8s.access_info`) supports the following:
 
 &#x2022; [`api_server`](#api-server) - Optional String<br>API Server and Port. API server must be a fully qualified domain string and port specified as host:port pair
 
@@ -236,7 +266,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-connection-info-tls-info"></a>
 
-**Discovery K8s Access Info Connection Info TLS Info**
+**TLS Info**
+
+A `tls_info` block (within `discovery_k8s.access_info.connection_info`) supports the following:
 
 &#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
@@ -248,7 +280,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-key-url"></a>
 
-**Discovery K8s Access Info Connection Info TLS Info Key URL**
+**Key URL**
+
+A `key_url` block (within `discovery_k8s.access_info.connection_info.tls_info`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info) below.
 
@@ -256,7 +290,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-key-url-blindfold-secret-info"></a>
 
-**Discovery K8s Access Info Connection Info TLS Info Key URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `discovery_k8s.access_info.connection_info.tls_info.key_url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -266,7 +302,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-connection-info-tls-info-key-url-clear-secret-info"></a>
 
-**Discovery K8s Access Info Connection Info TLS Info Key URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `discovery_k8s.access_info.connection_info.tls_info.key_url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -274,7 +312,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-kubeconfig-url"></a>
 
-**Discovery K8s Access Info Kubeconfig URL**
+**Kubeconfig URL**
+
+A `kubeconfig_url` block (within `discovery_k8s.access_info`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info) below.
 
@@ -282,7 +322,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-kubeconfig-url-blindfold-secret-info"></a>
 
-**Discovery K8s Access Info Kubeconfig URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `discovery_k8s.access_info.kubeconfig_url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -292,7 +334,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-access-info-kubeconfig-url-clear-secret-info"></a>
 
-**Discovery K8s Access Info Kubeconfig URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `discovery_k8s.access_info.kubeconfig_url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -300,13 +344,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-namespace-mapping"></a>
 
-**Discovery K8s Namespace Mapping**
+**Namespace Mapping**
+
+A `namespace_mapping` block (within `discovery_k8s`) supports the following:
 
 &#x2022; [`items`](#items) - Optional Block<br>Regex Matching. Map K8s namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex<br>See [Items](#discovery-k8s-namespace-mapping-items) below.
 
 <a id="discovery-k8s-namespace-mapping-items"></a>
 
-**Discovery K8s Namespace Mapping Items**
+**Items**
+
+An `items` block (within `discovery_k8s.namespace_mapping`) supports the following:
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>F5XC Application Namespaces. Select a namespace
 
@@ -314,7 +362,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-publish-info"></a>
 
-**Discovery K8s Publish Info**
+**Publish Info**
+
+A `publish_info` block (within `discovery_k8s`) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -326,7 +376,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-publish-info-dns-delegation"></a>
 
-**Discovery K8s Publish Info DNS Delegation**
+**DNS Delegation**
+
+A `dns_delegation` block (within `discovery_k8s.publish_info`) supports the following:
 
 &#x2022; [`dns_mode`](#dns-mode) - Optional String  Defaults to `CORE_DNS`<br>Possible values are `CORE_DNS`, `KUBE_DNS`<br>DNS Mode. Two modes are possible CoreDNS: Whether external K8s cluster is running core-DNS KubeDNS: External K8s cluster is running kube-DNS
 
@@ -334,13 +386,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="discovery-k8s-publish-info-publish"></a>
 
-**Discovery K8s Publish Info Publish**
+**Publish**
+
+A `publish` block (within `discovery_k8s.publish_info`) supports the following:
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Default Namespace. The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -354,6 +410,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Where**
 
+A `where` block supports the following:
+
 &#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
 &#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Network Reference. This specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
@@ -362,7 +420,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site"></a>
 
-**Where Site**
+**Site**
+
+A `site` block (within `where`) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -374,7 +434,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site-ref"></a>
 
-**Where Site Ref**
+**Ref**
+
+A `ref` block (within `where.site`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -388,13 +450,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-network"></a>
 
-**Where Virtual Network**
+**Virtual Network**
+
+A `virtual_network` block (within `where`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
 
 <a id="where-virtual-network-ref"></a>
 
-**Where Virtual Network Ref**
+**Ref**
+
+A `ref` block (within `where.virtual_network`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -408,7 +474,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site"></a>
 
-**Where Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `where`) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -420,7 +488,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site-ref"></a>
 
-**Where Virtual Site Ref**
+**Ref**
+
+A `ref` block (within `where.virtual_site`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

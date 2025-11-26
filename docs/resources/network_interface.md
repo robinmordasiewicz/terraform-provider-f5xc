@@ -87,6 +87,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dedicated Interface**
 
+A `dedicated_interface` block supports the following:
+
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`device`](#device) - Optional String<br>Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE
@@ -109,6 +111,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dedicated Management Interface**
 
+A `dedicated_management_interface` block supports the following:
+
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`device`](#device) - Optional String<br>Interface Device. Name of the device for which interface is configured
@@ -120,6 +124,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="ethernet-interface"></a>
 
 **Ethernet Interface**
+
+An `ethernet_interface` block supports the following:
 
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -163,7 +169,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-dhcp-server"></a>
 
-**Ethernet Interface DHCP Server**
+**DHCP Server**
+
+A `dhcp_server` block (within `ethernet_interface`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -177,7 +185,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks"></a>
 
-**Ethernet Interface DHCP Server DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `ethernet_interface.dhcp_server`) supports the following:
 
 &#x2022; [`dgw_address`](#dgw-address) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway
 
@@ -197,7 +207,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks-pools"></a>
 
-**Ethernet Interface DHCP Server DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `ethernet_interface.dhcp_server.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200
 
@@ -205,13 +217,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-dhcp-server-interface-ip-map"></a>
 
-**Ethernet Interface DHCP Server Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `ethernet_interface.dhcp_server`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node
 
 <a id="ethernet-interface-ipv6-auto-config"></a>
 
-**Ethernet Interface IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `ethernet_interface`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -219,7 +235,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-ipv6-auto-config-router"></a>
 
-**Ethernet Interface IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `ethernet_interface.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#ethernet-interface-ipv6-auto-config-router-dns-config) below.
 
@@ -229,7 +247,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config"></a>
 
-**Ethernet Interface IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `ethernet_interface.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -237,13 +257,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Ethernet Interface IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `ethernet_interface.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Ethernet Interface IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `ethernet_interface.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -253,7 +277,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful"></a>
 
-**Ethernet Interface IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `ethernet_interface.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -267,7 +293,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `ethernet_interface.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -277,7 +305,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -285,13 +315,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Ethernet Interface IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `ethernet_interface.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="ethernet-interface-static-ip"></a>
 
-**Ethernet Interface Static IP**
+**Static IP**
+
+A `static_ip` block (within `ethernet_interface`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#ethernet-interface-static-ip-cluster-static-ip) below.
 
@@ -299,13 +333,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-static-ip-cluster-static-ip"></a>
 
-**Ethernet Interface Static IP Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `ethernet_interface.static_ip`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="ethernet-interface-static-ip-node-static-ip"></a>
 
-**Ethernet Interface Static IP Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `ethernet_interface.static_ip`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -313,7 +351,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-static-ipv6-address"></a>
 
-**Ethernet Interface Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `ethernet_interface`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#ethernet-interface-static-ipv6-address-cluster-static-ip) below.
 
@@ -321,13 +361,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ethernet-interface-static-ipv6-address-cluster-static-ip"></a>
 
-**Ethernet Interface Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `ethernet_interface.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="ethernet-interface-static-ipv6-address-node-static-ip"></a>
 
-**Ethernet Interface Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `ethernet_interface.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -337,6 +381,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Layer2 Interface**
 
+A `layer2_interface` block supports the following:
+
 &#x2022; [`l2sriov_interface`](#l2sriov-interface) - Optional Block<br>Layer2 SR-IOV Interface. Layer2 SR-IOV Interface Configuration<br>See [L2sriov Interface](#layer2-interface-l2sriov-interface) below.
 
 &#x2022; [`l2vlan_interface`](#l2vlan-interface) - Optional Block<br>Layer2 VLAN Interface. Layer2 VLAN Interface Configuration<br>See [L2vlan Interface](#layer2-interface-l2vlan-interface) below.
@@ -345,7 +391,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="layer2-interface-l2sriov-interface"></a>
 
-**Layer2 Interface L2sriov Interface**
+**L2sriov Interface**
+
+A `l2sriov_interface` block (within `layer2_interface`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Physical ethernet interface
 
@@ -355,7 +403,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="layer2-interface-l2vlan-interface"></a>
 
-**Layer2 Interface L2vlan Interface**
+**L2vlan Interface**
+
+A `l2vlan_interface` block (within `layer2_interface`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Physical ethernet interface
 
@@ -363,13 +413,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="layer2-interface-l2vlan-slo-interface"></a>
 
-**Layer2 Interface L2vlan Slo Interface**
+**L2vlan Slo Interface**
+
+A `l2vlan_slo_interface` block (within `layer2_interface`) supports the following:
 
 &#x2022; [`vlan_id`](#vlan-id) - Optional Number<br>VLAN Id. VLAN Id
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -382,6 +436,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="tunnel-interface"></a>
 
 **Tunnel Interface**
+
+A `tunnel_interface` block supports the following:
 
 &#x2022; [`mtu`](#mtu) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -399,7 +455,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tunnel-interface-static-ip"></a>
 
-**Tunnel Interface Static IP**
+**Static IP**
+
+A `static_ip` block (within `tunnel_interface`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#tunnel-interface-static-ip-cluster-static-ip) below.
 
@@ -407,13 +465,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tunnel-interface-static-ip-cluster-static-ip"></a>
 
-**Tunnel Interface Static IP Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `tunnel_interface.static_ip`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="tunnel-interface-static-ip-node-static-ip"></a>
 
-**Tunnel Interface Static IP Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `tunnel_interface.static_ip`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -421,7 +483,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tunnel-interface-tunnel"></a>
 
-**Tunnel Interface Tunnel**
+**Tunnel**
+
+A `tunnel` block (within `tunnel_interface`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 

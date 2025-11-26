@@ -82,6 +82,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **App Type Settings**
 
+An `app_type_settings` block supports the following:
+
 &#x2022; [`app_type_ref`](#app-type-ref) - Optional Block<br>AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data<br>See [App Type Ref](#app-type-settings-app-type-ref) below.
 
 &#x2022; [`business_logic_markup_setting`](#business-logic-markup-setting) - Optional Block<br>API Discovery. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#app-type-settings-business-logic-markup-setting) below.
@@ -92,7 +94,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-app-type-ref"></a>
 
-**App Type Settings App Type Ref**
+**App Type Ref**
+
+An `app_type_ref` block (within `app_type_settings`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -106,7 +110,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-business-logic-markup-setting"></a>
 
-**App Type Settings Business Logic Markup Setting**
+**Business Logic Markup Setting**
+
+A `business_logic_markup_setting` block (within `app_type_settings`) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -114,13 +120,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-timeseries-analyses-setting"></a>
 
-**App Type Settings Timeseries Analyses Setting**
+**Timeseries Analyses Setting**
+
+A `timeseries_analyses_setting` block (within `app_type_settings`) supports the following:
 
 &#x2022; [`metric_selectors`](#metric-selectors) - Optional Block<br>Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic<br>See [Metric Selectors](#app-type-settings-timeseries-analyses-setting-metric-selectors) below.
 
 <a id="app-type-settings-timeseries-analyses-setting-metric-selectors"></a>
 
-**App Type Settings Timeseries Analyses Setting Metric Selectors**
+**Metric Selectors**
+
+A `metric_selectors` block (within `app_type_settings.timeseries_analyses_setting`) supports the following:
 
 &#x2022; [`metric`](#metric) - Optional List  Defaults to `NO_METRICS`<br>Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`<br>Metrics. Choose one or more metrics to be included in the detection logic
 
@@ -128,7 +138,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-user-behavior-analysis-setting"></a>
 
-**App Type Settings User Behavior Analysis Setting**
+**User Behavior Analysis Setting**
+
+An `user_behavior_analysis_setting` block (within `app_type_settings`) supports the following:
 
 &#x2022; [`disable_detection`](#disable-detection) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -140,7 +152,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection"></a>
 
-**App Type Settings User Behavior Analysis Setting Enable Detection**
+**Enable Detection**
+
+An `enable_detection` block (within `app_type_settings.user_behavior_analysis_setting`) supports the following:
 
 &#x2022; [`bola_detection_automatic`](#bola-detection-automatic) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -180,19 +194,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity"></a>
 
-**App Type Settings User Behavior Analysis Setting Enable Detection Include Failed Login Activity**
+**Include Failed Login Activity**
+
+An `include_failed_login_activity` block (within `app_type_settings.user_behavior_analysis_setting.enable_detection`) supports the following:
 
 &#x2022; [`login_failures_threshold`](#login-failures-threshold) - Optional Number<br>Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity"></a>
 
-**App Type Settings User Behavior Analysis Setting Enable Detection Include Forbidden Activity**
+**Include Forbidden Activity**
+
+An `include_forbidden_activity` block (within `app_type_settings.user_behavior_analysis_setting.enable_detection`) supports the following:
 
 &#x2022; [`forbidden_requests_threshold`](#forbidden-requests-threshold) - Optional Number<br>Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic"></a>
 
-**App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Automatic**
+**Include Non Existent URL Activity Automatic**
+
+An `include_non_existent_url_activity_automatic` block (within `app_type_settings.user_behavior_analysis_setting.enable_detection`) supports the following:
 
 &#x2022; [`high`](#high) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -202,13 +222,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom"></a>
 
-**App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Custom**
+**Include Non Existent URL Activity Custom**
+
+An `include_non_existent_url_activity_custom` block (within `app_type_settings.user_behavior_analysis_setting.enable_detection`) supports the following:
 
 &#x2022; [`nonexistent_requests_threshold`](#nonexistent-requests-threshold) - Optional Number<br>Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

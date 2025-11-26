@@ -95,17 +95,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Advanced Action**
 
+An `advanced_action` block supports the following:
+
 &#x2022; [`action`](#action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
 <a id="ip-prefix-set"></a>
 
 **IP Prefix Set**
 
+An `ip_prefix_set` block supports the following:
+
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
 
 <a id="ip-prefix-set-ref"></a>
 
-**IP Prefix Set Ref**
+**Ref**
+
+A `ref` block (within `ip_prefix_set`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -121,11 +127,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Label Matcher**
 
+A `label_matcher` block supports the following:
+
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
 
 <a id="prefix"></a>
 
 **Prefix**
+
+A `prefix` block supports the following:
 
 &#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
@@ -133,11 +143,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Prefix Selector**
 
+A `prefix_selector` block supports the following:
+
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

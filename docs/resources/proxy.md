@@ -91,11 +91,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Active Forward Proxy Policies**
 
+An `active_forward_proxy_policies` block supports the following:
+
 &#x2022; [`forward_proxy_policies`](#forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
 
 <a id="active-forward-proxy-policies-forward-proxy-policies"></a>
 
-**Active Forward Proxy Policies Forward Proxy Policies**
+**Forward Proxy Policies**
+
+A `forward_proxy_policies` block (within `active_forward_proxy_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -106,6 +110,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="dynamic-proxy"></a>
 
 **Dynamic Proxy**
+
+A `dynamic_proxy` block supports the following:
 
 &#x2022; [`disable_dns_masquerade`](#disable-dns-masquerade) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -121,13 +127,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy"></a>
 
-**Dynamic Proxy HTTP Proxy**
+**HTTP Proxy**
+
+A `http_proxy` block (within `dynamic_proxy`) supports the following:
 
 &#x2022; [`more_option`](#more-option) - Optional Block<br>Advanced Options. This defines various options to define a route<br>See [More Option](#dynamic-proxy-http-proxy-more-option) below.
 
 <a id="dynamic-proxy-http-proxy-more-option"></a>
 
-**Dynamic Proxy HTTP Proxy More Option**
+**More Option**
+
+A `more_option` block (within `dynamic_proxy.http_proxy`) supports the following:
 
 &#x2022; [`buffer_policy`](#buffer-policy) - Optional Block<br>Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence<br>See [Buffer Policy](#dynamic-proxy-http-proxy-more-option-buffer-policy) below.
 
@@ -163,7 +173,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-buffer-policy"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Buffer Policy**
+**Buffer Policy**
+
+A `buffer_policy` block (within `dynamic_proxy.http_proxy.more_option`) supports the following:
 
 &#x2022; [`disabled`](#disabled) - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
 
@@ -171,7 +183,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-compression-params"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Compression Params**
+**Compression Params**
+
+A `compression_params` block (within `dynamic_proxy.http_proxy.more_option`) supports the following:
 
 &#x2022; [`content_length`](#content-length) - Optional Number  Defaults to `30`<br>Content Length. Minimum response length, in bytes, which will trigger compression. The
 
@@ -183,7 +197,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-request-cookies-to-add"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Request Cookies To Add**
+**Request Cookies To Add**
+
+A `request_cookies_to_add` block (within `dynamic_proxy.http_proxy.more_option`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the cookie in Cookie header
 
@@ -195,7 +211,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Request Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `dynamic_proxy.http_proxy.more_option.request_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -203,7 +221,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Request Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `dynamic_proxy.http_proxy.more_option.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -213,7 +233,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-request-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Request Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `dynamic_proxy.http_proxy.more_option.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -221,7 +243,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-request-headers-to-add"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Request Headers To Add**
+**Request Headers To Add**
+
+A `request_headers_to_add` block (within `dynamic_proxy.http_proxy.more_option`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -233,7 +257,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Request Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `dynamic_proxy.http_proxy.more_option.request_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -241,7 +267,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Request Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `dynamic_proxy.http_proxy.more_option.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -251,7 +279,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-request-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Request Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `dynamic_proxy.http_proxy.more_option.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -259,7 +289,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Response Cookies To Add**
+**Response Cookies To Add**
+
+A `response_cookies_to_add` block (within `dynamic_proxy.http_proxy.more_option`) supports the following:
 
 &#x2022; [`add_domain`](#add-domain) - Optional String<br>Add Domain. Add domain attribute
 
@@ -309,7 +341,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Response Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `dynamic_proxy.http_proxy.more_option.response_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -317,7 +351,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Response Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `dynamic_proxy.http_proxy.more_option.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -327,7 +363,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-response-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Response Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `dynamic_proxy.http_proxy.more_option.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -335,7 +373,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-response-headers-to-add"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Response Headers To Add**
+**Response Headers To Add**
+
+A `response_headers_to_add` block (within `dynamic_proxy.http_proxy.more_option`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -347,7 +387,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Response Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `dynamic_proxy.http_proxy.more_option.response_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -355,7 +397,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Response Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `dynamic_proxy.http_proxy.more_option.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -365,7 +409,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-http-proxy-more-option-response-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Dynamic Proxy HTTP Proxy More Option Response Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `dynamic_proxy.http_proxy.more_option.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -373,7 +419,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy"></a>
 
-**Dynamic Proxy HTTPS Proxy**
+**HTTPS Proxy**
+
+A `https_proxy` block (within `dynamic_proxy`) supports the following:
 
 &#x2022; [`more_option`](#more-option) - Optional Block<br>Advanced Options. This defines various options to define a route<br>See [More Option](#dynamic-proxy-https-proxy-more-option) below.
 
@@ -381,7 +429,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option**
+**More Option**
+
+A `more_option` block (within `dynamic_proxy.https_proxy`) supports the following:
 
 &#x2022; [`buffer_policy`](#buffer-policy) - Optional Block<br>Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence<br>See [Buffer Policy](#dynamic-proxy-https-proxy-more-option-buffer-policy) below.
 
@@ -417,7 +467,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-buffer-policy"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Buffer Policy**
+**Buffer Policy**
+
+A `buffer_policy` block (within `dynamic_proxy.https_proxy.more_option`) supports the following:
 
 &#x2022; [`disabled`](#disabled) - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
 
@@ -425,7 +477,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-compression-params"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Compression Params**
+**Compression Params**
+
+A `compression_params` block (within `dynamic_proxy.https_proxy.more_option`) supports the following:
 
 &#x2022; [`content_length`](#content-length) - Optional Number  Defaults to `30`<br>Content Length. Minimum response length, in bytes, which will trigger compression. The
 
@@ -437,7 +491,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-request-cookies-to-add"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add**
+**Request Cookies To Add**
+
+A `request_cookies_to_add` block (within `dynamic_proxy.https_proxy.more_option`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the cookie in Cookie header
 
@@ -449,7 +505,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `dynamic_proxy.https_proxy.more_option.request_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -457,7 +515,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `dynamic_proxy.https_proxy.more_option.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -467,7 +527,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-request-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `dynamic_proxy.https_proxy.more_option.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -475,7 +537,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-request-headers-to-add"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Request Headers To Add**
+**Request Headers To Add**
+
+A `request_headers_to_add` block (within `dynamic_proxy.https_proxy.more_option`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -487,7 +551,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Request Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `dynamic_proxy.https_proxy.more_option.request_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -495,7 +561,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Request Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `dynamic_proxy.https_proxy.more_option.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -505,7 +573,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-request-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Request Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `dynamic_proxy.https_proxy.more_option.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -513,7 +583,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add**
+**Response Cookies To Add**
+
+A `response_cookies_to_add` block (within `dynamic_proxy.https_proxy.more_option`) supports the following:
 
 &#x2022; [`add_domain`](#add-domain) - Optional String<br>Add Domain. Add domain attribute
 
@@ -563,7 +635,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `dynamic_proxy.https_proxy.more_option.response_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -571,7 +645,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `dynamic_proxy.https_proxy.more_option.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -581,7 +657,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-response-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `dynamic_proxy.https_proxy.more_option.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -589,7 +667,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-response-headers-to-add"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Response Headers To Add**
+**Response Headers To Add**
+
+A `response_headers_to_add` block (within `dynamic_proxy.https_proxy.more_option`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -601,7 +681,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Response Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `dynamic_proxy.https_proxy.more_option.response_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -609,7 +691,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Response Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `dynamic_proxy.https_proxy.more_option.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -619,7 +703,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-more-option-response-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy More Option Response Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `dynamic_proxy.https_proxy.more_option.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -627,7 +713,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params**
+**TLS Params**
+
+A `tls_params` block (within `dynamic_proxy.https_proxy`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -639,7 +727,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-certificates"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `dynamic_proxy.https_proxy.tls_params`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -655,13 +745,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-custom-hash-algorithms"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `dynamic_proxy.https_proxy.tls_params.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `dynamic_proxy.https_proxy.tls_params.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -669,7 +763,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `dynamic_proxy.https_proxy.tls_params.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -679,7 +775,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-certificates-private-key-clear-secret-info"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `dynamic_proxy.https_proxy.tls_params.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -687,7 +785,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-config"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `dynamic_proxy.https_proxy.tls_params`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#dynamic-proxy-https-proxy-tls-params-tls-config-custom-security) below.
 
@@ -699,7 +799,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-tls-config-custom-security"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `dynamic_proxy.https_proxy.tls_params.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -709,7 +811,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-use-mtls"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `dynamic_proxy.https_proxy.tls_params`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -727,7 +831,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-use-mtls-crl"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `dynamic_proxy.https_proxy.tls_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -737,7 +843,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-use-mtls-trusted-ca"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `dynamic_proxy.https_proxy.tls_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -747,13 +855,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-proxy-https-proxy-tls-params-use-mtls-xfcc-options"></a>
 
-**Dynamic Proxy HTTPS Proxy TLS Params Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `dynamic_proxy.https_proxy.tls_params.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="dynamic-proxy-sni-proxy"></a>
 
-**Dynamic Proxy Sni Proxy**
+**Sni Proxy**
+
+A `sni_proxy` block (within `dynamic_proxy`) supports the following:
 
 &#x2022; [`idle_timeout`](#idle-timeout) - Optional Number<br>Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds
 
@@ -761,13 +873,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Proxy**
 
+A `http_proxy` block supports the following:
+
 &#x2022; [`enable_http`](#enable-http) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`more_option`](#more-option) - Optional Block<br>Advanced Options. This defines various options to define a route<br>See [More Option](#http-proxy-more-option) below.
 
 <a id="http-proxy-more-option"></a>
 
-**HTTP Proxy More Option**
+**More Option**
+
+A `more_option` block (within `http_proxy`) supports the following:
 
 &#x2022; [`buffer_policy`](#buffer-policy) - Optional Block<br>Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence<br>See [Buffer Policy](#http-proxy-more-option-buffer-policy) below.
 
@@ -803,7 +919,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-buffer-policy"></a>
 
-**HTTP Proxy More Option Buffer Policy**
+**Buffer Policy**
+
+A `buffer_policy` block (within `http_proxy.more_option`) supports the following:
 
 &#x2022; [`disabled`](#disabled) - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
 
@@ -811,7 +929,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-compression-params"></a>
 
-**HTTP Proxy More Option Compression Params**
+**Compression Params**
+
+A `compression_params` block (within `http_proxy.more_option`) supports the following:
 
 &#x2022; [`content_length`](#content-length) - Optional Number  Defaults to `30`<br>Content Length. Minimum response length, in bytes, which will trigger compression. The
 
@@ -823,7 +943,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-request-cookies-to-add"></a>
 
-**HTTP Proxy More Option Request Cookies To Add**
+**Request Cookies To Add**
+
+A `request_cookies_to_add` block (within `http_proxy.more_option`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the cookie in Cookie header
 
@@ -835,7 +957,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-request-cookies-to-add-secret-value"></a>
 
-**HTTP Proxy More Option Request Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `http_proxy.more_option.request_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -843,7 +967,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**HTTP Proxy More Option Request Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `http_proxy.more_option.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -853,7 +979,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-request-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**HTTP Proxy More Option Request Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `http_proxy.more_option.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -861,7 +989,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-request-headers-to-add"></a>
 
-**HTTP Proxy More Option Request Headers To Add**
+**Request Headers To Add**
+
+A `request_headers_to_add` block (within `http_proxy.more_option`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -873,7 +1003,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-request-headers-to-add-secret-value"></a>
 
-**HTTP Proxy More Option Request Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `http_proxy.more_option.request_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -881,7 +1013,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**HTTP Proxy More Option Request Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `http_proxy.more_option.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -891,7 +1025,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-request-headers-to-add-secret-value-clear-secret-info"></a>
 
-**HTTP Proxy More Option Request Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `http_proxy.more_option.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -899,7 +1035,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-response-cookies-to-add"></a>
 
-**HTTP Proxy More Option Response Cookies To Add**
+**Response Cookies To Add**
+
+A `response_cookies_to_add` block (within `http_proxy.more_option`) supports the following:
 
 &#x2022; [`add_domain`](#add-domain) - Optional String<br>Add Domain. Add domain attribute
 
@@ -949,7 +1087,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-response-cookies-to-add-secret-value"></a>
 
-**HTTP Proxy More Option Response Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `http_proxy.more_option.response_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -957,7 +1097,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**HTTP Proxy More Option Response Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `http_proxy.more_option.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -967,7 +1109,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-response-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**HTTP Proxy More Option Response Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `http_proxy.more_option.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -975,7 +1119,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-response-headers-to-add"></a>
 
-**HTTP Proxy More Option Response Headers To Add**
+**Response Headers To Add**
+
+A `response_headers_to_add` block (within `http_proxy.more_option`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -987,7 +1133,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-response-headers-to-add-secret-value"></a>
 
-**HTTP Proxy More Option Response Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `http_proxy.more_option.response_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -995,7 +1143,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**HTTP Proxy More Option Response Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `http_proxy.more_option.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1005,7 +1155,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-proxy-more-option-response-headers-to-add-secret-value-clear-secret-info"></a>
 
-**HTTP Proxy More Option Response Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `http_proxy.more_option.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1015,11 +1167,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Site Virtual Sites**
 
+A `site_virtual_sites` block supports the following:
+
 &#x2022; [`advertise_where`](#advertise-where) - Optional Block<br>List of Sites to Advertise. Where should this load balancer be available<br>See [Advertise Where](#site-virtual-sites-advertise-where) below.
 
 <a id="site-virtual-sites-advertise-where"></a>
 
-**Site Virtual Sites Advertise Where**
+**Advertise Where**
+
+An `advertise_where` block (within `site_virtual_sites`) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>TCP Listen Port. TCP port to Listen
 
@@ -1031,7 +1187,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-virtual-sites-advertise-where-site"></a>
 
-**Site Virtual Sites Advertise Where Site**
+**Site**
+
+A `site` block (within `site_virtual_sites.advertise_where`) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
@@ -1041,7 +1199,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-virtual-sites-advertise-where-site-site"></a>
 
-**Site Virtual Sites Advertise Where Site Site**
+**Site**
+
+A `site` block (within `site_virtual_sites.advertise_where.site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1051,7 +1211,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-virtual-sites-advertise-where-virtual-site"></a>
 
-**Site Virtual Sites Advertise Where Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `site_virtual_sites.advertise_where`) supports the following:
 
 &#x2022; [`network`](#network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
@@ -1059,7 +1221,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-virtual-sites-advertise-where-virtual-site-virtual-site"></a>
 
-**Site Virtual Sites Advertise Where Virtual Site Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `site_virtual_sites.advertise_where.virtual_site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1070,6 +1234,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -1082,6 +1248,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="tls-intercept"></a>
 
 **TLS Intercept**
+
+A `tls_intercept` block supports the following:
 
 &#x2022; [`custom_certificate`](#custom-certificate) - Optional Block<br>TLS Certificate. Handle to fetch certificate and key<br>See [Custom Certificate](#tls-intercept-custom-certificate) below.
 
@@ -1097,7 +1265,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-intercept-custom-certificate"></a>
 
-**TLS Intercept Custom Certificate**
+**Custom Certificate**
+
+A `custom_certificate` block (within `tls_intercept`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -1113,13 +1283,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-intercept-custom-certificate-custom-hash-algorithms"></a>
 
-**TLS Intercept Custom Certificate Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `tls_intercept.custom_certificate`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="tls-intercept-custom-certificate-private-key"></a>
 
-**TLS Intercept Custom Certificate Private Key**
+**Private Key**
+
+A `private_key` block (within `tls_intercept.custom_certificate`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tls-intercept-custom-certificate-private-key-blindfold-secret-info) below.
 
@@ -1127,7 +1301,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-intercept-custom-certificate-private-key-blindfold-secret-info"></a>
 
-**TLS Intercept Custom Certificate Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `tls_intercept.custom_certificate.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1137,7 +1313,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-intercept-custom-certificate-private-key-clear-secret-info"></a>
 
-**TLS Intercept Custom Certificate Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `tls_intercept.custom_certificate.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1145,13 +1323,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-intercept-policy"></a>
 
-**TLS Intercept Policy**
+**Policy**
+
+A `policy` block (within `tls_intercept`) supports the following:
 
 &#x2022; [`interception_rules`](#interception-rules) - Optional Block<br>TLS Interception Rules. List of ordered rules to enable or disable for TLS interception<br>See [Interception Rules](#tls-intercept-policy-interception-rules) below.
 
 <a id="tls-intercept-policy-interception-rules"></a>
 
-**TLS Intercept Policy Interception Rules**
+**Interception Rules**
+
+An `interception_rules` block (within `tls_intercept.policy`) supports the following:
 
 &#x2022; [`disable_interception`](#disable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1161,7 +1343,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-intercept-policy-interception-rules-domain-match"></a>
 
-**TLS Intercept Policy Interception Rules Domain Match**
+**Domain Match**
+
+A `domain_match` block (within `tls_intercept.policy.interception_rules`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 

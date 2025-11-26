@@ -88,6 +88,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Action**
 
+An `action` block supports the following:
+
 &#x2022; [`policer_action`](#policer-action) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#action-policer-action) below.
 
 &#x2022; [`protocol_policer_action`](#protocol-policer-action) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#action-protocol-policer-action) below.
@@ -96,13 +98,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="action-policer-action"></a>
 
-**Action Policer Action**
+**Policer Action**
+
+A `policer_action` block (within `action`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#action-policer-action-ref) below.
 
 <a id="action-policer-action-ref"></a>
 
-**Action Policer Action Ref**
+**Ref**
+
+A `ref` block (within `action.policer_action`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -116,13 +122,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="action-protocol-policer-action"></a>
 
-**Action Protocol Policer Action**
+**Protocol Policer Action**
+
+A `protocol_policer_action` block (within `action`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#action-protocol-policer-action-ref) below.
 
 <a id="action-protocol-policer-action-ref"></a>
 
-**Action Protocol Policer Action Ref**
+**Ref**
+
+A `ref` block (within `action.protocol_policer_action`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -138,11 +148,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **IP Prefix Set**
 
+An `ip_prefix_set` block supports the following:
+
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
 
 <a id="ip-prefix-set-ref"></a>
 
-**IP Prefix Set Ref**
+**Ref**
+
+A `ref` block (within `ip_prefix_set`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -158,6 +172,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Port**
 
+A `port` block supports the following:
+
 &#x2022; [`all`](#all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`dns`](#dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -168,11 +184,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Prefix**
 
+A `prefix` block supports the following:
+
 &#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

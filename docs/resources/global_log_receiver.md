@@ -105,6 +105,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS Cloud Watch Receiver**
 
+An `aws_cloud_watch_receiver` block supports the following:
+
 &#x2022; [`aws_cred`](#aws-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#aws-cloud-watch-receiver-aws-cred) below.
 
 &#x2022; [`aws_region`](#aws-region) - Optional String<br>AWS Region. AWS Region Name
@@ -119,7 +121,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-cloud-watch-receiver-aws-cred"></a>
 
-**AWS Cloud Watch Receiver AWS Cred**
+**AWS Cred**
+
+An `aws_cred` block (within `aws_cloud_watch_receiver`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -129,7 +133,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-cloud-watch-receiver-batch"></a>
 
-**AWS Cloud Watch Receiver Batch**
+**Batch**
+
+A `batch` block (within `aws_cloud_watch_receiver`) supports the following:
 
 &#x2022; [`max_bytes`](#max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
@@ -145,7 +151,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-cloud-watch-receiver-compression"></a>
 
-**AWS Cloud Watch Receiver Compression**
+**Compression**
+
+A `compression` block (within `aws_cloud_watch_receiver`) supports the following:
 
 &#x2022; [`compression_default`](#compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -157,6 +165,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Azure Event Hubs Receiver**
 
+An `azure_event_hubs_receiver` block supports the following:
+
 &#x2022; [`connection_string`](#connection-string) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Connection String](#azure-event-hubs-receiver-connection-string) below.
 
 &#x2022; [`instance`](#instance) - Optional String<br>Event Hubs Instance. Event Hubs Instance name into which logs should be stored
@@ -165,7 +175,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-event-hubs-receiver-connection-string"></a>
 
-**Azure Event Hubs Receiver Connection String**
+**Connection String**
+
+A `connection_string` block (within `azure_event_hubs_receiver`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) below.
 
@@ -173,7 +185,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info"></a>
 
-**Azure Event Hubs Receiver Connection String Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `azure_event_hubs_receiver.connection_string`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -183,7 +197,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-event-hubs-receiver-connection-string-clear-secret-info"></a>
 
-**Azure Event Hubs Receiver Connection String Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `azure_event_hubs_receiver.connection_string`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -192,6 +208,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="azure-receiver"></a>
 
 **Azure Receiver**
+
+An `azure_receiver` block supports the following:
 
 &#x2022; [`batch`](#batch) - Optional Block<br>Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint<br>See [Batch](#azure-receiver-batch) below.
 
@@ -205,7 +223,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-receiver-batch"></a>
 
-**Azure Receiver Batch**
+**Batch**
+
+A `batch` block (within `azure_receiver`) supports the following:
 
 &#x2022; [`max_bytes`](#max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
@@ -221,7 +241,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-receiver-compression"></a>
 
-**Azure Receiver Compression**
+**Compression**
+
+A `compression` block (within `azure_receiver`) supports the following:
 
 &#x2022; [`compression_default`](#compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -231,7 +253,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-receiver-connection-string"></a>
 
-**Azure Receiver Connection String**
+**Connection String**
+
+A `connection_string` block (within `azure_receiver`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-receiver-connection-string-blindfold-secret-info) below.
 
@@ -239,7 +263,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-receiver-connection-string-blindfold-secret-info"></a>
 
-**Azure Receiver Connection String Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `azure_receiver.connection_string`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -249,7 +275,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-receiver-connection-string-clear-secret-info"></a>
 
-**Azure Receiver Connection String Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `azure_receiver.connection_string`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -257,7 +285,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-receiver-filename-options"></a>
 
-**Azure Receiver Filename Options**
+**Filename Options**
+
+A `filename_options` block (within `azure_receiver`) supports the following:
 
 &#x2022; [`custom_folder`](#custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
@@ -268,6 +298,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="datadog-receiver"></a>
 
 **Datadog Receiver**
+
+A `datadog_receiver` block supports the following:
 
 &#x2022; [`batch`](#batch) - Optional Block<br>Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint<br>See [Batch](#datadog-receiver-batch) below.
 
@@ -285,7 +317,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-batch"></a>
 
-**Datadog Receiver Batch**
+**Batch**
+
+A `batch` block (within `datadog_receiver`) supports the following:
 
 &#x2022; [`max_bytes`](#max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
@@ -301,7 +335,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-compression"></a>
 
-**Datadog Receiver Compression**
+**Compression**
+
+A `compression` block (within `datadog_receiver`) supports the following:
 
 &#x2022; [`compression_default`](#compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -311,7 +347,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-datadog-api-key"></a>
 
-**Datadog Receiver Datadog API Key**
+**Datadog API Key**
+
+A `datadog_api_key` block (within `datadog_receiver`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#datadog-receiver-datadog-api-key-blindfold-secret-info) below.
 
@@ -319,7 +357,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-datadog-api-key-blindfold-secret-info"></a>
 
-**Datadog Receiver Datadog API Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `datadog_receiver.datadog_api_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -329,7 +369,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-datadog-api-key-clear-secret-info"></a>
 
-**Datadog Receiver Datadog API Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `datadog_receiver.datadog_api_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -337,7 +379,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-use-tls"></a>
 
-**Datadog Receiver Use TLS**
+**Use TLS**
+
+An `use_tls` block (within `datadog_receiver`) supports the following:
 
 &#x2022; [`disable_verify_certificate`](#disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -357,7 +401,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-use-tls-mtls-enable"></a>
 
-**Datadog Receiver Use TLS mTLS Enable**
+**mTLS Enable**
+
+A `mtls_enable` block (within `datadog_receiver.use_tls`) supports the following:
 
 &#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
@@ -365,7 +411,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-use-tls-mtls-enable-key-url"></a>
 
-**Datadog Receiver Use TLS mTLS Enable Key URL**
+**Key URL**
+
+A `key_url` block (within `datadog_receiver.use_tls.mtls_enable`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
@@ -373,7 +421,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Datadog Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `datadog_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -383,7 +433,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**Datadog Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `datadog_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -392,6 +444,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="gcp-bucket-receiver"></a>
 
 **GCP Bucket Receiver**
+
+A `gcp_bucket_receiver` block supports the following:
 
 &#x2022; [`batch`](#batch) - Optional Block<br>Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint<br>See [Batch](#gcp-bucket-receiver-batch) below.
 
@@ -405,7 +459,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-bucket-receiver-batch"></a>
 
-**GCP Bucket Receiver Batch**
+**Batch**
+
+A `batch` block (within `gcp_bucket_receiver`) supports the following:
 
 &#x2022; [`max_bytes`](#max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
@@ -421,7 +477,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-bucket-receiver-compression"></a>
 
-**GCP Bucket Receiver Compression**
+**Compression**
+
+A `compression` block (within `gcp_bucket_receiver`) supports the following:
 
 &#x2022; [`compression_default`](#compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -431,7 +489,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-bucket-receiver-filename-options"></a>
 
-**GCP Bucket Receiver Filename Options**
+**Filename Options**
+
+A `filename_options` block (within `gcp_bucket_receiver`) supports the following:
 
 &#x2022; [`custom_folder`](#custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
@@ -441,7 +501,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-bucket-receiver-gcp-cred"></a>
 
-**GCP Bucket Receiver GCP Cred**
+**GCP Cred**
+
+A `gcp_cred` block (within `gcp_bucket_receiver`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -452,6 +514,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="http-receiver"></a>
 
 **HTTP Receiver**
+
+A `http_receiver` block supports the following:
 
 &#x2022; [`auth_basic`](#auth-basic) - Optional Block<br>Basic Authentication Credentials. Authentication parameters to access HTPP Log Receiver Endpoint<br>See [Auth Basic](#http-receiver-auth-basic) below.
 
@@ -471,7 +535,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-auth-basic"></a>
 
-**HTTP Receiver Auth Basic**
+**Auth Basic**
+
+An `auth_basic` block (within `http_receiver`) supports the following:
 
 &#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#http-receiver-auth-basic-password) below.
 
@@ -479,7 +545,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-auth-basic-password"></a>
 
-**HTTP Receiver Auth Basic Password**
+**Password**
+
+A `password` block (within `http_receiver.auth_basic`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-auth-basic-password-blindfold-secret-info) below.
 
@@ -487,7 +555,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-auth-basic-password-blindfold-secret-info"></a>
 
-**HTTP Receiver Auth Basic Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `http_receiver.auth_basic.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -497,7 +567,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-auth-basic-password-clear-secret-info"></a>
 
-**HTTP Receiver Auth Basic Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `http_receiver.auth_basic.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -505,13 +577,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-auth-token"></a>
 
-**HTTP Receiver Auth Token**
+**Auth Token**
+
+An `auth_token` block (within `http_receiver`) supports the following:
 
 &#x2022; [`token`](#token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#http-receiver-auth-token-token) below.
 
 <a id="http-receiver-auth-token-token"></a>
 
-**HTTP Receiver Auth Token Token**
+**Token**
+
+A `token` block (within `http_receiver.auth_token`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-auth-token-token-blindfold-secret-info) below.
 
@@ -519,7 +595,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-auth-token-token-blindfold-secret-info"></a>
 
-**HTTP Receiver Auth Token Token Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `http_receiver.auth_token.token`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -529,7 +607,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-auth-token-token-clear-secret-info"></a>
 
-**HTTP Receiver Auth Token Token Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `http_receiver.auth_token.token`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -537,7 +617,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-batch"></a>
 
-**HTTP Receiver Batch**
+**Batch**
+
+A `batch` block (within `http_receiver`) supports the following:
 
 &#x2022; [`max_bytes`](#max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
@@ -553,7 +635,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-compression"></a>
 
-**HTTP Receiver Compression**
+**Compression**
+
+A `compression` block (within `http_receiver`) supports the following:
 
 &#x2022; [`compression_default`](#compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -563,7 +647,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-use-tls"></a>
 
-**HTTP Receiver Use TLS**
+**Use TLS**
+
+An `use_tls` block (within `http_receiver`) supports the following:
 
 &#x2022; [`disable_verify_certificate`](#disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -583,7 +669,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-use-tls-mtls-enable"></a>
 
-**HTTP Receiver Use TLS mTLS Enable**
+**mTLS Enable**
+
+A `mtls_enable` block (within `http_receiver.use_tls`) supports the following:
 
 &#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
@@ -591,7 +679,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-use-tls-mtls-enable-key-url"></a>
 
-**HTTP Receiver Use TLS mTLS Enable Key URL**
+**Key URL**
+
+A `key_url` block (within `http_receiver.use_tls.mtls_enable`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
@@ -599,7 +689,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**HTTP Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `http_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -609,7 +701,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**HTTP Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `http_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -618,6 +712,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="kafka-receiver"></a>
 
 **Kafka Receiver**
+
+A `kafka_receiver` block supports the following:
 
 &#x2022; [`batch`](#batch) - Optional Block<br>Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint<br>See [Batch](#kafka-receiver-batch) below.
 
@@ -633,7 +729,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kafka-receiver-batch"></a>
 
-**Kafka Receiver Batch**
+**Batch**
+
+A `batch` block (within `kafka_receiver`) supports the following:
 
 &#x2022; [`max_bytes`](#max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
@@ -649,7 +747,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kafka-receiver-compression"></a>
 
-**Kafka Receiver Compression**
+**Compression**
+
+A `compression` block (within `kafka_receiver`) supports the following:
 
 &#x2022; [`compression_default`](#compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -659,7 +759,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kafka-receiver-use-tls"></a>
 
-**Kafka Receiver Use TLS**
+**Use TLS**
+
+An `use_tls` block (within `kafka_receiver`) supports the following:
 
 &#x2022; [`disable_verify_certificate`](#disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -679,7 +781,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kafka-receiver-use-tls-mtls-enable"></a>
 
-**Kafka Receiver Use TLS mTLS Enable**
+**mTLS Enable**
+
+A `mtls_enable` block (within `kafka_receiver.use_tls`) supports the following:
 
 &#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
@@ -687,7 +791,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kafka-receiver-use-tls-mtls-enable-key-url"></a>
 
-**Kafka Receiver Use TLS mTLS Enable Key URL**
+**Key URL**
+
+A `key_url` block (within `kafka_receiver.use_tls.mtls_enable`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
@@ -695,7 +801,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Kafka Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `kafka_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -705,7 +813,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**Kafka Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `kafka_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -715,6 +825,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **New Relic Receiver**
 
+A `new_relic_receiver` block supports the following:
+
 &#x2022; [`api_key`](#api-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Key](#new-relic-receiver-api-key) below.
 
 &#x2022; [`eu`](#eu) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -723,7 +835,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="new-relic-receiver-api-key"></a>
 
-**New Relic Receiver API Key**
+**API Key**
+
+An `api_key` block (within `new_relic_receiver`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#new-relic-receiver-api-key-blindfold-secret-info) below.
 
@@ -731,7 +845,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="new-relic-receiver-api-key-blindfold-secret-info"></a>
 
-**New Relic Receiver API Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `new_relic_receiver.api_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -741,7 +857,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="new-relic-receiver-api-key-clear-secret-info"></a>
 
-**New Relic Receiver API Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `new_relic_receiver.api_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -751,11 +869,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ns List**
 
+A `ns_list` block supports the following:
+
 &#x2022; [`namespaces`](#namespaces) - Optional List<br>namespaces. List of namespaces to stream logs for
 
 <a id="qradar-receiver"></a>
 
 **Qradar Receiver**
+
+A `qradar_receiver` block supports the following:
 
 &#x2022; [`batch`](#batch) - Optional Block<br>Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint<br>See [Batch](#qradar-receiver-batch) below.
 
@@ -769,7 +891,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="qradar-receiver-batch"></a>
 
-**Qradar Receiver Batch**
+**Batch**
+
+A `batch` block (within `qradar_receiver`) supports the following:
 
 &#x2022; [`max_bytes`](#max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
@@ -785,7 +909,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="qradar-receiver-compression"></a>
 
-**Qradar Receiver Compression**
+**Compression**
+
+A `compression` block (within `qradar_receiver`) supports the following:
 
 &#x2022; [`compression_default`](#compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -795,7 +921,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="qradar-receiver-use-tls"></a>
 
-**Qradar Receiver Use TLS**
+**Use TLS**
+
+An `use_tls` block (within `qradar_receiver`) supports the following:
 
 &#x2022; [`disable_verify_certificate`](#disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -815,7 +943,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="qradar-receiver-use-tls-mtls-enable"></a>
 
-**Qradar Receiver Use TLS mTLS Enable**
+**mTLS Enable**
+
+A `mtls_enable` block (within `qradar_receiver.use_tls`) supports the following:
 
 &#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
@@ -823,7 +953,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="qradar-receiver-use-tls-mtls-enable-key-url"></a>
 
-**Qradar Receiver Use TLS mTLS Enable Key URL**
+**Key URL**
+
+A `key_url` block (within `qradar_receiver.use_tls.mtls_enable`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
@@ -831,7 +963,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Qradar Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `qradar_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -841,7 +975,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**Qradar Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `qradar_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -850,6 +986,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="s3-receiver"></a>
 
 **S3 Receiver**
+
+A `s3_receiver` block supports the following:
 
 &#x2022; [`aws_cred`](#aws-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#s3-receiver-aws-cred) below.
 
@@ -865,7 +1003,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="s3-receiver-aws-cred"></a>
 
-**S3 Receiver AWS Cred**
+**AWS Cred**
+
+An `aws_cred` block (within `s3_receiver`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -875,7 +1015,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="s3-receiver-batch"></a>
 
-**S3 Receiver Batch**
+**Batch**
+
+A `batch` block (within `s3_receiver`) supports the following:
 
 &#x2022; [`max_bytes`](#max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
@@ -891,7 +1033,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="s3-receiver-compression"></a>
 
-**S3 Receiver Compression**
+**Compression**
+
+A `compression` block (within `s3_receiver`) supports the following:
 
 &#x2022; [`compression_default`](#compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -901,7 +1045,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="s3-receiver-filename-options"></a>
 
-**S3 Receiver Filename Options**
+**Filename Options**
+
+A `filename_options` block (within `s3_receiver`) supports the following:
 
 &#x2022; [`custom_folder`](#custom-folder) - Optional String<br>Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_]\[a-z0-9\-\._]*$/i`
 
@@ -912,6 +1058,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="splunk-receiver"></a>
 
 **Splunk Receiver**
+
+A `splunk_receiver` block supports the following:
 
 &#x2022; [`batch`](#batch) - Optional Block<br>Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint<br>See [Batch](#splunk-receiver-batch) below.
 
@@ -927,7 +1075,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-batch"></a>
 
-**Splunk Receiver Batch**
+**Batch**
+
+A `batch` block (within `splunk_receiver`) supports the following:
 
 &#x2022; [`max_bytes`](#max-bytes) - Optional Number<br>Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes
 
@@ -943,7 +1093,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-compression"></a>
 
-**Splunk Receiver Compression**
+**Compression**
+
+A `compression` block (within `splunk_receiver`) supports the following:
 
 &#x2022; [`compression_default`](#compression-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -953,7 +1105,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-splunk-hec-token"></a>
 
-**Splunk Receiver Splunk Hec Token**
+**Splunk Hec Token**
+
+A `splunk_hec_token` block (within `splunk_receiver`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#splunk-receiver-splunk-hec-token-blindfold-secret-info) below.
 
@@ -961,7 +1115,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-splunk-hec-token-blindfold-secret-info"></a>
 
-**Splunk Receiver Splunk Hec Token Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `splunk_receiver.splunk_hec_token`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -971,7 +1127,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-splunk-hec-token-clear-secret-info"></a>
 
-**Splunk Receiver Splunk Hec Token Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `splunk_receiver.splunk_hec_token`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -979,7 +1137,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-use-tls"></a>
 
-**Splunk Receiver Use TLS**
+**Use TLS**
+
+An `use_tls` block (within `splunk_receiver`) supports the following:
 
 &#x2022; [`disable_verify_certificate`](#disable-verify-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -999,7 +1159,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-use-tls-mtls-enable"></a>
 
-**Splunk Receiver Use TLS mTLS Enable**
+**mTLS Enable**
+
+A `mtls_enable` block (within `splunk_receiver.use_tls`) supports the following:
 
 &#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
@@ -1007,7 +1169,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-use-tls-mtls-enable-key-url"></a>
 
-**Splunk Receiver Use TLS mTLS Enable Key URL**
+**Key URL**
+
+A `key_url` block (within `splunk_receiver.use_tls.mtls_enable`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) below.
 
@@ -1015,7 +1179,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Splunk Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `splunk_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1025,7 +1191,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**Splunk Receiver Use TLS mTLS Enable Key URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `splunk_receiver.use_tls.mtls_enable.key_url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1035,11 +1203,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sumo Logic Receiver**
 
+A `sumo_logic_receiver` block supports the following:
+
 &#x2022; [`url`](#url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [URL](#sumo-logic-receiver-url) below.
 
 <a id="sumo-logic-receiver-url"></a>
 
-**Sumo Logic Receiver URL**
+**URL**
+
+An `url` block (within `sumo_logic_receiver`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#sumo-logic-receiver-url-blindfold-secret-info) below.
 
@@ -1047,7 +1219,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="sumo-logic-receiver-url-blindfold-secret-info"></a>
 
-**Sumo Logic Receiver URL Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `sumo_logic_receiver.url`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1057,7 +1231,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="sumo-logic-receiver-url-clear-secret-info"></a>
 
-**Sumo Logic Receiver URL Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `sumo_logic_receiver.url`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1066,6 +1242,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

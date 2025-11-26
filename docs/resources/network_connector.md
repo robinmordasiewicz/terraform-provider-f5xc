@@ -87,6 +87,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Enable Forward Proxy**
 
+An `enable_forward_proxy` block supports the following:
+
 &#x2022; [`connection_timeout`](#connection-timeout) - Optional Number  Defaults to `2000`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to upstream server.  The (2 seconds)
 
 &#x2022; [`max_connect_attempts`](#max-connect-attempts) - Optional Number  Defaults to `1`<br>Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server
@@ -101,7 +103,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept"></a>
 
-**Enable Forward Proxy TLS Intercept**
+**TLS Intercept**
+
+A `tls_intercept` block (within `enable_forward_proxy`) supports the following:
 
 &#x2022; [`custom_certificate`](#custom-certificate) - Optional Block<br>TLS Certificate. Handle to fetch certificate and key<br>See [Custom Certificate](#enable-forward-proxy-tls-intercept-custom-certificate) below.
 
@@ -117,7 +121,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate"></a>
 
-**Enable Forward Proxy TLS Intercept Custom Certificate**
+**Custom Certificate**
+
+A `custom_certificate` block (within `enable_forward_proxy.tls_intercept`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -133,13 +139,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms"></a>
 
-**Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `enable_forward_proxy.tls_intercept.custom_certificate`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key"></a>
 
-**Enable Forward Proxy TLS Intercept Custom Certificate Private Key**
+**Private Key**
+
+A `private_key` block (within `enable_forward_proxy.tls_intercept.custom_certificate`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info) below.
 
@@ -147,7 +157,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info"></a>
 
-**Enable Forward Proxy TLS Intercept Custom Certificate Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `enable_forward_proxy.tls_intercept.custom_certificate.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -157,7 +169,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info"></a>
 
-**Enable Forward Proxy TLS Intercept Custom Certificate Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `enable_forward_proxy.tls_intercept.custom_certificate.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -165,13 +179,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept-policy"></a>
 
-**Enable Forward Proxy TLS Intercept Policy**
+**Policy**
+
+A `policy` block (within `enable_forward_proxy.tls_intercept`) supports the following:
 
 &#x2022; [`interception_rules`](#interception-rules) - Optional Block<br>TLS Interception Rules. List of ordered rules to enable or disable for TLS interception<br>See [Interception Rules](#enable-forward-proxy-tls-intercept-policy-interception-rules) below.
 
 <a id="enable-forward-proxy-tls-intercept-policy-interception-rules"></a>
 
-**Enable Forward Proxy TLS Intercept Policy Interception Rules**
+**Interception Rules**
+
+An `interception_rules` block (within `enable_forward_proxy.tls_intercept.policy`) supports the following:
 
 &#x2022; [`disable_interception`](#disable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -181,7 +199,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match"></a>
 
-**Enable Forward Proxy TLS Intercept Policy Interception Rules Domain Match**
+**Domain Match**
+
+A `domain_match` block (within `enable_forward_proxy.tls_intercept.policy.interception_rules`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -193,11 +213,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sli To Global DR**
 
+A `sli_to_global_dr` block supports the following:
+
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#sli-to-global-dr-global-vn) below.
 
 <a id="sli-to-global-dr-global-vn"></a>
 
-**Sli To Global DR Global Vn**
+**Global Vn**
+
+A `global_vn` block (within `sli_to_global_dr`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -209,6 +233,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sli To Slo Snat**
 
+A `sli_to_slo_snat` block supports the following:
+
 &#x2022; [`default_gw_snat`](#default-gw-snat) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`interface_ip`](#interface-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -217,11 +243,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Slo To Global DR**
 
+A `slo_to_global_dr` block supports the following:
+
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#slo-to-global-dr-global-vn) below.
 
 <a id="slo-to-global-dr-global-vn"></a>
 
-**Slo To Global DR Global Vn**
+**Global Vn**
+
+A `global_vn` block (within `slo_to_global_dr`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -232,6 +262,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

@@ -93,6 +93,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **BGP Parameters**
 
+A `bgp_parameters` block supports the following:
+
 &#x2022; [`asn`](#asn) - Optional Number<br>ASN. Autonomous System Number
 
 &#x2022; [`from_site`](#from-site) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -104,6 +106,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="peers"></a>
 
 **Peers**
+
+A `peers` block supports the following:
 
 &#x2022; [`bfd_disabled`](#bfd-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -125,7 +129,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-bfd-enabled"></a>
 
-**Peers Bfd Enabled**
+**Bfd Enabled**
+
+A `bfd_enabled` block (within `peers`) supports the following:
 
 &#x2022; [`multiplier`](#multiplier) - Optional Number<br>Multiplier. Specify Number of missed packets to bring session down'
 
@@ -135,7 +141,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-external"></a>
 
-**Peers External**
+**External**
+
+An `external` block (within `peers`) supports the following:
 
 &#x2022; [`address`](#address) - Optional String<br>Peer Address. Specify IPv4 peer address
 
@@ -179,7 +187,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-external-family-inet"></a>
 
-**Peers External Family Inet**
+**Family Inet**
+
+A `family_inet` block (within `peers.external`) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -187,7 +197,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-external-interface"></a>
 
-**Peers External Interface**
+**Interface**
+
+An `interface` block (within `peers.external`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -197,13 +209,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-external-interface-list"></a>
 
-**Peers External Interface List**
+**Interface List**
+
+An `interface_list` block (within `peers.external`) supports the following:
 
 &#x2022; [`interfaces`](#interfaces) - Optional Block<br>Interface List. List of network interfaces<br>See [Interfaces](#peers-external-interface-list-interfaces) below.
 
 <a id="peers-external-interface-list-interfaces"></a>
 
-**Peers External Interface List Interfaces**
+**Interfaces**
+
+An `interfaces` block (within `peers.external.interface_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -213,7 +229,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-metadata"></a>
 
-**Peers Metadata**
+**Metadata**
+
+A `metadata` block (within `peers`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -221,13 +239,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-routing-policies"></a>
 
-**Peers Routing Policies**
+**Routing Policies**
+
+A `routing_policies` block (within `peers`) supports the following:
 
 &#x2022; [`route_policy`](#route-policy) - Optional Block<br>BGP Routing policy. Route policy to be applied<br>See [Route Policy](#peers-routing-policies-route-policy) below.
 
 <a id="peers-routing-policies-route-policy"></a>
 
-**Peers Routing Policies Route Policy**
+**Route Policy**
+
+A `route_policy` block (within `peers.routing_policies`) supports the following:
 
 &#x2022; [`all_nodes`](#all-nodes) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -241,13 +263,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="peers-routing-policies-route-policy-node-name"></a>
 
-**Peers Routing Policies Route Policy Node Name**
+**Node Name**
+
+A `node_name` block (within `peers.routing_policies.route_policy`) supports the following:
 
 &#x2022; [`node`](#node) - Optional List<br>Node of choice. Select BGP Session on which policy will be applied
 
 <a id="peers-routing-policies-route-policy-object-refs"></a>
 
-**Peers Routing Policies Route Policy Object Refs**
+**Object Refs**
+
+An `object_refs` block (within `peers.routing_policies.route_policy`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -263,6 +289,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Timeouts**
 
+A `timeouts` block supports the following:
+
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 &#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
@@ -275,13 +303,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Where**
 
+A `where` block supports the following:
+
 &#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
 
 <a id="where-site"></a>
 
-**Where Site**
+**Site**
+
+A `site` block (within `where`) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -293,7 +325,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site-ref"></a>
 
-**Where Site Ref**
+**Ref**
+
+A `ref` block (within `where.site`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -307,7 +341,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site"></a>
 
-**Where Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `where`) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -319,7 +355,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site-ref"></a>
 
-**Where Virtual Site Ref**
+**Ref**
+
+A `ref` block (within `where.virtual_site`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

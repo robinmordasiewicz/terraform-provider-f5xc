@@ -84,6 +84,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS Assume Role**
 
+An `aws_assume_role` block supports the following:
+
 &#x2022; [`custom_external_id`](#custom-external-id) - Optional String<br>External ID is Custom ID. External ID is Custom ID
 
 &#x2022; [`duration_seconds`](#duration-seconds) - Optional Number<br>Role Session Duration Seconds. The duration, in seconds of the role session
@@ -102,13 +104,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS Secret Key**
 
+An `aws_secret_key` block supports the following:
+
 &#x2022; [`access_key`](#access-key) - Optional String<br>Access Key ID. Access key ID for your AWS account
 
 &#x2022; [`secret_key`](#secret-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Key](#aws-secret-key-secret-key) below.
 
 <a id="aws-secret-key-secret-key"></a>
 
-**AWS Secret Key Secret Key**
+**Secret Key**
+
+A `secret_key` block (within `aws_secret_key`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#aws-secret-key-secret-key-blindfold-secret-info) below.
 
@@ -116,7 +122,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-secret-key-secret-key-blindfold-secret-info"></a>
 
-**AWS Secret Key Secret Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `aws_secret_key.secret_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -126,7 +134,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-secret-key-secret-key-clear-secret-info"></a>
 
-**AWS Secret Key Secret Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `aws_secret_key.secret_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -135,6 +145,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="azure-client-secret"></a>
 
 **Azure Client Secret**
+
+An `azure_client_secret` block supports the following:
 
 &#x2022; [`client_id`](#client-id) - Optional String<br>Client ID. Client ID for your Azure service principal
 
@@ -146,7 +158,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-client-secret-client-secret"></a>
 
-**Azure Client Secret Client Secret**
+**Client Secret**
+
+A `client_secret` block (within `azure_client_secret`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-client-secret-client-secret-blindfold-secret-info) below.
 
@@ -154,7 +168,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-client-secret-client-secret-blindfold-secret-info"></a>
 
-**Azure Client Secret Client Secret Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `azure_client_secret.client_secret`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -164,7 +180,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-client-secret-client-secret-clear-secret-info"></a>
 
-**Azure Client Secret Client Secret Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `azure_client_secret.client_secret`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -173,6 +191,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="azure-pfx-certificate"></a>
 
 **Azure Pfx Certificate**
+
+An `azure_pfx_certificate` block supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///<Base64 of certificate> format. Here <Base64 of certificate> is base64 of '.pfx' or '.p12' binary file
 
@@ -186,7 +206,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-pfx-certificate-password"></a>
 
-**Azure Pfx Certificate Password**
+**Password**
+
+A `password` block (within `azure_pfx_certificate`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#azure-pfx-certificate-password-blindfold-secret-info) below.
 
@@ -194,7 +216,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-pfx-certificate-password-blindfold-secret-info"></a>
 
-**Azure Pfx Certificate Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `azure_pfx_certificate.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -204,7 +228,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-pfx-certificate-password-clear-secret-info"></a>
 
-**Azure Pfx Certificate Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `azure_pfx_certificate.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -214,11 +240,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **GCP Cred File**
 
+A `gcp_cred_file` block supports the following:
+
 &#x2022; [`credential_file`](#credential-file) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Credential File](#gcp-cred-file-credential-file) below.
 
 <a id="gcp-cred-file-credential-file"></a>
 
-**GCP Cred File Credential File**
+**Credential File**
+
+A `credential_file` block (within `gcp_cred_file`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#gcp-cred-file-credential-file-blindfold-secret-info) below.
 
@@ -226,7 +256,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-cred-file-credential-file-blindfold-secret-info"></a>
 
-**GCP Cred File Credential File Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `gcp_cred_file.credential_file`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -236,7 +268,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-cred-file-credential-file-clear-secret-info"></a>
 
-**GCP Cred File Credential File Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `gcp_cred_file.credential_file`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -245,6 +279,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

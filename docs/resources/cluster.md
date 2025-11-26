@@ -120,6 +120,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Circuit Breaker**
 
+A `circuit_breaker` block supports the following:
+
 &#x2022; [`connection_limit`](#connection-limit) - Optional Number<br>Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit
 
 &#x2022; [`max_requests`](#max-requests) - Optional Number<br>Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count
@@ -134,11 +136,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Endpoint Subsets**
 
+An `endpoint_subsets` block supports the following:
+
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. List of keys that define a cluster subset class
 
 <a id="endpoints"></a>
 
 **Endpoints**
+
+An `endpoints` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -154,6 +160,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Health Checks**
 
+A `health_checks` block supports the following:
+
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
@@ -168,11 +176,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Http1 Config**
 
+A `http1_config` block supports the following:
+
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#http1-config-header-transformation) below.
 
 <a id="http1-config-header-transformation"></a>
 
-**Http1 Config Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `http1_config`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -186,11 +198,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Http2 Options**
 
+A `http2_options` block supports the following:
+
 &#x2022; [`enabled`](#enabled) - Optional Bool<br>HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections
 
 <a id="outlier-detection"></a>
 
 **Outlier Detection**
+
+An `outlier_detection` block supports the following:
 
 &#x2022; [`base_ejection_time`](#base-ejection-time) - Optional Number  Defaults to `30000ms`  Specified in milliseconds<br>Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail
 
@@ -206,6 +222,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Timeouts**
 
+A `timeouts` block supports the following:
+
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 &#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
@@ -217,6 +235,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="tls-parameters"></a>
 
 **TLS Parameters**
+
+A `tls_parameters` block supports the following:
 
 &#x2022; [`cert_params`](#cert-params) - Optional Block<br>Upstream Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store<br>See [Cert Params](#tls-parameters-cert-params) below.
 
@@ -236,7 +256,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-cert-params"></a>
 
-**TLS Parameters Cert Params**
+**Cert Params**
+
+A `cert_params` block (within `tls_parameters`) supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Client Certificate. Client TLS Certificate required for mTLS authentication<br>See [Certificates](#tls-parameters-cert-params-certificates) below.
 
@@ -250,7 +272,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-cert-params-certificates"></a>
 
-**TLS Parameters Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `tls_parameters.cert_params`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -264,7 +288,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-cert-params-validation-params"></a>
 
-**TLS Parameters Cert Params Validation Params**
+**Validation Params**
+
+A `validation_params` block (within `tls_parameters.cert_params`) supports the following:
 
 &#x2022; [`skip_hostname_verification`](#skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
@@ -276,13 +302,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-cert-params-validation-params-trusted-ca"></a>
 
-**TLS Parameters Cert Params Validation Params Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `tls_parameters.cert_params.validation_params`) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
 
 <a id="tls-parameters-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
-**TLS Parameters Cert Params Validation Params Trusted CA Trusted CA List**
+**Trusted CA List**
+
+A `trusted_ca_list` block (within `tls_parameters.cert_params.validation_params.trusted_ca`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -296,7 +326,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params"></a>
 
-**TLS Parameters Common Params**
+**Common Params**
+
+A `common_params` block (within `tls_parameters`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
 
@@ -310,7 +342,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates"></a>
 
-**TLS Parameters Common Params TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `tls_parameters.common_params`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -326,13 +360,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
 
-**TLS Parameters Common Params TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `tls_parameters.common_params.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="tls-parameters-common-params-tls-certificates-private-key"></a>
 
-**TLS Parameters Common Params TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `tls_parameters.common_params.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -340,7 +378,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**TLS Parameters Common Params TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `tls_parameters.common_params.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -350,7 +390,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-clear-secret-info"></a>
 
-**TLS Parameters Common Params TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `tls_parameters.common_params.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -358,7 +400,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
-**TLS Parameters Common Params Validation Params**
+**Validation Params**
+
+A `validation_params` block (within `tls_parameters.common_params`) supports the following:
 
 &#x2022; [`skip_hostname_verification`](#skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
@@ -370,13 +414,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
 
-**TLS Parameters Common Params Validation Params Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `tls_parameters.common_params.validation_params`) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
-**TLS Parameters Common Params Validation Params Trusted CA Trusted CA List**
+**Trusted CA List**
+
+A `trusted_ca_list` block (within `tls_parameters.common_params.validation_params.trusted_ca`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -391,6 +439,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="upstream-conn-pool-reuse-type"></a>
 
 **Upstream Conn Pool Reuse Type**
+
+An `upstream_conn_pool_reuse_type` block supports the following:
 
 &#x2022; [`disable_conn_pool_reuse`](#disable-conn-pool-reuse) - Optional Block<br>Empty. This can be used for messages where no values are needed
 

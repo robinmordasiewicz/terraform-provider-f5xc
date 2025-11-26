@@ -90,13 +90,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Token**
 
+An `api_token` block supports the following:
+
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#api-token-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#api-token-clear-secret-info) below.
 
 <a id="api-token-blindfold-secret-info"></a>
 
-**API Token Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `api_token`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -106,7 +110,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-token-clear-secret-info"></a>
 
-**API Token Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `api_token`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -116,11 +122,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **IP**
 
+An `ip` block supports the following:
+
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="password"></a>
 
 **Password**
+
+A `password` block supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#password-blindfold-secret-info) below.
 
@@ -128,7 +138,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="password-blindfold-secret-info"></a>
 
-**Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -138,7 +150,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="password-clear-secret-info"></a>
 
-**Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -147,6 +161,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

@@ -84,6 +84,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **K8s Cluster Role**
 
+A `k8s_cluster_role` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -94,6 +96,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Subjects**
 
+A `subjects` block supports the following:
+
 &#x2022; [`group`](#group) - Optional String<br>Group. Group id of the user group
 
 &#x2022; [`service_account`](#service-account) - Optional Block<br>ServiceAccountType<br>See [Service Account](#subjects-service-account) below.
@@ -102,7 +106,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="subjects-service-account"></a>
 
-**Subjects Service Account**
+**Service Account**
+
+A `service_account` block (within `subjects`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the service account
 
@@ -111,6 +117,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

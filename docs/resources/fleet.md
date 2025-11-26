@@ -157,6 +157,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Blocked Services**
 
+A `blocked_services` block supports the following:
+
 &#x2022; [`dns`](#dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
@@ -169,11 +171,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Bond Device List**
 
+A `bond_device_list` block supports the following:
+
 &#x2022; [`bond_devices`](#bond-devices) - Optional Block<br>Bond Devices. List of bond devices<br>See [Bond Devices](#bond-device-list-bond-devices) below.
 
 <a id="bond-device-list-bond-devices"></a>
 
-**Bond Device List Bond Devices**
+**Bond Devices**
+
+A `bond_devices` block (within `bond_device_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -189,13 +195,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bond-device-list-bond-devices-lacp"></a>
 
-**Bond Device List Bond Devices Lacp**
+**Lacp**
+
+A `lacp` block (within `bond_device_list.bond_devices`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="dc-cluster-group"></a>
 
 **Dc Cluster Group**
+
+A `dc_cluster_group` block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -207,6 +217,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dc Cluster Group Inside**
 
+A `dc_cluster_group_inside` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -217,11 +229,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Device List**
 
+A `device_list` block supports the following:
+
 &#x2022; [`devices`](#devices) - Optional Block<br>Devices. Configuration for all devices in the fleet. Examples of devices are - network interfaces, cameras, scanners etc. Configuration a device is applied on VER node if the VER node is member of this fleet and has an corresponding interface/device. The mapping from device configured in fleet with interface/device in VER node depends on the type of device and is documented in device instance specific sections<br>See [Devices](#device-list-devices) below.
 
 <a id="device-list-devices"></a>
 
-**Device List Devices**
+**Devices**
+
+A `devices` block (within `device_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Device Name. Name of the device including the unit number (e.g. eth0 or disk1). The name must match name of device in host-OS of node
 
@@ -231,7 +247,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="device-list-devices-network-device"></a>
 
-**Device List Devices Network Device**
+**Network Device**
+
+A `network_device` block (within `device_list.devices`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if use is NETWORK_INTERFACE_USE_OUTSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL if use is NETWORK_INTERFACE_USE_INSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE<br>See [Interface](#device-list-devices-network-device-interface) below.
 
@@ -239,7 +257,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="device-list-devices-network-device-interface"></a>
 
-**Device List Devices Network Device Interface**
+**Interface**
+
+An `interface` block (within `device_list.devices.network_device`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -255,6 +275,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Enable Vgpu**
 
+An `enable_vgpu` block supports the following:
+
 &#x2022; [`feature_type`](#feature-type) - Optional String  Defaults to `UNLICENSED`<br>Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`<br>Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server
 
 &#x2022; [`server_address`](#server-address) - Optional String<br>License Server Address. Set License Server Address
@@ -264,6 +286,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="inside-virtual-network"></a>
 
 **Inside Virtual Network**
+
+An `inside_virtual_network` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -279,11 +303,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Interface List**
 
+An `interface_list` block supports the following:
+
 &#x2022; [`interfaces`](#interfaces) - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet<br>See [Interfaces](#interface-list-interfaces) below.
 
 <a id="interface-list-interfaces"></a>
 
-**Interface List Interfaces**
+**Interfaces**
+
+An `interfaces` block (within `interface_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -295,13 +323,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Kubernetes Upgrade Drain**
 
+A `kubernetes_upgrade_drain` block supports the following:
+
 &#x2022; [`disable_upgrade_drain`](#disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`enable_upgrade_drain`](#enable-upgrade-drain) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#kubernetes-upgrade-drain-enable-upgrade-drain) below.
 
 <a id="kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
-**Kubernetes Upgrade Drain Enable Upgrade Drain**
+**Enable Upgrade Drain**
+
+An `enable_upgrade_drain` block (within `kubernetes_upgrade_drain`) supports the following:
 
 &#x2022; [`disable_vega_upgrade_mode`](#disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -315,6 +347,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Log Receiver**
 
+A `log_receiver` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -324,6 +358,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="network-connectors"></a>
 
 **Network Connectors**
+
+A `network_connectors` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -339,6 +375,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Network Firewall**
 
+A `network_firewall` block supports the following:
+
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
@@ -352,6 +390,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="outside-virtual-network"></a>
 
 **Outside Virtual Network**
+
+An `outside_virtual_network` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -367,13 +407,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Performance Enhancement Mode**
 
+A `performance_enhancement_mode` block supports the following:
+
 &#x2022; [`perf_mode_l3_enhanced`](#perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
 &#x2022; [`perf_mode_l7_enhanced`](#perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
-**Performance Enhancement Mode Perf Mode L3 Enhanced**
+**Perf Mode L3 Enhanced**
+
+A `perf_mode_l3_enhanced` block (within `performance_enhancement_mode`) supports the following:
 
 &#x2022; [`jumbo`](#jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -383,11 +427,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sriov Interfaces**
 
+A `sriov_interfaces` block supports the following:
+
 &#x2022; [`sriov_interface`](#sriov-interface) - Optional Block<br>Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration<br>See [Sriov Interface](#sriov-interfaces-sriov-interface) below.
 
 <a id="sriov-interfaces-sriov-interface"></a>
 
-**Sriov Interfaces Sriov Interface**
+**Sriov Interface**
+
+A `sriov_interface` block (within `sriov_interfaces`) supports the following:
 
 &#x2022; [`interface_name`](#interface-name) - Optional String<br>Name of physical interface. Name of SR-IOV physical interface
 
@@ -399,11 +447,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Storage Class List**
 
+A `storage_class_list` block supports the following:
+
 &#x2022; [`storage_classes`](#storage-classes) - Optional Block<br>List of Storage Classes. List of custom storage classes<br>See [Storage Classes](#storage-class-list-storage-classes) below.
 
 <a id="storage-class-list-storage-classes"></a>
 
-**Storage Class List Storage Classes**
+**Storage Classes**
+
+A `storage_classes` block (within `storage_class_list`) supports the following:
 
 &#x2022; [`advanced_storage_parameters`](#advanced-storage-parameters) - Optional Block<br>Advanced Parameters. Map of parameter name and string value
 
@@ -429,13 +481,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-class-list-storage-classes-custom-storage"></a>
 
-**Storage Class List Storage Classes Custom Storage**
+**Custom Storage**
+
+A `custom_storage` block (within `storage_class_list.storage_classes`) supports the following:
 
 &#x2022; [`yaml`](#yaml) - Optional String<br>Storage Class YAML. K8s YAML for StorageClass
 
 <a id="storage-class-list-storage-classes-hpe-storage"></a>
 
-**Storage Class List Storage Classes Hpe Storage**
+**Hpe Storage**
+
+A `hpe_storage` block (within `storage_class_list.storage_classes`) supports the following:
 
 &#x2022; [`allow_mutations`](#allow-mutations) - Optional String<br>allowMutations. mutation can override specified parameters
 
@@ -471,7 +527,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-class-list-storage-classes-netapp-trident"></a>
 
-**Storage Class List Storage Classes Netapp Trident**
+**Netapp Trident**
+
+A `netapp_trident` block (within `storage_class_list.storage_classes`) supports the following:
 
 &#x2022; [`selector`](#selector) - Optional Block<br>Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool
 
@@ -479,7 +537,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-class-list-storage-classes-pure-service-orchestrator"></a>
 
-**Storage Class List Storage Classes Pure Service Orchestrator**
+**Pure Service Orchestrator**
+
+A `pure_service_orchestrator` block (within `storage_class_list.storage_classes`) supports the following:
 
 &#x2022; [`backend`](#backend) - Optional String<br>Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool
 
@@ -491,11 +551,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Storage Device List**
 
+A `storage_device_list` block supports the following:
+
 &#x2022; [`storage_devices`](#storage-devices) - Optional Block<br>List of Storage Devices. List of custom storage devices<br>See [Storage Devices](#storage-device-list-storage-devices) below.
 
 <a id="storage-device-list-storage-devices"></a>
 
-**Storage Device List Storage Devices**
+**Storage Devices**
+
+A `storage_devices` block (within `storage_device_list`) supports the following:
 
 &#x2022; [`advanced_advanced_parameters`](#advanced-advanced-parameters) - Optional Block<br>Advanced Parameters. Map of parameter name and string value
 
@@ -511,7 +575,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-hpe-storage"></a>
 
-**Storage Device List Storage Devices Hpe Storage**
+**Hpe Storage**
+
+A `hpe_storage` block (within `storage_device_list.storage_devices`) supports the following:
 
 &#x2022; [`api_server_port`](#api-server-port) - Optional Number<br>Storage server Port. Enter Storage Server Port
 
@@ -529,7 +595,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-hpe-storage-iscsi-chap-password"></a>
 
-**Storage Device List Storage Devices Hpe Storage iSCSI Chap Password**
+**iSCSI Chap Password**
+
+An `iscsi_chap_password` block (within `storage_device_list.storage_devices.hpe_storage`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-blindfold-secret-info) below.
 
@@ -537,7 +605,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.hpe_storage.iscsi_chap_password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -547,7 +617,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-hpe-storage-iscsi-chap-password-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.hpe_storage.iscsi_chap_password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -555,7 +627,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-hpe-storage-password"></a>
 
-**Storage Device List Storage Devices Hpe Storage Password**
+**Password**
+
+A `password` block (within `storage_device_list.storage_devices.hpe_storage`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-hpe-storage-password-blindfold-secret-info) below.
 
@@ -563,7 +637,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-hpe-storage-password-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Hpe Storage Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.hpe_storage.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -573,7 +649,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-hpe-storage-password-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Hpe Storage Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.hpe_storage.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -581,7 +659,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident"></a>
 
-**Storage Device List Storage Devices Netapp Trident**
+**Netapp Trident**
+
+A `netapp_trident` block (within `storage_device_list.storage_devices`) supports the following:
 
 &#x2022; [`netapp_backend_ontap_nas`](#netapp-backend-ontap-nas) - Optional Block<br>Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS<br>See [Netapp Backend Ontap Nas](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas) below.
 
@@ -589,7 +669,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas**
+**Netapp Backend Ontap Nas**
+
+A `netapp_backend_ontap_nas` block (within `storage_device_list.storage_devices.netapp_trident`) supports the following:
 
 &#x2022; [`auto_export_cidrs`](#auto-export-cidrs) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Auto Export Cidrs](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs) below.
 
@@ -637,13 +719,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-auto-export-cidrs"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Auto Export Cidrs**
+**Auto Export Cidrs**
+
+An `auto_export_cidrs` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key**
+**Client Private Key**
+
+A `client_private_key` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-blindfold-secret-info) below.
 
@@ -651,7 +737,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.client_private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -661,7 +749,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-client-private-key-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.client_private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -669,7 +759,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password**
+**Password**
+
+A `password` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-blindfold-secret-info) below.
 
@@ -677,7 +769,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -687,7 +781,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-password-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -695,7 +791,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage**
+**Storage**
+
+A `storage` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional Block<br>Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection
 
@@ -705,7 +803,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-storage-volume-defaults"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage Volume Defaults**
+**Volume Defaults**
+
+A `volume_defaults` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.storage`) supports the following:
 
 &#x2022; [`adaptive_qos_policy`](#adaptive-qos-policy) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
 
@@ -735,7 +835,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-nas-volume-defaults"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Volume Defaults**
+**Volume Defaults**
+
+A `volume_defaults` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`) supports the following:
 
 &#x2022; [`adaptive_qos_policy`](#adaptive-qos-policy) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
 
@@ -765,7 +867,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San**
+**Netapp Backend Ontap San**
+
+A `netapp_backend_ontap_san` block (within `storage_device_list.storage_devices.netapp_trident`) supports the following:
 
 &#x2022; [`client_certificate`](#client-certificate) - Optional String<br>Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth
 
@@ -811,7 +915,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key**
+**Client Private Key**
+
+A `client_private_key` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-blindfold-secret-info) below.
 
@@ -819,7 +925,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.client_private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -829,7 +937,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-client-private-key-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.client_private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -837,7 +947,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password**
+**Password**
+
+A `password` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-blindfold-secret-info) below.
 
@@ -845,7 +957,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -855,7 +969,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-password-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -863,7 +979,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage**
+**Storage**
+
+A `storage` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional Block<br>Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection
 
@@ -873,7 +991,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-storage-volume-defaults"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage Volume Defaults**
+**Volume Defaults**
+
+A `volume_defaults` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.storage`) supports the following:
 
 &#x2022; [`adaptive_qos_policy`](#adaptive-qos-policy) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
 
@@ -903,7 +1023,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap**
+**Use Chap**
+
+An `use_chap` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`) supports the following:
 
 &#x2022; [`chap_initiator_secret`](#chap-initiator-secret) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Chap Initiator Secret](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret) below.
 
@@ -915,7 +1037,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret**
+**Chap Initiator Secret**
+
+A `chap_initiator_secret` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-blindfold-secret-info) below.
 
@@ -923,7 +1047,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -933,7 +1059,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-initiator-secret-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -941,7 +1069,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret**
+**Chap Target Initiator Secret**
+
+A `chap_target_initiator_secret` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-blindfold-secret-info) below.
 
@@ -949,7 +1079,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -959,7 +1091,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-use-chap-chap-target-initiator-secret-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -967,7 +1101,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-netapp-trident-netapp-backend-ontap-san-volume-defaults"></a>
 
-**Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Volume Defaults**
+**Volume Defaults**
+
+A `volume_defaults` block (within `storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`) supports the following:
 
 &#x2022; [`adaptive_qos_policy`](#adaptive-qos-policy) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
 
@@ -997,7 +1133,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator**
+**Pure Service Orchestrator**
+
+A `pure_service_orchestrator` block (within `storage_device_list.storage_devices`) supports the following:
 
 &#x2022; [`arrays`](#arrays) - Optional Block<br>Arrays Configuration. Device configuration for PSO Arrays<br>See [Arrays](#storage-device-list-storage-devices-pure-service-orchestrator-arrays) below.
 
@@ -1009,7 +1147,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays**
+**Arrays**
+
+An `arrays` block (within `storage_device_list.storage_devices.pure_service_orchestrator`) supports the following:
 
 &#x2022; [`flash_array`](#flash-array) - Optional Block<br>Flash Arrays. Specify what storage flash arrays should be managed the plugin<br>See [Flash Array](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array) below.
 
@@ -1017,7 +1157,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array**
+**Flash Array**
+
+A `flash_array` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays`) supports the following:
 
 &#x2022; [`default_fs_opt`](#default-fs-opt) - Optional String<br>Default Filesystem Options. Block volume default mkfs options. Not recommended to change!
 
@@ -1035,7 +1177,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays**
+**Flash Arrays**
+
+A `flash_arrays` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array`) supports the following:
 
 &#x2022; [`api_token`](#api-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Token](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token) below.
 
@@ -1047,7 +1191,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token**
+**API Token**
+
+An `api_token` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array.flash_arrays`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-blindfold-secret-info) below.
 
@@ -1055,7 +1201,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array.flash_arrays.api_token`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1065,7 +1213,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-array-flash-arrays-api-token-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array.flash_arrays.api_token`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1073,7 +1223,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade**
+**Flash Blade**
+
+A `flash_blade` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays`) supports the following:
 
 &#x2022; [`enable_snapshot_directory`](#enable-snapshot-directory) - Optional Bool<br>Enable Snapshot Directory. Enable/Disable FlashBlade snapshots
 
@@ -1083,7 +1235,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades**
+**Flash Blades**
+
+A `flash_blades` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade`) supports the following:
 
 &#x2022; [`api_token`](#api-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Token](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token) below.
 
@@ -1099,7 +1253,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token**
+**API Token**
+
+An `api_token` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade.flash_blades`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-blindfold-secret-info) below.
 
@@ -1107,7 +1263,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-blindfold-secret-info"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade.flash_blades.api_token`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -1117,7 +1275,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-device-list-storage-devices-pure-service-orchestrator-arrays-flash-blade-flash-blades-api-token-clear-secret-info"></a>
 
-**Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade.flash_blades.api_token`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -1127,11 +1287,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Storage Interface List**
 
+A `storage_interface_list` block supports the following:
+
 &#x2022; [`interfaces`](#interfaces) - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet<br>See [Interfaces](#storage-interface-list-interfaces) below.
 
 <a id="storage-interface-list-interfaces"></a>
 
-**Storage Interface List Interfaces**
+**Interfaces**
+
+An `interfaces` block (within `storage_interface_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1143,11 +1307,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Storage Static Routes**
 
+A `storage_static_routes` block supports the following:
+
 &#x2022; [`storage_routes`](#storage-routes) - Optional Block<br>List of Static Routes. List of storage static routes<br>See [Storage Routes](#storage-static-routes-storage-routes) below.
 
 <a id="storage-static-routes-storage-routes"></a>
 
-**Storage Static Routes Storage Routes**
+**Storage Routes**
+
+A `storage_routes` block (within `storage_static_routes`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of route attributes associated with the static route
 
@@ -1159,7 +1327,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-static-routes-storage-routes-nexthop"></a>
 
-**Storage Static Routes Storage Routes Nexthop**
+**Nexthop**
+
+A `nexthop` block (within `storage_static_routes.storage_routes`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#storage-static-routes-storage-routes-nexthop-interface) below.
 
@@ -1169,7 +1339,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-static-routes-storage-routes-nexthop-interface"></a>
 
-**Storage Static Routes Storage Routes Nexthop Interface**
+**Interface**
+
+An `interface` block (within `storage_static_routes.storage_routes.nexthop`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1183,7 +1355,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-static-routes-storage-routes-nexthop-nexthop-address"></a>
 
-**Storage Static Routes Storage Routes Nexthop Nexthop Address**
+**Nexthop Address**
+
+A `nexthop_address` block (within `storage_static_routes.storage_routes.nexthop`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#storage-static-routes-storage-routes-nexthop-nexthop-address-ipv4) below.
 
@@ -1191,19 +1365,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-static-routes-storage-routes-nexthop-nexthop-address-ipv4"></a>
 
-**Storage Static Routes Storage Routes Nexthop Nexthop Address IPv4**
+**IPv4**
+
+An `ipv4` block (within `storage_static_routes.storage_routes.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
 <a id="storage-static-routes-storage-routes-nexthop-nexthop-address-ipv6"></a>
 
-**Storage Static Routes Storage Routes Nexthop Nexthop Address IPv6**
+**IPv6**
+
+An `ipv6` block (within `storage_static_routes.storage_routes.nexthop.nexthop_address`) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 <a id="storage-static-routes-storage-routes-subnets"></a>
 
-**Storage Static Routes Storage Routes Subnets**
+**Subnets**
+
+A `subnets` block (within `storage_static_routes.storage_routes`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#storage-static-routes-storage-routes-subnets-ipv4) below.
 
@@ -1211,7 +1391,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-static-routes-storage-routes-subnets-ipv4"></a>
 
-**Storage Static Routes Storage Routes Subnets IPv4**
+**IPv4**
+
+An `ipv4` block (within `storage_static_routes.storage_routes.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
 
@@ -1219,7 +1401,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="storage-static-routes-storage-routes-subnets-ipv6"></a>
 
-**Storage Static Routes Storage Routes Subnets IPv6**
+**IPv6**
+
+An `ipv6` block (within `storage_static_routes.storage_routes.subnets`) supports the following:
 
 &#x2022; [`plen`](#plen) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
 
@@ -1228,6 +1412,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -1240,6 +1426,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="usb-policy"></a>
 
 **Usb Policy**
+
+An `usb_policy` block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 

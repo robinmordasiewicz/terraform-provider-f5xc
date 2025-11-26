@@ -86,6 +86,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Infra**
 
+An `infra` block supports the following:
+
 &#x2022; [`availability_zone`](#availability-zone) - Optional String<br>Availability Zone. An Availability Zone is a high-availability offering that protects your applications and data from datacenter failures
 
 &#x2022; [`certified_hw`](#certified-hw) - Optional String<br>Certified Hardware. certified HW name used to map with F5XC certified_hardware definition
@@ -114,7 +116,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info"></a>
 
-**Infra Hw Info**
+**Hw Info**
+
+A `hw_info` block (within `infra`) supports the following:
 
 &#x2022; [`bios`](#bios) - Optional Block<br>Bios Data. BIOS information<br>See [Bios](#infra-hw-info-bios) below.
 
@@ -144,7 +148,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-bios"></a>
 
-**Infra Hw Info Bios**
+**Bios**
+
+A `bios` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`date`](#date) - Optional String<br>Date. information from /sys/class/dmi/id/bios_date
 
@@ -154,7 +160,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-board"></a>
 
-**Infra Hw Info Board**
+**Board**
+
+A `board` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`asset_tag`](#asset-tag) - Optional String<br>Asset Tag. information from /sys/class/dmi/id/board_asset_tag
 
@@ -168,7 +176,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-chassis"></a>
 
-**Infra Hw Info Chassis**
+**Chassis**
+
+A `chassis` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`asset_tag`](#asset-tag) - Optional String<br>Asset Tag. information from /sys/class/dmi/id/chassis_asset_tag
 
@@ -182,7 +192,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-cpu"></a>
 
-**Infra Hw Info CPU**
+**CPU**
+
+A `cpu` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`cache`](#cache) - Optional Number<br>Cache. CPU cache size in KB
 
@@ -200,7 +212,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-gpu"></a>
 
-**Infra Hw Info GPU**
+**GPU**
+
+A `gpu` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`cuda_version`](#cuda-version) - Optional String<br>Cuda Version. GPU Cuda Version
 
@@ -210,7 +224,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-gpu-gpu-device"></a>
 
-**Infra Hw Info GPU GPU Device**
+**GPU Device**
+
+A `gpu_device` block (within `infra.hw_info.gpu`) supports the following:
 
 &#x2022; [`id`](#id) - Optional String<br>GPU ID. GPU ID
 
@@ -220,7 +236,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-kernel"></a>
 
-**Infra Hw Info Kernel**
+**Kernel**
+
+A `kernel` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`architecture`](#architecture) - Optional String<br>Architecture. kernel architecture
 
@@ -230,7 +248,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-memory"></a>
 
-**Infra Hw Info Memory**
+**Memory**
+
+A `memory` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`size_mb`](#size-mb) - Optional Number<br>RAM. RAM size in MB
 
@@ -240,7 +260,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-network"></a>
 
-**Infra Hw Info Network**
+**Network**
+
+A `network` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`driver`](#driver) - Optional String<br>Driver. driver of device, eg. e1000e
 
@@ -260,7 +282,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-os"></a>
 
-**Infra Hw Info OS**
+**OS**
+
+An `os` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`architecture`](#architecture) - Optional String<br>Architecture. Architecture of OS
 
@@ -274,7 +298,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-product"></a>
 
-**Infra Hw Info Product**
+**Product**
+
+A `product` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. product name, eg. for AWS m5a.xlarge. Info taken from /sys/class/dmi/id/product_name
 
@@ -286,7 +312,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-storage"></a>
 
-**Infra Hw Info Storage**
+**Storage**
+
+A `storage` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`driver`](#driver) - Optional String<br>Driver. driver of device
 
@@ -302,7 +330,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-hw-info-usb"></a>
 
-**Infra Hw Info Usb**
+**Usb**
+
+An `usb` block (within `infra.hw_info`) supports the following:
 
 &#x2022; [`address`](#address) - Optional Number<br>Address. Address of the device on the bus in decimal
 
@@ -344,7 +374,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-internet-proxy"></a>
 
-**Infra Internet Proxy**
+**Internet Proxy**
+
+An `internet_proxy` block (within `infra`) supports the following:
 
 &#x2022; [`http_proxy`](#http-proxy) - Optional String<br>HTTP PROXY. It will be used as the proxy URL for HTTP requests and HTTPS requests unless overridden by HTTPSProxy or NoProxy
 
@@ -356,13 +388,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra-sw-info"></a>
 
-**Infra Sw Info**
+**Sw Info**
+
+A `sw_info` block (within `infra`) supports the following:
 
 &#x2022; [`sw_version`](#sw-version) - Optional String<br>SW Version. SW Version in the site
 
 <a id="passport"></a>
 
 **Passport**
+
+A `passport` block supports the following:
 
 &#x2022; [`cluster_name`](#cluster-name) - Optional String<br>Cluster Name
 
@@ -387,6 +423,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

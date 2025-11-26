@@ -86,6 +86,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS Tgw Site**
 
+An `aws_tgw_site` block supports the following:
+
 &#x2022; [`cred`](#cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cred](#aws-tgw-site-cred) below.
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#aws-tgw-site-site) below.
@@ -94,7 +96,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site-cred"></a>
 
-**AWS Tgw Site Cred**
+**Cred**
+
+A `cred` block (within `aws_tgw_site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -104,7 +108,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site-site"></a>
 
-**AWS Tgw Site Site**
+**Site**
+
+A `site` block (within `aws_tgw_site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -114,13 +120,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site-vpc-attachments"></a>
 
-**AWS Tgw Site Vpc Attachments**
+**Vpc Attachments**
+
+A `vpc_attachments` block (within `aws_tgw_site`) supports the following:
 
 &#x2022; [`vpc_list`](#vpc-list) - Optional Block<br>VPC List<br>See [Vpc List](#aws-tgw-site-vpc-attachments-vpc-list) below.
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list"></a>
 
-**AWS Tgw Site Vpc Attachments Vpc List**
+**Vpc List**
+
+A `vpc_list` block (within `aws_tgw_site.vpc_attachments`) supports the following:
 
 &#x2022; [`custom_routing`](#custom-routing) - Optional Block<br>AWS Route Table List. AWS Route Table List<br>See [Custom Routing](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) below.
 
@@ -134,13 +144,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing"></a>
 
-**AWS Tgw Site Vpc Attachments Vpc List Custom Routing**
+**Custom Routing**
+
+A `custom_routing` block (within `aws_tgw_site.vpc_attachments.vpc_list`) supports the following:
 
 &#x2022; [`route_tables`](#route-tables) - Optional Block<br>List of route tables. Route Tables<br>See [Route Tables](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables) below.
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables"></a>
 
-**AWS Tgw Site Vpc Attachments Vpc List Custom Routing Route Tables**
+**Route Tables**
+
+A `route_tables` block (within `aws_tgw_site.vpc_attachments.vpc_list.custom_routing`) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional String<br>Route table ID. Route table ID
 
@@ -148,7 +162,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-default-route"></a>
 
-**AWS Tgw Site Vpc Attachments Vpc List Default Route**
+**Default Route**
+
+A `default_route` block (within `aws_tgw_site.vpc_attachments.vpc_list`) supports the following:
 
 &#x2022; [`all_route_tables`](#all-route-tables) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -156,7 +172,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables"></a>
 
-**AWS Tgw Site Vpc Attachments Vpc List Default Route Selective Route Tables**
+**Selective Route Tables**
+
+A `selective_route_tables` block (within `aws_tgw_site.vpc_attachments.vpc_list.default_route`) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional List<br>Route table ID. Route table ID
 
@@ -164,13 +182,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Azure Vnet Site**
 
+An `azure_vnet_site` block supports the following:
+
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#azure-vnet-site-site) below.
 
 &#x2022; [`vnet_attachments`](#vnet-attachments) - Optional Block<br>VNET Attachments<br>See [Vnet Attachments](#azure-vnet-site-vnet-attachments) below.
 
 <a id="azure-vnet-site-site"></a>
 
-**Azure Vnet Site Site**
+**Site**
+
+A `site` block (within `azure_vnet_site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -180,13 +202,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-vnet-site-vnet-attachments"></a>
 
-**Azure Vnet Site Vnet Attachments**
+**Vnet Attachments**
+
+A `vnet_attachments` block (within `azure_vnet_site`) supports the following:
 
 &#x2022; [`vnet_list`](#vnet-list) - Optional Block<br>VNET List<br>See [Vnet List](#azure-vnet-site-vnet-attachments-vnet-list) below.
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list"></a>
 
-**Azure Vnet Site Vnet Attachments Vnet List**
+**Vnet List**
+
+A `vnet_list` block (within `azure_vnet_site.vnet_attachments`) supports the following:
 
 &#x2022; [`custom_routing`](#custom-routing) - Optional Block<br>List Azure Route Table with Static Route. List Azure Route Table with Static Route<br>See [Custom Routing](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) below.
 
@@ -202,13 +228,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing"></a>
 
-**Azure Vnet Site Vnet Attachments Vnet List Custom Routing**
+**Custom Routing**
+
+A `custom_routing` block (within `azure_vnet_site.vnet_attachments.vnet_list`) supports the following:
 
 &#x2022; [`route_tables`](#route-tables) - Optional Block<br>List of route tables with static routes. Route Tables with static routes<br>See [Route Tables](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) below.
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables"></a>
 
-**Azure Vnet Site Vnet Attachments Vnet List Custom Routing Route Tables**
+**Route Tables**
+
+A `route_tables` block (within `azure_vnet_site.vnet_attachments.vnet_list.custom_routing`) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional String<br>Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>
 
@@ -216,7 +246,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-default-route"></a>
 
-**Azure Vnet Site Vnet Attachments Vnet List Default Route**
+**Default Route**
+
+A `default_route` block (within `azure_vnet_site.vnet_attachments.vnet_list`) supports the following:
 
 &#x2022; [`all_route_tables`](#all-route-tables) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -224,13 +256,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables"></a>
 
-**Azure Vnet Site Vnet Attachments Vnet List Default Route Selective Route Tables**
+**Selective Route Tables**
+
+A `selective_route_tables` block (within `azure_vnet_site.vnet_attachments.vnet_list.default_route`) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional List<br>Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>
 
 <a id="segment"></a>
 
 **Segment**
+
+A `segment` block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -241,6 +277,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

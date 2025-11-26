@@ -1004,12 +1004,10 @@ func transformDoc(filePath string) error {
 			bulletPrefix = ""
 		}
 
-		// Build the first line: bullet + name (as link for blue color) + Required/Optional + Type + defaults + specified in
-		// Azure RM pattern: property names as markdown links render in blue
+		// Build the first line: bullet + name + Required/Optional + Type + defaults + specified in
 		reqText := strings.Trim(attr.reqStr, "()")
-		anchorID := toAnchorName(attr.name)
 		var firstLine strings.Builder
-		firstLine.WriteString(fmt.Sprintf("%s[`%s`](#%s) - %s %s", bulletPrefix, attr.name, anchorID, reqText, typeStr))
+		firstLine.WriteString(fmt.Sprintf("%s`%s` - %s %s", bulletPrefix, attr.name, reqText, typeStr))
 		if defaultVal != "" {
 			firstLine.WriteString("  " + defaultVal)
 		}
@@ -1274,11 +1272,9 @@ func transformDoc(filePath string) error {
 					desc = strings.TrimSpace(desc)
 					desc = strings.TrimSuffix(desc, ".")
 
-					// Build the first line: bullet + name (as link for blue color) + Optional + Type + defaults + specified in
-					// Azure RM pattern: property names as markdown links render in blue
-					nestedAttrAnchor := toAnchorName(name)
+					// Build the first line: bullet + name + Optional + Type + defaults + specified in
 					var firstLine strings.Builder
-					firstLine.WriteString(fmt.Sprintf("&#x2022; [`%s`](#%s) - Optional %s", name, nestedAttrAnchor, typeStr))
+					firstLine.WriteString(fmt.Sprintf("&#x2022; `%s` - Optional %s", name, typeStr))
 					if defaultVal != "" {
 						firstLine.WriteString("  " + defaultVal)
 					}

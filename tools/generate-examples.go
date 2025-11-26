@@ -377,7 +377,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 	case "http_loadbalancer":
 		sb.WriteString("\n  // One of the arguments from this list \"advertise_custom advertise_on_public advertise_on_public_default_vip do_not_advertise\" must be set\n\n")
 		sb.WriteString("  advertise_on_public_default_vip = true\n\n")
-		sb.WriteString("  // One of the arguments from this list \"api_definition api_definitions api_specification disable_api_definition\" must be set\n\n")
+		sb.WriteString("  // One of the arguments from this list \"api_specification disable_api_definition\" must be set\n\n")
 		sb.WriteString("  disable_api_definition = true\n\n")
 		sb.WriteString("  // One of the arguments from this list \"disable_api_discovery enable_api_discovery\" must be set\n\n")
 		sb.WriteString("  enable_api_discovery {\n")
@@ -542,7 +542,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 	case "app_firewall":
 		sb.WriteString("\n  // One of the arguments from this list \"blocking monitoring\" must be set\n\n")
 		sb.WriteString("  blocking {}\n\n")
-		sb.WriteString("  // One of the arguments from this list \"custom_blocking_page use_default_blocking_page\" must be set\n\n")
+		sb.WriteString("  // One of the arguments from this list \"blocking_page use_default_blocking_page\" must be set\n\n")
 		sb.WriteString("  use_default_blocking_page {}\n\n")
 		sb.WriteString("  // One of the arguments from this list \"bot_protection_setting default_bot_setting\" must be set\n\n")
 		sb.WriteString("  bot_protection_setting {\n")
@@ -550,7 +550,7 @@ func addResourceSpecificConfig(sb *strings.Builder, resourceName string, schema 
 		sb.WriteString("    suspicious_bot_action = \"REPORT\"\n")
 		sb.WriteString("    good_bot_action       = \"REPORT\"\n")
 		sb.WriteString("  }\n\n")
-		sb.WriteString("  // One of the arguments from this list \"custom_detection_settings default_detection_settings\" must be set\n\n")
+		sb.WriteString("  // One of the arguments from this list \"ai_risk_based_blocking default_detection_settings detection_settings\" must be set\n\n")
 		sb.WriteString("  default_detection_settings {}\n\n")
 		sb.WriteString("  // One of the arguments from this list \"allow_all_response_codes allowed_response_codes\" must be set\n\n")
 		sb.WriteString("  allow_all_response_codes {}\n")

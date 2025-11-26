@@ -14,10 +14,10 @@ Manages a BigIPIrule resource in F5 Distributed Cloud for desired state for big-
 ## Example Usage
 
 ```terraform
-# Bigip Irule Data Source Example
-# Retrieves information about an existing Bigip Irule
+# BigIP IRULE Data Source Example
+# Retrieves information about an existing BigIP IRULE
 
-# Look up an existing Bigip Irule by name
+# Look up an existing BigIP IRULE by name
 data "f5xc_bigip_irule" "example" {
   name      = "example-bigip-irule"
   namespace = "system"

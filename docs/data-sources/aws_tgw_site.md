@@ -14,10 +14,10 @@ Manages a AWSTGWSite resource in F5 Distributed Cloud for deploying F5 sites con
 ## Example Usage
 
 ```terraform
-# Aws Tgw Site Data Source Example
-# Retrieves information about an existing Aws Tgw Site
+# AWS TGW Site Data Source Example
+# Retrieves information about an existing AWS TGW Site
 
-# Look up an existing Aws Tgw Site by name
+# Look up an existing AWS TGW Site by name
 data "f5xc_aws_tgw_site" "example" {
   name      = "example-aws-tgw-site"
   namespace = "system"

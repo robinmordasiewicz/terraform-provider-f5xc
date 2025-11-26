@@ -14,10 +14,10 @@ Manages DNS Domain in a given namespace. If one already exist it will give a err
 ## Example Usage
 
 ```terraform
-# Dns Domain Resource Example
+# DNS Domain Resource Example
 # Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
-# Basic Dns Domain configuration
+# Basic DNS Domain configuration
 resource "f5xc_dns_domain" "example" {
   name      = "example-dns-domain"
   namespace = "staging"

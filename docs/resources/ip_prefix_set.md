@@ -14,10 +14,10 @@ Manages ip_prefix_set creates a new object in the storage backend for metadata.n
 ## Example Usage
 
 ```terraform
-# Ip Prefix Set Resource Example
+# IP Prefix Set Resource Example
 # Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-# Basic Ip Prefix Set configuration
+# Basic IP Prefix Set configuration
 resource "f5xc_ip_prefix_set" "example" {
   name      = "example-ip-prefix-set"
   namespace = "shared"

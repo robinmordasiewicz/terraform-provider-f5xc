@@ -14,10 +14,10 @@ Manages DNS Compliance Checks Specification in a given namespace. If one already
 ## Example Usage
 
 ```terraform
-# Dns Compliance Checks Data Source Example
-# Retrieves information about an existing Dns Compliance Checks
+# DNS Compliance Checks Data Source Example
+# Retrieves information about an existing DNS Compliance Checks
 
-# Look up an existing Dns Compliance Checks by name
+# Look up an existing DNS Compliance Checks by name
 data "f5xc_dns_compliance_checks" "example" {
   name      = "example-dns-compliance-checks"
   namespace = "system"

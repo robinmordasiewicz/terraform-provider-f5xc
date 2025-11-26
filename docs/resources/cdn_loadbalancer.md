@@ -14,10 +14,10 @@ Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery 
 ## Example Usage
 
 ```terraform
-# Cdn Loadbalancer Resource Example
+# CDN Loadbalancer Resource Example
 # Manages a CDNLoadBalancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
-# Basic Cdn Loadbalancer configuration
+# Basic CDN Loadbalancer configuration
 resource "f5xc_cdn_loadbalancer" "example" {
   name      = "example-cdn-loadbalancer"
   namespace = "staging"

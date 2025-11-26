@@ -14,10 +14,10 @@ Manages DNS Load Balancer in a given namespace. If one already exist it will giv
 ## Example Usage
 
 ```terraform
-# Dns Load Balancer Data Source Example
-# Retrieves information about an existing Dns Load Balancer
+# DNS Load Balancer Data Source Example
+# Retrieves information about an existing DNS Load Balancer
 
-# Look up an existing Dns Load Balancer by name
+# Look up an existing DNS Load Balancer by name
 data "f5xc_dns_load_balancer" "example" {
   name      = "example-dns-load-balancer"
   namespace = "system"

@@ -14,10 +14,10 @@ Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP,
 ## Example Usage
 
 ```terraform
-# Fast Acl Rule Data Source Example
-# Retrieves information about an existing Fast Acl Rule
+# Fast ACL Rule Data Source Example
+# Retrieves information about an existing Fast ACL Rule
 
-# Look up an existing Fast Acl Rule by name
+# Look up an existing Fast ACL Rule by name
 data "f5xc_fast_acl_rule" "example" {
   name      = "example-fast-acl-rule"
   namespace = "system"

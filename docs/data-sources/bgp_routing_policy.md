@@ -14,10 +14,10 @@ Manages a BGPRoutingPolicy resource in F5 Distributed Cloud for bgp routing poli
 ## Example Usage
 
 ```terraform
-# Bgp Routing Policy Data Source Example
-# Retrieves information about an existing Bgp Routing Policy
+# BGP Routing Policy Data Source Example
+# Retrieves information about an existing BGP Routing Policy
 
-# Look up an existing Bgp Routing Policy by name
+# Look up an existing BGP Routing Policy by name
 data "f5xc_bgp_routing_policy" "example" {
   name      = "example-bgp-routing-policy"
   namespace = "system"

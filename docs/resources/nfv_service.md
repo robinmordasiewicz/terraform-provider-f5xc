@@ -20,7 +20,7 @@ Manages new NFV service with configured parameters in F5 Distributed Cloud.
 # Basic Nfv Service configuration
 resource "f5xc_nfv_service" "example" {
   name      = "example-nfv-service"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

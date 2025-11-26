@@ -20,7 +20,7 @@ Manages virtual_k8s will create the object in the storage backend for namespace 
 # Basic Virtual K8s configuration
 resource "f5xc_virtual_k8s" "example" {
   name      = "example-virtual-k8s"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"
@@ -44,7 +44,7 @@ resource "f5xc_virtual_k8s" "example" {
   // Default workload flavor reference
   default_flavor_ref {
     name      = "example-workload-flavor"
-    namespace = "system"
+    namespace = "staging"
   }
 }
 ```

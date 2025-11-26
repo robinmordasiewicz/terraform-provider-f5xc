@@ -20,7 +20,7 @@ Manages rate_limiter creates a new object in the storage backend for metadata.na
 # Basic Rate Limiter configuration
 resource "f5xc_rate_limiter" "example" {
   name      = "example-rate-limiter"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

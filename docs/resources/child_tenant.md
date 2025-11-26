@@ -20,7 +20,7 @@ Manages child_tenant config instance. Name of the object is the name of the chil
 # Basic Child Tenant configuration
 resource "f5xc_child_tenant" "example" {
   name      = "example-child-tenant"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -20,7 +20,7 @@ Manages a Workload resource in F5 Distributed Cloud for workload configuration.
 # Basic Workload configuration
 resource "f5xc_workload" "example" {
   name      = "example-workload"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

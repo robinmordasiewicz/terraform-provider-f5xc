@@ -20,7 +20,7 @@ Manages DDoS transit Deny List Rule in F5 Distributed Cloud.
 # Basic Infraprotect Deny List Rule configuration
 resource "f5xc_infraprotect_deny_list_rule" "example" {
   name      = "example-infraprotect-deny-list-rule"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

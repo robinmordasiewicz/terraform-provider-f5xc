@@ -20,7 +20,7 @@ Manages DNS Compliance Checks Specification in a given namespace. If one already
 # Basic Dns Compliance Checks configuration
 resource "f5xc_dns_compliance_checks" "example" {
   name      = "example-dns-compliance-checks"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -20,7 +20,7 @@ Manages Protocol Inspection Specification in a given namespace. If one already e
 # Basic Protocol Inspection configuration
 resource "f5xc_protocol_inspection" "example" {
   name      = "example-protocol-inspection"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

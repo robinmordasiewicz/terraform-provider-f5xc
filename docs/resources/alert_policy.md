@@ -20,7 +20,7 @@ Manages a AlertPolicy resource in F5 Distributed Cloud for alerting rules and no
 # Basic Alert Policy configuration
 resource "f5xc_alert_policy" "example" {
   name      = "example-alert-policy"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"
@@ -35,7 +35,7 @@ resource "f5xc_alert_policy" "example" {
   # Alert receivers
   receivers {
     name      = "slack-receiver"
-    namespace = "system"
+    namespace = "shared"
   }
 
   # Alert routes

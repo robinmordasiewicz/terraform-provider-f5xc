@@ -20,7 +20,7 @@ Manages a APIDefinition resource in F5 Distributed Cloud for x-required create a
 # Basic Api Definition configuration
 resource "f5xc_api_definition" "example" {
   name      = "example-api-definition"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

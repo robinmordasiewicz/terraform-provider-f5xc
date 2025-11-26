@@ -20,7 +20,7 @@ Manages a CertificateChain resource in F5 Distributed Cloud for certificate chai
 # Basic Certificate Chain configuration
 resource "f5xc_certificate_chain" "example" {
   name      = "example-certificate-chain"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

@@ -20,7 +20,7 @@ Manages Geolocation Set in F5 Distributed Cloud.
 # Basic Geo Location Set configuration
 resource "f5xc_geo_location_set" "example" {
   name      = "example-geo-location-set"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

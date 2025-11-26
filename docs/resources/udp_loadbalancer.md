@@ -20,7 +20,7 @@ Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UD
 # Basic Udp Loadbalancer configuration
 resource "f5xc_udp_loadbalancer" "example" {
   name      = "example-udp-loadbalancer"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"
@@ -43,7 +43,7 @@ resource "f5xc_udp_loadbalancer" "example" {
   origin_pools_weights {
     pool {
       name      = "dns-pool"
-      namespace = "system"
+      namespace = "staging"
     }
     weight = 1
   }

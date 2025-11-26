@@ -20,7 +20,7 @@ Manages network policy rule with configured parameters in specified namespace in
 # Basic Network Policy Rule configuration
 resource "f5xc_network_policy_rule" "example" {
   name      = "example-network-policy-rule"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

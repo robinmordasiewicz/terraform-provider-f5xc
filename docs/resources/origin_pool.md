@@ -20,7 +20,7 @@ Manages a OriginPool resource in F5 Distributed Cloud for defining backend serve
 # Basic Origin Pool configuration
 resource "f5xc_origin_pool" "example" {
   name      = "example-origin-pool"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"
@@ -93,7 +93,7 @@ resource "f5xc_origin_pool" "example" {
   // Health check configuration
   healthcheck {
     name      = "example-healthcheck"
-    namespace = "system"
+    namespace = "staging"
   }
 
   // Load balancing configuration

@@ -20,7 +20,7 @@ Manages a ForwardingClass resource in F5 Distributed Cloud for forwarding class 
 # Basic Forwarding Class configuration
 resource "f5xc_forwarding_class" "example" {
   name      = "example-forwarding-class"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

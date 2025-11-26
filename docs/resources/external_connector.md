@@ -20,7 +20,7 @@ Manages a ExternalConnector resource in F5 Distributed Cloud for external_connec
 # Basic External Connector configuration
 resource "f5xc_external_connector" "example" {
   name      = "example-external-connector"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

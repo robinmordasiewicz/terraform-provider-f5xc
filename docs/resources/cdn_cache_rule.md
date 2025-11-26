@@ -20,7 +20,7 @@ Manages a CDNCacheRule resource in F5 Distributed Cloud for cdn loadbalancer con
 # Basic Cdn Cache Rule configuration
 resource "f5xc_cdn_cache_rule" "example" {
   name      = "example-cdn-cache-rule"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

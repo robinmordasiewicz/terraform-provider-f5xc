@@ -20,7 +20,7 @@ Manages a ContainerRegistry resource in F5 Distributed Cloud for container image
 # Basic Container Registry configuration
 resource "f5xc_container_registry" "example" {
   name      = "example-container-registry"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

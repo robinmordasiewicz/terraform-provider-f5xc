@@ -20,7 +20,7 @@ Manages allowed_tenant config instance. Name of the object is name of the tenant
 # Basic Allowed Tenant configuration
 resource "f5xc_allowed_tenant" "example" {
   name      = "example-allowed-tenant"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

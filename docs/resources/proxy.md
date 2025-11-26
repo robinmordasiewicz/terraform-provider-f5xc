@@ -20,7 +20,7 @@ Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create con
 # Basic Proxy configuration
 resource "f5xc_proxy" "example" {
   name      = "example-proxy"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

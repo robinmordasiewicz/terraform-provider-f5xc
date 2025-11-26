@@ -20,7 +20,7 @@ Manages a ReportConfig resource in F5 Distributed Cloud for report configuration
 # Basic Report Config configuration
 resource "f5xc_report_config" "example" {
   name      = "example-report-config"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

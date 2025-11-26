@@ -20,7 +20,7 @@ Manages App type will create the configuration in namespace metadata.namespace i
 # Basic App Type configuration
 resource "f5xc_app_type" "example" {
   name      = "example-app-type"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -20,7 +20,7 @@ Manages data_type creates a new object in the storage backend for metadata.names
 # Basic Data Type configuration
 resource "f5xc_data_type" "example" {
   name      = "example-data-type"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

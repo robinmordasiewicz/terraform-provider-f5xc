@@ -20,7 +20,7 @@ Manages a AdvertisePolicy resource in F5 Distributed Cloud for advertise_policy 
 # Basic Advertise Policy configuration
 resource "f5xc_advertise_policy" "example" {
   name      = "example-advertise-policy"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

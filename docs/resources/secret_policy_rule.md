@@ -20,7 +20,7 @@ Manages secret_policy_rule creates a new object in storage backend for metadata.
 # Basic Secret Policy Rule configuration
 resource "f5xc_secret_policy_rule" "example" {
   name      = "example-secret-policy-rule"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

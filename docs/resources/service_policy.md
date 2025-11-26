@@ -20,7 +20,7 @@ Manages service_policy creates a new object in the storage backend for metadata.
 # Basic Service Policy configuration
 resource "f5xc_service_policy" "example" {
   name      = "example-service-policy"
-  namespace = "system"
+  namespace = "shared"
 
   labels = {
     environment = "production"

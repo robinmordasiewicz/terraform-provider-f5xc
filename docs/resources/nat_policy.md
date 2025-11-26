@@ -20,7 +20,7 @@ Manages a NatPolicy resource in F5 Distributed Cloud for nat policy create speci
 # Basic Nat Policy configuration
 resource "f5xc_nat_policy" "example" {
   name      = "example-nat-policy"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

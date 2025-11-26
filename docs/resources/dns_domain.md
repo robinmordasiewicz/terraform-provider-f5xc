@@ -20,7 +20,7 @@ Manages DNS Domain in a given namespace. If one already exist it will give a err
 # Basic Dns Domain configuration
 resource "f5xc_dns_domain" "example" {
   name      = "example-dns-domain"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

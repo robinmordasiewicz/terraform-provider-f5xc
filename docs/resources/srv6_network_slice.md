@@ -20,7 +20,7 @@ Manages srv6_network_slice creates a new object in the storage backend for metad
 # Basic Srv6 Network Slice configuration
 resource "f5xc_srv6_network_slice" "example" {
   name      = "example-srv6-network-slice"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

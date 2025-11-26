@@ -20,7 +20,7 @@ Manages endpoint will create the object in the storage backend for namespace met
 # Basic Endpoint configuration
 resource "f5xc_endpoint" "example" {
   name      = "example-endpoint"
-  namespace = "system"
+  namespace = "staging"
 
   labels = {
     environment = "production"

@@ -1,7 +1,7 @@
-# Dns Zone Data Source Example
-# Retrieves information about an existing Dns Zone
+# DNS Zone Data Source Example
+# Retrieves information about an existing DNS Zone
 
-# Look up an existing Dns Zone by name
+# Look up an existing DNS Zone by name
 data "f5xc_dns_zone" "example" {
   name      = "example-dns-zone"
   namespace = "system"

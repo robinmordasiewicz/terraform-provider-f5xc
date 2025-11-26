@@ -1,7 +1,7 @@
-# Api Discovery Data Source Example
-# Retrieves information about an existing Api Discovery
+# API Discovery Data Source Example
+# Retrieves information about an existing API Discovery
 
-# Look up an existing Api Discovery by name
+# Look up an existing API Discovery by name
 data "f5xc_api_discovery" "example" {
   name      = "example-api-discovery"
   namespace = "system"

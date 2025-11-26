@@ -1,7 +1,7 @@
-# Aws Vpc Site Resource Example
+# AWS VPC Site Resource Example
 # Manages a AWSVPCSite resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 
-# Basic Aws Vpc Site configuration
+# Basic AWS VPC Site configuration
 resource "f5xc_aws_vpc_site" "example" {
   name      = "example-aws-vpc-site"
   namespace = "system"

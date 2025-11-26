@@ -1,7 +1,7 @@
-# Fast Acl Data Source Example
-# Retrieves information about an existing Fast Acl
+# Fast ACL Data Source Example
+# Retrieves information about an existing Fast ACL
 
-# Look up an existing Fast Acl by name
+# Look up an existing Fast ACL by name
 data "f5xc_fast_acl" "example" {
   name      = "example-fast-acl"
   namespace = "system"

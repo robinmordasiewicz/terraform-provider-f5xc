@@ -1,7 +1,7 @@
-# Irule Data Source Example
-# Retrieves information about an existing Irule
+# IRULE Data Source Example
+# Retrieves information about an existing IRULE
 
-# Look up an existing Irule by name
+# Look up an existing IRULE by name
 data "f5xc_irule" "example" {
   name      = "example-irule"
   namespace = "system"

@@ -1,7 +1,7 @@
-# Api Definition Data Source Example
-# Retrieves information about an existing Api Definition
+# API Definition Data Source Example
+# Retrieves information about an existing API Definition
 
-# Look up an existing Api Definition by name
+# Look up an existing API Definition by name
 data "f5xc_api_definition" "example" {
   name      = "example-api-definition"
   namespace = "system"

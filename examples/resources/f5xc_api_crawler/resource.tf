@@ -1,7 +1,7 @@
-# Api Crawler Resource Example
+# API Crawler Resource Example
 # Manages a APICrawler resource in F5 Distributed Cloud.
 
-# Basic Api Crawler configuration
+# Basic API Crawler configuration
 resource "f5xc_api_crawler" "example" {
   name      = "example-api-crawler"
   namespace = "staging"

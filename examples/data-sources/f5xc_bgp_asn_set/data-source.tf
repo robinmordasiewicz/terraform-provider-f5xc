@@ -1,7 +1,7 @@
-# Bgp Asn Set Data Source Example
-# Retrieves information about an existing Bgp Asn Set
+# BGP Asn Set Data Source Example
+# Retrieves information about an existing BGP Asn Set
 
-# Look up an existing Bgp Asn Set by name
+# Look up an existing BGP Asn Set by name
 data "f5xc_bgp_asn_set" "example" {
   name      = "example-bgp-asn-set"
   namespace = "system"

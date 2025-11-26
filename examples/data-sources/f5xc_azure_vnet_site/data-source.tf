@@ -1,7 +1,7 @@
-# Azure Vnet Site Data Source Example
-# Retrieves information about an existing Azure Vnet Site
+# Azure VNET Site Data Source Example
+# Retrieves information about an existing Azure VNET Site
 
-# Look up an existing Azure Vnet Site by name
+# Look up an existing Azure VNET Site by name
 data "f5xc_azure_vnet_site" "example" {
   name      = "example-azure-vnet-site"
   namespace = "system"

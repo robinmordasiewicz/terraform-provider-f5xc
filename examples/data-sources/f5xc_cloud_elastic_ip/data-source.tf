@@ -1,7 +1,7 @@
-# Cloud Elastic Ip Data Source Example
-# Retrieves information about an existing Cloud Elastic Ip
+# Cloud Elastic IP Data Source Example
+# Retrieves information about an existing Cloud Elastic IP
 
-# Look up an existing Cloud Elastic Ip by name
+# Look up an existing Cloud Elastic IP by name
 data "f5xc_cloud_elastic_ip" "example" {
   name      = "example-cloud-elastic-ip"
   namespace = "system"

@@ -1,7 +1,7 @@
-# Aws Vpc Site Data Source Example
-# Retrieves information about an existing Aws Vpc Site
+# AWS VPC Site Data Source Example
+# Retrieves information about an existing AWS VPC Site
 
-# Look up an existing Aws Vpc Site by name
+# Look up an existing AWS VPC Site by name
 data "f5xc_aws_vpc_site" "example" {
   name      = "example-aws-vpc-site"
   namespace = "system"

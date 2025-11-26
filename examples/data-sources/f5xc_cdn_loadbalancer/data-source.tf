@@ -1,7 +1,7 @@
-# Cdn Loadbalancer Data Source Example
-# Retrieves information about an existing Cdn Loadbalancer
+# CDN Loadbalancer Data Source Example
+# Retrieves information about an existing CDN Loadbalancer
 
-# Look up an existing Cdn Loadbalancer by name
+# Look up an existing CDN Loadbalancer by name
 data "f5xc_cdn_loadbalancer" "example" {
   name      = "example-cdn-loadbalancer"
   namespace = "system"

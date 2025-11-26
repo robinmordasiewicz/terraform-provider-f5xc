@@ -1,7 +1,7 @@
-# Api Discovery Resource Example
+# API Discovery Resource Example
 # Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-# Basic Api Discovery configuration
+# Basic API Discovery configuration
 resource "f5xc_api_discovery" "example" {
   name      = "example-api-discovery"
   namespace = "staging"

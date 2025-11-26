@@ -1,7 +1,7 @@
-# App Api Group Resource Example
+# App API Group Resource Example
 # Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-# Basic App Api Group configuration
+# Basic App API Group configuration
 resource "f5xc_app_api_group" "example" {
   name      = "example-app-api-group"
   namespace = "staging"

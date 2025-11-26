@@ -1,7 +1,7 @@
-# Http Loadbalancer Data Source Example
-# Retrieves information about an existing Http Loadbalancer
+# HTTP Loadbalancer Data Source Example
+# Retrieves information about an existing HTTP Loadbalancer
 
-# Look up an existing Http Loadbalancer by name
+# Look up an existing HTTP Loadbalancer by name
 data "f5xc_http_loadbalancer" "example" {
   name      = "example-http-loadbalancer"
   namespace = "system"

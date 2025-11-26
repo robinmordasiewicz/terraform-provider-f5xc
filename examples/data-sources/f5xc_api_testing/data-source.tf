@@ -1,7 +1,7 @@
-# Api Testing Data Source Example
-# Retrieves information about an existing Api Testing
+# API Testing Data Source Example
+# Retrieves information about an existing API Testing
 
-# Look up an existing Api Testing by name
+# Look up an existing API Testing by name
 data "f5xc_api_testing" "example" {
   name      = "example-api-testing"
   namespace = "system"

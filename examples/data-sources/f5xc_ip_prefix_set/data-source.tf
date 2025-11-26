@@ -1,7 +1,7 @@
-# Ip Prefix Set Data Source Example
-# Retrieves information about an existing Ip Prefix Set
+# IP Prefix Set Data Source Example
+# Retrieves information about an existing IP Prefix Set
 
-# Look up an existing Ip Prefix Set by name
+# Look up an existing IP Prefix Set by name
 data "f5xc_ip_prefix_set" "example" {
   name      = "example-ip-prefix-set"
   namespace = "system"

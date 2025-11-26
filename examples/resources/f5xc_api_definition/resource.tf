@@ -1,7 +1,7 @@
-# Api Definition Resource Example
+# API Definition Resource Example
 # Manages a APIDefinition resource in F5 Distributed Cloud for x-required create api definition. configuration.
 
-# Basic Api Definition configuration
+# Basic API Definition configuration
 resource "f5xc_api_definition" "example" {
   name      = "example-api-definition"
   namespace = "shared"

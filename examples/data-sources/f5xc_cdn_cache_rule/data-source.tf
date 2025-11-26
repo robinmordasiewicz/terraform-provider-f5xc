@@ -1,7 +1,7 @@
-# Cdn Cache Rule Data Source Example
-# Retrieves information about an existing Cdn Cache Rule
+# CDN Cache Rule Data Source Example
+# Retrieves information about an existing CDN Cache Rule
 
-# Look up an existing Cdn Cache Rule by name
+# Look up an existing CDN Cache Rule by name
 data "f5xc_cdn_cache_rule" "example" {
   name      = "example-cdn-cache-rule"
   namespace = "system"

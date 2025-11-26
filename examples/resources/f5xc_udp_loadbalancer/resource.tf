@@ -1,7 +1,7 @@
-# Udp Loadbalancer Resource Example
+# UDP Loadbalancer Resource Example
 # Manages a UDPLoadBalancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 
-# Basic Udp Loadbalancer configuration
+# Basic UDP Loadbalancer configuration
 resource "f5xc_udp_loadbalancer" "example" {
   name      = "example-udp-loadbalancer"
   namespace = "staging"

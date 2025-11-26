@@ -1,7 +1,7 @@
-# Dns Load Balancer Resource Example
+# DNS Load Balancer Resource Example
 # Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
-# Basic Dns Load Balancer configuration
+# Basic DNS Load Balancer configuration
 resource "f5xc_dns_load_balancer" "example" {
   name      = "example-dns-load-balancer"
   namespace = "staging"

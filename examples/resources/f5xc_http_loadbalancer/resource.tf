@@ -1,7 +1,7 @@
-# Http Loadbalancer Resource Example
+# HTTP Loadbalancer Resource Example
 # Manages a HTTPLoadBalancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.
 
-# Basic Http Loadbalancer configuration
+# Basic HTTP Loadbalancer configuration
 resource "f5xc_http_loadbalancer" "example" {
   name      = "example-http-loadbalancer"
   namespace = "staging"

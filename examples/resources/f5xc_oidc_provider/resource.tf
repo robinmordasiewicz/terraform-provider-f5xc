@@ -1,7 +1,7 @@
-# Oidc Provider Resource Example
+# OIDC Provider Resource Example
 # Manages a OidcProvider resource in F5 Distributed Cloud for customcreatespectype is the spec to create oidc provider configuration.
 
-# Basic Oidc Provider configuration
+# Basic OIDC Provider configuration
 resource "f5xc_oidc_provider" "example" {
   name      = "example-oidc-provider"
   namespace = "staging"

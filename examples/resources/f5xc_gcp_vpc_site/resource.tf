@@ -1,7 +1,7 @@
-# Gcp Vpc Site Resource Example
+# GCP VPC Site Resource Example
 # Manages a GCPVPCSite resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.
 
-# Basic Gcp Vpc Site configuration
+# Basic GCP VPC Site configuration
 resource "f5xc_gcp_vpc_site" "example" {
   name      = "example-gcp-vpc-site"
   namespace = "system"

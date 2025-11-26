@@ -596,7 +596,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Optional: true,
 												},
 												"weight": schema.Int64Attribute{
-													MarkdownDescription: "Routing Weight. The weight (or priority) for the routes received from this connection. The default value is 10.",
+													MarkdownDescription: "Routing Weight. The weight (or priority) for the routes received from this connection. The. Defaults to `10`.",
 													Optional: true,
 												},
 											},
@@ -1353,7 +1353,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Optional: true,
 												},
 												"weight": schema.Int64Attribute{
-													MarkdownDescription: "Routing Weight. The weight (or priority) for the routes received from this connection. The default value is 10.",
+													MarkdownDescription: "Routing Weight. The weight (or priority) for the routes received from this connection. The. Defaults to `10`.",
 													Optional: true,
 												},
 											},

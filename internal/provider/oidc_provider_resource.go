@@ -194,7 +194,7 @@ func (r *OidcProviderResource) Schema(ctx context.Context, req resource.SchemaRe
 				MarkdownDescription: "OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider",
 				Attributes: map[string]schema.Attribute{
 					"allowed_clock_skew": schema.StringAttribute{
-						MarkdownDescription: "Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens. Default value is zero.",
+						MarkdownDescription: "Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens. Defaults to `zero`.",
 						Optional: true,
 					},
 					"authorization_url": schema.StringAttribute{

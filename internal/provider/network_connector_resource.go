@@ -124,11 +124,11 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 				MarkdownDescription: "Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and ip prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted ip-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server.",
 				Attributes: map[string]schema.Attribute{
 					"connection_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The default value is 2000 (2 seconds)",
+						MarkdownDescription: "Connection Timeout. The timeout for new network connections to upstream server. This is specified in milliseconds. The  (2 seconds). Defaults to `2000`.",
 						Optional: true,
 					},
 					"max_connect_attempts": schema.Int64Attribute{
-						MarkdownDescription: "Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to 1.",
+						MarkdownDescription: "Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server. Defaults to `1`.",
 						Optional: true,
 					},
 					"white_listed_ports": schema.ListAttribute{

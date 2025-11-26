@@ -3416,7 +3416,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"exact_path": schema.StringAttribute{
-							MarkdownDescription: "Path. Specifies the exact path to GraphQL endpoint. Default value is /graphql.",
+							MarkdownDescription: "Path. Specifies the exact path to GraphQL endpoint. Defaults to `/graphql`.",
 							Optional: true,
 						},
 						"exact_value": schema.StringAttribute{
@@ -4315,7 +4315,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
-											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
@@ -4373,7 +4373,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"append": schema.BoolAttribute{
-											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values. Default value is do not append",
+											MarkdownDescription: "Append. Should the value be appended? If true, the value is appended to existing values.  not append. Defaults to `do`.",
 											Optional: true,
 										},
 										"name": schema.StringAttribute{
@@ -5207,7 +5207,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "[OneOf: slow_ddos_mitigation, system_default_timeouts] Slow DDoS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users.",
 				Attributes: map[string]schema.Attribute{
 					"request_headers_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The default value is 10000 milliseconds. This setting provides protection against Slowloris attacks.",
+						MarkdownDescription: "Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The  milliseconds. This setting provides protection against Slowloris attacks. Defaults to `10000`.",
 						Optional: true,
 					},
 					"request_timeout": schema.Int64Attribute{

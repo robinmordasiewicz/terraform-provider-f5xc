@@ -1214,12 +1214,36 @@ func transformDoc(filePath string) error {
 
 			// Transform nested schema headers to BOLD text (not H3) to prevent Registry truncation
 			// Single-page rendering: H3→bold conversion allows full content to render
+			// Following AzureRM pattern: add context line showing parent relationship
 			if strings.HasPrefix(line, "### Nested Schema for") {
 				headerRegex := regexp.MustCompile(`### Nested Schema for \x60([^\x60]+)\x60`)
 				if m := headerRegex.FindStringSubmatch(line); m != nil {
-					displayName := toTitleCase(strings.ReplaceAll(m[1], ".", " "))
+					fullPath := m[1] // e.g., "active_service_policies.policies"
+
+					// Extract only the last segment to avoid redundant naming
+					// "active_service_policies.policies" → "Policies"
+					// "active_service_policies" → "Active Service Policies"
+					pathParts := strings.Split(fullPath, ".")
+					lastSegment := pathParts[len(pathParts)-1]
+					displayName := toTitleCase(lastSegment)
+
 					// Use bold text instead of H3 to prevent truncation
 					output.WriteString(fmt.Sprintf("**%s**\n\n", displayName))
+
+					// Add AzureRM-style context line showing parent relationship
+					// Example: "A `policies` block (within `active_service_policies`) supports the following:"
+					article := "A"
+					if startsWithVowel(lastSegment) {
+						article = "An"
+					}
+					if len(pathParts) > 1 {
+						// Has parent - show relationship
+						parentPath := strings.Join(pathParts[:len(pathParts)-1], ".")
+						output.WriteString(fmt.Sprintf("%s `%s` block (within `%s`) supports the following:\n\n", article, lastSegment, parentPath))
+					} else {
+						// Top-level block - no parent context needed
+						output.WriteString(fmt.Sprintf("%s `%s` block supports the following:\n\n", article, lastSegment))
+					}
 				}
 				continue
 			} else if strings.HasPrefix(line, "### ") && !strings.HasPrefix(line, "### Nested") && inNestedBlock {
@@ -1495,6 +1519,15 @@ func toTitleCase(s string) string {
 	result = normalizeAcronyms(result)
 
 	return result
+}
+
+// startsWithVowel checks if a string starts with a vowel (for "A" vs "An" grammar)
+func startsWithVowel(s string) bool {
+	if len(s) == 0 {
+		return false
+	}
+	firstChar := strings.ToLower(string(s[0]))
+	return firstChar == "a" || firstChar == "e" || firstChar == "i" || firstChar == "o" || firstChar == "u"
 }
 
 // normalizeAcronyms corrects acronym capitalization in text

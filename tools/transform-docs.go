@@ -976,9 +976,12 @@ func transformDoc(filePath string) error {
 	propagateOneOfConstraints(&specAttrs, oneOfConstraintMap)
 	propagateOneOfConstraints(&readOnlyAttrs, oneOfConstraintMap)
 
-	// Helper function to format a single attribute line
-	// prefix is used for blockquote formatting (e.g., "> - " for OneOf groups)
-	formatAttrLine := func(attr attrInfo, prefix string) string {
+	// Helper function to format a single attribute line with enhanced multi-line format
+	// noBullet: set to true when called from OneOf groups (which already add bullets)
+	// Format: • name - Optional/Required Type  Defaults to X  Specified in Y
+	//         <br>Possible values are A, B, C
+	//         <br>Description text here
+	formatAttrLine := func(attr attrInfo, noBullet bool) string {
 		typeStr := extractSimpleType(attr.typeInfo)
 
 		// Clean any existing "See [X](#x) below" references from description to avoid duplication
@@ -988,27 +991,60 @@ func transformDoc(filePath string) error {
 		desc = strings.TrimSpace(desc)
 		desc = strings.TrimSuffix(desc, ".")
 
+		// Extract metadata from description
+		defaultVal, desc := extractDefaults(desc)
+		specifiedIn, desc := extractSpecifiedIn(desc)
+		possibleValues, desc := extractPossibleValues(desc)
+		desc = strings.TrimSpace(desc)
+		desc = strings.TrimSuffix(desc, ".")
+
+		// Build the bullet prefix
+		bulletPrefix := "&#x2022; "
+		if noBullet {
+			bulletPrefix = ""
+		}
+
+		// Build the first line: bullet + name + Required/Optional + Type + defaults + specified in
+		reqText := strings.Trim(attr.reqStr, "()")
+		var firstLine strings.Builder
+		firstLine.WriteString(fmt.Sprintf("%s`%s` - %s %s", bulletPrefix, attr.name, reqText, typeStr))
+		if defaultVal != "" {
+			firstLine.WriteString("  " + defaultVal)
+		}
+		if specifiedIn != "" {
+			firstLine.WriteString("  " + specifiedIn)
+		}
+
+		// Handle nested blocks with "See ... below" links
 		anchorName := toAnchorName(attr.name)
-		// Only generate "See ... below" links if:
-		// 1. The anchor has actual content (not empty blocks)
-		// 2. The anchor is within safe rendering range (Terraform Registry truncates large pages)
-		if attr.hasNested && anchorsWithContent[anchorName] && safeAnchors[anchorName] {
-			if desc != "" {
-				return fmt.Sprintf("%s`%s` - %s %s. See [%s](#%s) below for details.",
-					prefix, attr.name, attr.reqStr, desc, toTitleCase(attr.name), anchorName)
-			}
-			return fmt.Sprintf("%s`%s` - %s See [%s](#%s) below for details.",
-				prefix, attr.name, attr.reqStr, toTitleCase(attr.name), anchorName)
+		hasNestedLink := attr.hasNested && anchorsWithContent[anchorName] && safeAnchors[anchorName]
+
+		// Build subsequent lines with <br> tags
+		var result strings.Builder
+		result.WriteString(firstLine.String())
+
+		// Add possible values on second line (if any)
+		if possibleValues != "" {
+			result.WriteString("<br>" + possibleValues)
 		}
+
+		// Add description on next line (if any)
 		if desc != "" {
-			return fmt.Sprintf("%s`%s` - %s %s (`%s`).", prefix, attr.name, attr.reqStr, desc, typeStr)
+			result.WriteString("<br>" + desc)
 		}
-		return fmt.Sprintf("%s`%s` - %s (`%s`).", prefix, attr.name, attr.reqStr, typeStr)
+
+		// Add "See below" link for nested blocks
+		if hasNestedLink {
+			result.WriteString(fmt.Sprintf("<br>See [%s](#%s) below for details.", toTitleCase(attr.name), anchorName))
+		}
+
+		return result.String()
 	}
 
 	// Helper function to write a standalone attribute (not in OneOf group)
+	// Standalone attributes get bullets from formatAttrLine (noBullet=false)
 	writeAttr := func(attr attrInfo) {
-		output.WriteString(formatAttrLine(attr, ""))
+		output.WriteString(formatAttrLine(attr, false))
 		output.WriteString("\n\n")
 	}
 
@@ -1020,14 +1056,15 @@ func transformDoc(filePath string) error {
 		// Write callout with bold title (no redundant "Note:" label - icon indicates it)
 		// All content stays inside the callout box using <br> for line breaks
 		// Use HTML bullet points (&#x2022;) for each line item
+		// Pass noBullet=true to formatAttrLine since we add bullets manually here
 		output.WriteString("-> **One of the following:**\n")
 		for i, attr := range attrs {
 			if i == 0 {
 				// First attribute on next line (continuation of callout) with bullet
-				output.WriteString(fmt.Sprintf("&#x2022; %s\n", formatAttrLine(attr, "")))
+				output.WriteString(fmt.Sprintf("&#x2022; %s\n", formatAttrLine(attr, true)))
 			} else {
 				// Subsequent attributes with <br> prefix and bullet for line breaks inside callout
-				output.WriteString(fmt.Sprintf("<br>&#x2022; %s\n", formatAttrLine(attr, "")))
+				output.WriteString(fmt.Sprintf("<br>&#x2022; %s\n", formatAttrLine(attr, true)))
 			}
 		}
 		output.WriteString("\n")
@@ -1215,6 +1252,7 @@ func transformDoc(filePath string) error {
 			}
 
 			// Transform attribute lines in nested blocks - original tfplugindocs format
+			// Uses same multi-line format as main attributes
 			if inNestedBlock && strings.HasPrefix(line, "- `") {
 				if matches := attrRegex.FindStringSubmatch(line); matches != nil {
 					name := matches[1]
@@ -1227,42 +1265,56 @@ func transformDoc(filePath string) error {
 					hasNested := strings.Contains(matches[3], "see [below for nested schema]")
 					typeStr := extractSimpleType(typeInfo)
 
+					// Extract metadata from description
+					defaultVal, desc := extractDefaults(desc)
+					specifiedIn, desc := extractSpecifiedIn(desc)
+					possibleValues, desc := extractPossibleValues(desc)
+					desc = strings.TrimSpace(desc)
+					desc = strings.TrimSuffix(desc, ".")
+
+					// Build the first line: bullet + name + Optional + Type + defaults + specified in
+					var firstLine strings.Builder
+					firstLine.WriteString(fmt.Sprintf("&#x2022; `%s` - Optional %s", name, typeStr))
+					if defaultVal != "" {
+						firstLine.WriteString("  " + defaultVal)
+					}
+					if specifiedIn != "" {
+						firstLine.WriteString("  " + specifiedIn)
+					}
+
+					// Build subsequent lines with <br> tags
+					var result strings.Builder
+					result.WriteString(firstLine.String())
+
+					// Add possible values on second line (if any)
+					if possibleValues != "" {
+						result.WriteString("<br>" + possibleValues)
+					}
+
+					// Add description on next line (if any)
+					if desc != "" {
+						result.WriteString("<br>" + desc)
+					}
+
+					// Add "See below" link for nested blocks if content exists
 					if hasNested {
-						// Extract the nested anchor and convert to simplified format
 						nestedAnchorRegex := regexp.MustCompile(`#nestedblock--([^)]+)`)
 						nestedAnchor := ""
 						if am := nestedAnchorRegex.FindStringSubmatch(matches[3]); am != nil {
-							// Convert to simplified anchor: underscores and -- become hyphens
 							nestedAnchor = strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(am[1], "_", "-"), "--", "-"))
 						}
-
-						// Only generate "See...below" link if the nested anchor has content
-						if nestedAnchor != "" && anchorsWithContent[nestedAnchor] && desc != "" {
-							output.WriteString(fmt.Sprintf("`%s` - (Optional) %s. See [%s](#%s) below.\n\n",
-								name, desc, toTitleCase(name), nestedAnchor))
-						} else if nestedAnchor != "" && anchorsWithContent[nestedAnchor] {
-							output.WriteString(fmt.Sprintf("`%s` - (Optional) See [%s](#%s) below.\n\n",
-								name, toTitleCase(name), nestedAnchor))
-						} else {
-							// No nested content - just output the description with type
-							if desc != "" {
-								output.WriteString(fmt.Sprintf("`%s` - (Optional) %s (`%s`).\n\n", name, desc, typeStr))
-							} else {
-								output.WriteString(fmt.Sprintf("`%s` - (Optional) (`%s`).\n\n", name, typeStr))
-							}
-						}
-					} else {
-						if desc != "" {
-							output.WriteString(fmt.Sprintf("`%s` - (Optional) %s (`%s`).\n\n", name, desc, typeStr))
-						} else {
-							output.WriteString(fmt.Sprintf("`%s` - (Optional) (`%s`).\n\n", name, typeStr))
+						if nestedAnchor != "" && anchorsWithContent[nestedAnchor] {
+							result.WriteString(fmt.Sprintf("<br>See [%s](#%s) below.", toTitleCase(name), nestedAnchor))
 						}
 					}
+
+					output.WriteString(result.String() + "\n\n")
 				}
 				continue
 			}
 
 			// Handle already-transformed attribute lines - format: `name` - (Optional) ...
+			// Also add bullet prefix if not already present
 			if inNestedBlock && strings.HasPrefix(line, "`") && strings.Contains(line, "` - (") {
 				// Already-transformed format: check for and remove links to empty anchors
 				seeRefRegex := regexp.MustCompile(`\s*See \[([^\]]+)\]\(#([^)]+)\) below[^.]*\.?`)
@@ -1277,6 +1329,10 @@ func transformDoc(filePath string) error {
 							line = line + "."
 						}
 					}
+				}
+				// Add bullet prefix for consistency with new format
+				if !strings.HasPrefix(line, "&#x2022;") {
+					line = "&#x2022; " + line
 				}
 				output.WriteString(line + "\n\n")
 				continue
@@ -1493,6 +1549,58 @@ func normalizeOneOfKey(constraint string) string {
 	fields := strings.Split(constraint, ", ")
 	sort.Strings(fields)
 	return strings.Join(fields, ", ")
+}
+
+// extractDefaults extracts "Defaults to X" patterns from description
+// Returns the default value and the cleaned description
+func extractDefaults(desc string) (defaultVal, cleanDesc string) {
+	// Match patterns like "Defaults to 30000ms or 30s" or "Defaults to `VALUE`"
+	defaultsRegex := regexp.MustCompile(`Defaults to ([^.]+?)(?:\.|$)`)
+	match := defaultsRegex.FindStringSubmatch(desc)
+	if match != nil {
+		defaultVal = "Defaults to " + strings.TrimSpace(match[1])
+		cleanDesc = defaultsRegex.ReplaceAllString(desc, "")
+	} else {
+		cleanDesc = desc
+	}
+	cleanDesc = strings.TrimSpace(cleanDesc)
+	// Remove trailing period if present after cleaning
+	cleanDesc = strings.TrimSuffix(cleanDesc, ".")
+	return
+}
+
+// extractSpecifiedIn extracts "Specified in X" patterns from description
+// Returns the specification and the cleaned description
+func extractSpecifiedIn(desc string) (specifiedIn, cleanDesc string) {
+	// Match patterns like "Specified in milliseconds" or "This is specified in milliseconds"
+	specRegex := regexp.MustCompile(`(?:This is s|S)pecified in ([^.]+?)(?:\.|$)`)
+	match := specRegex.FindStringSubmatch(desc)
+	if match != nil {
+		specifiedIn = "Specified in " + strings.TrimSpace(match[1])
+		cleanDesc = specRegex.ReplaceAllString(desc, "")
+	} else {
+		cleanDesc = desc
+	}
+	cleanDesc = strings.TrimSpace(cleanDesc)
+	cleanDesc = strings.TrimSuffix(cleanDesc, ".")
+	return
+}
+
+// extractPossibleValues extracts "Possible values are X, Y, Z" patterns from description
+// Returns the possible values string and the cleaned description
+func extractPossibleValues(desc string) (possibleValues, cleanDesc string) {
+	// Match patterns like "Possible values are `A`, `B`, `C`"
+	valuesRegex := regexp.MustCompile(`Possible values are ([^.]+?)(?:\.|$)`)
+	match := valuesRegex.FindStringSubmatch(desc)
+	if match != nil {
+		possibleValues = "Possible values are " + strings.TrimSpace(match[1])
+		cleanDesc = valuesRegex.ReplaceAllString(desc, "")
+	} else {
+		cleanDesc = desc
+	}
+	cleanDesc = strings.TrimSpace(cleanDesc)
+	cleanDesc = strings.TrimSuffix(cleanDesc, ".")
+	return
 }
 
 // NOTE: countH3Headings and shouldSplitToGuides functions removed

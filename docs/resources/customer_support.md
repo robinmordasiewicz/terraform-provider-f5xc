@@ -106,6 +106,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Comments**
 
+A `comments` block supports the following:
+
 &#x2022; [`attachment_ids`](#attachment-ids) - Optional List<br>Attachment IDs. Third party id of any attachment related to this ticket comment
 
 &#x2022; [`attachments_info`](#attachments-info) - Optional Block<br>Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have<br>See [Attachments Info](#comments-attachments-info) below.
@@ -122,7 +124,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="comments-attachments-info"></a>
 
-**Comments Attachments Info**
+**Attachments Info**
+
+An `attachments_info` block (within `comments`) supports the following:
 
 &#x2022; [`attachment`](#attachment) - Optional String<br>Attachment data. Any binary attachment (such as screenshots, plain text files, PDFs) encoded as base64 if used over HTTP
 
@@ -135,6 +139,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="relates-to"></a>
 
 **Relates To**
+
+A `relates_to` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -149,6 +155,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

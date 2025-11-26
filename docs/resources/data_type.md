@@ -88,6 +88,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules**
 
+A `rules` block supports the following:
+
 &#x2022; [`key_pattern`](#key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-pattern) below.
 
 &#x2022; [`key_value_pattern`](#key-value-pattern) - Optional Block<br>Key & Value Pattern. Search for specific key & value patterns in the specified sections<br>See [Key Value Pattern](#rules-key-value-pattern) below.
@@ -96,7 +98,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-key-pattern"></a>
 
-**Rules Key Pattern**
+**Key Pattern**
+
+A `key_pattern` block (within `rules`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-pattern-exact-values) below.
 
@@ -106,13 +110,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-key-pattern-exact-values"></a>
 
-**Rules Key Pattern Exact Values**
+**Exact Values**
+
+An `exact_values` block (within `rules.key_pattern`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 <a id="rules-key-value-pattern"></a>
 
-**Rules Key Value Pattern**
+**Key Value Pattern**
+
+A `key_value_pattern` block (within `rules`) supports the following:
 
 &#x2022; [`key_pattern`](#key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
 
@@ -120,7 +128,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-key-value-pattern-key-pattern"></a>
 
-**Rules Key Value Pattern Key Pattern**
+**Key Pattern**
+
+A `key_pattern` block (within `rules.key_value_pattern`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
 
@@ -130,13 +140,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-key-value-pattern-key-pattern-exact-values"></a>
 
-**Rules Key Value Pattern Key Pattern Exact Values**
+**Exact Values**
+
+An `exact_values` block (within `rules.key_value_pattern.key_pattern`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 <a id="rules-key-value-pattern-value-pattern"></a>
 
-**Rules Key Value Pattern Value Pattern**
+**Value Pattern**
+
+A `value_pattern` block (within `rules.key_value_pattern`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
 
@@ -146,13 +160,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-key-value-pattern-value-pattern-exact-values"></a>
 
-**Rules Key Value Pattern Value Pattern Exact Values**
+**Exact Values**
+
+An `exact_values` block (within `rules.key_value_pattern.value_pattern`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 <a id="rules-value-pattern"></a>
 
-**Rules Value Pattern**
+**Value Pattern**
+
+A `value_pattern` block (within `rules`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-value-pattern-exact-values) below.
 
@@ -162,13 +180,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-value-pattern-exact-values"></a>
 
-**Rules Value Pattern Exact Values**
+**Exact Values**
+
+An `exact_values` block (within `rules.value_pattern`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

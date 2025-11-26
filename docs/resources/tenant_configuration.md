@@ -86,17 +86,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Basic Configuration**
 
+A `basic_configuration` block supports the following:
+
 &#x2022; [`display_name`](#display-name) - Optional String<br>Display Name. Tenant display name in the login screen
 
 <a id="brute-force-detection-settings"></a>
 
 **Brute Force Detection Settings**
 
+A `brute_force_detection_settings` block supports the following:
+
 &#x2022; [`max_login_failures`](#max-login-failures) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
 
 <a id="password-policy"></a>
 
 **Password Policy**
+
+A `password_policy` block supports the following:
 
 &#x2022; [`digits`](#digits) - Optional Number<br>Min Number Of Digits. The number of digits required to be in the password string
 
@@ -117,6 +123,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

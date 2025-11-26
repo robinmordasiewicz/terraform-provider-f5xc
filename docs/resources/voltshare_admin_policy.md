@@ -86,6 +86,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Author Restrictions**
 
+An `author_restrictions` block supports the following:
+
 &#x2022; [`allow_all`](#allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`allow_list`](#allow-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Allow List](#author-restrictions-allow-list) below.
@@ -96,13 +98,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="author-restrictions-allow-list"></a>
 
-**Author Restrictions Allow List**
+**Allow List**
+
+An `allow_list` block (within `author_restrictions`) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-allow-list-custom-list) below.
 
 <a id="author-restrictions-allow-list-custom-list"></a>
 
-**Author Restrictions Allow List Custom List**
+**Custom List**
+
+A `custom_list` block (within `author_restrictions.allow_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
 
@@ -110,13 +116,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="author-restrictions-deny-list"></a>
 
-**Author Restrictions Deny List**
+**Deny List**
+
+A `deny_list` block (within `author_restrictions`) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-deny-list-custom-list) below.
 
 <a id="author-restrictions-deny-list-custom-list"></a>
 
-**Author Restrictions Deny List Custom List**
+**Custom List**
+
+A `custom_list` block (within `author_restrictions.deny_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
 
@@ -125,6 +135,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -138,6 +150,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **User Restrictions**
 
+An `user_restrictions` block supports the following:
+
 &#x2022; [`all_tenants`](#all-tenants) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`individual_users`](#individual-users) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -148,7 +162,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="user-restrictions-user-restrictions"></a>
 
-**User Restrictions User Restrictions**
+**User Restrictions**
+
+An `user_restrictions` block (within `user_restrictions`) supports the following:
 
 &#x2022; [`allow_all`](#allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -160,13 +176,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="user-restrictions-user-restrictions-allow-list"></a>
 
-**User Restrictions User Restrictions Allow List**
+**Allow List**
+
+An `allow_list` block (within `user_restrictions.user_restrictions`) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-allow-list-custom-list) below.
 
 <a id="user-restrictions-user-restrictions-allow-list-custom-list"></a>
 
-**User Restrictions User Restrictions Allow List Custom List**
+**Custom List**
+
+A `custom_list` block (within `user_restrictions.user_restrictions.allow_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
 
@@ -174,13 +194,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="user-restrictions-user-restrictions-deny-list"></a>
 
-**User Restrictions User Restrictions Deny List**
+**Deny List**
+
+A `deny_list` block (within `user_restrictions.user_restrictions`) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-deny-list-custom-list) below.
 
 <a id="user-restrictions-user-restrictions-deny-list-custom-list"></a>
 
-**User Restrictions User Restrictions Deny List Custom List**
+**Custom List**
+
+A `custom_list` block (within `user_restrictions.user_restrictions.deny_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
 

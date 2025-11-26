@@ -155,11 +155,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Active Enhanced Firewall Policies**
 
+An `active_enhanced_firewall_policies` block supports the following:
+
 &#x2022; [`enhanced_firewall_policies`](#enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 <a id="active-enhanced-firewall-policies-enhanced-firewall-policies"></a>
 
-**Active Enhanced Firewall Policies Enhanced Firewall Policies**
+**Enhanced Firewall Policies**
+
+An `enhanced_firewall_policies` block (within `active_enhanced_firewall_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -171,11 +175,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Active Forward Proxy Policies**
 
+An `active_forward_proxy_policies` block supports the following:
+
 &#x2022; [`forward_proxy_policies`](#forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
 
 <a id="active-forward-proxy-policies-forward-proxy-policies"></a>
 
-**Active Forward Proxy Policies Forward Proxy Policies**
+**Forward Proxy Policies**
+
+A `forward_proxy_policies` block (within `active_forward_proxy_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -187,13 +195,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Admin User Credentials**
 
+An `admin_user_credentials` block supports the following:
+
 &#x2022; [`admin_password`](#admin-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#admin-user-credentials-admin-password) below.
 
 &#x2022; [`ssh_key`](#ssh-key) - Optional String<br>Public SSH key. Provided Public SSH key can be used for accessing nodes of the site. When provided, customers can SSH to the nodes of this Customer Edge site using admin as the user
 
 <a id="admin-user-credentials-admin-password"></a>
 
-**Admin User Credentials Admin Password**
+**Admin Password**
+
+An `admin_password` block (within `admin_user_credentials`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#admin-user-credentials-admin-password-blindfold-secret-info) below.
 
@@ -201,7 +213,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="admin-user-credentials-admin-password-blindfold-secret-info"></a>
 
-**Admin User Credentials Admin Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `admin_user_credentials.admin_password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -211,7 +225,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="admin-user-credentials-admin-password-clear-secret-info"></a>
 
-**Admin User Credentials Admin Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `admin_user_credentials.admin_password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -221,17 +237,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS**
 
+An `aws` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#aws-not-managed) below.
 
 <a id="aws-not-managed"></a>
 
-**AWS Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `aws`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#aws-not-managed-node-list) below.
 
 <a id="aws-not-managed-node-list"></a>
 
-**AWS Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `aws.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -243,7 +265,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list"></a>
 
-**AWS Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `aws.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#aws-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -285,7 +309,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-bond-interface"></a>
 
-**AWS Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `aws.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -301,13 +327,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**AWS Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `aws.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="aws-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**AWS Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `aws.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -315,7 +345,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**AWS Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `aws.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -323,7 +355,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**AWS Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `aws.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -333,7 +367,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `aws.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -341,13 +377,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `aws.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `aws.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -357,7 +397,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `aws.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -371,7 +413,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `aws.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -381,7 +425,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `aws.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -389,13 +435,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `aws.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="aws-not-managed-node-list-interface-list-network-option"></a>
 
-**AWS Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `aws.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -403,7 +453,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-static-ip"></a>
 
-**AWS Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `aws.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -411,7 +463,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**AWS Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `aws.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#aws-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -419,13 +473,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**AWS Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `aws.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="aws-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**AWS Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `aws.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -433,7 +491,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**AWS Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `aws.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 
@@ -443,17 +503,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Azure**
 
+An `azure` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#azure-not-managed) below.
 
 <a id="azure-not-managed"></a>
 
-**Azure Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `azure`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#azure-not-managed-node-list) below.
 
 <a id="azure-not-managed-node-list"></a>
 
-**Azure Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `azure.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -465,7 +531,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list"></a>
 
-**Azure Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `azure.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#azure-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -507,7 +575,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-bond-interface"></a>
 
-**Azure Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `azure.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -523,13 +593,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**Azure Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `azure.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="azure-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**Azure Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `azure.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -537,7 +611,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**Azure Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `azure.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -545,7 +621,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**Azure Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `azure.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -555,7 +633,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `azure.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -563,13 +643,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `azure.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `azure.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -579,7 +663,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `azure.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -593,7 +679,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `azure.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -603,7 +691,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `azure.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -611,13 +701,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `azure.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="azure-not-managed-node-list-interface-list-network-option"></a>
 
-**Azure Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `azure.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -625,7 +719,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-static-ip"></a>
 
-**Azure Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `azure.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -633,7 +729,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**Azure Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `azure.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#azure-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -641,13 +739,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**Azure Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `azure.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="azure-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**Azure Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `azure.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -655,7 +757,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**Azure Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `azure.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 
@@ -665,17 +769,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Baremetal**
 
+A `baremetal` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#baremetal-not-managed) below.
 
 <a id="baremetal-not-managed"></a>
 
-**Baremetal Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `baremetal`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#baremetal-not-managed-node-list) below.
 
 <a id="baremetal-not-managed-node-list"></a>
 
-**Baremetal Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `baremetal.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -687,7 +797,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list"></a>
 
-**Baremetal Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `baremetal.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#baremetal-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -729,7 +841,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-bond-interface"></a>
 
-**Baremetal Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `baremetal.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -745,13 +859,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**Baremetal Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `baremetal.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="baremetal-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**Baremetal Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `baremetal.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -759,7 +877,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**Baremetal Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `baremetal.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -767,7 +887,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `baremetal.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -777,7 +899,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -785,13 +909,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -801,7 +929,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -815,7 +945,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -825,7 +957,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -833,13 +967,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="baremetal-not-managed-node-list-interface-list-network-option"></a>
 
-**Baremetal Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `baremetal.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -847,7 +985,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-static-ip"></a>
 
-**Baremetal Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `baremetal.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -855,7 +995,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**Baremetal Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `baremetal.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#baremetal-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -863,13 +1005,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**Baremetal Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `baremetal.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="baremetal-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**Baremetal Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `baremetal.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -877,7 +1023,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="baremetal-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**Baremetal Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `baremetal.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 
@@ -887,11 +1035,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Blocked Services**
 
+A `blocked_services` block supports the following:
+
 &#x2022; [`blocked_sevice`](#blocked-sevice) - Optional Block<br>Disable Node Local Services<br>See [Blocked Sevice](#blocked-services-blocked-sevice) below.
 
 <a id="blocked-services-blocked-sevice"></a>
 
-**Blocked Services Blocked Sevice**
+**Blocked Sevice**
+
+A `blocked_sevice` block (within `blocked_services`) supports the following:
 
 &#x2022; [`dns`](#dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -904,6 +1056,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="custom-proxy"></a>
 
 **Custom Proxy**
+
+A `custom_proxy` block supports the following:
 
 &#x2022; [`disable_re_tunnel`](#disable-re-tunnel) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -919,7 +1073,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="custom-proxy-password"></a>
 
-**Custom Proxy Password**
+**Password**
+
+A `password` block (within `custom_proxy`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#custom-proxy-password-blindfold-secret-info) below.
 
@@ -927,7 +1083,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="custom-proxy-password-blindfold-secret-info"></a>
 
-**Custom Proxy Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `custom_proxy.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -937,7 +1095,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="custom-proxy-password-clear-secret-info"></a>
 
-**Custom Proxy Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `custom_proxy.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -947,11 +1107,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom Proxy Bypass**
 
+A `custom_proxy_bypass` block supports the following:
+
 &#x2022; [`proxy_bypass`](#proxy-bypass) - Optional List<br>Proxy Bypass. List of domains to bypass the proxy
 
 <a id="dc-cluster-group-sli"></a>
 
 **Dc Cluster Group Sli**
+
+A `dc_cluster_group_sli` block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -963,6 +1127,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dc Cluster Group Slo**
 
+A `dc_cluster_group_slo` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -972,6 +1138,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="dns-ntp-config"></a>
 
 **DNS NTP Config**
+
+A `dns_ntp_config` block supports the following:
 
 &#x2022; [`custom_dns`](#custom-dns) - Optional Block<br>DNS Servers. DNS Servers<br>See [Custom DNS](#dns-ntp-config-custom-dns) below.
 
@@ -983,13 +1151,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dns-ntp-config-custom-dns"></a>
 
-**DNS NTP Config Custom DNS**
+**Custom DNS**
+
+A `custom_dns` block (within `dns_ntp_config`) supports the following:
 
 &#x2022; [`dns_servers`](#dns-servers) - Optional List<br>DNS Servers. DNS Servers
 
 <a id="dns-ntp-config-custom-ntp"></a>
 
-**DNS NTP Config Custom NTP**
+**Custom NTP**
+
+A `custom_ntp` block (within `dns_ntp_config`) supports the following:
 
 &#x2022; [`ntp_servers`](#ntp-servers) - Optional List<br>NTP Servers. NTP Servers
 
@@ -997,17 +1169,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Equinix**
 
+An `equinix` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#equinix-not-managed) below.
 
 <a id="equinix-not-managed"></a>
 
-**Equinix Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `equinix`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#equinix-not-managed-node-list) below.
 
 <a id="equinix-not-managed-node-list"></a>
 
-**Equinix Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `equinix.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -1019,7 +1197,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list"></a>
 
-**Equinix Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `equinix.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#equinix-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -1061,7 +1241,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-bond-interface"></a>
 
-**Equinix Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `equinix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1077,13 +1259,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**Equinix Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `equinix.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="equinix-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**Equinix Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `equinix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -1091,7 +1277,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**Equinix Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `equinix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1099,7 +1287,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**Equinix Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `equinix.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -1109,7 +1299,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `equinix.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -1117,13 +1309,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -1133,7 +1329,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `equinix.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1147,7 +1345,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -1157,7 +1357,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -1165,13 +1367,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="equinix-not-managed-node-list-interface-list-network-option"></a>
 
-**Equinix Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `equinix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1179,7 +1385,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-static-ip"></a>
 
-**Equinix Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `equinix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -1187,7 +1395,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**Equinix Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `equinix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#equinix-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -1195,13 +1405,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**Equinix Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `equinix.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="equinix-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**Equinix Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `equinix.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -1209,7 +1423,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="equinix-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**Equinix Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `equinix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 
@@ -1219,17 +1435,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **GCP**
 
+A `gcp` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#gcp-not-managed) below.
 
 <a id="gcp-not-managed"></a>
 
-**GCP Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `gcp`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#gcp-not-managed-node-list) below.
 
 <a id="gcp-not-managed-node-list"></a>
 
-**GCP Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `gcp.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -1241,7 +1463,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list"></a>
 
-**GCP Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `gcp.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#gcp-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -1283,7 +1507,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-bond-interface"></a>
 
-**GCP Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `gcp.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1299,13 +1525,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**GCP Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `gcp.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="gcp-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**GCP Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `gcp.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -1313,7 +1543,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**GCP Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `gcp.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1321,7 +1553,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**GCP Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `gcp.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -1331,7 +1565,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `gcp.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -1339,13 +1575,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -1355,7 +1595,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `gcp.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1369,7 +1611,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -1379,7 +1623,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -1387,13 +1633,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="gcp-not-managed-node-list-interface-list-network-option"></a>
 
-**GCP Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `gcp.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1401,7 +1651,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-static-ip"></a>
 
-**GCP Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `gcp.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -1409,7 +1661,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**GCP Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `gcp.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#gcp-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -1417,13 +1671,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**GCP Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `gcp.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="gcp-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**GCP Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `gcp.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -1431,7 +1689,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="gcp-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**GCP Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `gcp.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 
@@ -1441,17 +1701,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Kvm**
 
+A `kvm` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#kvm-not-managed) below.
 
 <a id="kvm-not-managed"></a>
 
-**Kvm Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `kvm`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#kvm-not-managed-node-list) below.
 
 <a id="kvm-not-managed-node-list"></a>
 
-**Kvm Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `kvm.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -1463,7 +1729,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list"></a>
 
-**Kvm Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `kvm.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#kvm-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -1505,7 +1773,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-bond-interface"></a>
 
-**Kvm Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `kvm.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1521,13 +1791,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**Kvm Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `kvm.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="kvm-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**Kvm Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `kvm.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -1535,7 +1809,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**Kvm Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `kvm.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1543,7 +1819,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**Kvm Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `kvm.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -1553,7 +1831,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `kvm.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -1561,13 +1841,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -1577,7 +1861,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `kvm.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1591,7 +1877,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -1601,7 +1889,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -1609,13 +1899,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="kvm-not-managed-node-list-interface-list-network-option"></a>
 
-**Kvm Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `kvm.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1623,7 +1917,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-static-ip"></a>
 
-**Kvm Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `kvm.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -1631,7 +1927,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**Kvm Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `kvm.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#kvm-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -1639,13 +1937,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**Kvm Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `kvm.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="kvm-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**Kvm Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `kvm.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -1653,7 +1955,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="kvm-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**Kvm Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `kvm.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 
@@ -1663,11 +1967,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Load Balancing**
 
+A `load_balancing` block supports the following:
+
 &#x2022; [`vip_vrrp_mode`](#vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode
 
 <a id="local-vrf"></a>
 
 **Local Vrf**
+
+A `local_vrf` block supports the following:
 
 &#x2022; [`default_config`](#default-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1679,7 +1987,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-sli-config"></a>
 
-**Local Vrf Sli Config**
+**Sli Config**
+
+A `sli_config` block (within `local_vrf`) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional Block<br>Network Labels. Add Labels for this network, these labels can be used in firewall policy
 
@@ -1697,13 +2007,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-sli-config-static-routes"></a>
 
-**Local Vrf Sli Config Static Routes**
+**Static Routes**
+
+A `static_routes` block (within `local_vrf.sli_config`) supports the following:
 
 &#x2022; [`static_routes`](#static-routes) - Optional Block<br>Static Routes<br>See [Static Routes](#local-vrf-sli-config-static-routes-static-routes) below.
 
 <a id="local-vrf-sli-config-static-routes-static-routes"></a>
 
-**Local Vrf Sli Config Static Routes Static Routes**
+**Static Routes**
+
+A `static_routes` block (within `local_vrf.sli_config.static_routes`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
@@ -1717,13 +2031,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-sli-config-static-routes-static-routes-node-interface"></a>
 
-**Local Vrf Sli Config Static Routes Static Routes Node Interface**
+**Node Interface**
+
+A `node_interface` block (within `local_vrf.sli_config.static_routes.static_routes`) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#local-vrf-sli-config-static-routes-static-routes-node-interface-list) below.
 
 <a id="local-vrf-sli-config-static-routes-static-routes-node-interface-list"></a>
 
-**Local Vrf Sli Config Static Routes Static Routes Node Interface List**
+**List**
+
+A `list` block (within `local_vrf.sli_config.static_routes.static_routes.node_interface`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#local-vrf-sli-config-static-routes-static-routes-node-interface-list-interface) below.
 
@@ -1731,7 +2049,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-sli-config-static-routes-static-routes-node-interface-list-interface"></a>
 
-**Local Vrf Sli Config Static Routes Static Routes Node Interface List Interface**
+**Interface**
+
+An `interface` block (within `local_vrf.sli_config.static_routes.static_routes.node_interface.list`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1745,13 +2065,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-sli-config-static-v6-routes"></a>
 
-**Local Vrf Sli Config Static V6 Routes**
+**Static V6 Routes**
+
+A `static_v6_routes` block (within `local_vrf.sli_config`) supports the following:
 
 &#x2022; [`static_routes`](#static-routes) - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#local-vrf-sli-config-static-v6-routes-static-routes) below.
 
 <a id="local-vrf-sli-config-static-v6-routes-static-routes"></a>
 
-**Local Vrf Sli Config Static V6 Routes Static Routes**
+**Static Routes**
+
+A `static_routes` block (within `local_vrf.sli_config.static_v6_routes`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
@@ -1765,13 +2089,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-sli-config-static-v6-routes-static-routes-node-interface"></a>
 
-**Local Vrf Sli Config Static V6 Routes Static Routes Node Interface**
+**Node Interface**
+
+A `node_interface` block (within `local_vrf.sli_config.static_v6_routes.static_routes`) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list) below.
 
 <a id="local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list"></a>
 
-**Local Vrf Sli Config Static V6 Routes Static Routes Node Interface List**
+**List**
+
+A `list` block (within `local_vrf.sli_config.static_v6_routes.static_routes.node_interface`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list-interface) below.
 
@@ -1779,7 +2107,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-sli-config-static-v6-routes-static-routes-node-interface-list-interface"></a>
 
-**Local Vrf Sli Config Static V6 Routes Static Routes Node Interface List Interface**
+**Interface**
+
+An `interface` block (within `local_vrf.sli_config.static_v6_routes.static_routes.node_interface.list`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1793,7 +2123,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-slo-config"></a>
 
-**Local Vrf Slo Config**
+**Slo Config**
+
+A `slo_config` block (within `local_vrf`) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional Block<br>Network Labels. Add Labels for this network, these labels can be used in firewall policy
 
@@ -1811,13 +2143,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-slo-config-static-routes"></a>
 
-**Local Vrf Slo Config Static Routes**
+**Static Routes**
+
+A `static_routes` block (within `local_vrf.slo_config`) supports the following:
 
 &#x2022; [`static_routes`](#static-routes) - Optional Block<br>Static Routes<br>See [Static Routes](#local-vrf-slo-config-static-routes-static-routes) below.
 
 <a id="local-vrf-slo-config-static-routes-static-routes"></a>
 
-**Local Vrf Slo Config Static Routes Static Routes**
+**Static Routes**
+
+A `static_routes` block (within `local_vrf.slo_config.static_routes`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
@@ -1831,13 +2167,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-slo-config-static-routes-static-routes-node-interface"></a>
 
-**Local Vrf Slo Config Static Routes Static Routes Node Interface**
+**Node Interface**
+
+A `node_interface` block (within `local_vrf.slo_config.static_routes.static_routes`) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#local-vrf-slo-config-static-routes-static-routes-node-interface-list) below.
 
 <a id="local-vrf-slo-config-static-routes-static-routes-node-interface-list"></a>
 
-**Local Vrf Slo Config Static Routes Static Routes Node Interface List**
+**List**
+
+A `list` block (within `local_vrf.slo_config.static_routes.static_routes.node_interface`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#local-vrf-slo-config-static-routes-static-routes-node-interface-list-interface) below.
 
@@ -1845,7 +2185,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-slo-config-static-routes-static-routes-node-interface-list-interface"></a>
 
-**Local Vrf Slo Config Static Routes Static Routes Node Interface List Interface**
+**Interface**
+
+An `interface` block (within `local_vrf.slo_config.static_routes.static_routes.node_interface.list`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1859,13 +2201,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-slo-config-static-v6-routes"></a>
 
-**Local Vrf Slo Config Static V6 Routes**
+**Static V6 Routes**
+
+A `static_v6_routes` block (within `local_vrf.slo_config`) supports the following:
 
 &#x2022; [`static_routes`](#static-routes) - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#local-vrf-slo-config-static-v6-routes-static-routes) below.
 
 <a id="local-vrf-slo-config-static-v6-routes-static-routes"></a>
 
-**Local Vrf Slo Config Static V6 Routes Static Routes**
+**Static Routes**
+
+A `static_routes` block (within `local_vrf.slo_config.static_v6_routes`) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
@@ -1879,13 +2225,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-slo-config-static-v6-routes-static-routes-node-interface"></a>
 
-**Local Vrf Slo Config Static V6 Routes Static Routes Node Interface**
+**Node Interface**
+
+A `node_interface` block (within `local_vrf.slo_config.static_v6_routes.static_routes`) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#local-vrf-slo-config-static-v6-routes-static-routes-node-interface-list) below.
 
 <a id="local-vrf-slo-config-static-v6-routes-static-routes-node-interface-list"></a>
 
-**Local Vrf Slo Config Static V6 Routes Static Routes Node Interface List**
+**List**
+
+A `list` block (within `local_vrf.slo_config.static_v6_routes.static_routes.node_interface`) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#local-vrf-slo-config-static-v6-routes-static-routes-node-interface-list-interface) below.
 
@@ -1893,7 +2243,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-vrf-slo-config-static-v6-routes-static-routes-node-interface-list-interface"></a>
 
-**Local Vrf Slo Config Static V6 Routes Static Routes Node Interface List Interface**
+**Interface**
+
+An `interface` block (within `local_vrf.slo_config.static_v6_routes.static_routes.node_interface.list`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1909,6 +2261,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Log Receiver**
 
+A `log_receiver` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -1919,17 +2273,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Nutanix**
 
+A `nutanix` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#nutanix-not-managed) below.
 
 <a id="nutanix-not-managed"></a>
 
-**Nutanix Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `nutanix`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#nutanix-not-managed-node-list) below.
 
 <a id="nutanix-not-managed-node-list"></a>
 
-**Nutanix Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `nutanix.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -1941,7 +2301,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list"></a>
 
-**Nutanix Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `nutanix.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#nutanix-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -1983,7 +2345,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-bond-interface"></a>
 
-**Nutanix Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `nutanix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1999,13 +2363,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**Nutanix Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `nutanix.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="nutanix-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**Nutanix Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `nutanix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -2013,7 +2381,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**Nutanix Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `nutanix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2021,7 +2391,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `nutanix.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -2031,7 +2403,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -2039,13 +2413,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -2055,7 +2433,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2069,7 +2449,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -2079,7 +2461,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -2087,13 +2471,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="nutanix-not-managed-node-list-interface-list-network-option"></a>
 
-**Nutanix Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `nutanix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2101,7 +2489,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-static-ip"></a>
 
-**Nutanix Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `nutanix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -2109,7 +2499,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**Nutanix Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `nutanix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#nutanix-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -2117,13 +2509,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**Nutanix Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `nutanix.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="nutanix-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**Nutanix Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `nutanix.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -2131,7 +2527,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="nutanix-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**Nutanix Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `nutanix.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 
@@ -2141,17 +2539,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Oci**
 
+An `oci` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#oci-not-managed) below.
 
 <a id="oci-not-managed"></a>
 
-**Oci Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `oci`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#oci-not-managed-node-list) below.
 
 <a id="oci-not-managed-node-list"></a>
 
-**Oci Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `oci.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -2163,7 +2567,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list"></a>
 
-**Oci Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `oci.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#oci-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -2205,7 +2611,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-bond-interface"></a>
 
-**Oci Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `oci.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2221,13 +2629,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**Oci Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `oci.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="oci-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**Oci Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `oci.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -2235,7 +2647,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**Oci Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `oci.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2243,7 +2657,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**Oci Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `oci.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -2253,7 +2669,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `oci.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -2261,13 +2679,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `oci.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `oci.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -2277,7 +2699,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `oci.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2291,7 +2715,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `oci.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -2301,7 +2727,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `oci.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -2309,13 +2737,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `oci.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="oci-not-managed-node-list-interface-list-network-option"></a>
 
-**Oci Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `oci.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2323,7 +2755,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-static-ip"></a>
 
-**Oci Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `oci.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -2331,7 +2765,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**Oci Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `oci.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#oci-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -2339,13 +2775,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**Oci Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `oci.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="oci-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**Oci Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `oci.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -2353,7 +2793,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="oci-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**Oci Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `oci.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 
@@ -2363,6 +2805,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Offline Survivability Mode**
 
+An `offline_survivability_mode` block supports the following:
+
 &#x2022; [`enable_offline_survivability_mode`](#enable-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`no_offline_survivability_mode`](#no-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -2371,17 +2815,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Openstack**
 
+An `openstack` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#openstack-not-managed) below.
 
 <a id="openstack-not-managed"></a>
 
-**Openstack Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `openstack`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#openstack-not-managed-node-list) below.
 
 <a id="openstack-not-managed-node-list"></a>
 
-**Openstack Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `openstack.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -2393,7 +2843,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list"></a>
 
-**Openstack Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `openstack.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#openstack-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -2435,7 +2887,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-bond-interface"></a>
 
-**Openstack Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `openstack.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2451,13 +2905,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**Openstack Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `openstack.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="openstack-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**Openstack Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `openstack.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -2465,7 +2923,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**Openstack Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `openstack.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2473,7 +2933,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**Openstack Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `openstack.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -2483,7 +2945,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `openstack.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -2491,13 +2955,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -2507,7 +2975,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `openstack.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2521,7 +2991,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -2531,7 +3003,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -2539,13 +3013,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="openstack-not-managed-node-list-interface-list-network-option"></a>
 
-**Openstack Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `openstack.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2553,7 +3031,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-static-ip"></a>
 
-**Openstack Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `openstack.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -2561,7 +3041,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**Openstack Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `openstack.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#openstack-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -2569,13 +3051,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**Openstack Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `openstack.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="openstack-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**Openstack Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `openstack.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -2583,7 +3069,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="openstack-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**Openstack Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `openstack.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 
@@ -2593,13 +3081,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Performance Enhancement Mode**
 
+A `performance_enhancement_mode` block supports the following:
+
 &#x2022; [`perf_mode_l3_enhanced`](#perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
 &#x2022; [`perf_mode_l7_enhanced`](#perf-mode-l7-enhanced) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="performance-enhancement-mode-perf-mode-l3-enhanced"></a>
 
-**Performance Enhancement Mode Perf Mode L3 Enhanced**
+**Perf Mode L3 Enhanced**
+
+A `perf_mode_l3_enhanced` block (within `performance_enhancement_mode`) supports the following:
 
 &#x2022; [`jumbo`](#jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2609,19 +3101,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **RE Select**
 
+A `re_select` block supports the following:
+
 &#x2022; [`geo_proximity`](#geo-proximity) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`specific_re`](#specific-re) - Optional Block<br>Specific RE. Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs<br>See [Specific RE](#re-select-specific-re) below.
 
 <a id="re-select-specific-re"></a>
 
-**RE Select Specific RE**
+**Specific RE**
+
+A `specific_re` block (within `re_select`) supports the following:
 
 &#x2022; [`primary_re`](#primary-re) - Optional String<br>Primary RE Geography. Select primary RE for this site
 
 <a id="site-mesh-group-on-slo"></a>
 
 **Site Mesh Group On Slo**
+
+A `site_mesh_group_on_slo` block supports the following:
 
 &#x2022; [`no_site_mesh_group`](#no-site-mesh-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2633,7 +3131,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-mesh-group-on-slo-site-mesh-group"></a>
 
-**Site Mesh Group On Slo Site Mesh Group**
+**Site Mesh Group**
+
+A `site_mesh_group` block (within `site_mesh_group_on_slo`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2645,13 +3145,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Software Settings**
 
+A `software_settings` block supports the following:
+
 &#x2022; [`os`](#os) - Optional Block<br>Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions<br>See [OS](#software-settings-os) below.
 
 &#x2022; [`sw`](#sw) - Optional Block<br>F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions<br>See [Sw](#software-settings-sw) below.
 
 <a id="software-settings-os"></a>
 
-**Software Settings OS**
+**OS**
+
+An `os` block (within `software_settings`) supports the following:
 
 &#x2022; [`default_os_version`](#default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2659,7 +3163,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="software-settings-sw"></a>
 
-**Software Settings Sw**
+**Sw**
+
+A `sw` block (within `software_settings`) supports the following:
 
 &#x2022; [`default_sw_version`](#default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2668,6 +3174,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -2681,11 +3189,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Upgrade Settings**
 
+An `upgrade_settings` block supports the following:
+
 &#x2022; [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded<br>See [Kubernetes Upgrade Drain](#upgrade-settings-kubernetes-upgrade-drain) below.
 
 <a id="upgrade-settings-kubernetes-upgrade-drain"></a>
 
-**Upgrade Settings Kubernetes Upgrade Drain**
+**Kubernetes Upgrade Drain**
+
+A `kubernetes_upgrade_drain` block (within `upgrade_settings`) supports the following:
 
 &#x2022; [`disable_upgrade_drain`](#disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2693,7 +3205,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="upgrade-settings-kubernetes-upgrade-drain-enable-upgrade-drain"></a>
 
-**Upgrade Settings Kubernetes Upgrade Drain Enable Upgrade Drain**
+**Enable Upgrade Drain**
+
+An `enable_upgrade_drain` block (within `upgrade_settings.kubernetes_upgrade_drain`) supports the following:
 
 &#x2022; [`disable_vega_upgrade_mode`](#disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2707,17 +3221,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Vmware**
 
+A `vmware` block supports the following:
+
 &#x2022; [`not_managed`](#not-managed) - Optional Block<br>List of Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Not Managed](#vmware-not-managed) below.
 
 <a id="vmware-not-managed"></a>
 
-**Vmware Not Managed**
+**Not Managed**
+
+A `not_managed` block (within `vmware`) supports the following:
 
 &#x2022; [`node_list`](#node-list) - Optional Block<br>Nodes. This section will show nodes associated with this site. Note: For sites that are not orchestrated by F5XC, create nodes in the chosen provider. Once a node is created and registers with the site, it will be shown in this section<br>See [Node List](#vmware-not-managed-node-list) below.
 
 <a id="vmware-not-managed-node-list"></a>
 
-**Vmware Not Managed Node List**
+**Node List**
+
+A `node_list` block (within `vmware.not_managed`) supports the following:
 
 &#x2022; [`hostname`](#hostname) - Optional String<br>Hostname. Hostname for this Node
 
@@ -2729,7 +3249,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list"></a>
 
-**Vmware Not Managed Node List Interface List**
+**Interface List**
+
+An `interface_list` block (within `vmware.not_managed.node_list`) supports the following:
 
 &#x2022; [`bond_interface`](#bond-interface) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#vmware-not-managed-node-list-interface-list-bond-interface) below.
 
@@ -2771,7 +3293,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-bond-interface"></a>
 
-**Vmware Not Managed Node List Interface List Bond Interface**
+**Bond Interface**
+
+A `bond_interface` block (within `vmware.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2787,13 +3311,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-bond-interface-lacp"></a>
 
-**Vmware Not Managed Node List Interface List Bond Interface Lacp**
+**Lacp**
+
+A `lacp` block (within `vmware.not_managed.node_list.interface_list.bond_interface`) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
 <a id="vmware-not-managed-node-list-interface-list-ethernet-interface"></a>
 
-**Vmware Not Managed Node List Interface List Ethernet Interface**
+**Ethernet Interface**
+
+An `ethernet_interface` block (within `vmware.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
 
@@ -2801,7 +3329,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config"></a>
 
-**Vmware Not Managed Node List Interface List IPv6 Auto Config**
+**IPv6 Auto Config**
+
+An `ipv6_auto_config` block (within `vmware.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2809,7 +3339,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router"></a>
 
-**Vmware Not Managed Node List Interface List IPv6 Auto Config Router**
+**Router**
+
+A `router` block (within `vmware.not_managed.node_list.interface_list.ipv6_auto_config`) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config) below.
 
@@ -2819,7 +3351,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config"></a>
 
-**Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config**
+**DNS Config**
+
+A `dns_config` block (within `vmware.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -2827,13 +3361,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List**
+**Configured List**
+
+A `configured_list` block (within `vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS**
+**Local DNS**
+
+A `local_dns` block (within `vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -2843,7 +3381,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful"></a>
 
-**Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful**
+**Stateful**
+
+A `stateful` block (within `vmware.not_managed.node_list.interface_list.ipv6_auto_config.router`) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2857,7 +3397,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks**
+**DHCP Networks**
+
+A `dhcp_networks` block (within `vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -2867,7 +3409,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools**
+**Pools**
+
+A `pools` block (within `vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -2875,13 +3419,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map**
+**Interface IP Map**
+
+An `interface_ip_map` block (within `vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
 <a id="vmware-not-managed-node-list-interface-list-network-option"></a>
 
-**Vmware Not Managed Node List Interface List Network Option**
+**Network Option**
+
+A `network_option` block (within `vmware.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2889,7 +3437,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-static-ip"></a>
 
-**Vmware Not Managed Node List Interface List Static IP**
+**Static IP**
+
+A `static_ip` block (within `vmware.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -2897,7 +3447,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-static-ipv6-address"></a>
 
-**Vmware Not Managed Node List Interface List Static IPv6 Address**
+**Static IPv6 Address**
+
+A `static_ipv6_address` block (within `vmware.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#vmware-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip) below.
 
@@ -2905,13 +3457,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-static-ipv6-address-cluster-static-ip"></a>
 
-**Vmware Not Managed Node List Interface List Static IPv6 Address Cluster Static IP**
+**Cluster Static IP**
+
+A `cluster_static_ip` block (within `vmware.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 <a id="vmware-not-managed-node-list-interface-list-static-ipv6-address-node-static-ip"></a>
 
-**Vmware Not Managed Node List Interface List Static IPv6 Address Node Static IP**
+**Node Static IP**
+
+A `node_static_ip` block (within `vmware.not_managed.node_list.interface_list.static_ipv6_address`) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -2919,7 +3475,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="vmware-not-managed-node-list-interface-list-vlan-interface"></a>
 
-**Vmware Not Managed Node List Interface List VLAN Interface**
+**VLAN Interface**
+
+A `vlan_interface` block (within `vmware.not_managed.node_list.interface_list`) supports the following:
 
 &#x2022; [`device`](#device) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
 

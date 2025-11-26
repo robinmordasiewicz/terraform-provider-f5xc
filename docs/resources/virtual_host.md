@@ -171,6 +171,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Advertise Policies**
 
+An `advertise_policies` block supports the following:
+
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
@@ -185,6 +187,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Authentication**
 
+An `authentication` block supports the following:
+
 &#x2022; [`auth_config`](#auth-config) - Optional Block<br>Reference to Authentication Object. Reference to Authentication Config Object<br>See [Auth Config](#authentication-auth-config) below.
 
 &#x2022; [`cookie_params`](#cookie-params) - Optional Block<br>Cookie Parameters. Specifies different cookie related config parameters for authentication<br>See [Cookie Params](#authentication-cookie-params) below.
@@ -197,7 +201,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="authentication-auth-config"></a>
 
-**Authentication Auth Config**
+**Auth Config**
+
+An `auth_config` block (within `authentication`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -211,7 +217,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="authentication-cookie-params"></a>
 
-**Authentication Cookie Params**
+**Cookie Params**
+
+A `cookie_params` block (within `authentication`) supports the following:
 
 &#x2022; [`auth_hmac`](#auth-hmac) - Optional Block<br>HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid<br>See [Auth HMAC](#authentication-cookie-params-auth-hmac) below.
 
@@ -225,7 +233,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="authentication-cookie-params-auth-hmac"></a>
 
-**Authentication Cookie Params Auth HMAC**
+**Auth HMAC**
+
+An `auth_hmac` block (within `authentication.cookie_params`) supports the following:
 
 &#x2022; [`prim_key`](#prim-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Prim Key](#authentication-cookie-params-auth-hmac-prim-key) below.
 
@@ -237,7 +247,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="authentication-cookie-params-auth-hmac-prim-key"></a>
 
-**Authentication Cookie Params Auth HMAC Prim Key**
+**Prim Key**
+
+A `prim_key` block (within `authentication.cookie_params.auth_hmac`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
 
@@ -245,7 +257,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info"></a>
 
-**Authentication Cookie Params Auth HMAC Prim Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `authentication.cookie_params.auth_hmac.prim_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -255,7 +269,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="authentication-cookie-params-auth-hmac-prim-key-clear-secret-info"></a>
 
-**Authentication Cookie Params Auth HMAC Prim Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `authentication.cookie_params.auth_hmac.prim_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -263,7 +279,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="authentication-cookie-params-auth-hmac-sec-key"></a>
 
-**Authentication Cookie Params Auth HMAC Sec Key**
+**Sec Key**
+
+A `sec_key` block (within `authentication.cookie_params.auth_hmac`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
 
@@ -271,7 +289,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info"></a>
 
-**Authentication Cookie Params Auth HMAC Sec Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `authentication.cookie_params.auth_hmac.sec_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -281,7 +301,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="authentication-cookie-params-auth-hmac-sec-key-clear-secret-info"></a>
 
-**Authentication Cookie Params Auth HMAC Sec Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `authentication.cookie_params.auth_hmac.sec_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -291,6 +313,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Buffer Policy**
 
+A `buffer_policy` block supports the following:
+
 &#x2022; [`disabled`](#disabled) - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
 
 &#x2022; [`max_request_bytes`](#max-request-bytes) - Optional Number<br>Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response
@@ -298,6 +322,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="captcha-challenge"></a>
 
 **Captcha Challenge**
+
+A `captcha_challenge` block supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -307,6 +333,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Coalescing Options**
 
+A `coalescing_options` block supports the following:
+
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`strict_coalescing`](#strict-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -314,6 +342,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="compression-params"></a>
 
 **Compression Params**
+
+A `compression_params` block supports the following:
 
 &#x2022; [`content_length`](#content-length) - Optional Number  Defaults to `30`<br>Content Length. Minimum response length, in bytes, which will trigger compression. The
 
@@ -326,6 +356,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="cors-policy"></a>
 
 **CORS Policy**
+
+A `cors_policy` block supports the following:
 
 &#x2022; [`allow_credentials`](#allow-credentials) - Optional Bool<br>Allow Credentials. Specifies whether the resource allows credentials
 
@@ -347,6 +379,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **CSRF Policy**
 
+A `csrf_policy` block supports the following:
+
 &#x2022; [`all_load_balancer_domains`](#all-load-balancer-domains) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`custom_domain_list`](#custom-domain-list) - Optional Block<br>Domain name list. List of domain names used for Host header matching<br>See [Custom Domain List](#csrf-policy-custom-domain-list) below.
@@ -355,13 +389,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="csrf-policy-custom-domain-list"></a>
 
-**CSRF Policy Custom Domain List**
+**Custom Domain List**
+
+A `custom_domain_list` block (within `csrf_policy`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form
 
 <a id="dynamic-reverse-proxy"></a>
 
 **Dynamic Reverse Proxy**
+
+A `dynamic_reverse_proxy` block supports the following:
 
 &#x2022; [`connection_timeout`](#connection-timeout) - Optional Number  Defaults to `2000`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to upstream server.  The (2 seconds)
 
@@ -373,7 +411,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dynamic-reverse-proxy-resolution-network"></a>
 
-**Dynamic Reverse Proxy Resolution Network**
+**Resolution Network**
+
+A `resolution_network` block (within `dynamic_reverse_proxy`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -389,6 +429,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Protocol Options**
 
+A `http_protocol_options` block supports the following:
+
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#http-protocol-options-http-protocol-enable-v1-only) below.
 
 &#x2022; [`http_protocol_enable_v1_v2`](#http-protocol-enable-v1-v2) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -397,13 +439,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -417,6 +463,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Js Challenge**
 
+A `js_challenge` block supports the following:
+
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
 &#x2022; [`custom_page`](#custom-page) - Optional String<br>Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='
@@ -426,6 +474,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="rate-limiter-allowed-prefixes"></a>
 
 **Rate Limiter Allowed Prefixes**
+
+A `rate_limiter_allowed_prefixes` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -441,6 +491,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Request Cookies To Add**
 
+A `request_cookies_to_add` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the cookie in Cookie header
 
 &#x2022; [`overwrite`](#overwrite) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
@@ -451,7 +503,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="request-cookies-to-add-secret-value"></a>
 
-**Request Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `request_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -459,7 +513,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Request Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -469,7 +525,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="request-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Request Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -478,6 +536,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="request-headers-to-add"></a>
 
 **Request Headers To Add**
+
+A `request_headers_to_add` block supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -489,7 +549,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="request-headers-to-add-secret-value"></a>
 
-**Request Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `request_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#request-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -497,7 +559,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Request Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -507,7 +571,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="request-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Request Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -516,6 +582,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="response-cookies-to-add"></a>
 
 **Response Cookies To Add**
+
+A `response_cookies_to_add` block supports the following:
 
 &#x2022; [`add_domain`](#add-domain) - Optional String<br>Add Domain. Add domain attribute
 
@@ -565,7 +633,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="response-cookies-to-add-secret-value"></a>
 
-**Response Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `response_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -573,7 +643,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Response Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -583,7 +655,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="response-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Response Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -592,6 +666,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="response-headers-to-add"></a>
 
 **Response Headers To Add**
+
+A `response_headers_to_add` block supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -603,7 +679,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="response-headers-to-add-secret-value"></a>
 
-**Response Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `response_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#response-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -611,7 +689,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Response Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -621,7 +701,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="response-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Response Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -630,6 +712,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="retry-policy"></a>
 
 **Retry Policy**
+
+A `retry_policy` block supports the following:
 
 &#x2022; [`back_off`](#back-off) - Optional Block<br>Retry BackOff Interval. Specifies parameters that control retry back off<br>See [Back Off](#retry-policy-back-off) below.
 
@@ -643,7 +727,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="retry-policy-back-off"></a>
 
-**Retry Policy Back Off**
+**Back Off**
+
+A `back_off` block (within `retry_policy`) supports the following:
 
 &#x2022; [`base_interval`](#base-interval) - Optional Number<br>Base Retry Interval. Specifies the base interval between retries in milliseconds
 
@@ -652,6 +738,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="routes"></a>
 
 **Routes**
+
+A `routes` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -667,6 +755,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sensitive Data Policy**
 
+A `sensitive_data_policy` block supports the following:
+
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
@@ -681,6 +771,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Slow DDOS Mitigation**
 
+A `slow_ddos_mitigation` block supports the following:
+
 &#x2022; [`disable_request_timeout`](#disable-request-timeout) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`request_headers_timeout`](#request-headers-timeout) - Optional Number  Defaults to `10000`<br>Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The milliseconds. This setting provides protection against Slowloris attacks
@@ -690,6 +782,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -702,6 +796,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="tls-cert-params"></a>
 
 **TLS Cert Params**
+
+A `tls_cert_params` block supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Certificates. Set of certificates<br>See [Certificates](#tls-cert-params-certificates) below.
 
@@ -723,7 +819,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-cert-params-certificates"></a>
 
-**TLS Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `tls_cert_params`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -737,7 +835,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-cert-params-validation-params"></a>
 
-**TLS Cert Params Validation Params**
+**Validation Params**
+
+A `validation_params` block (within `tls_cert_params`) supports the following:
 
 &#x2022; [`skip_hostname_verification`](#skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
@@ -749,13 +849,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-cert-params-validation-params-trusted-ca"></a>
 
-**TLS Cert Params Validation Params Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `tls_cert_params.validation_params`) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
 
 <a id="tls-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
-**TLS Cert Params Validation Params Trusted CA Trusted CA List**
+**Trusted CA List**
+
+A `trusted_ca_list` block (within `tls_cert_params.validation_params.trusted_ca`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -771,6 +875,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **TLS Parameters**
 
+A `tls_parameters` block supports the following:
+
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`client_certificate_required`](#client-certificate-required) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -783,7 +889,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params"></a>
 
-**TLS Parameters Common Params**
+**Common Params**
+
+A `common_params` block (within `tls_parameters`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
 
@@ -797,7 +905,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates"></a>
 
-**TLS Parameters Common Params TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `tls_parameters.common_params`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -813,13 +923,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
 
-**TLS Parameters Common Params TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `tls_parameters.common_params.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="tls-parameters-common-params-tls-certificates-private-key"></a>
 
-**TLS Parameters Common Params TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `tls_parameters.common_params.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -827,7 +941,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**TLS Parameters Common Params TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `tls_parameters.common_params.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -837,7 +953,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-clear-secret-info"></a>
 
-**TLS Parameters Common Params TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `tls_parameters.common_params.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -845,7 +963,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
-**TLS Parameters Common Params Validation Params**
+**Validation Params**
+
+A `validation_params` block (within `tls_parameters.common_params`) supports the following:
 
 &#x2022; [`skip_hostname_verification`](#skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
@@ -857,13 +977,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
 
-**TLS Parameters Common Params Validation Params Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `tls_parameters.common_params.validation_params`) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
-**TLS Parameters Common Params Validation Params Trusted CA Trusted CA List**
+**Trusted CA List**
+
+A `trusted_ca_list` block (within `tls_parameters.common_params.validation_params.trusted_ca`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -879,6 +1003,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **User Identification**
 
+An `user_identification` block supports the following:
+
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
@@ -893,6 +1019,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **WAF Type**
 
+A `waf_type` block supports the following:
+
 &#x2022; [`app_firewall`](#app-firewall) - Optional Block<br>App Firewall Reference. A list of references to the app_firewall configuration objects<br>See [App Firewall](#waf-type-app-firewall) below.
 
 &#x2022; [`disable_waf`](#disable-waf) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -901,13 +1029,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-type-app-firewall"></a>
 
-**WAF Type App Firewall**
+**App Firewall**
+
+An `app_firewall` block (within `waf_type`) supports the following:
 
 &#x2022; [`app_firewall`](#app-firewall) - Optional Block<br>Application Firewall. References to an Application Firewall configuration object<br>See [App Firewall](#waf-type-app-firewall-app-firewall) below.
 
 <a id="waf-type-app-firewall-app-firewall"></a>
 
-**WAF Type App Firewall App Firewall**
+**App Firewall**
+
+An `app_firewall` block (within `waf_type.app_firewall`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

@@ -98,6 +98,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Fallback Pool**
 
+A `fallback_pool` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -108,6 +110,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Response Cache**
 
+A `response_cache` block supports the following:
+
 &#x2022; [`default_response_cache_parameters`](#default-response-cache-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -116,7 +120,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="response-cache-response-cache-parameters"></a>
 
-**Response Cache Response Cache Parameters**
+**Response Cache Parameters**
+
+A `response_cache_parameters` block (within `response_cache`) supports the following:
 
 &#x2022; [`cache_cidr_ipv4`](#cache-cidr-ipv4) - Optional Number<br>Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients
 
@@ -128,11 +134,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List**
 
+A `rule_list` block supports the following:
+
 &#x2022; [`rules`](#rules) - Optional Block<br>Load Balancing Rules. Rules to perform load balancing<br>See [Rules](#rule-list-rules) below.
 
 <a id="rule-list-rules"></a>
 
-**Rule List Rules**
+**Rules**
+
+A `rules` block (within `rule_list`) supports the following:
 
 &#x2022; [`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rule-list-rules-asn-list) below.
 
@@ -152,19 +162,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-asn-list"></a>
 
-**Rule List Rules Asn List**
+**Asn List**
+
+An `asn_list` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="rule-list-rules-asn-matcher"></a>
 
-**Rule List Rules Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rule-list-rules-asn-matcher-asn-sets) below.
 
 <a id="rule-list-rules-asn-matcher-asn-sets"></a>
 
-**Rule List Rules Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `rule_list.rules.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -178,13 +194,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-geo-location-label-selector"></a>
 
-**Rule List Rules Geo Location Label Selector**
+**Geo Location Label Selector**
+
+A `geo_location_label_selector` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="rule-list-rules-geo-location-set"></a>
 
-**Rule List Rules Geo Location Set**
+**Geo Location Set**
+
+A `geo_location_set` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -194,7 +214,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-ip-prefix-list"></a>
 
-**Rule List Rules IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -202,7 +224,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-ip-prefix-set"></a>
 
-**Rule List Rules IP Prefix Set**
+**IP Prefix Set**
+
+An `ip_prefix_set` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -210,7 +234,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-ip-prefix-set-prefix-sets"></a>
 
-**Rule List Rules IP Prefix Set Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `rule_list.rules.ip_prefix_set`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -224,7 +250,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-pool"></a>
 
-**Rule List Rules Pool**
+**Pool**
+
+A `pool` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -235,6 +263,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

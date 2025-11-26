@@ -89,6 +89,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Domains**
 
+A `domains` block supports the following:
+
 &#x2022; [`allow_destructive_methods`](#allow-destructive-methods) - Optional Bool<br>Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data
 
 &#x2022; [`credentials`](#credentials) - Optional Block<br>Credentials. Add credentials for API testing to use in the selected environment<br>See [Credentials](#domains-credentials) below.
@@ -97,7 +99,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials"></a>
 
-**Domains Credentials**
+**Credentials**
+
+A `credentials` block (within `domains`) supports the following:
 
 &#x2022; [`admin`](#admin) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -115,7 +119,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-api-key"></a>
 
-**Domains Credentials API Key**
+**API Key**
+
+An `api_key` block (within `domains.credentials`) supports the following:
 
 &#x2022; [`key`](#key) - Optional String<br>Key
 
@@ -123,7 +129,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-api-key-value"></a>
 
-**Domains Credentials API Key Value**
+**Value**
+
+A `value` block (within `domains.credentials.api_key`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-api-key-value-blindfold-secret-info) below.
 
@@ -131,7 +139,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-api-key-value-blindfold-secret-info"></a>
 
-**Domains Credentials API Key Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `domains.credentials.api_key.value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -141,7 +151,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-api-key-value-clear-secret-info"></a>
 
-**Domains Credentials API Key Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `domains.credentials.api_key.value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -149,7 +161,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-basic-auth"></a>
 
-**Domains Credentials Basic Auth**
+**Basic Auth**
+
+A `basic_auth` block (within `domains.credentials`) supports the following:
 
 &#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#domains-credentials-basic-auth-password) below.
 
@@ -157,7 +171,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-basic-auth-password"></a>
 
-**Domains Credentials Basic Auth Password**
+**Password**
+
+A `password` block (within `domains.credentials.basic_auth`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-basic-auth-password-blindfold-secret-info) below.
 
@@ -165,7 +181,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-basic-auth-password-blindfold-secret-info"></a>
 
-**Domains Credentials Basic Auth Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `domains.credentials.basic_auth.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -175,7 +193,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-basic-auth-password-clear-secret-info"></a>
 
-**Domains Credentials Basic Auth Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `domains.credentials.basic_auth.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -183,13 +203,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-bearer-token"></a>
 
-**Domains Credentials Bearer Token**
+**Bearer Token**
+
+A `bearer_token` block (within `domains.credentials`) supports the following:
 
 &#x2022; [`token`](#token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#domains-credentials-bearer-token-token) below.
 
 <a id="domains-credentials-bearer-token-token"></a>
 
-**Domains Credentials Bearer Token Token**
+**Token**
+
+A `token` block (within `domains.credentials.bearer_token`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-bearer-token-token-blindfold-secret-info) below.
 
@@ -197,7 +221,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-bearer-token-token-blindfold-secret-info"></a>
 
-**Domains Credentials Bearer Token Token Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `domains.credentials.bearer_token.token`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -207,7 +233,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-bearer-token-token-clear-secret-info"></a>
 
-**Domains Credentials Bearer Token Token Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `domains.credentials.bearer_token.token`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -215,7 +243,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-login-endpoint"></a>
 
-**Domains Credentials Login Endpoint**
+**Login Endpoint**
+
+A `login_endpoint` block (within `domains.credentials`) supports the following:
 
 &#x2022; [`json_payload`](#json-payload) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [JSON Payload](#domains-credentials-login-endpoint-json-payload) below.
 
@@ -227,7 +257,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-login-endpoint-json-payload"></a>
 
-**Domains Credentials Login Endpoint JSON Payload**
+**JSON Payload**
+
+A `json_payload` block (within `domains.credentials.login_endpoint`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-credentials-login-endpoint-json-payload-blindfold-secret-info) below.
 
@@ -235,7 +267,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-login-endpoint-json-payload-blindfold-secret-info"></a>
 
-**Domains Credentials Login Endpoint JSON Payload Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `domains.credentials.login_endpoint.json_payload`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -245,7 +279,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains-credentials-login-endpoint-json-payload-clear-secret-info"></a>
 
-**Domains Credentials Login Endpoint JSON Payload Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `domains.credentials.login_endpoint.json_payload`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -254,6 +290,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

@@ -92,6 +92,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Enabled SSH Access**
 
+An `enabled_ssh_access` block supports the following:
+
 &#x2022; [`advertise_on_sli`](#advertise-on-sli) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`advertise_on_slo`](#advertise-on-slo) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -104,7 +106,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enabled-ssh-access-node-ssh-ports"></a>
 
-**Enabled SSH Access Node SSH Ports**
+**Node SSH Ports**
+
+A `node_ssh_ports` block (within `enabled_ssh_access`) supports the following:
 
 &#x2022; [`node_name`](#node-name) - Optional String<br>Node Name. Node name will be used to match a particular node with the desired TCP port
 
@@ -113,6 +117,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="f5-big-ip-aws-service"></a>
 
 **F5 Big IP AWS Service**
+
+A `f5_big_ip_aws_service` block supports the following:
 
 &#x2022; [`admin_password`](#admin-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#f5-big-ip-aws-service-admin-password) below.
 
@@ -132,7 +138,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="f5-big-ip-aws-service-admin-password"></a>
 
-**F5 Big IP AWS Service Admin Password**
+**Admin Password**
+
+An `admin_password` block (within `f5_big_ip_aws_service`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#f5-big-ip-aws-service-admin-password-blindfold-secret-info) below.
 
@@ -140,7 +148,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="f5-big-ip-aws-service-admin-password-blindfold-secret-info"></a>
 
-**F5 Big IP AWS Service Admin Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `f5_big_ip_aws_service.admin_password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -150,7 +160,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="f5-big-ip-aws-service-admin-password-clear-secret-info"></a>
 
-**F5 Big IP AWS Service Admin Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `f5_big_ip_aws_service.admin_password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -158,13 +170,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="f5-big-ip-aws-service-aws-tgw-site-params"></a>
 
-**F5 Big IP AWS Service AWS Tgw Site Params**
+**AWS Tgw Site Params**
+
+An `aws_tgw_site_params` block (within `f5_big_ip_aws_service`) supports the following:
 
 &#x2022; [`aws_tgw_site`](#aws-tgw-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Tgw Site](#f5-big-ip-aws-service-aws-tgw-site-params-aws-tgw-site) below.
 
 <a id="f5-big-ip-aws-service-aws-tgw-site-params-aws-tgw-site"></a>
 
-**F5 Big IP AWS Service AWS Tgw Site Params AWS Tgw Site**
+**AWS Tgw Site**
+
+An `aws_tgw_site` block (within `f5_big_ip_aws_service.aws_tgw_site_params`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -174,7 +190,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="f5-big-ip-aws-service-endpoint-service"></a>
 
-**F5 Big IP AWS Service Endpoint Service**
+**Endpoint Service**
+
+An `endpoint_service` block (within `f5_big_ip_aws_service`) supports the following:
 
 &#x2022; [`advertise_on_slo_ip`](#advertise-on-slo-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -202,19 +220,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="f5-big-ip-aws-service-endpoint-service-custom-tcp-ports"></a>
 
-**F5 Big IP AWS Service Endpoint Service Custom TCP Ports**
+**Custom TCP Ports**
+
+A `custom_tcp_ports` block (within `f5_big_ip_aws_service.endpoint_service`) supports the following:
 
 &#x2022; [`ports`](#ports) - Optional List<br>Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
 
 <a id="f5-big-ip-aws-service-endpoint-service-custom-udp-ports"></a>
 
-**F5 Big IP AWS Service Endpoint Service Custom UDP Ports**
+**Custom UDP Ports**
+
+A `custom_udp_ports` block (within `f5_big_ip_aws_service.endpoint_service`) supports the following:
 
 &#x2022; [`ports`](#ports) - Optional List<br>Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
 
 <a id="f5-big-ip-aws-service-market-place-image"></a>
 
-**F5 Big IP AWS Service Market Place Image**
+**Market Place Image**
+
+A `market_place_image` block (within `f5_big_ip_aws_service`) supports the following:
 
 &#x2022; [`awafpay_g200_mbps`](#awafpay-g200-mbps) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -222,7 +246,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="f5-big-ip-aws-service-nodes"></a>
 
-**F5 Big IP AWS Service Nodes**
+**Nodes**
+
+A `nodes` block (within `f5_big_ip_aws_service`) supports the following:
 
 &#x2022; [`automatic_prefix`](#automatic-prefix) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -238,7 +264,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="f5-big-ip-aws-service-nodes-mgmt-subnet"></a>
 
-**F5 Big IP AWS Service Nodes Mgmt Subnet**
+**Mgmt Subnet**
+
+A `mgmt_subnet` block (within `f5_big_ip_aws_service.nodes`) supports the following:
 
 &#x2022; [`existing_subnet_id`](#existing-subnet-id) - Optional String<br>Existing Subnet ID. Information about existing subnet ID
 
@@ -246,13 +274,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="f5-big-ip-aws-service-nodes-mgmt-subnet-subnet-param"></a>
 
-**F5 Big IP AWS Service Nodes Mgmt Subnet Subnet Param**
+**Subnet Param**
+
+A `subnet_param` block (within `f5_big_ip_aws_service.nodes.mgmt_subnet`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 <a id="https-management"></a>
 
 **HTTPS Management**
+
+A `https_management` block supports the following:
 
 &#x2022; [`advertise_on_internet`](#advertise-on-internet) - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Internet](#https-management-advertise-on-internet) below.
 
@@ -274,13 +306,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-internet"></a>
 
-**HTTPS Management Advertise On Internet**
+**Advertise On Internet**
+
+An `advertise_on_internet` block (within `https_management`) supports the following:
 
 &#x2022; [`public_ip`](#public-ip) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#https-management-advertise-on-internet-public-ip) below.
 
 <a id="https-management-advertise-on-internet-public-ip"></a>
 
-**HTTPS Management Advertise On Internet Public IP**
+**Public IP**
+
+A `public_ip` block (within `https_management.advertise_on_internet`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -290,7 +326,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip"></a>
 
-**HTTPS Management Advertise On Sli VIP**
+**Advertise On Sli VIP**
+
+An `advertise_on_sli_vip` block (within `https_management`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -302,7 +340,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-tls-certificates"></a>
 
-**HTTPS Management Advertise On Sli VIP TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `https_management.advertise_on_sli_vip`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -318,13 +358,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-tls-certificates-custom-hash-algorithms"></a>
 
-**HTTPS Management Advertise On Sli VIP TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `https_management.advertise_on_sli_vip.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="https-management-advertise-on-sli-vip-tls-certificates-private-key"></a>
 
-**HTTPS Management Advertise On Sli VIP TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `https_management.advertise_on_sli_vip.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#https-management-advertise-on-sli-vip-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -332,7 +376,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**HTTPS Management Advertise On Sli VIP TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `https_management.advertise_on_sli_vip.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -342,7 +388,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-tls-certificates-private-key-clear-secret-info"></a>
 
-**HTTPS Management Advertise On Sli VIP TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `https_management.advertise_on_sli_vip.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -350,7 +398,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-tls-config"></a>
 
-**HTTPS Management Advertise On Sli VIP TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `https_management.advertise_on_sli_vip`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-management-advertise-on-sli-vip-tls-config-custom-security) below.
 
@@ -362,7 +412,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-tls-config-custom-security"></a>
 
-**HTTPS Management Advertise On Sli VIP TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `https_management.advertise_on_sli_vip.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -372,7 +424,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-use-mtls"></a>
 
-**HTTPS Management Advertise On Sli VIP Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `https_management.advertise_on_sli_vip`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -390,7 +444,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-use-mtls-crl"></a>
 
-**HTTPS Management Advertise On Sli VIP Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `https_management.advertise_on_sli_vip.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -400,7 +456,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-use-mtls-trusted-ca"></a>
 
-**HTTPS Management Advertise On Sli VIP Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `https_management.advertise_on_sli_vip.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -410,13 +468,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-sli-vip-use-mtls-xfcc-options"></a>
 
-**HTTPS Management Advertise On Sli VIP Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `https_management.advertise_on_sli_vip.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="https-management-advertise-on-slo-internet-vip"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP**
+**Advertise On Slo Internet VIP**
+
+An `advertise_on_slo_internet_vip` block (within `https_management`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -428,7 +490,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-certificates"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `https_management.advertise_on_slo_internet_vip`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -444,13 +508,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-certificates-custom-hash-algorithms"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `https_management.advertise_on_slo_internet_vip.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-certificates-private-key"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `https_management.advertise_on_slo_internet_vip.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#https-management-advertise-on-slo-internet-vip-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -458,7 +526,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `https_management.advertise_on_slo_internet_vip.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -468,7 +538,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-certificates-private-key-clear-secret-info"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `https_management.advertise_on_slo_internet_vip.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -476,7 +548,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-config"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `https_management.advertise_on_slo_internet_vip`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-management-advertise-on-slo-internet-vip-tls-config-custom-security) below.
 
@@ -488,7 +562,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-tls-config-custom-security"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `https_management.advertise_on_slo_internet_vip.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -498,7 +574,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `https_management.advertise_on_slo_internet_vip`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -516,7 +594,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls-crl"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `https_management.advertise_on_slo_internet_vip.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -526,7 +606,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls-trusted-ca"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `https_management.advertise_on_slo_internet_vip.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -536,13 +618,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-internet-vip-use-mtls-xfcc-options"></a>
 
-**HTTPS Management Advertise On Slo Internet VIP Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `https_management.advertise_on_slo_internet_vip.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="https-management-advertise-on-slo-sli"></a>
 
-**HTTPS Management Advertise On Slo Sli**
+**Advertise On Slo Sli**
+
+An `advertise_on_slo_sli` block (within `https_management`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -554,7 +640,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-tls-certificates"></a>
 
-**HTTPS Management Advertise On Slo Sli TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `https_management.advertise_on_slo_sli`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -570,13 +658,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-tls-certificates-custom-hash-algorithms"></a>
 
-**HTTPS Management Advertise On Slo Sli TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `https_management.advertise_on_slo_sli.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="https-management-advertise-on-slo-sli-tls-certificates-private-key"></a>
 
-**HTTPS Management Advertise On Slo Sli TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `https_management.advertise_on_slo_sli.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#https-management-advertise-on-slo-sli-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -584,7 +676,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**HTTPS Management Advertise On Slo Sli TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `https_management.advertise_on_slo_sli.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -594,7 +688,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-tls-certificates-private-key-clear-secret-info"></a>
 
-**HTTPS Management Advertise On Slo Sli TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `https_management.advertise_on_slo_sli.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -602,7 +698,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-tls-config"></a>
 
-**HTTPS Management Advertise On Slo Sli TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `https_management.advertise_on_slo_sli`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-management-advertise-on-slo-sli-tls-config-custom-security) below.
 
@@ -614,7 +712,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-tls-config-custom-security"></a>
 
-**HTTPS Management Advertise On Slo Sli TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `https_management.advertise_on_slo_sli.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -624,7 +724,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-use-mtls"></a>
 
-**HTTPS Management Advertise On Slo Sli Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `https_management.advertise_on_slo_sli`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -642,7 +744,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-use-mtls-crl"></a>
 
-**HTTPS Management Advertise On Slo Sli Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `https_management.advertise_on_slo_sli.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -652,7 +756,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-use-mtls-trusted-ca"></a>
 
-**HTTPS Management Advertise On Slo Sli Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `https_management.advertise_on_slo_sli.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -662,13 +768,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-sli-use-mtls-xfcc-options"></a>
 
-**HTTPS Management Advertise On Slo Sli Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `https_management.advertise_on_slo_sli.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="https-management-advertise-on-slo-vip"></a>
 
-**HTTPS Management Advertise On Slo VIP**
+**Advertise On Slo VIP**
+
+An `advertise_on_slo_vip` block (within `https_management`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -680,7 +790,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-tls-certificates"></a>
 
-**HTTPS Management Advertise On Slo VIP TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `https_management.advertise_on_slo_vip`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -696,13 +808,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-tls-certificates-custom-hash-algorithms"></a>
 
-**HTTPS Management Advertise On Slo VIP TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `https_management.advertise_on_slo_vip.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="https-management-advertise-on-slo-vip-tls-certificates-private-key"></a>
 
-**HTTPS Management Advertise On Slo VIP TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `https_management.advertise_on_slo_vip.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#https-management-advertise-on-slo-vip-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -710,7 +826,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**HTTPS Management Advertise On Slo VIP TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `https_management.advertise_on_slo_vip.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -720,7 +838,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-tls-certificates-private-key-clear-secret-info"></a>
 
-**HTTPS Management Advertise On Slo VIP TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `https_management.advertise_on_slo_vip.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -728,7 +848,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-tls-config"></a>
 
-**HTTPS Management Advertise On Slo VIP TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `https_management.advertise_on_slo_vip`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-management-advertise-on-slo-vip-tls-config-custom-security) below.
 
@@ -740,7 +862,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-tls-config-custom-security"></a>
 
-**HTTPS Management Advertise On Slo VIP TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `https_management.advertise_on_slo_vip.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -750,7 +874,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-use-mtls"></a>
 
-**HTTPS Management Advertise On Slo VIP Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `https_management.advertise_on_slo_vip`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -768,7 +894,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-use-mtls-crl"></a>
 
-**HTTPS Management Advertise On Slo VIP Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `https_management.advertise_on_slo_vip.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -778,7 +906,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-use-mtls-trusted-ca"></a>
 
-**HTTPS Management Advertise On Slo VIP Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `https_management.advertise_on_slo_vip.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -788,13 +918,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-management-advertise-on-slo-vip-use-mtls-xfcc-options"></a>
 
-**HTTPS Management Advertise On Slo VIP Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `https_management.advertise_on_slo_vip.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="palo-alto-fw-service"></a>
 
 **Palo Alto Fw Service**
+
+A `palo_alto_fw_service` block supports the following:
 
 &#x2022; [`auto_setup`](#auto-setup) - Optional Block<br>PAN VM Series Firewall Auto Setup. For auto-setup, SSH public and pvt keys are needed. Using the given config user, SSH and API access will be configured<br>See [Auto Setup](#palo-alto-fw-service-auto-setup) below.
 
@@ -820,7 +954,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-auto-setup"></a>
 
-**Palo Alto Fw Service Auto Setup**
+**Auto Setup**
+
+An `auto_setup` block (within `palo_alto_fw_service`) supports the following:
 
 &#x2022; [`admin_password`](#admin-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#palo-alto-fw-service-auto-setup-admin-password) below.
 
@@ -830,7 +966,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-auto-setup-admin-password"></a>
 
-**Palo Alto Fw Service Auto Setup Admin Password**
+**Admin Password**
+
+An `admin_password` block (within `palo_alto_fw_service.auto_setup`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#palo-alto-fw-service-auto-setup-admin-password-blindfold-secret-info) below.
 
@@ -838,7 +976,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-auto-setup-admin-password-blindfold-secret-info"></a>
 
-**Palo Alto Fw Service Auto Setup Admin Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `palo_alto_fw_service.auto_setup.admin_password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -848,7 +988,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-auto-setup-admin-password-clear-secret-info"></a>
 
-**Palo Alto Fw Service Auto Setup Admin Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `palo_alto_fw_service.auto_setup.admin_password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -856,7 +998,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-auto-setup-manual-ssh-keys"></a>
 
-**Palo Alto Fw Service Auto Setup Manual SSH Keys**
+**Manual SSH Keys**
+
+A `manual_ssh_keys` block (within `palo_alto_fw_service.auto_setup`) supports the following:
 
 &#x2022; [`private_key`](#private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key) below.
 
@@ -864,7 +1008,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key"></a>
 
-**Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key**
+**Private Key**
+
+A `private_key` block (within `palo_alto_fw_service.auto_setup.manual_ssh_keys`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key-blindfold-secret-info) below.
 
@@ -872,7 +1018,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key-blindfold-secret-info"></a>
 
-**Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -882,7 +1030,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-auto-setup-manual-ssh-keys-private-key-clear-secret-info"></a>
 
-**Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -890,7 +1040,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-aws-tgw-site"></a>
 
-**Palo Alto Fw Service AWS Tgw Site**
+**AWS Tgw Site**
+
+An `aws_tgw_site` block (within `palo_alto_fw_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -900,7 +1052,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-panorama-server"></a>
 
-**Palo Alto Fw Service Panorama Server**
+**Panorama Server**
+
+A `panorama_server` block (within `palo_alto_fw_service`) supports the following:
 
 &#x2022; [`authorization_key`](#authorization-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Authorization Key](#palo-alto-fw-service-panorama-server-authorization-key) below.
 
@@ -912,7 +1066,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-panorama-server-authorization-key"></a>
 
-**Palo Alto Fw Service Panorama Server Authorization Key**
+**Authorization Key**
+
+An `authorization_key` block (within `palo_alto_fw_service.panorama_server`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#palo-alto-fw-service-panorama-server-authorization-key-blindfold-secret-info) below.
 
@@ -920,7 +1076,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-panorama-server-authorization-key-blindfold-secret-info"></a>
 
-**Palo Alto Fw Service Panorama Server Authorization Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `palo_alto_fw_service.panorama_server.authorization_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -930,7 +1088,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-panorama-server-authorization-key-clear-secret-info"></a>
 
-**Palo Alto Fw Service Panorama Server Authorization Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `palo_alto_fw_service.panorama_server.authorization_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -938,13 +1098,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-service-nodes"></a>
 
-**Palo Alto Fw Service Service Nodes**
+**Service Nodes**
+
+A `service_nodes` block (within `palo_alto_fw_service`) supports the following:
 
 &#x2022; [`nodes`](#nodes) - Optional Block<br>Palo Alto Networks AZ Nodes<br>See [Nodes](#palo-alto-fw-service-service-nodes-nodes) below.
 
 <a id="palo-alto-fw-service-service-nodes-nodes"></a>
 
-**Palo Alto Fw Service Service Nodes Nodes**
+**Nodes**
+
+A `nodes` block (within `palo_alto_fw_service.service_nodes`) supports the following:
 
 &#x2022; [`aws_az_name`](#aws-az-name) - Optional String<br>AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. It is recommended that AZ is one of the AZ for sites
 
@@ -956,7 +1120,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-service-nodes-nodes-mgmt-subnet"></a>
 
-**Palo Alto Fw Service Service Nodes Nodes Mgmt Subnet**
+**Mgmt Subnet**
+
+A `mgmt_subnet` block (within `palo_alto_fw_service.service_nodes.nodes`) supports the following:
 
 &#x2022; [`existing_subnet_id`](#existing-subnet-id) - Optional String<br>Existing Subnet ID. Information about existing subnet ID
 
@@ -964,13 +1130,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="palo-alto-fw-service-service-nodes-nodes-mgmt-subnet-subnet-param"></a>
 
-**Palo Alto Fw Service Service Nodes Nodes Mgmt Subnet Subnet Param**
+**Subnet Param**
+
+A `subnet_param` block (within `palo_alto_fw_service.service_nodes.nodes.mgmt_subnet`) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

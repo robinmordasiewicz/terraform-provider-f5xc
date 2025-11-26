@@ -82,13 +82,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules**
 
+A `rules` block supports the following:
+
 &#x2022; [`action`](#action) - Optional Block<br>BGP Route Action. Action to be enforced if the BGP route matches the rule<br>See [Action](#rules-action) below.
 
 &#x2022; [`match`](#match) - Optional Block<br>BGP Route Match. Predicates which have to match information in route for action to be applied<br>See [Match](#rules-match) below.
 
 <a id="rules-action"></a>
 
-**Rules Action**
+**Action**
+
+An `action` block (within `rules`) supports the following:
 
 &#x2022; [`aggregate`](#aggregate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -106,13 +110,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-action-community"></a>
 
-**Rules Action Community**
+**Community**
+
+A `community` block (within `rules.action`) supports the following:
 
 &#x2022; [`community`](#community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
 
 <a id="rules-match"></a>
 
-**Rules Match**
+**Match**
+
+A `match` block (within `rules`) supports the following:
 
 &#x2022; [`as_path`](#as-path) - Optional String<br>AS path to match. AS path can also be a regex, which will be matched against route information
 
@@ -122,19 +130,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules-match-community"></a>
 
-**Rules Match Community**
+**Community**
+
+A `community` block (within `rules.match`) supports the following:
 
 &#x2022; [`community`](#community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
 
 <a id="rules-match-ip-prefixes"></a>
 
-**Rules Match IP Prefixes**
+**IP Prefixes**
+
+An `ip_prefixes` block (within `rules.match`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional Block<br>Prefix list. List of IP prefix<br>See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
 
 <a id="rules-match-ip-prefixes-prefixes"></a>
 
-**Rules Match IP Prefixes Prefixes**
+**Prefixes**
+
+A `prefixes` block (within `rules.match.ip_prefixes`) supports the following:
 
 &#x2022; [`equal_or_longer_than`](#equal-or-longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -147,6 +161,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

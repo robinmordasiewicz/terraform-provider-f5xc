@@ -358,11 +358,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Active Service Policies**
 
+An `active_service_policies` block supports the following:
+
 &#x2022; [`policies`](#policies) - Optional Block<br>Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to get the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are evaluated. Otherwise, the next policy is evaluated. If all policies are evaluated and none match, then the request will be denied by default<br>See [Policies](#active-service-policies-policies) below.
 
 <a id="active-service-policies-policies"></a>
 
-**Active Service Policies Policies**
+**Policies**
+
+A `policies` block (within `active_service_policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -374,11 +378,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Advertise Custom**
 
+An `advertise_custom` block supports the following:
+
 &#x2022; [`advertise_where`](#advertise-where) - Optional Block<br>List of Sites to Advertise. Where should this load balancer be available<br>See [Advertise Where](#advertise-custom-advertise-where) below.
 
 <a id="advertise-custom-advertise-where"></a>
 
-**Advertise Custom Advertise Where**
+**Advertise Where**
+
+An `advertise_where` block (within `advertise_custom`) supports the following:
 
 &#x2022; [`advertise_on_public`](#advertise-on-public) - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-custom-advertise-where-advertise-on-public) below.
 
@@ -400,13 +408,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-advertise-on-public"></a>
 
-**Advertise Custom Advertise Where Advertise On Public**
+**Advertise On Public**
+
+An `advertise_on_public` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`public_ip`](#public-ip) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#advertise-custom-advertise-where-advertise-on-public-public-ip) below.
 
 <a id="advertise-custom-advertise-where-advertise-on-public-public-ip"></a>
 
-**Advertise Custom Advertise Where Advertise On Public Public IP**
+**Public IP**
+
+A `public_ip` block (within `advertise_custom.advertise_where.advertise_on_public`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -416,7 +428,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-site"></a>
 
-**Advertise Custom Advertise Where Site**
+**Site**
+
+A `site` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
@@ -426,7 +440,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-site-site"></a>
 
-**Advertise Custom Advertise Where Site Site**
+**Site**
+
+A `site` block (within `advertise_custom.advertise_where.site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -436,7 +452,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-network"></a>
 
-**Advertise Custom Advertise Where Virtual Network**
+**Virtual Network**
+
+A `virtual_network` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`default_v6_vip`](#default-v6-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -450,7 +468,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-network-virtual-network"></a>
 
-**Advertise Custom Advertise Where Virtual Network Virtual Network**
+**Virtual Network**
+
+A `virtual_network` block (within `advertise_custom.advertise_where.virtual_network`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -460,7 +480,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site"></a>
 
-**Advertise Custom Advertise Where Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`network`](#network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
@@ -468,7 +490,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site-virtual-site"></a>
 
-**Advertise Custom Advertise Where Virtual Site Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `advertise_custom.advertise_where.virtual_site`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -478,7 +502,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site-with-vip"></a>
 
-**Advertise Custom Advertise Where Virtual Site With VIP**
+**Virtual Site With VIP**
+
+A `virtual_site_with_vip` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
@@ -488,7 +514,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-virtual-site-with-vip-virtual-site"></a>
 
-**Advertise Custom Advertise Where Virtual Site With VIP Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `advertise_custom.advertise_where.virtual_site_with_vip`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -498,7 +526,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-vk8s-service"></a>
 
-**Advertise Custom Advertise Where Vk8s Service**
+**Vk8s Service**
+
+A `vk8s_service` block (within `advertise_custom.advertise_where`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#advertise-custom-advertise-where-vk8s-service-site) below.
 
@@ -506,7 +536,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-vk8s-service-site"></a>
 
-**Advertise Custom Advertise Where Vk8s Service Site**
+**Site**
+
+A `site` block (within `advertise_custom.advertise_where.vk8s_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -516,7 +548,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-custom-advertise-where-vk8s-service-virtual-site"></a>
 
-**Advertise Custom Advertise Where Vk8s Service Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `advertise_custom.advertise_where.vk8s_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -528,11 +562,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Advertise On Public**
 
+An `advertise_on_public` block supports the following:
+
 &#x2022; [`public_ip`](#public-ip) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#advertise-on-public-public-ip) below.
 
 <a id="advertise-on-public-public-ip"></a>
 
-**Advertise On Public Public IP**
+**Public IP**
+
+A `public_ip` block (within `advertise_on_public`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -544,13 +582,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Protection Rules**
 
+An `api_protection_rules` block supports the following:
+
 &#x2022; [`api_endpoint_rules`](#api-endpoint-rules) - Optional Block<br>API Endpoints. This category defines specific rules per API endpoints. If request matches any of these rules, skipping second category rules<br>See [API Endpoint Rules](#api-protection-rules-api-endpoint-rules) below.
 
 &#x2022; [`api_groups_rules`](#api-groups-rules) - Optional Block<br>Server URLs and API Groups. This category includes rules per API group or Server URL. For API groups, refer to API Definition which includes API groups derived from uploaded swaggers<br>See [API Groups Rules](#api-protection-rules-api-groups-rules) below.
 
 <a id="api-protection-rules-api-endpoint-rules"></a>
 
-**API Protection Rules API Endpoint Rules**
+**API Endpoint Rules**
+
+An `api_endpoint_rules` block (within `api_protection_rules`) supports the following:
 
 &#x2022; [`action`](#action) - Optional Block<br>API Protection Rule Action. The action to take if the input request matches the rule<br>See [Action](#api-protection-rules-api-endpoint-rules-action) below.
 
@@ -570,7 +612,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-action"></a>
 
-**API Protection Rules API Endpoint Rules Action**
+**Action**
+
+An `action` block (within `api_protection_rules.api_endpoint_rules`) supports the following:
 
 &#x2022; [`allow`](#allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -578,7 +622,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-api-endpoint-method"></a>
 
-**API Protection Rules API Endpoint Rules API Endpoint Method**
+**API Endpoint Method**
+
+An `api_endpoint_method` block (within `api_protection_rules.api_endpoint_rules`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
@@ -586,7 +632,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher**
+**Client Matcher**
+
+A `client_matcher` block (within `api_protection_rules.api_endpoint_rules`) supports the following:
 
 &#x2022; [`any_client`](#any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -608,19 +656,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher-asn-list"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher Asn List**
+**Asn List**
+
+An `asn_list` block (within `api_protection_rules.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher-asn-matcher"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `api_protection_rules.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#api-protection-rules-api-endpoint-rules-client-matcher-asn-matcher-asn-sets) below.
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher-asn-matcher-asn-sets"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `api_protection_rules.api_endpoint_rules.client_matcher.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -634,13 +688,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher-client-selector"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher Client Selector**
+**Client Selector**
+
+A `client_selector` block (within `api_protection_rules.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher-ip-matcher"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher IP Matcher**
+**IP Matcher**
+
+An `ip_matcher` block (within `api_protection_rules.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -648,7 +706,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher-ip-matcher-prefix-sets"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `api_protection_rules.api_endpoint_rules.client_matcher.ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -662,7 +722,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher-ip-prefix-list"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `api_protection_rules.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -670,13 +732,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher-ip-threat-category-list"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher IP Threat Category List**
+**IP Threat Category List**
+
+An `ip_threat_category_list` block (within `api_protection_rules.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
 <a id="api-protection-rules-api-endpoint-rules-client-matcher-tls-fingerprint-matcher"></a>
 
-**API Protection Rules API Endpoint Rules Client Matcher TLS Fingerprint Matcher**
+**TLS Fingerprint Matcher**
+
+A `tls_fingerprint_matcher` block (within `api_protection_rules.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`classes`](#classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
@@ -686,7 +752,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-metadata"></a>
 
-**API Protection Rules API Endpoint Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `api_protection_rules.api_endpoint_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -694,7 +762,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-request-matcher"></a>
 
-**API Protection Rules API Endpoint Rules Request Matcher**
+**Request Matcher**
+
+A `request_matcher` block (within `api_protection_rules.api_endpoint_rules`) supports the following:
 
 &#x2022; [`cookie_matchers`](#cookie-matchers) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#api-protection-rules-api-endpoint-rules-request-matcher-cookie-matchers) below.
 
@@ -706,7 +776,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-request-matcher-cookie-matchers"></a>
 
-**API Protection Rules API Endpoint Rules Request Matcher Cookie Matchers**
+**Cookie Matchers**
+
+A `cookie_matchers` block (within `api_protection_rules.api_endpoint_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -720,7 +792,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-request-matcher-cookie-matchers-item"></a>
 
-**API Protection Rules API Endpoint Rules Request Matcher Cookie Matchers Item**
+**Item**
+
+An `item` block (within `api_protection_rules.api_endpoint_rules.request_matcher.cookie_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -730,7 +804,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-request-matcher-headers"></a>
 
-**API Protection Rules API Endpoint Rules Request Matcher Headers**
+**Headers**
+
+A `headers` block (within `api_protection_rules.api_endpoint_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -744,7 +820,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-request-matcher-headers-item"></a>
 
-**API Protection Rules API Endpoint Rules Request Matcher Headers Item**
+**Item**
+
+An `item` block (within `api_protection_rules.api_endpoint_rules.request_matcher.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -754,7 +832,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-request-matcher-jwt-claims"></a>
 
-**API Protection Rules API Endpoint Rules Request Matcher JWT Claims**
+**JWT Claims**
+
+A `jwt_claims` block (within `api_protection_rules.api_endpoint_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -768,7 +848,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-request-matcher-jwt-claims-item"></a>
 
-**API Protection Rules API Endpoint Rules Request Matcher JWT Claims Item**
+**Item**
+
+An `item` block (within `api_protection_rules.api_endpoint_rules.request_matcher.jwt_claims`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -778,7 +860,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-request-matcher-query-params"></a>
 
-**API Protection Rules API Endpoint Rules Request Matcher Query Params**
+**Query Params**
+
+A `query_params` block (within `api_protection_rules.api_endpoint_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -792,7 +876,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-endpoint-rules-request-matcher-query-params-item"></a>
 
-**API Protection Rules API Endpoint Rules Request Matcher Query Params Item**
+**Item**
+
+An `item` block (within `api_protection_rules.api_endpoint_rules.request_matcher.query_params`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -802,7 +888,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules"></a>
 
-**API Protection Rules API Groups Rules**
+**API Groups Rules**
+
+An `api_groups_rules` block (within `api_protection_rules`) supports the following:
 
 &#x2022; [`action`](#action) - Optional Block<br>API Protection Rule Action. The action to take if the input request matches the rule<br>See [Action](#api-protection-rules-api-groups-rules-action) below.
 
@@ -822,7 +910,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-action"></a>
 
-**API Protection Rules API Groups Rules Action**
+**Action**
+
+An `action` block (within `api_protection_rules.api_groups_rules`) supports the following:
 
 &#x2022; [`allow`](#allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -830,7 +920,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-client-matcher"></a>
 
-**API Protection Rules API Groups Rules Client Matcher**
+**Client Matcher**
+
+A `client_matcher` block (within `api_protection_rules.api_groups_rules`) supports the following:
 
 &#x2022; [`any_client`](#any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -852,19 +944,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-client-matcher-asn-list"></a>
 
-**API Protection Rules API Groups Rules Client Matcher Asn List**
+**Asn List**
+
+An `asn_list` block (within `api_protection_rules.api_groups_rules.client_matcher`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="api-protection-rules-api-groups-rules-client-matcher-asn-matcher"></a>
 
-**API Protection Rules API Groups Rules Client Matcher Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `api_protection_rules.api_groups_rules.client_matcher`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#api-protection-rules-api-groups-rules-client-matcher-asn-matcher-asn-sets) below.
 
 <a id="api-protection-rules-api-groups-rules-client-matcher-asn-matcher-asn-sets"></a>
 
-**API Protection Rules API Groups Rules Client Matcher Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `api_protection_rules.api_groups_rules.client_matcher.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -878,13 +976,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-client-matcher-client-selector"></a>
 
-**API Protection Rules API Groups Rules Client Matcher Client Selector**
+**Client Selector**
+
+A `client_selector` block (within `api_protection_rules.api_groups_rules.client_matcher`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="api-protection-rules-api-groups-rules-client-matcher-ip-matcher"></a>
 
-**API Protection Rules API Groups Rules Client Matcher IP Matcher**
+**IP Matcher**
+
+An `ip_matcher` block (within `api_protection_rules.api_groups_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -892,7 +994,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-client-matcher-ip-matcher-prefix-sets"></a>
 
-**API Protection Rules API Groups Rules Client Matcher IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `api_protection_rules.api_groups_rules.client_matcher.ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -906,7 +1010,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-client-matcher-ip-prefix-list"></a>
 
-**API Protection Rules API Groups Rules Client Matcher IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `api_protection_rules.api_groups_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -914,13 +1020,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-client-matcher-ip-threat-category-list"></a>
 
-**API Protection Rules API Groups Rules Client Matcher IP Threat Category List**
+**IP Threat Category List**
+
+An `ip_threat_category_list` block (within `api_protection_rules.api_groups_rules.client_matcher`) supports the following:
 
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
 <a id="api-protection-rules-api-groups-rules-client-matcher-tls-fingerprint-matcher"></a>
 
-**API Protection Rules API Groups Rules Client Matcher TLS Fingerprint Matcher**
+**TLS Fingerprint Matcher**
+
+A `tls_fingerprint_matcher` block (within `api_protection_rules.api_groups_rules.client_matcher`) supports the following:
 
 &#x2022; [`classes`](#classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
@@ -930,7 +1040,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-metadata"></a>
 
-**API Protection Rules API Groups Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `api_protection_rules.api_groups_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -938,7 +1050,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-request-matcher"></a>
 
-**API Protection Rules API Groups Rules Request Matcher**
+**Request Matcher**
+
+A `request_matcher` block (within `api_protection_rules.api_groups_rules`) supports the following:
 
 &#x2022; [`cookie_matchers`](#cookie-matchers) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#api-protection-rules-api-groups-rules-request-matcher-cookie-matchers) below.
 
@@ -950,7 +1064,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-request-matcher-cookie-matchers"></a>
 
-**API Protection Rules API Groups Rules Request Matcher Cookie Matchers**
+**Cookie Matchers**
+
+A `cookie_matchers` block (within `api_protection_rules.api_groups_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -964,7 +1080,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-request-matcher-cookie-matchers-item"></a>
 
-**API Protection Rules API Groups Rules Request Matcher Cookie Matchers Item**
+**Item**
+
+An `item` block (within `api_protection_rules.api_groups_rules.request_matcher.cookie_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -974,7 +1092,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-request-matcher-headers"></a>
 
-**API Protection Rules API Groups Rules Request Matcher Headers**
+**Headers**
+
+A `headers` block (within `api_protection_rules.api_groups_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -988,7 +1108,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-request-matcher-headers-item"></a>
 
-**API Protection Rules API Groups Rules Request Matcher Headers Item**
+**Item**
+
+An `item` block (within `api_protection_rules.api_groups_rules.request_matcher.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -998,7 +1120,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-request-matcher-jwt-claims"></a>
 
-**API Protection Rules API Groups Rules Request Matcher JWT Claims**
+**JWT Claims**
+
+A `jwt_claims` block (within `api_protection_rules.api_groups_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1012,7 +1136,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-request-matcher-jwt-claims-item"></a>
 
-**API Protection Rules API Groups Rules Request Matcher JWT Claims Item**
+**Item**
+
+An `item` block (within `api_protection_rules.api_groups_rules.request_matcher.jwt_claims`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1022,7 +1148,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-request-matcher-query-params"></a>
 
-**API Protection Rules API Groups Rules Request Matcher Query Params**
+**Query Params**
+
+A `query_params` block (within `api_protection_rules.api_groups_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1036,7 +1164,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-protection-rules-api-groups-rules-request-matcher-query-params-item"></a>
 
-**API Protection Rules API Groups Rules Request Matcher Query Params Item**
+**Item**
+
+An `item` block (within `api_protection_rules.api_groups_rules.request_matcher.query_params`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1047,6 +1177,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="api-rate-limit"></a>
 
 **API Rate Limit**
+
+An `api_rate_limit` block supports the following:
 
 &#x2022; [`api_endpoint_rules`](#api-endpoint-rules) - Optional Block<br>API Endpoints. Sets of rules for a specific endpoints. Order is matter as it uses first match policy. For creating rule that contain a whole domain or group of endpoints, please use the server URL rules above<br>See [API Endpoint Rules](#api-rate-limit-api-endpoint-rules) below.
 
@@ -1062,7 +1194,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules"></a>
 
-**API Rate Limit API Endpoint Rules**
+**API Endpoint Rules**
+
+An `api_endpoint_rules` block (within `api_rate_limit`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1082,7 +1216,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-api-endpoint-method"></a>
 
-**API Rate Limit API Endpoint Rules API Endpoint Method**
+**API Endpoint Method**
+
+An `api_endpoint_method` block (within `api_rate_limit.api_endpoint_rules`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
@@ -1090,7 +1226,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher**
+**Client Matcher**
+
+A `client_matcher` block (within `api_rate_limit.api_endpoint_rules`) supports the following:
 
 &#x2022; [`any_client`](#any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1112,19 +1250,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-list"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher Asn List**
+**Asn List**
+
+An `asn_list` block (within `api_rate_limit.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `api_rate_limit.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher-asn-sets) below.
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher-asn-sets"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `api_rate_limit.api_endpoint_rules.client_matcher.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1138,13 +1282,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-client-selector"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher Client Selector**
+**Client Selector**
+
+A `client_selector` block (within `api_rate_limit.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher IP Matcher**
+**IP Matcher**
+
+An `ip_matcher` block (within `api_rate_limit.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -1152,7 +1300,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher-prefix-sets"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `api_rate_limit.api_endpoint_rules.client_matcher.ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1166,7 +1316,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-prefix-list"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `api_rate_limit.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -1174,13 +1326,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-threat-category-list"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher IP Threat Category List**
+**IP Threat Category List**
+
+An `ip_threat_category_list` block (within `api_rate_limit.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-tls-fingerprint-matcher"></a>
 
-**API Rate Limit API Endpoint Rules Client Matcher TLS Fingerprint Matcher**
+**TLS Fingerprint Matcher**
+
+A `tls_fingerprint_matcher` block (within `api_rate_limit.api_endpoint_rules.client_matcher`) supports the following:
 
 &#x2022; [`classes`](#classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
@@ -1190,7 +1346,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter"></a>
 
-**API Rate Limit API Endpoint Rules Inline Rate Limiter**
+**Inline Rate Limiter**
+
+An `inline_rate_limiter` block (within `api_rate_limit.api_endpoint_rules`) supports the following:
 
 &#x2022; [`ref_user_id`](#ref-user-id) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Ref User Id](#api-rate-limit-api-endpoint-rules-inline-rate-limiter-ref-user-id) below.
 
@@ -1202,7 +1360,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter-ref-user-id"></a>
 
-**API Rate Limit API Endpoint Rules Inline Rate Limiter Ref User Id**
+**Ref User Id**
+
+A `ref_user_id` block (within `api_rate_limit.api_endpoint_rules.inline_rate_limiter`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1212,7 +1372,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-ref-rate-limiter"></a>
 
-**API Rate Limit API Endpoint Rules Ref Rate Limiter**
+**Ref Rate Limiter**
+
+A `ref_rate_limiter` block (within `api_rate_limit.api_endpoint_rules`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1222,7 +1384,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher"></a>
 
-**API Rate Limit API Endpoint Rules Request Matcher**
+**Request Matcher**
+
+A `request_matcher` block (within `api_rate_limit.api_endpoint_rules`) supports the following:
 
 &#x2022; [`cookie_matchers`](#cookie-matchers) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers) below.
 
@@ -1234,7 +1398,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers"></a>
 
-**API Rate Limit API Endpoint Rules Request Matcher Cookie Matchers**
+**Cookie Matchers**
+
+A `cookie_matchers` block (within `api_rate_limit.api_endpoint_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1248,7 +1414,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-item"></a>
 
-**API Rate Limit API Endpoint Rules Request Matcher Cookie Matchers Item**
+**Item**
+
+An `item` block (within `api_rate_limit.api_endpoint_rules.request_matcher.cookie_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1258,7 +1426,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-headers"></a>
 
-**API Rate Limit API Endpoint Rules Request Matcher Headers**
+**Headers**
+
+A `headers` block (within `api_rate_limit.api_endpoint_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1272,7 +1442,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-headers-item"></a>
 
-**API Rate Limit API Endpoint Rules Request Matcher Headers Item**
+**Item**
+
+An `item` block (within `api_rate_limit.api_endpoint_rules.request_matcher.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1282,7 +1454,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims"></a>
 
-**API Rate Limit API Endpoint Rules Request Matcher JWT Claims**
+**JWT Claims**
+
+A `jwt_claims` block (within `api_rate_limit.api_endpoint_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1296,7 +1470,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-item"></a>
 
-**API Rate Limit API Endpoint Rules Request Matcher JWT Claims Item**
+**Item**
+
+An `item` block (within `api_rate_limit.api_endpoint_rules.request_matcher.jwt_claims`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1306,7 +1482,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params"></a>
 
-**API Rate Limit API Endpoint Rules Request Matcher Query Params**
+**Query Params**
+
+A `query_params` block (within `api_rate_limit.api_endpoint_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1320,7 +1498,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params-item"></a>
 
-**API Rate Limit API Endpoint Rules Request Matcher Query Params Item**
+**Item**
+
+An `item` block (within `api_rate_limit.api_endpoint_rules.request_matcher.query_params`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1330,13 +1510,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules**
+**Bypass Rate Limiting Rules**
+
+A `bypass_rate_limiting_rules` block (within `api_rate_limit`) supports the following:
 
 &#x2022; [`bypass_rate_limiting_rules`](#bypass-rate-limiting-rules) - Optional Block<br>Bypass Rate Limiting. This category defines rules per URL or API group. If request matches any of these rules, skip Rate Limiting<br>See [Bypass Rate Limiting Rules](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules) below.
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules**
+**Bypass Rate Limiting Rules**
+
+A `bypass_rate_limiting_rules` block (within `api_rate_limit.bypass_rate_limiting_rules`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1356,7 +1540,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-endpoint"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules API Endpoint**
+**API Endpoint**
+
+An `api_endpoint` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`) supports the following:
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Methods. Methods to be matched
 
@@ -1364,13 +1550,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-groups"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules API Groups**
+**API Groups**
+
+An `api_groups` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`) supports the following:
 
 &#x2022; [`api_groups`](#api-groups) - Optional List<br>API Groups
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher**
+**Client Matcher**
+
+A `client_matcher` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`) supports the following:
 
 &#x2022; [`any_client`](#any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1392,19 +1582,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-list"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Asn List**
+**Asn List**
+
+An `asn_list` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher-asn-sets) below.
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher-asn-sets"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1418,13 +1614,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-client-selector"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Client Selector**
+**Client Selector**
+
+A `client_selector` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Matcher**
+**IP Matcher**
+
+An `ip_matcher` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -1432,7 +1632,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher-prefix-sets"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher.ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1446,7 +1648,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-prefix-list"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -1454,13 +1658,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-threat-category-list"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Threat Category List**
+**IP Threat Category List**
+
+An `ip_threat_category_list` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`) supports the following:
 
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-tls-fingerprint-matcher"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher TLS Fingerprint Matcher**
+**TLS Fingerprint Matcher**
+
+A `tls_fingerprint_matcher` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`) supports the following:
 
 &#x2022; [`classes`](#classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
@@ -1470,7 +1678,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher**
+**Request Matcher**
+
+A `request_matcher` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`) supports the following:
 
 &#x2022; [`cookie_matchers`](#cookie-matchers) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers) below.
 
@@ -1482,7 +1692,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Cookie Matchers**
+**Cookie Matchers**
+
+A `cookie_matchers` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1496,7 +1708,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-item"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Cookie Matchers Item**
+**Item**
+
+An `item` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.cookie_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1506,7 +1720,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Headers**
+**Headers**
+
+A `headers` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1520,7 +1736,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-item"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Headers Item**
+**Item**
+
+An `item` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1530,7 +1748,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher JWT Claims**
+**JWT Claims**
+
+A `jwt_claims` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1544,7 +1764,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-item"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher JWT Claims Item**
+**Item**
+
+An `item` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.jwt_claims`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1554,7 +1776,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Query Params**
+**Query Params**
+
+A `query_params` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1568,7 +1792,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-item"></a>
 
-**API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Query Params Item**
+**Item**
+
+An `item` block (within `api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.query_params`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1578,13 +1804,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-custom-ip-allowed-list"></a>
 
-**API Rate Limit Custom IP Allowed List**
+**Custom IP Allowed List**
+
+A `custom_ip_allowed_list` block (within `api_rate_limit`) supports the following:
 
 &#x2022; [`rate_limiter_allowed_prefixes`](#rate-limiter-allowed-prefixes) - Optional Block<br>List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting<br>See [Rate Limiter Allowed Prefixes](#api-rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes) below.
 
 <a id="api-rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes"></a>
 
-**API Rate Limit Custom IP Allowed List Rate Limiter Allowed Prefixes**
+**Rate Limiter Allowed Prefixes**
+
+A `rate_limiter_allowed_prefixes` block (within `api_rate_limit.custom_ip_allowed_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1594,13 +1824,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-ip-allowed-list"></a>
 
-**API Rate Limit IP Allowed List**
+**IP Allowed List**
+
+An `ip_allowed_list` block (within `api_rate_limit`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="api-rate-limit-server-url-rules"></a>
 
-**API Rate Limit Server URL Rules**
+**Server URL Rules**
+
+A `server_url_rules` block (within `api_rate_limit`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1620,7 +1854,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-client-matcher"></a>
 
-**API Rate Limit Server URL Rules Client Matcher**
+**Client Matcher**
+
+A `client_matcher` block (within `api_rate_limit.server_url_rules`) supports the following:
 
 &#x2022; [`any_client`](#any-client) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1642,19 +1878,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-client-matcher-asn-list"></a>
 
-**API Rate Limit Server URL Rules Client Matcher Asn List**
+**Asn List**
+
+An `asn_list` block (within `api_rate_limit.server_url_rules.client_matcher`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="api-rate-limit-server-url-rules-client-matcher-asn-matcher"></a>
 
-**API Rate Limit Server URL Rules Client Matcher Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `api_rate_limit.server_url_rules.client_matcher`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#api-rate-limit-server-url-rules-client-matcher-asn-matcher-asn-sets) below.
 
 <a id="api-rate-limit-server-url-rules-client-matcher-asn-matcher-asn-sets"></a>
 
-**API Rate Limit Server URL Rules Client Matcher Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `api_rate_limit.server_url_rules.client_matcher.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1668,13 +1910,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-client-matcher-client-selector"></a>
 
-**API Rate Limit Server URL Rules Client Matcher Client Selector**
+**Client Selector**
+
+A `client_selector` block (within `api_rate_limit.server_url_rules.client_matcher`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="api-rate-limit-server-url-rules-client-matcher-ip-matcher"></a>
 
-**API Rate Limit Server URL Rules Client Matcher IP Matcher**
+**IP Matcher**
+
+An `ip_matcher` block (within `api_rate_limit.server_url_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -1682,7 +1928,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-client-matcher-ip-matcher-prefix-sets"></a>
 
-**API Rate Limit Server URL Rules Client Matcher IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `api_rate_limit.server_url_rules.client_matcher.ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -1696,7 +1944,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-client-matcher-ip-prefix-list"></a>
 
-**API Rate Limit Server URL Rules Client Matcher IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `api_rate_limit.server_url_rules.client_matcher`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -1704,13 +1954,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-client-matcher-ip-threat-category-list"></a>
 
-**API Rate Limit Server URL Rules Client Matcher IP Threat Category List**
+**IP Threat Category List**
+
+An `ip_threat_category_list` block (within `api_rate_limit.server_url_rules.client_matcher`) supports the following:
 
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
 <a id="api-rate-limit-server-url-rules-client-matcher-tls-fingerprint-matcher"></a>
 
-**API Rate Limit Server URL Rules Client Matcher TLS Fingerprint Matcher**
+**TLS Fingerprint Matcher**
+
+A `tls_fingerprint_matcher` block (within `api_rate_limit.server_url_rules.client_matcher`) supports the following:
 
 &#x2022; [`classes`](#classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
@@ -1720,7 +1974,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-inline-rate-limiter"></a>
 
-**API Rate Limit Server URL Rules Inline Rate Limiter**
+**Inline Rate Limiter**
+
+An `inline_rate_limiter` block (within `api_rate_limit.server_url_rules`) supports the following:
 
 &#x2022; [`ref_user_id`](#ref-user-id) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Ref User Id](#api-rate-limit-server-url-rules-inline-rate-limiter-ref-user-id) below.
 
@@ -1732,7 +1988,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-inline-rate-limiter-ref-user-id"></a>
 
-**API Rate Limit Server URL Rules Inline Rate Limiter Ref User Id**
+**Ref User Id**
+
+A `ref_user_id` block (within `api_rate_limit.server_url_rules.inline_rate_limiter`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1742,7 +2000,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-ref-rate-limiter"></a>
 
-**API Rate Limit Server URL Rules Ref Rate Limiter**
+**Ref Rate Limiter**
+
+A `ref_rate_limiter` block (within `api_rate_limit.server_url_rules`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1752,7 +2012,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-request-matcher"></a>
 
-**API Rate Limit Server URL Rules Request Matcher**
+**Request Matcher**
+
+A `request_matcher` block (within `api_rate_limit.server_url_rules`) supports the following:
 
 &#x2022; [`cookie_matchers`](#cookie-matchers) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers) below.
 
@@ -1764,7 +2026,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers"></a>
 
-**API Rate Limit Server URL Rules Request Matcher Cookie Matchers**
+**Cookie Matchers**
+
+A `cookie_matchers` block (within `api_rate_limit.server_url_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1778,7 +2042,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers-item"></a>
 
-**API Rate Limit Server URL Rules Request Matcher Cookie Matchers Item**
+**Item**
+
+An `item` block (within `api_rate_limit.server_url_rules.request_matcher.cookie_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1788,7 +2054,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-request-matcher-headers"></a>
 
-**API Rate Limit Server URL Rules Request Matcher Headers**
+**Headers**
+
+A `headers` block (within `api_rate_limit.server_url_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1802,7 +2070,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-request-matcher-headers-item"></a>
 
-**API Rate Limit Server URL Rules Request Matcher Headers Item**
+**Item**
+
+An `item` block (within `api_rate_limit.server_url_rules.request_matcher.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1812,7 +2082,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims"></a>
 
-**API Rate Limit Server URL Rules Request Matcher JWT Claims**
+**JWT Claims**
+
+A `jwt_claims` block (within `api_rate_limit.server_url_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1826,7 +2098,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims-item"></a>
 
-**API Rate Limit Server URL Rules Request Matcher JWT Claims Item**
+**Item**
+
+An `item` block (within `api_rate_limit.server_url_rules.request_matcher.jwt_claims`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1836,7 +2110,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-request-matcher-query-params"></a>
 
-**API Rate Limit Server URL Rules Request Matcher Query Params**
+**Query Params**
+
+A `query_params` block (within `api_rate_limit.server_url_rules.request_matcher`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1850,7 +2126,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-rate-limit-server-url-rules-request-matcher-query-params-item"></a>
 
-**API Rate Limit Server URL Rules Request Matcher Query Params Item**
+**Item**
+
+An `item` block (within `api_rate_limit.server_url_rules.request_matcher.query_params`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -1862,6 +2140,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Specification**
 
+An `api_specification` block supports the following:
+
 &#x2022; [`api_definition`](#api-definition) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [API Definition](#api-specification-api-definition) below.
 
 &#x2022; [`validation_all_spec_endpoints`](#validation-all-spec-endpoints) - Optional Block<br>API Inventory. Settings for API Inventory validation<br>See [Validation All Spec Endpoints](#api-specification-validation-all-spec-endpoints) below.
@@ -1872,7 +2152,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-api-definition"></a>
 
-**API Specification API Definition**
+**API Definition**
+
+An `api_definition` block (within `api_specification`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1882,7 +2164,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints"></a>
 
-**API Specification Validation All Spec Endpoints**
+**Validation All Spec Endpoints**
+
+A `validation_all_spec_endpoints` block (within `api_specification`) supports the following:
 
 &#x2022; [`fall_through_mode`](#fall-through-mode) - Optional Block<br>Fall Through Mode. x-required Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules)<br>See [Fall Through Mode](#api-specification-validation-all-spec-endpoints-fall-through-mode) below.
 
@@ -1892,7 +2176,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode"></a>
 
-**API Specification Validation All Spec Endpoints Fall Through Mode**
+**Fall Through Mode**
+
+A `fall_through_mode` block (within `api_specification.validation_all_spec_endpoints`) supports the following:
 
 &#x2022; [`fall_through_mode_allow`](#fall-through-mode-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1900,13 +2186,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom"></a>
 
-**API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom**
+**Fall Through Mode Custom**
+
+A `fall_through_mode_custom` block (within `api_specification.validation_all_spec_endpoints.fall_through_mode`) supports the following:
 
 &#x2022; [`open_api_validation_rules`](#open-api-validation-rules) - Optional Block<br>Custom Fall Through Rule List<br>See [Open API Validation Rules](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules) below.
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules"></a>
 
-**API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom Open API Validation Rules**
+**Open API Validation Rules**
+
+An `open_api_validation_rules` block (within `api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom`) supports the following:
 
 &#x2022; [`action_block`](#action-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1924,7 +2214,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint"></a>
 
-**API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom Open API Validation Rules API Endpoint**
+**API Endpoint**
+
+An `api_endpoint` block (within `api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`) supports the following:
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Methods. Methods to be matched
 
@@ -1932,7 +2224,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata"></a>
 
-**API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom Open API Validation Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -1940,7 +2234,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints-settings"></a>
 
-**API Specification Validation All Spec Endpoints Settings**
+**Settings**
+
+A `settings` block (within `api_specification.validation_all_spec_endpoints`) supports the following:
 
 &#x2022; [`oversized_body_fail_validation`](#oversized-body-fail-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1952,13 +2248,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom"></a>
 
-**API Specification Validation All Spec Endpoints Settings Property Validation Settings Custom**
+**Property Validation Settings Custom**
+
+A `property_validation_settings_custom` block (within `api_specification.validation_all_spec_endpoints.settings`) supports the following:
 
 &#x2022; [`query_parameters`](#query-parameters) - Optional Block<br>Validation Settings For Query Parameters. Custom settings for query parameters validation<br>See [Query Parameters](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters) below.
 
 <a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters"></a>
 
-**API Specification Validation All Spec Endpoints Settings Property Validation Settings Custom Query Parameters**
+**Query Parameters**
+
+A `query_parameters` block (within `api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom`) supports the following:
 
 &#x2022; [`allow_additional_parameters`](#allow-additional-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1966,7 +2266,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode"></a>
 
-**API Specification Validation All Spec Endpoints Validation Mode**
+**Validation Mode**
+
+A `validation_mode` block (within `api_specification.validation_all_spec_endpoints`) supports the following:
 
 &#x2022; [`response_validation_mode_active`](#response-validation-mode-active) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of response<br>See [Response Validation Mode Active](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active) below.
 
@@ -1978,7 +2280,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active"></a>
 
-**API Specification Validation All Spec Endpoints Validation Mode Response Validation Mode Active**
+**Response Validation Mode Active**
+
+A `response_validation_mode_active` block (within `api_specification.validation_all_spec_endpoints.validation_mode`) supports the following:
 
 &#x2022; [`enforcement_block`](#enforcement-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1988,7 +2292,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active"></a>
 
-**API Specification Validation All Spec Endpoints Validation Mode Validation Mode Active**
+**Validation Mode Active**
+
+A `validation_mode_active` block (within `api_specification.validation_all_spec_endpoints.validation_mode`) supports the following:
 
 &#x2022; [`enforcement_block`](#enforcement-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1998,7 +2304,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list"></a>
 
-**API Specification Validation Custom List**
+**Validation Custom List**
+
+A `validation_custom_list` block (within `api_specification`) supports the following:
 
 &#x2022; [`fall_through_mode`](#fall-through-mode) - Optional Block<br>Fall Through Mode. x-required Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. swagger) or doesn't have a specific rule in custom rules)<br>See [Fall Through Mode](#api-specification-validation-custom-list-fall-through-mode) below.
 
@@ -2008,7 +2316,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-fall-through-mode"></a>
 
-**API Specification Validation Custom List Fall Through Mode**
+**Fall Through Mode**
+
+A `fall_through_mode` block (within `api_specification.validation_custom_list`) supports the following:
 
 &#x2022; [`fall_through_mode_allow`](#fall-through-mode-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2016,13 +2326,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom"></a>
 
-**API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom**
+**Fall Through Mode Custom**
+
+A `fall_through_mode_custom` block (within `api_specification.validation_custom_list.fall_through_mode`) supports the following:
 
 &#x2022; [`open_api_validation_rules`](#open-api-validation-rules) - Optional Block<br>Custom Fall Through Rule List<br>See [Open API Validation Rules](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules) below.
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules"></a>
 
-**API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom Open API Validation Rules**
+**Open API Validation Rules**
+
+An `open_api_validation_rules` block (within `api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom`) supports the following:
 
 &#x2022; [`action_block`](#action-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2040,7 +2354,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint"></a>
 
-**API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom Open API Validation Rules API Endpoint**
+**API Endpoint**
+
+An `api_endpoint` block (within `api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`) supports the following:
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Methods. Methods to be matched
 
@@ -2048,7 +2364,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata"></a>
 
-**API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom Open API Validation Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -2056,7 +2374,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules"></a>
 
-**API Specification Validation Custom List Open API Validation Rules**
+**Open API Validation Rules**
+
+An `open_api_validation_rules` block (within `api_specification.validation_custom_list`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2074,7 +2394,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-api-endpoint"></a>
 
-**API Specification Validation Custom List Open API Validation Rules API Endpoint**
+**API Endpoint**
+
+An `api_endpoint` block (within `api_specification.validation_custom_list.open_api_validation_rules`) supports the following:
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Methods. Methods to be matched
 
@@ -2082,7 +2404,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-metadata"></a>
 
-**API Specification Validation Custom List Open API Validation Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `api_specification.validation_custom_list.open_api_validation_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -2090,7 +2414,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode"></a>
 
-**API Specification Validation Custom List Open API Validation Rules Validation Mode**
+**Validation Mode**
+
+A `validation_mode` block (within `api_specification.validation_custom_list.open_api_validation_rules`) supports the following:
 
 &#x2022; [`response_validation_mode_active`](#response-validation-mode-active) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of response<br>See [Response Validation Mode Active](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active) below.
 
@@ -2102,7 +2428,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active"></a>
 
-**API Specification Validation Custom List Open API Validation Rules Validation Mode Response Validation Mode Active**
+**Response Validation Mode Active**
+
+A `response_validation_mode_active` block (within `api_specification.validation_custom_list.open_api_validation_rules.validation_mode`) supports the following:
 
 &#x2022; [`enforcement_block`](#enforcement-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2112,7 +2440,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active"></a>
 
-**API Specification Validation Custom List Open API Validation Rules Validation Mode Validation Mode Active**
+**Validation Mode Active**
+
+A `validation_mode_active` block (within `api_specification.validation_custom_list.open_api_validation_rules.validation_mode`) supports the following:
 
 &#x2022; [`enforcement_block`](#enforcement-block) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2122,7 +2452,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-settings"></a>
 
-**API Specification Validation Custom List Settings**
+**Settings**
+
+A `settings` block (within `api_specification.validation_custom_list`) supports the following:
 
 &#x2022; [`oversized_body_fail_validation`](#oversized-body-fail-validation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2134,13 +2466,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-specification-validation-custom-list-settings-property-validation-settings-custom"></a>
 
-**API Specification Validation Custom List Settings Property Validation Settings Custom**
+**Property Validation Settings Custom**
+
+A `property_validation_settings_custom` block (within `api_specification.validation_custom_list.settings`) supports the following:
 
 &#x2022; [`query_parameters`](#query-parameters) - Optional Block<br>Validation Settings For Query Parameters. Custom settings for query parameters validation<br>See [Query Parameters](#api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters) below.
 
 <a id="api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters"></a>
 
-**API Specification Validation Custom List Settings Property Validation Settings Custom Query Parameters**
+**Query Parameters**
+
+A `query_parameters` block (within `api_specification.validation_custom_list.settings.property_validation_settings_custom`) supports the following:
 
 &#x2022; [`allow_additional_parameters`](#allow-additional-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2149,6 +2485,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="api-testing"></a>
 
 **API Testing**
+
+An `api_testing` block supports the following:
 
 &#x2022; [`custom_header_value`](#custom-header-value) - Optional String<br>Custom Header. Add x-f5-API-testing-identifier header value to prevent security flags on API testing traffic
 
@@ -2162,7 +2500,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains"></a>
 
-**API Testing Domains**
+**Domains**
+
+A `domains` block (within `api_testing`) supports the following:
 
 &#x2022; [`allow_destructive_methods`](#allow-destructive-methods) - Optional Bool<br>Use Destructive Methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data
 
@@ -2172,7 +2512,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials"></a>
 
-**API Testing Domains Credentials**
+**Credentials**
+
+A `credentials` block (within `api_testing.domains`) supports the following:
 
 &#x2022; [`admin`](#admin) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2190,7 +2532,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-api-key"></a>
 
-**API Testing Domains Credentials API Key**
+**API Key**
+
+An `api_key` block (within `api_testing.domains.credentials`) supports the following:
 
 &#x2022; [`key`](#key) - Optional String<br>Key
 
@@ -2198,7 +2542,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-api-key-value"></a>
 
-**API Testing Domains Credentials API Key Value**
+**Value**
+
+A `value` block (within `api_testing.domains.credentials.api_key`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#api-testing-domains-credentials-api-key-value-blindfold-secret-info) below.
 
@@ -2206,7 +2552,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-api-key-value-blindfold-secret-info"></a>
 
-**API Testing Domains Credentials API Key Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `api_testing.domains.credentials.api_key.value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -2216,7 +2564,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-api-key-value-clear-secret-info"></a>
 
-**API Testing Domains Credentials API Key Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `api_testing.domains.credentials.api_key.value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -2224,7 +2574,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-basic-auth"></a>
 
-**API Testing Domains Credentials Basic Auth**
+**Basic Auth**
+
+A `basic_auth` block (within `api_testing.domains.credentials`) supports the following:
 
 &#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#api-testing-domains-credentials-basic-auth-password) below.
 
@@ -2232,7 +2584,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-basic-auth-password"></a>
 
-**API Testing Domains Credentials Basic Auth Password**
+**Password**
+
+A `password` block (within `api_testing.domains.credentials.basic_auth`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#api-testing-domains-credentials-basic-auth-password-blindfold-secret-info) below.
 
@@ -2240,7 +2594,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-basic-auth-password-blindfold-secret-info"></a>
 
-**API Testing Domains Credentials Basic Auth Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `api_testing.domains.credentials.basic_auth.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -2250,7 +2606,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-basic-auth-password-clear-secret-info"></a>
 
-**API Testing Domains Credentials Basic Auth Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `api_testing.domains.credentials.basic_auth.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -2258,13 +2616,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-bearer-token"></a>
 
-**API Testing Domains Credentials Bearer Token**
+**Bearer Token**
+
+A `bearer_token` block (within `api_testing.domains.credentials`) supports the following:
 
 &#x2022; [`token`](#token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#api-testing-domains-credentials-bearer-token-token) below.
 
 <a id="api-testing-domains-credentials-bearer-token-token"></a>
 
-**API Testing Domains Credentials Bearer Token Token**
+**Token**
+
+A `token` block (within `api_testing.domains.credentials.bearer_token`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#api-testing-domains-credentials-bearer-token-token-blindfold-secret-info) below.
 
@@ -2272,7 +2634,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-bearer-token-token-blindfold-secret-info"></a>
 
-**API Testing Domains Credentials Bearer Token Token Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `api_testing.domains.credentials.bearer_token.token`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -2282,7 +2646,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-bearer-token-token-clear-secret-info"></a>
 
-**API Testing Domains Credentials Bearer Token Token Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `api_testing.domains.credentials.bearer_token.token`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -2290,7 +2656,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-login-endpoint"></a>
 
-**API Testing Domains Credentials Login Endpoint**
+**Login Endpoint**
+
+A `login_endpoint` block (within `api_testing.domains.credentials`) supports the following:
 
 &#x2022; [`json_payload`](#json-payload) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [JSON Payload](#api-testing-domains-credentials-login-endpoint-json-payload) below.
 
@@ -2302,7 +2670,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-login-endpoint-json-payload"></a>
 
-**API Testing Domains Credentials Login Endpoint JSON Payload**
+**JSON Payload**
+
+A `json_payload` block (within `api_testing.domains.credentials.login_endpoint`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#api-testing-domains-credentials-login-endpoint-json-payload-blindfold-secret-info) below.
 
@@ -2310,7 +2680,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-login-endpoint-json-payload-blindfold-secret-info"></a>
 
-**API Testing Domains Credentials Login Endpoint JSON Payload Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `api_testing.domains.credentials.login_endpoint.json_payload`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -2320,7 +2692,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-testing-domains-credentials-login-endpoint-json-payload-clear-secret-info"></a>
 
-**API Testing Domains Credentials Login Endpoint JSON Payload Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `api_testing.domains.credentials.login_endpoint.json_payload`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -2329,6 +2703,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="app-firewall"></a>
 
 **App Firewall**
+
+An `app_firewall` block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -2339,6 +2715,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="blocked-clients"></a>
 
 **Blocked Clients**
+
+A `blocked_clients` block supports the following:
 
 &#x2022; [`actions`](#actions) - Optional List  Defaults to `SKIP_PROCESSING_WAF`<br>Possible values are `SKIP_PROCESSING_WAF`, `SKIP_PROCESSING_BOT`, `SKIP_PROCESSING_MUM`, `SKIP_PROCESSING_IP_REPUTATION`, `SKIP_PROCESSING_API_PROTECTION`, `SKIP_PROCESSING_OAS_VALIDATION`, `SKIP_PROCESSING_DDOS_PROTECTION`, `SKIP_PROCESSING_THREAT_MESH`, `SKIP_PROCESSING_MALWARE_PROTECTION`<br>Actions. Actions that should be taken when client identifier matches the rule
 
@@ -2364,13 +2742,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="blocked-clients-http-header"></a>
 
-**Blocked Clients HTTP Header**
+**HTTP Header**
+
+A `http_header` block (within `blocked_clients`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>HTTP Headers. List of HTTP header name and value pairs<br>See [Headers](#blocked-clients-http-header-headers) below.
 
 <a id="blocked-clients-http-header-headers"></a>
 
-**Blocked Clients HTTP Header Headers**
+**Headers**
+
+A `headers` block (within `blocked_clients.http_header`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -2384,7 +2766,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="blocked-clients-metadata"></a>
 
-**Blocked Clients Metadata**
+**Metadata**
+
+A `metadata` block (within `blocked_clients`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -2393,6 +2777,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="bot-defense"></a>
 
 **Bot Defense**
+
+A `bot_defense` block supports the following:
 
 &#x2022; [`disable_cors_support`](#disable-cors-support) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2406,7 +2792,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy"></a>
 
-**Bot Defense Policy**
+**Policy**
+
+A `policy` block (within `bot_defense`) supports the following:
 
 &#x2022; [`disable_js_insert`](#disable-js-insert) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2428,13 +2816,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insert-all-pages"></a>
 
-**Bot Defense Policy Js Insert All Pages**
+**Js Insert All Pages**
+
+A `js_insert_all_pages` block (within `bot_defense.policy`) supports the following:
 
 &#x2022; [`javascript_location`](#javascript-location) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag
 
 <a id="bot-defense-policy-js-insert-all-pages-except"></a>
 
-**Bot Defense Policy Js Insert All Pages Except**
+**Js Insert All Pages Except**
+
+A `js_insert_all_pages_except` block (within `bot_defense.policy`) supports the following:
 
 &#x2022; [`exclude_list`](#exclude-list) - Optional Block<br>Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers<br>See [Exclude List](#bot-defense-policy-js-insert-all-pages-except-exclude-list) below.
 
@@ -2442,7 +2834,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insert-all-pages-except-exclude-list"></a>
 
-**Bot Defense Policy Js Insert All Pages Except Exclude List**
+**Exclude List**
+
+An `exclude_list` block (within `bot_defense.policy.js_insert_all_pages_except`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2454,7 +2848,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-domain"></a>
 
-**Bot Defense Policy Js Insert All Pages Except Exclude List Domain**
+**Domain**
+
+A `domain` block (within `bot_defense.policy.js_insert_all_pages_except.exclude_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -2464,7 +2860,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-metadata"></a>
 
-**Bot Defense Policy Js Insert All Pages Except Exclude List Metadata**
+**Metadata**
+
+A `metadata` block (within `bot_defense.policy.js_insert_all_pages_except.exclude_list`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -2472,7 +2870,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-path"></a>
 
-**Bot Defense Policy Js Insert All Pages Except Exclude List Path**
+**Path**
+
+A `path` block (within `bot_defense.policy.js_insert_all_pages_except.exclude_list`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -2482,7 +2882,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insertion-rules"></a>
 
-**Bot Defense Policy Js Insertion Rules**
+**Js Insertion Rules**
+
+A `js_insertion_rules` block (within `bot_defense.policy`) supports the following:
 
 &#x2022; [`exclude_list`](#exclude-list) - Optional Block<br>Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers<br>See [Exclude List](#bot-defense-policy-js-insertion-rules-exclude-list) below.
 
@@ -2490,7 +2892,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insertion-rules-exclude-list"></a>
 
-**Bot Defense Policy Js Insertion Rules Exclude List**
+**Exclude List**
+
+An `exclude_list` block (within `bot_defense.policy.js_insertion_rules`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2502,7 +2906,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insertion-rules-exclude-list-domain"></a>
 
-**Bot Defense Policy Js Insertion Rules Exclude List Domain**
+**Domain**
+
+A `domain` block (within `bot_defense.policy.js_insertion_rules.exclude_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -2512,7 +2918,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insertion-rules-exclude-list-metadata"></a>
 
-**Bot Defense Policy Js Insertion Rules Exclude List Metadata**
+**Metadata**
+
+A `metadata` block (within `bot_defense.policy.js_insertion_rules.exclude_list`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -2520,7 +2928,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insertion-rules-exclude-list-path"></a>
 
-**Bot Defense Policy Js Insertion Rules Exclude List Path**
+**Path**
+
+A `path` block (within `bot_defense.policy.js_insertion_rules.exclude_list`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -2530,7 +2940,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insertion-rules-rules"></a>
 
-**Bot Defense Policy Js Insertion Rules Rules**
+**Rules**
+
+A `rules` block (within `bot_defense.policy.js_insertion_rules`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2544,7 +2956,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insertion-rules-rules-domain"></a>
 
-**Bot Defense Policy Js Insertion Rules Rules Domain**
+**Domain**
+
+A `domain` block (within `bot_defense.policy.js_insertion_rules.rules`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -2554,7 +2968,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insertion-rules-rules-metadata"></a>
 
-**Bot Defense Policy Js Insertion Rules Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `bot_defense.policy.js_insertion_rules.rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -2562,7 +2978,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-js-insertion-rules-rules-path"></a>
 
-**Bot Defense Policy Js Insertion Rules Rules Path**
+**Path**
+
+A `path` block (within `bot_defense.policy.js_insertion_rules.rules`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -2572,19 +2990,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-mobile-sdk-config"></a>
 
-**Bot Defense Policy Mobile Sdk Config**
+**Mobile Sdk Config**
+
+A `mobile_sdk_config` block (within `bot_defense.policy`) supports the following:
 
 &#x2022; [`mobile_identifier`](#mobile-identifier) - Optional Block<br>Mobile Traffic Identifier. Mobile traffic identifier type<br>See [Mobile Identifier](#bot-defense-policy-mobile-sdk-config-mobile-identifier) below.
 
 <a id="bot-defense-policy-mobile-sdk-config-mobile-identifier"></a>
 
-**Bot Defense Policy Mobile Sdk Config Mobile Identifier**
+**Mobile Identifier**
+
+A `mobile_identifier` block (within `bot_defense.policy.mobile_sdk_config`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. Headers that can be used to identify mobile traffic<br>See [Headers](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers) below.
 
 <a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers"></a>
 
-**Bot Defense Policy Mobile Sdk Config Mobile Identifier Headers**
+**Headers**
+
+A `headers` block (within `bot_defense.policy.mobile_sdk_config.mobile_identifier`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2596,7 +3020,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item"></a>
 
-**Bot Defense Policy Mobile Sdk Config Mobile Identifier Headers Item**
+**Item**
+
+An `item` block (within `bot_defense.policy.mobile_sdk_config.mobile_identifier.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -2606,7 +3032,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints"></a>
 
-**Bot Defense Policy Protected App Endpoints**
+**Protected App Endpoints**
+
+A `protected_app_endpoints` block (within `bot_defense.policy`) supports the following:
 
 &#x2022; [`allow_good_bots`](#allow-good-bots) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2642,7 +3070,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-domain"></a>
 
-**Bot Defense Policy Protected App Endpoints Domain**
+**Domain**
+
+A `domain` block (within `bot_defense.policy.protected_app_endpoints`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -2652,7 +3082,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label**
+**Flow Label**
+
+A `flow_label` block (within `bot_defense.policy.protected_app_endpoints`) supports the following:
 
 &#x2022; [`account_management`](#account-management) - Optional Block<br>Bot Defense Flow Label Account Management Category. Bot Defense Flow Label Account Management Category<br>See [Account Management](#bot-defense-policy-protected-app-endpoints-flow-label-account-management) below.
 
@@ -2670,7 +3102,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-account-management"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Account Management**
+**Account Management**
+
+An `account_management` block (within `bot_defense.policy.protected_app_endpoints.flow_label`) supports the following:
 
 &#x2022; [`create`](#create) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2678,7 +3112,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Authentication**
+**Authentication**
+
+An `authentication` block (within `bot_defense.policy.protected_app_endpoints.flow_label`) supports the following:
 
 &#x2022; [`login`](#login) - Optional Block<br>Bot Defense Transaction Result. Bot Defense Transaction Result<br>See [Login](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login) below.
 
@@ -2692,7 +3128,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Authentication Login**
+**Login**
+
+A `login` block (within `bot_defense.policy.protected_app_endpoints.flow_label.authentication`) supports the following:
 
 &#x2022; [`disable_transaction_result`](#disable-transaction-result) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2700,7 +3138,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Authentication Login Transaction Result**
+**Transaction Result**
+
+A `transaction_result` block (within `bot_defense.policy.protected_app_endpoints.flow_label.authentication.login`) supports the following:
 
 &#x2022; [`failure_conditions`](#failure-conditions) - Optional Block<br>Failure Conditions. Failure Conditions<br>See [Failure Conditions](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-failure-conditions) below.
 
@@ -2708,7 +3148,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-failure-conditions"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Authentication Login Transaction Result Failure Conditions**
+**Failure Conditions**
+
+A `failure_conditions` block (within `bot_defense.policy.protected_app_endpoints.flow_label.authentication.login.transaction_result`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Header Name. A case-insensitive HTTP header name
 
@@ -2718,7 +3160,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-success-conditions"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Authentication Login Transaction Result Success Conditions**
+**Success Conditions**
+
+A `success_conditions` block (within `bot_defense.policy.protected_app_endpoints.flow_label.authentication.login.transaction_result`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Header Name. A case-insensitive HTTP header name
 
@@ -2728,7 +3172,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-financial-services"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Financial Services**
+**Financial Services**
+
+A `financial_services` block (within `bot_defense.policy.protected_app_endpoints.flow_label`) supports the following:
 
 &#x2022; [`apply`](#apply) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2736,13 +3182,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-flight"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Flight**
+**Flight**
+
+A `flight` block (within `bot_defense.policy.protected_app_endpoints.flow_label`) supports the following:
 
 &#x2022; [`checkin`](#checkin) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-profile-management"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Profile Management**
+**Profile Management**
+
+A `profile_management` block (within `bot_defense.policy.protected_app_endpoints.flow_label`) supports the following:
 
 &#x2022; [`create`](#create) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2752,7 +3202,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-search"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Search**
+**Search**
+
+A `search` block (within `bot_defense.policy.protected_app_endpoints.flow_label`) supports the following:
 
 &#x2022; [`flight_search`](#flight-search) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2764,7 +3216,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards"></a>
 
-**Bot Defense Policy Protected App Endpoints Flow Label Shopping Gift Cards**
+**Shopping Gift Cards**
+
+A `shopping_gift_cards` block (within `bot_defense.policy.protected_app_endpoints.flow_label`) supports the following:
 
 &#x2022; [`gift_card_make_purchase_with_gift_card`](#gift-card-make-purchase-with-gift-card) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2792,7 +3246,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-headers"></a>
 
-**Bot Defense Policy Protected App Endpoints Headers**
+**Headers**
+
+A `headers` block (within `bot_defense.policy.protected_app_endpoints`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2806,7 +3262,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-headers-item"></a>
 
-**Bot Defense Policy Protected App Endpoints Headers Item**
+**Item**
+
+An `item` block (within `bot_defense.policy.protected_app_endpoints.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -2816,7 +3274,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-metadata"></a>
 
-**Bot Defense Policy Protected App Endpoints Metadata**
+**Metadata**
+
+A `metadata` block (within `bot_defense.policy.protected_app_endpoints`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -2824,7 +3284,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation"></a>
 
-**Bot Defense Policy Protected App Endpoints Mitigation**
+**Mitigation**
+
+A `mitigation` block (within `bot_defense.policy.protected_app_endpoints`) supports the following:
 
 &#x2022; [`block`](#block) - Optional Block<br>Block bot mitigation. Block request and respond with custom content<br>See [Block](#bot-defense-policy-protected-app-endpoints-mitigation-block) below.
 
@@ -2834,7 +3296,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation-block"></a>
 
-**Bot Defense Policy Protected App Endpoints Mitigation Block**
+**Block**
+
+A `block` block (within `bot_defense.policy.protected_app_endpoints.mitigation`) supports the following:
 
 &#x2022; [`body`](#body) - Optional String<br>Body. Custom body message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Your request was blocked' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Your request was blocked </p>'. Base64 encoded string for this HTML is 'LzxwPiBZb3VyIHJlcXVlc3Qgd2FzIGJsb2NrZWQgPC9wPg=='
 
@@ -2842,7 +3306,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation-flag"></a>
 
-**Bot Defense Policy Protected App Endpoints Mitigation Flag**
+**Flag**
+
+A `flag` block (within `bot_defense.policy.protected_app_endpoints.mitigation`) supports the following:
 
 &#x2022; [`append_headers`](#append-headers) - Optional Block<br>Append Flag Mitigation Headers. Append flag mitigation headers to forwarded request<br>See [Append Headers](#bot-defense-policy-protected-app-endpoints-mitigation-flag-append-headers) below.
 
@@ -2850,7 +3316,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation-flag-append-headers"></a>
 
-**Bot Defense Policy Protected App Endpoints Mitigation Flag Append Headers**
+**Append Headers**
+
+An `append_headers` block (within `bot_defense.policy.protected_app_endpoints.mitigation.flag`) supports the following:
 
 &#x2022; [`auto_type_header_name`](#auto-type-header-name) - Optional String<br>Automation Type Header Name. A case-insensitive HTTP header name
 
@@ -2858,13 +3326,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation-redirect"></a>
 
-**Bot Defense Policy Protected App Endpoints Mitigation Redirect**
+**Redirect**
+
+A `redirect` block (within `bot_defense.policy.protected_app_endpoints.mitigation`) supports the following:
 
 &#x2022; [`uri`](#uri) - Optional String<br>URI. URI location for redirect may be relative or absolute
 
 <a id="bot-defense-policy-protected-app-endpoints-path"></a>
 
-**Bot Defense Policy Protected App Endpoints Path**
+**Path**
+
+A `path` block (within `bot_defense.policy.protected_app_endpoints`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -2874,7 +3346,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-query-params"></a>
 
-**Bot Defense Policy Protected App Endpoints Query Params**
+**Query Params**
+
+A `query_params` block (within `bot_defense.policy.protected_app_endpoints`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2888,7 +3362,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-query-params-item"></a>
 
-**Bot Defense Policy Protected App Endpoints Query Params Item**
+**Item**
+
+An `item` block (within `bot_defense.policy.protected_app_endpoints.query_params`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -2898,13 +3374,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-policy-protected-app-endpoints-web-mobile"></a>
 
-**Bot Defense Policy Protected App Endpoints Web Mobile**
+**Web Mobile**
+
+A `web_mobile` block (within `bot_defense.policy.protected_app_endpoints`) supports the following:
 
 &#x2022; [`mobile_identifier`](#mobile-identifier) - Optional String  Defaults to `HEADERS`<br>Mobile Identifier. Mobile identifier type - HEADERS: Headers Headers. The only possible value is `HEADERS`
 
 <a id="bot-defense-advanced"></a>
 
 **Bot Defense Advanced**
+
+A `bot_defense_advanced` block supports the following:
 
 &#x2022; [`disable_js_insert`](#disable-js-insert) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2924,13 +3404,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insert-all-pages"></a>
 
-**Bot Defense Advanced Js Insert All Pages**
+**Js Insert All Pages**
+
+A `js_insert_all_pages` block (within `bot_defense_advanced`) supports the following:
 
 &#x2022; [`javascript_location`](#javascript-location) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag
 
 <a id="bot-defense-advanced-js-insert-all-pages-except"></a>
 
-**Bot Defense Advanced Js Insert All Pages Except**
+**Js Insert All Pages Except**
+
+A `js_insert_all_pages_except` block (within `bot_defense_advanced`) supports the following:
 
 &#x2022; [`exclude_list`](#exclude-list) - Optional Block<br>Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers<br>See [Exclude List](#bot-defense-advanced-js-insert-all-pages-except-exclude-list) below.
 
@@ -2938,7 +3422,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insert-all-pages-except-exclude-list"></a>
 
-**Bot Defense Advanced Js Insert All Pages Except Exclude List**
+**Exclude List**
+
+An `exclude_list` block (within `bot_defense_advanced.js_insert_all_pages_except`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2950,7 +3436,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insert-all-pages-except-exclude-list-domain"></a>
 
-**Bot Defense Advanced Js Insert All Pages Except Exclude List Domain**
+**Domain**
+
+A `domain` block (within `bot_defense_advanced.js_insert_all_pages_except.exclude_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -2960,7 +3448,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insert-all-pages-except-exclude-list-metadata"></a>
 
-**Bot Defense Advanced Js Insert All Pages Except Exclude List Metadata**
+**Metadata**
+
+A `metadata` block (within `bot_defense_advanced.js_insert_all_pages_except.exclude_list`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -2968,7 +3458,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insert-all-pages-except-exclude-list-path"></a>
 
-**Bot Defense Advanced Js Insert All Pages Except Exclude List Path**
+**Path**
+
+A `path` block (within `bot_defense_advanced.js_insert_all_pages_except.exclude_list`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -2978,7 +3470,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insertion-rules"></a>
 
-**Bot Defense Advanced Js Insertion Rules**
+**Js Insertion Rules**
+
+A `js_insertion_rules` block (within `bot_defense_advanced`) supports the following:
 
 &#x2022; [`exclude_list`](#exclude-list) - Optional Block<br>Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers<br>See [Exclude List](#bot-defense-advanced-js-insertion-rules-exclude-list) below.
 
@@ -2986,7 +3480,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insertion-rules-exclude-list"></a>
 
-**Bot Defense Advanced Js Insertion Rules Exclude List**
+**Exclude List**
+
+An `exclude_list` block (within `bot_defense_advanced.js_insertion_rules`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -2998,7 +3494,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insertion-rules-exclude-list-domain"></a>
 
-**Bot Defense Advanced Js Insertion Rules Exclude List Domain**
+**Domain**
+
+A `domain` block (within `bot_defense_advanced.js_insertion_rules.exclude_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -3008,7 +3506,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insertion-rules-exclude-list-metadata"></a>
 
-**Bot Defense Advanced Js Insertion Rules Exclude List Metadata**
+**Metadata**
+
+A `metadata` block (within `bot_defense_advanced.js_insertion_rules.exclude_list`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -3016,7 +3516,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insertion-rules-exclude-list-path"></a>
 
-**Bot Defense Advanced Js Insertion Rules Exclude List Path**
+**Path**
+
+A `path` block (within `bot_defense_advanced.js_insertion_rules.exclude_list`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -3026,7 +3528,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insertion-rules-rules"></a>
 
-**Bot Defense Advanced Js Insertion Rules Rules**
+**Rules**
+
+A `rules` block (within `bot_defense_advanced.js_insertion_rules`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3040,7 +3544,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insertion-rules-rules-domain"></a>
 
-**Bot Defense Advanced Js Insertion Rules Rules Domain**
+**Domain**
+
+A `domain` block (within `bot_defense_advanced.js_insertion_rules.rules`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -3050,7 +3556,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insertion-rules-rules-metadata"></a>
 
-**Bot Defense Advanced Js Insertion Rules Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `bot_defense_advanced.js_insertion_rules.rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -3058,7 +3566,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-js-insertion-rules-rules-path"></a>
 
-**Bot Defense Advanced Js Insertion Rules Rules Path**
+**Path**
+
+A `path` block (within `bot_defense_advanced.js_insertion_rules.rules`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -3068,7 +3578,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-mobile"></a>
 
-**Bot Defense Advanced Mobile**
+**Mobile**
+
+A `mobile` block (within `bot_defense_advanced`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3078,19 +3590,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-mobile-sdk-config"></a>
 
-**Bot Defense Advanced Mobile Sdk Config**
+**Mobile Sdk Config**
+
+A `mobile_sdk_config` block (within `bot_defense_advanced`) supports the following:
 
 &#x2022; [`mobile_identifier`](#mobile-identifier) - Optional Block<br>Mobile Traffic Identifier. Mobile traffic identifier type<br>See [Mobile Identifier](#bot-defense-advanced-mobile-sdk-config-mobile-identifier) below.
 
 <a id="bot-defense-advanced-mobile-sdk-config-mobile-identifier"></a>
 
-**Bot Defense Advanced Mobile Sdk Config Mobile Identifier**
+**Mobile Identifier**
+
+A `mobile_identifier` block (within `bot_defense_advanced.mobile_sdk_config`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. Headers that can be used to identify mobile traffic<br>See [Headers](#bot-defense-advanced-mobile-sdk-config-mobile-identifier-headers) below.
 
 <a id="bot-defense-advanced-mobile-sdk-config-mobile-identifier-headers"></a>
 
-**Bot Defense Advanced Mobile Sdk Config Mobile Identifier Headers**
+**Headers**
+
+A `headers` block (within `bot_defense_advanced.mobile_sdk_config.mobile_identifier`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3102,7 +3620,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-mobile-sdk-config-mobile-identifier-headers-item"></a>
 
-**Bot Defense Advanced Mobile Sdk Config Mobile Identifier Headers Item**
+**Item**
+
+An `item` block (within `bot_defense_advanced.mobile_sdk_config.mobile_identifier.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -3112,7 +3632,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bot-defense-advanced-web"></a>
 
-**Bot Defense Advanced Web**
+**Web**
+
+A `web` block (within `bot_defense_advanced`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3124,19 +3646,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Caching Policy**
 
+A `caching_policy` block supports the following:
+
 &#x2022; [`custom_cache_rule`](#custom-cache-rule) - Optional Block<br>Custom Cache Rules. Caching policies for CDN<br>See [Custom Cache Rule](#caching-policy-custom-cache-rule) below.
 
 &#x2022; [`default_cache_action`](#default-cache-action) - Optional Block<br>Default Cache Behaviour. This defines a Default Cache Action<br>See [Default Cache Action](#caching-policy-default-cache-action) below.
 
 <a id="caching-policy-custom-cache-rule"></a>
 
-**Caching Policy Custom Cache Rule**
+**Custom Cache Rule**
+
+A `custom_cache_rule` block (within `caching_policy`) supports the following:
 
 &#x2022; [`cdn_cache_rules`](#cdn-cache-rules) - Optional Block<br>CDN Cache Rule. Reference to CDN Cache Rule configuration object<br>See [CDN Cache Rules](#caching-policy-custom-cache-rule-cdn-cache-rules) below.
 
 <a id="caching-policy-custom-cache-rule-cdn-cache-rules"></a>
 
-**Caching Policy Custom Cache Rule CDN Cache Rules**
+**CDN Cache Rules**
+
+A `cdn_cache_rules` block (within `caching_policy.custom_cache_rule`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3146,7 +3674,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="caching-policy-default-cache-action"></a>
 
-**Caching Policy Default Cache Action**
+**Default Cache Action**
+
+A `default_cache_action` block (within `caching_policy`) supports the following:
 
 &#x2022; [`cache_disabled`](#cache-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3158,6 +3688,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Captcha Challenge**
 
+A `captcha_challenge` block supports the following:
+
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
 &#x2022; [`custom_page`](#custom-page) - Optional String<br>Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='
@@ -3166,11 +3698,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Client Side Defense**
 
+A `client_side_defense` block supports the following:
+
 &#x2022; [`policy`](#policy) - Optional Block<br>Client-Side Defense Policy. This defines various configuration options for Client-Side Defense policy<br>See [Policy](#client-side-defense-policy) below.
 
 <a id="client-side-defense-policy"></a>
 
-**Client Side Defense Policy**
+**Policy**
+
+A `policy` block (within `client_side_defense`) supports the following:
 
 &#x2022; [`disable_js_insert`](#disable-js-insert) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3182,13 +3718,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insert-all-pages-except"></a>
 
-**Client Side Defense Policy Js Insert All Pages Except**
+**Js Insert All Pages Except**
+
+A `js_insert_all_pages_except` block (within `client_side_defense.policy`) supports the following:
 
 &#x2022; [`exclude_list`](#exclude-list) - Optional Block<br>Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers<br>See [Exclude List](#client-side-defense-policy-js-insert-all-pages-except-exclude-list) below.
 
 <a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list"></a>
 
-**Client Side Defense Policy Js Insert All Pages Except Exclude List**
+**Exclude List**
+
+An `exclude_list` block (within `client_side_defense.policy.js_insert_all_pages_except`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3200,7 +3740,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-domain"></a>
 
-**Client Side Defense Policy Js Insert All Pages Except Exclude List Domain**
+**Domain**
+
+A `domain` block (within `client_side_defense.policy.js_insert_all_pages_except.exclude_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -3210,7 +3752,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-metadata"></a>
 
-**Client Side Defense Policy Js Insert All Pages Except Exclude List Metadata**
+**Metadata**
+
+A `metadata` block (within `client_side_defense.policy.js_insert_all_pages_except.exclude_list`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -3218,7 +3762,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-path"></a>
 
-**Client Side Defense Policy Js Insert All Pages Except Exclude List Path**
+**Path**
+
+A `path` block (within `client_side_defense.policy.js_insert_all_pages_except.exclude_list`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -3228,7 +3774,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insertion-rules"></a>
 
-**Client Side Defense Policy Js Insertion Rules**
+**Js Insertion Rules**
+
+A `js_insertion_rules` block (within `client_side_defense.policy`) supports the following:
 
 &#x2022; [`exclude_list`](#exclude-list) - Optional Block<br>Exclude Paths. Optional JavaScript insertions exclude list of domain and path matchers<br>See [Exclude List](#client-side-defense-policy-js-insertion-rules-exclude-list) below.
 
@@ -3236,7 +3784,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insertion-rules-exclude-list"></a>
 
-**Client Side Defense Policy Js Insertion Rules Exclude List**
+**Exclude List**
+
+An `exclude_list` block (within `client_side_defense.policy.js_insertion_rules`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3248,7 +3798,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insertion-rules-exclude-list-domain"></a>
 
-**Client Side Defense Policy Js Insertion Rules Exclude List Domain**
+**Domain**
+
+A `domain` block (within `client_side_defense.policy.js_insertion_rules.exclude_list`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -3258,7 +3810,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insertion-rules-exclude-list-metadata"></a>
 
-**Client Side Defense Policy Js Insertion Rules Exclude List Metadata**
+**Metadata**
+
+A `metadata` block (within `client_side_defense.policy.js_insertion_rules.exclude_list`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -3266,7 +3820,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insertion-rules-exclude-list-path"></a>
 
-**Client Side Defense Policy Js Insertion Rules Exclude List Path**
+**Path**
+
+A `path` block (within `client_side_defense.policy.js_insertion_rules.exclude_list`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -3276,7 +3832,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insertion-rules-rules"></a>
 
-**Client Side Defense Policy Js Insertion Rules Rules**
+**Rules**
+
+A `rules` block (within `client_side_defense.policy.js_insertion_rules`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3288,7 +3846,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insertion-rules-rules-domain"></a>
 
-**Client Side Defense Policy Js Insertion Rules Rules Domain**
+**Domain**
+
+A `domain` block (within `client_side_defense.policy.js_insertion_rules.rules`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -3298,7 +3858,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insertion-rules-rules-metadata"></a>
 
-**Client Side Defense Policy Js Insertion Rules Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `client_side_defense.policy.js_insertion_rules.rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -3306,7 +3868,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-side-defense-policy-js-insertion-rules-rules-path"></a>
 
-**Client Side Defense Policy Js Insertion Rules Rules Path**
+**Path**
+
+A `path` block (within `client_side_defense.policy.js_insertion_rules.rules`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -3317,6 +3881,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="cookie-stickiness"></a>
 
 **Cookie Stickiness**
+
+A `cookie_stickiness` block supports the following:
 
 &#x2022; [`add_httponly`](#add-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3344,6 +3910,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **CORS Policy**
 
+A `cors_policy` block supports the following:
+
 &#x2022; [`allow_credentials`](#allow-credentials) - Optional Bool<br>Allow Credentials. Specifies whether the resource allows credentials
 
 &#x2022; [`allow_headers`](#allow-headers) - Optional String<br>Allow Headers. Specifies the content for the access-control-allow-headers header
@@ -3364,6 +3932,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **CSRF Policy**
 
+A `csrf_policy` block supports the following:
+
 &#x2022; [`all_load_balancer_domains`](#all-load-balancer-domains) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`custom_domain_list`](#custom-domain-list) - Optional Block<br>Domain name list. List of domain names used for Host header matching<br>See [Custom Domain List](#csrf-policy-custom-domain-list) below.
@@ -3372,13 +3942,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="csrf-policy-custom-domain-list"></a>
 
-**CSRF Policy Custom Domain List**
+**Custom Domain List**
+
+A `custom_domain_list` block (within `csrf_policy`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form
 
 <a id="data-guard-rules"></a>
 
 **Data Guard Rules**
+
+A `data_guard_rules` block supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3396,7 +3970,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="data-guard-rules-metadata"></a>
 
-**Data Guard Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `data_guard_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -3404,7 +3980,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="data-guard-rules-path"></a>
 
-**Data Guard Rules Path**
+**Path**
+
+A `path` block (within `data_guard_rules`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -3415,6 +3993,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="ddos-mitigation-rules"></a>
 
 **DDOS Mitigation Rules**
+
+A `ddos_mitigation_rules` block supports the following:
 
 &#x2022; [`block`](#block) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3428,7 +4008,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ddos-mitigation-rules-ddos-client-source"></a>
 
-**DDOS Mitigation Rules DDOS Client Source**
+**DDOS Client Source**
+
+A `ddos_client_source` block (within `ddos_mitigation_rules`) supports the following:
 
 &#x2022; [`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#ddos-mitigation-rules-ddos-client-source-asn-list) below.
 
@@ -3440,19 +4022,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ddos-mitigation-rules-ddos-client-source-asn-list"></a>
 
-**DDOS Mitigation Rules DDOS Client Source Asn List**
+**Asn List**
+
+An `asn_list` block (within `ddos_mitigation_rules.ddos_client_source`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="ddos-mitigation-rules-ddos-client-source-ja4-tls-fingerprint-matcher"></a>
 
-**DDOS Mitigation Rules DDOS Client Source Ja4 TLS Fingerprint Matcher**
+**Ja4 TLS Fingerprint Matcher**
+
+A `ja4_tls_fingerprint_matcher` block (within `ddos_mitigation_rules.ddos_client_source`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
 
 <a id="ddos-mitigation-rules-ddos-client-source-tls-fingerprint-matcher"></a>
 
-**DDOS Mitigation Rules DDOS Client Source TLS Fingerprint Matcher**
+**TLS Fingerprint Matcher**
+
+A `tls_fingerprint_matcher` block (within `ddos_mitigation_rules.ddos_client_source`) supports the following:
 
 &#x2022; [`classes`](#classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
@@ -3462,7 +4050,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ddos-mitigation-rules-ip-prefix-list"></a>
 
-**DDOS Mitigation Rules IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `ddos_mitigation_rules`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -3470,7 +4060,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ddos-mitigation-rules-metadata"></a>
 
-**DDOS Mitigation Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `ddos_mitigation_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -3479,6 +4071,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="default-pool"></a>
 
 **Default Pool**
+
+A `default_pool` block supports the following:
 
 &#x2022; [`advanced_options`](#advanced-options) - Optional Block<br>Origin Pool Advanced Options. Configure Advanced options for origin pool<br>See [Advanced Options](#default-pool-advanced-options) below.
 
@@ -3510,7 +4104,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-advanced-options"></a>
 
-**Default Pool Advanced Options**
+**Advanced Options**
+
+An `advanced_options` block (within `default_pool`) supports the following:
 
 &#x2022; [`auto_http_config`](#auto-http-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3552,7 +4148,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-advanced-options-circuit-breaker"></a>
 
-**Default Pool Advanced Options Circuit Breaker**
+**Circuit Breaker**
+
+A `circuit_breaker` block (within `default_pool.advanced_options`) supports the following:
 
 &#x2022; [`connection_limit`](#connection-limit) - Optional Number<br>Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit
 
@@ -3566,7 +4164,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-advanced-options-enable-subsets"></a>
 
-**Default Pool Advanced Options Enable Subsets**
+**Enable Subsets**
+
+An `enable_subsets` block (within `default_pool.advanced_options`) supports the following:
 
 &#x2022; [`any_endpoint`](#any-endpoint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3578,25 +4178,33 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-advanced-options-enable-subsets-default-subset"></a>
 
-**Default Pool Advanced Options Enable Subsets Default Subset**
+**Default Subset**
+
+A `default_subset` block (within `default_pool.advanced_options.enable_subsets`) supports the following:
 
 &#x2022; [`default_subset`](#default-subset) - Optional Block<br>Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists
 
 <a id="default-pool-advanced-options-enable-subsets-endpoint-subsets"></a>
 
-**Default Pool Advanced Options Enable Subsets Endpoint Subsets**
+**Endpoint Subsets**
+
+An `endpoint_subsets` block (within `default_pool.advanced_options.enable_subsets`) supports the following:
 
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. List of keys that define a cluster subset class
 
 <a id="default-pool-advanced-options-http1-config"></a>
 
-**Default Pool Advanced Options Http1 Config**
+**Http1 Config**
+
+A `http1_config` block (within `default_pool.advanced_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#default-pool-advanced-options-http1-config-header-transformation) below.
 
 <a id="default-pool-advanced-options-http1-config-header-transformation"></a>
 
-**Default Pool Advanced Options Http1 Config Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `default_pool.advanced_options.http1_config`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3608,13 +4216,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-advanced-options-http2-options"></a>
 
-**Default Pool Advanced Options Http2 Options**
+**Http2 Options**
+
+A `http2_options` block (within `default_pool.advanced_options`) supports the following:
 
 &#x2022; [`enabled`](#enabled) - Optional Bool<br>HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections
 
 <a id="default-pool-advanced-options-outlier-detection"></a>
 
-**Default Pool Advanced Options Outlier Detection**
+**Outlier Detection**
+
+An `outlier_detection` block (within `default_pool.advanced_options`) supports the following:
 
 &#x2022; [`base_ejection_time`](#base-ejection-time) - Optional Number  Defaults to `30000ms`  Specified in milliseconds<br>Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail
 
@@ -3628,7 +4240,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-healthcheck"></a>
 
-**Default Pool Healthcheck**
+**Healthcheck**
+
+A `healthcheck` block (within `default_pool`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3638,7 +4252,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers"></a>
 
-**Default Pool Origin Servers**
+**Origin Servers**
+
+An `origin_servers` block (within `default_pool`) supports the following:
 
 &#x2022; [`cbip_service`](#cbip-service) - Optional Block<br>Discovered Classic BIG-IP Service Name. Specify origin server with Classic BIG-IP Service (Virtual Server)<br>See [Cbip Service](#default-pool-origin-servers-cbip-service) below.
 
@@ -3664,13 +4280,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-cbip-service"></a>
 
-**Default Pool Origin Servers Cbip Service**
+**Cbip Service**
+
+A `cbip_service` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`service_name`](#service-name) - Optional String<br>Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin
 
 <a id="default-pool-origin-servers-consul-service"></a>
 
-**Default Pool Origin Servers Consul Service**
+**Consul Service**
+
+A `consul_service` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`inside_network`](#inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3684,7 +4304,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-consul-service-site-locator"></a>
 
-**Default Pool Origin Servers Consul Service Site Locator**
+**Site Locator**
+
+A `site_locator` block (within `default_pool.origin_servers.consul_service`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#default-pool-origin-servers-consul-service-site-locator-site) below.
 
@@ -3692,7 +4314,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-consul-service-site-locator-site"></a>
 
-**Default Pool Origin Servers Consul Service Site Locator Site**
+**Site**
+
+A `site` block (within `default_pool.origin_servers.consul_service.site_locator`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3702,7 +4326,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-consul-service-site-locator-virtual-site"></a>
 
-**Default Pool Origin Servers Consul Service Site Locator Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `default_pool.origin_servers.consul_service.site_locator`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3712,7 +4338,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-consul-service-snat-pool"></a>
 
-**Default Pool Origin Servers Consul Service Snat Pool**
+**Snat Pool**
+
+A `snat_pool` block (within `default_pool.origin_servers.consul_service`) supports the following:
 
 &#x2022; [`no_snat_pool`](#no-snat-pool) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3720,19 +4348,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-consul-service-snat-pool-snat-pool"></a>
 
-**Default Pool Origin Servers Consul Service Snat Pool Snat Pool**
+**Snat Pool**
+
+A `snat_pool` block (within `default_pool.origin_servers.consul_service.snat_pool`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="default-pool-origin-servers-custom-endpoint-object"></a>
 
-**Default Pool Origin Servers Custom Endpoint Object**
+**Custom Endpoint Object**
+
+A `custom_endpoint_object` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`endpoint`](#endpoint) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Endpoint](#default-pool-origin-servers-custom-endpoint-object-endpoint) below.
 
 <a id="default-pool-origin-servers-custom-endpoint-object-endpoint"></a>
 
-**Default Pool Origin Servers Custom Endpoint Object Endpoint**
+**Endpoint**
+
+An `endpoint` block (within `default_pool.origin_servers.custom_endpoint_object`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3742,7 +4376,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-k8s-service"></a>
 
-**Default Pool Origin Servers K8s Service**
+**K8s Service**
+
+A `k8s_service` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`inside_network`](#inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3760,7 +4396,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-k8s-service-site-locator"></a>
 
-**Default Pool Origin Servers K8s Service Site Locator**
+**Site Locator**
+
+A `site_locator` block (within `default_pool.origin_servers.k8s_service`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#default-pool-origin-servers-k8s-service-site-locator-site) below.
 
@@ -3768,7 +4406,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-k8s-service-site-locator-site"></a>
 
-**Default Pool Origin Servers K8s Service Site Locator Site**
+**Site**
+
+A `site` block (within `default_pool.origin_servers.k8s_service.site_locator`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3778,7 +4418,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-k8s-service-site-locator-virtual-site"></a>
 
-**Default Pool Origin Servers K8s Service Site Locator Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `default_pool.origin_servers.k8s_service.site_locator`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3788,7 +4430,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-k8s-service-snat-pool"></a>
 
-**Default Pool Origin Servers K8s Service Snat Pool**
+**Snat Pool**
+
+A `snat_pool` block (within `default_pool.origin_servers.k8s_service`) supports the following:
 
 &#x2022; [`no_snat_pool`](#no-snat-pool) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3796,13 +4440,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-k8s-service-snat-pool-snat-pool"></a>
 
-**Default Pool Origin Servers K8s Service Snat Pool Snat Pool**
+**Snat Pool**
+
+A `snat_pool` block (within `default_pool.origin_servers.k8s_service.snat_pool`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="default-pool-origin-servers-private-ip"></a>
 
-**Default Pool Origin Servers Private IP**
+**Private IP**
+
+A `private_ip` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`inside_network`](#inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3818,7 +4466,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-ip-segment"></a>
 
-**Default Pool Origin Servers Private IP Segment**
+**Segment**
+
+A `segment` block (within `default_pool.origin_servers.private_ip`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3828,7 +4478,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-ip-site-locator"></a>
 
-**Default Pool Origin Servers Private IP Site Locator**
+**Site Locator**
+
+A `site_locator` block (within `default_pool.origin_servers.private_ip`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#default-pool-origin-servers-private-ip-site-locator-site) below.
 
@@ -3836,7 +4488,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-ip-site-locator-site"></a>
 
-**Default Pool Origin Servers Private IP Site Locator Site**
+**Site**
+
+A `site` block (within `default_pool.origin_servers.private_ip.site_locator`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3846,7 +4500,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-ip-site-locator-virtual-site"></a>
 
-**Default Pool Origin Servers Private IP Site Locator Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `default_pool.origin_servers.private_ip.site_locator`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3856,7 +4512,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-ip-snat-pool"></a>
 
-**Default Pool Origin Servers Private IP Snat Pool**
+**Snat Pool**
+
+A `snat_pool` block (within `default_pool.origin_servers.private_ip`) supports the following:
 
 &#x2022; [`no_snat_pool`](#no-snat-pool) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3864,13 +4522,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-ip-snat-pool-snat-pool"></a>
 
-**Default Pool Origin Servers Private IP Snat Pool Snat Pool**
+**Snat Pool**
+
+A `snat_pool` block (within `default_pool.origin_servers.private_ip.snat_pool`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="default-pool-origin-servers-private-name"></a>
 
-**Default Pool Origin Servers Private Name**
+**Private Name**
+
+A `private_name` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`dns_name`](#dns-name) - Optional String<br>DNS Name. DNS Name
 
@@ -3888,7 +4550,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-name-segment"></a>
 
-**Default Pool Origin Servers Private Name Segment**
+**Segment**
+
+A `segment` block (within `default_pool.origin_servers.private_name`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3898,7 +4562,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-name-site-locator"></a>
 
-**Default Pool Origin Servers Private Name Site Locator**
+**Site Locator**
+
+A `site_locator` block (within `default_pool.origin_servers.private_name`) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#default-pool-origin-servers-private-name-site-locator-site) below.
 
@@ -3906,7 +4572,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-name-site-locator-site"></a>
 
-**Default Pool Origin Servers Private Name Site Locator Site**
+**Site**
+
+A `site` block (within `default_pool.origin_servers.private_name.site_locator`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3916,7 +4584,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-name-site-locator-virtual-site"></a>
 
-**Default Pool Origin Servers Private Name Site Locator Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `default_pool.origin_servers.private_name.site_locator`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3926,7 +4596,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-name-snat-pool"></a>
 
-**Default Pool Origin Servers Private Name Snat Pool**
+**Snat Pool**
+
+A `snat_pool` block (within `default_pool.origin_servers.private_name`) supports the following:
 
 &#x2022; [`no_snat_pool`](#no-snat-pool) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3934,19 +4606,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-private-name-snat-pool-snat-pool"></a>
 
-**Default Pool Origin Servers Private Name Snat Pool Snat Pool**
+**Snat Pool**
+
+A `snat_pool` block (within `default_pool.origin_servers.private_name.snat_pool`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="default-pool-origin-servers-public-ip"></a>
 
-**Default Pool Origin Servers Public IP**
+**Public IP**
+
+A `public_ip` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>Public IPv4. Public IPv4 address
 
 <a id="default-pool-origin-servers-public-name"></a>
 
-**Default Pool Origin Servers Public Name**
+**Public Name**
+
+A `public_name` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`dns_name`](#dns-name) - Optional String<br>DNS Name. DNS Name
 
@@ -3954,7 +4632,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-vn-private-ip"></a>
 
-**Default Pool Origin Servers Vn Private IP**
+**Vn Private IP**
+
+A `vn_private_ip` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IPv4. IPv4 address
 
@@ -3962,7 +4642,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-vn-private-ip-virtual-network"></a>
 
-**Default Pool Origin Servers Vn Private IP Virtual Network**
+**Virtual Network**
+
+A `virtual_network` block (within `default_pool.origin_servers.vn_private_ip`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3972,7 +4654,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-vn-private-name"></a>
 
-**Default Pool Origin Servers Vn Private Name**
+**Vn Private Name**
+
+A `vn_private_name` block (within `default_pool.origin_servers`) supports the following:
 
 &#x2022; [`dns_name`](#dns-name) - Optional String<br>DNS Name. DNS Name
 
@@ -3980,7 +4664,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-origin-servers-vn-private-name-private-network"></a>
 
-**Default Pool Origin Servers Vn Private Name Private Network**
+**Private Network**
+
+A `private_network` block (within `default_pool.origin_servers.vn_private_name`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -3990,7 +4676,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-upstream-conn-pool-reuse-type"></a>
 
-**Default Pool Upstream Conn Pool Reuse Type**
+**Upstream Conn Pool Reuse Type**
+
+An `upstream_conn_pool_reuse_type` block (within `default_pool`) supports the following:
 
 &#x2022; [`disable_conn_pool_reuse`](#disable-conn-pool-reuse) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -3998,7 +4686,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls"></a>
 
-**Default Pool Use TLS**
+**Use TLS**
+
+An `use_tls` block (within `default_pool`) supports the following:
 
 &#x2022; [`default_session_key_caching`](#default-session-key-caching) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4028,7 +4718,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls-tls-config"></a>
 
-**Default Pool Use TLS TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `default_pool.use_tls`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#default-pool-use-tls-tls-config-custom-security) below.
 
@@ -4040,7 +4732,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls-tls-config-custom-security"></a>
 
-**Default Pool Use TLS TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `default_pool.use_tls.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -4050,13 +4744,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls-use-mtls"></a>
 
-**Default Pool Use TLS Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `default_pool.use_tls`) supports the following:
 
 &#x2022; [`tls_certificates`](#tls-certificates) - Optional Block<br>mTLS Client Certificate. mTLS Client Certificate<br>See [TLS Certificates](#default-pool-use-tls-use-mtls-tls-certificates) below.
 
 <a id="default-pool-use-tls-use-mtls-tls-certificates"></a>
 
-**Default Pool Use TLS Use mTLS TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `default_pool.use_tls.use_mtls`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -4072,13 +4770,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls-use-mtls-tls-certificates-custom-hash-algorithms"></a>
 
-**Default Pool Use TLS Use mTLS TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `default_pool.use_tls.use_mtls.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="default-pool-use-tls-use-mtls-tls-certificates-private-key"></a>
 
-**Default Pool Use TLS Use mTLS TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `default_pool.use_tls.use_mtls.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#default-pool-use-tls-use-mtls-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -4086,7 +4788,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls-use-mtls-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Default Pool Use TLS Use mTLS TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `default_pool.use_tls.use_mtls.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -4096,7 +4800,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls-use-mtls-tls-certificates-private-key-clear-secret-info"></a>
 
-**Default Pool Use TLS Use mTLS TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `default_pool.use_tls.use_mtls.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -4104,7 +4810,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls-use-mtls-obj"></a>
 
-**Default Pool Use TLS Use mTLS Obj**
+**Use mTLS Obj**
+
+An `use_mtls_obj` block (within `default_pool.use_tls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4114,7 +4822,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls-use-server-verification"></a>
 
-**Default Pool Use TLS Use Server Verification**
+**Use Server Verification**
+
+An `use_server_verification` block (within `default_pool.use_tls`) supports the following:
 
 &#x2022; [`trusted_ca`](#trusted-ca) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#default-pool-use-tls-use-server-verification-trusted-ca) below.
 
@@ -4122,7 +4832,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-use-tls-use-server-verification-trusted-ca"></a>
 
-**Default Pool Use TLS Use Server Verification Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `default_pool.use_tls.use_server_verification`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4132,7 +4844,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-view-internal"></a>
 
-**Default Pool View Internal**
+**View Internal**
+
+A `view_internal` block (within `default_pool`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4144,11 +4858,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Default Pool List**
 
+A `default_pool_list` block supports the following:
+
 &#x2022; [`pools`](#pools) - Optional Block<br>Origin Pools. List of Origin Pools<br>See [Pools](#default-pool-list-pools) below.
 
 <a id="default-pool-list-pools"></a>
 
-**Default Pool List Pools**
+**Pools**
+
+A `pools` block (within `default_pool_list`) supports the following:
 
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cluster](#default-pool-list-pools-cluster) below.
 
@@ -4162,7 +4880,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-list-pools-cluster"></a>
 
-**Default Pool List Pools Cluster**
+**Cluster**
+
+A `cluster` block (within `default_pool_list.pools`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4172,7 +4892,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-pool-list-pools-pool"></a>
 
-**Default Pool List Pools Pool**
+**Pool**
+
+A `pool` block (within `default_pool_list.pools`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4183,6 +4905,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="default-route-pools"></a>
 
 **Default Route Pools**
+
+A `default_route_pools` block supports the following:
 
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cluster](#default-route-pools-cluster) below.
 
@@ -4196,7 +4920,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-route-pools-cluster"></a>
 
-**Default Route Pools Cluster**
+**Cluster**
+
+A `cluster` block (within `default_route_pools`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4206,7 +4932,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-route-pools-pool"></a>
 
-**Default Route Pools Pool**
+**Pool**
+
+A `pool` block (within `default_route_pools`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4217,6 +4945,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="enable-api-discovery"></a>
 
 **Enable API Discovery**
+
+An `enable_api_discovery` block supports the following:
 
 &#x2022; [`api_crawler`](#api-crawler) - Optional Block<br>API Crawling. API Crawler message<br>See [API Crawler](#enable-api-discovery-api-crawler) below.
 
@@ -4234,7 +4964,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-api-crawler"></a>
 
-**Enable API Discovery API Crawler**
+**API Crawler**
+
+An `api_crawler` block (within `enable_api_discovery`) supports the following:
 
 &#x2022; [`api_crawler_config`](#api-crawler-config) - Optional Block<br>Crawler Configure<br>See [API Crawler Config](#enable-api-discovery-api-crawler-api-crawler-config) below.
 
@@ -4242,13 +4974,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config"></a>
 
-**Enable API Discovery API Crawler API Crawler Config**
+**API Crawler Config**
+
+An `api_crawler_config` block (within `enable_api_discovery.api_crawler`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional Block<br>Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer<br>See [Domains](#enable-api-discovery-api-crawler-api-crawler-config-domains) below.
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains"></a>
 
-**Enable API Discovery API Crawler API Crawler Config Domains**
+**Domains**
+
+A `domains` block (within `enable_api_discovery.api_crawler.api_crawler_config`) supports the following:
 
 &#x2022; [`domain`](#domain) - Optional String<br>Domain. Select the domain to execute API Crawling with given credentials
 
@@ -4256,7 +4992,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login"></a>
 
-**Enable API Discovery API Crawler API Crawler Config Domains Simple Login**
+**Simple Login**
+
+A `simple_login` block (within `enable_api_discovery.api_crawler.api_crawler_config.domains`) supports the following:
 
 &#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password) below.
 
@@ -4264,7 +5002,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password"></a>
 
-**Enable API Discovery API Crawler API Crawler Config Domains Simple Login Password**
+**Password**
+
+A `password` block (within `enable_api_discovery.api_crawler.api_crawler_config.domains.simple_login`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-blindfold-secret-info) below.
 
@@ -4272,7 +5012,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-blindfold-secret-info"></a>
 
-**Enable API Discovery API Crawler API Crawler Config Domains Simple Login Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `enable_api_discovery.api_crawler.api_crawler_config.domains.simple_login.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -4282,7 +5024,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-clear-secret-info"></a>
 
-**Enable API Discovery API Crawler API Crawler Config Domains Simple Login Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `enable_api_discovery.api_crawler.api_crawler_config.domains.simple_login.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -4290,13 +5034,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-api-discovery-from-code-scan"></a>
 
-**Enable API Discovery API Discovery From Code Scan**
+**API Discovery From Code Scan**
+
+An `api_discovery_from_code_scan` block (within `enable_api_discovery`) supports the following:
 
 &#x2022; [`code_base_integrations`](#code-base-integrations) - Optional Block<br>Select Code Base Integrations<br>See [Code Base Integrations](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations) below.
 
 <a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations"></a>
 
-**Enable API Discovery API Discovery From Code Scan Code Base Integrations**
+**Code Base Integrations**
+
+A `code_base_integrations` block (within `enable_api_discovery.api_discovery_from_code_scan`) supports the following:
 
 &#x2022; [`all_repos`](#all-repos) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4306,7 +5054,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-code-base-integration"></a>
 
-**Enable API Discovery API Discovery From Code Scan Code Base Integrations Code Base Integration**
+**Code Base Integration**
+
+A `code_base_integration` block (within `enable_api_discovery.api_discovery_from_code_scan.code_base_integrations`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4316,19 +5066,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-selected-repos"></a>
 
-**Enable API Discovery API Discovery From Code Scan Code Base Integrations Selected Repos**
+**Selected Repos**
+
+A `selected_repos` block (within `enable_api_discovery.api_discovery_from_code_scan.code_base_integrations`) supports the following:
 
 &#x2022; [`api_code_repo`](#api-code-repo) - Optional List<br>API Code Repository. Code repository which contain API endpoints
 
 <a id="enable-api-discovery-custom-api-auth-discovery"></a>
 
-**Enable API Discovery Custom API Auth Discovery**
+**Custom API Auth Discovery**
+
+A `custom_api_auth_discovery` block (within `enable_api_discovery`) supports the following:
 
 &#x2022; [`api_discovery_ref`](#api-discovery-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [API Discovery Ref](#enable-api-discovery-custom-api-auth-discovery-api-discovery-ref) below.
 
 <a id="enable-api-discovery-custom-api-auth-discovery-api-discovery-ref"></a>
 
-**Enable API Discovery Custom API Auth Discovery API Discovery Ref**
+**API Discovery Ref**
+
+An `api_discovery_ref` block (within `enable_api_discovery.custom_api_auth_discovery`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4338,13 +5094,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-api-discovery-discovered-api-settings"></a>
 
-**Enable API Discovery Discovered API Settings**
+**Discovered API Settings**
+
+A `discovered_api_settings` block (within `enable_api_discovery`) supports the following:
 
 &#x2022; [`purge_duration_for_inactive_discovered_apis`](#purge-duration-for-inactive-discovered-apis) - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
 
 <a id="enable-challenge"></a>
 
 **Enable Challenge**
+
+An `enable_challenge` block supports the following:
 
 &#x2022; [`captcha_challenge_parameters`](#captcha-challenge-parameters) - Optional Block<br>Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Captcha Challenge Parameters](#enable-challenge-captcha-challenge-parameters) below.
 
@@ -4360,7 +5120,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-challenge-captcha-challenge-parameters"></a>
 
-**Enable Challenge Captcha Challenge Parameters**
+**Captcha Challenge Parameters**
+
+A `captcha_challenge_parameters` block (within `enable_challenge`) supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -4368,7 +5130,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-challenge-js-challenge-parameters"></a>
 
-**Enable Challenge Js Challenge Parameters**
+**Js Challenge Parameters**
+
+A `js_challenge_parameters` block (within `enable_challenge`) supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -4378,7 +5142,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-challenge-malicious-user-mitigation"></a>
 
-**Enable Challenge Malicious User Mitigation**
+**Malicious User Mitigation**
+
+A `malicious_user_mitigation` block (within `enable_challenge`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4390,17 +5156,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Enable IP Reputation**
 
+An `enable_ip_reputation` block supports the following:
+
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied
 
 <a id="enable-trust-client-ip-headers"></a>
 
 **Enable Trust Client IP Headers**
 
+An `enable_trust_client_ip_headers` block supports the following:
+
 &#x2022; [`client_ip_headers`](#client-ip-headers) - Optional List<br>Client IP Headers. Define the list of one or more Client IP Headers. Headers will be used in order from top to bottom, meaning if the first header is not present in the request, the system will proceed to check for the second header, and so on, until one of the listed headers is found. If none of the defined headers exist, or the value is not an IP address, then the system will use the source IP of the packet. If multiple defined headers with different names are present in the request, the value of the first header name in the configuration will be used. If multiple defined headers with the same name are present in the request, values of all those headers will be combined. The system will read the right-most IP address from header, if there are multiple IP addresses in the header value. For X-Forwarded-For header, the system will read the IP address(rightmost - 1), as the client IP
 
 <a id="graphql-rules"></a>
 
 **GraphQL Rules**
+
+A `graphql_rules` block supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4420,7 +5192,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="graphql-rules-graphql-settings"></a>
 
-**GraphQL Rules GraphQL Settings**
+**GraphQL Settings**
+
+A `graphql_settings` block (within `graphql_rules`) supports the following:
 
 &#x2022; [`disable_introspection`](#disable-introspection) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4434,7 +5208,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="graphql-rules-metadata"></a>
 
-**GraphQL Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `graphql_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -4443,6 +5219,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="http"></a>
 
 **HTTP**
+
+A `http` block supports the following:
 
 &#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
 
@@ -4453,6 +5231,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="https"></a>
 
 **HTTPS**
+
+A `https` block supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -4490,7 +5270,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-coalescing-options"></a>
 
-**HTTPS Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `https`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4498,7 +5280,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-http-protocol-options"></a>
 
-**HTTPS HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `https`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#https-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -4508,13 +5292,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `https.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#https-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="https-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `https.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4526,7 +5314,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-cert-params"></a>
 
-**HTTPS TLS Cert Params**
+**TLS Cert Params**
+
+A `tls_cert_params` block (within `https`) supports the following:
 
 &#x2022; [`certificates`](#certificates) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#https-tls-cert-params-certificates) below.
 
@@ -4538,7 +5328,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-cert-params-certificates"></a>
 
-**HTTPS TLS Cert Params Certificates**
+**Certificates**
+
+A `certificates` block (within `https.tls_cert_params`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4548,7 +5340,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-cert-params-tls-config"></a>
 
-**HTTPS TLS Cert Params TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `https.tls_cert_params`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-tls-cert-params-tls-config-custom-security) below.
 
@@ -4560,7 +5354,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-cert-params-tls-config-custom-security"></a>
 
-**HTTPS TLS Cert Params TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `https.tls_cert_params.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -4570,7 +5366,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-cert-params-use-mtls"></a>
 
-**HTTPS TLS Cert Params Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `https.tls_cert_params`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -4588,7 +5386,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-cert-params-use-mtls-crl"></a>
 
-**HTTPS TLS Cert Params Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4598,7 +5398,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-cert-params-use-mtls-trusted-ca"></a>
 
-**HTTPS TLS Cert Params Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4608,13 +5410,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-cert-params-use-mtls-xfcc-options"></a>
 
-**HTTPS TLS Cert Params Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `https.tls_cert_params.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="https-tls-parameters"></a>
 
-**HTTPS TLS Parameters**
+**TLS Parameters**
+
+A `tls_parameters` block (within `https`) supports the following:
 
 &#x2022; [`no_mtls`](#no-mtls) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4626,7 +5432,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-tls-certificates"></a>
 
-**HTTPS TLS Parameters TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `https.tls_parameters`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -4642,13 +5450,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-tls-certificates-custom-hash-algorithms"></a>
 
-**HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="https-tls-parameters-tls-certificates-private-key"></a>
 
-**HTTPS TLS Parameters TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `https.tls_parameters.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#https-tls-parameters-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -4656,7 +5468,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -4666,7 +5480,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-tls-certificates-private-key-clear-secret-info"></a>
 
-**HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `https.tls_parameters.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -4674,7 +5490,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-tls-config"></a>
 
-**HTTPS TLS Parameters TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `https.tls_parameters`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-tls-parameters-tls-config-custom-security) below.
 
@@ -4686,7 +5504,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-tls-config-custom-security"></a>
 
-**HTTPS TLS Parameters TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `https.tls_parameters.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -4696,7 +5516,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-use-mtls"></a>
 
-**HTTPS TLS Parameters Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `https.tls_parameters`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -4714,7 +5536,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-use-mtls-crl"></a>
 
-**HTTPS TLS Parameters Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4724,7 +5548,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-use-mtls-trusted-ca"></a>
 
-**HTTPS TLS Parameters Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4734,13 +5560,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-tls-parameters-use-mtls-xfcc-options"></a>
 
-**HTTPS TLS Parameters Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `https.tls_parameters.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="https-auto-cert"></a>
 
 **HTTPS Auto Cert**
+
+A `https_auto_cert` block supports the following:
 
 &#x2022; [`add_hsts`](#add-hsts) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
 
@@ -4780,7 +5610,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-auto-cert-coalescing-options"></a>
 
-**HTTPS Auto Cert Coalescing Options**
+**Coalescing Options**
+
+A `coalescing_options` block (within `https_auto_cert`) supports the following:
 
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4788,7 +5620,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-auto-cert-http-protocol-options"></a>
 
-**HTTPS Auto Cert HTTP Protocol Options**
+**HTTP Protocol Options**
+
+A `http_protocol_options` block (within `https_auto_cert`) supports the following:
 
 &#x2022; [`http_protocol_enable_v1_only`](#http-protocol-enable-v1-only) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#https-auto-cert-http-protocol-options-http-protocol-enable-v1-only) below.
 
@@ -4798,13 +5632,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-auto-cert-http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only**
+**HTTP Protocol Enable V1 Only**
+
+A `http_protocol_enable_v1_only` block (within `https_auto_cert.http_protocol_options`) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
 <a id="https-auto-cert-http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation**
+**Header Transformation**
+
+A `header_transformation` block (within `https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`) supports the following:
 
 &#x2022; [`default_header_transformation`](#default-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4816,7 +5654,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-auto-cert-tls-config"></a>
 
-**HTTPS Auto Cert TLS Config**
+**TLS Config**
+
+A `tls_config` block (within `https_auto_cert`) supports the following:
 
 &#x2022; [`custom_security`](#custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#https-auto-cert-tls-config-custom-security) below.
 
@@ -4828,7 +5668,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-auto-cert-tls-config-custom-security"></a>
 
-**HTTPS Auto Cert TLS Config Custom Security**
+**Custom Security**
+
+A `custom_security` block (within `https_auto_cert.tls_config`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
 
@@ -4838,7 +5680,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-auto-cert-use-mtls"></a>
 
-**HTTPS Auto Cert Use mTLS**
+**Use mTLS**
+
+An `use_mtls` block (within `https_auto_cert`) supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
 
@@ -4856,7 +5700,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-auto-cert-use-mtls-crl"></a>
 
-**HTTPS Auto Cert Use mTLS CRL**
+**CRL**
+
+A `crl` block (within `https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4866,7 +5712,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-auto-cert-use-mtls-trusted-ca"></a>
 
-**HTTPS Auto Cert Use mTLS Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -4876,13 +5724,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="https-auto-cert-use-mtls-xfcc-options"></a>
 
-**HTTPS Auto Cert Use mTLS Xfcc Options**
+**Xfcc Options**
+
+A `xfcc_options` block (within `https_auto_cert.use_mtls`) supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
 
 <a id="js-challenge"></a>
 
 **Js Challenge**
+
+A `js_challenge` block supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -4893,6 +5745,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="jwt-validation"></a>
 
 **JWT Validation**
+
+A `jwt_validation` block supports the following:
 
 &#x2022; [`action`](#action) - Optional Block<br>Action<br>See [Action](#jwt-validation-action) below.
 
@@ -4908,7 +5762,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="jwt-validation-action"></a>
 
-**JWT Validation Action**
+**Action**
+
+An `action` block (within `jwt_validation`) supports the following:
 
 &#x2022; [`block`](#block) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4916,19 +5772,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="jwt-validation-jwks-config"></a>
 
-**JWT Validation Jwks Config**
+**Jwks Config**
+
+A `jwks_config` block (within `jwt_validation`) supports the following:
 
 &#x2022; [`cleartext`](#cleartext) - Optional String<br>JSON Web Key Set (JWKS). The JSON Web Key Set (JWKS) is a set of keys used to verify JSON Web Token (JWT) issued by the Authorization Server. See RFC 7517 for more details
 
 <a id="jwt-validation-mandatory-claims"></a>
 
-**JWT Validation Mandatory Claims**
+**Mandatory Claims**
+
+A `mandatory_claims` block (within `jwt_validation`) supports the following:
 
 &#x2022; [`claim_names`](#claim-names) - Optional List<br>Claim Names
 
 <a id="jwt-validation-reserved-claims"></a>
 
-**JWT Validation Reserved Claims**
+**Reserved Claims**
+
+A `reserved_claims` block (within `jwt_validation`) supports the following:
 
 &#x2022; [`audience`](#audience) - Optional Block<br>Audiences<br>See [Audience](#jwt-validation-reserved-claims-audience) below.
 
@@ -4944,13 +5806,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="jwt-validation-reserved-claims-audience"></a>
 
-**JWT Validation Reserved Claims Audience**
+**Audience**
+
+An `audience` block (within `jwt_validation.reserved_claims`) supports the following:
 
 &#x2022; [`audiences`](#audiences) - Optional List<br>Values
 
 <a id="jwt-validation-target"></a>
 
-**JWT Validation Target**
+**Target**
+
+A `target` block (within `jwt_validation`) supports the following:
 
 &#x2022; [`all_endpoint`](#all-endpoint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -4960,25 +5826,33 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="jwt-validation-target-api-groups"></a>
 
-**JWT Validation Target API Groups**
+**API Groups**
+
+An `api_groups` block (within `jwt_validation.target`) supports the following:
 
 &#x2022; [`api_groups`](#api-groups) - Optional List<br>API Groups
 
 <a id="jwt-validation-target-base-paths"></a>
 
-**JWT Validation Target Base Paths**
+**Base Paths**
+
+A `base_paths` block (within `jwt_validation.target`) supports the following:
 
 &#x2022; [`base_paths`](#base-paths) - Optional List<br>Prefix Values
 
 <a id="jwt-validation-token-location"></a>
 
-**JWT Validation Token Location**
+**Token Location**
+
+A `token_location` block (within `jwt_validation`) supports the following:
 
 &#x2022; [`bearer_token`](#bearer-token) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="l7-ddos-action-js-challenge"></a>
 
 **L7 DDOS Action Js Challenge**
+
+A `l7_ddos_action_js_challenge` block supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -4989,6 +5863,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="l7-ddos-protection"></a>
 
 **L7 DDOS Protection**
+
+A `l7_ddos_protection` block supports the following:
 
 &#x2022; [`clientside_action_captcha_challenge`](#clientside-action-captcha-challenge) - Optional Block<br>Captcha Challenge Parameters. Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect the browser to an HTML page on every new HTTP request. This HTML page will have captcha challenge embedded in it. Client will be allowed to make the request only if the captcha challenge is successful. Loadbalancer will tag response header with a cookie to avoid Captcha challenge for subsequent requests. CAPTCHA is mainly used as a security check to ensure only human users can pass through. Generally, computers or bots are not capable of solving a captcha. You can enable either Javascript challenge or Captcha challenge on a virtual host<br>See [Clientside Action Captcha Challenge](#l7-ddos-protection-clientside-action-captcha-challenge) below.
 
@@ -5012,7 +5888,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="l7-ddos-protection-clientside-action-captcha-challenge"></a>
 
-**L7 DDOS Protection Clientside Action Captcha Challenge**
+**Clientside Action Captcha Challenge**
+
+A `clientside_action_captcha_challenge` block (within `l7_ddos_protection`) supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -5020,7 +5898,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="l7-ddos-protection-clientside-action-js-challenge"></a>
 
-**L7 DDOS Protection Clientside Action Js Challenge**
+**Clientside Action Js Challenge**
+
+A `clientside_action_js_challenge` block (within `l7_ddos_protection`) supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -5030,7 +5910,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="l7-ddos-protection-ddos-policy-custom"></a>
 
-**L7 DDOS Protection DDOS Policy Custom**
+**DDOS Policy Custom**
+
+A `ddos_policy_custom` block (within `l7_ddos_protection`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5040,7 +5922,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="l7-ddos-protection-mitigation-captcha-challenge"></a>
 
-**L7 DDOS Protection Mitigation Captcha Challenge**
+**Mitigation Captcha Challenge**
+
+A `mitigation_captcha_challenge` block (within `l7_ddos_protection`) supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -5048,7 +5932,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="l7-ddos-protection-mitigation-js-challenge"></a>
 
-**L7 DDOS Protection Mitigation Js Challenge**
+**Mitigation Js Challenge**
+
+A `mitigation_js_challenge` block (within `l7_ddos_protection`) supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -5060,11 +5946,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Malware Protection Settings**
 
+A `malware_protection_settings` block supports the following:
+
 &#x2022; [`malware_protection_rules`](#malware-protection-rules) - Optional Block<br>Malware Detection Rules. Configure the match criteria to trigger Malware Protection Scan<br>See [Malware Protection Rules](#malware-protection-settings-malware-protection-rules) below.
 
 <a id="malware-protection-settings-malware-protection-rules"></a>
 
-**Malware Protection Settings Malware Protection Rules**
+**Malware Protection Rules**
+
+A `malware_protection_rules` block (within `malware_protection_settings`) supports the following:
 
 &#x2022; [`action`](#action) - Optional Block<br>Action<br>See [Action](#malware-protection-settings-malware-protection-rules-action) below.
 
@@ -5078,7 +5968,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="malware-protection-settings-malware-protection-rules-action"></a>
 
-**Malware Protection Settings Malware Protection Rules Action**
+**Action**
+
+An `action` block (within `malware_protection_settings.malware_protection_rules`) supports the following:
 
 &#x2022; [`block`](#block) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5086,7 +5978,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="malware-protection-settings-malware-protection-rules-domain"></a>
 
-**Malware Protection Settings Malware Protection Rules Domain**
+**Domain**
+
+A `domain` block (within `malware_protection_settings.malware_protection_rules`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5094,7 +5988,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="malware-protection-settings-malware-protection-rules-domain-domain"></a>
 
-**Malware Protection Settings Malware Protection Rules Domain Domain**
+**Domain**
+
+A `domain` block (within `malware_protection_settings.malware_protection_rules.domain`) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -5104,7 +6000,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="malware-protection-settings-malware-protection-rules-metadata"></a>
 
-**Malware Protection Settings Malware Protection Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `malware_protection_settings.malware_protection_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -5112,7 +6010,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="malware-protection-settings-malware-protection-rules-path"></a>
 
-**Malware Protection Settings Malware Protection Rules Path**
+**Path**
+
+A `path` block (within `malware_protection_settings.malware_protection_rules`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -5123,6 +6023,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="more-option"></a>
 
 **More Option**
+
+A `more_option` block supports the following:
 
 &#x2022; [`buffer_policy`](#buffer-policy) - Optional Block<br>Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence<br>See [Buffer Policy](#more-option-buffer-policy) below.
 
@@ -5158,7 +6060,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-buffer-policy"></a>
 
-**More Option Buffer Policy**
+**Buffer Policy**
+
+A `buffer_policy` block (within `more_option`) supports the following:
 
 &#x2022; [`disabled`](#disabled) - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
 
@@ -5166,7 +6070,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-compression-params"></a>
 
-**More Option Compression Params**
+**Compression Params**
+
+A `compression_params` block (within `more_option`) supports the following:
 
 &#x2022; [`content_length`](#content-length) - Optional Number  Defaults to `30`<br>Content Length. Minimum response length, in bytes, which will trigger compression. The
 
@@ -5178,7 +6084,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-request-cookies-to-add"></a>
 
-**More Option Request Cookies To Add**
+**Request Cookies To Add**
+
+A `request_cookies_to_add` block (within `more_option`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the cookie in Cookie header
 
@@ -5190,7 +6098,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-request-cookies-to-add-secret-value"></a>
 
-**More Option Request Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `more_option.request_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#more-option-request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -5198,7 +6108,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**More Option Request Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `more_option.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -5208,7 +6120,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-request-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**More Option Request Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `more_option.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -5216,7 +6130,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-request-headers-to-add"></a>
 
-**More Option Request Headers To Add**
+**Request Headers To Add**
+
+A `request_headers_to_add` block (within `more_option`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -5228,7 +6144,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-request-headers-to-add-secret-value"></a>
 
-**More Option Request Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `more_option.request_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#more-option-request-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -5236,7 +6154,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**More Option Request Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `more_option.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -5246,7 +6166,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-request-headers-to-add-secret-value-clear-secret-info"></a>
 
-**More Option Request Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `more_option.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -5254,7 +6176,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-response-cookies-to-add"></a>
 
-**More Option Response Cookies To Add**
+**Response Cookies To Add**
+
+A `response_cookies_to_add` block (within `more_option`) supports the following:
 
 &#x2022; [`add_domain`](#add-domain) - Optional String<br>Add Domain. Add domain attribute
 
@@ -5304,7 +6228,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-response-cookies-to-add-secret-value"></a>
 
-**More Option Response Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `more_option.response_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#more-option-response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -5312,7 +6238,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**More Option Response Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `more_option.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -5322,7 +6250,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-response-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**More Option Response Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `more_option.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -5330,7 +6260,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-response-headers-to-add"></a>
 
-**More Option Response Headers To Add**
+**Response Headers To Add**
+
+A `response_headers_to_add` block (within `more_option`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -5342,7 +6274,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-response-headers-to-add-secret-value"></a>
 
-**More Option Response Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `more_option.response_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#more-option-response-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -5350,7 +6284,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**More Option Response Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `more_option.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -5360,7 +6296,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="more-option-response-headers-to-add-secret-value-clear-secret-info"></a>
 
-**More Option Response Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `more_option.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -5370,11 +6308,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Origin Server Subset Rule List**
 
+An `origin_server_subset_rule_list` block supports the following:
+
 &#x2022; [`origin_server_subset_rules`](#origin-server-subset-rules) - Optional Block<br>Origin Server Subset Rules. Origin Server Subset Rules allow users to define match condition on Client (IP address, ASN, Country), IP Reputation, Regional Edge names, Request for subset selection of origin servers. Origin Server Subset is a sequential engine where rules are evaluated one after the other. It's important to define the correct order for Origin Server Subset to get the intended result, rules are evaluated from top to bottom in the list. When an Origin server subset rule is matched, then this selection rule takes effect and no more rules are evaluated<br>See [Origin Server Subset Rules](#origin-server-subset-rule-list-origin-server-subset-rules) below.
 
 <a id="origin-server-subset-rule-list-origin-server-subset-rules"></a>
 
-**Origin Server Subset Rule List Origin Server Subset Rules**
+**Origin Server Subset Rules**
+
+An `origin_server_subset_rules` block (within `origin_server_subset_rule_list`) supports the following:
 
 &#x2022; [`any_asn`](#any-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5402,19 +6344,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-asn-list"></a>
 
-**Origin Server Subset Rule List Origin Server Subset Rules Asn List**
+**Asn List**
+
+An `asn_list` block (within `origin_server_subset_rule_list.origin_server_subset_rules`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-asn-matcher"></a>
 
-**Origin Server Subset Rule List Origin Server Subset Rules Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `origin_server_subset_rule_list.origin_server_subset_rules`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#origin-server-subset-rule-list-origin-server-subset-rules-asn-matcher-asn-sets) below.
 
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-asn-matcher-asn-sets"></a>
 
-**Origin Server Subset Rule List Origin Server Subset Rules Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `origin_server_subset_rule_list.origin_server_subset_rules.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -5428,13 +6376,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-client-selector"></a>
 
-**Origin Server Subset Rule List Origin Server Subset Rules Client Selector**
+**Client Selector**
+
+A `client_selector` block (within `origin_server_subset_rule_list.origin_server_subset_rules`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-ip-matcher"></a>
 
-**Origin Server Subset Rule List Origin Server Subset Rules IP Matcher**
+**IP Matcher**
+
+An `ip_matcher` block (within `origin_server_subset_rule_list.origin_server_subset_rules`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -5442,7 +6394,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-ip-matcher-prefix-sets"></a>
 
-**Origin Server Subset Rule List Origin Server Subset Rules IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `origin_server_subset_rule_list.origin_server_subset_rules.ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -5456,7 +6410,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-ip-prefix-list"></a>
 
-**Origin Server Subset Rule List Origin Server Subset Rules IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `origin_server_subset_rule_list.origin_server_subset_rules`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -5464,7 +6420,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="origin-server-subset-rule-list-origin-server-subset-rules-metadata"></a>
 
-**Origin Server Subset Rule List Origin Server Subset Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `origin_server_subset_rule_list.origin_server_subset_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -5473,6 +6431,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="policy-based-challenge"></a>
 
 **Policy Based Challenge**
+
+A `policy_based_challenge` block supports the following:
 
 &#x2022; [`always_enable_captcha_challenge`](#always-enable-captcha-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5500,7 +6460,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-captcha-challenge-parameters"></a>
 
-**Policy Based Challenge Captcha Challenge Parameters**
+**Captcha Challenge Parameters**
+
+A `captcha_challenge_parameters` block (within `policy_based_challenge`) supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -5508,7 +6470,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-js-challenge-parameters"></a>
 
-**Policy Based Challenge Js Challenge Parameters**
+**Js Challenge Parameters**
+
+A `js_challenge_parameters` block (within `policy_based_challenge`) supports the following:
 
 &#x2022; [`cookie_expiry`](#cookie-expiry) - Optional Number<br>Cookie Expiration Period. Cookie expiration period, in seconds. An expired cookie causes the loadbalancer to issue a new challenge
 
@@ -5518,7 +6482,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-malicious-user-mitigation"></a>
 
-**Policy Based Challenge Malicious User Mitigation**
+**Malicious User Mitigation**
+
+A `malicious_user_mitigation` block (within `policy_based_challenge`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5528,13 +6494,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list"></a>
 
-**Policy Based Challenge Rule List**
+**Rule List**
+
+A `rule_list` block (within `policy_based_challenge`) supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>Rules. Rules that specify the match conditions and challenge type to be launched. When a challenge type is selected to be always enabled, these rules can be used to disable challenge or launch a different challenge for requests that match the specified conditions<br>See [Rules](#policy-based-challenge-rule-list-rules) below.
 
 <a id="policy-based-challenge-rule-list-rules"></a>
 
-**Policy Based Challenge Rule List Rules**
+**Rules**
+
+A `rules` block (within `policy_based_challenge.rule_list`) supports the following:
 
 &#x2022; [`metadata`](#metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#policy-based-challenge-rule-list-rules-metadata) below.
 
@@ -5542,7 +6512,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-metadata"></a>
 
-**Policy Based Challenge Rule List Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `policy_based_challenge.rule_list.rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -5550,7 +6522,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec"></a>
 
-**Policy Based Challenge Rule List Rules Spec**
+**Spec**
+
+A `spec` block (within `policy_based_challenge.rule_list.rules`) supports the following:
 
 &#x2022; [`any_asn`](#any-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5596,7 +6570,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-arg-matchers"></a>
 
-**Policy Based Challenge Rule List Rules Spec Arg Matchers**
+**Arg Matchers**
+
+An `arg_matchers` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5610,7 +6586,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-item"></a>
 
-**Policy Based Challenge Rule List Rules Spec Arg Matchers Item**
+**Item**
+
+An `item` block (within `policy_based_challenge.rule_list.rules.spec.arg_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -5620,19 +6598,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-asn-list"></a>
 
-**Policy Based Challenge Rule List Rules Spec Asn List**
+**Asn List**
+
+An `asn_list` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="policy-based-challenge-rule-list-rules-spec-asn-matcher"></a>
 
-**Policy Based Challenge Rule List Rules Spec Asn Matcher**
+**Asn Matcher**
+
+An `asn_matcher` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#policy-based-challenge-rule-list-rules-spec-asn-matcher-asn-sets) below.
 
 <a id="policy-based-challenge-rule-list-rules-spec-asn-matcher-asn-sets"></a>
 
-**Policy Based Challenge Rule List Rules Spec Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `policy_based_challenge.rule_list.rules.spec.asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -5646,7 +6630,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-body-matcher"></a>
 
-**Policy Based Challenge Rule List Rules Spec Body Matcher**
+**Body Matcher**
+
+A `body_matcher` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -5656,13 +6642,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-client-selector"></a>
 
-**Policy Based Challenge Rule List Rules Spec Client Selector**
+**Client Selector**
+
+A `client_selector` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers"></a>
 
-**Policy Based Challenge Rule List Rules Spec Cookie Matchers**
+**Cookie Matchers**
+
+A `cookie_matchers` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5676,7 +6666,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers-item"></a>
 
-**Policy Based Challenge Rule List Rules Spec Cookie Matchers Item**
+**Item**
+
+An `item` block (within `policy_based_challenge.rule_list.rules.spec.cookie_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -5686,7 +6678,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-domain-matcher"></a>
 
-**Policy Based Challenge Rule List Rules Spec Domain Matcher**
+**Domain Matcher**
+
+A `domain_matcher` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -5694,7 +6688,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-headers"></a>
 
-**Policy Based Challenge Rule List Rules Spec Headers**
+**Headers**
+
+A `headers` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5708,7 +6704,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-headers-item"></a>
 
-**Policy Based Challenge Rule List Rules Spec Headers Item**
+**Item**
+
+An `item` block (within `policy_based_challenge.rule_list.rules.spec.headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -5718,7 +6716,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-http-method"></a>
 
-**Policy Based Challenge Rule List Rules Spec HTTP Method**
+**HTTP Method**
+
+A `http_method` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
@@ -5726,7 +6726,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-ip-matcher"></a>
 
-**Policy Based Challenge Rule List Rules Spec IP Matcher**
+**IP Matcher**
+
+An `ip_matcher` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -5734,7 +6736,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-ip-matcher-prefix-sets"></a>
 
-**Policy Based Challenge Rule List Rules Spec IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `policy_based_challenge.rule_list.rules.spec.ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -5748,7 +6752,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-ip-prefix-list"></a>
 
-**Policy Based Challenge Rule List Rules Spec IP Prefix List**
+**IP Prefix List**
+
+An `ip_prefix_list` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -5756,7 +6762,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-path"></a>
 
-**Policy Based Challenge Rule List Rules Spec Path**
+**Path**
+
+A `path` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact path values to match the input HTTP path against
 
@@ -5772,7 +6780,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-query-params"></a>
 
-**Policy Based Challenge Rule List Rules Spec Query Params**
+**Query Params**
+
+A `query_params` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5786,7 +6796,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-query-params-item"></a>
 
-**Policy Based Challenge Rule List Rules Spec Query Params Item**
+**Item**
+
+An `item` block (within `policy_based_challenge.rule_list.rules.spec.query_params`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -5796,7 +6808,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-rule-list-rules-spec-tls-fingerprint-matcher"></a>
 
-**Policy Based Challenge Rule List Rules Spec TLS Fingerprint Matcher**
+**TLS Fingerprint Matcher**
+
+A `tls_fingerprint_matcher` block (within `policy_based_challenge.rule_list.rules.spec`) supports the following:
 
 &#x2022; [`classes`](#classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
@@ -5806,13 +6820,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="policy-based-challenge-temporary-user-blocking"></a>
 
-**Policy Based Challenge Temporary User Blocking**
+**Temporary User Blocking**
+
+A `temporary_user_blocking` block (within `policy_based_challenge`) supports the following:
 
 &#x2022; [`custom_page`](#custom-page) - Optional String<br>Custom Message for Temporary Blocking. Custom message is of type `uri_ref`. Currently supported URL schemes is `string:///`. For `string:///` scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Blocked.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Blocked </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='
 
 <a id="protected-cookies"></a>
 
 **Protected Cookies**
+
+A `protected_cookies` block supports the following:
 
 &#x2022; [`add_httponly`](#add-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5844,6 +6862,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rate Limit**
 
+A `rate_limit` block supports the following:
+
 &#x2022; [`custom_ip_allowed_list`](#custom-ip-allowed-list) - Optional Block<br>Custom IP Allowed List. IP Allowed list using existing ip_prefix_set objects<br>See [Custom IP Allowed List](#rate-limit-custom-ip-allowed-list) below.
 
 &#x2022; [`ip_allowed_list`](#ip-allowed-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [IP Allowed List](#rate-limit-ip-allowed-list) below.
@@ -5858,13 +6878,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rate-limit-custom-ip-allowed-list"></a>
 
-**Rate Limit Custom IP Allowed List**
+**Custom IP Allowed List**
+
+A `custom_ip_allowed_list` block (within `rate_limit`) supports the following:
 
 &#x2022; [`rate_limiter_allowed_prefixes`](#rate-limiter-allowed-prefixes) - Optional Block<br>List of IP Prefix Sets. References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting<br>See [Rate Limiter Allowed Prefixes](#rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes) below.
 
 <a id="rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes"></a>
 
-**Rate Limit Custom IP Allowed List Rate Limiter Allowed Prefixes**
+**Rate Limiter Allowed Prefixes**
+
+A `rate_limiter_allowed_prefixes` block (within `rate_limit.custom_ip_allowed_list`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5874,19 +6898,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rate-limit-ip-allowed-list"></a>
 
-**Rate Limit IP Allowed List**
+**IP Allowed List**
+
+An `ip_allowed_list` block (within `rate_limit`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="rate-limit-policies"></a>
 
-**Rate Limit Policies**
+**Policies**
+
+A `policies` block (within `rate_limit`) supports the following:
 
 &#x2022; [`policies`](#policies) - Optional Block<br>Rate Limiter Policies. Ordered list of rate limiter policies<br>See [Policies](#rate-limit-policies-policies) below.
 
 <a id="rate-limit-policies-policies"></a>
 
-**Rate Limit Policies Policies**
+**Policies**
+
+A `policies` block (within `rate_limit.policies`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -5896,7 +6926,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rate-limit-rate-limiter"></a>
 
-**Rate Limit Rate Limiter**
+**Rate Limiter**
+
+A `rate_limiter` block (within `rate_limit`) supports the following:
 
 &#x2022; [`action_block`](#action-block) - Optional Block<br>Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold<br>See [Action Block](#rate-limit-rate-limiter-action-block) below.
 
@@ -5916,7 +6948,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rate-limit-rate-limiter-action-block"></a>
 
-**Rate Limit Rate Limiter Action Block**
+**Action Block**
+
+An `action_block` block (within `rate_limit.rate_limiter`) supports the following:
 
 &#x2022; [`hours`](#hours) - Optional Block<br>Hours. Input Duration Hours<br>See [Hours](#rate-limit-rate-limiter-action-block-hours) below.
 
@@ -5926,19 +6960,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rate-limit-rate-limiter-action-block-hours"></a>
 
-**Rate Limit Rate Limiter Action Block Hours**
+**Hours**
+
+A `hours` block (within `rate_limit.rate_limiter.action_block`) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
 <a id="rate-limit-rate-limiter-action-block-minutes"></a>
 
-**Rate Limit Rate Limiter Action Block Minutes**
+**Minutes**
+
+A `minutes` block (within `rate_limit.rate_limiter.action_block`) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
 <a id="rate-limit-rate-limiter-action-block-seconds"></a>
 
-**Rate Limit Rate Limiter Action Block Seconds**
+**Seconds**
+
+A `seconds` block (within `rate_limit.rate_limiter.action_block`) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -5946,11 +6986,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ring Hash**
 
+A `ring_hash` block supports the following:
+
 &#x2022; [`hash_policy`](#hash-policy) - Optional Block<br>Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request<br>See [Hash Policy](#ring-hash-hash-policy) below.
 
 <a id="ring-hash-hash-policy"></a>
 
-**Ring Hash Hash Policy**
+**Hash Policy**
+
+A `hash_policy` block (within `ring_hash`) supports the following:
 
 &#x2022; [`cookie`](#cookie) - Optional Block<br>Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously<br>See [Cookie](#ring-hash-hash-policy-cookie) below.
 
@@ -5962,7 +7006,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ring-hash-hash-policy-cookie"></a>
 
-**Ring Hash Hash Policy Cookie**
+**Cookie**
+
+A `cookie` block (within `ring_hash.hash_policy`) supports the following:
 
 &#x2022; [`add_httponly`](#add-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -5990,6 +7036,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Routes**
 
+A `routes` block supports the following:
+
 &#x2022; [`custom_route_object`](#custom-route-object) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#routes-custom-route-object) below.
 
 &#x2022; [`direct_response_route`](#direct-response-route) - Optional Block<br>Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic<br>See [Direct Response Route](#routes-direct-response-route) below.
@@ -6000,13 +7048,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-custom-route-object"></a>
 
-**Routes Custom Route Object**
+**Custom Route Object**
+
+A `custom_route_object` block (within `routes`) supports the following:
 
 &#x2022; [`route_ref`](#route-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#routes-custom-route-object-route-ref) below.
 
 <a id="routes-custom-route-object-route-ref"></a>
 
-**Routes Custom Route Object Route Ref**
+**Route Ref**
+
+A `route_ref` block (within `routes.custom_route_object`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6016,7 +7068,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-direct-response-route"></a>
 
-**Routes Direct Response Route**
+**Direct Response Route**
+
+A `direct_response_route` block (within `routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#routes-direct-response-route-headers) below.
 
@@ -6030,7 +7084,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-direct-response-route-headers"></a>
 
-**Routes Direct Response Route Headers**
+**Headers**
+
+A `headers` block (within `routes.direct_response_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -6044,7 +7100,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-direct-response-route-incoming-port"></a>
 
-**Routes Direct Response Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `routes.direct_response_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -6054,7 +7112,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-direct-response-route-path"></a>
 
-**Routes Direct Response Route Path**
+**Path**
+
+A `path` block (within `routes.direct_response_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -6064,7 +7124,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-direct-response-route-route-direct-response"></a>
 
-**Routes Direct Response Route Route Direct Response**
+**Route Direct Response**
+
+A `route_direct_response` block (within `routes.direct_response_route`) supports the following:
 
 &#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
@@ -6072,7 +7134,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-redirect-route"></a>
 
-**Routes Redirect Route**
+**Redirect Route**
+
+A `redirect_route` block (within `routes`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#routes-redirect-route-headers) below.
 
@@ -6086,7 +7150,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-redirect-route-headers"></a>
 
-**Routes Redirect Route Headers**
+**Headers**
+
+A `headers` block (within `routes.redirect_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -6100,7 +7166,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-redirect-route-incoming-port"></a>
 
-**Routes Redirect Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `routes.redirect_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -6110,7 +7178,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-redirect-route-path"></a>
 
-**Routes Redirect Route Path**
+**Path**
+
+A `path` block (within `routes.redirect_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -6120,7 +7190,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-redirect-route-route-redirect"></a>
 
-**Routes Redirect Route Route Redirect**
+**Route Redirect**
+
+A `route_redirect` block (within `routes.redirect_route`) supports the following:
 
 &#x2022; [`host_redirect`](#host-redirect) - Optional String<br>Host. swap host part of incoming URL in redirect URL
 
@@ -6140,7 +7212,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route"></a>
 
-**Routes Simple Route**
+**Simple Route**
+
+A `simple_route` block (within `routes`) supports the following:
 
 &#x2022; [`advanced_options`](#advanced-options) - Optional Block<br>Advanced Route Options. Configure advanced options for route like path rewrite, hash policy, etc<br>See [Advanced Options](#routes-simple-route-advanced-options) below.
 
@@ -6164,7 +7238,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options"></a>
 
-**Routes Simple Route Advanced Options**
+**Advanced Options**
+
+An `advanced_options` block (within `routes.simple_route`) supports the following:
 
 &#x2022; [`app_firewall`](#app-firewall) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [App Firewall](#routes-simple-route-advanced-options-app-firewall) below.
 
@@ -6246,7 +7322,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-app-firewall"></a>
 
-**Routes Simple Route Advanced Options App Firewall**
+**App Firewall**
+
+An `app_firewall` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6256,7 +7334,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-bot-defense-javascript-injection"></a>
 
-**Routes Simple Route Advanced Options Bot Defense Javascript Injection**
+**Bot Defense Javascript Injection**
+
+A `bot_defense_javascript_injection` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`javascript_location`](#javascript-location) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag
 
@@ -6264,7 +7344,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-bot-defense-javascript-injection-javascript-tags"></a>
 
-**Routes Simple Route Advanced Options Bot Defense Javascript Injection Javascript Tags**
+**Javascript Tags**
+
+A `javascript_tags` block (within `routes.simple_route.advanced_options.bot_defense_javascript_injection`) supports the following:
 
 &#x2022; [`javascript_url`](#javascript-url) - Optional String<br>URL. Please enter the full URL (include domain and path), or relative path
 
@@ -6272,7 +7354,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-bot-defense-javascript-injection-javascript-tags-tag-attributes"></a>
 
-**Routes Simple Route Advanced Options Bot Defense Javascript Injection Javascript Tags Tag Attributes**
+**Tag Attributes**
+
+A `tag_attributes` block (within `routes.simple_route.advanced_options.bot_defense_javascript_injection.javascript_tags`) supports the following:
 
 &#x2022; [`javascript_tag`](#javascript-tag) - Optional String  Defaults to `JS_ATTR_ID`<br>Possible values are `JS_ATTR_ID`, `JS_ATTR_CID`, `JS_ATTR_CN`, `JS_ATTR_API_DOMAIN`, `JS_ATTR_API_URL`, `JS_ATTR_API_PATH`, `JS_ATTR_ASYNC`, `JS_ATTR_DEFER`<br>Tag Attribute Name. Select from one of the predefined tag attributes
 
@@ -6280,7 +7364,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-buffer-policy"></a>
 
-**Routes Simple Route Advanced Options Buffer Policy**
+**Buffer Policy**
+
+A `buffer_policy` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`disabled`](#disabled) - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
 
@@ -6288,7 +7374,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-cors-policy"></a>
 
-**Routes Simple Route Advanced Options CORS Policy**
+**CORS Policy**
+
+A `cors_policy` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`allow_credentials`](#allow-credentials) - Optional Bool<br>Allow Credentials. Specifies whether the resource allows credentials
 
@@ -6308,7 +7396,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-csrf-policy"></a>
 
-**Routes Simple Route Advanced Options CSRF Policy**
+**CSRF Policy**
+
+A `csrf_policy` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`all_load_balancer_domains`](#all-load-balancer-domains) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -6318,13 +7408,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-csrf-policy-custom-domain-list"></a>
 
-**Routes Simple Route Advanced Options CSRF Policy Custom Domain List**
+**Custom Domain List**
+
+A `custom_domain_list` block (within `routes.simple_route.advanced_options.csrf_policy`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form
 
 <a id="routes-simple-route-advanced-options-mirror-policy"></a>
 
-**Routes Simple Route Advanced Options Mirror Policy**
+**Mirror Policy**
+
+A `mirror_policy` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`origin_pool`](#origin-pool) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Origin Pool](#routes-simple-route-advanced-options-mirror-policy-origin-pool) below.
 
@@ -6332,7 +7426,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-mirror-policy-origin-pool"></a>
 
-**Routes Simple Route Advanced Options Mirror Policy Origin Pool**
+**Origin Pool**
+
+An `origin_pool` block (within `routes.simple_route.advanced_options.mirror_policy`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6342,7 +7438,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-mirror-policy-percent"></a>
 
-**Routes Simple Route Advanced Options Mirror Policy Percent**
+**Percent**
+
+A `percent` block (within `routes.simple_route.advanced_options.mirror_policy`) supports the following:
 
 &#x2022; [`denominator`](#denominator) - Optional String  Defaults to `HUNDRED`<br>Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`<br>Denominator. Denominator used in fraction where sampling percentages are needed. example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator
 
@@ -6350,7 +7448,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-regex-rewrite"></a>
 
-**Routes Simple Route Advanced Options Regex Rewrite**
+**Regex Rewrite**
+
+A `regex_rewrite` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`pattern`](#pattern) - Optional String<br>Pattern. The regular expression used to find portions of a string that should be replaced
 
@@ -6358,7 +7458,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-request-cookies-to-add"></a>
 
-**Routes Simple Route Advanced Options Request Cookies To Add**
+**Request Cookies To Add**
+
+A `request_cookies_to_add` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the cookie in Cookie header
 
@@ -6370,7 +7472,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-request-cookies-to-add-secret-value"></a>
 
-**Routes Simple Route Advanced Options Request Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `routes.simple_route.advanced_options.request_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#routes-simple-route-advanced-options-request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -6378,7 +7482,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Routes Simple Route Advanced Options Request Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `routes.simple_route.advanced_options.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -6388,7 +7494,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-request-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Routes Simple Route Advanced Options Request Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `routes.simple_route.advanced_options.request_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -6396,7 +7504,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-request-headers-to-add"></a>
 
-**Routes Simple Route Advanced Options Request Headers To Add**
+**Request Headers To Add**
+
+A `request_headers_to_add` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -6408,7 +7518,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-request-headers-to-add-secret-value"></a>
 
-**Routes Simple Route Advanced Options Request Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `routes.simple_route.advanced_options.request_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#routes-simple-route-advanced-options-request-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -6416,7 +7528,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Routes Simple Route Advanced Options Request Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `routes.simple_route.advanced_options.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -6426,7 +7540,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-request-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Routes Simple Route Advanced Options Request Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `routes.simple_route.advanced_options.request_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -6434,7 +7550,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-response-cookies-to-add"></a>
 
-**Routes Simple Route Advanced Options Response Cookies To Add**
+**Response Cookies To Add**
+
+A `response_cookies_to_add` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`add_domain`](#add-domain) - Optional String<br>Add Domain. Add domain attribute
 
@@ -6484,7 +7602,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-response-cookies-to-add-secret-value"></a>
 
-**Routes Simple Route Advanced Options Response Cookies To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `routes.simple_route.advanced_options.response_cookies_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#routes-simple-route-advanced-options-response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
@@ -6492,7 +7612,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Routes Simple Route Advanced Options Response Cookies To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `routes.simple_route.advanced_options.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -6502,7 +7624,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-response-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Routes Simple Route Advanced Options Response Cookies To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `routes.simple_route.advanced_options.response_cookies_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -6510,7 +7634,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-response-headers-to-add"></a>
 
-**Routes Simple Route Advanced Options Response Headers To Add**
+**Response Headers To Add**
+
+A `response_headers_to_add` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`append`](#append) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
 
@@ -6522,7 +7648,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-response-headers-to-add-secret-value"></a>
 
-**Routes Simple Route Advanced Options Response Headers To Add Secret Value**
+**Secret Value**
+
+A `secret_value` block (within `routes.simple_route.advanced_options.response_headers_to_add`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#routes-simple-route-advanced-options-response-headers-to-add-secret-value-blindfold-secret-info) below.
 
@@ -6530,7 +7658,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Routes Simple Route Advanced Options Response Headers To Add Secret Value Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `routes.simple_route.advanced_options.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -6540,7 +7670,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-response-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Routes Simple Route Advanced Options Response Headers To Add Secret Value Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `routes.simple_route.advanced_options.response_headers_to_add.secret_value`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -6548,7 +7680,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-retry-policy"></a>
 
-**Routes Simple Route Advanced Options Retry Policy**
+**Retry Policy**
+
+A `retry_policy` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`back_off`](#back-off) - Optional Block<br>Retry BackOff Interval. Specifies parameters that control retry back off<br>See [Back Off](#routes-simple-route-advanced-options-retry-policy-back-off) below.
 
@@ -6562,7 +7696,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-retry-policy-back-off"></a>
 
-**Routes Simple Route Advanced Options Retry Policy Back Off**
+**Back Off**
+
+A `back_off` block (within `routes.simple_route.advanced_options.retry_policy`) supports the following:
 
 &#x2022; [`base_interval`](#base-interval) - Optional Number<br>Base Retry Interval. Specifies the base interval between retries in milliseconds
 
@@ -6570,13 +7706,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-specific-hash-policy"></a>
 
-**Routes Simple Route Advanced Options Specific Hash Policy**
+**Specific Hash Policy**
+
+A `specific_hash_policy` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`hash_policy`](#hash-policy) - Optional Block<br>Hash Policy. Specifies a list of hash policies to use for ring hash load balancing. Each hash policy is evaluated individually and the combined result is used to route the request<br>See [Hash Policy](#routes-simple-route-advanced-options-specific-hash-policy-hash-policy) below.
 
 <a id="routes-simple-route-advanced-options-specific-hash-policy-hash-policy"></a>
 
-**Routes Simple Route Advanced Options Specific Hash Policy Hash Policy**
+**Hash Policy**
+
+A `hash_policy` block (within `routes.simple_route.advanced_options.specific_hash_policy`) supports the following:
 
 &#x2022; [`cookie`](#cookie) - Optional Block<br>Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously<br>See [Cookie](#routes-simple-route-advanced-options-specific-hash-policy-hash-policy-cookie) below.
 
@@ -6588,7 +7728,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-specific-hash-policy-hash-policy-cookie"></a>
 
-**Routes Simple Route Advanced Options Specific Hash Policy Hash Policy Cookie**
+**Cookie**
+
+A `cookie` block (within `routes.simple_route.advanced_options.specific_hash_policy.hash_policy`) supports the following:
 
 &#x2022; [`add_httponly`](#add-httponly) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -6614,7 +7756,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-waf-exclusion-policy"></a>
 
-**Routes Simple Route Advanced Options WAF Exclusion Policy**
+**WAF Exclusion Policy**
+
+A `waf_exclusion_policy` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6624,13 +7768,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-advanced-options-web-socket-config"></a>
 
-**Routes Simple Route Advanced Options Web Socket Config**
+**Web Socket Config**
+
+A `web_socket_config` block (within `routes.simple_route.advanced_options`) supports the following:
 
 &#x2022; [`use_websocket`](#use-websocket) - Optional Bool<br>Use WebSocket. Specifies that the HTTP client connection to this route is allowed to upgrade to a WebSocket connection
 
 <a id="routes-simple-route-headers"></a>
 
-**Routes Simple Route Headers**
+**Headers**
+
+A `headers` block (within `routes.simple_route`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -6644,7 +7792,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-incoming-port"></a>
 
-**Routes Simple Route Incoming Port**
+**Incoming Port**
+
+An `incoming_port` block (within `routes.simple_route`) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -6654,7 +7804,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-origin-pools"></a>
 
-**Routes Simple Route Origin Pools**
+**Origin Pools**
+
+An `origin_pools` block (within `routes.simple_route`) supports the following:
 
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cluster](#routes-simple-route-origin-pools-cluster) below.
 
@@ -6668,7 +7820,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-origin-pools-cluster"></a>
 
-**Routes Simple Route Origin Pools Cluster**
+**Cluster**
+
+A `cluster` block (within `routes.simple_route.origin_pools`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6678,7 +7832,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-origin-pools-pool"></a>
 
-**Routes Simple Route Origin Pools Pool**
+**Pool**
+
+A `pool` block (within `routes.simple_route.origin_pools`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6688,7 +7844,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-path"></a>
 
-**Routes Simple Route Path**
+**Path**
+
+A `path` block (within `routes.simple_route`) supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>Exact. Exact path value to match
 
@@ -6698,7 +7856,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-simple-route-query-params"></a>
 
-**Routes Simple Route Query Params**
+**Query Params**
+
+A `query_params` block (within `routes.simple_route`) supports the following:
 
 &#x2022; [`remove_all_params`](#remove-all-params) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -6710,11 +7870,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sensitive Data Disclosure Rules**
 
+A `sensitive_data_disclosure_rules` block supports the following:
+
 &#x2022; [`sensitive_data_types_in_response`](#sensitive-data-types-in-response) - Optional Block<br>Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses<br>See [Sensitive Data Types In Response](#sensitive-data-disclosure-rules-sensitive-data-types-in-response) below.
 
 <a id="sensitive-data-disclosure-rules-sensitive-data-types-in-response"></a>
 
-**Sensitive Data Disclosure Rules Sensitive Data Types In Response**
+**Sensitive Data Types In Response**
+
+A `sensitive_data_types_in_response` block (within `sensitive_data_disclosure_rules`) supports the following:
 
 &#x2022; [`api_endpoint`](#api-endpoint) - Optional Block<br>API Endpoint. This defines API endpoint<br>See [API Endpoint](#sensitive-data-disclosure-rules-sensitive-data-types-in-response-api-endpoint) below.
 
@@ -6726,7 +7890,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="sensitive-data-disclosure-rules-sensitive-data-types-in-response-api-endpoint"></a>
 
-**Sensitive Data Disclosure Rules Sensitive Data Types In Response API Endpoint**
+**API Endpoint**
+
+An `api_endpoint` block (within `sensitive_data_disclosure_rules.sensitive_data_types_in_response`) supports the following:
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Methods. Methods to be matched
 
@@ -6734,7 +7900,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="sensitive-data-disclosure-rules-sensitive-data-types-in-response-body"></a>
 
-**Sensitive Data Disclosure Rules Sensitive Data Types In Response Body**
+**Body**
+
+A `body` block (within `sensitive_data_disclosure_rules.sensitive_data_types_in_response`) supports the following:
 
 &#x2022; [`fields`](#fields) - Optional List<br>Values. List of JSON Path field values. Use square brackets with an underscore [_] to indicate array elements (e.g., person.emails[_]). To reference JSON keys that contain spaces, enclose the entire path in double quotes. For example: 'person.first name'
 
@@ -6742,11 +7910,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Sensitive Data Policy**
 
+A `sensitive_data_policy` block supports the following:
+
 &#x2022; [`sensitive_data_policy_ref`](#sensitive-data-policy-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Sensitive Data Policy Ref](#sensitive-data-policy-sensitive-data-policy-ref) below.
 
 <a id="sensitive-data-policy-sensitive-data-policy-ref"></a>
 
-**Sensitive Data Policy Sensitive Data Policy Ref**
+**Sensitive Data Policy Ref**
+
+A `sensitive_data_policy_ref` block (within `sensitive_data_policy`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6758,6 +7930,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Single LB App**
 
+A `single_lb_app` block supports the following:
+
 &#x2022; [`disable_discovery`](#disable-discovery) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`disable_malicious_user_detection`](#disable-malicious-user-detection) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -6768,7 +7942,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery"></a>
 
-**Single LB App Enable Discovery**
+**Enable Discovery**
+
+An `enable_discovery` block (within `single_lb_app`) supports the following:
 
 &#x2022; [`api_crawler`](#api-crawler) - Optional Block<br>API Crawling. API Crawler message<br>See [API Crawler](#single-lb-app-enable-discovery-api-crawler) below.
 
@@ -6786,7 +7962,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-api-crawler"></a>
 
-**Single LB App Enable Discovery API Crawler**
+**API Crawler**
+
+An `api_crawler` block (within `single_lb_app.enable_discovery`) supports the following:
 
 &#x2022; [`api_crawler_config`](#api-crawler-config) - Optional Block<br>Crawler Configure<br>See [API Crawler Config](#single-lb-app-enable-discovery-api-crawler-api-crawler-config) below.
 
@@ -6794,13 +7972,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-api-crawler-api-crawler-config"></a>
 
-**Single LB App Enable Discovery API Crawler API Crawler Config**
+**API Crawler Config**
+
+An `api_crawler_config` block (within `single_lb_app.enable_discovery.api_crawler`) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional Block<br>Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer<br>See [Domains](#single-lb-app-enable-discovery-api-crawler-api-crawler-config-domains) below.
 
 <a id="single-lb-app-enable-discovery-api-crawler-api-crawler-config-domains"></a>
 
-**Single LB App Enable Discovery API Crawler API Crawler Config Domains**
+**Domains**
+
+A `domains` block (within `single_lb_app.enable_discovery.api_crawler.api_crawler_config`) supports the following:
 
 &#x2022; [`domain`](#domain) - Optional String<br>Domain. Select the domain to execute API Crawling with given credentials
 
@@ -6808,7 +7990,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-api-crawler-api-crawler-config-domains-simple-login"></a>
 
-**Single LB App Enable Discovery API Crawler API Crawler Config Domains Simple Login**
+**Simple Login**
+
+A `simple_login` block (within `single_lb_app.enable_discovery.api_crawler.api_crawler_config.domains`) supports the following:
 
 &#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#single-lb-app-enable-discovery-api-crawler-api-crawler-config-domains-simple-login-password) below.
 
@@ -6816,7 +8000,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-api-crawler-api-crawler-config-domains-simple-login-password"></a>
 
-**Single LB App Enable Discovery API Crawler API Crawler Config Domains Simple Login Password**
+**Password**
+
+A `password` block (within `single_lb_app.enable_discovery.api_crawler.api_crawler_config.domains.simple_login`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#single-lb-app-enable-discovery-api-crawler-api-crawler-config-domains-simple-login-password-blindfold-secret-info) below.
 
@@ -6824,7 +8010,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-api-crawler-api-crawler-config-domains-simple-login-password-blindfold-secret-info"></a>
 
-**Single LB App Enable Discovery API Crawler API Crawler Config Domains Simple Login Password Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `single_lb_app.enable_discovery.api_crawler.api_crawler_config.domains.simple_login.password`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -6834,7 +8022,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-api-crawler-api-crawler-config-domains-simple-login-password-clear-secret-info"></a>
 
-**Single LB App Enable Discovery API Crawler API Crawler Config Domains Simple Login Password Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `single_lb_app.enable_discovery.api_crawler.api_crawler_config.domains.simple_login.password`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -6842,13 +8032,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-api-discovery-from-code-scan"></a>
 
-**Single LB App Enable Discovery API Discovery From Code Scan**
+**API Discovery From Code Scan**
+
+An `api_discovery_from_code_scan` block (within `single_lb_app.enable_discovery`) supports the following:
 
 &#x2022; [`code_base_integrations`](#code-base-integrations) - Optional Block<br>Select Code Base Integrations<br>See [Code Base Integrations](#single-lb-app-enable-discovery-api-discovery-from-code-scan-code-base-integrations) below.
 
 <a id="single-lb-app-enable-discovery-api-discovery-from-code-scan-code-base-integrations"></a>
 
-**Single LB App Enable Discovery API Discovery From Code Scan Code Base Integrations**
+**Code Base Integrations**
+
+A `code_base_integrations` block (within `single_lb_app.enable_discovery.api_discovery_from_code_scan`) supports the following:
 
 &#x2022; [`all_repos`](#all-repos) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -6858,7 +8052,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-api-discovery-from-code-scan-code-base-integrations-code-base-integration"></a>
 
-**Single LB App Enable Discovery API Discovery From Code Scan Code Base Integrations Code Base Integration**
+**Code Base Integration**
+
+A `code_base_integration` block (within `single_lb_app.enable_discovery.api_discovery_from_code_scan.code_base_integrations`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6868,19 +8064,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-api-discovery-from-code-scan-code-base-integrations-selected-repos"></a>
 
-**Single LB App Enable Discovery API Discovery From Code Scan Code Base Integrations Selected Repos**
+**Selected Repos**
+
+A `selected_repos` block (within `single_lb_app.enable_discovery.api_discovery_from_code_scan.code_base_integrations`) supports the following:
 
 &#x2022; [`api_code_repo`](#api-code-repo) - Optional List<br>API Code Repository. Code repository which contain API endpoints
 
 <a id="single-lb-app-enable-discovery-custom-api-auth-discovery"></a>
 
-**Single LB App Enable Discovery Custom API Auth Discovery**
+**Custom API Auth Discovery**
+
+A `custom_api_auth_discovery` block (within `single_lb_app.enable_discovery`) supports the following:
 
 &#x2022; [`api_discovery_ref`](#api-discovery-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [API Discovery Ref](#single-lb-app-enable-discovery-custom-api-auth-discovery-api-discovery-ref) below.
 
 <a id="single-lb-app-enable-discovery-custom-api-auth-discovery-api-discovery-ref"></a>
 
-**Single LB App Enable Discovery Custom API Auth Discovery API Discovery Ref**
+**API Discovery Ref**
+
+An `api_discovery_ref` block (within `single_lb_app.enable_discovery.custom_api_auth_discovery`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6890,13 +8092,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="single-lb-app-enable-discovery-discovered-api-settings"></a>
 
-**Single LB App Enable Discovery Discovered API Settings**
+**Discovered API Settings**
+
+A `discovered_api_settings` block (within `single_lb_app.enable_discovery`) supports the following:
 
 &#x2022; [`purge_duration_for_inactive_discovered_apis`](#purge-duration-for-inactive-discovered-apis) - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
 
 <a id="slow-ddos-mitigation"></a>
 
 **Slow DDOS Mitigation**
+
+A `slow_ddos_mitigation` block supports the following:
 
 &#x2022; [`disable_request_timeout`](#disable-request-timeout) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -6907,6 +8113,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -6919,6 +8127,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="trusted-clients"></a>
 
 **Trusted Clients**
+
+A `trusted_clients` block supports the following:
 
 &#x2022; [`actions`](#actions) - Optional List  Defaults to `SKIP_PROCESSING_WAF`<br>Possible values are `SKIP_PROCESSING_WAF`, `SKIP_PROCESSING_BOT`, `SKIP_PROCESSING_MUM`, `SKIP_PROCESSING_IP_REPUTATION`, `SKIP_PROCESSING_API_PROTECTION`, `SKIP_PROCESSING_OAS_VALIDATION`, `SKIP_PROCESSING_DDOS_PROTECTION`, `SKIP_PROCESSING_THREAT_MESH`, `SKIP_PROCESSING_MALWARE_PROTECTION`<br>Actions. Actions that should be taken when client identifier matches the rule
 
@@ -6944,13 +8154,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="trusted-clients-http-header"></a>
 
-**Trusted Clients HTTP Header**
+**HTTP Header**
+
+A `http_header` block (within `trusted_clients`) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>HTTP Headers. List of HTTP header name and value pairs<br>See [Headers](#trusted-clients-http-header-headers) below.
 
 <a id="trusted-clients-http-header-headers"></a>
 
-**Trusted Clients HTTP Header Headers**
+**Headers**
+
+A `headers` block (within `trusted_clients.http_header`) supports the following:
 
 &#x2022; [`exact`](#exact) - Optional String<br>Exact. Header value to match exactly
 
@@ -6964,7 +8178,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="trusted-clients-metadata"></a>
 
-**Trusted Clients Metadata**
+**Metadata**
+
+A `metadata` block (within `trusted_clients`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -6973,6 +8189,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="user-identification"></a>
 
 **User Identification**
+
+An `user_identification` block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -6984,19 +8202,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **WAF Exclusion**
 
+A `waf_exclusion` block supports the following:
+
 &#x2022; [`waf_exclusion_inline_rules`](#waf-exclusion-inline-rules) - Optional Block<br>WAF Exclusion Inline Rules. A list of WAF exclusion rules that will be applied inline<br>See [WAF Exclusion Inline Rules](#waf-exclusion-waf-exclusion-inline-rules) below.
 
 &#x2022; [`waf_exclusion_policy`](#waf-exclusion-policy) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [WAF Exclusion Policy](#waf-exclusion-waf-exclusion-policy) below.
 
 <a id="waf-exclusion-waf-exclusion-inline-rules"></a>
 
-**WAF Exclusion WAF Exclusion Inline Rules**
+**WAF Exclusion Inline Rules**
+
+A `waf_exclusion_inline_rules` block (within `waf_exclusion`) supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>WAF Exclusion Rules. An ordered list of WAF Exclusions specific to this Load Balancer<br>See [Rules](#waf-exclusion-waf-exclusion-inline-rules-rules) below.
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules"></a>
 
-**WAF Exclusion WAF Exclusion Inline Rules Rules**
+**Rules**
+
+A `rules` block (within `waf_exclusion.waf_exclusion_inline_rules`) supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -7022,7 +8246,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control"></a>
 
-**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control**
+**App Firewall Detection Control**
+
+An `app_firewall_detection_control` block (within `waf_exclusion.waf_exclusion_inline_rules.rules`) supports the following:
 
 &#x2022; [`exclude_attack_type_contexts`](#exclude-attack-type-contexts) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-attack-type-contexts) below.
 
@@ -7034,7 +8260,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-attack-type-contexts"></a>
 
-**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Attack Type Contexts**
+**Exclude Attack Type Contexts**
+
+An `exclude_attack_type_contexts` block (within `waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -7044,13 +8272,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-bot-name-contexts"></a>
 
-**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Bot Name Contexts**
+**Exclude Bot Name Contexts**
+
+An `exclude_bot_name_contexts` block (within `waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`bot_name`](#bot-name) - Optional String<br>Bot Name
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-signature-contexts"></a>
 
-**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Signature Contexts**
+**Exclude Signature Contexts**
+
+An `exclude_signature_contexts` block (within `waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -7060,7 +8292,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-violation-contexts"></a>
 
-**WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Violation Contexts**
+**Exclude Violation Contexts**
+
+An `exclude_violation_contexts` block (within `waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -7070,7 +8304,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-metadata"></a>
 
-**WAF Exclusion WAF Exclusion Inline Rules Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `waf_exclusion.waf_exclusion_inline_rules.rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -7078,7 +8314,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-waf-exclusion-policy"></a>
 
-**WAF Exclusion WAF Exclusion Policy**
+**WAF Exclusion Policy**
+
+A `waf_exclusion_policy` block (within `waf_exclusion`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 

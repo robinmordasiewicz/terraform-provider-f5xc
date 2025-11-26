@@ -95,11 +95,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Allowed Destinations**
 
+An `allowed_destinations` block supports the following:
+
 &#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 <a id="allowed-sources"></a>
 
 **Allowed Sources**
+
+An `allowed_sources` block supports the following:
 
 &#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
@@ -107,11 +111,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Denied Destinations**
 
+A `denied_destinations` block supports the following:
+
 &#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 <a id="denied-sources"></a>
 
 **Denied Sources**
+
+A `denied_sources` block supports the following:
 
 &#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
@@ -119,11 +127,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List**
 
+A `rule_list` block supports the following:
+
 &#x2022; [`rules`](#rules) - Optional Block<br>List of Enhanced Firewall Policy Rules. Ordered List of Enhanced Firewall Policy Rules<br>See [Rules](#rule-list-rules) below.
 
 <a id="rule-list-rules"></a>
 
-**Rule List Rules**
+**Rules**
+
+A `rules` block (within `rule_list`) supports the following:
 
 &#x2022; [`advanced_action`](#advanced-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Advanced Action](#rule-list-rules-advanced-action) below.
 
@@ -181,31 +193,41 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-advanced-action"></a>
 
-**Rule List Rules Advanced Action**
+**Advanced Action**
+
+An `advanced_action` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`action`](#action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
 <a id="rule-list-rules-applications"></a>
 
-**Rule List Rules Applications**
+**Applications**
+
+An `applications` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`applications`](#applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
 
 <a id="rule-list-rules-destination-aws-vpc-ids"></a>
 
-**Rule List Rules Destination AWS Vpc Ids**
+**Destination AWS Vpc Ids**
+
+A `destination_aws_vpc_ids` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`vpc_id`](#vpc-id) - Optional List<br>AWS VPC List. List of VPC Identifiers in AWS
 
 <a id="rule-list-rules-destination-ip-prefix-set"></a>
 
-**Rule List Rules Destination IP Prefix Set**
+**Destination IP Prefix Set**
+
+A `destination_ip_prefix_set` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rule-list-rules-destination-ip-prefix-set-ref) below.
 
 <a id="rule-list-rules-destination-ip-prefix-set-ref"></a>
 
-**Rule List Rules Destination IP Prefix Set Ref**
+**Ref**
+
+A `ref` block (within `rule_list.rules.destination_ip_prefix_set`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -219,25 +241,33 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-destination-label-selector"></a>
 
-**Rule List Rules Destination Label Selector**
+**Destination Label Selector**
+
+A `destination_label_selector` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="rule-list-rules-destination-prefix-list"></a>
 
-**Rule List Rules Destination Prefix List**
+**Destination Prefix List**
+
+A `destination_prefix_list` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="rule-list-rules-insert-service"></a>
 
-**Rule List Rules Insert Service**
+**Insert Service**
+
+An `insert_service` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`nfv_service`](#nfv-service) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Nfv Service](#rule-list-rules-insert-service-nfv-service) below.
 
 <a id="rule-list-rules-insert-service-nfv-service"></a>
 
-**Rule List Rules Insert Service Nfv Service**
+**Nfv Service**
+
+A `nfv_service` block (within `rule_list.rules.insert_service`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -247,13 +277,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-label-matcher"></a>
 
-**Rule List Rules Label Matcher**
+**Label Matcher**
+
+A `label_matcher` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
 
 <a id="rule-list-rules-metadata"></a>
 
-**Rule List Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -261,7 +295,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-protocol-port-range"></a>
 
-**Rule List Rules Protocol Port Range**
+**Protocol Port Range**
+
+A `protocol_port_range` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional List<br>List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
 
@@ -269,19 +305,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-source-aws-vpc-ids"></a>
 
-**Rule List Rules Source AWS Vpc Ids**
+**Source AWS Vpc Ids**
+
+A `source_aws_vpc_ids` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`vpc_id`](#vpc-id) - Optional List<br>AWS VPC List. List of VPC Identifiers in AWS
 
 <a id="rule-list-rules-source-ip-prefix-set"></a>
 
-**Rule List Rules Source IP Prefix Set**
+**Source IP Prefix Set**
+
+A `source_ip_prefix_set` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rule-list-rules-source-ip-prefix-set-ref) below.
 
 <a id="rule-list-rules-source-ip-prefix-set-ref"></a>
 
-**Rule List Rules Source IP Prefix Set Ref**
+**Ref**
+
+A `ref` block (within `rule_list.rules.source_ip_prefix_set`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -295,19 +337,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list-rules-source-label-selector"></a>
 
-**Rule List Rules Source Label Selector**
+**Source Label Selector**
+
+A `source_label_selector` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="rule-list-rules-source-prefix-list"></a>
 
-**Rule List Rules Source Prefix List**
+**Source Prefix List**
+
+A `source_prefix_list` block (within `rule_list.rules`) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

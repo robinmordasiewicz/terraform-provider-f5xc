@@ -86,6 +86,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Addon Service**
 
+An `addon_service` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -96,19 +98,25 @@ In addition to all arguments above, the following attributes are exported:
 
 **Notification Preference**
 
+A `notification_preference` block supports the following:
+
 &#x2022; [`emails`](#emails) - Optional Block<br>Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription<br>See [Emails](#notification-preference-emails) below.
 
 &#x2022; [`support_ticket_id`](#support-ticket-id) - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket Id](#notification-preference-support-ticket-id) below.
 
 <a id="notification-preference-emails"></a>
 
-**Notification Preference Emails**
+**Emails**
+
+An `emails` block (within `notification_preference`) supports the following:
 
 &#x2022; [`email_ids`](#email-ids) - Optional List<br>Emails. Email ids associated with the Addon Subscription
 
 <a id="notification-preference-support-ticket-id"></a>
 
-**Notification Preference Support Ticket Id**
+**Support Ticket Id**
+
+A `support_ticket_id` block (within `notification_preference`) supports the following:
 
 &#x2022; [`subscription_ticket_id`](#subscription-ticket-id) - Optional String<br>Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription
 
@@ -117,6 +125,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

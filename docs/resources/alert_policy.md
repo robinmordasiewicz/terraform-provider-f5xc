@@ -92,6 +92,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Notification Parameters**
 
+A `notification_parameters` block supports the following:
+
 &#x2022; [`custom`](#custom) - Optional Block<br>Custom Group By. Specify list of custom labels to group/aggregate the alerts<br>See [Custom](#notification-parameters-custom) below.
 
 &#x2022; [`default`](#default) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -108,13 +110,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="notification-parameters-custom"></a>
 
-**Notification Parameters Custom**
+**Custom**
+
+A `custom` block (within `notification_parameters`) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional List<br>Labels. Name of labels to group/aggregate the alerts
 
 <a id="receivers"></a>
 
 **Receivers**
+
+A `receivers` block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -129,6 +135,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="routes"></a>
 
 **Routes**
+
+A `routes` block supports the following:
 
 &#x2022; [`alertname`](#alertname) - Optional String  Defaults to `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`<br>Possible values are `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`, `SITE_PHYSICAL_INTERFACE_DOWN`, `TUNNELS_TO_CUSTOMER_SITE_DOWN`, `SERVICE_SERVER_ERROR`, `SERVICE_CLIENT_ERROR`, `SERVICE_HEALTH_LOW`, `SERVICE_UNAVAILABLE`, `SERVICE_SERVER_ERROR_PER_SOURCE_SITE`, `SERVICE_CLIENT_ERROR_PER_SOURCE_SITE`, `SERVICE_ENDPOINT_HEALTHCHECK_FAILURE`, `SYNTHETIC_MONITOR_HEALTH_CRITICAL`, `MALICIOUS_USER_DETECTED`, `WAF_TOO_MANY_ATTACKS`, `API_SECURITY_TOO_MANY_ATTACKS`, `SERVICE_POLICY_TOO_MANY_ATTACKS`, `WAF_TOO_MANY_MALICIOUS_BOTS`, `BOT_DEFENSE_TOO_MANY_SECURITY_EVENTS`, `THREAT_CAMPAIGN`, `VES_CLIENT_SIDE_DEFENSE_SUSPICIOUS_DOMAIN`, `VES_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD_READ`, `ERROR_RATE_ANOMALY`, `REQUEST_RATE_ANOMALY`, `REQUEST_THROUGHPUT_ANOMALY`, `RESPONSE_LATENCY_ANOMALY`, `RESPONSE_THROUGHPUT_ANOMALY`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_FAILURE`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_STILL_FAILING`, `TLS_AUTOMATIC_CERTIFICATE_EXPIRED`, `TLS_CUSTOM_CERTIFICATE_EXPIRING`, `TLS_CUSTOM_CERTIFICATE_EXPIRING_SOON`, `TLS_CUSTOM_CERTIFICATE_EXPIRED`, `L7DDOS`, `DNS_ZONE_IGNORED_DUPLICATE_RECORD`, `API_SECURITY_UNUSED_API_DETECTED`, `API_SECURITY_SHADOW_API_DETECTED`, `API_SECURITY_SENSITIVE_DATA_IN_RESPONSE_DETECTED`, `API_SECURITY_RISK_SCORE_HIGH_DETECTED`, `ROUTED_DDOS_ALERT_NOTIFICATION`, `ROUTED_DDOS_MITIGATION_NOTIFICATION`<br>AlertName. List of Alert Names Customer tunnel interface down Physical Interface down Tunnel Interfaces to Customer Site Down Virutal Host server error Virtual Host client error Service Health Low Service Unavailable Virtual Host server error Virtual Host client error Endpoint Healthcheck failure Synthetic monitor health critical Malicious user detected Virtual Host WAF security events detected Virtual Host API security events detected Virtual Host Service Policy security events detected Virtual Host Many Malicious Bots based WAF security events detected Virtual Host Many Malicious Bots based Bot Defense security events detected Virtual Host Many Threat campaign based WAF security events detected Suspicious domain identified by Client-Side Defense service Client-Side Defense has identified a suspicious script that is reading sensitive form field Error rate anomaly detected Request rate anomaly detected Request throughput anomaly detected Response latency anomaly detected Response throughput anomaly detected TLS Automatic Certificate renewal is failing TLS Automatic Certificate renewal is still failing after multiple retries TLS Automatic Certificate has expired TLS Custom Certificate will expire in less than 28 days TLS Custom Certificate will expire in less than 15 days TLS Custom Certificate has expired DDOS security event detected DNS Zone Ignored a Duplicate Record Create Request Unused APIs Detected Shadow APIs Detected Endpoints With Sensitive Data In Response Detected High Risk Score Endpoints Detected A routed DDOS traffic anomaly has been detected A routed DDOS mitigation has been implemented to block malicious traffic
 
@@ -150,7 +158,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-custom"></a>
 
-**Routes Custom**
+**Custom**
+
+A `custom` block (within `routes`) supports the following:
 
 &#x2022; [`alertlabel`](#alertlabel) - Optional Block<br>AlertLabel. AlertLabel to configure the alert policy rule
 
@@ -162,7 +172,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-custom-alertname"></a>
 
-**Routes Custom Alertname**
+**Alertname**
+
+An `alertname` block (within `routes.custom`) supports the following:
 
 &#x2022; [`exact_match`](#exact-match) - Optional String<br>Exact Match. Equality match value for the label
 
@@ -170,7 +182,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-custom-group"></a>
 
-**Routes Custom Group**
+**Group**
+
+A `group` block (within `routes.custom`) supports the following:
 
 &#x2022; [`exact_match`](#exact-match) - Optional String<br>Exact Match. Equality match value for the label
 
@@ -178,7 +192,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-custom-severity"></a>
 
-**Routes Custom Severity**
+**Severity**
+
+A `severity` block (within `routes.custom`) supports the following:
 
 &#x2022; [`exact_match`](#exact-match) - Optional String<br>Exact Match. Equality match value for the label
 
@@ -186,13 +202,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-group"></a>
 
-**Routes Group**
+**Group**
+
+A `group` block (within `routes`) supports the following:
 
 &#x2022; [`groups`](#groups) - Optional List  Defaults to `INFRASTRUCTURE`<br>Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`<br>Groups. Name of groups to match the alert
 
 <a id="routes-notification-parameters"></a>
 
-**Routes Notification Parameters**
+**Notification Parameters**
+
+A `notification_parameters` block (within `routes`) supports the following:
 
 &#x2022; [`custom`](#custom) - Optional Block<br>Custom Group By. Specify list of custom labels to group/aggregate the alerts<br>See [Custom](#routes-notification-parameters-custom) below.
 
@@ -210,19 +230,25 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="routes-notification-parameters-custom"></a>
 
-**Routes Notification Parameters Custom**
+**Custom**
+
+A `custom` block (within `routes.notification_parameters`) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional List<br>Labels. Name of labels to group/aggregate the alerts
 
 <a id="routes-severity"></a>
 
-**Routes Severity**
+**Severity**
+
+A `severity` block (within `routes`) supports the following:
 
 &#x2022; [`severities`](#severities) - Optional List  Defaults to `MINOR`<br>Possible values are `MINOR`, `MAJOR`, `CRITICAL`<br>Severities. List of severity levels
 
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

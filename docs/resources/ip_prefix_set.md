@@ -71,6 +71,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **IPv4 Prefixes**
 
+An `ipv4_prefixes` block supports the following:
+
 &#x2022; [`description`](#description) - Optional String<br>Description
 
 &#x2022; [`ipv4_prefix`](#ipv4-prefix) - Optional String<br>IPv4 Prefix
@@ -78,6 +80,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

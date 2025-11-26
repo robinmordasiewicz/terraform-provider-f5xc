@@ -115,6 +115,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol ICMP**
 
+A `protocol_icmp` block supports the following:
+
 &#x2022; [`echo_reply`](#echo-reply) - Optional Bool<br>Echo-Reply. Echo-Reply
 
 &#x2022; [`echo_request`](#echo-request) - Optional Bool<br>Echo-Request. Echo-Request
@@ -132,6 +134,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="protocol-icmp6"></a>
 
 **Protocol Icmp6**
+
+A `protocol_icmp6` block supports the following:
 
 &#x2022; [`destination_unreachable`](#destination-unreachable) - Optional Bool<br>Destination-Unreachable. Destination-Unreachable
 
@@ -159,6 +163,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol TCP**
 
+A `protocol_tcp` block supports the following:
+
 &#x2022; [`description`](#description) - Optional String<br>Description. Description
 
 &#x2022; [`destination_port_all`](#destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -173,6 +179,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol UDP**
 
+A `protocol_udp` block supports the following:
+
 &#x2022; [`description`](#description) - Optional String<br>Description. Description
 
 &#x2022; [`destination_port_all`](#destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -186,6 +194,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

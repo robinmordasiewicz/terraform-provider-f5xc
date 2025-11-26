@@ -74,6 +74,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom Auth Types**
 
+A `custom_auth_types` block supports the following:
+
 &#x2022; [`parameter_name`](#parameter-name) - Optional String<br>Parameter Name. The authentication parameter name
 
 &#x2022; [`parameter_type`](#parameter-type) - Optional String  Defaults to `QUERY_PARAMETER`<br>Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`<br>Authentication Parameter Type. Enumeration for authentication parameter types
@@ -81,6 +83,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

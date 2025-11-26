@@ -96,6 +96,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Public IP**
 
+A `public_ip` block supports the following:
+
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
@@ -110,6 +112,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Timeouts**
 
+A `timeouts` block supports the following:
+
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 &#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
@@ -121,6 +125,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="tls-parameters"></a>
 
 **TLS Parameters**
+
+A `tls_parameters` block supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -134,7 +140,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params"></a>
 
-**TLS Parameters Common Params**
+**Common Params**
+
+A `common_params` block (within `tls_parameters`) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
 
@@ -148,7 +156,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates"></a>
 
-**TLS Parameters Common Params TLS Certificates**
+**TLS Certificates**
+
+A `tls_certificates` block (within `tls_parameters.common_params`) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -164,13 +174,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
 
-**TLS Parameters Common Params TLS Certificates Custom Hash Algorithms**
+**Custom Hash Algorithms**
+
+A `custom_hash_algorithms` block (within `tls_parameters.common_params.tls_certificates`) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 <a id="tls-parameters-common-params-tls-certificates-private-key"></a>
 
-**TLS Parameters Common Params TLS Certificates Private Key**
+**Private Key**
+
+A `private_key` block (within `tls_parameters.common_params.tls_certificates`) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -178,7 +192,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**TLS Parameters Common Params TLS Certificates Private Key Blindfold Secret Info**
+**Blindfold Secret Info**
+
+A `blindfold_secret_info` block (within `tls_parameters.common_params.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -188,7 +204,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-clear-secret-info"></a>
 
-**TLS Parameters Common Params TLS Certificates Private Key Clear Secret Info**
+**Clear Secret Info**
+
+A `clear_secret_info` block (within `tls_parameters.common_params.tls_certificates.private_key`) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -196,7 +214,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
-**TLS Parameters Common Params Validation Params**
+**Validation Params**
+
+A `validation_params` block (within `tls_parameters.common_params`) supports the following:
 
 &#x2022; [`skip_hostname_verification`](#skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
@@ -208,13 +228,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
 
-**TLS Parameters Common Params Validation Params Trusted CA**
+**Trusted CA**
+
+A `trusted_ca` block (within `tls_parameters.common_params.validation_params`) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
-**TLS Parameters Common Params Validation Params Trusted CA Trusted CA List**
+**Trusted CA List**
+
+A `trusted_ca_list` block (within `tls_parameters.common_params.validation_params.trusted_ca`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -230,6 +254,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Where**
 
+A `where` block supports the following:
+
 &#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
 &#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Network Reference. This specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
@@ -238,7 +264,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site"></a>
 
-**Where Site**
+**Site**
+
+A `site` block (within `where`) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -250,7 +278,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-site-ref"></a>
 
-**Where Site Ref**
+**Ref**
+
+A `ref` block (within `where.site`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -264,13 +294,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-network"></a>
 
-**Where Virtual Network**
+**Virtual Network**
+
+A `virtual_network` block (within `where`) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
 
 <a id="where-virtual-network-ref"></a>
 
-**Where Virtual Network Ref**
+**Ref**
+
+A `ref` block (within `where.virtual_network`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -284,7 +318,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site"></a>
 
-**Where Virtual Site**
+**Virtual Site**
+
+A `virtual_site` block (within `where`) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -296,7 +332,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="where-virtual-site-ref"></a>
 
-**Where Virtual Site Ref**
+**Ref**
+
+A `ref` block (within `where.virtual_site`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

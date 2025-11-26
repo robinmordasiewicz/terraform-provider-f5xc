@@ -84,13 +84,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **Group Assignments**
 
+A `group_assignments` block supports the following:
+
 &#x2022; [`child_tenant_groups`](#child-tenant-groups) - Optional List<br>Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user
 
 &#x2022; [`group`](#group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Group](#group-assignments-group) below.
 
 <a id="group-assignments-group"></a>
 
-**Group Assignments Group**
+**Group**
+
+A `group` block (within `group_assignments`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -102,6 +106,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Tenant Owner Group**
 
+A `tenant_owner_group` block supports the following:
+
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
@@ -111,6 +117,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

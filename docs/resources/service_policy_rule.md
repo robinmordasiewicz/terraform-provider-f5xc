@@ -139,6 +139,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Group Matcher**
 
+An `api_group_matcher` block supports the following:
+
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert String Matcher. Invert the match result
 
 &#x2022; [`match`](#match) - Optional List<br>Exact Values. A list of exact values to match the input against
@@ -146,6 +148,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="arg-matchers"></a>
 
 **Arg Matchers**
+
+An `arg_matchers` block supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -159,7 +163,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="arg-matchers-item"></a>
 
-**Arg Matchers Item**
+**Item**
+
+An `item` block (within `arg_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -171,17 +177,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **Asn List**
 
+An `asn_list` block supports the following:
+
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 <a id="asn-matcher"></a>
 
 **Asn Matcher**
 
+An `asn_matcher` block supports the following:
+
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#asn-matcher-asn-sets) below.
 
 <a id="asn-matcher-asn-sets"></a>
 
-**Asn Matcher Asn Sets**
+**Asn Sets**
+
+An `asn_sets` block (within `asn_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -197,6 +209,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Body Matcher**
 
+A `body_matcher` block supports the following:
+
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
@@ -207,6 +221,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Bot Action**
 
+A `bot_action` block supports the following:
+
 &#x2022; [`bot_skip_processing`](#bot-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`none`](#none) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -214,6 +230,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="client-name-matcher"></a>
 
 **Client Name Matcher**
+
+A `client_name_matcher` block supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -223,11 +241,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Client Selector**
 
+A `client_selector` block supports the following:
+
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 <a id="cookie-matchers"></a>
 
 **Cookie Matchers**
+
+A `cookie_matchers` block supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -241,7 +263,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cookie-matchers-item"></a>
 
-**Cookie Matchers Item**
+**Item**
+
+An `item` block (within `cookie_matchers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -253,6 +277,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Domain Matcher**
 
+A `domain_matcher` block supports the following:
+
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
@@ -260,6 +286,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="headers"></a>
 
 **Headers**
+
+A `headers` block supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -273,7 +301,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="headers-item"></a>
 
-**Headers Item**
+**Item**
+
+An `item` block (within `headers`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -285,6 +315,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Method**
 
+A `http_method` block supports the following:
+
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Method List. List of methods values to match against
@@ -293,13 +325,17 @@ In addition to all arguments above, the following attributes are exported:
 
 **IP Matcher**
 
+An `ip_matcher` block supports the following:
+
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
 &#x2022; [`prefix_sets`](#prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#ip-matcher-prefix-sets) below.
 
 <a id="ip-matcher-prefix-sets"></a>
 
-**IP Matcher Prefix Sets**
+**Prefix Sets**
+
+A `prefix_sets` block (within `ip_matcher`) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -315,6 +351,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **IP Prefix List**
 
+An `ip_prefix_list` block supports the following:
+
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
 &#x2022; [`ip_prefixes`](#ip-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
@@ -323,17 +361,23 @@ In addition to all arguments above, the following attributes are exported:
 
 **IP Threat Category List**
 
+An `ip_threat_category_list` block supports the following:
+
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
 <a id="ja4-tls-fingerprint"></a>
 
 **Ja4 TLS Fingerprint**
 
+A `ja4_tls_fingerprint` block supports the following:
+
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
 
 <a id="jwt-claims"></a>
 
 **JWT Claims**
+
+A `jwt_claims` block supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -347,7 +391,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="jwt-claims-item"></a>
 
-**JWT Claims Item**
+**Item**
+
+An `item` block (within `jwt_claims`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -359,11 +405,15 @@ In addition to all arguments above, the following attributes are exported:
 
 **Label Matcher**
 
+A `label_matcher` block supports the following:
+
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
 
 <a id="mum-action"></a>
 
 **Mum Action**
+
+A `mum_action` block supports the following:
 
 &#x2022; [`default`](#default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -372,6 +422,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="path"></a>
 
 **Path**
+
+A `path` block supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact path values to match the input HTTP path against
 
@@ -389,6 +441,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Port Matcher**
 
+A `port_matcher` block supports the following:
+
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Port Matcher. Invert the match result
 
 &#x2022; [`ports`](#ports) - Optional List<br>Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
@@ -396,6 +450,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="query-params"></a>
 
 **Query Params**
+
+A `query_params` block supports the following:
 
 &#x2022; [`check_not_present`](#check-not-present) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -409,7 +465,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="query-params-item"></a>
 
-**Query Params Item**
+**Item**
+
+An `item` block (within `query_params`) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -420,6 +478,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="request-constraints"></a>
 
 **Request Constraints**
+
+A `request_constraints` block supports the following:
 
 &#x2022; [`max_cookie_count_exceeds`](#max-cookie-count-exceeds) - Optional Number<br>Match on the Count for all Cookies that exceed this value
 
@@ -477,6 +537,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Segment Policy**
 
+A `segment_policy` block supports the following:
+
 &#x2022; [`dst_any`](#dst-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`dst_segments`](#dst-segments) - Optional Block<br>Segment List. List of references to Segments<br>See [Dst Segments](#segment-policy-dst-segments) below.
@@ -489,13 +551,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="segment-policy-dst-segments"></a>
 
-**Segment Policy Dst Segments**
+**Dst Segments**
+
+A `dst_segments` block (within `segment_policy`) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#segment-policy-dst-segments-segments) below.
 
 <a id="segment-policy-dst-segments-segments"></a>
 
-**Segment Policy Dst Segments Segments**
+**Segments**
+
+A `segments` block (within `segment_policy.dst_segments`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -505,13 +571,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="segment-policy-src-segments"></a>
 
-**Segment Policy Src Segments**
+**Src Segments**
+
+A `src_segments` block (within `segment_policy`) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#segment-policy-src-segments-segments) below.
 
 <a id="segment-policy-src-segments-segments"></a>
 
-**Segment Policy Src Segments Segments**
+**Segments**
+
+A `segments` block (within `segment_policy.src_segments`) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -522,6 +592,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="timeouts"></a>
 
 **Timeouts**
+
+A `timeouts` block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -535,6 +607,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **TLS Fingerprint Matcher**
 
+A `tls_fingerprint_matcher` block supports the following:
+
 &#x2022; [`classes`](#classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
@@ -545,6 +619,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **WAF Action**
 
+A `waf_action` block supports the following:
+
 &#x2022; [`app_firewall_detection_control`](#app-firewall-detection-control) - Optional Block<br>App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#waf-action-app-firewall-detection-control) below.
 
 &#x2022; [`none`](#none) - Optional Block<br>Empty. This can be used for messages where no values are needed
@@ -553,7 +629,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-action-app-firewall-detection-control"></a>
 
-**WAF Action App Firewall Detection Control**
+**App Firewall Detection Control**
+
+An `app_firewall_detection_control` block (within `waf_action`) supports the following:
 
 &#x2022; [`exclude_attack_type_contexts`](#exclude-attack-type-contexts) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) below.
 
@@ -565,7 +643,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-action-app-firewall-detection-control-exclude-attack-type-contexts"></a>
 
-**WAF Action App Firewall Detection Control Exclude Attack Type Contexts**
+**Exclude Attack Type Contexts**
+
+An `exclude_attack_type_contexts` block (within `waf_action.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -575,13 +655,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-action-app-firewall-detection-control-exclude-bot-name-contexts"></a>
 
-**WAF Action App Firewall Detection Control Exclude Bot Name Contexts**
+**Exclude Bot Name Contexts**
+
+An `exclude_bot_name_contexts` block (within `waf_action.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`bot_name`](#bot-name) - Optional String<br>Bot Name
 
 <a id="waf-action-app-firewall-detection-control-exclude-signature-contexts"></a>
 
-**WAF Action App Firewall Detection Control Exclude Signature Contexts**
+**Exclude Signature Contexts**
+
+An `exclude_signature_contexts` block (within `waf_action.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -591,7 +675,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-action-app-firewall-detection-control-exclude-violation-contexts"></a>
 
-**WAF Action App Firewall Detection Control Exclude Violation Contexts**
+**Exclude Violation Contexts**
+
+An `exclude_violation_contexts` block (within `waf_action.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 

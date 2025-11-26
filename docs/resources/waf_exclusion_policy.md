@@ -82,6 +82,8 @@ In addition to all arguments above, the following attributes are exported:
 
 **Timeouts**
 
+A `timeouts` block supports the following:
+
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 &#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
@@ -93,6 +95,8 @@ In addition to all arguments above, the following attributes are exported:
 <a id="waf-exclusion-rules"></a>
 
 **WAF Exclusion Rules**
+
+A `waf_exclusion_rules` block supports the following:
 
 &#x2022; [`any_domain`](#any-domain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -118,7 +122,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-app-firewall-detection-control"></a>
 
-**WAF Exclusion Rules App Firewall Detection Control**
+**App Firewall Detection Control**
+
+An `app_firewall_detection_control` block (within `waf_exclusion_rules`) supports the following:
 
 &#x2022; [`exclude_attack_type_contexts`](#exclude-attack-type-contexts) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#waf-exclusion-rules-app-firewall-detection-control-exclude-attack-type-contexts) below.
 
@@ -130,7 +136,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-attack-type-contexts"></a>
 
-**WAF Exclusion Rules App Firewall Detection Control Exclude Attack Type Contexts**
+**Exclude Attack Type Contexts**
+
+An `exclude_attack_type_contexts` block (within `waf_exclusion_rules.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -140,13 +148,17 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-bot-name-contexts"></a>
 
-**WAF Exclusion Rules App Firewall Detection Control Exclude Bot Name Contexts**
+**Exclude Bot Name Contexts**
+
+An `exclude_bot_name_contexts` block (within `waf_exclusion_rules.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`bot_name`](#bot-name) - Optional String<br>Bot Name
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts"></a>
 
-**WAF Exclusion Rules App Firewall Detection Control Exclude Signature Contexts**
+**Exclude Signature Contexts**
+
+An `exclude_signature_contexts` block (within `waf_exclusion_rules.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -156,7 +168,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-violation-contexts"></a>
 
-**WAF Exclusion Rules App Firewall Detection Control Exclude Violation Contexts**
+**Exclude Violation Contexts**
+
+An `exclude_violation_contexts` block (within `waf_exclusion_rules.app_firewall_detection_control`) supports the following:
 
 &#x2022; [`context`](#context) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
 
@@ -166,7 +180,9 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="waf-exclusion-rules-metadata"></a>
 
-**WAF Exclusion Rules Metadata**
+**Metadata**
+
+A `metadata` block (within `waf_exclusion_rules`) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 

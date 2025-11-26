@@ -52,34 +52,34 @@ resource "f5xc_subnet" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; `name` - Required String<br>Name of the Subnet. Must be unique within the namespace
+&#x2022; [`name`](#name) - Required String<br>Name of the Subnet. Must be unique within the namespace
 
-&#x2022; `namespace` - Required String<br>Namespace where the Subnet will be created
+&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Subnet will be created
 
-&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; `description` - Optional String<br>Human readable description for the object
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; `connect_to_layer2` - Optional Block<br>Subnet connection to Layer2 Interface<br>See [Connect To Layer2](#connect-to-layer2) below for details.
-<br><br>&#x2022; `connect_to_slo` - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; `isolated_nw` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`connect_to_layer2`](#connect-to-layer2) - Optional Block<br>Subnet connection to Layer2 Interface<br>See [Connect To Layer2](#connect-to-layer2) below for details.
+<br><br>&#x2022; [`connect_to_slo`](#connect-to-slo) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; [`isolated_nw`](#isolated-nw) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `site_subnet_params` - Optional Block<br>Site Subnet Parameters. Configure subnet parameters per site<br>See [Site Subnet Params](#site-subnet-params) below for details.
+&#x2022; [`site_subnet_params`](#site-subnet-params) - Optional Block<br>Site Subnet Parameters. Configure subnet parameters per site<br>See [Site Subnet Params](#site-subnet-params) below for details.
 
-&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; `id` - Optional String<br>Unique identifier for the resource
+&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -87,63 +87,63 @@ In addition to all arguments above, the following attributes are exported:
 
 **Connect To Layer2**
 
-&#x2022; `layer2_intf_ref` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Layer2 Intf Ref](#connect-to-layer2-layer2-intf-ref) below.
+&#x2022; [`layer2_intf_ref`](#layer2-intf-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Layer2 Intf Ref](#connect-to-layer2-layer2-intf-ref) below.
 
 <a id="connect-to-layer2-layer2-intf-ref"></a>
 
 **Connect To Layer2 Layer2 Intf Ref**
 
-&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="site-subnet-params"></a>
 
 **Site Subnet Params**
 
-&#x2022; `dhcp` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`dhcp`](#dhcp) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `site` - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-subnet-params-site) below.
+&#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-subnet-params-site) below.
 
-&#x2022; `static_ip` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`static_ip`](#static-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `subnet_dhcp_server_params` - Optional Block<br>Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet<br>See [Subnet DHCP Server Params](#site-subnet-params-subnet-dhcp-server-params) below.
+&#x2022; [`subnet_dhcp_server_params`](#subnet-dhcp-server-params) - Optional Block<br>Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet<br>See [Subnet DHCP Server Params](#site-subnet-params-subnet-dhcp-server-params) below.
 
 <a id="site-subnet-params-site"></a>
 
 **Site Subnet Params Site**
 
-&#x2022; `name` - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; `namespace` - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; `tenant` - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 <a id="site-subnet-params-subnet-dhcp-server-params"></a>
 
 **Site Subnet Params Subnet DHCP Server Params**
 
-&#x2022; `dhcp_networks` - Optional Block<br>Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) below.
+&#x2022; [`dhcp_networks`](#dhcp-networks) - Optional Block<br>Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) below.
 
 <a id="site-subnet-params-subnet-dhcp-server-params-dhcp-networks"></a>
 
 **Site Subnet Params Subnet DHCP Server Params DHCP Networks**
 
-&#x2022; `network_prefix` - Optional String<br>Network Prefix. Network prefix for subnet
+&#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network prefix for subnet
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

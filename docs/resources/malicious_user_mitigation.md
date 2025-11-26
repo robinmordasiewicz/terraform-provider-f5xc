@@ -50,29 +50,29 @@ resource "f5xc_malicious_user_mitigation" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; `name` - Required String<br>Name of the MaliciousUserMitigation. Must be unique within the namespace
+&#x2022; [`name`](#name) - Required String<br>Name of the MaliciousUserMitigation. Must be unique within the namespace
 
-&#x2022; `namespace` - Required String<br>Namespace where the MaliciousUserMitigation will be created
+&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the MaliciousUserMitigation will be created
 
-&#x2022; `annotations` - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; `description` - Optional String<br>Human readable description for the object
+&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; `disable` - Optional Bool<br>A value of true will administratively disable the object
+&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; `labels` - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; `mitigation_type` - Optional Block<br>Malicious User Mitigation Settings. Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user. The settings defined in malicious user mitigation specify what mitigation actions to take for user determined to be at different threat levels<br>See [Mitigation Type](#mitigation-type) below for details.
+&#x2022; [`mitigation_type`](#mitigation-type) - Optional Block<br>Malicious User Mitigation Settings. Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user. The settings defined in malicious user mitigation specify what mitigation actions to take for user determined to be at different threat levels<br>See [Mitigation Type](#mitigation-type) below for details.
 
-&#x2022; `timeouts` - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; `id` - Optional String<br>Unique identifier for the resource
+&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -80,47 +80,47 @@ In addition to all arguments above, the following attributes are exported:
 
 **Mitigation Type**
 
-&#x2022; `rules` - Optional Block<br>Rules. Define the threat levels and the corresponding mitigation actions to be taken<br>See [Rules](#mitigation-type-rules) below.
+&#x2022; [`rules`](#rules) - Optional Block<br>Rules. Define the threat levels and the corresponding mitigation actions to be taken<br>See [Rules](#mitigation-type-rules) below.
 
 <a id="mitigation-type-rules"></a>
 
 **Mitigation Type Rules**
 
-&#x2022; `mitigation_action` - Optional Block<br>Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user<br>See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
+&#x2022; [`mitigation_action`](#mitigation-action) - Optional Block<br>Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user<br>See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
 
-&#x2022; `threat_level` - Optional Block<br>Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation<br>See [Threat Level](#mitigation-type-rules-threat-level) below.
+&#x2022; [`threat_level`](#threat-level) - Optional Block<br>Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation<br>See [Threat Level](#mitigation-type-rules-threat-level) below.
 
 <a id="mitigation-type-rules-mitigation-action"></a>
 
 **Mitigation Type Rules Mitigation Action**
 
-&#x2022; `block_temporarily` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`block_temporarily`](#block-temporarily) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `captcha_challenge` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`captcha_challenge`](#captcha-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `javascript_challenge` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`javascript_challenge`](#javascript-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="mitigation-type-rules-threat-level"></a>
 
 **Mitigation Type Rules Threat Level**
 
-&#x2022; `high` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`high`](#high) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `low` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`low`](#low) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; `medium` - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`medium`](#medium) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 <a id="timeouts"></a>
 
 **Timeouts**
 
-&#x2022; `create` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; `delete` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; `read` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; `update` - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

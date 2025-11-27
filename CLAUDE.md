@@ -219,11 +219,8 @@ This repository uses CI/CD automation extensively. Respect the automation - do n
 | `docs/data-sources/*.md` | `tfplugindocs` + `transform-docs.go` | `on-merge.yml` |
 | `examples/resources/*/*.tf` | `generate-examples.go` | `on-merge.yml` |
 | `examples/data-sources/*/*.tf` | `generate-examples.go` | `on-merge.yml` |
-| `docs/api/*.md` | `generate-api-docs.go` | `pages.yml` |
-| `docs/nav-api.yml` | `generate-api-docs.go` | `pages.yml` |
 | `internal/provider/*_resource.go` | `generate-all-schemas.go` | `on-merge.yml` |
 | `internal/provider/*_data_source.go` | `generate-all-schemas.go` | `on-merge.yml` |
-| `site/` | `mkdocs build` | `pages.yml` |
 
 **Correct behavior**: Commit only source/tool changes. Let workflows generate artifacts.
 
@@ -249,8 +246,6 @@ This repository uses a **DRY (Don't Repeat Yourself) orchestrator pattern** for 
 │ on-merge.yml    - MAIN ORCHESTRATOR for all main-branch automation  │
 │ ci.yml          - PR validation (build, test, lint, constitution)   │
 │ sync-openapi.yml - Scheduled OpenAPI spec sync                      │
-│ pages.yml       - Documentation site deployment                     │
-│ release.yml     - Manual release trigger (backup)                   │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -261,8 +256,6 @@ This repository uses a **DRY (Don't Repeat Yourself) orchestrator pattern** for 
 | `on-merge.yml` | Push to `main` | Orchestrates: build/test → regenerate → tag → release | ✅ Consolidated PR |
 | `ci.yml` | PRs and feature branches | Runs build, test, lint, constitution check | ❌ Status checks |
 | `sync-openapi.yml` | Scheduled (twice daily) | Downloads latest OpenAPI specs from F5 | ✅ Yes |
-| `pages.yml` | Changes to `docs/`, `mkdocs.yml` | Builds & deploys MkDocs site | ❌ Direct deploy |
-| `release.yml` | Tag push (`v*`) or manual | Publishes Terraform provider release | ❌ Creates release |
 
 **The on-merge.yml Orchestrator Flow:**
 
@@ -325,16 +318,7 @@ git commit -m "feat: add grouping + regenerate all docs"
 
 ### Rule 4: Check .gitignore for Generated Patterns
 
-Before committing, verify files aren't in `.gitignore`:
-
-```bash
-# Generated documentation (rebuilt at deploy time)
-docs/api/
-docs/nav-api.yml
-site/
-```
-
-If a file pattern is in `.gitignore`, it's generated - don't commit it manually.
+Before committing, verify files aren't in `.gitignore`. If a file pattern is in `.gitignore`, it's generated - don't commit it manually.
 
 ### Rule 5: Respect Auto-Generated PRs
 
@@ -427,11 +411,10 @@ git commit -m "docs: update namespace"
 **Patterns checked**:
 - `docs/resources/*.md` - Provider resource documentation
 - `docs/data-sources/*.md` - Provider data source documentation
-- `docs/api/*.md` - API reference documentation
-- `docs/nav-api.yml` - API navigation structure
-- `site/` - Built MkDocs site
 - `internal/provider/*_resource.go` - Generated resource implementations
 - `internal/provider/*_data_source.go` - Generated data source implementations
+- `examples/resources/*/*.tf` - Generated example Terraform files
+- `examples/data-sources/*/*.tf` - Generated example Terraform files
 
 #### Layer 2: CI/CD Checks (Remote)
 

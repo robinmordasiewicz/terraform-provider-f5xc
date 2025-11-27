@@ -698,7 +698,10 @@ func transformAnchorsOnly(filePath string, content string) error {
 	anchorsWithContent := make(map[string]bool)
 	allAnchors := make(map[string]bool)
 	anchorRegex := regexp.MustCompile(`<a id="([^"]+)"></a>`)
-	attrLineRegex := regexp.MustCompile("^`[^`]+` - \\((Required|Optional)\\)")
+	// Match both formats:
+	// - Old format: `name` - (Required/Optional) ...
+	// - New format: &#x2022; [`name`](#anchor) - Required/Optional ...
+	attrLineRegex := regexp.MustCompile("^(&#x2022; )?\\[?`[^`]+`\\]?.* - (Required|Optional)")
 	var currentAnchor string
 
 	for _, line := range lines {
@@ -784,9 +787,62 @@ func transformAnchorsOnly(filePath string, content string) error {
 		output.WriteString("\n")
 	}
 
+	// Convert plain backticked context lines to clickable links
+	result := output.String()
+	result = convertContextLinesToLinks(result)
+
 	// Normalize blank lines and write
-	result := normalizeBlankLines(output.String())
+	result = normalizeBlankLines(result)
 	return os.WriteFile(filePath, []byte(result), 0644)
+}
+
+// convertContextLinesToLinks converts plain backticked block context lines to clickable links
+// This handles already-transformed files that need their context lines updated
+// Examples:
+//   - "An `active_service_policies` block supports the following:"
+//     → "An [`active_service_policies`](#active-service-policies) block supports the following:"
+//   - "A `policies` block (within `active_service_policies`) supports the following:"
+//     → "A [`policies`](#active-service-policies-policies) block (within [`active_service_policies`](#active-service-policies)) supports the following:"
+func convertContextLinesToLinks(content string) string {
+	// Pattern 1: Top-level block - "An `block_name` block supports the following:"
+	// Only match if not already a link (no [ before the backtick)
+	topLevelRegex := regexp.MustCompile("(An?) `([^`]+)` block supports the following:")
+	content = topLevelRegex.ReplaceAllStringFunc(content, func(match string) string {
+		m := topLevelRegex.FindStringSubmatch(match)
+		if len(m) < 3 {
+			return match
+		}
+		article := m[1]
+		blockName := m[2]
+		anchor := toAnchorName(blockName)
+		return fmt.Sprintf("%s [`%s`](#%s) block supports the following:", article, blockName, anchor)
+	})
+
+	// Pattern 2: Nested block with parent - "A `block_name` block (within `parent.path`) supports the following:"
+	// Only match if not already a link
+	nestedRegex := regexp.MustCompile("(An?) `([^`]+)` block \\(within `([^`]+)`\\) supports the following:")
+	content = nestedRegex.ReplaceAllStringFunc(content, func(match string) string {
+		m := nestedRegex.FindStringSubmatch(match)
+		if len(m) < 4 {
+			return match
+		}
+		article := m[1]
+		blockName := m[2]
+		parentPath := m[3]
+
+		// Build full anchor: parent path + block name, all with hyphens
+		// e.g., "advertise_custom.advertise_where" + "site" → "advertise-custom-advertise-where-site"
+		fullPath := parentPath + "." + blockName
+		fullAnchor := toAnchorName(strings.ReplaceAll(fullPath, ".", "-"))
+
+		// Build parent anchor
+		parentAnchor := toAnchorName(strings.ReplaceAll(parentPath, ".", "-"))
+
+		return fmt.Sprintf("%s [`%s`](#%s) block (within [`%s`](#%s)) supports the following:",
+			article, blockName, fullAnchor, parentPath, parentAnchor)
+	})
+
+	return content
 }
 
 // NOTE: convertNestedBlocksHeadings function removed - single-page mode handles H3→bold inline
@@ -1309,19 +1365,27 @@ func transformDoc(filePath string) error {
 					// Use bold text instead of H3 to prevent truncation
 					output.WriteString(fmt.Sprintf("**%s**\n\n", displayName))
 
-					// Add AzureRM-style context line showing parent relationship
-					// Example: "A `policies` block (within `active_service_policies`) supports the following:"
+					// Add AzureRM-style context line showing parent relationship with clickable links
+					// Example: "A [`policies`](#active-service-policies-policies) block (within [`active_service_policies`](#active-service-policies)) supports the following:"
 					article := "A"
 					if startsWithVowel(lastSegment) {
 						article = "An"
 					}
+
+					// Build the full anchor for this block (all path parts joined with hyphens)
+					fullAnchor := toAnchorName(strings.Join(pathParts, "-"))
+
 					if len(pathParts) > 1 {
-						// Has parent - show relationship
-						parentPath := strings.Join(pathParts[:len(pathParts)-1], ".")
-						output.WriteString(fmt.Sprintf("%s `%s` block (within `%s`) supports the following:\n\n", article, lastSegment, parentPath))
+						// Has parent - show relationship with clickable links for both block and parent
+						// Build parent anchor (all parts except last, joined with hyphens)
+						parentParts := pathParts[:len(pathParts)-1]
+						parentAnchor := toAnchorName(strings.Join(parentParts, "-"))
+						parentPath := strings.Join(parentParts, ".")
+						output.WriteString(fmt.Sprintf("%s [`%s`](#%s) block (within [`%s`](#%s)) supports the following:\n\n",
+							article, lastSegment, fullAnchor, parentPath, parentAnchor))
 					} else {
-						// Top-level block - no parent context needed
-						output.WriteString(fmt.Sprintf("%s `%s` block supports the following:\n\n", article, lastSegment))
+						// Top-level block - no parent context needed, but still make block name clickable
+						output.WriteString(fmt.Sprintf("%s [`%s`](#%s) block supports the following:\n\n", article, lastSegment, fullAnchor))
 					}
 				}
 				continue

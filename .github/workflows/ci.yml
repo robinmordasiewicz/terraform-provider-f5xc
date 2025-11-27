@@ -72,11 +72,6 @@ jobs:
             # Example Terraform files
             "^examples/resources/.*\.tf$"
             "^examples/data-sources/.*\.tf$"
-            # API documentation
-            "^docs/api/.*\.md$"
-            "^docs/nav-api\.yml$"
-            # MkDocs site build output
-            "^site/"
             # Provider Go code
             "^internal/provider/.*_resource\.go$"
             "^internal/provider/.*_data_source\.go$"

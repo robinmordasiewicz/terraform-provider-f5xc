@@ -700,6 +700,8 @@ func transformAnchorsOnly(filePath string, content string) error {
 	anchorsWithContent := make(map[string]bool)
 	allAnchors := make(map[string]bool)
 	anchorRegex := regexp.MustCompile(`<a id="([^"]+)"></a>`)
+	// H4 headers auto-generate anchors on Terraform Registry: "#### CORS Policy" → #cors-policy
+	h4HeaderRegex := regexp.MustCompile(`^####\s+(.+)$`)
 	// Match both formats:
 	// - Old format: `name` - (Required/Optional) ...
 	// - New format: &#x2022; [`name`](#anchor) - Required/Optional ...
@@ -709,6 +711,12 @@ func transformAnchorsOnly(filePath string, content string) error {
 	for _, line := range lines {
 		if m := anchorRegex.FindStringSubmatch(line); m != nil {
 			currentAnchor = m[1]
+			allAnchors[currentAnchor] = true
+		} else if m := h4HeaderRegex.FindStringSubmatch(line); m != nil {
+			// H4 header found - derive anchor from header text
+			// "#### CORS Policy" → "cors-policy"
+			headerText := m[1]
+			currentAnchor = headerTextToAnchor(headerText)
 			allAnchors[currentAnchor] = true
 		} else if currentAnchor != "" && attrLineRegex.MatchString(line) {
 			anchorsWithContent[currentAnchor] = true

@@ -36,3 +36,6 @@ Thumbs.db
 # Build artifacts
 dist/
 bin/
+
+# Playwright MCP artifacts
+.playwright-mcp/

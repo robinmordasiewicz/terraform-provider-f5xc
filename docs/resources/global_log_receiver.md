@@ -91,7 +91,7 @@ resource "f5xc_global_log_receiver" "example" {
 <br><br>&#x2022; [`ns_current`](#ns-current) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; [`ns_list`](#ns-list) - Optional Block<br>Namespace List. Namespace List
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

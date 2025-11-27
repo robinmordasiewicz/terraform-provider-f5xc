@@ -137,27 +137,27 @@ resource "f5xc_virtual_host" "example" {
 
 &#x2022; [`response_cookies_to_remove`](#response-cookies-to-remove) - Optional List<br>Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed
 
-&#x2022; [`response_headers_to_add`](#response-headers-to-add) - Optional Block<br>Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied
+&#x2022; [`response_headers_to_add`](#response-headers-to-add) - Optional Block<br>Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied<br>See [Response Headers To Add](#response-headers-to-add) below for details.
 
 &#x2022; [`response_headers_to_remove`](#response-headers-to-remove) - Optional List<br>Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream
 
-&#x2022; [`retry_policy`](#retry-policy) - Optional Block<br>Retry Policy. Retry policy configuration for route destination
+&#x2022; [`retry_policy`](#retry-policy) - Optional Block<br>Retry Policy. Retry policy configuration for route destination<br>See [Retry Policy](#retry-policy) below for details.
 
-&#x2022; [`routes`](#routes) - Optional Block<br>Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. For TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts, the route object only specifies the cluster/weighted-cluster as route destination without any match condition. In other words, match condition in route object is ignored for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts. Routes used for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts cannot have DirectResponse or Redirect as actions
+&#x2022; [`routes`](#routes) - Optional Block<br>Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. For TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts, the route object only specifies the cluster/weighted-cluster as route destination without any match condition. In other words, match condition in route object is ignored for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts. Routes used for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts cannot have DirectResponse or Redirect as actions<br>See [Routes](#routes) below for details.
 
-&#x2022; [`sensitive_data_policy`](#sensitive-data-policy) - Optional Block<br>Sensitive Data Discovery. References to sensitive_data_policy objects
+&#x2022; [`sensitive_data_policy`](#sensitive-data-policy) - Optional Block<br>Sensitive Data Discovery. References to sensitive_data_policy objects<br>See [Sensitive Data Policy](#sensitive-data-policy) below for details.
 
-&#x2022; [`slow_ddos_mitigation`](#slow-ddos-mitigation) - Optional Block<br>Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users
+&#x2022; [`slow_ddos_mitigation`](#slow-ddos-mitigation) - Optional Block<br>Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users<br>See [Slow DDOS Mitigation](#slow-ddos-mitigation) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 -> **One of the following:**
-&#x2022; [`tls_cert_params`](#tls-cert-params) - Optional Block<br>Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store
+&#x2022; [`tls_cert_params`](#tls-cert-params) - Optional Block<br>Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store<br>See [TLS Cert Params](#tls-cert-params) below for details.
 <br><br>&#x2022; [`tls_parameters`](#tls-parameters) - Optional Block<br>Downstream TLS Parameters. TLS configuration for downstream connections
 
-&#x2022; [`user_identification`](#user-identification) - Optional Block<br>User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited
+&#x2022; [`user_identification`](#user-identification) - Optional Block<br>User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited<br>See [User Identification](#user-identification) below for details.
 
-&#x2022; [`waf_type`](#waf-type) - Optional Block<br>WAF Instance. WAF instance will be pointing to an app_firewall object
+&#x2022; [`waf_type`](#waf-type) - Optional Block<br>WAF Instance. WAF instance will be pointing to an app_firewall object<br>See [WAF Type](#waf-type) below for details.
 
 ### Attributes Reference
 

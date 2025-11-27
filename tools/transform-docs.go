@@ -791,6 +791,9 @@ func transformAnchorsOnly(filePath string, content string) error {
 	result := output.String()
 	result = convertContextLinesToLinks(result)
 
+	// Add "See below" links for attribute-only nested blocks
+	result = addSeeBelowLinksForNestedBlocks(result)
+
 	// Normalize blank lines and write
 	result = normalizeBlankLines(result)
 	return os.WriteFile(filePath, []byte(result), 0644)
@@ -843,6 +846,95 @@ func convertContextLinesToLinks(content string) string {
 	})
 
 	return content
+}
+
+// addSeeBelowLinksForNestedBlocks adds "See [Block Name](#anchor) below for details." suffix
+// to bullet points that reference nested blocks but are missing the "See below" link.
+// This handles attribute-only nested blocks that tfplugindocs doesn't annotate automatically.
+//
+// Algorithm:
+// 1. Find all anchors that have nested sections (anchor followed by "A `X` block supports...")
+// 2. Find bullet points linking to those anchors that don't already have "See below"
+// 3. Add the "See below" suffix to those bullet points
+func addSeeBelowLinksForNestedBlocks(content string) string {
+	lines := strings.Split(content, "\n")
+
+	// Step 1: Find all anchors with nested block content
+	// Pattern: <a id="anchor-name"></a> followed eventually by "A `block_name` block supports the following:"
+	anchorsWithNestedContent := make(map[string]string) // anchor -> block_name
+	anchorRegex := regexp.MustCompile("<a id=\"([^\"]+)\"></a>")
+	// Match: An? [`block_name`](#anchor)? block supports the following:
+	// The backtick is represented as \x60 in the regex
+	blockSupportsRegex := regexp.MustCompile("^An? \\[?\\x60([^\\x60]+)\\x60\\]?(?:\\(#[^)]+\\))? block supports the following:")
+
+	var currentAnchor string
+	for _, line := range lines {
+		if m := anchorRegex.FindStringSubmatch(line); m != nil {
+			currentAnchor = m[1]
+		} else if currentAnchor != "" && blockSupportsRegex.MatchString(line) {
+			// Extract block name from the "supports" line
+			if m := blockSupportsRegex.FindStringSubmatch(line); m != nil {
+				blockName := m[1]
+				anchorsWithNestedContent[currentAnchor] = blockName
+			}
+			currentAnchor = "" // Reset after finding content
+		}
+	}
+
+	// Step 2: Find bullet points that link to these anchors but don't have "See below"
+	// Pattern: &#x2022; [`block_name`](#anchor-name) - ... (without "See ... below")
+	// The backtick is represented as \x60 in the regex
+	bulletRegex := regexp.MustCompile("^(&#x2022; \\[\\x60([^\\x60]+)\\x60\\]\\(#([^)]+)\\) - [^<]+(?:<br>[^<]*)*?)$")
+	seeBelowPattern := regexp.MustCompile("See \\[[^\\]]+\\]\\(#[^)]+\\) below")
+
+	var result strings.Builder
+	for _, line := range lines {
+		if m := bulletRegex.FindStringSubmatch(line); m != nil {
+			fullLine := m[1]
+			_ = m[2] // blockName - not used but captured for clarity
+			anchorRef := m[3]
+
+			// Check if this anchor has nested content and doesn't already have "See below"
+			if _, hasNestedContent := anchorsWithNestedContent[anchorRef]; hasNestedContent {
+				if !seeBelowPattern.MatchString(line) {
+					// Add "See below" suffix
+					// Convert anchor to title case for display (cors-policy -> Cors Policy)
+					displayTitle := toTitleCaseFromAnchor(anchorRef)
+					seeBelow := fmt.Sprintf("<br>See [%s](#%s) below for details.", displayTitle, anchorRef)
+					line = fullLine + seeBelow
+				}
+			}
+		}
+		result.WriteString(line)
+		result.WriteString("\n")
+	}
+
+	// Remove trailing newline to match input format
+	output := result.String()
+	if strings.HasSuffix(output, "\n") {
+		output = output[:len(output)-1]
+	}
+	return output
+}
+
+// toTitleCaseFromAnchor converts an anchor name to title case for display
+// e.g., "cors-policy" -> "Cors Policy", "active-service-policies" -> "Active Service Policies"
+func toTitleCaseFromAnchor(anchor string) string {
+	words := strings.Split(anchor, "-")
+	for i, word := range words {
+		if len(word) > 0 {
+			// Check for acronyms that should be uppercase
+			upper := strings.ToUpper(word)
+			if uppercaseAcronyms[upper] {
+				words[i] = upper
+			} else if mixed, ok := mixedCaseAcronyms[strings.ToLower(word)]; ok {
+				words[i] = mixed
+			} else {
+				words[i] = strings.ToUpper(word[:1]) + word[1:]
+			}
+		}
+	}
+	return strings.Join(words, " ")
 }
 
 // NOTE: convertNestedBlocksHeadings function removed - single-page mode handles H3→bold inline

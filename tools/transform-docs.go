@@ -3,6 +3,8 @@
 
 // This tool transforms tfplugindocs-generated documentation into a cleaner,
 // Volterra-style format with flat argument references instead of deeply nested schemas.
+//
+// Version: 2.0.0 - Refactored for DRY CI/CD architecture (PR #209)
 package main
 
 import (

@@ -1,0 +1,322 @@
+# Main orchestrator for all automation triggered by merges to main
+# This workflow replaces the fragile push-event-based chaining with explicit orchestration
+#
+# DESIGN PRINCIPLES:
+# 1. Single entry point: All main-branch automation flows through here
+# 2. No cascades: Bot commits are detected and skipped to prevent infinite loops
+# 3. Atomic changes: All regeneration happens together, committed as one PR
+# 4. Single tag: Only one version bump per logical change
+#
+# REPLACED WORKFLOWS:
+# - auto-tag.yml (version tagging now happens here)
+# - docs.yml (documentation generation now happens here)
+# - generate.yml (provider code generation now happens here)
+name: On Merge
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '*.md'
+      - '.github/workflows/*.yml'
+      - '!.github/workflows/on-merge.yml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: on-merge-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # STEP 1: Detect what changed and whether to proceed
+  # ═══════════════════════════════════════════════════════════════════════════
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      specs-changed: ${{ steps.changes.outputs.specs }}
+      code-changed: ${{ steps.changes.outputs.code }}
+      tools-changed: ${{ steps.changes.outputs.tools }}
+      should-process: ${{ steps.should-process.outputs.result }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+
+      - name: Check if bot commit
+        id: check-author
+        run: |
+          AUTHOR=$(git log -1 --format='%an')
+          MESSAGE=$(git log -1 --format='%s')
+          echo "Author: $AUTHOR"
+          echo "Message: $MESSAGE"
+
+          IS_BOT="false"
+
+          # Check for bot author
+          if [[ "$AUTHOR" == "github-actions[bot]" ]]; then
+            IS_BOT="true"
+            echo "Detected github-actions[bot] author"
+          fi
+
+          # Check for auto-generated commit messages
+          if [[ "$MESSAGE" == "chore: auto-regenerate"* ]] || \
+             [[ "$MESSAGE" == "docs: auto-generate"* ]] || \
+             [[ "$MESSAGE" == "chore: regenerate provider"* ]]; then
+            IS_BOT="true"
+            echo "Detected auto-generated commit message"
+          fi
+
+          echo "is_bot=$IS_BOT" >> $GITHUB_OUTPUT
+
+      - name: Detect changed paths
+        id: changes
+        run: |
+          # Get changed files since parent commit
+          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --name-only HEAD)
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          # Check for OpenAPI spec changes
+          if echo "$CHANGED" | grep -qE '^docs/specifications/api/'; then
+            echo "specs=true" >> $GITHUB_OUTPUT
+            echo "OpenAPI specs changed"
+          else
+            echo "specs=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Check for provider code changes
+          if echo "$CHANGED" | grep -qE '^internal/'; then
+            echo "code=true" >> $GITHUB_OUTPUT
+            echo "Provider code changed"
+          else
+            echo "code=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Check for tool changes
+          if echo "$CHANGED" | grep -qE '^tools/|^templates/'; then
+            echo "tools=true" >> $GITHUB_OUTPUT
+            echo "Tools/templates changed"
+          else
+            echo "tools=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Determine if processing should proceed
+        id: should-process
+        run: |
+          IS_BOT="${{ steps.check-author.outputs.is_bot }}"
+          SPECS="${{ steps.changes.outputs.specs }}"
+          CODE="${{ steps.changes.outputs.code }}"
+          TOOLS="${{ steps.changes.outputs.tools }}"
+
+          if [[ "$IS_BOT" == "true" ]]; then
+            echo "Skipping: This is a bot commit"
+            echo "result=false" >> $GITHUB_OUTPUT
+          elif [[ "$SPECS" == "false" && "$CODE" == "false" && "$TOOLS" == "false" ]]; then
+            echo "Skipping: No relevant changes detected"
+            echo "result=false" >> $GITHUB_OUTPUT
+          else
+            echo "Processing: Human commit with relevant changes"
+            echo "result=true" >> $GITHUB_OUTPUT
+          fi
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # STEP 2: Build and Test (validates the merged code)
+  # ═══════════════════════════════════════════════════════════════════════════
+  build-test:
+    name: Build and Test
+    needs: detect-changes
+    if: needs.detect-changes.outputs.should-process == 'true'
+    uses: ./.github/workflows/_build-test.yml
+    with:
+      run-lint: true
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # STEP 3: Regenerate provider code (if OpenAPI specs changed)
+  # ═══════════════════════════════════════════════════════════════════════════
+  regenerate-provider:
+    name: Regenerate Provider
+    needs: [detect-changes, build-test]
+    if: |
+      needs.detect-changes.outputs.should-process == 'true' &&
+      needs.detect-changes.outputs.specs-changed == 'true'
+    uses: ./.github/workflows/_generate-provider.yml
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # STEP 4: Regenerate documentation (if code or tools changed)
+  # ═══════════════════════════════════════════════════════════════════════════
+  regenerate-docs:
+    name: Regenerate Docs
+    needs: [detect-changes, build-test, regenerate-provider]
+    if: |
+      always() &&
+      needs.detect-changes.outputs.should-process == 'true' &&
+      needs.build-test.result == 'success' &&
+      (needs.detect-changes.outputs.code-changed == 'true' ||
+       needs.detect-changes.outputs.tools-changed == 'true' ||
+       (needs.regenerate-provider.result == 'success' && needs.regenerate-provider.outputs.changed == 'true'))
+    uses: ./.github/workflows/_generate-docs.yml
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # STEP 5: Create consolidated PR (if any regeneration happened)
+  # ═══════════════════════════════════════════════════════════════════════════
+  create-regeneration-pr:
+    name: Create Regeneration PR
+    needs: [detect-changes, regenerate-provider, regenerate-docs]
+    if: |
+      always() &&
+      needs.detect-changes.outputs.should-process == 'true' &&
+      ((needs.regenerate-provider.result == 'success' && needs.regenerate-provider.outputs.changed == 'true') ||
+       (needs.regenerate-docs.result == 'success' && needs.regenerate-docs.outputs.changed == 'true'))
+    runs-on: ubuntu-latest
+    outputs:
+      pr-created: ${{ steps.create-pr.outputs.created }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Install tfplugindocs
+        run: |
+          go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: Regenerate provider (if needed)
+        if: needs.regenerate-provider.outputs.changed == 'true'
+        run: |
+          go run tools/generate-all-schemas.go --spec-dir=docs/specifications/api
+          go mod tidy
+
+      - name: Regenerate documentation (if needed)
+        if: needs.regenerate-docs.outputs.changed == 'true'
+        run: |
+          go run tools/generate-examples.go
+          tfplugindocs generate
+          go run tools/transform-docs.go
+
+      - name: Check for changes
+        id: check
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            git diff --cached --stat
+          fi
+
+      - name: Configure Git
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create branch and commit
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          BRANCH_NAME="auto-regenerate/${{ github.sha }}"
+          git checkout -b "$BRANCH_NAME"
+          git commit -m "chore: auto-regenerate provider and documentation
+
+          Triggered by commit: ${{ github.sha }}
+
+          Changes regenerated:
+          - Provider code: ${{ needs.regenerate-provider.outputs.changed || 'false' }}
+          - Documentation: ${{ needs.regenerate-docs.outputs.changed || 'false' }}
+
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+          Co-Authored-By: Claude <noreply@anthropic.com>"
+          git push origin "$BRANCH_NAME"
+
+      - name: Create PR
+        id: create-pr
+        if: steps.check.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
+        run: |
+          PR_URL=$(gh pr create \
+            --title "chore: auto-regenerate provider and documentation" \
+            --body "## Automated Regeneration
+
+          This PR was automatically generated by the on-merge workflow.
+
+          **Triggered by:** [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+
+          ### Changes
+          - Provider code regenerated: ${{ needs.regenerate-provider.outputs.changed || 'false' }}
+          - Documentation regenerated: ${{ needs.regenerate-docs.outputs.changed || 'false' }}
+
+          ---
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)" \
+            --label "automated")
+
+          PR_NUM=$(echo "$PR_URL" | grep -oE '[0-9]+$')
+          echo "number=$PR_NUM" >> $GITHUB_OUTPUT
+          echo "created=true" >> $GITHUB_OUTPUT
+          echo "Created PR #$PR_NUM"
+
+      - name: Enable auto-merge
+        if: steps.create-pr.outputs.created == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
+        run: |
+          gh pr merge ${{ steps.create-pr.outputs.number }} --auto --squash
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # STEP 6: Tag and Release (ONCE, only for human commits)
+  # ═══════════════════════════════════════════════════════════════════════════
+  tag-release:
+    name: Tag and Release
+    needs: [detect-changes, build-test, create-regeneration-pr]
+    if: |
+      always() &&
+      needs.detect-changes.outputs.should-process == 'true' &&
+      needs.build-test.result == 'success' &&
+      (needs.create-regeneration-pr.result == 'skipped' || needs.create-regeneration-pr.result == 'success')
+    uses: ./.github/workflows/_tag-release.yml
+    secrets:
+      gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+      gpg-passphrase: ${{ secrets.PASSPHRASE }}
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Summary
+  # ═══════════════════════════════════════════════════════════════════════════
+  summary:
+    name: Workflow Summary
+    needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, create-regeneration-pr, tag-release]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print summary
+        run: |
+          echo "## On-Merge Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Step | Result |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Should Process | ${{ needs.detect-changes.outputs.should-process }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Specs Changed | ${{ needs.detect-changes.outputs.specs-changed }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Code Changed | ${{ needs.detect-changes.outputs.code-changed }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Tools Changed | ${{ needs.detect-changes.outputs.tools-changed }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build/Test | ${{ needs.build-test.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Provider Regenerated | ${{ needs.regenerate-provider.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Docs Regenerated | ${{ needs.regenerate-docs.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| PR Created | ${{ needs.create-regeneration-pr.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Tagged/Released | ${{ needs.tag-release.result }} |" >> $GITHUB_STEP_SUMMARY

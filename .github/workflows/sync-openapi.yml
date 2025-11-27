@@ -1,4 +1,7 @@
-name: Sync F5 Distributed Cloud OpenAPI Spec
+# Scheduled workflow to sync F5 Distributed Cloud OpenAPI specifications
+# Downloads the latest specs and creates a PR if changes are detected
+# The on-merge.yml workflow handles regeneration when this PR merges
+name: Sync OpenAPI Specs
 
 on:
   schedule:
@@ -18,23 +21,38 @@ permissions:
   pull-requests: write
 
 env:
-  ISSUE_TITLE: "OpenAPI Spec Update Available"
-  PR_TITLE: "Update F5 Distributed Cloud OpenAPI spec and regenerate provider"
   SPEC_DIR: docs/specifications/api
+  PR_TITLE: "feat: update F5 Distributed Cloud OpenAPI specifications"
 
 jobs:
-  sync-and-generate:
+  sync:
+    name: Sync OpenAPI Specs
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - name: Download and extract OpenAPI spec
+      - name: Check for existing open PR
+        id: existing_pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_COUNT=$(gh pr list --search "in:title \"${{ env.PR_TITLE }}\"" --state open --json number --jq length)
+          if [ "$PR_COUNT" -gt "0" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Found existing open PR - skipping"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Download OpenAPI specs
+        if: steps.existing_pr.outputs.exists == 'false'
         run: |
           mkdir -p ${{ env.SPEC_DIR }}
-          # Retry logic with exponential backoff for transient network errors
+
+          # Retry logic with exponential backoff
           max_attempts=3
           attempt=1
           while [ $attempt -le $max_attempts ]; do
@@ -56,33 +74,13 @@ jobs:
               exit 1
             fi
           done
+
           unzip -o openapi.zip -d ${{ env.SPEC_DIR }}
           rm openapi.zip
 
-      - name: Check for existing open PR
-        id: existing_pr
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const prTitle = process.env.PR_TITLE;
-            const prs = await github.rest.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open'
-            });
-
-            const existingPR = prs.data.find(pr => pr.title === prTitle);
-            if (existingPR) {
-              console.log(`Found existing open PR #${existingPR.number} - skipping update`);
-              return 'true';
-            }
-            console.log('No existing open PR found');
-            return 'false';
-          result-encoding: string
-
-      - name: Check for spec changes
-        if: steps.existing_pr.outputs.result == 'false'
-        id: spec_changes
+      - name: Check for changes
+        if: steps.existing_pr.outputs.exists == 'false'
+        id: changes
         run: |
           git add -A
           if git diff --cached --quiet; then
@@ -90,107 +88,77 @@ jobs:
             echo "No changes detected in OpenAPI specs"
           else
             echo "changed=true" >> $GITHUB_OUTPUT
-            echo "Changes detected in OpenAPI spec"
+            echo "Changes detected in OpenAPI specs"
             git reset HEAD
           fi
 
-      - name: Get current date
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
-
-      - name: Setup Node.js
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+      - name: Setup Node.js for validation
+        if: steps.changes.outputs.changed == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Validate OpenAPI spec
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+      - name: Validate OpenAPI specs
+        if: steps.changes.outputs.changed == 'true'
         run: |
           npm install -g @apidevtools/swagger-cli
           echo "Validating OpenAPI specifications..."
+          VALID=true
           for file in $(find ${{ env.SPEC_DIR }} -type f \( -name "*.yaml" -o -name "*.yml" -o -name "*.json" \)); do
             if grep -q -E "(openapi|swagger).*['\"]?[0-9]+\.[0-9]+" "$file" 2>/dev/null; then
               echo "Validating: $file"
-              swagger-cli validate "$file"
-              echo "✅ $file is valid"
+              if swagger-cli validate "$file"; then
+                echo "✅ $file is valid"
+              else
+                echo "❌ $file validation failed"
+                VALID=false
+              fi
             fi
           done
+          if [ "$VALID" = false ]; then
+            echo "::error::Some OpenAPI specs failed validation"
+            exit 1
+          fi
           echo "✅ All OpenAPI specs validated successfully"
 
-      - name: Set up Go
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
-        uses: actions/setup-go@v6
-        with:
-          go-version-file: 'go.mod'
-          cache: true
+      - name: Get current date
+        if: steps.changes.outputs.changed == 'true'
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
-      - name: Regenerate provider from new specs
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
-        run: |
-          echo "🔨 Regenerating provider code from updated specs..."
-          go run tools/generate-all-schemas.go --spec-dir=${{ env.SPEC_DIR }}
-          echo "✅ Provider code regenerated"
-
-      - name: Regenerate API documentation
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
-        run: |
-          echo "📚 Regenerating API documentation..."
-          go run tools/generate-api-docs.go --spec-dir=${{ env.SPEC_DIR }} --output-dir=docs/api
-          python3 tools/merge-nav.py
-          echo "✅ API documentation and navigation regenerated"
-
-      - name: Run go mod tidy
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
-        run: go mod tidy
-
-      - name: Build to verify
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
-        run: |
-          echo "🔨 Building provider to verify..."
-          go build -v .
-          echo "✅ Build successful"
-
-      - name: Run tests
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
-        run: |
-          echo "🧪 Running tests..."
-          go test -v ./internal/...
-          echo "✅ Tests passed"
-
-      - name: Create branch and commit all changes
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+      - name: Create branch and commit
+        if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b openapi-update
+          git checkout -b openapi-update-${{ steps.date.outputs.date }}
           git add -A
-          git commit -m "feat: Update OpenAPI specs and regenerate provider
+          git commit -m "${{ env.PR_TITLE }}
 
-          Automated update from F5 Distributed Cloud OpenAPI specifications.
+          Automated sync from F5 Distributed Cloud OpenAPI specifications.
 
-          Changes:
-          - Updated OpenAPI specs from https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
-          - Regenerated provider resources and data sources
-          - Updated client types for API compatibility
+          Source: https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
+          Date: ${{ steps.date.outputs.date }}
 
-          Updated: ${{ steps.date.outputs.date }}
+          When this PR merges, the on-merge workflow will:
+          1. Regenerate provider code from the new specs
+          2. Regenerate documentation
+          3. Create a version tag and release
 
           🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
           Co-Authored-By: Claude <noreply@anthropic.com>"
-          git push --force origin openapi-update
+          git push --force origin openapi-update-${{ steps.date.outputs.date }}
 
-      - name: Find or create issue
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+      - name: Find or create tracking issue
+        if: steps.changes.outputs.changed == 'true'
         id: issue
         uses: actions/github-script@v7
         with:
           script: |
-            const issueTitle = process.env.ISSUE_TITLE;
+            const issueTitle = "OpenAPI Spec Update Available";
 
-            // Search for existing open issue with exact title
+            // Search for existing open issue
             const issues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -202,22 +170,15 @@ jobs:
 
             if (existingIssue) {
               console.log(`Found existing issue #${existingIssue.number}`);
-
-              // Add comment to existing issue
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: existingIssue.number,
                 body: `## Update Detected - ${{ steps.date.outputs.date }}
 
-            A new update to the OpenAPI specification has been detected and provider code regenerated.
-
-            **Branch:** \`openapi-update\`
-            **Detected:** ${{ steps.date.outputs.date }}
-
-            A new pull request has been created for this update.`
+                A new update to the OpenAPI specification has been detected.
+                A pull request has been created for review.`
               });
-
               return existingIssue.number;
             }
 
@@ -228,21 +189,15 @@ jobs:
               title: issueTitle,
               body: `## F5 Distributed Cloud OpenAPI Spec Update
 
-            This issue tracks updates to the F5 Distributed Cloud OpenAPI specification and provider regeneration.
+              This issue tracks updates to the F5 Distributed Cloud OpenAPI specification.
 
-            **Source:** https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
+              **Source:** https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
 
-            ---
+              ---
 
-            ### Latest Update - ${{ steps.date.outputs.date }}
+              ### Latest Update - ${{ steps.date.outputs.date }}
 
-            **Branch:** \`openapi-update\`
-
-            Please review the changes in the associated pull request.
-
-            ---
-
-            *This issue will be updated automatically when new spec versions are detected. Close this issue once all updates have been reviewed and merged.*`,
+              Please review the changes in the associated pull request.`,
               labels: ['openapi-update', 'automated']
             });
 
@@ -250,52 +205,48 @@ jobs:
             return issue.data.number;
 
       - name: Create Pull Request
-        if: steps.existing_pr.outputs.result == 'false' && steps.spec_changes.outputs.changed == 'true'
+        if: steps.changes.outputs.changed == 'true'
         id: create_pr
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.AUTO_MERGE_TOKEN }}
-          script: |
-            const prTitle = process.env.PR_TITLE;
-            const pr = await github.rest.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: prTitle,
-              head: 'openapi-update',
-              base: 'main',
-              body: `## Summary
-
-            This PR contains an automated update to the F5 Distributed Cloud OpenAPI specification and regenerated provider code.
-
-            **Source:** https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
-            **Detected:** ${{ steps.date.outputs.date }}
-            **Tracking Issue:** #${{ steps.issue.outputs.result }}
-
-            ## Changes
-
-            - Updated OpenAPI specs to latest version from F5
-            - Regenerated provider resources and data sources
-            - Updated client types for API compatibility
-
-            ## Verification
-
-            - ✅ OpenAPI specs validated
-            - ✅ Provider code regenerated
-            - ✅ Build passes
-            - ✅ Tests pass
-
-            ---
-            🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-            *Closes #${{ steps.issue.outputs.result }} when merged*`
-            });
-            console.log(`Created PR #${pr.data.number}`);
-            return pr.data.number;
-
-      - name: Enable auto-merge on PR
-        if: steps.create_pr.outputs.result != ''
         env:
           GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
         run: |
-          gh pr merge ${{ steps.create_pr.outputs.result }} \
-            --auto --squash
+          PR_URL=$(gh pr create \
+            --title "${{ env.PR_TITLE }}" \
+            --body "## Summary
+
+          This PR updates the F5 Distributed Cloud OpenAPI specifications.
+
+          **Source:** https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
+          **Date:** ${{ steps.date.outputs.date }}
+          **Tracking Issue:** #${{ steps.issue.outputs.result }}
+
+          ## What happens when this merges?
+
+          The \`on-merge.yml\` workflow will automatically:
+          1. ✅ Detect that OpenAPI specs changed
+          2. 🔄 Regenerate provider code from the new specs
+          3. 📚 Regenerate documentation
+          4. 🏷️ Create a version tag
+          5. 📦 Publish a release
+
+          ## Verification
+
+          - ✅ OpenAPI specs downloaded successfully
+          - ✅ All specs validated
+
+          ---
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+          Closes #${{ steps.issue.outputs.result }}" \
+            --label "automated,openapi-update")
+
+          PR_NUM=$(echo "$PR_URL" | grep -oE '[0-9]+$')
+          echo "number=$PR_NUM" >> $GITHUB_OUTPUT
+          echo "Created PR #$PR_NUM"
+
+      - name: Enable auto-merge
+        if: steps.create_pr.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
+        run: |
+          gh pr merge ${{ steps.create_pr.outputs.number }} --auto --squash

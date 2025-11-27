@@ -1,0 +1,91 @@
+# Reusable workflow for generating Terraform provider documentation
+# Called by: on-merge.yml, sync-openapi.yml
+name: Generate Documentation
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: 'Git ref to checkout'
+        type: string
+        default: ''
+    outputs:
+      changed:
+        description: 'Whether documentation changed'
+        value: ${{ jobs.generate.outputs.changed }}
+
+jobs:
+  generate:
+    name: Generate Documentation
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Install tfplugindocs
+        run: |
+          go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: Generate examples
+        run: |
+          echo "::group::Generating example Terraform files"
+          go run tools/generate-examples.go
+          echo "::endgroup::"
+
+      - name: Generate documentation
+        run: |
+          # Retry logic with exponential backoff for transient network errors
+          # tfplugindocs downloads Terraform CLI from HashiCorp's checkpoint API
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "::group::Attempt $attempt of $max_attempts"
+            if tfplugindocs generate; then
+              echo "Documentation generated successfully"
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            attempt=$((attempt + 1))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((2 ** attempt * 5))
+              echo "::warning::tfplugindocs failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            fi
+          done
+          if [ $attempt -gt $max_attempts ]; then
+            echo "::error::All $max_attempts attempts failed"
+            exit 1
+          fi
+
+      - name: Transform documentation
+        run: go run tools/transform-docs.go
+
+      - name: Check for changes
+        id: check
+        run: |
+          if [ -n "$(git status --porcelain docs/ examples/)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Documentation changes detected:"
+            git status --porcelain docs/ examples/
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No documentation changes"
+          fi

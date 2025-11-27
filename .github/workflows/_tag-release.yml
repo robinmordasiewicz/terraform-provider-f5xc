@@ -1,28 +1,37 @@
-# Automatic version tagging workflow
-# Increments version tag based on conventional commits
-name: Auto Tag
+# Reusable workflow for version tagging and release
+# Called by: on-merge.yml
+name: Tag and Release
 
 on:
-  push:
-    branches:
-      - main
-    # Note: 'docs/**' intentionally NOT ignored - when docs.yml's auto-PR merges,
-    # we want a new release to include the regenerated documentation.
-    # Manual docs commits are blocked by constitution check (CLAUDE.md Rule 1).
-    paths-ignore:
-      - '*.md'
-      - '.github/workflows/docs.yml'
-
-permissions:
-  contents: write
+  workflow_call:
+    inputs:
+      create-release:
+        description: 'Whether to create a release after tagging'
+        type: boolean
+        default: true
+    secrets:
+      gpg-private-key:
+        description: 'GPG private key for signing'
+        required: true
+      gpg-passphrase:
+        description: 'GPG key passphrase'
+        required: true
+    outputs:
+      new-tag:
+        description: 'The new version tag created'
+        value: ${{ jobs.tag.outputs.new_tag }}
+      tag-created:
+        description: 'Whether a new tag was created'
+        value: ${{ jobs.tag.outputs.created }}
 
 jobs:
-  auto-tag:
+  tag:
     name: Create Version Tag
     runs-on: ubuntu-latest
     outputs:
-      new_tag: ${{ steps.next_version.outputs.new_tag }}
-      tag_created: ${{ steps.create_tag.outputs.created }}
+      new_tag: ${{ steps.version.outputs.new_tag }}
+      latest_tag: ${{ steps.get_tag.outputs.latest_tag }}
+      created: ${{ steps.create.outputs.created }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -33,13 +42,12 @@ jobs:
       - name: Get latest tag
         id: get_tag
         run: |
-          # Get the latest tag, default to v0.0.0 if none exists
           LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
           echo "Latest tag: $LATEST_TAG"
 
       - name: Calculate next version
-        id: next_version
+        id: version
         run: |
           LATEST_TAG=${{ steps.get_tag.outputs.latest_tag }}
 
@@ -60,16 +68,20 @@ jobs:
             MAJOR=$((MAJOR + 1))
             MINOR=0
             PATCH=0
+            echo "bump=major" >> $GITHUB_OUTPUT
           elif echo "$COMMITS" | grep -qE "^feat(\(.+\))?:"; then
             # Minor version bump for features
             MINOR=$((MINOR + 1))
             PATCH=0
+            echo "bump=minor" >> $GITHUB_OUTPUT
           elif echo "$COMMITS" | grep -qE "^(fix|perf|refactor)(\(.+\))?:"; then
             # Patch version bump for fixes, performance, refactoring
             PATCH=$((PATCH + 1))
+            echo "bump=patch" >> $GITHUB_OUTPUT
           else
             # Default to patch bump for any other commits
             PATCH=$((PATCH + 1))
+            echo "bump=patch" >> $GITHUB_OUTPUT
           fi
 
           NEW_TAG="v${MAJOR}.${MINOR}.${PATCH}"
@@ -77,9 +89,9 @@ jobs:
           echo "Next version: $NEW_TAG"
 
       - name: Check if tag exists
-        id: check_tag
+        id: check
         run: |
-          NEW_TAG=${{ steps.next_version.outputs.new_tag }}
+          NEW_TAG=${{ steps.version.outputs.new_tag }}
           if git rev-parse "$NEW_TAG" >/dev/null 2>&1; then
             echo "exists=true" >> $GITHUB_OUTPUT
             echo "Tag $NEW_TAG already exists"
@@ -89,10 +101,10 @@ jobs:
           fi
 
       - name: Create and push tag
-        id: create_tag
-        if: steps.check_tag.outputs.exists == 'false'
+        id: create
+        if: steps.check.outputs.exists == 'false'
         run: |
-          NEW_TAG=${{ steps.next_version.outputs.new_tag }}
+          NEW_TAG=${{ steps.version.outputs.new_tag }}
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -111,14 +123,13 @@ jobs:
           echo "created=true" >> $GITHUB_OUTPUT
           echo "Created and pushed tag: $NEW_TAG"
 
-  # Trigger release workflow for the new tag
-  trigger-release:
-    name: Trigger Release
-    needs: auto-tag
-    if: needs.auto-tag.outputs.tag_created == 'true'
+  release:
+    name: Create Release
+    needs: tag
+    if: needs.tag.outputs.created == 'true' && inputs.create-release
     uses: hashicorp/ghaction-terraform-provider-release/.github/workflows/community.yml@v4
     secrets:
-      gpg-private-key: '${{ secrets.GPG_PRIVATE_KEY }}'
-      gpg-private-key-passphrase: '${{ secrets.PASSPHRASE }}'
+      gpg-private-key: ${{ secrets.gpg-private-key }}
+      gpg-private-key-passphrase: ${{ secrets.gpg-passphrase }}
     with:
       setup-go-version-file: 'go.mod'

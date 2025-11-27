@@ -1,0 +1,85 @@
+# Reusable workflow for building and testing Go code
+# Called by: on-merge.yml, ci.yml, sync-openapi.yml
+name: Build and Test
+
+on:
+  workflow_call:
+    inputs:
+      go-version-file:
+        description: 'Path to go.mod file for version detection'
+        type: string
+        default: 'go.mod'
+      ref:
+        description: 'Git ref to checkout'
+        type: string
+        default: ''
+      run-lint:
+        description: 'Whether to run golangci-lint'
+        type: boolean
+        default: false
+    outputs:
+      success:
+        description: 'Whether build and tests passed'
+        value: ${{ jobs.build.outputs.success }}
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    outputs:
+      success: ${{ steps.result.outputs.success }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: ${{ inputs.go-version-file }}
+          cache: true
+
+      - name: Run go mod tidy
+        run: |
+          go mod tidy
+          git diff --exit-code go.mod go.sum
+
+      - name: Build
+        run: go build -v .
+
+      - name: Test
+        run: go test -v -race ./internal/...
+
+      - name: Set result
+        id: result
+        if: always()
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "success=true" >> $GITHUB_OUTPUT
+          else
+            echo "success=false" >> $GITHUB_OUTPUT
+          fi
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    if: inputs.run-lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: ${{ inputs.go-version-file }}
+          cache: true
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: latest
+          args: --timeout=5m ./internal/... .

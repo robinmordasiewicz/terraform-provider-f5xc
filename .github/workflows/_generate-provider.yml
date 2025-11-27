@@ -1,0 +1,83 @@
+# Reusable workflow for regenerating provider code from OpenAPI specs
+# Called by: on-merge.yml, sync-openapi.yml
+name: Generate Provider Code
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: 'Git ref to checkout'
+        type: string
+        default: ''
+      spec-dir:
+        description: 'Directory containing OpenAPI specs'
+        type: string
+        default: 'docs/specifications/api'
+    outputs:
+      changed:
+        description: 'Whether provider code changed'
+        value: ${{ jobs.generate.outputs.changed }}
+
+jobs:
+  generate:
+    name: Generate Provider Code
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+          fetch-depth: 0
+
+      - name: Verify specs exist
+        id: verify
+        run: |
+          SPEC_COUNT=$(find ${{ inputs.spec-dir }} -name "*.json" -type f 2>/dev/null | wc -l)
+          echo "Found ${SPEC_COUNT} OpenAPI spec files in ${{ inputs.spec-dir }}"
+          if [ "$SPEC_COUNT" -eq "0" ]; then
+            echo "No spec files found - skipping generation"
+            echo "has_specs=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_specs=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up Go
+        if: steps.verify.outputs.has_specs == 'true'
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Run code generator
+        if: steps.verify.outputs.has_specs == 'true'
+        run: |
+          echo "Running code generator..."
+          go run tools/generate-all-schemas.go --spec-dir=${{ inputs.spec-dir }}
+
+      - name: Run go mod tidy
+        if: steps.verify.outputs.has_specs == 'true'
+        run: go mod tidy
+
+      - name: Build to verify
+        if: steps.verify.outputs.has_specs == 'true'
+        run: go build -v .
+
+      - name: Run tests
+        if: steps.verify.outputs.has_specs == 'true'
+        run: go test -v ./internal/...
+
+      - name: Check for changes
+        id: check
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No provider code changes"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Provider code changes detected:"
+            git diff --cached --stat
+            git reset HEAD
+          fi

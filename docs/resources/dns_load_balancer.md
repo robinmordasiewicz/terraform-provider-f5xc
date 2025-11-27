@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Fallback Pool**
 
-A `fallback_pool` block supports the following:
+A [`fallback_pool`](#fallback-pool) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -110,7 +110,7 @@ A `fallback_pool` block supports the following:
 
 **Response Cache**
 
-A `response_cache` block supports the following:
+A [`response_cache`](#response-cache) block supports the following:
 
 &#x2022; [`default_response_cache_parameters`](#default-response-cache-parameters) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -122,7 +122,7 @@ A `response_cache` block supports the following:
 
 **Response Cache Parameters**
 
-A `response_cache_parameters` block (within `response_cache`) supports the following:
+A [`response_cache_parameters`](#response-cache-response-cache-parameters) block (within [`response_cache`](#response-cache)) supports the following:
 
 &#x2022; [`cache_cidr_ipv4`](#cache-cidr-ipv4) - Optional Number<br>Length of IPv4 CIDR masks. Length of CIDR masks used to group IPv4 clients
 
@@ -134,7 +134,7 @@ A `response_cache_parameters` block (within `response_cache`) supports the follo
 
 **Rule List**
 
-A `rule_list` block supports the following:
+A [`rule_list`](#rule-list) block supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>Load Balancing Rules. Rules to perform load balancing<br>See [Rules](#rule-list-rules) below.
 
@@ -142,7 +142,7 @@ A `rule_list` block supports the following:
 
 **Rules**
 
-A `rules` block (within `rule_list`) supports the following:
+A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
 &#x2022; [`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rule-list-rules-asn-list) below.
 
@@ -164,7 +164,7 @@ A `rules` block (within `rule_list`) supports the following:
 
 **Asn List**
 
-An `asn_list` block (within `rule_list.rules`) supports the following:
+An [`asn_list`](#rule-list-rules-asn-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
@@ -172,7 +172,7 @@ An `asn_list` block (within `rule_list.rules`) supports the following:
 
 **Asn Matcher**
 
-An `asn_matcher` block (within `rule_list.rules`) supports the following:
+An [`asn_matcher`](#rule-list-rules-asn-matcher) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rule-list-rules-asn-matcher-asn-sets) below.
 
@@ -180,7 +180,7 @@ An `asn_matcher` block (within `rule_list.rules`) supports the following:
 
 **Asn Sets**
 
-An `asn_sets` block (within `rule_list.rules.asn_matcher`) supports the following:
+An [`asn_sets`](#rule-list-rules-asn-matcher-asn-sets) block (within [`rule_list.rules.asn_matcher`](#rule-list-rules-asn-matcher)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -196,7 +196,7 @@ An `asn_sets` block (within `rule_list.rules.asn_matcher`) supports the followin
 
 **Geo Location Label Selector**
 
-A `geo_location_label_selector` block (within `rule_list.rules`) supports the following:
+A [`geo_location_label_selector`](#rule-list-rules-geo-location-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -204,7 +204,7 @@ A `geo_location_label_selector` block (within `rule_list.rules`) supports the fo
 
 **Geo Location Set**
 
-A `geo_location_set` block (within `rule_list.rules`) supports the following:
+A [`geo_location_set`](#rule-list-rules-geo-location-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -216,7 +216,7 @@ A `geo_location_set` block (within `rule_list.rules`) supports the following:
 
 **IP Prefix List**
 
-An `ip_prefix_list` block (within `rule_list.rules`) supports the following:
+An [`ip_prefix_list`](#rule-list-rules-ip-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
@@ -226,7 +226,7 @@ An `ip_prefix_list` block (within `rule_list.rules`) supports the following:
 
 **IP Prefix Set**
 
-An `ip_prefix_set` block (within `rule_list.rules`) supports the following:
+An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
@@ -236,7 +236,7 @@ An `ip_prefix_set` block (within `rule_list.rules`) supports the following:
 
 **Prefix Sets**
 
-A `prefix_sets` block (within `rule_list.rules.ip_prefix_set`) supports the following:
+A [`prefix_sets`](#rule-list-rules-ip-prefix-set-prefix-sets) block (within [`rule_list.rules.ip_prefix_set`](#rule-list-rules-ip-prefix-set)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -252,7 +252,7 @@ A `prefix_sets` block (within `rule_list.rules.ip_prefix_set`) supports the foll
 
 **Pool**
 
-A `pool` block (within `rule_list.rules`) supports the following:
+A [`pool`](#rule-list-rules-pool) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -264,7 +264,7 @@ A `pool` block (within `rule_list.rules`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

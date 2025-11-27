@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cloud Hosted**
 
-A `cloud_hosted` block supports the following:
+A [`cloud_hosted`](#cloud-hosted) block supports the following:
 
 &#x2022; [`egress`](#egress) - Optional Block<br>Egress. Egress<br>See [Egress](#cloud-hosted-egress) below.
 
@@ -102,7 +102,7 @@ A `cloud_hosted` block supports the following:
 
 **Egress**
 
-An `egress` block (within `cloud_hosted`) supports the following:
+An [`egress`](#cloud-hosted-egress) block (within [`cloud_hosted`](#cloud-hosted)) supports the following:
 
 &#x2022; [`ip_address`](#ip-address) - Optional String<br>IP Address. Egress IP address
 
@@ -112,7 +112,7 @@ An `egress` block (within `cloud_hosted`) supports the following:
 
 **Ingress**
 
-An `ingress` block (within `cloud_hosted`) supports the following:
+An [`ingress`](#cloud-hosted-ingress) block (within [`cloud_hosted`](#cloud-hosted)) supports the following:
 
 &#x2022; [`host_name`](#host-name) - Optional String<br>Ingress value. Ingress Host Name
 
@@ -124,7 +124,7 @@ An `ingress` block (within `cloud_hosted`) supports the following:
 
 **Data Center Hosted**
 
-A `data_center_hosted` block supports the following:
+A [`data_center_hosted`](#data-center-hosted) block supports the following:
 
 &#x2022; [`egress`](#egress) - Optional Block<br>Egress. Egress<br>See [Egress](#data-center-hosted-egress) below.
 
@@ -138,7 +138,7 @@ A `data_center_hosted` block supports the following:
 
 **Egress**
 
-An `egress` block (within `data_center_hosted`) supports the following:
+An [`egress`](#data-center-hosted-egress) block (within [`data_center_hosted`](#data-center-hosted)) supports the following:
 
 &#x2022; [`ip_address`](#ip-address) - Optional String<br>IP Address. Egress IP address
 
@@ -148,7 +148,7 @@ An `egress` block (within `data_center_hosted`) supports the following:
 
 **Ingress**
 
-An `ingress` block (within `data_center_hosted`) supports the following:
+An [`ingress`](#data-center-hosted-ingress) block (within [`data_center_hosted`](#data-center-hosted)) supports the following:
 
 &#x2022; [`host_name`](#host-name) - Optional String<br>Ingress value. Ingress Host Name
 
@@ -160,7 +160,7 @@ An `ingress` block (within `data_center_hosted`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

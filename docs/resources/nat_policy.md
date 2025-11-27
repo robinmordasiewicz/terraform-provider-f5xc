@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules**
 
-A `rules` block supports the following:
+A [`rules`](#rules) block supports the following:
 
 &#x2022; [`action`](#action) - Optional Block<br>Action. Action to apply on the packet if the NAT rule is applied<br>See [Action](#rules-action) below.
 
@@ -108,7 +108,7 @@ A `rules` block supports the following:
 
 **Action**
 
-An `action` block (within `rules`) supports the following:
+An [`action`](#rules-action) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`dynamic`](#dynamic) - Optional Block<br>Dynamic Pool. Dynamic Pool Configuration<br>See [Dynamic](#rules-action-dynamic) below.
 
@@ -118,7 +118,7 @@ An `action` block (within `rules`) supports the following:
 
 **Dynamic**
 
-A `dynamic` block (within `rules.action`) supports the following:
+A [`dynamic`](#rules-action-dynamic) block (within [`rules.action`](#rules-action)) supports the following:
 
 &#x2022; [`elastic_ips`](#elastic-ips) - Optional Block<br>Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object<br>See [Elastic Ips](#rules-action-dynamic-elastic-ips) below.
 
@@ -128,7 +128,7 @@ A `dynamic` block (within `rules.action`) supports the following:
 
 **Elastic Ips**
 
-An `elastic_ips` block (within `rules.action.dynamic`) supports the following:
+An [`elastic_ips`](#rules-action-dynamic-elastic-ips) block (within [`rules.action.dynamic`](#rules-action-dynamic)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Cloud Elastic IP Reference List. Reference to one or more cloud elastic IP objects<br>See [Refs](#rules-action-dynamic-elastic-ips-refs) below.
 
@@ -136,7 +136,7 @@ An `elastic_ips` block (within `rules.action.dynamic`) supports the following:
 
 **Refs**
 
-A `refs` block (within `rules.action.dynamic.elastic_ips`) supports the following:
+A [`refs`](#rules-action-dynamic-elastic-ips-refs) block (within [`rules.action.dynamic.elastic_ips`](#rules-action-dynamic-elastic-ips)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -152,7 +152,7 @@ A `refs` block (within `rules.action.dynamic.elastic_ips`) supports the followin
 
 **Pools**
 
-A `pools` block (within `rules.action.dynamic`) supports the following:
+A [`pools`](#rules-action-dynamic-pools) block (within [`rules.action.dynamic`](#rules-action-dynamic)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
@@ -160,7 +160,7 @@ A `pools` block (within `rules.action.dynamic`) supports the following:
 
 **Cloud Connect**
 
-A `cloud_connect` block (within `rules`) supports the following:
+A [`cloud_connect`](#rules-cloud-connect) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Cloud Connect. Reference to Cloud Connect Object<br>See [Refs](#rules-cloud-connect-refs) below.
 
@@ -168,7 +168,7 @@ A `cloud_connect` block (within `rules`) supports the following:
 
 **Refs**
 
-A `refs` block (within `rules.cloud_connect`) supports the following:
+A [`refs`](#rules-cloud-connect-refs) block (within [`rules.cloud_connect`](#rules-cloud-connect)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -184,7 +184,7 @@ A `refs` block (within `rules.cloud_connect`) supports the following:
 
 **Criteria**
 
-A `criteria` block (within `rules`) supports the following:
+A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`any`](#any) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -212,7 +212,7 @@ A `criteria` block (within `rules`) supports the following:
 
 **Destination Port**
 
-A `destination_port` block (within `rules.criteria`) supports the following:
+A [`destination_port`](#rules-criteria-destination-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -224,7 +224,7 @@ A `destination_port` block (within `rules.criteria`) supports the following:
 
 **Segment**
 
-A `segment` block (within `rules.criteria`) supports the following:
+A [`segment`](#rules-criteria-segment) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#rules-criteria-segment-refs) below.
 
@@ -232,7 +232,7 @@ A `segment` block (within `rules.criteria`) supports the following:
 
 **Refs**
 
-A `refs` block (within `rules.criteria.segment`) supports the following:
+A [`refs`](#rules-criteria-segment-refs) block (within [`rules.criteria.segment`](#rules-criteria-segment)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -248,7 +248,7 @@ A `refs` block (within `rules.criteria.segment`) supports the following:
 
 **Source Port**
 
-A `source_port` block (within `rules.criteria`) supports the following:
+A [`source_port`](#rules-criteria-source-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -260,7 +260,7 @@ A `source_port` block (within `rules.criteria`) supports the following:
 
 **TCP**
 
-A `tcp` block (within `rules.criteria`) supports the following:
+A [`tcp`](#rules-criteria-tcp) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
 &#x2022; [`destination_port`](#destination-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Destination Port](#rules-criteria-tcp-destination-port) below.
 
@@ -270,7 +270,7 @@ A `tcp` block (within `rules.criteria`) supports the following:
 
 **Destination Port**
 
-A `destination_port` block (within `rules.criteria.tcp`) supports the following:
+A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -282,7 +282,7 @@ A `destination_port` block (within `rules.criteria.tcp`) supports the following:
 
 **Source Port**
 
-A `source_port` block (within `rules.criteria.tcp`) supports the following:
+A [`source_port`](#rules-criteria-tcp-source-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -294,7 +294,7 @@ A `source_port` block (within `rules.criteria.tcp`) supports the following:
 
 **UDP**
 
-An `udp` block (within `rules.criteria`) supports the following:
+An [`udp`](#rules-criteria-udp) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
 &#x2022; [`destination_port`](#destination-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Destination Port](#rules-criteria-udp-destination-port) below.
 
@@ -304,7 +304,7 @@ An `udp` block (within `rules.criteria`) supports the following:
 
 **Destination Port**
 
-A `destination_port` block (within `rules.criteria.udp`) supports the following:
+A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -316,7 +316,7 @@ A `destination_port` block (within `rules.criteria.udp`) supports the following:
 
 **Source Port**
 
-A `source_port` block (within `rules.criteria.udp`) supports the following:
+A [`source_port`](#rules-criteria-udp-source-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
 &#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -328,7 +328,7 @@ A `source_port` block (within `rules.criteria.udp`) supports the following:
 
 **Virtual Network**
 
-A `virtual_network` block (within `rules.criteria`) supports the following:
+A [`virtual_network`](#rules-criteria-virtual-network) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Virtual Network Reference. Reference to virtual network<br>See [Refs](#rules-criteria-virtual-network-refs) below.
 
@@ -336,7 +336,7 @@ A `virtual_network` block (within `rules.criteria`) supports the following:
 
 **Refs**
 
-A `refs` block (within `rules.criteria.virtual_network`) supports the following:
+A [`refs`](#rules-criteria-virtual-network-refs) block (within [`rules.criteria.virtual_network`](#rules-criteria-virtual-network)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -352,7 +352,7 @@ A `refs` block (within `rules.criteria.virtual_network`) supports the following:
 
 **Network Interface**
 
-A `network_interface` block (within `rules`) supports the following:
+A [`network_interface`](#rules-network-interface) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Network Interface. Reference to Network Interface Object<br>See [Refs](#rules-network-interface-refs) below.
 
@@ -360,7 +360,7 @@ A `network_interface` block (within `rules`) supports the following:
 
 **Refs**
 
-A `refs` block (within `rules.network_interface`) supports the following:
+A [`refs`](#rules-network-interface-refs) block (within [`rules.network_interface`](#rules-network-interface)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -376,7 +376,7 @@ A `refs` block (within `rules.network_interface`) supports the following:
 
 **Segment**
 
-A `segment` block (within `rules`) supports the following:
+A [`segment`](#rules-segment) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#rules-segment-refs) below.
 
@@ -384,7 +384,7 @@ A `segment` block (within `rules`) supports the following:
 
 **Refs**
 
-A `refs` block (within `rules.segment`) supports the following:
+A [`refs`](#rules-segment-refs) block (within [`rules.segment`](#rules-segment)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -400,7 +400,7 @@ A `refs` block (within `rules.segment`) supports the following:
 
 **Virtual Network**
 
-A `virtual_network` block (within `rules`) supports the following:
+A [`virtual_network`](#rules-virtual-network) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Virtual Network Reference. Reference to virtual network<br>See [Refs](#rules-virtual-network-refs) below.
 
@@ -408,7 +408,7 @@ A `virtual_network` block (within `rules`) supports the following:
 
 **Refs**
 
-A `refs` block (within `rules.virtual_network`) supports the following:
+A [`refs`](#rules-virtual-network-refs) block (within [`rules.virtual_network`](#rules-virtual-network)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -424,7 +424,7 @@ A `refs` block (within `rules.virtual_network`) supports the following:
 
 **Site**
 
-A `site` block supports the following:
+A [`site`](#site) block supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Site. Reference to Site Object<br>See [Refs](#site-refs) below.
 
@@ -432,7 +432,7 @@ A `site` block supports the following:
 
 **Refs**
 
-A `refs` block (within `site`) supports the following:
+A [`refs`](#site-refs) block (within [`site`](#site)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -448,7 +448,7 @@ A `refs` block (within `site`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

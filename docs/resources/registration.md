@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Infra**
 
-An `infra` block supports the following:
+An [`infra`](#infra) block supports the following:
 
 &#x2022; [`availability_zone`](#availability-zone) - Optional String<br>Availability Zone. An Availability Zone is a high-availability offering that protects your applications and data from datacenter failures
 
@@ -118,7 +118,7 @@ An `infra` block supports the following:
 
 **Hw Info**
 
-A `hw_info` block (within `infra`) supports the following:
+A [`hw_info`](#infra-hw-info) block (within [`infra`](#infra)) supports the following:
 
 &#x2022; [`bios`](#bios) - Optional Block<br>Bios Data. BIOS information<br>See [Bios](#infra-hw-info-bios) below.
 
@@ -150,7 +150,7 @@ A `hw_info` block (within `infra`) supports the following:
 
 **Bios**
 
-A `bios` block (within `infra.hw_info`) supports the following:
+A [`bios`](#infra-hw-info-bios) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`date`](#date) - Optional String<br>Date. information from /sys/class/dmi/id/bios_date
 
@@ -162,7 +162,7 @@ A `bios` block (within `infra.hw_info`) supports the following:
 
 **Board**
 
-A `board` block (within `infra.hw_info`) supports the following:
+A [`board`](#infra-hw-info-board) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`asset_tag`](#asset-tag) - Optional String<br>Asset Tag. information from /sys/class/dmi/id/board_asset_tag
 
@@ -178,7 +178,7 @@ A `board` block (within `infra.hw_info`) supports the following:
 
 **Chassis**
 
-A `chassis` block (within `infra.hw_info`) supports the following:
+A [`chassis`](#infra-hw-info-chassis) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`asset_tag`](#asset-tag) - Optional String<br>Asset Tag. information from /sys/class/dmi/id/chassis_asset_tag
 
@@ -194,7 +194,7 @@ A `chassis` block (within `infra.hw_info`) supports the following:
 
 **CPU**
 
-A `cpu` block (within `infra.hw_info`) supports the following:
+A [`cpu`](#infra-hw-info-cpu) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`cache`](#cache) - Optional Number<br>Cache. CPU cache size in KB
 
@@ -214,7 +214,7 @@ A `cpu` block (within `infra.hw_info`) supports the following:
 
 **GPU**
 
-A `gpu` block (within `infra.hw_info`) supports the following:
+A [`gpu`](#infra-hw-info-gpu) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`cuda_version`](#cuda-version) - Optional String<br>Cuda Version. GPU Cuda Version
 
@@ -226,7 +226,7 @@ A `gpu` block (within `infra.hw_info`) supports the following:
 
 **GPU Device**
 
-A `gpu_device` block (within `infra.hw_info.gpu`) supports the following:
+A [`gpu_device`](#infra-hw-info-gpu-gpu-device) block (within [`infra.hw_info.gpu`](#infra-hw-info-gpu)) supports the following:
 
 &#x2022; [`id`](#id) - Optional String<br>GPU ID. GPU ID
 
@@ -238,7 +238,7 @@ A `gpu_device` block (within `infra.hw_info.gpu`) supports the following:
 
 **Kernel**
 
-A `kernel` block (within `infra.hw_info`) supports the following:
+A [`kernel`](#infra-hw-info-kernel) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`architecture`](#architecture) - Optional String<br>Architecture. kernel architecture
 
@@ -250,7 +250,7 @@ A `kernel` block (within `infra.hw_info`) supports the following:
 
 **Memory**
 
-A `memory` block (within `infra.hw_info`) supports the following:
+A [`memory`](#infra-hw-info-memory) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`size_mb`](#size-mb) - Optional Number<br>RAM. RAM size in MB
 
@@ -262,7 +262,7 @@ A `memory` block (within `infra.hw_info`) supports the following:
 
 **Network**
 
-A `network` block (within `infra.hw_info`) supports the following:
+A [`network`](#infra-hw-info-network) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`driver`](#driver) - Optional String<br>Driver. driver of device, eg. e1000e
 
@@ -284,7 +284,7 @@ A `network` block (within `infra.hw_info`) supports the following:
 
 **OS**
 
-An `os` block (within `infra.hw_info`) supports the following:
+An [`os`](#infra-hw-info-os) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`architecture`](#architecture) - Optional String<br>Architecture. Architecture of OS
 
@@ -300,7 +300,7 @@ An `os` block (within `infra.hw_info`) supports the following:
 
 **Product**
 
-A `product` block (within `infra.hw_info`) supports the following:
+A [`product`](#infra-hw-info-product) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. product name, eg. for AWS m5a.xlarge. Info taken from /sys/class/dmi/id/product_name
 
@@ -314,7 +314,7 @@ A `product` block (within `infra.hw_info`) supports the following:
 
 **Storage**
 
-A `storage` block (within `infra.hw_info`) supports the following:
+A [`storage`](#infra-hw-info-storage) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`driver`](#driver) - Optional String<br>Driver. driver of device
 
@@ -332,7 +332,7 @@ A `storage` block (within `infra.hw_info`) supports the following:
 
 **Usb**
 
-An `usb` block (within `infra.hw_info`) supports the following:
+An [`usb`](#infra-hw-info-usb) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
 &#x2022; [`address`](#address) - Optional Number<br>Address. Address of the device on the bus in decimal
 
@@ -376,7 +376,7 @@ An `usb` block (within `infra.hw_info`) supports the following:
 
 **Internet Proxy**
 
-An `internet_proxy` block (within `infra`) supports the following:
+An [`internet_proxy`](#infra-internet-proxy) block (within [`infra`](#infra)) supports the following:
 
 &#x2022; [`http_proxy`](#http-proxy) - Optional String<br>HTTP PROXY. It will be used as the proxy URL for HTTP requests and HTTPS requests unless overridden by HTTPSProxy or NoProxy
 
@@ -390,7 +390,7 @@ An `internet_proxy` block (within `infra`) supports the following:
 
 **Sw Info**
 
-A `sw_info` block (within `infra`) supports the following:
+A [`sw_info`](#infra-sw-info) block (within [`infra`](#infra)) supports the following:
 
 &#x2022; [`sw_version`](#sw-version) - Optional String<br>SW Version. SW Version in the site
 
@@ -398,7 +398,7 @@ A `sw_info` block (within `infra`) supports the following:
 
 **Passport**
 
-A `passport` block supports the following:
+A [`passport`](#passport) block supports the following:
 
 &#x2022; [`cluster_name`](#cluster-name) - Optional String<br>Cluster Name
 
@@ -424,7 +424,7 @@ A `passport` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

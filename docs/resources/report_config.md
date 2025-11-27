@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Report Recipients**
 
-A `report_recipients` block supports the following:
+A [`report_recipients`](#report-recipients) block supports the following:
 
 &#x2022; [`user_groups`](#user-groups) - Optional Block<br>User Groups. Select one or more user groups, to which the report should be sent via email<br>See [User Groups](#report-recipients-user-groups) below.
 
@@ -92,7 +92,7 @@ A `report_recipients` block supports the following:
 
 **User Groups**
 
-An `user_groups` block (within `report_recipients`) supports the following:
+An [`user_groups`](#report-recipients-user-groups) block (within [`report_recipients`](#report-recipients)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -104,7 +104,7 @@ An `user_groups` block (within `report_recipients`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -118,7 +118,7 @@ A `timeouts` block supports the following:
 
 **Waap**
 
-A `waap` block supports the following:
+A [`waap`](#waap) block supports the following:
 
 &#x2022; [`current_namespace`](#current-namespace) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -134,7 +134,7 @@ A `waap` block supports the following:
 
 **Daily**
 
-A `daily` block (within `waap`) supports the following:
+A [`daily`](#waap-daily) block (within [`waap`](#waap)) supports the following:
 
 &#x2022; [`report_generation_time`](#report-generation-time) - Optional String<br>Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
 
@@ -142,7 +142,7 @@ A `daily` block (within `waap`) supports the following:
 
 **Monthly**
 
-A `monthly` block (within `waap`) supports the following:
+A [`monthly`](#waap-monthly) block (within [`waap`](#waap)) supports the following:
 
 &#x2022; [`date`](#date) - Optional String  Defaults to `DATE_NONE`<br>Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST`<br>Report Generation Date. report generation date Indicates field not being set Create report on Last day of month
 
@@ -152,7 +152,7 @@ A `monthly` block (within `waap`) supports the following:
 
 **Namespaces**
 
-A `namespaces` block (within `waap`) supports the following:
+A [`namespaces`](#waap-namespaces) block (within [`waap`](#waap)) supports the following:
 
 &#x2022; [`namespaces`](#namespaces) - Optional List<br>Namespaces. list of namespaces for which user wants to generate report
 
@@ -160,7 +160,7 @@ A `namespaces` block (within `waap`) supports the following:
 
 **Weekly**
 
-A `weekly` block (within `waap`) supports the following:
+A [`weekly`](#waap-weekly) block (within [`waap`](#waap)) supports the following:
 
 &#x2022; [`day`](#day) - Optional String  Defaults to `WEEKDAY_NONE`<br>Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY`<br>Report Generation Weekday. report generation weekday Indicates field not being set
 

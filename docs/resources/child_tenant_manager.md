@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Group Assignments**
 
-A `group_assignments` block supports the following:
+A [`group_assignments`](#group-assignments) block supports the following:
 
 &#x2022; [`child_tenant_groups`](#child-tenant-groups) - Optional List<br>Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user
 
@@ -94,7 +94,7 @@ A `group_assignments` block supports the following:
 
 **Group**
 
-A `group` block (within `group_assignments`) supports the following:
+A [`group`](#group-assignments-group) block (within [`group_assignments`](#group-assignments)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -106,7 +106,7 @@ A `group` block (within `group_assignments`) supports the following:
 
 **Tenant Owner Group**
 
-A `tenant_owner_group` block supports the following:
+A [`tenant_owner_group`](#tenant-owner-group) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -118,7 +118,7 @@ A `tenant_owner_group` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

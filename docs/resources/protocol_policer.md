@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol Policer**
 
-A `protocol_policer` block supports the following:
+A [`protocol_policer`](#protocol-policer) block supports the following:
 
 &#x2022; [`policer`](#policer) - Optional Block<br>Policer. Reference to policer object to apply traffic rate limits<br>See [Policer](#protocol-policer-policer) below.
 
@@ -92,7 +92,7 @@ A `protocol_policer` block supports the following:
 
 **Policer**
 
-A `policer` block (within `protocol_policer`) supports the following:
+A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -108,7 +108,7 @@ A `policer` block (within `protocol_policer`) supports the following:
 
 **Protocol**
 
-A `protocol` block (within `protocol_policer`) supports the following:
+A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
 &#x2022; [`dns`](#dns) - Optional Block<br>DNS Packets. Match all DNS packets inclusing UDP and TCP
 
@@ -122,7 +122,7 @@ A `protocol` block (within `protocol_policer`) supports the following:
 
 **ICMP**
 
-An `icmp` block (within `protocol_policer.protocol`) supports the following:
+An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
 &#x2022; [`type`](#type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
 
@@ -130,7 +130,7 @@ An `icmp` block (within `protocol_policer.protocol`) supports the following:
 
 **TCP**
 
-A `tcp` block (within `protocol_policer.protocol`) supports the following:
+A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
 &#x2022; [`flags`](#flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
 
@@ -138,7 +138,7 @@ A `tcp` block (within `protocol_policer.protocol`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

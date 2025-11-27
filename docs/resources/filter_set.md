@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Filter Fields**
 
-A `filter_fields` block supports the following:
+A [`filter_fields`](#filter-fields) block supports the following:
 
 &#x2022; [`date_field`](#date-field) - Optional Block<br>Filter Date/Time Range Field. either an absolute time range or a relative time interval<br>See [Date Field](#filter-fields-date-field) below.
 
@@ -98,7 +98,7 @@ A `filter_fields` block supports the following:
 
 **Date Field**
 
-A `date_field` block (within `filter_fields`) supports the following:
+A [`date_field`](#filter-fields-date-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
 &#x2022; [`absolute`](#absolute) - Optional Block<br>Date Range. Date range is for selecting a date range<br>See [Absolute](#filter-fields-date-field-absolute) below.
 
@@ -108,7 +108,7 @@ A `date_field` block (within `filter_fields`) supports the following:
 
 **Absolute**
 
-An `absolute` block (within `filter_fields.date_field`) supports the following:
+An [`absolute`](#filter-fields-date-field-absolute) block (within [`filter_fields.date_field`](#filter-fields-date-field)) supports the following:
 
 &#x2022; [`end_date`](#end-date) - Optional String<br>End Date. Contains end date
 
@@ -118,7 +118,7 @@ An `absolute` block (within `filter_fields.date_field`) supports the following:
 
 **Filter Expression Field**
 
-A `filter_expression_field` block (within `filter_fields`) supports the following:
+A [`filter_expression_field`](#filter-fields-filter-expression-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
 &#x2022; [`expression`](#expression) - Optional String<br>Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
 
@@ -126,7 +126,7 @@ A `filter_expression_field` block (within `filter_fields`) supports the followin
 
 **String Field**
 
-A `string_field` block (within `filter_fields`) supports the following:
+A [`string_field`](#filter-fields-string-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
 &#x2022; [`field_values`](#field-values) - Optional List<br>String Value(s)
 
@@ -134,7 +134,7 @@ A `string_field` block (within `filter_fields`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

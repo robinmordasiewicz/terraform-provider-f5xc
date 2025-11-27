@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Static Routes**
 
-A `static_routes` block supports the following:
+A [`static_routes`](#static-routes) block supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
@@ -105,7 +105,7 @@ A `static_routes` block supports the following:
 
 **Node Interface**
 
-A `node_interface` block (within `static_routes`) supports the following:
+A [`node_interface`](#static-routes-node-interface) block (within [`static_routes`](#static-routes)) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#static-routes-node-interface-list) below.
 
@@ -113,7 +113,7 @@ A `node_interface` block (within `static_routes`) supports the following:
 
 **List**
 
-A `list` block (within `static_routes.node_interface`) supports the following:
+A [`list`](#static-routes-node-interface-list) block (within [`static_routes.node_interface`](#static-routes-node-interface)) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#static-routes-node-interface-list-interface) below.
 
@@ -123,7 +123,7 @@ A `list` block (within `static_routes.node_interface`) supports the following:
 
 **Interface**
 
-An `interface` block (within `static_routes.node_interface.list`) supports the following:
+An [`interface`](#static-routes-node-interface-list-interface) block (within [`static_routes.node_interface.list`](#static-routes-node-interface-list)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -139,7 +139,7 @@ An `interface` block (within `static_routes.node_interface.list`) supports the f
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

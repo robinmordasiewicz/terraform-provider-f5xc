@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **DNS Name Advanced**
 
-A `dns_name_advanced` block supports the following:
+A [`dns_name_advanced`](#dns-name-advanced) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Endpoint DNS Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
 
@@ -106,7 +106,7 @@ A `dns_name_advanced` block supports the following:
 
 **Service Info**
 
-A `service_info` block supports the following:
+A [`service_info`](#service-info) block supports the following:
 
 &#x2022; [`discovery_type`](#discovery-type) - Optional String  Defaults to `INVALID_DISCOVERY`<br>Possible values are `INVALID_DISCOVERY`, `K8S`, `CONSUL`, `CLASSIC_BIGIP`, `THIRD_PARTY`<br>Discovery Type. Specifies whether the discovery is from Kubernetes or Consul cluster Invalid Discovery mechanism Discover from Kubernetes cluster Discover from Consul service Discover from Classic BIG-IP Clusters Discover for Third Party Application
 
@@ -118,7 +118,7 @@ A `service_info` block supports the following:
 
 **Service Selector**
 
-A `service_selector` block (within `service_info`) supports the following:
+A [`service_selector`](#service-info-service-selector) block (within [`service_info`](#service-info)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -126,7 +126,7 @@ A `service_selector` block (within `service_info`) supports the following:
 
 **Snat Pool**
 
-A `snat_pool` block supports the following:
+A [`snat_pool`](#snat-pool) block supports the following:
 
 &#x2022; [`no_snat_pool`](#no-snat-pool) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -136,7 +136,7 @@ A `snat_pool` block supports the following:
 
 **Snat Pool**
 
-A `snat_pool` block (within `snat_pool`) supports the following:
+A [`snat_pool`](#snat-pool-snat-pool) block (within [`snat_pool`](#snat-pool)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
@@ -144,7 +144,7 @@ A `snat_pool` block (within `snat_pool`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -158,7 +158,7 @@ A `timeouts` block supports the following:
 
 **Where**
 
-A `where` block supports the following:
+A [`where`](#where) block supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
@@ -170,7 +170,7 @@ A `where` block supports the following:
 
 **Site**
 
-A `site` block (within `where`) supports the following:
+A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -184,7 +184,7 @@ A `site` block (within `where`) supports the following:
 
 **Ref**
 
-A `ref` block (within `where.site`) supports the following:
+A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -200,7 +200,7 @@ A `ref` block (within `where.site`) supports the following:
 
 **Virtual Network**
 
-A `virtual_network` block (within `where`) supports the following:
+A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
 
@@ -208,7 +208,7 @@ A `virtual_network` block (within `where`) supports the following:
 
 **Ref**
 
-A `ref` block (within `where.virtual_network`) supports the following:
+A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#where-virtual-network)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -224,7 +224,7 @@ A `ref` block (within `where.virtual_network`) supports the following:
 
 **Virtual Site**
 
-A `virtual_site` block (within `where`) supports the following:
+A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -238,7 +238,7 @@ A `virtual_site` block (within `where`) supports the following:
 
 **Ref**
 
-A `ref` block (within `where.virtual_site`) supports the following:
+A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

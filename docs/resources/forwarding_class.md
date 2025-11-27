@@ -95,7 +95,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dscp**
 
-A `dscp` block supports the following:
+A [`dscp`](#dscp) block supports the following:
 
 &#x2022; [`drop_precedence`](#drop-precedence) - Optional String  Defaults to `DSCP_AF_FAKE`<br>Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`<br>DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer
 
@@ -105,7 +105,7 @@ A `dscp` block supports the following:
 
 **Policer**
 
-A `policer` block supports the following:
+A [`policer`](#policer) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -117,7 +117,7 @@ A `policer` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

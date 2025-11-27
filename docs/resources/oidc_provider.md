@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Azure Oidc Spec Type**
 
-An `azure_oidc_spec_type` block supports the following:
+An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
 
 &#x2022; [`authorization_url`](#authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
 
@@ -116,7 +116,7 @@ An `azure_oidc_spec_type` block supports the following:
 
 **Google Oidc Spec Type**
 
-A `google_oidc_spec_type` block supports the following:
+A [`google_oidc_spec_type`](#google-oidc-spec-type) block supports the following:
 
 &#x2022; [`client_id`](#client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field
 
@@ -128,7 +128,7 @@ A `google_oidc_spec_type` block supports the following:
 
 **Oidc V10 Spec Type**
 
-An `oidc_v10_spec_type` block supports the following:
+An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
 &#x2022; [`allowed_clock_skew`](#allowed-clock-skew) - Optional String  Defaults to `zero`<br>Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens
 
@@ -170,7 +170,7 @@ An `oidc_v10_spec_type` block supports the following:
 
 **Okta Oidc Spec Type**
 
-An `okta_oidc_spec_type` block supports the following:
+An [`okta_oidc_spec_type`](#okta-oidc-spec-type) block supports the following:
 
 &#x2022; [`authorization_url`](#authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
 
@@ -198,7 +198,7 @@ An `okta_oidc_spec_type` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

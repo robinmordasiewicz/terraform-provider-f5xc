@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **API Inventory Exclusion List**
 
-An `api_inventory_exclusion_list` block supports the following:
+An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block supports the following:
 
 &#x2022; [`method`](#method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
@@ -95,7 +95,7 @@ An `api_inventory_exclusion_list` block supports the following:
 
 **API Inventory Inclusion List**
 
-An `api_inventory_inclusion_list` block supports the following:
+An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block supports the following:
 
 &#x2022; [`method`](#method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
@@ -105,7 +105,7 @@ An `api_inventory_inclusion_list` block supports the following:
 
 **Non API Endpoints**
 
-A `non_api_endpoints` block supports the following:
+A [`non_api_endpoints`](#non-api-endpoints) block supports the following:
 
 &#x2022; [`method`](#method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
@@ -115,7 +115,7 @@ A `non_api_endpoints` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

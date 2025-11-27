@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ike Keylifetime Hours**
 
-An `ike_keylifetime_hours` block supports the following:
+An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -98,7 +98,7 @@ An `ike_keylifetime_hours` block supports the following:
 
 **Ike Keylifetime Minutes**
 
-An `ike_keylifetime_minutes` block supports the following:
+An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -106,7 +106,7 @@ An `ike_keylifetime_minutes` block supports the following:
 
 **Reauth Timeout Days**
 
-A `reauth_timeout_days` block supports the following:
+A [`reauth_timeout_days`](#reauth-timeout-days) block supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -114,7 +114,7 @@ A `reauth_timeout_days` block supports the following:
 
 **Reauth Timeout Hours**
 
-A `reauth_timeout_hours` block supports the following:
+A [`reauth_timeout_hours`](#reauth-timeout-hours) block supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -122,7 +122,7 @@ A `reauth_timeout_hours` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

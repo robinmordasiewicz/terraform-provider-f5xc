@@ -123,7 +123,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Blocked Services**
 
-A `blocked_services` block supports the following:
+A [`blocked_services`](#blocked-services) block supports the following:
 
 &#x2022; [`blocked_sevice`](#blocked-sevice) - Optional Block<br>Disable Node Local Services<br>See [Blocked Sevice](#blocked-services-blocked-sevice) below.
 
@@ -131,7 +131,7 @@ A `blocked_services` block supports the following:
 
 **Blocked Sevice**
 
-A `blocked_sevice` block (within `blocked_services`) supports the following:
+A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_services`](#blocked-services)) supports the following:
 
 &#x2022; [`dns`](#dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -145,7 +145,7 @@ A `blocked_sevice` block (within `blocked_services`) supports the following:
 
 **Bond Device List**
 
-A `bond_device_list` block supports the following:
+A [`bond_device_list`](#bond-device-list) block supports the following:
 
 &#x2022; [`bond_devices`](#bond-devices) - Optional Block<br>Bond Devices. List of bond devices<br>See [Bond Devices](#bond-device-list-bond-devices) below.
 
@@ -153,7 +153,7 @@ A `bond_device_list` block supports the following:
 
 **Bond Devices**
 
-A `bond_devices` block (within `bond_device_list`) supports the following:
+A [`bond_devices`](#bond-device-list-bond-devices) block (within [`bond_device_list`](#bond-device-list)) supports the following:
 
 &#x2022; [`active_backup`](#active-backup) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -171,7 +171,7 @@ A `bond_devices` block (within `bond_device_list`) supports the following:
 
 **Lacp**
 
-A `lacp` block (within `bond_device_list.bond_devices`) supports the following:
+A [`lacp`](#bond-device-list-bond-devices-lacp) block (within [`bond_device_list.bond_devices`](#bond-device-list-bond-devices)) supports the following:
 
 &#x2022; [`rate`](#rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
 
@@ -179,7 +179,7 @@ A `lacp` block (within `bond_device_list.bond_devices`) supports the following:
 
 **Coordinates**
 
-A `coordinates` block supports the following:
+A [`coordinates`](#coordinates) block supports the following:
 
 &#x2022; [`latitude`](#latitude) - Optional Number<br>Latitude. Latitude of the site location
 
@@ -189,7 +189,7 @@ A `coordinates` block supports the following:
 
 **Custom Network Config**
 
-A `custom_network_config` block supports the following:
+A [`custom_network_config`](#custom-network-config) block supports the following:
 
 &#x2022; [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#custom-network-config-active-enhanced-firewall-policies) below.
 
@@ -231,7 +231,7 @@ A `custom_network_config` block supports the following:
 
 **Active Enhanced Firewall Policies**
 
-An `active_enhanced_firewall_policies` block (within `custom_network_config`) supports the following:
+An [`active_enhanced_firewall_policies`](#custom-network-config-active-enhanced-firewall-policies) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
 &#x2022; [`enhanced_firewall_policies`](#enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#custom-network-config-active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
@@ -239,7 +239,7 @@ An `active_enhanced_firewall_policies` block (within `custom_network_config`) su
 
 **Enhanced Firewall Policies**
 
-An `enhanced_firewall_policies` block (within `custom_network_config.active_enhanced_firewall_policies`) supports the following:
+An [`enhanced_firewall_policies`](#custom-network-config-active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`custom_network_config.active_enhanced_firewall_policies`](#custom-network-config-active-enhanced-firewall-policies)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -251,7 +251,7 @@ An `enhanced_firewall_policies` block (within `custom_network_config.active_enha
 
 **Active Forward Proxy Policies**
 
-An `active_forward_proxy_policies` block (within `custom_network_config`) supports the following:
+An [`active_forward_proxy_policies`](#custom-network-config-active-forward-proxy-policies) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
 &#x2022; [`forward_proxy_policies`](#forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#custom-network-config-active-forward-proxy-policies-forward-proxy-policies) below.
 
@@ -259,7 +259,7 @@ An `active_forward_proxy_policies` block (within `custom_network_config`) suppor
 
 **Forward Proxy Policies**
 
-A `forward_proxy_policies` block (within `custom_network_config.active_forward_proxy_policies`) supports the following:
+A [`forward_proxy_policies`](#custom-network-config-active-forward-proxy-policies-forward-proxy-policies) block (within [`custom_network_config.active_forward_proxy_policies`](#custom-network-config-active-forward-proxy-policies)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -271,7 +271,7 @@ A `forward_proxy_policies` block (within `custom_network_config.active_forward_p
 
 **Active Network Policies**
 
-An `active_network_policies` block (within `custom_network_config`) supports the following:
+An [`active_network_policies`](#custom-network-config-active-network-policies) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
 &#x2022; [`network_policies`](#network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#custom-network-config-active-network-policies-network-policies) below.
 
@@ -279,7 +279,7 @@ An `active_network_policies` block (within `custom_network_config`) supports the
 
 **Network Policies**
 
-A `network_policies` block (within `custom_network_config.active_network_policies`) supports the following:
+A [`network_policies`](#custom-network-config-active-network-policies-network-policies) block (within [`custom_network_config.active_network_policies`](#custom-network-config-active-network-policies)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -291,7 +291,7 @@ A `network_policies` block (within `custom_network_config.active_network_policie
 
 **Global Network List**
 
-A `global_network_list` block (within `custom_network_config`) supports the following:
+A [`global_network_list`](#custom-network-config-global-network-list) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
 &#x2022; [`global_network_connections`](#global-network-connections) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#custom-network-config-global-network-list-global-network-connections) below.
 
@@ -299,7 +299,7 @@ A `global_network_list` block (within `custom_network_config`) supports the foll
 
 **Global Network Connections**
 
-A `global_network_connections` block (within `custom_network_config.global_network_list`) supports the following:
+A [`global_network_connections`](#custom-network-config-global-network-list-global-network-connections) block (within [`custom_network_config.global_network_list`](#custom-network-config-global-network-list)) supports the following:
 
 &#x2022; [`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Sli To Global DR](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) below.
 
@@ -309,7 +309,7 @@ A `global_network_connections` block (within `custom_network_config.global_netwo
 
 **Sli To Global DR**
 
-A `sli_to_global_dr` block (within `custom_network_config.global_network_list.global_network_connections`) supports the following:
+A [`sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr) block (within [`custom_network_config.global_network_list.global_network_connections`](#custom-network-config-global-network-list-global-network-connections)) supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) below.
 
@@ -317,7 +317,7 @@ A `sli_to_global_dr` block (within `custom_network_config.global_network_list.gl
 
 **Global Vn**
 
-A `global_vn` block (within `custom_network_config.global_network_list.global_network_connections.sli_to_global_dr`) supports the following:
+A [`global_vn`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr-global-vn) block (within [`custom_network_config.global_network_list.global_network_connections.sli_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-sli-to-global-dr)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -329,7 +329,7 @@ A `global_vn` block (within `custom_network_config.global_network_list.global_ne
 
 **Slo To Global DR**
 
-A `slo_to_global_dr` block (within `custom_network_config.global_network_list.global_network_connections`) supports the following:
+A [`slo_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr) block (within [`custom_network_config.global_network_list.global_network_connections`](#custom-network-config-global-network-list-global-network-connections)) supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn) below.
 
@@ -337,7 +337,7 @@ A `slo_to_global_dr` block (within `custom_network_config.global_network_list.gl
 
 **Global Vn**
 
-A `global_vn` block (within `custom_network_config.global_network_list.global_network_connections.slo_to_global_dr`) supports the following:
+A [`global_vn`](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr-global-vn) block (within [`custom_network_config.global_network_list.global_network_connections.slo_to_global_dr`](#custom-network-config-global-network-list-global-network-connections-slo-to-global-dr)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -349,7 +349,7 @@ A `global_vn` block (within `custom_network_config.global_network_list.global_ne
 
 **Interface List**
 
-An `interface_list` block (within `custom_network_config`) supports the following:
+An [`interface_list`](#custom-network-config-interface-list) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
 &#x2022; [`interfaces`](#interfaces) - Optional Block<br>List of Interface. Configure network interfaces for this Secure Mesh site<br>See [Interfaces](#custom-network-config-interface-list-interfaces) below.
 
@@ -357,7 +357,7 @@ An `interface_list` block (within `custom_network_config`) supports the followin
 
 **Interfaces**
 
-An `interfaces` block (within `custom_network_config.interface_list`) supports the following:
+An [`interfaces`](#custom-network-config-interface-list-interfaces) block (within [`custom_network_config.interface_list`](#custom-network-config-interface-list)) supports the following:
 
 &#x2022; [`dc_cluster_group_connectivity_interface_disabled`](#dc-cluster-group-connectivity-interface-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -377,7 +377,7 @@ An `interfaces` block (within `custom_network_config.interface_list`) supports t
 
 **Dedicated Interface**
 
-A `dedicated_interface` block (within `custom_network_config.interface_list.interfaces`) supports the following:
+A [`dedicated_interface`](#custom-network-config-interface-list-interfaces-dedicated-interface) block (within [`custom_network_config.interface_list.interfaces`](#custom-network-config-interface-list-interfaces)) supports the following:
 
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -401,7 +401,7 @@ A `dedicated_interface` block (within `custom_network_config.interface_list.inte
 
 **Dedicated Management Interface**
 
-A `dedicated_management_interface` block (within `custom_network_config.interface_list.interfaces`) supports the following:
+A [`dedicated_management_interface`](#custom-network-config-interface-list-interfaces-dedicated-management-interface) block (within [`custom_network_config.interface_list.interfaces`](#custom-network-config-interface-list-interfaces)) supports the following:
 
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -415,7 +415,7 @@ A `dedicated_management_interface` block (within `custom_network_config.interfac
 
 **Ethernet Interface**
 
-An `ethernet_interface` block (within `custom_network_config.interface_list.interfaces`) supports the following:
+An [`ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface) block (within [`custom_network_config.interface_list.interfaces`](#custom-network-config-interface-list-interfaces)) supports the following:
 
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -461,7 +461,7 @@ An `ethernet_interface` block (within `custom_network_config.interface_list.inte
 
 **DHCP Server**
 
-A `dhcp_server` block (within `custom_network_config.interface_list.interfaces.ethernet_interface`) supports the following:
+A [`dhcp_server`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface)) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -477,7 +477,7 @@ A `dhcp_server` block (within `custom_network_config.interface_list.interfaces.e
 
 **DHCP Networks**
 
-A `dhcp_networks` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.dhcp_server`) supports the following:
+A [`dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.dhcp_server`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server)) supports the following:
 
 &#x2022; [`dgw_address`](#dgw-address) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway
 
@@ -499,7 +499,7 @@ A `dhcp_networks` block (within `custom_network_config.interface_list.interfaces
 
 **Pools**
 
-A `pools` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.dhcp_server.dhcp_networks`) supports the following:
+A [`pools`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks-pools) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.dhcp_server.dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-dhcp-networks)) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200
 
@@ -509,7 +509,7 @@ A `pools` block (within `custom_network_config.interface_list.interfaces.etherne
 
 **Interface IP Map**
 
-An `interface_ip_map` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.dhcp_server`) supports the following:
+An [`interface_ip_map`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server-interface-ip-map) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.dhcp_server`](#custom-network-config-interface-list-interfaces-ethernet-interface-dhcp-server)) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node
 
@@ -517,7 +517,7 @@ An `interface_ip_map` block (within `custom_network_config.interface_list.interf
 
 **IPv6 Auto Config**
 
-An `ipv6_auto_config` block (within `custom_network_config.interface_list.interfaces.ethernet_interface`) supports the following:
+An [`ipv6_auto_config`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface)) supports the following:
 
 &#x2022; [`host`](#host) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -527,7 +527,7 @@ An `ipv6_auto_config` block (within `custom_network_config.interface_list.interf
 
 **Router**
 
-A `router` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config`) supports the following:
+A [`router`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config)) supports the following:
 
 &#x2022; [`dns_config`](#dns-config) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config) below.
 
@@ -539,7 +539,7 @@ A `router` block (within `custom_network_config.interface_list.interfaces.ethern
 
 **DNS Config**
 
-A `dns_config` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router`) supports the following:
+A [`dns_config`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router)) supports the following:
 
 &#x2022; [`configured_list`](#configured-list) - Optional Block<br>IPV6DnsList<br>See [Configured List](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) below.
 
@@ -549,7 +549,7 @@ A `dns_config` block (within `custom_network_config.interface_list.interfaces.et
 
 **Configured List**
 
-A `configured_list` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.dns_config`) supports the following:
+A [`configured_list`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.dns_config`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config)) supports the following:
 
 &#x2022; [`dns_list`](#dns-list) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
 
@@ -557,7 +557,7 @@ A `configured_list` block (within `custom_network_config.interface_list.interfac
 
 **Local DNS**
 
-A `local_dns` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.dns_config`) supports the following:
+A [`local_dns`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config-local-dns) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.dns_config`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-dns-config)) supports the following:
 
 &#x2022; [`configured_address`](#configured-address) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
 
@@ -569,7 +569,7 @@ A `local_dns` block (within `custom_network_config.interface_list.interfaces.eth
 
 **Stateful**
 
-A `stateful` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router`) supports the following:
+A [`stateful`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router)) supports the following:
 
 &#x2022; [`automatic_from_end`](#automatic-from-end) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -585,7 +585,7 @@ A `stateful` block (within `custom_network_config.interface_list.interfaces.ethe
 
 **DHCP Networks**
 
-A `dhcp_networks` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.stateful`) supports the following:
+A [`dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.stateful`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful)) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
 
@@ -597,7 +597,7 @@ A `dhcp_networks` block (within `custom_network_config.interface_list.interfaces
 
 **Pools**
 
-A `pools` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks`) supports the following:
+A [`pools`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks)) supports the following:
 
 &#x2022; [`end_ip`](#end-ip) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
 
@@ -607,7 +607,7 @@ A `pools` block (within `custom_network_config.interface_list.interfaces.etherne
 
 **Interface IP Map**
 
-An `interface_ip_map` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.stateful`) supports the following:
+An [`interface_ip_map`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.stateful`](#custom-network-config-interface-list-interfaces-ethernet-interface-ipv6-auto-config-router-stateful)) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
 
@@ -615,7 +615,7 @@ An `interface_ip_map` block (within `custom_network_config.interface_list.interf
 
 **Static IP**
 
-A `static_ip` block (within `custom_network_config.interface_list.interfaces.ethernet_interface`) supports the following:
+A [`static_ip`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface)) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-cluster-static-ip) below.
 
@@ -625,7 +625,7 @@ A `static_ip` block (within `custom_network_config.interface_list.interfaces.eth
 
 **Cluster Static IP**
 
-A `cluster_static_ip` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.static_ip`) supports the following:
+A [`cluster_static_ip`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-cluster-static-ip) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.static_ip`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip)) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
@@ -633,7 +633,7 @@ A `cluster_static_ip` block (within `custom_network_config.interface_list.interf
 
 **Node Static IP**
 
-A `node_static_ip` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.static_ip`) supports the following:
+A [`node_static_ip`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip-node-static-ip) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.static_ip`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ip)) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -643,7 +643,7 @@ A `node_static_ip` block (within `custom_network_config.interface_list.interface
 
 **Static IPv6 Address**
 
-A `static_ipv6_address` block (within `custom_network_config.interface_list.interfaces.ethernet_interface`) supports the following:
+A [`static_ipv6_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#custom-network-config-interface-list-interfaces-ethernet-interface)) supports the following:
 
 &#x2022; [`cluster_static_ip`](#cluster-static-ip) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-cluster-static-ip) below.
 
@@ -653,7 +653,7 @@ A `static_ipv6_address` block (within `custom_network_config.interface_list.inte
 
 **Cluster Static IP**
 
-A `cluster_static_ip` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.static_ipv6_address`) supports the following:
+A [`cluster_static_ip`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-cluster-static-ip) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.static_ipv6_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address)) supports the following:
 
 &#x2022; [`interface_ip_map`](#interface-ip-map) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
@@ -661,7 +661,7 @@ A `cluster_static_ip` block (within `custom_network_config.interface_list.interf
 
 **Node Static IP**
 
-A `node_static_ip` block (within `custom_network_config.interface_list.interfaces.ethernet_interface.static_ipv6_address`) supports the following:
+A [`node_static_ip`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address-node-static-ip) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.static_ipv6_address`](#custom-network-config-interface-list-interfaces-ethernet-interface-static-ipv6-address)) supports the following:
 
 &#x2022; [`default_gw`](#default-gw) - Optional String<br>Default Gateway. IP address of the default gateway
 
@@ -671,7 +671,7 @@ A `node_static_ip` block (within `custom_network_config.interface_list.interface
 
 **Sli Config**
 
-A `sli_config` block (within `custom_network_config`) supports the following:
+A [`sli_config`](#custom-network-config-sli-config) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
 &#x2022; [`dc_cluster_group`](#dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#custom-network-config-sli-config-dc-cluster-group) below.
 
@@ -695,7 +695,7 @@ A `sli_config` block (within `custom_network_config`) supports the following:
 
 **Dc Cluster Group**
 
-A `dc_cluster_group` block (within `custom_network_config.sli_config`) supports the following:
+A [`dc_cluster_group`](#custom-network-config-sli-config-dc-cluster-group) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -707,7 +707,7 @@ A `dc_cluster_group` block (within `custom_network_config.sli_config`) supports 
 
 **Static Routes**
 
-A `static_routes` block (within `custom_network_config.sli_config`) supports the following:
+A [`static_routes`](#custom-network-config-sli-config-static-routes) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
 
 &#x2022; [`static_routes`](#static-routes) - Optional Block<br>Static Routes. List of static routes<br>See [Static Routes](#custom-network-config-sli-config-static-routes-static-routes) below.
 
@@ -715,7 +715,7 @@ A `static_routes` block (within `custom_network_config.sli_config`) supports the
 
 **Static Routes**
 
-A `static_routes` block (within `custom_network_config.sli_config.static_routes`) supports the following:
+A [`static_routes`](#custom-network-config-sli-config-static-routes-static-routes) block (within [`custom_network_config.sli_config.static_routes`](#custom-network-config-sli-config-static-routes)) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
@@ -731,7 +731,7 @@ A `static_routes` block (within `custom_network_config.sli_config.static_routes`
 
 **Node Interface**
 
-A `node_interface` block (within `custom_network_config.sli_config.static_routes.static_routes`) supports the following:
+A [`node_interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface) block (within [`custom_network_config.sli_config.static_routes.static_routes`](#custom-network-config-sli-config-static-routes-static-routes)) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) below.
 
@@ -739,7 +739,7 @@ A `node_interface` block (within `custom_network_config.sli_config.static_routes
 
 **List**
 
-A `list` block (within `custom_network_config.sli_config.static_routes.static_routes.node_interface`) supports the following:
+A [`list`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list) block (within [`custom_network_config.sli_config.static_routes.static_routes.node_interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface)) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface) below.
 
@@ -749,7 +749,7 @@ A `list` block (within `custom_network_config.sli_config.static_routes.static_ro
 
 **Interface**
 
-An `interface` block (within `custom_network_config.sli_config.static_routes.static_routes.node_interface.list`) supports the following:
+An [`interface`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list-interface) block (within [`custom_network_config.sli_config.static_routes.static_routes.node_interface.list`](#custom-network-config-sli-config-static-routes-static-routes-node-interface-list)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -765,7 +765,7 @@ An `interface` block (within `custom_network_config.sli_config.static_routes.sta
 
 **Static V6 Routes**
 
-A `static_v6_routes` block (within `custom_network_config.sli_config`) supports the following:
+A [`static_v6_routes`](#custom-network-config-sli-config-static-v6-routes) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
 
 &#x2022; [`static_routes`](#static-routes) - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#custom-network-config-sli-config-static-v6-routes-static-routes) below.
 
@@ -773,7 +773,7 @@ A `static_v6_routes` block (within `custom_network_config.sli_config`) supports 
 
 **Static Routes**
 
-A `static_routes` block (within `custom_network_config.sli_config.static_v6_routes`) supports the following:
+A [`static_routes`](#custom-network-config-sli-config-static-v6-routes-static-routes) block (within [`custom_network_config.sli_config.static_v6_routes`](#custom-network-config-sli-config-static-v6-routes)) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
@@ -789,7 +789,7 @@ A `static_routes` block (within `custom_network_config.sli_config.static_v6_rout
 
 **Node Interface**
 
-A `node_interface` block (within `custom_network_config.sli_config.static_v6_routes.static_routes`) supports the following:
+A [`node_interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes`](#custom-network-config-sli-config-static-v6-routes-static-routes)) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) below.
 
@@ -797,7 +797,7 @@ A `node_interface` block (within `custom_network_config.sli_config.static_v6_rou
 
 **List**
 
-A `list` block (within `custom_network_config.sli_config.static_v6_routes.static_routes.node_interface`) supports the following:
+A [`list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes.node_interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface)) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-interface) below.
 
@@ -807,7 +807,7 @@ A `list` block (within `custom_network_config.sli_config.static_v6_routes.static
 
 **Interface**
 
-An `interface` block (within `custom_network_config.sli_config.static_v6_routes.static_routes.node_interface.list`) supports the following:
+An [`interface`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list-interface) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes.node_interface.list`](#custom-network-config-sli-config-static-v6-routes-static-routes-node-interface-list)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -823,7 +823,7 @@ An `interface` block (within `custom_network_config.sli_config.static_v6_routes.
 
 **Slo Config**
 
-A `slo_config` block (within `custom_network_config`) supports the following:
+A [`slo_config`](#custom-network-config-slo-config) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
 &#x2022; [`dc_cluster_group`](#dc-cluster-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#custom-network-config-slo-config-dc-cluster-group) below.
 
@@ -847,7 +847,7 @@ A `slo_config` block (within `custom_network_config`) supports the following:
 
 **Dc Cluster Group**
 
-A `dc_cluster_group` block (within `custom_network_config.slo_config`) supports the following:
+A [`dc_cluster_group`](#custom-network-config-slo-config-dc-cluster-group) block (within [`custom_network_config.slo_config`](#custom-network-config-slo-config)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -859,7 +859,7 @@ A `dc_cluster_group` block (within `custom_network_config.slo_config`) supports 
 
 **Static Routes**
 
-A `static_routes` block (within `custom_network_config.slo_config`) supports the following:
+A [`static_routes`](#custom-network-config-slo-config-static-routes) block (within [`custom_network_config.slo_config`](#custom-network-config-slo-config)) supports the following:
 
 &#x2022; [`static_routes`](#static-routes) - Optional Block<br>Static Routes. List of static routes<br>See [Static Routes](#custom-network-config-slo-config-static-routes-static-routes) below.
 
@@ -867,7 +867,7 @@ A `static_routes` block (within `custom_network_config.slo_config`) supports the
 
 **Static Routes**
 
-A `static_routes` block (within `custom_network_config.slo_config.static_routes`) supports the following:
+A [`static_routes`](#custom-network-config-slo-config-static-routes-static-routes) block (within [`custom_network_config.slo_config.static_routes`](#custom-network-config-slo-config-static-routes)) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
@@ -883,7 +883,7 @@ A `static_routes` block (within `custom_network_config.slo_config.static_routes`
 
 **Node Interface**
 
-A `node_interface` block (within `custom_network_config.slo_config.static_routes.static_routes`) supports the following:
+A [`node_interface`](#custom-network-config-slo-config-static-routes-static-routes-node-interface) block (within [`custom_network_config.slo_config.static_routes.static_routes`](#custom-network-config-slo-config-static-routes-static-routes)) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list) below.
 
@@ -891,7 +891,7 @@ A `node_interface` block (within `custom_network_config.slo_config.static_routes
 
 **List**
 
-A `list` block (within `custom_network_config.slo_config.static_routes.static_routes.node_interface`) supports the following:
+A [`list`](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list) block (within [`custom_network_config.slo_config.static_routes.static_routes.node_interface`](#custom-network-config-slo-config-static-routes-static-routes-node-interface)) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list-interface) below.
 
@@ -901,7 +901,7 @@ A `list` block (within `custom_network_config.slo_config.static_routes.static_ro
 
 **Interface**
 
-An `interface` block (within `custom_network_config.slo_config.static_routes.static_routes.node_interface.list`) supports the following:
+An [`interface`](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list-interface) block (within [`custom_network_config.slo_config.static_routes.static_routes.node_interface.list`](#custom-network-config-slo-config-static-routes-static-routes-node-interface-list)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -917,7 +917,7 @@ An `interface` block (within `custom_network_config.slo_config.static_routes.sta
 
 **Static V6 Routes**
 
-A `static_v6_routes` block (within `custom_network_config.slo_config`) supports the following:
+A [`static_v6_routes`](#custom-network-config-slo-config-static-v6-routes) block (within [`custom_network_config.slo_config`](#custom-network-config-slo-config)) supports the following:
 
 &#x2022; [`static_routes`](#static-routes) - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#custom-network-config-slo-config-static-v6-routes-static-routes) below.
 
@@ -925,7 +925,7 @@ A `static_v6_routes` block (within `custom_network_config.slo_config`) supports 
 
 **Static Routes**
 
-A `static_routes` block (within `custom_network_config.slo_config.static_v6_routes`) supports the following:
+A [`static_routes`](#custom-network-config-slo-config-static-v6-routes-static-routes) block (within [`custom_network_config.slo_config.static_v6_routes`](#custom-network-config-slo-config-static-v6-routes)) supports the following:
 
 &#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
@@ -941,7 +941,7 @@ A `static_routes` block (within `custom_network_config.slo_config.static_v6_rout
 
 **Node Interface**
 
-A `node_interface` block (within `custom_network_config.slo_config.static_v6_routes.static_routes`) supports the following:
+A [`node_interface`](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface) block (within [`custom_network_config.slo_config.static_v6_routes.static_routes`](#custom-network-config-slo-config-static-v6-routes-static-routes)) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list) below.
 
@@ -949,7 +949,7 @@ A `node_interface` block (within `custom_network_config.slo_config.static_v6_rou
 
 **List**
 
-A `list` block (within `custom_network_config.slo_config.static_v6_routes.static_routes.node_interface`) supports the following:
+A [`list`](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list) block (within [`custom_network_config.slo_config.static_v6_routes.static_routes.node_interface`](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface)) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list-interface) below.
 
@@ -959,7 +959,7 @@ A `list` block (within `custom_network_config.slo_config.static_v6_routes.static
 
 **Interface**
 
-An `interface` block (within `custom_network_config.slo_config.static_v6_routes.static_routes.node_interface.list`) supports the following:
+An [`interface`](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list-interface) block (within [`custom_network_config.slo_config.static_v6_routes.static_routes.node_interface.list`](#custom-network-config-slo-config-static-v6-routes-static-routes-node-interface-list)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -975,7 +975,7 @@ An `interface` block (within `custom_network_config.slo_config.static_v6_routes.
 
 **Kubernetes Upgrade Drain**
 
-A `kubernetes_upgrade_drain` block supports the following:
+A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
 &#x2022; [`disable_upgrade_drain`](#disable-upgrade-drain) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -985,7 +985,7 @@ A `kubernetes_upgrade_drain` block supports the following:
 
 **Enable Upgrade Drain**
 
-An `enable_upgrade_drain` block (within `kubernetes_upgrade_drain`) supports the following:
+An [`enable_upgrade_drain`](#kubernetes-upgrade-drain-enable-upgrade-drain) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
 &#x2022; [`disable_vega_upgrade_mode`](#disable-vega-upgrade-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -999,7 +999,7 @@ An `enable_upgrade_drain` block (within `kubernetes_upgrade_drain`) supports the
 
 **Log Receiver**
 
-A `log_receiver` block supports the following:
+A [`log_receiver`](#log-receiver) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -1011,7 +1011,7 @@ A `log_receiver` block supports the following:
 
 **Master Node Configuration**
 
-A `master_node_configuration` block supports the following:
+A [`master_node_configuration`](#master-node-configuration) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Names of master node
 
@@ -1021,7 +1021,7 @@ A `master_node_configuration` block supports the following:
 
 **Offline Survivability Mode**
 
-An `offline_survivability_mode` block supports the following:
+An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
 
 &#x2022; [`enable_offline_survivability_mode`](#enable-offline-survivability-mode) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1031,7 +1031,7 @@ An `offline_survivability_mode` block supports the following:
 
 **OS**
 
-An `os` block supports the following:
+An [`os`](#os) block supports the following:
 
 &#x2022; [`default_os_version`](#default-os-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1041,7 +1041,7 @@ An `os` block supports the following:
 
 **Performance Enhancement Mode**
 
-A `performance_enhancement_mode` block supports the following:
+A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports the following:
 
 &#x2022; [`perf_mode_l3_enhanced`](#perf-mode-l3-enhanced) - Optional Block<br>L3 Mode Enhanced Performance. x-required L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#performance-enhancement-mode-perf-mode-l3-enhanced) below.
 
@@ -1051,7 +1051,7 @@ A `performance_enhancement_mode` block supports the following:
 
 **Perf Mode L3 Enhanced**
 
-A `perf_mode_l3_enhanced` block (within `performance_enhancement_mode`) supports the following:
+A [`perf_mode_l3_enhanced`](#performance-enhancement-mode-perf-mode-l3-enhanced) block (within [`performance_enhancement_mode`](#performance-enhancement-mode)) supports the following:
 
 &#x2022; [`jumbo`](#jumbo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1061,7 +1061,7 @@ A `perf_mode_l3_enhanced` block (within `performance_enhancement_mode`) supports
 
 **Sw**
 
-A `sw` block supports the following:
+A [`sw`](#sw) block supports the following:
 
 &#x2022; [`default_sw_version`](#default-sw-version) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -1071,7 +1071,7 @@ A `sw` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

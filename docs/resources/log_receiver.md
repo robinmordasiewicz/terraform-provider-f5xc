@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Syslog**
 
-A `syslog` block supports the following:
+A [`syslog`](#syslog) block supports the following:
 
 &#x2022; [`syslog_rfc5424`](#syslog-rfc5424) - Optional Number<br>Syslog RFC5424 Format. Select RFC5424 syslog format and maximum message length
 
@@ -97,7 +97,7 @@ A `syslog` block supports the following:
 
 **TCP Server**
 
-A `tcp_server` block (within `syslog`) supports the following:
+A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port Number. Port number used for communication
 
@@ -107,7 +107,7 @@ A `tcp_server` block (within `syslog`) supports the following:
 
 **TLS Server**
 
-A `tls_server` block (within `syslog`) supports the following:
+A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports the following:
 
 &#x2022; [`default_https_port`](#default-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -129,7 +129,7 @@ A `tls_server` block (within `syslog`) supports the following:
 
 **mTLS Enable**
 
-A `mtls_enable` block (within `syslog.tls_server`) supports the following:
+A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_server`](#syslog-tls-server)) supports the following:
 
 &#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
@@ -139,7 +139,7 @@ A `mtls_enable` block (within `syslog.tls_server`) supports the following:
 
 **Key URL**
 
-A `key_url` block (within `syslog.tls_server.mtls_enable`) supports the following:
+A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls_server.mtls_enable`](#syslog-tls-server-mtls-enable)) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) below.
 
@@ -149,7 +149,7 @@ A `key_url` block (within `syslog.tls_server.mtls_enable`) supports the followin
 
 **Blindfold Secret Info**
 
-A `blindfold_secret_info` block (within `syslog.tls_server.mtls_enable.key_url`) supports the following:
+A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -161,7 +161,7 @@ A `blindfold_secret_info` block (within `syslog.tls_server.mtls_enable.key_url`)
 
 **Clear Secret Info**
 
-A `clear_secret_info` block (within `syslog.tls_server.mtls_enable.key_url`) supports the following:
+A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -171,7 +171,7 @@ A `clear_secret_info` block (within `syslog.tls_server.mtls_enable.key_url`) sup
 
 **UDP Server**
 
-An `udp_server` block (within `syslog`) supports the following:
+An [`udp_server`](#syslog-udp-server) block (within [`syslog`](#syslog)) supports the following:
 
 &#x2022; [`port`](#port) - Optional Number<br>Port Number. Port number used for communication
 
@@ -181,7 +181,7 @@ An `udp_server` block (within `syslog`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Health Check**
 
-A `http_health_check` block supports the following:
+A [`http_health_check`](#http-health-check) block supports the following:
 
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
@@ -102,7 +102,7 @@ A `http_health_check` block supports the following:
 
 **HTTPS Health Check**
 
-A `https_health_check` block supports the following:
+A [`https_health_check`](#https-health-check) block supports the following:
 
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
@@ -116,7 +116,7 @@ A `https_health_check` block supports the following:
 
 **TCP Health Check**
 
-A `tcp_health_check` block supports the following:
+A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
@@ -130,7 +130,7 @@ A `tcp_health_check` block supports the following:
 
 **TCP Hex Health Check**
 
-A `tcp_hex_health_check` block supports the following:
+A [`tcp_hex_health_check`](#tcp-hex-health-check) block supports the following:
 
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
@@ -144,7 +144,7 @@ A `tcp_hex_health_check` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -158,7 +158,7 @@ A `timeouts` block supports the following:
 
 **UDP Health Check**
 
-An `udp_health_check` block supports the following:
+An [`udp_health_check`](#udp-health-check) block supports the following:
 
 &#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 

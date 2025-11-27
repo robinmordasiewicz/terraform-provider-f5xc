@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules**
 
-A `rules` block supports the following:
+A [`rules`](#rules) block supports the following:
 
 &#x2022; [`key_pattern`](#key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-pattern) below.
 
@@ -100,7 +100,7 @@ A `rules` block supports the following:
 
 **Key Pattern**
 
-A `key_pattern` block (within `rules`) supports the following:
+A [`key_pattern`](#rules-key-pattern) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-pattern-exact-values) below.
 
@@ -112,7 +112,7 @@ A `key_pattern` block (within `rules`) supports the following:
 
 **Exact Values**
 
-An `exact_values` block (within `rules.key_pattern`) supports the following:
+An [`exact_values`](#rules-key-pattern-exact-values) block (within [`rules.key_pattern`](#rules-key-pattern)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
@@ -120,7 +120,7 @@ An `exact_values` block (within `rules.key_pattern`) supports the following:
 
 **Key Value Pattern**
 
-A `key_value_pattern` block (within `rules`) supports the following:
+A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`key_pattern`](#key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
 
@@ -130,7 +130,7 @@ A `key_value_pattern` block (within `rules`) supports the following:
 
 **Key Pattern**
 
-A `key_pattern` block (within `rules.key_value_pattern`) supports the following:
+A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
 
@@ -142,7 +142,7 @@ A `key_pattern` block (within `rules.key_value_pattern`) supports the following:
 
 **Exact Values**
 
-An `exact_values` block (within `rules.key_value_pattern.key_pattern`) supports the following:
+An [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) block (within [`rules.key_value_pattern.key_pattern`](#rules-key-value-pattern-key-pattern)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
@@ -150,7 +150,7 @@ An `exact_values` block (within `rules.key_value_pattern.key_pattern`) supports 
 
 **Value Pattern**
 
-A `value_pattern` block (within `rules.key_value_pattern`) supports the following:
+A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
 
@@ -162,7 +162,7 @@ A `value_pattern` block (within `rules.key_value_pattern`) supports the followin
 
 **Exact Values**
 
-An `exact_values` block (within `rules.key_value_pattern.value_pattern`) supports the following:
+An [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) block (within [`rules.key_value_pattern.value_pattern`](#rules-key-value-pattern-value-pattern)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
@@ -170,7 +170,7 @@ An `exact_values` block (within `rules.key_value_pattern.value_pattern`) support
 
 **Value Pattern**
 
-A `value_pattern` block (within `rules`) supports the following:
+A [`value_pattern`](#rules-value-pattern) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-value-pattern-exact-values) below.
 
@@ -182,7 +182,7 @@ A `value_pattern` block (within `rules`) supports the following:
 
 **Exact Values**
 
-An `exact_values` block (within `rules.value_pattern`) supports the following:
+An [`exact_values`](#rules-value-pattern-exact-values) block (within [`rules.value_pattern`](#rules-value-pattern)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
@@ -190,7 +190,7 @@ An `exact_values` block (within `rules.value_pattern`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

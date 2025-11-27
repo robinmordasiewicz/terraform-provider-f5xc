@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Domains**
 
-A `domains` block supports the following:
+A [`domains`](#domains) block supports the following:
 
 &#x2022; [`domain`](#domain) - Optional String<br>Domains to Crawl. Select the domain to execute API Crawling with given credentials
 
@@ -92,7 +92,7 @@ A `domains` block supports the following:
 
 **Simple Login**
 
-A `simple_login` block (within `domains`) supports the following:
+A [`simple_login`](#domains-simple-login) block (within [`domains`](#domains)) supports the following:
 
 &#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#domains-simple-login-password) below.
 
@@ -102,7 +102,7 @@ A `simple_login` block (within `domains`) supports the following:
 
 **Password**
 
-A `password` block (within `domains.simple_login`) supports the following:
+A [`password`](#domains-simple-login-password) block (within [`domains.simple_login`](#domains-simple-login)) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-simple-login-password-blindfold-secret-info) below.
 
@@ -112,7 +112,7 @@ A `password` block (within `domains.simple_login`) supports the following:
 
 **Blindfold Secret Info**
 
-A `blindfold_secret_info` block (within `domains.simple_login.password`) supports the following:
+A [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -124,7 +124,7 @@ A `blindfold_secret_info` block (within `domains.simple_login.password`) support
 
 **Clear Secret Info**
 
-A `clear_secret_info` block (within `domains.simple_login.password`) supports the following:
+A [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -134,7 +134,7 @@ A `clear_secret_info` block (within `domains.simple_login.password`) supports th
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

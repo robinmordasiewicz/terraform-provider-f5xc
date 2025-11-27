@@ -87,7 +87,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Bigip Virtual Server**
 
-A `bigip_virtual_server` block supports the following:
+A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
 
 &#x2022; [`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Bigip Virtual Server](#bigip-virtual-server-bigip-virtual-server) below.
 
@@ -95,7 +95,7 @@ A `bigip_virtual_server` block supports the following:
 
 **Bigip Virtual Server**
 
-A `bigip_virtual_server` block (within `bigip_virtual_server`) supports the following:
+A [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) block (within [`bigip_virtual_server`](#bigip-virtual-server)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -107,7 +107,7 @@ A `bigip_virtual_server` block (within `bigip_virtual_server`) supports the foll
 
 **CDN Loadbalancer**
 
-A `cdn_loadbalancer` block supports the following:
+A [`cdn_loadbalancer`](#cdn-loadbalancer) block supports the following:
 
 &#x2022; [`cdn_loadbalancer`](#cdn-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CDN Loadbalancer](#cdn-loadbalancer-cdn-loadbalancer) below.
 
@@ -115,7 +115,7 @@ A `cdn_loadbalancer` block supports the following:
 
 **CDN Loadbalancer**
 
-A `cdn_loadbalancer` block (within `cdn_loadbalancer`) supports the following:
+A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_loadbalancer`](#cdn-loadbalancer)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -127,7 +127,7 @@ A `cdn_loadbalancer` block (within `cdn_loadbalancer`) supports the following:
 
 **Elements**
 
-An `elements` block supports the following:
+An [`elements`](#elements) block supports the following:
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list
 
@@ -137,7 +137,7 @@ An `elements` block supports the following:
 
 **HTTP Loadbalancer**
 
-A `http_loadbalancer` block supports the following:
+A [`http_loadbalancer`](#http-loadbalancer) block supports the following:
 
 &#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [HTTP Loadbalancer](#http-loadbalancer-http-loadbalancer) below.
 
@@ -145,7 +145,7 @@ A `http_loadbalancer` block supports the following:
 
 **HTTP Loadbalancer**
 
-A `http_loadbalancer` block (within `http_loadbalancer`) supports the following:
+A [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) block (within [`http_loadbalancer`](#http-loadbalancer)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -157,7 +157,7 @@ A `http_loadbalancer` block (within `http_loadbalancer`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

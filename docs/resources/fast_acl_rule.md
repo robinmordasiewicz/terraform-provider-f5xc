@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Action**
 
-An `action` block supports the following:
+An [`action`](#action) block supports the following:
 
 &#x2022; [`policer_action`](#policer-action) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#action-policer-action) below.
 
@@ -100,7 +100,7 @@ An `action` block supports the following:
 
 **Policer Action**
 
-A `policer_action` block (within `action`) supports the following:
+A [`policer_action`](#action-policer-action) block (within [`action`](#action)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#action-policer-action-ref) below.
 
@@ -108,7 +108,7 @@ A `policer_action` block (within `action`) supports the following:
 
 **Ref**
 
-A `ref` block (within `action.policer_action`) supports the following:
+A [`ref`](#action-policer-action-ref) block (within [`action.policer_action`](#action-policer-action)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -124,7 +124,7 @@ A `ref` block (within `action.policer_action`) supports the following:
 
 **Protocol Policer Action**
 
-A `protocol_policer_action` block (within `action`) supports the following:
+A [`protocol_policer_action`](#action-protocol-policer-action) block (within [`action`](#action)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#action-protocol-policer-action-ref) below.
 
@@ -132,7 +132,7 @@ A `protocol_policer_action` block (within `action`) supports the following:
 
 **Ref**
 
-A `ref` block (within `action.protocol_policer_action`) supports the following:
+A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol_policer_action`](#action-protocol-policer-action)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -148,7 +148,7 @@ A `ref` block (within `action.protocol_policer_action`) supports the following:
 
 **IP Prefix Set**
 
-An `ip_prefix_set` block supports the following:
+An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
 
@@ -156,7 +156,7 @@ An `ip_prefix_set` block supports the following:
 
 **Ref**
 
-A `ref` block (within `ip_prefix_set`) supports the following:
+A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -172,7 +172,7 @@ A `ref` block (within `ip_prefix_set`) supports the following:
 
 **Port**
 
-A `port` block supports the following:
+A [`port`](#port) block supports the following:
 
 &#x2022; [`all`](#all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -184,7 +184,7 @@ A `port` block supports the following:
 
 **Prefix**
 
-A `prefix` block supports the following:
+A [`prefix`](#prefix) block supports the following:
 
 &#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
@@ -192,7 +192,7 @@ A `prefix` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

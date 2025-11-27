@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Jira Config**
 
-A `jira_config` block supports the following:
+A [`jira_config`](#jira-config) block supports the following:
 
 &#x2022; [`adhoc_rest_api`](#adhoc-rest-api) - Optional Block<br>JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message<br>See [Adhoc REST API](#jira-config-adhoc-rest-api) below.
 
@@ -86,7 +86,7 @@ A `jira_config` block supports the following:
 
 **Adhoc REST API**
 
-An `adhoc_rest_api` block (within `jira_config`) supports the following:
+An [`adhoc_rest_api`](#jira-config-adhoc-rest-api) block (within [`jira_config`](#jira-config)) supports the following:
 
 &#x2022; [`account_email`](#account-email) - Optional String<br>Account Email. Username (email) for the Atlassian account
 
@@ -98,7 +98,7 @@ An `adhoc_rest_api` block (within `jira_config`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

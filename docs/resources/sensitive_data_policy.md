@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Custom Data Types**
 
-A `custom_data_types` block supports the following:
+A [`custom_data_types`](#custom-data-types) block supports the following:
 
 &#x2022; [`custom_data_type_ref`](#custom-data-type-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
 
@@ -90,7 +90,7 @@ A `custom_data_types` block supports the following:
 
 **Custom Data Type Ref**
 
-A `custom_data_type_ref` block (within `custom_data_types`) supports the following:
+A [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) block (within [`custom_data_types`](#custom-data-types)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -102,7 +102,7 @@ A `custom_data_type_ref` block (within `custom_data_types`) supports the followi
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

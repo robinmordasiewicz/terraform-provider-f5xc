@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Active Enhanced Firewall Policies**
 
-An `active_enhanced_firewall_policies` block supports the following:
+An [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) block supports the following:
 
 &#x2022; [`enhanced_firewall_policies`](#enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
@@ -101,7 +101,7 @@ An `active_enhanced_firewall_policies` block supports the following:
 
 **Enhanced Firewall Policies**
 
-An `enhanced_firewall_policies` block (within `active_enhanced_firewall_policies`) supports the following:
+An [`enhanced_firewall_policies`](#active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -113,7 +113,7 @@ An `enhanced_firewall_policies` block (within `active_enhanced_firewall_policies
 
 **Active Fast Acls**
 
-An `active_fast_acls` block supports the following:
+An [`active_fast_acls`](#active-fast-acls) block supports the following:
 
 &#x2022; [`fast_acls`](#fast-acls) - Optional Block<br>Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall<br>See [Fast Acls](#active-fast-acls-fast-acls) below.
 
@@ -121,7 +121,7 @@ An `active_fast_acls` block supports the following:
 
 **Fast Acls**
 
-A `fast_acls` block (within `active_fast_acls`) supports the following:
+A [`fast_acls`](#active-fast-acls-fast-acls) block (within [`active_fast_acls`](#active-fast-acls)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -133,7 +133,7 @@ A `fast_acls` block (within `active_fast_acls`) supports the following:
 
 **Active Forward Proxy Policies**
 
-An `active_forward_proxy_policies` block supports the following:
+An [`active_forward_proxy_policies`](#active-forward-proxy-policies) block supports the following:
 
 &#x2022; [`forward_proxy_policies`](#forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
 
@@ -141,7 +141,7 @@ An `active_forward_proxy_policies` block supports the following:
 
 **Forward Proxy Policies**
 
-A `forward_proxy_policies` block (within `active_forward_proxy_policies`) supports the following:
+A [`forward_proxy_policies`](#active-forward-proxy-policies-forward-proxy-policies) block (within [`active_forward_proxy_policies`](#active-forward-proxy-policies)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -153,7 +153,7 @@ A `forward_proxy_policies` block (within `active_forward_proxy_policies`) suppor
 
 **Active Network Policies**
 
-An `active_network_policies` block supports the following:
+An [`active_network_policies`](#active-network-policies) block supports the following:
 
 &#x2022; [`network_policies`](#network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#active-network-policies-network-policies) below.
 
@@ -161,7 +161,7 @@ An `active_network_policies` block supports the following:
 
 **Network Policies**
 
-A `network_policies` block (within `active_network_policies`) supports the following:
+A [`network_policies`](#active-network-policies-network-policies) block (within [`active_network_policies`](#active-network-policies)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -173,7 +173,7 @@ A `network_policies` block (within `active_network_policies`) supports the follo
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

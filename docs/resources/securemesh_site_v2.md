@@ -93,19 +93,19 @@ resource "f5xc_securemesh_site_v2" "example" {
 <br><br>&#x2022; [`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site
 
 -> **One of the following:**
-&#x2022; [`custom_proxy`](#custom-proxy) - Optional Block<br>Custom Enterprise Proxy. Custom Enterprise Proxy
+&#x2022; [`custom_proxy`](#custom-proxy) - Optional Block<br>Custom Enterprise Proxy. Custom Enterprise Proxy<br>See [Custom Proxy](#custom-proxy) below for details.
 <br><br>&#x2022; [`f5_proxy`](#f5-proxy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; [`custom_proxy_bypass`](#custom-proxy-bypass) - Optional Block<br>Proxy Bypass. List of domains to bypass the proxy
+&#x2022; [`custom_proxy_bypass`](#custom-proxy-bypass) - Optional Block<br>Proxy Bypass. List of domains to bypass the proxy<br>See [Custom Proxy Bypass](#custom-proxy-bypass) below for details.
 <br><br>&#x2022; [`no_proxy_bypass`](#no-proxy-bypass) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; [`dc_cluster_group_sli`](#dc-cluster-group-sli) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+&#x2022; [`dc_cluster_group_sli`](#dc-cluster-group-sli) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Sli](#dc-cluster-group-sli) below for details.
 <br><br>&#x2022; [`no_s2s_connectivity_sli`](#no-s2s-connectivity-sli) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; [`dc_cluster_group_slo`](#dc-cluster-group-slo) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+&#x2022; [`dc_cluster_group_slo`](#dc-cluster-group-slo) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Slo](#dc-cluster-group-slo) below for details.
 <br><br>&#x2022; [`no_s2s_connectivity_slo`](#no-s2s-connectivity-slo) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; [`site_mesh_group_on_slo`](#site-mesh-group-on-slo) - Optional Block<br>Site Mesh Group Type. Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used
 
@@ -117,31 +117,31 @@ resource "f5xc_securemesh_site_v2" "example" {
 &#x2022; [`disable_url_categorization`](#disable-url-categorization) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; [`enable_url_categorization`](#enable-url-categorization) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`dns_ntp_config`](#dns-ntp-config) - Optional Block<br>DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site
+&#x2022; [`dns_ntp_config`](#dns-ntp-config) - Optional Block<br>DNS & NTP Servers Settings. Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site<br>See [DNS NTP Config](#dns-ntp-config) below for details.
 
-&#x2022; [`load_balancing`](#load-balancing) - Optional Block<br>Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality
+&#x2022; [`load_balancing`](#load-balancing) - Optional Block<br>Load Balancing Settings. This section contains settings on the site that relate to Load Balancing functionality<br>See [Load Balancing](#load-balancing) below for details.
 
-&#x2022; [`local_vrf`](#local-vrf) - Optional Block<br>Local VRF Settings. There can be two local VRFs on each site. The Site Local Outside (SLO) local VRF is used to connect WAN side workloads to this site and to connect the site to F5 Distributed Cloud for management. All sites are required to have an SLO local VRF. The Site Local Inside (SLI) local VRF is used to connect LAN side workloads to this site. SLI local VRF is optional
+&#x2022; [`local_vrf`](#local-vrf) - Optional Block<br>Local VRF Settings. There can be two local VRFs on each site. The Site Local Outside (SLO) local VRF is used to connect WAN side workloads to this site and to connect the site to F5 Distributed Cloud for management. All sites are required to have an SLO local VRF. The Site Local Inside (SLI) local VRF is used to connect LAN side workloads to this site. SLI local VRF is optional<br>See [Local Vrf](#local-vrf) below for details.
 
 -> **One of the following:**
-&#x2022; [`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+&#x2022; [`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Log Receiver](#log-receiver) below for details.
 <br><br>&#x2022; [`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
+&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen<br>See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 
-&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default
+&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
-&#x2022; [`re_select`](#re-select) - Optional Block<br>Regional Edge Selection. Selection criteria to connect the site with F5 Distributed Cloud Regional Edge(s)
+&#x2022; [`re_select`](#re-select) - Optional Block<br>Regional Edge Selection. Selection criteria to connect the site with F5 Distributed Cloud Regional Edge(s)<br>See [RE Select](#re-select) below for details.
 
-&#x2022; [`software_settings`](#software-settings) - Optional Block<br>F5XC Software Settings. Select OS and Software version for the site. All nodes in the site will run the same OS and Software version. These settings cannot be changed after the site is created
+&#x2022; [`software_settings`](#software-settings) - Optional Block<br>F5XC Software Settings. Select OS and Software version for the site. All nodes in the site will run the same OS and Software version. These settings cannot be changed after the site is created<br>See [Software Settings](#software-settings) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 &#x2022; [`tunnel_dead_timeout`](#tunnel-dead-timeout) - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
 
 &#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`<br>Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`<br>Tunnel type. Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL
 
-&#x2022; [`upgrade_settings`](#upgrade-settings) - Optional Block<br>Upgrade Settings. Specify how a site will be upgraded
+&#x2022; [`upgrade_settings`](#upgrade-settings) - Optional Block<br>Upgrade Settings. Specify how a site will be upgraded<br>See [Upgrade Settings](#upgrade-settings) below for details.
 
 ### Attributes Reference
 

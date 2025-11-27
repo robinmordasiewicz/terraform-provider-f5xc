@@ -133,17 +133,17 @@ resource "f5xc_aws_tgw_site" "example" {
 
 &#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. x-required Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
-&#x2022; [`sw`](#sw) - Optional Block<br>F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
+&#x2022; [`sw`](#sw) - Optional Block<br>F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions<br>See [Sw](#sw) below for details.
 
 &#x2022; [`tags`](#tags) - Optional Block<br>AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console
 
-&#x2022; [`tgw_security`](#tgw-security) - Optional Block<br>TGW Security Configuration. Security Configuration for transit gateway
+&#x2022; [`tgw_security`](#tgw-security) - Optional Block<br>TGW Security Configuration. Security Configuration for transit gateway<br>See [Tgw Security](#tgw-security) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; [`vn_config`](#vn-config) - Optional Block<br>Virtual Network Configuration. Virtual Network Configuration
+&#x2022; [`vn_config`](#vn-config) - Optional Block<br>Virtual Network Configuration. Virtual Network Configuration<br>See [Vn Config](#vn-config) below for details.
 
-&#x2022; [`vpc_attachments`](#vpc-attachments) - Optional Block<br>Spoke VPCs. Spoke VPCs to be attached to the AWS TGW Site
+&#x2022; [`vpc_attachments`](#vpc-attachments) - Optional Block<br>Spoke VPCs. Spoke VPCs to be attached to the AWS TGW Site<br>See [Vpc Attachments](#vpc-attachments) below for details.
 
 ### Attributes Reference
 

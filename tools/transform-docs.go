@@ -1615,7 +1615,12 @@ func transformDoc(filePath string) error {
 
 					// Build the first line: bullet + name + Optional + Type + defaults + specified in
 					var firstLine strings.Builder
-					nestedAttrAnchor := toAnchorName(name)
+					// FIX: Use full path anchor for nested attributes to match section headers
+					// currentBlockName is like "routes.simple_route.advanced_options"
+					// name is like "cors_policy"
+					// Result: "routes-simple-route-advanced-options-cors-policy"
+					fullAttrPath := currentBlockName + "." + name
+					nestedAttrAnchor := toAnchorName(strings.ReplaceAll(fullAttrPath, ".", "-"))
 					firstLine.WriteString(fmt.Sprintf("&#x2022; [`%s`](#%s) - Optional %s", name, nestedAttrAnchor, typeStr))
 					if defaultVal != "" {
 						firstLine.WriteString("  " + defaultVal)

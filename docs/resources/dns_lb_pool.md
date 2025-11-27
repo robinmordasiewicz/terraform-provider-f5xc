@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **A Pool**
 
-An `a_pool` block supports the following:
+An [`a_pool`](#a-pool) block supports the following:
 
 &#x2022; [`disable_health_check`](#disable-health-check) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -107,7 +107,7 @@ An `a_pool` block supports the following:
 
 **Health Check**
 
-A `health_check` block (within `a_pool`) supports the following:
+A [`health_check`](#a-pool-health-check) block (within [`a_pool`](#a-pool)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -119,7 +119,7 @@ A `health_check` block (within `a_pool`) supports the following:
 
 **Members**
 
-A `members` block (within `a_pool`) supports the following:
+A [`members`](#a-pool-members) block (within [`a_pool`](#a-pool)) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Bool<br>Disable. A value of true will disable the pool-member
 
@@ -135,7 +135,7 @@ A `members` block (within `a_pool`) supports the following:
 
 **Aaaa Pool**
 
-An `aaaa_pool` block supports the following:
+An [`aaaa_pool`](#aaaa-pool) block supports the following:
 
 &#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
@@ -145,7 +145,7 @@ An `aaaa_pool` block supports the following:
 
 **Members**
 
-A `members` block (within `aaaa_pool`) supports the following:
+A [`members`](#aaaa-pool-members) block (within [`aaaa_pool`](#aaaa-pool)) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Bool<br>Disable. A value of true will disable the pool-member
 
@@ -161,7 +161,7 @@ A `members` block (within `aaaa_pool`) supports the following:
 
 **Cname Pool**
 
-A `cname_pool` block supports the following:
+A [`cname_pool`](#cname-pool) block supports the following:
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#cname-pool-members) below.
 
@@ -169,7 +169,7 @@ A `cname_pool` block supports the following:
 
 **Members**
 
-A `members` block (within `cname_pool`) supports the following:
+A [`members`](#cname-pool-members) block (within [`cname_pool`](#cname-pool)) supports the following:
 
 &#x2022; [`domain`](#domain) - Optional String<br>Domain
 
@@ -183,7 +183,7 @@ A `members` block (within `cname_pool`) supports the following:
 
 **Mx Pool**
 
-A `mx_pool` block supports the following:
+A [`mx_pool`](#mx-pool) block supports the following:
 
 &#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
@@ -193,7 +193,7 @@ A `mx_pool` block supports the following:
 
 **Members**
 
-A `members` block (within `mx_pool`) supports the following:
+A [`members`](#mx-pool-members) block (within [`mx_pool`](#mx-pool)) supports the following:
 
 &#x2022; [`domain`](#domain) - Optional String<br>Domain
 
@@ -207,7 +207,7 @@ A `members` block (within `mx_pool`) supports the following:
 
 **Srv Pool**
 
-A `srv_pool` block supports the following:
+A [`srv_pool`](#srv-pool) block supports the following:
 
 &#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
@@ -217,7 +217,7 @@ A `srv_pool` block supports the following:
 
 **Members**
 
-A `members` block (within `srv_pool`) supports the following:
+A [`members`](#srv-pool-members) block (within [`srv_pool`](#srv-pool)) supports the following:
 
 &#x2022; [`final_translation`](#final-translation) - Optional Bool<br>Final Translation. If this flag is true, the SRV record will not be translated further
 
@@ -237,7 +237,7 @@ A `members` block (within `srv_pool`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

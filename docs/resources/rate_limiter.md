@@ -75,7 +75,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Limits**
 
-A `limits` block supports the following:
+A [`limits`](#limits) block supports the following:
 
 &#x2022; [`action_block`](#action-block) - Optional Block<br>Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold<br>See [Action Block](#limits-action-block) below.
 
@@ -97,7 +97,7 @@ A `limits` block supports the following:
 
 **Action Block**
 
-An `action_block` block (within `limits`) supports the following:
+An [`action_block`](#limits-action-block) block (within [`limits`](#limits)) supports the following:
 
 &#x2022; [`hours`](#hours) - Optional Block<br>Hours. Input Duration Hours<br>See [Hours](#limits-action-block-hours) below.
 
@@ -109,7 +109,7 @@ An `action_block` block (within `limits`) supports the following:
 
 **Hours**
 
-A `hours` block (within `limits.action_block`) supports the following:
+A [`hours`](#limits-action-block-hours) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -117,7 +117,7 @@ A `hours` block (within `limits.action_block`) supports the following:
 
 **Minutes**
 
-A `minutes` block (within `limits.action_block`) supports the following:
+A [`minutes`](#limits-action-block-minutes) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -125,7 +125,7 @@ A `minutes` block (within `limits.action_block`) supports the following:
 
 **Seconds**
 
-A `seconds` block (within `limits.action_block`) supports the following:
+A [`seconds`](#limits-action-block-seconds) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -133,7 +133,7 @@ A `seconds` block (within `limits.action_block`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -147,7 +147,7 @@ A `timeouts` block supports the following:
 
 **User Identification**
 
-An `user_identification` block supports the following:
+An [`user_identification`](#user-identification) block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

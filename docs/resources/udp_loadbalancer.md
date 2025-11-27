@@ -113,7 +113,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Advertise Custom**
 
-An `advertise_custom` block supports the following:
+An [`advertise_custom`](#advertise-custom) block supports the following:
 
 &#x2022; [`advertise_where`](#advertise-where) - Optional Block<br>List of Sites to Advertise. Where should this load balancer be available<br>See [Advertise Where](#advertise-custom-advertise-where) below.
 
@@ -121,7 +121,7 @@ An `advertise_custom` block supports the following:
 
 **Advertise Where**
 
-An `advertise_where` block (within `advertise_custom`) supports the following:
+An [`advertise_where`](#advertise-custom-advertise-where) block (within [`advertise_custom`](#advertise-custom)) supports the following:
 
 &#x2022; [`advertise_on_public`](#advertise-on-public) - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-custom-advertise-where-advertise-on-public) below.
 
@@ -145,7 +145,7 @@ An `advertise_where` block (within `advertise_custom`) supports the following:
 
 **Advertise On Public**
 
-An `advertise_on_public` block (within `advertise_custom.advertise_where`) supports the following:
+An [`advertise_on_public`](#advertise-custom-advertise-where-advertise-on-public) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
 &#x2022; [`public_ip`](#public-ip) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#advertise-custom-advertise-where-advertise-on-public-public-ip) below.
 
@@ -153,7 +153,7 @@ An `advertise_on_public` block (within `advertise_custom.advertise_where`) suppo
 
 **Public IP**
 
-A `public_ip` block (within `advertise_custom.advertise_where.advertise_on_public`) supports the following:
+A [`public_ip`](#advertise-custom-advertise-where-advertise-on-public-public-ip) block (within [`advertise_custom.advertise_where.advertise_on_public`](#advertise-custom-advertise-where-advertise-on-public)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -165,7 +165,7 @@ A `public_ip` block (within `advertise_custom.advertise_where.advertise_on_publi
 
 **Site**
 
-A `site` block (within `advertise_custom.advertise_where`) supports the following:
+A [`site`](#advertise-custom-advertise-where-site) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
@@ -177,7 +177,7 @@ A `site` block (within `advertise_custom.advertise_where`) supports the followin
 
 **Site**
 
-A `site` block (within `advertise_custom.advertise_where.site`) supports the following:
+A [`site`](#advertise-custom-advertise-where-site-site) block (within [`advertise_custom.advertise_where.site`](#advertise-custom-advertise-where-site)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -189,7 +189,7 @@ A `site` block (within `advertise_custom.advertise_where.site`) supports the fol
 
 **Virtual Network**
 
-A `virtual_network` block (within `advertise_custom.advertise_where`) supports the following:
+A [`virtual_network`](#advertise-custom-advertise-where-virtual-network) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
 &#x2022; [`default_v6_vip`](#default-v6-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -205,7 +205,7 @@ A `virtual_network` block (within `advertise_custom.advertise_where`) supports t
 
 **Virtual Network**
 
-A `virtual_network` block (within `advertise_custom.advertise_where.virtual_network`) supports the following:
+A [`virtual_network`](#advertise-custom-advertise-where-virtual-network-virtual-network) block (within [`advertise_custom.advertise_where.virtual_network`](#advertise-custom-advertise-where-virtual-network)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -217,7 +217,7 @@ A `virtual_network` block (within `advertise_custom.advertise_where.virtual_netw
 
 **Virtual Site**
 
-A `virtual_site` block (within `advertise_custom.advertise_where`) supports the following:
+A [`virtual_site`](#advertise-custom-advertise-where-virtual-site) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
 &#x2022; [`network`](#network) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
@@ -227,7 +227,7 @@ A `virtual_site` block (within `advertise_custom.advertise_where`) supports the 
 
 **Virtual Site**
 
-A `virtual_site` block (within `advertise_custom.advertise_where.virtual_site`) supports the following:
+A [`virtual_site`](#advertise-custom-advertise-where-virtual-site-virtual-site) block (within [`advertise_custom.advertise_where.virtual_site`](#advertise-custom-advertise-where-virtual-site)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -239,7 +239,7 @@ A `virtual_site` block (within `advertise_custom.advertise_where.virtual_site`) 
 
 **Virtual Site With VIP**
 
-A `virtual_site_with_vip` block (within `advertise_custom.advertise_where`) supports the following:
+A [`virtual_site_with_vip`](#advertise-custom-advertise-where-virtual-site-with-vip) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
@@ -251,7 +251,7 @@ A `virtual_site_with_vip` block (within `advertise_custom.advertise_where`) supp
 
 **Virtual Site**
 
-A `virtual_site` block (within `advertise_custom.advertise_where.virtual_site_with_vip`) supports the following:
+A [`virtual_site`](#advertise-custom-advertise-where-virtual-site-with-vip-virtual-site) block (within [`advertise_custom.advertise_where.virtual_site_with_vip`](#advertise-custom-advertise-where-virtual-site-with-vip)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -263,7 +263,7 @@ A `virtual_site` block (within `advertise_custom.advertise_where.virtual_site_wi
 
 **Vk8s Service**
 
-A `vk8s_service` block (within `advertise_custom.advertise_where`) supports the following:
+A [`vk8s_service`](#advertise-custom-advertise-where-vk8s-service) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#advertise-custom-advertise-where-vk8s-service-site) below.
 
@@ -273,7 +273,7 @@ A `vk8s_service` block (within `advertise_custom.advertise_where`) supports the 
 
 **Site**
 
-A `site` block (within `advertise_custom.advertise_where.vk8s_service`) supports the following:
+A [`site`](#advertise-custom-advertise-where-vk8s-service-site) block (within [`advertise_custom.advertise_where.vk8s_service`](#advertise-custom-advertise-where-vk8s-service)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -285,7 +285,7 @@ A `site` block (within `advertise_custom.advertise_where.vk8s_service`) supports
 
 **Virtual Site**
 
-A `virtual_site` block (within `advertise_custom.advertise_where.vk8s_service`) supports the following:
+A [`virtual_site`](#advertise-custom-advertise-where-vk8s-service-virtual-site) block (within [`advertise_custom.advertise_where.vk8s_service`](#advertise-custom-advertise-where-vk8s-service)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -297,7 +297,7 @@ A `virtual_site` block (within `advertise_custom.advertise_where.vk8s_service`) 
 
 **Advertise On Public**
 
-An `advertise_on_public` block supports the following:
+An [`advertise_on_public`](#advertise-on-public) block supports the following:
 
 &#x2022; [`public_ip`](#public-ip) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#advertise-on-public-public-ip) below.
 
@@ -305,7 +305,7 @@ An `advertise_on_public` block supports the following:
 
 **Public IP**
 
-A `public_ip` block (within `advertise_on_public`) supports the following:
+A [`public_ip`](#advertise-on-public-public-ip) block (within [`advertise_on_public`](#advertise-on-public)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -317,7 +317,7 @@ A `public_ip` block (within `advertise_on_public`) supports the following:
 
 **Origin Pools Weights**
 
-An `origin_pools_weights` block supports the following:
+An [`origin_pools_weights`](#origin-pools-weights) block supports the following:
 
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cluster](#origin-pools-weights-cluster) below.
 
@@ -333,7 +333,7 @@ An `origin_pools_weights` block supports the following:
 
 **Cluster**
 
-A `cluster` block (within `origin_pools_weights`) supports the following:
+A [`cluster`](#origin-pools-weights-cluster) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -345,7 +345,7 @@ A `cluster` block (within `origin_pools_weights`) supports the following:
 
 **Pool**
 
-A `pool` block (within `origin_pools_weights`) supports the following:
+A [`pool`](#origin-pools-weights-pool) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -357,7 +357,7 @@ A `pool` block (within `origin_pools_weights`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

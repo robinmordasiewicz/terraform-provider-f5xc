@@ -115,7 +115,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Protocol ICMP**
 
-A `protocol_icmp` block supports the following:
+A [`protocol_icmp`](#protocol-icmp) block supports the following:
 
 &#x2022; [`echo_reply`](#echo-reply) - Optional Bool<br>Echo-Reply. Echo-Reply
 
@@ -135,7 +135,7 @@ A `protocol_icmp` block supports the following:
 
 **Protocol Icmp6**
 
-A `protocol_icmp6` block supports the following:
+A [`protocol_icmp6`](#protocol-icmp6) block supports the following:
 
 &#x2022; [`destination_unreachable`](#destination-unreachable) - Optional Bool<br>Destination-Unreachable. Destination-Unreachable
 
@@ -163,7 +163,7 @@ A `protocol_icmp6` block supports the following:
 
 **Protocol TCP**
 
-A `protocol_tcp` block supports the following:
+A [`protocol_tcp`](#protocol-tcp) block supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Description
 
@@ -179,7 +179,7 @@ A `protocol_tcp` block supports the following:
 
 **Protocol UDP**
 
-A `protocol_udp` block supports the following:
+A [`protocol_udp`](#protocol-udp) block supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Description
 
@@ -195,7 +195,7 @@ A `protocol_udp` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

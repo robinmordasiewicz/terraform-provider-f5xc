@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Local IP**
 
-A `local_ip` block supports the following:
+A [`local_ip`](#local-ip) block supports the following:
 
 &#x2022; [`intf`](#intf) - Optional Block<br>Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet<br>See [Intf](#local-ip-intf) below.
 
@@ -102,7 +102,7 @@ A `local_ip` block supports the following:
 
 **Intf**
 
-An `intf` block (within `local_ip`) supports the following:
+An [`intf`](#local-ip-intf) block (within [`local_ip`](#local-ip)) supports the following:
 
 &#x2022; [`local_intf`](#local-intf) - Optional Block<br>Local Interface. Local interface to be used for filling in source information of IP and network for transport<br>See [Local Intf](#local-ip-intf-local-intf) below.
 
@@ -110,7 +110,7 @@ An `intf` block (within `local_ip`) supports the following:
 
 **Local Intf**
 
-A `local_intf` block (within `local_ip.intf`) supports the following:
+A [`local_intf`](#local-ip-intf-local-intf) block (within [`local_ip.intf`](#local-ip-intf)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -126,7 +126,7 @@ A `local_intf` block (within `local_ip.intf`) supports the following:
 
 **IP Address**
 
-An `ip_address` block (within `local_ip`) supports the following:
+An [`ip_address`](#local-ip-ip-address) block (within [`local_ip`](#local-ip)) supports the following:
 
 &#x2022; [`auto`](#auto) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -138,7 +138,7 @@ An `ip_address` block (within `local_ip`) supports the following:
 
 **IP Address**
 
-An `ip_address` block (within `local_ip.ip_address`) supports the following:
+An [`ip_address`](#local-ip-ip-address-ip-address) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#local-ip-ip-address-ip-address-ipv4) below.
 
@@ -148,7 +148,7 @@ An `ip_address` block (within `local_ip.ip_address`) supports the following:
 
 **IPv4**
 
-An `ipv4` block (within `local_ip.ip_address.ip_address`) supports the following:
+An [`ipv4`](#local-ip-ip-address-ip-address-ipv4) block (within [`local_ip.ip_address.ip_address`](#local-ip-ip-address-ip-address)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
@@ -156,7 +156,7 @@ An `ipv4` block (within `local_ip.ip_address.ip_address`) supports the following
 
 **IPv6**
 
-An `ipv6` block (within `local_ip.ip_address.ip_address`) supports the following:
+An [`ipv6`](#local-ip-ip-address-ip-address-ipv6) block (within [`local_ip.ip_address.ip_address`](#local-ip-ip-address-ip-address)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
@@ -164,7 +164,7 @@ An `ipv6` block (within `local_ip.ip_address.ip_address`) supports the following
 
 **Virtual Network Type**
 
-A `virtual_network_type` block (within `local_ip.ip_address`) supports the following:
+A [`virtual_network_type`](#local-ip-ip-address-virtual-network-type) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
 
 &#x2022; [`public`](#public) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -176,7 +176,7 @@ A `virtual_network_type` block (within `local_ip.ip_address`) supports the follo
 
 **Params**
 
-A `params` block supports the following:
+A [`params`](#params) block supports the following:
 
 &#x2022; [`ipsec`](#ipsec) - Optional Block<br>IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE<br>See [Ipsec](#params-ipsec) below.
 
@@ -184,7 +184,7 @@ A `params` block supports the following:
 
 **Ipsec**
 
-An `ipsec` block (within `params`) supports the following:
+An [`ipsec`](#params-ipsec) block (within [`params`](#params)) supports the following:
 
 &#x2022; [`ipsec_psk`](#ipsec-psk) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Ipsec Psk](#params-ipsec-ipsec-psk) below.
 
@@ -192,7 +192,7 @@ An `ipsec` block (within `params`) supports the following:
 
 **Ipsec Psk**
 
-An `ipsec_psk` block (within `params.ipsec`) supports the following:
+An [`ipsec_psk`](#params-ipsec-ipsec-psk) block (within [`params.ipsec`](#params-ipsec)) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#params-ipsec-ipsec-psk-blindfold-secret-info) below.
 
@@ -202,7 +202,7 @@ An `ipsec_psk` block (within `params.ipsec`) supports the following:
 
 **Blindfold Secret Info**
 
-A `blindfold_secret_info` block (within `params.ipsec.ipsec_psk`) supports the following:
+A [`blindfold_secret_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -214,7 +214,7 @@ A `blindfold_secret_info` block (within `params.ipsec.ipsec_psk`) supports the f
 
 **Clear Secret Info**
 
-A `clear_secret_info` block (within `params.ipsec.ipsec_psk`) supports the following:
+A [`clear_secret_info`](#params-ipsec-ipsec-psk-clear-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -224,7 +224,7 @@ A `clear_secret_info` block (within `params.ipsec.ipsec_psk`) supports the follo
 
 **Remote IP**
 
-A `remote_ip` block supports the following:
+A [`remote_ip`](#remote-ip) block supports the following:
 
 &#x2022; [`endpoints`](#endpoints) - Optional Block<br>Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel<br>See [Endpoints](#remote-ip-endpoints) below.
 
@@ -234,7 +234,7 @@ A `remote_ip` block supports the following:
 
 **Endpoints**
 
-An `endpoints` block (within `remote_ip`) supports the following:
+An [`endpoints`](#remote-ip-endpoints) block (within [`remote_ip`](#remote-ip)) supports the following:
 
 &#x2022; [`endpoints`](#endpoints) - Optional Block<br>Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes
 
@@ -242,7 +242,7 @@ An `endpoints` block (within `remote_ip`) supports the following:
 
 **IP**
 
-An `ip` block (within `remote_ip`) supports the following:
+An [`ip`](#remote-ip-ip) block (within [`remote_ip`](#remote-ip)) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#remote-ip-ip-ipv4) below.
 
@@ -252,7 +252,7 @@ An `ip` block (within `remote_ip`) supports the following:
 
 **IPv4**
 
-An `ipv4` block (within `remote_ip.ip`) supports the following:
+An [`ipv4`](#remote-ip-ip-ipv4) block (within [`remote_ip.ip`](#remote-ip-ip)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
@@ -260,7 +260,7 @@ An `ipv4` block (within `remote_ip.ip`) supports the following:
 
 **IPv6**
 
-An `ipv6` block (within `remote_ip.ip`) supports the following:
+An [`ipv6`](#remote-ip-ip-ipv6) block (within [`remote_ip.ip`](#remote-ip-ip)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
@@ -268,7 +268,7 @@ An `ipv6` block (within `remote_ip.ip`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

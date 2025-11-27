@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Forward Proxy Pbr**
 
-A `forward_proxy_pbr` block supports the following:
+A [`forward_proxy_pbr`](#forward-proxy-pbr) block supports the following:
 
 &#x2022; [`forward_proxy_pbr_rules`](#forward-proxy-pbr-rules) - Optional Block<br>L3/L4 routing rules. Network(L3/L4) routing policy rules<br>See [Forward Proxy Pbr Rules](#forward-proxy-pbr-forward-proxy-pbr-rules) below.
 
@@ -94,7 +94,7 @@ A `forward_proxy_pbr` block supports the following:
 
 **Forward Proxy Pbr Rules**
 
-A `forward_proxy_pbr_rules` block (within `forward_proxy_pbr`) supports the following:
+A [`forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules) block (within [`forward_proxy_pbr`](#forward-proxy-pbr)) supports the following:
 
 &#x2022; [`all_destinations`](#all-destinations) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -118,7 +118,7 @@ A `forward_proxy_pbr_rules` block (within `forward_proxy_pbr`) supports the foll
 
 **Forwarding Class List**
 
-A `forwarding_class_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) supports the following:
+A [`forwarding_class_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-forwarding-class-list) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -130,7 +130,7 @@ A `forwarding_class_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rul
 
 **HTTP List**
 
-A `http_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) supports the following:
+A [`http_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules)) supports the following:
 
 &#x2022; [`http_list`](#http-list) - Optional Block<br>HTTP URLs. URLs for HTTP connections<br>See [HTTP List](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list) below.
 
@@ -138,7 +138,7 @@ A `http_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) support
 
 **HTTP List**
 
-A `http_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules.http_list`) supports the following:
+A [`http_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list-http-list) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules.http_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-http-list)) supports the following:
 
 &#x2022; [`any_path`](#any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -158,7 +158,7 @@ A `http_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules.http_list
 
 **IP Prefix Set**
 
-An `ip_prefix_set` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) supports the following:
+An [`ip_prefix_set`](#forward-proxy-pbr-forward-proxy-pbr-rules-ip-prefix-set) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -170,7 +170,7 @@ An `ip_prefix_set` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) su
 
 **Label Selector**
 
-A `label_selector` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) supports the following:
+A [`label_selector`](#forward-proxy-pbr-forward-proxy-pbr-rules-label-selector) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -178,7 +178,7 @@ A `label_selector` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) su
 
 **Metadata**
 
-A `metadata` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) supports the following:
+A [`metadata`](#forward-proxy-pbr-forward-proxy-pbr-rules-metadata) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules)) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -188,7 +188,7 @@ A `metadata` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) supports
 
 **Prefix List**
 
-A `prefix_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) supports the following:
+A [`prefix_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-prefix-list) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
@@ -196,7 +196,7 @@ A `prefix_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) suppo
 
 **TLS List**
 
-A `tls_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) supports the following:
+A [`tls_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#forward-proxy-pbr-forward-proxy-pbr-rules)) supports the following:
 
 &#x2022; [`tls_list`](#tls-list) - Optional Block<br>TLS Domains. Domains in SNI for TLS connections<br>See [TLS List](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list-tls-list) below.
 
@@ -204,7 +204,7 @@ A `tls_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules`) supports
 
 **TLS List**
 
-A `tls_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules.tls_list`) supports the following:
+A [`tls_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list-tls-list) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules.tls_list`](#forward-proxy-pbr-forward-proxy-pbr-rules-tls-list)) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -216,7 +216,7 @@ A `tls_list` block (within `forward_proxy_pbr.forward_proxy_pbr_rules.tls_list`)
 
 **Forwarding Class List**
 
-A `forwarding_class_list` block supports the following:
+A [`forwarding_class_list`](#forwarding-class-list) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -228,7 +228,7 @@ A `forwarding_class_list` block supports the following:
 
 **Network Pbr**
 
-A `network_pbr` block supports the following:
+A [`network_pbr`](#network-pbr) block supports the following:
 
 &#x2022; [`any`](#any) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -242,7 +242,7 @@ A `network_pbr` block supports the following:
 
 **Label Selector**
 
-A `label_selector` block (within `network_pbr`) supports the following:
+A [`label_selector`](#network-pbr-label-selector) block (within [`network_pbr`](#network-pbr)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -250,7 +250,7 @@ A `label_selector` block (within `network_pbr`) supports the following:
 
 **Network Pbr Rules**
 
-A `network_pbr_rules` block (within `network_pbr`) supports the following:
+A [`network_pbr_rules`](#network-pbr-network-pbr-rules) block (within [`network_pbr`](#network-pbr)) supports the following:
 
 &#x2022; [`all_tcp_traffic`](#all-tcp-traffic) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -278,7 +278,7 @@ A `network_pbr_rules` block (within `network_pbr`) supports the following:
 
 **Applications**
 
-An `applications` block (within `network_pbr.network_pbr_rules`) supports the following:
+An [`applications`](#network-pbr-network-pbr-rules-applications) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
 
 &#x2022; [`applications`](#applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
 
@@ -286,7 +286,7 @@ An `applications` block (within `network_pbr.network_pbr_rules`) supports the fo
 
 **Forwarding Class List**
 
-A `forwarding_class_list` block (within `network_pbr.network_pbr_rules`) supports the following:
+A [`forwarding_class_list`](#network-pbr-network-pbr-rules-forwarding-class-list) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -298,7 +298,7 @@ A `forwarding_class_list` block (within `network_pbr.network_pbr_rules`) support
 
 **IP Prefix Set**
 
-An `ip_prefix_set` block (within `network_pbr.network_pbr_rules`) supports the following:
+An [`ip_prefix_set`](#network-pbr-network-pbr-rules-ip-prefix-set) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#network-pbr-network-pbr-rules-ip-prefix-set-ref) below.
 
@@ -306,7 +306,7 @@ An `ip_prefix_set` block (within `network_pbr.network_pbr_rules`) supports the f
 
 **Ref**
 
-A `ref` block (within `network_pbr.network_pbr_rules.ip_prefix_set`) supports the following:
+A [`ref`](#network-pbr-network-pbr-rules-ip-prefix-set-ref) block (within [`network_pbr.network_pbr_rules.ip_prefix_set`](#network-pbr-network-pbr-rules-ip-prefix-set)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -322,7 +322,7 @@ A `ref` block (within `network_pbr.network_pbr_rules.ip_prefix_set`) supports th
 
 **Metadata**
 
-A `metadata` block (within `network_pbr.network_pbr_rules`) supports the following:
+A [`metadata`](#network-pbr-network-pbr-rules-metadata) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -332,7 +332,7 @@ A `metadata` block (within `network_pbr.network_pbr_rules`) supports the followi
 
 **Prefix List**
 
-A `prefix_list` block (within `network_pbr.network_pbr_rules`) supports the following:
+A [`prefix_list`](#network-pbr-network-pbr-rules-prefix-list) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
@@ -340,7 +340,7 @@ A `prefix_list` block (within `network_pbr.network_pbr_rules`) supports the foll
 
 **Protocol Port Range**
 
-A `protocol_port_range` block (within `network_pbr.network_pbr_rules`) supports the following:
+A [`protocol_port_range`](#network-pbr-network-pbr-rules-protocol-port-range) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional List<br>List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
 
@@ -350,7 +350,7 @@ A `protocol_port_range` block (within `network_pbr.network_pbr_rules`) supports 
 
 **Prefix List**
 
-A `prefix_list` block (within `network_pbr`) supports the following:
+A [`prefix_list`](#network-pbr-prefix-list) block (within [`network_pbr`](#network-pbr)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
@@ -358,7 +358,7 @@ A `prefix_list` block (within `network_pbr`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

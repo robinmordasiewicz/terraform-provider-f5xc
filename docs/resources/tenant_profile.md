@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Ct Groups**
 
-A `ct_groups` block supports the following:
+A [`ct_groups`](#ct-groups) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the child tenant user group
 
@@ -102,7 +102,7 @@ A `ct_groups` block supports the following:
 
 **Namespace Roles**
 
-A `namespace_roles` block (within `ct_groups`) supports the following:
+A [`namespace_roles`](#ct-groups-namespace-roles) block (within [`ct_groups`](#ct-groups)) supports the following:
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces. The System, Shared, and Default namespaces will be created automatically
 
@@ -112,7 +112,7 @@ A `namespace_roles` block (within `ct_groups`) supports the following:
 
 **Favicon**
 
-A `favicon` block supports the following:
+A [`favicon`](#favicon) block supports the following:
 
 &#x2022; [`aws_s3`](#aws-s3) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -124,7 +124,7 @@ A `favicon` block supports the following:
 
 **Logo**
 
-A `logo` block supports the following:
+A [`logo`](#logo) block supports the following:
 
 &#x2022; [`aws_s3`](#aws-s3) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -136,7 +136,7 @@ A `logo` block supports the following:
 
 **Plan**
 
-A `plan` block supports the following:
+A [`plan`](#plan) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -148,7 +148,7 @@ A `plan` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

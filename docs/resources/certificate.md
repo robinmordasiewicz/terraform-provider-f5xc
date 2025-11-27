@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Certificate Chain**
 
-A `certificate_chain` block supports the following:
+A [`certificate_chain`](#certificate-chain) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -97,7 +97,7 @@ A `certificate_chain` block supports the following:
 
 **Custom Hash Algorithms**
 
-A `custom_hash_algorithms` block supports the following:
+A [`custom_hash_algorithms`](#custom-hash-algorithms) block supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
@@ -105,7 +105,7 @@ A `custom_hash_algorithms` block supports the following:
 
 **Private Key**
 
-A `private_key` block supports the following:
+A [`private_key`](#private-key) block supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#private-key-blindfold-secret-info) below.
 
@@ -115,7 +115,7 @@ A `private_key` block supports the following:
 
 **Blindfold Secret Info**
 
-A `blindfold_secret_info` block (within `private_key`) supports the following:
+A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -127,7 +127,7 @@ A `blindfold_secret_info` block (within `private_key`) supports the following:
 
 **Clear Secret Info**
 
-A `clear_secret_info` block (within `private_key`) supports the following:
+A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -137,7 +137,7 @@ A `clear_secret_info` block (within `private_key`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

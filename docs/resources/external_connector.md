@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **CE Site Reference**
 
-A `ce_site_reference` block supports the following:
+A [`ce_site_reference`](#ce-site-reference) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -96,7 +96,7 @@ A `ce_site_reference` block supports the following:
 
 **Ipsec**
 
-An `ipsec` block supports the following:
+An [`ipsec`](#ipsec) block supports the following:
 
 &#x2022; [`ike_parameters`](#ike-parameters) - Optional Block<br>IKE Parameters. IKE configuration parameters required for IPSec Connection type<br>See [Ike Parameters](#ipsec-ike-parameters) below.
 
@@ -106,7 +106,7 @@ An `ipsec` block supports the following:
 
 **Ike Parameters**
 
-An `ike_parameters` block (within `ipsec`) supports the following:
+An [`ike_parameters`](#ipsec-ike-parameters) block (within [`ipsec`](#ipsec)) supports the following:
 
 &#x2022; [`dpd_disabled`](#dpd-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -132,7 +132,7 @@ An `ike_parameters` block (within `ipsec`) supports the following:
 
 **Dpd Keep Alive Timer**
 
-A `dpd_keep_alive_timer` block (within `ipsec.ike_parameters`) supports the following:
+A [`dpd_keep_alive_timer`](#ipsec-ike-parameters-dpd-keep-alive-timer) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
 &#x2022; [`timeout`](#timeout) - Optional Number<br>Keepalive Timer
 
@@ -140,7 +140,7 @@ A `dpd_keep_alive_timer` block (within `ipsec.ike_parameters`) supports the foll
 
 **Ike Phase1 Profile**
 
-An `ike_phase1_profile` block (within `ipsec.ike_parameters`) supports the following:
+An [`ike_phase1_profile`](#ipsec-ike-parameters-ike-phase1-profile) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -152,7 +152,7 @@ An `ike_phase1_profile` block (within `ipsec.ike_parameters`) supports the follo
 
 **Ike Phase2 Profile**
 
-An `ike_phase2_profile` block (within `ipsec.ike_parameters`) supports the following:
+An [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -164,7 +164,7 @@ An `ike_phase2_profile` block (within `ipsec.ike_parameters`) supports the follo
 
 **Rm IP Address**
 
-A `rm_ip_address` block (within `ipsec.ike_parameters`) supports the following:
+A [`rm_ip_address`](#ipsec-ike-parameters-rm-ip-address) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
 &#x2022; [`ipv4`](#ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipsec-ike-parameters-rm-ip-address-ipv4) below.
 
@@ -174,7 +174,7 @@ A `rm_ip_address` block (within `ipsec.ike_parameters`) supports the following:
 
 **IPv4**
 
-An `ipv4` block (within `ipsec.ike_parameters.rm_ip_address`) supports the following:
+An [`ipv4`](#ipsec-ike-parameters-rm-ip-address-ipv4) block (within [`ipsec.ike_parameters.rm_ip_address`](#ipsec-ike-parameters-rm-ip-address)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
@@ -182,7 +182,7 @@ An `ipv4` block (within `ipsec.ike_parameters.rm_ip_address`) supports the follo
 
 **IPv6**
 
-An `ipv6` block (within `ipsec.ike_parameters.rm_ip_address`) supports the following:
+An [`ipv6`](#ipsec-ike-parameters-rm-ip-address-ipv6) block (within [`ipsec.ike_parameters.rm_ip_address`](#ipsec-ike-parameters-rm-ip-address)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
@@ -190,7 +190,7 @@ An `ipv6` block (within `ipsec.ike_parameters.rm_ip_address`) supports the follo
 
 **Ipsec Tunnel Parameters**
 
-An `ipsec_tunnel_parameters` block (within `ipsec`) supports the following:
+An [`ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters) block (within [`ipsec`](#ipsec)) supports the following:
 
 &#x2022; [`peer_ip_address`](#peer-ip-address) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [Peer IP Address](#ipsec-ipsec-tunnel-parameters-peer-ip-address) below.
 
@@ -210,7 +210,7 @@ An `ipsec_tunnel_parameters` block (within `ipsec`) supports the following:
 
 **Peer IP Address**
 
-A `peer_ip_address` block (within `ipsec.ipsec_tunnel_parameters`) supports the following:
+A [`peer_ip_address`](#ipsec-ipsec-tunnel-parameters-peer-ip-address) block (within [`ipsec.ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
@@ -218,7 +218,7 @@ A `peer_ip_address` block (within `ipsec.ipsec_tunnel_parameters`) supports the 
 
 **Segment**
 
-A `segment` block (within `ipsec.ipsec_tunnel_parameters`) supports the following:
+A [`segment`](#ipsec-ipsec-tunnel-parameters-segment) block (within [`ipsec.ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#ipsec-ipsec-tunnel-parameters-segment-refs) below.
 
@@ -226,7 +226,7 @@ A `segment` block (within `ipsec.ipsec_tunnel_parameters`) supports the followin
 
 **Refs**
 
-A `refs` block (within `ipsec.ipsec_tunnel_parameters.segment`) supports the following:
+A [`refs`](#ipsec-ipsec-tunnel-parameters-segment-refs) block (within [`ipsec.ipsec_tunnel_parameters.segment`](#ipsec-ipsec-tunnel-parameters-segment)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -242,7 +242,7 @@ A `refs` block (within `ipsec.ipsec_tunnel_parameters.segment`) supports the fol
 
 **Tunnel Eps**
 
-A `tunnel_eps` block (within `ipsec.ipsec_tunnel_parameters`) supports the following:
+A [`tunnel_eps`](#ipsec-ipsec-tunnel-parameters-tunnel-eps) block (within [`ipsec.ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters)) supports the following:
 
 &#x2022; [`interface`](#interface) - Optional String<br>Interface. For the chosen node, specify the interface that will be the tunnel source
 
@@ -256,7 +256,7 @@ A `tunnel_eps` block (within `ipsec.ipsec_tunnel_parameters`) supports the follo
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

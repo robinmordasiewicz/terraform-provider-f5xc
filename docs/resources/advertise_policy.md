@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Public IP**
 
-A `public_ip` block supports the following:
+A [`public_ip`](#public-ip) block supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -112,7 +112,7 @@ A `public_ip` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -126,7 +126,7 @@ A `timeouts` block supports the following:
 
 **TLS Parameters**
 
-A `tls_parameters` block supports the following:
+A [`tls_parameters`](#tls-parameters) block supports the following:
 
 &#x2022; [`client_certificate_optional`](#client-certificate-optional) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -142,7 +142,7 @@ A `tls_parameters` block supports the following:
 
 **Common Params**
 
-A `common_params` block (within `tls_parameters`) supports the following:
+A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
 &#x2022; [`cipher_suites`](#cipher-suites) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
 
@@ -158,7 +158,7 @@ A `common_params` block (within `tls_parameters`) supports the following:
 
 **TLS Certificates**
 
-A `tls_certificates` block (within `tls_parameters.common_params`) supports the following:
+A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
 &#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
@@ -176,7 +176,7 @@ A `tls_certificates` block (within `tls_parameters.common_params`) supports the 
 
 **Custom Hash Algorithms**
 
-A `custom_hash_algorithms` block (within `tls_parameters.common_params.tls_certificates`) supports the following:
+A [`custom_hash_algorithms`](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
@@ -184,7 +184,7 @@ A `custom_hash_algorithms` block (within `tls_parameters.common_params.tls_certi
 
 **Private Key**
 
-A `private_key` block (within `tls_parameters.common_params.tls_certificates`) supports the following:
+A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) below.
 
@@ -194,7 +194,7 @@ A `private_key` block (within `tls_parameters.common_params.tls_certificates`) s
 
 **Blindfold Secret Info**
 
-A `blindfold_secret_info` block (within `tls_parameters.common_params.tls_certificates.private_key`) supports the following:
+A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -206,7 +206,7 @@ A `blindfold_secret_info` block (within `tls_parameters.common_params.tls_certif
 
 **Clear Secret Info**
 
-A `clear_secret_info` block (within `tls_parameters.common_params.tls_certificates.private_key`) supports the following:
+A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -216,7 +216,7 @@ A `clear_secret_info` block (within `tls_parameters.common_params.tls_certificat
 
 **Validation Params**
 
-A `validation_params` block (within `tls_parameters.common_params`) supports the following:
+A [`validation_params`](#tls-parameters-common-params-validation-params) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
 &#x2022; [`skip_hostname_verification`](#skip-hostname-verification) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
@@ -230,7 +230,7 @@ A `validation_params` block (within `tls_parameters.common_params`) supports the
 
 **Trusted CA**
 
-A `trusted_ca` block (within `tls_parameters.common_params.validation_params`) supports the following:
+A [`trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca) block (within [`tls_parameters.common_params.validation_params`](#tls-parameters-common-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
 
@@ -238,7 +238,7 @@ A `trusted_ca` block (within `tls_parameters.common_params.validation_params`) s
 
 **Trusted CA List**
 
-A `trusted_ca_list` block (within `tls_parameters.common_params.validation_params.trusted_ca`) supports the following:
+A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_parameters.common_params.validation_params.trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -254,7 +254,7 @@ A `trusted_ca_list` block (within `tls_parameters.common_params.validation_param
 
 **Where**
 
-A `where` block supports the following:
+A [`where`](#where) block supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
@@ -266,7 +266,7 @@ A `where` block supports the following:
 
 **Site**
 
-A `site` block (within `where`) supports the following:
+A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -280,7 +280,7 @@ A `site` block (within `where`) supports the following:
 
 **Ref**
 
-A `ref` block (within `where.site`) supports the following:
+A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -296,7 +296,7 @@ A `ref` block (within `where.site`) supports the following:
 
 **Virtual Network**
 
-A `virtual_network` block (within `where`) supports the following:
+A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
 
@@ -304,7 +304,7 @@ A `virtual_network` block (within `where`) supports the following:
 
 **Ref**
 
-A `ref` block (within `where.virtual_network`) supports the following:
+A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#where-virtual-network)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -320,7 +320,7 @@ A `ref` block (within `where.virtual_network`) supports the following:
 
 **Virtual Site**
 
-A `virtual_site` block (within `where`) supports the following:
+A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -334,7 +334,7 @@ A `virtual_site` block (within `where`) supports the following:
 
 **Ref**
 
-A `ref` block (within `where.virtual_site`) supports the following:
+A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

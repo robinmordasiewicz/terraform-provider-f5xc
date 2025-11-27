@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **BGP Parameters**
 
-A `bgp_parameters` block supports the following:
+A [`bgp_parameters`](#bgp-parameters) block supports the following:
 
 &#x2022; [`asn`](#asn) - Optional Number<br>ASN. Autonomous System Number
 
@@ -107,7 +107,7 @@ A `bgp_parameters` block supports the following:
 
 **Peers**
 
-A `peers` block supports the following:
+A [`peers`](#peers) block supports the following:
 
 &#x2022; [`bfd_disabled`](#bfd-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -131,7 +131,7 @@ A `peers` block supports the following:
 
 **Bfd Enabled**
 
-A `bfd_enabled` block (within `peers`) supports the following:
+A [`bfd_enabled`](#peers-bfd-enabled) block (within [`peers`](#peers)) supports the following:
 
 &#x2022; [`multiplier`](#multiplier) - Optional Number<br>Multiplier. Specify Number of missed packets to bring session down'
 
@@ -143,7 +143,7 @@ A `bfd_enabled` block (within `peers`) supports the following:
 
 **External**
 
-An `external` block (within `peers`) supports the following:
+An [`external`](#peers-external) block (within [`peers`](#peers)) supports the following:
 
 &#x2022; [`address`](#address) - Optional String<br>Peer Address. Specify IPv4 peer address
 
@@ -189,7 +189,7 @@ An `external` block (within `peers`) supports the following:
 
 **Family Inet**
 
-A `family_inet` block (within `peers.external`) supports the following:
+A [`family_inet`](#peers-external-family-inet) block (within [`peers.external`](#peers-external)) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -199,7 +199,7 @@ A `family_inet` block (within `peers.external`) supports the following:
 
 **Interface**
 
-An `interface` block (within `peers.external`) supports the following:
+An [`interface`](#peers-external-interface) block (within [`peers.external`](#peers-external)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -211,7 +211,7 @@ An `interface` block (within `peers.external`) supports the following:
 
 **Interface List**
 
-An `interface_list` block (within `peers.external`) supports the following:
+An [`interface_list`](#peers-external-interface-list) block (within [`peers.external`](#peers-external)) supports the following:
 
 &#x2022; [`interfaces`](#interfaces) - Optional Block<br>Interface List. List of network interfaces<br>See [Interfaces](#peers-external-interface-list-interfaces) below.
 
@@ -219,7 +219,7 @@ An `interface_list` block (within `peers.external`) supports the following:
 
 **Interfaces**
 
-An `interfaces` block (within `peers.external.interface_list`) supports the following:
+An [`interfaces`](#peers-external-interface-list-interfaces) block (within [`peers.external.interface_list`](#peers-external-interface-list)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -231,7 +231,7 @@ An `interfaces` block (within `peers.external.interface_list`) supports the foll
 
 **Metadata**
 
-A `metadata` block (within `peers`) supports the following:
+A [`metadata`](#peers-metadata) block (within [`peers`](#peers)) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -241,7 +241,7 @@ A `metadata` block (within `peers`) supports the following:
 
 **Routing Policies**
 
-A `routing_policies` block (within `peers`) supports the following:
+A [`routing_policies`](#peers-routing-policies) block (within [`peers`](#peers)) supports the following:
 
 &#x2022; [`route_policy`](#route-policy) - Optional Block<br>BGP Routing policy. Route policy to be applied<br>See [Route Policy](#peers-routing-policies-route-policy) below.
 
@@ -249,7 +249,7 @@ A `routing_policies` block (within `peers`) supports the following:
 
 **Route Policy**
 
-A `route_policy` block (within `peers.routing_policies`) supports the following:
+A [`route_policy`](#peers-routing-policies-route-policy) block (within [`peers.routing_policies`](#peers-routing-policies)) supports the following:
 
 &#x2022; [`all_nodes`](#all-nodes) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -265,7 +265,7 @@ A `route_policy` block (within `peers.routing_policies`) supports the following:
 
 **Node Name**
 
-A `node_name` block (within `peers.routing_policies.route_policy`) supports the following:
+A [`node_name`](#peers-routing-policies-route-policy-node-name) block (within [`peers.routing_policies.route_policy`](#peers-routing-policies-route-policy)) supports the following:
 
 &#x2022; [`node`](#node) - Optional List<br>Node of choice. Select BGP Session on which policy will be applied
 
@@ -273,7 +273,7 @@ A `node_name` block (within `peers.routing_policies.route_policy`) supports the 
 
 **Object Refs**
 
-An `object_refs` block (within `peers.routing_policies.route_policy`) supports the following:
+An [`object_refs`](#peers-routing-policies-route-policy-object-refs) block (within [`peers.routing_policies.route_policy`](#peers-routing-policies-route-policy)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -289,7 +289,7 @@ An `object_refs` block (within `peers.routing_policies.route_policy`) supports t
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
@@ -303,7 +303,7 @@ A `timeouts` block supports the following:
 
 **Where**
 
-A `where` block supports the following:
+A [`where`](#where) block supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
@@ -313,7 +313,7 @@ A `where` block supports the following:
 
 **Site**
 
-A `site` block (within `where`) supports the following:
+A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -327,7 +327,7 @@ A `site` block (within `where`) supports the following:
 
 **Ref**
 
-A `ref` block (within `where.site`) supports the following:
+A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
@@ -343,7 +343,7 @@ A `ref` block (within `where.site`) supports the following:
 
 **Virtual Site**
 
-A `virtual_site` block (within `where`) supports the following:
+A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -357,7 +357,7 @@ A `virtual_site` block (within `where`) supports the following:
 
 **Ref**
 
-A `ref` block (within `where.virtual_site`) supports the following:
+A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 
 &#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 

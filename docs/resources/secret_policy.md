@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rule List**
 
-A `rule_list` block supports the following:
+A [`rule_list`](#rule-list) block supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list<br>See [Rules](#rule-list-rules) below.
 
@@ -97,7 +97,7 @@ A `rule_list` block supports the following:
 
 **Rules**
 
-A `rules` block (within `rule_list`) supports the following:
+A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
 &#x2022; [`metadata`](#metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
 
@@ -107,7 +107,7 @@ A `rules` block (within `rule_list`) supports the following:
 
 **Metadata**
 
-A `metadata` block (within `rule_list.rules`) supports the following:
+A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -117,7 +117,7 @@ A `metadata` block (within `rule_list.rules`) supports the following:
 
 **Spec**
 
-A `spec` block (within `rule_list.rules`) supports the following:
+A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
 
@@ -131,7 +131,7 @@ A `spec` block (within `rule_list.rules`) supports the following:
 
 **Client Name Matcher**
 
-A `client_name_matcher` block (within `rule_list.rules.spec`) supports the following:
+A [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
@@ -143,7 +143,7 @@ A `client_name_matcher` block (within `rule_list.rules.spec`) supports the follo
 
 **Client Selector**
 
-A `client_selector` block (within `rule_list.rules.spec`) supports the following:
+A [`client_selector`](#rule-list-rules-spec-client-selector) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -151,7 +151,7 @@ A `client_selector` block (within `rule_list.rules.spec`) supports the following
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

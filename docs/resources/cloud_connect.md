@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **AWS Tgw Site**
 
-An `aws_tgw_site` block supports the following:
+An [`aws_tgw_site`](#aws-tgw-site) block supports the following:
 
 &#x2022; [`cred`](#cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cred](#aws-tgw-site-cred) below.
 
@@ -98,7 +98,7 @@ An `aws_tgw_site` block supports the following:
 
 **Cred**
 
-A `cred` block (within `aws_tgw_site`) supports the following:
+A [`cred`](#aws-tgw-site-cred) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -110,7 +110,7 @@ A `cred` block (within `aws_tgw_site`) supports the following:
 
 **Site**
 
-A `site` block (within `aws_tgw_site`) supports the following:
+A [`site`](#aws-tgw-site-site) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -122,7 +122,7 @@ A `site` block (within `aws_tgw_site`) supports the following:
 
 **Vpc Attachments**
 
-A `vpc_attachments` block (within `aws_tgw_site`) supports the following:
+A [`vpc_attachments`](#aws-tgw-site-vpc-attachments) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
 &#x2022; [`vpc_list`](#vpc-list) - Optional Block<br>VPC List<br>See [Vpc List](#aws-tgw-site-vpc-attachments-vpc-list) below.
 
@@ -130,7 +130,7 @@ A `vpc_attachments` block (within `aws_tgw_site`) supports the following:
 
 **Vpc List**
 
-A `vpc_list` block (within `aws_tgw_site.vpc_attachments`) supports the following:
+A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_site.vpc_attachments`](#aws-tgw-site-vpc-attachments)) supports the following:
 
 &#x2022; [`custom_routing`](#custom-routing) - Optional Block<br>AWS Route Table List. AWS Route Table List<br>See [Custom Routing](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) below.
 
@@ -146,7 +146,7 @@ A `vpc_list` block (within `aws_tgw_site.vpc_attachments`) supports the followin
 
 **Custom Routing**
 
-A `custom_routing` block (within `aws_tgw_site.vpc_attachments.vpc_list`) supports the following:
+A [`custom_routing`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
 
 &#x2022; [`route_tables`](#route-tables) - Optional Block<br>List of route tables. Route Tables<br>See [Route Tables](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables) below.
 
@@ -154,7 +154,7 @@ A `custom_routing` block (within `aws_tgw_site.vpc_attachments.vpc_list`) suppor
 
 **Route Tables**
 
-A `route_tables` block (within `aws_tgw_site.vpc_attachments.vpc_list.custom_routing`) supports the following:
+A [`route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables) block (within [`aws_tgw_site.vpc_attachments.vpc_list.custom_routing`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing)) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional String<br>Route table ID. Route table ID
 
@@ -164,7 +164,7 @@ A `route_tables` block (within `aws_tgw_site.vpc_attachments.vpc_list.custom_rou
 
 **Default Route**
 
-A `default_route` block (within `aws_tgw_site.vpc_attachments.vpc_list`) supports the following:
+A [`default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
 
 &#x2022; [`all_route_tables`](#all-route-tables) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -174,7 +174,7 @@ A `default_route` block (within `aws_tgw_site.vpc_attachments.vpc_list`) support
 
 **Selective Route Tables**
 
-A `selective_route_tables` block (within `aws_tgw_site.vpc_attachments.vpc_list.default_route`) supports the following:
+A [`selective_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) block (within [`aws_tgw_site.vpc_attachments.vpc_list.default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route)) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional List<br>Route table ID. Route table ID
 
@@ -182,7 +182,7 @@ A `selective_route_tables` block (within `aws_tgw_site.vpc_attachments.vpc_list.
 
 **Azure Vnet Site**
 
-An `azure_vnet_site` block supports the following:
+An [`azure_vnet_site`](#azure-vnet-site) block supports the following:
 
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#azure-vnet-site-site) below.
 
@@ -192,7 +192,7 @@ An `azure_vnet_site` block supports the following:
 
 **Site**
 
-A `site` block (within `azure_vnet_site`) supports the following:
+A [`site`](#azure-vnet-site-site) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -204,7 +204,7 @@ A `site` block (within `azure_vnet_site`) supports the following:
 
 **Vnet Attachments**
 
-A `vnet_attachments` block (within `azure_vnet_site`) supports the following:
+A [`vnet_attachments`](#azure-vnet-site-vnet-attachments) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
 
 &#x2022; [`vnet_list`](#vnet-list) - Optional Block<br>VNET List<br>See [Vnet List](#azure-vnet-site-vnet-attachments-vnet-list) below.
 
@@ -212,7 +212,7 @@ A `vnet_attachments` block (within `azure_vnet_site`) supports the following:
 
 **Vnet List**
 
-A `vnet_list` block (within `azure_vnet_site.vnet_attachments`) supports the following:
+A [`vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list) block (within [`azure_vnet_site.vnet_attachments`](#azure-vnet-site-vnet-attachments)) supports the following:
 
 &#x2022; [`custom_routing`](#custom-routing) - Optional Block<br>List Azure Route Table with Static Route. List Azure Route Table with Static Route<br>See [Custom Routing](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) below.
 
@@ -230,7 +230,7 @@ A `vnet_list` block (within `azure_vnet_site.vnet_attachments`) supports the fol
 
 **Custom Routing**
 
-A `custom_routing` block (within `azure_vnet_site.vnet_attachments.vnet_list`) supports the following:
+A [`custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list)) supports the following:
 
 &#x2022; [`route_tables`](#route-tables) - Optional Block<br>List of route tables with static routes. Route Tables with static routes<br>See [Route Tables](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) below.
 
@@ -238,7 +238,7 @@ A `custom_routing` block (within `azure_vnet_site.vnet_attachments.vnet_list`) s
 
 **Route Tables**
 
-A `route_tables` block (within `azure_vnet_site.vnet_attachments.vnet_list.custom_routing`) supports the following:
+A [`route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) block (within [`azure_vnet_site.vnet_attachments.vnet_list.custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing)) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional String<br>Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>
 
@@ -248,7 +248,7 @@ A `route_tables` block (within `azure_vnet_site.vnet_attachments.vnet_list.custo
 
 **Default Route**
 
-A `default_route` block (within `azure_vnet_site.vnet_attachments.vnet_list`) supports the following:
+A [`default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list)) supports the following:
 
 &#x2022; [`all_route_tables`](#all-route-tables) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -258,7 +258,7 @@ A `default_route` block (within `azure_vnet_site.vnet_attachments.vnet_list`) su
 
 **Selective Route Tables**
 
-A `selective_route_tables` block (within `azure_vnet_site.vnet_attachments.vnet_list.default_route`) supports the following:
+A [`selective_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) block (within [`azure_vnet_site.vnet_attachments.vnet_list.default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route)) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional List<br>Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>
 
@@ -266,7 +266,7 @@ A `selective_route_tables` block (within `azure_vnet_site.vnet_attachments.vnet_
 
 **Segment**
 
-A `segment` block supports the following:
+A [`segment`](#segment) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -278,7 +278,7 @@ A `segment` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

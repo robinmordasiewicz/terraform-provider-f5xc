@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Dh Group Set**
 
-A `dh_group_set` block supports the following:
+A [`dh_group_set`](#dh-group-set) block supports the following:
 
 &#x2022; [`dh_groups`](#dh-groups) - Optional List  Defaults to `DH_GROUP_DEFAULT`<br>Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`<br>Diffie Hellman Groups
 
@@ -97,7 +97,7 @@ A `dh_group_set` block supports the following:
 
 **Ike Keylifetime Hours**
 
-An `ike_keylifetime_hours` block supports the following:
+An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -105,7 +105,7 @@ An `ike_keylifetime_hours` block supports the following:
 
 **Ike Keylifetime Minutes**
 
-An `ike_keylifetime_minutes` block supports the following:
+An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
@@ -113,7 +113,7 @@ An `ike_keylifetime_minutes` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

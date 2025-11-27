@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Mitigation Type**
 
-A `mitigation_type` block supports the following:
+A [`mitigation_type`](#mitigation-type) block supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>Rules. Define the threat levels and the corresponding mitigation actions to be taken<br>See [Rules](#mitigation-type-rules) below.
 
@@ -88,7 +88,7 @@ A `mitigation_type` block supports the following:
 
 **Rules**
 
-A `rules` block (within `mitigation_type`) supports the following:
+A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigation-type)) supports the following:
 
 &#x2022; [`mitigation_action`](#mitigation-action) - Optional Block<br>Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user<br>See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
 
@@ -98,7 +98,7 @@ A `rules` block (within `mitigation_type`) supports the following:
 
 **Mitigation Action**
 
-A `mitigation_action` block (within `mitigation_type.rules`) supports the following:
+A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
 &#x2022; [`block_temporarily`](#block-temporarily) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -110,7 +110,7 @@ A `mitigation_action` block (within `mitigation_type.rules`) supports the follow
 
 **Threat Level**
 
-A `threat_level` block (within `mitigation_type.rules`) supports the following:
+A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
 &#x2022; [`high`](#high) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -122,7 +122,7 @@ A `threat_level` block (within `mitigation_type.rules`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

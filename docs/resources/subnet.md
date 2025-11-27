@@ -87,7 +87,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Connect To Layer2**
 
-A `connect_to_layer2` block supports the following:
+A [`connect_to_layer2`](#connect-to-layer2) block supports the following:
 
 &#x2022; [`layer2_intf_ref`](#layer2-intf-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Layer2 Intf Ref](#connect-to-layer2-layer2-intf-ref) below.
 
@@ -95,7 +95,7 @@ A `connect_to_layer2` block supports the following:
 
 **Layer2 Intf Ref**
 
-A `layer2_intf_ref` block (within `connect_to_layer2`) supports the following:
+A [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) block (within [`connect_to_layer2`](#connect-to-layer2)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -107,7 +107,7 @@ A `layer2_intf_ref` block (within `connect_to_layer2`) supports the following:
 
 **Site Subnet Params**
 
-A `site_subnet_params` block supports the following:
+A [`site_subnet_params`](#site-subnet-params) block supports the following:
 
 &#x2022; [`dhcp`](#dhcp) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -121,7 +121,7 @@ A `site_subnet_params` block supports the following:
 
 **Site**
 
-A `site` block (within `site_subnet_params`) supports the following:
+A [`site`](#site-subnet-params-site) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -133,7 +133,7 @@ A `site` block (within `site_subnet_params`) supports the following:
 
 **Subnet DHCP Server Params**
 
-A `subnet_dhcp_server_params` block (within `site_subnet_params`) supports the following:
+A [`subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
 
 &#x2022; [`dhcp_networks`](#dhcp-networks) - Optional Block<br>Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) below.
 
@@ -141,7 +141,7 @@ A `subnet_dhcp_server_params` block (within `site_subnet_params`) supports the f
 
 **DHCP Networks**
 
-A `dhcp_networks` block (within `site_subnet_params.subnet_dhcp_server_params`) supports the following:
+A [`dhcp_networks`](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) block (within [`site_subnet_params.subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params)) supports the following:
 
 &#x2022; [`network_prefix`](#network-prefix) - Optional String<br>Network Prefix. Network prefix for subnet
 
@@ -149,7 +149,7 @@ A `dhcp_networks` block (within `site_subnet_params.subnet_dhcp_server_params`) 
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

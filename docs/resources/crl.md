@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **HTTP Access**
 
-A `http_access` block supports the following:
+A [`http_access`](#http-access) block supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>CRL File path. CRL file location
 
@@ -90,7 +90,7 @@ A `http_access` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

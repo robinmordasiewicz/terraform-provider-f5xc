@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **K8s Cluster Role Selector**
 
-A `k8s_cluster_role_selector` block supports the following:
+A [`k8s_cluster_role_selector`](#k8s-cluster-role-selector) block supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -93,7 +93,7 @@ A `k8s_cluster_role_selector` block supports the following:
 
 **Policy Rule List**
 
-A `policy_rule_list` block supports the following:
+A [`policy_rule_list`](#policy-rule-list) block supports the following:
 
 &#x2022; [`policy_rule`](#policy-rule) - Optional Block<br>Policy Rules. List of rules for role permissions<br>See [Policy Rule](#policy-rule-list-policy-rule) below.
 
@@ -101,7 +101,7 @@ A `policy_rule_list` block supports the following:
 
 **Policy Rule**
 
-A `policy_rule` block (within `policy_rule_list`) supports the following:
+A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_list`](#policy-rule-list)) supports the following:
 
 &#x2022; [`non_resource_url_list`](#non-resource-url-list) - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource<br>See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
 
@@ -111,7 +111,7 @@ A `policy_rule` block (within `policy_rule_list`) supports the following:
 
 **Non Resource URL List**
 
-A `non_resource_url_list` block (within `policy_rule_list.policy_rule`) supports the following:
+A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
 &#x2022; [`urls`](#urls) - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex
 
@@ -121,7 +121,7 @@ A `non_resource_url_list` block (within `policy_rule_list.policy_rule`) supports
 
 **Resource List**
 
-A `resource_list` block (within `policy_rule_list.policy_rule`) supports the following:
+A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
 &#x2022; [`api_groups`](#api-groups) - Optional List<br>API Groups. Allowed list of API group that contains resources, all resources of a given API group
 
@@ -135,7 +135,7 @@ A `resource_list` block (within `policy_rule_list.policy_rule`) supports the fol
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

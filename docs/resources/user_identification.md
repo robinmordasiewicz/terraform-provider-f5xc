@@ -74,7 +74,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Rules**
 
-A `rules` block supports the following:
+A [`rules`](#rules) block supports the following:
 
 &#x2022; [`client_asn`](#client-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -110,7 +110,7 @@ A `rules` block supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

@@ -100,7 +100,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Allow List**
 
-An `allow_list` block supports the following:
+An [`allow_list`](#allow-list) block supports the following:
 
 &#x2022; [`default_action_allow`](#default-action-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -118,7 +118,7 @@ An `allow_list` block supports the following:
 
 **Dest List**
 
-A `dest_list` block (within `allow_list`) supports the following:
+A [`dest_list`](#allow-list-dest-list) block (within [`allow_list`](#allow-list)) supports the following:
 
 &#x2022; [`ipv6_prefixes`](#ipv6-prefixes) - Optional List<br>IPv6 Prefixes. Destination IPv6 prefixes
 
@@ -130,7 +130,7 @@ A `dest_list` block (within `allow_list`) supports the following:
 
 **HTTP List**
 
-A `http_list` block (within `allow_list`) supports the following:
+A [`http_list`](#allow-list-http-list) block (within [`allow_list`](#allow-list)) supports the following:
 
 &#x2022; [`any_path`](#any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -150,7 +150,7 @@ A `http_list` block (within `allow_list`) supports the following:
 
 **TLS List**
 
-A `tls_list` block (within `allow_list`) supports the following:
+A [`tls_list`](#allow-list-tls-list) block (within [`allow_list`](#allow-list)) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -162,7 +162,7 @@ A `tls_list` block (within `allow_list`) supports the following:
 
 **Deny List**
 
-A `deny_list` block supports the following:
+A [`deny_list`](#deny-list) block supports the following:
 
 &#x2022; [`default_action_allow`](#default-action-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -180,7 +180,7 @@ A `deny_list` block supports the following:
 
 **Dest List**
 
-A `dest_list` block (within `deny_list`) supports the following:
+A [`dest_list`](#deny-list-dest-list) block (within [`deny_list`](#deny-list)) supports the following:
 
 &#x2022; [`ipv6_prefixes`](#ipv6-prefixes) - Optional List<br>IPv6 Prefixes. Destination IPv6 prefixes
 
@@ -192,7 +192,7 @@ A `dest_list` block (within `deny_list`) supports the following:
 
 **HTTP List**
 
-A `http_list` block (within `deny_list`) supports the following:
+A [`http_list`](#deny-list-http-list) block (within [`deny_list`](#deny-list)) supports the following:
 
 &#x2022; [`any_path`](#any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -212,7 +212,7 @@ A `http_list` block (within `deny_list`) supports the following:
 
 **TLS List**
 
-A `tls_list` block (within `deny_list`) supports the following:
+A [`tls_list`](#deny-list-tls-list) block (within [`deny_list`](#deny-list)) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -224,7 +224,7 @@ A `tls_list` block (within `deny_list`) supports the following:
 
 **Network Connector**
 
-A `network_connector` block supports the following:
+A [`network_connector`](#network-connector) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -236,7 +236,7 @@ A `network_connector` block supports the following:
 
 **Proxy Label Selector**
 
-A `proxy_label_selector` block supports the following:
+A [`proxy_label_selector`](#proxy-label-selector) block supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -244,7 +244,7 @@ A `proxy_label_selector` block supports the following:
 
 **Rule List**
 
-A `rule_list` block supports the following:
+A [`rule_list`](#rule-list) block supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>Custom Rule List. List of custom rules<br>See [Rules](#rule-list-rules) below.
 
@@ -252,7 +252,7 @@ A `rule_list` block supports the following:
 
 **Rules**
 
-A `rules` block (within `rule_list`) supports the following:
+A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
 &#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
 
@@ -292,7 +292,7 @@ A `rules` block (within `rule_list`) supports the following:
 
 **Dst Asn List**
 
-A `dst_asn_list` block (within `rule_list.rules`) supports the following:
+A [`dst_asn_list`](#rule-list-rules-dst-asn-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
@@ -300,7 +300,7 @@ A `dst_asn_list` block (within `rule_list.rules`) supports the following:
 
 **Dst Asn Set**
 
-A `dst_asn_set` block (within `rule_list.rules`) supports the following:
+A [`dst_asn_set`](#rule-list-rules-dst-asn-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -312,7 +312,7 @@ A `dst_asn_set` block (within `rule_list.rules`) supports the following:
 
 **Dst IP Prefix Set**
 
-A `dst_ip_prefix_set` block (within `rule_list.rules`) supports the following:
+A [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -324,7 +324,7 @@ A `dst_ip_prefix_set` block (within `rule_list.rules`) supports the following:
 
 **Dst Label Selector**
 
-A `dst_label_selector` block (within `rule_list.rules`) supports the following:
+A [`dst_label_selector`](#rule-list-rules-dst-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -332,7 +332,7 @@ A `dst_label_selector` block (within `rule_list.rules`) supports the following:
 
 **Dst Prefix List**
 
-A `dst_prefix_list` block (within `rule_list.rules`) supports the following:
+A [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
@@ -340,7 +340,7 @@ A `dst_prefix_list` block (within `rule_list.rules`) supports the following:
 
 **HTTP List**
 
-A `http_list` block (within `rule_list.rules`) supports the following:
+A [`http_list`](#rule-list-rules-http-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`http_list`](#http-list) - Optional Block<br>HTTP URLs. URLs for HTTP connections<br>See [HTTP List](#rule-list-rules-http-list-http-list) below.
 
@@ -348,7 +348,7 @@ A `http_list` block (within `rule_list.rules`) supports the following:
 
 **HTTP List**
 
-A `http_list` block (within `rule_list.rules.http_list`) supports the following:
+A [`http_list`](#rule-list-rules-http-list-http-list) block (within [`rule_list.rules.http_list`](#rule-list-rules-http-list)) supports the following:
 
 &#x2022; [`any_path`](#any-path) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -368,7 +368,7 @@ A `http_list` block (within `rule_list.rules.http_list`) supports the following:
 
 **IP Prefix Set**
 
-An `ip_prefix_set` block (within `rule_list.rules`) supports the following:
+An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
@@ -380,7 +380,7 @@ An `ip_prefix_set` block (within `rule_list.rules`) supports the following:
 
 **Label Selector**
 
-A `label_selector` block (within `rule_list.rules`) supports the following:
+A [`label_selector`](#rule-list-rules-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
@@ -388,7 +388,7 @@ A `label_selector` block (within `rule_list.rules`) supports the following:
 
 **Metadata**
 
-A `metadata` block (within `rule_list.rules`) supports the following:
+A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
@@ -398,7 +398,7 @@ A `metadata` block (within `rule_list.rules`) supports the following:
 
 **Port Matcher**
 
-A `port_matcher` block (within `rule_list.rules`) supports the following:
+A [`port_matcher`](#rule-list-rules-port-matcher) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Port Matcher. Invert the match result
 
@@ -408,7 +408,7 @@ A `port_matcher` block (within `rule_list.rules`) supports the following:
 
 **Prefix List**
 
-A `prefix_list` block (within `rule_list.rules`) supports the following:
+A [`prefix_list`](#rule-list-rules-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
@@ -416,7 +416,7 @@ A `prefix_list` block (within `rule_list.rules`) supports the following:
 
 **TLS List**
 
-A `tls_list` block (within `rule_list.rules`) supports the following:
+A [`tls_list`](#rule-list-rules-tls-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`tls_list`](#tls-list) - Optional Block<br>TLS Domains. Domains in SNI for TLS connections<br>See [TLS List](#rule-list-rules-tls-list-tls-list) below.
 
@@ -424,7 +424,7 @@ A `tls_list` block (within `rule_list.rules`) supports the following:
 
 **TLS List**
 
-A `tls_list` block (within `rule_list.rules.tls_list`) supports the following:
+A [`tls_list`](#rule-list-rules-tls-list-tls-list) block (within [`rule_list.rules.tls_list`](#rule-list-rules-tls-list)) supports the following:
 
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
 
@@ -436,7 +436,7 @@ A `tls_list` block (within `rule_list.rules.tls_list`) supports the following:
 
 **URL Category List**
 
-An `url_category_list` block (within `rule_list.rules`) supports the following:
+An [`url_category_list`](#rule-list-rules-url-category-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`url_categories`](#url-categories) - Optional List  Defaults to `UNCATEGORIZED`<br>Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`<br>URL Categories. List of URL categories to be selected
 
@@ -444,7 +444,7 @@ An `url_category_list` block (within `rule_list.rules`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

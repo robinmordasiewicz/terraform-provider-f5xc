@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 **Cookie Params**
 
-A `cookie_params` block supports the following:
+A [`cookie_params`](#cookie-params) block supports the following:
 
 &#x2022; [`auth_hmac`](#auth-hmac) - Optional Block<br>HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid<br>See [Auth HMAC](#cookie-params-auth-hmac) below.
 
@@ -100,7 +100,7 @@ A `cookie_params` block supports the following:
 
 **Auth HMAC**
 
-An `auth_hmac` block (within `cookie_params`) supports the following:
+An [`auth_hmac`](#cookie-params-auth-hmac) block (within [`cookie_params`](#cookie-params)) supports the following:
 
 &#x2022; [`prim_key`](#prim-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Prim Key](#cookie-params-auth-hmac-prim-key) below.
 
@@ -114,7 +114,7 @@ An `auth_hmac` block (within `cookie_params`) supports the following:
 
 **Prim Key**
 
-A `prim_key` block (within `cookie_params.auth_hmac`) supports the following:
+A [`prim_key`](#cookie-params-auth-hmac-prim-key) block (within [`cookie_params.auth_hmac`](#cookie-params-auth-hmac)) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
 
@@ -124,7 +124,7 @@ A `prim_key` block (within `cookie_params.auth_hmac`) supports the following:
 
 **Blindfold Secret Info**
 
-A `blindfold_secret_info` block (within `cookie_params.auth_hmac.prim_key`) supports the following:
+A [`blindfold_secret_info`](#cookie-params-auth-hmac-prim-key-blindfold-secret-info) block (within [`cookie_params.auth_hmac.prim_key`](#cookie-params-auth-hmac-prim-key)) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -136,7 +136,7 @@ A `blindfold_secret_info` block (within `cookie_params.auth_hmac.prim_key`) supp
 
 **Clear Secret Info**
 
-A `clear_secret_info` block (within `cookie_params.auth_hmac.prim_key`) supports the following:
+A [`clear_secret_info`](#cookie-params-auth-hmac-prim-key-clear-secret-info) block (within [`cookie_params.auth_hmac.prim_key`](#cookie-params-auth-hmac-prim-key)) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -146,7 +146,7 @@ A `clear_secret_info` block (within `cookie_params.auth_hmac.prim_key`) supports
 
 **Sec Key**
 
-A `sec_key` block (within `cookie_params.auth_hmac`) supports the following:
+A [`sec_key`](#cookie-params-auth-hmac-sec-key) block (within [`cookie_params.auth_hmac`](#cookie-params-auth-hmac)) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
 
@@ -156,7 +156,7 @@ A `sec_key` block (within `cookie_params.auth_hmac`) supports the following:
 
 **Blindfold Secret Info**
 
-A `blindfold_secret_info` block (within `cookie_params.auth_hmac.sec_key`) supports the following:
+A [`blindfold_secret_info`](#cookie-params-auth-hmac-sec-key-blindfold-secret-info) block (within [`cookie_params.auth_hmac.sec_key`](#cookie-params-auth-hmac-sec-key)) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -168,7 +168,7 @@ A `blindfold_secret_info` block (within `cookie_params.auth_hmac.sec_key`) suppo
 
 **Clear Secret Info**
 
-A `clear_secret_info` block (within `cookie_params.auth_hmac.sec_key`) supports the following:
+A [`clear_secret_info`](#cookie-params-auth-hmac-sec-key-clear-secret-info) block (within [`cookie_params.auth_hmac.sec_key`](#cookie-params-auth-hmac-sec-key)) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -178,7 +178,7 @@ A `clear_secret_info` block (within `cookie_params.auth_hmac.sec_key`) supports 
 
 **Oidc Auth**
 
-An `oidc_auth` block supports the following:
+An [`oidc_auth`](#oidc-auth) block supports the following:
 
 &#x2022; [`client_secret`](#client-secret) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Secret](#oidc-auth-client-secret) below.
 
@@ -192,7 +192,7 @@ An `oidc_auth` block supports the following:
 
 **Client Secret**
 
-A `client_secret` block (within `oidc_auth`) supports the following:
+A [`client_secret`](#oidc-auth-client-secret) block (within [`oidc_auth`](#oidc-auth)) supports the following:
 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#oidc-auth-client-secret-blindfold-secret-info) below.
 
@@ -202,7 +202,7 @@ A `client_secret` block (within `oidc_auth`) supports the following:
 
 **Blindfold Secret Info**
 
-A `blindfold_secret_info` block (within `oidc_auth.client_secret`) supports the following:
+A [`blindfold_secret_info`](#oidc-auth-client-secret-blindfold-secret-info) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
 
 &#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
@@ -214,7 +214,7 @@ A `blindfold_secret_info` block (within `oidc_auth.client_secret`) supports the 
 
 **Clear Secret Info**
 
-A `clear_secret_info` block (within `oidc_auth.client_secret`) supports the following:
+A [`clear_secret_info`](#oidc-auth-client-secret-clear-secret-info) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
@@ -224,7 +224,7 @@ A `clear_secret_info` block (within `oidc_auth.client_secret`) supports the foll
 
 **Oidc Auth Params**
 
-An `oidc_auth_params` block (within `oidc_auth`) supports the following:
+An [`oidc_auth_params`](#oidc-auth-oidc-auth-params) block (within [`oidc_auth`](#oidc-auth)) supports the following:
 
 &#x2022; [`auth_endpoint_url`](#auth-endpoint-url) - Optional String<br>Authorization Endpoint. URL of the authorization server's authorization endpoint
 
@@ -236,7 +236,7 @@ An `oidc_auth_params` block (within `oidc_auth`) supports the following:
 
 **Timeouts**
 
-A `timeouts` block supports the following:
+A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 

@@ -69,15 +69,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="custom-geo-location-selector"></a>
-
 #### Custom Geo Location Selector
 
 A [`custom_geo_location_selector`](#custom-geo-location-selector) block supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

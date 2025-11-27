@@ -81,15 +81,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="address-records"></a>
-
 #### Address Records
 
 An [`address_records`](#address-records) block supports the following:
 
 &#x2022; [`records`](#records) - Optional Block<br>Address records
-
-<a id="integer-records"></a>
 
 #### Integer Records
 
@@ -97,15 +93,11 @@ An [`integer_records`](#integer-records) block supports the following:
 
 &#x2022; [`records`](#records) - Optional Block<br>Integer records
 
-<a id="string-records"></a>
-
 #### String Records
 
 A [`string_records`](#string-records) block supports the following:
 
 &#x2022; [`records`](#records) - Optional Block<br>String records
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

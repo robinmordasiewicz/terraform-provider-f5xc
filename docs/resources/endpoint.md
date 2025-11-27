@@ -92,8 +92,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="dns-name-advanced"></a>
-
 #### DNS Name Advanced
 
 A [`dns_name_advanced`](#dns-name-advanced) block supports the following:
@@ -101,8 +99,6 @@ A [`dns_name_advanced`](#dns-name-advanced) block supports the following:
 &#x2022; [`name`](#name) - Optional String<br>Endpoint DNS Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
 
 &#x2022; [`refresh_interval`](#refresh-interval) - Optional Number<br>DNS Refresh Interval. Interval for DNS refresh in seconds
-
-<a id="service-info"></a>
 
 #### Service Info
 
@@ -114,15 +110,11 @@ A [`service_info`](#service-info) block supports the following:
 
 &#x2022; [`service_selector`](#service-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [Service Selector](#service-info-service-selector) below.
 
-<a id="service-info-service-selector"></a>
-
 #### Service Selector
 
 A [`service_selector`](#service-info-service-selector) block (within [`service_info`](#service-info)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
-
-<a id="snat-pool"></a>
 
 #### Snat Pool
 
@@ -132,15 +124,11 @@ A [`snat_pool`](#snat-pool) block supports the following:
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#snat-pool-snat-pool) below.
 
-<a id="snat-pool-snat-pool"></a>
-
 #### Snat Pool
 
 A [`snat_pool`](#snat-pool-snat-pool) block (within [`snat_pool`](#snat-pool)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
-
-<a id="timeouts"></a>
 
 #### Timeouts
 
@@ -154,8 +142,6 @@ A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-<a id="where"></a>
-
 #### Where
 
 A [`where`](#where) block supports the following:
@@ -165,8 +151,6 @@ A [`where`](#where) block supports the following:
 &#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Network Reference. This specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
-
-<a id="where-site"></a>
 
 #### Site
 
@@ -179,8 +163,6 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 &#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
-
-<a id="where-site-ref"></a>
 
 #### Ref
 
@@ -196,15 +178,11 @@ A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports t
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="where-virtual-network"></a>
-
 #### Virtual Network
 
 A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
-
-<a id="where-virtual-network-ref"></a>
 
 #### Ref
 
@@ -220,8 +198,6 @@ A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#w
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="where-virtual-site"></a>
-
 #### Virtual Site
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
@@ -233,8 +209,6 @@ A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) support
 &#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
-
-<a id="where-virtual-site-ref"></a>
 
 #### Ref
 

@@ -79,8 +79,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="syslog"></a>
-
 #### Syslog
 
 A [`syslog`](#syslog) block supports the following:
@@ -93,8 +91,6 @@ A [`syslog`](#syslog) block supports the following:
 
 &#x2022; [`udp_server`](#udp-server) - Optional Block<br>UDP Server Name and Port Number. Name and port number for a UDP server<br>See [UDP Server](#syslog-udp-server) below.
 
-<a id="syslog-tcp-server"></a>
-
 #### TCP Server
 
 A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports the following:
@@ -102,8 +98,6 @@ A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports
 &#x2022; [`port`](#port) - Optional Number<br>Port Number. Port number used for communication
 
 &#x2022; [`server_name`](#server-name) - Optional String<br>Server name. Server name is fully qualified domain name or IP address of the server
-
-<a id="syslog-tls-server"></a>
 
 #### TLS Server
 
@@ -125,8 +119,6 @@ A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports
 
 &#x2022; [`volterra_ca`](#volterra-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="syslog-tls-server-mtls-enable"></a>
-
 #### mTLS Enable
 
 A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_server`](#syslog-tls-server)) supports the following:
@@ -135,8 +127,6 @@ A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_ser
 
 &#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#syslog-tls-server-mtls-enable-key-url) below.
 
-<a id="syslog-tls-server-mtls-enable-key-url"></a>
-
 #### Key URL
 
 A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls_server.mtls_enable`](#syslog-tls-server-mtls-enable)) supports the following:
@@ -144,8 +134,6 @@ A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) below.
-
-<a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -157,8 +145,6 @@ A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-sec
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="syslog-tls-server-mtls-enable-key-url-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
@@ -167,8 +153,6 @@ A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-<a id="syslog-udp-server"></a>
-
 #### UDP Server
 
 An [`udp_server`](#syslog-udp-server) block (within [`syslog`](#syslog)) supports the following:
@@ -176,8 +160,6 @@ An [`udp_server`](#syslog-udp-server) block (within [`syslog`](#syslog)) support
 &#x2022; [`port`](#port) - Optional Number<br>Port Number. Port number used for communication
 
 &#x2022; [`server_name`](#server-name) - Optional String<br>Server name. Server name is fully qualified domain name or IP address of the server
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

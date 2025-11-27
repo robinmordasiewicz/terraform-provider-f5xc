@@ -90,15 +90,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="bandwidth"></a>
-
 #### Bandwidth
 
 A [`bandwidth`](#bandwidth) block supports the following:
 
 &#x2022; [`bandwidth_max_mb`](#bandwidth-max-mb) - Optional Number<br>Bandwidth Max in MB. Bandwidth max allowed
-
-<a id="bgp-information"></a>
 
 #### BGP Information
 
@@ -114,8 +110,6 @@ A [`bgp_information`](#bgp-information) block supports the following:
 
 &#x2022; [`use_default_secret`](#use-default-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="bgp-information-asn"></a>
-
 #### Asn
 
 An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-information)) supports the following:
@@ -126,8 +120,6 @@ An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-informat
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="bgp-information-peer-secret-override"></a>
-
 #### Peer Secret Override
 
 A [`peer_secret_override`](#bgp-information-peer-secret-override) block (within [`bgp_information`](#bgp-information)) supports the following:
@@ -135,8 +127,6 @@ A [`peer_secret_override`](#bgp-information-peer-secret-override) block (within 
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#bgp-information-peer-secret-override-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#bgp-information-peer-secret-override-clear-secret-info) below.
-
-<a id="bgp-information-peer-secret-override-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -148,8 +138,6 @@ A [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secr
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="bgp-information-peer-secret-override-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
@@ -157,8 +145,6 @@ A [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info)
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="firewall-rule-group"></a>
 
 #### Firewall Rule Group
 
@@ -169,8 +155,6 @@ A [`firewall_rule_group`](#firewall-rule-group) block supports the following:
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="gre-ipv4"></a>
 
 #### Gre IPv4
 
@@ -190,8 +174,6 @@ A [`gre_ipv4`](#gre-ipv4) block supports the following:
 
 &#x2022; [`keepalive_enabled`](#keepalive-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="gre-ipv6"></a>
-
 #### Gre IPv6
 
 A [`gre_ipv6`](#gre-ipv6) block supports the following:
@@ -202,23 +184,17 @@ A [`gre_ipv6`](#gre-ipv6) block supports the following:
 
 &#x2022; [`ipv4_interconnect_enabled`](#ipv4-interconnect-enabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ip-in-ip"></a>
-
 #### IP In IP
 
 An [`ip_in_ip`](#ip-in-ip) block supports the following:
 
 &#x2022; [`customer_endpoint_ipv4`](#customer-endpoint-ipv4) - Optional String<br>Customer Endpoint IP. IPv4 address for the customer endpoint of the tunnel
 
-<a id="ipv6-to-ipv6"></a>
-
 #### IPv6 To IPv6
 
 An [`ipv6_to_ipv6`](#ipv6-to-ipv6) block supports the following:
 
 &#x2022; [`customer_endpoint_ipv6`](#customer-endpoint-ipv6) - Optional String<br>Customer Endpoint IP. IPv6 address for the customer endpoint of the tunnel
-
-<a id="timeouts"></a>
 
 #### Timeouts
 
@@ -231,8 +207,6 @@ A [`timeouts`](#timeouts) block supports the following:
 &#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
-
-<a id="tunnel-location"></a>
 
 #### Tunnel Location
 

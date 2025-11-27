@@ -71,8 +71,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="limits"></a>
-
 #### Limits
 
 A [`limits`](#limits) block supports the following:
@@ -93,8 +91,6 @@ A [`limits`](#limits) block supports the following:
 
 &#x2022; [`unit`](#unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
 
-<a id="limits-action-block"></a>
-
 #### Action Block
 
 An [`action_block`](#limits-action-block) block (within [`limits`](#limits)) supports the following:
@@ -105,15 +101,11 @@ An [`action_block`](#limits-action-block) block (within [`limits`](#limits)) sup
 
 &#x2022; [`seconds`](#seconds) - Optional Block<br>Seconds. Input Duration Seconds<br>See [Seconds](#limits-action-block-seconds) below.
 
-<a id="limits-action-block-hours"></a>
-
 #### Hours
 
 A [`hours`](#limits-action-block-hours) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
-
-<a id="limits-action-block-minutes"></a>
 
 #### Minutes
 
@@ -121,15 +113,11 @@ A [`minutes`](#limits-action-block-minutes) block (within [`limits.action_block`
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
-<a id="limits-action-block-seconds"></a>
-
 #### Seconds
 
 A [`seconds`](#limits-action-block-seconds) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
-
-<a id="timeouts"></a>
 
 #### Timeouts
 
@@ -142,8 +130,6 @@ A [`timeouts`](#timeouts) block supports the following:
 &#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
-
-<a id="user-identification"></a>
 
 #### User Identification
 

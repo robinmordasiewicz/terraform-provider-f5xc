@@ -74,15 +74,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="jira-config"></a>
-
 #### Jira Config
 
 A [`jira_config`](#jira-config) block supports the following:
 
 &#x2022; [`adhoc_rest_api`](#adhoc-rest-api) - Optional Block<br>JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message<br>See [Adhoc REST API](#jira-config-adhoc-rest-api) below.
-
-<a id="jira-config-adhoc-rest-api"></a>
 
 #### Adhoc REST API
 
@@ -93,8 +89,6 @@ An [`adhoc_rest_api`](#jira-config-adhoc-rest-api) block (within [`jira_config`]
 &#x2022; [`api_token`](#api-token) - Optional String<br>API Token. API Token (password) specified by the customer in plaintext to be used for Basic Auth. This value is purely used for user input and is not persisted in the database. It will be converted to a blindfolded and encrypted form before saving. For editing/replacing the existing JIRA configuration, and to use the already stored value of the encrypted API Token, this field should be sent as an empty string. Since this field is confidential, the Get/List public APIs will return this value as an empty string
 
 &#x2022; [`organization_domain`](#organization-domain) - Optional String<br>Organization Domain. A valid hostname for the Atlassian organization, as defined by RFC 1034
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

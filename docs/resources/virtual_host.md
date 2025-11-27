@@ -137,27 +137,27 @@ resource "f5xc_virtual_host" "example" {
 
 &#x2022; [`response_cookies_to_remove`](#response-cookies-to-remove) - Optional List<br>Remove Cookies from Set-Cookie Headers. List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed
 
-&#x2022; [`response_headers_to_add`](#response-headers-to-add) - Optional Block<br>Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied<br>See [Response Headers To Add](#response-headers-to-add) below for details.
+&#x2022; [`response_headers_to_add`](#response-headers-to-add) - Optional Block<br>Add Response Headers. Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied
 
 &#x2022; [`response_headers_to_remove`](#response-headers-to-remove) - Optional List<br>Remove Response Headers. List of keys of Headers to be removed from the HTTP response being sent towards downstream
 
-&#x2022; [`retry_policy`](#retry-policy) - Optional Block<br>Retry Policy. Retry policy configuration for route destination<br>See [Retry Policy](#retry-policy) below for details.
+&#x2022; [`retry_policy`](#retry-policy) - Optional Block<br>Retry Policy. Retry policy configuration for route destination
 
-&#x2022; [`routes`](#routes) - Optional Block<br>Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. For TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts, the route object only specifies the cluster/weighted-cluster as route destination without any match condition. In other words, match condition in route object is ignored for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts. Routes used for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts cannot have DirectResponse or Redirect as actions<br>See [Routes](#routes) below for details.
+&#x2022; [`routes`](#routes) - Optional Block<br>Routes. The list of routes that will be matched, in order, for incoming requests. The first route that matches will be used. Currently route object is redundant in case of TCP proxy but required. For TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts, the route object only specifies the cluster/weighted-cluster as route destination without any match condition. In other words, match condition in route object is ignored for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts. Routes used for TCP_PROXY/TCP_PROXY_WITH_SNI/SMA_PROXY VirtualHosts cannot have DirectResponse or Redirect as actions
 
-&#x2022; [`sensitive_data_policy`](#sensitive-data-policy) - Optional Block<br>Sensitive Data Discovery. References to sensitive_data_policy objects<br>See [Sensitive Data Policy](#sensitive-data-policy) below for details.
+&#x2022; [`sensitive_data_policy`](#sensitive-data-policy) - Optional Block<br>Sensitive Data Discovery. References to sensitive_data_policy objects
 
-&#x2022; [`slow_ddos_mitigation`](#slow-ddos-mitigation) - Optional Block<br>Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users<br>See [Slow DDOS Mitigation](#slow-ddos-mitigation) below for details.
+&#x2022; [`slow_ddos_mitigation`](#slow-ddos-mitigation) - Optional Block<br>Slow DDOS Mitigation. 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block
 
 -> **One of the following:**
-&#x2022; [`tls_cert_params`](#tls-cert-params) - Optional Block<br>Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store<br>See [TLS Cert Params](#tls-cert-params) below for details.
+&#x2022; [`tls_cert_params`](#tls-cert-params) - Optional Block<br>Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store
 <br><br>&#x2022; [`tls_parameters`](#tls-parameters) - Optional Block<br>Downstream TLS Parameters. TLS configuration for downstream connections
 
-&#x2022; [`user_identification`](#user-identification) - Optional Block<br>User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited<br>See [User Identification](#user-identification) below for details.
+&#x2022; [`user_identification`](#user-identification) - Optional Block<br>User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited
 
-&#x2022; [`waf_type`](#waf-type) - Optional Block<br>WAF Instance. WAF instance will be pointing to an app_firewall object<br>See [WAF Type](#waf-type) below for details.
+&#x2022; [`waf_type`](#waf-type) - Optional Block<br>WAF Instance. WAF instance will be pointing to an app_firewall object
 
 ### Attributes Reference
 
@@ -166,8 +166,6 @@ In addition to all arguments above, the following attributes are exported:
 &#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
-
-<a id="advertise-policies"></a>
 
 #### Advertise Policies
 
@@ -183,8 +181,6 @@ An [`advertise_policies`](#advertise-policies) block supports the following:
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="authentication"></a>
-
 #### Authentication
 
 An [`authentication`](#authentication) block supports the following:
@@ -198,8 +194,6 @@ An [`authentication`](#authentication) block supports the following:
 &#x2022; [`redirect_url`](#redirect-url) - Optional String<br>Configure Redirect URL. user can provide a URL for e.g `HTTPS://abc.xyz.com` where user gets redirected. This URL configured here must match with the redirect URL configured with the OIDC provider
 
 &#x2022; [`use_auth_object_config`](#use-auth-object-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="authentication-auth-config"></a>
 
 #### Auth Config
 
@@ -215,8 +209,6 @@ An [`auth_config`](#authentication-auth-config) block (within [`authentication`]
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="authentication-cookie-params"></a>
-
 #### Cookie Params
 
 A [`cookie_params`](#authentication-cookie-params) block (within [`authentication`](#authentication)) supports the following:
@@ -231,8 +223,6 @@ A [`cookie_params`](#authentication-cookie-params) block (within [`authenticatio
 
 &#x2022; [`session_expiry`](#session-expiry) - Optional Number<br>Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours)
 
-<a id="authentication-cookie-params-auth-hmac"></a>
-
 #### Auth HMAC
 
 An [`auth_hmac`](#authentication-cookie-params-auth-hmac) block (within [`authentication.cookie_params`](#authentication-cookie-params)) supports the following:
@@ -245,8 +235,6 @@ An [`auth_hmac`](#authentication-cookie-params-auth-hmac) block (within [`authen
 
 &#x2022; [`sec_key_expiry`](#sec-key-expiry) - Optional String<br>HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time
 
-<a id="authentication-cookie-params-auth-hmac-prim-key"></a>
-
 #### Prim Key
 
 A [`prim_key`](#authentication-cookie-params-auth-hmac-prim-key) block (within [`authentication.cookie_params.auth_hmac`](#authentication-cookie-params-auth-hmac)) supports the following:
@@ -254,8 +242,6 @@ A [`prim_key`](#authentication-cookie-params-auth-hmac-prim-key) block (within [
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#authentication-cookie-params-auth-hmac-prim-key-clear-secret-info) below.
-
-<a id="authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -267,8 +253,6 @@ A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-bli
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="authentication-cookie-params-auth-hmac-prim-key-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-clear-secret-info) block (within [`authentication.cookie_params.auth_hmac.prim_key`](#authentication-cookie-params-auth-hmac-prim-key)) supports the following:
@@ -277,8 +261,6 @@ A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-clear-s
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-<a id="authentication-cookie-params-auth-hmac-sec-key"></a>
-
 #### Sec Key
 
 A [`sec_key`](#authentication-cookie-params-auth-hmac-sec-key) block (within [`authentication.cookie_params.auth_hmac`](#authentication-cookie-params-auth-hmac)) supports the following:
@@ -286,8 +268,6 @@ A [`sec_key`](#authentication-cookie-params-auth-hmac-sec-key) block (within [`a
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#authentication-cookie-params-auth-hmac-sec-key-clear-secret-info) below.
-
-<a id="authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -299,8 +279,6 @@ A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-blin
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="authentication-cookie-params-auth-hmac-sec-key-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-clear-secret-info) block (within [`authentication.cookie_params.auth_hmac.sec_key`](#authentication-cookie-params-auth-hmac-sec-key)) supports the following:
@@ -308,8 +286,6 @@ A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-clear-se
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="buffer-policy"></a>
 
 #### Buffer Policy
 
@@ -319,8 +295,6 @@ A [`buffer_policy`](#buffer-policy) block supports the following:
 
 &#x2022; [`max_request_bytes`](#max-request-bytes) - Optional Number<br>Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response
 
-<a id="captcha-challenge"></a>
-
 #### Captcha Challenge
 
 A [`captcha_challenge`](#captcha-challenge) block supports the following:
@@ -329,8 +303,6 @@ A [`captcha_challenge`](#captcha-challenge) block supports the following:
 
 &#x2022; [`custom_page`](#custom-page) - Optional String<br>Custom message for Captcha Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='
 
-<a id="coalescing-options"></a>
-
 #### Coalescing Options
 
 A [`coalescing_options`](#coalescing-options) block supports the following:
@@ -338,8 +310,6 @@ A [`coalescing_options`](#coalescing-options) block supports the following:
 &#x2022; [`default_coalescing`](#default-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`strict_coalescing`](#strict-coalescing) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="compression-params"></a>
 
 #### Compression Params
 
@@ -352,8 +322,6 @@ A [`compression_params`](#compression-params) block supports the following:
 &#x2022; [`disable_on_etag_header`](#disable-on-etag-header) - Optional Bool<br>Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed
 
 &#x2022; [`remove_accept_encoding_header`](#remove-accept-encoding-header) - Optional Bool<br>Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter
-
-<a id="cors-policy"></a>
 
 #### CORS Policy
 
@@ -375,8 +343,6 @@ A [`cors_policy`](#cors-policy) block supports the following:
 
 &#x2022; [`maximum_age`](#maximum-age) - Optional Number<br>Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours)
 
-<a id="csrf-policy"></a>
-
 #### CSRF Policy
 
 A [`csrf_policy`](#csrf-policy) block supports the following:
@@ -387,15 +353,11 @@ A [`csrf_policy`](#csrf-policy) block supports the following:
 
 &#x2022; [`disabled`](#disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="csrf-policy-custom-domain-list"></a>
-
 #### Custom Domain List
 
 A [`custom_domain_list`](#csrf-policy-custom-domain-list) block (within [`csrf_policy`](#csrf-policy)) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form
-
-<a id="dynamic-reverse-proxy"></a>
 
 #### Dynamic Reverse Proxy
 
@@ -408,8 +370,6 @@ A [`dynamic_reverse_proxy`](#dynamic-reverse-proxy) block supports the following
 &#x2022; [`resolution_network_type`](#resolution-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 &#x2022; [`resolve_endpoint_dynamically`](#resolve-endpoint-dynamically) - Optional Bool<br>Dynamic Endpoint Resolution. x-example : true In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyType is TCP_PROXY_WITH_SNI), virtual host will perform DNS resolution using the SNI. The DNS resolution is performed in the virtual network specified in outside_network_type or outside_network In both modes of operation(either using Host header or SNI), the DNS resolution could return multiple addresses. First IPv4 address from such returned list is used as endpoint for the request. The DNS response is cached for 60s by default
-
-<a id="dynamic-reverse-proxy-resolution-network"></a>
 
 #### Resolution Network
 
@@ -425,8 +385,6 @@ A [`resolution_network`](#dynamic-reverse-proxy-resolution-network) block (withi
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="http-protocol-options"></a>
-
 #### HTTP Protocol Options
 
 A [`http_protocol_options`](#http-protocol-options) block supports the following:
@@ -437,15 +395,11 @@ A [`http_protocol_options`](#http-protocol-options) block supports the following
 
 &#x2022; [`http_protocol_enable_v2_only`](#http-protocol-enable-v2-only) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="http-protocol-options-http-protocol-enable-v1-only"></a>
-
 #### HTTP Protocol Enable V1 Only
 
 A [`http_protocol_enable_v1_only`](#http-protocol-options-http-protocol-enable-v1-only) block (within [`http_protocol_options`](#http-protocol-options)) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
-
-<a id="http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
 #### Header Transformation
 
@@ -459,8 +413,6 @@ A [`header_transformation`](#http-protocol-options-http-protocol-enable-v1-only-
 
 &#x2022; [`proper_case_header_transformation`](#proper-case-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="js-challenge"></a>
-
 #### Js Challenge
 
 A [`js_challenge`](#js-challenge) block supports the following:
@@ -470,8 +422,6 @@ A [`js_challenge`](#js-challenge) block supports the following:
 &#x2022; [`custom_page`](#custom-page) - Optional String<br>Custom Message for Javascript Challenge. Custom message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Please Wait.' or it can be HTML paragraph or a body string encoded as base64 string E.g. '<p> Please Wait </p>'. Base64 encoded string for this HTML is 'PHA+IFBsZWFzZSBXYWl0IDwvcD4='
 
 &#x2022; [`js_script_delay`](#js-script-delay) - Optional Number<br>Javascript Delay. Delay introduced by Javascript, in milliseconds
-
-<a id="rate-limiter-allowed-prefixes"></a>
 
 #### Rate Limiter Allowed Prefixes
 
@@ -487,8 +437,6 @@ A [`rate_limiter_allowed_prefixes`](#rate-limiter-allowed-prefixes) block suppor
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="request-cookies-to-add"></a>
-
 #### Request Cookies To Add
 
 A [`request_cookies_to_add`](#request-cookies-to-add) block supports the following:
@@ -501,8 +449,6 @@ A [`request_cookies_to_add`](#request-cookies-to-add) block supports the followi
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the Cookie header
 
-<a id="request-cookies-to-add-secret-value"></a>
-
 #### Secret Value
 
 A [`secret_value`](#request-cookies-to-add-secret-value) block (within [`request_cookies_to_add`](#request-cookies-to-add)) supports the following:
@@ -510,8 +456,6 @@ A [`secret_value`](#request-cookies-to-add-secret-value) block (within [`request
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#request-cookies-to-add-secret-value-clear-secret-info) below.
-
-<a id="request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -523,8 +467,6 @@ A [`blindfold_secret_info`](#request-cookies-to-add-secret-value-blindfold-secre
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="request-cookies-to-add-secret-value-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#request-cookies-to-add-secret-value-clear-secret-info) block (within [`request_cookies_to_add.secret_value`](#request-cookies-to-add-secret-value)) supports the following:
@@ -532,8 +474,6 @@ A [`clear_secret_info`](#request-cookies-to-add-secret-value-clear-secret-info) 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="request-headers-to-add"></a>
 
 #### Request Headers To Add
 
@@ -547,8 +487,6 @@ A [`request_headers_to_add`](#request-headers-to-add) block supports the followi
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the HTTP header
 
-<a id="request-headers-to-add-secret-value"></a>
-
 #### Secret Value
 
 A [`secret_value`](#request-headers-to-add-secret-value) block (within [`request_headers_to_add`](#request-headers-to-add)) supports the following:
@@ -556,8 +494,6 @@ A [`secret_value`](#request-headers-to-add-secret-value) block (within [`request
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#request-headers-to-add-secret-value-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#request-headers-to-add-secret-value-clear-secret-info) below.
-
-<a id="request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -569,8 +505,6 @@ A [`blindfold_secret_info`](#request-headers-to-add-secret-value-blindfold-secre
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="request-headers-to-add-secret-value-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#request-headers-to-add-secret-value-clear-secret-info) block (within [`request_headers_to_add.secret_value`](#request-headers-to-add-secret-value)) supports the following:
@@ -578,8 +512,6 @@ A [`clear_secret_info`](#request-headers-to-add-secret-value-clear-secret-info) 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="response-cookies-to-add"></a>
 
 #### Response Cookies To Add
 
@@ -631,8 +563,6 @@ A [`response_cookies_to_add`](#response-cookies-to-add) block supports the follo
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the Cookie header
 
-<a id="response-cookies-to-add-secret-value"></a>
-
 #### Secret Value
 
 A [`secret_value`](#response-cookies-to-add-secret-value) block (within [`response_cookies_to_add`](#response-cookies-to-add)) supports the following:
@@ -640,8 +570,6 @@ A [`secret_value`](#response-cookies-to-add-secret-value) block (within [`respon
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#response-cookies-to-add-secret-value-clear-secret-info) below.
-
-<a id="response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -653,8 +581,6 @@ A [`blindfold_secret_info`](#response-cookies-to-add-secret-value-blindfold-secr
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="response-cookies-to-add-secret-value-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#response-cookies-to-add-secret-value-clear-secret-info) block (within [`response_cookies_to_add.secret_value`](#response-cookies-to-add-secret-value)) supports the following:
@@ -662,8 +588,6 @@ A [`clear_secret_info`](#response-cookies-to-add-secret-value-clear-secret-info)
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="response-headers-to-add"></a>
 
 #### Response Headers To Add
 
@@ -677,8 +601,6 @@ A [`response_headers_to_add`](#response-headers-to-add) block supports the follo
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the HTTP header
 
-<a id="response-headers-to-add-secret-value"></a>
-
 #### Secret Value
 
 A [`secret_value`](#response-headers-to-add-secret-value) block (within [`response_headers_to_add`](#response-headers-to-add)) supports the following:
@@ -686,8 +608,6 @@ A [`secret_value`](#response-headers-to-add-secret-value) block (within [`respon
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#response-headers-to-add-secret-value-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#response-headers-to-add-secret-value-clear-secret-info) below.
-
-<a id="response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -699,8 +619,6 @@ A [`blindfold_secret_info`](#response-headers-to-add-secret-value-blindfold-secr
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="response-headers-to-add-secret-value-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#response-headers-to-add-secret-value-clear-secret-info) block (within [`response_headers_to_add.secret_value`](#response-headers-to-add-secret-value)) supports the following:
@@ -708,8 +626,6 @@ A [`clear_secret_info`](#response-headers-to-add-secret-value-clear-secret-info)
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="retry-policy"></a>
 
 #### Retry Policy
 
@@ -725,8 +641,6 @@ A [`retry_policy`](#retry-policy) block supports the following:
 
 &#x2022; [`retry_condition`](#retry-condition) - Optional List<br>Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.)
 
-<a id="retry-policy-back-off"></a>
-
 #### Back Off
 
 A [`back_off`](#retry-policy-back-off) block (within [`retry_policy`](#retry-policy)) supports the following:
@@ -734,8 +648,6 @@ A [`back_off`](#retry-policy-back-off) block (within [`retry_policy`](#retry-pol
 &#x2022; [`base_interval`](#base-interval) - Optional Number<br>Base Retry Interval. Specifies the base interval between retries in milliseconds
 
 &#x2022; [`max_interval`](#max-interval) - Optional Number  Defaults to `10`<br>Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The times the base_interval
-
-<a id="routes"></a>
 
 #### Routes
 
@@ -751,8 +663,6 @@ A [`routes`](#routes) block supports the following:
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="sensitive-data-policy"></a>
-
 #### Sensitive Data Policy
 
 A [`sensitive_data_policy`](#sensitive-data-policy) block supports the following:
@@ -767,8 +677,6 @@ A [`sensitive_data_policy`](#sensitive-data-policy) block supports the following
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="slow-ddos-mitigation"></a>
-
 #### Slow DDOS Mitigation
 
 A [`slow_ddos_mitigation`](#slow-ddos-mitigation) block supports the following:
@@ -778,8 +686,6 @@ A [`slow_ddos_mitigation`](#slow-ddos-mitigation) block supports the following:
 &#x2022; [`request_headers_timeout`](#request-headers-timeout) - Optional Number  Defaults to `10000`<br>Request Headers Timeout. The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The milliseconds. This setting provides protection against Slowloris attacks
 
 &#x2022; [`request_timeout`](#request-timeout) - Optional Number<br>Custom Timeout
-
-<a id="timeouts"></a>
 
 #### Timeouts
 
@@ -792,8 +698,6 @@ A [`timeouts`](#timeouts) block supports the following:
 &#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
-
-<a id="tls-cert-params"></a>
 
 #### TLS Cert Params
 
@@ -817,8 +721,6 @@ A [`tls_cert_params`](#tls-cert-params) block supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added
 
-<a id="tls-cert-params-certificates"></a>
-
 #### Certificates
 
 A [`certificates`](#tls-cert-params-certificates) block (within [`tls_cert_params`](#tls-cert-params)) supports the following:
@@ -833,8 +735,6 @@ A [`certificates`](#tls-cert-params-certificates) block (within [`tls_cert_param
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="tls-cert-params-validation-params"></a>
-
 #### Validation Params
 
 A [`validation_params`](#tls-cert-params-validation-params) block (within [`tls_cert_params`](#tls-cert-params)) supports the following:
@@ -847,15 +747,11 @@ A [`validation_params`](#tls-cert-params-validation-params) block (within [`tls_
 
 &#x2022; [`verify_subject_alt_names`](#verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
-<a id="tls-cert-params-validation-params-trusted-ca"></a>
-
 #### Trusted CA
 
 A [`trusted_ca`](#tls-cert-params-validation-params-trusted-ca) block (within [`tls_cert_params.validation_params`](#tls-cert-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
-
-<a id="tls-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
 #### Trusted CA List
 
@@ -871,8 +767,6 @@ A [`trusted_ca_list`](#tls-cert-params-validation-params-trusted-ca-trusted-ca-l
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="tls-parameters"></a>
-
 #### TLS Parameters
 
 A [`tls_parameters`](#tls-parameters) block supports the following:
@@ -887,8 +781,6 @@ A [`tls_parameters`](#tls-parameters) block supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added
 
-<a id="tls-parameters-common-params"></a>
-
 #### Common Params
 
 A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
@@ -902,8 +794,6 @@ A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameter
 &#x2022; [`tls_certificates`](#tls-certificates) - Optional Block<br>TLS Certificates. Set of TLS certificates<br>See [TLS Certificates](#tls-parameters-common-params-tls-certificates) below.
 
 &#x2022; [`validation_params`](#validation-params) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#tls-parameters-common-params-validation-params) below.
-
-<a id="tls-parameters-common-params-tls-certificates"></a>
 
 #### TLS Certificates
 
@@ -921,15 +811,11 @@ A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (wi
 
 &#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
-
 #### Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
-
-<a id="tls-parameters-common-params-tls-certificates-private-key"></a>
 
 #### Private Key
 
@@ -938,8 +824,6 @@ A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) bl
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) below.
-
-<a id="tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -951,8 +835,6 @@ A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-priva
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="tls-parameters-common-params-tls-certificates-private-key-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
@@ -960,8 +842,6 @@ A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-k
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="tls-parameters-common-params-validation-params"></a>
 
 #### Validation Params
 
@@ -975,15 +855,11 @@ A [`validation_params`](#tls-parameters-common-params-validation-params) block (
 
 &#x2022; [`verify_subject_alt_names`](#verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
-<a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
-
 #### Trusted CA
 
 A [`trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca) block (within [`tls_parameters.common_params.validation_params`](#tls-parameters-common-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
-
-<a id="tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
 #### Trusted CA List
 
@@ -999,8 +875,6 @@ A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="user-identification"></a>
-
 #### User Identification
 
 An [`user_identification`](#user-identification) block supports the following:
@@ -1015,8 +889,6 @@ An [`user_identification`](#user-identification) block supports the following:
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="waf-type"></a>
-
 #### WAF Type
 
 A [`waf_type`](#waf-type) block supports the following:
@@ -1027,15 +899,11 @@ A [`waf_type`](#waf-type) block supports the following:
 
 &#x2022; [`inherit_waf`](#inherit-waf) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="waf-type-app-firewall"></a>
-
 #### App Firewall
 
 An [`app_firewall`](#waf-type-app-firewall) block (within [`waf_type`](#waf-type)) supports the following:
 
 &#x2022; [`app_firewall`](#app-firewall) - Optional Block<br>Application Firewall. References to an Application Firewall configuration object<br>See [App Firewall](#waf-type-app-firewall-app-firewall) below.
-
-<a id="waf-type-app-firewall-app-firewall"></a>
 
 #### App Firewall
 

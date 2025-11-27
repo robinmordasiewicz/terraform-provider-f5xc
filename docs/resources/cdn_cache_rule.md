@@ -78,8 +78,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="cache-rules"></a>
-
 #### Cache Rules
 
 A [`cache_rules`](#cache-rules) block supports the following:
@@ -92,8 +90,6 @@ A [`cache_rules`](#cache-rules) block supports the following:
 
 &#x2022; [`rule_name`](#rule-name) - Optional String<br>Rule Name. Name of the Cache Rule
 
-<a id="cache-rules-eligible-for-cache"></a>
-
 #### Eligible For Cache
 
 An [`eligible_for_cache`](#cache-rules-eligible-for-cache) block (within [`cache_rules`](#cache-rules)) supports the following:
@@ -101,8 +97,6 @@ An [`eligible_for_cache`](#cache-rules-eligible-for-cache) block (within [`cache
 &#x2022; [`scheme_proxy_host_request_uri`](#scheme-proxy-host-request-uri) - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host Request URI](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) below.
 
 &#x2022; [`scheme_proxy_host_uri`](#scheme-proxy-host-uri) - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host URI](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) below.
-
-<a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri"></a>
 
 #### Scheme Proxy Host Request URI
 
@@ -114,8 +108,6 @@ A [`scheme_proxy_host_request_uri`](#cache-rules-eligible-for-cache-scheme-proxy
 
 &#x2022; [`ignore_response_cookie`](#ignore-response-cookie) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
 
-<a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri"></a>
-
 #### Scheme Proxy Host URI
 
 A [`scheme_proxy_host_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) block (within [`cache_rules.eligible_for_cache`](#cache-rules-eligible-for-cache)) supports the following:
@@ -126,8 +118,6 @@ A [`scheme_proxy_host_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-ur
 
 &#x2022; [`ignore_response_cookie`](#ignore-response-cookie) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
 
-<a id="cache-rules-rule-expression-list"></a>
-
 #### Rule Expression List
 
 A [`rule_expression_list`](#cache-rules-rule-expression-list) block (within [`cache_rules`](#cache-rules)) supports the following:
@@ -135,8 +125,6 @@ A [`rule_expression_list`](#cache-rules-rule-expression-list) block (within [`ca
 &#x2022; [`cache_rule_expression`](#cache-rule-expression) - Optional Block<br>Terms. The Cache Rule Expression Terms that are ANDed<br>See [Cache Rule Expression](#cache-rules-rule-expression-list-cache-rule-expression) below.
 
 &#x2022; [`expression_name`](#expression-name) - Optional String<br>Expression Name. Name of the Expressions items that are ANDed
-
-<a id="cache-rules-rule-expression-list-cache-rule-expression"></a>
 
 #### Cache Rule Expression
 
@@ -150,8 +138,6 @@ A [`cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-express
 
 &#x2022; [`query_parameters`](#query-parameters) - Optional Block<br>Query Parameters. List of (key, value) query parameters<br>See [Query Parameters](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) below.
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers"></a>
-
 #### Cache Headers
 
 A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
@@ -159,8 +145,6 @@ A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cach
 &#x2022; [`name`](#name) - Optional String  Defaults to `PROXY_HOST`<br>Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`<br>Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent
 
 &#x2022; [`operator`](#operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) below.
-
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator"></a>
 
 #### Operator
 
@@ -184,8 +168,6 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cache-he
 
 &#x2022; [`startswith`](#startswith) - Optional String<br>Starts With. Field must start with
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher"></a>
-
 #### Cookie Matcher
 
 A [`cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
@@ -193,8 +175,6 @@ A [`cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-coo
 &#x2022; [`name`](#name) - Optional String<br>Cookie Name. A case-sensitive cookie name
 
 &#x2022; [`operator`](#operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator) below.
-
-<a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator"></a>
 
 #### Operator
 
@@ -218,15 +198,11 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-m
 
 &#x2022; [`startswith`](#startswith) - Optional String<br>Starts With. Field must start with
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match"></a>
-
 #### Path Match
 
 A [`path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-match) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
 &#x2022; [`operator`](#operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) below.
-
-<a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator"></a>
 
 #### Operator
 
@@ -250,8 +226,6 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-path-mat
 
 &#x2022; [`startswith`](#startswith) - Optional String<br>Starts With. Field must start with
 
-<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters"></a>
-
 #### Query Parameters
 
 A [`query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
@@ -259,8 +233,6 @@ A [`query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-q
 &#x2022; [`key`](#key) - Optional String<br>Key. Query parameter key In the above example, assignee_username is the key
 
 &#x2022; [`operator`](#operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator) below.
-
-<a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator"></a>
 
 #### Operator
 
@@ -283,8 +255,6 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-query-pa
 &#x2022; [`match_regex`](#match-regex) - Optional String<br>Matches Regex. Field matches PCRE 1 compliant regular expression
 
 &#x2022; [`startswith`](#startswith) - Optional String<br>Starts With. Field must start with
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

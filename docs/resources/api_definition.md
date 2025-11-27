@@ -81,8 +81,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="api-inventory-exclusion-list"></a>
-
 #### API Inventory Exclusion List
 
 An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block supports the following:
@@ -90,8 +88,6 @@ An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block support
 &#x2022; [`method`](#method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 &#x2022; [`path`](#path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
-
-<a id="api-inventory-inclusion-list"></a>
 
 #### API Inventory Inclusion List
 
@@ -101,8 +97,6 @@ An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block support
 
 &#x2022; [`path`](#path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
-<a id="non-api-endpoints"></a>
-
 #### Non API Endpoints
 
 A [`non_api_endpoints`](#non-api-endpoints) block supports the following:
@@ -110,8 +104,6 @@ A [`non_api_endpoints`](#non-api-endpoints) block supports the following:
 &#x2022; [`method`](#method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 &#x2022; [`path`](#path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

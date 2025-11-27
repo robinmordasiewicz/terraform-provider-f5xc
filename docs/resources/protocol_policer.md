@@ -78,8 +78,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="protocol-policer"></a>
-
 #### Protocol Policer
 
 A [`protocol_policer`](#protocol-policer) block supports the following:
@@ -87,8 +85,6 @@ A [`protocol_policer`](#protocol-policer) block supports the following:
 &#x2022; [`policer`](#policer) - Optional Block<br>Policer. Reference to policer object to apply traffic rate limits<br>See [Policer](#protocol-policer-policer) below.
 
 &#x2022; [`protocol`](#protocol) - Optional Block<br>Protocol Type. Protocol and protocol specific flags to be matched in packet<br>See [Protocol](#protocol-policer-protocol) below.
-
-<a id="protocol-policer-policer"></a>
 
 #### Policer
 
@@ -104,8 +100,6 @@ A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#pro
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="protocol-policer-protocol"></a>
-
 #### Protocol
 
 A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#protocol-policer)) supports the following:
@@ -118,23 +112,17 @@ A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#p
 
 &#x2022; [`udp`](#udp) - Optional Block<br>UDP Packets. Match all UDP packets
 
-<a id="protocol-policer-protocol-icmp"></a>
-
 #### ICMP
 
 An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
 &#x2022; [`type`](#type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
 
-<a id="protocol-policer-protocol-tcp"></a>
-
 #### TCP
 
 A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
 &#x2022; [`flags`](#flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

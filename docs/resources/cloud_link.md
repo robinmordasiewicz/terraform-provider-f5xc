@@ -84,8 +84,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="aws"></a>
-
 #### AWS
 
 An [`aws`](#aws) block supports the following:
@@ -95,8 +93,6 @@ An [`aws`](#aws) block supports the following:
 &#x2022; [`byoc`](#byoc) - Optional Block<br>Bring Your Own Connections. List of Bring You Own Connection<br>See [Byoc](#aws-byoc) below.
 
 &#x2022; [`custom_asn`](#custom-asn) - Optional Number<br>Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294
-
-<a id="aws-aws-cred"></a>
 
 #### AWS Cred
 
@@ -108,15 +104,11 @@ An [`aws_cred`](#aws-aws-cred) block (within [`aws`](#aws)) supports the followi
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="aws-byoc"></a>
-
 #### Byoc
 
 A [`byoc`](#aws-byoc) block (within [`aws`](#aws)) supports the following:
 
 &#x2022; [`connections`](#connections) - Optional Block<br>Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs<br>See [Connections](#aws-byoc-connections) below.
-
-<a id="aws-byoc-connections"></a>
 
 #### Connections
 
@@ -144,8 +136,6 @@ A [`connections`](#aws-byoc-connections) block (within [`aws.byoc`](#aws-byoc)) 
 
 &#x2022; [`vlan`](#vlan) - Optional Number<br>Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection
 
-<a id="aws-byoc-connections-auth-key"></a>
-
 #### Auth Key
 
 An [`auth_key`](#aws-byoc-connections-auth-key) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
@@ -153,8 +143,6 @@ An [`auth_key`](#aws-byoc-connections-auth-key) block (within [`aws.byoc.connect
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#aws-byoc-connections-auth-key-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#aws-byoc-connections-auth-key-clear-secret-info) below.
-
-<a id="aws-byoc-connections-auth-key-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -166,8 +154,6 @@ A [`blindfold_secret_info`](#aws-byoc-connections-auth-key-blindfold-secret-info
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="aws-byoc-connections-auth-key-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#aws-byoc-connections-auth-key-clear-secret-info) block (within [`aws.byoc.connections.auth_key`](#aws-byoc-connections-auth-key)) supports the following:
@@ -175,8 +161,6 @@ A [`clear_secret_info`](#aws-byoc-connections-auth-key-clear-secret-info) block 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="aws-byoc-connections-ipv4"></a>
 
 #### IPv4
 
@@ -186,8 +170,6 @@ An [`ipv4`](#aws-byoc-connections-ipv4) block (within [`aws.byoc.connections`](#
 
 &#x2022; [`router_peer_address`](#router-peer-address) - Optional String<br>Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint
 
-<a id="aws-byoc-connections-metadata"></a>
-
 #### Metadata
 
 A [`metadata`](#aws-byoc-connections-metadata) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
@@ -196,15 +178,11 @@ A [`metadata`](#aws-byoc-connections-metadata) block (within [`aws.byoc.connecti
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
-<a id="enabled"></a>
-
 #### Enabled
 
 An [`enabled`](#enabled) block supports the following:
 
 &#x2022; [`cloudlink_network_name`](#cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
-
-<a id="gcp"></a>
 
 #### GCP
 
@@ -214,15 +192,11 @@ A [`gcp`](#gcp) block supports the following:
 
 &#x2022; [`gcp_cred`](#gcp-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [GCP Cred](#gcp-gcp-cred) below.
 
-<a id="gcp-byoc"></a>
-
 #### Byoc
 
 A [`byoc`](#gcp-byoc) block (within [`gcp`](#gcp)) supports the following:
 
 &#x2022; [`connections`](#connections) - Optional Block<br>Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity<br>See [Connections](#gcp-byoc-connections) below.
-
-<a id="gcp-byoc-connections"></a>
 
 #### Connections
 
@@ -238,8 +212,6 @@ A [`connections`](#gcp-byoc-connections) block (within [`gcp.byoc`](#gcp-byoc)) 
 
 &#x2022; [`same_as_credential`](#same-as-credential) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="gcp-byoc-connections-metadata"></a>
-
 #### Metadata
 
 A [`metadata`](#gcp-byoc-connections-metadata) block (within [`gcp.byoc.connections`](#gcp-byoc-connections)) supports the following:
@@ -247,8 +219,6 @@ A [`metadata`](#gcp-byoc-connections-metadata) block (within [`gcp.byoc.connecti
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
-
-<a id="gcp-gcp-cred"></a>
 
 #### GCP Cred
 
@@ -259,8 +229,6 @@ A [`gcp_cred`](#gcp-gcp-cred) block (within [`gcp`](#gcp)) supports the followin
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

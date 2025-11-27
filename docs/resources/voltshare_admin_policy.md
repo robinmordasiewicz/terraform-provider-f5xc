@@ -82,8 +82,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="author-restrictions"></a>
-
 #### Author Restrictions
 
 An [`author_restrictions`](#author-restrictions) block supports the following:
@@ -96,15 +94,11 @@ An [`author_restrictions`](#author-restrictions) block supports the following:
 
 &#x2022; [`deny_list`](#deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#author-restrictions-deny-list) below.
 
-<a id="author-restrictions-allow-list"></a>
-
 #### Allow List
 
 An [`allow_list`](#author-restrictions-allow-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-allow-list-custom-list) below.
-
-<a id="author-restrictions-allow-list-custom-list"></a>
 
 #### Custom List
 
@@ -114,15 +108,11 @@ A [`custom_list`](#author-restrictions-allow-list-custom-list) block (within [`a
 
 &#x2022; [`regex_pattern`](#regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
 
-<a id="author-restrictions-deny-list"></a>
-
 #### Deny List
 
 A [`deny_list`](#author-restrictions-deny-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-deny-list-custom-list) below.
-
-<a id="author-restrictions-deny-list-custom-list"></a>
 
 #### Custom List
 
@@ -131,8 +121,6 @@ A [`custom_list`](#author-restrictions-deny-list-custom-list) block (within [`au
 &#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
 
 &#x2022; [`regex_pattern`](#regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
-
-<a id="timeouts"></a>
 
 #### Timeouts
 
@@ -146,8 +134,6 @@ A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-<a id="user-restrictions"></a>
-
 #### User Restrictions
 
 An [`user_restrictions`](#user-restrictions) block supports the following:
@@ -159,8 +145,6 @@ An [`user_restrictions`](#user-restrictions) block supports the following:
 &#x2022; [`tenant`](#tenant) - Optional String<br>Team/Tenant. Team/Tenant for which this rule is valid
 
 &#x2022; [`user_restrictions`](#user-restrictions) - Optional Block<br>User Matcher. user_matcher contains contains the allow/deny list of users/authors<br>See [User Restrictions](#user-restrictions-user-restrictions) below.
-
-<a id="user-restrictions-user-restrictions"></a>
 
 #### User Restrictions
 
@@ -174,15 +158,11 @@ An [`user_restrictions`](#user-restrictions-user-restrictions) block (within [`u
 
 &#x2022; [`deny_list`](#deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#user-restrictions-user-restrictions-deny-list) below.
 
-<a id="user-restrictions-user-restrictions-allow-list"></a>
-
 #### Allow List
 
 An [`allow_list`](#user-restrictions-user-restrictions-allow-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-allow-list-custom-list) below.
-
-<a id="user-restrictions-user-restrictions-allow-list-custom-list"></a>
 
 #### Custom List
 
@@ -192,15 +172,11 @@ A [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) b
 
 &#x2022; [`regex_pattern`](#regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
 
-<a id="user-restrictions-user-restrictions-deny-list"></a>
-
 #### Deny List
 
 A [`deny_list`](#user-restrictions-user-restrictions-deny-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-deny-list-custom-list) below.
-
-<a id="user-restrictions-user-restrictions-deny-list-custom-list"></a>
 
 #### Custom List
 

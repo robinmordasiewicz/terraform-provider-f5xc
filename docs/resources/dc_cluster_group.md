@@ -78,8 +78,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="timeouts"></a>
-
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
@@ -91,8 +89,6 @@ A [`timeouts`](#timeouts) block supports the following:
 &#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
-
-<a id="type"></a>
 
 #### Type
 

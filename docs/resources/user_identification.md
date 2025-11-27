@@ -70,8 +70,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="rules"></a>
-
 #### Rules
 
 A [`rules`](#rules) block supports the following:
@@ -105,8 +103,6 @@ A [`rules`](#rules) block supports the following:
 &#x2022; [`query_param_key`](#query-param-key) - Optional String<br>Query Parameter Key. Use the query parameter value for the given key as user identifier
 
 &#x2022; [`tls_fingerprint`](#tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

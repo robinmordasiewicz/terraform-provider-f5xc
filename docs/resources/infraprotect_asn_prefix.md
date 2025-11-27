@@ -72,8 +72,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="asn"></a>
-
 #### Asn
 
 An [`asn`](#asn) block supports the following:
@@ -83,8 +81,6 @@ An [`asn`](#asn) block supports the following:
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

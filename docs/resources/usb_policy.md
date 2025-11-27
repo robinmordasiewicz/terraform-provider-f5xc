@@ -70,8 +70,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="allowed-devices"></a>
-
 #### Allowed Devices
 
 An [`allowed_devices`](#allowed-devices) block supports the following:
@@ -87,8 +85,6 @@ An [`allowed_devices`](#allowed-devices) block supports the following:
 &#x2022; [`id_product`](#id-product) - Optional String<br>Product ID. Product ID (Assigned by Manufacturer) in hex
 
 &#x2022; [`id_vendor`](#id-vendor) - Optional String<br>Vendor ID. Vendor ID (Assigned by USB Org) in hex
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

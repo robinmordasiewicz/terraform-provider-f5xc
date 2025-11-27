@@ -67,8 +67,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="timeouts"></a>
-
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:

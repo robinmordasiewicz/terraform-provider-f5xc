@@ -80,8 +80,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="cookie-params"></a>
-
 #### Cookie Params
 
 A [`cookie_params`](#cookie-params) block supports the following:
@@ -96,8 +94,6 @@ A [`cookie_params`](#cookie-params) block supports the following:
 
 &#x2022; [`session_expiry`](#session-expiry) - Optional Number<br>Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours)
 
-<a id="cookie-params-auth-hmac"></a>
-
 #### Auth HMAC
 
 An [`auth_hmac`](#cookie-params-auth-hmac) block (within [`cookie_params`](#cookie-params)) supports the following:
@@ -110,8 +106,6 @@ An [`auth_hmac`](#cookie-params-auth-hmac) block (within [`cookie_params`](#cook
 
 &#x2022; [`sec_key_expiry`](#sec-key-expiry) - Optional String<br>HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time
 
-<a id="cookie-params-auth-hmac-prim-key"></a>
-
 #### Prim Key
 
 A [`prim_key`](#cookie-params-auth-hmac-prim-key) block (within [`cookie_params.auth_hmac`](#cookie-params-auth-hmac)) supports the following:
@@ -119,8 +113,6 @@ A [`prim_key`](#cookie-params-auth-hmac-prim-key) block (within [`cookie_params.
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cookie-params-auth-hmac-prim-key-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#cookie-params-auth-hmac-prim-key-clear-secret-info) below.
-
-<a id="cookie-params-auth-hmac-prim-key-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -132,8 +124,6 @@ A [`blindfold_secret_info`](#cookie-params-auth-hmac-prim-key-blindfold-secret-i
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="cookie-params-auth-hmac-prim-key-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#cookie-params-auth-hmac-prim-key-clear-secret-info) block (within [`cookie_params.auth_hmac.prim_key`](#cookie-params-auth-hmac-prim-key)) supports the following:
@@ -142,8 +132,6 @@ A [`clear_secret_info`](#cookie-params-auth-hmac-prim-key-clear-secret-info) blo
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-<a id="cookie-params-auth-hmac-sec-key"></a>
-
 #### Sec Key
 
 A [`sec_key`](#cookie-params-auth-hmac-sec-key) block (within [`cookie_params.auth_hmac`](#cookie-params-auth-hmac)) supports the following:
@@ -151,8 +139,6 @@ A [`sec_key`](#cookie-params-auth-hmac-sec-key) block (within [`cookie_params.au
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#cookie-params-auth-hmac-sec-key-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#cookie-params-auth-hmac-sec-key-clear-secret-info) below.
-
-<a id="cookie-params-auth-hmac-sec-key-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -164,8 +150,6 @@ A [`blindfold_secret_info`](#cookie-params-auth-hmac-sec-key-blindfold-secret-in
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="cookie-params-auth-hmac-sec-key-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#cookie-params-auth-hmac-sec-key-clear-secret-info) block (within [`cookie_params.auth_hmac.sec_key`](#cookie-params-auth-hmac-sec-key)) supports the following:
@@ -173,8 +157,6 @@ A [`clear_secret_info`](#cookie-params-auth-hmac-sec-key-clear-secret-info) bloc
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="oidc-auth"></a>
 
 #### Oidc Auth
 
@@ -188,8 +170,6 @@ An [`oidc_auth`](#oidc-auth) block supports the following:
 
 &#x2022; [`oidc_well_known_config_url`](#oidc-well-known-config-url) - Optional String<br>Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints
 
-<a id="oidc-auth-client-secret"></a>
-
 #### Client Secret
 
 A [`client_secret`](#oidc-auth-client-secret) block (within [`oidc_auth`](#oidc-auth)) supports the following:
@@ -197,8 +177,6 @@ A [`client_secret`](#oidc-auth-client-secret) block (within [`oidc_auth`](#oidc-
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#oidc-auth-client-secret-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#oidc-auth-client-secret-clear-secret-info) below.
-
-<a id="oidc-auth-client-secret-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -210,8 +188,6 @@ A [`blindfold_secret_info`](#oidc-auth-client-secret-blindfold-secret-info) bloc
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="oidc-auth-client-secret-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#oidc-auth-client-secret-clear-secret-info) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
@@ -219,8 +195,6 @@ A [`clear_secret_info`](#oidc-auth-client-secret-clear-secret-info) block (withi
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="oidc-auth-oidc-auth-params"></a>
 
 #### Oidc Auth Params
 
@@ -231,8 +205,6 @@ An [`oidc_auth_params`](#oidc-auth-oidc-auth-params) block (within [`oidc_auth`]
 &#x2022; [`end_session_endpoint_url`](#end-session-endpoint-url) - Optional String<br>Logout Endpoint. URL of the authorization server's Logout endpoint
 
 &#x2022; [`token_endpoint_url`](#token-endpoint-url) - Optional String<br>Token Endpoint. URL of the authorization server's Token endpoint
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

@@ -82,8 +82,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="access-info"></a>
-
 #### Access Info
 
 An [`access_info`](#access-info) block supports the following:
@@ -98,8 +96,6 @@ An [`access_info`](#access-info) block supports the following:
 
 &#x2022; [`vault_auth_info`](#vault-auth-info) - Optional Block<br>Vault Authentication Parameters. Authentication parameters for Hashicorp Vault hosts<br>See [Vault Auth Info](#access-info-vault-auth-info) below.
 
-<a id="access-info-rest-auth-info"></a>
-
 #### REST Auth Info
 
 A [`rest_auth_info`](#access-info-rest-auth-info) block (within [`access_info`](#access-info)) supports the following:
@@ -110,8 +106,6 @@ A [`rest_auth_info`](#access-info-rest-auth-info) block (within [`access_info`](
 
 &#x2022; [`query_params_auth`](#query-params-auth) - Optional Block<br>Authentication QueryParams. AuthnTypeQueryParams is used for setting query_params for authentication<br>See [Query Params Auth](#access-info-rest-auth-info-query-params-auth) below.
 
-<a id="access-info-rest-auth-info-basic-auth"></a>
-
 #### Basic Auth
 
 A [`basic_auth`](#access-info-rest-auth-info-basic-auth) block (within [`access_info.rest_auth_info`](#access-info-rest-auth-info)) supports the following:
@@ -120,8 +114,6 @@ A [`basic_auth`](#access-info-rest-auth-info-basic-auth) block (within [`access_
 
 &#x2022; [`username`](#username) - Optional String<br>Username. The username to encode in Basic Auth scheme
 
-<a id="access-info-rest-auth-info-basic-auth-password"></a>
-
 #### Password
 
 A [`password`](#access-info-rest-auth-info-basic-auth-password) block (within [`access_info.rest_auth_info.basic_auth`](#access-info-rest-auth-info-basic-auth)) supports the following:
@@ -129,8 +121,6 @@ A [`password`](#access-info-rest-auth-info-basic-auth-password) block (within [`
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-rest-auth-info-basic-auth-password-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-rest-auth-info-basic-auth-password-clear-secret-info) below.
-
-<a id="access-info-rest-auth-info-basic-auth-password-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -142,8 +132,6 @@ A [`blindfold_secret_info`](#access-info-rest-auth-info-basic-auth-password-blin
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="access-info-rest-auth-info-basic-auth-password-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#access-info-rest-auth-info-basic-auth-password-clear-secret-info) block (within [`access_info.rest_auth_info.basic_auth.password`](#access-info-rest-auth-info-basic-auth-password)) supports the following:
@@ -152,23 +140,17 @@ A [`clear_secret_info`](#access-info-rest-auth-info-basic-auth-password-clear-se
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-<a id="access-info-rest-auth-info-headers-auth"></a>
-
 #### Headers Auth
 
 A [`headers_auth`](#access-info-rest-auth-info-headers-auth) block (within [`access_info.rest_auth_info`](#access-info-rest-auth-info)) supports the following:
 
 &#x2022; [`headers`](#headers) - Optional Block<br>Headers. The set of authentication headers to pass in HTTP request
 
-<a id="access-info-rest-auth-info-query-params-auth"></a>
-
 #### Query Params Auth
 
 A [`query_params_auth`](#access-info-rest-auth-info-query-params-auth) block (within [`access_info.rest_auth_info`](#access-info-rest-auth-info)) supports the following:
 
 &#x2022; [`query_params`](#query-params) - Optional Block<br>Query Parameters. The set of authentication parameters to be passed as query parameters
-
-<a id="access-info-tls-config"></a>
 
 #### TLS Config
 
@@ -190,8 +172,6 @@ A [`tls_config`](#access-info-tls-config) block (within [`access_info`](#access-
 
 &#x2022; [`use_host_header_as_sni`](#use-host-header-as-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="access-info-tls-config-cert-params"></a>
-
 #### Cert Params
 
 A [`cert_params`](#access-info-tls-config-cert-params) block (within [`access_info.tls_config`](#access-info-tls-config)) supports the following:
@@ -205,8 +185,6 @@ A [`cert_params`](#access-info-tls-config-cert-params) block (within [`access_in
 &#x2022; [`minimum_protocol_version`](#minimum-protocol-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 &#x2022; [`validation_params`](#validation-params) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#access-info-tls-config-cert-params-validation-params) below.
-
-<a id="access-info-tls-config-cert-params-certificates"></a>
 
 #### Certificates
 
@@ -222,8 +200,6 @@ A [`certificates`](#access-info-tls-config-cert-params-certificates) block (with
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="access-info-tls-config-cert-params-validation-params"></a>
-
 #### Validation Params
 
 A [`validation_params`](#access-info-tls-config-cert-params-validation-params) block (within [`access_info.tls_config.cert_params`](#access-info-tls-config-cert-params)) supports the following:
@@ -236,15 +212,11 @@ A [`validation_params`](#access-info-tls-config-cert-params-validation-params) b
 
 &#x2022; [`verify_subject_alt_names`](#verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
-<a id="access-info-tls-config-cert-params-validation-params-trusted-ca"></a>
-
 #### Trusted CA
 
 A [`trusted_ca`](#access-info-tls-config-cert-params-validation-params-trusted-ca) block (within [`access_info.tls_config.cert_params.validation_params`](#access-info-tls-config-cert-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
-
-<a id="access-info-tls-config-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
 #### Trusted CA List
 
@@ -260,8 +232,6 @@ A [`trusted_ca_list`](#access-info-tls-config-cert-params-validation-params-trus
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="access-info-tls-config-common-params"></a>
-
 #### Common Params
 
 A [`common_params`](#access-info-tls-config-common-params) block (within [`access_info.tls_config`](#access-info-tls-config)) supports the following:
@@ -275,8 +245,6 @@ A [`common_params`](#access-info-tls-config-common-params) block (within [`acces
 &#x2022; [`tls_certificates`](#tls-certificates) - Optional Block<br>TLS Certificates. Set of TLS certificates<br>See [TLS Certificates](#access-info-tls-config-common-params-tls-certificates) below.
 
 &#x2022; [`validation_params`](#validation-params) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#access-info-tls-config-common-params-validation-params) below.
-
-<a id="access-info-tls-config-common-params-tls-certificates"></a>
 
 #### TLS Certificates
 
@@ -294,15 +262,11 @@ A [`tls_certificates`](#access-info-tls-config-common-params-tls-certificates) b
 
 &#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms"></a>
-
 #### Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#access-info-tls-config-common-params-tls-certificates-custom-hash-algorithms) block (within [`access_info.tls_config.common_params.tls_certificates`](#access-info-tls-config-common-params-tls-certificates)) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
-
-<a id="access-info-tls-config-common-params-tls-certificates-private-key"></a>
 
 #### Private Key
 
@@ -311,8 +275,6 @@ A [`private_key`](#access-info-tls-config-common-params-tls-certificates-private
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info) below.
-
-<a id="access-info-tls-config-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -324,8 +286,6 @@ A [`blindfold_secret_info`](#access-info-tls-config-common-params-tls-certificat
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#access-info-tls-config-common-params-tls-certificates-private-key-clear-secret-info) block (within [`access_info.tls_config.common_params.tls_certificates.private_key`](#access-info-tls-config-common-params-tls-certificates-private-key)) supports the following:
@@ -333,8 +293,6 @@ A [`clear_secret_info`](#access-info-tls-config-common-params-tls-certificates-p
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="access-info-tls-config-common-params-validation-params"></a>
 
 #### Validation Params
 
@@ -348,15 +306,11 @@ A [`validation_params`](#access-info-tls-config-common-params-validation-params)
 
 &#x2022; [`verify_subject_alt_names`](#verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
-<a id="access-info-tls-config-common-params-validation-params-trusted-ca"></a>
-
 #### Trusted CA
 
 A [`trusted_ca`](#access-info-tls-config-common-params-validation-params-trusted-ca) block (within [`access_info.tls_config.common_params.validation_params`](#access-info-tls-config-common-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list) below.
-
-<a id="access-info-tls-config-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
 #### Trusted CA List
 
@@ -372,8 +326,6 @@ A [`trusted_ca_list`](#access-info-tls-config-common-params-validation-params-tr
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="access-info-vault-auth-info"></a>
-
 #### Vault Auth Info
 
 A [`vault_auth_info`](#access-info-vault-auth-info) block (within [`access_info`](#access-info)) supports the following:
@@ -381,8 +333,6 @@ A [`vault_auth_info`](#access-info-vault-auth-info) block (within [`access_info`
 &#x2022; [`app_role_auth`](#app-role-auth) - Optional Block<br>Vault AppRole Authentication Parameters. AppRoleAuthInfoType contains parameters for AppRole authentication in Hashicorp Vault<br>See [App Role Auth](#access-info-vault-auth-info-app-role-auth) below.
 
 &#x2022; [`token`](#token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#access-info-vault-auth-info-token) below.
-
-<a id="access-info-vault-auth-info-app-role-auth"></a>
 
 #### App Role Auth
 
@@ -392,8 +342,6 @@ An [`app_role_auth`](#access-info-vault-auth-info-app-role-auth) block (within [
 
 &#x2022; [`secret_id`](#secret-id) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Id](#access-info-vault-auth-info-app-role-auth-secret-id) below.
 
-<a id="access-info-vault-auth-info-app-role-auth-secret-id"></a>
-
 #### Secret Id
 
 A [`secret_id`](#access-info-vault-auth-info-app-role-auth-secret-id) block (within [`access_info.vault_auth_info.app_role_auth`](#access-info-vault-auth-info-app-role-auth)) supports the following:
@@ -401,8 +349,6 @@ A [`secret_id`](#access-info-vault-auth-info-app-role-auth-secret-id) block (wit
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info) below.
-
-<a id="access-info-vault-auth-info-app-role-auth-secret-id-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -414,8 +360,6 @@ A [`blindfold_secret_info`](#access-info-vault-auth-info-app-role-auth-secret-id
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#access-info-vault-auth-info-app-role-auth-secret-id-clear-secret-info) block (within [`access_info.vault_auth_info.app_role_auth.secret_id`](#access-info-vault-auth-info-app-role-auth-secret-id)) supports the following:
@@ -424,8 +368,6 @@ A [`clear_secret_info`](#access-info-vault-auth-info-app-role-auth-secret-id-cle
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-<a id="access-info-vault-auth-info-token"></a>
-
 #### Token
 
 A [`token`](#access-info-vault-auth-info-token) block (within [`access_info.vault_auth_info`](#access-info-vault-auth-info)) supports the following:
@@ -433,8 +375,6 @@ A [`token`](#access-info-vault-auth-info-token) block (within [`access_info.vaul
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#access-info-vault-auth-info-token-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#access-info-vault-auth-info-token-clear-secret-info) below.
-
-<a id="access-info-vault-auth-info-token-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -446,8 +386,6 @@ A [`blindfold_secret_info`](#access-info-vault-auth-info-token-blindfold-secret-
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="access-info-vault-auth-info-token-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#access-info-vault-auth-info-token-clear-secret-info) block (within [`access_info.vault_auth_info.token`](#access-info-vault-auth-info-token)) supports the following:
@@ -455,8 +393,6 @@ A [`clear_secret_info`](#access-info-vault-auth-info-token-clear-secret-info) bl
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="timeouts"></a>
 
 #### Timeouts
 
@@ -470,8 +406,6 @@ A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-<a id="where"></a>
-
 #### Where
 
 A [`where`](#where) block supports the following:
@@ -481,8 +415,6 @@ A [`where`](#where) block supports the following:
 &#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Network Reference. This specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
-
-<a id="where-site"></a>
 
 #### Site
 
@@ -495,8 +427,6 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 &#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
-
-<a id="where-site-ref"></a>
 
 #### Ref
 
@@ -512,15 +442,11 @@ A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports t
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="where-virtual-network"></a>
-
 #### Virtual Network
 
 A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
-
-<a id="where-virtual-network-ref"></a>
 
 #### Ref
 
@@ -536,8 +462,6 @@ A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#w
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="where-virtual-site"></a>
-
 #### Virtual Site
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
@@ -549,8 +473,6 @@ A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) support
 &#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
-
-<a id="where-virtual-site-ref"></a>
 
 #### Ref
 

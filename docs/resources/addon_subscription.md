@@ -82,8 +82,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="addon-service"></a>
-
 #### Addon Service
 
 An [`addon_service`](#addon-service) block supports the following:
@@ -94,8 +92,6 @@ An [`addon_service`](#addon-service) block supports the following:
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="notification-preference"></a>
-
 #### Notification Preference
 
 A [`notification_preference`](#notification-preference) block supports the following:
@@ -104,15 +100,11 @@ A [`notification_preference`](#notification-preference) block supports the follo
 
 &#x2022; [`support_ticket_id`](#support-ticket-id) - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket Id](#notification-preference-support-ticket-id) below.
 
-<a id="notification-preference-emails"></a>
-
 #### Emails
 
 An [`emails`](#notification-preference-emails) block (within [`notification_preference`](#notification-preference)) supports the following:
 
 &#x2022; [`email_ids`](#email-ids) - Optional List<br>Emails. Email ids associated with the Addon Subscription
-
-<a id="notification-preference-support-ticket-id"></a>
 
 #### Support Ticket Id
 
@@ -121,8 +113,6 @@ A [`support_ticket_id`](#notification-preference-support-ticket-id) block (withi
 &#x2022; [`subscription_ticket_id`](#subscription-ticket-id) - Optional String<br>Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription
 
 &#x2022; [`unsubscription_ticket_id`](#unsubscription-ticket-id) - Optional String<br>Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

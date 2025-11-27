@@ -81,8 +81,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="certificate-chain"></a>
-
 #### Certificate Chain
 
 A [`certificate_chain`](#certificate-chain) block supports the following:
@@ -93,15 +91,11 @@ A [`certificate_chain`](#certificate-chain) block supports the following:
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="custom-hash-algorithms"></a>
-
 #### Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#custom-hash-algorithms) block supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
-
-<a id="private-key"></a>
 
 #### Private Key
 
@@ -110,8 +104,6 @@ A [`private_key`](#private-key) block supports the following:
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#private-key-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#private-key-clear-secret-info) below.
-
-<a id="private-key-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -123,8 +115,6 @@ A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="private-key-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_key`](#private-key)) supports the following:
@@ -132,8 +122,6 @@ A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

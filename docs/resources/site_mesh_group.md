@@ -90,8 +90,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="full-mesh"></a>
-
 #### Full Mesh
 
 A [`full_mesh`](#full-mesh) block supports the following:
@@ -100,8 +98,6 @@ A [`full_mesh`](#full-mesh) block supports the following:
 
 &#x2022; [`data_plane_mesh`](#data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="hub-mesh"></a>
-
 #### Hub Mesh
 
 A [`hub_mesh`](#hub-mesh) block supports the following:
@@ -109,8 +105,6 @@ A [`hub_mesh`](#hub-mesh) block supports the following:
 &#x2022; [`control_and_data_plane_mesh`](#control-and-data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`data_plane_mesh`](#data-plane-mesh) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="spoke-mesh"></a>
 
 #### Spoke Mesh
 
@@ -122,8 +116,6 @@ A [`spoke_mesh`](#spoke-mesh) block supports the following:
 
 &#x2022; [`hub_mesh_group`](#hub-mesh-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Hub Mesh Group](#spoke-mesh-hub-mesh-group) below.
 
-<a id="spoke-mesh-hub-mesh-group"></a>
-
 #### Hub Mesh Group
 
 A [`hub_mesh_group`](#spoke-mesh-hub-mesh-group) block (within [`spoke_mesh`](#spoke-mesh)) supports the following:
@@ -133,8 +125,6 @@ A [`hub_mesh_group`](#spoke-mesh-hub-mesh-group) block (within [`spoke_mesh`](#s
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 
@@ -147,8 +137,6 @@ A [`timeouts`](#timeouts) block supports the following:
 &#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
-
-<a id="virtual-site"></a>
 
 #### Virtual Site
 

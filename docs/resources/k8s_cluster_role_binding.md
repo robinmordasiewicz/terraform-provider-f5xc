@@ -80,8 +80,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="k8s-cluster-role"></a>
-
 #### K8s Cluster Role
 
 A [`k8s_cluster_role`](#k8s-cluster-role) block supports the following:
@@ -91,8 +89,6 @@ A [`k8s_cluster_role`](#k8s-cluster-role) block supports the following:
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="subjects"></a>
 
 #### Subjects
 
@@ -104,8 +100,6 @@ A [`subjects`](#subjects) block supports the following:
 
 &#x2022; [`user`](#user) - Optional String<br>User. User id of the user
 
-<a id="subjects-service-account"></a>
-
 #### Service Account
 
 A [`service_account`](#subjects-service-account) block (within [`subjects`](#subjects)) supports the following:
@@ -113,8 +107,6 @@ A [`service_account`](#subjects-service-account) block (within [`subjects`](#sub
 &#x2022; [`name`](#name) - Optional String<br>Name. Name of the service account
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. Namespace of the service account
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

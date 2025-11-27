@@ -72,7 +72,7 @@ resource "f5xc_route" "example" {
 
 &#x2022; [`routes`](#routes) - Optional Block<br>Routes. List of routes to match for incoming request<br>See [Routes](#routes) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block
 
 ### Attributes Reference
 
@@ -81,8 +81,6 @@ In addition to all arguments above, the following attributes are exported:
 &#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
-
-<a id="routes"></a>
 
 #### Routes
 
@@ -126,8 +124,6 @@ A [`routes`](#routes) block supports the following:
 
 &#x2022; [`waf_type`](#waf-type) - Optional Block<br>WAF Instance. WAF instance will be pointing to an app_firewall object<br>See [WAF Type](#routes-waf-type) below.
 
-<a id="routes-bot-defense-javascript-injection"></a>
-
 #### Bot Defense Javascript Injection
 
 A [`bot_defense_javascript_injection`](#routes-bot-defense-javascript-injection) block (within [`routes`](#routes)) supports the following:
@@ -135,8 +131,6 @@ A [`bot_defense_javascript_injection`](#routes-bot-defense-javascript-injection)
 &#x2022; [`javascript_location`](#javascript-location) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag
 
 &#x2022; [`javascript_tags`](#javascript-tags) - Optional Block<br>JavaScript Tags. Select Add item to configure your javascript tag. If adding both Bot Adv and Fraud, the Bot Javascript should be added first<br>See [Javascript Tags](#routes-bot-defense-javascript-injection-javascript-tags) below.
-
-<a id="routes-bot-defense-javascript-injection-javascript-tags"></a>
 
 #### Javascript Tags
 
@@ -146,8 +140,6 @@ A [`javascript_tags`](#routes-bot-defense-javascript-injection-javascript-tags) 
 
 &#x2022; [`tag_attributes`](#tag-attributes) - Optional Block<br>Tag Attributes. Add the tag attributes you want to include in your Javascript tag<br>See [Tag Attributes](#routes-bot-defense-javascript-injection-javascript-tags-tag-attributes) below.
 
-<a id="routes-bot-defense-javascript-injection-javascript-tags-tag-attributes"></a>
-
 #### Tag Attributes
 
 A [`tag_attributes`](#routes-bot-defense-javascript-injection-javascript-tags-tag-attributes) block (within [`routes.bot_defense_javascript_injection.javascript_tags`](#routes-bot-defense-javascript-injection-javascript-tags)) supports the following:
@@ -155,8 +147,6 @@ A [`tag_attributes`](#routes-bot-defense-javascript-injection-javascript-tags-ta
 &#x2022; [`javascript_tag`](#javascript-tag) - Optional String  Defaults to `JS_ATTR_ID`<br>Possible values are `JS_ATTR_ID`, `JS_ATTR_CID`, `JS_ATTR_CN`, `JS_ATTR_API_DOMAIN`, `JS_ATTR_API_URL`, `JS_ATTR_API_PATH`, `JS_ATTR_ASYNC`, `JS_ATTR_DEFER`<br>Tag Attribute Name. Select from one of the predefined tag attributes
 
 &#x2022; [`tag_value`](#tag-value) - Optional String<br>Value. Add the tag attribute value
-
-<a id="routes-match"></a>
 
 #### Match
 
@@ -172,8 +162,6 @@ A [`match`](#routes-match) block (within [`routes`](#routes)) supports the follo
 
 &#x2022; [`query_params`](#query-params) - Optional Block<br>Query Parameters. List of (key, value) query parameters<br>See [Query Params](#routes-match-query-params) below.
 
-<a id="routes-match-headers"></a>
-
 #### Headers
 
 A [`headers`](#routes-match-headers) block (within [`routes.match`](#routes-match)) supports the following:
@@ -188,8 +176,6 @@ A [`headers`](#routes-match-headers) block (within [`routes.match`](#routes-matc
 
 &#x2022; [`regex`](#regex) - Optional String<br>Regex. Regex match of the header value in re2 format
 
-<a id="routes-match-incoming-port"></a>
-
 #### Incoming Port
 
 An [`incoming_port`](#routes-match-incoming-port) block (within [`routes.match`](#routes-match)) supports the following:
@@ -199,8 +185,6 @@ An [`incoming_port`](#routes-match-incoming-port) block (within [`routes.match`]
 &#x2022; [`port`](#port) - Optional Number<br>Port. Exact Port to match
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
-
-<a id="routes-match-path"></a>
 
 #### Path
 
@@ -212,8 +196,6 @@ A [`path`](#routes-match-path) block (within [`routes.match`](#routes-match)) su
 
 &#x2022; [`regex`](#regex) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
 
-<a id="routes-match-query-params"></a>
-
 #### Query Params
 
 A [`query_params`](#routes-match-query-params) block (within [`routes.match`](#routes-match)) supports the following:
@@ -223,8 +205,6 @@ A [`query_params`](#routes-match-query-params) block (within [`routes.match`](#r
 &#x2022; [`key`](#key) - Optional String<br>Key. Query parameter key In the above example, assignee_username is the key
 
 &#x2022; [`regex`](#regex) - Optional String<br>Regex. Regex match value for the query parameter key
-
-<a id="routes-request-cookies-to-add"></a>
 
 #### Request Cookies To Add
 
@@ -238,8 +218,6 @@ A [`request_cookies_to_add`](#routes-request-cookies-to-add) block (within [`rou
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the Cookie header
 
-<a id="routes-request-cookies-to-add-secret-value"></a>
-
 #### Secret Value
 
 A [`secret_value`](#routes-request-cookies-to-add-secret-value) block (within [`routes.request_cookies_to_add`](#routes-request-cookies-to-add)) supports the following:
@@ -247,8 +225,6 @@ A [`secret_value`](#routes-request-cookies-to-add-secret-value) block (within [`
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#routes-request-cookies-to-add-secret-value-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#routes-request-cookies-to-add-secret-value-clear-secret-info) below.
-
-<a id="routes-request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -260,8 +236,6 @@ A [`blindfold_secret_info`](#routes-request-cookies-to-add-secret-value-blindfol
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="routes-request-cookies-to-add-secret-value-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#routes-request-cookies-to-add-secret-value-clear-secret-info) block (within [`routes.request_cookies_to_add.secret_value`](#routes-request-cookies-to-add-secret-value)) supports the following:
@@ -269,8 +243,6 @@ A [`clear_secret_info`](#routes-request-cookies-to-add-secret-value-clear-secret
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="routes-request-headers-to-add"></a>
 
 #### Request Headers To Add
 
@@ -284,8 +256,6 @@ A [`request_headers_to_add`](#routes-request-headers-to-add) block (within [`rou
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the HTTP header
 
-<a id="routes-request-headers-to-add-secret-value"></a>
-
 #### Secret Value
 
 A [`secret_value`](#routes-request-headers-to-add-secret-value) block (within [`routes.request_headers_to_add`](#routes-request-headers-to-add)) supports the following:
@@ -293,8 +263,6 @@ A [`secret_value`](#routes-request-headers-to-add-secret-value) block (within [`
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#routes-request-headers-to-add-secret-value-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#routes-request-headers-to-add-secret-value-clear-secret-info) below.
-
-<a id="routes-request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -306,8 +274,6 @@ A [`blindfold_secret_info`](#routes-request-headers-to-add-secret-value-blindfol
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="routes-request-headers-to-add-secret-value-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#routes-request-headers-to-add-secret-value-clear-secret-info) block (within [`routes.request_headers_to_add.secret_value`](#routes-request-headers-to-add-secret-value)) supports the following:
@@ -315,8 +281,6 @@ A [`clear_secret_info`](#routes-request-headers-to-add-secret-value-clear-secret
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="routes-response-cookies-to-add"></a>
 
 #### Response Cookies To Add
 
@@ -368,8 +332,6 @@ A [`response_cookies_to_add`](#routes-response-cookies-to-add) block (within [`r
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the Cookie header
 
-<a id="routes-response-cookies-to-add-secret-value"></a>
-
 #### Secret Value
 
 A [`secret_value`](#routes-response-cookies-to-add-secret-value) block (within [`routes.response_cookies_to_add`](#routes-response-cookies-to-add)) supports the following:
@@ -377,8 +339,6 @@ A [`secret_value`](#routes-response-cookies-to-add-secret-value) block (within [
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#routes-response-cookies-to-add-secret-value-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#routes-response-cookies-to-add-secret-value-clear-secret-info) below.
-
-<a id="routes-response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -390,8 +350,6 @@ A [`blindfold_secret_info`](#routes-response-cookies-to-add-secret-value-blindfo
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="routes-response-cookies-to-add-secret-value-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#routes-response-cookies-to-add-secret-value-clear-secret-info) block (within [`routes.response_cookies_to_add.secret_value`](#routes-response-cookies-to-add-secret-value)) supports the following:
@@ -399,8 +357,6 @@ A [`clear_secret_info`](#routes-response-cookies-to-add-secret-value-clear-secre
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="routes-response-headers-to-add"></a>
 
 #### Response Headers To Add
 
@@ -414,8 +370,6 @@ A [`response_headers_to_add`](#routes-response-headers-to-add) block (within [`r
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the HTTP header
 
-<a id="routes-response-headers-to-add-secret-value"></a>
-
 #### Secret Value
 
 A [`secret_value`](#routes-response-headers-to-add-secret-value) block (within [`routes.response_headers_to_add`](#routes-response-headers-to-add)) supports the following:
@@ -423,8 +377,6 @@ A [`secret_value`](#routes-response-headers-to-add-secret-value) block (within [
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#routes-response-headers-to-add-secret-value-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#routes-response-headers-to-add-secret-value-clear-secret-info) below.
-
-<a id="routes-response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -436,8 +388,6 @@ A [`blindfold_secret_info`](#routes-response-headers-to-add-secret-value-blindfo
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="routes-response-headers-to-add-secret-value-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#routes-response-headers-to-add-secret-value-clear-secret-info) block (within [`routes.response_headers_to_add.secret_value`](#routes-response-headers-to-add-secret-value)) supports the following:
@@ -445,8 +395,6 @@ A [`clear_secret_info`](#routes-response-headers-to-add-secret-value-clear-secre
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="routes-route-destination"></a>
 
 #### Route Destination
 
@@ -490,8 +438,6 @@ A [`route_destination`](#routes-route-destination) block (within [`routes`](#rou
 
 &#x2022; [`web_socket_config`](#web-socket-config) - Optional Block<br>WebSocket Configuration. Configuration to allow WebSocket Request headers of such upgrade looks like below 'connection', 'Upgrade' 'upgrade', 'WebSocket' With configuration to allow WebSocket upgrade, ADC will produce following response 'HTTP/1.1 101 Switching Protocols 'Upgrade': 'WebSocket' 'Connection': 'Upgrade'<br>See [Web Socket Config](#routes-route-destination-web-socket-config) below.
 
-<a id="routes-route-destination-buffer-policy"></a>
-
 #### Buffer Policy
 
 A [`buffer_policy`](#routes-route-destination-buffer-policy) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
@@ -499,8 +445,6 @@ A [`buffer_policy`](#routes-route-destination-buffer-policy) block (within [`rou
 &#x2022; [`disabled`](#disabled) - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
 
 &#x2022; [`max_request_bytes`](#max-request-bytes) - Optional Number<br>Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response
-
-<a id="routes-route-destination-cors-policy"></a>
 
 #### CORS Policy
 
@@ -522,8 +466,6 @@ A [`cors_policy`](#routes-route-destination-cors-policy) block (within [`routes.
 
 &#x2022; [`maximum_age`](#maximum-age) - Optional Number<br>Maximum Age. Specifies the content for the access-control-max-age header in seconds. This indicates the maximum number of seconds the results can be cached A value of -1 will disable caching. Maximum permitted value is 86400 seconds (24 hours)
 
-<a id="routes-route-destination-csrf-policy"></a>
-
 #### CSRF Policy
 
 A [`csrf_policy`](#routes-route-destination-csrf-policy) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
@@ -534,15 +476,11 @@ A [`csrf_policy`](#routes-route-destination-csrf-policy) block (within [`routes.
 
 &#x2022; [`disabled`](#disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="routes-route-destination-csrf-policy-custom-domain-list"></a>
-
 #### Custom Domain List
 
 A [`custom_domain_list`](#routes-route-destination-csrf-policy-custom-domain-list) block (within [`routes.route_destination.csrf_policy`](#routes-route-destination-csrf-policy)) supports the following:
 
 &#x2022; [`domains`](#domains) - Optional List<br>Domain names. A list of domain names that will be matched to loadbalancer. These domains are not used for SNI match. Wildcard names are supported in the suffix or prefix form
-
-<a id="routes-route-destination-destinations"></a>
 
 #### Destinations
 
@@ -555,8 +493,6 @@ A [`destinations`](#routes-route-destination-destinations) block (within [`route
 &#x2022; [`priority`](#priority) - Optional Number<br>Priority. Priority of this cluster, valid only with multiple destinations are configured. Value of 0 will make the cluster as lowest priority upstream cluster Priority of 1 means highest priority and is considered active. When active cluster is not available, lower priority clusters are made active as per the increasing priority
 
 &#x2022; [`weight`](#weight) - Optional Number<br>Weight. When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 weight: 10 This indicates that out of every 60 requests, 10 goes to cluster-3, 30 to cluster-2 and 20 to cluster-1 When single destination is configured, weight is ignored. All the requests are sent to the cluster specified in the destination
-
-<a id="routes-route-destination-destinations-cluster"></a>
 
 #### Cluster
 
@@ -572,8 +508,6 @@ A [`cluster`](#routes-route-destination-destinations-cluster) block (within [`ro
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="routes-route-destination-hash-policy"></a>
-
 #### Hash Policy
 
 A [`hash_policy`](#routes-route-destination-hash-policy) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
@@ -585,8 +519,6 @@ A [`hash_policy`](#routes-route-destination-hash-policy) block (within [`routes.
 &#x2022; [`source_ip`](#source-ip) - Optional Bool<br>Source IP. Hash based on source IP address
 
 &#x2022; [`terminal`](#terminal) - Optional Bool<br>Terminal. Specify if its a terminal policy
-
-<a id="routes-route-destination-hash-policy-cookie"></a>
 
 #### Cookie
 
@@ -614,8 +546,6 @@ A [`cookie`](#routes-route-destination-hash-policy-cookie) block (within [`route
 
 &#x2022; [`ttl`](#ttl) - Optional Number<br>TTL. If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds
 
-<a id="routes-route-destination-mirror-policy"></a>
-
 #### Mirror Policy
 
 A [`mirror_policy`](#routes-route-destination-mirror-policy) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
@@ -623,8 +553,6 @@ A [`mirror_policy`](#routes-route-destination-mirror-policy) block (within [`rou
 &#x2022; [`cluster`](#cluster) - Optional Block<br>Mirror Destination Cluster. Specifies the cluster to which the requests will be mirrored. The cluster object referred here must be present<br>See [Cluster](#routes-route-destination-mirror-policy-cluster) below.
 
 &#x2022; [`percent`](#percent) - Optional Block<br>Fractional Percent. Fraction used where sampling percentages are needed. example sampled requests<br>See [Percent](#routes-route-destination-mirror-policy-percent) below.
-
-<a id="routes-route-destination-mirror-policy-cluster"></a>
 
 #### Cluster
 
@@ -640,8 +568,6 @@ A [`cluster`](#routes-route-destination-mirror-policy-cluster) block (within [`r
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="routes-route-destination-mirror-policy-percent"></a>
-
 #### Percent
 
 A [`percent`](#routes-route-destination-mirror-policy-percent) block (within [`routes.route_destination.mirror_policy`](#routes-route-destination-mirror-policy)) supports the following:
@@ -649,8 +575,6 @@ A [`percent`](#routes-route-destination-mirror-policy-percent) block (within [`r
 &#x2022; [`denominator`](#denominator) - Optional String  Defaults to `HUNDRED`<br>Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`<br>Denominator. Denominator used in fraction where sampling percentages are needed. example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator
 
 &#x2022; [`numerator`](#numerator) - Optional Number<br>Numerator. sampled parts per denominator. If denominator was 10000, then value of 5 will be 5 in 10000
-
-<a id="routes-route-destination-query-params"></a>
 
 #### Query Params
 
@@ -662,8 +586,6 @@ A [`query_params`](#routes-route-destination-query-params) block (within [`route
 
 &#x2022; [`retain_all_params`](#retain-all-params) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="routes-route-destination-regex-rewrite"></a>
-
 #### Regex Rewrite
 
 A [`regex_rewrite`](#routes-route-destination-regex-rewrite) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
@@ -671,8 +593,6 @@ A [`regex_rewrite`](#routes-route-destination-regex-rewrite) block (within [`rou
 &#x2022; [`pattern`](#pattern) - Optional String<br>Pattern. The regular expression used to find portions of a string that should be replaced
 
 &#x2022; [`substitution`](#substitution) - Optional String<br>Substitution. The string that should be substituted into matching portions of the subject string during a substitution operation to produce a new string
-
-<a id="routes-route-destination-retry-policy"></a>
 
 #### Retry Policy
 
@@ -688,8 +608,6 @@ A [`retry_policy`](#routes-route-destination-retry-policy) block (within [`route
 
 &#x2022; [`retry_condition`](#retry-condition) - Optional List<br>Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.)
 
-<a id="routes-route-destination-retry-policy-back-off"></a>
-
 #### Back Off
 
 A [`back_off`](#routes-route-destination-retry-policy-back-off) block (within [`routes.route_destination.retry_policy`](#routes-route-destination-retry-policy)) supports the following:
@@ -698,23 +616,17 @@ A [`back_off`](#routes-route-destination-retry-policy-back-off) block (within [`
 
 &#x2022; [`max_interval`](#max-interval) - Optional Number  Defaults to `10`<br>Maximum Retry Interval. Specifies the maximum interval between retries in milliseconds. This parameter is optional, but must be greater than or equal to the base_interval if set. The times the base_interval
 
-<a id="routes-route-destination-spdy-config"></a>
-
 #### Spdy Config
 
 A [`spdy_config`](#routes-route-destination-spdy-config) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
 
 &#x2022; [`use_spdy`](#use-spdy) - Optional Bool<br>Use SPDY. Specifies that the HTTP client connection to this route is allowed to upgrade to a SPDY connection
 
-<a id="routes-route-destination-web-socket-config"></a>
-
 #### Web Socket Config
 
 A [`web_socket_config`](#routes-route-destination-web-socket-config) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
 
 &#x2022; [`use_websocket`](#use-websocket) - Optional Bool<br>Use WebSocket. Specifies that the HTTP client connection to this route is allowed to upgrade to a WebSocket connection
-
-<a id="routes-route-direct-response"></a>
 
 #### Route Direct Response
 
@@ -723,8 +635,6 @@ A [`route_direct_response`](#routes-route-direct-response) block (within [`route
 &#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
 &#x2022; [`response_code`](#response-code) - Optional Number<br>Response Code. response code to send
-
-<a id="routes-route-redirect"></a>
 
 #### Route Redirect
 
@@ -746,15 +656,11 @@ A [`route_redirect`](#routes-route-redirect) block (within [`routes`](#routes)) 
 
 &#x2022; [`retain_all_params`](#retain-all-params) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="routes-service-policy"></a>
-
 #### Service Policy
 
 A [`service_policy`](#routes-service-policy) block (within [`routes`](#routes)) supports the following:
 
 &#x2022; [`disable`](#disable) - Optional Bool<br>Disable. disable service policy at route level, if it is configured at virtual-host level
-
-<a id="routes-waf-exclusion-policy"></a>
 
 #### WAF Exclusion Policy
 
@@ -766,8 +672,6 @@ A [`waf_exclusion_policy`](#routes-waf-exclusion-policy) block (within [`routes`
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="routes-waf-type"></a>
-
 #### WAF Type
 
 A [`waf_type`](#routes-waf-type) block (within [`routes`](#routes)) supports the following:
@@ -778,15 +682,11 @@ A [`waf_type`](#routes-waf-type) block (within [`routes`](#routes)) supports the
 
 &#x2022; [`inherit_waf`](#inherit-waf) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="routes-waf-type-app-firewall"></a>
-
 #### App Firewall
 
 An [`app_firewall`](#routes-waf-type-app-firewall) block (within [`routes.waf_type`](#routes-waf-type)) supports the following:
 
 &#x2022; [`app_firewall`](#app-firewall) - Optional Block<br>Application Firewall. References to an Application Firewall configuration object<br>See [App Firewall](#routes-waf-type-app-firewall-app-firewall) below.
-
-<a id="routes-waf-type-app-firewall-app-firewall"></a>
 
 #### App Firewall
 
@@ -801,8 +701,6 @@ An [`app_firewall`](#routes-waf-type-app-firewall-app-firewall) block (within [`
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

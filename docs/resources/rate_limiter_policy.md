@@ -80,8 +80,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="rules"></a>
-
 #### Rules
 
 A [`rules`](#rules) block supports the following:
@@ -90,8 +88,6 @@ A [`rules`](#rules) block supports the following:
 
 &#x2022; [`spec`](#spec) - Optional Block<br>Rate Limiter Rule Specification. Shape of Rate Limiter Rule<br>See [Spec](#rules-spec) below.
 
-<a id="rules-metadata"></a>
-
 #### Metadata
 
 A [`metadata`](#rules-metadata) block (within [`rules`](#rules)) supports the following:
@@ -99,8 +95,6 @@ A [`metadata`](#rules-metadata) block (within [`rules`](#rules)) supports the fo
 &#x2022; [`description`](#description) - Optional String<br>Description. Human readable description
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
-
-<a id="rules-spec"></a>
 
 #### Spec
 
@@ -136,23 +130,17 @@ A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`path`](#path) - Optional Block<br>Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#rules-spec-path) below.
 
-<a id="rules-spec-asn-list"></a>
-
 #### Asn List
 
 An [`asn_list`](#rules-spec-asn-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-<a id="rules-spec-asn-matcher"></a>
-
 #### Asn Matcher
 
 An [`asn_matcher`](#rules-spec-asn-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
-
-<a id="rules-spec-asn-matcher-asn-sets"></a>
 
 #### Asn Sets
 
@@ -168,8 +156,6 @@ An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="rules-spec-country-list"></a>
-
 #### Country List
 
 A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules-spec)) supports the following:
@@ -177,8 +163,6 @@ A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules
 &#x2022; [`country_codes`](#country-codes) - Optional List  Defaults to `COUNTRY_NONE`<br>Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`<br>Country Codes List. List of Country Codes
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
-
-<a id="rules-spec-custom-rate-limiter"></a>
 
 #### Custom Rate Limiter
 
@@ -190,8 +174,6 @@ A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="rules-spec-domain-matcher"></a>
-
 #### Domain Matcher
 
 A [`domain_matcher`](#rules-spec-domain-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
@@ -199,8 +181,6 @@ A [`domain_matcher`](#rules-spec-domain-matcher) block (within [`rules.spec`](#r
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="rules-spec-headers"></a>
 
 #### Headers
 
@@ -216,8 +196,6 @@ A [`headers`](#rules-spec-headers) block (within [`rules.spec`](#rules-spec)) su
 
 &#x2022; [`name`](#name) - Optional String<br>Header Name. A case-insensitive HTTP header name
 
-<a id="rules-spec-headers-item"></a>
-
 #### Item
 
 An [`item`](#rules-spec-headers-item) block (within [`rules.spec.headers`](#rules-spec-headers)) supports the following:
@@ -228,8 +206,6 @@ An [`item`](#rules-spec-headers-item) block (within [`rules.spec.headers`](#rule
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-<a id="rules-spec-http-method"></a>
-
 #### HTTP Method
 
 A [`http_method`](#rules-spec-http-method) block (within [`rules.spec`](#rules-spec)) supports the following:
@@ -238,8 +214,6 @@ A [`http_method`](#rules-spec-http-method) block (within [`rules.spec`](#rules-s
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Method List. List of methods values to match against
 
-<a id="rules-spec-ip-matcher"></a>
-
 #### IP Matcher
 
 An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
@@ -247,8 +221,6 @@ An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-sp
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
 &#x2022; [`prefix_sets`](#prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#rules-spec-ip-matcher-prefix-sets) below.
-
-<a id="rules-spec-ip-matcher-prefix-sets"></a>
 
 #### Prefix Sets
 
@@ -264,8 +236,6 @@ A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="rules-spec-ip-prefix-list"></a>
-
 #### IP Prefix List
 
 An [`ip_prefix_list`](#rules-spec-ip-prefix-list) block (within [`rules.spec`](#rules-spec)) supports the following:
@@ -273,8 +243,6 @@ An [`ip_prefix_list`](#rules-spec-ip-prefix-list) block (within [`rules.spec`](#
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
 &#x2022; [`ip_prefixes`](#ip-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
-
-<a id="rules-spec-path"></a>
 
 #### Path
 
@@ -292,8 +260,6 @@ A [`path`](#rules-spec-path) block (within [`rules.spec`](#rules-spec)) supports
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-<a id="server-name-matcher"></a>
-
 #### Server Name Matcher
 
 A [`server_name_matcher`](#server-name-matcher) block supports the following:
@@ -302,15 +268,11 @@ A [`server_name_matcher`](#server-name-matcher) block supports the following:
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="server-selector"></a>
-
 #### Server Selector
 
 A [`server_selector`](#server-selector) block supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

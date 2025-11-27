@@ -83,15 +83,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="bigip-virtual-server"></a>
-
 #### Bigip Virtual Server
 
 A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
 
 &#x2022; [`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Bigip Virtual Server](#bigip-virtual-server-bigip-virtual-server) below.
-
-<a id="bigip-virtual-server-bigip-virtual-server"></a>
 
 #### Bigip Virtual Server
 
@@ -103,15 +99,11 @@ A [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) block (wi
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="cdn-loadbalancer"></a>
-
 #### CDN Loadbalancer
 
 A [`cdn_loadbalancer`](#cdn-loadbalancer) block supports the following:
 
 &#x2022; [`cdn_loadbalancer`](#cdn-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CDN Loadbalancer](#cdn-loadbalancer-cdn-loadbalancer) below.
-
-<a id="cdn-loadbalancer-cdn-loadbalancer"></a>
 
 #### CDN Loadbalancer
 
@@ -123,8 +115,6 @@ A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_l
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="elements"></a>
-
 #### Elements
 
 An [`elements`](#elements) block supports the following:
@@ -133,15 +123,11 @@ An [`elements`](#elements) block supports the following:
 
 &#x2022; [`path_regex`](#path-regex) - Optional String<br>Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex
 
-<a id="http-loadbalancer"></a>
-
 #### HTTP Loadbalancer
 
 A [`http_loadbalancer`](#http-loadbalancer) block supports the following:
 
 &#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [HTTP Loadbalancer](#http-loadbalancer-http-loadbalancer) below.
-
-<a id="http-loadbalancer-http-loadbalancer"></a>
 
 #### HTTP Loadbalancer
 
@@ -152,8 +138,6 @@ A [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) block (within [`ht
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

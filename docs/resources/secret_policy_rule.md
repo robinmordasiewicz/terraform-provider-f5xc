@@ -79,8 +79,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="client-name-matcher"></a>
-
 #### Client Name Matcher
 
 A [`client_name_matcher`](#client-name-matcher) block supports the following:
@@ -89,15 +87,11 @@ A [`client_name_matcher`](#client-name-matcher) block supports the following:
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="client-selector"></a>
-
 #### Client Selector
 
 A [`client_selector`](#client-selector) block supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

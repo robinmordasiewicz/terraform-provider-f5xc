@@ -78,15 +78,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="http-access"></a>
-
 #### HTTP Access
 
 A [`http_access`](#http-access) block supports the following:
 
 &#x2022; [`path`](#path) - Optional String<br>CRL File path. CRL file location
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

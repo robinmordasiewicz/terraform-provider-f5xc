@@ -89,8 +89,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="a-pool"></a>
-
 #### A Pool
 
 An [`a_pool`](#a-pool) block supports the following:
@@ -103,8 +101,6 @@ An [`a_pool`](#a-pool) block supports the following:
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#a-pool-members) below.
 
-<a id="a-pool-health-check"></a>
-
 #### Health Check
 
 A [`health_check`](#a-pool-health-check) block (within [`a_pool`](#a-pool)) supports the following:
@@ -114,8 +110,6 @@ A [`health_check`](#a-pool-health-check) block (within [`a_pool`](#a-pool)) supp
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="a-pool-members"></a>
 
 #### Members
 
@@ -131,8 +125,6 @@ A [`members`](#a-pool-members) block (within [`a_pool`](#a-pool)) supports the f
 
 &#x2022; [`ratio`](#ratio) - Optional Number<br>Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member
 
-<a id="aaaa-pool"></a>
-
 #### Aaaa Pool
 
 An [`aaaa_pool`](#aaaa-pool) block supports the following:
@@ -140,8 +132,6 @@ An [`aaaa_pool`](#aaaa-pool) block supports the following:
 &#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#aaaa-pool-members) below.
-
-<a id="aaaa-pool-members"></a>
 
 #### Members
 
@@ -157,15 +147,11 @@ A [`members`](#aaaa-pool-members) block (within [`aaaa_pool`](#aaaa-pool)) suppo
 
 &#x2022; [`ratio`](#ratio) - Optional Number<br>Load Balancing Ratio. Used if the pool’s load balancing mode is set to Ratio-Member
 
-<a id="cname-pool"></a>
-
 #### Cname Pool
 
 A [`cname_pool`](#cname-pool) block supports the following:
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#cname-pool-members) below.
-
-<a id="cname-pool-members"></a>
 
 #### Members
 
@@ -179,8 +165,6 @@ A [`members`](#cname-pool-members) block (within [`cname_pool`](#cname-pool)) su
 
 &#x2022; [`ratio`](#ratio) - Optional Number<br>Load Balancing Ratio. Ratio
 
-<a id="mx-pool"></a>
-
 #### Mx Pool
 
 A [`mx_pool`](#mx-pool) block supports the following:
@@ -188,8 +172,6 @@ A [`mx_pool`](#mx-pool) block supports the following:
 &#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#mx-pool-members) below.
-
-<a id="mx-pool-members"></a>
 
 #### Members
 
@@ -203,8 +185,6 @@ A [`members`](#mx-pool-members) block (within [`mx_pool`](#mx-pool)) supports th
 
 &#x2022; [`ratio`](#ratio) - Optional Number<br>Load Balancing Ratio. Load Balancing Ratio
 
-<a id="srv-pool"></a>
-
 #### Srv Pool
 
 A [`srv_pool`](#srv-pool) block supports the following:
@@ -212,8 +192,6 @@ A [`srv_pool`](#srv-pool) block supports the following:
 &#x2022; [`max_answers`](#max-answers) - Optional Number<br>Maximum Answers. Limit on number of Resource Records to be included in the response to query
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#srv-pool-members) below.
-
-<a id="srv-pool-members"></a>
 
 #### Members
 
@@ -232,8 +210,6 @@ A [`members`](#srv-pool-members) block (within [`srv_pool`](#srv-pool)) supports
 &#x2022; [`target`](#target) - Optional String<br>Target. Domain name of the machine providing the service
 
 &#x2022; [`weight`](#weight) - Optional Number<br>Weight. Weight of the target. A higher number indicates a higher preference
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

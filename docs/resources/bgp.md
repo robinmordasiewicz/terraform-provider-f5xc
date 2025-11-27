@@ -89,8 +89,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="bgp-parameters"></a>
-
 #### BGP Parameters
 
 A [`bgp_parameters`](#bgp-parameters) block supports the following:
@@ -102,8 +100,6 @@ A [`bgp_parameters`](#bgp-parameters) block supports the following:
 &#x2022; [`ip_address`](#ip-address) - Optional String<br>IP Address. Use the configured IPv4 Address as Router ID
 
 &#x2022; [`local_address`](#local-address) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="peers"></a>
 
 #### Peers
 
@@ -127,8 +123,6 @@ A [`peers`](#peers) block supports the following:
 
 &#x2022; [`routing_policies`](#routing-policies) - Optional Block<br>BGP Routing Policy. List of rules which can be applied on all or particular nodes<br>See [Routing Policies](#peers-routing-policies) below.
 
-<a id="peers-bfd-enabled"></a>
-
 #### Bfd Enabled
 
 A [`bfd_enabled`](#peers-bfd-enabled) block (within [`peers`](#peers)) supports the following:
@@ -138,8 +132,6 @@ A [`bfd_enabled`](#peers-bfd-enabled) block (within [`peers`](#peers)) supports 
 &#x2022; [`receive_interval_milliseconds`](#receive-interval-milliseconds) - Optional Number<br>Minimum Receive Interval. BFD receive interval timer, in milliseconds
 
 &#x2022; [`transmit_interval_milliseconds`](#transmit-interval-milliseconds) - Optional Number<br>Transmit Interval. BFD transmit interval timer, in milliseconds
-
-<a id="peers-external"></a>
 
 #### External
 
@@ -185,8 +177,6 @@ An [`external`](#peers-external) block (within [`peers`](#peers)) supports the f
 
 &#x2022; [`subnet_end_offset_v6`](#subnet-end-offset-v6) - Optional Number<br>Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet
 
-<a id="peers-external-family-inet"></a>
-
 #### Family Inet
 
 A [`family_inet`](#peers-external-family-inet) block (within [`peers.external`](#peers-external)) supports the following:
@@ -194,8 +184,6 @@ A [`family_inet`](#peers-external-family-inet) block (within [`peers.external`](
 &#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`enable`](#enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="peers-external-interface"></a>
 
 #### Interface
 
@@ -207,15 +195,11 @@ An [`interface`](#peers-external-interface) block (within [`peers.external`](#pe
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="peers-external-interface-list"></a>
-
 #### Interface List
 
 An [`interface_list`](#peers-external-interface-list) block (within [`peers.external`](#peers-external)) supports the following:
 
 &#x2022; [`interfaces`](#interfaces) - Optional Block<br>Interface List. List of network interfaces<br>See [Interfaces](#peers-external-interface-list-interfaces) below.
-
-<a id="peers-external-interface-list-interfaces"></a>
 
 #### Interfaces
 
@@ -227,8 +211,6 @@ An [`interfaces`](#peers-external-interface-list-interfaces) block (within [`pee
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="peers-metadata"></a>
-
 #### Metadata
 
 A [`metadata`](#peers-metadata) block (within [`peers`](#peers)) supports the following:
@@ -237,15 +219,11 @@ A [`metadata`](#peers-metadata) block (within [`peers`](#peers)) supports the fo
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
-<a id="peers-routing-policies"></a>
-
 #### Routing Policies
 
 A [`routing_policies`](#peers-routing-policies) block (within [`peers`](#peers)) supports the following:
 
 &#x2022; [`route_policy`](#route-policy) - Optional Block<br>BGP Routing policy. Route policy to be applied<br>See [Route Policy](#peers-routing-policies-route-policy) below.
-
-<a id="peers-routing-policies-route-policy"></a>
 
 #### Route Policy
 
@@ -261,15 +239,11 @@ A [`route_policy`](#peers-routing-policies-route-policy) block (within [`peers.r
 
 &#x2022; [`outbound`](#outbound) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="peers-routing-policies-route-policy-node-name"></a>
-
 #### Node Name
 
 A [`node_name`](#peers-routing-policies-route-policy-node-name) block (within [`peers.routing_policies.route_policy`](#peers-routing-policies-route-policy)) supports the following:
 
 &#x2022; [`node`](#node) - Optional List<br>Node of choice. Select BGP Session on which policy will be applied
-
-<a id="peers-routing-policies-route-policy-object-refs"></a>
 
 #### Object Refs
 
@@ -285,8 +259,6 @@ An [`object_refs`](#peers-routing-policies-route-policy-object-refs) block (with
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="timeouts"></a>
-
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
@@ -299,8 +271,6 @@ A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-<a id="where"></a>
-
 #### Where
 
 A [`where`](#where) block supports the following:
@@ -308,8 +278,6 @@ A [`where`](#where) block supports the following:
 &#x2022; [`site`](#site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
-
-<a id="where-site"></a>
 
 #### Site
 
@@ -322,8 +290,6 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 &#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
-
-<a id="where-site-ref"></a>
 
 #### Ref
 
@@ -339,8 +305,6 @@ A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports t
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="where-virtual-site"></a>
-
 #### Virtual Site
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
@@ -352,8 +316,6 @@ A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) support
 &#x2022; [`network_type`](#network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
-
-<a id="where-virtual-site-ref"></a>
 
 #### Ref
 

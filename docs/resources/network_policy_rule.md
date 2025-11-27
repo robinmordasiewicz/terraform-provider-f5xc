@@ -91,23 +91,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="advanced-action"></a>
-
 #### Advanced Action
 
 An [`advanced_action`](#advanced-action) block supports the following:
 
 &#x2022; [`action`](#action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
-<a id="ip-prefix-set"></a>
-
 #### IP Prefix Set
 
 An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
-
-<a id="ip-prefix-set-ref"></a>
 
 #### Ref
 
@@ -123,31 +117,23 @@ A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) s
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="label-matcher"></a>
-
 #### Label Matcher
 
 A [`label_matcher`](#label-matcher) block supports the following:
 
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
 
-<a id="prefix"></a>
-
 #### Prefix
 
 A [`prefix`](#prefix) block supports the following:
 
-&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length<br>See [Prefix](#prefix) below for details.
-
-<a id="prefix-selector"></a>
+&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 #### Prefix Selector
 
 A [`prefix_selector`](#prefix-selector) block supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

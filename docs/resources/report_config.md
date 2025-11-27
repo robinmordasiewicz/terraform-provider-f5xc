@@ -80,15 +80,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="report-recipients"></a>
-
 #### Report Recipients
 
 A [`report_recipients`](#report-recipients) block supports the following:
 
 &#x2022; [`user_groups`](#user-groups) - Optional Block<br>User Groups. Select one or more user groups, to which the report should be sent via email<br>See [User Groups](#report-recipients-user-groups) below.
-
-<a id="report-recipients-user-groups"></a>
 
 #### User Groups
 
@@ -99,8 +95,6 @@ An [`user_groups`](#report-recipients-user-groups) block (within [`report_recipi
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 
@@ -113,8 +107,6 @@ A [`timeouts`](#timeouts) block supports the following:
 &#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
-
-<a id="waap"></a>
 
 #### Waap
 
@@ -130,15 +122,11 @@ A [`waap`](#waap) block supports the following:
 
 &#x2022; [`weekly`](#weekly) - Optional Block<br>Report Frequency Weekly. create report weekly<br>See [Weekly](#waap-weekly) below.
 
-<a id="waap-daily"></a>
-
 #### Daily
 
 A [`daily`](#waap-daily) block (within [`waap`](#waap)) supports the following:
 
 &#x2022; [`report_generation_time`](#report-generation-time) - Optional String<br>Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
-
-<a id="waap-monthly"></a>
 
 #### Monthly
 
@@ -148,15 +136,11 @@ A [`monthly`](#waap-monthly) block (within [`waap`](#waap)) supports the followi
 
 &#x2022; [`report_generation_time`](#report-generation-time) - Optional String<br>Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
 
-<a id="waap-namespaces"></a>
-
 #### Namespaces
 
 A [`namespaces`](#waap-namespaces) block (within [`waap`](#waap)) supports the following:
 
 &#x2022; [`namespaces`](#namespaces) - Optional List<br>Namespaces. list of namespaces for which user wants to generate report
-
-<a id="waap-weekly"></a>
 
 #### Weekly
 

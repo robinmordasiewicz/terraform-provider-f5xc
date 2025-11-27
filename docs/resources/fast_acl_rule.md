@@ -84,8 +84,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="action"></a>
-
 #### Action
 
 An [`action`](#action) block supports the following:
@@ -96,15 +94,11 @@ An [`action`](#action) block supports the following:
 
 &#x2022; [`simple_action`](#simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
 
-<a id="action-policer-action"></a>
-
 #### Policer Action
 
 A [`policer_action`](#action-policer-action) block (within [`action`](#action)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#action-policer-action-ref) below.
-
-<a id="action-policer-action-ref"></a>
 
 #### Ref
 
@@ -120,15 +114,11 @@ A [`ref`](#action-policer-action-ref) block (within [`action.policer_action`](#a
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="action-protocol-policer-action"></a>
-
 #### Protocol Policer Action
 
 A [`protocol_policer_action`](#action-protocol-policer-action) block (within [`action`](#action)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#action-protocol-policer-action-ref) below.
-
-<a id="action-protocol-policer-action-ref"></a>
 
 #### Ref
 
@@ -144,15 +134,11 @@ A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol_p
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="ip-prefix-set"></a>
-
 #### IP Prefix Set
 
 An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
-
-<a id="ip-prefix-set-ref"></a>
 
 #### Ref
 
@@ -168,8 +154,6 @@ A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) s
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="port"></a>
-
 #### Port
 
 A [`port`](#port) block supports the following:
@@ -180,15 +164,11 @@ A [`port`](#port) block supports the following:
 
 &#x2022; [`user_defined`](#user-defined) - Optional Number<br>User defined port. Matches the user defined port
 
-<a id="prefix"></a>
-
 #### Prefix
 
 A [`prefix`](#prefix) block supports the following:
 
-&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length<br>See [Prefix](#prefix) below for details.
-
-<a id="timeouts"></a>
+&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 #### Timeouts
 

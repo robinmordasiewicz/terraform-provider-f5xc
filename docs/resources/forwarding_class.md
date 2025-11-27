@@ -91,8 +91,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="dscp"></a>
-
 #### Dscp
 
 A [`dscp`](#dscp) block supports the following:
@@ -100,8 +98,6 @@ A [`dscp`](#dscp) block supports the following:
 &#x2022; [`drop_precedence`](#drop-precedence) - Optional String  Defaults to `DSCP_AF_FAKE`<br>Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`<br>DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer
 
 &#x2022; [`dscp_class`](#dscp-class) - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
-
-<a id="policer"></a>
 
 #### Policer
 
@@ -112,8 +108,6 @@ A [`policer`](#policer) block supports the following:
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

@@ -88,8 +88,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="ct-groups"></a>
-
 #### Ct Groups
 
 A [`ct_groups`](#ct-groups) block supports the following:
@@ -98,8 +96,6 @@ A [`ct_groups`](#ct-groups) block supports the following:
 
 &#x2022; [`namespace_roles`](#namespace-roles) - Optional Block<br>Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant<br>See [Namespace Roles](#ct-groups-namespace-roles) below.
 
-<a id="ct-groups-namespace-roles"></a>
-
 #### Namespace Roles
 
 A [`namespace_roles`](#ct-groups-namespace-roles) block (within [`ct_groups`](#ct-groups)) supports the following:
@@ -107,8 +103,6 @@ A [`namespace_roles`](#ct-groups-namespace-roles) block (within [`ct_groups`](#c
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. All Namespaces with custom names will be created in the new Child Tenant. Input a '*' to apply to all application namespaces. The System, Shared, and Default namespaces will be created automatically
 
 &#x2022; [`role`](#role) - Optional String<br>Role. User role that users in the newly created group will inherit
-
-<a id="favicon"></a>
 
 #### Favicon
 
@@ -120,8 +114,6 @@ A [`favicon`](#favicon) block supports the following:
 
 &#x2022; [`content_type`](#content-type) - Optional String<br>Content Type. Content type of the file (MIME type)
 
-<a id="logo"></a>
-
 #### Logo
 
 A [`logo`](#logo) block supports the following:
@@ -132,8 +124,6 @@ A [`logo`](#logo) block supports the following:
 
 &#x2022; [`content_type`](#content-type) - Optional String<br>Content Type. Content type of the file (MIME type)
 
-<a id="plan"></a>
-
 #### Plan
 
 A [`plan`](#plan) block supports the following:
@@ -143,8 +133,6 @@ A [`plan`](#plan) block supports the following:
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

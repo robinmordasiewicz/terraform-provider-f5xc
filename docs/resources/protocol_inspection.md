@@ -82,8 +82,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="enable-disable-compliance-checks"></a>
-
 #### Enable Disable Compliance Checks
 
 An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block supports the following:
@@ -91,8 +89,6 @@ An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block
 &#x2022; [`disable_compliance_checks`](#disable-compliance-checks) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`enable_compliance_checks`](#enable-compliance-checks) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
-
-<a id="enable-disable-compliance-checks-enable-compliance-checks"></a>
 
 #### Enable Compliance Checks
 
@@ -104,8 +100,6 @@ An [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-complia
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="enable-disable-signatures"></a>
-
 #### Enable Disable Signatures
 
 An [`enable_disable_signatures`](#enable-disable-signatures) block supports the following:
@@ -113,8 +107,6 @@ An [`enable_disable_signatures`](#enable-disable-signatures) block supports the 
 &#x2022; [`disable_signature`](#disable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`enable_signature`](#enable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

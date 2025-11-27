@@ -102,8 +102,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="comments"></a>
-
 #### Comments
 
 A [`comments`](#comments) block supports the following:
@@ -122,8 +120,6 @@ A [`comments`](#comments) block supports the following:
 
 &#x2022; [`plain_text`](#plain-text) - Optional String<br>Comment. Comment body as plain text
 
-<a id="comments-attachments-info"></a>
-
 #### Attachments Info
 
 An [`attachments_info`](#comments-attachments-info) block (within [`comments`](#comments)) supports the following:
@@ -135,8 +131,6 @@ An [`attachments_info`](#comments-attachments-info) block (within [`comments`](#
 &#x2022; [`filename`](#filename) - Optional String<br>Filename. Filename of the attachment as provided by the caller
 
 &#x2022; [`tp_id`](#tp-id) - Optional String<br>3rd party ID. Optional ID as assigned by the 3rd party actually storing the data
-
-<a id="relates-to"></a>
 
 #### Relates To
 
@@ -151,8 +145,6 @@ A [`relates_to`](#relates-to) block supports the following:
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

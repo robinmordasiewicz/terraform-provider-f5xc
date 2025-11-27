@@ -89,15 +89,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="dh-group-set"></a>
-
 #### Dh Group Set
 
 A [`dh_group_set`](#dh-group-set) block supports the following:
 
 &#x2022; [`dh_groups`](#dh-groups) - Optional List  Defaults to `DH_GROUP_DEFAULT`<br>Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`<br>Diffie Hellman Groups. Choose the acceptable Diffie Hellman(DH) Group or Groups that you are willing to accept as part of this profile
-
-<a id="ike-keylifetime-hours"></a>
 
 #### Ike Keylifetime Hours
 
@@ -105,15 +101,11 @@ An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the followin
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
-<a id="ike-keylifetime-minutes"></a>
-
 #### Ike Keylifetime Minutes
 
 An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

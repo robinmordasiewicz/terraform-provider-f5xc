@@ -111,8 +111,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="protocol-icmp"></a>
-
 #### Protocol ICMP
 
 A [`protocol_icmp`](#protocol-icmp) block supports the following:
@@ -130,8 +128,6 @@ A [`protocol_icmp`](#protocol-icmp) block supports the following:
 &#x2022; [`time_exceeded`](#time-exceeded) - Optional Bool<br>Time-Exceeded. Time-Exceeded
 
 &#x2022; [`unreachable`](#unreachable) - Optional Bool<br>Unreachable. Unreachable
-
-<a id="protocol-icmp6"></a>
 
 #### Protocol Icmp6
 
@@ -159,8 +155,6 @@ A [`protocol_icmp6`](#protocol-icmp6) block supports the following:
 
 &#x2022; [`time_exceeded`](#time-exceeded) - Optional Bool<br>Time-Exceeded. Time-Exceeded
 
-<a id="protocol-tcp"></a>
-
 #### Protocol TCP
 
 A [`protocol_tcp`](#protocol-tcp) block supports the following:
@@ -175,8 +169,6 @@ A [`protocol_tcp`](#protocol-tcp) block supports the following:
 
 &#x2022; [`source_port_range`](#source-port-range) - Optional String<br>Port Range. Port Range
 
-<a id="protocol-udp"></a>
-
 #### Protocol UDP
 
 A [`protocol_udp`](#protocol-udp) block supports the following:
@@ -190,8 +182,6 @@ A [`protocol_udp`](#protocol-udp) block supports the following:
 &#x2022; [`source_port_all`](#source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`source_port_range`](#source-port-range) - Optional String<br>Port Range. Port Range
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

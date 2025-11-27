@@ -67,8 +67,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="ipv4-prefixes"></a>
-
 #### IPv4 Prefixes
 
 An [`ipv4_prefixes`](#ipv4-prefixes) block supports the following:
@@ -76,8 +74,6 @@ An [`ipv4_prefixes`](#ipv4-prefixes) block supports the following:
 &#x2022; [`description`](#description) - Optional String<br>Description
 
 &#x2022; [`ipv4_prefix`](#ipv4-prefix) - Optional String<br>IPv4 Prefix
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

@@ -121,11 +121,11 @@ resource "f5xc_service_policy_rule" "example" {
 
 &#x2022; [`request_constraints`](#request-constraints) - Optional Block<br>Request Constraints<br>See [Request Constraints](#request-constraints) below for details.
 
-&#x2022; [`segment_policy`](#segment-policy) - Optional Block<br>Configure Segments. Configure source and destination segment for policy<br>See [Segment Policy](#segment-policy) below for details.
+&#x2022; [`segment_policy`](#segment-policy) - Optional Block<br>Configure Segments. Configure source and destination segment for policy
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+&#x2022; [`timeouts`](#timeouts) - Optional Block
 
-&#x2022; [`waf_action`](#waf-action) - Optional Block<br>App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings<br>See [WAF Action](#waf-action) below for details.
+&#x2022; [`waf_action`](#waf-action) - Optional Block<br>App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings
 
 ### Attributes Reference
 
@@ -135,8 +135,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="api-group-matcher"></a>
-
 #### API Group Matcher
 
 An [`api_group_matcher`](#api-group-matcher) block supports the following:
@@ -144,8 +142,6 @@ An [`api_group_matcher`](#api-group-matcher) block supports the following:
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert String Matcher. Invert the match result
 
 &#x2022; [`match`](#match) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="arg-matchers"></a>
 
 #### Arg Matchers
 
@@ -161,8 +157,6 @@ An [`arg_matchers`](#arg-matchers) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body
 
-<a id="arg-matchers-item"></a>
-
 #### Item
 
 An [`item`](#arg-matchers-item) block (within [`arg_matchers`](#arg-matchers)) supports the following:
@@ -173,23 +167,17 @@ An [`item`](#arg-matchers-item) block (within [`arg_matchers`](#arg-matchers)) s
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-<a id="asn-list"></a>
-
 #### Asn List
 
 An [`asn_list`](#asn-list) block supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-<a id="asn-matcher"></a>
-
 #### Asn Matcher
 
 An [`asn_matcher`](#asn-matcher) block supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#asn-matcher-asn-sets) below.
-
-<a id="asn-matcher-asn-sets"></a>
 
 #### Asn Sets
 
@@ -205,8 +193,6 @@ An [`asn_sets`](#asn-matcher-asn-sets) block (within [`asn_matcher`](#asn-matche
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="body-matcher"></a>
-
 #### Body Matcher
 
 A [`body_matcher`](#body-matcher) block supports the following:
@@ -217,8 +203,6 @@ A [`body_matcher`](#body-matcher) block supports the following:
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-<a id="bot-action"></a>
-
 #### Bot Action
 
 A [`bot_action`](#bot-action) block supports the following:
@@ -226,8 +210,6 @@ A [`bot_action`](#bot-action) block supports the following:
 &#x2022; [`bot_skip_processing`](#bot-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`none`](#none) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="client-name-matcher"></a>
 
 #### Client Name Matcher
 
@@ -237,15 +219,11 @@ A [`client_name_matcher`](#client-name-matcher) block supports the following:
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="client-selector"></a>
-
 #### Client Selector
 
 A [`client_selector`](#client-selector) block supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
-
-<a id="cookie-matchers"></a>
 
 #### Cookie Matchers
 
@@ -261,8 +239,6 @@ A [`cookie_matchers`](#cookie-matchers) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Cookie Name. A case-sensitive cookie name
 
-<a id="cookie-matchers-item"></a>
-
 #### Item
 
 An [`item`](#cookie-matchers-item) block (within [`cookie_matchers`](#cookie-matchers)) supports the following:
@@ -273,8 +249,6 @@ An [`item`](#cookie-matchers-item) block (within [`cookie_matchers`](#cookie-mat
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-<a id="domain-matcher"></a>
-
 #### Domain Matcher
 
 A [`domain_matcher`](#domain-matcher) block supports the following:
@@ -282,8 +256,6 @@ A [`domain_matcher`](#domain-matcher) block supports the following:
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="headers"></a>
 
 #### Headers
 
@@ -299,8 +271,6 @@ A [`headers`](#headers) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Header Name. A case-insensitive HTTP header name
 
-<a id="headers-item"></a>
-
 #### Item
 
 An [`item`](#headers-item) block (within [`headers`](#headers)) supports the following:
@@ -311,8 +281,6 @@ An [`item`](#headers-item) block (within [`headers`](#headers)) supports the fol
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-<a id="http-method"></a>
-
 #### HTTP Method
 
 A [`http_method`](#http-method) block supports the following:
@@ -321,8 +289,6 @@ A [`http_method`](#http-method) block supports the following:
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Method List. List of methods values to match against
 
-<a id="ip-matcher"></a>
-
 #### IP Matcher
 
 An [`ip_matcher`](#ip-matcher) block supports the following:
@@ -330,8 +296,6 @@ An [`ip_matcher`](#ip-matcher) block supports the following:
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
 &#x2022; [`prefix_sets`](#prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#ip-matcher-prefix-sets) below.
-
-<a id="ip-matcher-prefix-sets"></a>
 
 #### Prefix Sets
 
@@ -347,8 +311,6 @@ A [`prefix_sets`](#ip-matcher-prefix-sets) block (within [`ip_matcher`](#ip-matc
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="ip-prefix-list"></a>
-
 #### IP Prefix List
 
 An [`ip_prefix_list`](#ip-prefix-list) block supports the following:
@@ -357,23 +319,17 @@ An [`ip_prefix_list`](#ip-prefix-list) block supports the following:
 
 &#x2022; [`ip_prefixes`](#ip-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
 
-<a id="ip-threat-category-list"></a>
-
 #### IP Threat Category List
 
 An [`ip_threat_category_list`](#ip-threat-category-list) block supports the following:
 
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
-<a id="ja4-tls-fingerprint"></a>
-
 #### Ja4 TLS Fingerprint
 
 A [`ja4_tls_fingerprint`](#ja4-tls-fingerprint) block supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
-
-<a id="jwt-claims"></a>
 
 #### JWT Claims
 
@@ -389,8 +345,6 @@ A [`jwt_claims`](#jwt-claims) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>JWT Claim Name. JWT claim name
 
-<a id="jwt-claims-item"></a>
-
 #### Item
 
 An [`item`](#jwt-claims-item) block (within [`jwt_claims`](#jwt-claims)) supports the following:
@@ -401,15 +355,11 @@ An [`item`](#jwt-claims-item) block (within [`jwt_claims`](#jwt-claims)) support
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-<a id="label-matcher"></a>
-
 #### Label Matcher
 
 A [`label_matcher`](#label-matcher) block supports the following:
 
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
-
-<a id="mum-action"></a>
 
 #### Mum Action
 
@@ -418,8 +368,6 @@ A [`mum_action`](#mum-action) block supports the following:
 &#x2022; [`default`](#default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`skip_processing`](#skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="path"></a>
 
 #### Path
 
@@ -437,8 +385,6 @@ A [`path`](#path) block supports the following:
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-<a id="port-matcher"></a>
-
 #### Port Matcher
 
 A [`port_matcher`](#port-matcher) block supports the following:
@@ -446,8 +392,6 @@ A [`port_matcher`](#port-matcher) block supports the following:
 &#x2022; [`invert_matcher`](#invert-matcher) - Optional Bool<br>Invert Port Matcher. Invert the match result
 
 &#x2022; [`ports`](#ports) - Optional List<br>Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
-
-<a id="query-params"></a>
 
 #### Query Params
 
@@ -463,8 +407,6 @@ A [`query_params`](#query-params) block supports the following:
 
 &#x2022; [`key`](#key) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
 
-<a id="query-params-item"></a>
-
 #### Item
 
 An [`item`](#query-params-item) block (within [`query_params`](#query-params)) supports the following:
@@ -474,8 +416,6 @@ An [`item`](#query-params-item) block (within [`query_params`](#query-params)) s
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
-
-<a id="request-constraints"></a>
 
 #### Request Constraints
 
@@ -533,8 +473,6 @@ A [`request_constraints`](#request-constraints) block supports the following:
 
 &#x2022; [`max_url_size_none`](#max-url-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="segment-policy"></a>
-
 #### Segment Policy
 
 A [`segment_policy`](#segment-policy) block supports the following:
@@ -549,15 +487,11 @@ A [`segment_policy`](#segment-policy) block supports the following:
 
 &#x2022; [`src_segments`](#src-segments) - Optional Block<br>Segment List. List of references to Segments<br>See [Src Segments](#segment-policy-src-segments) below.
 
-<a id="segment-policy-dst-segments"></a>
-
 #### Dst Segments
 
 A [`dst_segments`](#segment-policy-dst-segments) block (within [`segment_policy`](#segment-policy)) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#segment-policy-dst-segments-segments) below.
-
-<a id="segment-policy-dst-segments-segments"></a>
 
 #### Segments
 
@@ -569,15 +503,11 @@ A [`segments`](#segment-policy-dst-segments-segments) block (within [`segment_po
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="segment-policy-src-segments"></a>
-
 #### Src Segments
 
 A [`src_segments`](#segment-policy-src-segments) block (within [`segment_policy`](#segment-policy)) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#segment-policy-src-segments-segments) below.
-
-<a id="segment-policy-src-segments-segments"></a>
 
 #### Segments
 
@@ -588,8 +518,6 @@ A [`segments`](#segment-policy-src-segments-segments) block (within [`segment_po
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 
@@ -603,8 +531,6 @@ A [`timeouts`](#timeouts) block supports the following:
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-<a id="tls-fingerprint-matcher"></a>
-
 #### TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#tls-fingerprint-matcher) block supports the following:
@@ -615,8 +541,6 @@ A [`tls_fingerprint_matcher`](#tls-fingerprint-matcher) block supports the follo
 
 &#x2022; [`excluded_values`](#excluded-values) - Optional List<br>Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
 
-<a id="waf-action"></a>
-
 #### WAF Action
 
 A [`waf_action`](#waf-action) block supports the following:
@@ -626,8 +550,6 @@ A [`waf_action`](#waf-action) block supports the following:
 &#x2022; [`none`](#none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`waf_skip_processing`](#waf-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="waf-action-app-firewall-detection-control"></a>
 
 #### App Firewall Detection Control
 
@@ -641,8 +563,6 @@ An [`app_firewall_detection_control`](#waf-action-app-firewall-detection-control
 
 &#x2022; [`exclude_violation_contexts`](#exclude-violation-contexts) - Optional Block<br>Violations. Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#waf-action-app-firewall-detection-control-exclude-violation-contexts) below.
 
-<a id="waf-action-app-firewall-detection-control-exclude-attack-type-contexts"></a>
-
 #### Exclude Attack Type Contexts
 
 An [`exclude_attack_type_contexts`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
@@ -653,15 +573,11 @@ An [`exclude_attack_type_contexts`](#waf-action-app-firewall-detection-control-e
 
 &#x2022; [`exclude_attack_type`](#exclude-attack-type) - Optional String  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK
 
-<a id="waf-action-app-firewall-detection-control-exclude-bot-name-contexts"></a>
-
 #### Exclude Bot Name Contexts
 
 An [`exclude_bot_name_contexts`](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
 &#x2022; [`bot_name`](#bot-name) - Optional String<br>Bot Name
-
-<a id="waf-action-app-firewall-detection-control-exclude-signature-contexts"></a>
 
 #### Exclude Signature Contexts
 
@@ -672,8 +588,6 @@ An [`exclude_signature_contexts`](#waf-action-app-firewall-detection-control-exc
 &#x2022; [`context_name`](#context-name) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
 
 &#x2022; [`signature_id`](#signature-id) - Optional Number<br>SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
-
-<a id="waf-action-app-firewall-detection-control-exclude-violation-contexts"></a>
 
 #### Exclude Violation Contexts
 

@@ -78,8 +78,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="rules"></a>
-
 #### Rules
 
 A [`rules`](#rules) block supports the following:
@@ -87,8 +85,6 @@ A [`rules`](#rules) block supports the following:
 &#x2022; [`action`](#action) - Optional Block<br>BGP Route Action. Action to be enforced if the BGP route matches the rule<br>See [Action](#rules-action) below.
 
 &#x2022; [`match`](#match) - Optional Block<br>BGP Route Match. Predicates which have to match information in route for action to be applied<br>See [Match](#rules-match) below.
-
-<a id="rules-action"></a>
 
 #### Action
 
@@ -108,15 +104,11 @@ An [`action`](#rules-action) block (within [`rules`](#rules)) supports the follo
 
 &#x2022; [`metric`](#metric) - Optional Number<br>MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS
 
-<a id="rules-action-community"></a>
-
 #### Community
 
 A [`community`](#rules-action-community) block (within [`rules.action`](#rules-action)) supports the following:
 
 &#x2022; [`community`](#community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
-
-<a id="rules-match"></a>
 
 #### Match
 
@@ -128,23 +120,17 @@ A [`match`](#rules-match) block (within [`rules`](#rules)) supports the followin
 
 &#x2022; [`ip_prefixes`](#ip-prefixes) - Optional Block<br>BGP Prefix List. List of IP prefix and prefix length range match condition<br>See [IP Prefixes](#rules-match-ip-prefixes) below.
 
-<a id="rules-match-community"></a>
-
 #### Community
 
 A [`community`](#rules-match-community) block (within [`rules.match`](#rules-match)) supports the following:
 
 &#x2022; [`community`](#community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
 
-<a id="rules-match-ip-prefixes"></a>
-
 #### IP Prefixes
 
 An [`ip_prefixes`](#rules-match-ip-prefixes) block (within [`rules.match`](#rules-match)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional Block<br>Prefix list. List of IP prefix<br>See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
-
-<a id="rules-match-ip-prefixes-prefixes"></a>
 
 #### Prefixes
 
@@ -157,8 +143,6 @@ A [`prefixes`](#rules-match-ip-prefixes-prefixes) block (within [`rules.match.ip
 &#x2022; [`ip_prefixes`](#ip-prefixes) - Optional String<br>IP Prefix. IP prefix to match on BGP route
 
 &#x2022; [`longer_than`](#longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

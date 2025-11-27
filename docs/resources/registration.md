@@ -82,8 +82,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="infra"></a>
-
 #### Infra
 
 An [`infra`](#infra) block supports the following:
@@ -113,8 +111,6 @@ An [`infra`](#infra) block supports the following:
 &#x2022; [`timestamp`](#timestamp) - Optional String<br>Current (machine) time. It's used to verify machine have acceptable time difference from server
 
 &#x2022; [`zone`](#zone) - Optional String<br>Region. Instance zone (or region), depends on provider
-
-<a id="infra-hw-info"></a>
 
 #### Hw Info
 
@@ -146,8 +142,6 @@ A [`hw_info`](#infra-hw-info) block (within [`infra`](#infra)) supports the foll
 
 &#x2022; [`usb`](#usb) - Optional Block<br>USB devices. List of USB devices in server<br>See [Usb](#infra-hw-info-usb) below.
 
-<a id="infra-hw-info-bios"></a>
-
 #### Bios
 
 A [`bios`](#infra-hw-info-bios) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
@@ -157,8 +151,6 @@ A [`bios`](#infra-hw-info-bios) block (within [`infra.hw_info`](#infra-hw-info))
 &#x2022; [`vendor`](#vendor) - Optional String<br>Vendor. information from /sys/class/dmi/id/bios_vendor
 
 &#x2022; [`version`](#version) - Optional String<br>Version. information from /sys/class/dmi/id/bios_version
-
-<a id="infra-hw-info-board"></a>
 
 #### Board
 
@@ -174,8 +166,6 @@ A [`board`](#infra-hw-info-board) block (within [`infra.hw_info`](#infra-hw-info
 
 &#x2022; [`version`](#version) - Optional String<br>Version. information from /sys/class/dmi/id/board_version
 
-<a id="infra-hw-info-chassis"></a>
-
 #### Chassis
 
 A [`chassis`](#infra-hw-info-chassis) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
@@ -189,8 +179,6 @@ A [`chassis`](#infra-hw-info-chassis) block (within [`infra.hw_info`](#infra-hw-
 &#x2022; [`vendor`](#vendor) - Optional String<br>Vendor. information from /sys/class/dmi/id/chassis_vendor
 
 &#x2022; [`version`](#version) - Optional String<br>Version. information from /sys/class/dmi/id/chassis_version
-
-<a id="infra-hw-info-cpu"></a>
 
 #### CPU
 
@@ -210,8 +198,6 @@ A [`cpu`](#infra-hw-info-cpu) block (within [`infra.hw_info`](#infra-hw-info)) s
 
 &#x2022; [`vendor`](#vendor) - Optional String<br>Vendor. CPU vendor
 
-<a id="infra-hw-info-gpu"></a>
-
 #### GPU
 
 A [`gpu`](#infra-hw-info-gpu) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
@@ -221,8 +207,6 @@ A [`gpu`](#infra-hw-info-gpu) block (within [`infra.hw_info`](#infra-hw-info)) s
 &#x2022; [`driver_version`](#driver-version) - Optional String<br>Driver Version. GPU Driver Version
 
 &#x2022; [`gpu_device`](#gpu-device) - Optional Block<br>GPU devices. List of GPU devices in server<br>See [GPU Device](#infra-hw-info-gpu-gpu-device) below.
-
-<a id="infra-hw-info-gpu-gpu-device"></a>
 
 #### GPU Device
 
@@ -234,8 +218,6 @@ A [`gpu_device`](#infra-hw-info-gpu-gpu-device) block (within [`infra.hw_info.gp
 
 &#x2022; [`product_name`](#product-name) - Optional String<br>Product Name. GPU Product Name
 
-<a id="infra-hw-info-kernel"></a>
-
 #### Kernel
 
 A [`kernel`](#infra-hw-info-kernel) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
@@ -246,8 +228,6 @@ A [`kernel`](#infra-hw-info-kernel) block (within [`infra.hw_info`](#infra-hw-in
 
 &#x2022; [`version`](#version) - Optional String<br>Version. kernel version
 
-<a id="infra-hw-info-memory"></a>
-
 #### Memory
 
 A [`memory`](#infra-hw-info-memory) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
@@ -257,8 +237,6 @@ A [`memory`](#infra-hw-info-memory) block (within [`infra.hw_info`](#infra-hw-in
 &#x2022; [`speed`](#speed) - Optional Number<br>Speed. RAM data rate in MT/s
 
 &#x2022; [`type`](#type) - Optional String<br>Type. type of memory, eg. DDR4
-
-<a id="infra-hw-info-network"></a>
 
 #### Network
 
@@ -280,8 +258,6 @@ A [`network`](#infra-hw-info-network) block (within [`infra.hw_info`](#infra-hw-
 
 &#x2022; [`speed`](#speed) - Optional Number<br>Speed. device max supported speed in Mbps
 
-<a id="infra-hw-info-os"></a>
-
 #### OS
 
 An [`os`](#infra-hw-info-os) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
@@ -296,8 +272,6 @@ An [`os`](#infra-hw-info-os) block (within [`infra.hw_info`](#infra-hw-info)) su
 
 &#x2022; [`version`](#version) - Optional String<br>Version. Version of OS
 
-<a id="infra-hw-info-product"></a>
-
 #### Product
 
 A [`product`](#infra-hw-info-product) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
@@ -309,8 +283,6 @@ A [`product`](#infra-hw-info-product) block (within [`infra.hw_info`](#infra-hw-
 &#x2022; [`vendor`](#vendor) - Optional String<br>Vendor. vendor name, eg. for AWS Amazon EC2. Info taken from /sys/class/dmi/id/product_vendor
 
 &#x2022; [`version`](#version) - Optional String<br>Version. version name. Info taken from /sys/class/dmi/id/product_version
-
-<a id="infra-hw-info-storage"></a>
 
 #### Storage
 
@@ -327,8 +299,6 @@ A [`storage`](#infra-hw-info-storage) block (within [`infra.hw_info`](#infra-hw-
 &#x2022; [`size_gb`](#size-gb) - Optional Number<br>Size(GB). device size in GB
 
 &#x2022; [`vendor`](#vendor) - Optional String<br>Vendor. vendor of device
-
-<a id="infra-hw-info-usb"></a>
 
 #### Usb
 
@@ -372,8 +342,6 @@ An [`usb`](#infra-hw-info-usb) block (within [`infra.hw_info`](#infra-hw-info)) 
 
 &#x2022; [`vendor_name`](#vendor-name) - Optional String<br>Vendor name. Vendor ID translated to name (if available)
 
-<a id="infra-internet-proxy"></a>
-
 #### Internet Proxy
 
 An [`internet_proxy`](#infra-internet-proxy) block (within [`infra`](#infra)) supports the following:
@@ -386,15 +354,11 @@ An [`internet_proxy`](#infra-internet-proxy) block (within [`infra`](#infra)) su
 
 &#x2022; [`proxy_cacert_url`](#proxy-cacert-url) - Optional String<br>Proxy CA certificate URL. Allow optional different trust-store for proxy in HTTP CONNECT step by picking proxy CA certificate value
 
-<a id="infra-sw-info"></a>
-
 #### Sw Info
 
 A [`sw_info`](#infra-sw-info) block (within [`infra`](#infra)) supports the following:
 
 &#x2022; [`sw_version`](#sw-version) - Optional String<br>SW Version. SW Version in the site
-
-<a id="passport"></a>
 
 #### Passport
 
@@ -419,8 +383,6 @@ A [`passport`](#passport) block supports the following:
 &#x2022; [`private_network_name`](#private-network-name) - Optional String<br>Private Network Name. Private Network name for private access connectivity to F5XC ADN. It is used for PrivateLink, CloudLink and L3VPN
 
 &#x2022; [`volterra_software_version`](#volterra-software-version) - Optional String<br>F5XC Software Version. F5XC Software Version is optional parameter, which allows to specify target SW version for particular site e.g. crt-20210329-1002
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

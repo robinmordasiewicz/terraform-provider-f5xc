@@ -84,8 +84,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="http-health-check"></a>
-
 #### HTTP Health Check
 
 A [`http_health_check`](#http-health-check) block supports the following:
@@ -97,8 +95,6 @@ A [`http_health_check`](#http-health-check) block supports the following:
 &#x2022; [`receive`](#receive) - Optional String<br>Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
 &#x2022; [`send`](#send) - Optional String<br>Send String. HTTP payload to send to the target
-
-<a id="https-health-check"></a>
 
 #### HTTPS Health Check
 
@@ -112,8 +108,6 @@ A [`https_health_check`](#https-health-check) block supports the following:
 
 &#x2022; [`send`](#send) - Optional String<br>Send String. HTTP payload to send to the target
 
-<a id="tcp-health-check"></a>
-
 #### TCP Health Check
 
 A [`tcp_health_check`](#tcp-health-check) block supports the following:
@@ -125,8 +119,6 @@ A [`tcp_health_check`](#tcp-health-check) block supports the following:
 &#x2022; [`receive`](#receive) - Optional String<br>Receive String. Regular expression used to match against the response to the monitor's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
 &#x2022; [`send`](#send) - Optional String<br>Send String. Send this string to target (default empty. When send and receive are both empty, monitor just tests 3WHS)
-
-<a id="tcp-hex-health-check"></a>
 
 #### TCP Hex Health Check
 
@@ -140,8 +132,6 @@ A [`tcp_hex_health_check`](#tcp-hex-health-check) block supports the following:
 
 &#x2022; [`send`](#send) - Optional String<br>Send Payload. Hex encoded raw bytes sent in the request. Empty payloads imply a connect-only health check
 
-<a id="timeouts"></a>
-
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
@@ -153,8 +143,6 @@ A [`timeouts`](#timeouts) block supports the following:
 &#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
 &#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
-
-<a id="udp-health-check"></a>
 
 #### UDP Health Check
 

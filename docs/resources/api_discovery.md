@@ -70,8 +70,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="custom-auth-types"></a>
-
 #### Custom Auth Types
 
 A [`custom_auth_types`](#custom-auth-types) block supports the following:
@@ -79,8 +77,6 @@ A [`custom_auth_types`](#custom-auth-types) block supports the following:
 &#x2022; [`parameter_name`](#parameter-name) - Optional String<br>Parameter Name. The authentication parameter name
 
 &#x2022; [`parameter_type`](#parameter-type) - Optional String  Defaults to `QUERY_PARAMETER`<br>Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`<br>Authentication Parameter Type. Enumeration for authentication parameter types
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

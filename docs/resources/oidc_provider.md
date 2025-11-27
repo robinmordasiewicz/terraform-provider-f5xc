@@ -84,8 +84,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="azure-oidc-spec-type"></a>
-
 #### Azure Oidc Spec Type
 
 An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
@@ -112,8 +110,6 @@ An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
 
 &#x2022; [`user_info_url`](#user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
 
-<a id="google-oidc-spec-type"></a>
-
 #### Google Oidc Spec Type
 
 A [`google_oidc_spec_type`](#google-oidc-spec-type) block supports the following:
@@ -123,8 +119,6 @@ A [`google_oidc_spec_type`](#google-oidc-spec-type) block supports the following
 &#x2022; [`client_secret`](#client-secret) - Optional String<br>Client Secret. Secret of the OIDC application registered with google provider
 
 &#x2022; [`hosted_domain`](#hosted-domain) - Optional String<br>Hosted Domain. set hosted domain to restrict user input on login form to use email address from this email domain. for example, setting value company.com will enforce user email input to have only username@company.com leave empty if no restriction is required for email address. ie for example allow user@company1.com and user@company2.com
-
-<a id="oidc-v10-spec-type"></a>
 
 #### Oidc V10 Spec Type
 
@@ -166,8 +160,6 @@ An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
 &#x2022; [`validate_signatures`](#validate-signatures) - Optional Bool<br>Validate Signatures. Enable/disable signature validation of external IDP signatures
 
-<a id="okta-oidc-spec-type"></a>
-
 #### Okta Oidc Spec Type
 
 An [`okta_oidc_spec_type`](#okta-oidc-spec-type) block supports the following:
@@ -193,8 +185,6 @@ An [`okta_oidc_spec_type`](#okta-oidc-spec-type) block supports the following:
 &#x2022; [`token_url`](#token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 
 &#x2022; [`user_info_url`](#user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

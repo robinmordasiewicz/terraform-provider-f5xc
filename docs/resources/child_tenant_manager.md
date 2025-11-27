@@ -80,8 +80,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="group-assignments"></a>
-
 #### Group Assignments
 
 A [`group_assignments`](#group-assignments) block supports the following:
@@ -89,8 +87,6 @@ A [`group_assignments`](#group-assignments) block supports the following:
 &#x2022; [`child_tenant_groups`](#child-tenant-groups) - Optional List<br>Child Tenant User Groups. List of group names in child tenant. Note - To establish access, child tenant group names must be a subset of child tenant groups configured in tenant profile. Once it's setup, when user from msp tenant access child tenant, underlying roles from child tenant will be applied to user
 
 &#x2022; [`group`](#group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Group](#group-assignments-group) below.
-
-<a id="group-assignments-group"></a>
 
 #### Group
 
@@ -102,8 +98,6 @@ A [`group`](#group-assignments-group) block (within [`group_assignments`](#group
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="tenant-owner-group"></a>
-
 #### Tenant Owner Group
 
 A [`tenant_owner_group`](#tenant-owner-group) block supports the following:
@@ -113,8 +107,6 @@ A [`tenant_owner_group`](#tenant-owner-group) block supports the following:
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

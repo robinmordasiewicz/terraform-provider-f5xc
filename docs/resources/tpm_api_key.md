@@ -72,8 +72,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="category-ref"></a>
-
 #### Category Ref
 
 A [`category_ref`](#category-ref) block supports the following:
@@ -87,8 +85,6 @@ A [`category_ref`](#category-ref) block supports the following:
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

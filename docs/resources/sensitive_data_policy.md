@@ -78,15 +78,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="custom-data-types"></a>
-
 #### Custom Data Types
 
 A [`custom_data_types`](#custom-data-types) block supports the following:
 
 &#x2022; [`custom_data_type_ref`](#custom-data-type-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
-
-<a id="custom-data-types-custom-data-type-ref"></a>
 
 #### Custom Data Type Ref
 
@@ -97,8 +93,6 @@ A [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) block (withi
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

@@ -76,8 +76,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="groups"></a>
-
 #### Groups
 
 A [`groups`](#groups) block supports the following:
@@ -85,8 +83,6 @@ A [`groups`](#groups) block supports the following:
 &#x2022; [`group`](#group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Group](#groups-group) below.
 
 &#x2022; [`managed_tenant_groups`](#managed-tenant-groups) - Optional List<br>Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user
-
-<a id="groups-group"></a>
 
 #### Group
 
@@ -97,8 +93,6 @@ A [`group`](#groups-group) block (within [`groups`](#groups)) supports the follo
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

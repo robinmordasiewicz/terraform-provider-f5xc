@@ -82,23 +82,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="basic-configuration"></a>
-
 #### Basic Configuration
 
 A [`basic_configuration`](#basic-configuration) block supports the following:
 
 &#x2022; [`display_name`](#display-name) - Optional String<br>Display Name. Tenant display name in the login screen
 
-<a id="brute-force-detection-settings"></a>
-
 #### Brute Force Detection Settings
 
 A [`brute_force_detection_settings`](#brute-force-detection-settings) block supports the following:
 
 &#x2022; [`max_login_failures`](#max-login-failures) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
-
-<a id="password-policy"></a>
 
 #### Password Policy
 
@@ -119,8 +113,6 @@ A [`password_policy`](#password-policy) block supports the following:
 &#x2022; [`special_characters`](#special-characters) - Optional Number<br>Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string
 
 &#x2022; [`uppercase_characters`](#uppercase-characters) - Optional Number<br>Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

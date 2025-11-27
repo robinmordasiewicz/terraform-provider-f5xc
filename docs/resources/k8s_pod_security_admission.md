@@ -78,8 +78,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="pod-security-admission-specs"></a>
-
 #### Pod Security Admission Specs
 
 A [`pod_security_admission_specs`](#pod-security-admission-specs) block supports the following:
@@ -95,8 +93,6 @@ A [`pod_security_admission_specs`](#pod-security-admission-specs) block supports
 &#x2022; [`restricted`](#restricted) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`warn`](#warn) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

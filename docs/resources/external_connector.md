@@ -80,8 +80,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="ce-site-reference"></a>
-
 #### CE Site Reference
 
 A [`ce_site_reference`](#ce-site-reference) block supports the following:
@@ -92,8 +90,6 @@ A [`ce_site_reference`](#ce-site-reference) block supports the following:
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="ipsec"></a>
-
 #### Ipsec
 
 An [`ipsec`](#ipsec) block supports the following:
@@ -101,8 +97,6 @@ An [`ipsec`](#ipsec) block supports the following:
 &#x2022; [`ike_parameters`](#ike-parameters) - Optional Block<br>IKE Parameters. IKE configuration parameters required for IPSec Connection type<br>See [Ike Parameters](#ipsec-ike-parameters) below.
 
 &#x2022; [`ipsec_tunnel_parameters`](#ipsec-tunnel-parameters) - Optional Block<br>Configure IPSec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment<br>See [Ipsec Tunnel Parameters](#ipsec-ipsec-tunnel-parameters) below.
-
-<a id="ipsec-ike-parameters"></a>
 
 #### Ike Parameters
 
@@ -128,15 +122,11 @@ An [`ike_parameters`](#ipsec-ike-parameters) block (within [`ipsec`](#ipsec)) su
 
 &#x2022; [`use_default_remote_ike_id`](#use-default-remote-ike-id) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="ipsec-ike-parameters-dpd-keep-alive-timer"></a>
-
 #### Dpd Keep Alive Timer
 
 A [`dpd_keep_alive_timer`](#ipsec-ike-parameters-dpd-keep-alive-timer) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
 &#x2022; [`timeout`](#timeout) - Optional Number<br>Keepalive Timer
-
-<a id="ipsec-ike-parameters-ike-phase1-profile"></a>
 
 #### Ike Phase1 Profile
 
@@ -148,8 +138,6 @@ An [`ike_phase1_profile`](#ipsec-ike-parameters-ike-phase1-profile) block (withi
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="ipsec-ike-parameters-ike-phase2-profile"></a>
-
 #### Ike Phase2 Profile
 
 An [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
@@ -160,8 +148,6 @@ An [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) block (withi
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="ipsec-ike-parameters-rm-ip-address"></a>
-
 #### Rm IP Address
 
 A [`rm_ip_address`](#ipsec-ike-parameters-rm-ip-address) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
@@ -170,23 +156,17 @@ A [`rm_ip_address`](#ipsec-ike-parameters-rm-ip-address) block (within [`ipsec.i
 
 &#x2022; [`ipv6`](#ipv6) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipsec-ike-parameters-rm-ip-address-ipv6) below.
 
-<a id="ipsec-ike-parameters-rm-ip-address-ipv4"></a>
-
 #### IPv4
 
 An [`ipv4`](#ipsec-ike-parameters-rm-ip-address-ipv4) block (within [`ipsec.ike_parameters.rm_ip_address`](#ipsec-ike-parameters-rm-ip-address)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
-<a id="ipsec-ike-parameters-rm-ip-address-ipv6"></a>
-
 #### IPv6
 
 An [`ipv6`](#ipsec-ike-parameters-rm-ip-address-ipv6) block (within [`ipsec.ike_parameters.rm_ip_address`](#ipsec-ike-parameters-rm-ip-address)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
-
-<a id="ipsec-ipsec-tunnel-parameters"></a>
 
 #### Ipsec Tunnel Parameters
 
@@ -206,23 +186,17 @@ An [`ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters) block (within [`i
 
 &#x2022; [`tunnel_mtu`](#tunnel-mtu) - Optional Number<br>MTU. The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented
 
-<a id="ipsec-ipsec-tunnel-parameters-peer-ip-address"></a>
-
 #### Peer IP Address
 
 A [`peer_ip_address`](#ipsec-ipsec-tunnel-parameters-peer-ip-address) block (within [`ipsec.ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
-<a id="ipsec-ipsec-tunnel-parameters-segment"></a>
-
 #### Segment
 
 A [`segment`](#ipsec-ipsec-tunnel-parameters-segment) block (within [`ipsec.ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#ipsec-ipsec-tunnel-parameters-segment-refs) below.
-
-<a id="ipsec-ipsec-tunnel-parameters-segment-refs"></a>
 
 #### Refs
 
@@ -238,8 +212,6 @@ A [`refs`](#ipsec-ipsec-tunnel-parameters-segment-refs) block (within [`ipsec.ip
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-<a id="ipsec-ipsec-tunnel-parameters-tunnel-eps"></a>
-
 #### Tunnel Eps
 
 A [`tunnel_eps`](#ipsec-ipsec-tunnel-parameters-tunnel-eps) block (within [`ipsec.ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters)) supports the following:
@@ -251,8 +223,6 @@ A [`tunnel_eps`](#ipsec-ipsec-tunnel-parameters-tunnel-eps) block (within [`ipse
 &#x2022; [`node`](#node) - Optional String<br>Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection
 
 &#x2022; [`remote_tunnel_ip`](#remote-tunnel-ip) - Optional String<br>Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. the IP address of the tunnel on the remote gateway and a subnet prefix length
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

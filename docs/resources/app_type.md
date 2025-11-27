@@ -80,8 +80,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="business-logic-markup-setting"></a>
-
 #### Business Logic Markup Setting
 
 A [`business_logic_markup_setting`](#business-logic-markup-setting) block supports the following:
@@ -92,23 +90,17 @@ A [`business_logic_markup_setting`](#business-logic-markup-setting) block suppor
 
 &#x2022; [`enable`](#enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="business-logic-markup-setting-discovered-api-settings"></a>
-
 #### Discovered API Settings
 
 A [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-settings) block (within [`business_logic_markup_setting`](#business-logic-markup-setting)) supports the following:
 
 &#x2022; [`purge_duration_for_inactive_discovered_apis`](#purge-duration-for-inactive-discovered-apis) - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
 
-<a id="features"></a>
-
 #### Features
 
 A [`features`](#features) block supports the following:
 
 &#x2022; [`type`](#type) - Optional String  Defaults to `BUSINESS_LOGIC_MARKUP`<br>Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`<br>AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. the probability density function (PDF) charts generation for API endpoints Enable user behavior analysis
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

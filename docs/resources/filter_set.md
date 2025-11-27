@@ -80,8 +80,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="filter-fields"></a>
-
 #### Filter Fields
 
 A [`filter_fields`](#filter-fields) block supports the following:
@@ -94,8 +92,6 @@ A [`filter_fields`](#filter-fields) block supports the following:
 
 &#x2022; [`string_field`](#string-field) - Optional Block<br>Filter String Field<br>See [String Field](#filter-fields-string-field) below.
 
-<a id="filter-fields-date-field"></a>
-
 #### Date Field
 
 A [`date_field`](#filter-fields-date-field) block (within [`filter_fields`](#filter-fields)) supports the following:
@@ -103,8 +99,6 @@ A [`date_field`](#filter-fields-date-field) block (within [`filter_fields`](#fil
 &#x2022; [`absolute`](#absolute) - Optional Block<br>Date Range. Date range is for selecting a date range<br>See [Absolute](#filter-fields-date-field-absolute) below.
 
 &#x2022; [`relative`](#relative) - Optional String<br>Relative. relative time duration
-
-<a id="filter-fields-date-field-absolute"></a>
 
 #### Absolute
 
@@ -114,23 +108,17 @@ An [`absolute`](#filter-fields-date-field-absolute) block (within [`filter_field
 
 &#x2022; [`start_date`](#start-date) - Optional String<br>Start Date. Contains start date
 
-<a id="filter-fields-filter-expression-field"></a>
-
 #### Filter Expression Field
 
 A [`filter_expression_field`](#filter-fields-filter-expression-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
 &#x2022; [`expression`](#expression) - Optional String<br>Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
 
-<a id="filter-fields-string-field"></a>
-
 #### String Field
 
 A [`string_field`](#filter-fields-string-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
 &#x2022; [`field_values`](#field-values) - Optional List<br>String Value(s)
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

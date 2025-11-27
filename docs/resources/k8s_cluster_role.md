@@ -81,23 +81,17 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="k8s-cluster-role-selector"></a>
-
 #### K8s Cluster Role Selector
 
 A [`k8s_cluster_role_selector`](#k8s-cluster-role-selector) block supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
-<a id="policy-rule-list"></a>
-
 #### Policy Rule List
 
 A [`policy_rule_list`](#policy-rule-list) block supports the following:
 
 &#x2022; [`policy_rule`](#policy-rule) - Optional Block<br>Policy Rules. List of rules for role permissions<br>See [Policy Rule](#policy-rule-list-policy-rule) below.
-
-<a id="policy-rule-list-policy-rule"></a>
 
 #### Policy Rule
 
@@ -107,8 +101,6 @@ A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_lis
 
 &#x2022; [`resource_list`](#resource-list) - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
 
-<a id="policy-rule-list-policy-rule-non-resource-url-list"></a>
-
 #### Non Resource URL List
 
 A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
@@ -116,8 +108,6 @@ A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list)
 &#x2022; [`urls`](#urls) - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex
 
 &#x2022; [`verbs`](#verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations
-
-<a id="policy-rule-list-policy-rule-resource-list"></a>
 
 #### Resource List
 
@@ -130,8 +120,6 @@ A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [
 &#x2022; [`resource_types`](#resource-types) - Optional List<br>Resource Types. Allowed list of resource types within the API groups
 
 &#x2022; [`verbs`](#verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

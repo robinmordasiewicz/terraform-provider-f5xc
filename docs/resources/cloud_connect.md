@@ -82,8 +82,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="aws-tgw-site"></a>
-
 #### AWS Tgw Site
 
 An [`aws_tgw_site`](#aws-tgw-site) block supports the following:
@@ -93,8 +91,6 @@ An [`aws_tgw_site`](#aws-tgw-site) block supports the following:
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#aws-tgw-site-site) below.
 
 &#x2022; [`vpc_attachments`](#vpc-attachments) - Optional Block<br>VPC Attachments<br>See [Vpc Attachments](#aws-tgw-site-vpc-attachments) below.
-
-<a id="aws-tgw-site-cred"></a>
 
 #### Cred
 
@@ -106,8 +102,6 @@ A [`cred`](#aws-tgw-site-cred) block (within [`aws_tgw_site`](#aws-tgw-site)) su
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="aws-tgw-site-site"></a>
-
 #### Site
 
 A [`site`](#aws-tgw-site-site) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
@@ -118,15 +112,11 @@ A [`site`](#aws-tgw-site-site) block (within [`aws_tgw_site`](#aws-tgw-site)) su
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="aws-tgw-site-vpc-attachments"></a>
-
 #### Vpc Attachments
 
 A [`vpc_attachments`](#aws-tgw-site-vpc-attachments) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
 &#x2022; [`vpc_list`](#vpc-list) - Optional Block<br>VPC List<br>See [Vpc List](#aws-tgw-site-vpc-attachments-vpc-list) below.
-
-<a id="aws-tgw-site-vpc-attachments-vpc-list"></a>
 
 #### Vpc List
 
@@ -142,15 +132,11 @@ A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_s
 
 &#x2022; [`vpc_id`](#vpc-id) - Optional String<br>VPC ID. Enter the VPC ID of the VPC to be attached
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing"></a>
-
 #### Custom Routing
 
 A [`custom_routing`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
 
 &#x2022; [`route_tables`](#route-tables) - Optional Block<br>List of route tables. Route Tables<br>See [Route Tables](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables) below.
-
-<a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables"></a>
 
 #### Route Tables
 
@@ -160,8 +146,6 @@ A [`route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-t
 
 &#x2022; [`static_routes`](#static-routes) - Optional List<br>Static Routes. List of Static Routes
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route"></a>
-
 #### Default Route
 
 A [`default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
@@ -170,15 +154,11 @@ A [`default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route) block 
 
 &#x2022; [`selective_route_tables`](#selective-route-tables) - Optional Block<br>AWS Route Table. AWS Route Table<br>See [Selective Route Tables](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) below.
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables"></a>
-
 #### Selective Route Tables
 
 A [`selective_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) block (within [`aws_tgw_site.vpc_attachments.vpc_list.default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route)) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional List<br>Route table ID. Route table ID
-
-<a id="azure-vnet-site"></a>
 
 #### Azure Vnet Site
 
@@ -187,8 +167,6 @@ An [`azure_vnet_site`](#azure-vnet-site) block supports the following:
 &#x2022; [`site`](#site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#azure-vnet-site-site) below.
 
 &#x2022; [`vnet_attachments`](#vnet-attachments) - Optional Block<br>VNET Attachments<br>See [Vnet Attachments](#azure-vnet-site-vnet-attachments) below.
-
-<a id="azure-vnet-site-site"></a>
 
 #### Site
 
@@ -200,15 +178,11 @@ A [`site`](#azure-vnet-site-site) block (within [`azure_vnet_site`](#azure-vnet-
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-<a id="azure-vnet-site-vnet-attachments"></a>
-
 #### Vnet Attachments
 
 A [`vnet_attachments`](#azure-vnet-site-vnet-attachments) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
 
 &#x2022; [`vnet_list`](#vnet-list) - Optional Block<br>VNET List<br>See [Vnet List](#azure-vnet-site-vnet-attachments-vnet-list) below.
-
-<a id="azure-vnet-site-vnet-attachments-vnet-list"></a>
 
 #### Vnet List
 
@@ -226,15 +200,11 @@ A [`vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list) block (within [`azu
 
 &#x2022; [`vnet_id`](#vnet-id) - Optional String<br>VNET ID. Enter the vnet ID of the VNET to be attached in format /<resource-group-name>/<vnet-name>
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing"></a>
-
 #### Custom Routing
 
 A [`custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list)) supports the following:
 
 &#x2022; [`route_tables`](#route-tables) - Optional Block<br>List of route tables with static routes. Route Tables with static routes<br>See [Route Tables](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) below.
-
-<a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables"></a>
 
 #### Route Tables
 
@@ -244,8 +214,6 @@ A [`route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-ro
 
 &#x2022; [`static_routes`](#static-routes) - Optional List<br>Static Routes. List of Static Routes
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route"></a>
-
 #### Default Route
 
 A [`default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list)) supports the following:
@@ -254,15 +222,11 @@ A [`default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route) b
 
 &#x2022; [`selective_route_tables`](#selective-route-tables) - Optional Block<br>Azure Route Table. Azure Route Table<br>See [Selective Route Tables](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) below.
 
-<a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables"></a>
-
 #### Selective Route Tables
 
 A [`selective_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) block (within [`azure_vnet_site.vnet_attachments.vnet_list.default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route)) supports the following:
 
 &#x2022; [`route_table_id`](#route-table-id) - Optional List<br>Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>
-
-<a id="segment"></a>
 
 #### Segment
 
@@ -273,8 +237,6 @@ A [`segment`](#segment) block supports the following:
 &#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

@@ -78,8 +78,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="domains"></a>
-
 #### Domains
 
 A [`domains`](#domains) block supports the following:
@@ -87,8 +85,6 @@ A [`domains`](#domains) block supports the following:
 &#x2022; [`domain`](#domain) - Optional String<br>Domains to Crawl. Select the domain to execute API Crawling with given credentials
 
 &#x2022; [`simple_login`](#simple-login) - Optional Block<br>Simple Login<br>See [Simple Login](#domains-simple-login) below.
-
-<a id="domains-simple-login"></a>
 
 #### Simple Login
 
@@ -98,8 +94,6 @@ A [`simple_login`](#domains-simple-login) block (within [`domains`](#domains)) s
 
 &#x2022; [`user`](#user) - Optional String<br>User. Enter the username to assign credentials for the selected domain to crawl
 
-<a id="domains-simple-login-password"></a>
-
 #### Password
 
 A [`password`](#domains-simple-login-password) block (within [`domains.simple_login`](#domains-simple-login)) supports the following:
@@ -107,8 +101,6 @@ A [`password`](#domains-simple-login-password) block (within [`domains.simple_lo
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#domains-simple-login-password-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-simple-login-password-clear-secret-info) below.
-
-<a id="domains-simple-login-password-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -120,8 +112,6 @@ A [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="domains-simple-login-password-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
@@ -129,8 +119,6 @@ A [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) block 
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

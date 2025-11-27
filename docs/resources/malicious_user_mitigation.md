@@ -76,15 +76,11 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="mitigation-type"></a>
-
 #### Mitigation Type
 
 A [`mitigation_type`](#mitigation-type) block supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>Rules. Define the threat levels and the corresponding mitigation actions to be taken<br>See [Rules](#mitigation-type-rules) below.
-
-<a id="mitigation-type-rules"></a>
 
 #### Rules
 
@@ -93,8 +89,6 @@ A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigatio
 &#x2022; [`mitigation_action`](#mitigation-action) - Optional Block<br>Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user<br>See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
 
 &#x2022; [`threat_level`](#threat-level) - Optional Block<br>Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation<br>See [Threat Level](#mitigation-type-rules-threat-level) below.
-
-<a id="mitigation-type-rules-mitigation-action"></a>
 
 #### Mitigation Action
 
@@ -106,8 +100,6 @@ A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within 
 
 &#x2022; [`javascript_challenge`](#javascript-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="mitigation-type-rules-threat-level"></a>
-
 #### Threat Level
 
 A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
@@ -117,8 +109,6 @@ A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigati
 &#x2022; [`low`](#low) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 &#x2022; [`medium`](#medium) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

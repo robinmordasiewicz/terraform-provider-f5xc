@@ -88,8 +88,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="notification-parameters"></a>
-
 #### Notification Parameters
 
 A [`notification_parameters`](#notification-parameters) block supports the following:
@@ -108,15 +106,11 @@ A [`notification_parameters`](#notification-parameters) block supports the follo
 
 &#x2022; [`ves_io_group`](#ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="notification-parameters-custom"></a>
-
 #### Custom
 
 A [`custom`](#notification-parameters-custom) block (within [`notification_parameters`](#notification-parameters)) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional List<br>Labels. Name of labels to group/aggregate the alerts
-
-<a id="receivers"></a>
 
 #### Receivers
 
@@ -131,8 +125,6 @@ A [`receivers`](#receivers) block supports the following:
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
-
-<a id="routes"></a>
 
 #### Routes
 
@@ -156,8 +148,6 @@ A [`routes`](#routes) block supports the following:
 
 &#x2022; [`severity`](#severity) - Optional Block<br>Severity Matcher. Select one or more severity levels to match the incoming alert<br>See [Severity](#routes-severity) below.
 
-<a id="routes-custom"></a>
-
 #### Custom
 
 A [`custom`](#routes-custom) block (within [`routes`](#routes)) supports the following:
@@ -170,8 +160,6 @@ A [`custom`](#routes-custom) block (within [`routes`](#routes)) supports the fol
 
 &#x2022; [`severity`](#severity) - Optional Block<br>Label Matcher<br>See [Severity](#routes-custom-severity) below.
 
-<a id="routes-custom-alertname"></a>
-
 #### Alertname
 
 An [`alertname`](#routes-custom-alertname) block (within [`routes.custom`](#routes-custom)) supports the following:
@@ -179,8 +167,6 @@ An [`alertname`](#routes-custom-alertname) block (within [`routes.custom`](#rout
 &#x2022; [`exact_match`](#exact-match) - Optional String<br>Exact Match. Equality match value for the label
 
 &#x2022; [`regex_match`](#regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
-
-<a id="routes-custom-group"></a>
 
 #### Group
 
@@ -190,8 +176,6 @@ A [`group`](#routes-custom-group) block (within [`routes.custom`](#routes-custom
 
 &#x2022; [`regex_match`](#regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
 
-<a id="routes-custom-severity"></a>
-
 #### Severity
 
 A [`severity`](#routes-custom-severity) block (within [`routes.custom`](#routes-custom)) supports the following:
@@ -200,15 +184,11 @@ A [`severity`](#routes-custom-severity) block (within [`routes.custom`](#routes-
 
 &#x2022; [`regex_match`](#regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
 
-<a id="routes-group"></a>
-
 #### Group
 
 A [`group`](#routes-group) block (within [`routes`](#routes)) supports the following:
 
 &#x2022; [`groups`](#groups) - Optional List  Defaults to `INFRASTRUCTURE`<br>Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`<br>Groups. Name of groups to match the alert
-
-<a id="routes-notification-parameters"></a>
 
 #### Notification Parameters
 
@@ -228,23 +208,17 @@ A [`notification_parameters`](#routes-notification-parameters) block (within [`r
 
 &#x2022; [`ves_io_group`](#ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="routes-notification-parameters-custom"></a>
-
 #### Custom
 
 A [`custom`](#routes-notification-parameters-custom) block (within [`routes.notification_parameters`](#routes-notification-parameters)) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional List<br>Labels. Name of labels to group/aggregate the alerts
 
-<a id="routes-severity"></a>
-
 #### Severity
 
 A [`severity`](#routes-severity) block (within [`routes`](#routes)) supports the following:
 
 &#x2022; [`severities`](#severities) - Optional List  Defaults to `MINOR`<br>Possible values are `MINOR`, `MAJOR`, `CRITICAL`<br>Severities. List of severity levels
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

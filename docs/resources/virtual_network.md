@@ -85,8 +85,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="static-routes"></a>
-
 #### Static Routes
 
 A [`static_routes`](#static-routes) block supports the following:
@@ -101,15 +99,11 @@ A [`static_routes`](#static-routes) block supports the following:
 
 &#x2022; [`node_interface`](#node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#static-routes-node-interface) below.
 
-<a id="static-routes-node-interface"></a>
-
 #### Node Interface
 
 A [`node_interface`](#static-routes-node-interface) block (within [`static_routes`](#static-routes)) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#static-routes-node-interface-list) below.
-
-<a id="static-routes-node-interface-list"></a>
 
 #### List
 
@@ -118,8 +112,6 @@ A [`list`](#static-routes-node-interface-list) block (within [`static_routes.nod
 &#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#static-routes-node-interface-list-interface) below.
 
 &#x2022; [`node`](#node) - Optional String<br>Node. Node name on this site
-
-<a id="static-routes-node-interface-list-interface"></a>
 
 #### Interface
 
@@ -134,8 +126,6 @@ An [`interface`](#static-routes-node-interface-list-interface) block (within [`s
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

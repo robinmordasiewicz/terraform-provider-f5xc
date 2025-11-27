@@ -100,8 +100,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="http-health-check"></a>
-
 #### HTTP Health Check
 
 A [`http_health_check`](#http-health-check) block supports the following:
@@ -120,8 +118,6 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 &#x2022; [`use_origin_server_name`](#use-origin-server-name) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-<a id="tcp-health-check"></a>
-
 #### TCP Health Check
 
 A [`tcp_health_check`](#tcp-health-check) block supports the following:
@@ -129,8 +125,6 @@ A [`tcp_health_check`](#tcp-health-check) block supports the following:
 &#x2022; [`expected_response`](#expected-response) - Optional String<br>Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload
 
 &#x2022; [`send_payload`](#send-payload) - Optional String<br>Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

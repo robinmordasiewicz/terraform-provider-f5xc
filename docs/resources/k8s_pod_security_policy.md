@@ -80,8 +80,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="psp-spec"></a>
-
 #### Psp Spec
 
 A [`psp_spec`](#psp-spec) block supports the following:
@@ -148,15 +146,11 @@ A [`psp_spec`](#psp-spec) block supports the following:
 
 &#x2022; [`volumes`](#volumes) - Optional List<br>Volume. Allow List of volume plugins. Empty no volumes are allowed
 
-<a id="psp-spec-allowed-capabilities"></a>
-
 #### Allowed Capabilities
 
 An [`allowed_capabilities`](#psp-spec-allowed-capabilities) block (within [`psp_spec`](#psp-spec)) supports the following:
 
 &#x2022; [`capabilities`](#capabilities) - Optional List<br>Capability List. List of capabilities that docker container has
-
-<a id="psp-spec-allowed-host-paths"></a>
 
 #### Allowed Host Paths
 
@@ -166,23 +160,17 @@ An [`allowed_host_paths`](#psp-spec-allowed-host-paths) block (within [`psp_spec
 
 &#x2022; [`read_only`](#read-only) - Optional Bool<br>Read Only. This volume will be allowed to mount read only
 
-<a id="psp-spec-default-capabilities"></a>
-
 #### Default Capabilities
 
 A [`default_capabilities`](#psp-spec-default-capabilities) block (within [`psp_spec`](#psp-spec)) supports the following:
 
 &#x2022; [`capabilities`](#capabilities) - Optional List<br>Capability List. List of capabilities that docker container has
 
-<a id="psp-spec-drop-capabilities"></a>
-
 #### Drop Capabilities
 
 A [`drop_capabilities`](#psp-spec-drop-capabilities) block (within [`psp_spec`](#psp-spec)) supports the following:
 
 &#x2022; [`capabilities`](#capabilities) - Optional List<br>Capability List. List of capabilities that docker container has
-
-<a id="psp-spec-fs-group-strategy-options"></a>
 
 #### Fs Group Strategy Options
 
@@ -192,8 +180,6 @@ A [`fs_group_strategy_options`](#psp-spec-fs-group-strategy-options) block (with
 
 &#x2022; [`rule`](#rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
-<a id="psp-spec-fs-group-strategy-options-id-ranges"></a>
-
 #### Id Ranges
 
 An [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) block (within [`psp_spec.fs_group_strategy_options`](#psp-spec-fs-group-strategy-options)) supports the following:
@@ -201,8 +187,6 @@ An [`id_ranges`](#psp-spec-fs-group-strategy-options-id-ranges) block (within [`
 &#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
 &#x2022; [`min_id`](#min-id) - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
-
-<a id="psp-spec-run-as-group"></a>
 
 #### Run As Group
 
@@ -212,8 +196,6 @@ A [`run_as_group`](#psp-spec-run-as-group) block (within [`psp_spec`](#psp-spec)
 
 &#x2022; [`rule`](#rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
-<a id="psp-spec-run-as-group-id-ranges"></a>
-
 #### Id Ranges
 
 An [`id_ranges`](#psp-spec-run-as-group-id-ranges) block (within [`psp_spec.run_as_group`](#psp-spec-run-as-group)) supports the following:
@@ -221,8 +203,6 @@ An [`id_ranges`](#psp-spec-run-as-group-id-ranges) block (within [`psp_spec.run_
 &#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
 &#x2022; [`min_id`](#min-id) - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
-
-<a id="psp-spec-run-as-user"></a>
 
 #### Run As User
 
@@ -232,8 +212,6 @@ A [`run_as_user`](#psp-spec-run-as-user) block (within [`psp_spec`](#psp-spec)) 
 
 &#x2022; [`rule`](#rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
-<a id="psp-spec-run-as-user-id-ranges"></a>
-
 #### Id Ranges
 
 An [`id_ranges`](#psp-spec-run-as-user-id-ranges) block (within [`psp_spec.run_as_user`](#psp-spec-run-as-user)) supports the following:
@@ -241,8 +219,6 @@ An [`id_ranges`](#psp-spec-run-as-user-id-ranges) block (within [`psp_spec.run_a
 &#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
 &#x2022; [`min_id`](#min-id) - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
-
-<a id="psp-spec-supplemental-groups"></a>
 
 #### Supplemental Groups
 
@@ -252,8 +228,6 @@ A [`supplemental_groups`](#psp-spec-supplemental-groups) block (within [`psp_spe
 
 &#x2022; [`rule`](#rule) - Optional String<br>Rule. Rule indicated how the FS group ID range is used
 
-<a id="psp-spec-supplemental-groups-id-ranges"></a>
-
 #### Id Ranges
 
 An [`id_ranges`](#psp-spec-supplemental-groups-id-ranges) block (within [`psp_spec.supplemental_groups`](#psp-spec-supplemental-groups)) supports the following:
@@ -261,8 +235,6 @@ An [`id_ranges`](#psp-spec-supplemental-groups-id-ranges) block (within [`psp_sp
 &#x2022; [`max_id`](#max-id) - Optional Number<br>Ending ID. Ending(maximum) ID for for ID range
 
 &#x2022; [`min_id`](#min-id) - Optional Number<br>Starting ID. Starting(minimum) ID for for ID range
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

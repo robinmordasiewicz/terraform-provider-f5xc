@@ -74,8 +74,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="address-allocation-scheme"></a>
-
 #### Address Allocation Scheme
 
 An [`address_allocation_scheme`](#address-allocation-scheme) block supports the following:
@@ -85,8 +83,6 @@ An [`address_allocation_scheme`](#address-allocation-scheme) block supports the 
 &#x2022; [`local_interface_address_offset`](#local-interface-address-offset) - Optional Number<br>Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet. If Local Interface Address Type is set to 'Offset from beginning of Subnet', this offset value is added to the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 2 with Local Interface Address Type set to 'Offset from beginning of Subnet', local interface address of 169.254.0.2 is used. If Local Interface Address Type is set to 'Offset from end of Subnet', this offset value is subtracted from the end of the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 1 with Local Interface Address Type set to 'Offset from end of Subnet', local interface address of 169.254.0.2 is used
 
 &#x2022; [`local_interface_address_type`](#local-interface-address-type) - Optional String  Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`<br>Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`<br>Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 1 and Local Interface Address Type is set to 'Offset from end of Subnet', local address of 169.254.0.2 is used. This case is used for external_connector
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

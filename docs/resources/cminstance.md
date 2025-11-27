@@ -86,8 +86,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-<a id="api-token"></a>
-
 #### API Token
 
 An [`api_token`](#api-token) block supports the following:
@@ -95,8 +93,6 @@ An [`api_token`](#api-token) block supports the following:
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#api-token-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#api-token-clear-secret-info) below.
-
-<a id="api-token-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -108,8 +104,6 @@ A [`blindfold_secret_info`](#api-token-blindfold-secret-info) block (within [`ap
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="api-token-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#api-token-clear-secret-info) block (within [`api_token`](#api-token)) supports the following:
@@ -118,15 +112,11 @@ A [`clear_secret_info`](#api-token-clear-secret-info) block (within [`api_token`
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-<a id="ip"></a>
-
 #### IP
 
 An [`ip`](#ip) block supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
-
-<a id="password"></a>
 
 #### Password
 
@@ -135,8 +125,6 @@ A [`password`](#password) block supports the following:
 &#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#password-blindfold-secret-info) below.
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#password-clear-secret-info) below.
-
-<a id="password-blindfold-secret-info"></a>
 
 #### Blindfold Secret Info
 
@@ -148,8 +136,6 @@ A [`blindfold_secret_info`](#password-blindfold-secret-info) block (within [`pas
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="password-clear-secret-info"></a>
-
 #### Clear Secret Info
 
 A [`clear_secret_info`](#password-clear-secret-info) block (within [`password`](#password)) supports the following:
@@ -157,8 +143,6 @@ A [`clear_secret_info`](#password-clear-secret-info) block (within [`password`](
 &#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
-
-<a id="timeouts"></a>
 
 #### Timeouts
 

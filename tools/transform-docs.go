@@ -808,6 +808,9 @@ func transformAnchorsOnly(filePath string, content string) error {
 	// Terraform Registry doesn't support raw HTML anchors, but H4 headers auto-generate anchors
 	result = convertBoldToH4Headers(result)
 
+	// Escape HTML tags in descriptions to prevent Registry markdown parser truncation
+	result = escapeHTMLTagsInContent(result)
+
 	// Normalize blank lines and write
 	result = normalizeBlankLines(result)
 	return os.WriteFile(filePath, []byte(result), 0644)
@@ -1739,6 +1742,86 @@ func normalizeBlankLines(content string) string {
 	return content
 }
 
+// escapeHTMLTagsInContent applies HTML tag escaping to full document content.
+// Unlike escapeHTMLTags (for single descriptions), this function is designed to
+// process entire markdown files while preserving intentional HTML constructs.
+//
+// Preserves (does NOT escape):
+//   - Line break tags: <br>, <br/>, <br />
+//   - Anchor tags: <a id="...">...</a>
+//   - Tags already in backticks: `<head>`
+//
+// Escapes:
+//   - Content HTML tags: <head>, </title>, <script>, <div>, etc.
+//
+// This is applied to already-transformed files in transformAnchorsOnly
+// to fix HTML tags that weren't escaped during initial generation.
+func escapeHTMLTagsInContent(content string) string {
+	// List of HTML tags that should be escaped (commonly found in schema descriptions)
+	// These are tags that might appear in documentation text but break markdown parsing
+	tagsToEscape := []string{
+		"head", "title", "script", "body", "html", "div", "span", "style",
+		"meta", "link", "img", "input", "form", "button", "iframe",
+		"table", "tr", "td", "th", "thead", "tbody", "ul", "ol", "li",
+		"p", "h1", "h2", "h3", "h4", "h5", "h6", "header", "footer",
+		"nav", "section", "article", "aside", "main", "figure", "figcaption",
+	}
+
+	for _, tag := range tagsToEscape {
+		// Match opening tag not already in backticks: <tag> or <tag attr="...">
+		// Pattern: space or > before tag (not backtick), then the tag
+		openingRegex := regexp.MustCompile(`([^` + "`" + `])(<` + tag + `(?:\s[^>]*)?>)`)
+		content = openingRegex.ReplaceAllString(content, "$1`$2`")
+
+		// Match closing tag not already in backticks: </tag>
+		closingRegex := regexp.MustCompile(`([^` + "`" + `])(</` + tag + `>)`)
+		content = closingRegex.ReplaceAllString(content, "$1`$2`")
+	}
+
+	return content
+}
+
+// escapeHTMLTags wraps HTML-like tags in backticks to prevent Terraform Registry
+// markdown parser from interpreting them as actual HTML (which causes content truncation).
+// This function is idempotent - running it multiple times produces the same result.
+//
+// Pattern matches:
+//   - Opening tags: <tagname> or <tagname attr="value">
+//   - Closing tags: </tagname>
+//   - Self-closing tags: <tagname/>
+//
+// Does NOT match tags already inside backticks: `<head>`
+//
+// Examples:
+//   - "Insert after <head> tag" → "Insert after `<head>` tag"
+//   - "Insert after </title> tag" → "Insert after `</title>` tag"
+//   - "Use `<script>` for JS" → "Use `<script>` for JS" (unchanged, already escaped)
+func escapeHTMLTags(text string) string {
+	// Match HTML-like tags not already inside backticks
+	// The negative lookbehind (?<!) is not supported in Go regex, so we use a workaround:
+	// Match tags and check the preceding character is not a backtick
+	//
+	// Pattern breakdown:
+	// ([^`])        - Capture group 1: any char except backtick (preceding context)
+	// (</?          - Start of tag: < optionally followed by /
+	// [a-zA-Z]      - Tag name starts with letter
+	// [a-zA-Z0-9]*  - Tag name continues with alphanumeric
+	// [^>]*         - Optional attributes (anything except >)
+	// /?>)          - End of tag: optional / followed by >
+	//
+	// We also need to handle tags at the start of the string (no preceding char)
+	htmlTagRegex := regexp.MustCompile(`([^` + "`" + `])(</?[a-zA-Z][a-zA-Z0-9]*[^>]*/?>)`)
+	text = htmlTagRegex.ReplaceAllString(text, "$1`$2`")
+
+	// Handle tags at the very start of the string (no preceding character)
+	startTagRegex := regexp.MustCompile(`^(</?[a-zA-Z][a-zA-Z0-9]*[^>]*/?>)`)
+	if startTagRegex.MatchString(text) && !strings.HasPrefix(text, "`<") {
+		text = startTagRegex.ReplaceAllString(text, "`$1`")
+	}
+
+	return text
+}
+
 func cleanDescription(desc, attrPath string) string {
 	// Remove nested schema references
 	nestedRefRegex := regexp.MustCompile(`\s*\(see \[below for nested schema\]\([^)]+\)\)`)
@@ -1764,6 +1847,12 @@ func cleanDescription(desc, attrPath string) string {
 	// Fix patterns like www.foo.com that look like URLs
 	wwwRegex := regexp.MustCompile(`(^|[^` + "`" + `])(www\.[^\s\)\]\x60<>]+)`)
 	desc = wwwRegex.ReplaceAllString(desc, "$1`$2`")
+
+	// Escape HTML-like tags to prevent Terraform Registry markdown parser from
+	// interpreting them as actual HTML (which causes content truncation)
+	// Pattern matches <tagname> or </tagname> not already in backticks
+	// Example: "Insert JavaScript after <head> tag" → "Insert JavaScript after `<head>` tag"
+	desc = escapeHTMLTags(desc)
 
 	// Escape false-positive reference link patterns (MD052 compliance)
 	// Patterns like [+][country code] or [0-9][smhd] look like markdown reference links but aren't

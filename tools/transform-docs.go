@@ -1618,6 +1618,12 @@ func transformDoc(filePath string) error {
 	// Normalize multiple consecutive blank lines to single blank lines
 	result := normalizeBlankLines(output.String())
 
+	// Convert plain backticked context lines to clickable links
+	result = convertContextLinesToLinks(result)
+
+	// Add "See below" links for nested blocks that have their own sections
+	result = addSeeBelowLinksForNestedBlocks(result)
+
 	// Final pass: fix any remaining bare URLs not in backticks (MD034 compliance)
 	result = fixBareURLs(result)
 

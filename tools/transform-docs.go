@@ -1440,8 +1440,8 @@ func transformDoc(filePath string) error {
 					}
 
 					skipCurrentBlock = false
-					// Add blank line before anchor for proper markdown formatting
-					output.WriteString(fmt.Sprintf("\n<a id=\"%s\"></a>\n\n", anchorName))
+					// Skip raw HTML anchor - H4 header will auto-generate anchor on Terraform Registry
+					// The H4 header "#### Title" generates anchor "#title" automatically
 					inNestedBlock = true
 				}
 				continue
@@ -1458,8 +1458,8 @@ func transformDoc(filePath string) error {
 					}
 
 					skipCurrentBlock = false
-					// Write anchor as-is (already in simplified format)
-					output.WriteString(fmt.Sprintf("\n<a id=\"%s\"></a>\n\n", m[1]))
+					// Skip raw HTML anchor - H4 header will auto-generate anchor on Terraform Registry
+					// The H4 header "#### Title" generates anchor "#title" automatically
 					inNestedBlock = true
 				}
 				continue

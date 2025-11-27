@@ -1,5 +1,6 @@
 ---
 page_title: "Test: Control (No HTML Tags)"
+subcategory: "Testing"
 description: |-
   Control test guide with no HTML tags to establish baseline Registry markdown parsing behavior.
 ---

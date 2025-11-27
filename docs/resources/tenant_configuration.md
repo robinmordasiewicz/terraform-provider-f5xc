@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="basic-configuration"></a>
 
-**Basic Configuration**
+#### Basic Configuration
 
 A [`basic_configuration`](#basic-configuration) block supports the following:
 
@@ -92,7 +92,7 @@ A [`basic_configuration`](#basic-configuration) block supports the following:
 
 <a id="brute-force-detection-settings"></a>
 
-**Brute Force Detection Settings**
+#### Brute Force Detection Settings
 
 A [`brute_force_detection_settings`](#brute-force-detection-settings) block supports the following:
 
@@ -100,7 +100,7 @@ A [`brute_force_detection_settings`](#brute-force-detection-settings) block supp
 
 <a id="password-policy"></a>
 
-**Password Policy**
+#### Password Policy
 
 A [`password_policy`](#password-policy) block supports the following:
 
@@ -122,7 +122,7 @@ A [`password_policy`](#password-policy) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

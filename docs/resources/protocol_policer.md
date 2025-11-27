@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-policer"></a>
 
-**Protocol Policer**
+#### Protocol Policer
 
 A [`protocol_policer`](#protocol-policer) block supports the following:
 
@@ -90,7 +90,7 @@ A [`protocol_policer`](#protocol-policer) block supports the following:
 
 <a id="protocol-policer-policer"></a>
 
-**Policer**
+#### Policer
 
 A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
@@ -106,7 +106,7 @@ A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#pro
 
 <a id="protocol-policer-protocol"></a>
 
-**Protocol**
+#### Protocol
 
 A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
@@ -120,7 +120,7 @@ A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#p
 
 <a id="protocol-policer-protocol-icmp"></a>
 
-**ICMP**
+#### ICMP
 
 An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
@@ -128,7 +128,7 @@ An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.pr
 
 <a id="protocol-policer-protocol-tcp"></a>
 
-**TCP**
+#### TCP
 
 A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
@@ -136,7 +136,7 @@ A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.proto
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

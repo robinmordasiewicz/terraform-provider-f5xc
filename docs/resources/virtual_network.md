@@ -87,7 +87,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="static-routes"></a>
 
-**Static Routes**
+#### Static Routes
 
 A [`static_routes`](#static-routes) block supports the following:
 
@@ -103,7 +103,7 @@ A [`static_routes`](#static-routes) block supports the following:
 
 <a id="static-routes-node-interface"></a>
 
-**Node Interface**
+#### Node Interface
 
 A [`node_interface`](#static-routes-node-interface) block (within [`static_routes`](#static-routes)) supports the following:
 
@@ -111,7 +111,7 @@ A [`node_interface`](#static-routes-node-interface) block (within [`static_route
 
 <a id="static-routes-node-interface-list"></a>
 
-**List**
+#### List
 
 A [`list`](#static-routes-node-interface-list) block (within [`static_routes.node_interface`](#static-routes-node-interface)) supports the following:
 
@@ -121,7 +121,7 @@ A [`list`](#static-routes-node-interface-list) block (within [`static_routes.nod
 
 <a id="static-routes-node-interface-list-interface"></a>
 
-**Interface**
+#### Interface
 
 An [`interface`](#static-routes-node-interface-list-interface) block (within [`static_routes.node_interface.list`](#static-routes-node-interface-list)) supports the following:
 
@@ -137,7 +137,7 @@ An [`interface`](#static-routes-node-interface-list-interface) block (within [`s
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="full-mesh"></a>
 
-**Full Mesh**
+#### Full Mesh
 
 A [`full_mesh`](#full-mesh) block supports the following:
 
@@ -102,7 +102,7 @@ A [`full_mesh`](#full-mesh) block supports the following:
 
 <a id="hub-mesh"></a>
 
-**Hub Mesh**
+#### Hub Mesh
 
 A [`hub_mesh`](#hub-mesh) block supports the following:
 
@@ -112,7 +112,7 @@ A [`hub_mesh`](#hub-mesh) block supports the following:
 
 <a id="spoke-mesh"></a>
 
-**Spoke Mesh**
+#### Spoke Mesh
 
 A [`spoke_mesh`](#spoke-mesh) block supports the following:
 
@@ -124,7 +124,7 @@ A [`spoke_mesh`](#spoke-mesh) block supports the following:
 
 <a id="spoke-mesh-hub-mesh-group"></a>
 
-**Hub Mesh Group**
+#### Hub Mesh Group
 
 A [`hub_mesh_group`](#spoke-mesh-hub-mesh-group) block (within [`spoke_mesh`](#spoke-mesh)) supports the following:
 
@@ -136,7 +136,7 @@ A [`hub_mesh_group`](#spoke-mesh-hub-mesh-group) block (within [`spoke_mesh`](#s
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -150,7 +150,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="virtual-site"></a>
 
-**Virtual Site**
+#### Virtual Site
 
 A [`virtual_site`](#virtual-site) block supports the following:
 

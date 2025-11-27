@@ -72,7 +72,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="allowed-devices"></a>
 
-**Allowed Devices**
+#### Allowed Devices
 
 An [`allowed_devices`](#allowed-devices) block supports the following:
 
@@ -90,7 +90,7 @@ An [`allowed_devices`](#allowed-devices) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

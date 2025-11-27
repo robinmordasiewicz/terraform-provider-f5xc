@@ -91,7 +91,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bgp-parameters"></a>
 
-**BGP Parameters**
+#### BGP Parameters
 
 A [`bgp_parameters`](#bgp-parameters) block supports the following:
 
@@ -105,7 +105,7 @@ A [`bgp_parameters`](#bgp-parameters) block supports the following:
 
 <a id="peers"></a>
 
-**Peers**
+#### Peers
 
 A [`peers`](#peers) block supports the following:
 
@@ -129,7 +129,7 @@ A [`peers`](#peers) block supports the following:
 
 <a id="peers-bfd-enabled"></a>
 
-**Bfd Enabled**
+#### Bfd Enabled
 
 A [`bfd_enabled`](#peers-bfd-enabled) block (within [`peers`](#peers)) supports the following:
 
@@ -141,7 +141,7 @@ A [`bfd_enabled`](#peers-bfd-enabled) block (within [`peers`](#peers)) supports 
 
 <a id="peers-external"></a>
 
-**External**
+#### External
 
 An [`external`](#peers-external) block (within [`peers`](#peers)) supports the following:
 
@@ -187,7 +187,7 @@ An [`external`](#peers-external) block (within [`peers`](#peers)) supports the f
 
 <a id="peers-external-family-inet"></a>
 
-**Family Inet**
+#### Family Inet
 
 A [`family_inet`](#peers-external-family-inet) block (within [`peers.external`](#peers-external)) supports the following:
 
@@ -197,7 +197,7 @@ A [`family_inet`](#peers-external-family-inet) block (within [`peers.external`](
 
 <a id="peers-external-interface"></a>
 
-**Interface**
+#### Interface
 
 An [`interface`](#peers-external-interface) block (within [`peers.external`](#peers-external)) supports the following:
 
@@ -209,7 +209,7 @@ An [`interface`](#peers-external-interface) block (within [`peers.external`](#pe
 
 <a id="peers-external-interface-list"></a>
 
-**Interface List**
+#### Interface List
 
 An [`interface_list`](#peers-external-interface-list) block (within [`peers.external`](#peers-external)) supports the following:
 
@@ -217,7 +217,7 @@ An [`interface_list`](#peers-external-interface-list) block (within [`peers.exte
 
 <a id="peers-external-interface-list-interfaces"></a>
 
-**Interfaces**
+#### Interfaces
 
 An [`interfaces`](#peers-external-interface-list-interfaces) block (within [`peers.external.interface_list`](#peers-external-interface-list)) supports the following:
 
@@ -229,7 +229,7 @@ An [`interfaces`](#peers-external-interface-list-interfaces) block (within [`pee
 
 <a id="peers-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#peers-metadata) block (within [`peers`](#peers)) supports the following:
 
@@ -239,7 +239,7 @@ A [`metadata`](#peers-metadata) block (within [`peers`](#peers)) supports the fo
 
 <a id="peers-routing-policies"></a>
 
-**Routing Policies**
+#### Routing Policies
 
 A [`routing_policies`](#peers-routing-policies) block (within [`peers`](#peers)) supports the following:
 
@@ -247,7 +247,7 @@ A [`routing_policies`](#peers-routing-policies) block (within [`peers`](#peers))
 
 <a id="peers-routing-policies-route-policy"></a>
 
-**Route Policy**
+#### Route Policy
 
 A [`route_policy`](#peers-routing-policies-route-policy) block (within [`peers.routing_policies`](#peers-routing-policies)) supports the following:
 
@@ -263,7 +263,7 @@ A [`route_policy`](#peers-routing-policies-route-policy) block (within [`peers.r
 
 <a id="peers-routing-policies-route-policy-node-name"></a>
 
-**Node Name**
+#### Node Name
 
 A [`node_name`](#peers-routing-policies-route-policy-node-name) block (within [`peers.routing_policies.route_policy`](#peers-routing-policies-route-policy)) supports the following:
 
@@ -271,7 +271,7 @@ A [`node_name`](#peers-routing-policies-route-policy-node-name) block (within [`
 
 <a id="peers-routing-policies-route-policy-object-refs"></a>
 
-**Object Refs**
+#### Object Refs
 
 An [`object_refs`](#peers-routing-policies-route-policy-object-refs) block (within [`peers.routing_policies.route_policy`](#peers-routing-policies-route-policy)) supports the following:
 
@@ -287,7 +287,7 @@ An [`object_refs`](#peers-routing-policies-route-policy-object-refs) block (with
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -301,7 +301,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="where"></a>
 
-**Where**
+#### Where
 
 A [`where`](#where) block supports the following:
 
@@ -311,7 +311,7 @@ A [`where`](#where) block supports the following:
 
 <a id="where-site"></a>
 
-**Site**
+#### Site
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
@@ -325,7 +325,7 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 <a id="where-site-ref"></a>
 
-**Ref**
+#### Ref
 
 A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
@@ -341,7 +341,7 @@ A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports t
 
 <a id="where-virtual-site"></a>
 
-**Virtual Site**
+#### Virtual Site
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
@@ -355,7 +355,7 @@ A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) support
 
 <a id="where-virtual-site-ref"></a>
 
-**Ref**
+#### Ref
 
 A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 

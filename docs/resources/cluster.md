@@ -118,7 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="circuit-breaker"></a>
 
-**Circuit Breaker**
+#### Circuit Breaker
 
 A [`circuit_breaker`](#circuit-breaker) block supports the following:
 
@@ -134,7 +134,7 @@ A [`circuit_breaker`](#circuit-breaker) block supports the following:
 
 <a id="endpoint-subsets"></a>
 
-**Endpoint Subsets**
+#### Endpoint Subsets
 
 An [`endpoint_subsets`](#endpoint-subsets) block supports the following:
 
@@ -142,7 +142,7 @@ An [`endpoint_subsets`](#endpoint-subsets) block supports the following:
 
 <a id="endpoints"></a>
 
-**Endpoints**
+#### Endpoints
 
 An [`endpoints`](#endpoints) block supports the following:
 
@@ -158,7 +158,7 @@ An [`endpoints`](#endpoints) block supports the following:
 
 <a id="health-checks"></a>
 
-**Health Checks**
+#### Health Checks
 
 A [`health_checks`](#health-checks) block supports the following:
 
@@ -174,7 +174,7 @@ A [`health_checks`](#health-checks) block supports the following:
 
 <a id="http1-config"></a>
 
-**Http1 Config**
+#### Http1 Config
 
 A [`http1_config`](#http1-config) block supports the following:
 
@@ -182,7 +182,7 @@ A [`http1_config`](#http1-config) block supports the following:
 
 <a id="http1-config-header-transformation"></a>
 
-**Header Transformation**
+#### Header Transformation
 
 A [`header_transformation`](#http1-config-header-transformation) block (within [`http1_config`](#http1-config)) supports the following:
 
@@ -196,7 +196,7 @@ A [`header_transformation`](#http1-config-header-transformation) block (within [
 
 <a id="http2-options"></a>
 
-**Http2 Options**
+#### Http2 Options
 
 A [`http2_options`](#http2-options) block supports the following:
 
@@ -204,7 +204,7 @@ A [`http2_options`](#http2-options) block supports the following:
 
 <a id="outlier-detection"></a>
 
-**Outlier Detection**
+#### Outlier Detection
 
 An [`outlier_detection`](#outlier-detection) block supports the following:
 
@@ -220,7 +220,7 @@ An [`outlier_detection`](#outlier-detection) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -234,7 +234,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="tls-parameters"></a>
 
-**TLS Parameters**
+#### TLS Parameters
 
 A [`tls_parameters`](#tls-parameters) block supports the following:
 
@@ -256,7 +256,7 @@ A [`tls_parameters`](#tls-parameters) block supports the following:
 
 <a id="tls-parameters-cert-params"></a>
 
-**Cert Params**
+#### Cert Params
 
 A [`cert_params`](#tls-parameters-cert-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
@@ -272,7 +272,7 @@ A [`cert_params`](#tls-parameters-cert-params) block (within [`tls_parameters`](
 
 <a id="tls-parameters-cert-params-certificates"></a>
 
-**Certificates**
+#### Certificates
 
 A [`certificates`](#tls-parameters-cert-params-certificates) block (within [`tls_parameters.cert_params`](#tls-parameters-cert-params)) supports the following:
 
@@ -288,7 +288,7 @@ A [`certificates`](#tls-parameters-cert-params-certificates) block (within [`tls
 
 <a id="tls-parameters-cert-params-validation-params"></a>
 
-**Validation Params**
+#### Validation Params
 
 A [`validation_params`](#tls-parameters-cert-params-validation-params) block (within [`tls_parameters.cert_params`](#tls-parameters-cert-params)) supports the following:
 
@@ -302,7 +302,7 @@ A [`validation_params`](#tls-parameters-cert-params-validation-params) block (wi
 
 <a id="tls-parameters-cert-params-validation-params-trusted-ca"></a>
 
-**Trusted CA**
+#### Trusted CA
 
 A [`trusted_ca`](#tls-parameters-cert-params-validation-params-trusted-ca) block (within [`tls_parameters.cert_params.validation_params`](#tls-parameters-cert-params-validation-params)) supports the following:
 
@@ -310,7 +310,7 @@ A [`trusted_ca`](#tls-parameters-cert-params-validation-params-trusted-ca) block
 
 <a id="tls-parameters-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
-**Trusted CA List**
+#### Trusted CA List
 
 A [`trusted_ca_list`](#tls-parameters-cert-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_parameters.cert_params.validation_params.trusted_ca`](#tls-parameters-cert-params-validation-params-trusted-ca)) supports the following:
 
@@ -326,7 +326,7 @@ A [`trusted_ca_list`](#tls-parameters-cert-params-validation-params-trusted-ca-t
 
 <a id="tls-parameters-common-params"></a>
 
-**Common Params**
+#### Common Params
 
 A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
@@ -342,7 +342,7 @@ A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameter
 
 <a id="tls-parameters-common-params-tls-certificates"></a>
 
-**TLS Certificates**
+#### TLS Certificates
 
 A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -360,7 +360,7 @@ A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (wi
 
 <a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
 
-**Custom Hash Algorithms**
+#### Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
@@ -368,7 +368,7 @@ A [`custom_hash_algorithms`](#tls-parameters-common-params-tls-certificates-cust
 
 <a id="tls-parameters-common-params-tls-certificates-private-key"></a>
 
-**Private Key**
+#### Private Key
 
 A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
@@ -378,7 +378,7 @@ A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) bl
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -390,7 +390,7 @@ A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-priva
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -400,7 +400,7 @@ A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-k
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
-**Validation Params**
+#### Validation Params
 
 A [`validation_params`](#tls-parameters-common-params-validation-params) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -414,7 +414,7 @@ A [`validation_params`](#tls-parameters-common-params-validation-params) block (
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
 
-**Trusted CA**
+#### Trusted CA
 
 A [`trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca) block (within [`tls_parameters.common_params.validation_params`](#tls-parameters-common-params-validation-params)) supports the following:
 
@@ -422,7 +422,7 @@ A [`trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca) blo
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
-**Trusted CA List**
+#### Trusted CA List
 
 A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_parameters.common_params.validation_params.trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca)) supports the following:
 
@@ -438,7 +438,7 @@ A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca
 
 <a id="upstream-conn-pool-reuse-type"></a>
 
-**Upstream Conn Pool Reuse Type**
+#### Upstream Conn Pool Reuse Type
 
 An [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) block supports the following:
 

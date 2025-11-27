@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-token"></a>
 
-**API Token**
+#### API Token
 
 An [`api_token`](#api-token) block supports the following:
 
@@ -98,7 +98,7 @@ An [`api_token`](#api-token) block supports the following:
 
 <a id="api-token-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#api-token-blindfold-secret-info) block (within [`api_token`](#api-token)) supports the following:
 
@@ -110,7 +110,7 @@ A [`blindfold_secret_info`](#api-token-blindfold-secret-info) block (within [`ap
 
 <a id="api-token-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#api-token-clear-secret-info) block (within [`api_token`](#api-token)) supports the following:
 
@@ -120,7 +120,7 @@ A [`clear_secret_info`](#api-token-clear-secret-info) block (within [`api_token`
 
 <a id="ip"></a>
 
-**IP**
+#### IP
 
 An [`ip`](#ip) block supports the following:
 
@@ -128,7 +128,7 @@ An [`ip`](#ip) block supports the following:
 
 <a id="password"></a>
 
-**Password**
+#### Password
 
 A [`password`](#password) block supports the following:
 
@@ -138,7 +138,7 @@ A [`password`](#password) block supports the following:
 
 <a id="password-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#password-blindfold-secret-info) block (within [`password`](#password)) supports the following:
 
@@ -150,7 +150,7 @@ A [`blindfold_secret_info`](#password-blindfold-secret-info) block (within [`pas
 
 <a id="password-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#password-clear-secret-info) block (within [`password`](#password)) supports the following:
 
@@ -160,7 +160,7 @@ A [`clear_secret_info`](#password-clear-secret-info) block (within [`password`](
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

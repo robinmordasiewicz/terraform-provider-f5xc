@@ -87,7 +87,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rule-list"></a>
 
-**Rule List**
+#### Rule List
 
 A [`rule_list`](#rule-list) block supports the following:
 
@@ -95,7 +95,7 @@ A [`rule_list`](#rule-list) block supports the following:
 
 <a id="rule-list-rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
@@ -105,7 +105,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -115,7 +115,7 @@ A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rul
 
 <a id="rule-list-rules-spec"></a>
 
-**Spec**
+#### Spec
 
 A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -129,7 +129,7 @@ A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-r
 
 <a id="rule-list-rules-spec-client-name-matcher"></a>
 
-**Client Name Matcher**
+#### Client Name Matcher
 
 A [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -141,7 +141,7 @@ A [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) block (with
 
 <a id="rule-list-rules-spec-client-selector"></a>
 
-**Client Selector**
+#### Client Selector
 
 A [`client_selector`](#rule-list-rules-spec-client-selector) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -149,7 +149,7 @@ A [`client_selector`](#rule-list-rules-spec-client-selector) block (within [`rul
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -74,7 +74,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -88,7 +88,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="tpm-manager-ref"></a>
 
-**Tpm Manager Ref**
+#### Tpm Manager Ref
 
 A [`tpm_manager_ref`](#tpm-manager-ref) block supports the following:
 

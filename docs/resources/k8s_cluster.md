@@ -127,7 +127,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cluster-wide-app-list"></a>
 
-**Cluster Wide App List**
+#### Cluster Wide App List
 
 A [`cluster_wide_app_list`](#cluster-wide-app-list) block supports the following:
 
@@ -135,7 +135,7 @@ A [`cluster_wide_app_list`](#cluster-wide-app-list) block supports the following
 
 <a id="cluster-wide-app-list-cluster-wide-apps"></a>
 
-**Cluster Wide Apps**
+#### Cluster Wide Apps
 
 A [`cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps) block (within [`cluster_wide_app_list`](#cluster-wide-app-list)) supports the following:
 
@@ -149,7 +149,7 @@ A [`cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps) block (within 
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd"></a>
 
-**Argo Cd**
+#### Argo Cd
 
 An [`argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd) block (within [`cluster_wide_app_list.cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps)) supports the following:
 
@@ -157,7 +157,7 @@ An [`argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd) block (within [
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain"></a>
 
-**Local Domain**
+#### Local Domain
 
 A [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd)) supports the following:
 
@@ -171,7 +171,7 @@ A [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password"></a>
 
-**Password**
+#### Password
 
 A [`password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain)) supports the following:
 
@@ -181,7 +181,7 @@ A [`password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-pas
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain.password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password)) supports the following:
 
@@ -193,7 +193,7 @@ A [`blindfold_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-loc
 
 <a id="cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain.password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password)) supports the following:
 
@@ -203,7 +203,7 @@ A [`clear_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-d
 
 <a id="insecure-registry-list"></a>
 
-**Insecure Registry List**
+#### Insecure Registry List
 
 An [`insecure_registry_list`](#insecure-registry-list) block supports the following:
 
@@ -211,7 +211,7 @@ An [`insecure_registry_list`](#insecure-registry-list) block supports the follow
 
 <a id="local-access-config"></a>
 
-**Local Access Config**
+#### Local Access Config
 
 A [`local_access_config`](#local-access-config) block supports the following:
 
@@ -223,7 +223,7 @@ A [`local_access_config`](#local-access-config) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -237,7 +237,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="use-custom-cluster-role-bindings"></a>
 
-**Use Custom Cluster Role Bindings**
+#### Use Custom Cluster Role Bindings
 
 An [`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings) block supports the following:
 
@@ -245,7 +245,7 @@ An [`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings) block
 
 <a id="use-custom-cluster-role-bindings-cluster-role-bindings"></a>
 
-**Cluster Role Bindings**
+#### Cluster Role Bindings
 
 A [`cluster_role_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindings) block (within [`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings)) supports the following:
 
@@ -257,7 +257,7 @@ A [`cluster_role_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindi
 
 <a id="use-custom-cluster-role-list"></a>
 
-**Use Custom Cluster Role List**
+#### Use Custom Cluster Role List
 
 An [`use_custom_cluster_role_list`](#use-custom-cluster-role-list) block supports the following:
 
@@ -265,7 +265,7 @@ An [`use_custom_cluster_role_list`](#use-custom-cluster-role-list) block support
 
 <a id="use-custom-cluster-role-list-cluster-roles"></a>
 
-**Cluster Roles**
+#### Cluster Roles
 
 A [`cluster_roles`](#use-custom-cluster-role-list-cluster-roles) block (within [`use_custom_cluster_role_list`](#use-custom-cluster-role-list)) supports the following:
 
@@ -277,7 +277,7 @@ A [`cluster_roles`](#use-custom-cluster-role-list-cluster-roles) block (within [
 
 <a id="use-custom-pod-security-admission"></a>
 
-**Use Custom Pod Security Admission**
+#### Use Custom Pod Security Admission
 
 An [`use_custom_pod_security_admission`](#use-custom-pod-security-admission) block supports the following:
 
@@ -289,7 +289,7 @@ An [`use_custom_pod_security_admission`](#use-custom-pod-security-admission) blo
 
 <a id="use-custom-psp-list"></a>
 
-**Use Custom Psp List**
+#### Use Custom Psp List
 
 An [`use_custom_psp_list`](#use-custom-psp-list) block supports the following:
 
@@ -297,7 +297,7 @@ An [`use_custom_psp_list`](#use-custom-psp-list) block supports the following:
 
 <a id="use-custom-psp-list-pod-security-policies"></a>
 
-**Pod Security Policies**
+#### Pod Security Policies
 
 A [`pod_security_policies`](#use-custom-psp-list-pod-security-policies) block (within [`use_custom_psp_list`](#use-custom-psp-list)) supports the following:
 

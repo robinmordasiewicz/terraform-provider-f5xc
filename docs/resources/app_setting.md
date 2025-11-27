@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="app-type-settings"></a>
 
-**App Type Settings**
+#### App Type Settings
 
 An [`app_type_settings`](#app-type-settings) block supports the following:
 
@@ -94,7 +94,7 @@ An [`app_type_settings`](#app-type-settings) block supports the following:
 
 <a id="app-type-settings-app-type-ref"></a>
 
-**App Type Ref**
+#### App Type Ref
 
 An [`app_type_ref`](#app-type-settings-app-type-ref) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
@@ -110,7 +110,7 @@ An [`app_type_ref`](#app-type-settings-app-type-ref) block (within [`app_type_se
 
 <a id="app-type-settings-business-logic-markup-setting"></a>
 
-**Business Logic Markup Setting**
+#### Business Logic Markup Setting
 
 A [`business_logic_markup_setting`](#app-type-settings-business-logic-markup-setting) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
@@ -120,7 +120,7 @@ A [`business_logic_markup_setting`](#app-type-settings-business-logic-markup-set
 
 <a id="app-type-settings-timeseries-analyses-setting"></a>
 
-**Timeseries Analyses Setting**
+#### Timeseries Analyses Setting
 
 A [`timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
@@ -128,7 +128,7 @@ A [`timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting
 
 <a id="app-type-settings-timeseries-analyses-setting-metric-selectors"></a>
 
-**Metric Selectors**
+#### Metric Selectors
 
 A [`metric_selectors`](#app-type-settings-timeseries-analyses-setting-metric-selectors) block (within [`app_type_settings.timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting)) supports the following:
 
@@ -138,7 +138,7 @@ A [`metric_selectors`](#app-type-settings-timeseries-analyses-setting-metric-sel
 
 <a id="app-type-settings-user-behavior-analysis-setting"></a>
 
-**User Behavior Analysis Setting**
+#### User Behavior Analysis Setting
 
 An [`user_behavior_analysis_setting`](#app-type-settings-user-behavior-analysis-setting) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
@@ -152,7 +152,7 @@ An [`user_behavior_analysis_setting`](#app-type-settings-user-behavior-analysis-
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection"></a>
 
-**Enable Detection**
+#### Enable Detection
 
 An [`enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection) block (within [`app_type_settings.user_behavior_analysis_setting`](#app-type-settings-user-behavior-analysis-setting)) supports the following:
 
@@ -194,7 +194,7 @@ An [`enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity"></a>
 
-**Include Failed Login Activity**
+#### Include Failed Login Activity
 
 An [`include_failed_login_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
@@ -202,7 +202,7 @@ An [`include_failed_login_activity`](#app-type-settings-user-behavior-analysis-s
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity"></a>
 
-**Include Forbidden Activity**
+#### Include Forbidden Activity
 
 An [`include_forbidden_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
@@ -210,7 +210,7 @@ An [`include_forbidden_activity`](#app-type-settings-user-behavior-analysis-sett
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic"></a>
 
-**Include Non Existent URL Activity Automatic**
+#### Include Non Existent URL Activity Automatic
 
 An [`include_non_existent_url_activity_automatic`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
@@ -222,7 +222,7 @@ An [`include_non_existent_url_activity_automatic`](#app-type-settings-user-behav
 
 <a id="app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom"></a>
 
-**Include Non Existent URL Activity Custom**
+#### Include Non Existent URL Activity Custom
 
 An [`include_non_existent_url_activity_custom`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
@@ -230,7 +230,7 @@ An [`include_non_existent_url_activity_custom`](#app-type-settings-user-behavior
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

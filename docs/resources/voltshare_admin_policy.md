@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="author-restrictions"></a>
 
-**Author Restrictions**
+#### Author Restrictions
 
 An [`author_restrictions`](#author-restrictions) block supports the following:
 
@@ -98,7 +98,7 @@ An [`author_restrictions`](#author-restrictions) block supports the following:
 
 <a id="author-restrictions-allow-list"></a>
 
-**Allow List**
+#### Allow List
 
 An [`allow_list`](#author-restrictions-allow-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
@@ -106,7 +106,7 @@ An [`allow_list`](#author-restrictions-allow-list) block (within [`author_restri
 
 <a id="author-restrictions-allow-list-custom-list"></a>
 
-**Custom List**
+#### Custom List
 
 A [`custom_list`](#author-restrictions-allow-list-custom-list) block (within [`author_restrictions.allow_list`](#author-restrictions-allow-list)) supports the following:
 
@@ -116,7 +116,7 @@ A [`custom_list`](#author-restrictions-allow-list-custom-list) block (within [`a
 
 <a id="author-restrictions-deny-list"></a>
 
-**Deny List**
+#### Deny List
 
 A [`deny_list`](#author-restrictions-deny-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
@@ -124,7 +124,7 @@ A [`deny_list`](#author-restrictions-deny-list) block (within [`author_restricti
 
 <a id="author-restrictions-deny-list-custom-list"></a>
 
-**Custom List**
+#### Custom List
 
 A [`custom_list`](#author-restrictions-deny-list-custom-list) block (within [`author_restrictions.deny_list`](#author-restrictions-deny-list)) supports the following:
 
@@ -134,7 +134,7 @@ A [`custom_list`](#author-restrictions-deny-list-custom-list) block (within [`au
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -148,7 +148,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="user-restrictions"></a>
 
-**User Restrictions**
+#### User Restrictions
 
 An [`user_restrictions`](#user-restrictions) block supports the following:
 
@@ -162,7 +162,7 @@ An [`user_restrictions`](#user-restrictions) block supports the following:
 
 <a id="user-restrictions-user-restrictions"></a>
 
-**User Restrictions**
+#### User Restrictions
 
 An [`user_restrictions`](#user-restrictions-user-restrictions) block (within [`user_restrictions`](#user-restrictions)) supports the following:
 
@@ -176,7 +176,7 @@ An [`user_restrictions`](#user-restrictions-user-restrictions) block (within [`u
 
 <a id="user-restrictions-user-restrictions-allow-list"></a>
 
-**Allow List**
+#### Allow List
 
 An [`allow_list`](#user-restrictions-user-restrictions-allow-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
@@ -184,7 +184,7 @@ An [`allow_list`](#user-restrictions-user-restrictions-allow-list) block (within
 
 <a id="user-restrictions-user-restrictions-allow-list-custom-list"></a>
 
-**Custom List**
+#### Custom List
 
 A [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) block (within [`user_restrictions.user_restrictions.allow_list`](#user-restrictions-user-restrictions-allow-list)) supports the following:
 
@@ -194,7 +194,7 @@ A [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) b
 
 <a id="user-restrictions-user-restrictions-deny-list"></a>
 
-**Deny List**
+#### Deny List
 
 A [`deny_list`](#user-restrictions-user-restrictions-deny-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
@@ -202,7 +202,7 @@ A [`deny_list`](#user-restrictions-user-restrictions-deny-list) block (within [`
 
 <a id="user-restrictions-user-restrictions-deny-list-custom-list"></a>
 
-**Custom List**
+#### Custom List
 
 A [`custom_list`](#user-restrictions-user-restrictions-deny-list-custom-list) block (within [`user_restrictions.user_restrictions.deny_list`](#user-restrictions-user-restrictions-deny-list)) supports the following:
 

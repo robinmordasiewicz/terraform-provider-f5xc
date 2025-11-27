@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="filter-fields"></a>
 
-**Filter Fields**
+#### Filter Fields
 
 A [`filter_fields`](#filter-fields) block supports the following:
 
@@ -96,7 +96,7 @@ A [`filter_fields`](#filter-fields) block supports the following:
 
 <a id="filter-fields-date-field"></a>
 
-**Date Field**
+#### Date Field
 
 A [`date_field`](#filter-fields-date-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
@@ -106,7 +106,7 @@ A [`date_field`](#filter-fields-date-field) block (within [`filter_fields`](#fil
 
 <a id="filter-fields-date-field-absolute"></a>
 
-**Absolute**
+#### Absolute
 
 An [`absolute`](#filter-fields-date-field-absolute) block (within [`filter_fields.date_field`](#filter-fields-date-field)) supports the following:
 
@@ -116,7 +116,7 @@ An [`absolute`](#filter-fields-date-field-absolute) block (within [`filter_field
 
 <a id="filter-fields-filter-expression-field"></a>
 
-**Filter Expression Field**
+#### Filter Expression Field
 
 A [`filter_expression_field`](#filter-fields-filter-expression-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
@@ -124,7 +124,7 @@ A [`filter_expression_field`](#filter-fields-filter-expression-field) block (wit
 
 <a id="filter-fields-string-field"></a>
 
-**String Field**
+#### String Field
 
 A [`string_field`](#filter-fields-string-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
@@ -132,7 +132,7 @@ A [`string_field`](#filter-fields-string-field) block (within [`filter_fields`](
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

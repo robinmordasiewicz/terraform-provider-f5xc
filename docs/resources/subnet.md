@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="connect-to-layer2"></a>
 
-**Connect To Layer2**
+#### Connect To Layer2
 
 A [`connect_to_layer2`](#connect-to-layer2) block supports the following:
 
@@ -93,7 +93,7 @@ A [`connect_to_layer2`](#connect-to-layer2) block supports the following:
 
 <a id="connect-to-layer2-layer2-intf-ref"></a>
 
-**Layer2 Intf Ref**
+#### Layer2 Intf Ref
 
 A [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) block (within [`connect_to_layer2`](#connect-to-layer2)) supports the following:
 
@@ -105,7 +105,7 @@ A [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) block (within [`connec
 
 <a id="site-subnet-params"></a>
 
-**Site Subnet Params**
+#### Site Subnet Params
 
 A [`site_subnet_params`](#site-subnet-params) block supports the following:
 
@@ -119,7 +119,7 @@ A [`site_subnet_params`](#site-subnet-params) block supports the following:
 
 <a id="site-subnet-params-site"></a>
 
-**Site**
+#### Site
 
 A [`site`](#site-subnet-params-site) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
 
@@ -131,7 +131,7 @@ A [`site`](#site-subnet-params-site) block (within [`site_subnet_params`](#site-
 
 <a id="site-subnet-params-subnet-dhcp-server-params"></a>
 
-**Subnet DHCP Server Params**
+#### Subnet DHCP Server Params
 
 A [`subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
 
@@ -139,7 +139,7 @@ A [`subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params) b
 
 <a id="site-subnet-params-subnet-dhcp-server-params-dhcp-networks"></a>
 
-**DHCP Networks**
+#### DHCP Networks
 
 A [`dhcp_networks`](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) block (within [`site_subnet_params.subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params)) supports the following:
 
@@ -147,7 +147,7 @@ A [`dhcp_networks`](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks)
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

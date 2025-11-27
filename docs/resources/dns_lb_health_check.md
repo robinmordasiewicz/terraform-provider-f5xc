@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-health-check"></a>
 
-**HTTP Health Check**
+#### HTTP Health Check
 
 A [`http_health_check`](#http-health-check) block supports the following:
 
@@ -100,7 +100,7 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 <a id="https-health-check"></a>
 
-**HTTPS Health Check**
+#### HTTPS Health Check
 
 A [`https_health_check`](#https-health-check) block supports the following:
 
@@ -114,7 +114,7 @@ A [`https_health_check`](#https-health-check) block supports the following:
 
 <a id="tcp-health-check"></a>
 
-**TCP Health Check**
+#### TCP Health Check
 
 A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
@@ -128,7 +128,7 @@ A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
 <a id="tcp-hex-health-check"></a>
 
-**TCP Hex Health Check**
+#### TCP Hex Health Check
 
 A [`tcp_hex_health_check`](#tcp-hex-health-check) block supports the following:
 
@@ -142,7 +142,7 @@ A [`tcp_hex_health_check`](#tcp-hex-health-check) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -156,7 +156,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="udp-health-check"></a>
 
-**UDP Health Check**
+#### UDP Health Check
 
 An [`udp_health_check`](#udp-health-check) block supports the following:
 

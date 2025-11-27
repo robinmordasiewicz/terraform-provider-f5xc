@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#rules) block supports the following:
 
@@ -92,7 +92,7 @@ A [`rules`](#rules) block supports the following:
 
 <a id="rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#rules-metadata) block (within [`rules`](#rules)) supports the following:
 
@@ -102,7 +102,7 @@ A [`metadata`](#rules-metadata) block (within [`rules`](#rules)) supports the fo
 
 <a id="rules-spec"></a>
 
-**Spec**
+#### Spec
 
 A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
@@ -138,7 +138,7 @@ A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
 <a id="rules-spec-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#rules-spec-asn-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -146,7 +146,7 @@ An [`asn_list`](#rules-spec-asn-list) block (within [`rules.spec`](#rules-spec))
 
 <a id="rules-spec-asn-matcher"></a>
 
-**Asn Matcher**
+#### Asn Matcher
 
 An [`asn_matcher`](#rules-spec-asn-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -154,7 +154,7 @@ An [`asn_matcher`](#rules-spec-asn-matcher) block (within [`rules.spec`](#rules-
 
 <a id="rules-spec-asn-matcher-asn-sets"></a>
 
-**Asn Sets**
+#### Asn Sets
 
 An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn_matcher`](#rules-spec-asn-matcher)) supports the following:
 
@@ -170,7 +170,7 @@ An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn
 
 <a id="rules-spec-country-list"></a>
 
-**Country List**
+#### Country List
 
 A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -180,7 +180,7 @@ A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules
 
 <a id="rules-spec-custom-rate-limiter"></a>
 
-**Custom Rate Limiter**
+#### Custom Rate Limiter
 
 A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -192,7 +192,7 @@ A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules
 
 <a id="rules-spec-domain-matcher"></a>
 
-**Domain Matcher**
+#### Domain Matcher
 
 A [`domain_matcher`](#rules-spec-domain-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -202,7 +202,7 @@ A [`domain_matcher`](#rules-spec-domain-matcher) block (within [`rules.spec`](#r
 
 <a id="rules-spec-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#rules-spec-headers) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -218,7 +218,7 @@ A [`headers`](#rules-spec-headers) block (within [`rules.spec`](#rules-spec)) su
 
 <a id="rules-spec-headers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#rules-spec-headers-item) block (within [`rules.spec.headers`](#rules-spec-headers)) supports the following:
 
@@ -230,7 +230,7 @@ An [`item`](#rules-spec-headers-item) block (within [`rules.spec.headers`](#rule
 
 <a id="rules-spec-http-method"></a>
 
-**HTTP Method**
+#### HTTP Method
 
 A [`http_method`](#rules-spec-http-method) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -240,7 +240,7 @@ A [`http_method`](#rules-spec-http-method) block (within [`rules.spec`](#rules-s
 
 <a id="rules-spec-ip-matcher"></a>
 
-**IP Matcher**
+#### IP Matcher
 
 An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -250,7 +250,7 @@ An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-sp
 
 <a id="rules-spec-ip-matcher-prefix-sets"></a>
 
-**Prefix Sets**
+#### Prefix Sets
 
 A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec.ip_matcher`](#rules-spec-ip-matcher)) supports the following:
 
@@ -266,7 +266,7 @@ A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec
 
 <a id="rules-spec-ip-prefix-list"></a>
 
-**IP Prefix List**
+#### IP Prefix List
 
 An [`ip_prefix_list`](#rules-spec-ip-prefix-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -276,7 +276,7 @@ An [`ip_prefix_list`](#rules-spec-ip-prefix-list) block (within [`rules.spec`](#
 
 <a id="rules-spec-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#rules-spec-path) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -294,7 +294,7 @@ A [`path`](#rules-spec-path) block (within [`rules.spec`](#rules-spec)) supports
 
 <a id="server-name-matcher"></a>
 
-**Server Name Matcher**
+#### Server Name Matcher
 
 A [`server_name_matcher`](#server-name-matcher) block supports the following:
 
@@ -304,7 +304,7 @@ A [`server_name_matcher`](#server-name-matcher) block supports the following:
 
 <a id="server-selector"></a>
 
-**Server Selector**
+#### Server Selector
 
 A [`server_selector`](#server-selector) block supports the following:
 
@@ -312,7 +312,7 @@ A [`server_selector`](#server-selector) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

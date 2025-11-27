@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="business-logic-markup-setting"></a>
 
-**Business Logic Markup Setting**
+#### Business Logic Markup Setting
 
 A [`business_logic_markup_setting`](#business-logic-markup-setting) block supports the following:
 
@@ -94,7 +94,7 @@ A [`business_logic_markup_setting`](#business-logic-markup-setting) block suppor
 
 <a id="business-logic-markup-setting-discovered-api-settings"></a>
 
-**Discovered API Settings**
+#### Discovered API Settings
 
 A [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-settings) block (within [`business_logic_markup_setting`](#business-logic-markup-setting)) supports the following:
 
@@ -102,7 +102,7 @@ A [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-sett
 
 <a id="features"></a>
 
-**Features**
+#### Features
 
 A [`features`](#features) block supports the following:
 
@@ -110,7 +110,7 @@ A [`features`](#features) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

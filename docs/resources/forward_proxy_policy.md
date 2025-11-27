@@ -98,7 +98,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="allow-list"></a>
 
-**Allow List**
+#### Allow List
 
 An [`allow_list`](#allow-list) block supports the following:
 
@@ -116,7 +116,7 @@ An [`allow_list`](#allow-list) block supports the following:
 
 <a id="allow-list-dest-list"></a>
 
-**Dest List**
+#### Dest List
 
 A [`dest_list`](#allow-list-dest-list) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -128,7 +128,7 @@ A [`dest_list`](#allow-list-dest-list) block (within [`allow_list`](#allow-list)
 
 <a id="allow-list-http-list"></a>
 
-**HTTP List**
+#### HTTP List
 
 A [`http_list`](#allow-list-http-list) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -148,7 +148,7 @@ A [`http_list`](#allow-list-http-list) block (within [`allow_list`](#allow-list)
 
 <a id="allow-list-tls-list"></a>
 
-**TLS List**
+#### TLS List
 
 A [`tls_list`](#allow-list-tls-list) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -160,7 +160,7 @@ A [`tls_list`](#allow-list-tls-list) block (within [`allow_list`](#allow-list)) 
 
 <a id="deny-list"></a>
 
-**Deny List**
+#### Deny List
 
 A [`deny_list`](#deny-list) block supports the following:
 
@@ -178,7 +178,7 @@ A [`deny_list`](#deny-list) block supports the following:
 
 <a id="deny-list-dest-list"></a>
 
-**Dest List**
+#### Dest List
 
 A [`dest_list`](#deny-list-dest-list) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -190,7 +190,7 @@ A [`dest_list`](#deny-list-dest-list) block (within [`deny_list`](#deny-list)) s
 
 <a id="deny-list-http-list"></a>
 
-**HTTP List**
+#### HTTP List
 
 A [`http_list`](#deny-list-http-list) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -210,7 +210,7 @@ A [`http_list`](#deny-list-http-list) block (within [`deny_list`](#deny-list)) s
 
 <a id="deny-list-tls-list"></a>
 
-**TLS List**
+#### TLS List
 
 A [`tls_list`](#deny-list-tls-list) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -222,7 +222,7 @@ A [`tls_list`](#deny-list-tls-list) block (within [`deny_list`](#deny-list)) sup
 
 <a id="network-connector"></a>
 
-**Network Connector**
+#### Network Connector
 
 A [`network_connector`](#network-connector) block supports the following:
 
@@ -234,7 +234,7 @@ A [`network_connector`](#network-connector) block supports the following:
 
 <a id="proxy-label-selector"></a>
 
-**Proxy Label Selector**
+#### Proxy Label Selector
 
 A [`proxy_label_selector`](#proxy-label-selector) block supports the following:
 
@@ -242,7 +242,7 @@ A [`proxy_label_selector`](#proxy-label-selector) block supports the following:
 
 <a id="rule-list"></a>
 
-**Rule List**
+#### Rule List
 
 A [`rule_list`](#rule-list) block supports the following:
 
@@ -250,7 +250,7 @@ A [`rule_list`](#rule-list) block supports the following:
 
 <a id="rule-list-rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
@@ -290,7 +290,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-dst-asn-list"></a>
 
-**Dst Asn List**
+#### Dst Asn List
 
 A [`dst_asn_list`](#rule-list-rules-dst-asn-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -298,7 +298,7 @@ A [`dst_asn_list`](#rule-list-rules-dst-asn-list) block (within [`rule_list.rule
 
 <a id="rule-list-rules-dst-asn-set"></a>
 
-**Dst Asn Set**
+#### Dst Asn Set
 
 A [`dst_asn_set`](#rule-list-rules-dst-asn-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -310,7 +310,7 @@ A [`dst_asn_set`](#rule-list-rules-dst-asn-set) block (within [`rule_list.rules`
 
 <a id="rule-list-rules-dst-ip-prefix-set"></a>
 
-**Dst IP Prefix Set**
+#### Dst IP Prefix Set
 
 A [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -322,7 +322,7 @@ A [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) block (within [`rule
 
 <a id="rule-list-rules-dst-label-selector"></a>
 
-**Dst Label Selector**
+#### Dst Label Selector
 
 A [`dst_label_selector`](#rule-list-rules-dst-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -330,7 +330,7 @@ A [`dst_label_selector`](#rule-list-rules-dst-label-selector) block (within [`ru
 
 <a id="rule-list-rules-dst-prefix-list"></a>
 
-**Dst Prefix List**
+#### Dst Prefix List
 
 A [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -338,7 +338,7 @@ A [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) block (within [`rule_lis
 
 <a id="rule-list-rules-http-list"></a>
 
-**HTTP List**
+#### HTTP List
 
 A [`http_list`](#rule-list-rules-http-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -346,7 +346,7 @@ A [`http_list`](#rule-list-rules-http-list) block (within [`rule_list.rules`](#r
 
 <a id="rule-list-rules-http-list-http-list"></a>
 
-**HTTP List**
+#### HTTP List
 
 A [`http_list`](#rule-list-rules-http-list-http-list) block (within [`rule_list.rules.http_list`](#rule-list-rules-http-list)) supports the following:
 
@@ -366,7 +366,7 @@ A [`http_list`](#rule-list-rules-http-list-http-list) block (within [`rule_list.
 
 <a id="rule-list-rules-ip-prefix-set"></a>
 
-**IP Prefix Set**
+#### IP Prefix Set
 
 An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -378,7 +378,7 @@ An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.r
 
 <a id="rule-list-rules-label-selector"></a>
 
-**Label Selector**
+#### Label Selector
 
 A [`label_selector`](#rule-list-rules-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -386,7 +386,7 @@ A [`label_selector`](#rule-list-rules-label-selector) block (within [`rule_list.
 
 <a id="rule-list-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -396,7 +396,7 @@ A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rul
 
 <a id="rule-list-rules-port-matcher"></a>
 
-**Port Matcher**
+#### Port Matcher
 
 A [`port_matcher`](#rule-list-rules-port-matcher) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -406,7 +406,7 @@ A [`port_matcher`](#rule-list-rules-port-matcher) block (within [`rule_list.rule
 
 <a id="rule-list-rules-prefix-list"></a>
 
-**Prefix List**
+#### Prefix List
 
 A [`prefix_list`](#rule-list-rules-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -414,7 +414,7 @@ A [`prefix_list`](#rule-list-rules-prefix-list) block (within [`rule_list.rules`
 
 <a id="rule-list-rules-tls-list"></a>
 
-**TLS List**
+#### TLS List
 
 A [`tls_list`](#rule-list-rules-tls-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -422,7 +422,7 @@ A [`tls_list`](#rule-list-rules-tls-list) block (within [`rule_list.rules`](#rul
 
 <a id="rule-list-rules-tls-list-tls-list"></a>
 
-**TLS List**
+#### TLS List
 
 A [`tls_list`](#rule-list-rules-tls-list-tls-list) block (within [`rule_list.rules.tls_list`](#rule-list-rules-tls-list)) supports the following:
 
@@ -434,7 +434,7 @@ A [`tls_list`](#rule-list-rules-tls-list-tls-list) block (within [`rule_list.rul
 
 <a id="rule-list-rules-url-category-list"></a>
 
-**URL Category List**
+#### URL Category List
 
 An [`url_category_list`](#rule-list-rules-url-category-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -442,7 +442,7 @@ An [`url_category_list`](#rule-list-rules-url-category-list) block (within [`rul
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

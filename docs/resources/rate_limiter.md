@@ -73,7 +73,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="limits"></a>
 
-**Limits**
+#### Limits
 
 A [`limits`](#limits) block supports the following:
 
@@ -95,7 +95,7 @@ A [`limits`](#limits) block supports the following:
 
 <a id="limits-action-block"></a>
 
-**Action Block**
+#### Action Block
 
 An [`action_block`](#limits-action-block) block (within [`limits`](#limits)) supports the following:
 
@@ -107,7 +107,7 @@ An [`action_block`](#limits-action-block) block (within [`limits`](#limits)) sup
 
 <a id="limits-action-block-hours"></a>
 
-**Hours**
+#### Hours
 
 A [`hours`](#limits-action-block-hours) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
@@ -115,7 +115,7 @@ A [`hours`](#limits-action-block-hours) block (within [`limits.action_block`](#l
 
 <a id="limits-action-block-minutes"></a>
 
-**Minutes**
+#### Minutes
 
 A [`minutes`](#limits-action-block-minutes) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
@@ -123,7 +123,7 @@ A [`minutes`](#limits-action-block-minutes) block (within [`limits.action_block`
 
 <a id="limits-action-block-seconds"></a>
 
-**Seconds**
+#### Seconds
 
 A [`seconds`](#limits-action-block-seconds) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
@@ -131,7 +131,7 @@ A [`seconds`](#limits-action-block-seconds) block (within [`limits.action_block`
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -145,7 +145,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="user-identification"></a>
 
-**User Identification**
+#### User Identification
 
 An [`user_identification`](#user-identification) block supports the following:
 

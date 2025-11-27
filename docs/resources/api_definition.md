@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-inventory-exclusion-list"></a>
 
-**API Inventory Exclusion List**
+#### API Inventory Exclusion List
 
 An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block supports the following:
 
@@ -93,7 +93,7 @@ An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block support
 
 <a id="api-inventory-inclusion-list"></a>
 
-**API Inventory Inclusion List**
+#### API Inventory Inclusion List
 
 An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block supports the following:
 
@@ -103,7 +103,7 @@ An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block support
 
 <a id="non-api-endpoints"></a>
 
-**Non API Endpoints**
+#### Non API Endpoints
 
 A [`non_api_endpoints`](#non-api-endpoints) block supports the following:
 
@@ -113,7 +113,7 @@ A [`non_api_endpoints`](#non-api-endpoints) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

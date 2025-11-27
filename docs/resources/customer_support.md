@@ -104,7 +104,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="comments"></a>
 
-**Comments**
+#### Comments
 
 A [`comments`](#comments) block supports the following:
 
@@ -124,7 +124,7 @@ A [`comments`](#comments) block supports the following:
 
 <a id="comments-attachments-info"></a>
 
-**Attachments Info**
+#### Attachments Info
 
 An [`attachments_info`](#comments-attachments-info) block (within [`comments`](#comments)) supports the following:
 
@@ -138,7 +138,7 @@ An [`attachments_info`](#comments-attachments-info) block (within [`comments`](#
 
 <a id="relates-to"></a>
 
-**Relates To**
+#### Relates To
 
 A [`relates_to`](#relates-to) block supports the following:
 
@@ -154,7 +154,7 @@ A [`relates_to`](#relates-to) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

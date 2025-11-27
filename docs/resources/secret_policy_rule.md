@@ -81,7 +81,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="client-name-matcher"></a>
 
-**Client Name Matcher**
+#### Client Name Matcher
 
 A [`client_name_matcher`](#client-name-matcher) block supports the following:
 
@@ -91,7 +91,7 @@ A [`client_name_matcher`](#client-name-matcher) block supports the following:
 
 <a id="client-selector"></a>
 
-**Client Selector**
+#### Client Selector
 
 A [`client_selector`](#client-selector) block supports the following:
 
@@ -99,7 +99,7 @@ A [`client_selector`](#client-selector) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

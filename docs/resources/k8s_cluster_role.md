@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="k8s-cluster-role-selector"></a>
 
-**K8s Cluster Role Selector**
+#### K8s Cluster Role Selector
 
 A [`k8s_cluster_role_selector`](#k8s-cluster-role-selector) block supports the following:
 
@@ -91,7 +91,7 @@ A [`k8s_cluster_role_selector`](#k8s-cluster-role-selector) block supports the f
 
 <a id="policy-rule-list"></a>
 
-**Policy Rule List**
+#### Policy Rule List
 
 A [`policy_rule_list`](#policy-rule-list) block supports the following:
 
@@ -99,7 +99,7 @@ A [`policy_rule_list`](#policy-rule-list) block supports the following:
 
 <a id="policy-rule-list-policy-rule"></a>
 
-**Policy Rule**
+#### Policy Rule
 
 A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_list`](#policy-rule-list)) supports the following:
 
@@ -109,7 +109,7 @@ A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_lis
 
 <a id="policy-rule-list-policy-rule-non-resource-url-list"></a>
 
-**Non Resource URL List**
+#### Non Resource URL List
 
 A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
@@ -119,7 +119,7 @@ A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list)
 
 <a id="policy-rule-list-policy-rule-resource-list"></a>
 
-**Resource List**
+#### Resource List
 
 A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
@@ -133,7 +133,7 @@ A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

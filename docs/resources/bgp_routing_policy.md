@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#rules) block supports the following:
 
@@ -90,7 +90,7 @@ A [`rules`](#rules) block supports the following:
 
 <a id="rules-action"></a>
 
-**Action**
+#### Action
 
 An [`action`](#rules-action) block (within [`rules`](#rules)) supports the following:
 
@@ -110,7 +110,7 @@ An [`action`](#rules-action) block (within [`rules`](#rules)) supports the follo
 
 <a id="rules-action-community"></a>
 
-**Community**
+#### Community
 
 A [`community`](#rules-action-community) block (within [`rules.action`](#rules-action)) supports the following:
 
@@ -118,7 +118,7 @@ A [`community`](#rules-action-community) block (within [`rules.action`](#rules-a
 
 <a id="rules-match"></a>
 
-**Match**
+#### Match
 
 A [`match`](#rules-match) block (within [`rules`](#rules)) supports the following:
 
@@ -130,7 +130,7 @@ A [`match`](#rules-match) block (within [`rules`](#rules)) supports the followin
 
 <a id="rules-match-community"></a>
 
-**Community**
+#### Community
 
 A [`community`](#rules-match-community) block (within [`rules.match`](#rules-match)) supports the following:
 
@@ -138,7 +138,7 @@ A [`community`](#rules-match-community) block (within [`rules.match`](#rules-mat
 
 <a id="rules-match-ip-prefixes"></a>
 
-**IP Prefixes**
+#### IP Prefixes
 
 An [`ip_prefixes`](#rules-match-ip-prefixes) block (within [`rules.match`](#rules-match)) supports the following:
 
@@ -146,7 +146,7 @@ An [`ip_prefixes`](#rules-match-ip-prefixes) block (within [`rules.match`](#rule
 
 <a id="rules-match-ip-prefixes-prefixes"></a>
 
-**Prefixes**
+#### Prefixes
 
 A [`prefixes`](#rules-match-ip-prefixes-prefixes) block (within [`rules.match.ip_prefixes`](#rules-match-ip-prefixes)) supports the following:
 
@@ -160,7 +160,7 @@ A [`prefixes`](#rules-match-ip-prefixes-prefixes) block (within [`rules.match.ip
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

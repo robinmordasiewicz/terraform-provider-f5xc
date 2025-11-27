@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="custom-data-types"></a>
 
-**Custom Data Types**
+#### Custom Data Types
 
 A [`custom_data_types`](#custom-data-types) block supports the following:
 
@@ -88,7 +88,7 @@ A [`custom_data_types`](#custom-data-types) block supports the following:
 
 <a id="custom-data-types-custom-data-type-ref"></a>
 
-**Custom Data Type Ref**
+#### Custom Data Type Ref
 
 A [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) block (within [`custom_data_types`](#custom-data-types)) supports the following:
 
@@ -100,7 +100,7 @@ A [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) block (withi
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

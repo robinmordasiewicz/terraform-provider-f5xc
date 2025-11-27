@@ -71,7 +71,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="custom-geo-location-selector"></a>
 
-**Custom Geo Location Selector**
+#### Custom Geo Location Selector
 
 A [`custom_geo_location_selector`](#custom-geo-location-selector) block supports the following:
 
@@ -79,7 +79,7 @@ A [`custom_geo_location_selector`](#custom-geo-location-selector) block supports
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

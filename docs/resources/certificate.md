@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="certificate-chain"></a>
 
-**Certificate Chain**
+#### Certificate Chain
 
 A [`certificate_chain`](#certificate-chain) block supports the following:
 
@@ -95,7 +95,7 @@ A [`certificate_chain`](#certificate-chain) block supports the following:
 
 <a id="custom-hash-algorithms"></a>
 
-**Custom Hash Algorithms**
+#### Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#custom-hash-algorithms) block supports the following:
 
@@ -103,7 +103,7 @@ A [`custom_hash_algorithms`](#custom-hash-algorithms) block supports the followi
 
 <a id="private-key"></a>
 
-**Private Key**
+#### Private Key
 
 A [`private_key`](#private-key) block supports the following:
 
@@ -113,7 +113,7 @@ A [`private_key`](#private-key) block supports the following:
 
 <a id="private-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
@@ -125,7 +125,7 @@ A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`
 
 <a id="private-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
@@ -135,7 +135,7 @@ A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

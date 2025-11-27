@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="azure-oidc-spec-type"></a>
 
-**Azure Oidc Spec Type**
+#### Azure Oidc Spec Type
 
 An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
 
@@ -114,7 +114,7 @@ An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
 
 <a id="google-oidc-spec-type"></a>
 
-**Google Oidc Spec Type**
+#### Google Oidc Spec Type
 
 A [`google_oidc_spec_type`](#google-oidc-spec-type) block supports the following:
 
@@ -126,7 +126,7 @@ A [`google_oidc_spec_type`](#google-oidc-spec-type) block supports the following
 
 <a id="oidc-v10-spec-type"></a>
 
-**Oidc V10 Spec Type**
+#### Oidc V10 Spec Type
 
 An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
@@ -168,7 +168,7 @@ An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
 <a id="okta-oidc-spec-type"></a>
 
-**Okta Oidc Spec Type**
+#### Okta Oidc Spec Type
 
 An [`okta_oidc_spec_type`](#okta-oidc-spec-type) block supports the following:
 
@@ -196,7 +196,7 @@ An [`okta_oidc_spec_type`](#okta-oidc-spec-type) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

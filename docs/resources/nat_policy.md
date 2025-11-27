@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#rules) block supports the following:
 
@@ -106,7 +106,7 @@ A [`rules`](#rules) block supports the following:
 
 <a id="rules-action"></a>
 
-**Action**
+#### Action
 
 An [`action`](#rules-action) block (within [`rules`](#rules)) supports the following:
 
@@ -116,7 +116,7 @@ An [`action`](#rules-action) block (within [`rules`](#rules)) supports the follo
 
 <a id="rules-action-dynamic"></a>
 
-**Dynamic**
+#### Dynamic
 
 A [`dynamic`](#rules-action-dynamic) block (within [`rules.action`](#rules-action)) supports the following:
 
@@ -126,7 +126,7 @@ A [`dynamic`](#rules-action-dynamic) block (within [`rules.action`](#rules-actio
 
 <a id="rules-action-dynamic-elastic-ips"></a>
 
-**Elastic Ips**
+#### Elastic Ips
 
 An [`elastic_ips`](#rules-action-dynamic-elastic-ips) block (within [`rules.action.dynamic`](#rules-action-dynamic)) supports the following:
 
@@ -134,7 +134,7 @@ An [`elastic_ips`](#rules-action-dynamic-elastic-ips) block (within [`rules.acti
 
 <a id="rules-action-dynamic-elastic-ips-refs"></a>
 
-**Refs**
+#### Refs
 
 A [`refs`](#rules-action-dynamic-elastic-ips-refs) block (within [`rules.action.dynamic.elastic_ips`](#rules-action-dynamic-elastic-ips)) supports the following:
 
@@ -150,7 +150,7 @@ A [`refs`](#rules-action-dynamic-elastic-ips-refs) block (within [`rules.action.
 
 <a id="rules-action-dynamic-pools"></a>
 
-**Pools**
+#### Pools
 
 A [`pools`](#rules-action-dynamic-pools) block (within [`rules.action.dynamic`](#rules-action-dynamic)) supports the following:
 
@@ -158,7 +158,7 @@ A [`pools`](#rules-action-dynamic-pools) block (within [`rules.action.dynamic`](
 
 <a id="rules-cloud-connect"></a>
 
-**Cloud Connect**
+#### Cloud Connect
 
 A [`cloud_connect`](#rules-cloud-connect) block (within [`rules`](#rules)) supports the following:
 
@@ -166,7 +166,7 @@ A [`cloud_connect`](#rules-cloud-connect) block (within [`rules`](#rules)) suppo
 
 <a id="rules-cloud-connect-refs"></a>
 
-**Refs**
+#### Refs
 
 A [`refs`](#rules-cloud-connect-refs) block (within [`rules.cloud_connect`](#rules-cloud-connect)) supports the following:
 
@@ -182,7 +182,7 @@ A [`refs`](#rules-cloud-connect-refs) block (within [`rules.cloud_connect`](#rul
 
 <a id="rules-criteria"></a>
 
-**Criteria**
+#### Criteria
 
 A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the following:
 
@@ -210,7 +210,7 @@ A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the fo
 
 <a id="rules-criteria-destination-port"></a>
 
-**Destination Port**
+#### Destination Port
 
 A [`destination_port`](#rules-criteria-destination-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -222,7 +222,7 @@ A [`destination_port`](#rules-criteria-destination-port) block (within [`rules.c
 
 <a id="rules-criteria-segment"></a>
 
-**Segment**
+#### Segment
 
 A [`segment`](#rules-criteria-segment) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -230,7 +230,7 @@ A [`segment`](#rules-criteria-segment) block (within [`rules.criteria`](#rules-c
 
 <a id="rules-criteria-segment-refs"></a>
 
-**Refs**
+#### Refs
 
 A [`refs`](#rules-criteria-segment-refs) block (within [`rules.criteria.segment`](#rules-criteria-segment)) supports the following:
 
@@ -246,7 +246,7 @@ A [`refs`](#rules-criteria-segment-refs) block (within [`rules.criteria.segment`
 
 <a id="rules-criteria-source-port"></a>
 
-**Source Port**
+#### Source Port
 
 A [`source_port`](#rules-criteria-source-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -258,7 +258,7 @@ A [`source_port`](#rules-criteria-source-port) block (within [`rules.criteria`](
 
 <a id="rules-criteria-tcp"></a>
 
-**TCP**
+#### TCP
 
 A [`tcp`](#rules-criteria-tcp) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -268,7 +268,7 @@ A [`tcp`](#rules-criteria-tcp) block (within [`rules.criteria`](#rules-criteria)
 
 <a id="rules-criteria-tcp-destination-port"></a>
 
-**Destination Port**
+#### Destination Port
 
 A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
@@ -280,7 +280,7 @@ A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rul
 
 <a id="rules-criteria-tcp-source-port"></a>
 
-**Source Port**
+#### Source Port
 
 A [`source_port`](#rules-criteria-tcp-source-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
@@ -292,7 +292,7 @@ A [`source_port`](#rules-criteria-tcp-source-port) block (within [`rules.criteri
 
 <a id="rules-criteria-udp"></a>
 
-**UDP**
+#### UDP
 
 An [`udp`](#rules-criteria-udp) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -302,7 +302,7 @@ An [`udp`](#rules-criteria-udp) block (within [`rules.criteria`](#rules-criteria
 
 <a id="rules-criteria-udp-destination-port"></a>
 
-**Destination Port**
+#### Destination Port
 
 A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
@@ -314,7 +314,7 @@ A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rul
 
 <a id="rules-criteria-udp-source-port"></a>
 
-**Source Port**
+#### Source Port
 
 A [`source_port`](#rules-criteria-udp-source-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
@@ -326,7 +326,7 @@ A [`source_port`](#rules-criteria-udp-source-port) block (within [`rules.criteri
 
 <a id="rules-criteria-virtual-network"></a>
 
-**Virtual Network**
+#### Virtual Network
 
 A [`virtual_network`](#rules-criteria-virtual-network) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -334,7 +334,7 @@ A [`virtual_network`](#rules-criteria-virtual-network) block (within [`rules.cri
 
 <a id="rules-criteria-virtual-network-refs"></a>
 
-**Refs**
+#### Refs
 
 A [`refs`](#rules-criteria-virtual-network-refs) block (within [`rules.criteria.virtual_network`](#rules-criteria-virtual-network)) supports the following:
 
@@ -350,7 +350,7 @@ A [`refs`](#rules-criteria-virtual-network-refs) block (within [`rules.criteria.
 
 <a id="rules-network-interface"></a>
 
-**Network Interface**
+#### Network Interface
 
 A [`network_interface`](#rules-network-interface) block (within [`rules`](#rules)) supports the following:
 
@@ -358,7 +358,7 @@ A [`network_interface`](#rules-network-interface) block (within [`rules`](#rules
 
 <a id="rules-network-interface-refs"></a>
 
-**Refs**
+#### Refs
 
 A [`refs`](#rules-network-interface-refs) block (within [`rules.network_interface`](#rules-network-interface)) supports the following:
 
@@ -374,7 +374,7 @@ A [`refs`](#rules-network-interface-refs) block (within [`rules.network_interfac
 
 <a id="rules-segment"></a>
 
-**Segment**
+#### Segment
 
 A [`segment`](#rules-segment) block (within [`rules`](#rules)) supports the following:
 
@@ -382,7 +382,7 @@ A [`segment`](#rules-segment) block (within [`rules`](#rules)) supports the foll
 
 <a id="rules-segment-refs"></a>
 
-**Refs**
+#### Refs
 
 A [`refs`](#rules-segment-refs) block (within [`rules.segment`](#rules-segment)) supports the following:
 
@@ -398,7 +398,7 @@ A [`refs`](#rules-segment-refs) block (within [`rules.segment`](#rules-segment))
 
 <a id="rules-virtual-network"></a>
 
-**Virtual Network**
+#### Virtual Network
 
 A [`virtual_network`](#rules-virtual-network) block (within [`rules`](#rules)) supports the following:
 
@@ -406,7 +406,7 @@ A [`virtual_network`](#rules-virtual-network) block (within [`rules`](#rules)) s
 
 <a id="rules-virtual-network-refs"></a>
 
-**Refs**
+#### Refs
 
 A [`refs`](#rules-virtual-network-refs) block (within [`rules.virtual_network`](#rules-virtual-network)) supports the following:
 
@@ -422,7 +422,7 @@ A [`refs`](#rules-virtual-network-refs) block (within [`rules.virtual_network`](
 
 <a id="site"></a>
 
-**Site**
+#### Site
 
 A [`site`](#site) block supports the following:
 
@@ -430,7 +430,7 @@ A [`site`](#site) block supports the following:
 
 <a id="site-refs"></a>
 
-**Refs**
+#### Refs
 
 A [`refs`](#site-refs) block (within [`site`](#site)) supports the following:
 
@@ -446,7 +446,7 @@ A [`refs`](#site-refs) block (within [`site`](#site)) supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

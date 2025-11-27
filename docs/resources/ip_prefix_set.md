@@ -69,7 +69,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ipv4-prefixes"></a>
 
-**IPv4 Prefixes**
+#### IPv4 Prefixes
 
 An [`ipv4_prefixes`](#ipv4-prefixes) block supports the following:
 
@@ -79,7 +79,7 @@ An [`ipv4_prefixes`](#ipv4-prefixes) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-access"></a>
 
-**HTTP Access**
+#### HTTP Access
 
 A [`http_access`](#http-access) block supports the following:
 
@@ -88,7 +88,7 @@ A [`http_access`](#http-access) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

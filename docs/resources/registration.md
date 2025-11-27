@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="infra"></a>
 
-**Infra**
+#### Infra
 
 An [`infra`](#infra) block supports the following:
 
@@ -116,7 +116,7 @@ An [`infra`](#infra) block supports the following:
 
 <a id="infra-hw-info"></a>
 
-**Hw Info**
+#### Hw Info
 
 A [`hw_info`](#infra-hw-info) block (within [`infra`](#infra)) supports the following:
 
@@ -148,7 +148,7 @@ A [`hw_info`](#infra-hw-info) block (within [`infra`](#infra)) supports the foll
 
 <a id="infra-hw-info-bios"></a>
 
-**Bios**
+#### Bios
 
 A [`bios`](#infra-hw-info-bios) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -160,7 +160,7 @@ A [`bios`](#infra-hw-info-bios) block (within [`infra.hw_info`](#infra-hw-info))
 
 <a id="infra-hw-info-board"></a>
 
-**Board**
+#### Board
 
 A [`board`](#infra-hw-info-board) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -176,7 +176,7 @@ A [`board`](#infra-hw-info-board) block (within [`infra.hw_info`](#infra-hw-info
 
 <a id="infra-hw-info-chassis"></a>
 
-**Chassis**
+#### Chassis
 
 A [`chassis`](#infra-hw-info-chassis) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -192,7 +192,7 @@ A [`chassis`](#infra-hw-info-chassis) block (within [`infra.hw_info`](#infra-hw-
 
 <a id="infra-hw-info-cpu"></a>
 
-**CPU**
+#### CPU
 
 A [`cpu`](#infra-hw-info-cpu) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -212,7 +212,7 @@ A [`cpu`](#infra-hw-info-cpu) block (within [`infra.hw_info`](#infra-hw-info)) s
 
 <a id="infra-hw-info-gpu"></a>
 
-**GPU**
+#### GPU
 
 A [`gpu`](#infra-hw-info-gpu) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -224,7 +224,7 @@ A [`gpu`](#infra-hw-info-gpu) block (within [`infra.hw_info`](#infra-hw-info)) s
 
 <a id="infra-hw-info-gpu-gpu-device"></a>
 
-**GPU Device**
+#### GPU Device
 
 A [`gpu_device`](#infra-hw-info-gpu-gpu-device) block (within [`infra.hw_info.gpu`](#infra-hw-info-gpu)) supports the following:
 
@@ -236,7 +236,7 @@ A [`gpu_device`](#infra-hw-info-gpu-gpu-device) block (within [`infra.hw_info.gp
 
 <a id="infra-hw-info-kernel"></a>
 
-**Kernel**
+#### Kernel
 
 A [`kernel`](#infra-hw-info-kernel) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -248,7 +248,7 @@ A [`kernel`](#infra-hw-info-kernel) block (within [`infra.hw_info`](#infra-hw-in
 
 <a id="infra-hw-info-memory"></a>
 
-**Memory**
+#### Memory
 
 A [`memory`](#infra-hw-info-memory) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -260,7 +260,7 @@ A [`memory`](#infra-hw-info-memory) block (within [`infra.hw_info`](#infra-hw-in
 
 <a id="infra-hw-info-network"></a>
 
-**Network**
+#### Network
 
 A [`network`](#infra-hw-info-network) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -282,7 +282,7 @@ A [`network`](#infra-hw-info-network) block (within [`infra.hw_info`](#infra-hw-
 
 <a id="infra-hw-info-os"></a>
 
-**OS**
+#### OS
 
 An [`os`](#infra-hw-info-os) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -298,7 +298,7 @@ An [`os`](#infra-hw-info-os) block (within [`infra.hw_info`](#infra-hw-info)) su
 
 <a id="infra-hw-info-product"></a>
 
-**Product**
+#### Product
 
 A [`product`](#infra-hw-info-product) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -312,7 +312,7 @@ A [`product`](#infra-hw-info-product) block (within [`infra.hw_info`](#infra-hw-
 
 <a id="infra-hw-info-storage"></a>
 
-**Storage**
+#### Storage
 
 A [`storage`](#infra-hw-info-storage) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -330,7 +330,7 @@ A [`storage`](#infra-hw-info-storage) block (within [`infra.hw_info`](#infra-hw-
 
 <a id="infra-hw-info-usb"></a>
 
-**Usb**
+#### Usb
 
 An [`usb`](#infra-hw-info-usb) block (within [`infra.hw_info`](#infra-hw-info)) supports the following:
 
@@ -374,7 +374,7 @@ An [`usb`](#infra-hw-info-usb) block (within [`infra.hw_info`](#infra-hw-info)) 
 
 <a id="infra-internet-proxy"></a>
 
-**Internet Proxy**
+#### Internet Proxy
 
 An [`internet_proxy`](#infra-internet-proxy) block (within [`infra`](#infra)) supports the following:
 
@@ -388,7 +388,7 @@ An [`internet_proxy`](#infra-internet-proxy) block (within [`infra`](#infra)) su
 
 <a id="infra-sw-info"></a>
 
-**Sw Info**
+#### Sw Info
 
 A [`sw_info`](#infra-sw-info) block (within [`infra`](#infra)) supports the following:
 
@@ -396,7 +396,7 @@ A [`sw_info`](#infra-sw-info) block (within [`infra`](#infra)) supports the foll
 
 <a id="passport"></a>
 
-**Passport**
+#### Passport
 
 A [`passport`](#passport) block supports the following:
 
@@ -422,7 +422,7 @@ A [`passport`](#passport) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

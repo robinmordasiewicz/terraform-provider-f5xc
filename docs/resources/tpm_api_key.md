@@ -74,7 +74,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="category-ref"></a>
 
-**Category Ref**
+#### Category Ref
 
 A [`category_ref`](#category-ref) block supports the following:
 
@@ -90,7 +90,7 @@ A [`category_ref`](#category-ref) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="address-allocation-scheme"></a>
 
-**Address Allocation Scheme**
+#### Address Allocation Scheme
 
 An [`address_allocation_scheme`](#address-allocation-scheme) block supports the following:
 
@@ -88,7 +88,7 @@ An [`address_allocation_scheme`](#address-allocation-scheme) block supports the 
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

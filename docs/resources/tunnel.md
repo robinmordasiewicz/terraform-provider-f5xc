@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="local-ip"></a>
 
-**Local IP**
+#### Local IP
 
 A [`local_ip`](#local-ip) block supports the following:
 
@@ -100,7 +100,7 @@ A [`local_ip`](#local-ip) block supports the following:
 
 <a id="local-ip-intf"></a>
 
-**Intf**
+#### Intf
 
 An [`intf`](#local-ip-intf) block (within [`local_ip`](#local-ip)) supports the following:
 
@@ -108,7 +108,7 @@ An [`intf`](#local-ip-intf) block (within [`local_ip`](#local-ip)) supports the 
 
 <a id="local-ip-intf-local-intf"></a>
 
-**Local Intf**
+#### Local Intf
 
 A [`local_intf`](#local-ip-intf-local-intf) block (within [`local_ip.intf`](#local-ip-intf)) supports the following:
 
@@ -124,7 +124,7 @@ A [`local_intf`](#local-ip-intf-local-intf) block (within [`local_ip.intf`](#loc
 
 <a id="local-ip-ip-address"></a>
 
-**IP Address**
+#### IP Address
 
 An [`ip_address`](#local-ip-ip-address) block (within [`local_ip`](#local-ip)) supports the following:
 
@@ -136,7 +136,7 @@ An [`ip_address`](#local-ip-ip-address) block (within [`local_ip`](#local-ip)) s
 
 <a id="local-ip-ip-address-ip-address"></a>
 
-**IP Address**
+#### IP Address
 
 An [`ip_address`](#local-ip-ip-address-ip-address) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
 
@@ -146,7 +146,7 @@ An [`ip_address`](#local-ip-ip-address-ip-address) block (within [`local_ip.ip_a
 
 <a id="local-ip-ip-address-ip-address-ipv4"></a>
 
-**IPv4**
+#### IPv4
 
 An [`ipv4`](#local-ip-ip-address-ip-address-ipv4) block (within [`local_ip.ip_address.ip_address`](#local-ip-ip-address-ip-address)) supports the following:
 
@@ -154,7 +154,7 @@ An [`ipv4`](#local-ip-ip-address-ip-address-ipv4) block (within [`local_ip.ip_ad
 
 <a id="local-ip-ip-address-ip-address-ipv6"></a>
 
-**IPv6**
+#### IPv6
 
 An [`ipv6`](#local-ip-ip-address-ip-address-ipv6) block (within [`local_ip.ip_address.ip_address`](#local-ip-ip-address-ip-address)) supports the following:
 
@@ -162,7 +162,7 @@ An [`ipv6`](#local-ip-ip-address-ip-address-ipv6) block (within [`local_ip.ip_ad
 
 <a id="local-ip-ip-address-virtual-network-type"></a>
 
-**Virtual Network Type**
+#### Virtual Network Type
 
 A [`virtual_network_type`](#local-ip-ip-address-virtual-network-type) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
 
@@ -174,7 +174,7 @@ A [`virtual_network_type`](#local-ip-ip-address-virtual-network-type) block (wit
 
 <a id="params"></a>
 
-**Params**
+#### Params
 
 A [`params`](#params) block supports the following:
 
@@ -182,7 +182,7 @@ A [`params`](#params) block supports the following:
 
 <a id="params-ipsec"></a>
 
-**Ipsec**
+#### Ipsec
 
 An [`ipsec`](#params-ipsec) block (within [`params`](#params)) supports the following:
 
@@ -190,7 +190,7 @@ An [`ipsec`](#params-ipsec) block (within [`params`](#params)) supports the foll
 
 <a id="params-ipsec-ipsec-psk"></a>
 
-**Ipsec Psk**
+#### Ipsec Psk
 
 An [`ipsec_psk`](#params-ipsec-ipsec-psk) block (within [`params.ipsec`](#params-ipsec)) supports the following:
 
@@ -200,7 +200,7 @@ An [`ipsec_psk`](#params-ipsec-ipsec-psk) block (within [`params.ipsec`](#params
 
 <a id="params-ipsec-ipsec-psk-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
@@ -212,7 +212,7 @@ A [`blindfold_secret_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) block
 
 <a id="params-ipsec-ipsec-psk-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#params-ipsec-ipsec-psk-clear-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
@@ -222,7 +222,7 @@ A [`clear_secret_info`](#params-ipsec-ipsec-psk-clear-secret-info) block (within
 
 <a id="remote-ip"></a>
 
-**Remote IP**
+#### Remote IP
 
 A [`remote_ip`](#remote-ip) block supports the following:
 
@@ -232,7 +232,7 @@ A [`remote_ip`](#remote-ip) block supports the following:
 
 <a id="remote-ip-endpoints"></a>
 
-**Endpoints**
+#### Endpoints
 
 An [`endpoints`](#remote-ip-endpoints) block (within [`remote_ip`](#remote-ip)) supports the following:
 
@@ -240,7 +240,7 @@ An [`endpoints`](#remote-ip-endpoints) block (within [`remote_ip`](#remote-ip)) 
 
 <a id="remote-ip-ip"></a>
 
-**IP**
+#### IP
 
 An [`ip`](#remote-ip-ip) block (within [`remote_ip`](#remote-ip)) supports the following:
 
@@ -250,7 +250,7 @@ An [`ip`](#remote-ip-ip) block (within [`remote_ip`](#remote-ip)) supports the f
 
 <a id="remote-ip-ip-ipv4"></a>
 
-**IPv4**
+#### IPv4
 
 An [`ipv4`](#remote-ip-ip-ipv4) block (within [`remote_ip.ip`](#remote-ip-ip)) supports the following:
 
@@ -258,7 +258,7 @@ An [`ipv4`](#remote-ip-ip-ipv4) block (within [`remote_ip.ip`](#remote-ip-ip)) s
 
 <a id="remote-ip-ip-ipv6"></a>
 
-**IPv6**
+#### IPv6
 
 An [`ipv6`](#remote-ip-ip-ipv6) block (within [`remote_ip.ip`](#remote-ip-ip)) supports the following:
 
@@ -266,7 +266,7 @@ An [`ipv6`](#remote-ip-ip-ipv6) block (within [`remote_ip.ip`](#remote-ip-ip)) s
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

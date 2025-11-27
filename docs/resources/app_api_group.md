@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bigip-virtual-server"></a>
 
-**Bigip Virtual Server**
+#### Bigip Virtual Server
 
 A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
 
@@ -93,7 +93,7 @@ A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
 
 <a id="bigip-virtual-server-bigip-virtual-server"></a>
 
-**Bigip Virtual Server**
+#### Bigip Virtual Server
 
 A [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) block (within [`bigip_virtual_server`](#bigip-virtual-server)) supports the following:
 
@@ -105,7 +105,7 @@ A [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) block (wi
 
 <a id="cdn-loadbalancer"></a>
 
-**CDN Loadbalancer**
+#### CDN Loadbalancer
 
 A [`cdn_loadbalancer`](#cdn-loadbalancer) block supports the following:
 
@@ -113,7 +113,7 @@ A [`cdn_loadbalancer`](#cdn-loadbalancer) block supports the following:
 
 <a id="cdn-loadbalancer-cdn-loadbalancer"></a>
 
-**CDN Loadbalancer**
+#### CDN Loadbalancer
 
 A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_loadbalancer`](#cdn-loadbalancer)) supports the following:
 
@@ -125,7 +125,7 @@ A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_l
 
 <a id="elements"></a>
 
-**Elements**
+#### Elements
 
 An [`elements`](#elements) block supports the following:
 
@@ -135,7 +135,7 @@ An [`elements`](#elements) block supports the following:
 
 <a id="http-loadbalancer"></a>
 
-**HTTP Loadbalancer**
+#### HTTP Loadbalancer
 
 A [`http_loadbalancer`](#http-loadbalancer) block supports the following:
 
@@ -143,7 +143,7 @@ A [`http_loadbalancer`](#http-loadbalancer) block supports the following:
 
 <a id="http-loadbalancer-http-loadbalancer"></a>
 
-**HTTP Loadbalancer**
+#### HTTP Loadbalancer
 
 A [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) block (within [`http_loadbalancer`](#http-loadbalancer)) supports the following:
 
@@ -155,7 +155,7 @@ A [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) block (within [`ht
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

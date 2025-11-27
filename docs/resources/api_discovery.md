@@ -72,7 +72,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="custom-auth-types"></a>
 
-**Custom Auth Types**
+#### Custom Auth Types
 
 A [`custom_auth_types`](#custom-auth-types) block supports the following:
 
@@ -82,7 +82,7 @@ A [`custom_auth_types`](#custom-auth-types) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

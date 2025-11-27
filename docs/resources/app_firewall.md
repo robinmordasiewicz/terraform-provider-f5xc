@@ -114,7 +114,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ai-risk-based-blocking"></a>
 
-**Ai Risk Based Blocking**
+#### Ai Risk Based Blocking
 
 An [`ai_risk_based_blocking`](#ai-risk-based-blocking) block supports the following:
 
@@ -126,7 +126,7 @@ An [`ai_risk_based_blocking`](#ai-risk-based-blocking) block supports the follow
 
 <a id="allowed-response-codes"></a>
 
-**Allowed Response Codes**
+#### Allowed Response Codes
 
 An [`allowed_response_codes`](#allowed-response-codes) block supports the following:
 
@@ -134,7 +134,7 @@ An [`allowed_response_codes`](#allowed-response-codes) block supports the follow
 
 <a id="blocking-page"></a>
 
-**Blocking Page**
+#### Blocking Page
 
 A [`blocking_page`](#blocking-page) block supports the following:
 
@@ -144,7 +144,7 @@ A [`blocking_page`](#blocking-page) block supports the following:
 
 <a id="bot-protection-setting"></a>
 
-**Bot Protection Setting**
+#### Bot Protection Setting
 
 A [`bot_protection_setting`](#bot-protection-setting) block supports the following:
 
@@ -156,7 +156,7 @@ A [`bot_protection_setting`](#bot-protection-setting) block supports the followi
 
 <a id="custom-anonymization"></a>
 
-**Custom Anonymization**
+#### Custom Anonymization
 
 A [`custom_anonymization`](#custom-anonymization) block supports the following:
 
@@ -164,7 +164,7 @@ A [`custom_anonymization`](#custom-anonymization) block supports the following:
 
 <a id="custom-anonymization-anonymization-config"></a>
 
-**Anonymization Config**
+#### Anonymization Config
 
 An [`anonymization_config`](#custom-anonymization-anonymization-config) block (within [`custom_anonymization`](#custom-anonymization)) supports the following:
 
@@ -176,7 +176,7 @@ An [`anonymization_config`](#custom-anonymization-anonymization-config) block (w
 
 <a id="custom-anonymization-anonymization-config-cookie"></a>
 
-**Cookie**
+#### Cookie
 
 A [`cookie`](#custom-anonymization-anonymization-config-cookie) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
@@ -184,7 +184,7 @@ A [`cookie`](#custom-anonymization-anonymization-config-cookie) block (within [`
 
 <a id="custom-anonymization-anonymization-config-http-header"></a>
 
-**HTTP Header**
+#### HTTP Header
 
 A [`http_header`](#custom-anonymization-anonymization-config-http-header) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
@@ -192,7 +192,7 @@ A [`http_header`](#custom-anonymization-anonymization-config-http-header) block 
 
 <a id="custom-anonymization-anonymization-config-query-parameter"></a>
 
-**Query Parameter**
+#### Query Parameter
 
 A [`query_parameter`](#custom-anonymization-anonymization-config-query-parameter) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
@@ -200,7 +200,7 @@ A [`query_parameter`](#custom-anonymization-anonymization-config-query-parameter
 
 <a id="detection-settings"></a>
 
-**Detection Settings**
+#### Detection Settings
 
 A [`detection_settings`](#detection-settings) block supports the following:
 
@@ -230,7 +230,7 @@ A [`detection_settings`](#detection-settings) block supports the following:
 
 <a id="detection-settings-bot-protection-setting"></a>
 
-**Bot Protection Setting**
+#### Bot Protection Setting
 
 A [`bot_protection_setting`](#detection-settings-bot-protection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
 
@@ -242,7 +242,7 @@ A [`bot_protection_setting`](#detection-settings-bot-protection-setting) block (
 
 <a id="detection-settings-signature-selection-setting"></a>
 
-**Signature Selection Setting**
+#### Signature Selection Setting
 
 A [`signature_selection_setting`](#detection-settings-signature-selection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
 
@@ -258,7 +258,7 @@ A [`signature_selection_setting`](#detection-settings-signature-selection-settin
 
 <a id="detection-settings-signature-selection-setting-attack-type-settings"></a>
 
-**Attack Type Settings**
+#### Attack Type Settings
 
 An [`attack_type_settings`](#detection-settings-signature-selection-setting-attack-type-settings) block (within [`detection_settings.signature_selection_setting`](#detection-settings-signature-selection-setting)) supports the following:
 
@@ -266,7 +266,7 @@ An [`attack_type_settings`](#detection-settings-signature-selection-setting-atta
 
 <a id="detection-settings-stage-new-and-updated-signatures"></a>
 
-**Stage New And Updated Signatures**
+#### Stage New And Updated Signatures
 
 A [`stage_new_and_updated_signatures`](#detection-settings-stage-new-and-updated-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
@@ -274,7 +274,7 @@ A [`stage_new_and_updated_signatures`](#detection-settings-stage-new-and-updated
 
 <a id="detection-settings-stage-new-signatures"></a>
 
-**Stage New Signatures**
+#### Stage New Signatures
 
 A [`stage_new_signatures`](#detection-settings-stage-new-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
@@ -282,7 +282,7 @@ A [`stage_new_signatures`](#detection-settings-stage-new-signatures) block (with
 
 <a id="detection-settings-violation-settings"></a>
 
-**Violation Settings**
+#### Violation Settings
 
 A [`violation_settings`](#detection-settings-violation-settings) block (within [`detection_settings`](#detection-settings)) supports the following:
 
@@ -290,7 +290,7 @@ A [`violation_settings`](#detection-settings-violation-settings) block (within [
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

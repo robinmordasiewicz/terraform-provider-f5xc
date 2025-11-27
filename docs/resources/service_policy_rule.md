@@ -137,7 +137,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="api-group-matcher"></a>
 
-**API Group Matcher**
+#### API Group Matcher
 
 An [`api_group_matcher`](#api-group-matcher) block supports the following:
 
@@ -147,7 +147,7 @@ An [`api_group_matcher`](#api-group-matcher) block supports the following:
 
 <a id="arg-matchers"></a>
 
-**Arg Matchers**
+#### Arg Matchers
 
 An [`arg_matchers`](#arg-matchers) block supports the following:
 
@@ -163,7 +163,7 @@ An [`arg_matchers`](#arg-matchers) block supports the following:
 
 <a id="arg-matchers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#arg-matchers-item) block (within [`arg_matchers`](#arg-matchers)) supports the following:
 
@@ -175,7 +175,7 @@ An [`item`](#arg-matchers-item) block (within [`arg_matchers`](#arg-matchers)) s
 
 <a id="asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#asn-list) block supports the following:
 
@@ -183,7 +183,7 @@ An [`asn_list`](#asn-list) block supports the following:
 
 <a id="asn-matcher"></a>
 
-**Asn Matcher**
+#### Asn Matcher
 
 An [`asn_matcher`](#asn-matcher) block supports the following:
 
@@ -191,7 +191,7 @@ An [`asn_matcher`](#asn-matcher) block supports the following:
 
 <a id="asn-matcher-asn-sets"></a>
 
-**Asn Sets**
+#### Asn Sets
 
 An [`asn_sets`](#asn-matcher-asn-sets) block (within [`asn_matcher`](#asn-matcher)) supports the following:
 
@@ -207,7 +207,7 @@ An [`asn_sets`](#asn-matcher-asn-sets) block (within [`asn_matcher`](#asn-matche
 
 <a id="body-matcher"></a>
 
-**Body Matcher**
+#### Body Matcher
 
 A [`body_matcher`](#body-matcher) block supports the following:
 
@@ -219,7 +219,7 @@ A [`body_matcher`](#body-matcher) block supports the following:
 
 <a id="bot-action"></a>
 
-**Bot Action**
+#### Bot Action
 
 A [`bot_action`](#bot-action) block supports the following:
 
@@ -229,7 +229,7 @@ A [`bot_action`](#bot-action) block supports the following:
 
 <a id="client-name-matcher"></a>
 
-**Client Name Matcher**
+#### Client Name Matcher
 
 A [`client_name_matcher`](#client-name-matcher) block supports the following:
 
@@ -239,7 +239,7 @@ A [`client_name_matcher`](#client-name-matcher) block supports the following:
 
 <a id="client-selector"></a>
 
-**Client Selector**
+#### Client Selector
 
 A [`client_selector`](#client-selector) block supports the following:
 
@@ -247,7 +247,7 @@ A [`client_selector`](#client-selector) block supports the following:
 
 <a id="cookie-matchers"></a>
 
-**Cookie Matchers**
+#### Cookie Matchers
 
 A [`cookie_matchers`](#cookie-matchers) block supports the following:
 
@@ -263,7 +263,7 @@ A [`cookie_matchers`](#cookie-matchers) block supports the following:
 
 <a id="cookie-matchers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#cookie-matchers-item) block (within [`cookie_matchers`](#cookie-matchers)) supports the following:
 
@@ -275,7 +275,7 @@ An [`item`](#cookie-matchers-item) block (within [`cookie_matchers`](#cookie-mat
 
 <a id="domain-matcher"></a>
 
-**Domain Matcher**
+#### Domain Matcher
 
 A [`domain_matcher`](#domain-matcher) block supports the following:
 
@@ -285,7 +285,7 @@ A [`domain_matcher`](#domain-matcher) block supports the following:
 
 <a id="headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#headers) block supports the following:
 
@@ -301,7 +301,7 @@ A [`headers`](#headers) block supports the following:
 
 <a id="headers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#headers-item) block (within [`headers`](#headers)) supports the following:
 
@@ -313,7 +313,7 @@ An [`item`](#headers-item) block (within [`headers`](#headers)) supports the fol
 
 <a id="http-method"></a>
 
-**HTTP Method**
+#### HTTP Method
 
 A [`http_method`](#http-method) block supports the following:
 
@@ -323,7 +323,7 @@ A [`http_method`](#http-method) block supports the following:
 
 <a id="ip-matcher"></a>
 
-**IP Matcher**
+#### IP Matcher
 
 An [`ip_matcher`](#ip-matcher) block supports the following:
 
@@ -333,7 +333,7 @@ An [`ip_matcher`](#ip-matcher) block supports the following:
 
 <a id="ip-matcher-prefix-sets"></a>
 
-**Prefix Sets**
+#### Prefix Sets
 
 A [`prefix_sets`](#ip-matcher-prefix-sets) block (within [`ip_matcher`](#ip-matcher)) supports the following:
 
@@ -349,7 +349,7 @@ A [`prefix_sets`](#ip-matcher-prefix-sets) block (within [`ip_matcher`](#ip-matc
 
 <a id="ip-prefix-list"></a>
 
-**IP Prefix List**
+#### IP Prefix List
 
 An [`ip_prefix_list`](#ip-prefix-list) block supports the following:
 
@@ -359,7 +359,7 @@ An [`ip_prefix_list`](#ip-prefix-list) block supports the following:
 
 <a id="ip-threat-category-list"></a>
 
-**IP Threat Category List**
+#### IP Threat Category List
 
 An [`ip_threat_category_list`](#ip-threat-category-list) block supports the following:
 
@@ -367,7 +367,7 @@ An [`ip_threat_category_list`](#ip-threat-category-list) block supports the foll
 
 <a id="ja4-tls-fingerprint"></a>
 
-**Ja4 TLS Fingerprint**
+#### Ja4 TLS Fingerprint
 
 A [`ja4_tls_fingerprint`](#ja4-tls-fingerprint) block supports the following:
 
@@ -375,7 +375,7 @@ A [`ja4_tls_fingerprint`](#ja4-tls-fingerprint) block supports the following:
 
 <a id="jwt-claims"></a>
 
-**JWT Claims**
+#### JWT Claims
 
 A [`jwt_claims`](#jwt-claims) block supports the following:
 
@@ -391,7 +391,7 @@ A [`jwt_claims`](#jwt-claims) block supports the following:
 
 <a id="jwt-claims-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#jwt-claims-item) block (within [`jwt_claims`](#jwt-claims)) supports the following:
 
@@ -403,7 +403,7 @@ An [`item`](#jwt-claims-item) block (within [`jwt_claims`](#jwt-claims)) support
 
 <a id="label-matcher"></a>
 
-**Label Matcher**
+#### Label Matcher
 
 A [`label_matcher`](#label-matcher) block supports the following:
 
@@ -411,7 +411,7 @@ A [`label_matcher`](#label-matcher) block supports the following:
 
 <a id="mum-action"></a>
 
-**Mum Action**
+#### Mum Action
 
 A [`mum_action`](#mum-action) block supports the following:
 
@@ -421,7 +421,7 @@ A [`mum_action`](#mum-action) block supports the following:
 
 <a id="path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#path) block supports the following:
 
@@ -439,7 +439,7 @@ A [`path`](#path) block supports the following:
 
 <a id="port-matcher"></a>
 
-**Port Matcher**
+#### Port Matcher
 
 A [`port_matcher`](#port-matcher) block supports the following:
 
@@ -449,7 +449,7 @@ A [`port_matcher`](#port-matcher) block supports the following:
 
 <a id="query-params"></a>
 
-**Query Params**
+#### Query Params
 
 A [`query_params`](#query-params) block supports the following:
 
@@ -465,7 +465,7 @@ A [`query_params`](#query-params) block supports the following:
 
 <a id="query-params-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#query-params-item) block (within [`query_params`](#query-params)) supports the following:
 
@@ -477,7 +477,7 @@ An [`item`](#query-params-item) block (within [`query_params`](#query-params)) s
 
 <a id="request-constraints"></a>
 
-**Request Constraints**
+#### Request Constraints
 
 A [`request_constraints`](#request-constraints) block supports the following:
 
@@ -535,7 +535,7 @@ A [`request_constraints`](#request-constraints) block supports the following:
 
 <a id="segment-policy"></a>
 
-**Segment Policy**
+#### Segment Policy
 
 A [`segment_policy`](#segment-policy) block supports the following:
 
@@ -551,7 +551,7 @@ A [`segment_policy`](#segment-policy) block supports the following:
 
 <a id="segment-policy-dst-segments"></a>
 
-**Dst Segments**
+#### Dst Segments
 
 A [`dst_segments`](#segment-policy-dst-segments) block (within [`segment_policy`](#segment-policy)) supports the following:
 
@@ -559,7 +559,7 @@ A [`dst_segments`](#segment-policy-dst-segments) block (within [`segment_policy`
 
 <a id="segment-policy-dst-segments-segments"></a>
 
-**Segments**
+#### Segments
 
 A [`segments`](#segment-policy-dst-segments-segments) block (within [`segment_policy.dst_segments`](#segment-policy-dst-segments)) supports the following:
 
@@ -571,7 +571,7 @@ A [`segments`](#segment-policy-dst-segments-segments) block (within [`segment_po
 
 <a id="segment-policy-src-segments"></a>
 
-**Src Segments**
+#### Src Segments
 
 A [`src_segments`](#segment-policy-src-segments) block (within [`segment_policy`](#segment-policy)) supports the following:
 
@@ -579,7 +579,7 @@ A [`src_segments`](#segment-policy-src-segments) block (within [`segment_policy`
 
 <a id="segment-policy-src-segments-segments"></a>
 
-**Segments**
+#### Segments
 
 A [`segments`](#segment-policy-src-segments-segments) block (within [`segment_policy.src_segments`](#segment-policy-src-segments)) supports the following:
 
@@ -591,7 +591,7 @@ A [`segments`](#segment-policy-src-segments-segments) block (within [`segment_po
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -605,7 +605,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="tls-fingerprint-matcher"></a>
 
-**TLS Fingerprint Matcher**
+#### TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#tls-fingerprint-matcher) block supports the following:
 
@@ -617,7 +617,7 @@ A [`tls_fingerprint_matcher`](#tls-fingerprint-matcher) block supports the follo
 
 <a id="waf-action"></a>
 
-**WAF Action**
+#### WAF Action
 
 A [`waf_action`](#waf-action) block supports the following:
 
@@ -629,7 +629,7 @@ A [`waf_action`](#waf-action) block supports the following:
 
 <a id="waf-action-app-firewall-detection-control"></a>
 
-**App Firewall Detection Control**
+#### App Firewall Detection Control
 
 An [`app_firewall_detection_control`](#waf-action-app-firewall-detection-control) block (within [`waf_action`](#waf-action)) supports the following:
 
@@ -643,7 +643,7 @@ An [`app_firewall_detection_control`](#waf-action-app-firewall-detection-control
 
 <a id="waf-action-app-firewall-detection-control-exclude-attack-type-contexts"></a>
 
-**Exclude Attack Type Contexts**
+#### Exclude Attack Type Contexts
 
 An [`exclude_attack_type_contexts`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
@@ -655,7 +655,7 @@ An [`exclude_attack_type_contexts`](#waf-action-app-firewall-detection-control-e
 
 <a id="waf-action-app-firewall-detection-control-exclude-bot-name-contexts"></a>
 
-**Exclude Bot Name Contexts**
+#### Exclude Bot Name Contexts
 
 An [`exclude_bot_name_contexts`](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
@@ -663,7 +663,7 @@ An [`exclude_bot_name_contexts`](#waf-action-app-firewall-detection-control-excl
 
 <a id="waf-action-app-firewall-detection-control-exclude-signature-contexts"></a>
 
-**Exclude Signature Contexts**
+#### Exclude Signature Contexts
 
 An [`exclude_signature_contexts`](#waf-action-app-firewall-detection-control-exclude-signature-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
@@ -675,7 +675,7 @@ An [`exclude_signature_contexts`](#waf-action-app-firewall-detection-control-exc
 
 <a id="waf-action-app-firewall-detection-control-exclude-violation-contexts"></a>
 
-**Exclude Violation Contexts**
+#### Exclude Violation Contexts
 
 An [`exclude_violation_contexts`](#waf-action-app-firewall-detection-control-exclude-violation-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 

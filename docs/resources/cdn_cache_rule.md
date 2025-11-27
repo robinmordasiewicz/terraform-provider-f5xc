@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cache-rules"></a>
 
-**Cache Rules**
+#### Cache Rules
 
 A [`cache_rules`](#cache-rules) block supports the following:
 
@@ -94,7 +94,7 @@ A [`cache_rules`](#cache-rules) block supports the following:
 
 <a id="cache-rules-eligible-for-cache"></a>
 
-**Eligible For Cache**
+#### Eligible For Cache
 
 An [`eligible_for_cache`](#cache-rules-eligible-for-cache) block (within [`cache_rules`](#cache-rules)) supports the following:
 
@@ -104,7 +104,7 @@ An [`eligible_for_cache`](#cache-rules-eligible-for-cache) block (within [`cache
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-request-uri"></a>
 
-**Scheme Proxy Host Request URI**
+#### Scheme Proxy Host Request URI
 
 A [`scheme_proxy_host_request_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) block (within [`cache_rules.eligible_for_cache`](#cache-rules-eligible-for-cache)) supports the following:
 
@@ -116,7 +116,7 @@ A [`scheme_proxy_host_request_uri`](#cache-rules-eligible-for-cache-scheme-proxy
 
 <a id="cache-rules-eligible-for-cache-scheme-proxy-host-uri"></a>
 
-**Scheme Proxy Host URI**
+#### Scheme Proxy Host URI
 
 A [`scheme_proxy_host_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) block (within [`cache_rules.eligible_for_cache`](#cache-rules-eligible-for-cache)) supports the following:
 
@@ -128,7 +128,7 @@ A [`scheme_proxy_host_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-ur
 
 <a id="cache-rules-rule-expression-list"></a>
 
-**Rule Expression List**
+#### Rule Expression List
 
 A [`rule_expression_list`](#cache-rules-rule-expression-list) block (within [`cache_rules`](#cache-rules)) supports the following:
 
@@ -138,7 +138,7 @@ A [`rule_expression_list`](#cache-rules-rule-expression-list) block (within [`ca
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression"></a>
 
-**Cache Rule Expression**
+#### Cache Rule Expression
 
 A [`cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression) block (within [`cache_rules.rule_expression_list`](#cache-rules-rule-expression-list)) supports the following:
 
@@ -152,7 +152,7 @@ A [`cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-express
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers"></a>
 
-**Cache Headers**
+#### Cache Headers
 
 A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
@@ -162,7 +162,7 @@ A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cach
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator"></a>
 
-**Operator**
+#### Operator
 
 An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers)) supports the following:
 
@@ -186,7 +186,7 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cache-he
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher"></a>
 
-**Cookie Matcher**
+#### Cookie Matcher
 
 A [`cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
@@ -196,7 +196,7 @@ A [`cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-coo
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator"></a>
 
-**Operator**
+#### Operator
 
 An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher)) supports the following:
 
@@ -220,7 +220,7 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-m
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-path-match"></a>
 
-**Path Match**
+#### Path Match
 
 A [`path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-match) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
@@ -228,7 +228,7 @@ A [`path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-ma
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-path-match-operator"></a>
 
-**Operator**
+#### Operator
 
 An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-match)) supports the following:
 
@@ -252,7 +252,7 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-path-mat
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters"></a>
 
-**Query Parameters**
+#### Query Parameters
 
 A [`query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
@@ -262,7 +262,7 @@ A [`query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-q
 
 <a id="cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator"></a>
 
-**Operator**
+#### Operator
 
 An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters)) supports the following:
 
@@ -286,7 +286,7 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-query-pa
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

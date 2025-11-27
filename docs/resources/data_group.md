@@ -83,7 +83,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="address-records"></a>
 
-**Address Records**
+#### Address Records
 
 An [`address_records`](#address-records) block supports the following:
 
@@ -91,7 +91,7 @@ An [`address_records`](#address-records) block supports the following:
 
 <a id="integer-records"></a>
 
-**Integer Records**
+#### Integer Records
 
 An [`integer_records`](#integer-records) block supports the following:
 
@@ -99,7 +99,7 @@ An [`integer_records`](#integer-records) block supports the following:
 
 <a id="string-records"></a>
 
-**String Records**
+#### String Records
 
 A [`string_records`](#string-records) block supports the following:
 
@@ -107,7 +107,7 @@ A [`string_records`](#string-records) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

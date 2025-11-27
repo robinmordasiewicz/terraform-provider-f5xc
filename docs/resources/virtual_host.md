@@ -169,7 +169,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advertise-policies"></a>
 
-**Advertise Policies**
+#### Advertise Policies
 
 An [`advertise_policies`](#advertise-policies) block supports the following:
 
@@ -185,7 +185,7 @@ An [`advertise_policies`](#advertise-policies) block supports the following:
 
 <a id="authentication"></a>
 
-**Authentication**
+#### Authentication
 
 An [`authentication`](#authentication) block supports the following:
 
@@ -201,7 +201,7 @@ An [`authentication`](#authentication) block supports the following:
 
 <a id="authentication-auth-config"></a>
 
-**Auth Config**
+#### Auth Config
 
 An [`auth_config`](#authentication-auth-config) block (within [`authentication`](#authentication)) supports the following:
 
@@ -217,7 +217,7 @@ An [`auth_config`](#authentication-auth-config) block (within [`authentication`]
 
 <a id="authentication-cookie-params"></a>
 
-**Cookie Params**
+#### Cookie Params
 
 A [`cookie_params`](#authentication-cookie-params) block (within [`authentication`](#authentication)) supports the following:
 
@@ -233,7 +233,7 @@ A [`cookie_params`](#authentication-cookie-params) block (within [`authenticatio
 
 <a id="authentication-cookie-params-auth-hmac"></a>
 
-**Auth HMAC**
+#### Auth HMAC
 
 An [`auth_hmac`](#authentication-cookie-params-auth-hmac) block (within [`authentication.cookie_params`](#authentication-cookie-params)) supports the following:
 
@@ -247,7 +247,7 @@ An [`auth_hmac`](#authentication-cookie-params-auth-hmac) block (within [`authen
 
 <a id="authentication-cookie-params-auth-hmac-prim-key"></a>
 
-**Prim Key**
+#### Prim Key
 
 A [`prim_key`](#authentication-cookie-params-auth-hmac-prim-key) block (within [`authentication.cookie_params.auth_hmac`](#authentication-cookie-params-auth-hmac)) supports the following:
 
@@ -257,7 +257,7 @@ A [`prim_key`](#authentication-cookie-params-auth-hmac-prim-key) block (within [
 
 <a id="authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info) block (within [`authentication.cookie_params.auth_hmac.prim_key`](#authentication-cookie-params-auth-hmac-prim-key)) supports the following:
 
@@ -269,7 +269,7 @@ A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-bli
 
 <a id="authentication-cookie-params-auth-hmac-prim-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-clear-secret-info) block (within [`authentication.cookie_params.auth_hmac.prim_key`](#authentication-cookie-params-auth-hmac-prim-key)) supports the following:
 
@@ -279,7 +279,7 @@ A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-clear-s
 
 <a id="authentication-cookie-params-auth-hmac-sec-key"></a>
 
-**Sec Key**
+#### Sec Key
 
 A [`sec_key`](#authentication-cookie-params-auth-hmac-sec-key) block (within [`authentication.cookie_params.auth_hmac`](#authentication-cookie-params-auth-hmac)) supports the following:
 
@@ -289,7 +289,7 @@ A [`sec_key`](#authentication-cookie-params-auth-hmac-sec-key) block (within [`a
 
 <a id="authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info) block (within [`authentication.cookie_params.auth_hmac.sec_key`](#authentication-cookie-params-auth-hmac-sec-key)) supports the following:
 
@@ -301,7 +301,7 @@ A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-blin
 
 <a id="authentication-cookie-params-auth-hmac-sec-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-clear-secret-info) block (within [`authentication.cookie_params.auth_hmac.sec_key`](#authentication-cookie-params-auth-hmac-sec-key)) supports the following:
 
@@ -311,7 +311,7 @@ A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-clear-se
 
 <a id="buffer-policy"></a>
 
-**Buffer Policy**
+#### Buffer Policy
 
 A [`buffer_policy`](#buffer-policy) block supports the following:
 
@@ -321,7 +321,7 @@ A [`buffer_policy`](#buffer-policy) block supports the following:
 
 <a id="captcha-challenge"></a>
 
-**Captcha Challenge**
+#### Captcha Challenge
 
 A [`captcha_challenge`](#captcha-challenge) block supports the following:
 
@@ -331,7 +331,7 @@ A [`captcha_challenge`](#captcha-challenge) block supports the following:
 
 <a id="coalescing-options"></a>
 
-**Coalescing Options**
+#### Coalescing Options
 
 A [`coalescing_options`](#coalescing-options) block supports the following:
 
@@ -341,7 +341,7 @@ A [`coalescing_options`](#coalescing-options) block supports the following:
 
 <a id="compression-params"></a>
 
-**Compression Params**
+#### Compression Params
 
 A [`compression_params`](#compression-params) block supports the following:
 
@@ -355,7 +355,7 @@ A [`compression_params`](#compression-params) block supports the following:
 
 <a id="cors-policy"></a>
 
-**CORS Policy**
+#### CORS Policy
 
 A [`cors_policy`](#cors-policy) block supports the following:
 
@@ -377,7 +377,7 @@ A [`cors_policy`](#cors-policy) block supports the following:
 
 <a id="csrf-policy"></a>
 
-**CSRF Policy**
+#### CSRF Policy
 
 A [`csrf_policy`](#csrf-policy) block supports the following:
 
@@ -389,7 +389,7 @@ A [`csrf_policy`](#csrf-policy) block supports the following:
 
 <a id="csrf-policy-custom-domain-list"></a>
 
-**Custom Domain List**
+#### Custom Domain List
 
 A [`custom_domain_list`](#csrf-policy-custom-domain-list) block (within [`csrf_policy`](#csrf-policy)) supports the following:
 
@@ -397,7 +397,7 @@ A [`custom_domain_list`](#csrf-policy-custom-domain-list) block (within [`csrf_p
 
 <a id="dynamic-reverse-proxy"></a>
 
-**Dynamic Reverse Proxy**
+#### Dynamic Reverse Proxy
 
 A [`dynamic_reverse_proxy`](#dynamic-reverse-proxy) block supports the following:
 
@@ -411,7 +411,7 @@ A [`dynamic_reverse_proxy`](#dynamic-reverse-proxy) block supports the following
 
 <a id="dynamic-reverse-proxy-resolution-network"></a>
 
-**Resolution Network**
+#### Resolution Network
 
 A [`resolution_network`](#dynamic-reverse-proxy-resolution-network) block (within [`dynamic_reverse_proxy`](#dynamic-reverse-proxy)) supports the following:
 
@@ -427,7 +427,7 @@ A [`resolution_network`](#dynamic-reverse-proxy-resolution-network) block (withi
 
 <a id="http-protocol-options"></a>
 
-**HTTP Protocol Options**
+#### HTTP Protocol Options
 
 A [`http_protocol_options`](#http-protocol-options) block supports the following:
 
@@ -439,7 +439,7 @@ A [`http_protocol_options`](#http-protocol-options) block supports the following
 
 <a id="http-protocol-options-http-protocol-enable-v1-only"></a>
 
-**HTTP Protocol Enable V1 Only**
+#### HTTP Protocol Enable V1 Only
 
 A [`http_protocol_enable_v1_only`](#http-protocol-options-http-protocol-enable-v1-only) block (within [`http_protocol_options`](#http-protocol-options)) supports the following:
 
@@ -447,7 +447,7 @@ A [`http_protocol_enable_v1_only`](#http-protocol-options-http-protocol-enable-v
 
 <a id="http-protocol-options-http-protocol-enable-v1-only-header-transformation"></a>
 
-**Header Transformation**
+#### Header Transformation
 
 A [`header_transformation`](#http-protocol-options-http-protocol-enable-v1-only-header-transformation) block (within [`http_protocol_options.http_protocol_enable_v1_only`](#http-protocol-options-http-protocol-enable-v1-only)) supports the following:
 
@@ -461,7 +461,7 @@ A [`header_transformation`](#http-protocol-options-http-protocol-enable-v1-only-
 
 <a id="js-challenge"></a>
 
-**Js Challenge**
+#### Js Challenge
 
 A [`js_challenge`](#js-challenge) block supports the following:
 
@@ -473,7 +473,7 @@ A [`js_challenge`](#js-challenge) block supports the following:
 
 <a id="rate-limiter-allowed-prefixes"></a>
 
-**Rate Limiter Allowed Prefixes**
+#### Rate Limiter Allowed Prefixes
 
 A [`rate_limiter_allowed_prefixes`](#rate-limiter-allowed-prefixes) block supports the following:
 
@@ -489,7 +489,7 @@ A [`rate_limiter_allowed_prefixes`](#rate-limiter-allowed-prefixes) block suppor
 
 <a id="request-cookies-to-add"></a>
 
-**Request Cookies To Add**
+#### Request Cookies To Add
 
 A [`request_cookies_to_add`](#request-cookies-to-add) block supports the following:
 
@@ -503,7 +503,7 @@ A [`request_cookies_to_add`](#request-cookies-to-add) block supports the followi
 
 <a id="request-cookies-to-add-secret-value"></a>
 
-**Secret Value**
+#### Secret Value
 
 A [`secret_value`](#request-cookies-to-add-secret-value) block (within [`request_cookies_to_add`](#request-cookies-to-add)) supports the following:
 
@@ -513,7 +513,7 @@ A [`secret_value`](#request-cookies-to-add-secret-value) block (within [`request
 
 <a id="request-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#request-cookies-to-add-secret-value-blindfold-secret-info) block (within [`request_cookies_to_add.secret_value`](#request-cookies-to-add-secret-value)) supports the following:
 
@@ -525,7 +525,7 @@ A [`blindfold_secret_info`](#request-cookies-to-add-secret-value-blindfold-secre
 
 <a id="request-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#request-cookies-to-add-secret-value-clear-secret-info) block (within [`request_cookies_to_add.secret_value`](#request-cookies-to-add-secret-value)) supports the following:
 
@@ -535,7 +535,7 @@ A [`clear_secret_info`](#request-cookies-to-add-secret-value-clear-secret-info) 
 
 <a id="request-headers-to-add"></a>
 
-**Request Headers To Add**
+#### Request Headers To Add
 
 A [`request_headers_to_add`](#request-headers-to-add) block supports the following:
 
@@ -549,7 +549,7 @@ A [`request_headers_to_add`](#request-headers-to-add) block supports the followi
 
 <a id="request-headers-to-add-secret-value"></a>
 
-**Secret Value**
+#### Secret Value
 
 A [`secret_value`](#request-headers-to-add-secret-value) block (within [`request_headers_to_add`](#request-headers-to-add)) supports the following:
 
@@ -559,7 +559,7 @@ A [`secret_value`](#request-headers-to-add-secret-value) block (within [`request
 
 <a id="request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#request-headers-to-add-secret-value-blindfold-secret-info) block (within [`request_headers_to_add.secret_value`](#request-headers-to-add-secret-value)) supports the following:
 
@@ -571,7 +571,7 @@ A [`blindfold_secret_info`](#request-headers-to-add-secret-value-blindfold-secre
 
 <a id="request-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#request-headers-to-add-secret-value-clear-secret-info) block (within [`request_headers_to_add.secret_value`](#request-headers-to-add-secret-value)) supports the following:
 
@@ -581,7 +581,7 @@ A [`clear_secret_info`](#request-headers-to-add-secret-value-clear-secret-info) 
 
 <a id="response-cookies-to-add"></a>
 
-**Response Cookies To Add**
+#### Response Cookies To Add
 
 A [`response_cookies_to_add`](#response-cookies-to-add) block supports the following:
 
@@ -633,7 +633,7 @@ A [`response_cookies_to_add`](#response-cookies-to-add) block supports the follo
 
 <a id="response-cookies-to-add-secret-value"></a>
 
-**Secret Value**
+#### Secret Value
 
 A [`secret_value`](#response-cookies-to-add-secret-value) block (within [`response_cookies_to_add`](#response-cookies-to-add)) supports the following:
 
@@ -643,7 +643,7 @@ A [`secret_value`](#response-cookies-to-add-secret-value) block (within [`respon
 
 <a id="response-cookies-to-add-secret-value-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#response-cookies-to-add-secret-value-blindfold-secret-info) block (within [`response_cookies_to_add.secret_value`](#response-cookies-to-add-secret-value)) supports the following:
 
@@ -655,7 +655,7 @@ A [`blindfold_secret_info`](#response-cookies-to-add-secret-value-blindfold-secr
 
 <a id="response-cookies-to-add-secret-value-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#response-cookies-to-add-secret-value-clear-secret-info) block (within [`response_cookies_to_add.secret_value`](#response-cookies-to-add-secret-value)) supports the following:
 
@@ -665,7 +665,7 @@ A [`clear_secret_info`](#response-cookies-to-add-secret-value-clear-secret-info)
 
 <a id="response-headers-to-add"></a>
 
-**Response Headers To Add**
+#### Response Headers To Add
 
 A [`response_headers_to_add`](#response-headers-to-add) block supports the following:
 
@@ -679,7 +679,7 @@ A [`response_headers_to_add`](#response-headers-to-add) block supports the follo
 
 <a id="response-headers-to-add-secret-value"></a>
 
-**Secret Value**
+#### Secret Value
 
 A [`secret_value`](#response-headers-to-add-secret-value) block (within [`response_headers_to_add`](#response-headers-to-add)) supports the following:
 
@@ -689,7 +689,7 @@ A [`secret_value`](#response-headers-to-add-secret-value) block (within [`respon
 
 <a id="response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#response-headers-to-add-secret-value-blindfold-secret-info) block (within [`response_headers_to_add.secret_value`](#response-headers-to-add-secret-value)) supports the following:
 
@@ -701,7 +701,7 @@ A [`blindfold_secret_info`](#response-headers-to-add-secret-value-blindfold-secr
 
 <a id="response-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#response-headers-to-add-secret-value-clear-secret-info) block (within [`response_headers_to_add.secret_value`](#response-headers-to-add-secret-value)) supports the following:
 
@@ -711,7 +711,7 @@ A [`clear_secret_info`](#response-headers-to-add-secret-value-clear-secret-info)
 
 <a id="retry-policy"></a>
 
-**Retry Policy**
+#### Retry Policy
 
 A [`retry_policy`](#retry-policy) block supports the following:
 
@@ -727,7 +727,7 @@ A [`retry_policy`](#retry-policy) block supports the following:
 
 <a id="retry-policy-back-off"></a>
 
-**Back Off**
+#### Back Off
 
 A [`back_off`](#retry-policy-back-off) block (within [`retry_policy`](#retry-policy)) supports the following:
 
@@ -737,7 +737,7 @@ A [`back_off`](#retry-policy-back-off) block (within [`retry_policy`](#retry-pol
 
 <a id="routes"></a>
 
-**Routes**
+#### Routes
 
 A [`routes`](#routes) block supports the following:
 
@@ -753,7 +753,7 @@ A [`routes`](#routes) block supports the following:
 
 <a id="sensitive-data-policy"></a>
 
-**Sensitive Data Policy**
+#### Sensitive Data Policy
 
 A [`sensitive_data_policy`](#sensitive-data-policy) block supports the following:
 
@@ -769,7 +769,7 @@ A [`sensitive_data_policy`](#sensitive-data-policy) block supports the following
 
 <a id="slow-ddos-mitigation"></a>
 
-**Slow DDOS Mitigation**
+#### Slow DDOS Mitigation
 
 A [`slow_ddos_mitigation`](#slow-ddos-mitigation) block supports the following:
 
@@ -781,7 +781,7 @@ A [`slow_ddos_mitigation`](#slow-ddos-mitigation) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -795,7 +795,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="tls-cert-params"></a>
 
-**TLS Cert Params**
+#### TLS Cert Params
 
 A [`tls_cert_params`](#tls-cert-params) block supports the following:
 
@@ -819,7 +819,7 @@ A [`tls_cert_params`](#tls-cert-params) block supports the following:
 
 <a id="tls-cert-params-certificates"></a>
 
-**Certificates**
+#### Certificates
 
 A [`certificates`](#tls-cert-params-certificates) block (within [`tls_cert_params`](#tls-cert-params)) supports the following:
 
@@ -835,7 +835,7 @@ A [`certificates`](#tls-cert-params-certificates) block (within [`tls_cert_param
 
 <a id="tls-cert-params-validation-params"></a>
 
-**Validation Params**
+#### Validation Params
 
 A [`validation_params`](#tls-cert-params-validation-params) block (within [`tls_cert_params`](#tls-cert-params)) supports the following:
 
@@ -849,7 +849,7 @@ A [`validation_params`](#tls-cert-params-validation-params) block (within [`tls_
 
 <a id="tls-cert-params-validation-params-trusted-ca"></a>
 
-**Trusted CA**
+#### Trusted CA
 
 A [`trusted_ca`](#tls-cert-params-validation-params-trusted-ca) block (within [`tls_cert_params.validation_params`](#tls-cert-params-validation-params)) supports the following:
 
@@ -857,7 +857,7 @@ A [`trusted_ca`](#tls-cert-params-validation-params-trusted-ca) block (within [`
 
 <a id="tls-cert-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
-**Trusted CA List**
+#### Trusted CA List
 
 A [`trusted_ca_list`](#tls-cert-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_cert_params.validation_params.trusted_ca`](#tls-cert-params-validation-params-trusted-ca)) supports the following:
 
@@ -873,7 +873,7 @@ A [`trusted_ca_list`](#tls-cert-params-validation-params-trusted-ca-trusted-ca-l
 
 <a id="tls-parameters"></a>
 
-**TLS Parameters**
+#### TLS Parameters
 
 A [`tls_parameters`](#tls-parameters) block supports the following:
 
@@ -889,7 +889,7 @@ A [`tls_parameters`](#tls-parameters) block supports the following:
 
 <a id="tls-parameters-common-params"></a>
 
-**Common Params**
+#### Common Params
 
 A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
@@ -905,7 +905,7 @@ A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameter
 
 <a id="tls-parameters-common-params-tls-certificates"></a>
 
-**TLS Certificates**
+#### TLS Certificates
 
 A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -923,7 +923,7 @@ A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (wi
 
 <a id="tls-parameters-common-params-tls-certificates-custom-hash-algorithms"></a>
 
-**Custom Hash Algorithms**
+#### Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
@@ -931,7 +931,7 @@ A [`custom_hash_algorithms`](#tls-parameters-common-params-tls-certificates-cust
 
 <a id="tls-parameters-common-params-tls-certificates-private-key"></a>
 
-**Private Key**
+#### Private Key
 
 A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
@@ -941,7 +941,7 @@ A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) bl
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -953,7 +953,7 @@ A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-priva
 
 <a id="tls-parameters-common-params-tls-certificates-private-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -963,7 +963,7 @@ A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-k
 
 <a id="tls-parameters-common-params-validation-params"></a>
 
-**Validation Params**
+#### Validation Params
 
 A [`validation_params`](#tls-parameters-common-params-validation-params) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -977,7 +977,7 @@ A [`validation_params`](#tls-parameters-common-params-validation-params) block (
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca"></a>
 
-**Trusted CA**
+#### Trusted CA
 
 A [`trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca) block (within [`tls_parameters.common_params.validation_params`](#tls-parameters-common-params-validation-params)) supports the following:
 
@@ -985,7 +985,7 @@ A [`trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca) blo
 
 <a id="tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list"></a>
 
-**Trusted CA List**
+#### Trusted CA List
 
 A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_parameters.common_params.validation_params.trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca)) supports the following:
 
@@ -1001,7 +1001,7 @@ A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca
 
 <a id="user-identification"></a>
 
-**User Identification**
+#### User Identification
 
 An [`user_identification`](#user-identification) block supports the following:
 
@@ -1017,7 +1017,7 @@ An [`user_identification`](#user-identification) block supports the following:
 
 <a id="waf-type"></a>
 
-**WAF Type**
+#### WAF Type
 
 A [`waf_type`](#waf-type) block supports the following:
 
@@ -1029,7 +1029,7 @@ A [`waf_type`](#waf-type) block supports the following:
 
 <a id="waf-type-app-firewall"></a>
 
-**App Firewall**
+#### App Firewall
 
 An [`app_firewall`](#waf-type-app-firewall) block (within [`waf_type`](#waf-type)) supports the following:
 
@@ -1037,7 +1037,7 @@ An [`app_firewall`](#waf-type-app-firewall) block (within [`waf_type`](#waf-type
 
 <a id="waf-type-app-firewall-app-firewall"></a>
 
-**App Firewall**
+#### App Firewall
 
 An [`app_firewall`](#waf-type-app-firewall-app-firewall) block (within [`waf_type.app_firewall`](#waf-type-app-firewall)) supports the following:
 

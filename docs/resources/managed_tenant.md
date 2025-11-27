@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="groups"></a>
 
-**Groups**
+#### Groups
 
 A [`groups`](#groups) block supports the following:
 
@@ -88,7 +88,7 @@ A [`groups`](#groups) block supports the following:
 
 <a id="groups-group"></a>
 
-**Group**
+#### Group
 
 A [`group`](#groups-group) block (within [`groups`](#groups)) supports the following:
 
@@ -100,7 +100,7 @@ A [`group`](#groups-group) block (within [`groups`](#groups)) supports the follo
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

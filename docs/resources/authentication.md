@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cookie-params"></a>
 
-**Cookie Params**
+#### Cookie Params
 
 A [`cookie_params`](#cookie-params) block supports the following:
 
@@ -98,7 +98,7 @@ A [`cookie_params`](#cookie-params) block supports the following:
 
 <a id="cookie-params-auth-hmac"></a>
 
-**Auth HMAC**
+#### Auth HMAC
 
 An [`auth_hmac`](#cookie-params-auth-hmac) block (within [`cookie_params`](#cookie-params)) supports the following:
 
@@ -112,7 +112,7 @@ An [`auth_hmac`](#cookie-params-auth-hmac) block (within [`cookie_params`](#cook
 
 <a id="cookie-params-auth-hmac-prim-key"></a>
 
-**Prim Key**
+#### Prim Key
 
 A [`prim_key`](#cookie-params-auth-hmac-prim-key) block (within [`cookie_params.auth_hmac`](#cookie-params-auth-hmac)) supports the following:
 
@@ -122,7 +122,7 @@ A [`prim_key`](#cookie-params-auth-hmac-prim-key) block (within [`cookie_params.
 
 <a id="cookie-params-auth-hmac-prim-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#cookie-params-auth-hmac-prim-key-blindfold-secret-info) block (within [`cookie_params.auth_hmac.prim_key`](#cookie-params-auth-hmac-prim-key)) supports the following:
 
@@ -134,7 +134,7 @@ A [`blindfold_secret_info`](#cookie-params-auth-hmac-prim-key-blindfold-secret-i
 
 <a id="cookie-params-auth-hmac-prim-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#cookie-params-auth-hmac-prim-key-clear-secret-info) block (within [`cookie_params.auth_hmac.prim_key`](#cookie-params-auth-hmac-prim-key)) supports the following:
 
@@ -144,7 +144,7 @@ A [`clear_secret_info`](#cookie-params-auth-hmac-prim-key-clear-secret-info) blo
 
 <a id="cookie-params-auth-hmac-sec-key"></a>
 
-**Sec Key**
+#### Sec Key
 
 A [`sec_key`](#cookie-params-auth-hmac-sec-key) block (within [`cookie_params.auth_hmac`](#cookie-params-auth-hmac)) supports the following:
 
@@ -154,7 +154,7 @@ A [`sec_key`](#cookie-params-auth-hmac-sec-key) block (within [`cookie_params.au
 
 <a id="cookie-params-auth-hmac-sec-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#cookie-params-auth-hmac-sec-key-blindfold-secret-info) block (within [`cookie_params.auth_hmac.sec_key`](#cookie-params-auth-hmac-sec-key)) supports the following:
 
@@ -166,7 +166,7 @@ A [`blindfold_secret_info`](#cookie-params-auth-hmac-sec-key-blindfold-secret-in
 
 <a id="cookie-params-auth-hmac-sec-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#cookie-params-auth-hmac-sec-key-clear-secret-info) block (within [`cookie_params.auth_hmac.sec_key`](#cookie-params-auth-hmac-sec-key)) supports the following:
 
@@ -176,7 +176,7 @@ A [`clear_secret_info`](#cookie-params-auth-hmac-sec-key-clear-secret-info) bloc
 
 <a id="oidc-auth"></a>
 
-**Oidc Auth**
+#### Oidc Auth
 
 An [`oidc_auth`](#oidc-auth) block supports the following:
 
@@ -190,7 +190,7 @@ An [`oidc_auth`](#oidc-auth) block supports the following:
 
 <a id="oidc-auth-client-secret"></a>
 
-**Client Secret**
+#### Client Secret
 
 A [`client_secret`](#oidc-auth-client-secret) block (within [`oidc_auth`](#oidc-auth)) supports the following:
 
@@ -200,7 +200,7 @@ A [`client_secret`](#oidc-auth-client-secret) block (within [`oidc_auth`](#oidc-
 
 <a id="oidc-auth-client-secret-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#oidc-auth-client-secret-blindfold-secret-info) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
 
@@ -212,7 +212,7 @@ A [`blindfold_secret_info`](#oidc-auth-client-secret-blindfold-secret-info) bloc
 
 <a id="oidc-auth-client-secret-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#oidc-auth-client-secret-clear-secret-info) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
 
@@ -222,7 +222,7 @@ A [`clear_secret_info`](#oidc-auth-client-secret-clear-secret-info) block (withi
 
 <a id="oidc-auth-oidc-auth-params"></a>
 
-**Oidc Auth Params**
+#### Oidc Auth Params
 
 An [`oidc_auth_params`](#oidc-auth-oidc-auth-params) block (within [`oidc_auth`](#oidc-auth)) supports the following:
 
@@ -234,7 +234,7 @@ An [`oidc_auth_params`](#oidc-auth-oidc-auth-params) block (within [`oidc_auth`]
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

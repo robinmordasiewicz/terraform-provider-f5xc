@@ -87,7 +87,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dh-group-set"></a>
 
-**Dh Group Set**
+#### Dh Group Set
 
 A [`dh_group_set`](#dh-group-set) block supports the following:
 
@@ -95,7 +95,7 @@ A [`dh_group_set`](#dh-group-set) block supports the following:
 
 <a id="ike-keylifetime-hours"></a>
 
-**Ike Keylifetime Hours**
+#### Ike Keylifetime Hours
 
 An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the following:
 
@@ -103,7 +103,7 @@ An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the followin
 
 <a id="ike-keylifetime-minutes"></a>
 
-**Ike Keylifetime Minutes**
+#### Ike Keylifetime Minutes
 
 An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
 
@@ -111,7 +111,7 @@ An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the foll
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

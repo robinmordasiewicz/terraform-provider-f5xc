@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="jira-config"></a>
 
-**Jira Config**
+#### Jira Config
 
 A [`jira_config`](#jira-config) block supports the following:
 
@@ -84,7 +84,7 @@ A [`jira_config`](#jira-config) block supports the following:
 
 <a id="jira-config-adhoc-rest-api"></a>
 
-**Adhoc REST API**
+#### Adhoc REST API
 
 An [`adhoc_rest_api`](#jira-config-adhoc-rest-api) block (within [`jira_config`](#jira-config)) supports the following:
 
@@ -96,7 +96,7 @@ An [`adhoc_rest_api`](#jira-config-adhoc-rest-api) block (within [`jira_config`]
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

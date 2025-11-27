@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="notification-parameters"></a>
 
-**Notification Parameters**
+#### Notification Parameters
 
 A [`notification_parameters`](#notification-parameters) block supports the following:
 
@@ -110,7 +110,7 @@ A [`notification_parameters`](#notification-parameters) block supports the follo
 
 <a id="notification-parameters-custom"></a>
 
-**Custom**
+#### Custom
 
 A [`custom`](#notification-parameters-custom) block (within [`notification_parameters`](#notification-parameters)) supports the following:
 
@@ -118,7 +118,7 @@ A [`custom`](#notification-parameters-custom) block (within [`notification_param
 
 <a id="receivers"></a>
 
-**Receivers**
+#### Receivers
 
 A [`receivers`](#receivers) block supports the following:
 
@@ -134,7 +134,7 @@ A [`receivers`](#receivers) block supports the following:
 
 <a id="routes"></a>
 
-**Routes**
+#### Routes
 
 A [`routes`](#routes) block supports the following:
 
@@ -158,7 +158,7 @@ A [`routes`](#routes) block supports the following:
 
 <a id="routes-custom"></a>
 
-**Custom**
+#### Custom
 
 A [`custom`](#routes-custom) block (within [`routes`](#routes)) supports the following:
 
@@ -172,7 +172,7 @@ A [`custom`](#routes-custom) block (within [`routes`](#routes)) supports the fol
 
 <a id="routes-custom-alertname"></a>
 
-**Alertname**
+#### Alertname
 
 An [`alertname`](#routes-custom-alertname) block (within [`routes.custom`](#routes-custom)) supports the following:
 
@@ -182,7 +182,7 @@ An [`alertname`](#routes-custom-alertname) block (within [`routes.custom`](#rout
 
 <a id="routes-custom-group"></a>
 
-**Group**
+#### Group
 
 A [`group`](#routes-custom-group) block (within [`routes.custom`](#routes-custom)) supports the following:
 
@@ -192,7 +192,7 @@ A [`group`](#routes-custom-group) block (within [`routes.custom`](#routes-custom
 
 <a id="routes-custom-severity"></a>
 
-**Severity**
+#### Severity
 
 A [`severity`](#routes-custom-severity) block (within [`routes.custom`](#routes-custom)) supports the following:
 
@@ -202,7 +202,7 @@ A [`severity`](#routes-custom-severity) block (within [`routes.custom`](#routes-
 
 <a id="routes-group"></a>
 
-**Group**
+#### Group
 
 A [`group`](#routes-group) block (within [`routes`](#routes)) supports the following:
 
@@ -210,7 +210,7 @@ A [`group`](#routes-group) block (within [`routes`](#routes)) supports the follo
 
 <a id="routes-notification-parameters"></a>
 
-**Notification Parameters**
+#### Notification Parameters
 
 A [`notification_parameters`](#routes-notification-parameters) block (within [`routes`](#routes)) supports the following:
 
@@ -230,7 +230,7 @@ A [`notification_parameters`](#routes-notification-parameters) block (within [`r
 
 <a id="routes-notification-parameters-custom"></a>
 
-**Custom**
+#### Custom
 
 A [`custom`](#routes-notification-parameters-custom) block (within [`routes.notification_parameters`](#routes-notification-parameters)) supports the following:
 
@@ -238,7 +238,7 @@ A [`custom`](#routes-notification-parameters-custom) block (within [`routes.noti
 
 <a id="routes-severity"></a>
 
-**Severity**
+#### Severity
 
 A [`severity`](#routes-severity) block (within [`routes`](#routes)) supports the following:
 
@@ -246,7 +246,7 @@ A [`severity`](#routes-severity) block (within [`routes`](#routes)) supports the
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="domains"></a>
 
-**Domains**
+#### Domains
 
 A [`domains`](#domains) block supports the following:
 
@@ -90,7 +90,7 @@ A [`domains`](#domains) block supports the following:
 
 <a id="domains-simple-login"></a>
 
-**Simple Login**
+#### Simple Login
 
 A [`simple_login`](#domains-simple-login) block (within [`domains`](#domains)) supports the following:
 
@@ -100,7 +100,7 @@ A [`simple_login`](#domains-simple-login) block (within [`domains`](#domains)) s
 
 <a id="domains-simple-login-password"></a>
 
-**Password**
+#### Password
 
 A [`password`](#domains-simple-login-password) block (within [`domains.simple_login`](#domains-simple-login)) supports the following:
 
@@ -110,7 +110,7 @@ A [`password`](#domains-simple-login-password) block (within [`domains.simple_lo
 
 <a id="domains-simple-login-password-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
@@ -122,7 +122,7 @@ A [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info
 
 <a id="domains-simple-login-password-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
@@ -132,7 +132,7 @@ A [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) block 
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

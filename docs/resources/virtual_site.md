@@ -76,7 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="site-selector"></a>
 
-**Site Selector**
+#### Site Selector
 
 A [`site_selector`](#site-selector) block supports the following:
 
@@ -84,7 +84,7 @@ A [`site_selector`](#site-selector) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

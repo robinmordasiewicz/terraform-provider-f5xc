@@ -188,7 +188,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="active-service-policies"></a>
 
-**Active Service Policies**
+#### Active Service Policies
 
 An [`active_service_policies`](#active-service-policies) block supports the following:
 
@@ -196,7 +196,7 @@ An [`active_service_policies`](#active-service-policies) block supports the foll
 
 <a id="active-service-policies-policies"></a>
 
-**Policies**
+#### Policies
 
 A [`policies`](#active-service-policies-policies) block (within [`active_service_policies`](#active-service-policies)) supports the following:
 
@@ -208,7 +208,7 @@ A [`policies`](#active-service-policies-policies) block (within [`active_service
 
 <a id="api-rate-limit"></a>
 
-**API Rate Limit**
+#### API Rate Limit
 
 An [`api_rate_limit`](#api-rate-limit) block supports the following:
 
@@ -226,7 +226,7 @@ An [`api_rate_limit`](#api-rate-limit) block supports the following:
 
 <a id="api-rate-limit-api-endpoint-rules"></a>
 
-**API Endpoint Rules**
+#### API Endpoint Rules
 
 An [`api_endpoint_rules`](#api-rate-limit-api-endpoint-rules) block (within [`api_rate_limit`](#api-rate-limit)) supports the following:
 
@@ -248,7 +248,7 @@ An [`api_endpoint_rules`](#api-rate-limit-api-endpoint-rules) block (within [`ap
 
 <a id="api-rate-limit-api-endpoint-rules-api-endpoint-method"></a>
 
-**API Endpoint Method**
+#### API Endpoint Method
 
 An [`api_endpoint_method`](#api-rate-limit-api-endpoint-rules-api-endpoint-method) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
 
@@ -258,7 +258,7 @@ An [`api_endpoint_method`](#api-rate-limit-api-endpoint-rules-api-endpoint-metho
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher"></a>
 
-**Client Matcher**
+#### Client Matcher
 
 A [`client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
 
@@ -282,7 +282,7 @@ A [`client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher) block (w
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#api-rate-limit-api-endpoint-rules-client-matcher-asn-list) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher)) supports the following:
 
@@ -290,7 +290,7 @@ An [`asn_list`](#api-rate-limit-api-endpoint-rules-client-matcher-asn-list) bloc
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher"></a>
 
-**Asn Matcher**
+#### Asn Matcher
 
 An [`asn_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher)) supports the following:
 
@@ -298,7 +298,7 @@ An [`asn_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher-asn-sets"></a>
 
-**Asn Sets**
+#### Asn Sets
 
 An [`asn_sets`](#api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher-asn-sets) block (within [`api_rate_limit.api_endpoint_rules.client_matcher.asn_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher)) supports the following:
 
@@ -314,7 +314,7 @@ An [`asn_sets`](#api-rate-limit-api-endpoint-rules-client-matcher-asn-matcher-as
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-client-selector"></a>
 
-**Client Selector**
+#### Client Selector
 
 A [`client_selector`](#api-rate-limit-api-endpoint-rules-client-matcher-client-selector) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher)) supports the following:
 
@@ -322,7 +322,7 @@ A [`client_selector`](#api-rate-limit-api-endpoint-rules-client-matcher-client-s
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher"></a>
 
-**IP Matcher**
+#### IP Matcher
 
 An [`ip_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher)) supports the following:
 
@@ -332,7 +332,7 @@ An [`ip_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher) 
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher-prefix-sets"></a>
 
-**Prefix Sets**
+#### Prefix Sets
 
 A [`prefix_sets`](#api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher-prefix-sets) block (within [`api_rate_limit.api_endpoint_rules.client_matcher.ip_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher)) supports the following:
 
@@ -348,7 +348,7 @@ A [`prefix_sets`](#api-rate-limit-api-endpoint-rules-client-matcher-ip-matcher-p
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-prefix-list"></a>
 
-**IP Prefix List**
+#### IP Prefix List
 
 An [`ip_prefix_list`](#api-rate-limit-api-endpoint-rules-client-matcher-ip-prefix-list) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher)) supports the following:
 
@@ -358,7 +358,7 @@ An [`ip_prefix_list`](#api-rate-limit-api-endpoint-rules-client-matcher-ip-prefi
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-ip-threat-category-list"></a>
 
-**IP Threat Category List**
+#### IP Threat Category List
 
 An [`ip_threat_category_list`](#api-rate-limit-api-endpoint-rules-client-matcher-ip-threat-category-list) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher)) supports the following:
 
@@ -366,7 +366,7 @@ An [`ip_threat_category_list`](#api-rate-limit-api-endpoint-rules-client-matcher
 
 <a id="api-rate-limit-api-endpoint-rules-client-matcher-tls-fingerprint-matcher"></a>
 
-**TLS Fingerprint Matcher**
+#### TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher-tls-fingerprint-matcher) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher)) supports the following:
 
@@ -378,7 +378,7 @@ A [`tls_fingerprint_matcher`](#api-rate-limit-api-endpoint-rules-client-matcher-
 
 <a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter"></a>
 
-**Inline Rate Limiter**
+#### Inline Rate Limiter
 
 An [`inline_rate_limiter`](#api-rate-limit-api-endpoint-rules-inline-rate-limiter) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
 
@@ -392,7 +392,7 @@ An [`inline_rate_limiter`](#api-rate-limit-api-endpoint-rules-inline-rate-limite
 
 <a id="api-rate-limit-api-endpoint-rules-inline-rate-limiter-ref-user-id"></a>
 
-**Ref User Id**
+#### Ref User Id
 
 A [`ref_user_id`](#api-rate-limit-api-endpoint-rules-inline-rate-limiter-ref-user-id) block (within [`api_rate_limit.api_endpoint_rules.inline_rate_limiter`](#api-rate-limit-api-endpoint-rules-inline-rate-limiter)) supports the following:
 
@@ -404,7 +404,7 @@ A [`ref_user_id`](#api-rate-limit-api-endpoint-rules-inline-rate-limiter-ref-use
 
 <a id="api-rate-limit-api-endpoint-rules-ref-rate-limiter"></a>
 
-**Ref Rate Limiter**
+#### Ref Rate Limiter
 
 A [`ref_rate_limiter`](#api-rate-limit-api-endpoint-rules-ref-rate-limiter) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
 
@@ -416,7 +416,7 @@ A [`ref_rate_limiter`](#api-rate-limit-api-endpoint-rules-ref-rate-limiter) bloc
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher"></a>
 
-**Request Matcher**
+#### Request Matcher
 
 A [`request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
 
@@ -430,7 +430,7 @@ A [`request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher) block 
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers"></a>
 
-**Cookie Matchers**
+#### Cookie Matchers
 
 A [`cookie_matchers`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher)) supports the following:
 
@@ -446,7 +446,7 @@ A [`cookie_matchers`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-item) block (within [`api_rate_limit.api_endpoint_rules.request_matcher.cookie_matchers`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers)) supports the following:
 
@@ -458,7 +458,7 @@ An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-cookie-matchers-i
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#api-rate-limit-api-endpoint-rules-request-matcher-headers) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher)) supports the following:
 
@@ -474,7 +474,7 @@ A [`headers`](#api-rate-limit-api-endpoint-rules-request-matcher-headers) block 
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-headers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-headers-item) block (within [`api_rate_limit.api_endpoint_rules.request_matcher.headers`](#api-rate-limit-api-endpoint-rules-request-matcher-headers)) supports the following:
 
@@ -486,7 +486,7 @@ An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-headers-item) blo
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims"></a>
 
-**JWT Claims**
+#### JWT Claims
 
 A [`jwt_claims`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher)) supports the following:
 
@@ -502,7 +502,7 @@ A [`jwt_claims`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims) 
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-item) block (within [`api_rate_limit.api_endpoint_rules.request_matcher.jwt_claims`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims)) supports the following:
 
@@ -514,7 +514,7 @@ An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-jwt-claims-item) 
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params"></a>
 
-**Query Params**
+#### Query Params
 
 A [`query_params`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#api-rate-limit-api-endpoint-rules-request-matcher)) supports the following:
 
@@ -530,7 +530,7 @@ A [`query_params`](#api-rate-limit-api-endpoint-rules-request-matcher-query-para
 
 <a id="api-rate-limit-api-endpoint-rules-request-matcher-query-params-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params-item) block (within [`api_rate_limit.api_endpoint_rules.request_matcher.query_params`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params)) supports the following:
 
@@ -542,7 +542,7 @@ An [`item`](#api-rate-limit-api-endpoint-rules-request-matcher-query-params-item
 
 <a id="api-rate-limit-bypass-rate-limiting-rules"></a>
 
-**Bypass Rate Limiting Rules**
+#### Bypass Rate Limiting Rules
 
 A [`bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules) block (within [`api_rate_limit`](#api-rate-limit)) supports the following:
 
@@ -550,7 +550,7 @@ A [`bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules) blo
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules"></a>
 
-**Bypass Rate Limiting Rules**
+#### Bypass Rate Limiting Rules
 
 A [`bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules) block (within [`api_rate_limit.bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules)) supports the following:
 
@@ -572,7 +572,7 @@ A [`bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules-bypa
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-endpoint"></a>
 
-**API Endpoint**
+#### API Endpoint
 
 An [`api_endpoint`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-endpoint) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules)) supports the following:
 
@@ -582,7 +582,7 @@ An [`api_endpoint`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limit
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-groups"></a>
 
-**API Groups**
+#### API Groups
 
 An [`api_groups`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-api-groups) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules)) supports the following:
 
@@ -590,7 +590,7 @@ An [`api_groups`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limitin
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher"></a>
 
-**Client Matcher**
+#### Client Matcher
 
 A [`client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules)) supports the following:
 
@@ -614,7 +614,7 @@ A [`client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limi
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-list) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher)) supports the following:
 
@@ -622,7 +622,7 @@ An [`asn_list`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher"></a>
 
-**Asn Matcher**
+#### Asn Matcher
 
 An [`asn_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher)) supports the following:
 
@@ -630,7 +630,7 @@ An [`asn_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiti
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher-asn-sets"></a>
 
-**Asn Sets**
+#### Asn Sets
 
 An [`asn_sets`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher-asn-sets) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher.asn_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-asn-matcher)) supports the following:
 
@@ -646,7 +646,7 @@ An [`asn_sets`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-client-selector"></a>
 
-**Client Selector**
+#### Client Selector
 
 A [`client_selector`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-client-selector) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher)) supports the following:
 
@@ -654,7 +654,7 @@ A [`client_selector`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-lim
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher"></a>
 
-**IP Matcher**
+#### IP Matcher
 
 An [`ip_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher)) supports the following:
 
@@ -664,7 +664,7 @@ An [`ip_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limitin
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher-prefix-sets"></a>
 
-**Prefix Sets**
+#### Prefix Sets
 
 A [`prefix_sets`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher-prefix-sets) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher.ip_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-matcher)) supports the following:
 
@@ -680,7 +680,7 @@ A [`prefix_sets`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limitin
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-prefix-list"></a>
 
-**IP Prefix List**
+#### IP Prefix List
 
 An [`ip_prefix_list`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-prefix-list) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher)) supports the following:
 
@@ -690,7 +690,7 @@ An [`ip_prefix_list`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-lim
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-threat-category-list"></a>
 
-**IP Threat Category List**
+#### IP Threat Category List
 
 An [`ip_threat_category_list`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-ip-threat-category-list) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher)) supports the following:
 
@@ -698,7 +698,7 @@ An [`ip_threat_category_list`](#api-rate-limit-bypass-rate-limiting-rules-bypass
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-tls-fingerprint-matcher"></a>
 
-**TLS Fingerprint Matcher**
+#### TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher-tls-fingerprint-matcher) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-client-matcher)) supports the following:
 
@@ -710,7 +710,7 @@ A [`tls_fingerprint_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher"></a>
 
-**Request Matcher**
+#### Request Matcher
 
 A [`request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules)) supports the following:
 
@@ -724,7 +724,7 @@ A [`request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-lim
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers"></a>
 
-**Cookie Matchers**
+#### Cookie Matchers
 
 A [`cookie_matchers`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher)) supports the following:
 
@@ -740,7 +740,7 @@ A [`cookie_matchers`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-lim
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers-item) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.cookie_matchers`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-cookie-matchers)) supports the following:
 
@@ -752,7 +752,7 @@ An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rule
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher)) supports the following:
 
@@ -768,7 +768,7 @@ A [`headers`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-ru
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers-item) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.headers`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-headers)) supports the following:
 
@@ -780,7 +780,7 @@ An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rule
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims"></a>
 
-**JWT Claims**
+#### JWT Claims
 
 A [`jwt_claims`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher)) supports the following:
 
@@ -796,7 +796,7 @@ A [`jwt_claims`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims-item) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.jwt_claims`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-jwt-claims)) supports the following:
 
@@ -808,7 +808,7 @@ An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rule
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params"></a>
 
-**Query Params**
+#### Query Params
 
 A [`query_params`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher)) supports the following:
 
@@ -824,7 +824,7 @@ A [`query_params`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiti
 
 <a id="api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params-item) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.query_params`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rules-request-matcher-query-params)) supports the following:
 
@@ -836,7 +836,7 @@ An [`item`](#api-rate-limit-bypass-rate-limiting-rules-bypass-rate-limiting-rule
 
 <a id="api-rate-limit-custom-ip-allowed-list"></a>
 
-**Custom IP Allowed List**
+#### Custom IP Allowed List
 
 A [`custom_ip_allowed_list`](#api-rate-limit-custom-ip-allowed-list) block (within [`api_rate_limit`](#api-rate-limit)) supports the following:
 
@@ -844,7 +844,7 @@ A [`custom_ip_allowed_list`](#api-rate-limit-custom-ip-allowed-list) block (with
 
 <a id="api-rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes"></a>
 
-**Rate Limiter Allowed Prefixes**
+#### Rate Limiter Allowed Prefixes
 
 A [`rate_limiter_allowed_prefixes`](#api-rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes) block (within [`api_rate_limit.custom_ip_allowed_list`](#api-rate-limit-custom-ip-allowed-list)) supports the following:
 
@@ -856,7 +856,7 @@ A [`rate_limiter_allowed_prefixes`](#api-rate-limit-custom-ip-allowed-list-rate-
 
 <a id="api-rate-limit-ip-allowed-list"></a>
 
-**IP Allowed List**
+#### IP Allowed List
 
 An [`ip_allowed_list`](#api-rate-limit-ip-allowed-list) block (within [`api_rate_limit`](#api-rate-limit)) supports the following:
 
@@ -864,7 +864,7 @@ An [`ip_allowed_list`](#api-rate-limit-ip-allowed-list) block (within [`api_rate
 
 <a id="api-rate-limit-server-url-rules"></a>
 
-**Server URL Rules**
+#### Server URL Rules
 
 A [`server_url_rules`](#api-rate-limit-server-url-rules) block (within [`api_rate_limit`](#api-rate-limit)) supports the following:
 
@@ -886,7 +886,7 @@ A [`server_url_rules`](#api-rate-limit-server-url-rules) block (within [`api_rat
 
 <a id="api-rate-limit-server-url-rules-client-matcher"></a>
 
-**Client Matcher**
+#### Client Matcher
 
 A [`client_matcher`](#api-rate-limit-server-url-rules-client-matcher) block (within [`api_rate_limit.server_url_rules`](#api-rate-limit-server-url-rules)) supports the following:
 
@@ -910,7 +910,7 @@ A [`client_matcher`](#api-rate-limit-server-url-rules-client-matcher) block (wit
 
 <a id="api-rate-limit-server-url-rules-client-matcher-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#api-rate-limit-server-url-rules-client-matcher-asn-list) block (within [`api_rate_limit.server_url_rules.client_matcher`](#api-rate-limit-server-url-rules-client-matcher)) supports the following:
 
@@ -918,7 +918,7 @@ An [`asn_list`](#api-rate-limit-server-url-rules-client-matcher-asn-list) block 
 
 <a id="api-rate-limit-server-url-rules-client-matcher-asn-matcher"></a>
 
-**Asn Matcher**
+#### Asn Matcher
 
 An [`asn_matcher`](#api-rate-limit-server-url-rules-client-matcher-asn-matcher) block (within [`api_rate_limit.server_url_rules.client_matcher`](#api-rate-limit-server-url-rules-client-matcher)) supports the following:
 
@@ -926,7 +926,7 @@ An [`asn_matcher`](#api-rate-limit-server-url-rules-client-matcher-asn-matcher) 
 
 <a id="api-rate-limit-server-url-rules-client-matcher-asn-matcher-asn-sets"></a>
 
-**Asn Sets**
+#### Asn Sets
 
 An [`asn_sets`](#api-rate-limit-server-url-rules-client-matcher-asn-matcher-asn-sets) block (within [`api_rate_limit.server_url_rules.client_matcher.asn_matcher`](#api-rate-limit-server-url-rules-client-matcher-asn-matcher)) supports the following:
 
@@ -942,7 +942,7 @@ An [`asn_sets`](#api-rate-limit-server-url-rules-client-matcher-asn-matcher-asn-
 
 <a id="api-rate-limit-server-url-rules-client-matcher-client-selector"></a>
 
-**Client Selector**
+#### Client Selector
 
 A [`client_selector`](#api-rate-limit-server-url-rules-client-matcher-client-selector) block (within [`api_rate_limit.server_url_rules.client_matcher`](#api-rate-limit-server-url-rules-client-matcher)) supports the following:
 
@@ -950,7 +950,7 @@ A [`client_selector`](#api-rate-limit-server-url-rules-client-matcher-client-sel
 
 <a id="api-rate-limit-server-url-rules-client-matcher-ip-matcher"></a>
 
-**IP Matcher**
+#### IP Matcher
 
 An [`ip_matcher`](#api-rate-limit-server-url-rules-client-matcher-ip-matcher) block (within [`api_rate_limit.server_url_rules.client_matcher`](#api-rate-limit-server-url-rules-client-matcher)) supports the following:
 
@@ -960,7 +960,7 @@ An [`ip_matcher`](#api-rate-limit-server-url-rules-client-matcher-ip-matcher) bl
 
 <a id="api-rate-limit-server-url-rules-client-matcher-ip-matcher-prefix-sets"></a>
 
-**Prefix Sets**
+#### Prefix Sets
 
 A [`prefix_sets`](#api-rate-limit-server-url-rules-client-matcher-ip-matcher-prefix-sets) block (within [`api_rate_limit.server_url_rules.client_matcher.ip_matcher`](#api-rate-limit-server-url-rules-client-matcher-ip-matcher)) supports the following:
 
@@ -976,7 +976,7 @@ A [`prefix_sets`](#api-rate-limit-server-url-rules-client-matcher-ip-matcher-pre
 
 <a id="api-rate-limit-server-url-rules-client-matcher-ip-prefix-list"></a>
 
-**IP Prefix List**
+#### IP Prefix List
 
 An [`ip_prefix_list`](#api-rate-limit-server-url-rules-client-matcher-ip-prefix-list) block (within [`api_rate_limit.server_url_rules.client_matcher`](#api-rate-limit-server-url-rules-client-matcher)) supports the following:
 
@@ -986,7 +986,7 @@ An [`ip_prefix_list`](#api-rate-limit-server-url-rules-client-matcher-ip-prefix-
 
 <a id="api-rate-limit-server-url-rules-client-matcher-ip-threat-category-list"></a>
 
-**IP Threat Category List**
+#### IP Threat Category List
 
 An [`ip_threat_category_list`](#api-rate-limit-server-url-rules-client-matcher-ip-threat-category-list) block (within [`api_rate_limit.server_url_rules.client_matcher`](#api-rate-limit-server-url-rules-client-matcher)) supports the following:
 
@@ -994,7 +994,7 @@ An [`ip_threat_category_list`](#api-rate-limit-server-url-rules-client-matcher-i
 
 <a id="api-rate-limit-server-url-rules-client-matcher-tls-fingerprint-matcher"></a>
 
-**TLS Fingerprint Matcher**
+#### TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#api-rate-limit-server-url-rules-client-matcher-tls-fingerprint-matcher) block (within [`api_rate_limit.server_url_rules.client_matcher`](#api-rate-limit-server-url-rules-client-matcher)) supports the following:
 
@@ -1006,7 +1006,7 @@ A [`tls_fingerprint_matcher`](#api-rate-limit-server-url-rules-client-matcher-tl
 
 <a id="api-rate-limit-server-url-rules-inline-rate-limiter"></a>
 
-**Inline Rate Limiter**
+#### Inline Rate Limiter
 
 An [`inline_rate_limiter`](#api-rate-limit-server-url-rules-inline-rate-limiter) block (within [`api_rate_limit.server_url_rules`](#api-rate-limit-server-url-rules)) supports the following:
 
@@ -1020,7 +1020,7 @@ An [`inline_rate_limiter`](#api-rate-limit-server-url-rules-inline-rate-limiter)
 
 <a id="api-rate-limit-server-url-rules-inline-rate-limiter-ref-user-id"></a>
 
-**Ref User Id**
+#### Ref User Id
 
 A [`ref_user_id`](#api-rate-limit-server-url-rules-inline-rate-limiter-ref-user-id) block (within [`api_rate_limit.server_url_rules.inline_rate_limiter`](#api-rate-limit-server-url-rules-inline-rate-limiter)) supports the following:
 
@@ -1032,7 +1032,7 @@ A [`ref_user_id`](#api-rate-limit-server-url-rules-inline-rate-limiter-ref-user-
 
 <a id="api-rate-limit-server-url-rules-ref-rate-limiter"></a>
 
-**Ref Rate Limiter**
+#### Ref Rate Limiter
 
 A [`ref_rate_limiter`](#api-rate-limit-server-url-rules-ref-rate-limiter) block (within [`api_rate_limit.server_url_rules`](#api-rate-limit-server-url-rules)) supports the following:
 
@@ -1044,7 +1044,7 @@ A [`ref_rate_limiter`](#api-rate-limit-server-url-rules-ref-rate-limiter) block 
 
 <a id="api-rate-limit-server-url-rules-request-matcher"></a>
 
-**Request Matcher**
+#### Request Matcher
 
 A [`request_matcher`](#api-rate-limit-server-url-rules-request-matcher) block (within [`api_rate_limit.server_url_rules`](#api-rate-limit-server-url-rules)) supports the following:
 
@@ -1058,7 +1058,7 @@ A [`request_matcher`](#api-rate-limit-server-url-rules-request-matcher) block (w
 
 <a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers"></a>
 
-**Cookie Matchers**
+#### Cookie Matchers
 
 A [`cookie_matchers`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers) block (within [`api_rate_limit.server_url_rules.request_matcher`](#api-rate-limit-server-url-rules-request-matcher)) supports the following:
 
@@ -1074,7 +1074,7 @@ A [`cookie_matchers`](#api-rate-limit-server-url-rules-request-matcher-cookie-ma
 
 <a id="api-rate-limit-server-url-rules-request-matcher-cookie-matchers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers-item) block (within [`api_rate_limit.server_url_rules.request_matcher.cookie_matchers`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers)) supports the following:
 
@@ -1086,7 +1086,7 @@ An [`item`](#api-rate-limit-server-url-rules-request-matcher-cookie-matchers-ite
 
 <a id="api-rate-limit-server-url-rules-request-matcher-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#api-rate-limit-server-url-rules-request-matcher-headers) block (within [`api_rate_limit.server_url_rules.request_matcher`](#api-rate-limit-server-url-rules-request-matcher)) supports the following:
 
@@ -1102,7 +1102,7 @@ A [`headers`](#api-rate-limit-server-url-rules-request-matcher-headers) block (w
 
 <a id="api-rate-limit-server-url-rules-request-matcher-headers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-server-url-rules-request-matcher-headers-item) block (within [`api_rate_limit.server_url_rules.request_matcher.headers`](#api-rate-limit-server-url-rules-request-matcher-headers)) supports the following:
 
@@ -1114,7 +1114,7 @@ An [`item`](#api-rate-limit-server-url-rules-request-matcher-headers-item) block
 
 <a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims"></a>
 
-**JWT Claims**
+#### JWT Claims
 
 A [`jwt_claims`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims) block (within [`api_rate_limit.server_url_rules.request_matcher`](#api-rate-limit-server-url-rules-request-matcher)) supports the following:
 
@@ -1130,7 +1130,7 @@ A [`jwt_claims`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims) bl
 
 <a id="api-rate-limit-server-url-rules-request-matcher-jwt-claims-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims-item) block (within [`api_rate_limit.server_url_rules.request_matcher.jwt_claims`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims)) supports the following:
 
@@ -1142,7 +1142,7 @@ An [`item`](#api-rate-limit-server-url-rules-request-matcher-jwt-claims-item) bl
 
 <a id="api-rate-limit-server-url-rules-request-matcher-query-params"></a>
 
-**Query Params**
+#### Query Params
 
 A [`query_params`](#api-rate-limit-server-url-rules-request-matcher-query-params) block (within [`api_rate_limit.server_url_rules.request_matcher`](#api-rate-limit-server-url-rules-request-matcher)) supports the following:
 
@@ -1158,7 +1158,7 @@ A [`query_params`](#api-rate-limit-server-url-rules-request-matcher-query-params
 
 <a id="api-rate-limit-server-url-rules-request-matcher-query-params-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#api-rate-limit-server-url-rules-request-matcher-query-params-item) block (within [`api_rate_limit.server_url_rules.request_matcher.query_params`](#api-rate-limit-server-url-rules-request-matcher-query-params)) supports the following:
 
@@ -1170,7 +1170,7 @@ An [`item`](#api-rate-limit-server-url-rules-request-matcher-query-params-item) 
 
 <a id="api-specification"></a>
 
-**API Specification**
+#### API Specification
 
 An [`api_specification`](#api-specification) block supports the following:
 
@@ -1184,7 +1184,7 @@ An [`api_specification`](#api-specification) block supports the following:
 
 <a id="api-specification-api-definition"></a>
 
-**API Definition**
+#### API Definition
 
 An [`api_definition`](#api-specification-api-definition) block (within [`api_specification`](#api-specification)) supports the following:
 
@@ -1196,7 +1196,7 @@ An [`api_definition`](#api-specification-api-definition) block (within [`api_spe
 
 <a id="api-specification-validation-all-spec-endpoints"></a>
 
-**Validation All Spec Endpoints**
+#### Validation All Spec Endpoints
 
 A [`validation_all_spec_endpoints`](#api-specification-validation-all-spec-endpoints) block (within [`api_specification`](#api-specification)) supports the following:
 
@@ -1208,7 +1208,7 @@ A [`validation_all_spec_endpoints`](#api-specification-validation-all-spec-endpo
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode"></a>
 
-**Fall Through Mode**
+#### Fall Through Mode
 
 A [`fall_through_mode`](#api-specification-validation-all-spec-endpoints-fall-through-mode) block (within [`api_specification.validation_all_spec_endpoints`](#api-specification-validation-all-spec-endpoints)) supports the following:
 
@@ -1218,7 +1218,7 @@ A [`fall_through_mode`](#api-specification-validation-all-spec-endpoints-fall-th
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom"></a>
 
-**Fall Through Mode Custom**
+#### Fall Through Mode Custom
 
 A [`fall_through_mode_custom`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode`](#api-specification-validation-all-spec-endpoints-fall-through-mode)) supports the following:
 
@@ -1226,7 +1226,7 @@ A [`fall_through_mode_custom`](#api-specification-validation-all-spec-endpoints-
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules"></a>
 
-**Open API Validation Rules**
+#### Open API Validation Rules
 
 An [`open_api_validation_rules`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom)) supports the following:
 
@@ -1246,7 +1246,7 @@ An [`open_api_validation_rules`](#api-specification-validation-all-spec-endpoint
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint"></a>
 
-**API Endpoint**
+#### API Endpoint
 
 An [`api_endpoint`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules)) supports the following:
 
@@ -1256,7 +1256,7 @@ An [`api_endpoint`](#api-specification-validation-all-spec-endpoints-fall-throug
 
 <a id="api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#api-specification-validation-all-spec-endpoints-fall-through-mode-fall-through-mode-custom-open-api-validation-rules)) supports the following:
 
@@ -1266,7 +1266,7 @@ A [`metadata`](#api-specification-validation-all-spec-endpoints-fall-through-mod
 
 <a id="api-specification-validation-all-spec-endpoints-settings"></a>
 
-**Settings**
+#### Settings
 
 A [`settings`](#api-specification-validation-all-spec-endpoints-settings) block (within [`api_specification.validation_all_spec_endpoints`](#api-specification-validation-all-spec-endpoints)) supports the following:
 
@@ -1280,7 +1280,7 @@ A [`settings`](#api-specification-validation-all-spec-endpoints-settings) block 
 
 <a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom"></a>
 
-**Property Validation Settings Custom**
+#### Property Validation Settings Custom
 
 A [`property_validation_settings_custom`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom) block (within [`api_specification.validation_all_spec_endpoints.settings`](#api-specification-validation-all-spec-endpoints-settings)) supports the following:
 
@@ -1288,7 +1288,7 @@ A [`property_validation_settings_custom`](#api-specification-validation-all-spec
 
 <a id="api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters"></a>
 
-**Query Parameters**
+#### Query Parameters
 
 A [`query_parameters`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom-query-parameters) block (within [`api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom`](#api-specification-validation-all-spec-endpoints-settings-property-validation-settings-custom)) supports the following:
 
@@ -1298,7 +1298,7 @@ A [`query_parameters`](#api-specification-validation-all-spec-endpoints-settings
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode"></a>
 
-**Validation Mode**
+#### Validation Mode
 
 A [`validation_mode`](#api-specification-validation-all-spec-endpoints-validation-mode) block (within [`api_specification.validation_all_spec_endpoints`](#api-specification-validation-all-spec-endpoints)) supports the following:
 
@@ -1312,7 +1312,7 @@ A [`validation_mode`](#api-specification-validation-all-spec-endpoints-validatio
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active"></a>
 
-**Response Validation Mode Active**
+#### Response Validation Mode Active
 
 A [`response_validation_mode_active`](#api-specification-validation-all-spec-endpoints-validation-mode-response-validation-mode-active) block (within [`api_specification.validation_all_spec_endpoints.validation_mode`](#api-specification-validation-all-spec-endpoints-validation-mode)) supports the following:
 
@@ -1324,7 +1324,7 @@ A [`response_validation_mode_active`](#api-specification-validation-all-spec-end
 
 <a id="api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active"></a>
 
-**Validation Mode Active**
+#### Validation Mode Active
 
 A [`validation_mode_active`](#api-specification-validation-all-spec-endpoints-validation-mode-validation-mode-active) block (within [`api_specification.validation_all_spec_endpoints.validation_mode`](#api-specification-validation-all-spec-endpoints-validation-mode)) supports the following:
 
@@ -1336,7 +1336,7 @@ A [`validation_mode_active`](#api-specification-validation-all-spec-endpoints-va
 
 <a id="api-specification-validation-custom-list"></a>
 
-**Validation Custom List**
+#### Validation Custom List
 
 A [`validation_custom_list`](#api-specification-validation-custom-list) block (within [`api_specification`](#api-specification)) supports the following:
 
@@ -1348,7 +1348,7 @@ A [`validation_custom_list`](#api-specification-validation-custom-list) block (w
 
 <a id="api-specification-validation-custom-list-fall-through-mode"></a>
 
-**Fall Through Mode**
+#### Fall Through Mode
 
 A [`fall_through_mode`](#api-specification-validation-custom-list-fall-through-mode) block (within [`api_specification.validation_custom_list`](#api-specification-validation-custom-list)) supports the following:
 
@@ -1358,7 +1358,7 @@ A [`fall_through_mode`](#api-specification-validation-custom-list-fall-through-m
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom"></a>
 
-**Fall Through Mode Custom**
+#### Fall Through Mode Custom
 
 A [`fall_through_mode_custom`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom) block (within [`api_specification.validation_custom_list.fall_through_mode`](#api-specification-validation-custom-list-fall-through-mode)) supports the following:
 
@@ -1366,7 +1366,7 @@ A [`fall_through_mode_custom`](#api-specification-validation-custom-list-fall-th
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules"></a>
 
-**Open API Validation Rules**
+#### Open API Validation Rules
 
 An [`open_api_validation_rules`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules) block (within [`api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom)) supports the following:
 
@@ -1386,7 +1386,7 @@ An [`open_api_validation_rules`](#api-specification-validation-custom-list-fall-
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint"></a>
 
-**API Endpoint**
+#### API Endpoint
 
 An [`api_endpoint`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-api-endpoint) block (within [`api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules)) supports the following:
 
@@ -1396,7 +1396,7 @@ An [`api_endpoint`](#api-specification-validation-custom-list-fall-through-mode-
 
 <a id="api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules-metadata) block (within [`api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#api-specification-validation-custom-list-fall-through-mode-fall-through-mode-custom-open-api-validation-rules)) supports the following:
 
@@ -1406,7 +1406,7 @@ A [`metadata`](#api-specification-validation-custom-list-fall-through-mode-fall-
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules"></a>
 
-**Open API Validation Rules**
+#### Open API Validation Rules
 
 An [`open_api_validation_rules`](#api-specification-validation-custom-list-open-api-validation-rules) block (within [`api_specification.validation_custom_list`](#api-specification-validation-custom-list)) supports the following:
 
@@ -1426,7 +1426,7 @@ An [`open_api_validation_rules`](#api-specification-validation-custom-list-open-
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-api-endpoint"></a>
 
-**API Endpoint**
+#### API Endpoint
 
 An [`api_endpoint`](#api-specification-validation-custom-list-open-api-validation-rules-api-endpoint) block (within [`api_specification.validation_custom_list.open_api_validation_rules`](#api-specification-validation-custom-list-open-api-validation-rules)) supports the following:
 
@@ -1436,7 +1436,7 @@ An [`api_endpoint`](#api-specification-validation-custom-list-open-api-validatio
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#api-specification-validation-custom-list-open-api-validation-rules-metadata) block (within [`api_specification.validation_custom_list.open_api_validation_rules`](#api-specification-validation-custom-list-open-api-validation-rules)) supports the following:
 
@@ -1446,7 +1446,7 @@ A [`metadata`](#api-specification-validation-custom-list-open-api-validation-rul
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode"></a>
 
-**Validation Mode**
+#### Validation Mode
 
 A [`validation_mode`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode) block (within [`api_specification.validation_custom_list.open_api_validation_rules`](#api-specification-validation-custom-list-open-api-validation-rules)) supports the following:
 
@@ -1460,7 +1460,7 @@ A [`validation_mode`](#api-specification-validation-custom-list-open-api-validat
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active"></a>
 
-**Response Validation Mode Active**
+#### Response Validation Mode Active
 
 A [`response_validation_mode_active`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-response-validation-mode-active) block (within [`api_specification.validation_custom_list.open_api_validation_rules.validation_mode`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode)) supports the following:
 
@@ -1472,7 +1472,7 @@ A [`response_validation_mode_active`](#api-specification-validation-custom-list-
 
 <a id="api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active"></a>
 
-**Validation Mode Active**
+#### Validation Mode Active
 
 A [`validation_mode_active`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode-validation-mode-active) block (within [`api_specification.validation_custom_list.open_api_validation_rules.validation_mode`](#api-specification-validation-custom-list-open-api-validation-rules-validation-mode)) supports the following:
 
@@ -1484,7 +1484,7 @@ A [`validation_mode_active`](#api-specification-validation-custom-list-open-api-
 
 <a id="api-specification-validation-custom-list-settings"></a>
 
-**Settings**
+#### Settings
 
 A [`settings`](#api-specification-validation-custom-list-settings) block (within [`api_specification.validation_custom_list`](#api-specification-validation-custom-list)) supports the following:
 
@@ -1498,7 +1498,7 @@ A [`settings`](#api-specification-validation-custom-list-settings) block (within
 
 <a id="api-specification-validation-custom-list-settings-property-validation-settings-custom"></a>
 
-**Property Validation Settings Custom**
+#### Property Validation Settings Custom
 
 A [`property_validation_settings_custom`](#api-specification-validation-custom-list-settings-property-validation-settings-custom) block (within [`api_specification.validation_custom_list.settings`](#api-specification-validation-custom-list-settings)) supports the following:
 
@@ -1506,7 +1506,7 @@ A [`property_validation_settings_custom`](#api-specification-validation-custom-l
 
 <a id="api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters"></a>
 
-**Query Parameters**
+#### Query Parameters
 
 A [`query_parameters`](#api-specification-validation-custom-list-settings-property-validation-settings-custom-query-parameters) block (within [`api_specification.validation_custom_list.settings.property_validation_settings_custom`](#api-specification-validation-custom-list-settings-property-validation-settings-custom)) supports the following:
 
@@ -1516,7 +1516,7 @@ A [`query_parameters`](#api-specification-validation-custom-list-settings-proper
 
 <a id="app-firewall"></a>
 
-**App Firewall**
+#### App Firewall
 
 An [`app_firewall`](#app-firewall) block supports the following:
 
@@ -1528,7 +1528,7 @@ An [`app_firewall`](#app-firewall) block supports the following:
 
 <a id="blocked-clients"></a>
 
-**Blocked Clients**
+#### Blocked Clients
 
 A [`blocked_clients`](#blocked-clients) block supports the following:
 
@@ -1556,7 +1556,7 @@ A [`blocked_clients`](#blocked-clients) block supports the following:
 
 <a id="blocked-clients-http-header"></a>
 
-**HTTP Header**
+#### HTTP Header
 
 A [`http_header`](#blocked-clients-http-header) block (within [`blocked_clients`](#blocked-clients)) supports the following:
 
@@ -1564,7 +1564,7 @@ A [`http_header`](#blocked-clients-http-header) block (within [`blocked_clients`
 
 <a id="blocked-clients-http-header-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#blocked-clients-http-header-headers) block (within [`blocked_clients.http_header`](#blocked-clients-http-header)) supports the following:
 
@@ -1580,7 +1580,7 @@ A [`headers`](#blocked-clients-http-header-headers) block (within [`blocked_clie
 
 <a id="blocked-clients-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#blocked-clients-metadata) block (within [`blocked_clients`](#blocked-clients)) supports the following:
 
@@ -1590,7 +1590,7 @@ A [`metadata`](#blocked-clients-metadata) block (within [`blocked_clients`](#blo
 
 <a id="bot-defense"></a>
 
-**Bot Defense**
+#### Bot Defense
 
 A [`bot_defense`](#bot-defense) block supports the following:
 
@@ -1606,7 +1606,7 @@ A [`bot_defense`](#bot-defense) block supports the following:
 
 <a id="bot-defense-policy"></a>
 
-**Policy**
+#### Policy
 
 A [`policy`](#bot-defense-policy) block (within [`bot_defense`](#bot-defense)) supports the following:
 
@@ -1630,7 +1630,7 @@ A [`policy`](#bot-defense-policy) block (within [`bot_defense`](#bot-defense)) s
 
 <a id="bot-defense-policy-js-insert-all-pages"></a>
 
-**Js Insert All Pages**
+#### Js Insert All Pages
 
 A [`js_insert_all_pages`](#bot-defense-policy-js-insert-all-pages) block (within [`bot_defense.policy`](#bot-defense-policy)) supports the following:
 
@@ -1638,7 +1638,7 @@ A [`js_insert_all_pages`](#bot-defense-policy-js-insert-all-pages) block (within
 
 <a id="bot-defense-policy-js-insert-all-pages-except"></a>
 
-**Js Insert All Pages Except**
+#### Js Insert All Pages Except
 
 A [`js_insert_all_pages_except`](#bot-defense-policy-js-insert-all-pages-except) block (within [`bot_defense.policy`](#bot-defense-policy)) supports the following:
 
@@ -1648,7 +1648,7 @@ A [`js_insert_all_pages_except`](#bot-defense-policy-js-insert-all-pages-except)
 
 <a id="bot-defense-policy-js-insert-all-pages-except-exclude-list"></a>
 
-**Exclude List**
+#### Exclude List
 
 An [`exclude_list`](#bot-defense-policy-js-insert-all-pages-except-exclude-list) block (within [`bot_defense.policy.js_insert_all_pages_except`](#bot-defense-policy-js-insert-all-pages-except)) supports the following:
 
@@ -1662,7 +1662,7 @@ An [`exclude_list`](#bot-defense-policy-js-insert-all-pages-except-exclude-list)
 
 <a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-domain"></a>
 
-**Domain**
+#### Domain
 
 A [`domain`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-domain) block (within [`bot_defense.policy.js_insert_all_pages_except.exclude_list`](#bot-defense-policy-js-insert-all-pages-except-exclude-list)) supports the following:
 
@@ -1674,7 +1674,7 @@ A [`domain`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-domain)
 
 <a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-metadata) block (within [`bot_defense.policy.js_insert_all_pages_except.exclude_list`](#bot-defense-policy-js-insert-all-pages-except-exclude-list)) supports the following:
 
@@ -1684,7 +1684,7 @@ A [`metadata`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-metad
 
 <a id="bot-defense-policy-js-insert-all-pages-except-exclude-list-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-path) block (within [`bot_defense.policy.js_insert_all_pages_except.exclude_list`](#bot-defense-policy-js-insert-all-pages-except-exclude-list)) supports the following:
 
@@ -1696,7 +1696,7 @@ A [`path`](#bot-defense-policy-js-insert-all-pages-except-exclude-list-path) blo
 
 <a id="bot-defense-policy-js-insertion-rules"></a>
 
-**Js Insertion Rules**
+#### Js Insertion Rules
 
 A [`js_insertion_rules`](#bot-defense-policy-js-insertion-rules) block (within [`bot_defense.policy`](#bot-defense-policy)) supports the following:
 
@@ -1706,7 +1706,7 @@ A [`js_insertion_rules`](#bot-defense-policy-js-insertion-rules) block (within [
 
 <a id="bot-defense-policy-js-insertion-rules-exclude-list"></a>
 
-**Exclude List**
+#### Exclude List
 
 An [`exclude_list`](#bot-defense-policy-js-insertion-rules-exclude-list) block (within [`bot_defense.policy.js_insertion_rules`](#bot-defense-policy-js-insertion-rules)) supports the following:
 
@@ -1720,7 +1720,7 @@ An [`exclude_list`](#bot-defense-policy-js-insertion-rules-exclude-list) block (
 
 <a id="bot-defense-policy-js-insertion-rules-exclude-list-domain"></a>
 
-**Domain**
+#### Domain
 
 A [`domain`](#bot-defense-policy-js-insertion-rules-exclude-list-domain) block (within [`bot_defense.policy.js_insertion_rules.exclude_list`](#bot-defense-policy-js-insertion-rules-exclude-list)) supports the following:
 
@@ -1732,7 +1732,7 @@ A [`domain`](#bot-defense-policy-js-insertion-rules-exclude-list-domain) block (
 
 <a id="bot-defense-policy-js-insertion-rules-exclude-list-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#bot-defense-policy-js-insertion-rules-exclude-list-metadata) block (within [`bot_defense.policy.js_insertion_rules.exclude_list`](#bot-defense-policy-js-insertion-rules-exclude-list)) supports the following:
 
@@ -1742,7 +1742,7 @@ A [`metadata`](#bot-defense-policy-js-insertion-rules-exclude-list-metadata) blo
 
 <a id="bot-defense-policy-js-insertion-rules-exclude-list-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#bot-defense-policy-js-insertion-rules-exclude-list-path) block (within [`bot_defense.policy.js_insertion_rules.exclude_list`](#bot-defense-policy-js-insertion-rules-exclude-list)) supports the following:
 
@@ -1754,7 +1754,7 @@ A [`path`](#bot-defense-policy-js-insertion-rules-exclude-list-path) block (with
 
 <a id="bot-defense-policy-js-insertion-rules-rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#bot-defense-policy-js-insertion-rules-rules) block (within [`bot_defense.policy.js_insertion_rules`](#bot-defense-policy-js-insertion-rules)) supports the following:
 
@@ -1770,7 +1770,7 @@ A [`rules`](#bot-defense-policy-js-insertion-rules-rules) block (within [`bot_de
 
 <a id="bot-defense-policy-js-insertion-rules-rules-domain"></a>
 
-**Domain**
+#### Domain
 
 A [`domain`](#bot-defense-policy-js-insertion-rules-rules-domain) block (within [`bot_defense.policy.js_insertion_rules.rules`](#bot-defense-policy-js-insertion-rules-rules)) supports the following:
 
@@ -1782,7 +1782,7 @@ A [`domain`](#bot-defense-policy-js-insertion-rules-rules-domain) block (within 
 
 <a id="bot-defense-policy-js-insertion-rules-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#bot-defense-policy-js-insertion-rules-rules-metadata) block (within [`bot_defense.policy.js_insertion_rules.rules`](#bot-defense-policy-js-insertion-rules-rules)) supports the following:
 
@@ -1792,7 +1792,7 @@ A [`metadata`](#bot-defense-policy-js-insertion-rules-rules-metadata) block (wit
 
 <a id="bot-defense-policy-js-insertion-rules-rules-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#bot-defense-policy-js-insertion-rules-rules-path) block (within [`bot_defense.policy.js_insertion_rules.rules`](#bot-defense-policy-js-insertion-rules-rules)) supports the following:
 
@@ -1804,7 +1804,7 @@ A [`path`](#bot-defense-policy-js-insertion-rules-rules-path) block (within [`bo
 
 <a id="bot-defense-policy-mobile-sdk-config"></a>
 
-**Mobile Sdk Config**
+#### Mobile Sdk Config
 
 A [`mobile_sdk_config`](#bot-defense-policy-mobile-sdk-config) block (within [`bot_defense.policy`](#bot-defense-policy)) supports the following:
 
@@ -1812,7 +1812,7 @@ A [`mobile_sdk_config`](#bot-defense-policy-mobile-sdk-config) block (within [`b
 
 <a id="bot-defense-policy-mobile-sdk-config-mobile-identifier"></a>
 
-**Mobile Identifier**
+#### Mobile Identifier
 
 A [`mobile_identifier`](#bot-defense-policy-mobile-sdk-config-mobile-identifier) block (within [`bot_defense.policy.mobile_sdk_config`](#bot-defense-policy-mobile-sdk-config)) supports the following:
 
@@ -1820,7 +1820,7 @@ A [`mobile_identifier`](#bot-defense-policy-mobile-sdk-config-mobile-identifier)
 
 <a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers) block (within [`bot_defense.policy.mobile_sdk_config.mobile_identifier`](#bot-defense-policy-mobile-sdk-config-mobile-identifier)) supports the following:
 
@@ -1834,7 +1834,7 @@ A [`headers`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers) b
 
 <a id="bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item) block (within [`bot_defense.policy.mobile_sdk_config.mobile_identifier.headers`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers)) supports the following:
 
@@ -1846,7 +1846,7 @@ An [`item`](#bot-defense-policy-mobile-sdk-config-mobile-identifier-headers-item
 
 <a id="bot-defense-policy-protected-app-endpoints"></a>
 
-**Protected App Endpoints**
+#### Protected App Endpoints
 
 A [`protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints) block (within [`bot_defense.policy`](#bot-defense-policy)) supports the following:
 
@@ -1884,7 +1884,7 @@ A [`protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints) block
 
 <a id="bot-defense-policy-protected-app-endpoints-domain"></a>
 
-**Domain**
+#### Domain
 
 A [`domain`](#bot-defense-policy-protected-app-endpoints-domain) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
@@ -1896,7 +1896,7 @@ A [`domain`](#bot-defense-policy-protected-app-endpoints-domain) block (within [
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label"></a>
 
-**Flow Label**
+#### Flow Label
 
 A [`flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
@@ -1916,7 +1916,7 @@ A [`flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label) block (
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-account-management"></a>
 
-**Account Management**
+#### Account Management
 
 An [`account_management`](#bot-defense-policy-protected-app-endpoints-flow-label-account-management) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
@@ -1926,7 +1926,7 @@ An [`account_management`](#bot-defense-policy-protected-app-endpoints-flow-label
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication"></a>
 
-**Authentication**
+#### Authentication
 
 An [`authentication`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
@@ -1942,7 +1942,7 @@ An [`authentication`](#bot-defense-policy-protected-app-endpoints-flow-label-aut
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login"></a>
 
-**Login**
+#### Login
 
 A [`login`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login) block (within [`bot_defense.policy.protected_app_endpoints.flow_label.authentication`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication)) supports the following:
 
@@ -1952,7 +1952,7 @@ A [`login`](#bot-defense-policy-protected-app-endpoints-flow-label-authenticatio
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result"></a>
 
-**Transaction Result**
+#### Transaction Result
 
 A [`transaction_result`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result) block (within [`bot_defense.policy.protected_app_endpoints.flow_label.authentication.login`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login)) supports the following:
 
@@ -1962,7 +1962,7 @@ A [`transaction_result`](#bot-defense-policy-protected-app-endpoints-flow-label-
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-failure-conditions"></a>
 
-**Failure Conditions**
+#### Failure Conditions
 
 A [`failure_conditions`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-failure-conditions) block (within [`bot_defense.policy.protected_app_endpoints.flow_label.authentication.login.transaction_result`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result)) supports the following:
 
@@ -1974,7 +1974,7 @@ A [`failure_conditions`](#bot-defense-policy-protected-app-endpoints-flow-label-
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-success-conditions"></a>
 
-**Success Conditions**
+#### Success Conditions
 
 A [`success_conditions`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result-success-conditions) block (within [`bot_defense.policy.protected_app_endpoints.flow_label.authentication.login.transaction_result`](#bot-defense-policy-protected-app-endpoints-flow-label-authentication-login-transaction-result)) supports the following:
 
@@ -1986,7 +1986,7 @@ A [`success_conditions`](#bot-defense-policy-protected-app-endpoints-flow-label-
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-financial-services"></a>
 
-**Financial Services**
+#### Financial Services
 
 A [`financial_services`](#bot-defense-policy-protected-app-endpoints-flow-label-financial-services) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
@@ -1996,7 +1996,7 @@ A [`financial_services`](#bot-defense-policy-protected-app-endpoints-flow-label-
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-flight"></a>
 
-**Flight**
+#### Flight
 
 A [`flight`](#bot-defense-policy-protected-app-endpoints-flow-label-flight) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
@@ -2004,7 +2004,7 @@ A [`flight`](#bot-defense-policy-protected-app-endpoints-flow-label-flight) bloc
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-profile-management"></a>
 
-**Profile Management**
+#### Profile Management
 
 A [`profile_management`](#bot-defense-policy-protected-app-endpoints-flow-label-profile-management) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
@@ -2016,7 +2016,7 @@ A [`profile_management`](#bot-defense-policy-protected-app-endpoints-flow-label-
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-search"></a>
 
-**Search**
+#### Search
 
 A [`search`](#bot-defense-policy-protected-app-endpoints-flow-label-search) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
@@ -2030,7 +2030,7 @@ A [`search`](#bot-defense-policy-protected-app-endpoints-flow-label-search) bloc
 
 <a id="bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards"></a>
 
-**Shopping Gift Cards**
+#### Shopping Gift Cards
 
 A [`shopping_gift_cards`](#bot-defense-policy-protected-app-endpoints-flow-label-shopping-gift-cards) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#bot-defense-policy-protected-app-endpoints-flow-label)) supports the following:
 
@@ -2060,7 +2060,7 @@ A [`shopping_gift_cards`](#bot-defense-policy-protected-app-endpoints-flow-label
 
 <a id="bot-defense-policy-protected-app-endpoints-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#bot-defense-policy-protected-app-endpoints-headers) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
@@ -2076,7 +2076,7 @@ A [`headers`](#bot-defense-policy-protected-app-endpoints-headers) block (within
 
 <a id="bot-defense-policy-protected-app-endpoints-headers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#bot-defense-policy-protected-app-endpoints-headers-item) block (within [`bot_defense.policy.protected_app_endpoints.headers`](#bot-defense-policy-protected-app-endpoints-headers)) supports the following:
 
@@ -2088,7 +2088,7 @@ An [`item`](#bot-defense-policy-protected-app-endpoints-headers-item) block (wit
 
 <a id="bot-defense-policy-protected-app-endpoints-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#bot-defense-policy-protected-app-endpoints-metadata) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
@@ -2098,7 +2098,7 @@ A [`metadata`](#bot-defense-policy-protected-app-endpoints-metadata) block (with
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation"></a>
 
-**Mitigation**
+#### Mitigation
 
 A [`mitigation`](#bot-defense-policy-protected-app-endpoints-mitigation) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
@@ -2110,7 +2110,7 @@ A [`mitigation`](#bot-defense-policy-protected-app-endpoints-mitigation) block (
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation-block"></a>
 
-**Block**
+#### Block
 
 A [`block`](#bot-defense-policy-protected-app-endpoints-mitigation-block) block (within [`bot_defense.policy.protected_app_endpoints.mitigation`](#bot-defense-policy-protected-app-endpoints-mitigation)) supports the following:
 
@@ -2120,7 +2120,7 @@ A [`block`](#bot-defense-policy-protected-app-endpoints-mitigation-block) block 
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation-flag"></a>
 
-**Flag**
+#### Flag
 
 A [`flag`](#bot-defense-policy-protected-app-endpoints-mitigation-flag) block (within [`bot_defense.policy.protected_app_endpoints.mitigation`](#bot-defense-policy-protected-app-endpoints-mitigation)) supports the following:
 
@@ -2130,7 +2130,7 @@ A [`flag`](#bot-defense-policy-protected-app-endpoints-mitigation-flag) block (w
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation-flag-append-headers"></a>
 
-**Append Headers**
+#### Append Headers
 
 An [`append_headers`](#bot-defense-policy-protected-app-endpoints-mitigation-flag-append-headers) block (within [`bot_defense.policy.protected_app_endpoints.mitigation.flag`](#bot-defense-policy-protected-app-endpoints-mitigation-flag)) supports the following:
 
@@ -2140,7 +2140,7 @@ An [`append_headers`](#bot-defense-policy-protected-app-endpoints-mitigation-fla
 
 <a id="bot-defense-policy-protected-app-endpoints-mitigation-redirect"></a>
 
-**Redirect**
+#### Redirect
 
 A [`redirect`](#bot-defense-policy-protected-app-endpoints-mitigation-redirect) block (within [`bot_defense.policy.protected_app_endpoints.mitigation`](#bot-defense-policy-protected-app-endpoints-mitigation)) supports the following:
 
@@ -2148,7 +2148,7 @@ A [`redirect`](#bot-defense-policy-protected-app-endpoints-mitigation-redirect) 
 
 <a id="bot-defense-policy-protected-app-endpoints-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#bot-defense-policy-protected-app-endpoints-path) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
@@ -2160,7 +2160,7 @@ A [`path`](#bot-defense-policy-protected-app-endpoints-path) block (within [`bot
 
 <a id="bot-defense-policy-protected-app-endpoints-query-params"></a>
 
-**Query Params**
+#### Query Params
 
 A [`query_params`](#bot-defense-policy-protected-app-endpoints-query-params) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
@@ -2176,7 +2176,7 @@ A [`query_params`](#bot-defense-policy-protected-app-endpoints-query-params) blo
 
 <a id="bot-defense-policy-protected-app-endpoints-query-params-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#bot-defense-policy-protected-app-endpoints-query-params-item) block (within [`bot_defense.policy.protected_app_endpoints.query_params`](#bot-defense-policy-protected-app-endpoints-query-params)) supports the following:
 
@@ -2188,7 +2188,7 @@ An [`item`](#bot-defense-policy-protected-app-endpoints-query-params-item) block
 
 <a id="bot-defense-policy-protected-app-endpoints-web-mobile"></a>
 
-**Web Mobile**
+#### Web Mobile
 
 A [`web_mobile`](#bot-defense-policy-protected-app-endpoints-web-mobile) block (within [`bot_defense.policy.protected_app_endpoints`](#bot-defense-policy-protected-app-endpoints)) supports the following:
 
@@ -2196,7 +2196,7 @@ A [`web_mobile`](#bot-defense-policy-protected-app-endpoints-web-mobile) block (
 
 <a id="captcha-challenge"></a>
 
-**Captcha Challenge**
+#### Captcha Challenge
 
 A [`captcha_challenge`](#captcha-challenge) block supports the following:
 
@@ -2206,7 +2206,7 @@ A [`captcha_challenge`](#captcha-challenge) block supports the following:
 
 <a id="client-side-defense"></a>
 
-**Client Side Defense**
+#### Client Side Defense
 
 A [`client_side_defense`](#client-side-defense) block supports the following:
 
@@ -2214,7 +2214,7 @@ A [`client_side_defense`](#client-side-defense) block supports the following:
 
 <a id="client-side-defense-policy"></a>
 
-**Policy**
+#### Policy
 
 A [`policy`](#client-side-defense-policy) block (within [`client_side_defense`](#client-side-defense)) supports the following:
 
@@ -2228,7 +2228,7 @@ A [`policy`](#client-side-defense-policy) block (within [`client_side_defense`](
 
 <a id="client-side-defense-policy-js-insert-all-pages-except"></a>
 
-**Js Insert All Pages Except**
+#### Js Insert All Pages Except
 
 A [`js_insert_all_pages_except`](#client-side-defense-policy-js-insert-all-pages-except) block (within [`client_side_defense.policy`](#client-side-defense-policy)) supports the following:
 
@@ -2236,7 +2236,7 @@ A [`js_insert_all_pages_except`](#client-side-defense-policy-js-insert-all-pages
 
 <a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list"></a>
 
-**Exclude List**
+#### Exclude List
 
 An [`exclude_list`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list) block (within [`client_side_defense.policy.js_insert_all_pages_except`](#client-side-defense-policy-js-insert-all-pages-except)) supports the following:
 
@@ -2250,7 +2250,7 @@ An [`exclude_list`](#client-side-defense-policy-js-insert-all-pages-except-exclu
 
 <a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-domain"></a>
 
-**Domain**
+#### Domain
 
 A [`domain`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-domain) block (within [`client_side_defense.policy.js_insert_all_pages_except.exclude_list`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list)) supports the following:
 
@@ -2262,7 +2262,7 @@ A [`domain`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list
 
 <a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-metadata) block (within [`client_side_defense.policy.js_insert_all_pages_except.exclude_list`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list)) supports the following:
 
@@ -2272,7 +2272,7 @@ A [`metadata`](#client-side-defense-policy-js-insert-all-pages-except-exclude-li
 
 <a id="client-side-defense-policy-js-insert-all-pages-except-exclude-list-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-path) block (within [`client_side_defense.policy.js_insert_all_pages_except.exclude_list`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list)) supports the following:
 
@@ -2284,7 +2284,7 @@ A [`path`](#client-side-defense-policy-js-insert-all-pages-except-exclude-list-p
 
 <a id="client-side-defense-policy-js-insertion-rules"></a>
 
-**Js Insertion Rules**
+#### Js Insertion Rules
 
 A [`js_insertion_rules`](#client-side-defense-policy-js-insertion-rules) block (within [`client_side_defense.policy`](#client-side-defense-policy)) supports the following:
 
@@ -2294,7 +2294,7 @@ A [`js_insertion_rules`](#client-side-defense-policy-js-insertion-rules) block (
 
 <a id="client-side-defense-policy-js-insertion-rules-exclude-list"></a>
 
-**Exclude List**
+#### Exclude List
 
 An [`exclude_list`](#client-side-defense-policy-js-insertion-rules-exclude-list) block (within [`client_side_defense.policy.js_insertion_rules`](#client-side-defense-policy-js-insertion-rules)) supports the following:
 
@@ -2308,7 +2308,7 @@ An [`exclude_list`](#client-side-defense-policy-js-insertion-rules-exclude-list)
 
 <a id="client-side-defense-policy-js-insertion-rules-exclude-list-domain"></a>
 
-**Domain**
+#### Domain
 
 A [`domain`](#client-side-defense-policy-js-insertion-rules-exclude-list-domain) block (within [`client_side_defense.policy.js_insertion_rules.exclude_list`](#client-side-defense-policy-js-insertion-rules-exclude-list)) supports the following:
 
@@ -2320,7 +2320,7 @@ A [`domain`](#client-side-defense-policy-js-insertion-rules-exclude-list-domain)
 
 <a id="client-side-defense-policy-js-insertion-rules-exclude-list-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#client-side-defense-policy-js-insertion-rules-exclude-list-metadata) block (within [`client_side_defense.policy.js_insertion_rules.exclude_list`](#client-side-defense-policy-js-insertion-rules-exclude-list)) supports the following:
 
@@ -2330,7 +2330,7 @@ A [`metadata`](#client-side-defense-policy-js-insertion-rules-exclude-list-metad
 
 <a id="client-side-defense-policy-js-insertion-rules-exclude-list-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#client-side-defense-policy-js-insertion-rules-exclude-list-path) block (within [`client_side_defense.policy.js_insertion_rules.exclude_list`](#client-side-defense-policy-js-insertion-rules-exclude-list)) supports the following:
 
@@ -2342,7 +2342,7 @@ A [`path`](#client-side-defense-policy-js-insertion-rules-exclude-list-path) blo
 
 <a id="client-side-defense-policy-js-insertion-rules-rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#client-side-defense-policy-js-insertion-rules-rules) block (within [`client_side_defense.policy.js_insertion_rules`](#client-side-defense-policy-js-insertion-rules)) supports the following:
 
@@ -2356,7 +2356,7 @@ A [`rules`](#client-side-defense-policy-js-insertion-rules-rules) block (within 
 
 <a id="client-side-defense-policy-js-insertion-rules-rules-domain"></a>
 
-**Domain**
+#### Domain
 
 A [`domain`](#client-side-defense-policy-js-insertion-rules-rules-domain) block (within [`client_side_defense.policy.js_insertion_rules.rules`](#client-side-defense-policy-js-insertion-rules-rules)) supports the following:
 
@@ -2368,7 +2368,7 @@ A [`domain`](#client-side-defense-policy-js-insertion-rules-rules-domain) block 
 
 <a id="client-side-defense-policy-js-insertion-rules-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#client-side-defense-policy-js-insertion-rules-rules-metadata) block (within [`client_side_defense.policy.js_insertion_rules.rules`](#client-side-defense-policy-js-insertion-rules-rules)) supports the following:
 
@@ -2378,7 +2378,7 @@ A [`metadata`](#client-side-defense-policy-js-insertion-rules-rules-metadata) bl
 
 <a id="client-side-defense-policy-js-insertion-rules-rules-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#client-side-defense-policy-js-insertion-rules-rules-path) block (within [`client_side_defense.policy.js_insertion_rules.rules`](#client-side-defense-policy-js-insertion-rules-rules)) supports the following:
 
@@ -2390,7 +2390,7 @@ A [`path`](#client-side-defense-policy-js-insertion-rules-rules-path) block (wit
 
 <a id="cors-policy"></a>
 
-**CORS Policy**
+#### CORS Policy
 
 A [`cors_policy`](#cors-policy) block supports the following:
 
@@ -2412,7 +2412,7 @@ A [`cors_policy`](#cors-policy) block supports the following:
 
 <a id="csrf-policy"></a>
 
-**CSRF Policy**
+#### CSRF Policy
 
 A [`csrf_policy`](#csrf-policy) block supports the following:
 
@@ -2424,7 +2424,7 @@ A [`csrf_policy`](#csrf-policy) block supports the following:
 
 <a id="csrf-policy-custom-domain-list"></a>
 
-**Custom Domain List**
+#### Custom Domain List
 
 A [`custom_domain_list`](#csrf-policy-custom-domain-list) block (within [`csrf_policy`](#csrf-policy)) supports the following:
 
@@ -2432,7 +2432,7 @@ A [`custom_domain_list`](#csrf-policy-custom-domain-list) block (within [`csrf_p
 
 <a id="custom-cache-rule"></a>
 
-**Custom Cache Rule**
+#### Custom Cache Rule
 
 A [`custom_cache_rule`](#custom-cache-rule) block supports the following:
 
@@ -2440,7 +2440,7 @@ A [`custom_cache_rule`](#custom-cache-rule) block supports the following:
 
 <a id="custom-cache-rule-cdn-cache-rules"></a>
 
-**CDN Cache Rules**
+#### CDN Cache Rules
 
 A [`cdn_cache_rules`](#custom-cache-rule-cdn-cache-rules) block (within [`custom_cache_rule`](#custom-cache-rule)) supports the following:
 
@@ -2452,7 +2452,7 @@ A [`cdn_cache_rules`](#custom-cache-rule-cdn-cache-rules) block (within [`custom
 
 <a id="data-guard-rules"></a>
 
-**Data Guard Rules**
+#### Data Guard Rules
 
 A [`data_guard_rules`](#data-guard-rules) block supports the following:
 
@@ -2472,7 +2472,7 @@ A [`data_guard_rules`](#data-guard-rules) block supports the following:
 
 <a id="data-guard-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#data-guard-rules-metadata) block (within [`data_guard_rules`](#data-guard-rules)) supports the following:
 
@@ -2482,7 +2482,7 @@ A [`metadata`](#data-guard-rules-metadata) block (within [`data_guard_rules`](#d
 
 <a id="data-guard-rules-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#data-guard-rules-path) block (within [`data_guard_rules`](#data-guard-rules)) supports the following:
 
@@ -2494,7 +2494,7 @@ A [`path`](#data-guard-rules-path) block (within [`data_guard_rules`](#data-guar
 
 <a id="ddos-mitigation-rules"></a>
 
-**DDOS Mitigation Rules**
+#### DDOS Mitigation Rules
 
 A [`ddos_mitigation_rules`](#ddos-mitigation-rules) block supports the following:
 
@@ -2510,7 +2510,7 @@ A [`ddos_mitigation_rules`](#ddos-mitigation-rules) block supports the following
 
 <a id="ddos-mitigation-rules-ddos-client-source"></a>
 
-**DDOS Client Source**
+#### DDOS Client Source
 
 A [`ddos_client_source`](#ddos-mitigation-rules-ddos-client-source) block (within [`ddos_mitigation_rules`](#ddos-mitigation-rules)) supports the following:
 
@@ -2524,7 +2524,7 @@ A [`ddos_client_source`](#ddos-mitigation-rules-ddos-client-source) block (withi
 
 <a id="ddos-mitigation-rules-ddos-client-source-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#ddos-mitigation-rules-ddos-client-source-asn-list) block (within [`ddos_mitigation_rules.ddos_client_source`](#ddos-mitigation-rules-ddos-client-source)) supports the following:
 
@@ -2532,7 +2532,7 @@ An [`asn_list`](#ddos-mitigation-rules-ddos-client-source-asn-list) block (withi
 
 <a id="ddos-mitigation-rules-ddos-client-source-ja4-tls-fingerprint-matcher"></a>
 
-**Ja4 TLS Fingerprint Matcher**
+#### Ja4 TLS Fingerprint Matcher
 
 A [`ja4_tls_fingerprint_matcher`](#ddos-mitigation-rules-ddos-client-source-ja4-tls-fingerprint-matcher) block (within [`ddos_mitigation_rules.ddos_client_source`](#ddos-mitigation-rules-ddos-client-source)) supports the following:
 
@@ -2540,7 +2540,7 @@ A [`ja4_tls_fingerprint_matcher`](#ddos-mitigation-rules-ddos-client-source-ja4-
 
 <a id="ddos-mitigation-rules-ddos-client-source-tls-fingerprint-matcher"></a>
 
-**TLS Fingerprint Matcher**
+#### TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#ddos-mitigation-rules-ddos-client-source-tls-fingerprint-matcher) block (within [`ddos_mitigation_rules.ddos_client_source`](#ddos-mitigation-rules-ddos-client-source)) supports the following:
 
@@ -2552,7 +2552,7 @@ A [`tls_fingerprint_matcher`](#ddos-mitigation-rules-ddos-client-source-tls-fing
 
 <a id="ddos-mitigation-rules-ip-prefix-list"></a>
 
-**IP Prefix List**
+#### IP Prefix List
 
 An [`ip_prefix_list`](#ddos-mitigation-rules-ip-prefix-list) block (within [`ddos_mitigation_rules`](#ddos-mitigation-rules)) supports the following:
 
@@ -2562,7 +2562,7 @@ An [`ip_prefix_list`](#ddos-mitigation-rules-ip-prefix-list) block (within [`ddo
 
 <a id="ddos-mitigation-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#ddos-mitigation-rules-metadata) block (within [`ddos_mitigation_rules`](#ddos-mitigation-rules)) supports the following:
 
@@ -2572,7 +2572,7 @@ A [`metadata`](#ddos-mitigation-rules-metadata) block (within [`ddos_mitigation_
 
 <a id="default-cache-action"></a>
 
-**Default Cache Action**
+#### Default Cache Action
 
 A [`default_cache_action`](#default-cache-action) block supports the following:
 
@@ -2584,7 +2584,7 @@ A [`default_cache_action`](#default-cache-action) block supports the following:
 
 <a id="enable-api-discovery"></a>
 
-**Enable API Discovery**
+#### Enable API Discovery
 
 An [`enable_api_discovery`](#enable-api-discovery) block supports the following:
 
@@ -2604,7 +2604,7 @@ An [`enable_api_discovery`](#enable-api-discovery) block supports the following:
 
 <a id="enable-api-discovery-api-crawler"></a>
 
-**API Crawler**
+#### API Crawler
 
 An [`api_crawler`](#enable-api-discovery-api-crawler) block (within [`enable_api_discovery`](#enable-api-discovery)) supports the following:
 
@@ -2614,7 +2614,7 @@ An [`api_crawler`](#enable-api-discovery-api-crawler) block (within [`enable_api
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config"></a>
 
-**API Crawler Config**
+#### API Crawler Config
 
 An [`api_crawler_config`](#enable-api-discovery-api-crawler-api-crawler-config) block (within [`enable_api_discovery.api_crawler`](#enable-api-discovery-api-crawler)) supports the following:
 
@@ -2622,7 +2622,7 @@ An [`api_crawler_config`](#enable-api-discovery-api-crawler-api-crawler-config) 
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains"></a>
 
-**Domains**
+#### Domains
 
 A [`domains`](#enable-api-discovery-api-crawler-api-crawler-config-domains) block (within [`enable_api_discovery.api_crawler.api_crawler_config`](#enable-api-discovery-api-crawler-api-crawler-config)) supports the following:
 
@@ -2632,7 +2632,7 @@ A [`domains`](#enable-api-discovery-api-crawler-api-crawler-config-domains) bloc
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login"></a>
 
-**Simple Login**
+#### Simple Login
 
 A [`simple_login`](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login) block (within [`enable_api_discovery.api_crawler.api_crawler_config.domains`](#enable-api-discovery-api-crawler-api-crawler-config-domains)) supports the following:
 
@@ -2642,7 +2642,7 @@ A [`simple_login`](#enable-api-discovery-api-crawler-api-crawler-config-domains-
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password"></a>
 
-**Password**
+#### Password
 
 A [`password`](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password) block (within [`enable_api_discovery.api_crawler.api_crawler_config.domains.simple_login`](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login)) supports the following:
 
@@ -2652,7 +2652,7 @@ A [`password`](#enable-api-discovery-api-crawler-api-crawler-config-domains-simp
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-blindfold-secret-info) block (within [`enable_api_discovery.api_crawler.api_crawler_config.domains.simple_login.password`](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password)) supports the following:
 
@@ -2664,7 +2664,7 @@ A [`blindfold_secret_info`](#enable-api-discovery-api-crawler-api-crawler-config
 
 <a id="enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password-clear-secret-info) block (within [`enable_api_discovery.api_crawler.api_crawler_config.domains.simple_login.password`](#enable-api-discovery-api-crawler-api-crawler-config-domains-simple-login-password)) supports the following:
 
@@ -2674,7 +2674,7 @@ A [`clear_secret_info`](#enable-api-discovery-api-crawler-api-crawler-config-dom
 
 <a id="enable-api-discovery-api-discovery-from-code-scan"></a>
 
-**API Discovery From Code Scan**
+#### API Discovery From Code Scan
 
 An [`api_discovery_from_code_scan`](#enable-api-discovery-api-discovery-from-code-scan) block (within [`enable_api_discovery`](#enable-api-discovery)) supports the following:
 
@@ -2682,7 +2682,7 @@ An [`api_discovery_from_code_scan`](#enable-api-discovery-api-discovery-from-cod
 
 <a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations"></a>
 
-**Code Base Integrations**
+#### Code Base Integrations
 
 A [`code_base_integrations`](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations) block (within [`enable_api_discovery.api_discovery_from_code_scan`](#enable-api-discovery-api-discovery-from-code-scan)) supports the following:
 
@@ -2694,7 +2694,7 @@ A [`code_base_integrations`](#enable-api-discovery-api-discovery-from-code-scan-
 
 <a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-code-base-integration"></a>
 
-**Code Base Integration**
+#### Code Base Integration
 
 A [`code_base_integration`](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-code-base-integration) block (within [`enable_api_discovery.api_discovery_from_code_scan.code_base_integrations`](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations)) supports the following:
 
@@ -2706,7 +2706,7 @@ A [`code_base_integration`](#enable-api-discovery-api-discovery-from-code-scan-c
 
 <a id="enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-selected-repos"></a>
 
-**Selected Repos**
+#### Selected Repos
 
 A [`selected_repos`](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations-selected-repos) block (within [`enable_api_discovery.api_discovery_from_code_scan.code_base_integrations`](#enable-api-discovery-api-discovery-from-code-scan-code-base-integrations)) supports the following:
 
@@ -2714,7 +2714,7 @@ A [`selected_repos`](#enable-api-discovery-api-discovery-from-code-scan-code-bas
 
 <a id="enable-api-discovery-custom-api-auth-discovery"></a>
 
-**Custom API Auth Discovery**
+#### Custom API Auth Discovery
 
 A [`custom_api_auth_discovery`](#enable-api-discovery-custom-api-auth-discovery) block (within [`enable_api_discovery`](#enable-api-discovery)) supports the following:
 
@@ -2722,7 +2722,7 @@ A [`custom_api_auth_discovery`](#enable-api-discovery-custom-api-auth-discovery)
 
 <a id="enable-api-discovery-custom-api-auth-discovery-api-discovery-ref"></a>
 
-**API Discovery Ref**
+#### API Discovery Ref
 
 An [`api_discovery_ref`](#enable-api-discovery-custom-api-auth-discovery-api-discovery-ref) block (within [`enable_api_discovery.custom_api_auth_discovery`](#enable-api-discovery-custom-api-auth-discovery)) supports the following:
 
@@ -2734,7 +2734,7 @@ An [`api_discovery_ref`](#enable-api-discovery-custom-api-auth-discovery-api-dis
 
 <a id="enable-api-discovery-discovered-api-settings"></a>
 
-**Discovered API Settings**
+#### Discovered API Settings
 
 A [`discovered_api_settings`](#enable-api-discovery-discovered-api-settings) block (within [`enable_api_discovery`](#enable-api-discovery)) supports the following:
 
@@ -2742,7 +2742,7 @@ A [`discovered_api_settings`](#enable-api-discovery-discovered-api-settings) blo
 
 <a id="enable-challenge"></a>
 
-**Enable Challenge**
+#### Enable Challenge
 
 An [`enable_challenge`](#enable-challenge) block supports the following:
 
@@ -2760,7 +2760,7 @@ An [`enable_challenge`](#enable-challenge) block supports the following:
 
 <a id="enable-challenge-captcha-challenge-parameters"></a>
 
-**Captcha Challenge Parameters**
+#### Captcha Challenge Parameters
 
 A [`captcha_challenge_parameters`](#enable-challenge-captcha-challenge-parameters) block (within [`enable_challenge`](#enable-challenge)) supports the following:
 
@@ -2770,7 +2770,7 @@ A [`captcha_challenge_parameters`](#enable-challenge-captcha-challenge-parameter
 
 <a id="enable-challenge-js-challenge-parameters"></a>
 
-**Js Challenge Parameters**
+#### Js Challenge Parameters
 
 A [`js_challenge_parameters`](#enable-challenge-js-challenge-parameters) block (within [`enable_challenge`](#enable-challenge)) supports the following:
 
@@ -2782,7 +2782,7 @@ A [`js_challenge_parameters`](#enable-challenge-js-challenge-parameters) block (
 
 <a id="enable-challenge-malicious-user-mitigation"></a>
 
-**Malicious User Mitigation**
+#### Malicious User Mitigation
 
 A [`malicious_user_mitigation`](#enable-challenge-malicious-user-mitigation) block (within [`enable_challenge`](#enable-challenge)) supports the following:
 
@@ -2794,7 +2794,7 @@ A [`malicious_user_mitigation`](#enable-challenge-malicious-user-mitigation) blo
 
 <a id="enable-ip-reputation"></a>
 
-**Enable IP Reputation**
+#### Enable IP Reputation
 
 An [`enable_ip_reputation`](#enable-ip-reputation) block supports the following:
 
@@ -2802,7 +2802,7 @@ An [`enable_ip_reputation`](#enable-ip-reputation) block supports the following:
 
 <a id="graphql-rules"></a>
 
-**GraphQL Rules**
+#### GraphQL Rules
 
 A [`graphql_rules`](#graphql-rules) block supports the following:
 
@@ -2824,7 +2824,7 @@ A [`graphql_rules`](#graphql-rules) block supports the following:
 
 <a id="graphql-rules-graphql-settings"></a>
 
-**GraphQL Settings**
+#### GraphQL Settings
 
 A [`graphql_settings`](#graphql-rules-graphql-settings) block (within [`graphql_rules`](#graphql-rules)) supports the following:
 
@@ -2840,7 +2840,7 @@ A [`graphql_settings`](#graphql-rules-graphql-settings) block (within [`graphql_
 
 <a id="graphql-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#graphql-rules-metadata) block (within [`graphql_rules`](#graphql-rules)) supports the following:
 
@@ -2850,7 +2850,7 @@ A [`metadata`](#graphql-rules-metadata) block (within [`graphql_rules`](#graphql
 
 <a id="http"></a>
 
-**HTTP**
+#### HTTP
 
 A [`http`](#http) block supports the following:
 
@@ -2862,7 +2862,7 @@ A [`http`](#http) block supports the following:
 
 <a id="https"></a>
 
-**HTTPS**
+#### HTTPS
 
 A [`https`](#https) block supports the following:
 
@@ -2874,7 +2874,7 @@ A [`https`](#https) block supports the following:
 
 <a id="https-tls-cert-options"></a>
 
-**TLS Cert Options**
+#### TLS Cert Options
 
 A [`tls_cert_options`](#https-tls-cert-options) block (within [`https`](#https)) supports the following:
 
@@ -2884,7 +2884,7 @@ A [`tls_cert_options`](#https-tls-cert-options) block (within [`https`](#https))
 
 <a id="https-tls-cert-options-tls-cert-params"></a>
 
-**TLS Cert Params**
+#### TLS Cert Params
 
 A [`tls_cert_params`](#https-tls-cert-options-tls-cert-params) block (within [`https.tls_cert_options`](#https-tls-cert-options)) supports the following:
 
@@ -2898,7 +2898,7 @@ A [`tls_cert_params`](#https-tls-cert-options-tls-cert-params) block (within [`h
 
 <a id="https-tls-cert-options-tls-cert-params-certificates"></a>
 
-**Certificates**
+#### Certificates
 
 A [`certificates`](#https-tls-cert-options-tls-cert-params-certificates) block (within [`https.tls_cert_options.tls_cert_params`](#https-tls-cert-options-tls-cert-params)) supports the following:
 
@@ -2910,7 +2910,7 @@ A [`certificates`](#https-tls-cert-options-tls-cert-params-certificates) block (
 
 <a id="https-tls-cert-options-tls-cert-params-tls-config"></a>
 
-**TLS Config**
+#### TLS Config
 
 A [`tls_config`](#https-tls-cert-options-tls-cert-params-tls-config) block (within [`https.tls_cert_options.tls_cert_params`](#https-tls-cert-options-tls-cert-params)) supports the following:
 
@@ -2924,7 +2924,7 @@ A [`tls_config`](#https-tls-cert-options-tls-cert-params-tls-config) block (with
 
 <a id="https-tls-cert-options-tls-cert-params-tls-config-custom-security"></a>
 
-**Custom Security**
+#### Custom Security
 
 A [`custom_security`](#https-tls-cert-options-tls-cert-params-tls-config-custom-security) block (within [`https.tls_cert_options.tls_cert_params.tls_config`](#https-tls-cert-options-tls-cert-params-tls-config)) supports the following:
 
@@ -2936,7 +2936,7 @@ A [`custom_security`](#https-tls-cert-options-tls-cert-params-tls-config-custom-
 
 <a id="https-tls-cert-options-tls-cert-params-use-mtls"></a>
 
-**Use mTLS**
+#### Use mTLS
 
 An [`use_mtls`](#https-tls-cert-options-tls-cert-params-use-mtls) block (within [`https.tls_cert_options.tls_cert_params`](#https-tls-cert-options-tls-cert-params)) supports the following:
 
@@ -2956,7 +2956,7 @@ An [`use_mtls`](#https-tls-cert-options-tls-cert-params-use-mtls) block (within 
 
 <a id="https-tls-cert-options-tls-cert-params-use-mtls-crl"></a>
 
-**CRL**
+#### CRL
 
 A [`crl`](#https-tls-cert-options-tls-cert-params-use-mtls-crl) block (within [`https.tls_cert_options.tls_cert_params.use_mtls`](#https-tls-cert-options-tls-cert-params-use-mtls)) supports the following:
 
@@ -2968,7 +2968,7 @@ A [`crl`](#https-tls-cert-options-tls-cert-params-use-mtls-crl) block (within [`
 
 <a id="https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca"></a>
 
-**Trusted CA**
+#### Trusted CA
 
 A [`trusted_ca`](#https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca) block (within [`https.tls_cert_options.tls_cert_params.use_mtls`](#https-tls-cert-options-tls-cert-params-use-mtls)) supports the following:
 
@@ -2980,7 +2980,7 @@ A [`trusted_ca`](#https-tls-cert-options-tls-cert-params-use-mtls-trusted-ca) bl
 
 <a id="https-tls-cert-options-tls-cert-params-use-mtls-xfcc-options"></a>
 
-**Xfcc Options**
+#### Xfcc Options
 
 A [`xfcc_options`](#https-tls-cert-options-tls-cert-params-use-mtls-xfcc-options) block (within [`https.tls_cert_options.tls_cert_params.use_mtls`](#https-tls-cert-options-tls-cert-params-use-mtls)) supports the following:
 
@@ -2988,7 +2988,7 @@ A [`xfcc_options`](#https-tls-cert-options-tls-cert-params-use-mtls-xfcc-options
 
 <a id="https-tls-cert-options-tls-inline-params"></a>
 
-**TLS Inline Params**
+#### TLS Inline Params
 
 A [`tls_inline_params`](#https-tls-cert-options-tls-inline-params) block (within [`https.tls_cert_options`](#https-tls-cert-options)) supports the following:
 
@@ -3002,7 +3002,7 @@ A [`tls_inline_params`](#https-tls-cert-options-tls-inline-params) block (within
 
 <a id="https-tls-cert-options-tls-inline-params-tls-certificates"></a>
 
-**TLS Certificates**
+#### TLS Certificates
 
 A [`tls_certificates`](#https-tls-cert-options-tls-inline-params-tls-certificates) block (within [`https.tls_cert_options.tls_inline_params`](#https-tls-cert-options-tls-inline-params)) supports the following:
 
@@ -3020,7 +3020,7 @@ A [`tls_certificates`](#https-tls-cert-options-tls-inline-params-tls-certificate
 
 <a id="https-tls-cert-options-tls-inline-params-tls-certificates-custom-hash-algorithms"></a>
 
-**Custom Hash Algorithms**
+#### Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#https-tls-cert-options-tls-inline-params-tls-certificates-custom-hash-algorithms) block (within [`https.tls_cert_options.tls_inline_params.tls_certificates`](#https-tls-cert-options-tls-inline-params-tls-certificates)) supports the following:
 
@@ -3028,7 +3028,7 @@ A [`custom_hash_algorithms`](#https-tls-cert-options-tls-inline-params-tls-certi
 
 <a id="https-tls-cert-options-tls-inline-params-tls-certificates-private-key"></a>
 
-**Private Key**
+#### Private Key
 
 A [`private_key`](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key) block (within [`https.tls_cert_options.tls_inline_params.tls_certificates`](#https-tls-cert-options-tls-inline-params-tls-certificates)) supports the following:
 
@@ -3038,7 +3038,7 @@ A [`private_key`](#https-tls-cert-options-tls-inline-params-tls-certificates-pri
 
 <a id="https-tls-cert-options-tls-inline-params-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key-blindfold-secret-info) block (within [`https.tls_cert_options.tls_inline_params.tls_certificates.private_key`](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key)) supports the following:
 
@@ -3050,7 +3050,7 @@ A [`blindfold_secret_info`](#https-tls-cert-options-tls-inline-params-tls-certif
 
 <a id="https-tls-cert-options-tls-inline-params-tls-certificates-private-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key-clear-secret-info) block (within [`https.tls_cert_options.tls_inline_params.tls_certificates.private_key`](#https-tls-cert-options-tls-inline-params-tls-certificates-private-key)) supports the following:
 
@@ -3060,7 +3060,7 @@ A [`clear_secret_info`](#https-tls-cert-options-tls-inline-params-tls-certificat
 
 <a id="https-tls-cert-options-tls-inline-params-tls-config"></a>
 
-**TLS Config**
+#### TLS Config
 
 A [`tls_config`](#https-tls-cert-options-tls-inline-params-tls-config) block (within [`https.tls_cert_options.tls_inline_params`](#https-tls-cert-options-tls-inline-params)) supports the following:
 
@@ -3074,7 +3074,7 @@ A [`tls_config`](#https-tls-cert-options-tls-inline-params-tls-config) block (wi
 
 <a id="https-tls-cert-options-tls-inline-params-tls-config-custom-security"></a>
 
-**Custom Security**
+#### Custom Security
 
 A [`custom_security`](#https-tls-cert-options-tls-inline-params-tls-config-custom-security) block (within [`https.tls_cert_options.tls_inline_params.tls_config`](#https-tls-cert-options-tls-inline-params-tls-config)) supports the following:
 
@@ -3086,7 +3086,7 @@ A [`custom_security`](#https-tls-cert-options-tls-inline-params-tls-config-custo
 
 <a id="https-tls-cert-options-tls-inline-params-use-mtls"></a>
 
-**Use mTLS**
+#### Use mTLS
 
 An [`use_mtls`](#https-tls-cert-options-tls-inline-params-use-mtls) block (within [`https.tls_cert_options.tls_inline_params`](#https-tls-cert-options-tls-inline-params)) supports the following:
 
@@ -3106,7 +3106,7 @@ An [`use_mtls`](#https-tls-cert-options-tls-inline-params-use-mtls) block (withi
 
 <a id="https-tls-cert-options-tls-inline-params-use-mtls-crl"></a>
 
-**CRL**
+#### CRL
 
 A [`crl`](#https-tls-cert-options-tls-inline-params-use-mtls-crl) block (within [`https.tls_cert_options.tls_inline_params.use_mtls`](#https-tls-cert-options-tls-inline-params-use-mtls)) supports the following:
 
@@ -3118,7 +3118,7 @@ A [`crl`](#https-tls-cert-options-tls-inline-params-use-mtls-crl) block (within 
 
 <a id="https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca"></a>
 
-**Trusted CA**
+#### Trusted CA
 
 A [`trusted_ca`](#https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca) block (within [`https.tls_cert_options.tls_inline_params.use_mtls`](#https-tls-cert-options-tls-inline-params-use-mtls)) supports the following:
 
@@ -3130,7 +3130,7 @@ A [`trusted_ca`](#https-tls-cert-options-tls-inline-params-use-mtls-trusted-ca) 
 
 <a id="https-tls-cert-options-tls-inline-params-use-mtls-xfcc-options"></a>
 
-**Xfcc Options**
+#### Xfcc Options
 
 A [`xfcc_options`](#https-tls-cert-options-tls-inline-params-use-mtls-xfcc-options) block (within [`https.tls_cert_options.tls_inline_params.use_mtls`](#https-tls-cert-options-tls-inline-params-use-mtls)) supports the following:
 
@@ -3138,7 +3138,7 @@ A [`xfcc_options`](#https-tls-cert-options-tls-inline-params-use-mtls-xfcc-optio
 
 <a id="https-auto-cert"></a>
 
-**HTTPS Auto Cert**
+#### HTTPS Auto Cert
 
 A [`https_auto_cert`](#https-auto-cert) block supports the following:
 
@@ -3150,7 +3150,7 @@ A [`https_auto_cert`](#https-auto-cert) block supports the following:
 
 <a id="https-auto-cert-tls-config"></a>
 
-**TLS Config**
+#### TLS Config
 
 A [`tls_config`](#https-auto-cert-tls-config) block (within [`https_auto_cert`](#https-auto-cert)) supports the following:
 
@@ -3160,7 +3160,7 @@ A [`tls_config`](#https-auto-cert-tls-config) block (within [`https_auto_cert`](
 
 <a id="js-challenge"></a>
 
-**Js Challenge**
+#### Js Challenge
 
 A [`js_challenge`](#js-challenge) block supports the following:
 
@@ -3172,7 +3172,7 @@ A [`js_challenge`](#js-challenge) block supports the following:
 
 <a id="jwt-validation"></a>
 
-**JWT Validation**
+#### JWT Validation
 
 A [`jwt_validation`](#jwt-validation) block supports the following:
 
@@ -3190,7 +3190,7 @@ A [`jwt_validation`](#jwt-validation) block supports the following:
 
 <a id="jwt-validation-action"></a>
 
-**Action**
+#### Action
 
 An [`action`](#jwt-validation-action) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
@@ -3200,7 +3200,7 @@ An [`action`](#jwt-validation-action) block (within [`jwt_validation`](#jwt-vali
 
 <a id="jwt-validation-jwks-config"></a>
 
-**Jwks Config**
+#### Jwks Config
 
 A [`jwks_config`](#jwt-validation-jwks-config) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
@@ -3208,7 +3208,7 @@ A [`jwks_config`](#jwt-validation-jwks-config) block (within [`jwt_validation`](
 
 <a id="jwt-validation-mandatory-claims"></a>
 
-**Mandatory Claims**
+#### Mandatory Claims
 
 A [`mandatory_claims`](#jwt-validation-mandatory-claims) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
@@ -3216,7 +3216,7 @@ A [`mandatory_claims`](#jwt-validation-mandatory-claims) block (within [`jwt_val
 
 <a id="jwt-validation-reserved-claims"></a>
 
-**Reserved Claims**
+#### Reserved Claims
 
 A [`reserved_claims`](#jwt-validation-reserved-claims) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
@@ -3234,7 +3234,7 @@ A [`reserved_claims`](#jwt-validation-reserved-claims) block (within [`jwt_valid
 
 <a id="jwt-validation-reserved-claims-audience"></a>
 
-**Audience**
+#### Audience
 
 An [`audience`](#jwt-validation-reserved-claims-audience) block (within [`jwt_validation.reserved_claims`](#jwt-validation-reserved-claims)) supports the following:
 
@@ -3242,7 +3242,7 @@ An [`audience`](#jwt-validation-reserved-claims-audience) block (within [`jwt_va
 
 <a id="jwt-validation-target"></a>
 
-**Target**
+#### Target
 
 A [`target`](#jwt-validation-target) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
@@ -3254,7 +3254,7 @@ A [`target`](#jwt-validation-target) block (within [`jwt_validation`](#jwt-valid
 
 <a id="jwt-validation-target-api-groups"></a>
 
-**API Groups**
+#### API Groups
 
 An [`api_groups`](#jwt-validation-target-api-groups) block (within [`jwt_validation.target`](#jwt-validation-target)) supports the following:
 
@@ -3262,7 +3262,7 @@ An [`api_groups`](#jwt-validation-target-api-groups) block (within [`jwt_validat
 
 <a id="jwt-validation-target-base-paths"></a>
 
-**Base Paths**
+#### Base Paths
 
 A [`base_paths`](#jwt-validation-target-base-paths) block (within [`jwt_validation.target`](#jwt-validation-target)) supports the following:
 
@@ -3270,7 +3270,7 @@ A [`base_paths`](#jwt-validation-target-base-paths) block (within [`jwt_validati
 
 <a id="jwt-validation-token-location"></a>
 
-**Token Location**
+#### Token Location
 
 A [`token_location`](#jwt-validation-token-location) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
@@ -3278,7 +3278,7 @@ A [`token_location`](#jwt-validation-token-location) block (within [`jwt_validat
 
 <a id="l7-ddos-action-js-challenge"></a>
 
-**L7 DDOS Action Js Challenge**
+#### L7 DDOS Action Js Challenge
 
 A [`l7_ddos_action_js_challenge`](#l7-ddos-action-js-challenge) block supports the following:
 
@@ -3290,7 +3290,7 @@ A [`l7_ddos_action_js_challenge`](#l7-ddos-action-js-challenge) block supports t
 
 <a id="origin-pool"></a>
 
-**Origin Pool**
+#### Origin Pool
 
 An [`origin_pool`](#origin-pool) block supports the following:
 
@@ -3308,7 +3308,7 @@ An [`origin_pool`](#origin-pool) block supports the following:
 
 <a id="origin-pool-more-origin-options"></a>
 
-**More Origin Options**
+#### More Origin Options
 
 A [`more_origin_options`](#origin-pool-more-origin-options) block (within [`origin_pool`](#origin-pool)) supports the following:
 
@@ -3318,7 +3318,7 @@ A [`more_origin_options`](#origin-pool-more-origin-options) block (within [`orig
 
 <a id="origin-pool-origin-servers"></a>
 
-**Origin Servers**
+#### Origin Servers
 
 An [`origin_servers`](#origin-pool-origin-servers) block (within [`origin_pool`](#origin-pool)) supports the following:
 
@@ -3330,7 +3330,7 @@ An [`origin_servers`](#origin-pool-origin-servers) block (within [`origin_pool`]
 
 <a id="origin-pool-origin-servers-public-ip"></a>
 
-**Public IP**
+#### Public IP
 
 A [`public_ip`](#origin-pool-origin-servers-public-ip) block (within [`origin_pool.origin_servers`](#origin-pool-origin-servers)) supports the following:
 
@@ -3338,7 +3338,7 @@ A [`public_ip`](#origin-pool-origin-servers-public-ip) block (within [`origin_po
 
 <a id="origin-pool-origin-servers-public-name"></a>
 
-**Public Name**
+#### Public Name
 
 A [`public_name`](#origin-pool-origin-servers-public-name) block (within [`origin_pool.origin_servers`](#origin-pool-origin-servers)) supports the following:
 
@@ -3348,7 +3348,7 @@ A [`public_name`](#origin-pool-origin-servers-public-name) block (within [`origi
 
 <a id="origin-pool-public-name"></a>
 
-**Public Name**
+#### Public Name
 
 A [`public_name`](#origin-pool-public-name) block (within [`origin_pool`](#origin-pool)) supports the following:
 
@@ -3358,7 +3358,7 @@ A [`public_name`](#origin-pool-public-name) block (within [`origin_pool`](#origi
 
 <a id="origin-pool-use-tls"></a>
 
-**Use TLS**
+#### Use TLS
 
 An [`use_tls`](#origin-pool-use-tls) block (within [`origin_pool`](#origin-pool)) supports the following:
 
@@ -3390,7 +3390,7 @@ An [`use_tls`](#origin-pool-use-tls) block (within [`origin_pool`](#origin-pool)
 
 <a id="origin-pool-use-tls-tls-config"></a>
 
-**TLS Config**
+#### TLS Config
 
 A [`tls_config`](#origin-pool-use-tls-tls-config) block (within [`origin_pool.use_tls`](#origin-pool-use-tls)) supports the following:
 
@@ -3404,7 +3404,7 @@ A [`tls_config`](#origin-pool-use-tls-tls-config) block (within [`origin_pool.us
 
 <a id="origin-pool-use-tls-tls-config-custom-security"></a>
 
-**Custom Security**
+#### Custom Security
 
 A [`custom_security`](#origin-pool-use-tls-tls-config-custom-security) block (within [`origin_pool.use_tls.tls_config`](#origin-pool-use-tls-tls-config)) supports the following:
 
@@ -3416,7 +3416,7 @@ A [`custom_security`](#origin-pool-use-tls-tls-config-custom-security) block (wi
 
 <a id="origin-pool-use-tls-use-mtls"></a>
 
-**Use mTLS**
+#### Use mTLS
 
 An [`use_mtls`](#origin-pool-use-tls-use-mtls) block (within [`origin_pool.use_tls`](#origin-pool-use-tls)) supports the following:
 
@@ -3424,7 +3424,7 @@ An [`use_mtls`](#origin-pool-use-tls-use-mtls) block (within [`origin_pool.use_t
 
 <a id="origin-pool-use-tls-use-mtls-tls-certificates"></a>
 
-**TLS Certificates**
+#### TLS Certificates
 
 A [`tls_certificates`](#origin-pool-use-tls-use-mtls-tls-certificates) block (within [`origin_pool.use_tls.use_mtls`](#origin-pool-use-tls-use-mtls)) supports the following:
 
@@ -3442,7 +3442,7 @@ A [`tls_certificates`](#origin-pool-use-tls-use-mtls-tls-certificates) block (wi
 
 <a id="origin-pool-use-tls-use-mtls-tls-certificates-custom-hash-algorithms"></a>
 
-**Custom Hash Algorithms**
+#### Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#origin-pool-use-tls-use-mtls-tls-certificates-custom-hash-algorithms) block (within [`origin_pool.use_tls.use_mtls.tls_certificates`](#origin-pool-use-tls-use-mtls-tls-certificates)) supports the following:
 
@@ -3450,7 +3450,7 @@ A [`custom_hash_algorithms`](#origin-pool-use-tls-use-mtls-tls-certificates-cust
 
 <a id="origin-pool-use-tls-use-mtls-tls-certificates-private-key"></a>
 
-**Private Key**
+#### Private Key
 
 A [`private_key`](#origin-pool-use-tls-use-mtls-tls-certificates-private-key) block (within [`origin_pool.use_tls.use_mtls.tls_certificates`](#origin-pool-use-tls-use-mtls-tls-certificates)) supports the following:
 
@@ -3460,7 +3460,7 @@ A [`private_key`](#origin-pool-use-tls-use-mtls-tls-certificates-private-key) bl
 
 <a id="origin-pool-use-tls-use-mtls-tls-certificates-private-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#origin-pool-use-tls-use-mtls-tls-certificates-private-key-blindfold-secret-info) block (within [`origin_pool.use_tls.use_mtls.tls_certificates.private_key`](#origin-pool-use-tls-use-mtls-tls-certificates-private-key)) supports the following:
 
@@ -3472,7 +3472,7 @@ A [`blindfold_secret_info`](#origin-pool-use-tls-use-mtls-tls-certificates-priva
 
 <a id="origin-pool-use-tls-use-mtls-tls-certificates-private-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#origin-pool-use-tls-use-mtls-tls-certificates-private-key-clear-secret-info) block (within [`origin_pool.use_tls.use_mtls.tls_certificates.private_key`](#origin-pool-use-tls-use-mtls-tls-certificates-private-key)) supports the following:
 
@@ -3482,7 +3482,7 @@ A [`clear_secret_info`](#origin-pool-use-tls-use-mtls-tls-certificates-private-k
 
 <a id="origin-pool-use-tls-use-mtls-obj"></a>
 
-**Use mTLS Obj**
+#### Use mTLS Obj
 
 An [`use_mtls_obj`](#origin-pool-use-tls-use-mtls-obj) block (within [`origin_pool.use_tls`](#origin-pool-use-tls)) supports the following:
 
@@ -3494,7 +3494,7 @@ An [`use_mtls_obj`](#origin-pool-use-tls-use-mtls-obj) block (within [`origin_po
 
 <a id="origin-pool-use-tls-use-server-verification"></a>
 
-**Use Server Verification**
+#### Use Server Verification
 
 An [`use_server_verification`](#origin-pool-use-tls-use-server-verification) block (within [`origin_pool.use_tls`](#origin-pool-use-tls)) supports the following:
 
@@ -3504,7 +3504,7 @@ An [`use_server_verification`](#origin-pool-use-tls-use-server-verification) blo
 
 <a id="origin-pool-use-tls-use-server-verification-trusted-ca"></a>
 
-**Trusted CA**
+#### Trusted CA
 
 A [`trusted_ca`](#origin-pool-use-tls-use-server-verification-trusted-ca) block (within [`origin_pool.use_tls.use_server_verification`](#origin-pool-use-tls-use-server-verification)) supports the following:
 
@@ -3516,7 +3516,7 @@ A [`trusted_ca`](#origin-pool-use-tls-use-server-verification-trusted-ca) block 
 
 <a id="other-settings"></a>
 
-**Other Settings**
+#### Other Settings
 
 An [`other_settings`](#other-settings) block supports the following:
 
@@ -3528,7 +3528,7 @@ An [`other_settings`](#other-settings) block supports the following:
 
 <a id="other-settings-header-options"></a>
 
-**Header Options**
+#### Header Options
 
 A [`header_options`](#other-settings-header-options) block (within [`other_settings`](#other-settings)) supports the following:
 
@@ -3542,7 +3542,7 @@ A [`header_options`](#other-settings-header-options) block (within [`other_setti
 
 <a id="other-settings-header-options-request-headers-to-add"></a>
 
-**Request Headers To Add**
+#### Request Headers To Add
 
 A [`request_headers_to_add`](#other-settings-header-options-request-headers-to-add) block (within [`other_settings.header_options`](#other-settings-header-options)) supports the following:
 
@@ -3556,7 +3556,7 @@ A [`request_headers_to_add`](#other-settings-header-options-request-headers-to-a
 
 <a id="other-settings-header-options-request-headers-to-add-secret-value"></a>
 
-**Secret Value**
+#### Secret Value
 
 A [`secret_value`](#other-settings-header-options-request-headers-to-add-secret-value) block (within [`other_settings.header_options.request_headers_to_add`](#other-settings-header-options-request-headers-to-add)) supports the following:
 
@@ -3566,7 +3566,7 @@ A [`secret_value`](#other-settings-header-options-request-headers-to-add-secret-
 
 <a id="other-settings-header-options-request-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#other-settings-header-options-request-headers-to-add-secret-value-blindfold-secret-info) block (within [`other_settings.header_options.request_headers_to_add.secret_value`](#other-settings-header-options-request-headers-to-add-secret-value)) supports the following:
 
@@ -3578,7 +3578,7 @@ A [`blindfold_secret_info`](#other-settings-header-options-request-headers-to-ad
 
 <a id="other-settings-header-options-request-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#other-settings-header-options-request-headers-to-add-secret-value-clear-secret-info) block (within [`other_settings.header_options.request_headers_to_add.secret_value`](#other-settings-header-options-request-headers-to-add-secret-value)) supports the following:
 
@@ -3588,7 +3588,7 @@ A [`clear_secret_info`](#other-settings-header-options-request-headers-to-add-se
 
 <a id="other-settings-header-options-response-headers-to-add"></a>
 
-**Response Headers To Add**
+#### Response Headers To Add
 
 A [`response_headers_to_add`](#other-settings-header-options-response-headers-to-add) block (within [`other_settings.header_options`](#other-settings-header-options)) supports the following:
 
@@ -3602,7 +3602,7 @@ A [`response_headers_to_add`](#other-settings-header-options-response-headers-to
 
 <a id="other-settings-header-options-response-headers-to-add-secret-value"></a>
 
-**Secret Value**
+#### Secret Value
 
 A [`secret_value`](#other-settings-header-options-response-headers-to-add-secret-value) block (within [`other_settings.header_options.response_headers_to_add`](#other-settings-header-options-response-headers-to-add)) supports the following:
 
@@ -3612,7 +3612,7 @@ A [`secret_value`](#other-settings-header-options-response-headers-to-add-secret
 
 <a id="other-settings-header-options-response-headers-to-add-secret-value-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#other-settings-header-options-response-headers-to-add-secret-value-blindfold-secret-info) block (within [`other_settings.header_options.response_headers_to_add.secret_value`](#other-settings-header-options-response-headers-to-add-secret-value)) supports the following:
 
@@ -3624,7 +3624,7 @@ A [`blindfold_secret_info`](#other-settings-header-options-response-headers-to-a
 
 <a id="other-settings-header-options-response-headers-to-add-secret-value-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#other-settings-header-options-response-headers-to-add-secret-value-clear-secret-info) block (within [`other_settings.header_options.response_headers_to_add.secret_value`](#other-settings-header-options-response-headers-to-add-secret-value)) supports the following:
 
@@ -3634,7 +3634,7 @@ A [`clear_secret_info`](#other-settings-header-options-response-headers-to-add-s
 
 <a id="other-settings-logging-options"></a>
 
-**Logging Options**
+#### Logging Options
 
 A [`logging_options`](#other-settings-logging-options) block (within [`other_settings`](#other-settings)) supports the following:
 
@@ -3644,7 +3644,7 @@ A [`logging_options`](#other-settings-logging-options) block (within [`other_set
 
 <a id="other-settings-logging-options-client-log-options"></a>
 
-**Client Log Options**
+#### Client Log Options
 
 A [`client_log_options`](#other-settings-logging-options-client-log-options) block (within [`other_settings.logging_options`](#other-settings-logging-options)) supports the following:
 
@@ -3652,7 +3652,7 @@ A [`client_log_options`](#other-settings-logging-options-client-log-options) blo
 
 <a id="other-settings-logging-options-origin-log-options"></a>
 
-**Origin Log Options**
+#### Origin Log Options
 
 An [`origin_log_options`](#other-settings-logging-options-origin-log-options) block (within [`other_settings.logging_options`](#other-settings-logging-options)) supports the following:
 
@@ -3660,7 +3660,7 @@ An [`origin_log_options`](#other-settings-logging-options-origin-log-options) bl
 
 <a id="policy-based-challenge"></a>
 
-**Policy Based Challenge**
+#### Policy Based Challenge
 
 A [`policy_based_challenge`](#policy-based-challenge) block supports the following:
 
@@ -3690,7 +3690,7 @@ A [`policy_based_challenge`](#policy-based-challenge) block supports the followi
 
 <a id="policy-based-challenge-captcha-challenge-parameters"></a>
 
-**Captcha Challenge Parameters**
+#### Captcha Challenge Parameters
 
 A [`captcha_challenge_parameters`](#policy-based-challenge-captcha-challenge-parameters) block (within [`policy_based_challenge`](#policy-based-challenge)) supports the following:
 
@@ -3700,7 +3700,7 @@ A [`captcha_challenge_parameters`](#policy-based-challenge-captcha-challenge-par
 
 <a id="policy-based-challenge-js-challenge-parameters"></a>
 
-**Js Challenge Parameters**
+#### Js Challenge Parameters
 
 A [`js_challenge_parameters`](#policy-based-challenge-js-challenge-parameters) block (within [`policy_based_challenge`](#policy-based-challenge)) supports the following:
 
@@ -3712,7 +3712,7 @@ A [`js_challenge_parameters`](#policy-based-challenge-js-challenge-parameters) b
 
 <a id="policy-based-challenge-malicious-user-mitigation"></a>
 
-**Malicious User Mitigation**
+#### Malicious User Mitigation
 
 A [`malicious_user_mitigation`](#policy-based-challenge-malicious-user-mitigation) block (within [`policy_based_challenge`](#policy-based-challenge)) supports the following:
 
@@ -3724,7 +3724,7 @@ A [`malicious_user_mitigation`](#policy-based-challenge-malicious-user-mitigatio
 
 <a id="policy-based-challenge-rule-list"></a>
 
-**Rule List**
+#### Rule List
 
 A [`rule_list`](#policy-based-challenge-rule-list) block (within [`policy_based_challenge`](#policy-based-challenge)) supports the following:
 
@@ -3732,7 +3732,7 @@ A [`rule_list`](#policy-based-challenge-rule-list) block (within [`policy_based_
 
 <a id="policy-based-challenge-rule-list-rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#policy-based-challenge-rule-list-rules) block (within [`policy_based_challenge.rule_list`](#policy-based-challenge-rule-list)) supports the following:
 
@@ -3742,7 +3742,7 @@ A [`rules`](#policy-based-challenge-rule-list-rules) block (within [`policy_base
 
 <a id="policy-based-challenge-rule-list-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#policy-based-challenge-rule-list-rules-metadata) block (within [`policy_based_challenge.rule_list.rules`](#policy-based-challenge-rule-list-rules)) supports the following:
 
@@ -3752,7 +3752,7 @@ A [`metadata`](#policy-based-challenge-rule-list-rules-metadata) block (within [
 
 <a id="policy-based-challenge-rule-list-rules-spec"></a>
 
-**Spec**
+#### Spec
 
 A [`spec`](#policy-based-challenge-rule-list-rules-spec) block (within [`policy_based_challenge.rule_list.rules`](#policy-based-challenge-rule-list-rules)) supports the following:
 
@@ -3800,7 +3800,7 @@ A [`spec`](#policy-based-challenge-rule-list-rules-spec) block (within [`policy_
 
 <a id="policy-based-challenge-rule-list-rules-spec-arg-matchers"></a>
 
-**Arg Matchers**
+#### Arg Matchers
 
 An [`arg_matchers`](#policy-based-challenge-rule-list-rules-spec-arg-matchers) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3816,7 +3816,7 @@ An [`arg_matchers`](#policy-based-challenge-rule-list-rules-spec-arg-matchers) b
 
 <a id="policy-based-challenge-rule-list-rules-spec-arg-matchers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-item) block (within [`policy_based_challenge.rule_list.rules.spec.arg_matchers`](#policy-based-challenge-rule-list-rules-spec-arg-matchers)) supports the following:
 
@@ -3828,7 +3828,7 @@ An [`item`](#policy-based-challenge-rule-list-rules-spec-arg-matchers-item) bloc
 
 <a id="policy-based-challenge-rule-list-rules-spec-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#policy-based-challenge-rule-list-rules-spec-asn-list) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3836,7 +3836,7 @@ An [`asn_list`](#policy-based-challenge-rule-list-rules-spec-asn-list) block (wi
 
 <a id="policy-based-challenge-rule-list-rules-spec-asn-matcher"></a>
 
-**Asn Matcher**
+#### Asn Matcher
 
 An [`asn_matcher`](#policy-based-challenge-rule-list-rules-spec-asn-matcher) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3844,7 +3844,7 @@ An [`asn_matcher`](#policy-based-challenge-rule-list-rules-spec-asn-matcher) blo
 
 <a id="policy-based-challenge-rule-list-rules-spec-asn-matcher-asn-sets"></a>
 
-**Asn Sets**
+#### Asn Sets
 
 An [`asn_sets`](#policy-based-challenge-rule-list-rules-spec-asn-matcher-asn-sets) block (within [`policy_based_challenge.rule_list.rules.spec.asn_matcher`](#policy-based-challenge-rule-list-rules-spec-asn-matcher)) supports the following:
 
@@ -3860,7 +3860,7 @@ An [`asn_sets`](#policy-based-challenge-rule-list-rules-spec-asn-matcher-asn-set
 
 <a id="policy-based-challenge-rule-list-rules-spec-body-matcher"></a>
 
-**Body Matcher**
+#### Body Matcher
 
 A [`body_matcher`](#policy-based-challenge-rule-list-rules-spec-body-matcher) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3872,7 +3872,7 @@ A [`body_matcher`](#policy-based-challenge-rule-list-rules-spec-body-matcher) bl
 
 <a id="policy-based-challenge-rule-list-rules-spec-client-selector"></a>
 
-**Client Selector**
+#### Client Selector
 
 A [`client_selector`](#policy-based-challenge-rule-list-rules-spec-client-selector) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3880,7 +3880,7 @@ A [`client_selector`](#policy-based-challenge-rule-list-rules-spec-client-select
 
 <a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers"></a>
 
-**Cookie Matchers**
+#### Cookie Matchers
 
 A [`cookie_matchers`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3896,7 +3896,7 @@ A [`cookie_matchers`](#policy-based-challenge-rule-list-rules-spec-cookie-matche
 
 <a id="policy-based-challenge-rule-list-rules-spec-cookie-matchers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers-item) block (within [`policy_based_challenge.rule_list.rules.spec.cookie_matchers`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers)) supports the following:
 
@@ -3908,7 +3908,7 @@ An [`item`](#policy-based-challenge-rule-list-rules-spec-cookie-matchers-item) b
 
 <a id="policy-based-challenge-rule-list-rules-spec-domain-matcher"></a>
 
-**Domain Matcher**
+#### Domain Matcher
 
 A [`domain_matcher`](#policy-based-challenge-rule-list-rules-spec-domain-matcher) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3918,7 +3918,7 @@ A [`domain_matcher`](#policy-based-challenge-rule-list-rules-spec-domain-matcher
 
 <a id="policy-based-challenge-rule-list-rules-spec-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#policy-based-challenge-rule-list-rules-spec-headers) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3934,7 +3934,7 @@ A [`headers`](#policy-based-challenge-rule-list-rules-spec-headers) block (withi
 
 <a id="policy-based-challenge-rule-list-rules-spec-headers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#policy-based-challenge-rule-list-rules-spec-headers-item) block (within [`policy_based_challenge.rule_list.rules.spec.headers`](#policy-based-challenge-rule-list-rules-spec-headers)) supports the following:
 
@@ -3946,7 +3946,7 @@ An [`item`](#policy-based-challenge-rule-list-rules-spec-headers-item) block (wi
 
 <a id="policy-based-challenge-rule-list-rules-spec-http-method"></a>
 
-**HTTP Method**
+#### HTTP Method
 
 A [`http_method`](#policy-based-challenge-rule-list-rules-spec-http-method) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3956,7 +3956,7 @@ A [`http_method`](#policy-based-challenge-rule-list-rules-spec-http-method) bloc
 
 <a id="policy-based-challenge-rule-list-rules-spec-ip-matcher"></a>
 
-**IP Matcher**
+#### IP Matcher
 
 An [`ip_matcher`](#policy-based-challenge-rule-list-rules-spec-ip-matcher) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3966,7 +3966,7 @@ An [`ip_matcher`](#policy-based-challenge-rule-list-rules-spec-ip-matcher) block
 
 <a id="policy-based-challenge-rule-list-rules-spec-ip-matcher-prefix-sets"></a>
 
-**Prefix Sets**
+#### Prefix Sets
 
 A [`prefix_sets`](#policy-based-challenge-rule-list-rules-spec-ip-matcher-prefix-sets) block (within [`policy_based_challenge.rule_list.rules.spec.ip_matcher`](#policy-based-challenge-rule-list-rules-spec-ip-matcher)) supports the following:
 
@@ -3982,7 +3982,7 @@ A [`prefix_sets`](#policy-based-challenge-rule-list-rules-spec-ip-matcher-prefix
 
 <a id="policy-based-challenge-rule-list-rules-spec-ip-prefix-list"></a>
 
-**IP Prefix List**
+#### IP Prefix List
 
 An [`ip_prefix_list`](#policy-based-challenge-rule-list-rules-spec-ip-prefix-list) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -3992,7 +3992,7 @@ An [`ip_prefix_list`](#policy-based-challenge-rule-list-rules-spec-ip-prefix-lis
 
 <a id="policy-based-challenge-rule-list-rules-spec-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#policy-based-challenge-rule-list-rules-spec-path) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -4010,7 +4010,7 @@ A [`path`](#policy-based-challenge-rule-list-rules-spec-path) block (within [`po
 
 <a id="policy-based-challenge-rule-list-rules-spec-query-params"></a>
 
-**Query Params**
+#### Query Params
 
 A [`query_params`](#policy-based-challenge-rule-list-rules-spec-query-params) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -4026,7 +4026,7 @@ A [`query_params`](#policy-based-challenge-rule-list-rules-spec-query-params) bl
 
 <a id="policy-based-challenge-rule-list-rules-spec-query-params-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#policy-based-challenge-rule-list-rules-spec-query-params-item) block (within [`policy_based_challenge.rule_list.rules.spec.query_params`](#policy-based-challenge-rule-list-rules-spec-query-params)) supports the following:
 
@@ -4038,7 +4038,7 @@ An [`item`](#policy-based-challenge-rule-list-rules-spec-query-params-item) bloc
 
 <a id="policy-based-challenge-rule-list-rules-spec-tls-fingerprint-matcher"></a>
 
-**TLS Fingerprint Matcher**
+#### TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#policy-based-challenge-rule-list-rules-spec-tls-fingerprint-matcher) block (within [`policy_based_challenge.rule_list.rules.spec`](#policy-based-challenge-rule-list-rules-spec)) supports the following:
 
@@ -4050,7 +4050,7 @@ A [`tls_fingerprint_matcher`](#policy-based-challenge-rule-list-rules-spec-tls-f
 
 <a id="policy-based-challenge-temporary-user-blocking"></a>
 
-**Temporary User Blocking**
+#### Temporary User Blocking
 
 A [`temporary_user_blocking`](#policy-based-challenge-temporary-user-blocking) block (within [`policy_based_challenge`](#policy-based-challenge)) supports the following:
 
@@ -4058,7 +4058,7 @@ A [`temporary_user_blocking`](#policy-based-challenge-temporary-user-blocking) b
 
 <a id="protected-cookies"></a>
 
-**Protected Cookies**
+#### Protected Cookies
 
 A [`protected_cookies`](#protected-cookies) block supports the following:
 
@@ -4090,7 +4090,7 @@ A [`protected_cookies`](#protected-cookies) block supports the following:
 
 <a id="rate-limit"></a>
 
-**Rate Limit**
+#### Rate Limit
 
 A [`rate_limit`](#rate-limit) block supports the following:
 
@@ -4108,7 +4108,7 @@ A [`rate_limit`](#rate-limit) block supports the following:
 
 <a id="rate-limit-custom-ip-allowed-list"></a>
 
-**Custom IP Allowed List**
+#### Custom IP Allowed List
 
 A [`custom_ip_allowed_list`](#rate-limit-custom-ip-allowed-list) block (within [`rate_limit`](#rate-limit)) supports the following:
 
@@ -4116,7 +4116,7 @@ A [`custom_ip_allowed_list`](#rate-limit-custom-ip-allowed-list) block (within [
 
 <a id="rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes"></a>
 
-**Rate Limiter Allowed Prefixes**
+#### Rate Limiter Allowed Prefixes
 
 A [`rate_limiter_allowed_prefixes`](#rate-limit-custom-ip-allowed-list-rate-limiter-allowed-prefixes) block (within [`rate_limit.custom_ip_allowed_list`](#rate-limit-custom-ip-allowed-list)) supports the following:
 
@@ -4128,7 +4128,7 @@ A [`rate_limiter_allowed_prefixes`](#rate-limit-custom-ip-allowed-list-rate-limi
 
 <a id="rate-limit-ip-allowed-list"></a>
 
-**IP Allowed List**
+#### IP Allowed List
 
 An [`ip_allowed_list`](#rate-limit-ip-allowed-list) block (within [`rate_limit`](#rate-limit)) supports the following:
 
@@ -4136,7 +4136,7 @@ An [`ip_allowed_list`](#rate-limit-ip-allowed-list) block (within [`rate_limit`]
 
 <a id="rate-limit-policies"></a>
 
-**Policies**
+#### Policies
 
 A [`policies`](#rate-limit-policies) block (within [`rate_limit`](#rate-limit)) supports the following:
 
@@ -4144,7 +4144,7 @@ A [`policies`](#rate-limit-policies) block (within [`rate_limit`](#rate-limit)) 
 
 <a id="rate-limit-policies-policies"></a>
 
-**Policies**
+#### Policies
 
 A [`policies`](#rate-limit-policies-policies) block (within [`rate_limit.policies`](#rate-limit-policies)) supports the following:
 
@@ -4156,7 +4156,7 @@ A [`policies`](#rate-limit-policies-policies) block (within [`rate_limit.policie
 
 <a id="rate-limit-rate-limiter"></a>
 
-**Rate Limiter**
+#### Rate Limiter
 
 A [`rate_limiter`](#rate-limit-rate-limiter) block (within [`rate_limit`](#rate-limit)) supports the following:
 
@@ -4178,7 +4178,7 @@ A [`rate_limiter`](#rate-limit-rate-limiter) block (within [`rate_limit`](#rate-
 
 <a id="rate-limit-rate-limiter-action-block"></a>
 
-**Action Block**
+#### Action Block
 
 An [`action_block`](#rate-limit-rate-limiter-action-block) block (within [`rate_limit.rate_limiter`](#rate-limit-rate-limiter)) supports the following:
 
@@ -4190,7 +4190,7 @@ An [`action_block`](#rate-limit-rate-limiter-action-block) block (within [`rate_
 
 <a id="rate-limit-rate-limiter-action-block-hours"></a>
 
-**Hours**
+#### Hours
 
 A [`hours`](#rate-limit-rate-limiter-action-block-hours) block (within [`rate_limit.rate_limiter.action_block`](#rate-limit-rate-limiter-action-block)) supports the following:
 
@@ -4198,7 +4198,7 @@ A [`hours`](#rate-limit-rate-limiter-action-block-hours) block (within [`rate_li
 
 <a id="rate-limit-rate-limiter-action-block-minutes"></a>
 
-**Minutes**
+#### Minutes
 
 A [`minutes`](#rate-limit-rate-limiter-action-block-minutes) block (within [`rate_limit.rate_limiter.action_block`](#rate-limit-rate-limiter-action-block)) supports the following:
 
@@ -4206,7 +4206,7 @@ A [`minutes`](#rate-limit-rate-limiter-action-block-minutes) block (within [`rat
 
 <a id="rate-limit-rate-limiter-action-block-seconds"></a>
 
-**Seconds**
+#### Seconds
 
 A [`seconds`](#rate-limit-rate-limiter-action-block-seconds) block (within [`rate_limit.rate_limiter.action_block`](#rate-limit-rate-limiter-action-block)) supports the following:
 
@@ -4214,7 +4214,7 @@ A [`seconds`](#rate-limit-rate-limiter-action-block-seconds) block (within [`rat
 
 <a id="sensitive-data-policy"></a>
 
-**Sensitive Data Policy**
+#### Sensitive Data Policy
 
 A [`sensitive_data_policy`](#sensitive-data-policy) block supports the following:
 
@@ -4222,7 +4222,7 @@ A [`sensitive_data_policy`](#sensitive-data-policy) block supports the following
 
 <a id="sensitive-data-policy-sensitive-data-policy-ref"></a>
 
-**Sensitive Data Policy Ref**
+#### Sensitive Data Policy Ref
 
 A [`sensitive_data_policy_ref`](#sensitive-data-policy-sensitive-data-policy-ref) block (within [`sensitive_data_policy`](#sensitive-data-policy)) supports the following:
 
@@ -4234,7 +4234,7 @@ A [`sensitive_data_policy_ref`](#sensitive-data-policy-sensitive-data-policy-ref
 
 <a id="slow-ddos-mitigation"></a>
 
-**Slow DDOS Mitigation**
+#### Slow DDOS Mitigation
 
 A [`slow_ddos_mitigation`](#slow-ddos-mitigation) block supports the following:
 
@@ -4246,7 +4246,7 @@ A [`slow_ddos_mitigation`](#slow-ddos-mitigation) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -4260,7 +4260,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="trusted-clients"></a>
 
-**Trusted Clients**
+#### Trusted Clients
 
 A [`trusted_clients`](#trusted-clients) block supports the following:
 
@@ -4288,7 +4288,7 @@ A [`trusted_clients`](#trusted-clients) block supports the following:
 
 <a id="trusted-clients-http-header"></a>
 
-**HTTP Header**
+#### HTTP Header
 
 A [`http_header`](#trusted-clients-http-header) block (within [`trusted_clients`](#trusted-clients)) supports the following:
 
@@ -4296,7 +4296,7 @@ A [`http_header`](#trusted-clients-http-header) block (within [`trusted_clients`
 
 <a id="trusted-clients-http-header-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#trusted-clients-http-header-headers) block (within [`trusted_clients.http_header`](#trusted-clients-http-header)) supports the following:
 
@@ -4312,7 +4312,7 @@ A [`headers`](#trusted-clients-http-header-headers) block (within [`trusted_clie
 
 <a id="trusted-clients-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#trusted-clients-metadata) block (within [`trusted_clients`](#trusted-clients)) supports the following:
 
@@ -4322,7 +4322,7 @@ A [`metadata`](#trusted-clients-metadata) block (within [`trusted_clients`](#tru
 
 <a id="user-identification"></a>
 
-**User Identification**
+#### User Identification
 
 An [`user_identification`](#user-identification) block supports the following:
 
@@ -4334,7 +4334,7 @@ An [`user_identification`](#user-identification) block supports the following:
 
 <a id="waf-exclusion"></a>
 
-**WAF Exclusion**
+#### WAF Exclusion
 
 A [`waf_exclusion`](#waf-exclusion) block supports the following:
 
@@ -4344,7 +4344,7 @@ A [`waf_exclusion`](#waf-exclusion) block supports the following:
 
 <a id="waf-exclusion-waf-exclusion-inline-rules"></a>
 
-**WAF Exclusion Inline Rules**
+#### WAF Exclusion Inline Rules
 
 A [`waf_exclusion_inline_rules`](#waf-exclusion-waf-exclusion-inline-rules) block (within [`waf_exclusion`](#waf-exclusion)) supports the following:
 
@@ -4352,7 +4352,7 @@ A [`waf_exclusion_inline_rules`](#waf-exclusion-waf-exclusion-inline-rules) bloc
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#waf-exclusion-waf-exclusion-inline-rules-rules) block (within [`waf_exclusion.waf_exclusion_inline_rules`](#waf-exclusion-waf-exclusion-inline-rules)) supports the following:
 
@@ -4380,7 +4380,7 @@ A [`rules`](#waf-exclusion-waf-exclusion-inline-rules-rules) block (within [`waf
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control"></a>
 
-**App Firewall Detection Control**
+#### App Firewall Detection Control
 
 An [`app_firewall_detection_control`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules`](#waf-exclusion-waf-exclusion-inline-rules-rules)) supports the following:
 
@@ -4394,7 +4394,7 @@ An [`app_firewall_detection_control`](#waf-exclusion-waf-exclusion-inline-rules-
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-attack-type-contexts"></a>
 
-**Exclude Attack Type Contexts**
+#### Exclude Attack Type Contexts
 
 An [`exclude_attack_type_contexts`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-attack-type-contexts) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control)) supports the following:
 
@@ -4406,7 +4406,7 @@ An [`exclude_attack_type_contexts`](#waf-exclusion-waf-exclusion-inline-rules-ru
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-bot-name-contexts"></a>
 
-**Exclude Bot Name Contexts**
+#### Exclude Bot Name Contexts
 
 An [`exclude_bot_name_contexts`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-bot-name-contexts) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control)) supports the following:
 
@@ -4414,7 +4414,7 @@ An [`exclude_bot_name_contexts`](#waf-exclusion-waf-exclusion-inline-rules-rules
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-signature-contexts"></a>
 
-**Exclude Signature Contexts**
+#### Exclude Signature Contexts
 
 An [`exclude_signature_contexts`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-signature-contexts) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control)) supports the following:
 
@@ -4426,7 +4426,7 @@ An [`exclude_signature_contexts`](#waf-exclusion-waf-exclusion-inline-rules-rule
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-violation-contexts"></a>
 
-**Exclude Violation Contexts**
+#### Exclude Violation Contexts
 
 An [`exclude_violation_contexts`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control-exclude-violation-contexts) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`](#waf-exclusion-waf-exclusion-inline-rules-rules-app-firewall-detection-control)) supports the following:
 
@@ -4438,7 +4438,7 @@ An [`exclude_violation_contexts`](#waf-exclusion-waf-exclusion-inline-rules-rule
 
 <a id="waf-exclusion-waf-exclusion-inline-rules-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#waf-exclusion-waf-exclusion-inline-rules-rules-metadata) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules`](#waf-exclusion-waf-exclusion-inline-rules-rules)) supports the following:
 
@@ -4448,7 +4448,7 @@ A [`metadata`](#waf-exclusion-waf-exclusion-inline-rules-rules-metadata) block (
 
 <a id="waf-exclusion-waf-exclusion-policy"></a>
 
-**WAF Exclusion Policy**
+#### WAF Exclusion Policy
 
 A [`waf_exclusion_policy`](#waf-exclusion-waf-exclusion-policy) block (within [`waf_exclusion`](#waf-exclusion)) supports the following:
 

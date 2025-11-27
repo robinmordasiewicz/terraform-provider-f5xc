@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-forward-proxy"></a>
 
-**Enable Forward Proxy**
+#### Enable Forward Proxy
 
 An [`enable_forward_proxy`](#enable-forward-proxy) block supports the following:
 
@@ -103,7 +103,7 @@ An [`enable_forward_proxy`](#enable-forward-proxy) block supports the following:
 
 <a id="enable-forward-proxy-tls-intercept"></a>
 
-**TLS Intercept**
+#### TLS Intercept
 
 A [`tls_intercept`](#enable-forward-proxy-tls-intercept) block (within [`enable_forward_proxy`](#enable-forward-proxy)) supports the following:
 
@@ -121,7 +121,7 @@ A [`tls_intercept`](#enable-forward-proxy-tls-intercept) block (within [`enable_
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate"></a>
 
-**Custom Certificate**
+#### Custom Certificate
 
 A [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate) block (within [`enable_forward_proxy.tls_intercept`](#enable-forward-proxy-tls-intercept)) supports the following:
 
@@ -139,7 +139,7 @@ A [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms"></a>
 
-**Custom Hash Algorithms**
+#### Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) block (within [`enable_forward_proxy.tls_intercept.custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)) supports the following:
 
@@ -147,7 +147,7 @@ A [`custom_hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certific
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key"></a>
 
-**Private Key**
+#### Private Key
 
 A [`private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) block (within [`enable_forward_proxy.tls_intercept.custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)) supports the following:
 
@@ -157,7 +157,7 @@ A [`private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info) block (within [`enable_forward_proxy.tls_intercept.custom_certificate.private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key)) supports the following:
 
@@ -169,7 +169,7 @@ A [`blindfold_secret_info`](#enable-forward-proxy-tls-intercept-custom-certifica
 
 <a id="enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info) block (within [`enable_forward_proxy.tls_intercept.custom_certificate.private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key)) supports the following:
 
@@ -179,7 +179,7 @@ A [`clear_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-p
 
 <a id="enable-forward-proxy-tls-intercept-policy"></a>
 
-**Policy**
+#### Policy
 
 A [`policy`](#enable-forward-proxy-tls-intercept-policy) block (within [`enable_forward_proxy.tls_intercept`](#enable-forward-proxy-tls-intercept)) supports the following:
 
@@ -187,7 +187,7 @@ A [`policy`](#enable-forward-proxy-tls-intercept-policy) block (within [`enable_
 
 <a id="enable-forward-proxy-tls-intercept-policy-interception-rules"></a>
 
-**Interception Rules**
+#### Interception Rules
 
 An [`interception_rules`](#enable-forward-proxy-tls-intercept-policy-interception-rules) block (within [`enable_forward_proxy.tls_intercept.policy`](#enable-forward-proxy-tls-intercept-policy)) supports the following:
 
@@ -199,7 +199,7 @@ An [`interception_rules`](#enable-forward-proxy-tls-intercept-policy-interceptio
 
 <a id="enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match"></a>
 
-**Domain Match**
+#### Domain Match
 
 A [`domain_match`](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match) block (within [`enable_forward_proxy.tls_intercept.policy.interception_rules`](#enable-forward-proxy-tls-intercept-policy-interception-rules)) supports the following:
 
@@ -211,7 +211,7 @@ A [`domain_match`](#enable-forward-proxy-tls-intercept-policy-interception-rules
 
 <a id="sli-to-global-dr"></a>
 
-**Sli To Global DR**
+#### Sli To Global DR
 
 A [`sli_to_global_dr`](#sli-to-global-dr) block supports the following:
 
@@ -219,7 +219,7 @@ A [`sli_to_global_dr`](#sli-to-global-dr) block supports the following:
 
 <a id="sli-to-global-dr-global-vn"></a>
 
-**Global Vn**
+#### Global Vn
 
 A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](#sli-to-global-dr)) supports the following:
 
@@ -231,7 +231,7 @@ A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](
 
 <a id="sli-to-slo-snat"></a>
 
-**Sli To Slo Snat**
+#### Sli To Slo Snat
 
 A [`sli_to_slo_snat`](#sli-to-slo-snat) block supports the following:
 
@@ -241,7 +241,7 @@ A [`sli_to_slo_snat`](#sli-to-slo-snat) block supports the following:
 
 <a id="slo-to-global-dr"></a>
 
-**Slo To Global DR**
+#### Slo To Global DR
 
 A [`slo_to_global_dr`](#slo-to-global-dr) block supports the following:
 
@@ -249,7 +249,7 @@ A [`slo_to_global_dr`](#slo-to-global-dr) block supports the following:
 
 <a id="slo-to-global-dr-global-vn"></a>
 
-**Global Vn**
+#### Global Vn
 
 A [`global_vn`](#slo-to-global-dr-global-vn) block (within [`slo_to_global_dr`](#slo-to-global-dr)) supports the following:
 
@@ -261,7 +261,7 @@ A [`global_vn`](#slo-to-global-dr-global-vn) block (within [`slo_to_global_dr`](
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

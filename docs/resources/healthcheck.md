@@ -102,7 +102,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="http-health-check"></a>
 
-**HTTP Health Check**
+#### HTTP Health Check
 
 A [`http_health_check`](#http-health-check) block supports the following:
 
@@ -122,7 +122,7 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 <a id="tcp-health-check"></a>
 
-**TCP Health Check**
+#### TCP Health Check
 
 A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
@@ -132,7 +132,7 @@ A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

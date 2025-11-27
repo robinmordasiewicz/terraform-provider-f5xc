@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="default-flavor-ref"></a>
 
-**Default Flavor Ref**
+#### Default Flavor Ref
 
 A [`default_flavor_ref`](#default-flavor-ref) block supports the following:
 
@@ -100,7 +100,7 @@ A [`default_flavor_ref`](#default-flavor-ref) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -114,7 +114,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="vsite-refs"></a>
 
-**Vsite Refs**
+#### Vsite Refs
 
 A [`vsite_refs`](#vsite-refs) block supports the following:
 

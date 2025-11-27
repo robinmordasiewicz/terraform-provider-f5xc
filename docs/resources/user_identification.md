@@ -72,7 +72,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#rules) block supports the following:
 
@@ -108,7 +108,7 @@ A [`rules`](#rules) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

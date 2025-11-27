@@ -92,7 +92,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="bandwidth"></a>
 
-**Bandwidth**
+#### Bandwidth
 
 A [`bandwidth`](#bandwidth) block supports the following:
 
@@ -100,7 +100,7 @@ A [`bandwidth`](#bandwidth) block supports the following:
 
 <a id="bgp-information"></a>
 
-**BGP Information**
+#### BGP Information
 
 A [`bgp_information`](#bgp-information) block supports the following:
 
@@ -116,7 +116,7 @@ A [`bgp_information`](#bgp-information) block supports the following:
 
 <a id="bgp-information-asn"></a>
 
-**Asn**
+#### Asn
 
 An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-information)) supports the following:
 
@@ -128,7 +128,7 @@ An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-informat
 
 <a id="bgp-information-peer-secret-override"></a>
 
-**Peer Secret Override**
+#### Peer Secret Override
 
 A [`peer_secret_override`](#bgp-information-peer-secret-override) block (within [`bgp_information`](#bgp-information)) supports the following:
 
@@ -138,7 +138,7 @@ A [`peer_secret_override`](#bgp-information-peer-secret-override) block (within 
 
 <a id="bgp-information-peer-secret-override-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secret-info) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
 
@@ -150,7 +150,7 @@ A [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secr
 
 <a id="bgp-information-peer-secret-override-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
 
@@ -160,7 +160,7 @@ A [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info)
 
 <a id="firewall-rule-group"></a>
 
-**Firewall Rule Group**
+#### Firewall Rule Group
 
 A [`firewall_rule_group`](#firewall-rule-group) block supports the following:
 
@@ -172,7 +172,7 @@ A [`firewall_rule_group`](#firewall-rule-group) block supports the following:
 
 <a id="gre-ipv4"></a>
 
-**Gre IPv4**
+#### Gre IPv4
 
 A [`gre_ipv4`](#gre-ipv4) block supports the following:
 
@@ -192,7 +192,7 @@ A [`gre_ipv4`](#gre-ipv4) block supports the following:
 
 <a id="gre-ipv6"></a>
 
-**Gre IPv6**
+#### Gre IPv6
 
 A [`gre_ipv6`](#gre-ipv6) block supports the following:
 
@@ -204,7 +204,7 @@ A [`gre_ipv6`](#gre-ipv6) block supports the following:
 
 <a id="ip-in-ip"></a>
 
-**IP In IP**
+#### IP In IP
 
 An [`ip_in_ip`](#ip-in-ip) block supports the following:
 
@@ -212,7 +212,7 @@ An [`ip_in_ip`](#ip-in-ip) block supports the following:
 
 <a id="ipv6-to-ipv6"></a>
 
-**IPv6 To IPv6**
+#### IPv6 To IPv6
 
 An [`ipv6_to_ipv6`](#ipv6-to-ipv6) block supports the following:
 
@@ -220,7 +220,7 @@ An [`ipv6_to_ipv6`](#ipv6-to-ipv6) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -234,7 +234,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="tunnel-location"></a>
 
-**Tunnel Location**
+#### Tunnel Location
 
 A [`tunnel_location`](#tunnel-location) block supports the following:
 

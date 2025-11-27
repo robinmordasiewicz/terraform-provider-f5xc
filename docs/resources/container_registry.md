@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="password"></a>
 
-**Password**
+#### Password
 
 A [`password`](#password) block supports the following:
 
@@ -96,7 +96,7 @@ A [`password`](#password) block supports the following:
 
 <a id="password-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#password-blindfold-secret-info) block (within [`password`](#password)) supports the following:
 
@@ -108,7 +108,7 @@ A [`blindfold_secret_info`](#password-blindfold-secret-info) block (within [`pas
 
 <a id="password-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#password-clear-secret-info) block (within [`password`](#password)) supports the following:
 
@@ -118,7 +118,7 @@ A [`clear_secret_info`](#password-clear-secret-info) block (within [`password`](
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -103,7 +103,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-cloud-watch-receiver"></a>
 
-**AWS Cloud Watch Receiver**
+#### AWS Cloud Watch Receiver
 
 An [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver) block supports the following:
 
@@ -121,7 +121,7 @@ An [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver) block supports the fo
 
 <a id="aws-cloud-watch-receiver-aws-cred"></a>
 
-**AWS Cred**
+#### AWS Cred
 
 An [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
@@ -133,7 +133,7 @@ An [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) block (within [`aws_cloud_wa
 
 <a id="aws-cloud-watch-receiver-batch"></a>
 
-**Batch**
+#### Batch
 
 A [`batch`](#aws-cloud-watch-receiver-batch) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
@@ -151,7 +151,7 @@ A [`batch`](#aws-cloud-watch-receiver-batch) block (within [`aws_cloud_watch_rec
 
 <a id="aws-cloud-watch-receiver-compression"></a>
 
-**Compression**
+#### Compression
 
 A [`compression`](#aws-cloud-watch-receiver-compression) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
@@ -163,7 +163,7 @@ A [`compression`](#aws-cloud-watch-receiver-compression) block (within [`aws_clo
 
 <a id="azure-event-hubs-receiver"></a>
 
-**Azure Event Hubs Receiver**
+#### Azure Event Hubs Receiver
 
 An [`azure_event_hubs_receiver`](#azure-event-hubs-receiver) block supports the following:
 
@@ -175,7 +175,7 @@ An [`azure_event_hubs_receiver`](#azure-event-hubs-receiver) block supports the 
 
 <a id="azure-event-hubs-receiver-connection-string"></a>
 
-**Connection String**
+#### Connection String
 
 A [`connection_string`](#azure-event-hubs-receiver-connection-string) block (within [`azure_event_hubs_receiver`](#azure-event-hubs-receiver)) supports the following:
 
@@ -185,7 +185,7 @@ A [`connection_string`](#azure-event-hubs-receiver-connection-string) block (wit
 
 <a id="azure-event-hubs-receiver-connection-string-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) block (within [`azure_event_hubs_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
 
@@ -197,7 +197,7 @@ A [`blindfold_secret_info`](#azure-event-hubs-receiver-connection-string-blindfo
 
 <a id="azure-event-hubs-receiver-connection-string-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#azure-event-hubs-receiver-connection-string-clear-secret-info) block (within [`azure_event_hubs_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
 
@@ -207,7 +207,7 @@ A [`clear_secret_info`](#azure-event-hubs-receiver-connection-string-clear-secre
 
 <a id="azure-receiver"></a>
 
-**Azure Receiver**
+#### Azure Receiver
 
 An [`azure_receiver`](#azure-receiver) block supports the following:
 
@@ -223,7 +223,7 @@ An [`azure_receiver`](#azure-receiver) block supports the following:
 
 <a id="azure-receiver-batch"></a>
 
-**Batch**
+#### Batch
 
 A [`batch`](#azure-receiver-batch) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
@@ -241,7 +241,7 @@ A [`batch`](#azure-receiver-batch) block (within [`azure_receiver`](#azure-recei
 
 <a id="azure-receiver-compression"></a>
 
-**Compression**
+#### Compression
 
 A [`compression`](#azure-receiver-compression) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
@@ -253,7 +253,7 @@ A [`compression`](#azure-receiver-compression) block (within [`azure_receiver`](
 
 <a id="azure-receiver-connection-string"></a>
 
-**Connection String**
+#### Connection String
 
 A [`connection_string`](#azure-receiver-connection-string) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
@@ -263,7 +263,7 @@ A [`connection_string`](#azure-receiver-connection-string) block (within [`azure
 
 <a id="azure-receiver-connection-string-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#azure-receiver-connection-string-blindfold-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
 
@@ -275,7 +275,7 @@ A [`blindfold_secret_info`](#azure-receiver-connection-string-blindfold-secret-i
 
 <a id="azure-receiver-connection-string-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#azure-receiver-connection-string-clear-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
 
@@ -285,7 +285,7 @@ A [`clear_secret_info`](#azure-receiver-connection-string-clear-secret-info) blo
 
 <a id="azure-receiver-filename-options"></a>
 
-**Filename Options**
+#### Filename Options
 
 A [`filename_options`](#azure-receiver-filename-options) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
@@ -297,7 +297,7 @@ A [`filename_options`](#azure-receiver-filename-options) block (within [`azure_r
 
 <a id="datadog-receiver"></a>
 
-**Datadog Receiver**
+#### Datadog Receiver
 
 A [`datadog_receiver`](#datadog-receiver) block supports the following:
 
@@ -317,7 +317,7 @@ A [`datadog_receiver`](#datadog-receiver) block supports the following:
 
 <a id="datadog-receiver-batch"></a>
 
-**Batch**
+#### Batch
 
 A [`batch`](#datadog-receiver-batch) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
@@ -335,7 +335,7 @@ A [`batch`](#datadog-receiver-batch) block (within [`datadog_receiver`](#datadog
 
 <a id="datadog-receiver-compression"></a>
 
-**Compression**
+#### Compression
 
 A [`compression`](#datadog-receiver-compression) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
@@ -347,7 +347,7 @@ A [`compression`](#datadog-receiver-compression) block (within [`datadog_receive
 
 <a id="datadog-receiver-datadog-api-key"></a>
 
-**Datadog API Key**
+#### Datadog API Key
 
 A [`datadog_api_key`](#datadog-receiver-datadog-api-key) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
@@ -357,7 +357,7 @@ A [`datadog_api_key`](#datadog-receiver-datadog-api-key) block (within [`datadog
 
 <a id="datadog-receiver-datadog-api-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#datadog-receiver-datadog-api-key-blindfold-secret-info) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
 
@@ -369,7 +369,7 @@ A [`blindfold_secret_info`](#datadog-receiver-datadog-api-key-blindfold-secret-i
 
 <a id="datadog-receiver-datadog-api-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
 
@@ -379,7 +379,7 @@ A [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) blo
 
 <a id="datadog-receiver-use-tls"></a>
 
-**Use TLS**
+#### Use TLS
 
 An [`use_tls`](#datadog-receiver-use-tls) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
@@ -401,7 +401,7 @@ An [`use_tls`](#datadog-receiver-use-tls) block (within [`datadog_receiver`](#da
 
 <a id="datadog-receiver-use-tls-mtls-enable"></a>
 
-**mTLS Enable**
+#### mTLS Enable
 
 A [`mtls_enable`](#datadog-receiver-use-tls-mtls-enable) block (within [`datadog_receiver.use_tls`](#datadog-receiver-use-tls)) supports the following:
 
@@ -411,7 +411,7 @@ A [`mtls_enable`](#datadog-receiver-use-tls-mtls-enable) block (within [`datadog
 
 <a id="datadog-receiver-use-tls-mtls-enable-key-url"></a>
 
-**Key URL**
+#### Key URL
 
 A [`key_url`](#datadog-receiver-use-tls-mtls-enable-key-url) block (within [`datadog_receiver.use_tls.mtls_enable`](#datadog-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -421,7 +421,7 @@ A [`key_url`](#datadog-receiver-use-tls-mtls-enable-key-url) block (within [`dat
 
 <a id="datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -433,7 +433,7 @@ A [`blindfold_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindf
 
 <a id="datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -443,7 +443,7 @@ A [`clear_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secr
 
 <a id="gcp-bucket-receiver"></a>
 
-**GCP Bucket Receiver**
+#### GCP Bucket Receiver
 
 A [`gcp_bucket_receiver`](#gcp-bucket-receiver) block supports the following:
 
@@ -459,7 +459,7 @@ A [`gcp_bucket_receiver`](#gcp-bucket-receiver) block supports the following:
 
 <a id="gcp-bucket-receiver-batch"></a>
 
-**Batch**
+#### Batch
 
 A [`batch`](#gcp-bucket-receiver-batch) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
@@ -477,7 +477,7 @@ A [`batch`](#gcp-bucket-receiver-batch) block (within [`gcp_bucket_receiver`](#g
 
 <a id="gcp-bucket-receiver-compression"></a>
 
-**Compression**
+#### Compression
 
 A [`compression`](#gcp-bucket-receiver-compression) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
@@ -489,7 +489,7 @@ A [`compression`](#gcp-bucket-receiver-compression) block (within [`gcp_bucket_r
 
 <a id="gcp-bucket-receiver-filename-options"></a>
 
-**Filename Options**
+#### Filename Options
 
 A [`filename_options`](#gcp-bucket-receiver-filename-options) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
@@ -501,7 +501,7 @@ A [`filename_options`](#gcp-bucket-receiver-filename-options) block (within [`gc
 
 <a id="gcp-bucket-receiver-gcp-cred"></a>
 
-**GCP Cred**
+#### GCP Cred
 
 A [`gcp_cred`](#gcp-bucket-receiver-gcp-cred) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
@@ -513,7 +513,7 @@ A [`gcp_cred`](#gcp-bucket-receiver-gcp-cred) block (within [`gcp_bucket_receive
 
 <a id="http-receiver"></a>
 
-**HTTP Receiver**
+#### HTTP Receiver
 
 A [`http_receiver`](#http-receiver) block supports the following:
 
@@ -535,7 +535,7 @@ A [`http_receiver`](#http-receiver) block supports the following:
 
 <a id="http-receiver-auth-basic"></a>
 
-**Auth Basic**
+#### Auth Basic
 
 An [`auth_basic`](#http-receiver-auth-basic) block (within [`http_receiver`](#http-receiver)) supports the following:
 
@@ -545,7 +545,7 @@ An [`auth_basic`](#http-receiver-auth-basic) block (within [`http_receiver`](#ht
 
 <a id="http-receiver-auth-basic-password"></a>
 
-**Password**
+#### Password
 
 A [`password`](#http-receiver-auth-basic-password) block (within [`http_receiver.auth_basic`](#http-receiver-auth-basic)) supports the following:
 
@@ -555,7 +555,7 @@ A [`password`](#http-receiver-auth-basic-password) block (within [`http_receiver
 
 <a id="http-receiver-auth-basic-password-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#http-receiver-auth-basic-password-blindfold-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
 
@@ -567,7 +567,7 @@ A [`blindfold_secret_info`](#http-receiver-auth-basic-password-blindfold-secret-
 
 <a id="http-receiver-auth-basic-password-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#http-receiver-auth-basic-password-clear-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
 
@@ -577,7 +577,7 @@ A [`clear_secret_info`](#http-receiver-auth-basic-password-clear-secret-info) bl
 
 <a id="http-receiver-auth-token"></a>
 
-**Auth Token**
+#### Auth Token
 
 An [`auth_token`](#http-receiver-auth-token) block (within [`http_receiver`](#http-receiver)) supports the following:
 
@@ -585,7 +585,7 @@ An [`auth_token`](#http-receiver-auth-token) block (within [`http_receiver`](#ht
 
 <a id="http-receiver-auth-token-token"></a>
 
-**Token**
+#### Token
 
 A [`token`](#http-receiver-auth-token-token) block (within [`http_receiver.auth_token`](#http-receiver-auth-token)) supports the following:
 
@@ -595,7 +595,7 @@ A [`token`](#http-receiver-auth-token-token) block (within [`http_receiver.auth_
 
 <a id="http-receiver-auth-token-token-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#http-receiver-auth-token-token-blindfold-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
 
@@ -607,7 +607,7 @@ A [`blindfold_secret_info`](#http-receiver-auth-token-token-blindfold-secret-inf
 
 <a id="http-receiver-auth-token-token-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#http-receiver-auth-token-token-clear-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
 
@@ -617,7 +617,7 @@ A [`clear_secret_info`](#http-receiver-auth-token-token-clear-secret-info) block
 
 <a id="http-receiver-batch"></a>
 
-**Batch**
+#### Batch
 
 A [`batch`](#http-receiver-batch) block (within [`http_receiver`](#http-receiver)) supports the following:
 
@@ -635,7 +635,7 @@ A [`batch`](#http-receiver-batch) block (within [`http_receiver`](#http-receiver
 
 <a id="http-receiver-compression"></a>
 
-**Compression**
+#### Compression
 
 A [`compression`](#http-receiver-compression) block (within [`http_receiver`](#http-receiver)) supports the following:
 
@@ -647,7 +647,7 @@ A [`compression`](#http-receiver-compression) block (within [`http_receiver`](#h
 
 <a id="http-receiver-use-tls"></a>
 
-**Use TLS**
+#### Use TLS
 
 An [`use_tls`](#http-receiver-use-tls) block (within [`http_receiver`](#http-receiver)) supports the following:
 
@@ -669,7 +669,7 @@ An [`use_tls`](#http-receiver-use-tls) block (within [`http_receiver`](#http-rec
 
 <a id="http-receiver-use-tls-mtls-enable"></a>
 
-**mTLS Enable**
+#### mTLS Enable
 
 A [`mtls_enable`](#http-receiver-use-tls-mtls-enable) block (within [`http_receiver.use_tls`](#http-receiver-use-tls)) supports the following:
 
@@ -679,7 +679,7 @@ A [`mtls_enable`](#http-receiver-use-tls-mtls-enable) block (within [`http_recei
 
 <a id="http-receiver-use-tls-mtls-enable-key-url"></a>
 
-**Key URL**
+#### Key URL
 
 A [`key_url`](#http-receiver-use-tls-mtls-enable-key-url) block (within [`http_receiver.use_tls.mtls_enable`](#http-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -689,7 +689,7 @@ A [`key_url`](#http-receiver-use-tls-mtls-enable-key-url) block (within [`http_r
 
 <a id="http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -701,7 +701,7 @@ A [`blindfold_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold
 
 <a id="http-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -711,7 +711,7 @@ A [`clear_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-
 
 <a id="kafka-receiver"></a>
 
-**Kafka Receiver**
+#### Kafka Receiver
 
 A [`kafka_receiver`](#kafka-receiver) block supports the following:
 
@@ -729,7 +729,7 @@ A [`kafka_receiver`](#kafka-receiver) block supports the following:
 
 <a id="kafka-receiver-batch"></a>
 
-**Batch**
+#### Batch
 
 A [`batch`](#kafka-receiver-batch) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
@@ -747,7 +747,7 @@ A [`batch`](#kafka-receiver-batch) block (within [`kafka_receiver`](#kafka-recei
 
 <a id="kafka-receiver-compression"></a>
 
-**Compression**
+#### Compression
 
 A [`compression`](#kafka-receiver-compression) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
@@ -759,7 +759,7 @@ A [`compression`](#kafka-receiver-compression) block (within [`kafka_receiver`](
 
 <a id="kafka-receiver-use-tls"></a>
 
-**Use TLS**
+#### Use TLS
 
 An [`use_tls`](#kafka-receiver-use-tls) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
@@ -781,7 +781,7 @@ An [`use_tls`](#kafka-receiver-use-tls) block (within [`kafka_receiver`](#kafka-
 
 <a id="kafka-receiver-use-tls-mtls-enable"></a>
 
-**mTLS Enable**
+#### mTLS Enable
 
 A [`mtls_enable`](#kafka-receiver-use-tls-mtls-enable) block (within [`kafka_receiver.use_tls`](#kafka-receiver-use-tls)) supports the following:
 
@@ -791,7 +791,7 @@ A [`mtls_enable`](#kafka-receiver-use-tls-mtls-enable) block (within [`kafka_rec
 
 <a id="kafka-receiver-use-tls-mtls-enable-key-url"></a>
 
-**Key URL**
+#### Key URL
 
 A [`key_url`](#kafka-receiver-use-tls-mtls-enable-key-url) block (within [`kafka_receiver.use_tls.mtls_enable`](#kafka-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -801,7 +801,7 @@ A [`key_url`](#kafka-receiver-use-tls-mtls-enable-key-url) block (within [`kafka
 
 <a id="kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -813,7 +813,7 @@ A [`blindfold_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfol
 
 <a id="kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -823,7 +823,7 @@ A [`clear_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret
 
 <a id="new-relic-receiver"></a>
 
-**New Relic Receiver**
+#### New Relic Receiver
 
 A [`new_relic_receiver`](#new-relic-receiver) block supports the following:
 
@@ -835,7 +835,7 @@ A [`new_relic_receiver`](#new-relic-receiver) block supports the following:
 
 <a id="new-relic-receiver-api-key"></a>
 
-**API Key**
+#### API Key
 
 An [`api_key`](#new-relic-receiver-api-key) block (within [`new_relic_receiver`](#new-relic-receiver)) supports the following:
 
@@ -845,7 +845,7 @@ An [`api_key`](#new-relic-receiver-api-key) block (within [`new_relic_receiver`]
 
 <a id="new-relic-receiver-api-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#new-relic-receiver-api-key-blindfold-secret-info) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
 
@@ -857,7 +857,7 @@ A [`blindfold_secret_info`](#new-relic-receiver-api-key-blindfold-secret-info) b
 
 <a id="new-relic-receiver-api-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#new-relic-receiver-api-key-clear-secret-info) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
 
@@ -867,7 +867,7 @@ A [`clear_secret_info`](#new-relic-receiver-api-key-clear-secret-info) block (wi
 
 <a id="ns-list"></a>
 
-**Ns List**
+#### Ns List
 
 A [`ns_list`](#ns-list) block supports the following:
 
@@ -875,7 +875,7 @@ A [`ns_list`](#ns-list) block supports the following:
 
 <a id="qradar-receiver"></a>
 
-**Qradar Receiver**
+#### Qradar Receiver
 
 A [`qradar_receiver`](#qradar-receiver) block supports the following:
 
@@ -891,7 +891,7 @@ A [`qradar_receiver`](#qradar-receiver) block supports the following:
 
 <a id="qradar-receiver-batch"></a>
 
-**Batch**
+#### Batch
 
 A [`batch`](#qradar-receiver-batch) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
@@ -909,7 +909,7 @@ A [`batch`](#qradar-receiver-batch) block (within [`qradar_receiver`](#qradar-re
 
 <a id="qradar-receiver-compression"></a>
 
-**Compression**
+#### Compression
 
 A [`compression`](#qradar-receiver-compression) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
@@ -921,7 +921,7 @@ A [`compression`](#qradar-receiver-compression) block (within [`qradar_receiver`
 
 <a id="qradar-receiver-use-tls"></a>
 
-**Use TLS**
+#### Use TLS
 
 An [`use_tls`](#qradar-receiver-use-tls) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
@@ -943,7 +943,7 @@ An [`use_tls`](#qradar-receiver-use-tls) block (within [`qradar_receiver`](#qrad
 
 <a id="qradar-receiver-use-tls-mtls-enable"></a>
 
-**mTLS Enable**
+#### mTLS Enable
 
 A [`mtls_enable`](#qradar-receiver-use-tls-mtls-enable) block (within [`qradar_receiver.use_tls`](#qradar-receiver-use-tls)) supports the following:
 
@@ -953,7 +953,7 @@ A [`mtls_enable`](#qradar-receiver-use-tls-mtls-enable) block (within [`qradar_r
 
 <a id="qradar-receiver-use-tls-mtls-enable-key-url"></a>
 
-**Key URL**
+#### Key URL
 
 A [`key_url`](#qradar-receiver-use-tls-mtls-enable-key-url) block (within [`qradar_receiver.use_tls.mtls_enable`](#qradar-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -963,7 +963,7 @@ A [`key_url`](#qradar-receiver-use-tls-mtls-enable-key-url) block (within [`qrad
 
 <a id="qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -975,7 +975,7 @@ A [`blindfold_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfo
 
 <a id="qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -985,7 +985,7 @@ A [`clear_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secre
 
 <a id="s3-receiver"></a>
 
-**S3 Receiver**
+#### S3 Receiver
 
 A [`s3_receiver`](#s3-receiver) block supports the following:
 
@@ -1003,7 +1003,7 @@ A [`s3_receiver`](#s3-receiver) block supports the following:
 
 <a id="s3-receiver-aws-cred"></a>
 
-**AWS Cred**
+#### AWS Cred
 
 An [`aws_cred`](#s3-receiver-aws-cred) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
@@ -1015,7 +1015,7 @@ An [`aws_cred`](#s3-receiver-aws-cred) block (within [`s3_receiver`](#s3-receive
 
 <a id="s3-receiver-batch"></a>
 
-**Batch**
+#### Batch
 
 A [`batch`](#s3-receiver-batch) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
@@ -1033,7 +1033,7 @@ A [`batch`](#s3-receiver-batch) block (within [`s3_receiver`](#s3-receiver)) sup
 
 <a id="s3-receiver-compression"></a>
 
-**Compression**
+#### Compression
 
 A [`compression`](#s3-receiver-compression) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
@@ -1045,7 +1045,7 @@ A [`compression`](#s3-receiver-compression) block (within [`s3_receiver`](#s3-re
 
 <a id="s3-receiver-filename-options"></a>
 
-**Filename Options**
+#### Filename Options
 
 A [`filename_options`](#s3-receiver-filename-options) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
@@ -1057,7 +1057,7 @@ A [`filename_options`](#s3-receiver-filename-options) block (within [`s3_receive
 
 <a id="splunk-receiver"></a>
 
-**Splunk Receiver**
+#### Splunk Receiver
 
 A [`splunk_receiver`](#splunk-receiver) block supports the following:
 
@@ -1075,7 +1075,7 @@ A [`splunk_receiver`](#splunk-receiver) block supports the following:
 
 <a id="splunk-receiver-batch"></a>
 
-**Batch**
+#### Batch
 
 A [`batch`](#splunk-receiver-batch) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
@@ -1093,7 +1093,7 @@ A [`batch`](#splunk-receiver-batch) block (within [`splunk_receiver`](#splunk-re
 
 <a id="splunk-receiver-compression"></a>
 
-**Compression**
+#### Compression
 
 A [`compression`](#splunk-receiver-compression) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
@@ -1105,7 +1105,7 @@ A [`compression`](#splunk-receiver-compression) block (within [`splunk_receiver`
 
 <a id="splunk-receiver-splunk-hec-token"></a>
 
-**Splunk Hec Token**
+#### Splunk Hec Token
 
 A [`splunk_hec_token`](#splunk-receiver-splunk-hec-token) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
@@ -1115,7 +1115,7 @@ A [`splunk_hec_token`](#splunk-receiver-splunk-hec-token) block (within [`splunk
 
 <a id="splunk-receiver-splunk-hec-token-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-info) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
 
@@ -1127,7 +1127,7 @@ A [`blindfold_secret_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-i
 
 <a id="splunk-receiver-splunk-hec-token-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
 
@@ -1137,7 +1137,7 @@ A [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) blo
 
 <a id="splunk-receiver-use-tls"></a>
 
-**Use TLS**
+#### Use TLS
 
 An [`use_tls`](#splunk-receiver-use-tls) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
@@ -1159,7 +1159,7 @@ An [`use_tls`](#splunk-receiver-use-tls) block (within [`splunk_receiver`](#splu
 
 <a id="splunk-receiver-use-tls-mtls-enable"></a>
 
-**mTLS Enable**
+#### mTLS Enable
 
 A [`mtls_enable`](#splunk-receiver-use-tls-mtls-enable) block (within [`splunk_receiver.use_tls`](#splunk-receiver-use-tls)) supports the following:
 
@@ -1169,7 +1169,7 @@ A [`mtls_enable`](#splunk-receiver-use-tls-mtls-enable) block (within [`splunk_r
 
 <a id="splunk-receiver-use-tls-mtls-enable-key-url"></a>
 
-**Key URL**
+#### Key URL
 
 A [`key_url`](#splunk-receiver-use-tls-mtls-enable-key-url) block (within [`splunk_receiver.use_tls.mtls_enable`](#splunk-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -1179,7 +1179,7 @@ A [`key_url`](#splunk-receiver-use-tls-mtls-enable-key-url) block (within [`splu
 
 <a id="splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -1191,7 +1191,7 @@ A [`blindfold_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfo
 
 <a id="splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -1201,7 +1201,7 @@ A [`clear_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secre
 
 <a id="sumo-logic-receiver"></a>
 
-**Sumo Logic Receiver**
+#### Sumo Logic Receiver
 
 A [`sumo_logic_receiver`](#sumo-logic-receiver) block supports the following:
 
@@ -1209,7 +1209,7 @@ A [`sumo_logic_receiver`](#sumo-logic-receiver) block supports the following:
 
 <a id="sumo-logic-receiver-url"></a>
 
-**URL**
+#### URL
 
 An [`url`](#sumo-logic-receiver-url) block (within [`sumo_logic_receiver`](#sumo-logic-receiver)) supports the following:
 
@@ -1219,7 +1219,7 @@ An [`url`](#sumo-logic-receiver-url) block (within [`sumo_logic_receiver`](#sumo
 
 <a id="sumo-logic-receiver-url-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#sumo-logic-receiver-url-blindfold-secret-info) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
 
@@ -1231,7 +1231,7 @@ A [`blindfold_secret_info`](#sumo-logic-receiver-url-blindfold-secret-info) bloc
 
 <a id="sumo-logic-receiver-url-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#sumo-logic-receiver-url-clear-secret-info) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
 
@@ -1241,7 +1241,7 @@ A [`clear_secret_info`](#sumo-logic-receiver-url-clear-secret-info) block (withi
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -113,7 +113,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="protocol-icmp"></a>
 
-**Protocol ICMP**
+#### Protocol ICMP
 
 A [`protocol_icmp`](#protocol-icmp) block supports the following:
 
@@ -133,7 +133,7 @@ A [`protocol_icmp`](#protocol-icmp) block supports the following:
 
 <a id="protocol-icmp6"></a>
 
-**Protocol Icmp6**
+#### Protocol Icmp6
 
 A [`protocol_icmp6`](#protocol-icmp6) block supports the following:
 
@@ -161,7 +161,7 @@ A [`protocol_icmp6`](#protocol-icmp6) block supports the following:
 
 <a id="protocol-tcp"></a>
 
-**Protocol TCP**
+#### Protocol TCP
 
 A [`protocol_tcp`](#protocol-tcp) block supports the following:
 
@@ -177,7 +177,7 @@ A [`protocol_tcp`](#protocol-tcp) block supports the following:
 
 <a id="protocol-udp"></a>
 
-**Protocol UDP**
+#### Protocol UDP
 
 A [`protocol_udp`](#protocol-udp) block supports the following:
 
@@ -193,7 +193,7 @@ A [`protocol_udp`](#protocol-udp) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

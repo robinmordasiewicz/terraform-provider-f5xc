@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="addon-service"></a>
 
-**Addon Service**
+#### Addon Service
 
 An [`addon_service`](#addon-service) block supports the following:
 
@@ -96,7 +96,7 @@ An [`addon_service`](#addon-service) block supports the following:
 
 <a id="notification-preference"></a>
 
-**Notification Preference**
+#### Notification Preference
 
 A [`notification_preference`](#notification-preference) block supports the following:
 
@@ -106,7 +106,7 @@ A [`notification_preference`](#notification-preference) block supports the follo
 
 <a id="notification-preference-emails"></a>
 
-**Emails**
+#### Emails
 
 An [`emails`](#notification-preference-emails) block (within [`notification_preference`](#notification-preference)) supports the following:
 
@@ -114,7 +114,7 @@ An [`emails`](#notification-preference-emails) block (within [`notification_pref
 
 <a id="notification-preference-support-ticket-id"></a>
 
-**Support Ticket Id**
+#### Support Ticket Id
 
 A [`support_ticket_id`](#notification-preference-support-ticket-id) block (within [`notification_preference`](#notification-preference)) supports the following:
 
@@ -124,7 +124,7 @@ A [`support_ticket_id`](#notification-preference-support-ticket-id) block (withi
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -96,7 +96,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="fallback-pool"></a>
 
-**Fallback Pool**
+#### Fallback Pool
 
 A [`fallback_pool`](#fallback-pool) block supports the following:
 
@@ -108,7 +108,7 @@ A [`fallback_pool`](#fallback-pool) block supports the following:
 
 <a id="response-cache"></a>
 
-**Response Cache**
+#### Response Cache
 
 A [`response_cache`](#response-cache) block supports the following:
 
@@ -120,7 +120,7 @@ A [`response_cache`](#response-cache) block supports the following:
 
 <a id="response-cache-response-cache-parameters"></a>
 
-**Response Cache Parameters**
+#### Response Cache Parameters
 
 A [`response_cache_parameters`](#response-cache-response-cache-parameters) block (within [`response_cache`](#response-cache)) supports the following:
 
@@ -132,7 +132,7 @@ A [`response_cache_parameters`](#response-cache-response-cache-parameters) block
 
 <a id="rule-list"></a>
 
-**Rule List**
+#### Rule List
 
 A [`rule_list`](#rule-list) block supports the following:
 
@@ -140,7 +140,7 @@ A [`rule_list`](#rule-list) block supports the following:
 
 <a id="rule-list-rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
@@ -162,7 +162,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#rule-list-rules-asn-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -170,7 +170,7 @@ An [`asn_list`](#rule-list-rules-asn-list) block (within [`rule_list.rules`](#ru
 
 <a id="rule-list-rules-asn-matcher"></a>
 
-**Asn Matcher**
+#### Asn Matcher
 
 An [`asn_matcher`](#rule-list-rules-asn-matcher) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -178,7 +178,7 @@ An [`asn_matcher`](#rule-list-rules-asn-matcher) block (within [`rule_list.rules
 
 <a id="rule-list-rules-asn-matcher-asn-sets"></a>
 
-**Asn Sets**
+#### Asn Sets
 
 An [`asn_sets`](#rule-list-rules-asn-matcher-asn-sets) block (within [`rule_list.rules.asn_matcher`](#rule-list-rules-asn-matcher)) supports the following:
 
@@ -194,7 +194,7 @@ An [`asn_sets`](#rule-list-rules-asn-matcher-asn-sets) block (within [`rule_list
 
 <a id="rule-list-rules-geo-location-label-selector"></a>
 
-**Geo Location Label Selector**
+#### Geo Location Label Selector
 
 A [`geo_location_label_selector`](#rule-list-rules-geo-location-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -202,7 +202,7 @@ A [`geo_location_label_selector`](#rule-list-rules-geo-location-label-selector) 
 
 <a id="rule-list-rules-geo-location-set"></a>
 
-**Geo Location Set**
+#### Geo Location Set
 
 A [`geo_location_set`](#rule-list-rules-geo-location-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -214,7 +214,7 @@ A [`geo_location_set`](#rule-list-rules-geo-location-set) block (within [`rule_l
 
 <a id="rule-list-rules-ip-prefix-list"></a>
 
-**IP Prefix List**
+#### IP Prefix List
 
 An [`ip_prefix_list`](#rule-list-rules-ip-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -224,7 +224,7 @@ An [`ip_prefix_list`](#rule-list-rules-ip-prefix-list) block (within [`rule_list
 
 <a id="rule-list-rules-ip-prefix-set"></a>
 
-**IP Prefix Set**
+#### IP Prefix Set
 
 An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -234,7 +234,7 @@ An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.r
 
 <a id="rule-list-rules-ip-prefix-set-prefix-sets"></a>
 
-**Prefix Sets**
+#### Prefix Sets
 
 A [`prefix_sets`](#rule-list-rules-ip-prefix-set-prefix-sets) block (within [`rule_list.rules.ip_prefix_set`](#rule-list-rules-ip-prefix-set)) supports the following:
 
@@ -250,7 +250,7 @@ A [`prefix_sets`](#rule-list-rules-ip-prefix-set-prefix-sets) block (within [`ru
 
 <a id="rule-list-rules-pool"></a>
 
-**Pool**
+#### Pool
 
 A [`pool`](#rule-list-rules-pool) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -262,7 +262,7 @@ A [`pool`](#rule-list-rules-pool) block (within [`rule_list.rules`](#rule-list-r
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

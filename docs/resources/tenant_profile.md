@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ct-groups"></a>
 
-**Ct Groups**
+#### Ct Groups
 
 A [`ct_groups`](#ct-groups) block supports the following:
 
@@ -100,7 +100,7 @@ A [`ct_groups`](#ct-groups) block supports the following:
 
 <a id="ct-groups-namespace-roles"></a>
 
-**Namespace Roles**
+#### Namespace Roles
 
 A [`namespace_roles`](#ct-groups-namespace-roles) block (within [`ct_groups`](#ct-groups)) supports the following:
 
@@ -110,7 +110,7 @@ A [`namespace_roles`](#ct-groups-namespace-roles) block (within [`ct_groups`](#c
 
 <a id="favicon"></a>
 
-**Favicon**
+#### Favicon
 
 A [`favicon`](#favicon) block supports the following:
 
@@ -122,7 +122,7 @@ A [`favicon`](#favicon) block supports the following:
 
 <a id="logo"></a>
 
-**Logo**
+#### Logo
 
 A [`logo`](#logo) block supports the following:
 
@@ -134,7 +134,7 @@ A [`logo`](#logo) block supports the following:
 
 <a id="plan"></a>
 
-**Plan**
+#### Plan
 
 A [`plan`](#plan) block supports the following:
 
@@ -146,7 +146,7 @@ A [`plan`](#plan) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="mitigation-type"></a>
 
-**Mitigation Type**
+#### Mitigation Type
 
 A [`mitigation_type`](#mitigation-type) block supports the following:
 
@@ -86,7 +86,7 @@ A [`mitigation_type`](#mitigation-type) block supports the following:
 
 <a id="mitigation-type-rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigation-type)) supports the following:
 
@@ -96,7 +96,7 @@ A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigatio
 
 <a id="mitigation-type-rules-mitigation-action"></a>
 
-**Mitigation Action**
+#### Mitigation Action
 
 A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
@@ -108,7 +108,7 @@ A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within 
 
 <a id="mitigation-type-rules-threat-level"></a>
 
-**Threat Level**
+#### Threat Level
 
 A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
@@ -120,7 +120,7 @@ A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigati
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

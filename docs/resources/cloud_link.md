@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws"></a>
 
-**AWS**
+#### AWS
 
 An [`aws`](#aws) block supports the following:
 
@@ -98,7 +98,7 @@ An [`aws`](#aws) block supports the following:
 
 <a id="aws-aws-cred"></a>
 
-**AWS Cred**
+#### AWS Cred
 
 An [`aws_cred`](#aws-aws-cred) block (within [`aws`](#aws)) supports the following:
 
@@ -110,7 +110,7 @@ An [`aws_cred`](#aws-aws-cred) block (within [`aws`](#aws)) supports the followi
 
 <a id="aws-byoc"></a>
 
-**Byoc**
+#### Byoc
 
 A [`byoc`](#aws-byoc) block (within [`aws`](#aws)) supports the following:
 
@@ -118,7 +118,7 @@ A [`byoc`](#aws-byoc) block (within [`aws`](#aws)) supports the following:
 
 <a id="aws-byoc-connections"></a>
 
-**Connections**
+#### Connections
 
 A [`connections`](#aws-byoc-connections) block (within [`aws.byoc`](#aws-byoc)) supports the following:
 
@@ -146,7 +146,7 @@ A [`connections`](#aws-byoc-connections) block (within [`aws.byoc`](#aws-byoc)) 
 
 <a id="aws-byoc-connections-auth-key"></a>
 
-**Auth Key**
+#### Auth Key
 
 An [`auth_key`](#aws-byoc-connections-auth-key) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
 
@@ -156,7 +156,7 @@ An [`auth_key`](#aws-byoc-connections-auth-key) block (within [`aws.byoc.connect
 
 <a id="aws-byoc-connections-auth-key-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#aws-byoc-connections-auth-key-blindfold-secret-info) block (within [`aws.byoc.connections.auth_key`](#aws-byoc-connections-auth-key)) supports the following:
 
@@ -168,7 +168,7 @@ A [`blindfold_secret_info`](#aws-byoc-connections-auth-key-blindfold-secret-info
 
 <a id="aws-byoc-connections-auth-key-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#aws-byoc-connections-auth-key-clear-secret-info) block (within [`aws.byoc.connections.auth_key`](#aws-byoc-connections-auth-key)) supports the following:
 
@@ -178,7 +178,7 @@ A [`clear_secret_info`](#aws-byoc-connections-auth-key-clear-secret-info) block 
 
 <a id="aws-byoc-connections-ipv4"></a>
 
-**IPv4**
+#### IPv4
 
 An [`ipv4`](#aws-byoc-connections-ipv4) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
 
@@ -188,7 +188,7 @@ An [`ipv4`](#aws-byoc-connections-ipv4) block (within [`aws.byoc.connections`](#
 
 <a id="aws-byoc-connections-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#aws-byoc-connections-metadata) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
 
@@ -198,7 +198,7 @@ A [`metadata`](#aws-byoc-connections-metadata) block (within [`aws.byoc.connecti
 
 <a id="enabled"></a>
 
-**Enabled**
+#### Enabled
 
 An [`enabled`](#enabled) block supports the following:
 
@@ -206,7 +206,7 @@ An [`enabled`](#enabled) block supports the following:
 
 <a id="gcp"></a>
 
-**GCP**
+#### GCP
 
 A [`gcp`](#gcp) block supports the following:
 
@@ -216,7 +216,7 @@ A [`gcp`](#gcp) block supports the following:
 
 <a id="gcp-byoc"></a>
 
-**Byoc**
+#### Byoc
 
 A [`byoc`](#gcp-byoc) block (within [`gcp`](#gcp)) supports the following:
 
@@ -224,7 +224,7 @@ A [`byoc`](#gcp-byoc) block (within [`gcp`](#gcp)) supports the following:
 
 <a id="gcp-byoc-connections"></a>
 
-**Connections**
+#### Connections
 
 A [`connections`](#gcp-byoc-connections) block (within [`gcp.byoc`](#gcp-byoc)) supports the following:
 
@@ -240,7 +240,7 @@ A [`connections`](#gcp-byoc-connections) block (within [`gcp.byoc`](#gcp-byoc)) 
 
 <a id="gcp-byoc-connections-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#gcp-byoc-connections-metadata) block (within [`gcp.byoc.connections`](#gcp-byoc-connections)) supports the following:
 
@@ -250,7 +250,7 @@ A [`metadata`](#gcp-byoc-connections-metadata) block (within [`gcp.byoc.connecti
 
 <a id="gcp-gcp-cred"></a>
 
-**GCP Cred**
+#### GCP Cred
 
 A [`gcp_cred`](#gcp-gcp-cred) block (within [`gcp`](#gcp)) supports the following:
 
@@ -262,7 +262,7 @@ A [`gcp_cred`](#gcp-gcp-cred) block (within [`gcp`](#gcp)) supports the followin
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -94,7 +94,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="waf-exclusion-rules"></a>
 
-**WAF Exclusion Rules**
+#### WAF Exclusion Rules
 
 A [`waf_exclusion_rules`](#waf-exclusion-rules) block supports the following:
 
@@ -122,7 +122,7 @@ A [`waf_exclusion_rules`](#waf-exclusion-rules) block supports the following:
 
 <a id="waf-exclusion-rules-app-firewall-detection-control"></a>
 
-**App Firewall Detection Control**
+#### App Firewall Detection Control
 
 An [`app_firewall_detection_control`](#waf-exclusion-rules-app-firewall-detection-control) block (within [`waf_exclusion_rules`](#waf-exclusion-rules)) supports the following:
 
@@ -136,7 +136,7 @@ An [`app_firewall_detection_control`](#waf-exclusion-rules-app-firewall-detectio
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-attack-type-contexts"></a>
 
-**Exclude Attack Type Contexts**
+#### Exclude Attack Type Contexts
 
 An [`exclude_attack_type_contexts`](#waf-exclusion-rules-app-firewall-detection-control-exclude-attack-type-contexts) block (within [`waf_exclusion_rules.app_firewall_detection_control`](#waf-exclusion-rules-app-firewall-detection-control)) supports the following:
 
@@ -148,7 +148,7 @@ An [`exclude_attack_type_contexts`](#waf-exclusion-rules-app-firewall-detection-
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-bot-name-contexts"></a>
 
-**Exclude Bot Name Contexts**
+#### Exclude Bot Name Contexts
 
 An [`exclude_bot_name_contexts`](#waf-exclusion-rules-app-firewall-detection-control-exclude-bot-name-contexts) block (within [`waf_exclusion_rules.app_firewall_detection_control`](#waf-exclusion-rules-app-firewall-detection-control)) supports the following:
 
@@ -156,7 +156,7 @@ An [`exclude_bot_name_contexts`](#waf-exclusion-rules-app-firewall-detection-con
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts"></a>
 
-**Exclude Signature Contexts**
+#### Exclude Signature Contexts
 
 An [`exclude_signature_contexts`](#waf-exclusion-rules-app-firewall-detection-control-exclude-signature-contexts) block (within [`waf_exclusion_rules.app_firewall_detection_control`](#waf-exclusion-rules-app-firewall-detection-control)) supports the following:
 
@@ -168,7 +168,7 @@ An [`exclude_signature_contexts`](#waf-exclusion-rules-app-firewall-detection-co
 
 <a id="waf-exclusion-rules-app-firewall-detection-control-exclude-violation-contexts"></a>
 
-**Exclude Violation Contexts**
+#### Exclude Violation Contexts
 
 An [`exclude_violation_contexts`](#waf-exclusion-rules-app-firewall-detection-control-exclude-violation-contexts) block (within [`waf_exclusion_rules.app_firewall_detection_control`](#waf-exclusion-rules-app-firewall-detection-control)) supports the following:
 
@@ -180,7 +180,7 @@ An [`exclude_violation_contexts`](#waf-exclusion-rules-app-firewall-detection-co
 
 <a id="waf-exclusion-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#waf-exclusion-rules-metadata) block (within [`waf_exclusion_rules`](#waf-exclusion-rules)) supports the following:
 

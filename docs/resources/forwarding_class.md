@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dscp"></a>
 
-**Dscp**
+#### Dscp
 
 A [`dscp`](#dscp) block supports the following:
 
@@ -103,7 +103,7 @@ A [`dscp`](#dscp) block supports the following:
 
 <a id="policer"></a>
 
-**Policer**
+#### Policer
 
 A [`policer`](#policer) block supports the following:
 
@@ -115,7 +115,7 @@ A [`policer`](#policer) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

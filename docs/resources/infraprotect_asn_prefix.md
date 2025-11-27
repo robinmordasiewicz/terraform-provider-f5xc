@@ -74,7 +74,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="asn"></a>
 
-**Asn**
+#### Asn
 
 An [`asn`](#asn) block supports the following:
 
@@ -86,7 +86,7 @@ An [`asn`](#asn) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

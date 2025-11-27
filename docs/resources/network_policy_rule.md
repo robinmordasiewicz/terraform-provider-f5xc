@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="advanced-action"></a>
 
-**Advanced Action**
+#### Advanced Action
 
 An [`advanced_action`](#advanced-action) block supports the following:
 
@@ -101,7 +101,7 @@ An [`advanced_action`](#advanced-action) block supports the following:
 
 <a id="ip-prefix-set"></a>
 
-**IP Prefix Set**
+#### IP Prefix Set
 
 An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
@@ -109,7 +109,7 @@ An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
 <a id="ip-prefix-set-ref"></a>
 
-**Ref**
+#### Ref
 
 A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
 
@@ -125,7 +125,7 @@ A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) s
 
 <a id="label-matcher"></a>
 
-**Label Matcher**
+#### Label Matcher
 
 A [`label_matcher`](#label-matcher) block supports the following:
 
@@ -133,7 +133,7 @@ A [`label_matcher`](#label-matcher) block supports the following:
 
 <a id="prefix"></a>
 
-**Prefix**
+#### Prefix
 
 A [`prefix`](#prefix) block supports the following:
 
@@ -141,7 +141,7 @@ A [`prefix`](#prefix) block supports the following:
 
 <a id="prefix-selector"></a>
 
-**Prefix Selector**
+#### Prefix Selector
 
 A [`prefix_selector`](#prefix-selector) block supports the following:
 
@@ -149,7 +149,7 @@ A [`prefix_selector`](#prefix-selector) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="pod-security-admission-specs"></a>
 
-**Pod Security Admission Specs**
+#### Pod Security Admission Specs
 
 A [`pod_security_admission_specs`](#pod-security-admission-specs) block supports the following:
 
@@ -98,7 +98,7 @@ A [`pod_security_admission_specs`](#pod-security-admission-specs) block supports
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

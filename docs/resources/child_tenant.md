@@ -90,7 +90,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="child-tenant-manager"></a>
 
-**Child Tenant Manager**
+#### Child Tenant Manager
 
 A [`child_tenant_manager`](#child-tenant-manager) block supports the following:
 
@@ -102,7 +102,7 @@ A [`child_tenant_manager`](#child-tenant-manager) block supports the following:
 
 <a id="contact-detail"></a>
 
-**Contact Detail**
+#### Contact Detail
 
 A [`contact_detail`](#contact-detail) block supports the following:
 
@@ -128,7 +128,7 @@ A [`contact_detail`](#contact-detail) block supports the following:
 
 <a id="customer-info"></a>
 
-**Customer Info**
+#### Customer Info
 
 A [`customer_info`](#customer-info) block supports the following:
 
@@ -142,7 +142,7 @@ A [`customer_info`](#customer-info) block supports the following:
 
 <a id="tenant-profile"></a>
 
-**Tenant Profile**
+#### Tenant Profile
 
 A [`tenant_profile`](#tenant-profile) block supports the following:
 
@@ -154,7 +154,7 @@ A [`tenant_profile`](#tenant-profile) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

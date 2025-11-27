@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="enable-disable-compliance-checks"></a>
 
-**Enable Disable Compliance Checks**
+#### Enable Disable Compliance Checks
 
 An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block supports the following:
 
@@ -94,7 +94,7 @@ An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block
 
 <a id="enable-disable-compliance-checks-enable-compliance-checks"></a>
 
-**Enable Compliance Checks**
+#### Enable Compliance Checks
 
 An [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) block (within [`enable_disable_compliance_checks`](#enable-disable-compliance-checks)) supports the following:
 
@@ -106,7 +106,7 @@ An [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-complia
 
 <a id="enable-disable-signatures"></a>
 
-**Enable Disable Signatures**
+#### Enable Disable Signatures
 
 An [`enable_disable_signatures`](#enable-disable-signatures) block supports the following:
 
@@ -116,7 +116,7 @@ An [`enable_disable_signatures`](#enable-disable-signatures) block supports the 
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

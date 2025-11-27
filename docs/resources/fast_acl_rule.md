@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="action"></a>
 
-**Action**
+#### Action
 
 An [`action`](#action) block supports the following:
 
@@ -98,7 +98,7 @@ An [`action`](#action) block supports the following:
 
 <a id="action-policer-action"></a>
 
-**Policer Action**
+#### Policer Action
 
 A [`policer_action`](#action-policer-action) block (within [`action`](#action)) supports the following:
 
@@ -106,7 +106,7 @@ A [`policer_action`](#action-policer-action) block (within [`action`](#action)) 
 
 <a id="action-policer-action-ref"></a>
 
-**Ref**
+#### Ref
 
 A [`ref`](#action-policer-action-ref) block (within [`action.policer_action`](#action-policer-action)) supports the following:
 
@@ -122,7 +122,7 @@ A [`ref`](#action-policer-action-ref) block (within [`action.policer_action`](#a
 
 <a id="action-protocol-policer-action"></a>
 
-**Protocol Policer Action**
+#### Protocol Policer Action
 
 A [`protocol_policer_action`](#action-protocol-policer-action) block (within [`action`](#action)) supports the following:
 
@@ -130,7 +130,7 @@ A [`protocol_policer_action`](#action-protocol-policer-action) block (within [`a
 
 <a id="action-protocol-policer-action-ref"></a>
 
-**Ref**
+#### Ref
 
 A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol_policer_action`](#action-protocol-policer-action)) supports the following:
 
@@ -146,7 +146,7 @@ A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol_p
 
 <a id="ip-prefix-set"></a>
 
-**IP Prefix Set**
+#### IP Prefix Set
 
 An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
@@ -154,7 +154,7 @@ An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
 <a id="ip-prefix-set-ref"></a>
 
-**Ref**
+#### Ref
 
 A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
 
@@ -170,7 +170,7 @@ A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) s
 
 <a id="port"></a>
 
-**Port**
+#### Port
 
 A [`port`](#port) block supports the following:
 
@@ -182,7 +182,7 @@ A [`port`](#port) block supports the following:
 
 <a id="prefix"></a>
 
-**Prefix**
+#### Prefix
 
 A [`prefix`](#prefix) block supports the following:
 
@@ -190,7 +190,7 @@ A [`prefix`](#prefix) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

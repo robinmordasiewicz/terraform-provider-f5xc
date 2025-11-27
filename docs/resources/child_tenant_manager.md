@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="group-assignments"></a>
 
-**Group Assignments**
+#### Group Assignments
 
 A [`group_assignments`](#group-assignments) block supports the following:
 
@@ -92,7 +92,7 @@ A [`group_assignments`](#group-assignments) block supports the following:
 
 <a id="group-assignments-group"></a>
 
-**Group**
+#### Group
 
 A [`group`](#group-assignments-group) block (within [`group_assignments`](#group-assignments)) supports the following:
 
@@ -104,7 +104,7 @@ A [`group`](#group-assignments-group) block (within [`group_assignments`](#group
 
 <a id="tenant-owner-group"></a>
 
-**Tenant Owner Group**
+#### Tenant Owner Group
 
 A [`tenant_owner_group`](#tenant-owner-group) block supports the following:
 
@@ -116,7 +116,7 @@ A [`tenant_owner_group`](#tenant-owner-group) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

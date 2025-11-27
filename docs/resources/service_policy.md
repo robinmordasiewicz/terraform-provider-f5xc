@@ -93,7 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="allow-list"></a>
 
-**Allow List**
+#### Allow List
 
 An [`allow_list`](#allow-list) block supports the following:
 
@@ -119,7 +119,7 @@ An [`allow_list`](#allow-list) block supports the following:
 
 <a id="allow-list-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#allow-list-asn-list) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -127,7 +127,7 @@ An [`asn_list`](#allow-list-asn-list) block (within [`allow_list`](#allow-list))
 
 <a id="allow-list-asn-set"></a>
 
-**Asn Set**
+#### Asn Set
 
 An [`asn_set`](#allow-list-asn-set) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -139,7 +139,7 @@ An [`asn_set`](#allow-list-asn-set) block (within [`allow_list`](#allow-list)) s
 
 <a id="allow-list-ip-prefix-set"></a>
 
-**IP Prefix Set**
+#### IP Prefix Set
 
 An [`ip_prefix_set`](#allow-list-ip-prefix-set) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -151,7 +151,7 @@ An [`ip_prefix_set`](#allow-list-ip-prefix-set) block (within [`allow_list`](#al
 
 <a id="allow-list-prefix-list"></a>
 
-**Prefix List**
+#### Prefix List
 
 A [`prefix_list`](#allow-list-prefix-list) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -159,7 +159,7 @@ A [`prefix_list`](#allow-list-prefix-list) block (within [`allow_list`](#allow-l
 
 <a id="deny-list"></a>
 
-**Deny List**
+#### Deny List
 
 A [`deny_list`](#deny-list) block supports the following:
 
@@ -185,7 +185,7 @@ A [`deny_list`](#deny-list) block supports the following:
 
 <a id="deny-list-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#deny-list-asn-list) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -193,7 +193,7 @@ An [`asn_list`](#deny-list-asn-list) block (within [`deny_list`](#deny-list)) su
 
 <a id="deny-list-asn-set"></a>
 
-**Asn Set**
+#### Asn Set
 
 An [`asn_set`](#deny-list-asn-set) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -205,7 +205,7 @@ An [`asn_set`](#deny-list-asn-set) block (within [`deny_list`](#deny-list)) supp
 
 <a id="deny-list-ip-prefix-set"></a>
 
-**IP Prefix Set**
+#### IP Prefix Set
 
 An [`ip_prefix_set`](#deny-list-ip-prefix-set) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -217,7 +217,7 @@ An [`ip_prefix_set`](#deny-list-ip-prefix-set) block (within [`deny_list`](#deny
 
 <a id="deny-list-prefix-list"></a>
 
-**Prefix List**
+#### Prefix List
 
 A [`prefix_list`](#deny-list-prefix-list) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -225,7 +225,7 @@ A [`prefix_list`](#deny-list-prefix-list) block (within [`deny_list`](#deny-list
 
 <a id="rule-list"></a>
 
-**Rule List**
+#### Rule List
 
 A [`rule_list`](#rule-list) block supports the following:
 
@@ -233,7 +233,7 @@ A [`rule_list`](#rule-list) block supports the following:
 
 <a id="rule-list-rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
@@ -243,7 +243,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-metadata"></a>
 
-**Metadata**
+#### Metadata
 
 A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -253,7 +253,7 @@ A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rul
 
 <a id="rule-list-rules-spec"></a>
 
-**Spec**
+#### Spec
 
 A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -325,7 +325,7 @@ A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-r
 
 <a id="rule-list-rules-spec-api-group-matcher"></a>
 
-**API Group Matcher**
+#### API Group Matcher
 
 An [`api_group_matcher`](#rule-list-rules-spec-api-group-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -335,7 +335,7 @@ An [`api_group_matcher`](#rule-list-rules-spec-api-group-matcher) block (within 
 
 <a id="rule-list-rules-spec-arg-matchers"></a>
 
-**Arg Matchers**
+#### Arg Matchers
 
 An [`arg_matchers`](#rule-list-rules-spec-arg-matchers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -351,7 +351,7 @@ An [`arg_matchers`](#rule-list-rules-spec-arg-matchers) block (within [`rule_lis
 
 <a id="rule-list-rules-spec-arg-matchers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#rule-list-rules-spec-arg-matchers-item) block (within [`rule_list.rules.spec.arg_matchers`](#rule-list-rules-spec-arg-matchers)) supports the following:
 
@@ -363,7 +363,7 @@ An [`item`](#rule-list-rules-spec-arg-matchers-item) block (within [`rule_list.r
 
 <a id="rule-list-rules-spec-asn-list"></a>
 
-**Asn List**
+#### Asn List
 
 An [`asn_list`](#rule-list-rules-spec-asn-list) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -371,7 +371,7 @@ An [`asn_list`](#rule-list-rules-spec-asn-list) block (within [`rule_list.rules.
 
 <a id="rule-list-rules-spec-asn-matcher"></a>
 
-**Asn Matcher**
+#### Asn Matcher
 
 An [`asn_matcher`](#rule-list-rules-spec-asn-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -379,7 +379,7 @@ An [`asn_matcher`](#rule-list-rules-spec-asn-matcher) block (within [`rule_list.
 
 <a id="rule-list-rules-spec-asn-matcher-asn-sets"></a>
 
-**Asn Sets**
+#### Asn Sets
 
 An [`asn_sets`](#rule-list-rules-spec-asn-matcher-asn-sets) block (within [`rule_list.rules.spec.asn_matcher`](#rule-list-rules-spec-asn-matcher)) supports the following:
 
@@ -395,7 +395,7 @@ An [`asn_sets`](#rule-list-rules-spec-asn-matcher-asn-sets) block (within [`rule
 
 <a id="rule-list-rules-spec-body-matcher"></a>
 
-**Body Matcher**
+#### Body Matcher
 
 A [`body_matcher`](#rule-list-rules-spec-body-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -407,7 +407,7 @@ A [`body_matcher`](#rule-list-rules-spec-body-matcher) block (within [`rule_list
 
 <a id="rule-list-rules-spec-bot-action"></a>
 
-**Bot Action**
+#### Bot Action
 
 A [`bot_action`](#rule-list-rules-spec-bot-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -417,7 +417,7 @@ A [`bot_action`](#rule-list-rules-spec-bot-action) block (within [`rule_list.rul
 
 <a id="rule-list-rules-spec-client-name-matcher"></a>
 
-**Client Name Matcher**
+#### Client Name Matcher
 
 A [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -429,7 +429,7 @@ A [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) block (with
 
 <a id="rule-list-rules-spec-client-selector"></a>
 
-**Client Selector**
+#### Client Selector
 
 A [`client_selector`](#rule-list-rules-spec-client-selector) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -437,7 +437,7 @@ A [`client_selector`](#rule-list-rules-spec-client-selector) block (within [`rul
 
 <a id="rule-list-rules-spec-cookie-matchers"></a>
 
-**Cookie Matchers**
+#### Cookie Matchers
 
 A [`cookie_matchers`](#rule-list-rules-spec-cookie-matchers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -453,7 +453,7 @@ A [`cookie_matchers`](#rule-list-rules-spec-cookie-matchers) block (within [`rul
 
 <a id="rule-list-rules-spec-cookie-matchers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#rule-list-rules-spec-cookie-matchers-item) block (within [`rule_list.rules.spec.cookie_matchers`](#rule-list-rules-spec-cookie-matchers)) supports the following:
 
@@ -465,7 +465,7 @@ An [`item`](#rule-list-rules-spec-cookie-matchers-item) block (within [`rule_lis
 
 <a id="rule-list-rules-spec-domain-matcher"></a>
 
-**Domain Matcher**
+#### Domain Matcher
 
 A [`domain_matcher`](#rule-list-rules-spec-domain-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -477,7 +477,7 @@ A [`domain_matcher`](#rule-list-rules-spec-domain-matcher) block (within [`rule_
 
 <a id="rule-list-rules-spec-headers"></a>
 
-**Headers**
+#### Headers
 
 A [`headers`](#rule-list-rules-spec-headers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -493,7 +493,7 @@ A [`headers`](#rule-list-rules-spec-headers) block (within [`rule_list.rules.spe
 
 <a id="rule-list-rules-spec-headers-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#rule-list-rules-spec-headers-item) block (within [`rule_list.rules.spec.headers`](#rule-list-rules-spec-headers)) supports the following:
 
@@ -505,7 +505,7 @@ An [`item`](#rule-list-rules-spec-headers-item) block (within [`rule_list.rules.
 
 <a id="rule-list-rules-spec-http-method"></a>
 
-**HTTP Method**
+#### HTTP Method
 
 A [`http_method`](#rule-list-rules-spec-http-method) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -515,7 +515,7 @@ A [`http_method`](#rule-list-rules-spec-http-method) block (within [`rule_list.r
 
 <a id="rule-list-rules-spec-ip-matcher"></a>
 
-**IP Matcher**
+#### IP Matcher
 
 An [`ip_matcher`](#rule-list-rules-spec-ip-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -525,7 +525,7 @@ An [`ip_matcher`](#rule-list-rules-spec-ip-matcher) block (within [`rule_list.ru
 
 <a id="rule-list-rules-spec-ip-matcher-prefix-sets"></a>
 
-**Prefix Sets**
+#### Prefix Sets
 
 A [`prefix_sets`](#rule-list-rules-spec-ip-matcher-prefix-sets) block (within [`rule_list.rules.spec.ip_matcher`](#rule-list-rules-spec-ip-matcher)) supports the following:
 
@@ -541,7 +541,7 @@ A [`prefix_sets`](#rule-list-rules-spec-ip-matcher-prefix-sets) block (within [`
 
 <a id="rule-list-rules-spec-ip-prefix-list"></a>
 
-**IP Prefix List**
+#### IP Prefix List
 
 An [`ip_prefix_list`](#rule-list-rules-spec-ip-prefix-list) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -551,7 +551,7 @@ An [`ip_prefix_list`](#rule-list-rules-spec-ip-prefix-list) block (within [`rule
 
 <a id="rule-list-rules-spec-ip-threat-category-list"></a>
 
-**IP Threat Category List**
+#### IP Threat Category List
 
 An [`ip_threat_category_list`](#rule-list-rules-spec-ip-threat-category-list) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -559,7 +559,7 @@ An [`ip_threat_category_list`](#rule-list-rules-spec-ip-threat-category-list) bl
 
 <a id="rule-list-rules-spec-ja4-tls-fingerprint"></a>
 
-**Ja4 TLS Fingerprint**
+#### Ja4 TLS Fingerprint
 
 A [`ja4_tls_fingerprint`](#rule-list-rules-spec-ja4-tls-fingerprint) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -567,7 +567,7 @@ A [`ja4_tls_fingerprint`](#rule-list-rules-spec-ja4-tls-fingerprint) block (with
 
 <a id="rule-list-rules-spec-jwt-claims"></a>
 
-**JWT Claims**
+#### JWT Claims
 
 A [`jwt_claims`](#rule-list-rules-spec-jwt-claims) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -583,7 +583,7 @@ A [`jwt_claims`](#rule-list-rules-spec-jwt-claims) block (within [`rule_list.rul
 
 <a id="rule-list-rules-spec-jwt-claims-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#rule-list-rules-spec-jwt-claims-item) block (within [`rule_list.rules.spec.jwt_claims`](#rule-list-rules-spec-jwt-claims)) supports the following:
 
@@ -595,7 +595,7 @@ An [`item`](#rule-list-rules-spec-jwt-claims-item) block (within [`rule_list.rul
 
 <a id="rule-list-rules-spec-label-matcher"></a>
 
-**Label Matcher**
+#### Label Matcher
 
 A [`label_matcher`](#rule-list-rules-spec-label-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -603,7 +603,7 @@ A [`label_matcher`](#rule-list-rules-spec-label-matcher) block (within [`rule_li
 
 <a id="rule-list-rules-spec-mum-action"></a>
 
-**Mum Action**
+#### Mum Action
 
 A [`mum_action`](#rule-list-rules-spec-mum-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -613,7 +613,7 @@ A [`mum_action`](#rule-list-rules-spec-mum-action) block (within [`rule_list.rul
 
 <a id="rule-list-rules-spec-path"></a>
 
-**Path**
+#### Path
 
 A [`path`](#rule-list-rules-spec-path) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -631,7 +631,7 @@ A [`path`](#rule-list-rules-spec-path) block (within [`rule_list.rules.spec`](#r
 
 <a id="rule-list-rules-spec-port-matcher"></a>
 
-**Port Matcher**
+#### Port Matcher
 
 A [`port_matcher`](#rule-list-rules-spec-port-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -641,7 +641,7 @@ A [`port_matcher`](#rule-list-rules-spec-port-matcher) block (within [`rule_list
 
 <a id="rule-list-rules-spec-query-params"></a>
 
-**Query Params**
+#### Query Params
 
 A [`query_params`](#rule-list-rules-spec-query-params) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -657,7 +657,7 @@ A [`query_params`](#rule-list-rules-spec-query-params) block (within [`rule_list
 
 <a id="rule-list-rules-spec-query-params-item"></a>
 
-**Item**
+#### Item
 
 An [`item`](#rule-list-rules-spec-query-params-item) block (within [`rule_list.rules.spec.query_params`](#rule-list-rules-spec-query-params)) supports the following:
 
@@ -669,7 +669,7 @@ An [`item`](#rule-list-rules-spec-query-params-item) block (within [`rule_list.r
 
 <a id="rule-list-rules-spec-request-constraints"></a>
 
-**Request Constraints**
+#### Request Constraints
 
 A [`request_constraints`](#rule-list-rules-spec-request-constraints) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -727,7 +727,7 @@ A [`request_constraints`](#rule-list-rules-spec-request-constraints) block (with
 
 <a id="rule-list-rules-spec-segment-policy"></a>
 
-**Segment Policy**
+#### Segment Policy
 
 A [`segment_policy`](#rule-list-rules-spec-segment-policy) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -743,7 +743,7 @@ A [`segment_policy`](#rule-list-rules-spec-segment-policy) block (within [`rule_
 
 <a id="rule-list-rules-spec-segment-policy-dst-segments"></a>
 
-**Dst Segments**
+#### Dst Segments
 
 A [`dst_segments`](#rule-list-rules-spec-segment-policy-dst-segments) block (within [`rule_list.rules.spec.segment_policy`](#rule-list-rules-spec-segment-policy)) supports the following:
 
@@ -751,7 +751,7 @@ A [`dst_segments`](#rule-list-rules-spec-segment-policy-dst-segments) block (wit
 
 <a id="rule-list-rules-spec-segment-policy-dst-segments-segments"></a>
 
-**Segments**
+#### Segments
 
 A [`segments`](#rule-list-rules-spec-segment-policy-dst-segments-segments) block (within [`rule_list.rules.spec.segment_policy.dst_segments`](#rule-list-rules-spec-segment-policy-dst-segments)) supports the following:
 
@@ -763,7 +763,7 @@ A [`segments`](#rule-list-rules-spec-segment-policy-dst-segments-segments) block
 
 <a id="rule-list-rules-spec-segment-policy-src-segments"></a>
 
-**Src Segments**
+#### Src Segments
 
 A [`src_segments`](#rule-list-rules-spec-segment-policy-src-segments) block (within [`rule_list.rules.spec.segment_policy`](#rule-list-rules-spec-segment-policy)) supports the following:
 
@@ -771,7 +771,7 @@ A [`src_segments`](#rule-list-rules-spec-segment-policy-src-segments) block (wit
 
 <a id="rule-list-rules-spec-segment-policy-src-segments-segments"></a>
 
-**Segments**
+#### Segments
 
 A [`segments`](#rule-list-rules-spec-segment-policy-src-segments-segments) block (within [`rule_list.rules.spec.segment_policy.src_segments`](#rule-list-rules-spec-segment-policy-src-segments)) supports the following:
 
@@ -783,7 +783,7 @@ A [`segments`](#rule-list-rules-spec-segment-policy-src-segments-segments) block
 
 <a id="rule-list-rules-spec-tls-fingerprint-matcher"></a>
 
-**TLS Fingerprint Matcher**
+#### TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#rule-list-rules-spec-tls-fingerprint-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -795,7 +795,7 @@ A [`tls_fingerprint_matcher`](#rule-list-rules-spec-tls-fingerprint-matcher) blo
 
 <a id="rule-list-rules-spec-user-identity-matcher"></a>
 
-**User Identity Matcher**
+#### User Identity Matcher
 
 An [`user_identity_matcher`](#rule-list-rules-spec-user-identity-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -805,7 +805,7 @@ An [`user_identity_matcher`](#rule-list-rules-spec-user-identity-matcher) block 
 
 <a id="rule-list-rules-spec-waf-action"></a>
 
-**WAF Action**
+#### WAF Action
 
 A [`waf_action`](#rule-list-rules-spec-waf-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -817,7 +817,7 @@ A [`waf_action`](#rule-list-rules-spec-waf-action) block (within [`rule_list.rul
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control"></a>
 
-**App Firewall Detection Control**
+#### App Firewall Detection Control
 
 An [`app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control) block (within [`rule_list.rules.spec.waf_action`](#rule-list-rules-spec-waf-action)) supports the following:
 
@@ -831,7 +831,7 @@ An [`app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firew
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-attack-type-contexts"></a>
 
-**Exclude Attack Type Contexts**
+#### Exclude Attack Type Contexts
 
 An [`exclude_attack_type_contexts`](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-attack-type-contexts) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control)) supports the following:
 
@@ -843,7 +843,7 @@ An [`exclude_attack_type_contexts`](#rule-list-rules-spec-waf-action-app-firewal
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-bot-name-contexts"></a>
 
-**Exclude Bot Name Contexts**
+#### Exclude Bot Name Contexts
 
 An [`exclude_bot_name_contexts`](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-bot-name-contexts) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control)) supports the following:
 
@@ -851,7 +851,7 @@ An [`exclude_bot_name_contexts`](#rule-list-rules-spec-waf-action-app-firewall-d
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-signature-contexts"></a>
 
-**Exclude Signature Contexts**
+#### Exclude Signature Contexts
 
 An [`exclude_signature_contexts`](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-signature-contexts) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control)) supports the following:
 
@@ -863,7 +863,7 @@ An [`exclude_signature_contexts`](#rule-list-rules-spec-waf-action-app-firewall-
 
 <a id="rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-violation-contexts"></a>
 
-**Exclude Violation Contexts**
+#### Exclude Violation Contexts
 
 An [`exclude_violation_contexts`](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-violation-contexts) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control)) supports the following:
 
@@ -875,7 +875,7 @@ An [`exclude_violation_contexts`](#rule-list-rules-spec-waf-action-app-firewall-
 
 <a id="server-name-matcher"></a>
 
-**Server Name Matcher**
+#### Server Name Matcher
 
 A [`server_name_matcher`](#server-name-matcher) block supports the following:
 
@@ -885,7 +885,7 @@ A [`server_name_matcher`](#server-name-matcher) block supports the following:
 
 <a id="server-selector"></a>
 
-**Server Selector**
+#### Server Selector
 
 A [`server_selector`](#server-selector) block supports the following:
 
@@ -893,7 +893,7 @@ A [`server_selector`](#server-selector) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

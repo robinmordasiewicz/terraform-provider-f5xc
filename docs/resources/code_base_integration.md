@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="code-base-integration"></a>
 
-**Code Base Integration**
+#### Code Base Integration
 
 A [`code_base_integration`](#code-base-integration) block supports the following:
 
@@ -100,7 +100,7 @@ A [`code_base_integration`](#code-base-integration) block supports the following
 
 <a id="code-base-integration-azure-repos"></a>
 
-**Azure Repos**
+#### Azure Repos
 
 An [`azure_repos`](#code-base-integration-azure-repos) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -108,7 +108,7 @@ An [`azure_repos`](#code-base-integration-azure-repos) block (within [`code_base
 
 <a id="code-base-integration-azure-repos-access-token"></a>
 
-**Access Token**
+#### Access Token
 
 An [`access_token`](#code-base-integration-azure-repos-access-token) block (within [`code_base_integration.azure_repos`](#code-base-integration-azure-repos)) supports the following:
 
@@ -118,7 +118,7 @@ An [`access_token`](#code-base-integration-azure-repos-access-token) block (with
 
 <a id="code-base-integration-azure-repos-access-token-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-azure-repos-access-token-blindfold-secret-info) block (within [`code_base_integration.azure_repos.access_token`](#code-base-integration-azure-repos-access-token)) supports the following:
 
@@ -130,7 +130,7 @@ A [`blindfold_secret_info`](#code-base-integration-azure-repos-access-token-blin
 
 <a id="code-base-integration-azure-repos-access-token-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-azure-repos-access-token-clear-secret-info) block (within [`code_base_integration.azure_repos.access_token`](#code-base-integration-azure-repos-access-token)) supports the following:
 
@@ -140,7 +140,7 @@ A [`clear_secret_info`](#code-base-integration-azure-repos-access-token-clear-se
 
 <a id="code-base-integration-bitbucket"></a>
 
-**Bitbucket**
+#### Bitbucket
 
 A [`bitbucket`](#code-base-integration-bitbucket) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -150,7 +150,7 @@ A [`bitbucket`](#code-base-integration-bitbucket) block (within [`code_base_inte
 
 <a id="code-base-integration-bitbucket-passwd"></a>
 
-**Passwd**
+#### Passwd
 
 A [`passwd`](#code-base-integration-bitbucket-passwd) block (within [`code_base_integration.bitbucket`](#code-base-integration-bitbucket)) supports the following:
 
@@ -160,7 +160,7 @@ A [`passwd`](#code-base-integration-bitbucket-passwd) block (within [`code_base_
 
 <a id="code-base-integration-bitbucket-passwd-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-bitbucket-passwd-blindfold-secret-info) block (within [`code_base_integration.bitbucket.passwd`](#code-base-integration-bitbucket-passwd)) supports the following:
 
@@ -172,7 +172,7 @@ A [`blindfold_secret_info`](#code-base-integration-bitbucket-passwd-blindfold-se
 
 <a id="code-base-integration-bitbucket-passwd-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-bitbucket-passwd-clear-secret-info) block (within [`code_base_integration.bitbucket.passwd`](#code-base-integration-bitbucket-passwd)) supports the following:
 
@@ -182,7 +182,7 @@ A [`clear_secret_info`](#code-base-integration-bitbucket-passwd-clear-secret-inf
 
 <a id="code-base-integration-bitbucket-server"></a>
 
-**Bitbucket Server**
+#### Bitbucket Server
 
 A [`bitbucket_server`](#code-base-integration-bitbucket-server) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -196,7 +196,7 @@ A [`bitbucket_server`](#code-base-integration-bitbucket-server) block (within [`
 
 <a id="code-base-integration-bitbucket-server-passwd"></a>
 
-**Passwd**
+#### Passwd
 
 A [`passwd`](#code-base-integration-bitbucket-server-passwd) block (within [`code_base_integration.bitbucket_server`](#code-base-integration-bitbucket-server)) supports the following:
 
@@ -206,7 +206,7 @@ A [`passwd`](#code-base-integration-bitbucket-server-passwd) block (within [`cod
 
 <a id="code-base-integration-bitbucket-server-passwd-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-bitbucket-server-passwd-blindfold-secret-info) block (within [`code_base_integration.bitbucket_server.passwd`](#code-base-integration-bitbucket-server-passwd)) supports the following:
 
@@ -218,7 +218,7 @@ A [`blindfold_secret_info`](#code-base-integration-bitbucket-server-passwd-blind
 
 <a id="code-base-integration-bitbucket-server-passwd-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-bitbucket-server-passwd-clear-secret-info) block (within [`code_base_integration.bitbucket_server.passwd`](#code-base-integration-bitbucket-server-passwd)) supports the following:
 
@@ -228,7 +228,7 @@ A [`clear_secret_info`](#code-base-integration-bitbucket-server-passwd-clear-sec
 
 <a id="code-base-integration-github"></a>
 
-**Github**
+#### Github
 
 A [`github`](#code-base-integration-github) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -240,7 +240,7 @@ A [`github`](#code-base-integration-github) block (within [`code_base_integratio
 
 <a id="code-base-integration-github-access-token"></a>
 
-**Access Token**
+#### Access Token
 
 An [`access_token`](#code-base-integration-github-access-token) block (within [`code_base_integration.github`](#code-base-integration-github)) supports the following:
 
@@ -250,7 +250,7 @@ An [`access_token`](#code-base-integration-github-access-token) block (within [`
 
 <a id="code-base-integration-github-access-token-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-github-access-token-blindfold-secret-info) block (within [`code_base_integration.github.access_token`](#code-base-integration-github-access-token)) supports the following:
 
@@ -262,7 +262,7 @@ A [`blindfold_secret_info`](#code-base-integration-github-access-token-blindfold
 
 <a id="code-base-integration-github-access-token-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-github-access-token-clear-secret-info) block (within [`code_base_integration.github.access_token`](#code-base-integration-github-access-token)) supports the following:
 
@@ -272,7 +272,7 @@ A [`clear_secret_info`](#code-base-integration-github-access-token-clear-secret-
 
 <a id="code-base-integration-github-enterprise"></a>
 
-**Github Enterprise**
+#### Github Enterprise
 
 A [`github_enterprise`](#code-base-integration-github-enterprise) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -284,7 +284,7 @@ A [`github_enterprise`](#code-base-integration-github-enterprise) block (within 
 
 <a id="code-base-integration-github-enterprise-access-token"></a>
 
-**Access Token**
+#### Access Token
 
 An [`access_token`](#code-base-integration-github-enterprise-access-token) block (within [`code_base_integration.github_enterprise`](#code-base-integration-github-enterprise)) supports the following:
 
@@ -294,7 +294,7 @@ An [`access_token`](#code-base-integration-github-enterprise-access-token) block
 
 <a id="code-base-integration-github-enterprise-access-token-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-github-enterprise-access-token-blindfold-secret-info) block (within [`code_base_integration.github_enterprise.access_token`](#code-base-integration-github-enterprise-access-token)) supports the following:
 
@@ -306,7 +306,7 @@ A [`blindfold_secret_info`](#code-base-integration-github-enterprise-access-toke
 
 <a id="code-base-integration-github-enterprise-access-token-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-github-enterprise-access-token-clear-secret-info) block (within [`code_base_integration.github_enterprise.access_token`](#code-base-integration-github-enterprise-access-token)) supports the following:
 
@@ -316,7 +316,7 @@ A [`clear_secret_info`](#code-base-integration-github-enterprise-access-token-cl
 
 <a id="code-base-integration-gitlab"></a>
 
-**Gitlab**
+#### Gitlab
 
 A [`gitlab`](#code-base-integration-gitlab) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -324,7 +324,7 @@ A [`gitlab`](#code-base-integration-gitlab) block (within [`code_base_integratio
 
 <a id="code-base-integration-gitlab-access-token"></a>
 
-**Access Token**
+#### Access Token
 
 An [`access_token`](#code-base-integration-gitlab-access-token) block (within [`code_base_integration.gitlab`](#code-base-integration-gitlab)) supports the following:
 
@@ -334,7 +334,7 @@ An [`access_token`](#code-base-integration-gitlab-access-token) block (within [`
 
 <a id="code-base-integration-gitlab-access-token-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-gitlab-access-token-blindfold-secret-info) block (within [`code_base_integration.gitlab.access_token`](#code-base-integration-gitlab-access-token)) supports the following:
 
@@ -346,7 +346,7 @@ A [`blindfold_secret_info`](#code-base-integration-gitlab-access-token-blindfold
 
 <a id="code-base-integration-gitlab-access-token-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-gitlab-access-token-clear-secret-info) block (within [`code_base_integration.gitlab.access_token`](#code-base-integration-gitlab-access-token)) supports the following:
 
@@ -356,7 +356,7 @@ A [`clear_secret_info`](#code-base-integration-gitlab-access-token-clear-secret-
 
 <a id="code-base-integration-gitlab-enterprise"></a>
 
-**Gitlab Enterprise**
+#### Gitlab Enterprise
 
 A [`gitlab_enterprise`](#code-base-integration-gitlab-enterprise) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -366,7 +366,7 @@ A [`gitlab_enterprise`](#code-base-integration-gitlab-enterprise) block (within 
 
 <a id="code-base-integration-gitlab-enterprise-access-token"></a>
 
-**Access Token**
+#### Access Token
 
 An [`access_token`](#code-base-integration-gitlab-enterprise-access-token) block (within [`code_base_integration.gitlab_enterprise`](#code-base-integration-gitlab-enterprise)) supports the following:
 
@@ -376,7 +376,7 @@ An [`access_token`](#code-base-integration-gitlab-enterprise-access-token) block
 
 <a id="code-base-integration-gitlab-enterprise-access-token-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-gitlab-enterprise-access-token-blindfold-secret-info) block (within [`code_base_integration.gitlab_enterprise.access_token`](#code-base-integration-gitlab-enterprise-access-token)) supports the following:
 
@@ -388,7 +388,7 @@ A [`blindfold_secret_info`](#code-base-integration-gitlab-enterprise-access-toke
 
 <a id="code-base-integration-gitlab-enterprise-access-token-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-gitlab-enterprise-access-token-clear-secret-info) block (within [`code_base_integration.gitlab_enterprise.access_token`](#code-base-integration-gitlab-enterprise-access-token)) supports the following:
 
@@ -398,7 +398,7 @@ A [`clear_secret_info`](#code-base-integration-gitlab-enterprise-access-token-cl
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

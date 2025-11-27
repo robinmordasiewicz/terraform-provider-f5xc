@@ -81,7 +81,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="syslog"></a>
 
-**Syslog**
+#### Syslog
 
 A [`syslog`](#syslog) block supports the following:
 
@@ -95,7 +95,7 @@ A [`syslog`](#syslog) block supports the following:
 
 <a id="syslog-tcp-server"></a>
 
-**TCP Server**
+#### TCP Server
 
 A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports the following:
 
@@ -105,7 +105,7 @@ A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports
 
 <a id="syslog-tls-server"></a>
 
-**TLS Server**
+#### TLS Server
 
 A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports the following:
 
@@ -127,7 +127,7 @@ A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports
 
 <a id="syslog-tls-server-mtls-enable"></a>
 
-**mTLS Enable**
+#### mTLS Enable
 
 A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_server`](#syslog-tls-server)) supports the following:
 
@@ -137,7 +137,7 @@ A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_ser
 
 <a id="syslog-tls-server-mtls-enable-key-url"></a>
 
-**Key URL**
+#### Key URL
 
 A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls_server.mtls_enable`](#syslog-tls-server-mtls-enable)) supports the following:
 
@@ -147,7 +147,7 @@ A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls
 
 <a id="syslog-tls-server-mtls-enable-key-url-blindfold-secret-info"></a>
 
-**Blindfold Secret Info**
+#### Blindfold Secret Info
 
 A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
@@ -159,7 +159,7 @@ A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-sec
 
 <a id="syslog-tls-server-mtls-enable-key-url-clear-secret-info"></a>
 
-**Clear Secret Info**
+#### Clear Secret Info
 
 A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
@@ -169,7 +169,7 @@ A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info
 
 <a id="syslog-udp-server"></a>
 
-**UDP Server**
+#### UDP Server
 
 An [`udp_server`](#syslog-udp-server) block (within [`syslog`](#syslog)) supports the following:
 
@@ -179,7 +179,7 @@ An [`udp_server`](#syslog-udp-server) block (within [`syslog`](#syslog)) support
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

@@ -88,7 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="ike-keylifetime-hours"></a>
 
-**Ike Keylifetime Hours**
+#### Ike Keylifetime Hours
 
 An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the following:
 
@@ -96,7 +96,7 @@ An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the followin
 
 <a id="ike-keylifetime-minutes"></a>
 
-**Ike Keylifetime Minutes**
+#### Ike Keylifetime Minutes
 
 An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
 
@@ -104,7 +104,7 @@ An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the foll
 
 <a id="reauth-timeout-days"></a>
 
-**Reauth Timeout Days**
+#### Reauth Timeout Days
 
 A [`reauth_timeout_days`](#reauth-timeout-days) block supports the following:
 
@@ -112,7 +112,7 @@ A [`reauth_timeout_days`](#reauth-timeout-days) block supports the following:
 
 <a id="reauth-timeout-hours"></a>
 
-**Reauth Timeout Hours**
+#### Reauth Timeout Hours
 
 A [`reauth_timeout_hours`](#reauth-timeout-hours) block supports the following:
 
@@ -120,7 +120,7 @@ A [`reauth_timeout_hours`](#reauth-timeout-hours) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

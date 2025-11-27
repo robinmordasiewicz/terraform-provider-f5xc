@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="cloud-hosted"></a>
 
-**Cloud Hosted**
+#### Cloud Hosted
 
 A [`cloud_hosted`](#cloud-hosted) block supports the following:
 
@@ -100,7 +100,7 @@ A [`cloud_hosted`](#cloud-hosted) block supports the following:
 
 <a id="cloud-hosted-egress"></a>
 
-**Egress**
+#### Egress
 
 An [`egress`](#cloud-hosted-egress) block (within [`cloud_hosted`](#cloud-hosted)) supports the following:
 
@@ -110,7 +110,7 @@ An [`egress`](#cloud-hosted-egress) block (within [`cloud_hosted`](#cloud-hosted
 
 <a id="cloud-hosted-ingress"></a>
 
-**Ingress**
+#### Ingress
 
 An [`ingress`](#cloud-hosted-ingress) block (within [`cloud_hosted`](#cloud-hosted)) supports the following:
 
@@ -122,7 +122,7 @@ An [`ingress`](#cloud-hosted-ingress) block (within [`cloud_hosted`](#cloud-host
 
 <a id="data-center-hosted"></a>
 
-**Data Center Hosted**
+#### Data Center Hosted
 
 A [`data_center_hosted`](#data-center-hosted) block supports the following:
 
@@ -136,7 +136,7 @@ A [`data_center_hosted`](#data-center-hosted) block supports the following:
 
 <a id="data-center-hosted-egress"></a>
 
-**Egress**
+#### Egress
 
 An [`egress`](#data-center-hosted-egress) block (within [`data_center_hosted`](#data-center-hosted)) supports the following:
 
@@ -146,7 +146,7 @@ An [`egress`](#data-center-hosted-egress) block (within [`data_center_hosted`](#
 
 <a id="data-center-hosted-ingress"></a>
 
-**Ingress**
+#### Ingress
 
 An [`ingress`](#data-center-hosted-ingress) block (within [`data_center_hosted`](#data-center-hosted)) supports the following:
 
@@ -158,7 +158,7 @@ An [`ingress`](#data-center-hosted-ingress) block (within [`data_center_hosted`]
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

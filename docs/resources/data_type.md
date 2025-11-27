@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="rules"></a>
 
-**Rules**
+#### Rules
 
 A [`rules`](#rules) block supports the following:
 
@@ -98,7 +98,7 @@ A [`rules`](#rules) block supports the following:
 
 <a id="rules-key-pattern"></a>
 
-**Key Pattern**
+#### Key Pattern
 
 A [`key_pattern`](#rules-key-pattern) block (within [`rules`](#rules)) supports the following:
 
@@ -110,7 +110,7 @@ A [`key_pattern`](#rules-key-pattern) block (within [`rules`](#rules)) supports 
 
 <a id="rules-key-pattern-exact-values"></a>
 
-**Exact Values**
+#### Exact Values
 
 An [`exact_values`](#rules-key-pattern-exact-values) block (within [`rules.key_pattern`](#rules-key-pattern)) supports the following:
 
@@ -118,7 +118,7 @@ An [`exact_values`](#rules-key-pattern-exact-values) block (within [`rules.key_p
 
 <a id="rules-key-value-pattern"></a>
 
-**Key Value Pattern**
+#### Key Value Pattern
 
 A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules)) supports the following:
 
@@ -128,7 +128,7 @@ A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules
 
 <a id="rules-key-value-pattern-key-pattern"></a>
 
-**Key Pattern**
+#### Key Pattern
 
 A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
@@ -140,7 +140,7 @@ A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.ke
 
 <a id="rules-key-value-pattern-key-pattern-exact-values"></a>
 
-**Exact Values**
+#### Exact Values
 
 An [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) block (within [`rules.key_value_pattern.key_pattern`](#rules-key-value-pattern-key-pattern)) supports the following:
 
@@ -148,7 +148,7 @@ An [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) block (wi
 
 <a id="rules-key-value-pattern-value-pattern"></a>
 
-**Value Pattern**
+#### Value Pattern
 
 A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
@@ -160,7 +160,7 @@ A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rule
 
 <a id="rules-key-value-pattern-value-pattern-exact-values"></a>
 
-**Exact Values**
+#### Exact Values
 
 An [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) block (within [`rules.key_value_pattern.value_pattern`](#rules-key-value-pattern-value-pattern)) supports the following:
 
@@ -168,7 +168,7 @@ An [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) block (
 
 <a id="rules-value-pattern"></a>
 
-**Value Pattern**
+#### Value Pattern
 
 A [`value_pattern`](#rules-value-pattern) block (within [`rules`](#rules)) supports the following:
 
@@ -180,7 +180,7 @@ A [`value_pattern`](#rules-value-pattern) block (within [`rules`](#rules)) suppo
 
 <a id="rules-value-pattern-exact-values"></a>
 
-**Exact Values**
+#### Exact Values
 
 An [`exact_values`](#rules-value-pattern-exact-values) block (within [`rules.value_pattern`](#rules-value-pattern)) supports the following:
 
@@ -188,7 +188,7 @@ An [`exact_values`](#rules-value-pattern-exact-values) block (within [`rules.val
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

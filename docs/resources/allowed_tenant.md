@@ -74,7 +74,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="allowed-groups"></a>
 
-**Allowed Groups**
+#### Allowed Groups
 
 An [`allowed_groups`](#allowed-groups) block supports the following:
 
@@ -86,7 +86,7 @@ An [`allowed_groups`](#allowed-groups) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

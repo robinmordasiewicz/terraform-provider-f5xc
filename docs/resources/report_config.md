@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="report-recipients"></a>
 
-**Report Recipients**
+#### Report Recipients
 
 A [`report_recipients`](#report-recipients) block supports the following:
 
@@ -90,7 +90,7 @@ A [`report_recipients`](#report-recipients) block supports the following:
 
 <a id="report-recipients-user-groups"></a>
 
-**User Groups**
+#### User Groups
 
 An [`user_groups`](#report-recipients-user-groups) block (within [`report_recipients`](#report-recipients)) supports the following:
 
@@ -102,7 +102,7 @@ An [`user_groups`](#report-recipients-user-groups) block (within [`report_recipi
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -116,7 +116,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="waap"></a>
 
-**Waap**
+#### Waap
 
 A [`waap`](#waap) block supports the following:
 
@@ -132,7 +132,7 @@ A [`waap`](#waap) block supports the following:
 
 <a id="waap-daily"></a>
 
-**Daily**
+#### Daily
 
 A [`daily`](#waap-daily) block (within [`waap`](#waap)) supports the following:
 
@@ -140,7 +140,7 @@ A [`daily`](#waap-daily) block (within [`waap`](#waap)) supports the following:
 
 <a id="waap-monthly"></a>
 
-**Monthly**
+#### Monthly
 
 A [`monthly`](#waap-monthly) block (within [`waap`](#waap)) supports the following:
 
@@ -150,7 +150,7 @@ A [`monthly`](#waap-monthly) block (within [`waap`](#waap)) supports the followi
 
 <a id="waap-namespaces"></a>
 
-**Namespaces**
+#### Namespaces
 
 A [`namespaces`](#waap-namespaces) block (within [`waap`](#waap)) supports the following:
 
@@ -158,7 +158,7 @@ A [`namespaces`](#waap-namespaces) block (within [`waap`](#waap)) supports the f
 
 <a id="waap-weekly"></a>
 
-**Weekly**
+#### Weekly
 
 A [`weekly`](#waap-weekly) block (within [`waap`](#waap)) supports the following:
 

@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="aws-tgw-site"></a>
 
-**AWS Tgw Site**
+#### AWS Tgw Site
 
 An [`aws_tgw_site`](#aws-tgw-site) block supports the following:
 
@@ -96,7 +96,7 @@ An [`aws_tgw_site`](#aws-tgw-site) block supports the following:
 
 <a id="aws-tgw-site-cred"></a>
 
-**Cred**
+#### Cred
 
 A [`cred`](#aws-tgw-site-cred) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
@@ -108,7 +108,7 @@ A [`cred`](#aws-tgw-site-cred) block (within [`aws_tgw_site`](#aws-tgw-site)) su
 
 <a id="aws-tgw-site-site"></a>
 
-**Site**
+#### Site
 
 A [`site`](#aws-tgw-site-site) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
@@ -120,7 +120,7 @@ A [`site`](#aws-tgw-site-site) block (within [`aws_tgw_site`](#aws-tgw-site)) su
 
 <a id="aws-tgw-site-vpc-attachments"></a>
 
-**Vpc Attachments**
+#### Vpc Attachments
 
 A [`vpc_attachments`](#aws-tgw-site-vpc-attachments) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
@@ -128,7 +128,7 @@ A [`vpc_attachments`](#aws-tgw-site-vpc-attachments) block (within [`aws_tgw_sit
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list"></a>
 
-**Vpc List**
+#### Vpc List
 
 A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_site.vpc_attachments`](#aws-tgw-site-vpc-attachments)) supports the following:
 
@@ -144,7 +144,7 @@ A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_s
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing"></a>
 
-**Custom Routing**
+#### Custom Routing
 
 A [`custom_routing`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
 
@@ -152,7 +152,7 @@ A [`custom_routing`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing) bloc
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables"></a>
 
-**Route Tables**
+#### Route Tables
 
 A [`route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-tables) block (within [`aws_tgw_site.vpc_attachments.vpc_list.custom_routing`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing)) supports the following:
 
@@ -162,7 +162,7 @@ A [`route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-custom-routing-route-t
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-default-route"></a>
 
-**Default Route**
+#### Default Route
 
 A [`default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
 
@@ -172,7 +172,7 @@ A [`default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route) block 
 
 <a id="aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables"></a>
 
-**Selective Route Tables**
+#### Selective Route Tables
 
 A [`selective_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-route-selective-route-tables) block (within [`aws_tgw_site.vpc_attachments.vpc_list.default_route`](#aws-tgw-site-vpc-attachments-vpc-list-default-route)) supports the following:
 
@@ -180,7 +180,7 @@ A [`selective_route_tables`](#aws-tgw-site-vpc-attachments-vpc-list-default-rout
 
 <a id="azure-vnet-site"></a>
 
-**Azure Vnet Site**
+#### Azure Vnet Site
 
 An [`azure_vnet_site`](#azure-vnet-site) block supports the following:
 
@@ -190,7 +190,7 @@ An [`azure_vnet_site`](#azure-vnet-site) block supports the following:
 
 <a id="azure-vnet-site-site"></a>
 
-**Site**
+#### Site
 
 A [`site`](#azure-vnet-site-site) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
 
@@ -202,7 +202,7 @@ A [`site`](#azure-vnet-site-site) block (within [`azure_vnet_site`](#azure-vnet-
 
 <a id="azure-vnet-site-vnet-attachments"></a>
 
-**Vnet Attachments**
+#### Vnet Attachments
 
 A [`vnet_attachments`](#azure-vnet-site-vnet-attachments) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
 
@@ -210,7 +210,7 @@ A [`vnet_attachments`](#azure-vnet-site-vnet-attachments) block (within [`azure_
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list"></a>
 
-**Vnet List**
+#### Vnet List
 
 A [`vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list) block (within [`azure_vnet_site.vnet_attachments`](#azure-vnet-site-vnet-attachments)) supports the following:
 
@@ -228,7 +228,7 @@ A [`vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list) block (within [`azu
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing"></a>
 
-**Custom Routing**
+#### Custom Routing
 
 A [`custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list)) supports the following:
 
@@ -236,7 +236,7 @@ A [`custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing)
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables"></a>
 
-**Route Tables**
+#### Route Tables
 
 A [`route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) block (within [`azure_vnet_site.vnet_attachments.vnet_list.custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing)) supports the following:
 
@@ -246,7 +246,7 @@ A [`route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-ro
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-default-route"></a>
 
-**Default Route**
+#### Default Route
 
 A [`default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list)) supports the following:
 
@@ -256,7 +256,7 @@ A [`default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route) b
 
 <a id="azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables"></a>
 
-**Selective Route Tables**
+#### Selective Route Tables
 
 A [`selective_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) block (within [`azure_vnet_site.vnet_attachments.vnet_list.default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route)) supports the following:
 
@@ -264,7 +264,7 @@ A [`selective_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default
 
 <a id="segment"></a>
 
-**Segment**
+#### Segment
 
 A [`segment`](#segment) block supports the following:
 
@@ -276,7 +276,7 @@ A [`segment`](#segment) block supports the following:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

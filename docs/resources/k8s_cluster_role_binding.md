@@ -82,7 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="k8s-cluster-role"></a>
 
-**K8s Cluster Role**
+#### K8s Cluster Role
 
 A [`k8s_cluster_role`](#k8s-cluster-role) block supports the following:
 
@@ -94,7 +94,7 @@ A [`k8s_cluster_role`](#k8s-cluster-role) block supports the following:
 
 <a id="subjects"></a>
 
-**Subjects**
+#### Subjects
 
 A [`subjects`](#subjects) block supports the following:
 
@@ -106,7 +106,7 @@ A [`subjects`](#subjects) block supports the following:
 
 <a id="subjects-service-account"></a>
 
-**Service Account**
+#### Service Account
 
 A [`service_account`](#subjects-service-account) block (within [`subjects`](#subjects)) supports the following:
 
@@ -116,7 +116,7 @@ A [`service_account`](#subjects-service-account) block (within [`subjects`](#sub
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

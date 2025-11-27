@@ -80,7 +80,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -94,7 +94,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="type"></a>
 
-**Type**
+#### Type
 
 A [`type`](#type) block supports the following:
 

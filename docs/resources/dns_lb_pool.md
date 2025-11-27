@@ -91,7 +91,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="a-pool"></a>
 
-**A Pool**
+#### A Pool
 
 An [`a_pool`](#a-pool) block supports the following:
 
@@ -105,7 +105,7 @@ An [`a_pool`](#a-pool) block supports the following:
 
 <a id="a-pool-health-check"></a>
 
-**Health Check**
+#### Health Check
 
 A [`health_check`](#a-pool-health-check) block (within [`a_pool`](#a-pool)) supports the following:
 
@@ -117,7 +117,7 @@ A [`health_check`](#a-pool-health-check) block (within [`a_pool`](#a-pool)) supp
 
 <a id="a-pool-members"></a>
 
-**Members**
+#### Members
 
 A [`members`](#a-pool-members) block (within [`a_pool`](#a-pool)) supports the following:
 
@@ -133,7 +133,7 @@ A [`members`](#a-pool-members) block (within [`a_pool`](#a-pool)) supports the f
 
 <a id="aaaa-pool"></a>
 
-**Aaaa Pool**
+#### Aaaa Pool
 
 An [`aaaa_pool`](#aaaa-pool) block supports the following:
 
@@ -143,7 +143,7 @@ An [`aaaa_pool`](#aaaa-pool) block supports the following:
 
 <a id="aaaa-pool-members"></a>
 
-**Members**
+#### Members
 
 A [`members`](#aaaa-pool-members) block (within [`aaaa_pool`](#aaaa-pool)) supports the following:
 
@@ -159,7 +159,7 @@ A [`members`](#aaaa-pool-members) block (within [`aaaa_pool`](#aaaa-pool)) suppo
 
 <a id="cname-pool"></a>
 
-**Cname Pool**
+#### Cname Pool
 
 A [`cname_pool`](#cname-pool) block supports the following:
 
@@ -167,7 +167,7 @@ A [`cname_pool`](#cname-pool) block supports the following:
 
 <a id="cname-pool-members"></a>
 
-**Members**
+#### Members
 
 A [`members`](#cname-pool-members) block (within [`cname_pool`](#cname-pool)) supports the following:
 
@@ -181,7 +181,7 @@ A [`members`](#cname-pool-members) block (within [`cname_pool`](#cname-pool)) su
 
 <a id="mx-pool"></a>
 
-**Mx Pool**
+#### Mx Pool
 
 A [`mx_pool`](#mx-pool) block supports the following:
 
@@ -191,7 +191,7 @@ A [`mx_pool`](#mx-pool) block supports the following:
 
 <a id="mx-pool-members"></a>
 
-**Members**
+#### Members
 
 A [`members`](#mx-pool-members) block (within [`mx_pool`](#mx-pool)) supports the following:
 
@@ -205,7 +205,7 @@ A [`members`](#mx-pool-members) block (within [`mx_pool`](#mx-pool)) supports th
 
 <a id="srv-pool"></a>
 
-**Srv Pool**
+#### Srv Pool
 
 A [`srv_pool`](#srv-pool) block supports the following:
 
@@ -215,7 +215,7 @@ A [`srv_pool`](#srv-pool) block supports the following:
 
 <a id="srv-pool-members"></a>
 
-**Members**
+#### Members
 
 A [`members`](#srv-pool-members) block (within [`srv_pool`](#srv-pool)) supports the following:
 
@@ -235,7 +235,7 @@ A [`members`](#srv-pool-members) block (within [`srv_pool`](#srv-pool)) supports
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 

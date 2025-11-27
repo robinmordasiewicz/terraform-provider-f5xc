@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="dedicated-interface"></a>
 
-**Dedicated Interface**
+#### Dedicated Interface
 
 A [`dedicated_interface`](#dedicated-interface) block supports the following:
 
@@ -109,7 +109,7 @@ A [`dedicated_interface`](#dedicated-interface) block supports the following:
 
 <a id="dedicated-management-interface"></a>
 
-**Dedicated Management Interface**
+#### Dedicated Management Interface
 
 A [`dedicated_management_interface`](#dedicated-management-interface) block supports the following:
 
@@ -123,7 +123,7 @@ A [`dedicated_management_interface`](#dedicated-management-interface) block supp
 
 <a id="ethernet-interface"></a>
 
-**Ethernet Interface**
+#### Ethernet Interface
 
 An [`ethernet_interface`](#ethernet-interface) block supports the following:
 
@@ -169,7 +169,7 @@ An [`ethernet_interface`](#ethernet-interface) block supports the following:
 
 <a id="ethernet-interface-dhcp-server"></a>
 
-**DHCP Server**
+#### DHCP Server
 
 A [`dhcp_server`](#ethernet-interface-dhcp-server) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
@@ -185,7 +185,7 @@ A [`dhcp_server`](#ethernet-interface-dhcp-server) block (within [`ethernet_inte
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks"></a>
 
-**DHCP Networks**
+#### DHCP Networks
 
 A [`dhcp_networks`](#ethernet-interface-dhcp-server-dhcp-networks) block (within [`ethernet_interface.dhcp_server`](#ethernet-interface-dhcp-server)) supports the following:
 
@@ -207,7 +207,7 @@ A [`dhcp_networks`](#ethernet-interface-dhcp-server-dhcp-networks) block (within
 
 <a id="ethernet-interface-dhcp-server-dhcp-networks-pools"></a>
 
-**Pools**
+#### Pools
 
 A [`pools`](#ethernet-interface-dhcp-server-dhcp-networks-pools) block (within [`ethernet_interface.dhcp_server.dhcp_networks`](#ethernet-interface-dhcp-server-dhcp-networks)) supports the following:
 
@@ -217,7 +217,7 @@ A [`pools`](#ethernet-interface-dhcp-server-dhcp-networks-pools) block (within [
 
 <a id="ethernet-interface-dhcp-server-interface-ip-map"></a>
 
-**Interface IP Map**
+#### Interface IP Map
 
 An [`interface_ip_map`](#ethernet-interface-dhcp-server-interface-ip-map) block (within [`ethernet_interface.dhcp_server`](#ethernet-interface-dhcp-server)) supports the following:
 
@@ -225,7 +225,7 @@ An [`interface_ip_map`](#ethernet-interface-dhcp-server-interface-ip-map) block 
 
 <a id="ethernet-interface-ipv6-auto-config"></a>
 
-**IPv6 Auto Config**
+#### IPv6 Auto Config
 
 An [`ipv6_auto_config`](#ethernet-interface-ipv6-auto-config) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
@@ -235,7 +235,7 @@ An [`ipv6_auto_config`](#ethernet-interface-ipv6-auto-config) block (within [`et
 
 <a id="ethernet-interface-ipv6-auto-config-router"></a>
 
-**Router**
+#### Router
 
 A [`router`](#ethernet-interface-ipv6-auto-config-router) block (within [`ethernet_interface.ipv6_auto_config`](#ethernet-interface-ipv6-auto-config)) supports the following:
 
@@ -247,7 +247,7 @@ A [`router`](#ethernet-interface-ipv6-auto-config-router) block (within [`ethern
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config"></a>
 
-**DNS Config**
+#### DNS Config
 
 A [`dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config) block (within [`ethernet_interface.ipv6_auto_config.router`](#ethernet-interface-ipv6-auto-config-router)) supports the following:
 
@@ -257,7 +257,7 @@ A [`dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config) block (
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config-configured-list"></a>
 
-**Configured List**
+#### Configured List
 
 A [`configured_list`](#ethernet-interface-ipv6-auto-config-router-dns-config-configured-list) block (within [`ethernet_interface.ipv6_auto_config.router.dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config)) supports the following:
 
@@ -265,7 +265,7 @@ A [`configured_list`](#ethernet-interface-ipv6-auto-config-router-dns-config-con
 
 <a id="ethernet-interface-ipv6-auto-config-router-dns-config-local-dns"></a>
 
-**Local DNS**
+#### Local DNS
 
 A [`local_dns`](#ethernet-interface-ipv6-auto-config-router-dns-config-local-dns) block (within [`ethernet_interface.ipv6_auto_config.router.dns_config`](#ethernet-interface-ipv6-auto-config-router-dns-config)) supports the following:
 
@@ -277,7 +277,7 @@ A [`local_dns`](#ethernet-interface-ipv6-auto-config-router-dns-config-local-dns
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful"></a>
 
-**Stateful**
+#### Stateful
 
 A [`stateful`](#ethernet-interface-ipv6-auto-config-router-stateful) block (within [`ethernet_interface.ipv6_auto_config.router`](#ethernet-interface-ipv6-auto-config-router)) supports the following:
 
@@ -293,7 +293,7 @@ A [`stateful`](#ethernet-interface-ipv6-auto-config-router-stateful) block (with
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks"></a>
 
-**DHCP Networks**
+#### DHCP Networks
 
 A [`dhcp_networks`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks) block (within [`ethernet_interface.ipv6_auto_config.router.stateful`](#ethernet-interface-ipv6-auto-config-router-stateful)) supports the following:
 
@@ -305,7 +305,7 @@ A [`dhcp_networks`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-ne
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools"></a>
 
-**Pools**
+#### Pools
 
 A [`pools`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-pools) block (within [`ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks)) supports the following:
 
@@ -315,7 +315,7 @@ A [`pools`](#ethernet-interface-ipv6-auto-config-router-stateful-dhcp-networks-p
 
 <a id="ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map"></a>
 
-**Interface IP Map**
+#### Interface IP Map
 
 An [`interface_ip_map`](#ethernet-interface-ipv6-auto-config-router-stateful-interface-ip-map) block (within [`ethernet_interface.ipv6_auto_config.router.stateful`](#ethernet-interface-ipv6-auto-config-router-stateful)) supports the following:
 
@@ -323,7 +323,7 @@ An [`interface_ip_map`](#ethernet-interface-ipv6-auto-config-router-stateful-int
 
 <a id="ethernet-interface-static-ip"></a>
 
-**Static IP**
+#### Static IP
 
 A [`static_ip`](#ethernet-interface-static-ip) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
@@ -333,7 +333,7 @@ A [`static_ip`](#ethernet-interface-static-ip) block (within [`ethernet_interfac
 
 <a id="ethernet-interface-static-ip-cluster-static-ip"></a>
 
-**Cluster Static IP**
+#### Cluster Static IP
 
 A [`cluster_static_ip`](#ethernet-interface-static-ip-cluster-static-ip) block (within [`ethernet_interface.static_ip`](#ethernet-interface-static-ip)) supports the following:
 
@@ -341,7 +341,7 @@ A [`cluster_static_ip`](#ethernet-interface-static-ip-cluster-static-ip) block (
 
 <a id="ethernet-interface-static-ip-node-static-ip"></a>
 
-**Node Static IP**
+#### Node Static IP
 
 A [`node_static_ip`](#ethernet-interface-static-ip-node-static-ip) block (within [`ethernet_interface.static_ip`](#ethernet-interface-static-ip)) supports the following:
 
@@ -351,7 +351,7 @@ A [`node_static_ip`](#ethernet-interface-static-ip-node-static-ip) block (within
 
 <a id="ethernet-interface-static-ipv6-address"></a>
 
-**Static IPv6 Address**
+#### Static IPv6 Address
 
 A [`static_ipv6_address`](#ethernet-interface-static-ipv6-address) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
@@ -361,7 +361,7 @@ A [`static_ipv6_address`](#ethernet-interface-static-ipv6-address) block (within
 
 <a id="ethernet-interface-static-ipv6-address-cluster-static-ip"></a>
 
-**Cluster Static IP**
+#### Cluster Static IP
 
 A [`cluster_static_ip`](#ethernet-interface-static-ipv6-address-cluster-static-ip) block (within [`ethernet_interface.static_ipv6_address`](#ethernet-interface-static-ipv6-address)) supports the following:
 
@@ -369,7 +369,7 @@ A [`cluster_static_ip`](#ethernet-interface-static-ipv6-address-cluster-static-i
 
 <a id="ethernet-interface-static-ipv6-address-node-static-ip"></a>
 
-**Node Static IP**
+#### Node Static IP
 
 A [`node_static_ip`](#ethernet-interface-static-ipv6-address-node-static-ip) block (within [`ethernet_interface.static_ipv6_address`](#ethernet-interface-static-ipv6-address)) supports the following:
 
@@ -379,7 +379,7 @@ A [`node_static_ip`](#ethernet-interface-static-ipv6-address-node-static-ip) blo
 
 <a id="layer2-interface"></a>
 
-**Layer2 Interface**
+#### Layer2 Interface
 
 A [`layer2_interface`](#layer2-interface) block supports the following:
 
@@ -391,7 +391,7 @@ A [`layer2_interface`](#layer2-interface) block supports the following:
 
 <a id="layer2-interface-l2sriov-interface"></a>
 
-**L2sriov Interface**
+#### L2sriov Interface
 
 A [`l2sriov_interface`](#layer2-interface-l2sriov-interface) block (within [`layer2_interface`](#layer2-interface)) supports the following:
 
@@ -403,7 +403,7 @@ A [`l2sriov_interface`](#layer2-interface-l2sriov-interface) block (within [`lay
 
 <a id="layer2-interface-l2vlan-interface"></a>
 
-**L2vlan Interface**
+#### L2vlan Interface
 
 A [`l2vlan_interface`](#layer2-interface-l2vlan-interface) block (within [`layer2_interface`](#layer2-interface)) supports the following:
 
@@ -413,7 +413,7 @@ A [`l2vlan_interface`](#layer2-interface-l2vlan-interface) block (within [`layer
 
 <a id="layer2-interface-l2vlan-slo-interface"></a>
 
-**L2vlan Slo Interface**
+#### L2vlan Slo Interface
 
 A [`l2vlan_slo_interface`](#layer2-interface-l2vlan-slo-interface) block (within [`layer2_interface`](#layer2-interface)) supports the following:
 
@@ -421,7 +421,7 @@ A [`l2vlan_slo_interface`](#layer2-interface-l2vlan-slo-interface) block (within
 
 <a id="timeouts"></a>
 
-**Timeouts**
+#### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
@@ -435,7 +435,7 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="tunnel-interface"></a>
 
-**Tunnel Interface**
+#### Tunnel Interface
 
 A [`tunnel_interface`](#tunnel-interface) block supports the following:
 
@@ -455,7 +455,7 @@ A [`tunnel_interface`](#tunnel-interface) block supports the following:
 
 <a id="tunnel-interface-static-ip"></a>
 
-**Static IP**
+#### Static IP
 
 A [`static_ip`](#tunnel-interface-static-ip) block (within [`tunnel_interface`](#tunnel-interface)) supports the following:
 
@@ -465,7 +465,7 @@ A [`static_ip`](#tunnel-interface-static-ip) block (within [`tunnel_interface`](
 
 <a id="tunnel-interface-static-ip-cluster-static-ip"></a>
 
-**Cluster Static IP**
+#### Cluster Static IP
 
 A [`cluster_static_ip`](#tunnel-interface-static-ip-cluster-static-ip) block (within [`tunnel_interface.static_ip`](#tunnel-interface-static-ip)) supports the following:
 
@@ -473,7 +473,7 @@ A [`cluster_static_ip`](#tunnel-interface-static-ip-cluster-static-ip) block (wi
 
 <a id="tunnel-interface-static-ip-node-static-ip"></a>
 
-**Node Static IP**
+#### Node Static IP
 
 A [`node_static_ip`](#tunnel-interface-static-ip-node-static-ip) block (within [`tunnel_interface.static_ip`](#tunnel-interface-static-ip)) supports the following:
 
@@ -483,7 +483,7 @@ A [`node_static_ip`](#tunnel-interface-static-ip-node-static-ip) block (within [
 
 <a id="tunnel-interface-tunnel"></a>
 
-**Tunnel**
+#### Tunnel
 
 A [`tunnel`](#tunnel-interface-tunnel) block (within [`tunnel_interface`](#tunnel-interface)) supports the following:
 

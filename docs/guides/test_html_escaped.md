@@ -1,5 +1,6 @@
 ---
 page_title: "Test: Escaped HTML Tags"
+subcategory: "Testing"
 description: |-
   Test guide with escaped HTML tags (using backticks) to verify Registry markdown parsing behavior.
 ---

@@ -1,5 +1,6 @@
 ---
 page_title: "Test: Unescaped HTML Tags"
+subcategory: "Testing"
 description: |-
   Test guide with unescaped HTML tags to verify Registry markdown parsing behavior.
 ---

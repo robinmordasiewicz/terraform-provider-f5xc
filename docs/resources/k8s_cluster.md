@@ -155,7 +155,7 @@ A [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain
 
 &#x2022; [`default_port`](#default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`local_domain`](#local-domain) - Optional String<br>Local Domain. ArgoCD will be accessible at <site name>.<local domain>
+&#x2022; [`local_domain`](#local-domain) - Optional String<br>Local Domain. ArgoCD will be accessible at `<site name>`.`<local domain>`
 
 &#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password) below.
 
@@ -199,7 +199,7 @@ A [`local_access_config`](#local-access-config) block supports the following:
 
 &#x2022; [`default_port`](#default-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`local_domain`](#local-domain) - Optional String<br>Local Domain. Local K8s API server will be accessible at <site name>.<local domain>
+&#x2022; [`local_domain`](#local-domain) - Optional String<br>Local Domain. Local K8s API server will be accessible at `<site name>`.`<local domain>`
 
 &#x2022; [`port`](#port) - Optional Number<br>Custom k8s Port. Use custom K8s port for API server. Available port range is less than 65000 except reserved ports
 

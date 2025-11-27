@@ -88,7 +88,7 @@ A [`routes`](#routes) block supports the following:
 
 &#x2022; [`bot_defense_javascript_injection`](#bot-defense-javascript-injection) - Optional Block<br>Bot Defense Javascript Injection Configuration for inline deployments. Bot Defense Javascript Injection Configuration for inline bot defense deployments<br>See [Bot Defense Javascript Injection](#routes-bot-defense-javascript-injection) below.
 
-&#x2022; [`disable_location_add`](#disable-location-add) - Optional Bool<br>Disable Location Addition. disables append of x-volterra-location = <RE-site-name> at route level, if it is configured at virtual-host level. This configuration is ignored on CE sites
+&#x2022; [`disable_location_add`](#disable-location-add) - Optional Bool<br>Disable Location Addition. disables append of x-volterra-location = `<RE-site-name>` at route level, if it is configured at virtual-host level. This configuration is ignored on CE sites
 
 &#x2022; [`inherited_bot_defense_javascript_injection`](#inherited-bot-defense-javascript-injection) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
@@ -128,7 +128,7 @@ A [`routes`](#routes) block supports the following:
 
 A [`bot_defense_javascript_injection`](#routes-bot-defense-javascript-injection) block (within [`routes`](#routes)) supports the following:
 
-&#x2022; [`javascript_location`](#javascript-location) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>JavaScript Location. All inside networks. Insert JavaScript after <head> tag Insert JavaScript after </title> tag. Insert JavaScript before first <script> tag
+&#x2022; [`javascript_location`](#javascript-location) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>JavaScript Location. All inside networks. Insert JavaScript after `<head>` tag Insert JavaScript after `</title>` tag. Insert JavaScript before first `<script>` tag
 
 &#x2022; [`javascript_tags`](#javascript-tags) - Optional Block<br>JavaScript Tags. Select Add item to configure your javascript tag. If adding both Bot Adv and Fraud, the Bot Javascript should be added first<br>See [Javascript Tags](#routes-bot-defense-javascript-injection-javascript-tags) below.
 
@@ -632,7 +632,7 @@ A [`web_socket_config`](#routes-route-destination-web-socket-config) block (with
 
 A [`route_direct_response`](#routes-route-direct-response) block (within [`routes`](#routes)) supports the following:
 
-&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
+&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
 &#x2022; [`response_code`](#response-code) - Optional Number<br>Response Code. response code to send
 

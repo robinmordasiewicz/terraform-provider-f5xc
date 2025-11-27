@@ -109,7 +109,7 @@ resource "f5xc_fleet" "example" {
 
 &#x2022; [`enable_default_fleet_config_download`](#enable-default-fleet-config-download) - Optional Bool<br>Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config
 
-&#x2022; [`fleet_label`](#fleet-label) - Optional String<br>Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet
+&#x2022; [`fleet_label`](#fleet-label) - Optional String<br>Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=`<fleet_label>`' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name `<fleet_label>` is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet
 
 &#x2022; [`inside_virtual_network`](#inside-virtual-network) - Optional Block<br>Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet<br>See [Inside Virtual Network](#inside-virtual-network) below for details.
 

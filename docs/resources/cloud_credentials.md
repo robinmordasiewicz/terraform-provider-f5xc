@@ -174,7 +174,7 @@ A [`clear_secret_info`](#azure-client-secret-client-secret-clear-secret-info) bl
 
 An [`azure_pfx_certificate`](#azure-pfx-certificate) block supports the following:
 
-&#x2022; [`certificate_url`](#certificate-url) - Optional String<br>URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///<Base64 of certificate> format. Here <Base64 of certificate> is base64 of '.pfx' or '.p12' binary file
+&#x2022; [`certificate_url`](#certificate-url) - Optional String<br>URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///`<Base64 of certificate>` format. Here `<Base64 of certificate>` is base64 of '.pfx' or '.p12' binary file
 
 &#x2022; [`client_id`](#client-id) - Optional String<br>Client ID. Client ID for your Azure service principal
 

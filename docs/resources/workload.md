@@ -1155,7 +1155,7 @@ A [`path`](#service-advertise-options-advertise-custom-ports-http-loadbalancer-s
 
 A [`route_direct_response`](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route)) supports the following:
 
-&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
+&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
 &#x2022; [`response_code`](#response-code) - Optional Number<br>Response Code. response code to send
 
@@ -1907,7 +1907,7 @@ A [`path`](#service-advertise-options-advertise-on-public-multi-ports-ports-http
 
 A [`route_direct_response`](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route)) supports the following:
 
-&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
+&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
 &#x2022; [`response_code`](#response-code) - Optional Number<br>Response Code. response code to send
 
@@ -2593,7 +2593,7 @@ A [`path`](#service-advertise-options-advertise-on-public-port-http-loadbalancer
 
 A [`route_direct_response`](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route)) supports the following:
 
-&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
+&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
 &#x2022; [`response_code`](#response-code) - Optional Number<br>Response Code. response code to send
 
@@ -4055,7 +4055,7 @@ A [`path`](#stateful-service-advertise-options-advertise-custom-ports-http-loadb
 
 A [`route_direct_response`](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#stateful-service-advertise-options-advertise-custom-ports-http-loadbalancer-specific-routes-routes-direct-response-route)) supports the following:
 
-&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
+&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
 &#x2022; [`response_code`](#response-code) - Optional Number<br>Response Code. response code to send
 
@@ -4807,7 +4807,7 @@ A [`path`](#stateful-service-advertise-options-advertise-on-public-multi-ports-p
 
 A [`route_direct_response`](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#stateful-service-advertise-options-advertise-on-public-multi-ports-ports-http-loadbalancer-specific-routes-routes-direct-response-route)) supports the following:
 
-&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
+&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
 &#x2022; [`response_code`](#response-code) - Optional Number<br>Response Code. response code to send
 
@@ -5493,7 +5493,7 @@ A [`path`](#stateful-service-advertise-options-advertise-on-public-port-http-loa
 
 A [`route_direct_response`](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route-route-direct-response) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#stateful-service-advertise-options-advertise-on-public-port-http-loadbalancer-specific-routes-routes-direct-response-route)) supports the following:
 
-&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
+&#x2022; [`response_body_encoded`](#response-body-encoded) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
 &#x2022; [`response_code`](#response-code) - Optional Number<br>Response Code. response code to send
 

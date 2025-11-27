@@ -198,7 +198,7 @@ A [`vnet_list`](#azure-vnet-site-vnet-attachments-vnet-list) block (within [`azu
 
 &#x2022; [`subscription_id`](#subscription-id) - Optional String<br>Subscription ID. Enter the Subscription ID of the VNET to be attached
 
-&#x2022; [`vnet_id`](#vnet-id) - Optional String<br>VNET ID. Enter the vnet ID of the VNET to be attached in format /<resource-group-name>/<vnet-name>
+&#x2022; [`vnet_id`](#vnet-id) - Optional String<br>VNET ID. Enter the vnet ID of the VNET to be attached in format /`<resource-group-name>`/`<vnet-name>`
 
 #### Azure Vnet Site Vnet Attachments Vnet List Custom Routing
 
@@ -210,7 +210,7 @@ A [`custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing)
 
 A [`route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing-route-tables) block (within [`azure_vnet_site.vnet_attachments.vnet_list.custom_routing`](#azure-vnet-site-vnet-attachments-vnet-list-custom-routing)) supports the following:
 
-&#x2022; [`route_table_id`](#route-table-id) - Optional String<br>Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>
+&#x2022; [`route_table_id`](#route-table-id) - Optional String<br>Route table ID. Route table ID in the format /`<resource-group-name>`/`<route-table-name>`
 
 &#x2022; [`static_routes`](#static-routes) - Optional List<br>Static Routes. List of Static Routes
 
@@ -226,7 +226,7 @@ A [`default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route) b
 
 A [`selective_route_tables`](#azure-vnet-site-vnet-attachments-vnet-list-default-route-selective-route-tables) block (within [`azure_vnet_site.vnet_attachments.vnet_list.default_route`](#azure-vnet-site-vnet-attachments-vnet-list-default-route)) supports the following:
 
-&#x2022; [`route_table_id`](#route-table-id) - Optional List<br>Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>
+&#x2022; [`route_table_id`](#route-table-id) - Optional List<br>Route table ID. Route table ID in the format /`<resource-group-name>`/`<route-table-name>`
 
 #### Segment
 

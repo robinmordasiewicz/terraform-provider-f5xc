@@ -137,7 +137,7 @@ A [`label_matcher`](#label-matcher) block supports the following:
 
 A [`prefix`](#prefix) block supports the following:
 
-&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
+&#x2022; [`prefix`](#prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length<br>See [Prefix](#prefix) below for details.
 
 <a id="prefix-selector"></a>
 

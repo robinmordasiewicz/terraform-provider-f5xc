@@ -77,7 +77,7 @@ resource "f5xc_workload" "example" {
 <br><br>&#x2022; [`simple_service`](#simple-service) - Optional Block<br>SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP
 <br><br>&#x2022; [`stateful_service`](#stateful-service) - Optional Block<br>StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

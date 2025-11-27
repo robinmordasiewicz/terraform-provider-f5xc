@@ -78,7 +78,7 @@ resource "f5xc_nfv_service" "example" {
 &#x2022; [`f5_big_ip_aws_service`](#f5-big-ip-aws-service) - Optional Block<br>Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS<br>See [F5 Big IP AWS Service](#f5-big-ip-aws-service) below for details.
 <br><br>&#x2022; [`palo_alto_fw_service`](#palo-alto-fw-service) - Optional Block<br>Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

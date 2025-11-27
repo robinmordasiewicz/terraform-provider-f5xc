@@ -72,7 +72,7 @@ resource "f5xc_route" "example" {
 
 &#x2022; [`routes`](#routes) - Optional Block<br>Routes. List of routes to match for incoming request<br>See [Routes](#routes) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

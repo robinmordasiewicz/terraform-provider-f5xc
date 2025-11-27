@@ -89,7 +89,7 @@ A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
 
 &#x2022; [`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Bigip Virtual Server](#bigip-virtual-server-bigip-virtual-server) below.
 
-#### Bigip Virtual Server
+#### Bigip Virtual Server Bigip Virtual Server
 
 A [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) block (within [`bigip_virtual_server`](#bigip-virtual-server)) supports the following:
 
@@ -105,7 +105,7 @@ A [`cdn_loadbalancer`](#cdn-loadbalancer) block supports the following:
 
 &#x2022; [`cdn_loadbalancer`](#cdn-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CDN Loadbalancer](#cdn-loadbalancer-cdn-loadbalancer) below.
 
-#### CDN Loadbalancer
+#### CDN Loadbalancer CDN Loadbalancer
 
 A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_loadbalancer`](#cdn-loadbalancer)) supports the following:
 
@@ -129,7 +129,7 @@ A [`http_loadbalancer`](#http-loadbalancer) block supports the following:
 
 &#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [HTTP Loadbalancer](#http-loadbalancer-http-loadbalancer) below.
 
-#### HTTP Loadbalancer
+#### HTTP Loadbalancer HTTP Loadbalancer
 
 A [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) block (within [`http_loadbalancer`](#http-loadbalancer)) supports the following:
 

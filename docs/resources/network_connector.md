@@ -99,7 +99,7 @@ An [`enable_forward_proxy`](#enable-forward-proxy) block supports the following:
 
 &#x2022; [`white_listed_prefixes`](#white-listed-prefixes) - Optional List<br>IP Prefixes to Skip Protocol Parsing. Traffic to these destination IP prefixes is not subjected to protocol parsing Example 'tmate' server IP
 
-#### TLS Intercept
+#### Enable Forward Proxy TLS Intercept
 
 A [`tls_intercept`](#enable-forward-proxy-tls-intercept) block (within [`enable_forward_proxy`](#enable-forward-proxy)) supports the following:
 
@@ -115,7 +115,7 @@ A [`tls_intercept`](#enable-forward-proxy-tls-intercept) block (within [`enable_
 
 &#x2022; [`volterra_trusted_ca`](#volterra-trusted-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom Certificate
+#### Enable Forward Proxy TLS Intercept Custom Certificate
 
 A [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate) block (within [`enable_forward_proxy.tls_intercept`](#enable-forward-proxy-tls-intercept)) supports the following:
 
@@ -131,13 +131,13 @@ A [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)
 
 &#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom Hash Algorithms
+#### Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) block (within [`enable_forward_proxy.tls_intercept.custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
-#### Private Key
+#### Enable Forward Proxy TLS Intercept Custom Certificate Private Key
 
 A [`private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) block (within [`enable_forward_proxy.tls_intercept.custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)) supports the following:
 
@@ -145,7 +145,7 @@ A [`private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Enable Forward Proxy TLS Intercept Custom Certificate Private Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info) block (within [`enable_forward_proxy.tls_intercept.custom_certificate.private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key)) supports the following:
 
@@ -155,7 +155,7 @@ A [`blindfold_secret_info`](#enable-forward-proxy-tls-intercept-custom-certifica
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Enable Forward Proxy TLS Intercept Custom Certificate Private Key Clear Secret Info
 
 A [`clear_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info) block (within [`enable_forward_proxy.tls_intercept.custom_certificate.private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key)) supports the following:
 
@@ -163,13 +163,13 @@ A [`clear_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-p
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Policy
+#### Enable Forward Proxy TLS Intercept Policy
 
 A [`policy`](#enable-forward-proxy-tls-intercept-policy) block (within [`enable_forward_proxy.tls_intercept`](#enable-forward-proxy-tls-intercept)) supports the following:
 
 &#x2022; [`interception_rules`](#interception-rules) - Optional Block<br>TLS Interception Rules. List of ordered rules to enable or disable for TLS interception<br>See [Interception Rules](#enable-forward-proxy-tls-intercept-policy-interception-rules) below.
 
-#### Interception Rules
+#### Enable Forward Proxy TLS Intercept Policy Interception Rules
 
 An [`interception_rules`](#enable-forward-proxy-tls-intercept-policy-interception-rules) block (within [`enable_forward_proxy.tls_intercept.policy`](#enable-forward-proxy-tls-intercept-policy)) supports the following:
 
@@ -179,7 +179,7 @@ An [`interception_rules`](#enable-forward-proxy-tls-intercept-policy-interceptio
 
 &#x2022; [`enable_interception`](#enable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Domain Match
+#### Enable Forward Proxy TLS Intercept Policy Interception Rules Domain Match
 
 A [`domain_match`](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match) block (within [`enable_forward_proxy.tls_intercept.policy.interception_rules`](#enable-forward-proxy-tls-intercept-policy-interception-rules)) supports the following:
 
@@ -195,7 +195,7 @@ A [`sli_to_global_dr`](#sli-to-global-dr) block supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#sli-to-global-dr-global-vn) below.
 
-#### Global Vn
+#### Sli To Global DR Global Vn
 
 A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](#sli-to-global-dr)) supports the following:
 
@@ -219,7 +219,7 @@ A [`slo_to_global_dr`](#slo-to-global-dr) block supports the following:
 
 &#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#slo-to-global-dr-global-vn) below.
 
-#### Global Vn
+#### Slo To Global DR Global Vn
 
 A [`global_vn`](#slo-to-global-dr-global-vn) block (within [`slo_to_global_dr`](#slo-to-global-dr)) supports the following:
 

@@ -86,7 +86,7 @@ A [`protocol_policer`](#protocol-policer) block supports the following:
 
 &#x2022; [`protocol`](#protocol) - Optional Block<br>Protocol Type. Protocol and protocol specific flags to be matched in packet<br>See [Protocol](#protocol-policer-protocol) below.
 
-#### Policer
+#### Protocol Policer Policer
 
 A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
@@ -100,7 +100,7 @@ A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#pro
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Protocol
+#### Protocol Policer Protocol
 
 A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
@@ -112,13 +112,13 @@ A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#p
 
 &#x2022; [`udp`](#udp) - Optional Block<br>UDP Packets. Match all UDP packets
 
-#### ICMP
+#### Protocol Policer Protocol ICMP
 
 An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
 &#x2022; [`type`](#type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
 
-#### TCP
+#### Protocol Policer Protocol TCP
 
 A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 

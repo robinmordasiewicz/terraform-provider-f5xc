@@ -96,13 +96,13 @@ A [`local_ip`](#local-ip) block supports the following:
 
 &#x2022; [`ip_address`](#ip-address) - Optional Block<br>Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet<br>See [IP Address](#local-ip-ip-address) below.
 
-#### Intf
+#### Local IP Intf
 
 An [`intf`](#local-ip-intf) block (within [`local_ip`](#local-ip)) supports the following:
 
 &#x2022; [`local_intf`](#local-intf) - Optional Block<br>Local Interface. Local interface to be used for filling in source information of IP and network for transport<br>See [Local Intf](#local-ip-intf-local-intf) below.
 
-#### Local Intf
+#### Local IP Intf Local Intf
 
 A [`local_intf`](#local-ip-intf-local-intf) block (within [`local_ip.intf`](#local-ip-intf)) supports the following:
 
@@ -116,7 +116,7 @@ A [`local_intf`](#local-ip-intf-local-intf) block (within [`local_ip.intf`](#loc
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### IP Address
+#### Local IP IP Address
 
 An [`ip_address`](#local-ip-ip-address) block (within [`local_ip`](#local-ip)) supports the following:
 
@@ -126,7 +126,7 @@ An [`ip_address`](#local-ip-ip-address) block (within [`local_ip`](#local-ip)) s
 
 &#x2022; [`virtual_network_type`](#virtual-network-type) - Optional Block<br>Virtual Network Type. Different types of virtual networks understood by the system<br>See [Virtual Network Type](#local-ip-ip-address-virtual-network-type) below.
 
-#### IP Address
+#### Local IP IP Address IP Address
 
 An [`ip_address`](#local-ip-ip-address-ip-address) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
 
@@ -134,19 +134,19 @@ An [`ip_address`](#local-ip-ip-address-ip-address) block (within [`local_ip.ip_a
 
 &#x2022; [`ipv6`](#ipv6) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#local-ip-ip-address-ip-address-ipv6) below.
 
-#### IPv4
+#### Local IP IP Address IP Address IPv4
 
 An [`ipv4`](#local-ip-ip-address-ip-address-ipv4) block (within [`local_ip.ip_address.ip_address`](#local-ip-ip-address-ip-address)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
-#### IPv6
+#### Local IP IP Address IP Address IPv6
 
 An [`ipv6`](#local-ip-ip-address-ip-address-ipv6) block (within [`local_ip.ip_address.ip_address`](#local-ip-ip-address-ip-address)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
-#### Virtual Network Type
+#### Local IP IP Address Virtual Network Type
 
 A [`virtual_network_type`](#local-ip-ip-address-virtual-network-type) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
 
@@ -162,13 +162,13 @@ A [`params`](#params) block supports the following:
 
 &#x2022; [`ipsec`](#ipsec) - Optional Block<br>IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE<br>See [Ipsec](#params-ipsec) below.
 
-#### Ipsec
+#### Params Ipsec
 
 An [`ipsec`](#params-ipsec) block (within [`params`](#params)) supports the following:
 
 &#x2022; [`ipsec_psk`](#ipsec-psk) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Ipsec Psk](#params-ipsec-ipsec-psk) below.
 
-#### Ipsec Psk
+#### Params Ipsec Ipsec Psk
 
 An [`ipsec_psk`](#params-ipsec-ipsec-psk) block (within [`params.ipsec`](#params-ipsec)) supports the following:
 
@@ -176,7 +176,7 @@ An [`ipsec_psk`](#params-ipsec-ipsec-psk) block (within [`params.ipsec`](#params
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#params-ipsec-ipsec-psk-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Params Ipsec Ipsec Psk Blindfold Secret Info
 
 A [`blindfold_secret_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
@@ -186,7 +186,7 @@ A [`blindfold_secret_info`](#params-ipsec-ipsec-psk-blindfold-secret-info) block
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Params Ipsec Ipsec Psk Clear Secret Info
 
 A [`clear_secret_info`](#params-ipsec-ipsec-psk-clear-secret-info) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
@@ -202,13 +202,13 @@ A [`remote_ip`](#remote-ip) block supports the following:
 
 &#x2022; [`ip`](#ip) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [IP](#remote-ip-ip) below.
 
-#### Endpoints
+#### Remote IP Endpoints
 
 An [`endpoints`](#remote-ip-endpoints) block (within [`remote_ip`](#remote-ip)) supports the following:
 
 &#x2022; [`endpoints`](#endpoints) - Optional Block<br>Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes
 
-#### IP
+#### Remote IP IP
 
 An [`ip`](#remote-ip-ip) block (within [`remote_ip`](#remote-ip)) supports the following:
 
@@ -216,13 +216,13 @@ An [`ip`](#remote-ip-ip) block (within [`remote_ip`](#remote-ip)) supports the f
 
 &#x2022; [`ipv6`](#ipv6) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#remote-ip-ip-ipv6) below.
 
-#### IPv4
+#### Remote IP IP IPv4
 
 An [`ipv4`](#remote-ip-ip-ipv4) block (within [`remote_ip.ip`](#remote-ip-ip)) supports the following:
 
 &#x2022; [`addr`](#addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
 
-#### IPv6
+#### Remote IP IP IPv6
 
 An [`ipv6`](#remote-ip-ip-ipv6) block (within [`remote_ip.ip`](#remote-ip-ip)) supports the following:
 

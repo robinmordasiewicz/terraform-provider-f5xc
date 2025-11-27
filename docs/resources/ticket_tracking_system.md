@@ -80,7 +80,7 @@ A [`jira_config`](#jira-config) block supports the following:
 
 &#x2022; [`adhoc_rest_api`](#adhoc-rest-api) - Optional Block<br>JIRA Ad-hoc REST API Configuration Type. v3 API Basic Auth for Ad-hoc API Calls - `HTTPS://developer.atlassian.com/cloud/jira/platform/REST/v3/` This message represents what is stored in the XC database. To see the API format, refer to the JiraAdhocRestApiConfigurationSpec message<br>See [Adhoc REST API](#jira-config-adhoc-rest-api) below.
 
-#### Adhoc REST API
+#### Jira Config Adhoc REST API
 
 An [`adhoc_rest_api`](#jira-config-adhoc-rest-api) block (within [`jira_config`](#jira-config)) supports the following:
 

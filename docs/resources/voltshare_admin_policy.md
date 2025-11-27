@@ -94,13 +94,13 @@ An [`author_restrictions`](#author-restrictions) block supports the following:
 
 &#x2022; [`deny_list`](#deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#author-restrictions-deny-list) below.
 
-#### Allow List
+#### Author Restrictions Allow List
 
 An [`allow_list`](#author-restrictions-allow-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-allow-list-custom-list) below.
 
-#### Custom List
+#### Author Restrictions Allow List Custom List
 
 A [`custom_list`](#author-restrictions-allow-list-custom-list) block (within [`author_restrictions.allow_list`](#author-restrictions-allow-list)) supports the following:
 
@@ -108,13 +108,13 @@ A [`custom_list`](#author-restrictions-allow-list-custom-list) block (within [`a
 
 &#x2022; [`regex_pattern`](#regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
 
-#### Deny List
+#### Author Restrictions Deny List
 
 A [`deny_list`](#author-restrictions-deny-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-deny-list-custom-list) below.
 
-#### Custom List
+#### Author Restrictions Deny List Custom List
 
 A [`custom_list`](#author-restrictions-deny-list-custom-list) block (within [`author_restrictions.deny_list`](#author-restrictions-deny-list)) supports the following:
 
@@ -146,7 +146,7 @@ An [`user_restrictions`](#user-restrictions) block supports the following:
 
 &#x2022; [`user_restrictions`](#user-restrictions) - Optional Block<br>User Matcher. user_matcher contains contains the allow/deny list of users/authors<br>See [User Restrictions](#user-restrictions-user-restrictions) below.
 
-#### User Restrictions
+#### User Restrictions User Restrictions
 
 An [`user_restrictions`](#user-restrictions-user-restrictions) block (within [`user_restrictions`](#user-restrictions)) supports the following:
 
@@ -158,13 +158,13 @@ An [`user_restrictions`](#user-restrictions-user-restrictions) block (within [`u
 
 &#x2022; [`deny_list`](#deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#user-restrictions-user-restrictions-deny-list) below.
 
-#### Allow List
+#### User Restrictions User Restrictions Allow List
 
 An [`allow_list`](#user-restrictions-user-restrictions-allow-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-allow-list-custom-list) below.
 
-#### Custom List
+#### User Restrictions User Restrictions Allow List Custom List
 
 A [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) block (within [`user_restrictions.user_restrictions.allow_list`](#user-restrictions-user-restrictions-allow-list)) supports the following:
 
@@ -172,13 +172,13 @@ A [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) b
 
 &#x2022; [`regex_pattern`](#regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
 
-#### Deny List
+#### User Restrictions User Restrictions Deny List
 
 A [`deny_list`](#user-restrictions-user-restrictions-deny-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
 &#x2022; [`custom_list`](#custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-deny-list-custom-list) below.
 
-#### Custom List
+#### User Restrictions User Restrictions Deny List Custom List
 
 A [`custom_list`](#user-restrictions-user-restrictions-deny-list-custom-list) block (within [`user_restrictions.user_restrictions.deny_list`](#user-restrictions-user-restrictions-deny-list)) supports the following:
 

@@ -90,7 +90,7 @@ An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block
 
 &#x2022; [`enable_compliance_checks`](#enable-compliance-checks) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
 
-#### Enable Compliance Checks
+#### Enable Disable Compliance Checks Enable Compliance Checks
 
 An [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) block (within [`enable_disable_compliance_checks`](#enable-disable-compliance-checks)) supports the following:
 

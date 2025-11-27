@@ -89,7 +89,7 @@ A [`connect_to_layer2`](#connect-to-layer2) block supports the following:
 
 &#x2022; [`layer2_intf_ref`](#layer2-intf-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Layer2 Intf Ref](#connect-to-layer2-layer2-intf-ref) below.
 
-#### Layer2 Intf Ref
+#### Connect To Layer2 Layer2 Intf Ref
 
 A [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) block (within [`connect_to_layer2`](#connect-to-layer2)) supports the following:
 
@@ -111,7 +111,7 @@ A [`site_subnet_params`](#site-subnet-params) block supports the following:
 
 &#x2022; [`subnet_dhcp_server_params`](#subnet-dhcp-server-params) - Optional Block<br>Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet<br>See [Subnet DHCP Server Params](#site-subnet-params-subnet-dhcp-server-params) below.
 
-#### Site
+#### Site Subnet Params Site
 
 A [`site`](#site-subnet-params-site) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
 
@@ -121,13 +121,13 @@ A [`site`](#site-subnet-params-site) block (within [`site_subnet_params`](#site-
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Subnet DHCP Server Params
+#### Site Subnet Params Subnet DHCP Server Params
 
 A [`subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
 
 &#x2022; [`dhcp_networks`](#dhcp-networks) - Optional Block<br>Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) below.
 
-#### DHCP Networks
+#### Site Subnet Params Subnet DHCP Server Params DHCP Networks
 
 A [`dhcp_networks`](#site-subnet-params-subnet-dhcp-server-params-dhcp-networks) block (within [`site_subnet_params.subnet_dhcp_server_params`](#site-subnet-params-subnet-dhcp-server-params)) supports the following:
 

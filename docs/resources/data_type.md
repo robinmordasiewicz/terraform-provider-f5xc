@@ -94,7 +94,7 @@ A [`rules`](#rules) block supports the following:
 
 &#x2022; [`value_pattern`](#value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-value-pattern) below.
 
-#### Key Pattern
+#### Rules Key Pattern
 
 A [`key_pattern`](#rules-key-pattern) block (within [`rules`](#rules)) supports the following:
 
@@ -104,13 +104,13 @@ A [`key_pattern`](#rules-key-pattern) block (within [`rules`](#rules)) supports 
 
 &#x2022; [`substring_value`](#substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
-#### Exact Values
+#### Rules Key Pattern Exact Values
 
 An [`exact_values`](#rules-key-pattern-exact-values) block (within [`rules.key_pattern`](#rules-key-pattern)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
-#### Key Value Pattern
+#### Rules Key Value Pattern
 
 A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules)) supports the following:
 
@@ -118,7 +118,7 @@ A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules
 
 &#x2022; [`value_pattern`](#value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
 
-#### Key Pattern
+#### Rules Key Value Pattern Key Pattern
 
 A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
@@ -128,13 +128,13 @@ A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.ke
 
 &#x2022; [`substring_value`](#substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
-#### Exact Values
+#### Rules Key Value Pattern Key Pattern Exact Values
 
 An [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) block (within [`rules.key_value_pattern.key_pattern`](#rules-key-value-pattern-key-pattern)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
-#### Value Pattern
+#### Rules Key Value Pattern Value Pattern
 
 A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
@@ -144,13 +144,13 @@ A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rule
 
 &#x2022; [`substring_value`](#substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
-#### Exact Values
+#### Rules Key Value Pattern Value Pattern Exact Values
 
 An [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) block (within [`rules.key_value_pattern.value_pattern`](#rules-key-value-pattern-value-pattern)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
 
-#### Value Pattern
+#### Rules Value Pattern
 
 A [`value_pattern`](#rules-value-pattern) block (within [`rules`](#rules)) supports the following:
 
@@ -160,7 +160,7 @@ A [`value_pattern`](#rules-value-pattern) block (within [`rules`](#rules)) suppo
 
 &#x2022; [`substring_value`](#substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
-#### Exact Values
+#### Rules Value Pattern Exact Values
 
 An [`exact_values`](#rules-value-pattern-exact-values) block (within [`rules.value_pattern`](#rules-value-pattern)) supports the following:
 

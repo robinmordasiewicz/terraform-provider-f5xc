@@ -110,7 +110,7 @@ A [`bgp_information`](#bgp-information) block supports the following:
 
 &#x2022; [`use_default_secret`](#use-default-secret) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Asn
+#### BGP Information Asn
 
 An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-information)) supports the following:
 
@@ -120,7 +120,7 @@ An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-informat
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Peer Secret Override
+#### BGP Information Peer Secret Override
 
 A [`peer_secret_override`](#bgp-information-peer-secret-override) block (within [`bgp_information`](#bgp-information)) supports the following:
 
@@ -128,7 +128,7 @@ A [`peer_secret_override`](#bgp-information-peer-secret-override) block (within 
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#bgp-information-peer-secret-override-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### BGP Information Peer Secret Override Blindfold Secret Info
 
 A [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secret-info) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
 
@@ -138,7 +138,7 @@ A [`blindfold_secret_info`](#bgp-information-peer-secret-override-blindfold-secr
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### BGP Information Peer Secret Override Clear Secret Info
 
 A [`clear_secret_info`](#bgp-information-peer-secret-override-clear-secret-info) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
 

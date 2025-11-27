@@ -91,7 +91,7 @@ A [`limits`](#limits) block supports the following:
 
 &#x2022; [`unit`](#unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
 
-#### Action Block
+#### Limits Action Block
 
 An [`action_block`](#limits-action-block) block (within [`limits`](#limits)) supports the following:
 
@@ -101,19 +101,19 @@ An [`action_block`](#limits-action-block) block (within [`limits`](#limits)) sup
 
 &#x2022; [`seconds`](#seconds) - Optional Block<br>Seconds. Input Duration Seconds<br>See [Seconds](#limits-action-block-seconds) below.
 
-#### Hours
+#### Limits Action Block Hours
 
 A [`hours`](#limits-action-block-hours) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
-#### Minutes
+#### Limits Action Block Minutes
 
 A [`minutes`](#limits-action-block-minutes) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
 &#x2022; [`duration`](#duration) - Optional Number<br>Duration
 
-#### Seconds
+#### Limits Action Block Seconds
 
 A [`seconds`](#limits-action-block-seconds) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 

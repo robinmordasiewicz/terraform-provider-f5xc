@@ -103,7 +103,7 @@ An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
 
-#### Ref
+#### IP Prefix Set Ref
 
 A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
 

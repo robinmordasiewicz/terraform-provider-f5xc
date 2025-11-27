@@ -86,7 +86,7 @@ A [`domains`](#domains) block supports the following:
 
 &#x2022; [`simple_login`](#simple-login) - Optional Block<br>Simple Login<br>See [Simple Login](#domains-simple-login) below.
 
-#### Simple Login
+#### Domains Simple Login
 
 A [`simple_login`](#domains-simple-login) block (within [`domains`](#domains)) supports the following:
 
@@ -94,7 +94,7 @@ A [`simple_login`](#domains-simple-login) block (within [`domains`](#domains)) s
 
 &#x2022; [`user`](#user) - Optional String<br>User. Enter the username to assign credentials for the selected domain to crawl
 
-#### Password
+#### Domains Simple Login Password
 
 A [`password`](#domains-simple-login-password) block (within [`domains.simple_login`](#domains-simple-login)) supports the following:
 
@@ -102,7 +102,7 @@ A [`password`](#domains-simple-login-password) block (within [`domains.simple_lo
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#domains-simple-login-password-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Domains Simple Login Password Blindfold Secret Info
 
 A [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
@@ -112,7 +112,7 @@ A [`blindfold_secret_info`](#domains-simple-login-password-blindfold-secret-info
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Domains Simple Login Password Clear Secret Info
 
 A [`clear_secret_info`](#domains-simple-login-password-clear-secret-info) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 

@@ -86,7 +86,7 @@ A [`rules`](#rules) block supports the following:
 
 &#x2022; [`match`](#match) - Optional Block<br>BGP Route Match. Predicates which have to match information in route for action to be applied<br>See [Match](#rules-match) below.
 
-#### Action
+#### Rules Action
 
 An [`action`](#rules-action) block (within [`rules`](#rules)) supports the following:
 
@@ -104,13 +104,13 @@ An [`action`](#rules-action) block (within [`rules`](#rules)) supports the follo
 
 &#x2022; [`metric`](#metric) - Optional Number<br>MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS
 
-#### Community
+#### Rules Action Community
 
 A [`community`](#rules-action-community) block (within [`rules.action`](#rules-action)) supports the following:
 
 &#x2022; [`community`](#community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
 
-#### Match
+#### Rules Match
 
 A [`match`](#rules-match) block (within [`rules`](#rules)) supports the following:
 
@@ -120,19 +120,19 @@ A [`match`](#rules-match) block (within [`rules`](#rules)) supports the followin
 
 &#x2022; [`ip_prefixes`](#ip-prefixes) - Optional Block<br>BGP Prefix List. List of IP prefix and prefix length range match condition<br>See [IP Prefixes](#rules-match-ip-prefixes) below.
 
-#### Community
+#### Rules Match Community
 
 A [`community`](#rules-match-community) block (within [`rules.match`](#rules-match)) supports the following:
 
 &#x2022; [`community`](#community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
 
-#### IP Prefixes
+#### Rules Match IP Prefixes
 
 An [`ip_prefixes`](#rules-match-ip-prefixes) block (within [`rules.match`](#rules-match)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional Block<br>Prefix list. List of IP prefix<br>See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
 
-#### Prefixes
+#### Rules Match IP Prefixes Prefixes
 
 A [`prefixes`](#rules-match-ip-prefixes-prefixes) block (within [`rules.match.ip_prefixes`](#rules-match-ip-prefixes)) supports the following:
 

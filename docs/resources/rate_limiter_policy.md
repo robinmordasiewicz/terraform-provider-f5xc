@@ -88,7 +88,7 @@ A [`rules`](#rules) block supports the following:
 
 &#x2022; [`spec`](#spec) - Optional Block<br>Rate Limiter Rule Specification. Shape of Rate Limiter Rule<br>See [Spec](#rules-spec) below.
 
-#### Metadata
+#### Rules Metadata
 
 A [`metadata`](#rules-metadata) block (within [`rules`](#rules)) supports the following:
 
@@ -96,7 +96,7 @@ A [`metadata`](#rules-metadata) block (within [`rules`](#rules)) supports the fo
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
-#### Spec
+#### Rules Spec
 
 A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
@@ -130,19 +130,19 @@ A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`path`](#path) - Optional Block<br>Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#rules-spec-path) below.
 
-#### Asn List
+#### Rules Spec Asn List
 
 An [`asn_list`](#rules-spec-asn-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### Asn Matcher
+#### Rules Spec Asn Matcher
 
 An [`asn_matcher`](#rules-spec-asn-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
 
-#### Asn Sets
+#### Rules Spec Asn Matcher Asn Sets
 
 An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn_matcher`](#rules-spec-asn-matcher)) supports the following:
 
@@ -156,7 +156,7 @@ An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Country List
+#### Rules Spec Country List
 
 A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -164,7 +164,7 @@ A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules
 
 &#x2022; [`invert_match`](#invert-match) - Optional Bool<br>Invert Match Result. Invert the match result
 
-#### Custom Rate Limiter
+#### Rules Spec Custom Rate Limiter
 
 A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -174,7 +174,7 @@ A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Domain Matcher
+#### Rules Spec Domain Matcher
 
 A [`domain_matcher`](#rules-spec-domain-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -182,7 +182,7 @@ A [`domain_matcher`](#rules-spec-domain-matcher) block (within [`rules.spec`](#r
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-#### Headers
+#### Rules Spec Headers
 
 A [`headers`](#rules-spec-headers) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -196,7 +196,7 @@ A [`headers`](#rules-spec-headers) block (within [`rules.spec`](#rules-spec)) su
 
 &#x2022; [`name`](#name) - Optional String<br>Header Name. A case-insensitive HTTP header name
 
-#### Item
+#### Rules Spec Headers Item
 
 An [`item`](#rules-spec-headers-item) block (within [`rules.spec.headers`](#rules-spec-headers)) supports the following:
 
@@ -206,7 +206,7 @@ An [`item`](#rules-spec-headers-item) block (within [`rules.spec.headers`](#rule
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### HTTP Method
+#### Rules Spec HTTP Method
 
 A [`http_method`](#rules-spec-http-method) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -214,7 +214,7 @@ A [`http_method`](#rules-spec-http-method) block (within [`rules.spec`](#rules-s
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Method List. List of methods values to match against
 
-#### IP Matcher
+#### Rules Spec IP Matcher
 
 An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -222,7 +222,7 @@ An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-sp
 
 &#x2022; [`prefix_sets`](#prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#rules-spec-ip-matcher-prefix-sets) below.
 
-#### Prefix Sets
+#### Rules Spec IP Matcher Prefix Sets
 
 A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec.ip_matcher`](#rules-spec-ip-matcher)) supports the following:
 
@@ -236,7 +236,7 @@ A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### IP Prefix List
+#### Rules Spec IP Prefix List
 
 An [`ip_prefix_list`](#rules-spec-ip-prefix-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
@@ -244,7 +244,7 @@ An [`ip_prefix_list`](#rules-spec-ip-prefix-list) block (within [`rules.spec`](#
 
 &#x2022; [`ip_prefixes`](#ip-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
 
-#### Path
+#### Rules Spec Path
 
 A [`path`](#rules-spec-path) block (within [`rules.spec`](#rules-spec)) supports the following:
 

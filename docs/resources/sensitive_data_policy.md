@@ -84,7 +84,7 @@ A [`custom_data_types`](#custom-data-types) block supports the following:
 
 &#x2022; [`custom_data_type_ref`](#custom-data-type-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
 
-#### Custom Data Type Ref
+#### Custom Data Types Custom Data Type Ref
 
 A [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) block (within [`custom_data_types`](#custom-data-types)) supports the following:
 

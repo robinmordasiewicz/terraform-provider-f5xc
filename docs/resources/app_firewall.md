@@ -152,7 +152,7 @@ A [`custom_anonymization`](#custom-anonymization) block supports the following:
 
 &#x2022; [`anonymization_config`](#anonymization-config) - Optional Block<br>Configuration. List of HTTP headers, cookies and query parameters whose values will be masked<br>See [Anonymization Config](#custom-anonymization-anonymization-config) below.
 
-#### Anonymization Config
+#### Custom Anonymization Anonymization Config
 
 An [`anonymization_config`](#custom-anonymization-anonymization-config) block (within [`custom_anonymization`](#custom-anonymization)) supports the following:
 
@@ -162,19 +162,19 @@ An [`anonymization_config`](#custom-anonymization-anonymization-config) block (w
 
 &#x2022; [`query_parameter`](#query-parameter) - Optional Block<br>Anonymize HTTP Query Parameter. Configure anonymization for HTTP Parameters<br>See [Query Parameter](#custom-anonymization-anonymization-config-query-parameter) below.
 
-#### Cookie
+#### Custom Anonymization Anonymization Config Cookie
 
 A [`cookie`](#custom-anonymization-anonymization-config-cookie) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
 &#x2022; [`cookie_name`](#cookie-name) - Optional String<br>Cookie Name. Masks the cookie value. The setting does not mask the cookie name
 
-#### HTTP Header
+#### Custom Anonymization Anonymization Config HTTP Header
 
 A [`http_header`](#custom-anonymization-anonymization-config-http-header) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
 &#x2022; [`header_name`](#header-name) - Optional String<br>Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name
 
-#### Query Parameter
+#### Custom Anonymization Anonymization Config Query Parameter
 
 A [`query_parameter`](#custom-anonymization-anonymization-config-query-parameter) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
@@ -208,7 +208,7 @@ A [`detection_settings`](#detection-settings) block supports the following:
 
 &#x2022; [`violation_settings`](#violation-settings) - Optional Block<br>Violation Settings. Specifies violation settings to be used by WAF<br>See [Violation Settings](#detection-settings-violation-settings) below.
 
-#### Bot Protection Setting
+#### Detection Settings Bot Protection Setting
 
 A [`bot_protection_setting`](#detection-settings-bot-protection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
 
@@ -218,7 +218,7 @@ A [`bot_protection_setting`](#detection-settings-bot-protection-setting) block (
 
 &#x2022; [`suspicious_bot_action`](#suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-#### Signature Selection Setting
+#### Detection Settings Signature Selection Setting
 
 A [`signature_selection_setting`](#detection-settings-signature-selection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
 
@@ -232,25 +232,25 @@ A [`signature_selection_setting`](#detection-settings-signature-selection-settin
 
 &#x2022; [`only_high_accuracy_signatures`](#only-high-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Attack Type Settings
+#### Detection Settings Signature Selection Setting Attack Type Settings
 
 An [`attack_type_settings`](#detection-settings-signature-selection-setting-attack-type-settings) block (within [`detection_settings.signature_selection_setting`](#detection-settings-signature-selection-setting)) supports the following:
 
 &#x2022; [`disabled_attack_types`](#disabled-attack-types) - Optional List  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection
 
-#### Stage New And Updated Signatures
+#### Detection Settings Stage New And Updated Signatures
 
 A [`stage_new_and_updated_signatures`](#detection-settings-stage-new-and-updated-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
 &#x2022; [`staging_period`](#staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
-#### Stage New Signatures
+#### Detection Settings Stage New Signatures
 
 A [`stage_new_signatures`](#detection-settings-stage-new-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
 &#x2022; [`staging_period`](#staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
-#### Violation Settings
+#### Detection Settings Violation Settings
 
 A [`violation_settings`](#detection-settings-violation-settings) block (within [`detection_settings`](#detection-settings)) supports the following:
 

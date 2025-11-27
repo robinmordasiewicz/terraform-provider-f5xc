@@ -120,7 +120,7 @@ A [`comments`](#comments) block supports the following:
 
 &#x2022; [`plain_text`](#plain-text) - Optional String<br>Comment. Comment body as plain text
 
-#### Attachments Info
+#### Comments Attachments Info
 
 An [`attachments_info`](#comments-attachments-info) block (within [`comments`](#comments)) supports the following:
 

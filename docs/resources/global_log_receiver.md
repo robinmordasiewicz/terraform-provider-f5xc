@@ -117,7 +117,7 @@ An [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver) block supports the fo
 
 &#x2022; [`stream_name`](#stream-name) - Optional String<br>Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time
 
-#### AWS Cred
+#### AWS Cloud Watch Receiver AWS Cred
 
 An [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
@@ -127,7 +127,7 @@ An [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) block (within [`aws_cloud_wa
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Batch
+#### AWS Cloud Watch Receiver Batch
 
 A [`batch`](#aws-cloud-watch-receiver-batch) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
@@ -143,7 +143,7 @@ A [`batch`](#aws-cloud-watch-receiver-batch) block (within [`aws_cloud_watch_rec
 
 &#x2022; [`timeout_seconds_default`](#timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Compression
+#### AWS Cloud Watch Receiver Compression
 
 A [`compression`](#aws-cloud-watch-receiver-compression) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
 
@@ -163,7 +163,7 @@ An [`azure_event_hubs_receiver`](#azure-event-hubs-receiver) block supports the 
 
 &#x2022; [`namespace`](#namespace) - Optional String<br>Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored
 
-#### Connection String
+#### Azure Event Hubs Receiver Connection String
 
 A [`connection_string`](#azure-event-hubs-receiver-connection-string) block (within [`azure_event_hubs_receiver`](#azure-event-hubs-receiver)) supports the following:
 
@@ -171,7 +171,7 @@ A [`connection_string`](#azure-event-hubs-receiver-connection-string) block (wit
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-event-hubs-receiver-connection-string-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Azure Event Hubs Receiver Connection String Blindfold Secret Info
 
 A [`blindfold_secret_info`](#azure-event-hubs-receiver-connection-string-blindfold-secret-info) block (within [`azure_event_hubs_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
 
@@ -181,7 +181,7 @@ A [`blindfold_secret_info`](#azure-event-hubs-receiver-connection-string-blindfo
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Azure Event Hubs Receiver Connection String Clear Secret Info
 
 A [`clear_secret_info`](#azure-event-hubs-receiver-connection-string-clear-secret-info) block (within [`azure_event_hubs_receiver.connection_string`](#azure-event-hubs-receiver-connection-string)) supports the following:
 
@@ -203,7 +203,7 @@ An [`azure_receiver`](#azure-receiver) block supports the following:
 
 &#x2022; [`filename_options`](#filename-options) - Optional Block<br>Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file<br>See [Filename Options](#azure-receiver-filename-options) below.
 
-#### Batch
+#### Azure Receiver Batch
 
 A [`batch`](#azure-receiver-batch) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
@@ -219,7 +219,7 @@ A [`batch`](#azure-receiver-batch) block (within [`azure_receiver`](#azure-recei
 
 &#x2022; [`timeout_seconds_default`](#timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Compression
+#### Azure Receiver Compression
 
 A [`compression`](#azure-receiver-compression) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
@@ -229,7 +229,7 @@ A [`compression`](#azure-receiver-compression) block (within [`azure_receiver`](
 
 &#x2022; [`compression_none`](#compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Connection String
+#### Azure Receiver Connection String
 
 A [`connection_string`](#azure-receiver-connection-string) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
@@ -237,7 +237,7 @@ A [`connection_string`](#azure-receiver-connection-string) block (within [`azure
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-receiver-connection-string-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Azure Receiver Connection String Blindfold Secret Info
 
 A [`blindfold_secret_info`](#azure-receiver-connection-string-blindfold-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
 
@@ -247,7 +247,7 @@ A [`blindfold_secret_info`](#azure-receiver-connection-string-blindfold-secret-i
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Azure Receiver Connection String Clear Secret Info
 
 A [`clear_secret_info`](#azure-receiver-connection-string-clear-secret-info) block (within [`azure_receiver.connection_string`](#azure-receiver-connection-string)) supports the following:
 
@@ -255,7 +255,7 @@ A [`clear_secret_info`](#azure-receiver-connection-string-clear-secret-info) blo
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Filename Options
+#### Azure Receiver Filename Options
 
 A [`filename_options`](#azure-receiver-filename-options) block (within [`azure_receiver`](#azure-receiver)) supports the following:
 
@@ -283,7 +283,7 @@ A [`datadog_receiver`](#datadog-receiver) block supports the following:
 
 &#x2022; [`use_tls`](#use-tls) - Optional Block<br>TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint<br>See [Use TLS](#datadog-receiver-use-tls) below.
 
-#### Batch
+#### Datadog Receiver Batch
 
 A [`batch`](#datadog-receiver-batch) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
@@ -299,7 +299,7 @@ A [`batch`](#datadog-receiver-batch) block (within [`datadog_receiver`](#datadog
 
 &#x2022; [`timeout_seconds_default`](#timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Compression
+#### Datadog Receiver Compression
 
 A [`compression`](#datadog-receiver-compression) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
@@ -309,7 +309,7 @@ A [`compression`](#datadog-receiver-compression) block (within [`datadog_receive
 
 &#x2022; [`compression_none`](#compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Datadog API Key
+#### Datadog Receiver Datadog API Key
 
 A [`datadog_api_key`](#datadog-receiver-datadog-api-key) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
@@ -317,7 +317,7 @@ A [`datadog_api_key`](#datadog-receiver-datadog-api-key) block (within [`datadog
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#datadog-receiver-datadog-api-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Datadog Receiver Datadog API Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#datadog-receiver-datadog-api-key-blindfold-secret-info) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
 
@@ -327,7 +327,7 @@ A [`blindfold_secret_info`](#datadog-receiver-datadog-api-key-blindfold-secret-i
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Datadog Receiver Datadog API Key Clear Secret Info
 
 A [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
 
@@ -335,7 +335,7 @@ A [`clear_secret_info`](#datadog-receiver-datadog-api-key-clear-secret-info) blo
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Use TLS
+#### Datadog Receiver Use TLS
 
 An [`use_tls`](#datadog-receiver-use-tls) block (within [`datadog_receiver`](#datadog-receiver)) supports the following:
 
@@ -355,7 +355,7 @@ An [`use_tls`](#datadog-receiver-use-tls) block (within [`datadog_receiver`](#da
 
 &#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
-#### mTLS Enable
+#### Datadog Receiver Use TLS mTLS Enable
 
 A [`mtls_enable`](#datadog-receiver-use-tls-mtls-enable) block (within [`datadog_receiver.use_tls`](#datadog-receiver-use-tls)) supports the following:
 
@@ -363,7 +363,7 @@ A [`mtls_enable`](#datadog-receiver-use-tls-mtls-enable) block (within [`datadog
 
 &#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#datadog-receiver-use-tls-mtls-enable-key-url) below.
 
-#### Key URL
+#### Datadog Receiver Use TLS mTLS Enable Key URL
 
 A [`key_url`](#datadog-receiver-use-tls-mtls-enable-key-url) block (within [`datadog_receiver.use_tls.mtls_enable`](#datadog-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -371,7 +371,7 @@ A [`key_url`](#datadog-receiver-use-tls-mtls-enable-key-url) block (within [`dat
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Datadog Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -381,7 +381,7 @@ A [`blindfold_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-blindf
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Datadog Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
 A [`clear_secret_info`](#datadog-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#datadog-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -403,7 +403,7 @@ A [`gcp_bucket_receiver`](#gcp-bucket-receiver) block supports the following:
 
 &#x2022; [`gcp_cred`](#gcp-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [GCP Cred](#gcp-bucket-receiver-gcp-cred) below.
 
-#### Batch
+#### GCP Bucket Receiver Batch
 
 A [`batch`](#gcp-bucket-receiver-batch) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
@@ -419,7 +419,7 @@ A [`batch`](#gcp-bucket-receiver-batch) block (within [`gcp_bucket_receiver`](#g
 
 &#x2022; [`timeout_seconds_default`](#timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Compression
+#### GCP Bucket Receiver Compression
 
 A [`compression`](#gcp-bucket-receiver-compression) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
@@ -429,7 +429,7 @@ A [`compression`](#gcp-bucket-receiver-compression) block (within [`gcp_bucket_r
 
 &#x2022; [`compression_none`](#compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Filename Options
+#### GCP Bucket Receiver Filename Options
 
 A [`filename_options`](#gcp-bucket-receiver-filename-options) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
@@ -439,7 +439,7 @@ A [`filename_options`](#gcp-bucket-receiver-filename-options) block (within [`gc
 
 &#x2022; [`no_folder`](#no-folder) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### GCP Cred
+#### GCP Bucket Receiver GCP Cred
 
 A [`gcp_cred`](#gcp-bucket-receiver-gcp-cred) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
 
@@ -469,7 +469,7 @@ A [`http_receiver`](#http-receiver) block supports the following:
 
 &#x2022; [`use_tls`](#use-tls) - Optional Block<br>TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint<br>See [Use TLS](#http-receiver-use-tls) below.
 
-#### Auth Basic
+#### HTTP Receiver Auth Basic
 
 An [`auth_basic`](#http-receiver-auth-basic) block (within [`http_receiver`](#http-receiver)) supports the following:
 
@@ -477,7 +477,7 @@ An [`auth_basic`](#http-receiver-auth-basic) block (within [`http_receiver`](#ht
 
 &#x2022; [`user_name`](#user-name) - Optional String<br>User Name. HTTP Basic Auth User Name
 
-#### Password
+#### HTTP Receiver Auth Basic Password
 
 A [`password`](#http-receiver-auth-basic-password) block (within [`http_receiver.auth_basic`](#http-receiver-auth-basic)) supports the following:
 
@@ -485,7 +485,7 @@ A [`password`](#http-receiver-auth-basic-password) block (within [`http_receiver
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-auth-basic-password-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### HTTP Receiver Auth Basic Password Blindfold Secret Info
 
 A [`blindfold_secret_info`](#http-receiver-auth-basic-password-blindfold-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
 
@@ -495,7 +495,7 @@ A [`blindfold_secret_info`](#http-receiver-auth-basic-password-blindfold-secret-
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### HTTP Receiver Auth Basic Password Clear Secret Info
 
 A [`clear_secret_info`](#http-receiver-auth-basic-password-clear-secret-info) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
 
@@ -503,13 +503,13 @@ A [`clear_secret_info`](#http-receiver-auth-basic-password-clear-secret-info) bl
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Auth Token
+#### HTTP Receiver Auth Token
 
 An [`auth_token`](#http-receiver-auth-token) block (within [`http_receiver`](#http-receiver)) supports the following:
 
 &#x2022; [`token`](#token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#http-receiver-auth-token-token) below.
 
-#### Token
+#### HTTP Receiver Auth Token Token
 
 A [`token`](#http-receiver-auth-token-token) block (within [`http_receiver.auth_token`](#http-receiver-auth-token)) supports the following:
 
@@ -517,7 +517,7 @@ A [`token`](#http-receiver-auth-token-token) block (within [`http_receiver.auth_
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-auth-token-token-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### HTTP Receiver Auth Token Token Blindfold Secret Info
 
 A [`blindfold_secret_info`](#http-receiver-auth-token-token-blindfold-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
 
@@ -527,7 +527,7 @@ A [`blindfold_secret_info`](#http-receiver-auth-token-token-blindfold-secret-inf
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### HTTP Receiver Auth Token Token Clear Secret Info
 
 A [`clear_secret_info`](#http-receiver-auth-token-token-clear-secret-info) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
 
@@ -535,7 +535,7 @@ A [`clear_secret_info`](#http-receiver-auth-token-token-clear-secret-info) block
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Batch
+#### HTTP Receiver Batch
 
 A [`batch`](#http-receiver-batch) block (within [`http_receiver`](#http-receiver)) supports the following:
 
@@ -551,7 +551,7 @@ A [`batch`](#http-receiver-batch) block (within [`http_receiver`](#http-receiver
 
 &#x2022; [`timeout_seconds_default`](#timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Compression
+#### HTTP Receiver Compression
 
 A [`compression`](#http-receiver-compression) block (within [`http_receiver`](#http-receiver)) supports the following:
 
@@ -561,7 +561,7 @@ A [`compression`](#http-receiver-compression) block (within [`http_receiver`](#h
 
 &#x2022; [`compression_none`](#compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Use TLS
+#### HTTP Receiver Use TLS
 
 An [`use_tls`](#http-receiver-use-tls) block (within [`http_receiver`](#http-receiver)) supports the following:
 
@@ -581,7 +581,7 @@ An [`use_tls`](#http-receiver-use-tls) block (within [`http_receiver`](#http-rec
 
 &#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
-#### mTLS Enable
+#### HTTP Receiver Use TLS mTLS Enable
 
 A [`mtls_enable`](#http-receiver-use-tls-mtls-enable) block (within [`http_receiver.use_tls`](#http-receiver-use-tls)) supports the following:
 
@@ -589,7 +589,7 @@ A [`mtls_enable`](#http-receiver-use-tls-mtls-enable) block (within [`http_recei
 
 &#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#http-receiver-use-tls-mtls-enable-key-url) below.
 
-#### Key URL
+#### HTTP Receiver Use TLS mTLS Enable Key URL
 
 A [`key_url`](#http-receiver-use-tls-mtls-enable-key-url) block (within [`http_receiver.use_tls.mtls_enable`](#http-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -597,7 +597,7 @@ A [`key_url`](#http-receiver-use-tls-mtls-enable-key-url) block (within [`http_r
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### HTTP Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -607,7 +607,7 @@ A [`blindfold_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-blindfold
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### HTTP Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
 A [`clear_secret_info`](#http-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#http-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -631,7 +631,7 @@ A [`kafka_receiver`](#kafka-receiver) block supports the following:
 
 &#x2022; [`use_tls`](#use-tls) - Optional Block<br>TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint<br>See [Use TLS](#kafka-receiver-use-tls) below.
 
-#### Batch
+#### Kafka Receiver Batch
 
 A [`batch`](#kafka-receiver-batch) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
@@ -647,7 +647,7 @@ A [`batch`](#kafka-receiver-batch) block (within [`kafka_receiver`](#kafka-recei
 
 &#x2022; [`timeout_seconds_default`](#timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Compression
+#### Kafka Receiver Compression
 
 A [`compression`](#kafka-receiver-compression) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
@@ -657,7 +657,7 @@ A [`compression`](#kafka-receiver-compression) block (within [`kafka_receiver`](
 
 &#x2022; [`compression_none`](#compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Use TLS
+#### Kafka Receiver Use TLS
 
 An [`use_tls`](#kafka-receiver-use-tls) block (within [`kafka_receiver`](#kafka-receiver)) supports the following:
 
@@ -677,7 +677,7 @@ An [`use_tls`](#kafka-receiver-use-tls) block (within [`kafka_receiver`](#kafka-
 
 &#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
-#### mTLS Enable
+#### Kafka Receiver Use TLS mTLS Enable
 
 A [`mtls_enable`](#kafka-receiver-use-tls-mtls-enable) block (within [`kafka_receiver.use_tls`](#kafka-receiver-use-tls)) supports the following:
 
@@ -685,7 +685,7 @@ A [`mtls_enable`](#kafka-receiver-use-tls-mtls-enable) block (within [`kafka_rec
 
 &#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#kafka-receiver-use-tls-mtls-enable-key-url) below.
 
-#### Key URL
+#### Kafka Receiver Use TLS mTLS Enable Key URL
 
 A [`key_url`](#kafka-receiver-use-tls-mtls-enable-key-url) block (within [`kafka_receiver.use_tls.mtls_enable`](#kafka-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -693,7 +693,7 @@ A [`key_url`](#kafka-receiver-use-tls-mtls-enable-key-url) block (within [`kafka
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Kafka Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -703,7 +703,7 @@ A [`blindfold_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-blindfol
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Kafka Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
 A [`clear_secret_info`](#kafka-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#kafka-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -721,7 +721,7 @@ A [`new_relic_receiver`](#new-relic-receiver) block supports the following:
 
 &#x2022; [`us`](#us) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### API Key
+#### New Relic Receiver API Key
 
 An [`api_key`](#new-relic-receiver-api-key) block (within [`new_relic_receiver`](#new-relic-receiver)) supports the following:
 
@@ -729,7 +729,7 @@ An [`api_key`](#new-relic-receiver-api-key) block (within [`new_relic_receiver`]
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#new-relic-receiver-api-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### New Relic Receiver API Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#new-relic-receiver-api-key-blindfold-secret-info) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
 
@@ -739,7 +739,7 @@ A [`blindfold_secret_info`](#new-relic-receiver-api-key-blindfold-secret-info) b
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### New Relic Receiver API Key Clear Secret Info
 
 A [`clear_secret_info`](#new-relic-receiver-api-key-clear-secret-info) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
 
@@ -767,7 +767,7 @@ A [`qradar_receiver`](#qradar-receiver) block supports the following:
 
 &#x2022; [`use_tls`](#use-tls) - Optional Block<br>TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint<br>See [Use TLS](#qradar-receiver-use-tls) below.
 
-#### Batch
+#### Qradar Receiver Batch
 
 A [`batch`](#qradar-receiver-batch) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
@@ -783,7 +783,7 @@ A [`batch`](#qradar-receiver-batch) block (within [`qradar_receiver`](#qradar-re
 
 &#x2022; [`timeout_seconds_default`](#timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Compression
+#### Qradar Receiver Compression
 
 A [`compression`](#qradar-receiver-compression) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
@@ -793,7 +793,7 @@ A [`compression`](#qradar-receiver-compression) block (within [`qradar_receiver`
 
 &#x2022; [`compression_none`](#compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Use TLS
+#### Qradar Receiver Use TLS
 
 An [`use_tls`](#qradar-receiver-use-tls) block (within [`qradar_receiver`](#qradar-receiver)) supports the following:
 
@@ -813,7 +813,7 @@ An [`use_tls`](#qradar-receiver-use-tls) block (within [`qradar_receiver`](#qrad
 
 &#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
-#### mTLS Enable
+#### Qradar Receiver Use TLS mTLS Enable
 
 A [`mtls_enable`](#qradar-receiver-use-tls-mtls-enable) block (within [`qradar_receiver.use_tls`](#qradar-receiver-use-tls)) supports the following:
 
@@ -821,7 +821,7 @@ A [`mtls_enable`](#qradar-receiver-use-tls-mtls-enable) block (within [`qradar_r
 
 &#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#qradar-receiver-use-tls-mtls-enable-key-url) below.
 
-#### Key URL
+#### Qradar Receiver Use TLS mTLS Enable Key URL
 
 A [`key_url`](#qradar-receiver-use-tls-mtls-enable-key-url) block (within [`qradar_receiver.use_tls.mtls_enable`](#qradar-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -829,7 +829,7 @@ A [`key_url`](#qradar-receiver-use-tls-mtls-enable-key-url) block (within [`qrad
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Qradar Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -839,7 +839,7 @@ A [`blindfold_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-blindfo
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Qradar Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
 A [`clear_secret_info`](#qradar-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#qradar-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -863,7 +863,7 @@ A [`s3_receiver`](#s3-receiver) block supports the following:
 
 &#x2022; [`filename_options`](#filename-options) - Optional Block<br>Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file<br>See [Filename Options](#s3-receiver-filename-options) below.
 
-#### AWS Cred
+#### S3 Receiver AWS Cred
 
 An [`aws_cred`](#s3-receiver-aws-cred) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
@@ -873,7 +873,7 @@ An [`aws_cred`](#s3-receiver-aws-cred) block (within [`s3_receiver`](#s3-receive
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Batch
+#### S3 Receiver Batch
 
 A [`batch`](#s3-receiver-batch) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
@@ -889,7 +889,7 @@ A [`batch`](#s3-receiver-batch) block (within [`s3_receiver`](#s3-receiver)) sup
 
 &#x2022; [`timeout_seconds_default`](#timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Compression
+#### S3 Receiver Compression
 
 A [`compression`](#s3-receiver-compression) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
@@ -899,7 +899,7 @@ A [`compression`](#s3-receiver-compression) block (within [`s3_receiver`](#s3-re
 
 &#x2022; [`compression_none`](#compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Filename Options
+#### S3 Receiver Filename Options
 
 A [`filename_options`](#s3-receiver-filename-options) block (within [`s3_receiver`](#s3-receiver)) supports the following:
 
@@ -925,7 +925,7 @@ A [`splunk_receiver`](#splunk-receiver) block supports the following:
 
 &#x2022; [`use_tls`](#use-tls) - Optional Block<br>TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint<br>See [Use TLS](#splunk-receiver-use-tls) below.
 
-#### Batch
+#### Splunk Receiver Batch
 
 A [`batch`](#splunk-receiver-batch) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
@@ -941,7 +941,7 @@ A [`batch`](#splunk-receiver-batch) block (within [`splunk_receiver`](#splunk-re
 
 &#x2022; [`timeout_seconds_default`](#timeout-seconds-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Compression
+#### Splunk Receiver Compression
 
 A [`compression`](#splunk-receiver-compression) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
@@ -951,7 +951,7 @@ A [`compression`](#splunk-receiver-compression) block (within [`splunk_receiver`
 
 &#x2022; [`compression_none`](#compression-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Splunk Hec Token
+#### Splunk Receiver Splunk Hec Token
 
 A [`splunk_hec_token`](#splunk-receiver-splunk-hec-token) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
@@ -959,7 +959,7 @@ A [`splunk_hec_token`](#splunk-receiver-splunk-hec-token) block (within [`splunk
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#splunk-receiver-splunk-hec-token-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Splunk Receiver Splunk Hec Token Blindfold Secret Info
 
 A [`blindfold_secret_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-info) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
 
@@ -969,7 +969,7 @@ A [`blindfold_secret_info`](#splunk-receiver-splunk-hec-token-blindfold-secret-i
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Splunk Receiver Splunk Hec Token Clear Secret Info
 
 A [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
 
@@ -977,7 +977,7 @@ A [`clear_secret_info`](#splunk-receiver-splunk-hec-token-clear-secret-info) blo
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Use TLS
+#### Splunk Receiver Use TLS
 
 An [`use_tls`](#splunk-receiver-use-tls) block (within [`splunk_receiver`](#splunk-receiver)) supports the following:
 
@@ -997,7 +997,7 @@ An [`use_tls`](#splunk-receiver-use-tls) block (within [`splunk_receiver`](#splu
 
 &#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
-#### mTLS Enable
+#### Splunk Receiver Use TLS mTLS Enable
 
 A [`mtls_enable`](#splunk-receiver-use-tls-mtls-enable) block (within [`splunk_receiver.use_tls`](#splunk-receiver-use-tls)) supports the following:
 
@@ -1005,7 +1005,7 @@ A [`mtls_enable`](#splunk-receiver-use-tls-mtls-enable) block (within [`splunk_r
 
 &#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#splunk-receiver-use-tls-mtls-enable-key-url) below.
 
-#### Key URL
+#### Splunk Receiver Use TLS mTLS Enable Key URL
 
 A [`key_url`](#splunk-receiver-use-tls-mtls-enable-key-url) block (within [`splunk_receiver.use_tls.mtls_enable`](#splunk-receiver-use-tls-mtls-enable)) supports the following:
 
@@ -1013,7 +1013,7 @@ A [`key_url`](#splunk-receiver-use-tls-mtls-enable-key-url) block (within [`splu
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Splunk Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfold-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -1023,7 +1023,7 @@ A [`blindfold_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-blindfo
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Splunk Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
 A [`clear_secret_info`](#splunk-receiver-use-tls-mtls-enable-key-url-clear-secret-info) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#splunk-receiver-use-tls-mtls-enable-key-url)) supports the following:
 
@@ -1037,7 +1037,7 @@ A [`sumo_logic_receiver`](#sumo-logic-receiver) block supports the following:
 
 &#x2022; [`url`](#url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [URL](#sumo-logic-receiver-url) below.
 
-#### URL
+#### Sumo Logic Receiver URL
 
 An [`url`](#sumo-logic-receiver-url) block (within [`sumo_logic_receiver`](#sumo-logic-receiver)) supports the following:
 
@@ -1045,7 +1045,7 @@ An [`url`](#sumo-logic-receiver-url) block (within [`sumo_logic_receiver`](#sumo
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#sumo-logic-receiver-url-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Sumo Logic Receiver URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#sumo-logic-receiver-url-blindfold-secret-info) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
 
@@ -1055,7 +1055,7 @@ A [`blindfold_secret_info`](#sumo-logic-receiver-url-blindfold-secret-info) bloc
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Sumo Logic Receiver URL Clear Secret Info
 
 A [`clear_secret_info`](#sumo-logic-receiver-url-clear-secret-info) block (within [`sumo_logic_receiver.url`](#sumo-logic-receiver-url)) supports the following:
 

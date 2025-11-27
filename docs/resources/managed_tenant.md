@@ -84,7 +84,7 @@ A [`groups`](#groups) block supports the following:
 
 &#x2022; [`managed_tenant_groups`](#managed-tenant-groups) - Optional List<br>Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user
 
-#### Group
+#### Groups Group
 
 A [`group`](#groups-group) block (within [`groups`](#groups)) supports the following:
 

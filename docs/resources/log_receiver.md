@@ -91,7 +91,7 @@ A [`syslog`](#syslog) block supports the following:
 
 &#x2022; [`udp_server`](#udp-server) - Optional Block<br>UDP Server Name and Port Number. Name and port number for a UDP server<br>See [UDP Server](#syslog-udp-server) below.
 
-#### TCP Server
+#### Syslog TCP Server
 
 A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports the following:
 
@@ -99,7 +99,7 @@ A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports
 
 &#x2022; [`server_name`](#server-name) - Optional String<br>Server name. Server name is fully qualified domain name or IP address of the server
 
-#### TLS Server
+#### Syslog TLS Server
 
 A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports the following:
 
@@ -119,7 +119,7 @@ A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports
 
 &#x2022; [`volterra_ca`](#volterra-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### mTLS Enable
+#### Syslog TLS Server mTLS Enable
 
 A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_server`](#syslog-tls-server)) supports the following:
 
@@ -127,7 +127,7 @@ A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_ser
 
 &#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#syslog-tls-server-mtls-enable-key-url) below.
 
-#### Key URL
+#### Syslog TLS Server mTLS Enable Key URL
 
 A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls_server.mtls_enable`](#syslog-tls-server-mtls-enable)) supports the following:
 
@@ -135,7 +135,7 @@ A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Syslog TLS Server mTLS Enable Key URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
@@ -145,7 +145,7 @@ A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-sec
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Syslog TLS Server mTLS Enable Key URL Clear Secret Info
 
 A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
@@ -153,7 +153,7 @@ A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### UDP Server
+#### Syslog UDP Server
 
 An [`udp_server`](#syslog-udp-server) block (within [`syslog`](#syslog)) supports the following:
 

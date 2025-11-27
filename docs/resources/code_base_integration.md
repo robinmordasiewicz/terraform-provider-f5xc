@@ -96,13 +96,13 @@ A [`code_base_integration`](#code-base-integration) block supports the following
 
 &#x2022; [`gitlab_enterprise`](#gitlab-enterprise) - Optional Block<br>GitLab Enterprise Integration<br>See [Gitlab Enterprise](#code-base-integration-gitlab-enterprise) below.
 
-#### Azure Repos
+#### Code Base Integration Azure Repos
 
 An [`azure_repos`](#code-base-integration-azure-repos) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
 &#x2022; [`access_token`](#access-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#code-base-integration-azure-repos-access-token) below.
 
-#### Access Token
+#### Code Base Integration Azure Repos Access Token
 
 An [`access_token`](#code-base-integration-azure-repos-access-token) block (within [`code_base_integration.azure_repos`](#code-base-integration-azure-repos)) supports the following:
 
@@ -110,7 +110,7 @@ An [`access_token`](#code-base-integration-azure-repos-access-token) block (with
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-azure-repos-access-token-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Code Base Integration Azure Repos Access Token Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-azure-repos-access-token-blindfold-secret-info) block (within [`code_base_integration.azure_repos.access_token`](#code-base-integration-azure-repos-access-token)) supports the following:
 
@@ -120,7 +120,7 @@ A [`blindfold_secret_info`](#code-base-integration-azure-repos-access-token-blin
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Code Base Integration Azure Repos Access Token Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-azure-repos-access-token-clear-secret-info) block (within [`code_base_integration.azure_repos.access_token`](#code-base-integration-azure-repos-access-token)) supports the following:
 
@@ -128,7 +128,7 @@ A [`clear_secret_info`](#code-base-integration-azure-repos-access-token-clear-se
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Bitbucket
+#### Code Base Integration Bitbucket
 
 A [`bitbucket`](#code-base-integration-bitbucket) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -136,7 +136,7 @@ A [`bitbucket`](#code-base-integration-bitbucket) block (within [`code_base_inte
 
 &#x2022; [`username`](#username) - Optional String<br>BitBucket Username
 
-#### Passwd
+#### Code Base Integration Bitbucket Passwd
 
 A [`passwd`](#code-base-integration-bitbucket-passwd) block (within [`code_base_integration.bitbucket`](#code-base-integration-bitbucket)) supports the following:
 
@@ -144,7 +144,7 @@ A [`passwd`](#code-base-integration-bitbucket-passwd) block (within [`code_base_
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-bitbucket-passwd-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Code Base Integration Bitbucket Passwd Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-bitbucket-passwd-blindfold-secret-info) block (within [`code_base_integration.bitbucket.passwd`](#code-base-integration-bitbucket-passwd)) supports the following:
 
@@ -154,7 +154,7 @@ A [`blindfold_secret_info`](#code-base-integration-bitbucket-passwd-blindfold-se
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Code Base Integration Bitbucket Passwd Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-bitbucket-passwd-clear-secret-info) block (within [`code_base_integration.bitbucket.passwd`](#code-base-integration-bitbucket-passwd)) supports the following:
 
@@ -162,7 +162,7 @@ A [`clear_secret_info`](#code-base-integration-bitbucket-passwd-clear-secret-inf
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Bitbucket Server
+#### Code Base Integration Bitbucket Server
 
 A [`bitbucket_server`](#code-base-integration-bitbucket-server) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -174,7 +174,7 @@ A [`bitbucket_server`](#code-base-integration-bitbucket-server) block (within [`
 
 &#x2022; [`verify_ssl`](#verify-ssl) - Optional Bool<br>Verify SSL
 
-#### Passwd
+#### Code Base Integration Bitbucket Server Passwd
 
 A [`passwd`](#code-base-integration-bitbucket-server-passwd) block (within [`code_base_integration.bitbucket_server`](#code-base-integration-bitbucket-server)) supports the following:
 
@@ -182,7 +182,7 @@ A [`passwd`](#code-base-integration-bitbucket-server-passwd) block (within [`cod
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-bitbucket-server-passwd-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Code Base Integration Bitbucket Server Passwd Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-bitbucket-server-passwd-blindfold-secret-info) block (within [`code_base_integration.bitbucket_server.passwd`](#code-base-integration-bitbucket-server-passwd)) supports the following:
 
@@ -192,7 +192,7 @@ A [`blindfold_secret_info`](#code-base-integration-bitbucket-server-passwd-blind
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Code Base Integration Bitbucket Server Passwd Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-bitbucket-server-passwd-clear-secret-info) block (within [`code_base_integration.bitbucket_server.passwd`](#code-base-integration-bitbucket-server-passwd)) supports the following:
 
@@ -200,7 +200,7 @@ A [`clear_secret_info`](#code-base-integration-bitbucket-server-passwd-clear-sec
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Github
+#### Code Base Integration Github
 
 A [`github`](#code-base-integration-github) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -210,7 +210,7 @@ A [`github`](#code-base-integration-github) block (within [`code_base_integratio
 
 &#x2022; [`verify_ssl`](#verify-ssl) - Optional Bool<br>GitHub Verify SSL
 
-#### Access Token
+#### Code Base Integration Github Access Token
 
 An [`access_token`](#code-base-integration-github-access-token) block (within [`code_base_integration.github`](#code-base-integration-github)) supports the following:
 
@@ -218,7 +218,7 @@ An [`access_token`](#code-base-integration-github-access-token) block (within [`
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-github-access-token-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Code Base Integration Github Access Token Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-github-access-token-blindfold-secret-info) block (within [`code_base_integration.github.access_token`](#code-base-integration-github-access-token)) supports the following:
 
@@ -228,7 +228,7 @@ A [`blindfold_secret_info`](#code-base-integration-github-access-token-blindfold
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Code Base Integration Github Access Token Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-github-access-token-clear-secret-info) block (within [`code_base_integration.github.access_token`](#code-base-integration-github-access-token)) supports the following:
 
@@ -236,7 +236,7 @@ A [`clear_secret_info`](#code-base-integration-github-access-token-clear-secret-
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Github Enterprise
+#### Code Base Integration Github Enterprise
 
 A [`github_enterprise`](#code-base-integration-github-enterprise) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -246,7 +246,7 @@ A [`github_enterprise`](#code-base-integration-github-enterprise) block (within 
 
 &#x2022; [`username`](#username) - Optional String<br>GitHub Username
 
-#### Access Token
+#### Code Base Integration Github Enterprise Access Token
 
 An [`access_token`](#code-base-integration-github-enterprise-access-token) block (within [`code_base_integration.github_enterprise`](#code-base-integration-github-enterprise)) supports the following:
 
@@ -254,7 +254,7 @@ An [`access_token`](#code-base-integration-github-enterprise-access-token) block
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-github-enterprise-access-token-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Code Base Integration Github Enterprise Access Token Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-github-enterprise-access-token-blindfold-secret-info) block (within [`code_base_integration.github_enterprise.access_token`](#code-base-integration-github-enterprise-access-token)) supports the following:
 
@@ -264,7 +264,7 @@ A [`blindfold_secret_info`](#code-base-integration-github-enterprise-access-toke
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Code Base Integration Github Enterprise Access Token Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-github-enterprise-access-token-clear-secret-info) block (within [`code_base_integration.github_enterprise.access_token`](#code-base-integration-github-enterprise-access-token)) supports the following:
 
@@ -272,13 +272,13 @@ A [`clear_secret_info`](#code-base-integration-github-enterprise-access-token-cl
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Gitlab
+#### Code Base Integration Gitlab
 
 A [`gitlab`](#code-base-integration-gitlab) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
 &#x2022; [`access_token`](#access-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#code-base-integration-gitlab-access-token) below.
 
-#### Access Token
+#### Code Base Integration Gitlab Access Token
 
 An [`access_token`](#code-base-integration-gitlab-access-token) block (within [`code_base_integration.gitlab`](#code-base-integration-gitlab)) supports the following:
 
@@ -286,7 +286,7 @@ An [`access_token`](#code-base-integration-gitlab-access-token) block (within [`
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-gitlab-access-token-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Code Base Integration Gitlab Access Token Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-gitlab-access-token-blindfold-secret-info) block (within [`code_base_integration.gitlab.access_token`](#code-base-integration-gitlab-access-token)) supports the following:
 
@@ -296,7 +296,7 @@ A [`blindfold_secret_info`](#code-base-integration-gitlab-access-token-blindfold
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Code Base Integration Gitlab Access Token Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-gitlab-access-token-clear-secret-info) block (within [`code_base_integration.gitlab.access_token`](#code-base-integration-gitlab-access-token)) supports the following:
 
@@ -304,7 +304,7 @@ A [`clear_secret_info`](#code-base-integration-gitlab-access-token-clear-secret-
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Gitlab Enterprise
+#### Code Base Integration Gitlab Enterprise
 
 A [`gitlab_enterprise`](#code-base-integration-gitlab-enterprise) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
@@ -312,7 +312,7 @@ A [`gitlab_enterprise`](#code-base-integration-gitlab-enterprise) block (within 
 
 &#x2022; [`url`](#url) - Optional String<br>GitLab URL
 
-#### Access Token
+#### Code Base Integration Gitlab Enterprise Access Token
 
 An [`access_token`](#code-base-integration-gitlab-enterprise-access-token) block (within [`code_base_integration.gitlab_enterprise`](#code-base-integration-gitlab-enterprise)) supports the following:
 
@@ -320,7 +320,7 @@ An [`access_token`](#code-base-integration-gitlab-enterprise-access-token) block
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#code-base-integration-gitlab-enterprise-access-token-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Code Base Integration Gitlab Enterprise Access Token Blindfold Secret Info
 
 A [`blindfold_secret_info`](#code-base-integration-gitlab-enterprise-access-token-blindfold-secret-info) block (within [`code_base_integration.gitlab_enterprise.access_token`](#code-base-integration-gitlab-enterprise-access-token)) supports the following:
 
@@ -330,7 +330,7 @@ A [`blindfold_secret_info`](#code-base-integration-gitlab-enterprise-access-toke
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Code Base Integration Gitlab Enterprise Access Token Clear Secret Info
 
 A [`clear_secret_info`](#code-base-integration-gitlab-enterprise-access-token-clear-secret-info) block (within [`code_base_integration.gitlab_enterprise.access_token`](#code-base-integration-gitlab-enterprise-access-token)) supports the following:
 

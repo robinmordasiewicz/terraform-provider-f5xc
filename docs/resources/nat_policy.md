@@ -102,7 +102,7 @@ A [`rules`](#rules) block supports the following:
 
 &#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Virtual Network Reference Type. Carries the reference to virtual network<br>See [Virtual Network](#rules-virtual-network) below.
 
-#### Action
+#### Rules Action
 
 An [`action`](#rules-action) block (within [`rules`](#rules)) supports the following:
 
@@ -110,7 +110,7 @@ An [`action`](#rules-action) block (within [`rules`](#rules)) supports the follo
 
 &#x2022; [`virtual_cidr`](#virtual-cidr) - Optional String<br>Virtual Subnet NAT. Virtual Subnet NAT is static NAT that does a one-to-one translation between the real source IP CIDR in the policy and the virtual CIDR in a bidirectional fashion. The range of the real CIDR and virtual CIDRs should be the same (e.g. if the real CIDR has the CIDR 10.10.10.0/24, the virtual CIDR has 100.100.100.0/24
 
-#### Dynamic
+#### Rules Action Dynamic
 
 A [`dynamic`](#rules-action-dynamic) block (within [`rules.action`](#rules-action)) supports the following:
 
@@ -118,13 +118,13 @@ A [`dynamic`](#rules-action-dynamic) block (within [`rules.action`](#rules-actio
 
 &#x2022; [`pools`](#pools) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Pools](#rules-action-dynamic-pools) below.
 
-#### Elastic Ips
+#### Rules Action Dynamic Elastic Ips
 
 An [`elastic_ips`](#rules-action-dynamic-elastic-ips) block (within [`rules.action.dynamic`](#rules-action-dynamic)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Cloud Elastic IP Reference List. Reference to one or more cloud elastic IP objects<br>See [Refs](#rules-action-dynamic-elastic-ips-refs) below.
 
-#### Refs
+#### Rules Action Dynamic Elastic Ips Refs
 
 A [`refs`](#rules-action-dynamic-elastic-ips-refs) block (within [`rules.action.dynamic.elastic_ips`](#rules-action-dynamic-elastic-ips)) supports the following:
 
@@ -138,19 +138,19 @@ A [`refs`](#rules-action-dynamic-elastic-ips-refs) block (within [`rules.action.
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Pools
+#### Rules Action Dynamic Pools
 
 A [`pools`](#rules-action-dynamic-pools) block (within [`rules.action.dynamic`](#rules-action-dynamic)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
-#### Cloud Connect
+#### Rules Cloud Connect
 
 A [`cloud_connect`](#rules-cloud-connect) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Cloud Connect. Reference to Cloud Connect Object<br>See [Refs](#rules-cloud-connect-refs) below.
 
-#### Refs
+#### Rules Cloud Connect Refs
 
 A [`refs`](#rules-cloud-connect-refs) block (within [`rules.cloud_connect`](#rules-cloud-connect)) supports the following:
 
@@ -164,7 +164,7 @@ A [`refs`](#rules-cloud-connect-refs) block (within [`rules.cloud_connect`](#rul
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Criteria
+#### Rules Criteria
 
 A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the following:
 
@@ -190,7 +190,7 @@ A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the fo
 
 &#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Virtual Network Reference Type. Carries the reference to virtual network<br>See [Virtual Network](#rules-criteria-virtual-network) below.
 
-#### Destination Port
+#### Rules Criteria Destination Port
 
 A [`destination_port`](#rules-criteria-destination-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -200,13 +200,13 @@ A [`destination_port`](#rules-criteria-destination-port) block (within [`rules.c
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
 
-#### Segment
+#### Rules Criteria Segment
 
 A [`segment`](#rules-criteria-segment) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#rules-criteria-segment-refs) below.
 
-#### Refs
+#### Rules Criteria Segment Refs
 
 A [`refs`](#rules-criteria-segment-refs) block (within [`rules.criteria.segment`](#rules-criteria-segment)) supports the following:
 
@@ -220,7 +220,7 @@ A [`refs`](#rules-criteria-segment-refs) block (within [`rules.criteria.segment`
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Source Port
+#### Rules Criteria Source Port
 
 A [`source_port`](#rules-criteria-source-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -230,7 +230,7 @@ A [`source_port`](#rules-criteria-source-port) block (within [`rules.criteria`](
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
 
-#### TCP
+#### Rules Criteria TCP
 
 A [`tcp`](#rules-criteria-tcp) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -238,7 +238,7 @@ A [`tcp`](#rules-criteria-tcp) block (within [`rules.criteria`](#rules-criteria)
 
 &#x2022; [`source_port`](#source-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Source Port](#rules-criteria-tcp-source-port) below.
 
-#### Destination Port
+#### Rules Criteria TCP Destination Port
 
 A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
@@ -248,7 +248,7 @@ A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rul
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
 
-#### Source Port
+#### Rules Criteria TCP Source Port
 
 A [`source_port`](#rules-criteria-tcp-source-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
@@ -258,7 +258,7 @@ A [`source_port`](#rules-criteria-tcp-source-port) block (within [`rules.criteri
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
 
-#### UDP
+#### Rules Criteria UDP
 
 An [`udp`](#rules-criteria-udp) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
@@ -266,7 +266,7 @@ An [`udp`](#rules-criteria-udp) block (within [`rules.criteria`](#rules-criteria
 
 &#x2022; [`source_port`](#source-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Source Port](#rules-criteria-udp-source-port) below.
 
-#### Destination Port
+#### Rules Criteria UDP Destination Port
 
 A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
@@ -276,7 +276,7 @@ A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rul
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
 
-#### Source Port
+#### Rules Criteria UDP Source Port
 
 A [`source_port`](#rules-criteria-udp-source-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
@@ -286,13 +286,13 @@ A [`source_port`](#rules-criteria-udp-source-port) block (within [`rules.criteri
 
 &#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
 
-#### Virtual Network
+#### Rules Criteria Virtual Network
 
 A [`virtual_network`](#rules-criteria-virtual-network) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Virtual Network Reference. Reference to virtual network<br>See [Refs](#rules-criteria-virtual-network-refs) below.
 
-#### Refs
+#### Rules Criteria Virtual Network Refs
 
 A [`refs`](#rules-criteria-virtual-network-refs) block (within [`rules.criteria.virtual_network`](#rules-criteria-virtual-network)) supports the following:
 
@@ -306,13 +306,13 @@ A [`refs`](#rules-criteria-virtual-network-refs) block (within [`rules.criteria.
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Network Interface
+#### Rules Network Interface
 
 A [`network_interface`](#rules-network-interface) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Network Interface. Reference to Network Interface Object<br>See [Refs](#rules-network-interface-refs) below.
 
-#### Refs
+#### Rules Network Interface Refs
 
 A [`refs`](#rules-network-interface-refs) block (within [`rules.network_interface`](#rules-network-interface)) supports the following:
 
@@ -326,13 +326,13 @@ A [`refs`](#rules-network-interface-refs) block (within [`rules.network_interfac
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Segment
+#### Rules Segment
 
 A [`segment`](#rules-segment) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#rules-segment-refs) below.
 
-#### Refs
+#### Rules Segment Refs
 
 A [`refs`](#rules-segment-refs) block (within [`rules.segment`](#rules-segment)) supports the following:
 
@@ -346,13 +346,13 @@ A [`refs`](#rules-segment-refs) block (within [`rules.segment`](#rules-segment))
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Virtual Network
+#### Rules Virtual Network
 
 A [`virtual_network`](#rules-virtual-network) block (within [`rules`](#rules)) supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Virtual Network Reference. Reference to virtual network<br>See [Refs](#rules-virtual-network-refs) below.
 
-#### Refs
+#### Rules Virtual Network Refs
 
 A [`refs`](#rules-virtual-network-refs) block (within [`rules.virtual_network`](#rules-virtual-network)) supports the following:
 
@@ -372,7 +372,7 @@ A [`site`](#site) block supports the following:
 
 &#x2022; [`refs`](#refs) - Optional Block<br>Site. Reference to Site Object<br>See [Refs](#site-refs) below.
 
-#### Refs
+#### Site Refs
 
 A [`refs`](#site-refs) block (within [`site`](#site)) supports the following:
 

@@ -82,7 +82,7 @@ A [`mitigation_type`](#mitigation-type) block supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>Rules. Define the threat levels and the corresponding mitigation actions to be taken<br>See [Rules](#mitigation-type-rules) below.
 
-#### Rules
+#### Mitigation Type Rules
 
 A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigation-type)) supports the following:
 
@@ -90,7 +90,7 @@ A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigatio
 
 &#x2022; [`threat_level`](#threat-level) - Optional Block<br>Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation<br>See [Threat Level](#mitigation-type-rules-threat-level) below.
 
-#### Mitigation Action
+#### Mitigation Type Rules Mitigation Action
 
 A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
@@ -100,7 +100,7 @@ A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within 
 
 &#x2022; [`javascript_challenge`](#javascript-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Threat Level
+#### Mitigation Type Rules Threat Level
 
 A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 

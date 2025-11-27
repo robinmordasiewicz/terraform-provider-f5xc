@@ -90,7 +90,7 @@ A [`business_logic_markup_setting`](#business-logic-markup-setting) block suppor
 
 &#x2022; [`enable`](#enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Discovered API Settings
+#### Business Logic Markup Setting Discovered API Settings
 
 A [`discovered_api_settings`](#business-logic-markup-setting-discovered-api-settings) block (within [`business_logic_markup_setting`](#business-logic-markup-setting)) supports the following:
 

@@ -100,7 +100,7 @@ A [`subjects`](#subjects) block supports the following:
 
 &#x2022; [`user`](#user) - Optional String<br>User. User id of the user
 
-#### Service Account
+#### Subjects Service Account
 
 A [`service_account`](#subjects-service-account) block (within [`subjects`](#subjects)) supports the following:
 

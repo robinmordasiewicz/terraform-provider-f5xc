@@ -123,7 +123,7 @@ A [`peers`](#peers) block supports the following:
 
 &#x2022; [`routing_policies`](#routing-policies) - Optional Block<br>BGP Routing Policy. List of rules which can be applied on all or particular nodes<br>See [Routing Policies](#peers-routing-policies) below.
 
-#### Bfd Enabled
+#### Peers Bfd Enabled
 
 A [`bfd_enabled`](#peers-bfd-enabled) block (within [`peers`](#peers)) supports the following:
 
@@ -133,7 +133,7 @@ A [`bfd_enabled`](#peers-bfd-enabled) block (within [`peers`](#peers)) supports 
 
 &#x2022; [`transmit_interval_milliseconds`](#transmit-interval-milliseconds) - Optional Number<br>Transmit Interval. BFD transmit interval timer, in milliseconds
 
-#### External
+#### Peers External
 
 An [`external`](#peers-external) block (within [`peers`](#peers)) supports the following:
 
@@ -177,7 +177,7 @@ An [`external`](#peers-external) block (within [`peers`](#peers)) supports the f
 
 &#x2022; [`subnet_end_offset_v6`](#subnet-end-offset-v6) - Optional Number<br>Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet
 
-#### Family Inet
+#### Peers External Family Inet
 
 A [`family_inet`](#peers-external-family-inet) block (within [`peers.external`](#peers-external)) supports the following:
 
@@ -185,7 +185,7 @@ A [`family_inet`](#peers-external-family-inet) block (within [`peers.external`](
 
 &#x2022; [`enable`](#enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Interface
+#### Peers External Interface
 
 An [`interface`](#peers-external-interface) block (within [`peers.external`](#peers-external)) supports the following:
 
@@ -195,13 +195,13 @@ An [`interface`](#peers-external-interface) block (within [`peers.external`](#pe
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Interface List
+#### Peers External Interface List
 
 An [`interface_list`](#peers-external-interface-list) block (within [`peers.external`](#peers-external)) supports the following:
 
 &#x2022; [`interfaces`](#interfaces) - Optional Block<br>Interface List. List of network interfaces<br>See [Interfaces](#peers-external-interface-list-interfaces) below.
 
-#### Interfaces
+#### Peers External Interface List Interfaces
 
 An [`interfaces`](#peers-external-interface-list-interfaces) block (within [`peers.external.interface_list`](#peers-external-interface-list)) supports the following:
 
@@ -211,7 +211,7 @@ An [`interfaces`](#peers-external-interface-list-interfaces) block (within [`pee
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Metadata
+#### Peers Metadata
 
 A [`metadata`](#peers-metadata) block (within [`peers`](#peers)) supports the following:
 
@@ -219,13 +219,13 @@ A [`metadata`](#peers-metadata) block (within [`peers`](#peers)) supports the fo
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
-#### Routing Policies
+#### Peers Routing Policies
 
 A [`routing_policies`](#peers-routing-policies) block (within [`peers`](#peers)) supports the following:
 
 &#x2022; [`route_policy`](#route-policy) - Optional Block<br>BGP Routing policy. Route policy to be applied<br>See [Route Policy](#peers-routing-policies-route-policy) below.
 
-#### Route Policy
+#### Peers Routing Policies Route Policy
 
 A [`route_policy`](#peers-routing-policies-route-policy) block (within [`peers.routing_policies`](#peers-routing-policies)) supports the following:
 
@@ -239,13 +239,13 @@ A [`route_policy`](#peers-routing-policies-route-policy) block (within [`peers.r
 
 &#x2022; [`outbound`](#outbound) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Node Name
+#### Peers Routing Policies Route Policy Node Name
 
 A [`node_name`](#peers-routing-policies-route-policy-node-name) block (within [`peers.routing_policies.route_policy`](#peers-routing-policies-route-policy)) supports the following:
 
 &#x2022; [`node`](#node) - Optional List<br>Node of choice. Select BGP Session on which policy will be applied
 
-#### Object Refs
+#### Peers Routing Policies Route Policy Object Refs
 
 An [`object_refs`](#peers-routing-policies-route-policy-object-refs) block (within [`peers.routing_policies.route_policy`](#peers-routing-policies-route-policy)) supports the following:
 
@@ -279,7 +279,7 @@ A [`where`](#where) block supports the following:
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
 
-#### Site
+#### Where Site
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
@@ -291,7 +291,7 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
 
-#### Ref
+#### Where Site Ref
 
 A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
@@ -305,7 +305,7 @@ A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports t
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Virtual Site
+#### Where Virtual Site
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
@@ -317,7 +317,7 @@ A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) support
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
 
-#### Ref
+#### Where Virtual Site Ref
 
 A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 

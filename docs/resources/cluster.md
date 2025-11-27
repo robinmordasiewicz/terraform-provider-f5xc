@@ -170,7 +170,7 @@ A [`http1_config`](#http1-config) block supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#http1-config-header-transformation) below.
 
-#### Header Transformation
+#### Http1 Config Header Transformation
 
 A [`header_transformation`](#http1-config-header-transformation) block (within [`http1_config`](#http1-config)) supports the following:
 
@@ -234,7 +234,7 @@ A [`tls_parameters`](#tls-parameters) block supports the following:
 
 &#x2022; [`use_host_header_as_sni`](#use-host-header-as-sni) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Cert Params
+#### TLS Parameters Cert Params
 
 A [`cert_params`](#tls-parameters-cert-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
@@ -248,7 +248,7 @@ A [`cert_params`](#tls-parameters-cert-params) block (within [`tls_parameters`](
 
 &#x2022; [`validation_params`](#validation-params) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#tls-parameters-cert-params-validation-params) below.
 
-#### Certificates
+#### TLS Parameters Cert Params Certificates
 
 A [`certificates`](#tls-parameters-cert-params-certificates) block (within [`tls_parameters.cert_params`](#tls-parameters-cert-params)) supports the following:
 
@@ -262,7 +262,7 @@ A [`certificates`](#tls-parameters-cert-params-certificates) block (within [`tls
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Validation Params
+#### TLS Parameters Cert Params Validation Params
 
 A [`validation_params`](#tls-parameters-cert-params-validation-params) block (within [`tls_parameters.cert_params`](#tls-parameters-cert-params)) supports the following:
 
@@ -274,13 +274,13 @@ A [`validation_params`](#tls-parameters-cert-params-validation-params) block (wi
 
 &#x2022; [`verify_subject_alt_names`](#verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
-#### Trusted CA
+#### TLS Parameters Cert Params Validation Params Trusted CA
 
 A [`trusted_ca`](#tls-parameters-cert-params-validation-params-trusted-ca) block (within [`tls_parameters.cert_params.validation_params`](#tls-parameters-cert-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
 
-#### Trusted CA List
+#### TLS Parameters Cert Params Validation Params Trusted CA Trusted CA List
 
 A [`trusted_ca_list`](#tls-parameters-cert-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_parameters.cert_params.validation_params.trusted_ca`](#tls-parameters-cert-params-validation-params-trusted-ca)) supports the following:
 
@@ -294,7 +294,7 @@ A [`trusted_ca_list`](#tls-parameters-cert-params-validation-params-trusted-ca-t
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Common Params
+#### TLS Parameters Common Params
 
 A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
@@ -308,7 +308,7 @@ A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameter
 
 &#x2022; [`validation_params`](#validation-params) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#tls-parameters-common-params-validation-params) below.
 
-#### TLS Certificates
+#### TLS Parameters Common Params TLS Certificates
 
 A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -324,13 +324,13 @@ A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (wi
 
 &#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom Hash Algorithms
+#### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
-#### Private Key
+#### TLS Parameters Common Params TLS Certificates Private Key
 
 A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
@@ -338,7 +338,7 @@ A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) bl
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### TLS Parameters Common Params TLS Certificates Private Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -348,7 +348,7 @@ A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-priva
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### TLS Parameters Common Params TLS Certificates Private Key Clear Secret Info
 
 A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -356,7 +356,7 @@ A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-k
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Validation Params
+#### TLS Parameters Common Params Validation Params
 
 A [`validation_params`](#tls-parameters-common-params-validation-params) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -368,13 +368,13 @@ A [`validation_params`](#tls-parameters-common-params-validation-params) block (
 
 &#x2022; [`verify_subject_alt_names`](#verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
-#### Trusted CA
+#### TLS Parameters Common Params Validation Params Trusted CA
 
 A [`trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca) block (within [`tls_parameters.common_params.validation_params`](#tls-parameters-common-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
 
-#### Trusted CA List
+#### TLS Parameters Common Params Validation Params Trusted CA Trusted CA List
 
 A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_parameters.common_params.validation_params.trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca)) supports the following:
 

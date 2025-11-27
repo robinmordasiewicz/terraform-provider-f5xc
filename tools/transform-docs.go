@@ -753,8 +753,8 @@ func transformAnchorsOnly(filePath string, content string) error {
 			}
 
 			skipUntilNextAnchor = false
-			output.WriteString(line)
-			output.WriteString("\n")
+			// Skip writing raw HTML anchor tags - they don't work on Terraform Registry
+			// The H4 headers generated in processNestedBlocks will create proper anchors
 			continue
 		}
 
@@ -793,6 +793,10 @@ func transformAnchorsOnly(filePath string, content string) error {
 
 	// Add "See below" links for attribute-only nested blocks
 	result = addSeeBelowLinksForNestedBlocks(result)
+
+	// Convert bold nested block headers to H4 for proper anchor navigation
+	// Terraform Registry doesn't support raw HTML anchors, but H4 headers auto-generate anchors
+	result = convertBoldToH4Headers(result)
 
 	// Normalize blank lines and write
 	result = normalizeBlankLines(result)
@@ -846,6 +850,33 @@ func convertContextLinesToLinks(content string) string {
 	})
 
 	return content
+}
+
+// convertBoldToH4Headers converts standalone bold text headers to H4 headers
+// This enables proper anchor navigation on Terraform Registry, which doesn't support
+// raw HTML <a id="..."> anchor tags. H4 headers auto-generate anchors from their text.
+// Example: "**CORS Policy**" → "#### CORS Policy"
+// The resulting "#### CORS Policy" generates anchor "#cors-policy" which matches toAnchorName("cors_policy")
+func convertBoldToH4Headers(content string) string {
+	lines := strings.Split(content, "\n")
+	var result []string
+
+	// Match standalone bold text: starts and ends with ** and contains only text
+	// Pattern: ^\*\*([^*]+)\*\*$
+	boldHeaderRegex := regexp.MustCompile(`^\*\*([^*]+)\*\*$`)
+
+	for _, line := range lines {
+		trimmed := strings.TrimSpace(line)
+		if m := boldHeaderRegex.FindStringSubmatch(trimmed); m != nil {
+			// Convert bold to H4 header
+			headerText := m[1]
+			result = append(result, fmt.Sprintf("#### %s", headerText))
+		} else {
+			result = append(result, line)
+		}
+	}
+
+	return strings.Join(result, "\n")
 }
 
 // addSeeBelowLinksForNestedBlocks adds "See [Block Name](#anchor) below for details." suffix
@@ -1439,8 +1470,9 @@ func transformDoc(filePath string) error {
 				continue
 			}
 
-			// Transform nested schema headers to BOLD text (not H3) to prevent Registry truncation
-			// Single-page rendering: H3→bold conversion allows full content to render
+			// Transform nested schema headers to H4 (not H3) for proper anchor navigation
+			// H4 headers auto-generate anchors that match our toAnchorName() output
+			// e.g., "#### CORS Policy" generates anchor "#cors-policy"
 			// Following AzureRM pattern: add context line showing parent relationship
 			if strings.HasPrefix(line, "### Nested Schema for") {
 				headerRegex := regexp.MustCompile(`### Nested Schema for \x60([^\x60]+)\x60`)
@@ -1454,8 +1486,8 @@ func transformDoc(filePath string) error {
 					lastSegment := pathParts[len(pathParts)-1]
 					displayName := toTitleCase(lastSegment)
 
-					// Use bold text instead of H3 to prevent truncation
-					output.WriteString(fmt.Sprintf("**%s**\n\n", displayName))
+					// Use H4 header to create proper navigable anchor on Terraform Registry
+					output.WriteString(fmt.Sprintf("#### %s\n\n", displayName))
 
 					// Add AzureRM-style context line showing parent relationship with clickable links
 					// Example: "A [`policies`](#active-service-policies-policies) block (within [`active_service_policies`](#active-service-policies)) supports the following:"
@@ -1482,9 +1514,9 @@ func transformDoc(filePath string) error {
 				}
 				continue
 			} else if strings.HasPrefix(line, "### ") && !strings.HasPrefix(line, "### Nested") && inNestedBlock {
-				// Convert any H3 headers in nested blocks to bold text
+				// Convert any H3 headers in nested blocks to H4 for proper anchor navigation
 				headerText := strings.TrimPrefix(line, "### ")
-				output.WriteString(fmt.Sprintf("**%s**\n\n", headerText))
+				output.WriteString(fmt.Sprintf("#### %s\n\n", headerText))
 				continue
 			}
 

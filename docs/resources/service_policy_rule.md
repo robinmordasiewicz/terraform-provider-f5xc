@@ -121,11 +121,11 @@ resource "f5xc_service_policy_rule" "example" {
 
 &#x2022; [`request_constraints`](#request-constraints) - Optional Block<br>Request Constraints<br>See [Request Constraints](#request-constraints) below for details.
 
-&#x2022; [`segment_policy`](#segment-policy) - Optional Block<br>Configure Segments. Configure source and destination segment for policy
+&#x2022; [`segment_policy`](#segment-policy) - Optional Block<br>Configure Segments. Configure source and destination segment for policy<br>See [Segment Policy](#segment-policy) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; [`waf_action`](#waf-action) - Optional Block<br>App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings
+&#x2022; [`waf_action`](#waf-action) - Optional Block<br>App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings<br>See [WAF Action](#waf-action) below for details.
 
 ### Attributes Reference
 

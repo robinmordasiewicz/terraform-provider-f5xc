@@ -77,7 +77,7 @@ resource "f5xc_proxy" "example" {
 &#x2022; [`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 <br><br>&#x2022; [`site_local_network`](#site-local-network) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

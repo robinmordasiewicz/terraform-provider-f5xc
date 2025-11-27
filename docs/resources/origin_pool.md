@@ -144,9 +144,9 @@ resource "f5xc_origin_pool" "example" {
 
 &#x2022; [`origin_servers`](#origin-servers) - Optional Block<br>Origin Servers. List of origin servers in this pool<br>See [Origin Servers](#origin-servers) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) - Optional Block<br>Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only
+&#x2022; [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) - Optional Block<br>Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only<br>See [Upstream Conn Pool Reuse Type](#upstream-conn-pool-reuse-type) below for details.
 
 ### Attributes Reference
 

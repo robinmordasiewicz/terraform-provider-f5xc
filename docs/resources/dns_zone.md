@@ -81,7 +81,7 @@ resource "f5xc_dns_zone" "example" {
 
 &#x2022; [`rr_set_group`](#rr-set-group) - Optional Block<br>Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5<br>See [Rr Set Group](#rr-set-group) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block
+&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 

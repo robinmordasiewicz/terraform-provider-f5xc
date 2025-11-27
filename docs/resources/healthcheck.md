@@ -104,39 +104,39 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`http_health_check`](#http-health-check) block supports the following:
 
-&#x2022; [`expected_status_codes`](#expected-status-codes) - Optional List<br>Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'
+&#x2022; [`expected_status_codes`](#http-health-check-expected-status-codes) - Optional List<br>Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'
 
-&#x2022; [`headers`](#headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs
+&#x2022; [`headers`](#http-health-check-headers) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs
 
-&#x2022; [`host_header`](#host-header) - Optional String<br>Host Header Value. The value of the host header
+&#x2022; [`host_header`](#http-health-check-host-header) - Optional String<br>Host Header Value. The value of the host header
 
-&#x2022; [`path`](#path) - Optional String<br>Path. Specifies the HTTP path that will be requested during health checking
+&#x2022; [`path`](#http-health-check-path) - Optional String<br>Path. Specifies the HTTP path that will be requested during health checking
 
-&#x2022; [`request_headers_to_remove`](#request-headers-to-remove) - Optional List<br>Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers
+&#x2022; [`request_headers_to_remove`](#http-health-check-request-headers-to-remove) - Optional List<br>Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers
 
-&#x2022; [`use_http2`](#use-http2) - Optional Bool<br>Use HTTP2. If set, health checks will be made using HTTP/2
+&#x2022; [`use_http2`](#http-health-check-use-http2) - Optional Bool<br>Use HTTP2. If set, health checks will be made using HTTP/2
 
-&#x2022; [`use_origin_server_name`](#use-origin-server-name) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`use_origin_server_name`](#http-health-check-use-origin-server-name) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### TCP Health Check
 
 A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
-&#x2022; [`expected_response`](#expected-response) - Optional String<br>Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload
+&#x2022; [`expected_response`](#tcp-health-check-expected-response) - Optional String<br>Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload
 
-&#x2022; [`send_payload`](#send-payload) - Optional String<br>Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload
+&#x2022; [`send_payload`](#tcp-health-check-send-payload) - Optional String<br>Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

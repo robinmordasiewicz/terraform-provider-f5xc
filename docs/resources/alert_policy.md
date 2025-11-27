@@ -92,145 +92,145 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`notification_parameters`](#notification-parameters) block supports the following:
 
-&#x2022; [`custom`](#custom) - Optional Block<br>Custom Group By. Specify list of custom labels to group/aggregate the alerts<br>See [Custom](#notification-parameters-custom) below.
+&#x2022; [`custom`](#notification-parameters-custom) - Optional Block<br>Custom Group By. Specify list of custom labels to group/aggregate the alerts<br>See [Custom](#notification-parameters-custom) below.
 
-&#x2022; [`default`](#default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default`](#notification-parameters-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`group_interval`](#group-interval) - Optional String<br>Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'
+&#x2022; [`group_interval`](#notification-parameters-group-interval) - Optional String<br>Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'
 
-&#x2022; [`group_wait`](#group-wait) - Optional String<br>Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'
+&#x2022; [`group_wait`](#notification-parameters-group-wait) - Optional String<br>Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'
 
-&#x2022; [`individual`](#individual) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`individual`](#notification-parameters-individual) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`repeat_interval`](#repeat-interval) - Optional String<br>Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'
+&#x2022; [`repeat_interval`](#notification-parameters-repeat-interval) - Optional String<br>Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'
 
-&#x2022; [`ves_io_group`](#ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`ves_io_group`](#notification-parameters-ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Notification Parameters Custom
 
 A [`custom`](#notification-parameters-custom) block (within [`notification_parameters`](#notification-parameters)) supports the following:
 
-&#x2022; [`labels`](#labels) - Optional List<br>Labels. Name of labels to group/aggregate the alerts
+&#x2022; [`labels`](#notification-parameters-custom-labels) - Optional List<br>Labels. Name of labels to group/aggregate the alerts
 
 #### Receivers
 
 A [`receivers`](#receivers) block supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#receivers-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#receivers-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#receivers-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#receivers-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#receivers-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Routes
 
 A [`routes`](#routes) block supports the following:
 
-&#x2022; [`alertname`](#alertname) - Optional String  Defaults to `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`<br>Possible values are `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`, `SITE_PHYSICAL_INTERFACE_DOWN`, `TUNNELS_TO_CUSTOMER_SITE_DOWN`, `SERVICE_SERVER_ERROR`, `SERVICE_CLIENT_ERROR`, `SERVICE_HEALTH_LOW`, `SERVICE_UNAVAILABLE`, `SERVICE_SERVER_ERROR_PER_SOURCE_SITE`, `SERVICE_CLIENT_ERROR_PER_SOURCE_SITE`, `SERVICE_ENDPOINT_HEALTHCHECK_FAILURE`, `SYNTHETIC_MONITOR_HEALTH_CRITICAL`, `MALICIOUS_USER_DETECTED`, `WAF_TOO_MANY_ATTACKS`, `API_SECURITY_TOO_MANY_ATTACKS`, `SERVICE_POLICY_TOO_MANY_ATTACKS`, `WAF_TOO_MANY_MALICIOUS_BOTS`, `BOT_DEFENSE_TOO_MANY_SECURITY_EVENTS`, `THREAT_CAMPAIGN`, `VES_CLIENT_SIDE_DEFENSE_SUSPICIOUS_DOMAIN`, `VES_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD_READ`, `ERROR_RATE_ANOMALY`, `REQUEST_RATE_ANOMALY`, `REQUEST_THROUGHPUT_ANOMALY`, `RESPONSE_LATENCY_ANOMALY`, `RESPONSE_THROUGHPUT_ANOMALY`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_FAILURE`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_STILL_FAILING`, `TLS_AUTOMATIC_CERTIFICATE_EXPIRED`, `TLS_CUSTOM_CERTIFICATE_EXPIRING`, `TLS_CUSTOM_CERTIFICATE_EXPIRING_SOON`, `TLS_CUSTOM_CERTIFICATE_EXPIRED`, `L7DDOS`, `DNS_ZONE_IGNORED_DUPLICATE_RECORD`, `API_SECURITY_UNUSED_API_DETECTED`, `API_SECURITY_SHADOW_API_DETECTED`, `API_SECURITY_SENSITIVE_DATA_IN_RESPONSE_DETECTED`, `API_SECURITY_RISK_SCORE_HIGH_DETECTED`, `ROUTED_DDOS_ALERT_NOTIFICATION`, `ROUTED_DDOS_MITIGATION_NOTIFICATION`<br>AlertName. List of Alert Names Customer tunnel interface down Physical Interface down Tunnel Interfaces to Customer Site Down Virutal Host server error Virtual Host client error Service Health Low Service Unavailable Virtual Host server error Virtual Host client error Endpoint Healthcheck failure Synthetic monitor health critical Malicious user detected Virtual Host WAF security events detected Virtual Host API security events detected Virtual Host Service Policy security events detected Virtual Host Many Malicious Bots based WAF security events detected Virtual Host Many Malicious Bots based Bot Defense security events detected Virtual Host Many Threat campaign based WAF security events detected Suspicious domain identified by Client-Side Defense service Client-Side Defense has identified a suspicious script that is reading sensitive form field Error rate anomaly detected Request rate anomaly detected Request throughput anomaly detected Response latency anomaly detected Response throughput anomaly detected TLS Automatic Certificate renewal is failing TLS Automatic Certificate renewal is still failing after multiple retries TLS Automatic Certificate has expired TLS Custom Certificate will expire in less than 28 days TLS Custom Certificate will expire in less than 15 days TLS Custom Certificate has expired DDOS security event detected DNS Zone Ignored a Duplicate Record Create Request Unused APIs Detected Shadow APIs Detected Endpoints With Sensitive Data In Response Detected High Risk Score Endpoints Detected A routed DDOS traffic anomaly has been detected A routed DDOS mitigation has been implemented to block malicious traffic
+&#x2022; [`alertname`](#routes-alertname) - Optional String  Defaults to `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`<br>Possible values are `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`, `SITE_PHYSICAL_INTERFACE_DOWN`, `TUNNELS_TO_CUSTOMER_SITE_DOWN`, `SERVICE_SERVER_ERROR`, `SERVICE_CLIENT_ERROR`, `SERVICE_HEALTH_LOW`, `SERVICE_UNAVAILABLE`, `SERVICE_SERVER_ERROR_PER_SOURCE_SITE`, `SERVICE_CLIENT_ERROR_PER_SOURCE_SITE`, `SERVICE_ENDPOINT_HEALTHCHECK_FAILURE`, `SYNTHETIC_MONITOR_HEALTH_CRITICAL`, `MALICIOUS_USER_DETECTED`, `WAF_TOO_MANY_ATTACKS`, `API_SECURITY_TOO_MANY_ATTACKS`, `SERVICE_POLICY_TOO_MANY_ATTACKS`, `WAF_TOO_MANY_MALICIOUS_BOTS`, `BOT_DEFENSE_TOO_MANY_SECURITY_EVENTS`, `THREAT_CAMPAIGN`, `VES_CLIENT_SIDE_DEFENSE_SUSPICIOUS_DOMAIN`, `VES_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD_READ`, `ERROR_RATE_ANOMALY`, `REQUEST_RATE_ANOMALY`, `REQUEST_THROUGHPUT_ANOMALY`, `RESPONSE_LATENCY_ANOMALY`, `RESPONSE_THROUGHPUT_ANOMALY`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_FAILURE`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_STILL_FAILING`, `TLS_AUTOMATIC_CERTIFICATE_EXPIRED`, `TLS_CUSTOM_CERTIFICATE_EXPIRING`, `TLS_CUSTOM_CERTIFICATE_EXPIRING_SOON`, `TLS_CUSTOM_CERTIFICATE_EXPIRED`, `L7DDOS`, `DNS_ZONE_IGNORED_DUPLICATE_RECORD`, `API_SECURITY_UNUSED_API_DETECTED`, `API_SECURITY_SHADOW_API_DETECTED`, `API_SECURITY_SENSITIVE_DATA_IN_RESPONSE_DETECTED`, `API_SECURITY_RISK_SCORE_HIGH_DETECTED`, `ROUTED_DDOS_ALERT_NOTIFICATION`, `ROUTED_DDOS_MITIGATION_NOTIFICATION`<br>AlertName. List of Alert Names Customer tunnel interface down Physical Interface down Tunnel Interfaces to Customer Site Down Virutal Host server error Virtual Host client error Service Health Low Service Unavailable Virtual Host server error Virtual Host client error Endpoint Healthcheck failure Synthetic monitor health critical Malicious user detected Virtual Host WAF security events detected Virtual Host API security events detected Virtual Host Service Policy security events detected Virtual Host Many Malicious Bots based WAF security events detected Virtual Host Many Malicious Bots based Bot Defense security events detected Virtual Host Many Threat campaign based WAF security events detected Suspicious domain identified by Client-Side Defense service Client-Side Defense has identified a suspicious script that is reading sensitive form field Error rate anomaly detected Request rate anomaly detected Request throughput anomaly detected Response latency anomaly detected Response throughput anomaly detected TLS Automatic Certificate renewal is failing TLS Automatic Certificate renewal is still failing after multiple retries TLS Automatic Certificate has expired TLS Custom Certificate will expire in less than 28 days TLS Custom Certificate will expire in less than 15 days TLS Custom Certificate has expired DDOS security event detected DNS Zone Ignored a Duplicate Record Create Request Unused APIs Detected Shadow APIs Detected Endpoints With Sensitive Data In Response Detected High Risk Score Endpoints Detected A routed DDOS traffic anomaly has been detected A routed DDOS mitigation has been implemented to block malicious traffic
 
-&#x2022; [`alertname_regex`](#alertname-regex) - Optional String<br>Matching RegEx of Alertname. Regular Expression match for the alertname
+&#x2022; [`alertname_regex`](#routes-alertname-regex) - Optional String<br>Matching RegEx of Alertname. Regular Expression match for the alertname
 
-&#x2022; [`any`](#any) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`any`](#routes-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`custom`](#custom) - Optional Block<br>Custom Matcher. A set of matchers an alert has to fulfill to match the route<br>See [Custom](#routes-custom) below.
+&#x2022; [`custom`](#routes-custom) - Optional Block<br>Custom Matcher. A set of matchers an alert has to fulfill to match the route<br>See [Custom](#routes-custom) below.
 
-&#x2022; [`dont_send`](#dont-send) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`dont_send`](#routes-dont-send) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`group`](#group) - Optional Block<br>Group Matcher. Select one or more known group names to match the incoming alert<br>See [Group](#routes-group) below.
+&#x2022; [`group`](#routes-group) - Optional Block<br>Group Matcher. Select one or more known group names to match the incoming alert<br>See [Group](#routes-group) below.
 
-&#x2022; [`notification_parameters`](#notification-parameters) - Optional Block<br>Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers<br>See [Notification Parameters](#routes-notification-parameters) below.
+&#x2022; [`notification_parameters`](#routes-notification-parameters) - Optional Block<br>Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers<br>See [Notification Parameters](#routes-notification-parameters) below.
 
-&#x2022; [`send`](#send) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`send`](#routes-send) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`severity`](#severity) - Optional Block<br>Severity Matcher. Select one or more severity levels to match the incoming alert<br>See [Severity](#routes-severity) below.
+&#x2022; [`severity`](#routes-severity) - Optional Block<br>Severity Matcher. Select one or more severity levels to match the incoming alert<br>See [Severity](#routes-severity) below.
 
 #### Routes Custom
 
 A [`custom`](#routes-custom) block (within [`routes`](#routes)) supports the following:
 
-&#x2022; [`alertlabel`](#alertlabel) - Optional Block<br>AlertLabel. AlertLabel to configure the alert policy rule
+&#x2022; [`alertlabel`](#routes-custom-alertlabel) - Optional Block<br>AlertLabel. AlertLabel to configure the alert policy rule
 
-&#x2022; [`alertname`](#alertname) - Optional Block<br>Label Matcher<br>See [Alertname](#routes-custom-alertname) below.
+&#x2022; [`alertname`](#routes-custom-alertname) - Optional Block<br>Label Matcher<br>See [Alertname](#routes-custom-alertname) below.
 
-&#x2022; [`group`](#group) - Optional Block<br>Label Matcher<br>See [Group](#routes-custom-group) below.
+&#x2022; [`group`](#routes-custom-group) - Optional Block<br>Label Matcher<br>See [Group](#routes-custom-group) below.
 
-&#x2022; [`severity`](#severity) - Optional Block<br>Label Matcher<br>See [Severity](#routes-custom-severity) below.
+&#x2022; [`severity`](#routes-custom-severity) - Optional Block<br>Label Matcher<br>See [Severity](#routes-custom-severity) below.
 
 #### Routes Custom Alertname
 
 An [`alertname`](#routes-custom-alertname) block (within [`routes.custom`](#routes-custom)) supports the following:
 
-&#x2022; [`exact_match`](#exact-match) - Optional String<br>Exact Match. Equality match value for the label
+&#x2022; [`exact_match`](#routes-custom-alertname-exact-match) - Optional String<br>Exact Match. Equality match value for the label
 
-&#x2022; [`regex_match`](#regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
+&#x2022; [`regex_match`](#routes-custom-alertname-regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
 
 #### Routes Custom Group
 
 A [`group`](#routes-custom-group) block (within [`routes.custom`](#routes-custom)) supports the following:
 
-&#x2022; [`exact_match`](#exact-match) - Optional String<br>Exact Match. Equality match value for the label
+&#x2022; [`exact_match`](#routes-custom-group-exact-match) - Optional String<br>Exact Match. Equality match value for the label
 
-&#x2022; [`regex_match`](#regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
+&#x2022; [`regex_match`](#routes-custom-group-regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
 
 #### Routes Custom Severity
 
 A [`severity`](#routes-custom-severity) block (within [`routes.custom`](#routes-custom)) supports the following:
 
-&#x2022; [`exact_match`](#exact-match) - Optional String<br>Exact Match. Equality match value for the label
+&#x2022; [`exact_match`](#routes-custom-severity-exact-match) - Optional String<br>Exact Match. Equality match value for the label
 
-&#x2022; [`regex_match`](#regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
+&#x2022; [`regex_match`](#routes-custom-severity-regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
 
 #### Routes Group
 
 A [`group`](#routes-group) block (within [`routes`](#routes)) supports the following:
 
-&#x2022; [`groups`](#groups) - Optional List  Defaults to `INFRASTRUCTURE`<br>Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`<br>Groups. Name of groups to match the alert
+&#x2022; [`groups`](#routes-group-groups) - Optional List  Defaults to `INFRASTRUCTURE`<br>Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`<br>Groups. Name of groups to match the alert
 
 #### Routes Notification Parameters
 
 A [`notification_parameters`](#routes-notification-parameters) block (within [`routes`](#routes)) supports the following:
 
-&#x2022; [`custom`](#custom) - Optional Block<br>Custom Group By. Specify list of custom labels to group/aggregate the alerts<br>See [Custom](#routes-notification-parameters-custom) below.
+&#x2022; [`custom`](#routes-notification-parameters-custom) - Optional Block<br>Custom Group By. Specify list of custom labels to group/aggregate the alerts<br>See [Custom](#routes-notification-parameters-custom) below.
 
-&#x2022; [`default`](#default) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default`](#routes-notification-parameters-default) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`group_interval`](#group-interval) - Optional String<br>Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'
+&#x2022; [`group_interval`](#routes-notification-parameters-group-interval) - Optional String<br>Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'
 
-&#x2022; [`group_wait`](#group-wait) - Optional String<br>Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'
+&#x2022; [`group_wait`](#routes-notification-parameters-group-wait) - Optional String<br>Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'
 
-&#x2022; [`individual`](#individual) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`individual`](#routes-notification-parameters-individual) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`repeat_interval`](#repeat-interval) - Optional String<br>Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'
+&#x2022; [`repeat_interval`](#routes-notification-parameters-repeat-interval) - Optional String<br>Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'
 
-&#x2022; [`ves_io_group`](#ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`ves_io_group`](#routes-notification-parameters-ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Routes Notification Parameters Custom
 
 A [`custom`](#routes-notification-parameters-custom) block (within [`routes.notification_parameters`](#routes-notification-parameters)) supports the following:
 
-&#x2022; [`labels`](#labels) - Optional List<br>Labels. Name of labels to group/aggregate the alerts
+&#x2022; [`labels`](#routes-notification-parameters-custom-labels) - Optional List<br>Labels. Name of labels to group/aggregate the alerts
 
 #### Routes Severity
 
 A [`severity`](#routes-severity) block (within [`routes`](#routes)) supports the following:
 
-&#x2022; [`severities`](#severities) - Optional List  Defaults to `MINOR`<br>Possible values are `MINOR`, `MAJOR`, `CRITICAL`<br>Severities. List of severity levels
+&#x2022; [`severities`](#routes-severity-severities) - Optional List  Defaults to `MINOR`<br>Possible values are `MINOR`, `MAJOR`, `CRITICAL`<br>Severities. List of severity levels
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

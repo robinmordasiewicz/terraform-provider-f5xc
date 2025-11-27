@@ -87,159 +87,159 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`enable_forward_proxy`](#enable-forward-proxy) block supports the following:
 
-&#x2022; [`connection_timeout`](#connection-timeout) - Optional Number  Defaults to `2000`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to upstream server.  The (2 seconds)
+&#x2022; [`connection_timeout`](#enable-forward-proxy-connection-timeout) - Optional Number  Defaults to `2000`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to upstream server.  The (2 seconds)
 
-&#x2022; [`max_connect_attempts`](#max-connect-attempts) - Optional Number  Defaults to `1`<br>Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server
+&#x2022; [`max_connect_attempts`](#enable-forward-proxy-max-connect-attempts) - Optional Number  Defaults to `1`<br>Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server
 
-&#x2022; [`no_interception`](#no-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_interception`](#enable-forward-proxy-no-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`tls_intercept`](#tls-intercept) - Optional Block<br>Configuration for TLS interception. Configuration to enable TLS interception<br>See [TLS Intercept](#enable-forward-proxy-tls-intercept) below.
+&#x2022; [`tls_intercept`](#enable-forward-proxy-tls-intercept) - Optional Block<br>Configuration for TLS interception. Configuration to enable TLS interception<br>See [TLS Intercept](#enable-forward-proxy-tls-intercept) below.
 
-&#x2022; [`white_listed_ports`](#white-listed-ports) - Optional List<br>TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port
+&#x2022; [`white_listed_ports`](#enable-forward-proxy-white-listed-ports) - Optional List<br>TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port
 
-&#x2022; [`white_listed_prefixes`](#white-listed-prefixes) - Optional List<br>IP Prefixes to Skip Protocol Parsing. Traffic to these destination IP prefixes is not subjected to protocol parsing Example 'tmate' server IP
+&#x2022; [`white_listed_prefixes`](#enable-forward-proxy-white-listed-prefixes) - Optional List<br>IP Prefixes to Skip Protocol Parsing. Traffic to these destination IP prefixes is not subjected to protocol parsing Example 'tmate' server IP
 
 #### Enable Forward Proxy TLS Intercept
 
 A [`tls_intercept`](#enable-forward-proxy-tls-intercept) block (within [`enable_forward_proxy`](#enable-forward-proxy)) supports the following:
 
-&#x2022; [`custom_certificate`](#custom-certificate) - Optional Block<br>TLS Certificate. Handle to fetch certificate and key<br>See [Custom Certificate](#enable-forward-proxy-tls-intercept-custom-certificate) below.
+&#x2022; [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate) - Optional Block<br>TLS Certificate. Handle to fetch certificate and key<br>See [Custom Certificate](#enable-forward-proxy-tls-intercept-custom-certificate) below.
 
-&#x2022; [`enable_for_all_domains`](#enable-for-all-domains) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`enable_for_all_domains`](#enable-forward-proxy-tls-intercept-enable-for-all-domains) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`policy`](#policy) - Optional Block<br>TLS Interception Policy. Policy to enable or disable TLS interception<br>See [Policy](#enable-forward-proxy-tls-intercept-policy) below.
+&#x2022; [`policy`](#enable-forward-proxy-tls-intercept-policy) - Optional Block<br>TLS Interception Policy. Policy to enable or disable TLS interception<br>See [Policy](#enable-forward-proxy-tls-intercept-policy) below.
 
-&#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate
+&#x2022; [`trusted_ca_url`](#enable-forward-proxy-tls-intercept-trusted-ca-url) - Optional String<br>Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate
 
-&#x2022; [`volterra_certificate`](#volterra-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`volterra_certificate`](#enable-forward-proxy-tls-intercept-volterra-certificate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`volterra_trusted_ca`](#volterra-trusted-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`volterra_trusted_ca`](#enable-forward-proxy-tls-intercept-volterra-trusted-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate
 
 A [`custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate) block (within [`enable_forward_proxy.tls_intercept`](#enable-forward-proxy-tls-intercept)) supports the following:
 
-&#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
+&#x2022; [`certificate_url`](#enable-forward-proxy-tls-intercept-custom-certificate-certificate-url) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
-&#x2022; [`custom_hash_algorithms`](#custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) below.
+&#x2022; [`custom_hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) below.
 
-&#x2022; [`description`](#description) - Optional String<br>Description. Description for the certificate
+&#x2022; [`description`](#enable-forward-proxy-tls-intercept-custom-certificate-description) - Optional String<br>Description. Description for the certificate
 
-&#x2022; [`disable_ocsp_stapling`](#disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable_ocsp_stapling`](#enable-forward-proxy-tls-intercept-custom-certificate-disable-ocsp-stapling) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`private_key`](#private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) below.
+&#x2022; [`private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) below.
 
-&#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`use_system_defaults`](#enable-forward-proxy-tls-intercept-custom-certificate-use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms) block (within [`enable_forward_proxy.tls_intercept.custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)) supports the following:
 
-&#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
+&#x2022; [`hash_algorithms`](#enable-forward-proxy-tls-intercept-custom-certificate-custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Private Key
 
 A [`private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key) block (within [`enable_forward_proxy.tls_intercept.custom_certificate`](#enable-forward-proxy-tls-intercept-custom-certificate)) supports the following:
 
-&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info) below.
+&#x2022; [`blindfold_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info) below.
 
-&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info) below.
+&#x2022; [`clear_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info) below.
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Private Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info) block (within [`enable_forward_proxy.tls_intercept.custom_certificate.private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key)) supports the following:
 
-&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; [`decryption_provider`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; [`location`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`store_provider`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Private Key Clear Secret Info
 
 A [`clear_secret_info`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info) block (within [`enable_forward_proxy.tls_intercept.custom_certificate.private_key`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key)) supports the following:
 
-&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`provider_ref`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; [`url`](#enable-forward-proxy-tls-intercept-custom-certificate-private-key-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Enable Forward Proxy TLS Intercept Policy
 
 A [`policy`](#enable-forward-proxy-tls-intercept-policy) block (within [`enable_forward_proxy.tls_intercept`](#enable-forward-proxy-tls-intercept)) supports the following:
 
-&#x2022; [`interception_rules`](#interception-rules) - Optional Block<br>TLS Interception Rules. List of ordered rules to enable or disable for TLS interception<br>See [Interception Rules](#enable-forward-proxy-tls-intercept-policy-interception-rules) below.
+&#x2022; [`interception_rules`](#enable-forward-proxy-tls-intercept-policy-interception-rules) - Optional Block<br>TLS Interception Rules. List of ordered rules to enable or disable for TLS interception<br>See [Interception Rules](#enable-forward-proxy-tls-intercept-policy-interception-rules) below.
 
 #### Enable Forward Proxy TLS Intercept Policy Interception Rules
 
 An [`interception_rules`](#enable-forward-proxy-tls-intercept-policy-interception-rules) block (within [`enable_forward_proxy.tls_intercept.policy`](#enable-forward-proxy-tls-intercept-policy)) supports the following:
 
-&#x2022; [`disable_interception`](#disable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable_interception`](#enable-forward-proxy-tls-intercept-policy-interception-rules-disable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`domain_match`](#domain-match) - Optional Block<br>Domains. Domains names<br>See [Domain Match](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match) below.
+&#x2022; [`domain_match`](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match) - Optional Block<br>Domains. Domains names<br>See [Domain Match](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match) below.
 
-&#x2022; [`enable_interception`](#enable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`enable_interception`](#enable-forward-proxy-tls-intercept-policy-interception-rules-enable-interception) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Enable Forward Proxy TLS Intercept Policy Interception Rules Domain Match
 
 A [`domain_match`](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match) block (within [`enable_forward_proxy.tls_intercept.policy.interception_rules`](#enable-forward-proxy-tls-intercept-policy-interception-rules)) supports the following:
 
-&#x2022; [`exact_value`](#exact-value) - Optional String<br>Exact Value. Exact domain name
+&#x2022; [`exact_value`](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match-exact-value) - Optional String<br>Exact Value. Exact domain name
 
-&#x2022; [`regex_value`](#regex-value) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
+&#x2022; [`regex_value`](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match-regex-value) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
 
-&#x2022; [`suffix_value`](#suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+&#x2022; [`suffix_value`](#enable-forward-proxy-tls-intercept-policy-interception-rules-domain-match-suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
 #### Sli To Global DR
 
 A [`sli_to_global_dr`](#sli-to-global-dr) block supports the following:
 
-&#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#sli-to-global-dr-global-vn) below.
+&#x2022; [`global_vn`](#sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#sli-to-global-dr-global-vn) below.
 
 #### Sli To Global DR Global Vn
 
 A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](#sli-to-global-dr)) supports the following:
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#sli-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#sli-to-global-dr-global-vn-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#sli-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Sli To Slo Snat
 
 A [`sli_to_slo_snat`](#sli-to-slo-snat) block supports the following:
 
-&#x2022; [`default_gw_snat`](#default-gw-snat) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default_gw_snat`](#sli-to-slo-snat-default-gw-snat) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`interface_ip`](#interface-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`interface_ip`](#sli-to-slo-snat-interface-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Slo To Global DR
 
 A [`slo_to_global_dr`](#slo-to-global-dr) block supports the following:
 
-&#x2022; [`global_vn`](#global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#slo-to-global-dr-global-vn) below.
+&#x2022; [`global_vn`](#slo-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#slo-to-global-dr-global-vn) below.
 
 #### Slo To Global DR Global Vn
 
 A [`global_vn`](#slo-to-global-dr-global-vn) block (within [`slo_to_global_dr`](#slo-to-global-dr)) supports the following:
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#slo-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#slo-to-global-dr-global-vn-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#slo-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

@@ -83,95 +83,95 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`syslog`](#syslog) block supports the following:
 
-&#x2022; [`syslog_rfc5424`](#syslog-rfc5424) - Optional Number<br>Syslog RFC5424 Format. Select RFC5424 syslog format and maximum message length
+&#x2022; [`syslog_rfc5424`](#syslog-syslog-rfc5424) - Optional Number<br>Syslog RFC5424 Format. Select RFC5424 syslog format and maximum message length
 
-&#x2022; [`tcp_server`](#tcp-server) - Optional Block<br>TCP Server name and Port Number. Name and port number for a TCP server<br>See [TCP Server](#syslog-tcp-server) below.
+&#x2022; [`tcp_server`](#syslog-tcp-server) - Optional Block<br>TCP Server name and Port Number. Name and port number for a TCP server<br>See [TCP Server](#syslog-tcp-server) below.
 
-&#x2022; [`tls_server`](#tls-server) - Optional Block<br>Client TLS Config. TLS config for client of discovery service<br>See [TLS Server](#syslog-tls-server) below.
+&#x2022; [`tls_server`](#syslog-tls-server) - Optional Block<br>Client TLS Config. TLS config for client of discovery service<br>See [TLS Server](#syslog-tls-server) below.
 
-&#x2022; [`udp_server`](#udp-server) - Optional Block<br>UDP Server Name and Port Number. Name and port number for a UDP server<br>See [UDP Server](#syslog-udp-server) below.
+&#x2022; [`udp_server`](#syslog-udp-server) - Optional Block<br>UDP Server Name and Port Number. Name and port number for a UDP server<br>See [UDP Server](#syslog-udp-server) below.
 
 #### Syslog TCP Server
 
 A [`tcp_server`](#syslog-tcp-server) block (within [`syslog`](#syslog)) supports the following:
 
-&#x2022; [`port`](#port) - Optional Number<br>Port Number. Port number used for communication
+&#x2022; [`port`](#syslog-tcp-server-port) - Optional Number<br>Port Number. Port number used for communication
 
-&#x2022; [`server_name`](#server-name) - Optional String<br>Server name. Server name is fully qualified domain name or IP address of the server
+&#x2022; [`server_name`](#syslog-tcp-server-server-name) - Optional String<br>Server name. Server name is fully qualified domain name or IP address of the server
 
 #### Syslog TLS Server
 
 A [`tls_server`](#syslog-tls-server) block (within [`syslog`](#syslog)) supports the following:
 
-&#x2022; [`default_https_port`](#default-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default_https_port`](#syslog-tls-server-default-https-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`default_syslog_tls_port`](#default-syslog-tls-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default_syslog_tls_port`](#syslog-tls-server-default-syslog-tls-port) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`mtls_disabled`](#mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`mtls_disabled`](#syslog-tls-server-mtls-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`mtls_enable`](#mtls-enable) - Optional Block<br>mTLS Client Config. TLS config for client<br>See [mTLS Enable](#syslog-tls-server-mtls-enable) below.
+&#x2022; [`mtls_enable`](#syslog-tls-server-mtls-enable) - Optional Block<br>mTLS Client Config. TLS config for client<br>See [mTLS Enable](#syslog-tls-server-mtls-enable) below.
 
-&#x2022; [`port`](#port) - Optional Number<br>TCP Port Number. Custom port number used for communication
+&#x2022; [`port`](#syslog-tls-server-port) - Optional Number<br>TCP Port Number. Custom port number used for communication
 
-&#x2022; [`server_name`](#server-name) - Optional String<br>SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against
+&#x2022; [`server_name`](#syslog-tls-server-server-name) - Optional String<br>SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against
 
-&#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+&#x2022; [`trusted_ca_url`](#syslog-tls-server-trusted-ca-url) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
 
-&#x2022; [`volterra_ca`](#volterra-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`volterra_ca`](#syslog-tls-server-volterra-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Syslog TLS Server mTLS Enable
 
 A [`mtls_enable`](#syslog-tls-server-mtls-enable) block (within [`syslog.tls_server`](#syslog-tls-server)) supports the following:
 
-&#x2022; [`certificate`](#certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
+&#x2022; [`certificate`](#syslog-tls-server-mtls-enable-certificate) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
 
-&#x2022; [`key_url`](#key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#syslog-tls-server-mtls-enable-key-url) below.
+&#x2022; [`key_url`](#syslog-tls-server-mtls-enable-key-url) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#syslog-tls-server-mtls-enable-key-url) below.
 
 #### Syslog TLS Server mTLS Enable Key URL
 
 A [`key_url`](#syslog-tls-server-mtls-enable-key-url) block (within [`syslog.tls_server.mtls_enable`](#syslog-tls-server-mtls-enable)) supports the following:
 
-&#x2022; [`blindfold_secret_info`](#blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) below.
+&#x2022; [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) below.
 
-&#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) below.
+&#x2022; [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) below.
 
 #### Syslog TLS Server mTLS Enable Key URL Blindfold Secret Info
 
 A [`blindfold_secret_info`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
-&#x2022; [`decryption_provider`](#decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+&#x2022; [`decryption_provider`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-decryption-provider) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-&#x2022; [`location`](#location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+&#x2022; [`location`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-&#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`store_provider`](#syslog-tls-server-mtls-enable-key-url-blindfold-secret-info-store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Syslog TLS Server mTLS Enable Key URL Clear Secret Info
 
 A [`clear_secret_info`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info) block (within [`syslog.tls_server.mtls_enable.key_url`](#syslog-tls-server-mtls-enable-key-url)) supports the following:
 
-&#x2022; [`provider_ref`](#provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+&#x2022; [`provider_ref`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-&#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+&#x2022; [`url`](#syslog-tls-server-mtls-enable-key-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Syslog UDP Server
 
 An [`udp_server`](#syslog-udp-server) block (within [`syslog`](#syslog)) supports the following:
 
-&#x2022; [`port`](#port) - Optional Number<br>Port Number. Port number used for communication
+&#x2022; [`port`](#syslog-udp-server-port) - Optional Number<br>Port Number. Port number used for communication
 
-&#x2022; [`server_name`](#server-name) - Optional String<br>Server name. Server name is fully qualified domain name or IP address of the server
+&#x2022; [`server_name`](#syslog-udp-server-server-name) - Optional String<br>Server name. Server name is fully qualified domain name or IP address of the server
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

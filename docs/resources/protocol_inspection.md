@@ -86,39 +86,39 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block supports the following:
 
-&#x2022; [`disable_compliance_checks`](#disable-compliance-checks) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable_compliance_checks`](#enable-disable-compliance-checks-disable-compliance-checks) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable_compliance_checks`](#enable-compliance-checks) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
+&#x2022; [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
 
 #### Enable Disable Compliance Checks Enable Compliance Checks
 
 An [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) block (within [`enable_disable_compliance_checks`](#enable-disable-compliance-checks)) supports the following:
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#enable-disable-compliance-checks-enable-compliance-checks-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#enable-disable-compliance-checks-enable-compliance-checks-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#enable-disable-compliance-checks-enable-compliance-checks-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Enable Disable Signatures
 
 An [`enable_disable_signatures`](#enable-disable-signatures) block supports the following:
 
-&#x2022; [`disable_signature`](#disable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable_signature`](#enable-disable-signatures-disable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable_signature`](#enable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`enable_signature`](#enable-disable-signatures-enable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

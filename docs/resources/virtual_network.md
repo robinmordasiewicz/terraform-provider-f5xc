@@ -89,55 +89,55 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`static_routes`](#static-routes) block supports the following:
 
-&#x2022; [`attrs`](#attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+&#x2022; [`attrs`](#static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-&#x2022; [`default_gateway`](#default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default_gateway`](#static-routes-default-gateway) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`ip_address`](#ip-address) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
+&#x2022; [`ip_address`](#static-routes-ip-address) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
 
-&#x2022; [`ip_prefixes`](#ip-prefixes) - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
+&#x2022; [`ip_prefixes`](#static-routes-ip-prefixes) - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
 
-&#x2022; [`node_interface`](#node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#static-routes-node-interface) below.
+&#x2022; [`node_interface`](#static-routes-node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#static-routes-node-interface) below.
 
 #### Static Routes Node Interface
 
 A [`node_interface`](#static-routes-node-interface) block (within [`static_routes`](#static-routes)) supports the following:
 
-&#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#static-routes-node-interface-list) below.
+&#x2022; [`list`](#static-routes-node-interface-list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#static-routes-node-interface-list) below.
 
 #### Static Routes Node Interface List
 
 A [`list`](#static-routes-node-interface-list) block (within [`static_routes.node_interface`](#static-routes-node-interface)) supports the following:
 
-&#x2022; [`interface`](#interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#static-routes-node-interface-list-interface) below.
+&#x2022; [`interface`](#static-routes-node-interface-list-interface) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#static-routes-node-interface-list-interface) below.
 
-&#x2022; [`node`](#node) - Optional String<br>Node. Node name on this site
+&#x2022; [`node`](#static-routes-node-interface-list-node) - Optional String<br>Node. Node name on this site
 
 #### Static Routes Node Interface List Interface
 
 An [`interface`](#static-routes-node-interface-list-interface) block (within [`static_routes.node_interface.list`](#static-routes-node-interface-list)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#static-routes-node-interface-list-interface-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#static-routes-node-interface-list-interface-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#static-routes-node-interface-list-interface-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#static-routes-node-interface-list-interface-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#static-routes-node-interface-list-interface-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

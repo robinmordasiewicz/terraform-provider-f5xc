@@ -88,95 +88,95 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`rules`](#rules) block supports the following:
 
-&#x2022; [`key_pattern`](#key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-pattern) below.
+&#x2022; [`key_pattern`](#rules-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-pattern) below.
 
-&#x2022; [`key_value_pattern`](#key-value-pattern) - Optional Block<br>Key & Value Pattern. Search for specific key & value patterns in the specified sections<br>See [Key Value Pattern](#rules-key-value-pattern) below.
+&#x2022; [`key_value_pattern`](#rules-key-value-pattern) - Optional Block<br>Key & Value Pattern. Search for specific key & value patterns in the specified sections<br>See [Key Value Pattern](#rules-key-value-pattern) below.
 
-&#x2022; [`value_pattern`](#value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-value-pattern) below.
+&#x2022; [`value_pattern`](#rules-value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-value-pattern) below.
 
 #### Rules Key Pattern
 
 A [`key_pattern`](#rules-key-pattern) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-pattern-exact-values) below.
+&#x2022; [`exact_values`](#rules-key-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-pattern-exact-values) below.
 
-&#x2022; [`regex_value`](#regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+&#x2022; [`regex_value`](#rules-key-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-&#x2022; [`substring_value`](#substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+&#x2022; [`substring_value`](#rules-key-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Key Pattern Exact Values
 
 An [`exact_values`](#rules-key-pattern-exact-values) block (within [`rules.key_pattern`](#rules-key-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
+&#x2022; [`exact_values`](#rules-key-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Key Value Pattern
 
 A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`key_pattern`](#key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
+&#x2022; [`key_pattern`](#rules-key-value-pattern-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
 
-&#x2022; [`value_pattern`](#value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
+&#x2022; [`value_pattern`](#rules-key-value-pattern-value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
 
 #### Rules Key Value Pattern Key Pattern
 
 A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
+&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
 
-&#x2022; [`regex_value`](#regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+&#x2022; [`regex_value`](#rules-key-value-pattern-key-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-&#x2022; [`substring_value`](#substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+&#x2022; [`substring_value`](#rules-key-value-pattern-key-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Key Value Pattern Key Pattern Exact Values
 
 An [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) block (within [`rules.key_value_pattern.key_pattern`](#rules-key-value-pattern-key-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
+&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Key Value Pattern Value Pattern
 
 A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
+&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
 
-&#x2022; [`regex_value`](#regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+&#x2022; [`regex_value`](#rules-key-value-pattern-value-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-&#x2022; [`substring_value`](#substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+&#x2022; [`substring_value`](#rules-key-value-pattern-value-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Key Value Pattern Value Pattern Exact Values
 
 An [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) block (within [`rules.key_value_pattern.value_pattern`](#rules-key-value-pattern-value-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
+&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Value Pattern
 
 A [`value_pattern`](#rules-value-pattern) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`exact_values`](#exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-value-pattern-exact-values) below.
+&#x2022; [`exact_values`](#rules-value-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-value-pattern-exact-values) below.
 
-&#x2022; [`regex_value`](#regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+&#x2022; [`regex_value`](#rules-value-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-&#x2022; [`substring_value`](#substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+&#x2022; [`substring_value`](#rules-value-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Value Pattern Exact Values
 
 An [`exact_values`](#rules-value-pattern-exact-values) block (within [`rules.value_pattern`](#rules-value-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. List of exact values to match
+&#x2022; [`exact_values`](#rules-value-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

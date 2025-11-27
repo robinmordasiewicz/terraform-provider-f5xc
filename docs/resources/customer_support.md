@@ -106,57 +106,57 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`comments`](#comments) block supports the following:
 
-&#x2022; [`attachment_ids`](#attachment-ids) - Optional List<br>Attachment IDs. Third party id of any attachment related to this ticket comment
+&#x2022; [`attachment_ids`](#comments-attachment-ids) - Optional List<br>Attachment IDs. Third party id of any attachment related to this ticket comment
 
-&#x2022; [`attachments_info`](#attachments-info) - Optional Block<br>Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have<br>See [Attachments Info](#comments-attachments-info) below.
+&#x2022; [`attachments_info`](#comments-attachments-info) - Optional Block<br>Attachments details. Information about any attachments (such as screenshots, plain text files) the comment can have<br>See [Attachments Info](#comments-attachments-info) below.
 
-&#x2022; [`author_email`](#author-email) - Optional String<br>Email. Email of the author of the comment
+&#x2022; [`author_email`](#comments-author-email) - Optional String<br>Email. Email of the author of the comment
 
-&#x2022; [`author_name`](#author-name) - Optional String<br>Author. Author of the comment (as a name)
+&#x2022; [`author_name`](#comments-author-name) - Optional String<br>Author. Author of the comment (as a name)
 
-&#x2022; [`created_at`](#created-at) - Optional String<br>At. Comment creation time
+&#x2022; [`created_at`](#comments-created-at) - Optional String<br>At. Comment creation time
 
-&#x2022; [`html`](#html) - Optional String<br>Comment. Comment body as HTML
+&#x2022; [`html`](#comments-html) - Optional String<br>Comment. Comment body as HTML
 
-&#x2022; [`plain_text`](#plain-text) - Optional String<br>Comment. Comment body as plain text
+&#x2022; [`plain_text`](#comments-plain-text) - Optional String<br>Comment. Comment body as plain text
 
 #### Comments Attachments Info
 
 An [`attachments_info`](#comments-attachments-info) block (within [`comments`](#comments)) supports the following:
 
-&#x2022; [`attachment`](#attachment) - Optional String<br>Attachment data. Any binary attachment (such as screenshots, plain text files, PDFs) encoded as base64 if used over HTTP
+&#x2022; [`attachment`](#comments-attachments-info-attachment) - Optional String<br>Attachment data. Any binary attachment (such as screenshots, plain text files, PDFs) encoded as base64 if used over HTTP
 
-&#x2022; [`content_type`](#content-type) - Optional String<br>Content type. Mime content type of the attachment. Helps the UI to properly display the data
+&#x2022; [`content_type`](#comments-attachments-info-content-type) - Optional String<br>Content type. Mime content type of the attachment. Helps the UI to properly display the data
 
-&#x2022; [`filename`](#filename) - Optional String<br>Filename. Filename of the attachment as provided by the caller
+&#x2022; [`filename`](#comments-attachments-info-filename) - Optional String<br>Filename. Filename of the attachment as provided by the caller
 
-&#x2022; [`tp_id`](#tp-id) - Optional String<br>3rd party ID. Optional ID as assigned by the 3rd party actually storing the data
+&#x2022; [`tp_id`](#comments-attachments-info-tp-id) - Optional String<br>3rd party ID. Optional ID as assigned by the 3rd party actually storing the data
 
 #### Relates To
 
 A [`relates_to`](#relates-to) block supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#relates-to-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#relates-to-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#relates-to-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#relates-to-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#relates-to-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

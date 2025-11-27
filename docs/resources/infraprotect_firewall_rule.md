@@ -115,85 +115,85 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`protocol_icmp`](#protocol-icmp) block supports the following:
 
-&#x2022; [`echo_reply`](#echo-reply) - Optional Bool<br>Echo-Reply. Echo-Reply
+&#x2022; [`echo_reply`](#protocol-icmp-echo-reply) - Optional Bool<br>Echo-Reply. Echo-Reply
 
-&#x2022; [`echo_request`](#echo-request) - Optional Bool<br>Echo-Request. Echo-Request
+&#x2022; [`echo_request`](#protocol-icmp-echo-request) - Optional Bool<br>Echo-Request. Echo-Request
 
-&#x2022; [`parameter_problem`](#parameter-problem) - Optional Bool<br>Parameter-Problem. Parameter-Problem
+&#x2022; [`parameter_problem`](#protocol-icmp-parameter-problem) - Optional Bool<br>Parameter-Problem. Parameter-Problem
 
-&#x2022; [`redirect`](#redirect) - Optional Bool<br>Redirect. Redirect
+&#x2022; [`redirect`](#protocol-icmp-redirect) - Optional Bool<br>Redirect. Redirect
 
-&#x2022; [`source_quench`](#source-quench) - Optional Bool<br>Source-Quench. Source-Quench
+&#x2022; [`source_quench`](#protocol-icmp-source-quench) - Optional Bool<br>Source-Quench. Source-Quench
 
-&#x2022; [`time_exceeded`](#time-exceeded) - Optional Bool<br>Time-Exceeded. Time-Exceeded
+&#x2022; [`time_exceeded`](#protocol-icmp-time-exceeded) - Optional Bool<br>Time-Exceeded. Time-Exceeded
 
-&#x2022; [`unreachable`](#unreachable) - Optional Bool<br>Unreachable. Unreachable
+&#x2022; [`unreachable`](#protocol-icmp-unreachable) - Optional Bool<br>Unreachable. Unreachable
 
 #### Protocol Icmp6
 
 A [`protocol_icmp6`](#protocol-icmp6) block supports the following:
 
-&#x2022; [`destination_unreachable`](#destination-unreachable) - Optional Bool<br>Destination-Unreachable. Destination-Unreachable
+&#x2022; [`destination_unreachable`](#protocol-icmp6-destination-unreachable) - Optional Bool<br>Destination-Unreachable. Destination-Unreachable
 
-&#x2022; [`echo_reply`](#echo-reply) - Optional Bool<br>Echo-Reply. Echo-Reply
+&#x2022; [`echo_reply`](#protocol-icmp6-echo-reply) - Optional Bool<br>Echo-Reply. Echo-Reply
 
-&#x2022; [`echo_request`](#echo-request) - Optional Bool<br>Echo-Request. Echo-Request
+&#x2022; [`echo_request`](#protocol-icmp6-echo-request) - Optional Bool<br>Echo-Request. Echo-Request
 
-&#x2022; [`neighbor_advertisement`](#neighbor-advertisement) - Optional Bool<br>Neighbor-Advertisement. Neighbor-Advertisement
+&#x2022; [`neighbor_advertisement`](#protocol-icmp6-neighbor-advertisement) - Optional Bool<br>Neighbor-Advertisement. Neighbor-Advertisement
 
-&#x2022; [`neighbor_solicit`](#neighbor-solicit) - Optional Bool<br>Neighbor-Solicit. Neighbor-Solicit
+&#x2022; [`neighbor_solicit`](#protocol-icmp6-neighbor-solicit) - Optional Bool<br>Neighbor-Solicit. Neighbor-Solicit
 
-&#x2022; [`packet_too_big`](#packet-too-big) - Optional Bool<br>Packet-Too-Big. Packet-Too-Big
+&#x2022; [`packet_too_big`](#protocol-icmp6-packet-too-big) - Optional Bool<br>Packet-Too-Big. Packet-Too-Big
 
-&#x2022; [`parameter_problem`](#parameter-problem) - Optional Bool<br>Parameter-Problem. Parameter-Problem
+&#x2022; [`parameter_problem`](#protocol-icmp6-parameter-problem) - Optional Bool<br>Parameter-Problem. Parameter-Problem
 
-&#x2022; [`redirect`](#redirect) - Optional Bool<br>Redirect. Redirect
+&#x2022; [`redirect`](#protocol-icmp6-redirect) - Optional Bool<br>Redirect. Redirect
 
-&#x2022; [`router_advertisement`](#router-advertisement) - Optional Bool<br>Router-Advertisement. Router-Advertisement
+&#x2022; [`router_advertisement`](#protocol-icmp6-router-advertisement) - Optional Bool<br>Router-Advertisement. Router-Advertisement
 
-&#x2022; [`router_solicit`](#router-solicit) - Optional Bool<br>Router-Solicit. Router-Solicit
+&#x2022; [`router_solicit`](#protocol-icmp6-router-solicit) - Optional Bool<br>Router-Solicit. Router-Solicit
 
-&#x2022; [`time_exceeded`](#time-exceeded) - Optional Bool<br>Time-Exceeded. Time-Exceeded
+&#x2022; [`time_exceeded`](#protocol-icmp6-time-exceeded) - Optional Bool<br>Time-Exceeded. Time-Exceeded
 
 #### Protocol TCP
 
 A [`protocol_tcp`](#protocol-tcp) block supports the following:
 
-&#x2022; [`description`](#description) - Optional String<br>Description. Description
+&#x2022; [`description`](#protocol-tcp-description) - Optional String<br>Description. Description
 
-&#x2022; [`destination_port_all`](#destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`destination_port_all`](#protocol-tcp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`destination_port_range`](#destination-port-range) - Optional String<br>Port Range. Port Range
+&#x2022; [`destination_port_range`](#protocol-tcp-destination-port-range) - Optional String<br>Port Range. Port Range
 
-&#x2022; [`source_port_all`](#source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`source_port_all`](#protocol-tcp-source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`source_port_range`](#source-port-range) - Optional String<br>Port Range. Port Range
+&#x2022; [`source_port_range`](#protocol-tcp-source-port-range) - Optional String<br>Port Range. Port Range
 
 #### Protocol UDP
 
 A [`protocol_udp`](#protocol-udp) block supports the following:
 
-&#x2022; [`description`](#description) - Optional String<br>Description. Description
+&#x2022; [`description`](#protocol-udp-description) - Optional String<br>Description. Description
 
-&#x2022; [`destination_port_all`](#destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`destination_port_all`](#protocol-udp-destination-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`destination_port_range`](#destination-port-range) - Optional String<br>Port Range. Port Range
+&#x2022; [`destination_port_range`](#protocol-udp-destination-port-range) - Optional String<br>Port Range. Port Range
 
-&#x2022; [`source_port_all`](#source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`source_port_all`](#protocol-udp-source-port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`source_port_range`](#source-port-range) - Optional String<br>Port Range. Port Range
+&#x2022; [`source_port_range`](#protocol-udp-source-port-range) - Optional String<br>Port Range. Port Range
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

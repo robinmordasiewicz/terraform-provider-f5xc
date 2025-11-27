@@ -82,29 +82,29 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`pod_security_admission_specs`](#pod-security-admission-specs) block supports the following:
 
-&#x2022; [`audit`](#audit) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`audit`](#pod-security-admission-specs-audit) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`baseline`](#baseline) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`baseline`](#pod-security-admission-specs-baseline) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enforce`](#enforce) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`enforce`](#pod-security-admission-specs-enforce) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`privileged`](#privileged) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`privileged`](#pod-security-admission-specs-privileged) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`restricted`](#restricted) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`restricted`](#pod-security-admission-specs-restricted) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`warn`](#warn) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`warn`](#pod-security-admission-specs-warn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

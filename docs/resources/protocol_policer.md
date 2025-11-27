@@ -82,59 +82,59 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`protocol_policer`](#protocol-policer) block supports the following:
 
-&#x2022; [`policer`](#policer) - Optional Block<br>Policer. Reference to policer object to apply traffic rate limits<br>See [Policer](#protocol-policer-policer) below.
+&#x2022; [`policer`](#protocol-policer-policer) - Optional Block<br>Policer. Reference to policer object to apply traffic rate limits<br>See [Policer](#protocol-policer-policer) below.
 
-&#x2022; [`protocol`](#protocol) - Optional Block<br>Protocol Type. Protocol and protocol specific flags to be matched in packet<br>See [Protocol](#protocol-policer-protocol) below.
+&#x2022; [`protocol`](#protocol-policer-protocol) - Optional Block<br>Protocol Type. Protocol and protocol specific flags to be matched in packet<br>See [Protocol](#protocol-policer-protocol) below.
 
 #### Protocol Policer Policer
 
 A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#protocol-policer-policer-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#protocol-policer-policer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#protocol-policer-policer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#protocol-policer-policer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#protocol-policer-policer-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Protocol Policer Protocol
 
 A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
-&#x2022; [`dns`](#dns) - Optional Block<br>DNS Packets. Match all DNS packets inclusing UDP and TCP
+&#x2022; [`dns`](#protocol-policer-protocol-dns) - Optional Block<br>DNS Packets. Match all DNS packets inclusing UDP and TCP
 
-&#x2022; [`icmp`](#icmp) - Optional Block<br>ICMP Packet Type. ICMP message type to match in packet<br>See [ICMP](#protocol-policer-protocol-icmp) below.
+&#x2022; [`icmp`](#protocol-policer-protocol-icmp) - Optional Block<br>ICMP Packet Type. ICMP message type to match in packet<br>See [ICMP](#protocol-policer-protocol-icmp) below.
 
-&#x2022; [`tcp`](#tcp) - Optional Block<br>TCP Packet Type. Specification of TCP flag to be matched in a TCP packet<br>See [TCP](#protocol-policer-protocol-tcp) below.
+&#x2022; [`tcp`](#protocol-policer-protocol-tcp) - Optional Block<br>TCP Packet Type. Specification of TCP flag to be matched in a TCP packet<br>See [TCP](#protocol-policer-protocol-tcp) below.
 
-&#x2022; [`udp`](#udp) - Optional Block<br>UDP Packets. Match all UDP packets
+&#x2022; [`udp`](#protocol-policer-protocol-udp) - Optional Block<br>UDP Packets. Match all UDP packets
 
 #### Protocol Policer Protocol ICMP
 
 An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
-&#x2022; [`type`](#type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
+&#x2022; [`type`](#protocol-policer-protocol-icmp-type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
 
 #### Protocol Policer Protocol TCP
 
 A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
-&#x2022; [`flags`](#flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
+&#x2022; [`flags`](#protocol-policer-protocol-tcp-flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

@@ -84,319 +84,319 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`rules`](#rules) block supports the following:
 
-&#x2022; [`action`](#action) - Optional Block<br>Action. Action to apply on the packet if the NAT rule is applied<br>See [Action](#rules-action) below.
+&#x2022; [`action`](#rules-action) - Optional Block<br>Action. Action to apply on the packet if the NAT rule is applied<br>See [Action](#rules-action) below.
 
-&#x2022; [`cloud_connect`](#cloud-connect) - Optional Block<br>Cloud Connect Reference Type. Reference to Cloud connect Object<br>See [Cloud Connect](#rules-cloud-connect) below.
+&#x2022; [`cloud_connect`](#rules-cloud-connect) - Optional Block<br>Cloud Connect Reference Type. Reference to Cloud connect Object<br>See [Cloud Connect](#rules-cloud-connect) below.
 
-&#x2022; [`criteria`](#criteria) - Optional Block<br>Match Criteria. Match criteria of the packet to apply the NAT Rule<br>See [Criteria](#rules-criteria) below.
+&#x2022; [`criteria`](#rules-criteria) - Optional Block<br>Match Criteria. Match criteria of the packet to apply the NAT Rule<br>See [Criteria](#rules-criteria) below.
 
-&#x2022; [`disable`](#disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable`](#rules-disable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable`](#enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`enable`](#rules-enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`name`](#name) - Optional String<br>Name. Name of the Rule
+&#x2022; [`name`](#rules-name) - Optional String<br>Name. Name of the Rule
 
-&#x2022; [`network_interface`](#network-interface) - Optional Block<br>NetworkInterface Reference Type. Reference to Network Interface Object<br>See [Network Interface](#rules-network-interface) below.
+&#x2022; [`network_interface`](#rules-network-interface) - Optional Block<br>NetworkInterface Reference Type. Reference to Network Interface Object<br>See [Network Interface](#rules-network-interface) below.
 
-&#x2022; [`segment`](#segment) - Optional Block<br>Segment Reference Type. Reference to Segment Object<br>See [Segment](#rules-segment) below.
+&#x2022; [`segment`](#rules-segment) - Optional Block<br>Segment Reference Type. Reference to Segment Object<br>See [Segment](#rules-segment) below.
 
-&#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Virtual Network Reference Type. Carries the reference to virtual network<br>See [Virtual Network](#rules-virtual-network) below.
+&#x2022; [`virtual_network`](#rules-virtual-network) - Optional Block<br>Virtual Network Reference Type. Carries the reference to virtual network<br>See [Virtual Network](#rules-virtual-network) below.
 
 #### Rules Action
 
 An [`action`](#rules-action) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`dynamic`](#dynamic) - Optional Block<br>Dynamic Pool. Dynamic Pool Configuration<br>See [Dynamic](#rules-action-dynamic) below.
+&#x2022; [`dynamic`](#rules-action-dynamic) - Optional Block<br>Dynamic Pool. Dynamic Pool Configuration<br>See [Dynamic](#rules-action-dynamic) below.
 
-&#x2022; [`virtual_cidr`](#virtual-cidr) - Optional String<br>Virtual Subnet NAT. Virtual Subnet NAT is static NAT that does a one-to-one translation between the real source IP CIDR in the policy and the virtual CIDR in a bidirectional fashion. The range of the real CIDR and virtual CIDRs should be the same (e.g. if the real CIDR has the CIDR 10.10.10.0/24, the virtual CIDR has 100.100.100.0/24
+&#x2022; [`virtual_cidr`](#rules-action-virtual-cidr) - Optional String<br>Virtual Subnet NAT. Virtual Subnet NAT is static NAT that does a one-to-one translation between the real source IP CIDR in the policy and the virtual CIDR in a bidirectional fashion. The range of the real CIDR and virtual CIDRs should be the same (e.g. if the real CIDR has the CIDR 10.10.10.0/24, the virtual CIDR has 100.100.100.0/24
 
 #### Rules Action Dynamic
 
 A [`dynamic`](#rules-action-dynamic) block (within [`rules.action`](#rules-action)) supports the following:
 
-&#x2022; [`elastic_ips`](#elastic-ips) - Optional Block<br>Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object<br>See [Elastic Ips](#rules-action-dynamic-elastic-ips) below.
+&#x2022; [`elastic_ips`](#rules-action-dynamic-elastic-ips) - Optional Block<br>Cloud Elastic IP Ref List. List of references to Cloud Elastic IP Object<br>See [Elastic Ips](#rules-action-dynamic-elastic-ips) below.
 
-&#x2022; [`pools`](#pools) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Pools](#rules-action-dynamic-pools) below.
+&#x2022; [`pools`](#rules-action-dynamic-pools) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Pools](#rules-action-dynamic-pools) below.
 
 #### Rules Action Dynamic Elastic Ips
 
 An [`elastic_ips`](#rules-action-dynamic-elastic-ips) block (within [`rules.action.dynamic`](#rules-action-dynamic)) supports the following:
 
-&#x2022; [`refs`](#refs) - Optional Block<br>Cloud Elastic IP Reference List. Reference to one or more cloud elastic IP objects<br>See [Refs](#rules-action-dynamic-elastic-ips-refs) below.
+&#x2022; [`refs`](#rules-action-dynamic-elastic-ips-refs) - Optional Block<br>Cloud Elastic IP Reference List. Reference to one or more cloud elastic IP objects<br>See [Refs](#rules-action-dynamic-elastic-ips-refs) below.
 
 #### Rules Action Dynamic Elastic Ips Refs
 
 A [`refs`](#rules-action-dynamic-elastic-ips-refs) block (within [`rules.action.dynamic.elastic_ips`](#rules-action-dynamic-elastic-ips)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#rules-action-dynamic-elastic-ips-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#rules-action-dynamic-elastic-ips-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#rules-action-dynamic-elastic-ips-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#rules-action-dynamic-elastic-ips-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#rules-action-dynamic-elastic-ips-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Rules Action Dynamic Pools
 
 A [`pools`](#rules-action-dynamic-pools) block (within [`rules.action.dynamic`](#rules-action-dynamic)) supports the following:
 
-&#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+&#x2022; [`prefixes`](#rules-action-dynamic-pools-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
 #### Rules Cloud Connect
 
 A [`cloud_connect`](#rules-cloud-connect) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`refs`](#refs) - Optional Block<br>Cloud Connect. Reference to Cloud Connect Object<br>See [Refs](#rules-cloud-connect-refs) below.
+&#x2022; [`refs`](#rules-cloud-connect-refs) - Optional Block<br>Cloud Connect. Reference to Cloud Connect Object<br>See [Refs](#rules-cloud-connect-refs) below.
 
 #### Rules Cloud Connect Refs
 
 A [`refs`](#rules-cloud-connect-refs) block (within [`rules.cloud_connect`](#rules-cloud-connect)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#rules-cloud-connect-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#rules-cloud-connect-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#rules-cloud-connect-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#rules-cloud-connect-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#rules-cloud-connect-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Rules Criteria
 
 A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`any`](#any) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`any`](#rules-criteria-any) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`destination_cidr`](#destination-cidr) - Optional List<br>Destination IP. Destination IP of the packet to match
+&#x2022; [`destination_cidr`](#rules-criteria-destination-cidr) - Optional List<br>Destination IP. Destination IP of the packet to match
 
-&#x2022; [`destination_port`](#destination-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Destination Port](#rules-criteria-destination-port) below.
+&#x2022; [`destination_port`](#rules-criteria-destination-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Destination Port](#rules-criteria-destination-port) below.
 
-&#x2022; [`icmp`](#icmp) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`icmp`](#rules-criteria-icmp) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`protocol`](#protocol) - Optional String  Defaults to `ALL`<br>Possible values are `ALL`, `ICMP`, `TCP`, `UDP`<br>Protocols. Protocols like TCP, UDP
+&#x2022; [`protocol`](#rules-criteria-protocol) - Optional String  Defaults to `ALL`<br>Possible values are `ALL`, `ICMP`, `TCP`, `UDP`<br>Protocols. Protocols like TCP, UDP
 
-&#x2022; [`segment`](#segment) - Optional Block<br>Segment Reference Type. Reference to Segment Object<br>See [Segment](#rules-criteria-segment) below.
+&#x2022; [`segment`](#rules-criteria-segment) - Optional Block<br>Segment Reference Type. Reference to Segment Object<br>See [Segment](#rules-criteria-segment) below.
 
-&#x2022; [`source_cidr`](#source-cidr) - Optional List<br>Source IP. Source IP of the packet to match
+&#x2022; [`source_cidr`](#rules-criteria-source-cidr) - Optional List<br>Source IP. Source IP of the packet to match
 
-&#x2022; [`source_port`](#source-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Source Port](#rules-criteria-source-port) below.
+&#x2022; [`source_port`](#rules-criteria-source-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Source Port](#rules-criteria-source-port) below.
 
-&#x2022; [`tcp`](#tcp) - Optional Block<br>Port Match Configuration. Action to apply on the packet if the NAT rule is applied<br>See [TCP](#rules-criteria-tcp) below.
+&#x2022; [`tcp`](#rules-criteria-tcp) - Optional Block<br>Port Match Configuration. Action to apply on the packet if the NAT rule is applied<br>See [TCP](#rules-criteria-tcp) below.
 
-&#x2022; [`udp`](#udp) - Optional Block<br>Port Match Configuration. Action to apply on the packet if the NAT rule is applied<br>See [UDP](#rules-criteria-udp) below.
+&#x2022; [`udp`](#rules-criteria-udp) - Optional Block<br>Port Match Configuration. Action to apply on the packet if the NAT rule is applied<br>See [UDP](#rules-criteria-udp) below.
 
-&#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Virtual Network Reference Type. Carries the reference to virtual network<br>See [Virtual Network](#rules-criteria-virtual-network) below.
+&#x2022; [`virtual_network`](#rules-criteria-virtual-network) - Optional Block<br>Virtual Network Reference Type. Carries the reference to virtual network<br>See [Virtual Network](#rules-criteria-virtual-network) below.
 
 #### Rules Criteria Destination Port
 
 A [`destination_port`](#rules-criteria-destination-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-&#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_port_match`](#rules-criteria-destination-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`port`](#port) - Optional Number<br>Port. Exact Port to match
+&#x2022; [`port`](#rules-criteria-destination-port-port) - Optional Number<br>Port. Exact Port to match
 
-&#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
+&#x2022; [`port_ranges`](#rules-criteria-destination-port-port-ranges) - Optional String<br>Port range. Port range to match
 
 #### Rules Criteria Segment
 
 A [`segment`](#rules-criteria-segment) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-&#x2022; [`refs`](#refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#rules-criteria-segment-refs) below.
+&#x2022; [`refs`](#rules-criteria-segment-refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#rules-criteria-segment-refs) below.
 
 #### Rules Criteria Segment Refs
 
 A [`refs`](#rules-criteria-segment-refs) block (within [`rules.criteria.segment`](#rules-criteria-segment)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#rules-criteria-segment-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#rules-criteria-segment-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#rules-criteria-segment-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#rules-criteria-segment-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#rules-criteria-segment-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Rules Criteria Source Port
 
 A [`source_port`](#rules-criteria-source-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-&#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_port_match`](#rules-criteria-source-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`port`](#port) - Optional Number<br>Port. Exact Port to match
+&#x2022; [`port`](#rules-criteria-source-port-port) - Optional Number<br>Port. Exact Port to match
 
-&#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
+&#x2022; [`port_ranges`](#rules-criteria-source-port-port-ranges) - Optional String<br>Port range. Port range to match
 
 #### Rules Criteria TCP
 
 A [`tcp`](#rules-criteria-tcp) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-&#x2022; [`destination_port`](#destination-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Destination Port](#rules-criteria-tcp-destination-port) below.
+&#x2022; [`destination_port`](#rules-criteria-tcp-destination-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Destination Port](#rules-criteria-tcp-destination-port) below.
 
-&#x2022; [`source_port`](#source-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Source Port](#rules-criteria-tcp-source-port) below.
+&#x2022; [`source_port`](#rules-criteria-tcp-source-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Source Port](#rules-criteria-tcp-source-port) below.
 
 #### Rules Criteria TCP Destination Port
 
 A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
-&#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_port_match`](#rules-criteria-tcp-destination-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`port`](#port) - Optional Number<br>Port. Exact Port to match
+&#x2022; [`port`](#rules-criteria-tcp-destination-port-port) - Optional Number<br>Port. Exact Port to match
 
-&#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
+&#x2022; [`port_ranges`](#rules-criteria-tcp-destination-port-port-ranges) - Optional String<br>Port range. Port range to match
 
 #### Rules Criteria TCP Source Port
 
 A [`source_port`](#rules-criteria-tcp-source-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
-&#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_port_match`](#rules-criteria-tcp-source-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`port`](#port) - Optional Number<br>Port. Exact Port to match
+&#x2022; [`port`](#rules-criteria-tcp-source-port-port) - Optional Number<br>Port. Exact Port to match
 
-&#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
+&#x2022; [`port_ranges`](#rules-criteria-tcp-source-port-port-ranges) - Optional String<br>Port range. Port range to match
 
 #### Rules Criteria UDP
 
 An [`udp`](#rules-criteria-udp) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-&#x2022; [`destination_port`](#destination-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Destination Port](#rules-criteria-udp-destination-port) below.
+&#x2022; [`destination_port`](#rules-criteria-udp-destination-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Destination Port](#rules-criteria-udp-destination-port) below.
 
-&#x2022; [`source_port`](#source-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Source Port](#rules-criteria-udp-source-port) below.
+&#x2022; [`source_port`](#rules-criteria-udp-source-port) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Source Port](#rules-criteria-udp-source-port) below.
 
 #### Rules Criteria UDP Destination Port
 
 A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
-&#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_port_match`](#rules-criteria-udp-destination-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`port`](#port) - Optional Number<br>Port. Exact Port to match
+&#x2022; [`port`](#rules-criteria-udp-destination-port-port) - Optional Number<br>Port. Exact Port to match
 
-&#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
+&#x2022; [`port_ranges`](#rules-criteria-udp-destination-port-port-ranges) - Optional String<br>Port range. Port range to match
 
 #### Rules Criteria UDP Source Port
 
 A [`source_port`](#rules-criteria-udp-source-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
-&#x2022; [`no_port_match`](#no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`no_port_match`](#rules-criteria-udp-source-port-no-port-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`port`](#port) - Optional Number<br>Port. Exact Port to match
+&#x2022; [`port`](#rules-criteria-udp-source-port-port) - Optional Number<br>Port. Exact Port to match
 
-&#x2022; [`port_ranges`](#port-ranges) - Optional String<br>Port range. Port range to match
+&#x2022; [`port_ranges`](#rules-criteria-udp-source-port-port-ranges) - Optional String<br>Port range. Port range to match
 
 #### Rules Criteria Virtual Network
 
 A [`virtual_network`](#rules-criteria-virtual-network) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-&#x2022; [`refs`](#refs) - Optional Block<br>Virtual Network Reference. Reference to virtual network<br>See [Refs](#rules-criteria-virtual-network-refs) below.
+&#x2022; [`refs`](#rules-criteria-virtual-network-refs) - Optional Block<br>Virtual Network Reference. Reference to virtual network<br>See [Refs](#rules-criteria-virtual-network-refs) below.
 
 #### Rules Criteria Virtual Network Refs
 
 A [`refs`](#rules-criteria-virtual-network-refs) block (within [`rules.criteria.virtual_network`](#rules-criteria-virtual-network)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#rules-criteria-virtual-network-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#rules-criteria-virtual-network-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#rules-criteria-virtual-network-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#rules-criteria-virtual-network-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#rules-criteria-virtual-network-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Rules Network Interface
 
 A [`network_interface`](#rules-network-interface) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`refs`](#refs) - Optional Block<br>Network Interface. Reference to Network Interface Object<br>See [Refs](#rules-network-interface-refs) below.
+&#x2022; [`refs`](#rules-network-interface-refs) - Optional Block<br>Network Interface. Reference to Network Interface Object<br>See [Refs](#rules-network-interface-refs) below.
 
 #### Rules Network Interface Refs
 
 A [`refs`](#rules-network-interface-refs) block (within [`rules.network_interface`](#rules-network-interface)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#rules-network-interface-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#rules-network-interface-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#rules-network-interface-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#rules-network-interface-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#rules-network-interface-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Rules Segment
 
 A [`segment`](#rules-segment) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`refs`](#refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#rules-segment-refs) below.
+&#x2022; [`refs`](#rules-segment-refs) - Optional Block<br>Segment. Reference to Segment Object<br>See [Refs](#rules-segment-refs) below.
 
 #### Rules Segment Refs
 
 A [`refs`](#rules-segment-refs) block (within [`rules.segment`](#rules-segment)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#rules-segment-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#rules-segment-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#rules-segment-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#rules-segment-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#rules-segment-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Rules Virtual Network
 
 A [`virtual_network`](#rules-virtual-network) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`refs`](#refs) - Optional Block<br>Virtual Network Reference. Reference to virtual network<br>See [Refs](#rules-virtual-network-refs) below.
+&#x2022; [`refs`](#rules-virtual-network-refs) - Optional Block<br>Virtual Network Reference. Reference to virtual network<br>See [Refs](#rules-virtual-network-refs) below.
 
 #### Rules Virtual Network Refs
 
 A [`refs`](#rules-virtual-network-refs) block (within [`rules.virtual_network`](#rules-virtual-network)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#rules-virtual-network-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#rules-virtual-network-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#rules-virtual-network-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#rules-virtual-network-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#rules-virtual-network-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Site
 
 A [`site`](#site) block supports the following:
 
-&#x2022; [`refs`](#refs) - Optional Block<br>Site. Reference to Site Object<br>See [Refs](#site-refs) below.
+&#x2022; [`refs`](#site-refs) - Optional Block<br>Site. Reference to Site Object<br>See [Refs](#site-refs) below.
 
 #### Site Refs
 
 A [`refs`](#site-refs) block (within [`site`](#site)) supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#site-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#site-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#site-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#site-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#site-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

@@ -74,47 +74,47 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`rules`](#rules) block supports the following:
 
-&#x2022; [`client_asn`](#client-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`client_asn`](#rules-client-asn) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`client_city`](#client-city) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`client_city`](#rules-client-city) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`client_country`](#client-country) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`client_country`](#rules-client-country) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`client_ip`](#client-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`client_ip`](#rules-client-ip) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`client_region`](#client-region) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`client_region`](#rules-client-region) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`cookie_name`](#cookie-name) - Optional String<br>Cookie Name. Use the HTTP cookie value for the given name as user identifier
+&#x2022; [`cookie_name`](#rules-cookie-name) - Optional String<br>Cookie Name. Use the HTTP cookie value for the given name as user identifier
 
-&#x2022; [`http_header_name`](#http-header-name) - Optional String<br>HTTP Header Name. Use the HTTP header value for the given name as user identifier
+&#x2022; [`http_header_name`](#rules-http-header-name) - Optional String<br>HTTP Header Name. Use the HTTP header value for the given name as user identifier
 
-&#x2022; [`ip_and_http_header_name`](#ip-and-http-header-name) - Optional String<br>HTTP Header Name. Name of HTTP header from which the value should be extracted
+&#x2022; [`ip_and_http_header_name`](#rules-ip-and-http-header-name) - Optional String<br>HTTP Header Name. Name of HTTP header from which the value should be extracted
 
-&#x2022; [`ip_and_ja4_tls_fingerprint`](#ip-and-ja4-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`ip_and_ja4_tls_fingerprint`](#rules-ip-and-ja4-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`ip_and_tls_fingerprint`](#ip-and-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`ip_and_tls_fingerprint`](#rules-ip-and-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`ja4_tls_fingerprint`](#ja4-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`ja4_tls_fingerprint`](#rules-ja4-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`jwt_claim_name`](#jwt-claim-name) - Optional String<br>JWT Claim Name. Use the JWT claim value as user identifier
+&#x2022; [`jwt_claim_name`](#rules-jwt-claim-name) - Optional String<br>JWT Claim Name. Use the JWT claim value as user identifier
 
-&#x2022; [`none`](#none) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`none`](#rules-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`query_param_key`](#query-param-key) - Optional String<br>Query Parameter Key. Use the query parameter value for the given key as user identifier
+&#x2022; [`query_param_key`](#rules-query-param-key) - Optional String<br>Query Parameter Key. Use the query parameter value for the given key as user identifier
 
-&#x2022; [`tls_fingerprint`](#tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`tls_fingerprint`](#rules-tls-fingerprint) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

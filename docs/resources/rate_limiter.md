@@ -75,75 +75,75 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`limits`](#limits) block supports the following:
 
-&#x2022; [`action_block`](#action-block) - Optional Block<br>Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold<br>See [Action Block](#limits-action-block) below.
+&#x2022; [`action_block`](#limits-action-block) - Optional Block<br>Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold<br>See [Action Block](#limits-action-block) below.
 
-&#x2022; [`burst_multiplier`](#burst-multiplier) - Optional Number<br>Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate
+&#x2022; [`burst_multiplier`](#limits-burst-multiplier) - Optional Number<br>Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate
 
-&#x2022; [`disabled`](#disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disabled`](#limits-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`leaky_bucket`](#leaky-bucket) - Optional Block<br>Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5
+&#x2022; [`leaky_bucket`](#limits-leaky-bucket) - Optional Block<br>Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5
 
-&#x2022; [`period_multiplier`](#period-multiplier) - Optional Number<br>Periods. This setting, combined with Per Period units, provides a duration
+&#x2022; [`period_multiplier`](#limits-period-multiplier) - Optional Number<br>Periods. This setting, combined with Per Period units, provides a duration
 
-&#x2022; [`token_bucket`](#token-bucket) - Optional Block<br>Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits
+&#x2022; [`token_bucket`](#limits-token-bucket) - Optional Block<br>Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits
 
-&#x2022; [`total_number`](#total-number) - Optional Number<br>Number Of Requests. The total number of allowed requests per rate-limiting period
+&#x2022; [`total_number`](#limits-total-number) - Optional Number<br>Number Of Requests. The total number of allowed requests per rate-limiting period
 
-&#x2022; [`unit`](#unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
+&#x2022; [`unit`](#limits-unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
 
 #### Limits Action Block
 
 An [`action_block`](#limits-action-block) block (within [`limits`](#limits)) supports the following:
 
-&#x2022; [`hours`](#hours) - Optional Block<br>Hours. Input Duration Hours<br>See [Hours](#limits-action-block-hours) below.
+&#x2022; [`hours`](#limits-action-block-hours) - Optional Block<br>Hours. Input Duration Hours<br>See [Hours](#limits-action-block-hours) below.
 
-&#x2022; [`minutes`](#minutes) - Optional Block<br>Minutes. Input Duration Minutes<br>See [Minutes](#limits-action-block-minutes) below.
+&#x2022; [`minutes`](#limits-action-block-minutes) - Optional Block<br>Minutes. Input Duration Minutes<br>See [Minutes](#limits-action-block-minutes) below.
 
-&#x2022; [`seconds`](#seconds) - Optional Block<br>Seconds. Input Duration Seconds<br>See [Seconds](#limits-action-block-seconds) below.
+&#x2022; [`seconds`](#limits-action-block-seconds) - Optional Block<br>Seconds. Input Duration Seconds<br>See [Seconds](#limits-action-block-seconds) below.
 
 #### Limits Action Block Hours
 
 A [`hours`](#limits-action-block-hours) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
-&#x2022; [`duration`](#duration) - Optional Number<br>Duration
+&#x2022; [`duration`](#limits-action-block-hours-duration) - Optional Number<br>Duration
 
 #### Limits Action Block Minutes
 
 A [`minutes`](#limits-action-block-minutes) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
-&#x2022; [`duration`](#duration) - Optional Number<br>Duration
+&#x2022; [`duration`](#limits-action-block-minutes-duration) - Optional Number<br>Duration
 
 #### Limits Action Block Seconds
 
 A [`seconds`](#limits-action-block-seconds) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
-&#x2022; [`duration`](#duration) - Optional Number<br>Duration
+&#x2022; [`duration`](#limits-action-block-seconds-duration) - Optional Number<br>Duration
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 #### User Identification
 
 An [`user_identification`](#user-identification) block supports the following:
 
-&#x2022; [`kind`](#kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+&#x2022; [`kind`](#user-identification-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#user-identification-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#user-identification-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#user-identification-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+&#x2022; [`uid`](#user-identification-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 ## Import
 

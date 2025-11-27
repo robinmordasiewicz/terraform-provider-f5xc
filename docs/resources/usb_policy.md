@@ -74,29 +74,29 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`allowed_devices`](#allowed-devices) block supports the following:
 
-&#x2022; [`b_device_class`](#b-device-class) - Optional String<br>Class. The class of this device
+&#x2022; [`b_device_class`](#allowed-devices-b-device-class) - Optional String<br>Class. The class of this device
 
-&#x2022; [`b_device_protocol`](#b-device-protocol) - Optional String<br>Protocol. The protocol (within the sub-class) of this device
+&#x2022; [`b_device_protocol`](#allowed-devices-b-device-protocol) - Optional String<br>Protocol. The protocol (within the sub-class) of this device
 
-&#x2022; [`b_device_sub_class`](#b-device-sub-class) - Optional String<br>Subclass. The sub-class (within the class) of this device
+&#x2022; [`b_device_sub_class`](#allowed-devices-b-device-sub-class) - Optional String<br>Subclass. The sub-class (within the class) of this device
 
-&#x2022; [`i_serial`](#i-serial) - Optional String<br>iSerialNumber. Index of Serial Number String Descriptor
+&#x2022; [`i_serial`](#allowed-devices-i-serial) - Optional String<br>iSerialNumber. Index of Serial Number String Descriptor
 
-&#x2022; [`id_product`](#id-product) - Optional String<br>Product ID. Product ID (Assigned by Manufacturer) in hex
+&#x2022; [`id_product`](#allowed-devices-id-product) - Optional String<br>Product ID. Product ID (Assigned by Manufacturer) in hex
 
-&#x2022; [`id_vendor`](#id-vendor) - Optional String<br>Vendor ID. Vendor ID (Assigned by USB Org) in hex
+&#x2022; [`id_vendor`](#allowed-devices-id-vendor) - Optional String<br>Vendor ID. Vendor ID (Assigned by USB Org) in hex
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

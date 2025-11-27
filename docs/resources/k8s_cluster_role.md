@@ -85,53 +85,53 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`k8s_cluster_role_selector`](#k8s-cluster-role-selector) block supports the following:
 
-&#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+&#x2022; [`expressions`](#k8s-cluster-role-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 #### Policy Rule List
 
 A [`policy_rule_list`](#policy-rule-list) block supports the following:
 
-&#x2022; [`policy_rule`](#policy-rule) - Optional Block<br>Policy Rules. List of rules for role permissions<br>See [Policy Rule](#policy-rule-list-policy-rule) below.
+&#x2022; [`policy_rule`](#policy-rule-list-policy-rule) - Optional Block<br>Policy Rules. List of rules for role permissions<br>See [Policy Rule](#policy-rule-list-policy-rule) below.
 
 #### Policy Rule List Policy Rule
 
 A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_list`](#policy-rule-list)) supports the following:
 
-&#x2022; [`non_resource_url_list`](#non-resource-url-list) - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource<br>See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
+&#x2022; [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource<br>See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
 
-&#x2022; [`resource_list`](#resource-list) - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
+&#x2022; [`resource_list`](#policy-rule-list-policy-rule-resource-list) - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
 
 #### Policy Rule List Policy Rule Non Resource URL List
 
 A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
-&#x2022; [`urls`](#urls) - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex
+&#x2022; [`urls`](#policy-rule-list-policy-rule-non-resource-url-list-urls) - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex
 
-&#x2022; [`verbs`](#verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations
+&#x2022; [`verbs`](#policy-rule-list-policy-rule-non-resource-url-list-verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations
 
 #### Policy Rule List Policy Rule Resource List
 
 A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
-&#x2022; [`api_groups`](#api-groups) - Optional List<br>API Groups. Allowed list of API group that contains resources, all resources of a given API group
+&#x2022; [`api_groups`](#policy-rule-list-policy-rule-resource-list-api-groups) - Optional List<br>API Groups. Allowed list of API group that contains resources, all resources of a given API group
 
-&#x2022; [`resource_instances`](#resource-instances) - Optional List<br>Resource Instances. Allowed list of resource instances within the resource types
+&#x2022; [`resource_instances`](#policy-rule-list-policy-rule-resource-list-resource-instances) - Optional List<br>Resource Instances. Allowed list of resource instances within the resource types
 
-&#x2022; [`resource_types`](#resource-types) - Optional List<br>Resource Types. Allowed list of resource types within the API groups
+&#x2022; [`resource_types`](#policy-rule-list-policy-rule-resource-list-resource-types) - Optional List<br>Resource Types. Allowed list of resource types within the API groups
 
-&#x2022; [`verbs`](#verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations
+&#x2022; [`verbs`](#policy-rule-list-policy-rule-resource-list-verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

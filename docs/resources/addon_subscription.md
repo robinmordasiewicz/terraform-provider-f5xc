@@ -86,45 +86,45 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`addon_service`](#addon-service) block supports the following:
 
-&#x2022; [`name`](#name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+&#x2022; [`name`](#addon-service-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+&#x2022; [`namespace`](#addon-service-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+&#x2022; [`tenant`](#addon-service-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Notification Preference
 
 A [`notification_preference`](#notification-preference) block supports the following:
 
-&#x2022; [`emails`](#emails) - Optional Block<br>Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription<br>See [Emails](#notification-preference-emails) below.
+&#x2022; [`emails`](#notification-preference-emails) - Optional Block<br>Addon Subscription Associated Emails. Addon Subscription Emails associated with the Addon Subscription<br>See [Emails](#notification-preference-emails) below.
 
-&#x2022; [`support_ticket_id`](#support-ticket-id) - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket Id](#notification-preference-support-ticket-id) below.
+&#x2022; [`support_ticket_id`](#notification-preference-support-ticket-id) - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket Id](#notification-preference-support-ticket-id) below.
 
 #### Notification Preference Emails
 
 An [`emails`](#notification-preference-emails) block (within [`notification_preference`](#notification-preference)) supports the following:
 
-&#x2022; [`email_ids`](#email-ids) - Optional List<br>Emails. Email ids associated with the Addon Subscription
+&#x2022; [`email_ids`](#notification-preference-emails-email-ids) - Optional List<br>Emails. Email ids associated with the Addon Subscription
 
 #### Notification Preference Support Ticket Id
 
 A [`support_ticket_id`](#notification-preference-support-ticket-id) block (within [`notification_preference`](#notification-preference)) supports the following:
 
-&#x2022; [`subscription_ticket_id`](#subscription-ticket-id) - Optional String<br>Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription
+&#x2022; [`subscription_ticket_id`](#notification-preference-support-ticket-id-subscription-ticket-id) - Optional String<br>Subscription Ticket ID. subscription_ticket_id associated with the Addon Subscription subscription
 
-&#x2022; [`unsubscription_ticket_id`](#unsubscription-ticket-id) - Optional String<br>Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription
+&#x2022; [`unsubscription_ticket_id`](#notification-preference-support-ticket-id-unsubscription-ticket-id) - Optional String<br>Unsubscription Ticket ID. unsubscription_ticket_id associated with the Addon Subscription unsubscription
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

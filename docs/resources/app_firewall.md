@@ -116,157 +116,157 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`ai_risk_based_blocking`](#ai-risk-based-blocking) block supports the following:
 
-&#x2022; [`high_risk_action`](#high-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+&#x2022; [`high_risk_action`](#ai-risk-based-blocking-high-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
 
-&#x2022; [`low_risk_action`](#low-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+&#x2022; [`low_risk_action`](#ai-risk-based-blocking-low-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
 
-&#x2022; [`medium_risk_action`](#medium-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+&#x2022; [`medium_risk_action`](#ai-risk-based-blocking-medium-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>Risk Based Blocking Action. Action to be performed on the request Log and block Log only
 
 #### Allowed Response Codes
 
 An [`allowed_response_codes`](#allowed-response-codes) block supports the following:
 
-&#x2022; [`response_code`](#response-code) - Optional List<br>Response Code. List of HTTP response status codes that are allowed
+&#x2022; [`response_code`](#allowed-response-codes-response-code) - Optional List<br>Response Code. List of HTTP response status codes that are allowed
 
 #### Blocking Page
 
 A [`blocking_page`](#blocking-page) block supports the following:
 
-&#x2022; [`blocking_page`](#blocking-page) - Optional String<br>Blocking Response Page Body. Define the content of the response page (e.g., an HTML document or a JSON object), use the {{request_id}} placeholder to provide users with a unique identifier to be able to trace the blocked request in the logs. The maximum allowed size of response body is 4096 bytes after base64 encoding, which would be about 3070 bytes in plain text<br>See [Blocking Page](#blocking-page) below for details.
+&#x2022; [`blocking_page`](#blocking-page-blocking-page) - Optional String<br>Blocking Response Page Body. Define the content of the response page (e.g., an HTML document or a JSON object), use the {{request_id}} placeholder to provide users with a unique identifier to be able to trace the blocked request in the logs. The maximum allowed size of response body is 4096 bytes after base64 encoding, which would be about 3070 bytes in plain text
 
-&#x2022; [`response_code`](#response-code) - Optional String  Defaults to `EmptyStatusCode`<br>Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`<br>HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code
+&#x2022; [`response_code`](#blocking-page-response-code) - Optional String  Defaults to `EmptyStatusCode`<br>Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`<br>HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code
 
 #### Bot Protection Setting
 
 A [`bot_protection_setting`](#bot-protection-setting) block supports the following:
 
-&#x2022; [`good_bot_action`](#good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+&#x2022; [`good_bot_action`](#bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-&#x2022; [`malicious_bot_action`](#malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+&#x2022; [`malicious_bot_action`](#bot-protection-setting-malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-&#x2022; [`suspicious_bot_action`](#suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+&#x2022; [`suspicious_bot_action`](#bot-protection-setting-suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
 #### Custom Anonymization
 
 A [`custom_anonymization`](#custom-anonymization) block supports the following:
 
-&#x2022; [`anonymization_config`](#anonymization-config) - Optional Block<br>Configuration. List of HTTP headers, cookies and query parameters whose values will be masked<br>See [Anonymization Config](#custom-anonymization-anonymization-config) below.
+&#x2022; [`anonymization_config`](#custom-anonymization-anonymization-config) - Optional Block<br>Configuration. List of HTTP headers, cookies and query parameters whose values will be masked<br>See [Anonymization Config](#custom-anonymization-anonymization-config) below.
 
 #### Custom Anonymization Anonymization Config
 
 An [`anonymization_config`](#custom-anonymization-anonymization-config) block (within [`custom_anonymization`](#custom-anonymization)) supports the following:
 
-&#x2022; [`cookie`](#cookie) - Optional Block<br>Anonymize HTTP Cookie. Configure anonymization for HTTP Cookies<br>See [Cookie](#custom-anonymization-anonymization-config-cookie) below.
+&#x2022; [`cookie`](#custom-anonymization-anonymization-config-cookie) - Optional Block<br>Anonymize HTTP Cookie. Configure anonymization for HTTP Cookies<br>See [Cookie](#custom-anonymization-anonymization-config-cookie) below.
 
-&#x2022; [`http_header`](#http-header) - Optional Block<br>Anonymize HTTP Header. Configure anonymization for HTTP Headers<br>See [HTTP Header](#custom-anonymization-anonymization-config-http-header) below.
+&#x2022; [`http_header`](#custom-anonymization-anonymization-config-http-header) - Optional Block<br>Anonymize HTTP Header. Configure anonymization for HTTP Headers<br>See [HTTP Header](#custom-anonymization-anonymization-config-http-header) below.
 
-&#x2022; [`query_parameter`](#query-parameter) - Optional Block<br>Anonymize HTTP Query Parameter. Configure anonymization for HTTP Parameters<br>See [Query Parameter](#custom-anonymization-anonymization-config-query-parameter) below.
+&#x2022; [`query_parameter`](#custom-anonymization-anonymization-config-query-parameter) - Optional Block<br>Anonymize HTTP Query Parameter. Configure anonymization for HTTP Parameters<br>See [Query Parameter](#custom-anonymization-anonymization-config-query-parameter) below.
 
 #### Custom Anonymization Anonymization Config Cookie
 
 A [`cookie`](#custom-anonymization-anonymization-config-cookie) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
-&#x2022; [`cookie_name`](#cookie-name) - Optional String<br>Cookie Name. Masks the cookie value. The setting does not mask the cookie name
+&#x2022; [`cookie_name`](#custom-anonymization-anonymization-config-cookie-cookie-name) - Optional String<br>Cookie Name. Masks the cookie value. The setting does not mask the cookie name
 
 #### Custom Anonymization Anonymization Config HTTP Header
 
 A [`http_header`](#custom-anonymization-anonymization-config-http-header) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
-&#x2022; [`header_name`](#header-name) - Optional String<br>Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name
+&#x2022; [`header_name`](#custom-anonymization-anonymization-config-http-header-header-name) - Optional String<br>Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name
 
 #### Custom Anonymization Anonymization Config Query Parameter
 
 A [`query_parameter`](#custom-anonymization-anonymization-config-query-parameter) block (within [`custom_anonymization.anonymization_config`](#custom-anonymization-anonymization-config)) supports the following:
 
-&#x2022; [`query_param_name`](#query-param-name) - Optional String<br>Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name
+&#x2022; [`query_param_name`](#custom-anonymization-anonymization-config-query-parameter-query-param-name) - Optional String<br>Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name
 
 #### Detection Settings
 
 A [`detection_settings`](#detection-settings) block supports the following:
 
-&#x2022; [`bot_protection_setting`](#bot-protection-setting) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
+&#x2022; [`bot_protection_setting`](#detection-settings-bot-protection-setting) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#detection-settings-bot-protection-setting) below.
 
-&#x2022; [`default_bot_setting`](#default-bot-setting) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default_bot_setting`](#detection-settings-default-bot-setting) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`default_violation_settings`](#default-violation-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default_violation_settings`](#detection-settings-default-violation-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`disable_staging`](#disable-staging) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable_staging`](#detection-settings-disable-staging) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`disable_suppression`](#disable-suppression) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable_suppression`](#detection-settings-disable-suppression) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`disable_threat_campaigns`](#disable-threat-campaigns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`disable_threat_campaigns`](#detection-settings-disable-threat-campaigns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable_suppression`](#enable-suppression) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`enable_suppression`](#detection-settings-enable-suppression) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable_threat_campaigns`](#enable-threat-campaigns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`enable_threat_campaigns`](#detection-settings-enable-threat-campaigns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`signature_selection_setting`](#signature-selection-setting) - Optional Block<br>Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components<br>See [Signature Selection Setting](#detection-settings-signature-selection-setting) below.
+&#x2022; [`signature_selection_setting`](#detection-settings-signature-selection-setting) - Optional Block<br>Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components<br>See [Signature Selection Setting](#detection-settings-signature-selection-setting) below.
 
-&#x2022; [`stage_new_and_updated_signatures`](#stage-new-and-updated-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New And Updated Signatures](#detection-settings-stage-new-and-updated-signatures) below.
+&#x2022; [`stage_new_and_updated_signatures`](#detection-settings-stage-new-and-updated-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New And Updated Signatures](#detection-settings-stage-new-and-updated-signatures) below.
 
-&#x2022; [`stage_new_signatures`](#stage-new-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New Signatures](#detection-settings-stage-new-signatures) below.
+&#x2022; [`stage_new_signatures`](#detection-settings-stage-new-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New Signatures](#detection-settings-stage-new-signatures) below.
 
-&#x2022; [`violation_settings`](#violation-settings) - Optional Block<br>Violation Settings. Specifies violation settings to be used by WAF<br>See [Violation Settings](#detection-settings-violation-settings) below.
+&#x2022; [`violation_settings`](#detection-settings-violation-settings) - Optional Block<br>Violation Settings. Specifies violation settings to be used by WAF<br>See [Violation Settings](#detection-settings-violation-settings) below.
 
 #### Detection Settings Bot Protection Setting
 
 A [`bot_protection_setting`](#detection-settings-bot-protection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-&#x2022; [`good_bot_action`](#good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+&#x2022; [`good_bot_action`](#detection-settings-bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-&#x2022; [`malicious_bot_action`](#malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+&#x2022; [`malicious_bot_action`](#detection-settings-bot-protection-setting-malicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
-&#x2022; [`suspicious_bot_action`](#suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
+&#x2022; [`suspicious_bot_action`](#detection-settings-bot-protection-setting-suspicious-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>Bot Action. Action to be performed on the request Log and block Log only Disable detection
 
 #### Detection Settings Signature Selection Setting
 
 A [`signature_selection_setting`](#detection-settings-signature-selection-setting) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-&#x2022; [`attack_type_settings`](#attack-type-settings) - Optional Block<br>Attack Type Settings. Specifies attack-type settings to be used by WAF<br>See [Attack Type Settings](#detection-settings-signature-selection-setting-attack-type-settings) below.
+&#x2022; [`attack_type_settings`](#detection-settings-signature-selection-setting-attack-type-settings) - Optional Block<br>Attack Type Settings. Specifies attack-type settings to be used by WAF<br>See [Attack Type Settings](#detection-settings-signature-selection-setting-attack-type-settings) below.
 
-&#x2022; [`default_attack_type_settings`](#default-attack-type-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`default_attack_type_settings`](#detection-settings-signature-selection-setting-default-attack-type-settings) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`high_medium_accuracy_signatures`](#high-medium-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`high_medium_accuracy_signatures`](#detection-settings-signature-selection-setting-high-medium-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`high_medium_low_accuracy_signatures`](#high-medium-low-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`high_medium_low_accuracy_signatures`](#detection-settings-signature-selection-setting-high-medium-low-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`only_high_accuracy_signatures`](#only-high-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; [`only_high_accuracy_signatures`](#detection-settings-signature-selection-setting-only-high-accuracy-signatures) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Detection Settings Signature Selection Setting Attack Type Settings
 
 An [`attack_type_settings`](#detection-settings-signature-selection-setting-attack-type-settings) block (within [`detection_settings.signature_selection_setting`](#detection-settings-signature-selection-setting)) supports the following:
 
-&#x2022; [`disabled_attack_types`](#disabled-attack-types) - Optional List  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection
+&#x2022; [`disabled_attack_types`](#detection-settings-signature-selection-setting-attack-type-settings-disabled-attack-types) - Optional List  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection
 
 #### Detection Settings Stage New And Updated Signatures
 
 A [`stage_new_and_updated_signatures`](#detection-settings-stage-new-and-updated-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-&#x2022; [`staging_period`](#staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
+&#x2022; [`staging_period`](#detection-settings-stage-new-and-updated-signatures-staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
 #### Detection Settings Stage New Signatures
 
 A [`stage_new_signatures`](#detection-settings-stage-new-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-&#x2022; [`staging_period`](#staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
+&#x2022; [`staging_period`](#detection-settings-stage-new-signatures-staging-period) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
 #### Detection Settings Violation Settings
 
 A [`violation_settings`](#detection-settings-violation-settings) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-&#x2022; [`disabled_violation_types`](#disabled-violation-types) - Optional List  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>Disabled Violations. List of violations to be excluded
+&#x2022; [`disabled_violation_types`](#detection-settings-violation-settings-disabled-violation-types) - Optional List  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>Disabled Violations. List of violations to be excluded
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 ## Import
 

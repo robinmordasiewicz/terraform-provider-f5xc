@@ -88,73 +88,73 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`http_health_check`](#http-health-check) block supports the following:
 
-&#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+&#x2022; [`health_check_port`](#http-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-&#x2022; [`health_check_secondary_port`](#health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+&#x2022; [`health_check_secondary_port`](#http-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
-&#x2022; [`receive`](#receive) - Optional String<br>Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
+&#x2022; [`receive`](#http-health-check-receive) - Optional String<br>Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
-&#x2022; [`send`](#send) - Optional String<br>Send String. HTTP payload to send to the target
+&#x2022; [`send`](#http-health-check-send) - Optional String<br>Send String. HTTP payload to send to the target
 
 #### HTTPS Health Check
 
 A [`https_health_check`](#https-health-check) block supports the following:
 
-&#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+&#x2022; [`health_check_port`](#https-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-&#x2022; [`health_check_secondary_port`](#health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+&#x2022; [`health_check_secondary_port`](#https-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
-&#x2022; [`receive`](#receive) - Optional String<br>Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
+&#x2022; [`receive`](#https-health-check-receive) - Optional String<br>Receive String. Regular expression used to match against the response to the health check's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
-&#x2022; [`send`](#send) - Optional String<br>Send String. HTTP payload to send to the target
+&#x2022; [`send`](#https-health-check-send) - Optional String<br>Send String. HTTP payload to send to the target
 
 #### TCP Health Check
 
 A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
-&#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+&#x2022; [`health_check_port`](#tcp-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-&#x2022; [`health_check_secondary_port`](#health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+&#x2022; [`health_check_secondary_port`](#tcp-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
-&#x2022; [`receive`](#receive) - Optional String<br>Receive String. Regular expression used to match against the response to the monitor's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
+&#x2022; [`receive`](#tcp-health-check-receive) - Optional String<br>Receive String. Regular expression used to match against the response to the monitor's request. Mark node up upon receipt of a successful regular expression match. Uses re2 regular expression syntax
 
-&#x2022; [`send`](#send) - Optional String<br>Send String. Send this string to target (default empty. When send and receive are both empty, monitor just tests 3WHS)
+&#x2022; [`send`](#tcp-health-check-send) - Optional String<br>Send String. Send this string to target (default empty. When send and receive are both empty, monitor just tests 3WHS)
 
 #### TCP Hex Health Check
 
 A [`tcp_hex_health_check`](#tcp-hex-health-check) block supports the following:
 
-&#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+&#x2022; [`health_check_port`](#tcp-hex-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-&#x2022; [`health_check_secondary_port`](#health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+&#x2022; [`health_check_secondary_port`](#tcp-hex-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
-&#x2022; [`receive`](#receive) - Optional String<br>Receive Payload. Hex encoded raw bytes expected in the response
+&#x2022; [`receive`](#tcp-hex-health-check-receive) - Optional String<br>Receive Payload. Hex encoded raw bytes expected in the response
 
-&#x2022; [`send`](#send) - Optional String<br>Send Payload. Hex encoded raw bytes sent in the request. Empty payloads imply a connect-only health check
+&#x2022; [`send`](#tcp-hex-health-check-send) - Optional String<br>Send Payload. Hex encoded raw bytes sent in the request. Empty payloads imply a connect-only health check
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`create`](#timeouts-create) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
-&#x2022; [`delete`](#delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
+&#x2022; [`delete`](#timeouts-delete) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs
 
-&#x2022; [`read`](#read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
+&#x2022; [`read`](#timeouts-read) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled
 
-&#x2022; [`update`](#update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
+&#x2022; [`update`](#timeouts-update) - Optional String<br>A string that can be [parsed as a duration](`HTTPS://pkg.go.dev/time#ParseDuration`) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours)
 
 #### UDP Health Check
 
 An [`udp_health_check`](#udp-health-check) block supports the following:
 
-&#x2022; [`health_check_port`](#health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
+&#x2022; [`health_check_port`](#udp-health-check-health-check-port) - Optional Number<br>Health Check Port. Port used for performing health check
 
-&#x2022; [`health_check_secondary_port`](#health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
+&#x2022; [`health_check_secondary_port`](#udp-health-check-health-check-secondary-port) - Optional Number<br>Health Check Secondary Port. Secondary port used for performing health check. If included, both ports must be healthy for the health check to pass
 
-&#x2022; [`receive`](#receive) - Optional String<br>Receive String. UDP response to be matched. It can be a regex
+&#x2022; [`receive`](#udp-health-check-receive) - Optional String<br>Receive String. UDP response to be matched. It can be a regex
 
-&#x2022; [`send`](#send) - Optional String<br>Send String. UDP payload
+&#x2022; [`send`](#udp-health-check-send) - Optional String<br>Send String. UDP payload
 
 ## Import
 

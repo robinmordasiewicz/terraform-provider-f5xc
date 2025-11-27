@@ -76,35 +76,35 @@ var mixedCaseAcronyms = map[string]string{
 // that don't match any pattern or need a specific override
 var subcategoryOverrides = map[string]string{
 	// Explicit overrides for resources that don't match patterns well
-	"apm":               "Monitoring",
-	"crl":               "Certificates",
-	"bgp":               "Networking",
-	"proxy":             "Networking",
-	"tunnel":            "Networking",
-	"segment":           "Networking",
-	"subnet":            "Networking",
-	"fleet":             "Sites",
-	"cluster":           "Load Balancing",
-	"endpoint":          "Load Balancing",
-	"route":             "Load Balancing",
-	"healthcheck":       "Load Balancing",
-	"origin_pool":       "Load Balancing",
-	"virtual_host":      "Load Balancing",
-	"discovery":         "Applications",
-	"filter_set":        "Applications",
-	"policer":           "Service Mesh",
-	"quota":             "Organization",
-	"contact":           "Organization",
-	"role":              "Organization",
-	"token":             "Authentication",
-	"registration":      "Sites",
-	"namespace":         "Organization",
-	"data_type":         "Security",
-	"data_group":        "BIG-IP Integration",
-	"irule":             "BIG-IP Integration",
-	"nfv_service":       "Networking",
-	"workload":          "Kubernetes",
-	"workload_flavor":   "Kubernetes",
+	"apm":                 "Monitoring",
+	"crl":                 "Certificates",
+	"bgp":                 "Networking",
+	"proxy":               "Networking",
+	"tunnel":              "Networking",
+	"segment":             "Networking",
+	"subnet":              "Networking",
+	"fleet":               "Sites",
+	"cluster":             "Load Balancing",
+	"endpoint":            "Load Balancing",
+	"route":               "Load Balancing",
+	"healthcheck":         "Load Balancing",
+	"origin_pool":         "Load Balancing",
+	"virtual_host":        "Load Balancing",
+	"discovery":           "Applications",
+	"filter_set":          "Applications",
+	"policer":             "Service Mesh",
+	"quota":               "Organization",
+	"contact":             "Organization",
+	"role":                "Organization",
+	"token":               "Authentication",
+	"registration":        "Sites",
+	"namespace":           "Organization",
+	"data_type":           "Security",
+	"data_group":          "BIG-IP Integration",
+	"irule":               "BIG-IP Integration",
+	"nfv_service":         "Networking",
+	"workload":            "Kubernetes",
+	"workload_flavor":     "Kubernetes",
 	"cminstance":          "Subscriptions",
 	"user_identification": "Security",
 	"virtual_network":     "Networking",
@@ -886,16 +886,21 @@ func convertBoldToH4Headers(content string) string {
 // This handles attribute-only nested blocks that tfplugindocs doesn't annotate automatically.
 //
 // Algorithm:
-// 1. Find all anchors that have nested sections (anchor followed by "A `X` block supports...")
-// 2. Find bullet points linking to those anchors that don't already have "See below"
-// 3. Add the "See below" suffix to those bullet points
+//  1. Find all anchors that have nested sections (anchor followed by "A `X` block supports...")
+//     This includes both <a id="..."> tags AND H4 headers (#### Title) which auto-generate anchors
+//  2. Find bullet points linking to those anchors that don't already have "See below"
+//  3. Add the "See below" suffix to those bullet points
 func addSeeBelowLinksForNestedBlocks(content string) string {
 	lines := strings.Split(content, "\n")
 
 	// Step 1: Find all anchors with nested block content
-	// Pattern: <a id="anchor-name"></a> followed eventually by "A `block_name` block supports the following:"
+	// Pattern 1: <a id="anchor-name"></a> followed by "A `block_name` block supports the following:"
+	// Pattern 2: #### Header Title followed by "A `block_name` block supports the following:"
+	//            H4 headers auto-generate anchors: "#### CORS Policy" → #cors-policy
 	anchorsWithNestedContent := make(map[string]string) // anchor -> block_name
 	anchorRegex := regexp.MustCompile("<a id=\"([^\"]+)\"></a>")
+	// H4 header regex: #### Title Text (generates anchor from title)
+	h4HeaderRegex := regexp.MustCompile(`^####\s+(.+)$`)
 	// Match: An? [`block_name`](#anchor)? block supports the following:
 	// The backtick is represented as \x60 in the regex
 	blockSupportsRegex := regexp.MustCompile("^An? \\[?\\x60([^\\x60]+)\\x60\\]?(?:\\(#[^)]+\\))? block supports the following:")
@@ -904,6 +909,11 @@ func addSeeBelowLinksForNestedBlocks(content string) string {
 	for _, line := range lines {
 		if m := anchorRegex.FindStringSubmatch(line); m != nil {
 			currentAnchor = m[1]
+		} else if m := h4HeaderRegex.FindStringSubmatch(line); m != nil {
+			// H4 header found - derive anchor from header text
+			// "#### CORS Policy" → "cors-policy"
+			headerText := m[1]
+			currentAnchor = headerTextToAnchor(headerText)
 		} else if currentAnchor != "" && blockSupportsRegex.MatchString(line) {
 			// Extract block name from the "supports" line
 			if m := blockSupportsRegex.FindStringSubmatch(line); m != nil {
@@ -968,6 +978,31 @@ func toTitleCaseFromAnchor(anchor string) string {
 		}
 	}
 	return strings.Join(words, " ")
+}
+
+// headerTextToAnchor converts H4 header text to the anchor that markdown auto-generates
+// e.g., "CORS Policy" -> "cors-policy", "Active Service Policies" -> "active-service-policies"
+// This mirrors how markdown renderers generate anchor IDs from header text
+func headerTextToAnchor(headerText string) string {
+	// Convert to lowercase
+	anchor := strings.ToLower(headerText)
+	// Replace spaces with hyphens
+	anchor = strings.ReplaceAll(anchor, " ", "-")
+	// Remove any characters that aren't alphanumeric or hyphens
+	var result strings.Builder
+	for _, r := range anchor {
+		if (r >= 'a' && r <= 'z') || (r >= '0' && r <= '9') || r == '-' {
+			result.WriteRune(r)
+		}
+	}
+	// Collapse multiple consecutive hyphens into one
+	anchor = result.String()
+	for strings.Contains(anchor, "--") {
+		anchor = strings.ReplaceAll(anchor, "--", "-")
+	}
+	// Trim leading and trailing hyphens
+	anchor = strings.Trim(anchor, "-")
+	return anchor
 }
 
 // NOTE: convertNestedBlocksHeadings function removed - single-page mode handles H3→bold inline

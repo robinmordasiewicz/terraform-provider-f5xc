@@ -36,8 +36,3 @@ Thumbs.db
 # Build artifacts
 dist/
 bin/
-site/
-
-# Generated documentation (rebuilt at deploy time)
-docs/api/
-docs/nav-api.yml

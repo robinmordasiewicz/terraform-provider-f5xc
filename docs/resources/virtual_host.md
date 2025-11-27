@@ -195,7 +195,7 @@ An [`authentication`](#authentication) block supports the following:
 
 &#x2022; [`use_auth_object_config`](#use-auth-object-config) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Auth Config
+#### Authentication Auth Config
 
 An [`auth_config`](#authentication-auth-config) block (within [`authentication`](#authentication)) supports the following:
 
@@ -209,7 +209,7 @@ An [`auth_config`](#authentication-auth-config) block (within [`authentication`]
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Cookie Params
+#### Authentication Cookie Params
 
 A [`cookie_params`](#authentication-cookie-params) block (within [`authentication`](#authentication)) supports the following:
 
@@ -223,7 +223,7 @@ A [`cookie_params`](#authentication-cookie-params) block (within [`authenticatio
 
 &#x2022; [`session_expiry`](#session-expiry) - Optional Number<br>Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours)
 
-#### Auth HMAC
+#### Authentication Cookie Params Auth HMAC
 
 An [`auth_hmac`](#authentication-cookie-params-auth-hmac) block (within [`authentication.cookie_params`](#authentication-cookie-params)) supports the following:
 
@@ -235,7 +235,7 @@ An [`auth_hmac`](#authentication-cookie-params-auth-hmac) block (within [`authen
 
 &#x2022; [`sec_key_expiry`](#sec-key-expiry) - Optional String<br>HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time
 
-#### Prim Key
+#### Authentication Cookie Params Auth HMAC Prim Key
 
 A [`prim_key`](#authentication-cookie-params-auth-hmac-prim-key) block (within [`authentication.cookie_params.auth_hmac`](#authentication-cookie-params-auth-hmac)) supports the following:
 
@@ -243,7 +243,7 @@ A [`prim_key`](#authentication-cookie-params-auth-hmac-prim-key) block (within [
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#authentication-cookie-params-auth-hmac-prim-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Authentication Cookie Params Auth HMAC Prim Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-blindfold-secret-info) block (within [`authentication.cookie_params.auth_hmac.prim_key`](#authentication-cookie-params-auth-hmac-prim-key)) supports the following:
 
@@ -253,7 +253,7 @@ A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-bli
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Authentication Cookie Params Auth HMAC Prim Key Clear Secret Info
 
 A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-clear-secret-info) block (within [`authentication.cookie_params.auth_hmac.prim_key`](#authentication-cookie-params-auth-hmac-prim-key)) supports the following:
 
@@ -261,7 +261,7 @@ A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-prim-key-clear-s
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Sec Key
+#### Authentication Cookie Params Auth HMAC Sec Key
 
 A [`sec_key`](#authentication-cookie-params-auth-hmac-sec-key) block (within [`authentication.cookie_params.auth_hmac`](#authentication-cookie-params-auth-hmac)) supports the following:
 
@@ -269,7 +269,7 @@ A [`sec_key`](#authentication-cookie-params-auth-hmac-sec-key) block (within [`a
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#authentication-cookie-params-auth-hmac-sec-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Authentication Cookie Params Auth HMAC Sec Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-blindfold-secret-info) block (within [`authentication.cookie_params.auth_hmac.sec_key`](#authentication-cookie-params-auth-hmac-sec-key)) supports the following:
 
@@ -279,7 +279,7 @@ A [`blindfold_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-blin
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Authentication Cookie Params Auth HMAC Sec Key Clear Secret Info
 
 A [`clear_secret_info`](#authentication-cookie-params-auth-hmac-sec-key-clear-secret-info) block (within [`authentication.cookie_params.auth_hmac.sec_key`](#authentication-cookie-params-auth-hmac-sec-key)) supports the following:
 
@@ -353,7 +353,7 @@ A [`csrf_policy`](#csrf-policy) block supports the following:
 
 &#x2022; [`disabled`](#disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom Domain List
+#### CSRF Policy Custom Domain List
 
 A [`custom_domain_list`](#csrf-policy-custom-domain-list) block (within [`csrf_policy`](#csrf-policy)) supports the following:
 
@@ -371,7 +371,7 @@ A [`dynamic_reverse_proxy`](#dynamic-reverse-proxy) block supports the following
 
 &#x2022; [`resolve_endpoint_dynamically`](#resolve-endpoint-dynamically) - Optional Bool<br>Dynamic Endpoint Resolution. x-example : true In this mode of proxy, virtual host will resolve the destination endpoint dynamically. The dynamic resolution is done using a predefined field in the request. This predefined field depends on the ProxyType configured on the Virtual Host. For HTTP traffic, i.e. with ProxyType as HTTP_PROXY or HTTPS_PROXY, virtual host will use the 'HOST' HTTP header from the request and perform DNS resolution to select destination endpoint. For TCP traffic with SNI, (If the ProxyType is TCP_PROXY_WITH_SNI), virtual host will perform DNS resolution using the SNI. The DNS resolution is performed in the virtual network specified in outside_network_type or outside_network In both modes of operation(either using Host header or SNI), the DNS resolution could return multiple addresses. First IPv4 address from such returned list is used as endpoint for the request. The DNS response is cached for 60s by default
 
-#### Resolution Network
+#### Dynamic Reverse Proxy Resolution Network
 
 A [`resolution_network`](#dynamic-reverse-proxy-resolution-network) block (within [`dynamic_reverse_proxy`](#dynamic-reverse-proxy)) supports the following:
 
@@ -395,13 +395,13 @@ A [`http_protocol_options`](#http-protocol-options) block supports the following
 
 &#x2022; [`http_protocol_enable_v2_only`](#http-protocol-enable-v2-only) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### HTTP Protocol Enable V1 Only
+#### HTTP Protocol Options HTTP Protocol Enable V1 Only
 
 A [`http_protocol_enable_v1_only`](#http-protocol-options-http-protocol-enable-v1-only) block (within [`http_protocol_options`](#http-protocol-options)) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#http-protocol-options-http-protocol-enable-v1-only-header-transformation) below.
 
-#### Header Transformation
+#### HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
 A [`header_transformation`](#http-protocol-options-http-protocol-enable-v1-only-header-transformation) block (within [`http_protocol_options.http_protocol_enable_v1_only`](#http-protocol-options-http-protocol-enable-v1-only)) supports the following:
 
@@ -449,7 +449,7 @@ A [`request_cookies_to_add`](#request-cookies-to-add) block supports the followi
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the Cookie header
 
-#### Secret Value
+#### Request Cookies To Add Secret Value
 
 A [`secret_value`](#request-cookies-to-add-secret-value) block (within [`request_cookies_to_add`](#request-cookies-to-add)) supports the following:
 
@@ -457,7 +457,7 @@ A [`secret_value`](#request-cookies-to-add-secret-value) block (within [`request
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#request-cookies-to-add-secret-value-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Request Cookies To Add Secret Value Blindfold Secret Info
 
 A [`blindfold_secret_info`](#request-cookies-to-add-secret-value-blindfold-secret-info) block (within [`request_cookies_to_add.secret_value`](#request-cookies-to-add-secret-value)) supports the following:
 
@@ -467,7 +467,7 @@ A [`blindfold_secret_info`](#request-cookies-to-add-secret-value-blindfold-secre
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Request Cookies To Add Secret Value Clear Secret Info
 
 A [`clear_secret_info`](#request-cookies-to-add-secret-value-clear-secret-info) block (within [`request_cookies_to_add.secret_value`](#request-cookies-to-add-secret-value)) supports the following:
 
@@ -487,7 +487,7 @@ A [`request_headers_to_add`](#request-headers-to-add) block supports the followi
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the HTTP header
 
-#### Secret Value
+#### Request Headers To Add Secret Value
 
 A [`secret_value`](#request-headers-to-add-secret-value) block (within [`request_headers_to_add`](#request-headers-to-add)) supports the following:
 
@@ -495,7 +495,7 @@ A [`secret_value`](#request-headers-to-add-secret-value) block (within [`request
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#request-headers-to-add-secret-value-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Request Headers To Add Secret Value Blindfold Secret Info
 
 A [`blindfold_secret_info`](#request-headers-to-add-secret-value-blindfold-secret-info) block (within [`request_headers_to_add.secret_value`](#request-headers-to-add-secret-value)) supports the following:
 
@@ -505,7 +505,7 @@ A [`blindfold_secret_info`](#request-headers-to-add-secret-value-blindfold-secre
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Request Headers To Add Secret Value Clear Secret Info
 
 A [`clear_secret_info`](#request-headers-to-add-secret-value-clear-secret-info) block (within [`request_headers_to_add.secret_value`](#request-headers-to-add-secret-value)) supports the following:
 
@@ -563,7 +563,7 @@ A [`response_cookies_to_add`](#response-cookies-to-add) block supports the follo
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the Cookie header
 
-#### Secret Value
+#### Response Cookies To Add Secret Value
 
 A [`secret_value`](#response-cookies-to-add-secret-value) block (within [`response_cookies_to_add`](#response-cookies-to-add)) supports the following:
 
@@ -571,7 +571,7 @@ A [`secret_value`](#response-cookies-to-add-secret-value) block (within [`respon
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#response-cookies-to-add-secret-value-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Response Cookies To Add Secret Value Blindfold Secret Info
 
 A [`blindfold_secret_info`](#response-cookies-to-add-secret-value-blindfold-secret-info) block (within [`response_cookies_to_add.secret_value`](#response-cookies-to-add-secret-value)) supports the following:
 
@@ -581,7 +581,7 @@ A [`blindfold_secret_info`](#response-cookies-to-add-secret-value-blindfold-secr
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Response Cookies To Add Secret Value Clear Secret Info
 
 A [`clear_secret_info`](#response-cookies-to-add-secret-value-clear-secret-info) block (within [`response_cookies_to_add.secret_value`](#response-cookies-to-add-secret-value)) supports the following:
 
@@ -601,7 +601,7 @@ A [`response_headers_to_add`](#response-headers-to-add) block supports the follo
 
 &#x2022; [`value`](#value) - Optional String<br>Value. Value of the HTTP header
 
-#### Secret Value
+#### Response Headers To Add Secret Value
 
 A [`secret_value`](#response-headers-to-add-secret-value) block (within [`response_headers_to_add`](#response-headers-to-add)) supports the following:
 
@@ -609,7 +609,7 @@ A [`secret_value`](#response-headers-to-add-secret-value) block (within [`respon
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#response-headers-to-add-secret-value-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Response Headers To Add Secret Value Blindfold Secret Info
 
 A [`blindfold_secret_info`](#response-headers-to-add-secret-value-blindfold-secret-info) block (within [`response_headers_to_add.secret_value`](#response-headers-to-add-secret-value)) supports the following:
 
@@ -619,7 +619,7 @@ A [`blindfold_secret_info`](#response-headers-to-add-secret-value-blindfold-secr
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Response Headers To Add Secret Value Clear Secret Info
 
 A [`clear_secret_info`](#response-headers-to-add-secret-value-clear-secret-info) block (within [`response_headers_to_add.secret_value`](#response-headers-to-add-secret-value)) supports the following:
 
@@ -641,7 +641,7 @@ A [`retry_policy`](#retry-policy) block supports the following:
 
 &#x2022; [`retry_condition`](#retry-condition) - Optional List<br>Retry Condition. Specifies the conditions under which retry takes place. Retries can be on different types of condition depending on application requirements. For example, network failure, all 5xx response codes, idempotent 4xx response codes, etc The possible values are '5xx' : Retry will be done if the upstream server responds with any 5xx response code, or does not respond at all (disconnect/reset/read timeout). 'gateway-error' : Retry will be done only if the upstream server responds with 502, 503 or 504 responses (Included in 5xx) 'connect-failure' : Retry will be done if the request fails because of a connection failure to the upstream server (connect timeout, etc.). (Included in 5xx) 'refused-stream' : Retry is done if the upstream server resets the stream with a REFUSED_STREAM error code (Included in 5xx) 'retriable-4xx' : Retry is done if the upstream server responds with a retriable 4xx response code. The only response code in this category is HTTP CONFLICT (409) 'retriable-status-codes' : Retry is done if the upstream server responds with any response code matching one defined in retriable_status_codes field 'reset' : Retry is done if the upstream server does not respond at all (disconnect/reset/read timeout.)
 
-#### Back Off
+#### Retry Policy Back Off
 
 A [`back_off`](#retry-policy-back-off) block (within [`retry_policy`](#retry-policy)) supports the following:
 
@@ -721,7 +721,7 @@ A [`tls_cert_params`](#tls-cert-params) block supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added
 
-#### Certificates
+#### TLS Cert Params Certificates
 
 A [`certificates`](#tls-cert-params-certificates) block (within [`tls_cert_params`](#tls-cert-params)) supports the following:
 
@@ -735,7 +735,7 @@ A [`certificates`](#tls-cert-params-certificates) block (within [`tls_cert_param
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Validation Params
+#### TLS Cert Params Validation Params
 
 A [`validation_params`](#tls-cert-params-validation-params) block (within [`tls_cert_params`](#tls-cert-params)) supports the following:
 
@@ -747,13 +747,13 @@ A [`validation_params`](#tls-cert-params-validation-params) block (within [`tls_
 
 &#x2022; [`verify_subject_alt_names`](#verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
-#### Trusted CA
+#### TLS Cert Params Validation Params Trusted CA
 
 A [`trusted_ca`](#tls-cert-params-validation-params-trusted-ca) block (within [`tls_cert_params.validation_params`](#tls-cert-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-cert-params-validation-params-trusted-ca-trusted-ca-list) below.
 
-#### Trusted CA List
+#### TLS Cert Params Validation Params Trusted CA Trusted CA List
 
 A [`trusted_ca_list`](#tls-cert-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_cert_params.validation_params.trusted_ca`](#tls-cert-params-validation-params-trusted-ca)) supports the following:
 
@@ -781,7 +781,7 @@ A [`tls_parameters`](#tls-parameters) block supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added
 
-#### Common Params
+#### TLS Parameters Common Params
 
 A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
@@ -795,7 +795,7 @@ A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameter
 
 &#x2022; [`validation_params`](#validation-params) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#tls-parameters-common-params-validation-params) below.
 
-#### TLS Certificates
+#### TLS Parameters Common Params TLS Certificates
 
 A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -811,13 +811,13 @@ A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (wi
 
 &#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom Hash Algorithms
+#### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
-#### Private Key
+#### TLS Parameters Common Params TLS Certificates Private Key
 
 A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
@@ -825,7 +825,7 @@ A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) bl
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### TLS Parameters Common Params TLS Certificates Private Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -835,7 +835,7 @@ A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-priva
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### TLS Parameters Common Params TLS Certificates Private Key Clear Secret Info
 
 A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -843,7 +843,7 @@ A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-k
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Validation Params
+#### TLS Parameters Common Params Validation Params
 
 A [`validation_params`](#tls-parameters-common-params-validation-params) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -855,13 +855,13 @@ A [`validation_params`](#tls-parameters-common-params-validation-params) block (
 
 &#x2022; [`verify_subject_alt_names`](#verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
-#### Trusted CA
+#### TLS Parameters Common Params Validation Params Trusted CA
 
 A [`trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca) block (within [`tls_parameters.common_params.validation_params`](#tls-parameters-common-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
 
-#### Trusted CA List
+#### TLS Parameters Common Params Validation Params Trusted CA Trusted CA List
 
 A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_parameters.common_params.validation_params.trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca)) supports the following:
 
@@ -899,13 +899,13 @@ A [`waf_type`](#waf-type) block supports the following:
 
 &#x2022; [`inherit_waf`](#inherit-waf) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### App Firewall
+#### WAF Type App Firewall
 
 An [`app_firewall`](#waf-type-app-firewall) block (within [`waf_type`](#waf-type)) supports the following:
 
 &#x2022; [`app_firewall`](#app-firewall) - Optional Block<br>Application Firewall. References to an Application Firewall configuration object<br>See [App Firewall](#waf-type-app-firewall-app-firewall) below.
 
-#### App Firewall
+#### WAF Type App Firewall App Firewall
 
 An [`app_firewall`](#waf-type-app-firewall-app-firewall) block (within [`waf_type.app_firewall`](#waf-type-app-firewall)) supports the following:
 

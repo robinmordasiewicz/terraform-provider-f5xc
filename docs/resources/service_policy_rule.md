@@ -157,7 +157,7 @@ An [`arg_matchers`](#arg-matchers) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body
 
-#### Item
+#### Arg Matchers Item
 
 An [`item`](#arg-matchers-item) block (within [`arg_matchers`](#arg-matchers)) supports the following:
 
@@ -179,7 +179,7 @@ An [`asn_matcher`](#asn-matcher) block supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#asn-matcher-asn-sets) below.
 
-#### Asn Sets
+#### Asn Matcher Asn Sets
 
 An [`asn_sets`](#asn-matcher-asn-sets) block (within [`asn_matcher`](#asn-matcher)) supports the following:
 
@@ -239,7 +239,7 @@ A [`cookie_matchers`](#cookie-matchers) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Cookie Name. A case-sensitive cookie name
 
-#### Item
+#### Cookie Matchers Item
 
 An [`item`](#cookie-matchers-item) block (within [`cookie_matchers`](#cookie-matchers)) supports the following:
 
@@ -271,7 +271,7 @@ A [`headers`](#headers) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>Header Name. A case-insensitive HTTP header name
 
-#### Item
+#### Headers Item
 
 An [`item`](#headers-item) block (within [`headers`](#headers)) supports the following:
 
@@ -297,7 +297,7 @@ An [`ip_matcher`](#ip-matcher) block supports the following:
 
 &#x2022; [`prefix_sets`](#prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#ip-matcher-prefix-sets) below.
 
-#### Prefix Sets
+#### IP Matcher Prefix Sets
 
 A [`prefix_sets`](#ip-matcher-prefix-sets) block (within [`ip_matcher`](#ip-matcher)) supports the following:
 
@@ -345,7 +345,7 @@ A [`jwt_claims`](#jwt-claims) block supports the following:
 
 &#x2022; [`name`](#name) - Optional String<br>JWT Claim Name. JWT claim name
 
-#### Item
+#### JWT Claims Item
 
 An [`item`](#jwt-claims-item) block (within [`jwt_claims`](#jwt-claims)) supports the following:
 
@@ -407,7 +407,7 @@ A [`query_params`](#query-params) block supports the following:
 
 &#x2022; [`key`](#key) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
 
-#### Item
+#### Query Params Item
 
 An [`item`](#query-params-item) block (within [`query_params`](#query-params)) supports the following:
 
@@ -487,13 +487,13 @@ A [`segment_policy`](#segment-policy) block supports the following:
 
 &#x2022; [`src_segments`](#src-segments) - Optional Block<br>Segment List. List of references to Segments<br>See [Src Segments](#segment-policy-src-segments) below.
 
-#### Dst Segments
+#### Segment Policy Dst Segments
 
 A [`dst_segments`](#segment-policy-dst-segments) block (within [`segment_policy`](#segment-policy)) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#segment-policy-dst-segments-segments) below.
 
-#### Segments
+#### Segment Policy Dst Segments Segments
 
 A [`segments`](#segment-policy-dst-segments-segments) block (within [`segment_policy.dst_segments`](#segment-policy-dst-segments)) supports the following:
 
@@ -503,13 +503,13 @@ A [`segments`](#segment-policy-dst-segments-segments) block (within [`segment_po
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Src Segments
+#### Segment Policy Src Segments
 
 A [`src_segments`](#segment-policy-src-segments) block (within [`segment_policy`](#segment-policy)) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#segment-policy-src-segments-segments) below.
 
-#### Segments
+#### Segment Policy Src Segments Segments
 
 A [`segments`](#segment-policy-src-segments-segments) block (within [`segment_policy.src_segments`](#segment-policy-src-segments)) supports the following:
 
@@ -551,7 +551,7 @@ A [`waf_action`](#waf-action) block supports the following:
 
 &#x2022; [`waf_skip_processing`](#waf-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### App Firewall Detection Control
+#### WAF Action App Firewall Detection Control
 
 An [`app_firewall_detection_control`](#waf-action-app-firewall-detection-control) block (within [`waf_action`](#waf-action)) supports the following:
 
@@ -563,7 +563,7 @@ An [`app_firewall_detection_control`](#waf-action-app-firewall-detection-control
 
 &#x2022; [`exclude_violation_contexts`](#exclude-violation-contexts) - Optional Block<br>Violations. Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#waf-action-app-firewall-detection-control-exclude-violation-contexts) below.
 
-#### Exclude Attack Type Contexts
+#### WAF Action App Firewall Detection Control Exclude Attack Type Contexts
 
 An [`exclude_attack_type_contexts`](#waf-action-app-firewall-detection-control-exclude-attack-type-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
@@ -573,13 +573,13 @@ An [`exclude_attack_type_contexts`](#waf-action-app-firewall-detection-control-e
 
 &#x2022; [`exclude_attack_type`](#exclude-attack-type) - Optional String  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK
 
-#### Exclude Bot Name Contexts
+#### WAF Action App Firewall Detection Control Exclude Bot Name Contexts
 
 An [`exclude_bot_name_contexts`](#waf-action-app-firewall-detection-control-exclude-bot-name-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
 &#x2022; [`bot_name`](#bot-name) - Optional String<br>Bot Name
 
-#### Exclude Signature Contexts
+#### WAF Action App Firewall Detection Control Exclude Signature Contexts
 
 An [`exclude_signature_contexts`](#waf-action-app-firewall-detection-control-exclude-signature-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 
@@ -589,7 +589,7 @@ An [`exclude_signature_contexts`](#waf-action-app-firewall-detection-control-exc
 
 &#x2022; [`signature_id`](#signature-id) - Optional Number<br>SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
 
-#### Exclude Violation Contexts
+#### WAF Action App Firewall Detection Control Exclude Violation Contexts
 
 An [`exclude_violation_contexts`](#waf-action-app-firewall-detection-control-exclude-violation-contexts) block (within [`waf_action.app_firewall_detection_control`](#waf-action-app-firewall-detection-control)) supports the following:
 

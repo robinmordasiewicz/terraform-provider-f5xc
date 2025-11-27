@@ -93,7 +93,7 @@ A [`policy_rule_list`](#policy-rule-list) block supports the following:
 
 &#x2022; [`policy_rule`](#policy-rule) - Optional Block<br>Policy Rules. List of rules for role permissions<br>See [Policy Rule](#policy-rule-list-policy-rule) below.
 
-#### Policy Rule
+#### Policy Rule List Policy Rule
 
 A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_list`](#policy-rule-list)) supports the following:
 
@@ -101,7 +101,7 @@ A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_lis
 
 &#x2022; [`resource_list`](#resource-list) - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
 
-#### Non Resource URL List
+#### Policy Rule List Policy Rule Non Resource URL List
 
 A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
@@ -109,7 +109,7 @@ A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list)
 
 &#x2022; [`verbs`](#verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations
 
-#### Resource List
+#### Policy Rule List Policy Rule Resource List
 
 A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 

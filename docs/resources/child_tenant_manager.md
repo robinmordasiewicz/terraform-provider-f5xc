@@ -88,7 +88,7 @@ A [`group_assignments`](#group-assignments) block supports the following:
 
 &#x2022; [`group`](#group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Group](#group-assignments-group) below.
 
-#### Group
+#### Group Assignments Group
 
 A [`group`](#group-assignments-group) block (within [`group_assignments`](#group-assignments)) supports the following:
 

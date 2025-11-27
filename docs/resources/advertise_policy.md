@@ -132,7 +132,7 @@ A [`tls_parameters`](#tls-parameters) block supports the following:
 
 &#x2022; [`xfcc_header_elements`](#xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>XFCC Header. X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added
 
-#### Common Params
+#### TLS Parameters Common Params
 
 A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
@@ -146,7 +146,7 @@ A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameter
 
 &#x2022; [`validation_params`](#validation-params) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#tls-parameters-common-params-validation-params) below.
 
-#### TLS Certificates
+#### TLS Parameters Common Params TLS Certificates
 
 A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -162,13 +162,13 @@ A [`tls_certificates`](#tls-parameters-common-params-tls-certificates) block (wi
 
 &#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom Hash Algorithms
+#### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#tls-parameters-common-params-tls-certificates-custom-hash-algorithms) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
-#### Private Key
+#### TLS Parameters Common Params TLS Certificates Private Key
 
 A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) block (within [`tls_parameters.common_params.tls_certificates`](#tls-parameters-common-params-tls-certificates)) supports the following:
 
@@ -176,7 +176,7 @@ A [`private_key`](#tls-parameters-common-params-tls-certificates-private-key) bl
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### TLS Parameters Common Params TLS Certificates Private Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-blindfold-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -186,7 +186,7 @@ A [`blindfold_secret_info`](#tls-parameters-common-params-tls-certificates-priva
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### TLS Parameters Common Params TLS Certificates Private Key Clear Secret Info
 
 A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-key-clear-secret-info) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#tls-parameters-common-params-tls-certificates-private-key)) supports the following:
 
@@ -194,7 +194,7 @@ A [`clear_secret_info`](#tls-parameters-common-params-tls-certificates-private-k
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Validation Params
+#### TLS Parameters Common Params Validation Params
 
 A [`validation_params`](#tls-parameters-common-params-validation-params) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
@@ -206,13 +206,13 @@ A [`validation_params`](#tls-parameters-common-params-validation-params) block (
 
 &#x2022; [`verify_subject_alt_names`](#verify-subject-alt-names) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
-#### Trusted CA
+#### TLS Parameters Common Params Validation Params Trusted CA
 
 A [`trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca) block (within [`tls_parameters.common_params.validation_params`](#tls-parameters-common-params-validation-params)) supports the following:
 
 &#x2022; [`trusted_ca_list`](#trusted-ca-list) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) below.
 
-#### Trusted CA List
+#### TLS Parameters Common Params Validation Params Trusted CA Trusted CA List
 
 A [`trusted_ca_list`](#tls-parameters-common-params-validation-params-trusted-ca-trusted-ca-list) block (within [`tls_parameters.common_params.validation_params.trusted_ca`](#tls-parameters-common-params-validation-params-trusted-ca)) supports the following:
 
@@ -236,7 +236,7 @@ A [`where`](#where) block supports the following:
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
 
-#### Site
+#### Where Site
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
@@ -248,7 +248,7 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
 
-#### Ref
+#### Where Site Ref
 
 A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
@@ -262,13 +262,13 @@ A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports t
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Virtual Network
+#### Where Virtual Network
 
 A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
 
-#### Ref
+#### Where Virtual Network Ref
 
 A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#where-virtual-network)) supports the following:
 
@@ -282,7 +282,7 @@ A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#w
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Virtual Site
+#### Where Virtual Site
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
@@ -294,7 +294,7 @@ A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) support
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
 
-#### Ref
+#### Where Virtual Site Ref
 
 A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 

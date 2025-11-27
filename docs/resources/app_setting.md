@@ -90,7 +90,7 @@ An [`app_type_settings`](#app-type-settings) block supports the following:
 
 &#x2022; [`user_behavior_analysis_setting`](#user-behavior-analysis-setting) - Optional Block<br>User Behavior Analysis Setting. Configuration for user behavior analysis<br>See [User Behavior Analysis Setting](#app-type-settings-user-behavior-analysis-setting) below.
 
-#### App Type Ref
+#### App Type Settings App Type Ref
 
 An [`app_type_ref`](#app-type-settings-app-type-ref) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
@@ -104,7 +104,7 @@ An [`app_type_ref`](#app-type-settings-app-type-ref) block (within [`app_type_se
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Business Logic Markup Setting
+#### App Type Settings Business Logic Markup Setting
 
 A [`business_logic_markup_setting`](#app-type-settings-business-logic-markup-setting) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
@@ -112,13 +112,13 @@ A [`business_logic_markup_setting`](#app-type-settings-business-logic-markup-set
 
 &#x2022; [`enable`](#enable) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Timeseries Analyses Setting
+#### App Type Settings Timeseries Analyses Setting
 
 A [`timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
 &#x2022; [`metric_selectors`](#metric-selectors) - Optional Block<br>Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic<br>See [Metric Selectors](#app-type-settings-timeseries-analyses-setting-metric-selectors) below.
 
-#### Metric Selectors
+#### App Type Settings Timeseries Analyses Setting Metric Selectors
 
 A [`metric_selectors`](#app-type-settings-timeseries-analyses-setting-metric-selectors) block (within [`app_type_settings.timeseries_analyses_setting`](#app-type-settings-timeseries-analyses-setting)) supports the following:
 
@@ -126,7 +126,7 @@ A [`metric_selectors`](#app-type-settings-timeseries-analyses-setting-metric-sel
 
 &#x2022; [`metrics_source`](#metrics-source) - Optional String<br>Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`<br>Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations
 
-#### User Behavior Analysis Setting
+#### App Type Settings User Behavior Analysis Setting
 
 An [`user_behavior_analysis_setting`](#app-type-settings-user-behavior-analysis-setting) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
@@ -138,7 +138,7 @@ An [`user_behavior_analysis_setting`](#app-type-settings-user-behavior-analysis-
 
 &#x2022; [`enable_learning`](#enable-learning) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Enable Detection
+#### App Type Settings User Behavior Analysis Setting Enable Detection
 
 An [`enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection) block (within [`app_type_settings.user_behavior_analysis_setting`](#app-type-settings-user-behavior-analysis-setting)) supports the following:
 
@@ -178,19 +178,19 @@ An [`enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable
 
 &#x2022; [`include_waf_activity`](#include-waf-activity) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Include Failed Login Activity
+#### App Type Settings User Behavior Analysis Setting Enable Detection Include Failed Login Activity
 
 An [`include_failed_login_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-failed-login-activity) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
 &#x2022; [`login_failures_threshold`](#login-failures-threshold) - Optional Number<br>Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious
 
-#### Include Forbidden Activity
+#### App Type Settings User Behavior Analysis Setting Enable Detection Include Forbidden Activity
 
 An [`include_forbidden_activity`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-forbidden-activity) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
 &#x2022; [`forbidden_requests_threshold`](#forbidden-requests-threshold) - Optional Number<br>Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious
 
-#### Include Non Existent URL Activity Automatic
+#### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Automatic
 
 An [`include_non_existent_url_activity_automatic`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-automatic) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 
@@ -200,7 +200,7 @@ An [`include_non_existent_url_activity_automatic`](#app-type-settings-user-behav
 
 &#x2022; [`medium`](#medium) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Include Non Existent URL Activity Custom
+#### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Custom
 
 An [`include_non_existent_url_activity_custom`](#app-type-settings-user-behavior-analysis-setting-enable-detection-include-non-existent-url-activity-custom) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#app-type-settings-user-behavior-analysis-setting-enable-detection)) supports the following:
 

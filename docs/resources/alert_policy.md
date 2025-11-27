@@ -106,7 +106,7 @@ A [`notification_parameters`](#notification-parameters) block supports the follo
 
 &#x2022; [`ves_io_group`](#ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom
+#### Notification Parameters Custom
 
 A [`custom`](#notification-parameters-custom) block (within [`notification_parameters`](#notification-parameters)) supports the following:
 
@@ -148,7 +148,7 @@ A [`routes`](#routes) block supports the following:
 
 &#x2022; [`severity`](#severity) - Optional Block<br>Severity Matcher. Select one or more severity levels to match the incoming alert<br>See [Severity](#routes-severity) below.
 
-#### Custom
+#### Routes Custom
 
 A [`custom`](#routes-custom) block (within [`routes`](#routes)) supports the following:
 
@@ -160,7 +160,7 @@ A [`custom`](#routes-custom) block (within [`routes`](#routes)) supports the fol
 
 &#x2022; [`severity`](#severity) - Optional Block<br>Label Matcher<br>See [Severity](#routes-custom-severity) below.
 
-#### Alertname
+#### Routes Custom Alertname
 
 An [`alertname`](#routes-custom-alertname) block (within [`routes.custom`](#routes-custom)) supports the following:
 
@@ -168,7 +168,7 @@ An [`alertname`](#routes-custom-alertname) block (within [`routes.custom`](#rout
 
 &#x2022; [`regex_match`](#regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
 
-#### Group
+#### Routes Custom Group
 
 A [`group`](#routes-custom-group) block (within [`routes.custom`](#routes-custom)) supports the following:
 
@@ -176,7 +176,7 @@ A [`group`](#routes-custom-group) block (within [`routes.custom`](#routes-custom
 
 &#x2022; [`regex_match`](#regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
 
-#### Severity
+#### Routes Custom Severity
 
 A [`severity`](#routes-custom-severity) block (within [`routes.custom`](#routes-custom)) supports the following:
 
@@ -184,13 +184,13 @@ A [`severity`](#routes-custom-severity) block (within [`routes.custom`](#routes-
 
 &#x2022; [`regex_match`](#regex-match) - Optional String<br>RegEx Match. Regular expression match value for the label
 
-#### Group
+#### Routes Group
 
 A [`group`](#routes-group) block (within [`routes`](#routes)) supports the following:
 
 &#x2022; [`groups`](#groups) - Optional List  Defaults to `INFRASTRUCTURE`<br>Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`<br>Groups. Name of groups to match the alert
 
-#### Notification Parameters
+#### Routes Notification Parameters
 
 A [`notification_parameters`](#routes-notification-parameters) block (within [`routes`](#routes)) supports the following:
 
@@ -208,13 +208,13 @@ A [`notification_parameters`](#routes-notification-parameters) block (within [`r
 
 &#x2022; [`ves_io_group`](#ves-io-group) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom
+#### Routes Notification Parameters Custom
 
 A [`custom`](#routes-notification-parameters-custom) block (within [`routes.notification_parameters`](#routes-notification-parameters)) supports the following:
 
 &#x2022; [`labels`](#labels) - Optional List<br>Labels. Name of labels to group/aggregate the alerts
 
-#### Severity
+#### Routes Severity
 
 A [`severity`](#routes-severity) block (within [`routes`](#routes)) supports the following:
 

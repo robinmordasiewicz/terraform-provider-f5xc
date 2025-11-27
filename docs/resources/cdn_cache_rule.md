@@ -90,7 +90,7 @@ A [`cache_rules`](#cache-rules) block supports the following:
 
 &#x2022; [`rule_name`](#rule-name) - Optional String<br>Rule Name. Name of the Cache Rule
 
-#### Eligible For Cache
+#### Cache Rules Eligible For Cache
 
 An [`eligible_for_cache`](#cache-rules-eligible-for-cache) block (within [`cache_rules`](#cache-rules)) supports the following:
 
@@ -98,7 +98,7 @@ An [`eligible_for_cache`](#cache-rules-eligible-for-cache) block (within [`cache
 
 &#x2022; [`scheme_proxy_host_uri`](#scheme-proxy-host-uri) - Optional Block<br>Cache TTL Enable Props. Cache TTL Enable Values<br>See [Scheme Proxy Host URI](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) below.
 
-#### Scheme Proxy Host Request URI
+#### Cache Rules Eligible For Cache Scheme Proxy Host Request URI
 
 A [`scheme_proxy_host_request_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-request-uri) block (within [`cache_rules.eligible_for_cache`](#cache-rules-eligible-for-cache)) supports the following:
 
@@ -108,7 +108,7 @@ A [`scheme_proxy_host_request_uri`](#cache-rules-eligible-for-cache-scheme-proxy
 
 &#x2022; [`ignore_response_cookie`](#ignore-response-cookie) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
 
-#### Scheme Proxy Host URI
+#### Cache Rules Eligible For Cache Scheme Proxy Host URI
 
 A [`scheme_proxy_host_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-uri) block (within [`cache_rules.eligible_for_cache`](#cache-rules-eligible-for-cache)) supports the following:
 
@@ -118,7 +118,7 @@ A [`scheme_proxy_host_uri`](#cache-rules-eligible-for-cache-scheme-proxy-host-ur
 
 &#x2022; [`ignore_response_cookie`](#ignore-response-cookie) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
 
-#### Rule Expression List
+#### Cache Rules Rule Expression List
 
 A [`rule_expression_list`](#cache-rules-rule-expression-list) block (within [`cache_rules`](#cache-rules)) supports the following:
 
@@ -126,7 +126,7 @@ A [`rule_expression_list`](#cache-rules-rule-expression-list) block (within [`ca
 
 &#x2022; [`expression_name`](#expression-name) - Optional String<br>Expression Name. Name of the Expressions items that are ANDed
 
-#### Cache Rule Expression
+#### Cache Rules Rule Expression List Cache Rule Expression
 
 A [`cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression) block (within [`cache_rules.rule_expression_list`](#cache-rules-rule-expression-list)) supports the following:
 
@@ -138,7 +138,7 @@ A [`cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-express
 
 &#x2022; [`query_parameters`](#query-parameters) - Optional Block<br>Query Parameters. List of (key, value) query parameters<br>See [Query Parameters](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) below.
 
-#### Cache Headers
+#### Cache Rules Rule Expression List Cache Rule Expression Cache Headers
 
 A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
@@ -146,7 +146,7 @@ A [`cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cach
 
 &#x2022; [`operator`](#operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) below.
 
-#### Operator
+#### Cache Rules Rule Expression List Cache Rule Expression Cache Headers Operator
 
 An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.cache_headers`](#cache-rules-rule-expression-list-cache-rule-expression-cache-headers)) supports the following:
 
@@ -168,7 +168,7 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cache-he
 
 &#x2022; [`startswith`](#startswith) - Optional String<br>Starts With. Field must start with
 
-#### Cookie Matcher
+#### Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher
 
 A [`cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
@@ -176,7 +176,7 @@ A [`cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-coo
 
 &#x2022; [`operator`](#operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator) below.
 
-#### Operator
+#### Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher Operator
 
 An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.cookie_matcher`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-matcher)) supports the following:
 
@@ -198,13 +198,13 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-cookie-m
 
 &#x2022; [`startswith`](#startswith) - Optional String<br>Starts With. Field must start with
 
-#### Path Match
+#### Cache Rules Rule Expression List Cache Rule Expression Path Match
 
 A [`path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-match) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
 &#x2022; [`operator`](#operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) below.
 
-#### Operator
+#### Cache Rules Rule Expression List Cache Rule Expression Path Match Operator
 
 An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-path-match-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.path_match`](#cache-rules-rule-expression-list-cache-rule-expression-path-match)) supports the following:
 
@@ -226,7 +226,7 @@ An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-path-mat
 
 &#x2022; [`startswith`](#startswith) - Optional String<br>Starts With. Field must start with
 
-#### Query Parameters
+#### Cache Rules Rule Expression List Cache Rule Expression Query Parameters
 
 A [`query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#cache-rules-rule-expression-list-cache-rule-expression)) supports the following:
 
@@ -234,7 +234,7 @@ A [`query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-q
 
 &#x2022; [`operator`](#operator) - Optional Block<br>Operator<br>See [Operator](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator) below.
 
-#### Operator
+#### Cache Rules Rule Expression List Cache Rule Expression Query Parameters Operator
 
 An [`operator`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters-operator) block (within [`cache_rules.rule_expression_list.cache_rule_expression.query_parameters`](#cache-rules-rule-expression-list-cache-rule-expression-query-parameters)) supports the following:
 

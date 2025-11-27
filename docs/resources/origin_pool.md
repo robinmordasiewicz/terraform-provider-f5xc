@@ -198,7 +198,7 @@ An [`advanced_options`](#advanced-options) block supports the following:
 
 &#x2022; [`proxy_protocol_v2`](#proxy-protocol-v2) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Circuit Breaker
+#### Advanced Options Circuit Breaker
 
 A [`circuit_breaker`](#advanced-options-circuit-breaker) block (within [`advanced_options`](#advanced-options)) supports the following:
 
@@ -212,7 +212,7 @@ A [`circuit_breaker`](#advanced-options-circuit-breaker) block (within [`advance
 
 &#x2022; [`retries`](#retries) - Optional Number<br>Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count
 
-#### Enable Subsets
+#### Advanced Options Enable Subsets
 
 An [`enable_subsets`](#advanced-options-enable-subsets) block (within [`advanced_options`](#advanced-options)) supports the following:
 
@@ -224,25 +224,25 @@ An [`enable_subsets`](#advanced-options-enable-subsets) block (within [`advanced
 
 &#x2022; [`fail_request`](#fail-request) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Default Subset
+#### Advanced Options Enable Subsets Default Subset
 
 A [`default_subset`](#advanced-options-enable-subsets-default-subset) block (within [`advanced_options.enable_subsets`](#advanced-options-enable-subsets)) supports the following:
 
 &#x2022; [`default_subset`](#default-subset) - Optional Block<br>Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists
 
-#### Endpoint Subsets
+#### Advanced Options Enable Subsets Endpoint Subsets
 
 An [`endpoint_subsets`](#advanced-options-enable-subsets-endpoint-subsets) block (within [`advanced_options.enable_subsets`](#advanced-options-enable-subsets)) supports the following:
 
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. List of keys that define a cluster subset class
 
-#### Http1 Config
+#### Advanced Options Http1 Config
 
 A [`http1_config`](#advanced-options-http1-config) block (within [`advanced_options`](#advanced-options)) supports the following:
 
 &#x2022; [`header_transformation`](#header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#advanced-options-http1-config-header-transformation) below.
 
-#### Header Transformation
+#### Advanced Options Http1 Config Header Transformation
 
 A [`header_transformation`](#advanced-options-http1-config-header-transformation) block (within [`advanced_options.http1_config`](#advanced-options-http1-config)) supports the following:
 
@@ -254,13 +254,13 @@ A [`header_transformation`](#advanced-options-http1-config-header-transformation
 
 &#x2022; [`proper_case_header_transformation`](#proper-case-header-transformation) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Http2 Options
+#### Advanced Options Http2 Options
 
 A [`http2_options`](#advanced-options-http2-options) block (within [`advanced_options`](#advanced-options)) supports the following:
 
 &#x2022; [`enabled`](#enabled) - Optional Bool<br>HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections
 
-#### Outlier Detection
+#### Advanced Options Outlier Detection
 
 An [`outlier_detection`](#advanced-options-outlier-detection) block (within [`advanced_options`](#advanced-options)) supports the following:
 
@@ -310,13 +310,13 @@ An [`origin_servers`](#origin-servers) block supports the following:
 
 &#x2022; [`vn_private_name`](#vn-private-name) - Optional Block<br>DNS Name on Virtual Network. Specify origin server with DNS name on Virtual Network<br>See [Vn Private Name](#origin-servers-vn-private-name) below.
 
-#### Cbip Service
+#### Origin Servers Cbip Service
 
 A [`cbip_service`](#origin-servers-cbip-service) block (within [`origin_servers`](#origin-servers)) supports the following:
 
 &#x2022; [`service_name`](#service-name) - Optional String<br>Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin
 
-#### Consul Service
+#### Origin Servers Consul Service
 
 A [`consul_service`](#origin-servers-consul-service) block (within [`origin_servers`](#origin-servers)) supports the following:
 
@@ -330,7 +330,7 @@ A [`consul_service`](#origin-servers-consul-service) block (within [`origin_serv
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>Snat Pool. Snat Pool configuration<br>See [Snat Pool](#origin-servers-consul-service-snat-pool) below.
 
-#### Site Locator
+#### Origin Servers Consul Service Site Locator
 
 A [`site_locator`](#origin-servers-consul-service-site-locator) block (within [`origin_servers.consul_service`](#origin-servers-consul-service)) supports the following:
 
@@ -338,7 +338,7 @@ A [`site_locator`](#origin-servers-consul-service-site-locator) block (within [`
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#origin-servers-consul-service-site-locator-virtual-site) below.
 
-#### Site
+#### Origin Servers Consul Service Site Locator Site
 
 A [`site`](#origin-servers-consul-service-site-locator-site) block (within [`origin_servers.consul_service.site_locator`](#origin-servers-consul-service-site-locator)) supports the following:
 
@@ -348,7 +348,7 @@ A [`site`](#origin-servers-consul-service-site-locator-site) block (within [`ori
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Virtual Site
+#### Origin Servers Consul Service Site Locator Virtual Site
 
 A [`virtual_site`](#origin-servers-consul-service-site-locator-virtual-site) block (within [`origin_servers.consul_service.site_locator`](#origin-servers-consul-service-site-locator)) supports the following:
 
@@ -358,7 +358,7 @@ A [`virtual_site`](#origin-servers-consul-service-site-locator-virtual-site) blo
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Snat Pool
+#### Origin Servers Consul Service Snat Pool
 
 A [`snat_pool`](#origin-servers-consul-service-snat-pool) block (within [`origin_servers.consul_service`](#origin-servers-consul-service)) supports the following:
 
@@ -366,19 +366,19 @@ A [`snat_pool`](#origin-servers-consul-service-snat-pool) block (within [`origin
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#origin-servers-consul-service-snat-pool-snat-pool) below.
 
-#### Snat Pool
+#### Origin Servers Consul Service Snat Pool Snat Pool
 
 A [`snat_pool`](#origin-servers-consul-service-snat-pool-snat-pool) block (within [`origin_servers.consul_service.snat_pool`](#origin-servers-consul-service-snat-pool)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
-#### Custom Endpoint Object
+#### Origin Servers Custom Endpoint Object
 
 A [`custom_endpoint_object`](#origin-servers-custom-endpoint-object) block (within [`origin_servers`](#origin-servers)) supports the following:
 
 &#x2022; [`endpoint`](#endpoint) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Endpoint](#origin-servers-custom-endpoint-object-endpoint) below.
 
-#### Endpoint
+#### Origin Servers Custom Endpoint Object Endpoint
 
 An [`endpoint`](#origin-servers-custom-endpoint-object-endpoint) block (within [`origin_servers.custom_endpoint_object`](#origin-servers-custom-endpoint-object)) supports the following:
 
@@ -388,7 +388,7 @@ An [`endpoint`](#origin-servers-custom-endpoint-object-endpoint) block (within [
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### K8s Service
+#### Origin Servers K8s Service
 
 A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](#origin-servers)) supports the following:
 
@@ -406,7 +406,7 @@ A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](
 
 &#x2022; [`vk8s_networks`](#vk8s-networks) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Site Locator
+#### Origin Servers K8s Service Site Locator
 
 A [`site_locator`](#origin-servers-k8s-service-site-locator) block (within [`origin_servers.k8s_service`](#origin-servers-k8s-service)) supports the following:
 
@@ -414,7 +414,7 @@ A [`site_locator`](#origin-servers-k8s-service-site-locator) block (within [`ori
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#origin-servers-k8s-service-site-locator-virtual-site) below.
 
-#### Site
+#### Origin Servers K8s Service Site Locator Site
 
 A [`site`](#origin-servers-k8s-service-site-locator-site) block (within [`origin_servers.k8s_service.site_locator`](#origin-servers-k8s-service-site-locator)) supports the following:
 
@@ -424,7 +424,7 @@ A [`site`](#origin-servers-k8s-service-site-locator-site) block (within [`origin
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Virtual Site
+#### Origin Servers K8s Service Site Locator Virtual Site
 
 A [`virtual_site`](#origin-servers-k8s-service-site-locator-virtual-site) block (within [`origin_servers.k8s_service.site_locator`](#origin-servers-k8s-service-site-locator)) supports the following:
 
@@ -434,7 +434,7 @@ A [`virtual_site`](#origin-servers-k8s-service-site-locator-virtual-site) block 
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Snat Pool
+#### Origin Servers K8s Service Snat Pool
 
 A [`snat_pool`](#origin-servers-k8s-service-snat-pool) block (within [`origin_servers.k8s_service`](#origin-servers-k8s-service)) supports the following:
 
@@ -442,13 +442,13 @@ A [`snat_pool`](#origin-servers-k8s-service-snat-pool) block (within [`origin_se
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#origin-servers-k8s-service-snat-pool-snat-pool) below.
 
-#### Snat Pool
+#### Origin Servers K8s Service Snat Pool Snat Pool
 
 A [`snat_pool`](#origin-servers-k8s-service-snat-pool-snat-pool) block (within [`origin_servers.k8s_service.snat_pool`](#origin-servers-k8s-service-snat-pool)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
-#### Private IP
+#### Origin Servers Private IP
 
 A [`private_ip`](#origin-servers-private-ip) block (within [`origin_servers`](#origin-servers)) supports the following:
 
@@ -464,7 +464,7 @@ A [`private_ip`](#origin-servers-private-ip) block (within [`origin_servers`](#o
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>Snat Pool. Snat Pool configuration<br>See [Snat Pool](#origin-servers-private-ip-snat-pool) below.
 
-#### Segment
+#### Origin Servers Private IP Segment
 
 A [`segment`](#origin-servers-private-ip-segment) block (within [`origin_servers.private_ip`](#origin-servers-private-ip)) supports the following:
 
@@ -474,7 +474,7 @@ A [`segment`](#origin-servers-private-ip-segment) block (within [`origin_servers
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Site Locator
+#### Origin Servers Private IP Site Locator
 
 A [`site_locator`](#origin-servers-private-ip-site-locator) block (within [`origin_servers.private_ip`](#origin-servers-private-ip)) supports the following:
 
@@ -482,7 +482,7 @@ A [`site_locator`](#origin-servers-private-ip-site-locator) block (within [`orig
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#origin-servers-private-ip-site-locator-virtual-site) below.
 
-#### Site
+#### Origin Servers Private IP Site Locator Site
 
 A [`site`](#origin-servers-private-ip-site-locator-site) block (within [`origin_servers.private_ip.site_locator`](#origin-servers-private-ip-site-locator)) supports the following:
 
@@ -492,7 +492,7 @@ A [`site`](#origin-servers-private-ip-site-locator-site) block (within [`origin_
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Virtual Site
+#### Origin Servers Private IP Site Locator Virtual Site
 
 A [`virtual_site`](#origin-servers-private-ip-site-locator-virtual-site) block (within [`origin_servers.private_ip.site_locator`](#origin-servers-private-ip-site-locator)) supports the following:
 
@@ -502,7 +502,7 @@ A [`virtual_site`](#origin-servers-private-ip-site-locator-virtual-site) block (
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Snat Pool
+#### Origin Servers Private IP Snat Pool
 
 A [`snat_pool`](#origin-servers-private-ip-snat-pool) block (within [`origin_servers.private_ip`](#origin-servers-private-ip)) supports the following:
 
@@ -510,13 +510,13 @@ A [`snat_pool`](#origin-servers-private-ip-snat-pool) block (within [`origin_ser
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#origin-servers-private-ip-snat-pool-snat-pool) below.
 
-#### Snat Pool
+#### Origin Servers Private IP Snat Pool Snat Pool
 
 A [`snat_pool`](#origin-servers-private-ip-snat-pool-snat-pool) block (within [`origin_servers.private_ip.snat_pool`](#origin-servers-private-ip-snat-pool)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
-#### Private Name
+#### Origin Servers Private Name
 
 A [`private_name`](#origin-servers-private-name) block (within [`origin_servers`](#origin-servers)) supports the following:
 
@@ -534,7 +534,7 @@ A [`private_name`](#origin-servers-private-name) block (within [`origin_servers`
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>Snat Pool. Snat Pool configuration<br>See [Snat Pool](#origin-servers-private-name-snat-pool) below.
 
-#### Segment
+#### Origin Servers Private Name Segment
 
 A [`segment`](#origin-servers-private-name-segment) block (within [`origin_servers.private_name`](#origin-servers-private-name)) supports the following:
 
@@ -544,7 +544,7 @@ A [`segment`](#origin-servers-private-name-segment) block (within [`origin_serve
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Site Locator
+#### Origin Servers Private Name Site Locator
 
 A [`site_locator`](#origin-servers-private-name-site-locator) block (within [`origin_servers.private_name`](#origin-servers-private-name)) supports the following:
 
@@ -552,7 +552,7 @@ A [`site_locator`](#origin-servers-private-name-site-locator) block (within [`or
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#origin-servers-private-name-site-locator-virtual-site) below.
 
-#### Site
+#### Origin Servers Private Name Site Locator Site
 
 A [`site`](#origin-servers-private-name-site-locator-site) block (within [`origin_servers.private_name.site_locator`](#origin-servers-private-name-site-locator)) supports the following:
 
@@ -562,7 +562,7 @@ A [`site`](#origin-servers-private-name-site-locator-site) block (within [`origi
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Virtual Site
+#### Origin Servers Private Name Site Locator Virtual Site
 
 A [`virtual_site`](#origin-servers-private-name-site-locator-virtual-site) block (within [`origin_servers.private_name.site_locator`](#origin-servers-private-name-site-locator)) supports the following:
 
@@ -572,7 +572,7 @@ A [`virtual_site`](#origin-servers-private-name-site-locator-virtual-site) block
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Snat Pool
+#### Origin Servers Private Name Snat Pool
 
 A [`snat_pool`](#origin-servers-private-name-snat-pool) block (within [`origin_servers.private_name`](#origin-servers-private-name)) supports the following:
 
@@ -580,19 +580,19 @@ A [`snat_pool`](#origin-servers-private-name-snat-pool) block (within [`origin_s
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#origin-servers-private-name-snat-pool-snat-pool) below.
 
-#### Snat Pool
+#### Origin Servers Private Name Snat Pool Snat Pool
 
 A [`snat_pool`](#origin-servers-private-name-snat-pool-snat-pool) block (within [`origin_servers.private_name.snat_pool`](#origin-servers-private-name-snat-pool)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
-#### Public IP
+#### Origin Servers Public IP
 
 A [`public_ip`](#origin-servers-public-ip) block (within [`origin_servers`](#origin-servers)) supports the following:
 
 &#x2022; [`ip`](#ip) - Optional String<br>Public IPv4. Public IPv4 address
 
-#### Public Name
+#### Origin Servers Public Name
 
 A [`public_name`](#origin-servers-public-name) block (within [`origin_servers`](#origin-servers)) supports the following:
 
@@ -600,7 +600,7 @@ A [`public_name`](#origin-servers-public-name) block (within [`origin_servers`](
 
 &#x2022; [`refresh_interval`](#refresh-interval) - Optional Number<br>DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767`
 
-#### Vn Private IP
+#### Origin Servers Vn Private IP
 
 A [`vn_private_ip`](#origin-servers-vn-private-ip) block (within [`origin_servers`](#origin-servers)) supports the following:
 
@@ -608,7 +608,7 @@ A [`vn_private_ip`](#origin-servers-vn-private-ip) block (within [`origin_server
 
 &#x2022; [`virtual_network`](#virtual-network) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Network](#origin-servers-vn-private-ip-virtual-network) below.
 
-#### Virtual Network
+#### Origin Servers Vn Private IP Virtual Network
 
 A [`virtual_network`](#origin-servers-vn-private-ip-virtual-network) block (within [`origin_servers.vn_private_ip`](#origin-servers-vn-private-ip)) supports the following:
 
@@ -618,7 +618,7 @@ A [`virtual_network`](#origin-servers-vn-private-ip-virtual-network) block (with
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Vn Private Name
+#### Origin Servers Vn Private Name
 
 A [`vn_private_name`](#origin-servers-vn-private-name) block (within [`origin_servers`](#origin-servers)) supports the following:
 
@@ -626,7 +626,7 @@ A [`vn_private_name`](#origin-servers-vn-private-name) block (within [`origin_se
 
 &#x2022; [`private_network`](#private-network) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Private Network](#origin-servers-vn-private-name-private-network) below.
 
-#### Private Network
+#### Origin Servers Vn Private Name Private Network
 
 A [`private_network`](#origin-servers-vn-private-name-private-network) block (within [`origin_servers.vn_private_name`](#origin-servers-vn-private-name)) supports the following:
 
@@ -686,7 +686,7 @@ An [`use_tls`](#use-tls) block supports the following:
 
 &#x2022; [`volterra_trusted_ca`](#volterra-trusted-ca) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### TLS Config
+#### Use TLS TLS Config
 
 A [`tls_config`](#use-tls-tls-config) block (within [`use_tls`](#use-tls)) supports the following:
 
@@ -698,7 +698,7 @@ A [`tls_config`](#use-tls-tls-config) block (within [`use_tls`](#use-tls)) suppo
 
 &#x2022; [`medium_security`](#medium-security) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom Security
+#### Use TLS TLS Config Custom Security
 
 A [`custom_security`](#use-tls-tls-config-custom-security) block (within [`use_tls.tls_config`](#use-tls-tls-config)) supports the following:
 
@@ -708,13 +708,13 @@ A [`custom_security`](#use-tls-tls-config-custom-security) block (within [`use_t
 
 &#x2022; [`min_version`](#min-version) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-#### Use mTLS
+#### Use TLS Use mTLS
 
 An [`use_mtls`](#use-tls-use-mtls) block (within [`use_tls`](#use-tls)) supports the following:
 
 &#x2022; [`tls_certificates`](#tls-certificates) - Optional Block<br>mTLS Client Certificate. mTLS Client Certificate<br>See [TLS Certificates](#use-tls-use-mtls-tls-certificates) below.
 
-#### TLS Certificates
+#### Use TLS Use mTLS TLS Certificates
 
 A [`tls_certificates`](#use-tls-use-mtls-tls-certificates) block (within [`use_tls.use_mtls`](#use-tls-use-mtls)) supports the following:
 
@@ -730,13 +730,13 @@ A [`tls_certificates`](#use-tls-use-mtls-tls-certificates) block (within [`use_t
 
 &#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Custom Hash Algorithms
+#### Use TLS Use mTLS TLS Certificates Custom Hash Algorithms
 
 A [`custom_hash_algorithms`](#use-tls-use-mtls-tls-certificates-custom-hash-algorithms) block (within [`use_tls.use_mtls.tls_certificates`](#use-tls-use-mtls-tls-certificates)) supports the following:
 
 &#x2022; [`hash_algorithms`](#hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>Hash Algorithms. Ordered list of hash algorithms to be used
 
-#### Private Key
+#### Use TLS Use mTLS TLS Certificates Private Key
 
 A [`private_key`](#use-tls-use-mtls-tls-certificates-private-key) block (within [`use_tls.use_mtls.tls_certificates`](#use-tls-use-mtls-tls-certificates)) supports the following:
 
@@ -744,7 +744,7 @@ A [`private_key`](#use-tls-use-mtls-tls-certificates-private-key) block (within 
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#use-tls-use-mtls-tls-certificates-private-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Use TLS Use mTLS TLS Certificates Private Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#use-tls-use-mtls-tls-certificates-private-key-blindfold-secret-info) block (within [`use_tls.use_mtls.tls_certificates.private_key`](#use-tls-use-mtls-tls-certificates-private-key)) supports the following:
 
@@ -754,7 +754,7 @@ A [`blindfold_secret_info`](#use-tls-use-mtls-tls-certificates-private-key-blind
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Use TLS Use mTLS TLS Certificates Private Key Clear Secret Info
 
 A [`clear_secret_info`](#use-tls-use-mtls-tls-certificates-private-key-clear-secret-info) block (within [`use_tls.use_mtls.tls_certificates.private_key`](#use-tls-use-mtls-tls-certificates-private-key)) supports the following:
 
@@ -762,7 +762,7 @@ A [`clear_secret_info`](#use-tls-use-mtls-tls-certificates-private-key-clear-sec
 
 &#x2022; [`url`](#url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
-#### Use mTLS Obj
+#### Use TLS Use mTLS Obj
 
 An [`use_mtls_obj`](#use-tls-use-mtls-obj) block (within [`use_tls`](#use-tls)) supports the following:
 
@@ -772,7 +772,7 @@ An [`use_mtls_obj`](#use-tls-use-mtls-obj) block (within [`use_tls`](#use-tls)) 
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Use Server Verification
+#### Use TLS Use Server Verification
 
 An [`use_server_verification`](#use-tls-use-server-verification) block (within [`use_tls`](#use-tls)) supports the following:
 
@@ -780,7 +780,7 @@ An [`use_server_verification`](#use-tls-use-server-verification) block (within [
 
 &#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate
 
-#### Trusted CA
+#### Use TLS Use Server Verification Trusted CA
 
 A [`trusted_ca`](#use-tls-use-server-verification-trusted-ca) block (within [`use_tls.use_server_verification`](#use-tls-use-server-verification)) supports the following:
 

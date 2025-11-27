@@ -116,7 +116,7 @@ A [`spoke_mesh`](#spoke-mesh) block supports the following:
 
 &#x2022; [`hub_mesh_group`](#hub-mesh-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Hub Mesh Group](#spoke-mesh-hub-mesh-group) below.
 
-#### Hub Mesh Group
+#### Spoke Mesh Hub Mesh Group
 
 A [`hub_mesh_group`](#spoke-mesh-hub-mesh-group) block (within [`spoke_mesh`](#spoke-mesh)) supports the following:
 

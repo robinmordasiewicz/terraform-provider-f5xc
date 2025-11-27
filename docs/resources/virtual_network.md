@@ -99,13 +99,13 @@ A [`static_routes`](#static-routes) block supports the following:
 
 &#x2022; [`node_interface`](#node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#static-routes-node-interface) below.
 
-#### Node Interface
+#### Static Routes Node Interface
 
 A [`node_interface`](#static-routes-node-interface) block (within [`static_routes`](#static-routes)) supports the following:
 
 &#x2022; [`list`](#list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#static-routes-node-interface-list) below.
 
-#### List
+#### Static Routes Node Interface List
 
 A [`list`](#static-routes-node-interface-list) block (within [`static_routes.node_interface`](#static-routes-node-interface)) supports the following:
 
@@ -113,7 +113,7 @@ A [`list`](#static-routes-node-interface-list) block (within [`static_routes.nod
 
 &#x2022; [`node`](#node) - Optional String<br>Node. Node name on this site
 
-#### Interface
+#### Static Routes Node Interface List Interface
 
 An [`interface`](#static-routes-node-interface-list-interface) block (within [`static_routes.node_interface.list`](#static-routes-node-interface-list)) supports the following:
 

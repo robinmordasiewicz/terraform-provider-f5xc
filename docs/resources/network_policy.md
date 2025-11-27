@@ -105,13 +105,13 @@ An [`endpoint`](#endpoint) block supports the following:
 
 &#x2022; [`prefix_list`](#prefix-list) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#endpoint-prefix-list) below.
 
-#### Label Selector
+#### Endpoint Label Selector
 
 A [`label_selector`](#endpoint-label-selector) block (within [`endpoint`](#endpoint)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
-#### Prefix List
+#### Endpoint Prefix List
 
 A [`prefix_list`](#endpoint-prefix-list) block (within [`endpoint`](#endpoint)) supports the following:
 
@@ -125,7 +125,7 @@ A [`rules`](#rules) block supports the following:
 
 &#x2022; [`ingress_rules`](#ingress-rules) - Optional Block<br>Ingress Rules. Ordered list of rules applied to connections to policy endpoints<br>See [Ingress Rules](#rules-ingress-rules) below.
 
-#### Egress Rules
+#### Rules Egress Rules
 
 An [`egress_rules`](#rules-egress-rules) block (within [`rules`](#rules)) supports the following:
 
@@ -159,25 +159,25 @@ An [`egress_rules`](#rules-egress-rules) block (within [`rules`](#rules)) suppor
 
 &#x2022; [`protocol_port_range`](#protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rules-egress-rules-protocol-port-range) below.
 
-#### Adv Action
+#### Rules Egress Rules Adv Action
 
 An [`adv_action`](#rules-egress-rules-adv-action) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
 &#x2022; [`action`](#action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
-#### Applications
+#### Rules Egress Rules Applications
 
 An [`applications`](#rules-egress-rules-applications) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
 &#x2022; [`applications`](#applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
 
-#### IP Prefix Set
+#### Rules Egress Rules IP Prefix Set
 
 An [`ip_prefix_set`](#rules-egress-rules-ip-prefix-set) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rules-egress-rules-ip-prefix-set-ref) below.
 
-#### Ref
+#### Rules Egress Rules IP Prefix Set Ref
 
 A [`ref`](#rules-egress-rules-ip-prefix-set-ref) block (within [`rules.egress_rules.ip_prefix_set`](#rules-egress-rules-ip-prefix-set)) supports the following:
 
@@ -191,19 +191,19 @@ A [`ref`](#rules-egress-rules-ip-prefix-set-ref) block (within [`rules.egress_ru
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Label Matcher
+#### Rules Egress Rules Label Matcher
 
 A [`label_matcher`](#rules-egress-rules-label-matcher) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
 
-#### Label Selector
+#### Rules Egress Rules Label Selector
 
 A [`label_selector`](#rules-egress-rules-label-selector) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
-#### Metadata
+#### Rules Egress Rules Metadata
 
 A [`metadata`](#rules-egress-rules-metadata) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
@@ -211,13 +211,13 @@ A [`metadata`](#rules-egress-rules-metadata) block (within [`rules.egress_rules`
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
-#### Prefix List
+#### Rules Egress Rules Prefix List
 
 A [`prefix_list`](#rules-egress-rules-prefix-list) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
-#### Protocol Port Range
+#### Rules Egress Rules Protocol Port Range
 
 A [`protocol_port_range`](#rules-egress-rules-protocol-port-range) block (within [`rules.egress_rules`](#rules-egress-rules)) supports the following:
 
@@ -225,7 +225,7 @@ A [`protocol_port_range`](#rules-egress-rules-protocol-port-range) block (within
 
 &#x2022; [`protocol`](#protocol) - Optional String<br>Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and ICMP
 
-#### Ingress Rules
+#### Rules Ingress Rules
 
 An [`ingress_rules`](#rules-ingress-rules) block (within [`rules`](#rules)) supports the following:
 
@@ -259,25 +259,25 @@ An [`ingress_rules`](#rules-ingress-rules) block (within [`rules`](#rules)) supp
 
 &#x2022; [`protocol_port_range`](#protocol-port-range) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#rules-ingress-rules-protocol-port-range) below.
 
-#### Adv Action
+#### Rules Ingress Rules Adv Action
 
 An [`adv_action`](#rules-ingress-rules-adv-action) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
 &#x2022; [`action`](#action) - Optional String  Defaults to `NOLOG`<br>Possible values are `NOLOG`, `LOG`<br>Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified x-example: (No Selection in NetworkPolicyRuleAction + AdvancedAction as LOG) = LOG Only, (ALLOW/DENY in NetworkPolicyRuleAction + AdvancedAction as LOG) = Log and Allow/Deny, (ALLOW/DENY in NetworkPolicyRuleAction + NOLOG in AdvancedAction) = Allow/Deny with no log Don't sample the traffic hitting the rule Sample the traffic hitting the rule
 
-#### Applications
+#### Rules Ingress Rules Applications
 
 An [`applications`](#rules-ingress-rules-applications) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
 &#x2022; [`applications`](#applications) - Optional List  Defaults to `APPLICATION_HTTP`<br>Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`<br>Application Protocols. Application protocols like HTTP, SNMP
 
-#### IP Prefix Set
+#### Rules Ingress Rules IP Prefix Set
 
 An [`ip_prefix_set`](#rules-ingress-rules-ip-prefix-set) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#rules-ingress-rules-ip-prefix-set-ref) below.
 
-#### Ref
+#### Rules Ingress Rules IP Prefix Set Ref
 
 A [`ref`](#rules-ingress-rules-ip-prefix-set-ref) block (within [`rules.ingress_rules.ip_prefix_set`](#rules-ingress-rules-ip-prefix-set)) supports the following:
 
@@ -291,19 +291,19 @@ A [`ref`](#rules-ingress-rules-ip-prefix-set-ref) block (within [`rules.ingress_
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Label Matcher
+#### Rules Ingress Rules Label Matcher
 
 A [`label_matcher`](#rules-ingress-rules-label-matcher) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
 
-#### Label Selector
+#### Rules Ingress Rules Label Selector
 
 A [`label_selector`](#rules-ingress-rules-label-selector) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
-#### Metadata
+#### Rules Ingress Rules Metadata
 
 A [`metadata`](#rules-ingress-rules-metadata) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
@@ -311,13 +311,13 @@ A [`metadata`](#rules-ingress-rules-metadata) block (within [`rules.ingress_rule
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
-#### Prefix List
+#### Rules Ingress Rules Prefix List
 
 A [`prefix_list`](#rules-ingress-rules-prefix-list) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
-#### Protocol Port Range
+#### Rules Ingress Rules Protocol Port Range
 
 A [`protocol_port_range`](#rules-ingress-rules-protocol-port-range) block (within [`rules.ingress_rules`](#rules-ingress-rules)) supports the following:
 

@@ -131,7 +131,7 @@ A [`cluster_wide_app_list`](#cluster-wide-app-list) block supports the following
 
 &#x2022; [`cluster_wide_apps`](#cluster-wide-apps) - Optional Block<br>Cluster Wide Application List. List of cluster wide applications<br>See [Cluster Wide Apps](#cluster-wide-app-list-cluster-wide-apps) below.
 
-#### Cluster Wide Apps
+#### Cluster Wide App List Cluster Wide Apps
 
 A [`cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps) block (within [`cluster_wide_app_list`](#cluster-wide-app-list)) supports the following:
 
@@ -143,13 +143,13 @@ A [`cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps) block (within 
 
 &#x2022; [`prometheus`](#prometheus) - Optional Block<br>Prometheus access configuration. description Parameters for Prometheus server access
 
-#### Argo Cd
+#### Cluster Wide App List Cluster Wide Apps Argo Cd
 
 An [`argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd) block (within [`cluster_wide_app_list.cluster_wide_apps`](#cluster-wide-app-list-cluster-wide-apps)) supports the following:
 
 &#x2022; [`local_domain`](#local-domain) - Optional Block<br>Local Access Configuration. Parameters required to enable local access<br>See [Local Domain](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) below.
 
-#### Local Domain
+#### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain
 
 A [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd`](#cluster-wide-app-list-cluster-wide-apps-argo-cd)) supports the following:
 
@@ -161,7 +161,7 @@ A [`local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain
 
 &#x2022; [`port`](#port) - Optional Number<br>Custom ArgoCD Port. Use custom ArgoCD port. Available port range is less than 65000 except reserved ports
 
-#### Password
+#### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password
 
 A [`password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain)) supports the following:
 
@@ -169,7 +169,7 @@ A [`password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-pas
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password Blindfold Secret Info
 
 A [`blindfold_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-blindfold-secret-info) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain.password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password)) supports the following:
 
@@ -179,7 +179,7 @@ A [`blindfold_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-loc
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Cluster Wide App List Cluster Wide Apps Argo Cd Local Domain Password Clear Secret Info
 
 A [`clear_secret_info`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password-clear-secret-info) block (within [`cluster_wide_app_list.cluster_wide_apps.argo_cd.local_domain.password`](#cluster-wide-app-list-cluster-wide-apps-argo-cd-local-domain-password)) supports the following:
 
@@ -221,7 +221,7 @@ An [`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings) block
 
 &#x2022; [`cluster_role_bindings`](#cluster-role-bindings) - Optional Block<br>Cluster Role Binding List. List of active cluster role binding list for a K8s cluster<br>See [Cluster Role Bindings](#use-custom-cluster-role-bindings-cluster-role-bindings) below.
 
-#### Cluster Role Bindings
+#### Use Custom Cluster Role Bindings Cluster Role Bindings
 
 A [`cluster_role_bindings`](#use-custom-cluster-role-bindings-cluster-role-bindings) block (within [`use_custom_cluster_role_bindings`](#use-custom-cluster-role-bindings)) supports the following:
 
@@ -237,7 +237,7 @@ An [`use_custom_cluster_role_list`](#use-custom-cluster-role-list) block support
 
 &#x2022; [`cluster_roles`](#cluster-roles) - Optional Block<br>Cluster Role List. List of active cluster role list for a K8s cluster<br>See [Cluster Roles](#use-custom-cluster-role-list-cluster-roles) below.
 
-#### Cluster Roles
+#### Use Custom Cluster Role List Cluster Roles
 
 A [`cluster_roles`](#use-custom-cluster-role-list-cluster-roles) block (within [`use_custom_cluster_role_list`](#use-custom-cluster-role-list)) supports the following:
 
@@ -263,7 +263,7 @@ An [`use_custom_psp_list`](#use-custom-psp-list) block supports the following:
 
 &#x2022; [`pod_security_policies`](#pod-security-policies) - Optional Block<br>Pod Security Policy List. List of active Pod security policies for a K8s cluster<br>See [Pod Security Policies](#use-custom-psp-list-pod-security-policies) below.
 
-#### Pod Security Policies
+#### Use Custom Psp List Pod Security Policies
 
 A [`pod_security_policies`](#use-custom-psp-list-pod-security-policies) block (within [`use_custom_psp_list`](#use-custom-psp-list)) supports the following:
 

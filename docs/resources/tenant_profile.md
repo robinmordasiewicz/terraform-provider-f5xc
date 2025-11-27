@@ -96,7 +96,7 @@ A [`ct_groups`](#ct-groups) block supports the following:
 
 &#x2022; [`namespace_roles`](#namespace-roles) - Optional Block<br>Namespace Roles. [x-example: 'monitor, system:monitor-role'] List of namespaces and associated roles to be created in the new Child Tenant<br>See [Namespace Roles](#ct-groups-namespace-roles) below.
 
-#### Namespace Roles
+#### Ct Groups Namespace Roles
 
 A [`namespace_roles`](#ct-groups-namespace-roles) block (within [`ct_groups`](#ct-groups)) supports the following:
 

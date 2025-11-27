@@ -95,7 +95,7 @@ An [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) blo
 
 &#x2022; [`enhanced_firewall_policies`](#enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
-#### Enhanced Firewall Policies
+#### Active Enhanced Firewall Policies Enhanced Firewall Policies
 
 An [`enhanced_firewall_policies`](#active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies)) supports the following:
 
@@ -111,7 +111,7 @@ An [`active_fast_acls`](#active-fast-acls) block supports the following:
 
 &#x2022; [`fast_acls`](#fast-acls) - Optional Block<br>Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall<br>See [Fast Acls](#active-fast-acls-fast-acls) below.
 
-#### Fast Acls
+#### Active Fast Acls Fast Acls
 
 A [`fast_acls`](#active-fast-acls-fast-acls) block (within [`active_fast_acls`](#active-fast-acls)) supports the following:
 
@@ -127,7 +127,7 @@ An [`active_forward_proxy_policies`](#active-forward-proxy-policies) block suppo
 
 &#x2022; [`forward_proxy_policies`](#forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
 
-#### Forward Proxy Policies
+#### Active Forward Proxy Policies Forward Proxy Policies
 
 A [`forward_proxy_policies`](#active-forward-proxy-policies-forward-proxy-policies) block (within [`active_forward_proxy_policies`](#active-forward-proxy-policies)) supports the following:
 
@@ -143,7 +143,7 @@ An [`active_network_policies`](#active-network-policies) block supports the foll
 
 &#x2022; [`network_policies`](#network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#active-network-policies-network-policies) below.
 
-#### Network Policies
+#### Active Network Policies Network Policies
 
 A [`network_policies`](#active-network-policies-network-policies) block (within [`active_network_policies`](#active-network-policies)) supports the following:
 

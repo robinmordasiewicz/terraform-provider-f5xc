@@ -105,7 +105,7 @@ A [`private_key`](#private-key) block supports the following:
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#private-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Private Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
@@ -115,7 +115,7 @@ A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Private Key Clear Secret Info
 
 A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_key`](#private-key)) supports the following:
 

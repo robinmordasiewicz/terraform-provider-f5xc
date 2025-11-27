@@ -86,7 +86,7 @@ A [`report_recipients`](#report-recipients) block supports the following:
 
 &#x2022; [`user_groups`](#user-groups) - Optional Block<br>User Groups. Select one or more user groups, to which the report should be sent via email<br>See [User Groups](#report-recipients-user-groups) below.
 
-#### User Groups
+#### Report Recipients User Groups
 
 An [`user_groups`](#report-recipients-user-groups) block (within [`report_recipients`](#report-recipients)) supports the following:
 
@@ -122,13 +122,13 @@ A [`waap`](#waap) block supports the following:
 
 &#x2022; [`weekly`](#weekly) - Optional Block<br>Report Frequency Weekly. create report weekly<br>See [Weekly](#waap-weekly) below.
 
-#### Daily
+#### Waap Daily
 
 A [`daily`](#waap-daily) block (within [`waap`](#waap)) supports the following:
 
 &#x2022; [`report_generation_time`](#report-generation-time) - Optional String<br>Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
 
-#### Monthly
+#### Waap Monthly
 
 A [`monthly`](#waap-monthly) block (within [`waap`](#waap)) supports the following:
 
@@ -136,13 +136,13 @@ A [`monthly`](#waap-monthly) block (within [`waap`](#waap)) supports the followi
 
 &#x2022; [`report_generation_time`](#report-generation-time) - Optional String<br>Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
 
-#### Namespaces
+#### Waap Namespaces
 
 A [`namespaces`](#waap-namespaces) block (within [`waap`](#waap)) supports the following:
 
 &#x2022; [`namespaces`](#namespaces) - Optional List<br>Namespaces. list of namespaces for which user wants to generate report
 
-#### Weekly
+#### Waap Weekly
 
 A [`weekly`](#waap-weekly) block (within [`waap`](#waap)) supports the following:
 

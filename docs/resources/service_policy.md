@@ -115,13 +115,13 @@ An [`allow_list`](#allow-list) block supports the following:
 
 &#x2022; [`tls_fingerprint_values`](#tls-fingerprint-values) - Optional List<br>TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
-#### Asn List
+#### Allow List Asn List
 
 An [`asn_list`](#allow-list-asn-list) block (within [`allow_list`](#allow-list)) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### Asn Set
+#### Allow List Asn Set
 
 An [`asn_set`](#allow-list-asn-set) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -131,7 +131,7 @@ An [`asn_set`](#allow-list-asn-set) block (within [`allow_list`](#allow-list)) s
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### IP Prefix Set
+#### Allow List IP Prefix Set
 
 An [`ip_prefix_set`](#allow-list-ip-prefix-set) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -141,7 +141,7 @@ An [`ip_prefix_set`](#allow-list-ip-prefix-set) block (within [`allow_list`](#al
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Prefix List
+#### Allow List Prefix List
 
 A [`prefix_list`](#allow-list-prefix-list) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -171,13 +171,13 @@ A [`deny_list`](#deny-list) block supports the following:
 
 &#x2022; [`tls_fingerprint_values`](#tls-fingerprint-values) - Optional List<br>TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
-#### Asn List
+#### Deny List Asn List
 
 An [`asn_list`](#deny-list-asn-list) block (within [`deny_list`](#deny-list)) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### Asn Set
+#### Deny List Asn Set
 
 An [`asn_set`](#deny-list-asn-set) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -187,7 +187,7 @@ An [`asn_set`](#deny-list-asn-set) block (within [`deny_list`](#deny-list)) supp
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### IP Prefix Set
+#### Deny List IP Prefix Set
 
 An [`ip_prefix_set`](#deny-list-ip-prefix-set) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -197,7 +197,7 @@ An [`ip_prefix_set`](#deny-list-ip-prefix-set) block (within [`deny_list`](#deny
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Prefix List
+#### Deny List Prefix List
 
 A [`prefix_list`](#deny-list-prefix-list) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -209,7 +209,7 @@ A [`rule_list`](#rule-list) block supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list<br>See [Rules](#rule-list-rules) below.
 
-#### Rules
+#### Rule List Rules
 
 A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
@@ -217,7 +217,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 &#x2022; [`spec`](#spec) - Optional Block<br>Specification. Shape of service_policy_rule in the storage backend<br>See [Spec](#rule-list-rules-spec) below.
 
-#### Metadata
+#### Rule List Rules Metadata
 
 A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -225,7 +225,7 @@ A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rul
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
-#### Spec
+#### Rule List Rules Spec
 
 A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -295,7 +295,7 @@ A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-r
 
 &#x2022; [`waf_action`](#waf-action) - Optional Block<br>App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings<br>See [WAF Action](#rule-list-rules-spec-waf-action) below.
 
-#### API Group Matcher
+#### Rule List Rules Spec API Group Matcher
 
 An [`api_group_matcher`](#rule-list-rules-spec-api-group-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -303,7 +303,7 @@ An [`api_group_matcher`](#rule-list-rules-spec-api-group-matcher) block (within 
 
 &#x2022; [`match`](#match) - Optional List<br>Exact Values. A list of exact values to match the input against
 
-#### Arg Matchers
+#### Rule List Rules Spec Arg Matchers
 
 An [`arg_matchers`](#rule-list-rules-spec-arg-matchers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -317,7 +317,7 @@ An [`arg_matchers`](#rule-list-rules-spec-arg-matchers) block (within [`rule_lis
 
 &#x2022; [`name`](#name) - Optional String<br>Argument Name. x-example: 'phones[_]' x-example: 'cars.make.toyota.models[1]' x-example: 'cars.make.honda.models[_]' x-example: 'cars.make[_].models[_]' A case-sensitive JSON path in the HTTP request body
 
-#### Item
+#### Rule List Rules Spec Arg Matchers Item
 
 An [`item`](#rule-list-rules-spec-arg-matchers-item) block (within [`rule_list.rules.spec.arg_matchers`](#rule-list-rules-spec-arg-matchers)) supports the following:
 
@@ -327,19 +327,19 @@ An [`item`](#rule-list-rules-spec-arg-matchers-item) block (within [`rule_list.r
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### Asn List
+#### Rule List Rules Spec Asn List
 
 An [`asn_list`](#rule-list-rules-spec-asn-list) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### Asn Matcher
+#### Rule List Rules Spec Asn Matcher
 
 An [`asn_matcher`](#rule-list-rules-spec-asn-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
 &#x2022; [`asn_sets`](#asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rule-list-rules-spec-asn-matcher-asn-sets) below.
 
-#### Asn Sets
+#### Rule List Rules Spec Asn Matcher Asn Sets
 
 An [`asn_sets`](#rule-list-rules-spec-asn-matcher-asn-sets) block (within [`rule_list.rules.spec.asn_matcher`](#rule-list-rules-spec-asn-matcher)) supports the following:
 
@@ -353,7 +353,7 @@ An [`asn_sets`](#rule-list-rules-spec-asn-matcher-asn-sets) block (within [`rule
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Body Matcher
+#### Rule List Rules Spec Body Matcher
 
 A [`body_matcher`](#rule-list-rules-spec-body-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -363,7 +363,7 @@ A [`body_matcher`](#rule-list-rules-spec-body-matcher) block (within [`rule_list
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### Bot Action
+#### Rule List Rules Spec Bot Action
 
 A [`bot_action`](#rule-list-rules-spec-bot-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -371,7 +371,7 @@ A [`bot_action`](#rule-list-rules-spec-bot-action) block (within [`rule_list.rul
 
 &#x2022; [`none`](#none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Client Name Matcher
+#### Rule List Rules Spec Client Name Matcher
 
 A [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -381,13 +381,13 @@ A [`client_name_matcher`](#rule-list-rules-spec-client-name-matcher) block (with
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### Client Selector
+#### Rule List Rules Spec Client Selector
 
 A [`client_selector`](#rule-list-rules-spec-client-selector) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
-#### Cookie Matchers
+#### Rule List Rules Spec Cookie Matchers
 
 A [`cookie_matchers`](#rule-list-rules-spec-cookie-matchers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -401,7 +401,7 @@ A [`cookie_matchers`](#rule-list-rules-spec-cookie-matchers) block (within [`rul
 
 &#x2022; [`name`](#name) - Optional String<br>Cookie Name. A case-sensitive cookie name
 
-#### Item
+#### Rule List Rules Spec Cookie Matchers Item
 
 An [`item`](#rule-list-rules-spec-cookie-matchers-item) block (within [`rule_list.rules.spec.cookie_matchers`](#rule-list-rules-spec-cookie-matchers)) supports the following:
 
@@ -411,7 +411,7 @@ An [`item`](#rule-list-rules-spec-cookie-matchers-item) block (within [`rule_lis
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### Domain Matcher
+#### Rule List Rules Spec Domain Matcher
 
 A [`domain_matcher`](#rule-list-rules-spec-domain-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -421,7 +421,7 @@ A [`domain_matcher`](#rule-list-rules-spec-domain-matcher) block (within [`rule_
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### Headers
+#### Rule List Rules Spec Headers
 
 A [`headers`](#rule-list-rules-spec-headers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -435,7 +435,7 @@ A [`headers`](#rule-list-rules-spec-headers) block (within [`rule_list.rules.spe
 
 &#x2022; [`name`](#name) - Optional String<br>Header Name. A case-insensitive HTTP header name
 
-#### Item
+#### Rule List Rules Spec Headers Item
 
 An [`item`](#rule-list-rules-spec-headers-item) block (within [`rule_list.rules.spec.headers`](#rule-list-rules-spec-headers)) supports the following:
 
@@ -445,7 +445,7 @@ An [`item`](#rule-list-rules-spec-headers-item) block (within [`rule_list.rules.
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### HTTP Method
+#### Rule List Rules Spec HTTP Method
 
 A [`http_method`](#rule-list-rules-spec-http-method) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -453,7 +453,7 @@ A [`http_method`](#rule-list-rules-spec-http-method) block (within [`rule_list.r
 
 &#x2022; [`methods`](#methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>Method List. List of methods values to match against
 
-#### IP Matcher
+#### Rule List Rules Spec IP Matcher
 
 An [`ip_matcher`](#rule-list-rules-spec-ip-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -461,7 +461,7 @@ An [`ip_matcher`](#rule-list-rules-spec-ip-matcher) block (within [`rule_list.ru
 
 &#x2022; [`prefix_sets`](#prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#rule-list-rules-spec-ip-matcher-prefix-sets) below.
 
-#### Prefix Sets
+#### Rule List Rules Spec IP Matcher Prefix Sets
 
 A [`prefix_sets`](#rule-list-rules-spec-ip-matcher-prefix-sets) block (within [`rule_list.rules.spec.ip_matcher`](#rule-list-rules-spec-ip-matcher)) supports the following:
 
@@ -475,7 +475,7 @@ A [`prefix_sets`](#rule-list-rules-spec-ip-matcher-prefix-sets) block (within [`
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### IP Prefix List
+#### Rule List Rules Spec IP Prefix List
 
 An [`ip_prefix_list`](#rule-list-rules-spec-ip-prefix-list) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -483,19 +483,19 @@ An [`ip_prefix_list`](#rule-list-rules-spec-ip-prefix-list) block (within [`rule
 
 &#x2022; [`ip_prefixes`](#ip-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
 
-#### IP Threat Category List
+#### Rule List Rules Spec IP Threat Category List
 
 An [`ip_threat_category_list`](#rule-list-rules-spec-ip-threat-category-list) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
 &#x2022; [`ip_threat_categories`](#ip-threat-categories) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
-#### Ja4 TLS Fingerprint
+#### Rule List Rules Spec Ja4 TLS Fingerprint
 
 A [`ja4_tls_fingerprint`](#rule-list-rules-spec-ja4-tls-fingerprint) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
 &#x2022; [`exact_values`](#exact-values) - Optional List<br>Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
 
-#### JWT Claims
+#### Rule List Rules Spec JWT Claims
 
 A [`jwt_claims`](#rule-list-rules-spec-jwt-claims) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -509,7 +509,7 @@ A [`jwt_claims`](#rule-list-rules-spec-jwt-claims) block (within [`rule_list.rul
 
 &#x2022; [`name`](#name) - Optional String<br>JWT Claim Name. JWT claim name
 
-#### Item
+#### Rule List Rules Spec JWT Claims Item
 
 An [`item`](#rule-list-rules-spec-jwt-claims-item) block (within [`rule_list.rules.spec.jwt_claims`](#rule-list-rules-spec-jwt-claims)) supports the following:
 
@@ -519,13 +519,13 @@ An [`item`](#rule-list-rules-spec-jwt-claims-item) block (within [`rule_list.rul
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### Label Matcher
+#### Rule List Rules Spec Label Matcher
 
 A [`label_matcher`](#rule-list-rules-spec-label-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
 &#x2022; [`keys`](#keys) - Optional List<br>Keys. The list of label key names that have to match
 
-#### Mum Action
+#### Rule List Rules Spec Mum Action
 
 A [`mum_action`](#rule-list-rules-spec-mum-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -533,7 +533,7 @@ A [`mum_action`](#rule-list-rules-spec-mum-action) block (within [`rule_list.rul
 
 &#x2022; [`skip_processing`](#skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Path
+#### Rule List Rules Spec Path
 
 A [`path`](#rule-list-rules-spec-path) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -549,7 +549,7 @@ A [`path`](#rule-list-rules-spec-path) block (within [`rule_list.rules.spec`](#r
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### Port Matcher
+#### Rule List Rules Spec Port Matcher
 
 A [`port_matcher`](#rule-list-rules-spec-port-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -557,7 +557,7 @@ A [`port_matcher`](#rule-list-rules-spec-port-matcher) block (within [`rule_list
 
 &#x2022; [`ports`](#ports) - Optional List<br>Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
 
-#### Query Params
+#### Rule List Rules Spec Query Params
 
 A [`query_params`](#rule-list-rules-spec-query-params) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -571,7 +571,7 @@ A [`query_params`](#rule-list-rules-spec-query-params) block (within [`rule_list
 
 &#x2022; [`key`](#key) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
 
-#### Item
+#### Rule List Rules Spec Query Params Item
 
 An [`item`](#rule-list-rules-spec-query-params-item) block (within [`rule_list.rules.spec.query_params`](#rule-list-rules-spec-query-params)) supports the following:
 
@@ -581,7 +581,7 @@ An [`item`](#rule-list-rules-spec-query-params-item) block (within [`rule_list.r
 
 &#x2022; [`transformers`](#transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
-#### Request Constraints
+#### Rule List Rules Spec Request Constraints
 
 A [`request_constraints`](#rule-list-rules-spec-request-constraints) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -637,7 +637,7 @@ A [`request_constraints`](#rule-list-rules-spec-request-constraints) block (with
 
 &#x2022; [`max_url_size_none`](#max-url-size-none) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### Segment Policy
+#### Rule List Rules Spec Segment Policy
 
 A [`segment_policy`](#rule-list-rules-spec-segment-policy) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -651,13 +651,13 @@ A [`segment_policy`](#rule-list-rules-spec-segment-policy) block (within [`rule_
 
 &#x2022; [`src_segments`](#src-segments) - Optional Block<br>Segment List. List of references to Segments<br>See [Src Segments](#rule-list-rules-spec-segment-policy-src-segments) below.
 
-#### Dst Segments
+#### Rule List Rules Spec Segment Policy Dst Segments
 
 A [`dst_segments`](#rule-list-rules-spec-segment-policy-dst-segments) block (within [`rule_list.rules.spec.segment_policy`](#rule-list-rules-spec-segment-policy)) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#rule-list-rules-spec-segment-policy-dst-segments-segments) below.
 
-#### Segments
+#### Rule List Rules Spec Segment Policy Dst Segments Segments
 
 A [`segments`](#rule-list-rules-spec-segment-policy-dst-segments-segments) block (within [`rule_list.rules.spec.segment_policy.dst_segments`](#rule-list-rules-spec-segment-policy-dst-segments)) supports the following:
 
@@ -667,13 +667,13 @@ A [`segments`](#rule-list-rules-spec-segment-policy-dst-segments-segments) block
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Src Segments
+#### Rule List Rules Spec Segment Policy Src Segments
 
 A [`src_segments`](#rule-list-rules-spec-segment-policy-src-segments) block (within [`rule_list.rules.spec.segment_policy`](#rule-list-rules-spec-segment-policy)) supports the following:
 
 &#x2022; [`segments`](#segments) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#rule-list-rules-spec-segment-policy-src-segments-segments) below.
 
-#### Segments
+#### Rule List Rules Spec Segment Policy Src Segments Segments
 
 A [`segments`](#rule-list-rules-spec-segment-policy-src-segments-segments) block (within [`rule_list.rules.spec.segment_policy.src_segments`](#rule-list-rules-spec-segment-policy-src-segments)) supports the following:
 
@@ -683,7 +683,7 @@ A [`segments`](#rule-list-rules-spec-segment-policy-src-segments-segments) block
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### TLS Fingerprint Matcher
+#### Rule List Rules Spec TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#rule-list-rules-spec-tls-fingerprint-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -693,7 +693,7 @@ A [`tls_fingerprint_matcher`](#rule-list-rules-spec-tls-fingerprint-matcher) blo
 
 &#x2022; [`excluded_values`](#excluded-values) - Optional List<br>Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
 
-#### User Identity Matcher
+#### Rule List Rules Spec User Identity Matcher
 
 An [`user_identity_matcher`](#rule-list-rules-spec-user-identity-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -701,7 +701,7 @@ An [`user_identity_matcher`](#rule-list-rules-spec-user-identity-matcher) block 
 
 &#x2022; [`regex_values`](#regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-#### WAF Action
+#### Rule List Rules Spec WAF Action
 
 A [`waf_action`](#rule-list-rules-spec-waf-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
@@ -711,7 +711,7 @@ A [`waf_action`](#rule-list-rules-spec-waf-action) block (within [`rule_list.rul
 
 &#x2022; [`waf_skip_processing`](#waf-skip-processing) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-#### App Firewall Detection Control
+#### Rule List Rules Spec WAF Action App Firewall Detection Control
 
 An [`app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control) block (within [`rule_list.rules.spec.waf_action`](#rule-list-rules-spec-waf-action)) supports the following:
 
@@ -723,7 +723,7 @@ An [`app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firew
 
 &#x2022; [`exclude_violation_contexts`](#exclude-violation-contexts) - Optional Block<br>Violations. Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-violation-contexts) below.
 
-#### Exclude Attack Type Contexts
+#### Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Attack Type Contexts
 
 An [`exclude_attack_type_contexts`](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-attack-type-contexts) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control)) supports the following:
 
@@ -733,13 +733,13 @@ An [`exclude_attack_type_contexts`](#rule-list-rules-spec-waf-action-app-firewal
 
 &#x2022; [`exclude_attack_type`](#exclude-attack-type) - Optional String  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK
 
-#### Exclude Bot Name Contexts
+#### Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Bot Name Contexts
 
 An [`exclude_bot_name_contexts`](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-bot-name-contexts) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control)) supports the following:
 
 &#x2022; [`bot_name`](#bot-name) - Optional String<br>Bot Name
 
-#### Exclude Signature Contexts
+#### Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Signature Contexts
 
 An [`exclude_signature_contexts`](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-signature-contexts) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control)) supports the following:
 
@@ -749,7 +749,7 @@ An [`exclude_signature_contexts`](#rule-list-rules-spec-waf-action-app-firewall-
 
 &#x2022; [`signature_id`](#signature-id) - Optional Number<br>SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
 
-#### Exclude Violation Contexts
+#### Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Violation Contexts
 
 An [`exclude_violation_contexts`](#rule-list-rules-spec-waf-action-app-firewall-detection-control-exclude-violation-contexts) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#rule-list-rules-spec-waf-action-app-firewall-detection-control)) supports the following:
 

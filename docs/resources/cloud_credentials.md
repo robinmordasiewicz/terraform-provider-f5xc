@@ -106,7 +106,7 @@ An [`aws_secret_key`](#aws-secret-key) block supports the following:
 
 &#x2022; [`secret_key`](#secret-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Key](#aws-secret-key-secret-key) below.
 
-#### Secret Key
+#### AWS Secret Key Secret Key
 
 A [`secret_key`](#aws-secret-key-secret-key) block (within [`aws_secret_key`](#aws-secret-key)) supports the following:
 
@@ -114,7 +114,7 @@ A [`secret_key`](#aws-secret-key-secret-key) block (within [`aws_secret_key`](#a
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#aws-secret-key-secret-key-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### AWS Secret Key Secret Key Blindfold Secret Info
 
 A [`blindfold_secret_info`](#aws-secret-key-secret-key-blindfold-secret-info) block (within [`aws_secret_key.secret_key`](#aws-secret-key-secret-key)) supports the following:
 
@@ -124,7 +124,7 @@ A [`blindfold_secret_info`](#aws-secret-key-secret-key-blindfold-secret-info) bl
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### AWS Secret Key Secret Key Clear Secret Info
 
 A [`clear_secret_info`](#aws-secret-key-secret-key-clear-secret-info) block (within [`aws_secret_key.secret_key`](#aws-secret-key-secret-key)) supports the following:
 
@@ -144,7 +144,7 @@ An [`azure_client_secret`](#azure-client-secret) block supports the following:
 
 &#x2022; [`tenant_id`](#tenant-id) - Optional String<br>Tenant ID. Tenant ID for your Azure service principal
 
-#### Client Secret
+#### Azure Client Secret Client Secret
 
 A [`client_secret`](#azure-client-secret-client-secret) block (within [`azure_client_secret`](#azure-client-secret)) supports the following:
 
@@ -152,7 +152,7 @@ A [`client_secret`](#azure-client-secret-client-secret) block (within [`azure_cl
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-client-secret-client-secret-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Azure Client Secret Client Secret Blindfold Secret Info
 
 A [`blindfold_secret_info`](#azure-client-secret-client-secret-blindfold-secret-info) block (within [`azure_client_secret.client_secret`](#azure-client-secret-client-secret)) supports the following:
 
@@ -162,7 +162,7 @@ A [`blindfold_secret_info`](#azure-client-secret-client-secret-blindfold-secret-
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Azure Client Secret Client Secret Clear Secret Info
 
 A [`clear_secret_info`](#azure-client-secret-client-secret-clear-secret-info) block (within [`azure_client_secret.client_secret`](#azure-client-secret-client-secret)) supports the following:
 
@@ -184,7 +184,7 @@ An [`azure_pfx_certificate`](#azure-pfx-certificate) block supports the followin
 
 &#x2022; [`tenant_id`](#tenant-id) - Optional String<br>Tenant ID. Tenant ID for your Azure service principal
 
-#### Password
+#### Azure Pfx Certificate Password
 
 A [`password`](#azure-pfx-certificate-password) block (within [`azure_pfx_certificate`](#azure-pfx-certificate)) supports the following:
 
@@ -192,7 +192,7 @@ A [`password`](#azure-pfx-certificate-password) block (within [`azure_pfx_certif
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#azure-pfx-certificate-password-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### Azure Pfx Certificate Password Blindfold Secret Info
 
 A [`blindfold_secret_info`](#azure-pfx-certificate-password-blindfold-secret-info) block (within [`azure_pfx_certificate.password`](#azure-pfx-certificate-password)) supports the following:
 
@@ -202,7 +202,7 @@ A [`blindfold_secret_info`](#azure-pfx-certificate-password-blindfold-secret-inf
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### Azure Pfx Certificate Password Clear Secret Info
 
 A [`clear_secret_info`](#azure-pfx-certificate-password-clear-secret-info) block (within [`azure_pfx_certificate.password`](#azure-pfx-certificate-password)) supports the following:
 
@@ -216,7 +216,7 @@ A [`gcp_cred_file`](#gcp-cred-file) block supports the following:
 
 &#x2022; [`credential_file`](#credential-file) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Credential File](#gcp-cred-file-credential-file) below.
 
-#### Credential File
+#### GCP Cred File Credential File
 
 A [`credential_file`](#gcp-cred-file-credential-file) block (within [`gcp_cred_file`](#gcp-cred-file)) supports the following:
 
@@ -224,7 +224,7 @@ A [`credential_file`](#gcp-cred-file-credential-file) block (within [`gcp_cred_f
 
 &#x2022; [`clear_secret_info`](#clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#gcp-cred-file-credential-file-clear-secret-info) below.
 
-#### Blindfold Secret Info
+#### GCP Cred File Credential File Blindfold Secret Info
 
 A [`blindfold_secret_info`](#gcp-cred-file-credential-file-blindfold-secret-info) block (within [`gcp_cred_file.credential_file`](#gcp-cred-file-credential-file)) supports the following:
 
@@ -234,7 +234,7 @@ A [`blindfold_secret_info`](#gcp-cred-file-credential-file-blindfold-secret-info
 
 &#x2022; [`store_provider`](#store-provider) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Clear Secret Info
+#### GCP Cred File Credential File Clear Secret Info
 
 A [`clear_secret_info`](#gcp-cred-file-credential-file-clear-secret-info) block (within [`gcp_cred_file.credential_file`](#gcp-cred-file-credential-file)) supports the following:
 

@@ -101,7 +101,7 @@ An [`a_pool`](#a-pool) block supports the following:
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#a-pool-members) below.
 
-#### Health Check
+#### A Pool Health Check
 
 A [`health_check`](#a-pool-health-check) block (within [`a_pool`](#a-pool)) supports the following:
 
@@ -111,7 +111,7 @@ A [`health_check`](#a-pool-health-check) block (within [`a_pool`](#a-pool)) supp
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Members
+#### A Pool Members
 
 A [`members`](#a-pool-members) block (within [`a_pool`](#a-pool)) supports the following:
 
@@ -133,7 +133,7 @@ An [`aaaa_pool`](#aaaa-pool) block supports the following:
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#aaaa-pool-members) below.
 
-#### Members
+#### Aaaa Pool Members
 
 A [`members`](#aaaa-pool-members) block (within [`aaaa_pool`](#aaaa-pool)) supports the following:
 
@@ -153,7 +153,7 @@ A [`cname_pool`](#cname-pool) block supports the following:
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#cname-pool-members) below.
 
-#### Members
+#### Cname Pool Members
 
 A [`members`](#cname-pool-members) block (within [`cname_pool`](#cname-pool)) supports the following:
 
@@ -173,7 +173,7 @@ A [`mx_pool`](#mx-pool) block supports the following:
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#mx-pool-members) below.
 
-#### Members
+#### Mx Pool Members
 
 A [`members`](#mx-pool-members) block (within [`mx_pool`](#mx-pool)) supports the following:
 
@@ -193,7 +193,7 @@ A [`srv_pool`](#srv-pool) block supports the following:
 
 &#x2022; [`members`](#members) - Optional Block<br>Pool Members<br>See [Members](#srv-pool-members) below.
 
-#### Members
+#### Srv Pool Members
 
 A [`members`](#srv-pool-members) block (within [`srv_pool`](#srv-pool)) supports the following:
 

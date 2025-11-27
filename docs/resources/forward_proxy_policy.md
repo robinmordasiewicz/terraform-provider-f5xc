@@ -112,7 +112,7 @@ An [`allow_list`](#allow-list) block supports the following:
 
 &#x2022; [`tls_list`](#tls-list) - Optional Block<br>TLS Domains. Domains in SNI for TLS connections<br>See [TLS List](#allow-list-tls-list) below.
 
-#### Dest List
+#### Allow List Dest List
 
 A [`dest_list`](#allow-list-dest-list) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -122,7 +122,7 @@ A [`dest_list`](#allow-list-dest-list) block (within [`allow_list`](#allow-list)
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefixes. Destination IPv4 prefixes
 
-#### HTTP List
+#### Allow List HTTP List
 
 A [`http_list`](#allow-list-http-list) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -140,7 +140,7 @@ A [`http_list`](#allow-list-http-list) block (within [`allow_list`](#allow-list)
 
 &#x2022; [`suffix_value`](#suffix-value) - Optional String<br>Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
 
-#### TLS List
+#### Allow List TLS List
 
 A [`tls_list`](#allow-list-tls-list) block (within [`allow_list`](#allow-list)) supports the following:
 
@@ -166,7 +166,7 @@ A [`deny_list`](#deny-list) block supports the following:
 
 &#x2022; [`tls_list`](#tls-list) - Optional Block<br>TLS Domains. Domains in SNI for TLS connections<br>See [TLS List](#deny-list-tls-list) below.
 
-#### Dest List
+#### Deny List Dest List
 
 A [`dest_list`](#deny-list-dest-list) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -176,7 +176,7 @@ A [`dest_list`](#deny-list-dest-list) block (within [`deny_list`](#deny-list)) s
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefixes. Destination IPv4 prefixes
 
-#### HTTP List
+#### Deny List HTTP List
 
 A [`http_list`](#deny-list-http-list) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -194,7 +194,7 @@ A [`http_list`](#deny-list-http-list) block (within [`deny_list`](#deny-list)) s
 
 &#x2022; [`suffix_value`](#suffix-value) - Optional String<br>Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
 
-#### TLS List
+#### Deny List TLS List
 
 A [`tls_list`](#deny-list-tls-list) block (within [`deny_list`](#deny-list)) supports the following:
 
@@ -226,7 +226,7 @@ A [`rule_list`](#rule-list) block supports the following:
 
 &#x2022; [`rules`](#rules) - Optional Block<br>Custom Rule List. List of custom rules<br>See [Rules](#rule-list-rules) below.
 
-#### Rules
+#### Rule List Rules
 
 A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
@@ -264,13 +264,13 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 &#x2022; [`url_category_list`](#url-category-list) - Optional Block<br>URL Category List Type. List of URL categories<br>See [URL Category List](#rule-list-rules-url-category-list) below.
 
-#### Dst Asn List
+#### Rule List Rules Dst Asn List
 
 A [`dst_asn_list`](#rule-list-rules-dst-asn-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`as_numbers`](#as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
-#### Dst Asn Set
+#### Rule List Rules Dst Asn Set
 
 A [`dst_asn_set`](#rule-list-rules-dst-asn-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -280,7 +280,7 @@ A [`dst_asn_set`](#rule-list-rules-dst-asn-set) block (within [`rule_list.rules`
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Dst IP Prefix Set
+#### Rule List Rules Dst IP Prefix Set
 
 A [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -290,25 +290,25 @@ A [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) block (within [`rule
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Dst Label Selector
+#### Rule List Rules Dst Label Selector
 
 A [`dst_label_selector`](#rule-list-rules-dst-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
-#### Dst Prefix List
+#### Rule List Rules Dst Prefix List
 
 A [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
-#### HTTP List
+#### Rule List Rules HTTP List
 
 A [`http_list`](#rule-list-rules-http-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`http_list`](#http-list) - Optional Block<br>HTTP URLs. URLs for HTTP connections<br>See [HTTP List](#rule-list-rules-http-list-http-list) below.
 
-#### HTTP List
+#### Rule List Rules HTTP List HTTP List
 
 A [`http_list`](#rule-list-rules-http-list-http-list) block (within [`rule_list.rules.http_list`](#rule-list-rules-http-list)) supports the following:
 
@@ -326,7 +326,7 @@ A [`http_list`](#rule-list-rules-http-list-http-list) block (within [`rule_list.
 
 &#x2022; [`suffix_value`](#suffix-value) - Optional String<br>Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
 
-#### IP Prefix Set
+#### Rule List Rules IP Prefix Set
 
 An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -336,13 +336,13 @@ An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.r
 
 &#x2022; [`tenant`](#tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-#### Label Selector
+#### Rule List Rules Label Selector
 
 A [`label_selector`](#rule-list-rules-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`expressions`](#expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
-#### Metadata
+#### Rule List Rules Metadata
 
 A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -350,7 +350,7 @@ A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rul
 
 &#x2022; [`name`](#name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
-#### Port Matcher
+#### Rule List Rules Port Matcher
 
 A [`port_matcher`](#rule-list-rules-port-matcher) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
@@ -358,19 +358,19 @@ A [`port_matcher`](#rule-list-rules-port-matcher) block (within [`rule_list.rule
 
 &#x2022; [`ports`](#ports) - Optional List<br>Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
 
-#### Prefix List
+#### Rule List Rules Prefix List
 
 A [`prefix_list`](#rule-list-rules-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`prefixes`](#prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
 
-#### TLS List
+#### Rule List Rules TLS List
 
 A [`tls_list`](#rule-list-rules-tls-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
 &#x2022; [`tls_list`](#tls-list) - Optional Block<br>TLS Domains. Domains in SNI for TLS connections<br>See [TLS List](#rule-list-rules-tls-list-tls-list) below.
 
-#### TLS List
+#### Rule List Rules TLS List TLS List
 
 A [`tls_list`](#rule-list-rules-tls-list-tls-list) block (within [`rule_list.rules.tls_list`](#rule-list-rules-tls-list)) supports the following:
 
@@ -380,7 +380,7 @@ A [`tls_list`](#rule-list-rules-tls-list-tls-list) block (within [`rule_list.rul
 
 &#x2022; [`suffix_value`](#suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
-#### URL Category List
+#### Rule List Rules URL Category List
 
 An [`url_category_list`](#rule-list-rules-url-category-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 

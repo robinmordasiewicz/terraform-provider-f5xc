@@ -110,7 +110,7 @@ A [`service_info`](#service-info) block supports the following:
 
 &#x2022; [`service_selector`](#service-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE<br>See [Service Selector](#service-info-service-selector) below.
 
-#### Service Selector
+#### Service Info Service Selector
 
 A [`service_selector`](#service-info-service-selector) block (within [`service_info`](#service-info)) supports the following:
 
@@ -124,7 +124,7 @@ A [`snat_pool`](#snat-pool) block supports the following:
 
 &#x2022; [`snat_pool`](#snat-pool) - Optional Block<br>IPv4 Prefix List. x-example: '192.168.20.0/24' List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#snat-pool-snat-pool) below.
 
-#### Snat Pool
+#### Snat Pool Snat Pool
 
 A [`snat_pool`](#snat-pool-snat-pool) block (within [`snat_pool`](#snat-pool)) supports the following:
 
@@ -152,7 +152,7 @@ A [`where`](#where) block supports the following:
 
 &#x2022; [`virtual_site`](#virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
 
-#### Site
+#### Where Site
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
@@ -164,7 +164,7 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
 
-#### Ref
+#### Where Site Ref
 
 A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
@@ -178,13 +178,13 @@ A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports t
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Virtual Network
+#### Where Virtual Network
 
 A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) supports the following:
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
 
-#### Ref
+#### Where Virtual Network Ref
 
 A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#where-virtual-network)) supports the following:
 
@@ -198,7 +198,7 @@ A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#w
 
 &#x2022; [`uid`](#uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
-#### Virtual Site
+#### Where Virtual Site
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
@@ -210,7 +210,7 @@ A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) support
 
 &#x2022; [`ref`](#ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
 
-#### Ref
+#### Where Virtual Site Ref
 
 A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 

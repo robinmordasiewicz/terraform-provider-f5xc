@@ -100,13 +100,13 @@ A [`notification_preference`](#notification-preference) block supports the follo
 
 &#x2022; [`support_ticket_id`](#support-ticket-id) - Optional Block<br>Support Ticket ID. SupportTicketId gives the information about ticket created for managed addon subscription<br>See [Support Ticket Id](#notification-preference-support-ticket-id) below.
 
-#### Emails
+#### Notification Preference Emails
 
 An [`emails`](#notification-preference-emails) block (within [`notification_preference`](#notification-preference)) supports the following:
 
 &#x2022; [`email_ids`](#email-ids) - Optional List<br>Emails. Email ids associated with the Addon Subscription
 
-#### Support Ticket Id
+#### Notification Preference Support Ticket Id
 
 A [`support_ticket_id`](#notification-preference-support-ticket-id) block (within [`notification_preference`](#notification-preference)) supports the following:
 

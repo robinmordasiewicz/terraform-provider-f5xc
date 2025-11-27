@@ -40,7 +40,27 @@ jobs:
 
       - name: Install tfplugindocs
         run: |
-          go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs@latest
+          # Retry logic for go install (network-dependent)
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "::group::Install tfplugindocs - Attempt $attempt of $max_attempts"
+            if go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs@latest; then
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            attempt=$((attempt + 1))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((2 ** attempt * 5))
+              echo "::warning::go install failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            fi
+          done
+          if [ $attempt -gt $max_attempts ]; then
+            echo "::error::Failed to install tfplugindocs after $max_attempts attempts"
+            exit 1
+          fi
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
       - name: Generate examples

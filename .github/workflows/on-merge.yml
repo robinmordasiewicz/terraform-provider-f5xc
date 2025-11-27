@@ -195,20 +195,68 @@ jobs:
 
       - name: Install tfplugindocs
         run: |
-          go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs@latest
+          # Retry logic for go install (network-dependent)
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "::group::Install tfplugindocs - Attempt $attempt of $max_attempts"
+            if go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs@latest; then
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            attempt=$((attempt + 1))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((2 ** attempt * 5))
+              echo "::warning::go install failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            fi
+          done
+          if [ $attempt -gt $max_attempts ]; then
+            echo "::error::Failed to install tfplugindocs after $max_attempts attempts"
+            exit 1
+          fi
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
       - name: Regenerate provider (if needed)
         if: needs.regenerate-provider.outputs.changed == 'true'
         run: |
           go run tools/generate-all-schemas.go --spec-dir=docs/specifications/api
-          go mod tidy
+          # Retry go mod tidy
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            if go mod tidy; then break; fi
+            attempt=$((attempt + 1))
+            [ $attempt -le $max_attempts ] && sleep $((2 ** attempt * 5))
+          done
+          [ $attempt -gt $max_attempts ] && exit 1
 
       - name: Regenerate documentation (if needed)
         if: needs.regenerate-docs.outputs.changed == 'true'
         run: |
           go run tools/generate-examples.go
-          tfplugindocs generate
+          # Retry tfplugindocs generate
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "::group::tfplugindocs generate - Attempt $attempt of $max_attempts"
+            if tfplugindocs generate; then
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            attempt=$((attempt + 1))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((2 ** attempt * 5))
+              echo "::warning::tfplugindocs failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            fi
+          done
+          if [ $attempt -gt $max_attempts ]; then
+            echo "::error::tfplugindocs failed after $max_attempts attempts"
+            exit 1
+          fi
           go run tools/transform-docs.go
 
       - name: Check for changes

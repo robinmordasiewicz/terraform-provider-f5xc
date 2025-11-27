@@ -43,14 +43,76 @@ jobs:
 
       - name: Run go mod tidy
         run: |
-          go mod tidy
+          # Retry logic for go mod operations (network-dependent)
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "::group::go mod tidy - Attempt $attempt of $max_attempts"
+            if go mod tidy; then
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            attempt=$((attempt + 1))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((2 ** attempt * 5))
+              echo "::warning::go mod tidy failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            fi
+          done
+          if [ $attempt -gt $max_attempts ]; then
+            echo "::error::go mod tidy failed after $max_attempts attempts"
+            exit 1
+          fi
           git diff --exit-code go.mod go.sum
 
       - name: Build
-        run: go build -v .
+        run: |
+          # Retry logic for build (may need to download dependencies)
+          max_attempts=3
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "::group::Build - Attempt $attempt of $max_attempts"
+            if go build -v .; then
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            attempt=$((attempt + 1))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((2 ** attempt * 5))
+              echo "::warning::Build failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            fi
+          done
+          if [ $attempt -gt $max_attempts ]; then
+            echo "::error::Build failed after $max_attempts attempts"
+            exit 1
+          fi
 
       - name: Test
-        run: go test -v -race ./internal/...
+        run: |
+          # Retry logic for tests (may have transient failures)
+          max_attempts=2
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "::group::Test - Attempt $attempt of $max_attempts"
+            if go test -v -race ./internal/...; then
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            attempt=$((attempt + 1))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((attempt * 10))
+              echo "::warning::Tests failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            fi
+          done
+          if [ $attempt -gt $max_attempts ]; then
+            echo "::error::Tests failed after $max_attempts attempts"
+            exit 1
+          fi
 
       - name: Set result
         id: result

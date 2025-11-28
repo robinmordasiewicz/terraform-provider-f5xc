@@ -33,8 +33,9 @@ on:
       - main
     paths-ignore:
       - '*.md'
-      - '.github/workflows/*.yml'
-      - '!.github/workflows/on-merge.yml'
+      # Note: Don't ignore workflow files - changes to on-merge.yml itself
+      # should be testable via CI, but won't trigger regeneration anyway
+      # since the detect-changes job filters by actual code changes.
 
 permissions:
   contents: write

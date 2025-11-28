@@ -11,15 +11,15 @@
 # FIX FOR RACE CONDITION (Issue #252) - DELAYED TAGGING PATTERN:
 # The race condition occurred because tags were created BEFORE regeneration PRs merged.
 # Solution: Use conditional tagging based on commit type:
-#   - Human commit needing regeneration → Create PR, DO NOT tag (content incomplete)
-#   - Human commit NOT needing regeneration → Tag immediately (content complete)
-#   - Bot commit (regeneration merged) → Tag now (content complete)
+#   - Human commit needing regeneration -> Create PR, DO NOT tag (content incomplete)
+#   - Human commit NOT needing regeneration -> Tag immediately (content complete)
+#   - Bot commit (regeneration merged) -> Tag now (content complete)
 #
 # FLOW:
-# Human PR merges → detect-changes → build-test → regenerate?
-#   → If regeneration needed: Create PR, skip tagging (wait for PR to merge)
-#   → If no regeneration: Tag and release immediately
-# Bot commit (regeneration PR merged) → Tag and release
+# Human PR merges -> detect-changes -> build-test -> regenerate?
+#   -> If regeneration needed: Create PR, skip tagging (wait for PR to merge)
+#   -> If no regeneration: Tag and release immediately
+# Bot commit (regeneration PR merged) -> Tag and release
 #
 # REPLACED WORKFLOWS:
 # - auto-tag.yml (version tagging now happens here)
@@ -46,9 +46,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   # STEP 1: Detect what changed and whether to proceed
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   detect-changes:
     name: Detect Changes
     runs-on: ubuntu-latest
@@ -166,9 +166,9 @@ jobs:
             echo "result=true" >> $GITHUB_OUTPUT
           fi
 
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   # STEP 2: Build and Test (validates the merged code - human commits only)
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   build-test:
     name: Build and Test
     needs: detect-changes
@@ -180,9 +180,9 @@ jobs:
     with:
       run-lint: true
 
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   # STEP 3: Regenerate provider code (if OpenAPI specs changed - human commits only)
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   regenerate-provider:
     name: Regenerate Provider
     needs: [detect-changes, build-test]
@@ -193,9 +193,9 @@ jobs:
       needs.detect-changes.outputs.specs-changed == 'true'
     uses: ./.github/workflows/_generate-provider.yml
 
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   # STEP 4: Regenerate documentation (if code, tools, or functions changed - human commits only)
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   regenerate-docs:
     name: Regenerate Docs
     needs: [detect-changes, build-test, regenerate-provider]
@@ -211,9 +211,9 @@ jobs:
        (needs.regenerate-provider.result == 'success' && needs.regenerate-provider.outputs.changed == 'true'))
     uses: ./.github/workflows/_generate-docs.yml
 
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   # STEP 5: Create PR for regenerated content (human commits only)
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   # NOTE: We create a PR instead of pushing directly to respect branch protection.
   # The delayed tagging pattern ensures we DON'T tag here - tagging happens when
   # the regeneration PR is merged (detected as bot commit in next workflow run).
@@ -400,13 +400,13 @@ jobs:
           echo "pr_created=false" >> $GITHUB_OUTPUT
           echo "No regeneration changes to commit"
 
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   # STEP 6: Tag and Release (DELAYED TAGGING PATTERN)
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   # CRITICAL: Tags are ONLY created when content is definitively complete:
-  #   1. Bot commit (regeneration PR was merged) → Tag now, content is complete
-  #   2. Human commit that didn't need regeneration → Tag now, content is complete
-  #   3. Human commit that created regeneration PR → DON'T tag, wait for PR merge
+  #   1. Bot commit (regeneration PR was merged) -> Tag now, content is complete
+  #   2. Human commit that didn't need regeneration -> Tag now, content is complete
+  #   3. Human commit that created regeneration PR -> DON'T tag, wait for PR merge
   tag-release:
     name: Tag and Release
     needs: [detect-changes, build-test, create-regeneration-pr]
@@ -428,9 +428,9 @@ jobs:
       gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
       gpg-passphrase: ${{ secrets.PASSPHRASE }}
 
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   # Summary
-  # ═══════════════════════════════════════════════════════════════════════════
+  # ===========================================================================
   summary:
     name: Workflow Summary
     needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, create-regeneration-pr, tag-release]
@@ -457,6 +457,6 @@ jobs:
           echo "| Tagged/Released | ${{ needs.tag-release.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Delayed Tagging Logic" >> $GITHUB_STEP_SUMMARY
-          echo "- Bot commits → Tag immediately (regeneration complete)" >> $GITHUB_STEP_SUMMARY
-          echo "- Human commits without regeneration → Tag immediately" >> $GITHUB_STEP_SUMMARY
-          echo "- Human commits with regeneration PR → Wait for PR merge to tag" >> $GITHUB_STEP_SUMMARY
+          echo "- Bot commits -> Tag immediately (regeneration complete)" >> $GITHUB_STEP_SUMMARY
+          echo "- Human commits without regeneration -> Tag immediately" >> $GITHUB_STEP_SUMMARY
+          echo "- Human commits with regeneration PR -> Wait for PR merge to tag" >> $GITHUB_STEP_SUMMARY

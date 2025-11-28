@@ -63,6 +63,12 @@ jobs:
           fi
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
+      - name: Calculate Terraform version requirements
+        run: |
+          echo "::group::Calculating minimum Terraform version"
+          go run tools/calculate-terraform-version.go --update-templates
+          echo "::endgroup::"
+
       - name: Generate examples
         run: |
           echo "::group::Generating example Terraform files"

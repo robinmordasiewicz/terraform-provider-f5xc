@@ -10,6 +10,14 @@ The F5XC Terraform provider enables infrastructure as code management for F5 Dis
 
 This is a community-maintained provider built from public F5 API documentation.
 
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 1.8 |
+
+-> **Note:** This provider uses provider-defined functions which require Terraform 1.8 or later. For details, see the [Functions](/docs/functions) documentation.
+
 ## Authenticating to F5 Distributed Cloud
 
 The F5XC Terraform provider supports multiple authentication methods:

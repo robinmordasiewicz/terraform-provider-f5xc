@@ -493,23 +493,19 @@ func CheckNamespaceAttributes(resourceName string, expectedLabels map[string]str
 		}
 
 		// Check labels
-		if expectedLabels != nil {
-			for k, v := range expectedLabels {
+		for k, v := range expectedLabels {
 				if apiResource.Metadata.Labels[k] != v {
 					return fmt.Errorf("label %s: got %q, want %q",
 						k, apiResource.Metadata.Labels[k], v)
 				}
-			}
 		}
 
 		// Check annotations
-		if expectedAnnotations != nil {
-			for k, v := range expectedAnnotations {
+		for k, v := range expectedAnnotations {
 				if apiResource.Metadata.Annotations[k] != v {
 					return fmt.Errorf("annotation %s: got %q, want %q",
 						k, apiResource.Metadata.Annotations[k], v)
 				}
-			}
 		}
 
 		return nil
@@ -675,23 +671,19 @@ func CheckHealthcheckAttributes(resourceName string, expectedLabels map[string]s
 		}
 
 		// Check labels
-		if expectedLabels != nil {
-			for k, v := range expectedLabels {
+		for k, v := range expectedLabels {
 				if apiResource.Metadata.Labels[k] != v {
 					return fmt.Errorf("label %s: got %q, want %q",
 						k, apiResource.Metadata.Labels[k], v)
 				}
-			}
 		}
 
 		// Check annotations
-		if expectedAnnotations != nil {
-			for k, v := range expectedAnnotations {
+		for k, v := range expectedAnnotations {
 				if apiResource.Metadata.Annotations[k] != v {
 					return fmt.Errorf("annotation %s: got %q, want %q",
 						k, apiResource.Metadata.Annotations[k], v)
 				}
-			}
 		}
 
 		return nil

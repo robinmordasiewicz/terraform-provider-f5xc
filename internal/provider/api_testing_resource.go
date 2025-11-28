@@ -634,7 +634,7 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)

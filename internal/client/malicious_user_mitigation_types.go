@@ -48,3 +48,19 @@ func (c *Client) DeleteMaliciousUserMitigation(ctx context.Context, namespace, n
 	path := fmt.Sprintf("/api/config/namespaces/%s/malicious_user_mitigations/%s", namespace, name)
 	return c.Delete(ctx, path)
 }
+
+// MaliciousUserMitigationListResponse is the response from listing malicious user mitigations
+type MaliciousUserMitigationListResponse struct {
+	Items []MaliciousUserMitigation `json:"items"`
+}
+
+// ListMaliciousUserMitigations lists all malicious user mitigations in a namespace
+func (c *Client) ListMaliciousUserMitigations(ctx context.Context, namespace string) ([]MaliciousUserMitigation, error) {
+	var result MaliciousUserMitigationListResponse
+	path := fmt.Sprintf("/api/config/namespaces/%s/malicious_user_mitigations", namespace)
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
+}

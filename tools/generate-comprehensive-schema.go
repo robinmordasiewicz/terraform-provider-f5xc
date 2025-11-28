@@ -812,8 +812,10 @@ func (r *{{.TitleCase}}GeneratedResource) Update(ctx context.Context, req resour
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update {{.TitleCase}}: %s", err))
 		return
 	}
+	_ = updated // Suppress unused variable warning
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	// Use plan data for ID since API response may not include metadata.name
+	data.ID = types.StringValue(data.Name.ValueString())
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 

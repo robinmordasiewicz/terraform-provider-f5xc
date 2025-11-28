@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -18,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	f5xcerrors "github.com/f5xc/terraform-provider-f5xc/internal/errors"
 	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
@@ -45,14 +47,20 @@ type AlertReceiverResource struct {
 }
 
 type AlertReceiverResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name        types.String   `tfsdk:"name"`
+	Namespace   types.String   `tfsdk:"namespace"`
+	Annotations types.Map      `tfsdk:"annotations"`
+	Description types.String   `tfsdk:"description"`
+	Disable     types.Bool     `tfsdk:"disable"`
+	Labels      types.Map      `tfsdk:"labels"`
+	ID          types.String   `tfsdk:"id"`
+	Timeouts    timeouts.Value `tfsdk:"timeouts"`
+	Email       types.Object   `tfsdk:"email"`
+	Opsgenie    types.Object   `tfsdk:"opsgenie"`
+	Pagerduty   types.Object   `tfsdk:"pagerduty"`
+	Slack       types.Object   `tfsdk:"slack"`
+	Sms         types.Object   `tfsdk:"sms"`
+	Webhook     types.Object   `tfsdk:"webhook"`
 }
 
 func (r *AlertReceiverResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -685,6 +693,30 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Spec.Description = data.Description.ValueString()
+	}
+
+	// Handle email block
+	if !data.Email.IsNull() {
+		emailAttrs := data.Email.Attributes()
+		if emailVal, ok := emailAttrs["email"]; ok && !emailVal.IsNull() {
+			apiResource.Spec.Email = &client.AlertReceiverEmail{
+				Email: emailVal.(types.String).ValueString(),
+			}
+		}
+	}
+
+	// Handle sms block
+	if !data.Sms.IsNull() {
+		smsAttrs := data.Sms.Attributes()
+		if contactNumber, ok := smsAttrs["contact_number"]; ok && !contactNumber.IsNull() {
+			apiResource.Spec.Sms = &client.AlertReceiverSms{
+				ContactNumber: contactNumber.(types.String).ValueString(),
+			}
+		}
+	}
+
 	created, err := r.client.CreateAlertReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create AlertReceiver: %s", err))
@@ -722,6 +754,15 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 
 	apiResource, err := r.client.GetAlertReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if resource was deleted outside of Terraform
+		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
+			tflog.Warn(ctx, "AlertReceiver not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AlertReceiver: %s", err))
 		return
 	}
@@ -806,16 +847,50 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Spec.Description = data.Description.ValueString()
+	}
+
+	// Handle email block
+	if !data.Email.IsNull() {
+		emailAttrs := data.Email.Attributes()
+		if emailVal, ok := emailAttrs["email"]; ok && !emailVal.IsNull() {
+			apiResource.Spec.Email = &client.AlertReceiverEmail{
+				Email: emailVal.(types.String).ValueString(),
+			}
+		}
+	}
+
+	// Handle sms block
+	if !data.Sms.IsNull() {
+		smsAttrs := data.Sms.Attributes()
+		if contactNumber, ok := smsAttrs["contact_number"]; ok && !contactNumber.IsNull() {
+			apiResource.Spec.Sms = &client.AlertReceiverSms{
+				ContactNumber: contactNumber.(types.String).ValueString(),
+			}
+		}
+	}
+
 	updated, err := r.client.UpdateAlertReceiver(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update AlertReceiver: %s", err))
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	// Use plan data for ID since API response may not include metadata.name
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetAlertReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -839,11 +914,32 @@ func (r *AlertReceiverResource) Delete(ctx context.Context, req resource.DeleteR
 
 	err := r.client.DeleteAlertReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, treat as success
+		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
+			tflog.Warn(ctx, "AlertReceiver already deleted", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete AlertReceiver: %s", err))
 		return
 	}
 }
 
 func (r *AlertReceiverResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	idParts := strings.Split(req.ID, "/")
+	if len(idParts) != 2 || idParts[0] == "" || idParts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID in format 'namespace/name', got: %s", req.ID),
+		)
+		return
+	}
+	namespace := idParts[0]
+	name := idParts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

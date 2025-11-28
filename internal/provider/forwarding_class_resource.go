@@ -44,18 +44,40 @@ type ForwardingClassResource struct {
 	client *client.Client
 }
 
-type ForwardingClassResourceModel struct {
-	Name types.String `tfsdk:"name"`
+// ForwardingClassDSCPModel represents the DSCP marking setting block
+type ForwardingClassDSCPModel struct {
+	DropPrecedence types.String `tfsdk:"drop_precedence"`
+	DSCPClass      types.String `tfsdk:"dscp_class"`
+}
+
+// ForwardingClassEmptyModel represents an empty block (dscp_based_queue, no_marking, no_policer)
+type ForwardingClassEmptyModel struct {
+}
+
+// ForwardingClassPolicerRefModel represents the policer reference block
+type ForwardingClassPolicerRefModel struct {
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	InterfaceGroup types.String `tfsdk:"interface_group"`
-	Labels types.Map `tfsdk:"labels"`
-	QueueIDToUse types.String `tfsdk:"queue_id_to_use"`
-	TosValue types.Int64 `tfsdk:"tos_value"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+type ForwardingClassResourceModel struct {
+	Name           types.String                    `tfsdk:"name"`
+	Namespace      types.String                    `tfsdk:"namespace"`
+	Annotations    types.Map                       `tfsdk:"annotations"`
+	Description    types.String                    `tfsdk:"description"`
+	Disable        types.Bool                      `tfsdk:"disable"`
+	InterfaceGroup types.String                    `tfsdk:"interface_group"`
+	Labels         types.Map                       `tfsdk:"labels"`
+	QueueIDToUse   types.String                    `tfsdk:"queue_id_to_use"`
+	TosValue       types.Int64                     `tfsdk:"tos_value"`
+	DSCP           *ForwardingClassDSCPModel       `tfsdk:"dscp"`
+	DSCPBasedQueue *ForwardingClassEmptyModel      `tfsdk:"dscp_based_queue"`
+	NoMarking      *ForwardingClassEmptyModel      `tfsdk:"no_marking"`
+	NoPolicer      *ForwardingClassEmptyModel      `tfsdk:"no_policer"`
+	Policer        *ForwardingClassPolicerRefModel `tfsdk:"policer"`
+	ID             types.String                    `tfsdk:"id"`
+	Timeouts       timeouts.Value                  `tfsdk:"timeouts"`
 }
 
 func (r *ForwardingClassResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -443,7 +465,7 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)

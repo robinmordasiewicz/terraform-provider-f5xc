@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -259,7 +260,13 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.PolicerSpec{},
+		Spec: client.PolicerSpec{
+			BurstSize:                data.BurstSize.ValueInt64(),
+			CommittedInformationRate: data.CommittedInformationRate.ValueInt64(),
+			PolicerMode:              data.PolicerMode.ValueString(),
+			PolicerType:              data.PolicerType.ValueString(),
+			Description:              data.Description.ValueString(),
+		},
 	}
 
 	if !data.Labels.IsNull() {
@@ -332,6 +339,25 @@ func (r *PolicerResource) Read(ctx context.Context, req resource.ReadRequest, re
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
+	// Set Spec fields from API response
+	if apiResource.Spec.BurstSize != 0 {
+		data.BurstSize = types.Int64Value(apiResource.Spec.BurstSize)
+	}
+	if apiResource.Spec.CommittedInformationRate != 0 {
+		data.CommittedInformationRate = types.Int64Value(apiResource.Spec.CommittedInformationRate)
+	}
+	// Only set policer_mode if it was configured (not just the API default)
+	if !data.PolicerMode.IsNull() && apiResource.Spec.PolicerMode != "" {
+		data.PolicerMode = types.StringValue(apiResource.Spec.PolicerMode)
+	}
+	// Only set policer_type if it was configured (not just the API default)
+	if !data.PolicerType.IsNull() && apiResource.Spec.PolicerType != "" {
+		data.PolicerType = types.StringValue(apiResource.Spec.PolicerType)
+	}
+	if apiResource.Spec.Description != "" {
+		data.Description = types.StringValue(apiResource.Spec.Description)
+	}
+
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
 		resp.Diagnostics.Append(diags...)
@@ -380,7 +406,13 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.PolicerSpec{},
+		Spec: client.PolicerSpec{
+			BurstSize:                data.BurstSize.ValueInt64(),
+			CommittedInformationRate: data.CommittedInformationRate.ValueInt64(),
+			PolicerMode:              data.PolicerMode.ValueString(),
+			PolicerType:              data.PolicerType.ValueString(),
+			Description:              data.Description.ValueString(),
+		},
 	}
 
 	if !data.Labels.IsNull() {
@@ -407,7 +439,7 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)
@@ -440,5 +472,20 @@ func (r *PolicerResource) Delete(ctx context.Context, req resource.DeleteRequest
 }
 
 func (r *PolicerResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

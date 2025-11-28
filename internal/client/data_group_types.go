@@ -16,7 +16,25 @@ type DataGroup struct {
 
 // DataGroupSpec defines the specification for DataGroup
 type DataGroupSpec struct {
-	Description string `json:"description,omitempty"`
+	Description    string                     `json:"description,omitempty"`
+	StringRecords  *DataGroupStringRecords   `json:"string_records,omitempty"`
+	IntegerRecords *DataGroupIntegerRecords  `json:"integer_records,omitempty"`
+	AddressRecords *DataGroupAddressRecords  `json:"address_records,omitempty"`
+}
+
+// DataGroupStringRecords defines string records
+type DataGroupStringRecords struct {
+	Records map[string]string `json:"records,omitempty"`
+}
+
+// DataGroupIntegerRecords defines integer records
+type DataGroupIntegerRecords struct {
+	Records map[string]string `json:"records,omitempty"`
+}
+
+// DataGroupAddressRecords defines address records
+type DataGroupAddressRecords struct {
+	Records map[string]string `json:"records,omitempty"`
 }
 
 // CreateDataGroup creates a new DataGroup
@@ -47,4 +65,20 @@ func (c *Client) UpdateDataGroup(ctx context.Context, resource *DataGroup) (*Dat
 func (c *Client) DeleteDataGroup(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/data_groups/%s", namespace, name)
 	return c.Delete(ctx, path)
+}
+
+// DataGroupListResponse is the response from listing data groups
+type DataGroupListResponse struct {
+	Items []DataGroup `json:"items"`
+}
+
+// ListDataGroups lists all data groups in a namespace
+func (c *Client) ListDataGroups(ctx context.Context, namespace string) ([]DataGroup, error) {
+	var result DataGroupListResponse
+	path := fmt.Sprintf("/api/config/namespaces/%s/data_groups", namespace)
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
 }

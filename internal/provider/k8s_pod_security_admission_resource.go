@@ -415,7 +415,7 @@ func (r *K8SPodSecurityAdmissionResource) Update(ctx context.Context, req resour
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)

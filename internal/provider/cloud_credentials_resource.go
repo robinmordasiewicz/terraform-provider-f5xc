@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -18,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
+	f5xcerrors "github.com/f5xc/terraform-provider-f5xc/internal/errors"
 	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
@@ -45,14 +47,19 @@ type CloudCredentialsResource struct {
 }
 
 type CloudCredentialsResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name               types.String   `tfsdk:"name"`
+	Namespace          types.String   `tfsdk:"namespace"`
+	Annotations        types.Map      `tfsdk:"annotations"`
+	Description        types.String   `tfsdk:"description"`
+	Disable            types.Bool     `tfsdk:"disable"`
+	Labels             types.Map      `tfsdk:"labels"`
+	ID                 types.String   `tfsdk:"id"`
+	Timeouts           timeouts.Value `tfsdk:"timeouts"`
+	AwsAssumeRole      types.Object   `tfsdk:"aws_assume_role"`
+	AwsSecretKey       types.Object   `tfsdk:"aws_secret_key"`
+	AzureClientSecret  types.Object   `tfsdk:"azure_client_secret"`
+	AzurePfxCertificate types.Object   `tfsdk:"azure_pfx_certificate"`
+	GcpCredFile        types.Object   `tfsdk:"gcp_cred_file"`
 }
 
 func (r *CloudCredentialsResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -542,6 +549,15 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 
 	apiResource, err := r.client.GetCloudCredentials(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if resource was deleted outside of Terraform
+		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
+			tflog.Warn(ctx, "CloudCredentials not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CloudCredentials: %s", err))
 		return
 	}
@@ -632,10 +648,19 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	// Use plan data for ID since API response may not include metadata.name
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise fetch it
+	uid := updated.Metadata.UID
+	if uid == "" {
+		fetched, fetchErr := r.client.GetCloudCredentials(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -659,11 +684,32 @@ func (r *CloudCredentialsResource) Delete(ctx context.Context, req resource.Dele
 
 	err := r.client.DeleteCloudCredentials(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, treat as success
+		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
+			tflog.Warn(ctx, "CloudCredentials already deleted", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete CloudCredentials: %s", err))
 		return
 	}
 }
 
 func (r *CloudCredentialsResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	idParts := strings.Split(req.ID, "/")
+	if len(idParts) != 2 || idParts[0] == "" || idParts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID in format 'namespace/name', got: %s", req.ID),
+		)
+		return
+	}
+	namespace := idParts[0]
+	name := idParts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -248,6 +249,25 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 		Spec: client.BGPAsnSetSpec{},
 	}
 
+	// Map as_numbers from terraform state to API spec
+	if !data.AsNumbers.IsNull() && !data.AsNumbers.IsUnknown() {
+		var asNumbers []string
+		resp.Diagnostics.Append(data.AsNumbers.ElementsAs(ctx, &asNumbers, false)...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+		// Convert string ASNs to uint32
+		for _, asn := range asNumbers {
+			var asnVal uint64
+			_, err := fmt.Sscanf(asn, "%d", &asnVal)
+			if err != nil {
+				resp.Diagnostics.AddError("Invalid ASN", fmt.Sprintf("Unable to parse ASN '%s': %s", asn, err))
+				return
+			}
+			apiResource.Spec.AsNumbers = append(apiResource.Spec.AsNumbers, uint32(asnVal))
+		}
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -338,6 +358,21 @@ func (r *BGPAsnSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
+	// Map as_numbers from API response to terraform state
+	if len(apiResource.Spec.AsNumbers) > 0 {
+		asNumStrings := make([]string, len(apiResource.Spec.AsNumbers))
+		for i, asn := range apiResource.Spec.AsNumbers {
+			asNumStrings[i] = fmt.Sprintf("%d", asn)
+		}
+		asNumbers, diags := types.ListValueFrom(ctx, types.StringType, asNumStrings)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AsNumbers = asNumbers
+		}
+	} else {
+		data.AsNumbers = types.ListNull(types.StringType)
+	}
+
 	psd = privatestate.NewPrivateStateData()
 	psd.SetUID(apiResource.Metadata.UID)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
@@ -369,6 +404,25 @@ func (r *BGPAsnSetResource) Update(ctx context.Context, req resource.UpdateReque
 		Spec: client.BGPAsnSetSpec{},
 	}
 
+	// Map as_numbers from terraform state to API spec
+	if !data.AsNumbers.IsNull() && !data.AsNumbers.IsUnknown() {
+		var asNumbers []string
+		resp.Diagnostics.Append(data.AsNumbers.ElementsAs(ctx, &asNumbers, false)...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+		// Convert string ASNs to uint32
+		for _, asn := range asNumbers {
+			var asnVal uint64
+			_, err := fmt.Sscanf(asn, "%d", &asnVal)
+			if err != nil {
+				resp.Diagnostics.AddError("Invalid ASN", fmt.Sprintf("Unable to parse ASN '%s': %s", asn, err))
+				return
+			}
+			apiResource.Spec.AsNumbers = append(apiResource.Spec.AsNumbers, uint32(asnVal))
+		}
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -393,7 +447,7 @@ func (r *BGPAsnSetResource) Update(ctx context.Context, req resource.UpdateReque
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)
@@ -426,5 +480,20 @@ func (r *BGPAsnSetResource) Delete(ctx context.Context, req resource.DeleteReque
 }
 
 func (r *BGPAsnSetResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

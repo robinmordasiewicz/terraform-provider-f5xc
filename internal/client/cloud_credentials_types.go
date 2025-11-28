@@ -22,7 +22,7 @@ type CloudCredentialsSpec struct {
 // CreateCloudCredentials creates a new CloudCredentials
 func (c *Client) CreateCloudCredentials(ctx context.Context, resource *CloudCredentials) (*CloudCredentials, error) {
 	var result CloudCredentials
-	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_credentialss", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_credentials", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +30,7 @@ func (c *Client) CreateCloudCredentials(ctx context.Context, resource *CloudCred
 // GetCloudCredentials retrieves a CloudCredentials
 func (c *Client) GetCloudCredentials(ctx context.Context, namespace, name string) (*CloudCredentials, error) {
 	var result CloudCredentials
-	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_credentialss/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_credentials/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +38,29 @@ func (c *Client) GetCloudCredentials(ctx context.Context, namespace, name string
 // UpdateCloudCredentials updates a CloudCredentials
 func (c *Client) UpdateCloudCredentials(ctx context.Context, resource *CloudCredentials) (*CloudCredentials, error) {
 	var result CloudCredentials
-	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_credentialss/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_credentials/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteCloudCredentials deletes a CloudCredentials
 func (c *Client) DeleteCloudCredentials(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_credentialss/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_credentials/%s", namespace, name)
 	return c.Delete(ctx, path)
+}
+
+// CloudCredentialsListResponse is the response from listing cloud credentials
+type CloudCredentialsListResponse struct {
+	Items []CloudCredentials `json:"items"`
+}
+
+// ListCloudCredentials lists all cloud credentials in a namespace
+func (c *Client) ListCloudCredentials(ctx context.Context, namespace string) ([]CloudCredentials, error) {
+	var result CloudCredentialsListResponse
+	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_credentials", namespace)
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
 }

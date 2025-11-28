@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,15 +45,37 @@ type DataGroupResource struct {
 	client *client.Client
 }
 
+// DataGroupRecordsModel represents the records nested block
+type DataGroupRecordsModel struct {
+}
+
+// DataGroupAddressRecordsModel represents the address_records nested block
+type DataGroupAddressRecordsModel struct {
+	Records *DataGroupRecordsModel `tfsdk:"records"`
+}
+
+// DataGroupIntegerRecordsModel represents the integer_records nested block
+type DataGroupIntegerRecordsModel struct {
+	Records *DataGroupRecordsModel `tfsdk:"records"`
+}
+
+// DataGroupStringRecordsModel represents the string_records nested block
+type DataGroupStringRecordsModel struct {
+	Records *DataGroupRecordsModel `tfsdk:"records"`
+}
+
 type DataGroupResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name           types.String                  `tfsdk:"name"`
+	Namespace      types.String                  `tfsdk:"namespace"`
+	Annotations    types.Map                     `tfsdk:"annotations"`
+	Description    types.String                  `tfsdk:"description"`
+	Disable        types.Bool                    `tfsdk:"disable"`
+	Labels         types.Map                     `tfsdk:"labels"`
+	AddressRecords *DataGroupAddressRecordsModel `tfsdk:"address_records"`
+	IntegerRecords *DataGroupIntegerRecordsModel `tfsdk:"integer_records"`
+	StringRecords  *DataGroupStringRecordsModel  `tfsdk:"string_records"`
+	ID             types.String                  `tfsdk:"id"`
+	Timeouts       timeouts.Value                `tfsdk:"timeouts"`
 }
 
 func (r *DataGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -272,7 +295,24 @@ func (r *DataGroupResource) Create(ctx context.Context, req resource.CreateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataGroupSpec{},
+		Spec: client.DataGroupSpec{
+			Description: data.Description.ValueString(),
+		},
+	}
+
+	// Handle OneOf: string_records, integer_records, or address_records
+	if data.StringRecords != nil {
+		apiResource.Spec.StringRecords = &client.DataGroupStringRecords{
+			Records: map[string]string{},
+		}
+	} else if data.IntegerRecords != nil {
+		apiResource.Spec.IntegerRecords = &client.DataGroupIntegerRecords{
+			Records: map[string]string{},
+		}
+	} else if data.AddressRecords != nil {
+		apiResource.Spec.AddressRecords = &client.DataGroupAddressRecords{
+			Records: map[string]string{},
+		}
 	}
 
 	if !data.Labels.IsNull() {
@@ -345,6 +385,23 @@ func (r *DataGroupResource) Read(ctx context.Context, req resource.ReadRequest, 
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
+	// Read spec fields
+	if apiResource.Spec.Description != "" {
+		data.Description = types.StringValue(apiResource.Spec.Description)
+	}
+
+	// Read record types from API response to preserve state
+	// Only set the record type block if it was configured (don't add nested records block)
+	if apiResource.Spec.StringRecords != nil {
+		data.StringRecords = &DataGroupStringRecordsModel{}
+	}
+	if apiResource.Spec.IntegerRecords != nil {
+		data.IntegerRecords = &DataGroupIntegerRecordsModel{}
+	}
+	if apiResource.Spec.AddressRecords != nil {
+		data.AddressRecords = &DataGroupAddressRecordsModel{}
+	}
+
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
 		resp.Diagnostics.Append(diags...)
@@ -393,7 +450,24 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataGroupSpec{},
+		Spec: client.DataGroupSpec{
+			Description: data.Description.ValueString(),
+		},
+	}
+
+	// Handle OneOf: string_records, integer_records, or address_records
+	if data.StringRecords != nil {
+		apiResource.Spec.StringRecords = &client.DataGroupStringRecords{
+			Records: map[string]string{},
+		}
+	} else if data.IntegerRecords != nil {
+		apiResource.Spec.IntegerRecords = &client.DataGroupIntegerRecords{
+			Records: map[string]string{},
+		}
+	} else if data.AddressRecords != nil {
+		apiResource.Spec.AddressRecords = &client.DataGroupAddressRecords{
+			Records: map[string]string{},
+		}
 	}
 
 	if !data.Labels.IsNull() {
@@ -420,7 +494,7 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)
@@ -453,5 +527,20 @@ func (r *DataGroupResource) Delete(ctx context.Context, req resource.DeleteReque
 }
 
 func (r *DataGroupResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"os"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -17,6 +18,26 @@ import (
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
 )
+
+// normalizeAPIURL cleans up the API URL to ensure consistent formatting.
+// It removes trailing slashes and the /api suffix if present, since API paths
+// already include the /api prefix (e.g., /api/web/namespaces).
+func normalizeAPIURL(url string) (string, bool) {
+	original := url
+
+	// Remove trailing slashes
+	url = strings.TrimRight(url, "/")
+
+	// Remove /api suffix (case-insensitive check, preserve original case in removal)
+	if strings.HasSuffix(strings.ToLower(url), "/api") {
+		url = url[:len(url)-4]
+	}
+
+	// Remove any trailing slashes that might have been before /api
+	url = strings.TrimRight(url, "/")
+
+	return url, url != original
+}
 
 // Ensure F5XCProvider satisfies various provider interfaces.
 var _ provider.Provider = &F5XCProvider{}
@@ -52,7 +73,10 @@ func (p *F5XCProvider) Schema(ctx context.Context, req provider.SchemaRequest, r
 			"built from public F5 API documentation.",
 		Attributes: map[string]schema.Attribute{
 			"api_url": schema.StringAttribute{
-				MarkdownDescription: "F5 Distributed Cloud API URL. Defaults to https://console.ves.volterra.io/api. " +
+				MarkdownDescription: "F5 Distributed Cloud API URL (base URL without path). " +
+					"Examples: `https://console.ves.volterra.io` or `https://<tenant>.console.ves.volterra.io`. " +
+					"The provider will automatically normalize URLs by removing trailing slashes and `/api` suffix if present. " +
+					"Defaults to `https://console.ves.volterra.io`. " +
 					"Can also be set via F5XC_API_URL environment variable.",
 				Optional: true,
 			},
@@ -142,7 +166,18 @@ func (p *F5XCProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 
 	// Set default API URL if not provided
 	if apiURL == "" {
-		apiURL = "https://console.ves.volterra.io/api"
+		apiURL = "https://console.ves.volterra.io"
+	}
+
+	// Normalize the API URL (remove trailing slashes and /api suffix if present)
+	normalizedURL, wasNormalized := normalizeAPIURL(apiURL)
+	if wasNormalized {
+		tflog.Warn(ctx, "API URL was normalized", map[string]any{
+			"original":   apiURL,
+			"normalized": normalizedURL,
+			"hint":       "Configure F5XC_API_URL without trailing slashes or /api suffix for best results",
+		})
+		apiURL = normalizedURL
 	}
 
 	var c *client.Client

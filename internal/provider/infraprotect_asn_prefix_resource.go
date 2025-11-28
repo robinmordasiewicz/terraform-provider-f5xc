@@ -410,7 +410,7 @@ func (r *InfraprotectAsnPrefixResource) Update(ctx context.Context, req resource
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)

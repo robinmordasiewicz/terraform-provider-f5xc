@@ -16,7 +16,72 @@ type AlertReceiver struct {
 
 // AlertReceiverSpec defines the specification for AlertReceiver
 type AlertReceiverSpec struct {
-	Description string `json:"description,omitempty"`
+	Description string                    `json:"description,omitempty"`
+	Email       *AlertReceiverEmail       `json:"email,omitempty"`
+	Opsgenie    *AlertReceiverOpsgenie    `json:"opsgenie,omitempty"`
+	Pagerduty   *AlertReceiverPagerduty   `json:"pagerduty,omitempty"`
+	Slack       *AlertReceiverSlack       `json:"slack,omitempty"`
+	Sms         *AlertReceiverSms         `json:"sms,omitempty"`
+	Webhook     *AlertReceiverWebhook     `json:"webhook,omitempty"`
+}
+
+// AlertReceiverEmail represents email receiver configuration
+type AlertReceiverEmail struct {
+	Email string `json:"email,omitempty"`
+}
+
+// AlertReceiverOpsgenie represents OpsGenie receiver configuration
+type AlertReceiverOpsgenie struct {
+	URL    string       `json:"url,omitempty"`
+	ApiKey *SecretType  `json:"api_key,omitempty"`
+}
+
+// AlertReceiverPagerduty represents PagerDuty receiver configuration
+type AlertReceiverPagerduty struct {
+	URL        string      `json:"url,omitempty"`
+	RoutingKey *SecretType `json:"routing_key,omitempty"`
+}
+
+// AlertReceiverSlack represents Slack receiver configuration
+type AlertReceiverSlack struct {
+	Channel string      `json:"channel,omitempty"`
+	URL     *SecretType `json:"url,omitempty"`
+}
+
+// AlertReceiverSms represents SMS receiver configuration
+type AlertReceiverSms struct {
+	ContactNumber string `json:"contact_number,omitempty"`
+}
+
+// AlertReceiverWebhook represents Webhook receiver configuration
+type AlertReceiverWebhook struct {
+	HttpConfig *WebhookHttpConfig `json:"http_config,omitempty"`
+	URL        *SecretType        `json:"url,omitempty"`
+}
+
+// SecretType represents a secret field
+type SecretType struct {
+	BlindfoldSecretInfo *BlindfoldSecretInfo `json:"blindfold_secret_info,omitempty"`
+	ClearSecretInfo     *ClearSecretInfo     `json:"clear_secret_info,omitempty"`
+}
+
+// BlindfoldSecretInfo represents blindfold encrypted secret
+type BlindfoldSecretInfo struct {
+	DecryptionProvider string `json:"decryption_provider,omitempty"`
+	Location           string `json:"location,omitempty"`
+	StoreProvider      string `json:"store_provider,omitempty"`
+}
+
+// ClearSecretInfo represents clear text secret
+type ClearSecretInfo struct {
+	ProviderRef string `json:"provider_ref,omitempty"`
+	URL         string `json:"url,omitempty"`
+}
+
+// WebhookHttpConfig represents HTTP configuration for webhook
+type WebhookHttpConfig struct {
+	EnableHttp2     bool `json:"enable_http2,omitempty"`
+	FollowRedirects bool `json:"follow_redirects,omitempty"`
 }
 
 // CreateAlertReceiver creates a new AlertReceiver
@@ -47,4 +112,20 @@ func (c *Client) UpdateAlertReceiver(ctx context.Context, resource *AlertReceive
 func (c *Client) DeleteAlertReceiver(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/alert_receivers/%s", namespace, name)
 	return c.Delete(ctx, path)
+}
+
+// AlertReceiverListResponse is the response from listing alert receivers
+type AlertReceiverListResponse struct {
+	Items []AlertReceiver `json:"items"`
+}
+
+// ListAlertReceivers lists all alert receivers in a namespace
+func (c *Client) ListAlertReceivers(ctx context.Context, namespace string) ([]AlertReceiver, error) {
+	var result AlertReceiverListResponse
+	path := fmt.Sprintf("/api/config/namespaces/%s/alert_receivers", namespace)
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
 }

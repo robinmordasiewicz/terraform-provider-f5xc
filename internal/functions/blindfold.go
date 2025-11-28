@@ -57,7 +57,7 @@ resource "f5xc_http_loadbalancer" "example" {
       blindfold_secret_info {
         location = provider::f5xc::blindfold(
           base64encode(file("${path.module}/private.key")),
-          "my-secret-policy",
+          "example-secret-policy",
           "shared"
         )
       }

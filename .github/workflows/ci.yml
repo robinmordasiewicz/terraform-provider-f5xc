@@ -64,6 +64,13 @@ jobs:
             GENERATOR_TOOLS_MODIFIED=true
           fi
 
+          # Check if test files are included - indicates bug fix PR
+          BUG_FIX_PR=false
+          if echo "$CHANGED_FILES" | grep -qE "^internal/provider/.*_test\.go$|^internal/client/.*_test\.go$|^internal/acctest/"; then
+            echo "Test files included - provider/client code changes are allowed (bug fix PR)"
+            BUG_FIX_PR=true
+          fi
+
           # Define patterns for generated files
           GENERATED_PATTERNS=(
             # Provider documentation
@@ -73,7 +80,7 @@ jobs:
             # Example Terraform files (Note: examples/functions/ is manually maintained)
             "^examples/resources/.*\.tf$"
             "^examples/data-sources/.*\.tf$"
-            # Provider Go code
+            # Provider Go code (blocked unless it's a bug fix PR with tests)
             "^internal/provider/.*_resource\.go$"
             "^internal/provider/.*_data_source\.go$"
           )
@@ -88,6 +95,14 @@ jobs:
             "^examples/data-sources/.*\.tf$"
           )
 
+          # Patterns allowed when test files are included (bug fix PRs)
+          ALLOWED_WITH_TESTS=(
+            "^internal/provider/.*_resource\.go$"
+            "^internal/provider/.*_data_source\.go$"
+            "^internal/provider/provider\.go$"
+            "^internal/client/.*\.go$"
+          )
+
           # Check for violations
           VIOLATIONS=""
           for file in $CHANGED_FILES; do
@@ -97,6 +112,19 @@ jobs:
                 if [ "$GENERATOR_TOOLS_MODIFIED" = true ]; then
                   ALLOWED=false
                   for allowed_pattern in "${ALLOWED_WITH_GENERATORS[@]}"; do
+                    if echo "$file" | grep -qE "$allowed_pattern"; then
+                      ALLOWED=true
+                      break
+                    fi
+                  done
+                  if [ "$ALLOWED" = true ]; then
+                    continue
+                  fi
+                fi
+                # If test files are included, check if this pattern is allowed
+                if [ "$BUG_FIX_PR" = true ]; then
+                  ALLOWED=false
+                  for allowed_pattern in "${ALLOWED_WITH_TESTS[@]}"; do
                     if echo "$file" | grep -qE "$allowed_pattern"; then
                       ALLOWED=true
                       break
@@ -127,6 +155,9 @@ jobs:
             echo "Note: docs/ and examples/ changes are allowed when"
             echo "tools/transform-docs.go, tools/generate-*.go, or"
             echo "templates/ are also modified in the same PR."
+            echo ""
+            echo "Note: Provider/client code changes are allowed when"
+            echo "test files are included in the same PR (bug fix PRs)."
             exit 1
           fi
 

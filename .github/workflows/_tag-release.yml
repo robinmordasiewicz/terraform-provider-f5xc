@@ -1,5 +1,8 @@
 # Reusable workflow for version tagging and release
 # Called by: on-merge.yml
+#
+# NOTE: This workflow fetches the LATEST main HEAD to ensure tags include
+# any regeneration commits that were pushed by the on-merge workflow.
 name: Tag and Release
 
 on:
@@ -33,9 +36,12 @@ jobs:
       latest_tag: ${{ steps.get_tag.outputs.latest_tag }}
       created: ${{ steps.create.outputs.created }}
     steps:
-      - name: Checkout
+      - name: Checkout latest main
         uses: actions/checkout@v5
         with:
+          # Fetch the LATEST main HEAD, not github.sha
+          # This ensures we tag the commit that includes regeneration
+          ref: main
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 

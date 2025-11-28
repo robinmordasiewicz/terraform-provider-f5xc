@@ -30,6 +30,18 @@ const (
 	// EnvF5XCToken is the environment variable for the F5 XC API token
 	EnvF5XCToken = "F5XC_API_TOKEN"
 
+	// EnvF5XCP12File is the environment variable for the P12 certificate file path
+	EnvF5XCP12File = "F5XC_API_P12_FILE"
+
+	// EnvF5XCP12Password is the environment variable for the P12 certificate password
+	EnvF5XCP12Password = "F5XC_P12_PASSWORD"
+
+	// EnvF5XCCert is the environment variable for the PEM certificate file path
+	EnvF5XCCert = "F5XC_API_CERT"
+
+	// EnvF5XCKey is the environment variable for the PEM key file path
+	EnvF5XCKey = "F5XC_API_KEY"
+
 	// EnvF5XCTenantName is the environment variable for the F5 XC tenant name
 	EnvF5XCTenantName = "F5XC_TENANT_NAME"
 
@@ -42,22 +54,68 @@ var ProtoV6ProviderFactories = map[string]func() (tfprotov6.ProviderServer, erro
 	"f5xc": providerserver.NewProtocol6WithError(provider.New("test")()),
 }
 
+// AuthMethod represents the authentication method detected
+type AuthMethod int
+
+const (
+	// AuthMethodNone indicates no authentication configured
+	AuthMethodNone AuthMethod = iota
+	// AuthMethodToken indicates API token authentication
+	AuthMethodToken
+	// AuthMethodP12 indicates P12 certificate authentication
+	AuthMethodP12
+	// AuthMethodPEM indicates PEM certificate authentication
+	AuthMethodPEM
+)
+
+// DetectAuthMethod determines which authentication method is configured
+func DetectAuthMethod() AuthMethod {
+	// Check P12 authentication (preferred for testing)
+	if os.Getenv(EnvF5XCP12File) != "" && os.Getenv(EnvF5XCP12Password) != "" {
+		return AuthMethodP12
+	}
+
+	// Check PEM certificate authentication
+	if os.Getenv(EnvF5XCCert) != "" && os.Getenv(EnvF5XCKey) != "" {
+		return AuthMethodPEM
+	}
+
+	// Check token authentication
+	if os.Getenv(EnvF5XCToken) != "" {
+		return AuthMethodToken
+	}
+
+	return AuthMethodNone
+}
+
 // PreCheck validates that required environment variables are set before running tests
 func PreCheck(t *testing.T) {
 	t.Helper()
 
-	// Check required environment variables
-	required := []string{EnvF5XCURL, EnvF5XCToken}
-	var missing []string
-
-	for _, env := range required {
-		if os.Getenv(env) == "" {
-			missing = append(missing, env)
-		}
+	// API URL is always required
+	if os.Getenv(EnvF5XCURL) == "" {
+		t.Fatalf("Required environment variable not set: %s", EnvF5XCURL)
 	}
 
-	if len(missing) > 0 {
-		t.Fatalf("Required environment variables not set: %s", strings.Join(missing, ", "))
+	// Check for at least one valid authentication method
+	authMethod := DetectAuthMethod()
+
+	switch authMethod {
+	case AuthMethodP12:
+		t.Logf("Using P12 certificate authentication (file: %s)", os.Getenv(EnvF5XCP12File))
+	case AuthMethodPEM:
+		t.Logf("Using PEM certificate authentication (cert: %s, key: %s)",
+			os.Getenv(EnvF5XCCert), os.Getenv(EnvF5XCKey))
+	case AuthMethodToken:
+		t.Logf("Using API token authentication")
+	case AuthMethodNone:
+		t.Fatalf("No authentication configured. Set one of:\n"+
+			"  - P12: %s and %s\n"+
+			"  - PEM: %s and %s\n"+
+			"  - Token: %s",
+			EnvF5XCP12File, EnvF5XCP12Password,
+			EnvF5XCCert, EnvF5XCKey,
+			EnvF5XCToken)
 	}
 }
 

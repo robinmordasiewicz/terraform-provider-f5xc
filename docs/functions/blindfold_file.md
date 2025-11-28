@@ -63,7 +63,7 @@ resource "f5xc_http_loadbalancer" "example" {
 }
 ```
 
-~> **Note:** This function requires Terraform 1.8.0 or later.
+~> **Note:** This function requires Terraform 1.8 or later.
 
 ## Signature
 

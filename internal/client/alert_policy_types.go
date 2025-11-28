@@ -48,3 +48,19 @@ func (c *Client) DeleteAlertPolicy(ctx context.Context, namespace, name string) 
 	path := fmt.Sprintf("/api/config/namespaces/%s/alert_policys/%s", namespace, name)
 	return c.Delete(ctx, path)
 }
+
+// AlertPolicyListResponse is the response from listing alert policies
+type AlertPolicyListResponse struct {
+	Items []AlertPolicy `json:"items"`
+}
+
+// ListAlertPolicies lists all alert policies in a namespace
+func (c *Client) ListAlertPolicies(ctx context.Context, namespace string) ([]AlertPolicy, error) {
+	var result AlertPolicyListResponse
+	path := fmt.Sprintf("/api/config/namespaces/%s/alert_policys", namespace)
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
+}

@@ -16,7 +16,36 @@ type DataType struct {
 
 // DataTypeSpec defines the specification for DataType
 type DataTypeSpec struct {
-	Description string `json:"description,omitempty"`
+	Description     string              `json:"description,omitempty"`
+	IsPii           bool                `json:"is_pii,omitempty"`
+	IsSensitiveData bool                `json:"is_sensitive_data,omitempty"`
+	Compliances     []string            `json:"compliances,omitempty"`
+	Rules           []DataTypeRuleSpec `json:"rules,omitempty"`
+}
+
+// DataTypeRuleSpec defines a data type rule
+type DataTypeRuleSpec struct {
+	KeyPattern      *DataTypePatternSpec      `json:"key_pattern,omitempty"`
+	ValuePattern    *DataTypePatternSpec      `json:"value_pattern,omitempty"`
+	KeyValuePattern *DataTypeKeyValuePattern `json:"key_value_pattern,omitempty"`
+}
+
+// DataTypePatternSpec defines a pattern for matching
+type DataTypePatternSpec struct {
+	RegexValue     string                    `json:"regex_value,omitempty"`
+	SubstringValue string                    `json:"substring_value,omitempty"`
+	ExactValues    *DataTypeExactValuesSpec `json:"exact_values,omitempty"`
+}
+
+// DataTypeExactValuesSpec defines exact values to match
+type DataTypeExactValuesSpec struct {
+	ExactValues []string `json:"exact_values,omitempty"`
+}
+
+// DataTypeKeyValuePattern defines a key-value pattern
+type DataTypeKeyValuePattern struct {
+	KeyPattern   *DataTypePatternSpec `json:"key_pattern,omitempty"`
+	ValuePattern *DataTypePatternSpec `json:"value_pattern,omitempty"`
 }
 
 // CreateDataType creates a new DataType
@@ -47,4 +76,20 @@ func (c *Client) UpdateDataType(ctx context.Context, resource *DataType) (*DataT
 func (c *Client) DeleteDataType(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/data_types/%s", namespace, name)
 	return c.Delete(ctx, path)
+}
+
+// DataTypeListResponse is the response from listing data types
+type DataTypeListResponse struct {
+	Items []DataType `json:"items"`
+}
+
+// ListDataTypes lists all data types in a namespace
+func (c *Client) ListDataTypes(ctx context.Context, namespace string) ([]DataType, error) {
+	var result DataTypeListResponse
+	path := fmt.Sprintf("/api/config/namespaces/%s/data_types", namespace)
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
 }

@@ -16,8 +16,40 @@ type Healthcheck struct {
 
 // HealthcheckSpec defines the specification for Healthcheck
 type HealthcheckSpec struct {
-	Description string `json:"description,omitempty"`
+	Description        string                    `json:"description,omitempty"`
+	Disable            bool                      `json:"disable,omitempty"`
+	HealthyThreshold   int64                     `json:"healthy_threshold,omitempty"`
+	Interval           int64                     `json:"interval,omitempty"`
+	JitterPercent      int64                     `json:"jitter_percent,omitempty"`
+	Timeout            int64                     `json:"timeout,omitempty"`
+	UnhealthyThreshold int64                     `json:"unhealthy_threshold,omitempty"`
+	HTTPHealthCheck    *HTTPHealthCheckSpec      `json:"http_health_check,omitempty"`
+	TCPHealthCheck     *TCPHealthCheckSpec       `json:"tcp_health_check,omitempty"`
+	UDPICMPHealthCheck *UDPICMPHealthCheckSpec   `json:"udp_icmp_health_check,omitempty"`
 }
+
+// HTTPHealthCheckSpec defines the HTTP health check configuration
+type HTTPHealthCheckSpec struct {
+	ExpectedStatusCodes    []string                   `json:"expected_status_codes,omitempty"`
+	HostHeader             string                     `json:"host_header,omitempty"`
+	Path                   string                     `json:"path,omitempty"`
+	RequestHeadersToRemove []string                   `json:"request_headers_to_remove,omitempty"`
+	UseHTTP2               bool                       `json:"use_http2,omitempty"`
+	Headers                map[string]string          `json:"headers,omitempty"`
+	UseOriginServerName    *EmptySpec                 `json:"use_origin_server_name,omitempty"`
+}
+
+// TCPHealthCheckSpec defines the TCP health check configuration
+type TCPHealthCheckSpec struct {
+	ExpectedResponse string `json:"expected_response,omitempty"`
+	SendPayload      string `json:"send_payload,omitempty"`
+}
+
+// UDPICMPHealthCheckSpec defines the UDP/ICMP health check configuration
+type UDPICMPHealthCheckSpec struct{}
+
+// EmptySpec represents an empty block
+type EmptySpec struct{}
 
 // CreateHealthcheck creates a new Healthcheck
 func (c *Client) CreateHealthcheck(ctx context.Context, resource *Healthcheck) (*Healthcheck, error) {
@@ -47,4 +79,20 @@ func (c *Client) UpdateHealthcheck(ctx context.Context, resource *Healthcheck) (
 func (c *Client) DeleteHealthcheck(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/healthchecks/%s", namespace, name)
 	return c.Delete(ctx, path)
+}
+
+// HealthcheckListResponse is the response from listing healthchecks
+type HealthcheckListResponse struct {
+	Items []Healthcheck `json:"items"`
+}
+
+// ListHealthchecks lists all healthchecks in a namespace
+func (c *Client) ListHealthchecks(ctx context.Context, namespace string) ([]Healthcheck, error) {
+	var result HealthcheckListResponse
+	path := fmt.Sprintf("/api/config/namespaces/%s/healthchecks", namespace)
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
 }

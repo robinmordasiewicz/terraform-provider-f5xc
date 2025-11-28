@@ -17,6 +17,7 @@ type FilterSet struct {
 // FilterSetSpec defines the specification for FilterSet
 type FilterSetSpec struct {
 	Description string `json:"description,omitempty"`
+	ContextKey  string `json:"context_key,omitempty"`
 }
 
 // CreateFilterSet creates a new FilterSet
@@ -47,4 +48,20 @@ func (c *Client) UpdateFilterSet(ctx context.Context, resource *FilterSet) (*Fil
 func (c *Client) DeleteFilterSet(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/filter_sets/%s", namespace, name)
 	return c.Delete(ctx, path)
+}
+
+// FilterSetListResponse is the response from listing filter sets
+type FilterSetListResponse struct {
+	Items []FilterSet `json:"items"`
+}
+
+// ListFilterSets lists all filter sets in a namespace
+func (c *Client) ListFilterSets(ctx context.Context, namespace string) ([]FilterSet, error) {
+	var result FilterSetListResponse
+	path := fmt.Sprintf("/api/config/namespaces/%s/filter_sets", namespace)
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
 }

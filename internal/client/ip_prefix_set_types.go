@@ -14,9 +14,16 @@ type IPPrefixSet struct {
 	Spec     IPPrefixSetSpec `json:"spec"`
 }
 
+// IPv4Prefix represents an IPv4 prefix with description
+type IPv4Prefix struct {
+	Description string `json:"description,omitempty"`
+	IPv4Prefix  string `json:"ipv4_prefix,omitempty"`
+}
+
 // IPPrefixSetSpec defines the specification for IPPrefixSet
 type IPPrefixSetSpec struct {
-	Description string `json:"description,omitempty"`
+	Description  string       `json:"description,omitempty"`
+	IPv4Prefixes []IPv4Prefix `json:"ipv4_prefixes,omitempty"`
 }
 
 // CreateIPPrefixSet creates a new IPPrefixSet
@@ -47,4 +54,20 @@ func (c *Client) UpdateIPPrefixSet(ctx context.Context, resource *IPPrefixSet) (
 func (c *Client) DeleteIPPrefixSet(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/ip_prefix_sets/%s", namespace, name)
 	return c.Delete(ctx, path)
+}
+
+// IPPrefixSetListResponse is the response from listing IP prefix sets
+type IPPrefixSetListResponse struct {
+	Items []IPPrefixSet `json:"items"`
+}
+
+// ListIPPrefixSets lists all IP prefix sets in a namespace
+func (c *Client) ListIPPrefixSets(ctx context.Context, namespace string) ([]IPPrefixSet, error) {
+	var result IPPrefixSetListResponse
+	path := fmt.Sprintf("/api/config/namespaces/%s/ip_prefix_sets", namespace)
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
 }

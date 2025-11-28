@@ -22,7 +22,7 @@ type NamespaceSpec struct {
 // CreateNamespace creates a new Namespace
 func (c *Client) CreateNamespace(ctx context.Context, resource *Namespace) (*Namespace, error) {
 	var result Namespace
-	path := fmt.Sprintf("/api/config/namespaces/%s/namespaces", resource.Metadata.Namespace)
+	path := "/api/web/namespaces"
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +30,7 @@ func (c *Client) CreateNamespace(ctx context.Context, resource *Namespace) (*Nam
 // GetNamespace retrieves a Namespace
 func (c *Client) GetNamespace(ctx context.Context, namespace, name string) (*Namespace, error) {
 	var result Namespace
-	path := fmt.Sprintf("/api/config/namespaces/%s/namespaces/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/%s", name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,13 +38,37 @@ func (c *Client) GetNamespace(ctx context.Context, namespace, name string) (*Nam
 // UpdateNamespace updates a Namespace
 func (c *Client) UpdateNamespace(ctx context.Context, resource *Namespace) (*Namespace, error) {
 	var result Namespace
-	path := fmt.Sprintf("/api/config/namespaces/%s/namespaces/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/%s", resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
-// DeleteNamespace deletes a Namespace
+// CascadeDeleteRequest is the request body for namespace deletion
+type CascadeDeleteRequest struct {
+	Name string `json:"name"`
+}
+
+// DeleteNamespace deletes a Namespace using the cascade_delete API
+// The F5XC API uses POST /api/web/namespaces/{name}/cascade_delete
 func (c *Client) DeleteNamespace(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/namespaces/%s", namespace, name)
-	return c.Delete(ctx, path)
+	path := fmt.Sprintf("/api/web/namespaces/%s/cascade_delete", name)
+	req := CascadeDeleteRequest{Name: name}
+	return c.Post(ctx, path, req, nil)
+}
+
+// NamespaceListResponse is the response from listing namespaces
+type NamespaceListResponse struct {
+	Items []Namespace `json:"items"`
+}
+
+// ListNamespaces lists all namespaces
+// The namespace parameter is ignored as namespaces are top-level objects
+func (c *Client) ListNamespaces(ctx context.Context, namespace string) ([]Namespace, error) {
+	var result NamespaceListResponse
+	path := "/api/web/namespaces"
+	err := c.Get(ctx, path, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result.Items, nil
 }

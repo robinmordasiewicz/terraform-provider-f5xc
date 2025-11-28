@@ -407,6 +407,10 @@ jobs:
   #   1. Bot commit (regeneration PR was merged) -> Tag now, content is complete
   #   2. Human commit that didn't need regeneration -> Tag now, content is complete
   #   3. Human commit that created regeneration PR -> DON'T tag, wait for PR merge
+  # Tagging conditions (comments cannot be inside if expressions):
+  # - Case 1: Bot commit -> Tag immediately (regeneration is complete)
+  # - Case 2: Human commit without regeneration -> Tag immediately (PR job was skipped)
+  # - Case 3: Human commit WITH regeneration -> DON'T tag (wait for regen PR to merge)
   tag-release:
     name: Tag and Release
     needs: [detect-changes, build-test, create-regeneration-pr]
@@ -414,9 +418,7 @@ jobs:
       always() &&
       needs.detect-changes.outputs.should-process == 'true' &&
       (
-        # Case 1: Bot commit - regeneration is complete, safe to tag
         needs.detect-changes.outputs.is-bot-commit == 'true' ||
-        # Case 2: Human commit that didn't need regeneration (PR job was skipped)
         (
           needs.detect-changes.outputs.is-bot-commit != 'true' &&
           needs.build-test.result == 'success' &&

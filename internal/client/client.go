@@ -9,6 +9,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/json"
+	"encoding/pem"
 	"fmt"
 	"io"
 	"math"
@@ -104,9 +105,8 @@ func LoadP12Certificate(p12File, password string) (*tls.Config, error) {
 	for _, block := range blocks {
 		switch block.Type {
 		case "PRIVATE KEY":
-			pemKey = append(pemKey, []byte("-----BEGIN PRIVATE KEY-----\n")...)
-			pemKey = append(pemKey, block.Bytes...)
-			pemKey = append(pemKey, []byte("\n-----END PRIVATE KEY-----\n")...)
+			// Use pem.EncodeToMemory to properly base64-encode the DER data
+			pemKey = append(pemKey, pem.EncodeToMemory(block)...)
 		case "CERTIFICATE":
 			cert, err := x509.ParseCertificate(block.Bytes)
 			if err != nil {
@@ -116,9 +116,8 @@ func LoadP12Certificate(p12File, password string) (*tls.Config, error) {
 			if cert.IsCA {
 				caCerts = append(caCerts, cert)
 			} else {
-				pemCert = append(pemCert, []byte("-----BEGIN CERTIFICATE-----\n")...)
-				pemCert = append(pemCert, block.Bytes...)
-				pemCert = append(pemCert, []byte("\n-----END CERTIFICATE-----\n")...)
+				// Use pem.EncodeToMemory to properly base64-encode the DER data
+				pemCert = append(pemCert, pem.EncodeToMemory(block)...)
 			}
 		}
 	}
@@ -132,8 +131,12 @@ func LoadP12Certificate(p12File, password string) (*tls.Config, error) {
 		return nil, fmt.Errorf("failed to create X509 key pair: %w", err)
 	}
 
-	// Create CA pool
-	caCertPool := x509.NewCertPool()
+	// Create CA pool starting with system CAs, then add P12 CAs
+	caCertPool, err := x509.SystemCertPool()
+	if err != nil {
+		// Fall back to empty pool if system certs unavailable
+		caCertPool = x509.NewCertPool()
+	}
 	for _, caCert := range caCerts {
 		caCertPool.AddCert(caCert)
 	}
@@ -257,6 +260,8 @@ type Metadata struct {
 	Namespace   string            `json:"namespace,omitempty"`
 	Labels      map[string]string `json:"labels,omitempty"`
 	Annotations map[string]string `json:"annotations,omitempty"`
+	Description string            `json:"description,omitempty"`
+	Disable     bool              `json:"disable,omitempty"`
 	UID         string            `json:"uid,omitempty"`
 }
 

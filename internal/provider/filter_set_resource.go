@@ -44,16 +44,47 @@ type FilterSetResource struct {
 	client *client.Client
 }
 
+// FilterSetDateRangeAbsoluteModel represents the absolute date range block
+type FilterSetDateRangeAbsoluteModel struct {
+	EndDate   types.String `tfsdk:"end_date"`
+	StartDate types.String `tfsdk:"start_date"`
+}
+
+// FilterSetDateFieldModel represents the date_field block
+type FilterSetDateFieldModel struct {
+	Relative types.String                     `tfsdk:"relative"`
+	Absolute *FilterSetDateRangeAbsoluteModel `tfsdk:"absolute"`
+}
+
+// FilterSetFilterExpressionFieldModel represents the filter_expression_field block
+type FilterSetFilterExpressionFieldModel struct {
+	Expression types.String `tfsdk:"expression"`
+}
+
+// FilterSetStringFieldModel represents the string_field block
+type FilterSetStringFieldModel struct {
+	FieldValues types.List `tfsdk:"field_values"`
+}
+
+// FilterSetFilterFieldModel represents a single filter field in the filter_fields list
+type FilterSetFilterFieldModel struct {
+	FieldID               types.String                         `tfsdk:"field_id"`
+	DateField             *FilterSetDateFieldModel             `tfsdk:"date_field"`
+	FilterExpressionField *FilterSetFilterExpressionFieldModel `tfsdk:"filter_expression_field"`
+	StringField           *FilterSetStringFieldModel           `tfsdk:"string_field"`
+}
+
 type FilterSetResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	ContextKey types.String `tfsdk:"context_key"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name         types.String                `tfsdk:"name"`
+	Namespace    types.String                `tfsdk:"namespace"`
+	Annotations  types.Map                   `tfsdk:"annotations"`
+	ContextKey   types.String                `tfsdk:"context_key"`
+	Description  types.String                `tfsdk:"description"`
+	Disable      types.Bool                  `tfsdk:"disable"`
+	Labels       types.Map                   `tfsdk:"labels"`
+	FilterFields []FilterSetFilterFieldModel `tfsdk:"filter_fields"`
+	ID           types.String                `tfsdk:"id"`
+	Timeouts     timeouts.Value              `tfsdk:"timeouts"`
 }
 
 func (r *FilterSetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -301,7 +332,10 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FilterSetSpec{},
+		Spec: client.FilterSetSpec{
+			Description: data.Description.ValueString(),
+			ContextKey:  data.ContextKey.ValueString(),
+		},
 	}
 
 	if !data.Labels.IsNull() {
@@ -374,6 +408,14 @@ func (r *FilterSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
+	// Read spec fields
+	if apiResource.Spec.Description != "" {
+		data.Description = types.StringValue(apiResource.Spec.Description)
+	}
+	if apiResource.Spec.ContextKey != "" {
+		data.ContextKey = types.StringValue(apiResource.Spec.ContextKey)
+	}
+
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
 		resp.Diagnostics.Append(diags...)
@@ -422,7 +464,10 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.FilterSetSpec{},
+		Spec: client.FilterSetSpec{
+			Description: data.Description.ValueString(),
+			ContextKey:  data.ContextKey.ValueString(),
+		},
 	}
 
 	if !data.Labels.IsNull() {
@@ -449,7 +494,7 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)

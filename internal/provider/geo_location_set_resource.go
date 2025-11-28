@@ -44,15 +44,26 @@ type GeoLocationSetResource struct {
 	client *client.Client
 }
 
+// GeoLocationSetCustomSelectorModel represents the custom_geo_location_selector block
+type GeoLocationSetCustomSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// GeoLocationSetGlobalModel represents the global empty block
+type GeoLocationSetGlobalModel struct {
+}
+
 type GeoLocationSetResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name                      types.String                        `tfsdk:"name"`
+	Namespace                 types.String                        `tfsdk:"namespace"`
+	Annotations               types.Map                           `tfsdk:"annotations"`
+	Description               types.String                        `tfsdk:"description"`
+	Disable                   types.Bool                          `tfsdk:"disable"`
+	Labels                    types.Map                           `tfsdk:"labels"`
+	CustomGeoLocationSelector *GeoLocationSetCustomSelectorModel  `tfsdk:"custom_geo_location_selector"`
+	Global                    *GeoLocationSetGlobalModel          `tfsdk:"global"`
+	ID                        types.String                        `tfsdk:"id"`
+	Timeouts                  timeouts.Value                      `tfsdk:"timeouts"`
 }
 
 func (r *GeoLocationSetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -401,7 +412,7 @@ func (r *GeoLocationSetResource) Update(ctx context.Context, req resource.Update
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)

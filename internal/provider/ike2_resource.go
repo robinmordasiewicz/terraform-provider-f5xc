@@ -424,7 +424,7 @@ func (r *Ike2Resource) Update(ctx context.Context, req resource.UpdateRequest, r
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)

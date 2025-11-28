@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,15 +45,45 @@ type MaliciousUserMitigationResource struct {
 	client *client.Client
 }
 
+// MaliciousUserMitigationEmptyModel represents empty nested blocks
+type MaliciousUserMitigationEmptyModel struct {
+}
+
+// MaliciousUserMitigationActionModel represents the mitigation_action block
+type MaliciousUserMitigationActionModel struct {
+	BlockTemporarily    *MaliciousUserMitigationEmptyModel `tfsdk:"block_temporarily"`
+	CaptchaChallenge    *MaliciousUserMitigationEmptyModel `tfsdk:"captcha_challenge"`
+	JavascriptChallenge *MaliciousUserMitigationEmptyModel `tfsdk:"javascript_challenge"`
+}
+
+// MaliciousUserMitigationThreatLevelModel represents the threat_level block
+type MaliciousUserMitigationThreatLevelModel struct {
+	High   *MaliciousUserMitigationEmptyModel `tfsdk:"high"`
+	Low    *MaliciousUserMitigationEmptyModel `tfsdk:"low"`
+	Medium *MaliciousUserMitigationEmptyModel `tfsdk:"medium"`
+}
+
+// MaliciousUserMitigationRuleModel represents a single rule in the rules list
+type MaliciousUserMitigationRuleModel struct {
+	MitigationAction *MaliciousUserMitigationActionModel      `tfsdk:"mitigation_action"`
+	ThreatLevel      *MaliciousUserMitigationThreatLevelModel `tfsdk:"threat_level"`
+}
+
+// MaliciousUserMitigationTypeModel represents the mitigation_type block
+type MaliciousUserMitigationTypeModel struct {
+	Rules []MaliciousUserMitigationRuleModel `tfsdk:"rules"`
+}
+
 type MaliciousUserMitigationResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name           types.String                      `tfsdk:"name"`
+	Namespace      types.String                      `tfsdk:"namespace"`
+	Annotations    types.Map                         `tfsdk:"annotations"`
+	Description    types.String                      `tfsdk:"description"`
+	Disable        types.Bool                        `tfsdk:"disable"`
+	Labels         types.Map                         `tfsdk:"labels"`
+	MitigationType *MaliciousUserMitigationTypeModel `tfsdk:"mitigation_type"`
+	ID             types.String                      `tfsdk:"id"`
+	Timeouts       timeouts.Value                    `tfsdk:"timeouts"`
 }
 
 func (r *MaliciousUserMitigationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -436,7 +467,7 @@ func (r *MaliciousUserMitigationResource) Update(ctx context.Context, req resour
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)
@@ -469,5 +500,20 @@ func (r *MaliciousUserMitigationResource) Delete(ctx context.Context, req resour
 }
 
 func (r *MaliciousUserMitigationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

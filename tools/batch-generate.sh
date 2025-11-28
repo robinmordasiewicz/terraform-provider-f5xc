@@ -208,7 +208,10 @@ func (r *RESOURCE_NAMEResource) Update(ctx context.Context, req resource.UpdateR
 		resp.Diagnostics.AddError("Error", err.Error())
 		return
 	}
-	data.ID = types.StringValue(updated.Metadata.Name)
+	_ = updated // Suppress unused variable warning
+
+	// Use plan data for ID since API response may not include metadata.name
+	data.ID = types.StringValue(data.Name.ValueString())
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 

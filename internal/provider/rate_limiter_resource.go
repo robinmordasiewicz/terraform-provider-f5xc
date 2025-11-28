@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,15 +45,54 @@ type RateLimiterResource struct {
 	client *client.Client
 }
 
-type RateLimiterResourceModel struct {
-	Name types.String `tfsdk:"name"`
+// RateLimiterEmptyModel represents empty nested blocks
+type RateLimiterEmptyModel struct {
+}
+
+// RateLimiterDurationModel represents duration blocks (hours, minutes, seconds)
+type RateLimiterDurationModel struct {
+	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// RateLimiterActionBlockModel represents the action_block block
+type RateLimiterActionBlockModel struct {
+	Hours   *RateLimiterDurationModel `tfsdk:"hours"`
+	Minutes *RateLimiterDurationModel `tfsdk:"minutes"`
+	Seconds *RateLimiterDurationModel `tfsdk:"seconds"`
+}
+
+// RateLimiterLimitModel represents a single limit in the limits list
+type RateLimiterLimitModel struct {
+	BurstMultiplier  types.Int64                  `tfsdk:"burst_multiplier"`
+	PeriodMultiplier types.Int64                  `tfsdk:"period_multiplier"`
+	TotalNumber      types.Int64                  `tfsdk:"total_number"`
+	Unit             types.String                 `tfsdk:"unit"`
+	ActionBlock      *RateLimiterActionBlockModel `tfsdk:"action_block"`
+	Disabled         *RateLimiterEmptyModel       `tfsdk:"disabled"`
+	LeakyBucket      *RateLimiterEmptyModel       `tfsdk:"leaky_bucket"`
+	TokenBucket      *RateLimiterEmptyModel       `tfsdk:"token_bucket"`
+}
+
+// RateLimiterUserIdentificationModel represents the user_identification reference
+type RateLimiterUserIdentificationModel struct {
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Tenant    types.String `tfsdk:"tenant"`
+	UID       types.String `tfsdk:"uid"`
+}
+
+type RateLimiterResourceModel struct {
+	Name               types.String                         `tfsdk:"name"`
+	Namespace          types.String                         `tfsdk:"namespace"`
+	Annotations        types.Map                            `tfsdk:"annotations"`
+	Description        types.String                         `tfsdk:"description"`
+	Disable            types.Bool                           `tfsdk:"disable"`
+	Labels             types.Map                            `tfsdk:"labels"`
+	Limits             []RateLimiterLimitModel              `tfsdk:"limits"`
+	UserIdentification []RateLimiterUserIdentificationModel `tfsdk:"user_identification"`
+	ID                 types.String                         `tfsdk:"id"`
+	Timeouts           timeouts.Value                       `tfsdk:"timeouts"`
 }
 
 func (r *RateLimiterResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -484,7 +524,7 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)
@@ -517,5 +557,20 @@ func (r *RateLimiterResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *RateLimiterResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

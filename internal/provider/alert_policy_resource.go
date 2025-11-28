@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,15 +45,84 @@ type AlertPolicyResource struct {
 	client *client.Client
 }
 
-type AlertPolicyResourceModel struct {
-	Name types.String `tfsdk:"name"`
+// AlertPolicyEmptyModel represents empty nested blocks
+type AlertPolicyEmptyModel struct {
+}
+
+// AlertPolicyCustomLabelsModel represents the custom labels block
+type AlertPolicyCustomLabelsModel struct {
+	Labels types.List `tfsdk:"labels"`
+}
+
+// AlertPolicyNotificationParametersModel represents notification_parameters block
+type AlertPolicyNotificationParametersModel struct {
+	GroupInterval  types.String                  `tfsdk:"group_interval"`
+	GroupWait      types.String                  `tfsdk:"group_wait"`
+	RepeatInterval types.String                  `tfsdk:"repeat_interval"`
+	Custom         *AlertPolicyCustomLabelsModel `tfsdk:"custom"`
+	Default        *AlertPolicyEmptyModel        `tfsdk:"default"`
+	Individual     *AlertPolicyEmptyModel        `tfsdk:"individual"`
+	VesIoGroup     *AlertPolicyEmptyModel        `tfsdk:"ves_io_group"`
+}
+
+// AlertPolicyReceiverModel represents a single receiver in the receivers list
+type AlertPolicyReceiverModel struct {
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Tenant    types.String `tfsdk:"tenant"`
+	UID       types.String `tfsdk:"uid"`
+}
+
+// AlertPolicyLabelMatcherModel represents label matcher blocks (alertname, group, severity)
+type AlertPolicyLabelMatcherModel struct {
+	ExactMatch types.String `tfsdk:"exact_match"`
+	RegexMatch types.String `tfsdk:"regex_match"`
+}
+
+// AlertPolicyCustomMatcherModel represents the custom matcher block
+type AlertPolicyCustomMatcherModel struct {
+	Alertlabel *AlertPolicyEmptyModel        `tfsdk:"alertlabel"`
+	Alertname  *AlertPolicyLabelMatcherModel `tfsdk:"alertname"`
+	Group      *AlertPolicyLabelMatcherModel `tfsdk:"group"`
+	Severity   *AlertPolicyLabelMatcherModel `tfsdk:"severity"`
+}
+
+// AlertPolicyGroupMatcherModel represents the group matcher block
+type AlertPolicyGroupMatcherModel struct {
+	Groups types.List `tfsdk:"groups"`
+}
+
+// AlertPolicySeverityMatcherModel represents the severity matcher block
+type AlertPolicySeverityMatcherModel struct {
+	Severities types.List `tfsdk:"severities"`
+}
+
+// AlertPolicyRouteModel represents a single route in the routes list
+type AlertPolicyRouteModel struct {
+	Alertname              types.String                            `tfsdk:"alertname"`
+	AlertnameRegex         types.String                            `tfsdk:"alertname_regex"`
+	Any                    *AlertPolicyEmptyModel                  `tfsdk:"any"`
+	Custom                 *AlertPolicyCustomMatcherModel          `tfsdk:"custom"`
+	DontSend               *AlertPolicyEmptyModel                  `tfsdk:"dont_send"`
+	Group                  *AlertPolicyGroupMatcherModel           `tfsdk:"group"`
+	NotificationParameters *AlertPolicyNotificationParametersModel `tfsdk:"notification_parameters"`
+	Send                   *AlertPolicyEmptyModel                  `tfsdk:"send"`
+	Severity               *AlertPolicySeverityMatcherModel        `tfsdk:"severity"`
+}
+
+type AlertPolicyResourceModel struct {
+	Name                   types.String                            `tfsdk:"name"`
+	Namespace              types.String                            `tfsdk:"namespace"`
+	Annotations            types.Map                               `tfsdk:"annotations"`
+	Description            types.String                            `tfsdk:"description"`
+	Disable                types.Bool                              `tfsdk:"disable"`
+	Labels                 types.Map                               `tfsdk:"labels"`
+	NotificationParameters *AlertPolicyNotificationParametersModel `tfsdk:"notification_parameters"`
+	Receivers              []AlertPolicyReceiverModel              `tfsdk:"receivers"`
+	Routes                 []AlertPolicyRouteModel                 `tfsdk:"routes"`
+	ID                     types.String                            `tfsdk:"id"`
+	Timeouts               timeouts.Value                          `tfsdk:"timeouts"`
 }
 
 func (r *AlertPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -588,7 +658,7 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)
@@ -621,5 +691,20 @@ func (r *AlertPolicyResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *AlertPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

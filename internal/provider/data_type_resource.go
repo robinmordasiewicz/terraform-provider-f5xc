@@ -44,18 +44,44 @@ type DataTypeResource struct {
 	client *client.Client
 }
 
+// DataTypeExactValuesModel represents the exact_values block
+type DataTypeExactValuesModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+}
+
+// DataTypePatternModel represents a pattern block (key_pattern, value_pattern)
+type DataTypePatternModel struct {
+	RegexValue     types.String              `tfsdk:"regex_value"`
+	SubstringValue types.String              `tfsdk:"substring_value"`
+	ExactValues    *DataTypeExactValuesModel `tfsdk:"exact_values"`
+}
+
+// DataTypeKeyValuePatternModel represents the key_value_pattern block
+type DataTypeKeyValuePatternModel struct {
+	KeyPattern   *DataTypePatternModel `tfsdk:"key_pattern"`
+	ValuePattern *DataTypePatternModel `tfsdk:"value_pattern"`
+}
+
+// DataTypeRuleModel represents a single rule in the rules list
+type DataTypeRuleModel struct {
+	KeyPattern      *DataTypePatternModel         `tfsdk:"key_pattern"`
+	KeyValuePattern *DataTypeKeyValuePatternModel `tfsdk:"key_value_pattern"`
+	ValuePattern    *DataTypePatternModel         `tfsdk:"value_pattern"`
+}
+
 type DataTypeResourceModel struct {
-	Name types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Annotations types.Map `tfsdk:"annotations"`
-	Compliances types.List `tfsdk:"compliances"`
-	Description types.String `tfsdk:"description"`
-	Disable types.Bool `tfsdk:"disable"`
-	IsPii types.Bool `tfsdk:"is_pii"`
-	IsSensitiveData types.Bool `tfsdk:"is_sensitive_data"`
-	Labels types.Map `tfsdk:"labels"`
-	ID types.String `tfsdk:"id"`
-	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Name            types.String         `tfsdk:"name"`
+	Namespace       types.String         `tfsdk:"namespace"`
+	Annotations     types.Map            `tfsdk:"annotations"`
+	Compliances     types.List           `tfsdk:"compliances"`
+	Description     types.String         `tfsdk:"description"`
+	Disable         types.Bool           `tfsdk:"disable"`
+	IsPii           types.Bool           `tfsdk:"is_pii"`
+	IsSensitiveData types.Bool           `tfsdk:"is_sensitive_data"`
+	Labels          types.Map            `tfsdk:"labels"`
+	Rules           []DataTypeRuleModel  `tfsdk:"rules"`
+	ID              types.String         `tfsdk:"id"`
+	Timeouts        timeouts.Value       `tfsdk:"timeouts"`
 }
 
 func (r *DataTypeResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -372,7 +398,21 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataTypeSpec{},
+		Spec: client.DataTypeSpec{
+			Description:     data.Description.ValueString(),
+			IsPii:           data.IsPii.ValueBool(),
+			IsSensitiveData: data.IsSensitiveData.ValueBool(),
+		},
+	}
+
+	// Handle compliances list
+	if !data.Compliances.IsNull() && !data.Compliances.IsUnknown() {
+		var compliances []string
+		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliances, false)...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+		apiResource.Spec.Compliances = compliances
 	}
 
 	if !data.Labels.IsNull() {
@@ -445,6 +485,24 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
+	// Read spec fields
+	if apiResource.Spec.Description != "" {
+		data.Description = types.StringValue(apiResource.Spec.Description)
+	}
+	data.IsPii = types.BoolValue(apiResource.Spec.IsPii)
+	data.IsSensitiveData = types.BoolValue(apiResource.Spec.IsSensitiveData)
+
+	// Handle compliances list
+	if len(apiResource.Spec.Compliances) > 0 {
+		compliances, diags := types.ListValueFrom(ctx, types.StringType, apiResource.Spec.Compliances)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Compliances = compliances
+		}
+	} else {
+		data.Compliances = types.ListNull(types.StringType)
+	}
+
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
 		resp.Diagnostics.Append(diags...)
@@ -493,7 +551,21 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataTypeSpec{},
+		Spec: client.DataTypeSpec{
+			Description:     data.Description.ValueString(),
+			IsPii:           data.IsPii.ValueBool(),
+			IsSensitiveData: data.IsSensitiveData.ValueBool(),
+		},
+	}
+
+	// Handle compliances list
+	if !data.Compliances.IsNull() && !data.Compliances.IsUnknown() {
+		var compliances []string
+		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliances, false)...)
+		if resp.Diagnostics.HasError() {
+			return
+		}
+		apiResource.Spec.Compliances = compliances
 	}
 
 	if !data.Labels.IsNull() {
@@ -520,7 +592,7 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 		return
 	}
 
-	data.ID = types.StringValue(updated.Metadata.Name)
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(updated.Metadata.UID)

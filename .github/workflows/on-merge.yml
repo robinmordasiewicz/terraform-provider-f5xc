@@ -359,11 +359,8 @@ jobs:
           # Push the branch
           git push origin "$BRANCH_NAME"
 
-          # Create the PR
-          PR_URL=$(gh pr create \
-            --title "chore: auto-regenerate provider and documentation" \
-            --body "$(cat <<'EOF'
-          ## Summary
+          # Create the PR body
+          PR_BODY="## Summary
           Automated regeneration of provider code and/or documentation.
 
           ## Triggered By
@@ -376,9 +373,12 @@ jobs:
           ## Note
           This PR was automatically created. When merged, it will trigger the tag/release workflow.
 
-          🤖 Generated with [Claude Code](https://claude.com/claude-code)
-          EOF
-          )" \
+          🤖 Generated with [Claude Code](https://claude.com/claude-code)"
+
+          # Create the PR
+          PR_URL=$(gh pr create \
+            --title "chore: auto-regenerate provider and documentation" \
+            --body "$PR_BODY" \
             --label "automated" \
             --label "regeneration" \
             --base main \

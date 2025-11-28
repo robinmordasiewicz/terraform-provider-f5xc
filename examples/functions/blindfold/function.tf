@@ -7,7 +7,7 @@
 # Example: Encrypt a password for use in origin pool authentication
 locals {
   encrypted_password = provider::f5xc::blindfold(
-    base64encode("my-secret-password"),
+    base64encode("example-secret-password"),
     "production-secrets-policy",
     "shared"
   )

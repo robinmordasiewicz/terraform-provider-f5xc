@@ -62,7 +62,7 @@ resource "f5xc_http_loadbalancer" "example" {
       blindfold_secret_info {
         location = provider::f5xc::blindfold_file(
           "${path.module}/certs/private.key",
-          "my-secret-policy",
+          "example-secret-policy",
           "shared"
         )
       }

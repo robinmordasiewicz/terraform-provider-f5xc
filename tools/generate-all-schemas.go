@@ -1271,8 +1271,10 @@ func generateResourceFile(resource *ResourceTemplate) error {
 
 	// Create template with custom functions
 	funcMap := template.FuncMap{
-		"renderNestedAttrs": renderNestedAttributes,
-		"renderNestedBlocks": renderNestedBlocks,
+		"renderNestedAttrs":      renderNestedAttributes,
+		"renderNestedBlocks":     renderNestedBlocks,
+		"renderNestedModelTypes": renderNestedModelTypes,
+		"renderBlockFields":      renderBlockFields,
 	}
 
 	tmpl, err := template.New("resource").Funcs(funcMap).Parse(resourceTemplate)
@@ -1346,6 +1348,197 @@ func escapeGoString(s string) string {
 	s = strings.ReplaceAll(s, `\`, `\\`)
 	s = strings.ReplaceAll(s, `"`, `\"`)
 	return s
+}
+
+// NestedModelInfo holds information needed to generate a nested model type
+type NestedModelInfo struct {
+	TypeName    string
+	Description string
+	Prefix      string // Full prefix path for generating nested type references
+	Attributes  []TerraformAttribute
+	IsEmpty     bool
+}
+
+// collectNestedModelTypes recursively collects all nested model type definitions
+func collectNestedModelTypes(resourceTitleCase string, attrs []TerraformAttribute, prefix string, collected *[]NestedModelInfo) {
+	for _, attr := range attrs {
+		if !attr.IsBlock {
+			continue
+		}
+
+		// Build the type name: ResourceName + Prefix + AttributeName + Model
+		currentPrefix := prefix + toTitleCase(attr.TfsdkTag)
+		typeName := resourceTitleCase + currentPrefix + "Model"
+
+		// Check if this block has any nested attributes (non-empty)
+		hasContent := false
+		for _, nested := range attr.NestedAttributes {
+			if !nested.IsBlock {
+				hasContent = true
+				break
+			}
+		}
+
+		// Also check for nested blocks
+		for _, nested := range attr.NestedAttributes {
+			if nested.IsBlock {
+				hasContent = true
+				break
+			}
+		}
+
+		*collected = append(*collected, NestedModelInfo{
+			TypeName:    typeName,
+			Description: attr.TfsdkTag,
+			Prefix:      currentPrefix, // Store the full prefix for generating nested type references
+			Attributes:  attr.NestedAttributes,
+			IsEmpty:     !hasContent && len(attr.NestedAttributes) == 0,
+		})
+
+		// Recursively collect nested types
+		if len(attr.NestedAttributes) > 0 {
+			collectNestedModelTypes(resourceTitleCase, attr.NestedAttributes, currentPrefix, collected)
+		}
+	}
+}
+
+// renderNestedModelTypes generates all nested model struct definitions for a resource
+func renderNestedModelTypes(resourceTitleCase string, attrs []TerraformAttribute) string {
+	// First check if there are any blocks
+	hasBlocks := false
+	for _, attr := range attrs {
+		if attr.IsBlock {
+			hasBlocks = true
+			break
+		}
+	}
+	if !hasBlocks {
+		return ""
+	}
+
+	var sb strings.Builder
+
+	// Add empty model type for blocks with no attributes
+	sb.WriteString(fmt.Sprintf("// %sEmptyModel represents empty nested blocks\n", resourceTitleCase))
+	sb.WriteString(fmt.Sprintf("type %sEmptyModel struct {\n}\n\n", resourceTitleCase))
+
+	// Collect all nested model types
+	var models []NestedModelInfo
+	collectNestedModelTypes(resourceTitleCase, attrs, "", &models)
+
+	// Generate each model type
+	for _, model := range models {
+		if model.IsEmpty {
+			continue // Empty models use the shared EmptyModel
+		}
+
+		sb.WriteString(fmt.Sprintf("// %s represents %s block\n", model.TypeName, model.Description))
+		sb.WriteString(fmt.Sprintf("type %s struct {\n", model.TypeName))
+
+		// Generate fields for non-block attributes
+		for _, attr := range model.Attributes {
+			if attr.IsBlock {
+				continue
+			}
+			goType := "String"
+			switch attr.Type {
+			case "int64":
+				goType = "Int64"
+			case "bool":
+				goType = "Bool"
+			case "map":
+				goType = "Map"
+			case "list":
+				goType = "List"
+			}
+			sb.WriteString(fmt.Sprintf("\t%s types.%s `tfsdk:\"%s\"`\n", attr.GoName, goType, attr.TfsdkTag))
+		}
+
+		// Generate pointer fields for nested block attributes
+		for _, attr := range model.Attributes {
+			if !attr.IsBlock {
+				continue
+			}
+			// Use the model's full prefix to build the nested type name
+			nestedTypeName := resourceTitleCase + model.Prefix + toTitleCase(attr.TfsdkTag) + "Model"
+
+			// Check if this nested block is empty
+			isNestedEmpty := len(attr.NestedAttributes) == 0
+			if !isNestedEmpty {
+				hasNonBlockAttrs := false
+				for _, nested := range attr.NestedAttributes {
+					if !nested.IsBlock {
+						hasNonBlockAttrs = true
+						break
+					}
+				}
+				isNestedEmpty = !hasNonBlockAttrs && len(attr.NestedAttributes) == 0
+			}
+
+			if isNestedEmpty {
+				nestedTypeName = resourceTitleCase + "EmptyModel"
+			}
+
+			// For list nested blocks, use slice type; for single, use pointer
+			if attr.NestedBlockType == "list" {
+				sb.WriteString(fmt.Sprintf("\t%s []%s `tfsdk:\"%s\"`\n", attr.GoName, nestedTypeName, attr.TfsdkTag))
+			} else {
+				sb.WriteString(fmt.Sprintf("\t%s *%s `tfsdk:\"%s\"`\n", attr.GoName, nestedTypeName, attr.TfsdkTag))
+			}
+		}
+
+		sb.WriteString("}\n\n")
+	}
+
+	return sb.String()
+}
+
+// renderBlockFields generates the block fields for the main ResourceModel struct
+func renderBlockFields(resourceTitleCase string, attrs []TerraformAttribute) string {
+	var sb strings.Builder
+
+	for _, attr := range attrs {
+		if !attr.IsBlock {
+			continue
+		}
+
+		// Determine the type name
+		typeName := resourceTitleCase + toTitleCase(attr.TfsdkTag) + "Model"
+
+		// Check if this block is empty
+		isBlockEmpty := len(attr.NestedAttributes) == 0
+		if !isBlockEmpty {
+			hasNonBlockAttrs := false
+			for _, nested := range attr.NestedAttributes {
+				if !nested.IsBlock {
+					hasNonBlockAttrs = true
+					break
+				}
+			}
+			// Also check for any nested blocks
+			hasNestedBlocks := false
+			for _, nested := range attr.NestedAttributes {
+				if nested.IsBlock {
+					hasNestedBlocks = true
+					break
+				}
+			}
+			isBlockEmpty = !hasNonBlockAttrs && !hasNestedBlocks
+		}
+
+		if isBlockEmpty {
+			typeName = resourceTitleCase + "EmptyModel"
+		}
+
+		// For list nested blocks, use slice type; for single, use pointer
+		if attr.NestedBlockType == "list" {
+			sb.WriteString(fmt.Sprintf("\t%s []%s `tfsdk:\"%s\"`\n", attr.GoName, typeName, attr.TfsdkTag))
+		} else {
+			sb.WriteString(fmt.Sprintf("\t%s *%s `tfsdk:\"%s\"`\n", attr.GoName, typeName, attr.TfsdkTag))
+		}
+	}
+
+	return sb.String()
 }
 
 // renderNestedBlocks generates the Blocks map for nested blocks within a block
@@ -1706,6 +1899,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -1744,14 +1938,14 @@ type {{.TitleCase}}Resource struct {
 	client *client.Client
 }
 
-type {{.TitleCase}}ResourceModel struct {
+{{renderNestedModelTypes .TitleCase .Attributes}}type {{.TitleCase}}ResourceModel struct {
 {{- range .Attributes}}
 {{- if not .IsBlock}}
 	{{.GoName}} types.{{if eq .Type "string"}}String{{else if eq .Type "int64"}}Int64{{else if eq .Type "bool"}}Bool{{else if eq .Type "map"}}Map{{else if eq .Type "list"}}List{{else}}String{{end}} ` + "`" + `tfsdk:"{{.TfsdkTag}}"` + "`" + `
 {{- end}}
 {{- end}}
 	Timeouts timeouts.Value ` + "`" + `tfsdk:"timeouts"` + "`" + `
-}
+{{renderBlockFields .TitleCase .Attributes}}}
 
 func (r *{{.TitleCase}}Resource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_{{.Name}}"
@@ -1951,6 +2145,10 @@ func (r *{{.TitleCase}}Resource) Create(ctx context.Context, req resource.Create
 		Spec: client.{{.TitleCase}}Spec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -2006,6 +2204,15 @@ func (r *{{.TitleCase}}Resource) Read(ctx context.Context, req resource.ReadRequ
 
 	apiResource, err := r.client.Get{{.TitleCase}}(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "{{.TitleCase}} not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read {{.TitleCase}}: %s", err))
 		return
 	}
@@ -2020,6 +2227,13 @@ func (r *{{.TitleCase}}Resource) Read(ctx context.Context, req resource.ReadRequ
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -2070,6 +2284,10 @@ func (r *{{.TitleCase}}Resource) Update(ctx context.Context, req resource.Update
 			Namespace: data.Namespace.ValueString(),
 		},
 		Spec: client.{{.TitleCase}}Spec{},
+	}
+
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -2133,13 +2351,35 @@ func (r *{{.TitleCase}}Resource) Delete(ctx context.Context, req resource.Delete
 
 	err := r.client.Delete{{.TitleCase}}(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "{{.TitleCase}} already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete {{.TitleCase}}: %s", err))
 		return
 	}
 }
 
 func (r *{{.TitleCase}}Resource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }
 `
 

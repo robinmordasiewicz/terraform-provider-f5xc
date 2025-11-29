@@ -225,6 +225,31 @@ This repository uses CI/CD automation extensively. Respect the automation - do n
 
 **Correct behavior**: Commit only source/tool changes. Let workflows generate artifacts.
 
+#### Fixing Bugs in Generated Resource Code
+
+**IMPORTANT**: If you find a bug in a generated `*_resource.go` or `*_data_source.go` file, you must fix the generator, NOT the generated file.
+
+```bash
+# ❌ WRONG: Manually edit the generated file
+vim internal/provider/app_firewall_resource.go  # NO! This is generated
+git add internal/provider/app_firewall_resource.go
+git commit -m "fix: patch app_firewall resource"  # WILL BE BLOCKED
+
+# ✅ CORRECT: Fix the generator and let CI/CD regenerate
+vim tools/generate-all-schemas.go  # Fix the bug in the generator
+git add tools/generate-all-schemas.go
+git commit -m "fix(generator): correct ImportState parsing for namespace/name format"
+git push  # on-merge.yml will regenerate ALL resources with the fix
+```
+
+**Why this matters:**
+1. **Idempotency**: Manual fixes get overwritten when specs are updated
+2. **Consistency**: All 144+ resources benefit from generator fixes
+3. **Maintainability**: Single source of truth for resource implementation patterns
+4. **CI/CD Trust**: The automation ensures consistent, tested code generation
+
+**NO EXCEPTIONS**: The CI check will block PRs containing manually-modified generated files, even if tests are included. Always fix the generator.
+
 **Important**:
 - Resource/data source example files (`examples/resources/`, `examples/data-sources/`) are generated from `tools/generate-examples.go`
 - Function example files (`examples/functions/`) are **manually maintained** (they are the source for doc generation)

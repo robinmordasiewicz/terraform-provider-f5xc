@@ -1,6 +1,5 @@
 ---
 page_title: "blindfold function - terraform-provider-f5xc"
-subcategory: "Functions"
 description: |-
   Encrypts base64-encoded plaintext using F5 Distributed Cloud Secret Management (blindfold).
   Returns a sealed secret string suitable for use in blindfold_secret_info.location fields.

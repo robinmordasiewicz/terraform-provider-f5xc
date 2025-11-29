@@ -1,6 +1,5 @@
 ---
 page_title: "blindfold_file function - terraform-provider-f5xc"
-subcategory: "Functions"
 description: |-
   Reads a file and encrypts its contents using F5 Distributed Cloud Secret Management (blindfold).
   Returns a sealed secret string suitable for use in blindfold_secret_info.location fields.

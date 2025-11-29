@@ -488,7 +488,7 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		idComponentAttrs = append(idComponentAttrs, TerraformAttribute{
 			Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
 			Description: fmt.Sprintf("Namespace for the %s. For this resource type, namespace should be empty or omitted.", toTitleCase(resourceName)),
-			Optional: true, Computed: true})
+			Optional: true, Computed: true, PlanModifier: "UseStateForUnknown"})
 	}
 
 	// Optional standard attrs will be sorted with other optionals

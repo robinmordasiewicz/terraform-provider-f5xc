@@ -53,16 +53,13 @@ repos:
       - id: destroyed-symlinks
 
   # =============================================================================
-  # Go language checks - golangci-lint (validation only, no --fix)
+  # Go language checks - golangci-lint v2.x (validation only, no --fix)
   # =============================================================================
-  - repo: local
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.6.2
     hooks:
       - id: golangci-lint
-        name: golangci-lint
-        entry: golangci-lint run --timeout=5m
-        language: system
-        types: [go]
-        pass_filenames: false
+        args: [--timeout=5m]
 
   # =============================================================================
   # Terraform example files validation

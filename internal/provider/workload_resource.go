@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,4036 @@ type WorkloadResource struct {
 	client *client.Client
 }
 
+// WorkloadEmptyModel represents empty nested blocks
+type WorkloadEmptyModel struct {
+}
+
+// WorkloadJobModel represents job block
+type WorkloadJobModel struct {
+	NumReplicas types.Int64 `tfsdk:"num_replicas"`
+	Configuration *WorkloadJobConfigurationModel `tfsdk:"configuration"`
+	Containers []WorkloadJobContainersModel `tfsdk:"containers"`
+	DeployOptions *WorkloadJobDeployOptionsModel `tfsdk:"deploy_options"`
+	Volumes []WorkloadJobVolumesModel `tfsdk:"volumes"`
+}
+
+// WorkloadJobConfigurationModel represents configuration block
+type WorkloadJobConfigurationModel struct {
+	Parameters []WorkloadJobConfigurationParametersModel `tfsdk:"parameters"`
+}
+
+// WorkloadJobConfigurationParametersModel represents parameters block
+type WorkloadJobConfigurationParametersModel struct {
+	EnvVar *WorkloadJobConfigurationParametersEnvVarModel `tfsdk:"env_var"`
+	File *WorkloadJobConfigurationParametersFileModel `tfsdk:"file"`
+}
+
+// WorkloadJobConfigurationParametersEnvVarModel represents env_var block
+type WorkloadJobConfigurationParametersEnvVarModel struct {
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+}
+
+// WorkloadJobConfigurationParametersFileModel represents file block
+type WorkloadJobConfigurationParametersFileModel struct {
+	Data types.String `tfsdk:"data"`
+	Name types.String `tfsdk:"name"`
+	VolumeName types.String `tfsdk:"volume_name"`
+	Mount *WorkloadJobConfigurationParametersFileMountModel `tfsdk:"mount"`
+}
+
+// WorkloadJobConfigurationParametersFileMountModel represents mount block
+type WorkloadJobConfigurationParametersFileMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadJobContainersModel represents containers block
+type WorkloadJobContainersModel struct {
+	Args types.List `tfsdk:"args"`
+	Command types.List `tfsdk:"command"`
+	Flavor types.String `tfsdk:"flavor"`
+	InitContainer types.Bool `tfsdk:"init_container"`
+	Name types.String `tfsdk:"name"`
+	CustomFlavor *WorkloadJobContainersCustomFlavorModel `tfsdk:"custom_flavor"`
+	DefaultFlavor *WorkloadEmptyModel `tfsdk:"default_flavor"`
+	Image *WorkloadJobContainersImageModel `tfsdk:"image"`
+	LivenessCheck *WorkloadJobContainersLivenessCheckModel `tfsdk:"liveness_check"`
+	ReadinessCheck *WorkloadJobContainersReadinessCheckModel `tfsdk:"readiness_check"`
+}
+
+// WorkloadJobContainersCustomFlavorModel represents custom_flavor block
+type WorkloadJobContainersCustomFlavorModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadJobContainersImageModel represents image block
+type WorkloadJobContainersImageModel struct {
+	Name types.String `tfsdk:"name"`
+	PullPolicy types.String `tfsdk:"pull_policy"`
+	ContainerRegistry *WorkloadJobContainersImageContainerRegistryModel `tfsdk:"container_registry"`
+	Public *WorkloadEmptyModel `tfsdk:"public"`
+}
+
+// WorkloadJobContainersImageContainerRegistryModel represents container_registry block
+type WorkloadJobContainersImageContainerRegistryModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadJobContainersLivenessCheckModel represents liveness_check block
+type WorkloadJobContainersLivenessCheckModel struct {
+	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
+	InitialDelay types.Int64 `tfsdk:"initial_delay"`
+	Interval types.Int64 `tfsdk:"interval"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
+	ExecHealthCheck *WorkloadJobContainersLivenessCheckExecHealthCheckModel `tfsdk:"exec_health_check"`
+	HTTPHealthCheck *WorkloadJobContainersLivenessCheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck *WorkloadJobContainersLivenessCheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+}
+
+// WorkloadJobContainersLivenessCheckExecHealthCheckModel represents exec_health_check block
+type WorkloadJobContainersLivenessCheckExecHealthCheckModel struct {
+	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadJobContainersLivenessCheckHTTPHealthCheckModel represents http_health_check block
+type WorkloadJobContainersLivenessCheckHTTPHealthCheckModel struct {
+	HostHeader types.String `tfsdk:"host_header"`
+	Path types.String `tfsdk:"path"`
+	Headers *WorkloadEmptyModel `tfsdk:"headers"`
+	Port *WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModel represents port block
+type WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadJobContainersLivenessCheckTCPHealthCheckModel represents tcp_health_check block
+type WorkloadJobContainersLivenessCheckTCPHealthCheckModel struct {
+	Port *WorkloadJobContainersLivenessCheckTCPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadJobContainersLivenessCheckTCPHealthCheckPortModel represents port block
+type WorkloadJobContainersLivenessCheckTCPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadJobContainersReadinessCheckModel represents readiness_check block
+type WorkloadJobContainersReadinessCheckModel struct {
+	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
+	InitialDelay types.Int64 `tfsdk:"initial_delay"`
+	Interval types.Int64 `tfsdk:"interval"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
+	ExecHealthCheck *WorkloadJobContainersReadinessCheckExecHealthCheckModel `tfsdk:"exec_health_check"`
+	HTTPHealthCheck *WorkloadJobContainersReadinessCheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck *WorkloadJobContainersReadinessCheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+}
+
+// WorkloadJobContainersReadinessCheckExecHealthCheckModel represents exec_health_check block
+type WorkloadJobContainersReadinessCheckExecHealthCheckModel struct {
+	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadJobContainersReadinessCheckHTTPHealthCheckModel represents http_health_check block
+type WorkloadJobContainersReadinessCheckHTTPHealthCheckModel struct {
+	HostHeader types.String `tfsdk:"host_header"`
+	Path types.String `tfsdk:"path"`
+	Headers *WorkloadEmptyModel `tfsdk:"headers"`
+	Port *WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModel represents port block
+type WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadJobContainersReadinessCheckTCPHealthCheckModel represents tcp_health_check block
+type WorkloadJobContainersReadinessCheckTCPHealthCheckModel struct {
+	Port *WorkloadJobContainersReadinessCheckTCPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadJobContainersReadinessCheckTCPHealthCheckPortModel represents port block
+type WorkloadJobContainersReadinessCheckTCPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadJobDeployOptionsModel represents deploy_options block
+type WorkloadJobDeployOptionsModel struct {
+	AllRes *WorkloadEmptyModel `tfsdk:"all_res"`
+	DefaultVirtualSites *WorkloadEmptyModel `tfsdk:"default_virtual_sites"`
+	DeployCeSites *WorkloadJobDeployOptionsDeployCeSitesModel `tfsdk:"deploy_ce_sites"`
+	DeployCeVirtualSites *WorkloadJobDeployOptionsDeployCeVirtualSitesModel `tfsdk:"deploy_ce_virtual_sites"`
+	DeployReSites *WorkloadJobDeployOptionsDeployReSitesModel `tfsdk:"deploy_re_sites"`
+	DeployReVirtualSites *WorkloadJobDeployOptionsDeployReVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
+}
+
+// WorkloadJobDeployOptionsDeployCeSitesModel represents deploy_ce_sites block
+type WorkloadJobDeployOptionsDeployCeSitesModel struct {
+	Site []WorkloadJobDeployOptionsDeployCeSitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadJobDeployOptionsDeployCeSitesSiteModel represents site block
+type WorkloadJobDeployOptionsDeployCeSitesSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadJobDeployOptionsDeployCeVirtualSitesModel represents deploy_ce_virtual_sites block
+type WorkloadJobDeployOptionsDeployCeVirtualSitesModel struct {
+	VirtualSite []WorkloadJobDeployOptionsDeployCeVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadJobDeployOptionsDeployCeVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadJobDeployOptionsDeployCeVirtualSitesVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadJobDeployOptionsDeployReSitesModel represents deploy_re_sites block
+type WorkloadJobDeployOptionsDeployReSitesModel struct {
+	Site []WorkloadJobDeployOptionsDeployReSitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadJobDeployOptionsDeployReSitesSiteModel represents site block
+type WorkloadJobDeployOptionsDeployReSitesSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadJobDeployOptionsDeployReVirtualSitesModel represents deploy_re_virtual_sites block
+type WorkloadJobDeployOptionsDeployReVirtualSitesModel struct {
+	VirtualSite []WorkloadJobDeployOptionsDeployReVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadJobDeployOptionsDeployReVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadJobDeployOptionsDeployReVirtualSitesVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadJobVolumesModel represents volumes block
+type WorkloadJobVolumesModel struct {
+	Name types.String `tfsdk:"name"`
+	EmptyDir *WorkloadJobVolumesEmptyDirModel `tfsdk:"empty_dir"`
+	HostPath *WorkloadJobVolumesHostPathModel `tfsdk:"host_path"`
+	PersistentVolume *WorkloadJobVolumesPersistentVolumeModel `tfsdk:"persistent_volume"`
+}
+
+// WorkloadJobVolumesEmptyDirModel represents empty_dir block
+type WorkloadJobVolumesEmptyDirModel struct {
+	SizeLimit types.Int64 `tfsdk:"size_limit"`
+	Mount *WorkloadJobVolumesEmptyDirMountModel `tfsdk:"mount"`
+}
+
+// WorkloadJobVolumesEmptyDirMountModel represents mount block
+type WorkloadJobVolumesEmptyDirMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadJobVolumesHostPathModel represents host_path block
+type WorkloadJobVolumesHostPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Mount *WorkloadJobVolumesHostPathMountModel `tfsdk:"mount"`
+}
+
+// WorkloadJobVolumesHostPathMountModel represents mount block
+type WorkloadJobVolumesHostPathMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadJobVolumesPersistentVolumeModel represents persistent_volume block
+type WorkloadJobVolumesPersistentVolumeModel struct {
+	Mount *WorkloadJobVolumesPersistentVolumeMountModel `tfsdk:"mount"`
+	Storage *WorkloadJobVolumesPersistentVolumeStorageModel `tfsdk:"storage"`
+}
+
+// WorkloadJobVolumesPersistentVolumeMountModel represents mount block
+type WorkloadJobVolumesPersistentVolumeMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadJobVolumesPersistentVolumeStorageModel represents storage block
+type WorkloadJobVolumesPersistentVolumeStorageModel struct {
+	AccessMode types.String `tfsdk:"access_mode"`
+	ClassName types.String `tfsdk:"class_name"`
+	StorageSize types.Int64 `tfsdk:"storage_size"`
+	Default *WorkloadEmptyModel `tfsdk:"default"`
+}
+
+// WorkloadServiceModel represents service block
+type WorkloadServiceModel struct {
+	NumReplicas types.Int64 `tfsdk:"num_replicas"`
+	AdvertiseOptions *WorkloadServiceAdvertiseOptionsModel `tfsdk:"advertise_options"`
+	Configuration *WorkloadServiceConfigurationModel `tfsdk:"configuration"`
+	Containers []WorkloadServiceContainersModel `tfsdk:"containers"`
+	DeployOptions *WorkloadServiceDeployOptionsModel `tfsdk:"deploy_options"`
+	ScaleToZero *WorkloadEmptyModel `tfsdk:"scale_to_zero"`
+	Volumes []WorkloadServiceVolumesModel `tfsdk:"volumes"`
+}
+
+// WorkloadServiceAdvertiseOptionsModel represents advertise_options block
+type WorkloadServiceAdvertiseOptionsModel struct {
+	AdvertiseCustom *WorkloadServiceAdvertiseOptionsAdvertiseCustomModel `tfsdk:"advertise_custom"`
+	AdvertiseInCluster *WorkloadServiceAdvertiseOptionsAdvertiseInClusterModel `tfsdk:"advertise_in_cluster"`
+	AdvertiseOnPublic *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
+	DoNotAdvertise *WorkloadEmptyModel `tfsdk:"do_not_advertise"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomModel represents advertise_custom block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomModel struct {
+	AdvertiseWhere []WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel `tfsdk:"advertise_where"`
+	Ports []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModel `tfsdk:"ports"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel represents advertise_where block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel struct {
+	Site *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel `tfsdk:"site"`
+	VirtualSite *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel `tfsdk:"virtual_site"`
+	Vk8sService *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel `tfsdk:"vk8s_service"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel represents site block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel struct {
+	IP types.String `tfsdk:"ip"`
+	Network types.String `tfsdk:"network"`
+	Site *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
+	Network types.String `tfsdk:"network"`
+	VirtualSite *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
+	Site *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel `tfsdk:"site"`
+	VirtualSite *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModel represents ports block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModel struct {
+	HTTPLoadBalancer *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
+	Port *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModel `tfsdk:"port"`
+	TCPLoadBalancer *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel represents http_loadbalancer block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	DefaultRoute *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel `tfsdk:"default_route"`
+	HTTP *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel `tfsdk:"http"`
+	HTTPS *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel `tfsdk:"https"`
+	HTTPSAutoCert *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel `tfsdk:"https_auto_cert"`
+	SpecificRoutes *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel represents http block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel struct {
+	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel represents https block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSCertParams *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSParameters *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel `tfsdk:"tls_parameters"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
+	Certificates []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSConfig *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel struct {
+	CustomSecurity *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel struct {
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *WorkloadEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel struct {
+	CustomSecurity *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSConfig *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
+	CustomSecurity *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel struct {
+	Routes []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel struct {
+	CustomRouteObject *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel `tfsdk:"custom_route_object"`
+	DirectResponseRoute *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel `tfsdk:"direct_response_route"`
+	RedirectRoute *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel `tfsdk:"redirect_route"`
+	SimpleRoute *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel `tfsdk:"simple_route"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
+	RouteRef *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel `tfsdk:"path"`
+	RouteDirectResponse *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
+	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel `tfsdk:"path"`
+	RouteRedirect *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel struct {
+	HostRedirect types.String `tfsdk:"host_redirect"`
+	PathRedirect types.String `tfsdk:"path_redirect"`
+	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
+	ProtoRedirect types.String `tfsdk:"proto_redirect"`
+	ReplaceParams types.String `tfsdk:"replace_params"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+	RemoveAllParams *WorkloadEmptyModel `tfsdk:"remove_all_params"`
+	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	HTTPMethod types.String `tfsdk:"http_method"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+	Path *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModel represents port block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Info *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel represents info block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel represents tcp_loadbalancer block
+type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterModel represents advertise_in_cluster block
+type WorkloadServiceAdvertiseOptionsAdvertiseInClusterModel struct {
+	MultiPorts *WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel `tfsdk:"multi_ports"`
+	Port *WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModel `tfsdk:"port"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel represents multi_ports block
+type WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel struct {
+	Ports []WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel `tfsdk:"ports"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel represents ports block
+type WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel struct {
+	Name types.String `tfsdk:"name"`
+	Info *WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel represents info block
+type WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModel represents port block
+type WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModel struct {
+	Info *WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel represents info block
+type WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModel represents advertise_on_public block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModel struct {
+	MultiPorts *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel `tfsdk:"multi_ports"`
+	Port *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModel `tfsdk:"port"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel represents multi_ports block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel struct {
+	Ports []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel `tfsdk:"ports"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel represents ports block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel struct {
+	HTTPLoadBalancer *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
+	Port *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel `tfsdk:"port"`
+	TCPLoadBalancer *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel represents http_loadbalancer block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	DefaultRoute *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel `tfsdk:"default_route"`
+	HTTP *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel `tfsdk:"http"`
+	HTTPS *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel `tfsdk:"https"`
+	HTTPSAutoCert *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel `tfsdk:"https_auto_cert"`
+	SpecificRoutes *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel represents http block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel struct {
+	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel represents https block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSCertParams *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSParameters *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel `tfsdk:"tls_parameters"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
+	Certificates []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSConfig *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel struct {
+	CustomSecurity *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel struct {
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *WorkloadEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel struct {
+	CustomSecurity *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSConfig *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
+	CustomSecurity *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel struct {
+	Routes []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel struct {
+	CustomRouteObject *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel `tfsdk:"custom_route_object"`
+	DirectResponseRoute *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel `tfsdk:"direct_response_route"`
+	RedirectRoute *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel `tfsdk:"redirect_route"`
+	SimpleRoute *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel `tfsdk:"simple_route"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
+	RouteRef *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel `tfsdk:"path"`
+	RouteDirectResponse *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
+	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel `tfsdk:"path"`
+	RouteRedirect *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel struct {
+	HostRedirect types.String `tfsdk:"host_redirect"`
+	PathRedirect types.String `tfsdk:"path_redirect"`
+	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
+	ProtoRedirect types.String `tfsdk:"proto_redirect"`
+	ReplaceParams types.String `tfsdk:"replace_params"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+	RemoveAllParams *WorkloadEmptyModel `tfsdk:"remove_all_params"`
+	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	HTTPMethod types.String `tfsdk:"http_method"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+	Path *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel represents port block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Info *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel represents info block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel represents tcp_loadbalancer block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModel represents port block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModel struct {
+	HTTPLoadBalancer *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
+	Port *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel `tfsdk:"port"`
+	TCPLoadBalancer *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel represents http_loadbalancer block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	DefaultRoute *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel `tfsdk:"default_route"`
+	HTTP *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel `tfsdk:"http"`
+	HTTPS *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel `tfsdk:"https"`
+	HTTPSAutoCert *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel `tfsdk:"https_auto_cert"`
+	SpecificRoutes *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel represents default_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel represents http block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel struct {
+	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel represents https block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSCertParams *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSParameters *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel `tfsdk:"tls_parameters"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
+	Certificates []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSConfig *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel struct {
+	CustomSecurity *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel struct {
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *WorkloadEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel struct {
+	CustomSecurity *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSConfig *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
+	CustomSecurity *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel struct {
+	Routes []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel struct {
+	CustomRouteObject *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel `tfsdk:"custom_route_object"`
+	DirectResponseRoute *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel `tfsdk:"direct_response_route"`
+	RedirectRoute *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel `tfsdk:"redirect_route"`
+	SimpleRoute *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel `tfsdk:"simple_route"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
+	RouteRef *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel `tfsdk:"path"`
+	RouteDirectResponse *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
+	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel `tfsdk:"path"`
+	RouteRedirect *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel struct {
+	HostRedirect types.String `tfsdk:"host_redirect"`
+	PathRedirect types.String `tfsdk:"path_redirect"`
+	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
+	ProtoRedirect types.String `tfsdk:"proto_redirect"`
+	ReplaceParams types.String `tfsdk:"replace_params"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+	RemoveAllParams *WorkloadEmptyModel `tfsdk:"remove_all_params"`
+	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	HTTPMethod types.String `tfsdk:"http_method"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+	Path *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel represents port block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel struct {
+	Info *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel represents info block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel represents tcp_loadbalancer block
+type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadServiceConfigurationModel represents configuration block
+type WorkloadServiceConfigurationModel struct {
+	Parameters []WorkloadServiceConfigurationParametersModel `tfsdk:"parameters"`
+}
+
+// WorkloadServiceConfigurationParametersModel represents parameters block
+type WorkloadServiceConfigurationParametersModel struct {
+	EnvVar *WorkloadServiceConfigurationParametersEnvVarModel `tfsdk:"env_var"`
+	File *WorkloadServiceConfigurationParametersFileModel `tfsdk:"file"`
+}
+
+// WorkloadServiceConfigurationParametersEnvVarModel represents env_var block
+type WorkloadServiceConfigurationParametersEnvVarModel struct {
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+}
+
+// WorkloadServiceConfigurationParametersFileModel represents file block
+type WorkloadServiceConfigurationParametersFileModel struct {
+	Data types.String `tfsdk:"data"`
+	Name types.String `tfsdk:"name"`
+	VolumeName types.String `tfsdk:"volume_name"`
+	Mount *WorkloadServiceConfigurationParametersFileMountModel `tfsdk:"mount"`
+}
+
+// WorkloadServiceConfigurationParametersFileMountModel represents mount block
+type WorkloadServiceConfigurationParametersFileMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadServiceContainersModel represents containers block
+type WorkloadServiceContainersModel struct {
+	Args types.List `tfsdk:"args"`
+	Command types.List `tfsdk:"command"`
+	Flavor types.String `tfsdk:"flavor"`
+	InitContainer types.Bool `tfsdk:"init_container"`
+	Name types.String `tfsdk:"name"`
+	CustomFlavor *WorkloadServiceContainersCustomFlavorModel `tfsdk:"custom_flavor"`
+	DefaultFlavor *WorkloadEmptyModel `tfsdk:"default_flavor"`
+	Image *WorkloadServiceContainersImageModel `tfsdk:"image"`
+	LivenessCheck *WorkloadServiceContainersLivenessCheckModel `tfsdk:"liveness_check"`
+	ReadinessCheck *WorkloadServiceContainersReadinessCheckModel `tfsdk:"readiness_check"`
+}
+
+// WorkloadServiceContainersCustomFlavorModel represents custom_flavor block
+type WorkloadServiceContainersCustomFlavorModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceContainersImageModel represents image block
+type WorkloadServiceContainersImageModel struct {
+	Name types.String `tfsdk:"name"`
+	PullPolicy types.String `tfsdk:"pull_policy"`
+	ContainerRegistry *WorkloadServiceContainersImageContainerRegistryModel `tfsdk:"container_registry"`
+	Public *WorkloadEmptyModel `tfsdk:"public"`
+}
+
+// WorkloadServiceContainersImageContainerRegistryModel represents container_registry block
+type WorkloadServiceContainersImageContainerRegistryModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceContainersLivenessCheckModel represents liveness_check block
+type WorkloadServiceContainersLivenessCheckModel struct {
+	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
+	InitialDelay types.Int64 `tfsdk:"initial_delay"`
+	Interval types.Int64 `tfsdk:"interval"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
+	ExecHealthCheck *WorkloadServiceContainersLivenessCheckExecHealthCheckModel `tfsdk:"exec_health_check"`
+	HTTPHealthCheck *WorkloadServiceContainersLivenessCheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck *WorkloadServiceContainersLivenessCheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+}
+
+// WorkloadServiceContainersLivenessCheckExecHealthCheckModel represents exec_health_check block
+type WorkloadServiceContainersLivenessCheckExecHealthCheckModel struct {
+	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadServiceContainersLivenessCheckHTTPHealthCheckModel represents http_health_check block
+type WorkloadServiceContainersLivenessCheckHTTPHealthCheckModel struct {
+	HostHeader types.String `tfsdk:"host_header"`
+	Path types.String `tfsdk:"path"`
+	Headers *WorkloadEmptyModel `tfsdk:"headers"`
+	Port *WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModel represents port block
+type WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadServiceContainersLivenessCheckTCPHealthCheckModel represents tcp_health_check block
+type WorkloadServiceContainersLivenessCheckTCPHealthCheckModel struct {
+	Port *WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModel represents port block
+type WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadServiceContainersReadinessCheckModel represents readiness_check block
+type WorkloadServiceContainersReadinessCheckModel struct {
+	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
+	InitialDelay types.Int64 `tfsdk:"initial_delay"`
+	Interval types.Int64 `tfsdk:"interval"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
+	ExecHealthCheck *WorkloadServiceContainersReadinessCheckExecHealthCheckModel `tfsdk:"exec_health_check"`
+	HTTPHealthCheck *WorkloadServiceContainersReadinessCheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck *WorkloadServiceContainersReadinessCheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+}
+
+// WorkloadServiceContainersReadinessCheckExecHealthCheckModel represents exec_health_check block
+type WorkloadServiceContainersReadinessCheckExecHealthCheckModel struct {
+	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadServiceContainersReadinessCheckHTTPHealthCheckModel represents http_health_check block
+type WorkloadServiceContainersReadinessCheckHTTPHealthCheckModel struct {
+	HostHeader types.String `tfsdk:"host_header"`
+	Path types.String `tfsdk:"path"`
+	Headers *WorkloadEmptyModel `tfsdk:"headers"`
+	Port *WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModel represents port block
+type WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadServiceContainersReadinessCheckTCPHealthCheckModel represents tcp_health_check block
+type WorkloadServiceContainersReadinessCheckTCPHealthCheckModel struct {
+	Port *WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModel represents port block
+type WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadServiceDeployOptionsModel represents deploy_options block
+type WorkloadServiceDeployOptionsModel struct {
+	AllRes *WorkloadEmptyModel `tfsdk:"all_res"`
+	DefaultVirtualSites *WorkloadEmptyModel `tfsdk:"default_virtual_sites"`
+	DeployCeSites *WorkloadServiceDeployOptionsDeployCeSitesModel `tfsdk:"deploy_ce_sites"`
+	DeployCeVirtualSites *WorkloadServiceDeployOptionsDeployCeVirtualSitesModel `tfsdk:"deploy_ce_virtual_sites"`
+	DeployReSites *WorkloadServiceDeployOptionsDeployReSitesModel `tfsdk:"deploy_re_sites"`
+	DeployReVirtualSites *WorkloadServiceDeployOptionsDeployReVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
+}
+
+// WorkloadServiceDeployOptionsDeployCeSitesModel represents deploy_ce_sites block
+type WorkloadServiceDeployOptionsDeployCeSitesModel struct {
+	Site []WorkloadServiceDeployOptionsDeployCeSitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadServiceDeployOptionsDeployCeSitesSiteModel represents site block
+type WorkloadServiceDeployOptionsDeployCeSitesSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceDeployOptionsDeployCeVirtualSitesModel represents deploy_ce_virtual_sites block
+type WorkloadServiceDeployOptionsDeployCeVirtualSitesModel struct {
+	VirtualSite []WorkloadServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceDeployOptionsDeployReSitesModel represents deploy_re_sites block
+type WorkloadServiceDeployOptionsDeployReSitesModel struct {
+	Site []WorkloadServiceDeployOptionsDeployReSitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadServiceDeployOptionsDeployReSitesSiteModel represents site block
+type WorkloadServiceDeployOptionsDeployReSitesSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceDeployOptionsDeployReVirtualSitesModel represents deploy_re_virtual_sites block
+type WorkloadServiceDeployOptionsDeployReVirtualSitesModel struct {
+	VirtualSite []WorkloadServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceVolumesModel represents volumes block
+type WorkloadServiceVolumesModel struct {
+	Name types.String `tfsdk:"name"`
+	EmptyDir *WorkloadServiceVolumesEmptyDirModel `tfsdk:"empty_dir"`
+	HostPath *WorkloadServiceVolumesHostPathModel `tfsdk:"host_path"`
+	PersistentVolume *WorkloadServiceVolumesPersistentVolumeModel `tfsdk:"persistent_volume"`
+}
+
+// WorkloadServiceVolumesEmptyDirModel represents empty_dir block
+type WorkloadServiceVolumesEmptyDirModel struct {
+	SizeLimit types.Int64 `tfsdk:"size_limit"`
+	Mount *WorkloadServiceVolumesEmptyDirMountModel `tfsdk:"mount"`
+}
+
+// WorkloadServiceVolumesEmptyDirMountModel represents mount block
+type WorkloadServiceVolumesEmptyDirMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadServiceVolumesHostPathModel represents host_path block
+type WorkloadServiceVolumesHostPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Mount *WorkloadServiceVolumesHostPathMountModel `tfsdk:"mount"`
+}
+
+// WorkloadServiceVolumesHostPathMountModel represents mount block
+type WorkloadServiceVolumesHostPathMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadServiceVolumesPersistentVolumeModel represents persistent_volume block
+type WorkloadServiceVolumesPersistentVolumeModel struct {
+	Mount *WorkloadServiceVolumesPersistentVolumeMountModel `tfsdk:"mount"`
+	Storage *WorkloadServiceVolumesPersistentVolumeStorageModel `tfsdk:"storage"`
+}
+
+// WorkloadServiceVolumesPersistentVolumeMountModel represents mount block
+type WorkloadServiceVolumesPersistentVolumeMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadServiceVolumesPersistentVolumeStorageModel represents storage block
+type WorkloadServiceVolumesPersistentVolumeStorageModel struct {
+	AccessMode types.String `tfsdk:"access_mode"`
+	ClassName types.String `tfsdk:"class_name"`
+	StorageSize types.Int64 `tfsdk:"storage_size"`
+	Default *WorkloadEmptyModel `tfsdk:"default"`
+}
+
+// WorkloadSimpleServiceModel represents simple_service block
+type WorkloadSimpleServiceModel struct {
+	ScaleToZero types.Bool `tfsdk:"scale_to_zero"`
+	Configuration *WorkloadSimpleServiceConfigurationModel `tfsdk:"configuration"`
+	Container *WorkloadSimpleServiceContainerModel `tfsdk:"container"`
+	Disabled *WorkloadEmptyModel `tfsdk:"disabled"`
+	DoNotAdvertise *WorkloadEmptyModel `tfsdk:"do_not_advertise"`
+	Enabled *WorkloadSimpleServiceEnabledModel `tfsdk:"enabled"`
+	SimpleAdvertise *WorkloadSimpleServiceSimpleAdvertiseModel `tfsdk:"simple_advertise"`
+}
+
+// WorkloadSimpleServiceConfigurationModel represents configuration block
+type WorkloadSimpleServiceConfigurationModel struct {
+	Parameters []WorkloadSimpleServiceConfigurationParametersModel `tfsdk:"parameters"`
+}
+
+// WorkloadSimpleServiceConfigurationParametersModel represents parameters block
+type WorkloadSimpleServiceConfigurationParametersModel struct {
+	EnvVar *WorkloadSimpleServiceConfigurationParametersEnvVarModel `tfsdk:"env_var"`
+	File *WorkloadSimpleServiceConfigurationParametersFileModel `tfsdk:"file"`
+}
+
+// WorkloadSimpleServiceConfigurationParametersEnvVarModel represents env_var block
+type WorkloadSimpleServiceConfigurationParametersEnvVarModel struct {
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+}
+
+// WorkloadSimpleServiceConfigurationParametersFileModel represents file block
+type WorkloadSimpleServiceConfigurationParametersFileModel struct {
+	Data types.String `tfsdk:"data"`
+	Name types.String `tfsdk:"name"`
+	VolumeName types.String `tfsdk:"volume_name"`
+	Mount *WorkloadSimpleServiceConfigurationParametersFileMountModel `tfsdk:"mount"`
+}
+
+// WorkloadSimpleServiceConfigurationParametersFileMountModel represents mount block
+type WorkloadSimpleServiceConfigurationParametersFileMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadSimpleServiceContainerModel represents container block
+type WorkloadSimpleServiceContainerModel struct {
+	Args types.List `tfsdk:"args"`
+	Command types.List `tfsdk:"command"`
+	Flavor types.String `tfsdk:"flavor"`
+	InitContainer types.Bool `tfsdk:"init_container"`
+	Name types.String `tfsdk:"name"`
+	CustomFlavor *WorkloadSimpleServiceContainerCustomFlavorModel `tfsdk:"custom_flavor"`
+	DefaultFlavor *WorkloadEmptyModel `tfsdk:"default_flavor"`
+	Image *WorkloadSimpleServiceContainerImageModel `tfsdk:"image"`
+	LivenessCheck *WorkloadSimpleServiceContainerLivenessCheckModel `tfsdk:"liveness_check"`
+	ReadinessCheck *WorkloadSimpleServiceContainerReadinessCheckModel `tfsdk:"readiness_check"`
+}
+
+// WorkloadSimpleServiceContainerCustomFlavorModel represents custom_flavor block
+type WorkloadSimpleServiceContainerCustomFlavorModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadSimpleServiceContainerImageModel represents image block
+type WorkloadSimpleServiceContainerImageModel struct {
+	Name types.String `tfsdk:"name"`
+	PullPolicy types.String `tfsdk:"pull_policy"`
+	ContainerRegistry *WorkloadSimpleServiceContainerImageContainerRegistryModel `tfsdk:"container_registry"`
+	Public *WorkloadEmptyModel `tfsdk:"public"`
+}
+
+// WorkloadSimpleServiceContainerImageContainerRegistryModel represents container_registry block
+type WorkloadSimpleServiceContainerImageContainerRegistryModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadSimpleServiceContainerLivenessCheckModel represents liveness_check block
+type WorkloadSimpleServiceContainerLivenessCheckModel struct {
+	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
+	InitialDelay types.Int64 `tfsdk:"initial_delay"`
+	Interval types.Int64 `tfsdk:"interval"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
+	ExecHealthCheck *WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModel `tfsdk:"exec_health_check"`
+	HTTPHealthCheck *WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck *WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+}
+
+// WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModel represents exec_health_check block
+type WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModel struct {
+	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModel represents http_health_check block
+type WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModel struct {
+	HostHeader types.String `tfsdk:"host_header"`
+	Path types.String `tfsdk:"path"`
+	Headers *WorkloadEmptyModel `tfsdk:"headers"`
+	Port *WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModel represents port block
+type WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModel represents tcp_health_check block
+type WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModel struct {
+	Port *WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModel represents port block
+type WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadSimpleServiceContainerReadinessCheckModel represents readiness_check block
+type WorkloadSimpleServiceContainerReadinessCheckModel struct {
+	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
+	InitialDelay types.Int64 `tfsdk:"initial_delay"`
+	Interval types.Int64 `tfsdk:"interval"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
+	ExecHealthCheck *WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModel `tfsdk:"exec_health_check"`
+	HTTPHealthCheck *WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck *WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+}
+
+// WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModel represents exec_health_check block
+type WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModel struct {
+	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModel represents http_health_check block
+type WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModel struct {
+	HostHeader types.String `tfsdk:"host_header"`
+	Path types.String `tfsdk:"path"`
+	Headers *WorkloadEmptyModel `tfsdk:"headers"`
+	Port *WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModel represents port block
+type WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModel represents tcp_health_check block
+type WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModel struct {
+	Port *WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModel represents port block
+type WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadSimpleServiceEnabledModel represents enabled block
+type WorkloadSimpleServiceEnabledModel struct {
+	Name types.String `tfsdk:"name"`
+	PersistentVolume *WorkloadSimpleServiceEnabledPersistentVolumeModel `tfsdk:"persistent_volume"`
+}
+
+// WorkloadSimpleServiceEnabledPersistentVolumeModel represents persistent_volume block
+type WorkloadSimpleServiceEnabledPersistentVolumeModel struct {
+	Mount *WorkloadSimpleServiceEnabledPersistentVolumeMountModel `tfsdk:"mount"`
+	Storage *WorkloadSimpleServiceEnabledPersistentVolumeStorageModel `tfsdk:"storage"`
+}
+
+// WorkloadSimpleServiceEnabledPersistentVolumeMountModel represents mount block
+type WorkloadSimpleServiceEnabledPersistentVolumeMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadSimpleServiceEnabledPersistentVolumeStorageModel represents storage block
+type WorkloadSimpleServiceEnabledPersistentVolumeStorageModel struct {
+	AccessMode types.String `tfsdk:"access_mode"`
+	ClassName types.String `tfsdk:"class_name"`
+	StorageSize types.Int64 `tfsdk:"storage_size"`
+	Default *WorkloadEmptyModel `tfsdk:"default"`
+}
+
+// WorkloadSimpleServiceSimpleAdvertiseModel represents simple_advertise block
+type WorkloadSimpleServiceSimpleAdvertiseModel struct {
+	Domains types.List `tfsdk:"domains"`
+	ServicePort types.Int64 `tfsdk:"service_port"`
+}
+
+// WorkloadStatefulServiceModel represents stateful_service block
+type WorkloadStatefulServiceModel struct {
+	NumReplicas types.Int64 `tfsdk:"num_replicas"`
+	AdvertiseOptions *WorkloadStatefulServiceAdvertiseOptionsModel `tfsdk:"advertise_options"`
+	Configuration *WorkloadStatefulServiceConfigurationModel `tfsdk:"configuration"`
+	Containers []WorkloadStatefulServiceContainersModel `tfsdk:"containers"`
+	DeployOptions *WorkloadStatefulServiceDeployOptionsModel `tfsdk:"deploy_options"`
+	PersistentVolumes []WorkloadStatefulServicePersistentVolumesModel `tfsdk:"persistent_volumes"`
+	ScaleToZero *WorkloadEmptyModel `tfsdk:"scale_to_zero"`
+	Volumes []WorkloadStatefulServiceVolumesModel `tfsdk:"volumes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsModel represents advertise_options block
+type WorkloadStatefulServiceAdvertiseOptionsModel struct {
+	AdvertiseCustom *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModel `tfsdk:"advertise_custom"`
+	AdvertiseInCluster *WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModel `tfsdk:"advertise_in_cluster"`
+	AdvertiseOnPublic *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
+	DoNotAdvertise *WorkloadEmptyModel `tfsdk:"do_not_advertise"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModel represents advertise_custom block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModel struct {
+	AdvertiseWhere []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel `tfsdk:"advertise_where"`
+	Ports []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModel `tfsdk:"ports"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel represents advertise_where block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel struct {
+	Site *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel `tfsdk:"site"`
+	VirtualSite *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel `tfsdk:"virtual_site"`
+	Vk8sService *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel `tfsdk:"vk8s_service"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel represents site block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel struct {
+	IP types.String `tfsdk:"ip"`
+	Network types.String `tfsdk:"network"`
+	Site *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
+	Network types.String `tfsdk:"network"`
+	VirtualSite *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
+	Site *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel `tfsdk:"site"`
+	VirtualSite *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModel represents ports block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModel struct {
+	HTTPLoadBalancer *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
+	Port *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModel `tfsdk:"port"`
+	TCPLoadBalancer *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel represents http_loadbalancer block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	DefaultRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel `tfsdk:"default_route"`
+	HTTP *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel `tfsdk:"http"`
+	HTTPS *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel `tfsdk:"https"`
+	HTTPSAutoCert *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel `tfsdk:"https_auto_cert"`
+	SpecificRoutes *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel represents http block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel struct {
+	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel represents https block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSCertParams *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSParameters *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel `tfsdk:"tls_parameters"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
+	Certificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSConfig *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel struct {
+	CustomSecurity *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel struct {
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *WorkloadEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel struct {
+	CustomSecurity *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSConfig *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
+	CustomSecurity *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel struct {
+	Routes []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel struct {
+	CustomRouteObject *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel `tfsdk:"custom_route_object"`
+	DirectResponseRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel `tfsdk:"direct_response_route"`
+	RedirectRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel `tfsdk:"redirect_route"`
+	SimpleRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel `tfsdk:"simple_route"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
+	RouteRef *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel `tfsdk:"path"`
+	RouteDirectResponse *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
+	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel `tfsdk:"path"`
+	RouteRedirect *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel struct {
+	HostRedirect types.String `tfsdk:"host_redirect"`
+	PathRedirect types.String `tfsdk:"path_redirect"`
+	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
+	ProtoRedirect types.String `tfsdk:"proto_redirect"`
+	ReplaceParams types.String `tfsdk:"replace_params"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+	RemoveAllParams *WorkloadEmptyModel `tfsdk:"remove_all_params"`
+	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	HTTPMethod types.String `tfsdk:"http_method"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+	Path *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModel represents port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel represents info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel represents tcp_loadbalancer block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModel represents advertise_in_cluster block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModel struct {
+	MultiPorts *WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel `tfsdk:"multi_ports"`
+	Port *WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModel `tfsdk:"port"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel represents multi_ports block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel struct {
+	Ports []WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel `tfsdk:"ports"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel represents ports block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel struct {
+	Name types.String `tfsdk:"name"`
+	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel represents info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModel represents port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModel struct {
+	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel represents info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModel represents advertise_on_public block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModel struct {
+	MultiPorts *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel `tfsdk:"multi_ports"`
+	Port *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModel `tfsdk:"port"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel represents multi_ports block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel struct {
+	Ports []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel `tfsdk:"ports"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel represents ports block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel struct {
+	HTTPLoadBalancer *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
+	Port *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel `tfsdk:"port"`
+	TCPLoadBalancer *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel represents http_loadbalancer block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	DefaultRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel `tfsdk:"default_route"`
+	HTTP *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel `tfsdk:"http"`
+	HTTPS *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel `tfsdk:"https"`
+	HTTPSAutoCert *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel `tfsdk:"https_auto_cert"`
+	SpecificRoutes *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel represents http block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel struct {
+	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel represents https block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSCertParams *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSParameters *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel `tfsdk:"tls_parameters"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
+	Certificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSConfig *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel struct {
+	CustomSecurity *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel struct {
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *WorkloadEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel struct {
+	CustomSecurity *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSConfig *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
+	CustomSecurity *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel struct {
+	Routes []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel struct {
+	CustomRouteObject *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel `tfsdk:"custom_route_object"`
+	DirectResponseRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel `tfsdk:"direct_response_route"`
+	RedirectRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel `tfsdk:"redirect_route"`
+	SimpleRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel `tfsdk:"simple_route"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
+	RouteRef *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel `tfsdk:"path"`
+	RouteDirectResponse *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
+	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel `tfsdk:"path"`
+	RouteRedirect *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel struct {
+	HostRedirect types.String `tfsdk:"host_redirect"`
+	PathRedirect types.String `tfsdk:"path_redirect"`
+	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
+	ProtoRedirect types.String `tfsdk:"proto_redirect"`
+	ReplaceParams types.String `tfsdk:"replace_params"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+	RemoveAllParams *WorkloadEmptyModel `tfsdk:"remove_all_params"`
+	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	HTTPMethod types.String `tfsdk:"http_method"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+	Path *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel represents port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel represents info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel represents tcp_loadbalancer block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModel represents port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModel struct {
+	HTTPLoadBalancer *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
+	Port *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel `tfsdk:"port"`
+	TCPLoadBalancer *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel represents http_loadbalancer block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	DefaultRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel `tfsdk:"default_route"`
+	HTTP *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel `tfsdk:"http"`
+	HTTPS *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel `tfsdk:"https"`
+	HTTPSAutoCert *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel `tfsdk:"https_auto_cert"`
+	SpecificRoutes *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel represents default_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel represents http block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel struct {
+	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel represents https block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSCertParams *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSParameters *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel `tfsdk:"tls_parameters"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
+	Certificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSConfig *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel struct {
+	CustomSecurity *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel struct {
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *WorkloadEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *WorkloadEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel struct {
+	CustomSecurity *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	AppendServerName types.String `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout types.Int64 `tfsdk:"connection_idle_timeout"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	ServerName types.String `tfsdk:"server_name"`
+	CoalescingOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	DefaultHeader *WorkloadEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *WorkloadEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *WorkloadEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	NoMtls *WorkloadEmptyModel `tfsdk:"no_mtls"`
+	NonDefaultLoadBalancer *WorkloadEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *WorkloadEmptyModel `tfsdk:"pass_through"`
+	TLSConfig *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
+	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *WorkloadEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *WorkloadEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *WorkloadEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
+	CustomSecurity *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *WorkloadEmptyModel `tfsdk:"default_security"`
+	LowSecurity *WorkloadEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *WorkloadEmptyModel `tfsdk:"medium_security"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *WorkloadEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *WorkloadEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel represents trusted_ca block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel struct {
+	Routes []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel struct {
+	CustomRouteObject *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel `tfsdk:"custom_route_object"`
+	DirectResponseRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel `tfsdk:"direct_response_route"`
+	RedirectRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel `tfsdk:"redirect_route"`
+	SimpleRoute *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel `tfsdk:"simple_route"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
+	RouteRef *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel `tfsdk:"path"`
+	RouteDirectResponse *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
+	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel `tfsdk:"headers"`
+	IncomingPort *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel `tfsdk:"incoming_port"`
+	Path *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel `tfsdk:"path"`
+	RouteRedirect *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel struct {
+	HostRedirect types.String `tfsdk:"host_redirect"`
+	PathRedirect types.String `tfsdk:"path_redirect"`
+	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
+	ProtoRedirect types.String `tfsdk:"proto_redirect"`
+	ReplaceParams types.String `tfsdk:"replace_params"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+	RemoveAllParams *WorkloadEmptyModel `tfsdk:"remove_all_params"`
+	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	HTTPMethod types.String `tfsdk:"http_method"`
+	AutoHostRewrite *WorkloadEmptyModel `tfsdk:"auto_host_rewrite"`
+	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
+	Path *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel represents port block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel struct {
+	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel represents info block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Protocol types.String `tfsdk:"protocol"`
+	TargetPort types.Int64 `tfsdk:"target_port"`
+	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel represents tcp_loadbalancer block
+type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel struct {
+	Domains types.List `tfsdk:"domains"`
+	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadStatefulServiceConfigurationModel represents configuration block
+type WorkloadStatefulServiceConfigurationModel struct {
+	Parameters []WorkloadStatefulServiceConfigurationParametersModel `tfsdk:"parameters"`
+}
+
+// WorkloadStatefulServiceConfigurationParametersModel represents parameters block
+type WorkloadStatefulServiceConfigurationParametersModel struct {
+	EnvVar *WorkloadStatefulServiceConfigurationParametersEnvVarModel `tfsdk:"env_var"`
+	File *WorkloadStatefulServiceConfigurationParametersFileModel `tfsdk:"file"`
+}
+
+// WorkloadStatefulServiceConfigurationParametersEnvVarModel represents env_var block
+type WorkloadStatefulServiceConfigurationParametersEnvVarModel struct {
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+}
+
+// WorkloadStatefulServiceConfigurationParametersFileModel represents file block
+type WorkloadStatefulServiceConfigurationParametersFileModel struct {
+	Data types.String `tfsdk:"data"`
+	Name types.String `tfsdk:"name"`
+	VolumeName types.String `tfsdk:"volume_name"`
+	Mount *WorkloadStatefulServiceConfigurationParametersFileMountModel `tfsdk:"mount"`
+}
+
+// WorkloadStatefulServiceConfigurationParametersFileMountModel represents mount block
+type WorkloadStatefulServiceConfigurationParametersFileMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadStatefulServiceContainersModel represents containers block
+type WorkloadStatefulServiceContainersModel struct {
+	Args types.List `tfsdk:"args"`
+	Command types.List `tfsdk:"command"`
+	Flavor types.String `tfsdk:"flavor"`
+	InitContainer types.Bool `tfsdk:"init_container"`
+	Name types.String `tfsdk:"name"`
+	CustomFlavor *WorkloadStatefulServiceContainersCustomFlavorModel `tfsdk:"custom_flavor"`
+	DefaultFlavor *WorkloadEmptyModel `tfsdk:"default_flavor"`
+	Image *WorkloadStatefulServiceContainersImageModel `tfsdk:"image"`
+	LivenessCheck *WorkloadStatefulServiceContainersLivenessCheckModel `tfsdk:"liveness_check"`
+	ReadinessCheck *WorkloadStatefulServiceContainersReadinessCheckModel `tfsdk:"readiness_check"`
+}
+
+// WorkloadStatefulServiceContainersCustomFlavorModel represents custom_flavor block
+type WorkloadStatefulServiceContainersCustomFlavorModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceContainersImageModel represents image block
+type WorkloadStatefulServiceContainersImageModel struct {
+	Name types.String `tfsdk:"name"`
+	PullPolicy types.String `tfsdk:"pull_policy"`
+	ContainerRegistry *WorkloadStatefulServiceContainersImageContainerRegistryModel `tfsdk:"container_registry"`
+	Public *WorkloadEmptyModel `tfsdk:"public"`
+}
+
+// WorkloadStatefulServiceContainersImageContainerRegistryModel represents container_registry block
+type WorkloadStatefulServiceContainersImageContainerRegistryModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceContainersLivenessCheckModel represents liveness_check block
+type WorkloadStatefulServiceContainersLivenessCheckModel struct {
+	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
+	InitialDelay types.Int64 `tfsdk:"initial_delay"`
+	Interval types.Int64 `tfsdk:"interval"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
+	ExecHealthCheck *WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModel `tfsdk:"exec_health_check"`
+	HTTPHealthCheck *WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck *WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+}
+
+// WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModel represents exec_health_check block
+type WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModel struct {
+	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModel represents http_health_check block
+type WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModel struct {
+	HostHeader types.String `tfsdk:"host_header"`
+	Path types.String `tfsdk:"path"`
+	Headers *WorkloadEmptyModel `tfsdk:"headers"`
+	Port *WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModel represents port block
+type WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModel represents tcp_health_check block
+type WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModel struct {
+	Port *WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModel represents port block
+type WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadStatefulServiceContainersReadinessCheckModel represents readiness_check block
+type WorkloadStatefulServiceContainersReadinessCheckModel struct {
+	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
+	InitialDelay types.Int64 `tfsdk:"initial_delay"`
+	Interval types.Int64 `tfsdk:"interval"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
+	ExecHealthCheck *WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModel `tfsdk:"exec_health_check"`
+	HTTPHealthCheck *WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck *WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+}
+
+// WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModel represents exec_health_check block
+type WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModel struct {
+	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModel represents http_health_check block
+type WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModel struct {
+	HostHeader types.String `tfsdk:"host_header"`
+	Path types.String `tfsdk:"path"`
+	Headers *WorkloadEmptyModel `tfsdk:"headers"`
+	Port *WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModel represents port block
+type WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModel represents tcp_health_check block
+type WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModel struct {
+	Port *WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModel represents port block
+type WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModel struct {
+	Name types.String `tfsdk:"name"`
+	Num types.Int64 `tfsdk:"num"`
+}
+
+// WorkloadStatefulServiceDeployOptionsModel represents deploy_options block
+type WorkloadStatefulServiceDeployOptionsModel struct {
+	AllRes *WorkloadEmptyModel `tfsdk:"all_res"`
+	DefaultVirtualSites *WorkloadEmptyModel `tfsdk:"default_virtual_sites"`
+	DeployCeSites *WorkloadStatefulServiceDeployOptionsDeployCeSitesModel `tfsdk:"deploy_ce_sites"`
+	DeployCeVirtualSites *WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesModel `tfsdk:"deploy_ce_virtual_sites"`
+	DeployReSites *WorkloadStatefulServiceDeployOptionsDeployReSitesModel `tfsdk:"deploy_re_sites"`
+	DeployReVirtualSites *WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployCeSitesModel represents deploy_ce_sites block
+type WorkloadStatefulServiceDeployOptionsDeployCeSitesModel struct {
+	Site []WorkloadStatefulServiceDeployOptionsDeployCeSitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployCeSitesSiteModel represents site block
+type WorkloadStatefulServiceDeployOptionsDeployCeSitesSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesModel represents deploy_ce_virtual_sites block
+type WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesModel struct {
+	VirtualSite []WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadStatefulServiceDeployOptionsDeployCeVirtualSitesVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployReSitesModel represents deploy_re_sites block
+type WorkloadStatefulServiceDeployOptionsDeployReSitesModel struct {
+	Site []WorkloadStatefulServiceDeployOptionsDeployReSitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployReSitesSiteModel represents site block
+type WorkloadStatefulServiceDeployOptionsDeployReSitesSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesModel represents deploy_re_virtual_sites block
+type WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesModel struct {
+	VirtualSite []WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel represents virtual_site block
+type WorkloadStatefulServiceDeployOptionsDeployReVirtualSitesVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServicePersistentVolumesModel represents persistent_volumes block
+type WorkloadStatefulServicePersistentVolumesModel struct {
+	Name types.String `tfsdk:"name"`
+	PersistentVolume *WorkloadStatefulServicePersistentVolumesPersistentVolumeModel `tfsdk:"persistent_volume"`
+}
+
+// WorkloadStatefulServicePersistentVolumesPersistentVolumeModel represents persistent_volume block
+type WorkloadStatefulServicePersistentVolumesPersistentVolumeModel struct {
+	Mount *WorkloadStatefulServicePersistentVolumesPersistentVolumeMountModel `tfsdk:"mount"`
+	Storage *WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModel `tfsdk:"storage"`
+}
+
+// WorkloadStatefulServicePersistentVolumesPersistentVolumeMountModel represents mount block
+type WorkloadStatefulServicePersistentVolumesPersistentVolumeMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModel represents storage block
+type WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModel struct {
+	AccessMode types.String `tfsdk:"access_mode"`
+	ClassName types.String `tfsdk:"class_name"`
+	StorageSize types.Int64 `tfsdk:"storage_size"`
+	Default *WorkloadEmptyModel `tfsdk:"default"`
+}
+
+// WorkloadStatefulServiceVolumesModel represents volumes block
+type WorkloadStatefulServiceVolumesModel struct {
+	Name types.String `tfsdk:"name"`
+	EmptyDir *WorkloadStatefulServiceVolumesEmptyDirModel `tfsdk:"empty_dir"`
+	HostPath *WorkloadStatefulServiceVolumesHostPathModel `tfsdk:"host_path"`
+}
+
+// WorkloadStatefulServiceVolumesEmptyDirModel represents empty_dir block
+type WorkloadStatefulServiceVolumesEmptyDirModel struct {
+	SizeLimit types.Int64 `tfsdk:"size_limit"`
+	Mount *WorkloadStatefulServiceVolumesEmptyDirMountModel `tfsdk:"mount"`
+}
+
+// WorkloadStatefulServiceVolumesEmptyDirMountModel represents mount block
+type WorkloadStatefulServiceVolumesEmptyDirMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadStatefulServiceVolumesHostPathModel represents host_path block
+type WorkloadStatefulServiceVolumesHostPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Mount *WorkloadStatefulServiceVolumesHostPathMountModel `tfsdk:"mount"`
+}
+
+// WorkloadStatefulServiceVolumesHostPathMountModel represents mount block
+type WorkloadStatefulServiceVolumesHostPathMountModel struct {
+	Mode types.String `tfsdk:"mode"`
+	MountPath types.String `tfsdk:"mount_path"`
+	SubPath types.String `tfsdk:"sub_path"`
+}
+
 type WorkloadResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +4084,10 @@ type WorkloadResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Job *WorkloadJobModel `tfsdk:"job"`
+	Service *WorkloadServiceModel `tfsdk:"service"`
+	SimpleService *WorkloadSimpleServiceModel `tfsdk:"simple_service"`
+	StatefulService *WorkloadStatefulServiceModel `tfsdk:"stateful_service"`
 }
 
 func (r *WorkloadResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -8784,6 +12819,10 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 		Spec: client.WorkloadSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -8839,6 +12878,15 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 
 	apiResource, err := r.client.GetWorkload(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Workload not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Workload: %s", err))
 		return
 	}
@@ -8853,6 +12901,13 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -8905,6 +12960,10 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 		Spec: client.WorkloadSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -8929,10 +12988,20 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetWorkload(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -8956,11 +13025,33 @@ func (r *WorkloadResource) Delete(ctx context.Context, req resource.DeleteReques
 
 	err := r.client.DeleteWorkload(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Workload already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Workload: %s", err))
 		return
 	}
 }
 
 func (r *WorkloadResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

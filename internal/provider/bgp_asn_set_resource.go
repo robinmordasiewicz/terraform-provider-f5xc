@@ -249,23 +249,8 @@ func (r *BGPAsnSetResource) Create(ctx context.Context, req resource.CreateReque
 		Spec: client.BGPAsnSetSpec{},
 	}
 
-	// Map as_numbers from terraform state to API spec
-	if !data.AsNumbers.IsNull() && !data.AsNumbers.IsUnknown() {
-		var asNumbers []string
-		resp.Diagnostics.Append(data.AsNumbers.ElementsAs(ctx, &asNumbers, false)...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-		// Convert string ASNs to uint32
-		for _, asn := range asNumbers {
-			var asnVal uint64
-			_, err := fmt.Sscanf(asn, "%d", &asnVal)
-			if err != nil {
-				resp.Diagnostics.AddError("Invalid ASN", fmt.Sprintf("Unable to parse ASN '%s': %s", asn, err))
-				return
-			}
-			apiResource.Spec.AsNumbers = append(apiResource.Spec.AsNumbers, uint32(asnVal))
-		}
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -323,6 +308,15 @@ func (r *BGPAsnSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 
 	apiResource, err := r.client.GetBGPAsnSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "BGPAsnSet not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read BGPAsnSet: %s", err))
 		return
 	}
@@ -337,6 +331,13 @@ func (r *BGPAsnSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -356,21 +357,6 @@ func (r *BGPAsnSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 		}
 	} else {
 		data.Annotations = types.MapNull(types.StringType)
-	}
-
-	// Map as_numbers from API response to terraform state
-	if len(apiResource.Spec.AsNumbers) > 0 {
-		asNumStrings := make([]string, len(apiResource.Spec.AsNumbers))
-		for i, asn := range apiResource.Spec.AsNumbers {
-			asNumStrings[i] = fmt.Sprintf("%d", asn)
-		}
-		asNumbers, diags := types.ListValueFrom(ctx, types.StringType, asNumStrings)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.AsNumbers = asNumbers
-		}
-	} else {
-		data.AsNumbers = types.ListNull(types.StringType)
 	}
 
 	psd = privatestate.NewPrivateStateData()
@@ -404,23 +390,8 @@ func (r *BGPAsnSetResource) Update(ctx context.Context, req resource.UpdateReque
 		Spec: client.BGPAsnSetSpec{},
 	}
 
-	// Map as_numbers from terraform state to API spec
-	if !data.AsNumbers.IsNull() && !data.AsNumbers.IsUnknown() {
-		var asNumbers []string
-		resp.Diagnostics.Append(data.AsNumbers.ElementsAs(ctx, &asNumbers, false)...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-		// Convert string ASNs to uint32
-		for _, asn := range asNumbers {
-			var asnVal uint64
-			_, err := fmt.Sscanf(asn, "%d", &asnVal)
-			if err != nil {
-				resp.Diagnostics.AddError("Invalid ASN", fmt.Sprintf("Unable to parse ASN '%s': %s", asn, err))
-				return
-			}
-			apiResource.Spec.AsNumbers = append(apiResource.Spec.AsNumbers, uint32(asnVal))
-		}
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -447,10 +418,20 @@ func (r *BGPAsnSetResource) Update(ctx context.Context, req resource.UpdateReque
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetBGPAsnSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -474,6 +455,14 @@ func (r *BGPAsnSetResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	err := r.client.DeleteBGPAsnSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "BGPAsnSet already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete BGPAsnSet: %s", err))
 		return
 	}
@@ -489,7 +478,6 @@ func (r *BGPAsnSetResource) ImportState(ctx context.Context, req resource.Import
 		)
 		return
 	}
-
 	namespace := parts[0]
 	name := parts[1]
 

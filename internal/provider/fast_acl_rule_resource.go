@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,71 @@ type FastACLRuleResource struct {
 	client *client.Client
 }
 
+// FastACLRuleEmptyModel represents empty nested blocks
+type FastACLRuleEmptyModel struct {
+}
+
+// FastACLRuleActionModel represents action block
+type FastACLRuleActionModel struct {
+	SimpleAction types.String `tfsdk:"simple_action"`
+	PolicerAction *FastACLRuleActionPolicerActionModel `tfsdk:"policer_action"`
+	ProtocolPolicerAction *FastACLRuleActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
+}
+
+// FastACLRuleActionPolicerActionModel represents policer_action block
+type FastACLRuleActionPolicerActionModel struct {
+	Ref []FastACLRuleActionPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLRuleActionPolicerActionRefModel represents ref block
+type FastACLRuleActionPolicerActionRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// FastACLRuleActionProtocolPolicerActionModel represents protocol_policer_action block
+type FastACLRuleActionProtocolPolicerActionModel struct {
+	Ref []FastACLRuleActionProtocolPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLRuleActionProtocolPolicerActionRefModel represents ref block
+type FastACLRuleActionProtocolPolicerActionRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// FastACLRuleIPPrefixSetModel represents ip_prefix_set block
+type FastACLRuleIPPrefixSetModel struct {
+	Ref []FastACLRuleIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// FastACLRuleIPPrefixSetRefModel represents ref block
+type FastACLRuleIPPrefixSetRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// FastACLRulePortModel represents port block
+type FastACLRulePortModel struct {
+	UserDefined types.Int64 `tfsdk:"user_defined"`
+	All *FastACLRuleEmptyModel `tfsdk:"all"`
+	DNS *FastACLRuleEmptyModel `tfsdk:"dns"`
+}
+
+// FastACLRulePrefixModel represents prefix block
+type FastACLRulePrefixModel struct {
+	Prefix types.List `tfsdk:"prefix"`
+}
+
 type FastACLRuleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +119,10 @@ type FastACLRuleResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Action *FastACLRuleActionModel `tfsdk:"action"`
+	IPPrefixSet *FastACLRuleIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	Port []FastACLRulePortModel `tfsdk:"port"`
+	Prefix *FastACLRulePrefixModel `tfsdk:"prefix"`
 }
 
 func (r *FastACLRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -388,6 +458,10 @@ func (r *FastACLRuleResource) Create(ctx context.Context, req resource.CreateReq
 		Spec: client.FastACLRuleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -443,6 +517,15 @@ func (r *FastACLRuleResource) Read(ctx context.Context, req resource.ReadRequest
 
 	apiResource, err := r.client.GetFastACLRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "FastACLRule not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read FastACLRule: %s", err))
 		return
 	}
@@ -457,6 +540,13 @@ func (r *FastACLRuleResource) Read(ctx context.Context, req resource.ReadRequest
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -509,6 +599,10 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 		Spec: client.FastACLRuleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -533,10 +627,20 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetFastACLRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -560,11 +664,33 @@ func (r *FastACLRuleResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	err := r.client.DeleteFastACLRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "FastACLRule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete FastACLRule: %s", err))
 		return
 	}
 }
 
 func (r *FastACLRuleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

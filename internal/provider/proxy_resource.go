@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,727 @@ type ProxyResource struct {
 	client *client.Client
 }
 
+// ProxyEmptyModel represents empty nested blocks
+type ProxyEmptyModel struct {
+}
+
+// ProxyActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
+type ProxyActiveForwardProxyPoliciesModel struct {
+	ForwardProxyPolicies []ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
+type ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ProxyDynamicProxyModel represents dynamic_proxy block
+type ProxyDynamicProxyModel struct {
+	Domains types.List `tfsdk:"domains"`
+	DisableDNSMasquerade *ProxyEmptyModel `tfsdk:"disable_dns_masquerade"`
+	EnableDNSMasquerade *ProxyEmptyModel `tfsdk:"enable_dns_masquerade"`
+	HTTPProxy *ProxyDynamicProxyHTTPProxyModel `tfsdk:"http_proxy"`
+	HTTPSProxy *ProxyDynamicProxyHTTPSProxyModel `tfsdk:"https_proxy"`
+	SniProxy *ProxyDynamicProxySniProxyModel `tfsdk:"sni_proxy"`
+}
+
+// ProxyDynamicProxyHTTPProxyModel represents http_proxy block
+type ProxyDynamicProxyHTTPProxyModel struct {
+	MoreOption *ProxyDynamicProxyHTTPProxyMoreOptionModel `tfsdk:"more_option"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionModel represents more_option block
+type ProxyDynamicProxyHTTPProxyMoreOptionModel struct {
+	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
+	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
+	MaxRequestHeaderSize types.Int64 `tfsdk:"max_request_header_size"`
+	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
+	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
+	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
+	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
+	BufferPolicy *ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel `tfsdk:"buffer_policy"`
+	CompressionParams *ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel `tfsdk:"compression_params"`
+	CustomErrors *ProxyEmptyModel `tfsdk:"custom_errors"`
+	DisablePathNormalize *ProxyEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *ProxyEmptyModel `tfsdk:"enable_path_normalize"`
+	RequestCookiesToAdd []ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd []ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd []ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd []ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel represents buffer_policy block
+type ProxyDynamicProxyHTTPProxyMoreOptionBufferPolicyModel struct {
+	Disabled types.Bool `tfsdk:"disabled"`
+	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel represents compression_params block
+type ProxyDynamicProxyHTTPProxyMoreOptionCompressionParamsModel struct {
+	ContentLength types.Int64 `tfsdk:"content_length"`
+	ContentType types.List `tfsdk:"content_type"`
+	DisableOnEtagHeader types.Bool `tfsdk:"disable_on_etag_header"`
+	RemoveAcceptEncodingHeader types.Bool `tfsdk:"remove_accept_encoding_header"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
+type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModel struct {
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
+type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
+type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
+type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
+type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModel struct {
+	AddDomain types.String `tfsdk:"add_domain"`
+	AddExpiry types.String `tfsdk:"add_expiry"`
+	AddPath types.String `tfsdk:"add_path"`
+	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	AddHttponly *ProxyEmptyModel `tfsdk:"add_httponly"`
+	AddPartitioned *ProxyEmptyModel `tfsdk:"add_partitioned"`
+	AddSecure *ProxyEmptyModel `tfsdk:"add_secure"`
+	IgnoreDomain *ProxyEmptyModel `tfsdk:"ignore_domain"`
+	IgnoreExpiry *ProxyEmptyModel `tfsdk:"ignore_expiry"`
+	IgnoreHttponly *ProxyEmptyModel `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge *ProxyEmptyModel `tfsdk:"ignore_max_age"`
+	IgnorePartitioned *ProxyEmptyModel `tfsdk:"ignore_partitioned"`
+	IgnorePath *ProxyEmptyModel `tfsdk:"ignore_path"`
+	IgnoreSamesite *ProxyEmptyModel `tfsdk:"ignore_samesite"`
+	IgnoreSecure *ProxyEmptyModel `tfsdk:"ignore_secure"`
+	IgnoreValue *ProxyEmptyModel `tfsdk:"ignore_value"`
+	SamesiteLax *ProxyEmptyModel `tfsdk:"samesite_lax"`
+	SamesiteNone *ProxyEmptyModel `tfsdk:"samesite_none"`
+	SamesiteStrict *ProxyEmptyModel `tfsdk:"samesite_strict"`
+	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
+type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
+type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
+type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyModel represents https_proxy block
+type ProxyDynamicProxyHTTPSProxyModel struct {
+	MoreOption *ProxyDynamicProxyHTTPSProxyMoreOptionModel `tfsdk:"more_option"`
+	TLSParams *ProxyDynamicProxyHTTPSProxyTLSParamsModel `tfsdk:"tls_params"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionModel represents more_option block
+type ProxyDynamicProxyHTTPSProxyMoreOptionModel struct {
+	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
+	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
+	MaxRequestHeaderSize types.Int64 `tfsdk:"max_request_header_size"`
+	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
+	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
+	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
+	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
+	BufferPolicy *ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel `tfsdk:"buffer_policy"`
+	CompressionParams *ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel `tfsdk:"compression_params"`
+	CustomErrors *ProxyEmptyModel `tfsdk:"custom_errors"`
+	DisablePathNormalize *ProxyEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *ProxyEmptyModel `tfsdk:"enable_path_normalize"`
+	RequestCookiesToAdd []ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd []ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd []ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd []ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel represents buffer_policy block
+type ProxyDynamicProxyHTTPSProxyMoreOptionBufferPolicyModel struct {
+	Disabled types.Bool `tfsdk:"disabled"`
+	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel represents compression_params block
+type ProxyDynamicProxyHTTPSProxyMoreOptionCompressionParamsModel struct {
+	ContentLength types.Int64 `tfsdk:"content_length"`
+	ContentType types.List `tfsdk:"content_type"`
+	DisableOnEtagHeader types.Bool `tfsdk:"disable_on_etag_header"`
+	RemoveAcceptEncodingHeader types.Bool `tfsdk:"remove_accept_encoding_header"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
+type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModel struct {
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
+type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
+type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
+type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
+type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModel struct {
+	AddDomain types.String `tfsdk:"add_domain"`
+	AddExpiry types.String `tfsdk:"add_expiry"`
+	AddPath types.String `tfsdk:"add_path"`
+	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	AddHttponly *ProxyEmptyModel `tfsdk:"add_httponly"`
+	AddPartitioned *ProxyEmptyModel `tfsdk:"add_partitioned"`
+	AddSecure *ProxyEmptyModel `tfsdk:"add_secure"`
+	IgnoreDomain *ProxyEmptyModel `tfsdk:"ignore_domain"`
+	IgnoreExpiry *ProxyEmptyModel `tfsdk:"ignore_expiry"`
+	IgnoreHttponly *ProxyEmptyModel `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge *ProxyEmptyModel `tfsdk:"ignore_max_age"`
+	IgnorePartitioned *ProxyEmptyModel `tfsdk:"ignore_partitioned"`
+	IgnorePath *ProxyEmptyModel `tfsdk:"ignore_path"`
+	IgnoreSamesite *ProxyEmptyModel `tfsdk:"ignore_samesite"`
+	IgnoreSecure *ProxyEmptyModel `tfsdk:"ignore_secure"`
+	IgnoreValue *ProxyEmptyModel `tfsdk:"ignore_value"`
+	SamesiteLax *ProxyEmptyModel `tfsdk:"samesite_lax"`
+	SamesiteNone *ProxyEmptyModel `tfsdk:"samesite_none"`
+	SamesiteStrict *ProxyEmptyModel `tfsdk:"samesite_strict"`
+	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
+type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
+type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
+type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsModel represents tls_params block
+type ProxyDynamicProxyHTTPSProxyTLSParamsModel struct {
+	NoMtls *ProxyEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel represents tls_certificates block
+type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *ProxyEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *ProxyEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel represents private_key block
+type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel represents tls_config block
+type ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModel struct {
+	CustomSecurity *ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *ProxyEmptyModel `tfsdk:"default_security"`
+	LowSecurity *ProxyEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *ProxyEmptyModel `tfsdk:"medium_security"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel represents custom_security block
+type ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel represents use_mtls block
+type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *ProxyEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *ProxyEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel represents crl block
+type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel represents trusted_ca block
+type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// ProxyDynamicProxySniProxyModel represents sni_proxy block
+type ProxyDynamicProxySniProxyModel struct {
+	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
+}
+
+// ProxyHTTPProxyModel represents http_proxy block
+type ProxyHTTPProxyModel struct {
+	EnableHTTP *ProxyEmptyModel `tfsdk:"enable_http"`
+	MoreOption *ProxyHTTPProxyMoreOptionModel `tfsdk:"more_option"`
+}
+
+// ProxyHTTPProxyMoreOptionModel represents more_option block
+type ProxyHTTPProxyMoreOptionModel struct {
+	DisableDefaultErrorPages types.Bool `tfsdk:"disable_default_error_pages"`
+	IdleTimeout types.Int64 `tfsdk:"idle_timeout"`
+	MaxRequestHeaderSize types.Int64 `tfsdk:"max_request_header_size"`
+	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
+	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
+	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
+	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
+	BufferPolicy *ProxyHTTPProxyMoreOptionBufferPolicyModel `tfsdk:"buffer_policy"`
+	CompressionParams *ProxyHTTPProxyMoreOptionCompressionParamsModel `tfsdk:"compression_params"`
+	CustomErrors *ProxyEmptyModel `tfsdk:"custom_errors"`
+	DisablePathNormalize *ProxyEmptyModel `tfsdk:"disable_path_normalize"`
+	EnablePathNormalize *ProxyEmptyModel `tfsdk:"enable_path_normalize"`
+	RequestCookiesToAdd []ProxyHTTPProxyMoreOptionRequestCookiesToAddModel `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd []ProxyHTTPProxyMoreOptionRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd []ProxyHTTPProxyMoreOptionResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd []ProxyHTTPProxyMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+}
+
+// ProxyHTTPProxyMoreOptionBufferPolicyModel represents buffer_policy block
+type ProxyHTTPProxyMoreOptionBufferPolicyModel struct {
+	Disabled types.Bool `tfsdk:"disabled"`
+	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// ProxyHTTPProxyMoreOptionCompressionParamsModel represents compression_params block
+type ProxyHTTPProxyMoreOptionCompressionParamsModel struct {
+	ContentLength types.Int64 `tfsdk:"content_length"`
+	ContentType types.List `tfsdk:"content_type"`
+	DisableOnEtagHeader types.Bool `tfsdk:"disable_on_etag_header"`
+	RemoveAcceptEncodingHeader types.Bool `tfsdk:"remove_accept_encoding_header"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
+type ProxyHTTPProxyMoreOptionRequestCookiesToAddModel struct {
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
+type ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
+type ProxyHTTPProxyMoreOptionRequestHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
+type ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
+type ProxyHTTPProxyMoreOptionResponseCookiesToAddModel struct {
+	AddDomain types.String `tfsdk:"add_domain"`
+	AddExpiry types.String `tfsdk:"add_expiry"`
+	AddPath types.String `tfsdk:"add_path"`
+	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	AddHttponly *ProxyEmptyModel `tfsdk:"add_httponly"`
+	AddPartitioned *ProxyEmptyModel `tfsdk:"add_partitioned"`
+	AddSecure *ProxyEmptyModel `tfsdk:"add_secure"`
+	IgnoreDomain *ProxyEmptyModel `tfsdk:"ignore_domain"`
+	IgnoreExpiry *ProxyEmptyModel `tfsdk:"ignore_expiry"`
+	IgnoreHttponly *ProxyEmptyModel `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge *ProxyEmptyModel `tfsdk:"ignore_max_age"`
+	IgnorePartitioned *ProxyEmptyModel `tfsdk:"ignore_partitioned"`
+	IgnorePath *ProxyEmptyModel `tfsdk:"ignore_path"`
+	IgnoreSamesite *ProxyEmptyModel `tfsdk:"ignore_samesite"`
+	IgnoreSecure *ProxyEmptyModel `tfsdk:"ignore_secure"`
+	IgnoreValue *ProxyEmptyModel `tfsdk:"ignore_value"`
+	SamesiteLax *ProxyEmptyModel `tfsdk:"samesite_lax"`
+	SamesiteNone *ProxyEmptyModel `tfsdk:"samesite_none"`
+	SamesiteStrict *ProxyEmptyModel `tfsdk:"samesite_strict"`
+	SecretValue *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
+type ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
+type ProxyHTTPProxyMoreOptionResponseHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
+type ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxySiteVirtualSitesModel represents site_virtual_sites block
+type ProxySiteVirtualSitesModel struct {
+	AdvertiseWhere []ProxySiteVirtualSitesAdvertiseWhereModel `tfsdk:"advertise_where"`
+}
+
+// ProxySiteVirtualSitesAdvertiseWhereModel represents advertise_where block
+type ProxySiteVirtualSitesAdvertiseWhereModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	Site *ProxySiteVirtualSitesAdvertiseWhereSiteModel `tfsdk:"site"`
+	UseDefaultPort *ProxyEmptyModel `tfsdk:"use_default_port"`
+	VirtualSite *ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// ProxySiteVirtualSitesAdvertiseWhereSiteModel represents site block
+type ProxySiteVirtualSitesAdvertiseWhereSiteModel struct {
+	IP types.String `tfsdk:"ip"`
+	Network types.String `tfsdk:"network"`
+	Site *ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+}
+
+// ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel represents site block
+type ProxySiteVirtualSitesAdvertiseWhereSiteSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel represents virtual_site block
+type ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel struct {
+	Network types.String `tfsdk:"network"`
+	VirtualSite *ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
+type ProxySiteVirtualSitesAdvertiseWhereVirtualSiteVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ProxyTLSInterceptModel represents tls_intercept block
+type ProxyTLSInterceptModel struct {
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CustomCertificate *ProxyTLSInterceptCustomCertificateModel `tfsdk:"custom_certificate"`
+	EnableForAllDomains *ProxyEmptyModel `tfsdk:"enable_for_all_domains"`
+	Policy *ProxyTLSInterceptPolicyModel `tfsdk:"policy"`
+	VolterraCertificate *ProxyEmptyModel `tfsdk:"volterra_certificate"`
+	VolterraTrustedCa *ProxyEmptyModel `tfsdk:"volterra_trusted_ca"`
+}
+
+// ProxyTLSInterceptCustomCertificateModel represents custom_certificate block
+type ProxyTLSInterceptCustomCertificateModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *ProxyEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *ProxyTLSInterceptCustomCertificatePrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *ProxyEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// ProxyTLSInterceptCustomCertificatePrivateKeyModel represents private_key block
+type ProxyTLSInterceptCustomCertificatePrivateKeyModel struct {
+	BlindfoldSecretInfo *ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel represents clear_secret_info block
+type ProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ProxyTLSInterceptPolicyModel represents policy block
+type ProxyTLSInterceptPolicyModel struct {
+	InterceptionRules []ProxyTLSInterceptPolicyInterceptionRulesModel `tfsdk:"interception_rules"`
+}
+
+// ProxyTLSInterceptPolicyInterceptionRulesModel represents interception_rules block
+type ProxyTLSInterceptPolicyInterceptionRulesModel struct {
+	DisableInterception *ProxyEmptyModel `tfsdk:"disable_interception"`
+	DomainMatch *ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel `tfsdk:"domain_match"`
+	EnableInterception *ProxyEmptyModel `tfsdk:"enable_interception"`
+}
+
+// ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel represents domain_match block
+type ProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
 type ProxyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +776,16 @@ type ProxyResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	ActiveForwardProxyPolicies *ProxyActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
+	DoNotAdvertise *ProxyEmptyModel `tfsdk:"do_not_advertise"`
+	DynamicProxy *ProxyDynamicProxyModel `tfsdk:"dynamic_proxy"`
+	HTTPProxy *ProxyHTTPProxyModel `tfsdk:"http_proxy"`
+	NoForwardProxyPolicy *ProxyEmptyModel `tfsdk:"no_forward_proxy_policy"`
+	NoInterception *ProxyEmptyModel `tfsdk:"no_interception"`
+	SiteLocalInsideNetwork *ProxyEmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *ProxyEmptyModel `tfsdk:"site_local_network"`
+	SiteVirtualSites *ProxySiteVirtualSitesModel `tfsdk:"site_virtual_sites"`
+	TLSIntercept *ProxyTLSInterceptModel `tfsdk:"tls_intercept"`
 }
 
 func (r *ProxyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1861,6 +2593,10 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 		Spec: client.ProxySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1916,6 +2652,15 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 
 	apiResource, err := r.client.GetProxy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Proxy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Proxy: %s", err))
 		return
 	}
@@ -1930,6 +2675,13 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1982,6 +2734,10 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		Spec: client.ProxySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -2006,10 +2762,20 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetProxy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2033,11 +2799,33 @@ func (r *ProxyResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 
 	err := r.client.DeleteProxy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Proxy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Proxy: %s", err))
 		return
 	}
 }
 
 func (r *ProxyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

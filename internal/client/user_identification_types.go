@@ -16,31 +16,8 @@ type UserIdentification struct {
 
 // UserIdentificationSpec defines the specification for UserIdentification
 type UserIdentificationSpec struct {
-	Description string                        `json:"description,omitempty"`
-	Rules       []UserIdentificationRuleSpec `json:"rules,omitempty"`
+	Description string `json:"description,omitempty"`
 }
-
-// UserIdentificationRuleSpec defines a user identification rule
-type UserIdentificationRuleSpec struct {
-	ClientIP             *EmptyRuleSpec `json:"client_ip,omitempty"`
-	ClientASN            *EmptyRuleSpec `json:"client_asn,omitempty"`
-	ClientCountry        *EmptyRuleSpec `json:"client_country,omitempty"`
-	ClientCity           *EmptyRuleSpec `json:"client_city,omitempty"`
-	ClientRegion         *EmptyRuleSpec `json:"client_region,omitempty"`
-	TLSFingerprint       *EmptyRuleSpec `json:"tls_fingerprint,omitempty"`
-	JA4TLSFingerprint    *EmptyRuleSpec `json:"ja4_tls_fingerprint,omitempty"`
-	IPAndTLSFingerprint  *EmptyRuleSpec `json:"ip_and_tls_fingerprint,omitempty"`
-	IPAndJA4TLSFingerprint *EmptyRuleSpec `json:"ip_and_ja4_tls_fingerprint,omitempty"`
-	None                 *EmptyRuleSpec `json:"none,omitempty"`
-	CookieName           string         `json:"cookie_name,omitempty"`
-	HTTPHeaderName       string         `json:"http_header_name,omitempty"`
-	IPAndHTTPHeaderName  string         `json:"ip_and_http_header_name,omitempty"`
-	JWTClaimName         string         `json:"jwt_claim_name,omitempty"`
-	QueryParamKey        string         `json:"query_param_key,omitempty"`
-}
-
-// EmptyRuleSpec represents an empty rule block
-type EmptyRuleSpec struct{}
 
 // CreateUserIdentification creates a new UserIdentification
 func (c *Client) CreateUserIdentification(ctx context.Context, resource *UserIdentification) (*UserIdentification, error) {
@@ -70,20 +47,4 @@ func (c *Client) UpdateUserIdentification(ctx context.Context, resource *UserIde
 func (c *Client) DeleteUserIdentification(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/user_identifications/%s", namespace, name)
 	return c.Delete(ctx, path)
-}
-
-// UserIdentificationListResponse is the response from listing user identifications
-type UserIdentificationListResponse struct {
-	Items []UserIdentification `json:"items"`
-}
-
-// ListUserIdentifications lists all user identifications in a namespace
-func (c *Client) ListUserIdentifications(ctx context.Context, namespace string) ([]UserIdentification, error) {
-	var result UserIdentificationListResponse
-	path := fmt.Sprintf("/api/config/namespaces/%s/user_identifications", namespace)
-	err := c.Get(ctx, path, &result)
-	if err != nil {
-		return nil, err
-	}
-	return result.Items, nil
 }

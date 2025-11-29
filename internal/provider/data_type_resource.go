@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,44 +45,84 @@ type DataTypeResource struct {
 	client *client.Client
 }
 
-// DataTypeExactValuesModel represents the exact_values block
-type DataTypeExactValuesModel struct {
+// DataTypeEmptyModel represents empty nested blocks
+type DataTypeEmptyModel struct {
+}
+
+// DataTypeRulesModel represents rules block
+type DataTypeRulesModel struct {
+	KeyPattern *DataTypeRulesKeyPatternModel `tfsdk:"key_pattern"`
+	KeyValuePattern *DataTypeRulesKeyValuePatternModel `tfsdk:"key_value_pattern"`
+	ValuePattern *DataTypeRulesValuePatternModel `tfsdk:"value_pattern"`
+}
+
+// DataTypeRulesKeyPatternModel represents key_pattern block
+type DataTypeRulesKeyPatternModel struct {
+	RegexValue types.String `tfsdk:"regex_value"`
+	SubstringValue types.String `tfsdk:"substring_value"`
+	ExactValues *DataTypeRulesKeyPatternExactValuesModel `tfsdk:"exact_values"`
+}
+
+// DataTypeRulesKeyPatternExactValuesModel represents exact_values block
+type DataTypeRulesKeyPatternExactValuesModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
 }
 
-// DataTypePatternModel represents a pattern block (key_pattern, value_pattern)
-type DataTypePatternModel struct {
-	RegexValue     types.String              `tfsdk:"regex_value"`
-	SubstringValue types.String              `tfsdk:"substring_value"`
-	ExactValues    *DataTypeExactValuesModel `tfsdk:"exact_values"`
+// DataTypeRulesKeyValuePatternModel represents key_value_pattern block
+type DataTypeRulesKeyValuePatternModel struct {
+	KeyPattern *DataTypeRulesKeyValuePatternKeyPatternModel `tfsdk:"key_pattern"`
+	ValuePattern *DataTypeRulesKeyValuePatternValuePatternModel `tfsdk:"value_pattern"`
 }
 
-// DataTypeKeyValuePatternModel represents the key_value_pattern block
-type DataTypeKeyValuePatternModel struct {
-	KeyPattern   *DataTypePatternModel `tfsdk:"key_pattern"`
-	ValuePattern *DataTypePatternModel `tfsdk:"value_pattern"`
+// DataTypeRulesKeyValuePatternKeyPatternModel represents key_pattern block
+type DataTypeRulesKeyValuePatternKeyPatternModel struct {
+	RegexValue types.String `tfsdk:"regex_value"`
+	SubstringValue types.String `tfsdk:"substring_value"`
+	ExactValues *DataTypeRulesKeyValuePatternKeyPatternExactValuesModel `tfsdk:"exact_values"`
 }
 
-// DataTypeRuleModel represents a single rule in the rules list
-type DataTypeRuleModel struct {
-	KeyPattern      *DataTypePatternModel         `tfsdk:"key_pattern"`
-	KeyValuePattern *DataTypeKeyValuePatternModel `tfsdk:"key_value_pattern"`
-	ValuePattern    *DataTypePatternModel         `tfsdk:"value_pattern"`
+// DataTypeRulesKeyValuePatternKeyPatternExactValuesModel represents exact_values block
+type DataTypeRulesKeyValuePatternKeyPatternExactValuesModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+}
+
+// DataTypeRulesKeyValuePatternValuePatternModel represents value_pattern block
+type DataTypeRulesKeyValuePatternValuePatternModel struct {
+	RegexValue types.String `tfsdk:"regex_value"`
+	SubstringValue types.String `tfsdk:"substring_value"`
+	ExactValues *DataTypeRulesKeyValuePatternValuePatternExactValuesModel `tfsdk:"exact_values"`
+}
+
+// DataTypeRulesKeyValuePatternValuePatternExactValuesModel represents exact_values block
+type DataTypeRulesKeyValuePatternValuePatternExactValuesModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+}
+
+// DataTypeRulesValuePatternModel represents value_pattern block
+type DataTypeRulesValuePatternModel struct {
+	RegexValue types.String `tfsdk:"regex_value"`
+	SubstringValue types.String `tfsdk:"substring_value"`
+	ExactValues *DataTypeRulesValuePatternExactValuesModel `tfsdk:"exact_values"`
+}
+
+// DataTypeRulesValuePatternExactValuesModel represents exact_values block
+type DataTypeRulesValuePatternExactValuesModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
 }
 
 type DataTypeResourceModel struct {
-	Name            types.String         `tfsdk:"name"`
-	Namespace       types.String         `tfsdk:"namespace"`
-	Annotations     types.Map            `tfsdk:"annotations"`
-	Compliances     types.List           `tfsdk:"compliances"`
-	Description     types.String         `tfsdk:"description"`
-	Disable         types.Bool           `tfsdk:"disable"`
-	IsPii           types.Bool           `tfsdk:"is_pii"`
-	IsSensitiveData types.Bool           `tfsdk:"is_sensitive_data"`
-	Labels          types.Map            `tfsdk:"labels"`
-	Rules           []DataTypeRuleModel  `tfsdk:"rules"`
-	ID              types.String         `tfsdk:"id"`
-	Timeouts        timeouts.Value       `tfsdk:"timeouts"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Compliances types.List `tfsdk:"compliances"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	IsPii types.Bool `tfsdk:"is_pii"`
+	IsSensitiveData types.Bool `tfsdk:"is_sensitive_data"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Rules []DataTypeRulesModel `tfsdk:"rules"`
 }
 
 func (r *DataTypeResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -398,21 +439,11 @@ func (r *DataTypeResource) Create(ctx context.Context, req resource.CreateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataTypeSpec{
-			Description:     data.Description.ValueString(),
-			IsPii:           data.IsPii.ValueBool(),
-			IsSensitiveData: data.IsSensitiveData.ValueBool(),
-		},
+		Spec: client.DataTypeSpec{},
 	}
 
-	// Handle compliances list
-	if !data.Compliances.IsNull() && !data.Compliances.IsUnknown() {
-		var compliances []string
-		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliances, false)...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-		apiResource.Spec.Compliances = compliances
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -470,6 +501,15 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 
 	apiResource, err := r.client.GetDataType(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "DataType not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DataType: %s", err))
 		return
 	}
@@ -485,22 +525,11 @@ func (r *DataTypeResource) Read(ctx context.Context, req resource.ReadRequest, r
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
-	// Read spec fields
-	if apiResource.Spec.Description != "" {
-		data.Description = types.StringValue(apiResource.Spec.Description)
-	}
-	data.IsPii = types.BoolValue(apiResource.Spec.IsPii)
-	data.IsSensitiveData = types.BoolValue(apiResource.Spec.IsSensitiveData)
-
-	// Handle compliances list
-	if len(apiResource.Spec.Compliances) > 0 {
-		compliances, diags := types.ListValueFrom(ctx, types.StringType, apiResource.Spec.Compliances)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Compliances = compliances
-		}
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
 	} else {
-		data.Compliances = types.ListNull(types.StringType)
+		data.Description = types.StringNull()
 	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
@@ -551,21 +580,11 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataTypeSpec{
-			Description:     data.Description.ValueString(),
-			IsPii:           data.IsPii.ValueBool(),
-			IsSensitiveData: data.IsSensitiveData.ValueBool(),
-		},
+		Spec: client.DataTypeSpec{},
 	}
 
-	// Handle compliances list
-	if !data.Compliances.IsNull() && !data.Compliances.IsUnknown() {
-		var compliances []string
-		resp.Diagnostics.Append(data.Compliances.ElementsAs(ctx, &compliances, false)...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-		apiResource.Spec.Compliances = compliances
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -592,10 +611,20 @@ func (r *DataTypeResource) Update(ctx context.Context, req resource.UpdateReques
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetDataType(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -619,11 +648,33 @@ func (r *DataTypeResource) Delete(ctx context.Context, req resource.DeleteReques
 
 	err := r.client.DeleteDataType(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "DataType already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete DataType: %s", err))
 		return
 	}
 }
 
 func (r *DataTypeResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

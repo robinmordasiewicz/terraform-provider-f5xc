@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,124 @@ type CloudConnectResource struct {
 	client *client.Client
 }
 
+// CloudConnectEmptyModel represents empty nested blocks
+type CloudConnectEmptyModel struct {
+}
+
+// CloudConnectAWSTGWSiteModel represents aws_tgw_site block
+type CloudConnectAWSTGWSiteModel struct {
+	Cred *CloudConnectAWSTGWSiteCredModel `tfsdk:"cred"`
+	Site *CloudConnectAWSTGWSiteSiteModel `tfsdk:"site"`
+	VPCAttachments *CloudConnectAWSTGWSiteVPCAttachmentsModel `tfsdk:"vpc_attachments"`
+}
+
+// CloudConnectAWSTGWSiteCredModel represents cred block
+type CloudConnectAWSTGWSiteCredModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CloudConnectAWSTGWSiteSiteModel represents site block
+type CloudConnectAWSTGWSiteSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CloudConnectAWSTGWSiteVPCAttachmentsModel represents vpc_attachments block
+type CloudConnectAWSTGWSiteVPCAttachmentsModel struct {
+	VPCList []CloudConnectAWSTGWSiteVPCAttachmentsVPCListModel `tfsdk:"vpc_list"`
+}
+
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListModel represents vpc_list block
+type CloudConnectAWSTGWSiteVPCAttachmentsVPCListModel struct {
+	VPCID types.String `tfsdk:"vpc_id"`
+	CustomRouting *CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingModel `tfsdk:"custom_routing"`
+	DefaultRoute *CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteModel `tfsdk:"default_route"`
+	Labels *CloudConnectEmptyModel `tfsdk:"labels"`
+	ManualRouting *CloudConnectEmptyModel `tfsdk:"manual_routing"`
+}
+
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingModel represents custom_routing block
+type CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingModel struct {
+	RouteTables []CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModel `tfsdk:"route_tables"`
+}
+
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModel represents route_tables block
+type CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingRouteTablesModel struct {
+	RouteTableID types.String `tfsdk:"route_table_id"`
+	StaticRoutes types.List `tfsdk:"static_routes"`
+}
+
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteModel represents default_route block
+type CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteModel struct {
+	AllRouteTables *CloudConnectEmptyModel `tfsdk:"all_route_tables"`
+	SelectiveRouteTables *CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTablesModel `tfsdk:"selective_route_tables"`
+}
+
+// CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTablesModel represents selective_route_tables block
+type CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteSelectiveRouteTablesModel struct {
+	RouteTableID types.List `tfsdk:"route_table_id"`
+}
+
+// CloudConnectAzureVNETSiteModel represents azure_vnet_site block
+type CloudConnectAzureVNETSiteModel struct {
+	Site *CloudConnectAzureVNETSiteSiteModel `tfsdk:"site"`
+	VNETAttachments *CloudConnectAzureVNETSiteVNETAttachmentsModel `tfsdk:"vnet_attachments"`
+}
+
+// CloudConnectAzureVNETSiteSiteModel represents site block
+type CloudConnectAzureVNETSiteSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CloudConnectAzureVNETSiteVNETAttachmentsModel represents vnet_attachments block
+type CloudConnectAzureVNETSiteVNETAttachmentsModel struct {
+	VNETList []CloudConnectAzureVNETSiteVNETAttachmentsVNETListModel `tfsdk:"vnet_list"`
+}
+
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListModel represents vnet_list block
+type CloudConnectAzureVNETSiteVNETAttachmentsVNETListModel struct {
+	SubscriptionID types.String `tfsdk:"subscription_id"`
+	VNETID types.String `tfsdk:"vnet_id"`
+	CustomRouting *CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingModel `tfsdk:"custom_routing"`
+	DefaultRoute *CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteModel `tfsdk:"default_route"`
+	Labels *CloudConnectEmptyModel `tfsdk:"labels"`
+	ManualRouting *CloudConnectEmptyModel `tfsdk:"manual_routing"`
+}
+
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingModel represents custom_routing block
+type CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingModel struct {
+	RouteTables []CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesModel `tfsdk:"route_tables"`
+}
+
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesModel represents route_tables block
+type CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingRouteTablesModel struct {
+	RouteTableID types.String `tfsdk:"route_table_id"`
+	StaticRoutes types.List `tfsdk:"static_routes"`
+}
+
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteModel represents default_route block
+type CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteModel struct {
+	AllRouteTables *CloudConnectEmptyModel `tfsdk:"all_route_tables"`
+	SelectiveRouteTables *CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteTablesModel `tfsdk:"selective_route_tables"`
+}
+
+// CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteTablesModel represents selective_route_tables block
+type CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteSelectiveRouteTablesModel struct {
+	RouteTableID types.List `tfsdk:"route_table_id"`
+}
+
+// CloudConnectSegmentModel represents segment block
+type CloudConnectSegmentModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type CloudConnectResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +172,9 @@ type CloudConnectResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AWSTGWSite *CloudConnectAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
+	AzureVNETSite *CloudConnectAzureVNETSiteModel `tfsdk:"azure_vnet_site"`
+	Segment *CloudConnectSegmentModel `tfsdk:"segment"`
 }
 
 func (r *CloudConnectResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -469,6 +591,10 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 		Spec: client.CloudConnectSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -524,6 +650,15 @@ func (r *CloudConnectResource) Read(ctx context.Context, req resource.ReadReques
 
 	apiResource, err := r.client.GetCloudConnect(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CloudConnect not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CloudConnect: %s", err))
 		return
 	}
@@ -538,6 +673,13 @@ func (r *CloudConnectResource) Read(ctx context.Context, req resource.ReadReques
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -590,6 +732,10 @@ func (r *CloudConnectResource) Update(ctx context.Context, req resource.UpdateRe
 		Spec: client.CloudConnectSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -614,10 +760,20 @@ func (r *CloudConnectResource) Update(ctx context.Context, req resource.UpdateRe
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetCloudConnect(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -641,11 +797,33 @@ func (r *CloudConnectResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	err := r.client.DeleteCloudConnect(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CloudConnect already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete CloudConnect: %s", err))
 		return
 	}
 }
 
 func (r *CloudConnectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

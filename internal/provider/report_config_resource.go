@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,53 @@ type ReportConfigResource struct {
 	client *client.Client
 }
 
+// ReportConfigEmptyModel represents empty nested blocks
+type ReportConfigEmptyModel struct {
+}
+
+// ReportConfigReportRecipientsModel represents report_recipients block
+type ReportConfigReportRecipientsModel struct {
+	UserGroups []ReportConfigReportRecipientsUserGroupsModel `tfsdk:"user_groups"`
+}
+
+// ReportConfigReportRecipientsUserGroupsModel represents user_groups block
+type ReportConfigReportRecipientsUserGroupsModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ReportConfigWaapModel represents waap block
+type ReportConfigWaapModel struct {
+	CurrentNamespace *ReportConfigEmptyModel `tfsdk:"current_namespace"`
+	Daily *ReportConfigWaapDailyModel `tfsdk:"daily"`
+	Monthly *ReportConfigWaapMonthlyModel `tfsdk:"monthly"`
+	Namespaces *ReportConfigWaapNamespacesModel `tfsdk:"namespaces"`
+	Weekly *ReportConfigWaapWeeklyModel `tfsdk:"weekly"`
+}
+
+// ReportConfigWaapDailyModel represents daily block
+type ReportConfigWaapDailyModel struct {
+	ReportGenerationTime types.String `tfsdk:"report_generation_time"`
+}
+
+// ReportConfigWaapMonthlyModel represents monthly block
+type ReportConfigWaapMonthlyModel struct {
+	Date types.String `tfsdk:"date"`
+	ReportGenerationTime types.String `tfsdk:"report_generation_time"`
+}
+
+// ReportConfigWaapNamespacesModel represents namespaces block
+type ReportConfigWaapNamespacesModel struct {
+	Namespaces types.List `tfsdk:"namespaces"`
+}
+
+// ReportConfigWaapWeeklyModel represents weekly block
+type ReportConfigWaapWeeklyModel struct {
+	Day types.String `tfsdk:"day"`
+	ReportGenerationTime types.String `tfsdk:"report_generation_time"`
+}
+
 type ReportConfigResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +101,8 @@ type ReportConfigResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	ReportRecipients *ReportConfigReportRecipientsModel `tfsdk:"report_recipients"`
+	Waap *ReportConfigWaapModel `tfsdk:"waap"`
 }
 
 func (r *ReportConfigResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -325,6 +375,10 @@ func (r *ReportConfigResource) Create(ctx context.Context, req resource.CreateRe
 		Spec: client.ReportConfigSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -380,6 +434,15 @@ func (r *ReportConfigResource) Read(ctx context.Context, req resource.ReadReques
 
 	apiResource, err := r.client.GetReportConfig(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ReportConfig not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ReportConfig: %s", err))
 		return
 	}
@@ -394,6 +457,13 @@ func (r *ReportConfigResource) Read(ctx context.Context, req resource.ReadReques
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -446,6 +516,10 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 		Spec: client.ReportConfigSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -470,10 +544,20 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetReportConfig(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -497,11 +581,33 @@ func (r *ReportConfigResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	err := r.client.DeleteReportConfig(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ReportConfig already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete ReportConfig: %s", err))
 		return
 	}
 }
 
 func (r *ReportConfigResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

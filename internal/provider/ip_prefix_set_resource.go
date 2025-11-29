@@ -45,22 +45,26 @@ type IPPrefixSetResource struct {
 	client *client.Client
 }
 
-// IPv4PrefixModel represents an IPv4 prefix with description
-type IPv4PrefixModel struct {
+// IPPrefixSetEmptyModel represents empty nested blocks
+type IPPrefixSetEmptyModel struct {
+}
+
+// IPPrefixSetIPV4PrefixesModel represents ipv4_prefixes block
+type IPPrefixSetIPV4PrefixesModel struct {
 	Description types.String `tfsdk:"description"`
-	IPv4Prefix  types.String `tfsdk:"ipv4_prefix"`
+	IPV4Prefix types.String `tfsdk:"ipv4_prefix"`
 }
 
 type IPPrefixSetResourceModel struct {
-	Name         types.String      `tfsdk:"name"`
-	Namespace    types.String      `tfsdk:"namespace"`
-	Annotations  types.Map         `tfsdk:"annotations"`
-	Description  types.String      `tfsdk:"description"`
-	Disable      types.Bool        `tfsdk:"disable"`
-	Labels       types.Map         `tfsdk:"labels"`
-	IPv4Prefixes []IPv4PrefixModel `tfsdk:"ipv4_prefixes"`
-	ID           types.String      `tfsdk:"id"`
-	Timeouts     timeouts.Value    `tfsdk:"timeouts"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	IPV4Prefixes []IPPrefixSetIPV4PrefixesModel `tfsdk:"ipv4_prefixes"`
 }
 
 func (r *IPPrefixSetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -266,6 +270,10 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 		Spec: client.IPPrefixSetSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -282,18 +290,6 @@ func (r *IPPrefixSetResource) Create(ctx context.Context, req resource.CreateReq
 			return
 		}
 		apiResource.Metadata.Annotations = annotations
-	}
-
-	// Convert IPv4Prefixes from Terraform model to API model
-	if len(data.IPv4Prefixes) > 0 {
-		apiPrefixes := make([]client.IPv4Prefix, len(data.IPv4Prefixes))
-		for i, prefix := range data.IPv4Prefixes {
-			apiPrefixes[i] = client.IPv4Prefix{
-				Description: prefix.Description.ValueString(),
-				IPv4Prefix:  prefix.IPv4Prefix.ValueString(),
-			}
-		}
-		apiResource.Spec.IPv4Prefixes = apiPrefixes
 	}
 
 	created, err := r.client.CreateIPPrefixSet(ctx, apiResource)
@@ -333,6 +329,15 @@ func (r *IPPrefixSetResource) Read(ctx context.Context, req resource.ReadRequest
 
 	apiResource, err := r.client.GetIPPrefixSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "IPPrefixSet not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read IPPrefixSet: %s", err))
 		return
 	}
@@ -347,6 +352,13 @@ func (r *IPPrefixSetResource) Read(ctx context.Context, req resource.ReadRequest
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -366,20 +378,6 @@ func (r *IPPrefixSetResource) Read(ctx context.Context, req resource.ReadRequest
 		}
 	} else {
 		data.Annotations = types.MapNull(types.StringType)
-	}
-
-	// Read IPv4Prefixes from API response
-	if len(apiResource.Spec.IPv4Prefixes) > 0 {
-		prefixes := make([]IPv4PrefixModel, len(apiResource.Spec.IPv4Prefixes))
-		for i, prefix := range apiResource.Spec.IPv4Prefixes {
-			prefixes[i] = IPv4PrefixModel{
-				Description: types.StringValue(prefix.Description),
-				IPv4Prefix:  types.StringValue(prefix.IPv4Prefix),
-			}
-		}
-		data.IPv4Prefixes = prefixes
-	} else {
-		data.IPv4Prefixes = nil
 	}
 
 	psd = privatestate.NewPrivateStateData()
@@ -413,6 +411,10 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 		Spec: client.IPPrefixSetSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -431,28 +433,26 @@ func (r *IPPrefixSetResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
-	// Convert IPv4Prefixes from Terraform model to API model
-	if len(data.IPv4Prefixes) > 0 {
-		apiPrefixes := make([]client.IPv4Prefix, len(data.IPv4Prefixes))
-		for i, prefix := range data.IPv4Prefixes {
-			apiPrefixes[i] = client.IPv4Prefix{
-				Description: prefix.Description.ValueString(),
-				IPv4Prefix:  prefix.IPv4Prefix.ValueString(),
-			}
-		}
-		apiResource.Spec.IPv4Prefixes = apiPrefixes
-	}
-
 	updated, err := r.client.UpdateIPPrefixSet(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update IPPrefixSet: %s", err))
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetIPPrefixSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -476,26 +476,33 @@ func (r *IPPrefixSetResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	err := r.client.DeleteIPPrefixSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "IPPrefixSet already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete IPPrefixSet: %s", err))
 		return
 	}
 }
 
 func (r *IPPrefixSetResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: "namespace/name"
-	idParts := strings.Split(req.ID, "/")
-	if len(idParts) != 2 || idParts[0] == "" || idParts[1] == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID in format 'namespace/name', got: %s", req.ID),
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
+	namespace := parts[0]
+	name := parts[1]
 
-	namespace := idParts[0]
-	name := idParts[1]
-
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

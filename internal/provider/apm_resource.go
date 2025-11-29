@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,591 @@ type APMResource struct {
 	client *client.Client
 }
 
+// APMEmptyModel represents empty nested blocks
+type APMEmptyModel struct {
+}
+
+// APMAWSSiteTypeChoiceModel represents aws_site_type_choice block
+type APMAWSSiteTypeChoiceModel struct {
+	APMAWSSite *APMAWSSiteTypeChoiceAPMAWSSiteModel `tfsdk:"apm_aws_site"`
+	MarketPlaceImage *APMAWSSiteTypeChoiceMarketPlaceImageModel `tfsdk:"market_place_image"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteModel represents apm_aws_site block
+type APMAWSSiteTypeChoiceAPMAWSSiteModel struct {
+	AdminUsername types.String `tfsdk:"admin_username"`
+	SSHKey types.String `tfsdk:"ssh_key"`
+	AdminPassword *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel `tfsdk:"admin_password"`
+	AWSTGWSite *APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
+	EndpointService *APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModel `tfsdk:"endpoint_service"`
+	Nodes []APMAWSSiteTypeChoiceAPMAWSSiteNodesModel `tfsdk:"nodes"`
+	Tags *APMEmptyModel `tfsdk:"tags"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel represents admin_password block
+type APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel struct {
+	BlindfoldSecretInfo *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel represents aws_tgw_site block
+type APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel struct {
+	AWSTGWSite *APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModel represents aws_tgw_site block
+type APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModel represents endpoint_service block
+type APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModel struct {
+	ConfiguredVip types.String `tfsdk:"configured_vip"`
+	AdvertiseOnSLOIP *APMEmptyModel `tfsdk:"advertise_on_slo_ip"`
+	AdvertiseOnSLOIPExternal *APMEmptyModel `tfsdk:"advertise_on_slo_ip_external"`
+	AutomaticVip *APMEmptyModel `tfsdk:"automatic_vip"`
+	CustomTCPPorts *APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModel `tfsdk:"custom_tcp_ports"`
+	CustomUDPPorts *APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModel `tfsdk:"custom_udp_ports"`
+	DefaultTCPPorts *APMEmptyModel `tfsdk:"default_tcp_ports"`
+	DisableAdvertiseOnSLOIP *APMEmptyModel `tfsdk:"disable_advertise_on_slo_ip"`
+	HTTPPort *APMEmptyModel `tfsdk:"http_port"`
+	HTTPSPort *APMEmptyModel `tfsdk:"https_port"`
+	NoTCPPorts *APMEmptyModel `tfsdk:"no_tcp_ports"`
+	NoUDPPorts *APMEmptyModel `tfsdk:"no_udp_ports"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModel represents custom_tcp_ports block
+type APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModel struct {
+	Ports types.List `tfsdk:"ports"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModel represents custom_udp_ports block
+type APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModel struct {
+	Ports types.List `tfsdk:"ports"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteNodesModel represents nodes block
+type APMAWSSiteTypeChoiceAPMAWSSiteNodesModel struct {
+	AWSAzName types.String `tfsdk:"aws_az_name"`
+	NodeName types.String `tfsdk:"node_name"`
+	TunnelPrefix types.String `tfsdk:"tunnel_prefix"`
+	AutomaticPrefix *APMEmptyModel `tfsdk:"automatic_prefix"`
+	MgmtSubnet *APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
+	ReservedMgmtSubnet *APMEmptyModel `tfsdk:"reserved_mgmt_subnet"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel represents mgmt_subnet block
+type APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel struct {
+	ExistingSubnetID types.String `tfsdk:"existing_subnet_id"`
+	SubnetParam *APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel represents subnet_param block
+type APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// APMAWSSiteTypeChoiceMarketPlaceImageModel represents market_place_image block
+type APMAWSSiteTypeChoiceMarketPlaceImageModel struct {
+	Bestpluspayg200mbps *APMEmptyModel `tfsdk:"best_plus_pay_g200_mbps"`
+	BestPlusPayg1gbps *APMEmptyModel `tfsdk:"best_plus_payg_1gbps"`
+}
+
+// APMBaremetalSiteTypeChoiceModel represents baremetal_site_type_choice block
+type APMBaremetalSiteTypeChoiceModel struct {
+	F5BareMetalSite *APMBaremetalSiteTypeChoiceF5BareMetalSiteModel `tfsdk:"f5_bare_metal_site"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteModel represents f5_bare_metal_site block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteModel struct {
+	AdminUsername types.String `tfsdk:"admin_username"`
+	PublicDownloadURL types.String `tfsdk:"public_download_url"`
+	SSHKey types.String `tfsdk:"ssh_key"`
+	AdminPassword *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel `tfsdk:"admin_password"`
+	BareMetalSite *APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel `tfsdk:"bare_metal_site"`
+	BigiqInstance *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel `tfsdk:"bigiq_instance"`
+	Nodes []APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel `tfsdk:"nodes"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel represents admin_password block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel struct {
+	BlindfoldSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel represents bare_metal_site block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel represents bigiq_instance block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel struct {
+	LicensePoolName types.String `tfsdk:"license_pool_name"`
+	LicenseServerIP types.String `tfsdk:"license_server_ip"`
+	SkuName types.String `tfsdk:"sku_name"`
+	Username types.String `tfsdk:"username"`
+	Password *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel `tfsdk:"password"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel represents password block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel struct {
+	BlindfoldSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel represents clear_secret_info block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel represents nodes block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel struct {
+	BmNodeMemorySize types.String `tfsdk:"bm_node_memory_size"`
+	BmVirtualCpuCount types.String `tfsdk:"bm_virtual_cpu_count"`
+	NodeName types.String `tfsdk:"node_name"`
+	ExternalInterface *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModel `tfsdk:"external_interface"`
+	InternalInterface *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel `tfsdk:"internal_interface"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModel represents external_interface block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModel struct {
+	NetworkGateway types.String `tfsdk:"network_gateway"`
+	NetworkSelfIP types.String `tfsdk:"network_self_ip"`
+	Interface *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel `tfsdk:"interface"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel represents interface block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel represents internal_interface block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel struct {
+	NetworkGateway types.String `tfsdk:"network_gateway"`
+	NetworkSelfIP types.String `tfsdk:"network_self_ip"`
+	Interface *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel `tfsdk:"interface"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel represents interface block
+type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementModel represents https_management block
+type APMHTTPSManagementModel struct {
+	DomainSuffix types.String `tfsdk:"domain_suffix"`
+	HTTPSPort types.Int64 `tfsdk:"https_port"`
+	AdvertiseOnInternet *APMHTTPSManagementAdvertiseOnInternetModel `tfsdk:"advertise_on_internet"`
+	AdvertiseOnInternetDefaultVip *APMEmptyModel `tfsdk:"advertise_on_internet_default_vip"`
+	AdvertiseOnSLIVip *APMHTTPSManagementAdvertiseOnSLIVipModel `tfsdk:"advertise_on_sli_vip"`
+	AdvertiseOnSLOInternetVip *APMHTTPSManagementAdvertiseOnSLOInternetVipModel `tfsdk:"advertise_on_slo_internet_vip"`
+	AdvertiseOnSLOSLI *APMHTTPSManagementAdvertiseOnSLOSLIModel `tfsdk:"advertise_on_slo_sli"`
+	AdvertiseOnSLOVip *APMHTTPSManagementAdvertiseOnSLOVipModel `tfsdk:"advertise_on_slo_vip"`
+	DefaultHTTPSPort *APMEmptyModel `tfsdk:"default_https_port"`
+}
+
+// APMHTTPSManagementAdvertiseOnInternetModel represents advertise_on_internet block
+type APMHTTPSManagementAdvertiseOnInternetModel struct {
+	PublicIP *APMHTTPSManagementAdvertiseOnInternetPublicIPModel `tfsdk:"public_ip"`
+}
+
+// APMHTTPSManagementAdvertiseOnInternetPublicIPModel represents public_ip block
+type APMHTTPSManagementAdvertiseOnInternetPublicIPModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipModel represents advertise_on_sli_vip block
+type APMHTTPSManagementAdvertiseOnSLIVipModel struct {
+	NoMtls *APMEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *APMHTTPSManagementAdvertiseOnSLIVipTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel represents tls_certificates block
+type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *APMEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel represents private_key block
+type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type APMHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipTLSConfigModel represents tls_config block
+type APMHTTPSManagementAdvertiseOnSLIVipTLSConfigModel struct {
+	CustomSecurity *APMHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *APMEmptyModel `tfsdk:"default_security"`
+	LowSecurity *APMEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *APMEmptyModel `tfsdk:"medium_security"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel represents custom_security block
+type APMHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipUseMtlsModel represents use_mtls block
+type APMHTTPSManagementAdvertiseOnSLIVipUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *APMEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *APMEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *APMHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel represents crl block
+type APMHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel represents trusted_ca block
+type APMHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel represents xfcc_options block
+type APMHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipModel represents advertise_on_slo_internet_vip block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipModel struct {
+	NoMtls *APMEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel represents tls_certificates block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *APMEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel represents private_key block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel represents tls_config block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel struct {
+	CustomSecurity *APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *APMEmptyModel `tfsdk:"default_security"`
+	LowSecurity *APMEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *APMEmptyModel `tfsdk:"medium_security"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel represents custom_security block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel represents use_mtls block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *APMEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *APMEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel represents crl block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel represents trusted_ca block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel represents xfcc_options block
+type APMHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLIModel represents advertise_on_slo_sli block
+type APMHTTPSManagementAdvertiseOnSLOSLIModel struct {
+	NoMtls *APMEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *APMHTTPSManagementAdvertiseOnSLOSLITLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel represents tls_certificates block
+type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *APMEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel represents private_key block
+type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type APMHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLITLSConfigModel represents tls_config block
+type APMHTTPSManagementAdvertiseOnSLOSLITLSConfigModel struct {
+	CustomSecurity *APMHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *APMEmptyModel `tfsdk:"default_security"`
+	LowSecurity *APMEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *APMEmptyModel `tfsdk:"medium_security"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel represents custom_security block
+type APMHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel represents use_mtls block
+type APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *APMEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *APMEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel represents crl block
+type APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel represents trusted_ca block
+type APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel represents xfcc_options block
+type APMHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipModel represents advertise_on_slo_vip block
+type APMHTTPSManagementAdvertiseOnSLOVipModel struct {
+	NoMtls *APMEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *APMHTTPSManagementAdvertiseOnSLOVipTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel represents tls_certificates block
+type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *APMEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *APMEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel represents private_key block
+type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type APMHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipTLSConfigModel represents tls_config block
+type APMHTTPSManagementAdvertiseOnSLOVipTLSConfigModel struct {
+	CustomSecurity *APMHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *APMEmptyModel `tfsdk:"default_security"`
+	LowSecurity *APMEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *APMEmptyModel `tfsdk:"medium_security"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel represents custom_security block
+type APMHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipUseMtlsModel represents use_mtls block
+type APMHTTPSManagementAdvertiseOnSLOVipUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *APMEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *APMEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *APMHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel represents crl block
+type APMHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel represents trusted_ca block
+type APMHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel represents xfcc_options block
+type APMHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
 type APMResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +639,9 @@ type APMResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AWSSiteTypeChoice *APMAWSSiteTypeChoiceModel `tfsdk:"aws_site_type_choice"`
+	BaremetalSiteTypeChoice *APMBaremetalSiteTypeChoiceModel `tfsdk:"baremetal_site_type_choice"`
+	HTTPSManagement *APMHTTPSManagementModel `tfsdk:"https_management"`
 }
 
 func (r *APMResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1435,6 +2024,10 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 		Spec: client.APMSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1490,6 +2083,15 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 
 	apiResource, err := r.client.GetAPM(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "APM not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read APM: %s", err))
 		return
 	}
@@ -1504,6 +2106,13 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1556,6 +2165,10 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		Spec: client.APMSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1580,10 +2193,20 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetAPM(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1607,11 +2230,33 @@ func (r *APMResource) Delete(ctx context.Context, req resource.DeleteRequest, re
 
 	err := r.client.DeleteAPM(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "APM already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete APM: %s", err))
 		return
 	}
 }
 
 func (r *APMResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

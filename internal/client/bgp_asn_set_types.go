@@ -16,8 +16,7 @@ type BGPAsnSet struct {
 
 // BGPAsnSetSpec defines the specification for BGPAsnSet
 type BGPAsnSetSpec struct {
-	Description string   `json:"description,omitempty"`
-	AsNumbers   []uint32 `json:"as_numbers,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 // CreateBGPAsnSet creates a new BGPAsnSet
@@ -48,20 +47,4 @@ func (c *Client) UpdateBGPAsnSet(ctx context.Context, resource *BGPAsnSet) (*BGP
 func (c *Client) DeleteBGPAsnSet(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/bgp_asn_sets/%s", namespace, name)
 	return c.Delete(ctx, path)
-}
-
-// BGPAsnSetListResponse is the response from listing BGP ASN sets
-type BGPAsnSetListResponse struct {
-	Items []BGPAsnSet `json:"items"`
-}
-
-// ListBGPAsnSets lists all BGP ASN sets in a namespace
-func (c *Client) ListBGPAsnSets(ctx context.Context, namespace string) ([]BGPAsnSet, error) {
-	var result BGPAsnSetListResponse
-	path := fmt.Sprintf("/api/config/namespaces/%s/bgp_asn_sets", namespace)
-	err := c.Get(ctx, path, &result)
-	if err != nil {
-		return nil, err
-	}
-	return result.Items, nil
 }

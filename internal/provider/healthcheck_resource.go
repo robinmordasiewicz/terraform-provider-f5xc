@@ -45,50 +45,45 @@ type HealthcheckResource struct {
 	client *client.Client
 }
 
-type HealthcheckResourceModel struct {
-	Name               types.String                     `tfsdk:"name"`
-	Namespace          types.String                     `tfsdk:"namespace"`
-	Annotations        types.Map                        `tfsdk:"annotations"`
-	Description        types.String                     `tfsdk:"description"`
-	Disable            types.Bool                       `tfsdk:"disable"`
-	HealthyThreshold   types.Int64                      `tfsdk:"healthy_threshold"`
-	Interval           types.Int64                      `tfsdk:"interval"`
-	JitterPercent      types.Int64                      `tfsdk:"jitter_percent"`
-	Labels             types.Map                        `tfsdk:"labels"`
-	Timeout            types.Int64                      `tfsdk:"timeout"`
-	UnhealthyThreshold types.Int64                      `tfsdk:"unhealthy_threshold"`
-	ID                 types.String                     `tfsdk:"id"`
-	Timeouts           timeouts.Value                   `tfsdk:"timeouts"`
-	HTTPHealthCheck    *HTTPHealthCheckModel            `tfsdk:"http_health_check"`
-	TCPHealthCheck     *TCPHealthCheckModel             `tfsdk:"tcp_health_check"`
-	UDPICMPHealthCheck *UDPICMPHealthCheckModel         `tfsdk:"udp_icmp_health_check"`
+// HealthcheckEmptyModel represents empty nested blocks
+type HealthcheckEmptyModel struct {
 }
 
-// HTTPHealthCheckModel represents the http_health_check nested block
-type HTTPHealthCheckModel struct {
-	ExpectedStatusCodes    types.List                   `tfsdk:"expected_status_codes"`
-	HostHeader             types.String                 `tfsdk:"host_header"`
-	Path                   types.String                 `tfsdk:"path"`
-	RequestHeadersToRemove types.List                   `tfsdk:"request_headers_to_remove"`
-	UseHTTP2               types.Bool                   `tfsdk:"use_http2"`
-	Headers                *HTTPHealthCheckHeadersModel `tfsdk:"headers"`
-	UseOriginServerName    *EmptyBlockModel             `tfsdk:"use_origin_server_name"`
+// HealthcheckHTTPHealthCheckModel represents http_health_check block
+type HealthcheckHTTPHealthCheckModel struct {
+	ExpectedStatusCodes types.List `tfsdk:"expected_status_codes"`
+	HostHeader types.String `tfsdk:"host_header"`
+	Path types.String `tfsdk:"path"`
+	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
+	UseHttp2 types.Bool `tfsdk:"use_http2"`
+	Headers *HealthcheckEmptyModel `tfsdk:"headers"`
+	UseOriginServerName *HealthcheckEmptyModel `tfsdk:"use_origin_server_name"`
 }
 
-// HTTPHealthCheckHeadersModel represents the headers nested block
-type HTTPHealthCheckHeadersModel struct{}
-
-// TCPHealthCheckModel represents the tcp_health_check nested block
-type TCPHealthCheckModel struct {
+// HealthcheckTCPHealthCheckModel represents tcp_health_check block
+type HealthcheckTCPHealthCheckModel struct {
 	ExpectedResponse types.String `tfsdk:"expected_response"`
-	SendPayload      types.String `tfsdk:"send_payload"`
+	SendPayload types.String `tfsdk:"send_payload"`
 }
 
-// UDPICMPHealthCheckModel represents the udp_icmp_health_check nested block
-type UDPICMPHealthCheckModel struct{}
-
-// EmptyBlockModel represents an empty nested block
-type EmptyBlockModel struct{}
+type HealthcheckResourceModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	HealthyThreshold types.Int64 `tfsdk:"healthy_threshold"`
+	Interval types.Int64 `tfsdk:"interval"`
+	JitterPercent types.Int64 `tfsdk:"jitter_percent"`
+	Labels types.Map `tfsdk:"labels"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	UnhealthyThreshold types.Int64 `tfsdk:"unhealthy_threshold"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	HTTPHealthCheck *HealthcheckHTTPHealthCheckModel `tfsdk:"http_health_check"`
+	TCPHealthCheck *HealthcheckTCPHealthCheckModel `tfsdk:"tcp_health_check"`
+	UDPIcmpHealthCheck *HealthcheckEmptyModel `tfsdk:"udp_icmp_health_check"`
+}
 
 func (r *HealthcheckResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_healthcheck"
@@ -350,6 +345,10 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 		Spec: client.HealthcheckSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -366,74 +365,6 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 			return
 		}
 		apiResource.Metadata.Annotations = annotations
-	}
-
-	// Populate spec fields
-	if !data.Description.IsNull() {
-		apiResource.Spec.Description = data.Description.ValueString()
-	}
-	if !data.Disable.IsNull() {
-		apiResource.Spec.Disable = data.Disable.ValueBool()
-	}
-	if !data.HealthyThreshold.IsNull() {
-		apiResource.Spec.HealthyThreshold = data.HealthyThreshold.ValueInt64()
-	}
-	if !data.Interval.IsNull() {
-		apiResource.Spec.Interval = data.Interval.ValueInt64()
-	}
-	if !data.JitterPercent.IsNull() {
-		apiResource.Spec.JitterPercent = data.JitterPercent.ValueInt64()
-	}
-	if !data.Timeout.IsNull() {
-		apiResource.Spec.Timeout = data.Timeout.ValueInt64()
-	}
-	if !data.UnhealthyThreshold.IsNull() {
-		apiResource.Spec.UnhealthyThreshold = data.UnhealthyThreshold.ValueInt64()
-	}
-
-	// Populate health check type (OneOf: http_health_check, tcp_health_check, udp_icmp_health_check)
-	if data.HTTPHealthCheck != nil {
-		httpHC := &client.HTTPHealthCheckSpec{}
-		if !data.HTTPHealthCheck.Path.IsNull() {
-			httpHC.Path = data.HTTPHealthCheck.Path.ValueString()
-		}
-		if !data.HTTPHealthCheck.HostHeader.IsNull() {
-			httpHC.HostHeader = data.HTTPHealthCheck.HostHeader.ValueString()
-		}
-		if !data.HTTPHealthCheck.UseHTTP2.IsNull() {
-			httpHC.UseHTTP2 = data.HTTPHealthCheck.UseHTTP2.ValueBool()
-		}
-		if !data.HTTPHealthCheck.ExpectedStatusCodes.IsNull() {
-			var codes []string
-			resp.Diagnostics.Append(data.HTTPHealthCheck.ExpectedStatusCodes.ElementsAs(ctx, &codes, false)...)
-			if resp.Diagnostics.HasError() {
-				return
-			}
-			httpHC.ExpectedStatusCodes = codes
-		}
-		if !data.HTTPHealthCheck.RequestHeadersToRemove.IsNull() {
-			var headers []string
-			resp.Diagnostics.Append(data.HTTPHealthCheck.RequestHeadersToRemove.ElementsAs(ctx, &headers, false)...)
-			if resp.Diagnostics.HasError() {
-				return
-			}
-			httpHC.RequestHeadersToRemove = headers
-		}
-		if data.HTTPHealthCheck.UseOriginServerName != nil {
-			httpHC.UseOriginServerName = &client.EmptySpec{}
-		}
-		apiResource.Spec.HTTPHealthCheck = httpHC
-	} else if data.TCPHealthCheck != nil {
-		tcpHC := &client.TCPHealthCheckSpec{}
-		if !data.TCPHealthCheck.ExpectedResponse.IsNull() {
-			tcpHC.ExpectedResponse = data.TCPHealthCheck.ExpectedResponse.ValueString()
-		}
-		if !data.TCPHealthCheck.SendPayload.IsNull() {
-			tcpHC.SendPayload = data.TCPHealthCheck.SendPayload.ValueString()
-		}
-		apiResource.Spec.TCPHealthCheck = tcpHC
-	} else if data.UDPICMPHealthCheck != nil {
-		apiResource.Spec.UDPICMPHealthCheck = &client.UDPICMPHealthCheckSpec{}
 	}
 
 	created, err := r.client.CreateHealthcheck(ctx, apiResource)
@@ -473,8 +404,8 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 
 	apiResource, err := r.client.GetHealthcheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// Handle 404 - resource was deleted outside Terraform
-		if strings.Contains(err.Error(), "404") || strings.Contains(err.Error(), "not found") || strings.Contains(err.Error(), "NOT_FOUND") {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Healthcheck not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
@@ -497,6 +428,13 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
+
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
 		resp.Diagnostics.Append(diags...)
@@ -515,105 +453,6 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 		}
 	} else {
 		data.Annotations = types.MapNull(types.StringType)
-	}
-
-	// Read spec fields
-	if apiResource.Spec.Description != "" {
-		data.Description = types.StringValue(apiResource.Spec.Description)
-	} else {
-		data.Description = types.StringNull()
-	}
-	if apiResource.Spec.Disable {
-		data.Disable = types.BoolValue(apiResource.Spec.Disable)
-	} else {
-		data.Disable = types.BoolNull()
-	}
-	if apiResource.Spec.HealthyThreshold > 0 {
-		data.HealthyThreshold = types.Int64Value(apiResource.Spec.HealthyThreshold)
-	} else {
-		data.HealthyThreshold = types.Int64Null()
-	}
-	if apiResource.Spec.Interval > 0 {
-		data.Interval = types.Int64Value(apiResource.Spec.Interval)
-	} else {
-		data.Interval = types.Int64Null()
-	}
-	if apiResource.Spec.JitterPercent > 0 {
-		data.JitterPercent = types.Int64Value(apiResource.Spec.JitterPercent)
-	} else {
-		data.JitterPercent = types.Int64Null()
-	}
-	if apiResource.Spec.Timeout > 0 {
-		data.Timeout = types.Int64Value(apiResource.Spec.Timeout)
-	} else {
-		data.Timeout = types.Int64Null()
-	}
-	if apiResource.Spec.UnhealthyThreshold > 0 {
-		data.UnhealthyThreshold = types.Int64Value(apiResource.Spec.UnhealthyThreshold)
-	} else {
-		data.UnhealthyThreshold = types.Int64Null()
-	}
-
-	// Read health check type (OneOf: http_health_check, tcp_health_check, udp_icmp_health_check)
-	if apiResource.Spec.HTTPHealthCheck != nil {
-		httpHC := &HTTPHealthCheckModel{
-			Path:       types.StringNull(),
-			HostHeader: types.StringNull(),
-			UseHTTP2:   types.BoolNull(),
-			ExpectedStatusCodes:    types.ListNull(types.StringType),
-			RequestHeadersToRemove: types.ListNull(types.StringType),
-		}
-		if apiResource.Spec.HTTPHealthCheck.Path != "" {
-			httpHC.Path = types.StringValue(apiResource.Spec.HTTPHealthCheck.Path)
-		}
-		if apiResource.Spec.HTTPHealthCheck.HostHeader != "" {
-			httpHC.HostHeader = types.StringValue(apiResource.Spec.HTTPHealthCheck.HostHeader)
-		}
-		if apiResource.Spec.HTTPHealthCheck.UseHTTP2 {
-			httpHC.UseHTTP2 = types.BoolValue(apiResource.Spec.HTTPHealthCheck.UseHTTP2)
-		}
-		if len(apiResource.Spec.HTTPHealthCheck.ExpectedStatusCodes) > 0 {
-			codes, diags := types.ListValueFrom(ctx, types.StringType, apiResource.Spec.HTTPHealthCheck.ExpectedStatusCodes)
-			resp.Diagnostics.Append(diags...)
-			if !resp.Diagnostics.HasError() {
-				httpHC.ExpectedStatusCodes = codes
-			}
-		}
-		if len(apiResource.Spec.HTTPHealthCheck.RequestHeadersToRemove) > 0 {
-			headers, diags := types.ListValueFrom(ctx, types.StringType, apiResource.Spec.HTTPHealthCheck.RequestHeadersToRemove)
-			resp.Diagnostics.Append(diags...)
-			if !resp.Diagnostics.HasError() {
-				httpHC.RequestHeadersToRemove = headers
-			}
-		}
-		if apiResource.Spec.HTTPHealthCheck.UseOriginServerName != nil {
-			httpHC.UseOriginServerName = &EmptyBlockModel{}
-		}
-		data.HTTPHealthCheck = httpHC
-		data.TCPHealthCheck = nil
-		data.UDPICMPHealthCheck = nil
-	} else if apiResource.Spec.TCPHealthCheck != nil {
-		tcpHC := &TCPHealthCheckModel{
-			ExpectedResponse: types.StringNull(),
-			SendPayload:      types.StringNull(),
-		}
-		if apiResource.Spec.TCPHealthCheck.ExpectedResponse != "" {
-			tcpHC.ExpectedResponse = types.StringValue(apiResource.Spec.TCPHealthCheck.ExpectedResponse)
-		}
-		if apiResource.Spec.TCPHealthCheck.SendPayload != "" {
-			tcpHC.SendPayload = types.StringValue(apiResource.Spec.TCPHealthCheck.SendPayload)
-		}
-		data.TCPHealthCheck = tcpHC
-		data.HTTPHealthCheck = nil
-		data.UDPICMPHealthCheck = nil
-	} else if apiResource.Spec.UDPICMPHealthCheck != nil {
-		data.UDPICMPHealthCheck = &UDPICMPHealthCheckModel{}
-		data.HTTPHealthCheck = nil
-		data.TCPHealthCheck = nil
-	} else {
-		data.HTTPHealthCheck = nil
-		data.TCPHealthCheck = nil
-		data.UDPICMPHealthCheck = nil
 	}
 
 	psd = privatestate.NewPrivateStateData()
@@ -647,6 +486,10 @@ func (r *HealthcheckResource) Update(ctx context.Context, req resource.UpdateReq
 		Spec: client.HealthcheckSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -665,92 +508,26 @@ func (r *HealthcheckResource) Update(ctx context.Context, req resource.UpdateReq
 		apiResource.Metadata.Annotations = annotations
 	}
 
-	// Populate spec fields
-	if !data.Description.IsNull() {
-		apiResource.Spec.Description = data.Description.ValueString()
-	}
-	if !data.Disable.IsNull() {
-		apiResource.Spec.Disable = data.Disable.ValueBool()
-	}
-	if !data.HealthyThreshold.IsNull() {
-		apiResource.Spec.HealthyThreshold = data.HealthyThreshold.ValueInt64()
-	}
-	if !data.Interval.IsNull() {
-		apiResource.Spec.Interval = data.Interval.ValueInt64()
-	}
-	if !data.JitterPercent.IsNull() {
-		apiResource.Spec.JitterPercent = data.JitterPercent.ValueInt64()
-	}
-	if !data.Timeout.IsNull() {
-		apiResource.Spec.Timeout = data.Timeout.ValueInt64()
-	}
-	if !data.UnhealthyThreshold.IsNull() {
-		apiResource.Spec.UnhealthyThreshold = data.UnhealthyThreshold.ValueInt64()
-	}
-
-	// Populate health check type (OneOf: http_health_check, tcp_health_check, udp_icmp_health_check)
-	if data.HTTPHealthCheck != nil {
-		httpHC := &client.HTTPHealthCheckSpec{}
-		if !data.HTTPHealthCheck.Path.IsNull() {
-			httpHC.Path = data.HTTPHealthCheck.Path.ValueString()
-		}
-		if !data.HTTPHealthCheck.HostHeader.IsNull() {
-			httpHC.HostHeader = data.HTTPHealthCheck.HostHeader.ValueString()
-		}
-		if !data.HTTPHealthCheck.UseHTTP2.IsNull() {
-			httpHC.UseHTTP2 = data.HTTPHealthCheck.UseHTTP2.ValueBool()
-		}
-		if !data.HTTPHealthCheck.ExpectedStatusCodes.IsNull() {
-			var codes []string
-			resp.Diagnostics.Append(data.HTTPHealthCheck.ExpectedStatusCodes.ElementsAs(ctx, &codes, false)...)
-			if resp.Diagnostics.HasError() {
-				return
-			}
-			httpHC.ExpectedStatusCodes = codes
-		}
-		if !data.HTTPHealthCheck.RequestHeadersToRemove.IsNull() {
-			var headers []string
-			resp.Diagnostics.Append(data.HTTPHealthCheck.RequestHeadersToRemove.ElementsAs(ctx, &headers, false)...)
-			if resp.Diagnostics.HasError() {
-				return
-			}
-			httpHC.RequestHeadersToRemove = headers
-		}
-		if data.HTTPHealthCheck.UseOriginServerName != nil {
-			httpHC.UseOriginServerName = &client.EmptySpec{}
-		}
-		apiResource.Spec.HTTPHealthCheck = httpHC
-	} else if data.TCPHealthCheck != nil {
-		tcpHC := &client.TCPHealthCheckSpec{}
-		if !data.TCPHealthCheck.ExpectedResponse.IsNull() {
-			tcpHC.ExpectedResponse = data.TCPHealthCheck.ExpectedResponse.ValueString()
-		}
-		if !data.TCPHealthCheck.SendPayload.IsNull() {
-			tcpHC.SendPayload = data.TCPHealthCheck.SendPayload.ValueString()
-		}
-		apiResource.Spec.TCPHealthCheck = tcpHC
-	} else if data.UDPICMPHealthCheck != nil {
-		apiResource.Spec.UDPICMPHealthCheck = &client.UDPICMPHealthCheckSpec{}
-	}
-
 	updated, err := r.client.UpdateHealthcheck(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Healthcheck: %s", err))
 		return
 	}
 
-	// Preserve the ID - use updated metadata if available, otherwise use original
-	if updated.Metadata.Name != "" {
-		data.ID = types.StringValue(data.Name.ValueString())
-	} else {
-		// Preserve original ID if API doesn't return it
-		data.ID = types.StringValue(data.Name.ValueString())
-	}
+	// Use plan data for ID since API response may not include metadata.name
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	if updated.Metadata.UID != "" {
-		psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetHealthcheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
 	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -774,9 +551,9 @@ func (r *HealthcheckResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	err := r.client.DeleteHealthcheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// Handle 404 - resource was already deleted
-		if strings.Contains(err.Error(), "404") || strings.Contains(err.Error(), "not found") || strings.Contains(err.Error(), "NOT_FOUND") {
-			tflog.Warn(ctx, "Healthcheck already deleted", map[string]interface{}{
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Healthcheck already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -797,7 +574,6 @@ func (r *HealthcheckResource) ImportState(ctx context.Context, req resource.Impo
 		)
 		return
 	}
-
 	namespace := parts[0]
 	name := parts[1]
 

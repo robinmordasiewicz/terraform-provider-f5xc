@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,127 @@ type CDNCacheRuleResource struct {
 	client *client.Client
 }
 
+// CDNCacheRuleEmptyModel represents empty nested blocks
+type CDNCacheRuleEmptyModel struct {
+}
+
+// CDNCacheRuleCacheRulesModel represents cache_rules block
+type CDNCacheRuleCacheRulesModel struct {
+	RuleName types.String `tfsdk:"rule_name"`
+	CacheBypass *CDNCacheRuleEmptyModel `tfsdk:"cache_bypass"`
+	EligibleForCache *CDNCacheRuleCacheRulesEligibleForCacheModel `tfsdk:"eligible_for_cache"`
+	RuleExpressionList []CDNCacheRuleCacheRulesRuleExpressionListModel `tfsdk:"rule_expression_list"`
+}
+
+// CDNCacheRuleCacheRulesEligibleForCacheModel represents eligible_for_cache block
+type CDNCacheRuleCacheRulesEligibleForCacheModel struct {
+	SchemeProxyHostRequestURI *CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel `tfsdk:"scheme_proxy_host_request_uri"`
+	SchemeProxyHostURI *CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel `tfsdk:"scheme_proxy_host_uri"`
+}
+
+// CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel represents scheme_proxy_host_request_uri block
+type CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostRequestURIModel struct {
+	CacheOverride types.Bool `tfsdk:"cache_override"`
+	CacheTtl types.String `tfsdk:"cache_ttl"`
+	IgnoreResponseCookie types.Bool `tfsdk:"ignore_response_cookie"`
+}
+
+// CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel represents scheme_proxy_host_uri block
+type CDNCacheRuleCacheRulesEligibleForCacheSchemeProxyHostURIModel struct {
+	CacheOverride types.Bool `tfsdk:"cache_override"`
+	CacheTtl types.String `tfsdk:"cache_ttl"`
+	IgnoreResponseCookie types.Bool `tfsdk:"ignore_response_cookie"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListModel represents rule_expression_list block
+type CDNCacheRuleCacheRulesRuleExpressionListModel struct {
+	ExpressionName types.String `tfsdk:"expression_name"`
+	CacheRuleExpression []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel `tfsdk:"cache_rule_expression"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel represents cache_rule_expression block
+type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel struct {
+	CacheHeaders []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel `tfsdk:"cache_headers"`
+	CookieMatcher []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel `tfsdk:"cookie_matcher"`
+	PathMatch *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel `tfsdk:"path_match"`
+	QueryParameters []CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel `tfsdk:"query_parameters"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel represents cache_headers block
+type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModel struct {
+	Name types.String `tfsdk:"name"`
+	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModel `tfsdk:"operator"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModel represents operator block
+type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersOperatorModel struct {
+	Contains types.String `tfsdk:"contains"`
+	Doesnotcontain types.String `tfsdk:"does_not_contain"`
+	Doesnotendwith types.String `tfsdk:"does_not_end_with"`
+	Doesnotequal types.String `tfsdk:"does_not_equal"`
+	Doesnotstartwith types.String `tfsdk:"does_not_start_with"`
+	Endswith types.String `tfsdk:"endswith"`
+	Equals types.String `tfsdk:"equals"`
+	Matchregex types.String `tfsdk:"match_regex"`
+	Startswith types.String `tfsdk:"startswith"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel represents cookie_matcher block
+type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModel struct {
+	Name types.String `tfsdk:"name"`
+	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModel `tfsdk:"operator"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModel represents operator block
+type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherOperatorModel struct {
+	Contains types.String `tfsdk:"contains"`
+	Doesnotcontain types.String `tfsdk:"does_not_contain"`
+	Doesnotendwith types.String `tfsdk:"does_not_end_with"`
+	Doesnotequal types.String `tfsdk:"does_not_equal"`
+	Doesnotstartwith types.String `tfsdk:"does_not_start_with"`
+	Endswith types.String `tfsdk:"endswith"`
+	Equals types.String `tfsdk:"equals"`
+	Matchregex types.String `tfsdk:"match_regex"`
+	Startswith types.String `tfsdk:"startswith"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel represents path_match block
+type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModel struct {
+	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModel `tfsdk:"operator"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModel represents operator block
+type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchOperatorModel struct {
+	Contains types.String `tfsdk:"contains"`
+	Doesnotcontain types.String `tfsdk:"does_not_contain"`
+	Doesnotendwith types.String `tfsdk:"does_not_end_with"`
+	Doesnotequal types.String `tfsdk:"does_not_equal"`
+	Doesnotstartwith types.String `tfsdk:"does_not_start_with"`
+	Endswith types.String `tfsdk:"endswith"`
+	Equals types.String `tfsdk:"equals"`
+	Matchregex types.String `tfsdk:"match_regex"`
+	Startswith types.String `tfsdk:"startswith"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel represents query_parameters block
+type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModel struct {
+	Key types.String `tfsdk:"key"`
+	Operator *CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModel `tfsdk:"operator"`
+}
+
+// CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModel represents operator block
+type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersOperatorModel struct {
+	Contains types.String `tfsdk:"contains"`
+	Doesnotcontain types.String `tfsdk:"does_not_contain"`
+	Doesnotendwith types.String `tfsdk:"does_not_end_with"`
+	Doesnotequal types.String `tfsdk:"does_not_equal"`
+	Doesnotstartwith types.String `tfsdk:"does_not_start_with"`
+	Endswith types.String `tfsdk:"endswith"`
+	Equals types.String `tfsdk:"equals"`
+	Matchregex types.String `tfsdk:"match_regex"`
+	Startswith types.String `tfsdk:"startswith"`
+}
+
 type CDNCacheRuleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +175,7 @@ type CDNCacheRuleResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	CacheRules *CDNCacheRuleCacheRulesModel `tfsdk:"cache_rules"`
 }
 
 func (r *CDNCacheRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -530,6 +653,10 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 		Spec: client.CDNCacheRuleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -585,6 +712,15 @@ func (r *CDNCacheRuleResource) Read(ctx context.Context, req resource.ReadReques
 
 	apiResource, err := r.client.GetCDNCacheRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CDNCacheRule not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CDNCacheRule: %s", err))
 		return
 	}
@@ -599,6 +735,13 @@ func (r *CDNCacheRuleResource) Read(ctx context.Context, req resource.ReadReques
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -651,6 +794,10 @@ func (r *CDNCacheRuleResource) Update(ctx context.Context, req resource.UpdateRe
 		Spec: client.CDNCacheRuleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -675,10 +822,20 @@ func (r *CDNCacheRuleResource) Update(ctx context.Context, req resource.UpdateRe
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetCDNCacheRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -702,11 +859,33 @@ func (r *CDNCacheRuleResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	err := r.client.DeleteCDNCacheRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CDNCacheRule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete CDNCacheRule: %s", err))
 		return
 	}
 }
 
 func (r *CDNCacheRuleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

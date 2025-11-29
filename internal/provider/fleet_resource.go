@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,737 @@ type FleetResource struct {
 	client *client.Client
 }
 
+// FleetEmptyModel represents empty nested blocks
+type FleetEmptyModel struct {
+}
+
+// FleetBlockedServicesModel represents blocked_services block
+type FleetBlockedServicesModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DNS *FleetEmptyModel `tfsdk:"dns"`
+	SSH *FleetEmptyModel `tfsdk:"ssh"`
+	WebUserInterface *FleetEmptyModel `tfsdk:"web_user_interface"`
+}
+
+// FleetBondDeviceListModel represents bond_device_list block
+type FleetBondDeviceListModel struct {
+	BondDevices []FleetBondDeviceListBondDevicesModel `tfsdk:"bond_devices"`
+}
+
+// FleetBondDeviceListBondDevicesModel represents bond_devices block
+type FleetBondDeviceListBondDevicesModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *FleetEmptyModel `tfsdk:"active_backup"`
+	Lacp *FleetBondDeviceListBondDevicesLacpModel `tfsdk:"lacp"`
+}
+
+// FleetBondDeviceListBondDevicesLacpModel represents lacp block
+type FleetBondDeviceListBondDevicesLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// FleetDcClusterGroupModel represents dc_cluster_group block
+type FleetDcClusterGroupModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// FleetDcClusterGroupInsideModel represents dc_cluster_group_inside block
+type FleetDcClusterGroupInsideModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// FleetDeviceListModel represents device_list block
+type FleetDeviceListModel struct {
+	Devices []FleetDeviceListDevicesModel `tfsdk:"devices"`
+}
+
+// FleetDeviceListDevicesModel represents devices block
+type FleetDeviceListDevicesModel struct {
+	Name types.String `tfsdk:"name"`
+	Owner types.String `tfsdk:"owner"`
+	NetworkDevice *FleetDeviceListDevicesNetworkDeviceModel `tfsdk:"network_device"`
+}
+
+// FleetDeviceListDevicesNetworkDeviceModel represents network_device block
+type FleetDeviceListDevicesNetworkDeviceModel struct {
+	Use types.String `tfsdk:"use"`
+	Interface []FleetDeviceListDevicesNetworkDeviceInterfaceModel `tfsdk:"interface"`
+}
+
+// FleetDeviceListDevicesNetworkDeviceInterfaceModel represents interface block
+type FleetDeviceListDevicesNetworkDeviceInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// FleetEnableVgpuModel represents enable_vgpu block
+type FleetEnableVgpuModel struct {
+	FeatureType types.String `tfsdk:"feature_type"`
+	ServerAddress types.String `tfsdk:"server_address"`
+	ServerPort types.Int64 `tfsdk:"server_port"`
+}
+
+// FleetInsideVirtualNetworkModel represents inside_virtual_network block
+type FleetInsideVirtualNetworkModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// FleetInterfaceListModel represents interface_list block
+type FleetInterfaceListModel struct {
+	Interfaces []FleetInterfaceListInterfacesModel `tfsdk:"interfaces"`
+}
+
+// FleetInterfaceListInterfacesModel represents interfaces block
+type FleetInterfaceListInterfacesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// FleetKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
+type FleetKubernetesUpgradeDrainModel struct {
+	DisableUpgradeDrain *FleetEmptyModel `tfsdk:"disable_upgrade_drain"`
+	EnableUpgradeDrain *FleetKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+}
+
+// FleetKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
+type FleetKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
+	DrainMaxUnavailableNodeCount types.Int64 `tfsdk:"drain_max_unavailable_node_count"`
+	DrainNodeTimeout types.Int64 `tfsdk:"drain_node_timeout"`
+	DisableVegaUpgradeMode *FleetEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
+	EnableVegaUpgradeMode *FleetEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
+}
+
+// FleetLogReceiverModel represents log_receiver block
+type FleetLogReceiverModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// FleetNetworkConnectorsModel represents network_connectors block
+type FleetNetworkConnectorsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// FleetNetworkFirewallModel represents network_firewall block
+type FleetNetworkFirewallModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// FleetOutsideVirtualNetworkModel represents outside_virtual_network block
+type FleetOutsideVirtualNetworkModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// FleetPerformanceEnhancementModeModel represents performance_enhancement_mode block
+type FleetPerformanceEnhancementModeModel struct {
+	PerfModeL3Enhanced *FleetPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
+	PerfModeL7Enhanced *FleetEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+}
+
+// FleetPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
+type FleetPerformanceEnhancementModePerfModeL3EnhancedModel struct {
+	Jumbo *FleetEmptyModel `tfsdk:"jumbo"`
+	NoJumbo *FleetEmptyModel `tfsdk:"no_jumbo"`
+}
+
+// FleetSriovInterfacesModel represents sriov_interfaces block
+type FleetSriovInterfacesModel struct {
+	SriovInterface []FleetSriovInterfacesSriovInterfaceModel `tfsdk:"sriov_interface"`
+}
+
+// FleetSriovInterfacesSriovInterfaceModel represents sriov_interface block
+type FleetSriovInterfacesSriovInterfaceModel struct {
+	InterfaceName types.String `tfsdk:"interface_name"`
+	NumberOfVfioVfs types.Int64 `tfsdk:"number_of_vfio_vfs"`
+	NumberOfVfs types.Int64 `tfsdk:"number_of_vfs"`
+}
+
+// FleetStorageClassListModel represents storage_class_list block
+type FleetStorageClassListModel struct {
+	StorageClasses []FleetStorageClassListStorageClassesModel `tfsdk:"storage_classes"`
+}
+
+// FleetStorageClassListStorageClassesModel represents storage_classes block
+type FleetStorageClassListStorageClassesModel struct {
+	AllowVolumeExpansion types.Bool `tfsdk:"allow_volume_expansion"`
+	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
+	Description types.String `tfsdk:"description"`
+	ReclaimPolicy types.String `tfsdk:"reclaim_policy"`
+	StorageClassName types.String `tfsdk:"storage_class_name"`
+	StorageDevice types.String `tfsdk:"storage_device"`
+	AdvancedStorageParameters *FleetEmptyModel `tfsdk:"advanced_storage_parameters"`
+	CustomStorage *FleetStorageClassListStorageClassesCustomStorageModel `tfsdk:"custom_storage"`
+	HpeStorage *FleetStorageClassListStorageClassesHpeStorageModel `tfsdk:"hpe_storage"`
+	NetappTrident *FleetStorageClassListStorageClassesNetappTridentModel `tfsdk:"netapp_trident"`
+	PureServiceOrchestrator *FleetStorageClassListStorageClassesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
+}
+
+// FleetStorageClassListStorageClassesCustomStorageModel represents custom_storage block
+type FleetStorageClassListStorageClassesCustomStorageModel struct {
+	Yaml types.String `tfsdk:"yaml"`
+}
+
+// FleetStorageClassListStorageClassesHpeStorageModel represents hpe_storage block
+type FleetStorageClassListStorageClassesHpeStorageModel struct {
+	AllowMutations types.String `tfsdk:"allow_mutations"`
+	AllowOverrides types.String `tfsdk:"allow_overrides"`
+	DedupeEnabled types.Bool `tfsdk:"dedupe_enabled"`
+	Description types.String `tfsdk:"description"`
+	DestroyOnDelete types.Bool `tfsdk:"destroy_on_delete"`
+	Encrypted types.Bool `tfsdk:"encrypted"`
+	Folder types.String `tfsdk:"folder"`
+	LimitIops types.String `tfsdk:"limit_iops"`
+	LimitMbps types.String `tfsdk:"limit_mbps"`
+	PerformancePolicy types.String `tfsdk:"performance_policy"`
+	Pool types.String `tfsdk:"pool"`
+	ProtectionTemplate types.String `tfsdk:"protection_template"`
+	SecretName types.String `tfsdk:"secret_name"`
+	SecretNamespace types.String `tfsdk:"secret_namespace"`
+	SyncOnDetach types.Bool `tfsdk:"sync_on_detach"`
+	Thick types.Bool `tfsdk:"thick"`
+}
+
+// FleetStorageClassListStorageClassesNetappTridentModel represents netapp_trident block
+type FleetStorageClassListStorageClassesNetappTridentModel struct {
+	StoragePools types.String `tfsdk:"storage_pools"`
+	Selector *FleetEmptyModel `tfsdk:"selector"`
+}
+
+// FleetStorageClassListStorageClassesPureServiceOrchestratorModel represents pure_service_orchestrator block
+type FleetStorageClassListStorageClassesPureServiceOrchestratorModel struct {
+	Backend types.String `tfsdk:"backend"`
+	BandwidthLimit types.String `tfsdk:"bandwidth_limit"`
+	IopsLimit types.Int64 `tfsdk:"iops_limit"`
+}
+
+// FleetStorageDeviceListModel represents storage_device_list block
+type FleetStorageDeviceListModel struct {
+	StorageDevices []FleetStorageDeviceListStorageDevicesModel `tfsdk:"storage_devices"`
+}
+
+// FleetStorageDeviceListStorageDevicesModel represents storage_devices block
+type FleetStorageDeviceListStorageDevicesModel struct {
+	StorageDevice types.String `tfsdk:"storage_device"`
+	AdvancedAdvancedParameters *FleetEmptyModel `tfsdk:"advanced_advanced_parameters"`
+	CustomStorage *FleetEmptyModel `tfsdk:"custom_storage"`
+	HpeStorage *FleetStorageDeviceListStorageDevicesHpeStorageModel `tfsdk:"hpe_storage"`
+	NetappTrident *FleetStorageDeviceListStorageDevicesNetappTridentModel `tfsdk:"netapp_trident"`
+	PureServiceOrchestrator *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel `tfsdk:"pure_service_orchestrator"`
+}
+
+// FleetStorageDeviceListStorageDevicesHpeStorageModel represents hpe_storage block
+type FleetStorageDeviceListStorageDevicesHpeStorageModel struct {
+	APIServerPort types.Int64 `tfsdk:"api_server_port"`
+	IscsiChapUser types.String `tfsdk:"iscsi_chap_user"`
+	StorageServerIPAddress types.String `tfsdk:"storage_server_ip_address"`
+	StorageServerName types.String `tfsdk:"storage_server_name"`
+	Username types.String `tfsdk:"username"`
+	IscsiChapPassword *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel `tfsdk:"iscsi_chap_password"`
+	Password *FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel `tfsdk:"password"`
+}
+
+// FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel represents iscsi_chap_password block
+type FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel represents password block
+type FleetStorageDeviceListStorageDevicesHpeStoragePasswordModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesHpeStoragePasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesHpeStoragePasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentModel represents netapp_trident block
+type FleetStorageDeviceListStorageDevicesNetappTridentModel struct {
+	NetappBackendOntapNas *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel `tfsdk:"netapp_backend_ontap_nas"`
+	NetappBackendOntapSan *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel `tfsdk:"netapp_backend_ontap_san"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel represents netapp_backend_ontap_nas block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModel struct {
+	AutoExportPolicy types.Bool `tfsdk:"auto_export_policy"`
+	BackendName types.String `tfsdk:"backend_name"`
+	ClientCertificate types.String `tfsdk:"client_certificate"`
+	DataLifDNSName types.String `tfsdk:"data_lif_dns_name"`
+	DataLifIP types.String `tfsdk:"data_lif_ip"`
+	LimitAggregateUsage types.String `tfsdk:"limit_aggregate_usage"`
+	LimitVolumeSize types.String `tfsdk:"limit_volume_size"`
+	ManagementLifDNSName types.String `tfsdk:"management_lif_dns_name"`
+	ManagementLifIP types.String `tfsdk:"management_lif_ip"`
+	NfsMountOptions types.String `tfsdk:"nfs_mount_options"`
+	Region types.String `tfsdk:"region"`
+	StorageDriverName types.String `tfsdk:"storage_driver_name"`
+	StoragePrefix types.String `tfsdk:"storage_prefix"`
+	Svm types.String `tfsdk:"svm"`
+	TrustedCaCertificate types.String `tfsdk:"trusted_ca_certificate"`
+	Username types.String `tfsdk:"username"`
+	AutoExportCidrs *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel `tfsdk:"auto_export_cidrs"`
+	ClientPrivateKey *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel `tfsdk:"client_private_key"`
+	Labels *FleetEmptyModel `tfsdk:"labels"`
+	Password *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel `tfsdk:"password"`
+	Storage []FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel `tfsdk:"storage"`
+	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel `tfsdk:"volume_defaults"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel represents auto_export_cidrs block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel represents client_private_key block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel represents password block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel represents storage block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModel struct {
+	Zone types.String `tfsdk:"zone"`
+	Labels *FleetEmptyModel `tfsdk:"labels"`
+	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel `tfsdk:"volume_defaults"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel represents volume_defaults block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageVolumeDefaultsModel struct {
+	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
+	Encryption types.Bool `tfsdk:"encryption"`
+	ExportPolicy types.String `tfsdk:"export_policy"`
+	QosPolicy types.String `tfsdk:"qos_policy"`
+	SecurityStyle types.String `tfsdk:"security_style"`
+	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
+	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
+	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
+	SpaceReserve types.String `tfsdk:"space_reserve"`
+	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
+	TieringPolicy types.String `tfsdk:"tiering_policy"`
+	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
+	NoQos *FleetEmptyModel `tfsdk:"no_qos"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel represents volume_defaults block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModel struct {
+	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
+	Encryption types.Bool `tfsdk:"encryption"`
+	ExportPolicy types.String `tfsdk:"export_policy"`
+	QosPolicy types.String `tfsdk:"qos_policy"`
+	SecurityStyle types.String `tfsdk:"security_style"`
+	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
+	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
+	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
+	SpaceReserve types.String `tfsdk:"space_reserve"`
+	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
+	TieringPolicy types.String `tfsdk:"tiering_policy"`
+	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
+	NoQos *FleetEmptyModel `tfsdk:"no_qos"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel represents netapp_backend_ontap_san block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModel struct {
+	ClientCertificate types.String `tfsdk:"client_certificate"`
+	DataLifDNSName types.String `tfsdk:"data_lif_dns_name"`
+	DataLifIP types.String `tfsdk:"data_lif_ip"`
+	IgroupName types.String `tfsdk:"igroup_name"`
+	LimitAggregateUsage types.Int64 `tfsdk:"limit_aggregate_usage"`
+	LimitVolumeSize types.Int64 `tfsdk:"limit_volume_size"`
+	ManagementLifDNSName types.String `tfsdk:"management_lif_dns_name"`
+	ManagementLifIP types.String `tfsdk:"management_lif_ip"`
+	Region types.String `tfsdk:"region"`
+	StorageDriverName types.String `tfsdk:"storage_driver_name"`
+	StoragePrefix types.String `tfsdk:"storage_prefix"`
+	Svm types.String `tfsdk:"svm"`
+	TrustedCaCertificate types.String `tfsdk:"trusted_ca_certificate"`
+	Username types.String `tfsdk:"username"`
+	ClientPrivateKey *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel `tfsdk:"client_private_key"`
+	Labels *FleetEmptyModel `tfsdk:"labels"`
+	NoChap *FleetEmptyModel `tfsdk:"no_chap"`
+	Password *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel `tfsdk:"password"`
+	Storage []FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel `tfsdk:"storage"`
+	UseChap *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel `tfsdk:"use_chap"`
+	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel `tfsdk:"volume_defaults"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel represents client_private_key block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel represents password block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel represents storage block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModel struct {
+	Zone types.String `tfsdk:"zone"`
+	Labels *FleetEmptyModel `tfsdk:"labels"`
+	VolumeDefaults *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel `tfsdk:"volume_defaults"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel represents volume_defaults block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageVolumeDefaultsModel struct {
+	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
+	Encryption types.Bool `tfsdk:"encryption"`
+	ExportPolicy types.String `tfsdk:"export_policy"`
+	QosPolicy types.String `tfsdk:"qos_policy"`
+	SecurityStyle types.String `tfsdk:"security_style"`
+	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
+	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
+	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
+	SpaceReserve types.String `tfsdk:"space_reserve"`
+	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
+	TieringPolicy types.String `tfsdk:"tiering_policy"`
+	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
+	NoQos *FleetEmptyModel `tfsdk:"no_qos"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel represents use_chap block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModel struct {
+	ChapTargetUsername types.String `tfsdk:"chap_target_username"`
+	ChapUsername types.String `tfsdk:"chap_username"`
+	ChapInitiatorSecret *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel `tfsdk:"chap_initiator_secret"`
+	ChapTargetInitiatorSecret *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel `tfsdk:"chap_target_initiator_secret"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel represents chap_initiator_secret block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel represents chap_target_initiator_secret block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel represents volume_defaults block
+type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModel struct {
+	AdaptiveQosPolicy types.String `tfsdk:"adaptive_qos_policy"`
+	Encryption types.Bool `tfsdk:"encryption"`
+	ExportPolicy types.String `tfsdk:"export_policy"`
+	QosPolicy types.String `tfsdk:"qos_policy"`
+	SecurityStyle types.String `tfsdk:"security_style"`
+	SnapshotDir types.Bool `tfsdk:"snapshot_dir"`
+	SnapshotPolicy types.String `tfsdk:"snapshot_policy"`
+	SnapshotReserve types.String `tfsdk:"snapshot_reserve"`
+	SpaceReserve types.String `tfsdk:"space_reserve"`
+	SplitOnClone types.Bool `tfsdk:"split_on_clone"`
+	TieringPolicy types.String `tfsdk:"tiering_policy"`
+	UnixPermissions types.Int64 `tfsdk:"unix_permissions"`
+	NoQos *FleetEmptyModel `tfsdk:"no_qos"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel represents pure_service_orchestrator block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel struct {
+	ClusterID types.String `tfsdk:"cluster_id"`
+	EnableStorageTopology types.Bool `tfsdk:"enable_storage_topology"`
+	EnableStrictTopology types.Bool `tfsdk:"enable_strict_topology"`
+	Arrays *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel `tfsdk:"arrays"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel represents arrays block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel struct {
+	FlashArray *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel `tfsdk:"flash_array"`
+	FlashBlade *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel `tfsdk:"flash_blade"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel represents flash_array block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayModel struct {
+	DefaultFsOpt types.String `tfsdk:"default_fs_opt"`
+	DefaultFsType types.String `tfsdk:"default_fs_type"`
+	DefaultMountOpts types.List `tfsdk:"default_mount_opts"`
+	DisablePreemptAttachments types.Bool `tfsdk:"disable_preempt_attachments"`
+	IscsiLoginTimeout types.Int64 `tfsdk:"iscsi_login_timeout"`
+	SanType types.String `tfsdk:"san_type"`
+	FlashArrays []FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel `tfsdk:"flash_arrays"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel represents flash_arrays block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModel struct {
+	MgmtDNSName types.String `tfsdk:"mgmt_dns_name"`
+	MgmtIP types.String `tfsdk:"mgmt_ip"`
+	APIToken *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel `tfsdk:"api_token"`
+	Labels *FleetEmptyModel `tfsdk:"labels"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel represents api_token block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel represents flash_blade block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeModel struct {
+	EnableSnapshotDirectory types.Bool `tfsdk:"enable_snapshot_directory"`
+	ExportRules types.String `tfsdk:"export_rules"`
+	FlashBlades []FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel `tfsdk:"flash_blades"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel represents flash_blades block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesModel struct {
+	MgmtDNSName types.String `tfsdk:"mgmt_dns_name"`
+	MgmtIP types.String `tfsdk:"mgmt_ip"`
+	NfsEndpointDNSName types.String `tfsdk:"nfs_endpoint_dns_name"`
+	NfsEndpointIP types.String `tfsdk:"nfs_endpoint_ip"`
+	APIToken *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel `tfsdk:"api_token"`
+	Lables *FleetEmptyModel `tfsdk:"lables"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel represents api_token block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModel struct {
+	BlindfoldSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel represents clear_secret_info block
+type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// FleetStorageInterfaceListModel represents storage_interface_list block
+type FleetStorageInterfaceListModel struct {
+	Interfaces []FleetStorageInterfaceListInterfacesModel `tfsdk:"interfaces"`
+}
+
+// FleetStorageInterfaceListInterfacesModel represents interfaces block
+type FleetStorageInterfaceListInterfacesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// FleetStorageStaticRoutesModel represents storage_static_routes block
+type FleetStorageStaticRoutesModel struct {
+	StorageRoutes []FleetStorageStaticRoutesStorageRoutesModel `tfsdk:"storage_routes"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesModel represents storage_routes block
+type FleetStorageStaticRoutesStorageRoutesModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *FleetEmptyModel `tfsdk:"labels"`
+	Nexthop *FleetStorageStaticRoutesStorageRoutesNexthopModel `tfsdk:"nexthop"`
+	Subnets []FleetStorageStaticRoutesStorageRoutesSubnetsModel `tfsdk:"subnets"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesNexthopModel represents nexthop block
+type FleetStorageStaticRoutesStorageRoutesNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel represents interface block
+type FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel represents nexthop_address block
+type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModel struct {
+	IPV4 *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV4Model represents ipv4 block
+type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV6Model represents ipv6 block
+type FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesSubnetsModel represents subnets block
+type FleetStorageStaticRoutesStorageRoutesSubnetsModel struct {
+	IPV4 *FleetStorageStaticRoutesStorageRoutesSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *FleetStorageStaticRoutesStorageRoutesSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesSubnetsIPV4Model represents ipv4 block
+type FleetStorageStaticRoutesStorageRoutesSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// FleetStorageStaticRoutesStorageRoutesSubnetsIPV6Model represents ipv6 block
+type FleetStorageStaticRoutesStorageRoutesSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// FleetUsbPolicyModel represents usb_policy block
+type FleetUsbPolicyModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type FleetResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -57,6 +789,41 @@ type FleetResourceModel struct {
 	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AllowAllUsb *FleetEmptyModel `tfsdk:"allow_all_usb"`
+	BlockedServices []FleetBlockedServicesModel `tfsdk:"blocked_services"`
+	BondDeviceList *FleetBondDeviceListModel `tfsdk:"bond_device_list"`
+	DcClusterGroup *FleetDcClusterGroupModel `tfsdk:"dc_cluster_group"`
+	DcClusterGroupInside *FleetDcClusterGroupInsideModel `tfsdk:"dc_cluster_group_inside"`
+	DefaultConfig *FleetEmptyModel `tfsdk:"default_config"`
+	DefaultSriovInterface *FleetEmptyModel `tfsdk:"default_sriov_interface"`
+	DefaultStorageClass *FleetEmptyModel `tfsdk:"default_storage_class"`
+	DenyAllUsb *FleetEmptyModel `tfsdk:"deny_all_usb"`
+	DeviceList *FleetDeviceListModel `tfsdk:"device_list"`
+	DisableGpu *FleetEmptyModel `tfsdk:"disable_gpu"`
+	DisableVm *FleetEmptyModel `tfsdk:"disable_vm"`
+	EnableGpu *FleetEmptyModel `tfsdk:"enable_gpu"`
+	EnableVgpu *FleetEnableVgpuModel `tfsdk:"enable_vgpu"`
+	EnableVm *FleetEmptyModel `tfsdk:"enable_vm"`
+	InsideVirtualNetwork []FleetInsideVirtualNetworkModel `tfsdk:"inside_virtual_network"`
+	InterfaceList *FleetInterfaceListModel `tfsdk:"interface_list"`
+	KubernetesUpgradeDrain *FleetKubernetesUpgradeDrainModel `tfsdk:"kubernetes_upgrade_drain"`
+	LogReceiver *FleetLogReceiverModel `tfsdk:"log_receiver"`
+	LogsStreamingDisabled *FleetEmptyModel `tfsdk:"logs_streaming_disabled"`
+	NetworkConnectors []FleetNetworkConnectorsModel `tfsdk:"network_connectors"`
+	NetworkFirewall []FleetNetworkFirewallModel `tfsdk:"network_firewall"`
+	NoBondDevices *FleetEmptyModel `tfsdk:"no_bond_devices"`
+	NoDcClusterGroup *FleetEmptyModel `tfsdk:"no_dc_cluster_group"`
+	NoStorageDevice *FleetEmptyModel `tfsdk:"no_storage_device"`
+	NoStorageInterfaces *FleetEmptyModel `tfsdk:"no_storage_interfaces"`
+	NoStorageStaticRoutes *FleetEmptyModel `tfsdk:"no_storage_static_routes"`
+	OutsideVirtualNetwork []FleetOutsideVirtualNetworkModel `tfsdk:"outside_virtual_network"`
+	PerformanceEnhancementMode *FleetPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+	SriovInterfaces *FleetSriovInterfacesModel `tfsdk:"sriov_interfaces"`
+	StorageClassList *FleetStorageClassListModel `tfsdk:"storage_class_list"`
+	StorageDeviceList *FleetStorageDeviceListModel `tfsdk:"storage_device_list"`
+	StorageInterfaceList *FleetStorageInterfaceListModel `tfsdk:"storage_interface_list"`
+	StorageStaticRoutes *FleetStorageStaticRoutesModel `tfsdk:"storage_static_routes"`
+	UsbPolicy *FleetUsbPolicyModel `tfsdk:"usb_policy"`
 }
 
 func (r *FleetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -2038,6 +2805,10 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 		Spec: client.FleetSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -2093,6 +2864,15 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 
 	apiResource, err := r.client.GetFleet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Fleet not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Fleet: %s", err))
 		return
 	}
@@ -2107,6 +2887,13 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -2159,6 +2946,10 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		Spec: client.FleetSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -2183,10 +2974,20 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetFleet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2210,11 +3011,33 @@ func (r *FleetResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 
 	err := r.client.DeleteFleet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Fleet already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Fleet: %s", err))
 		return
 	}
 }
 
 func (r *FleetResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

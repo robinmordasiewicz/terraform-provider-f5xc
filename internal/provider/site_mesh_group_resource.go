@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,45 @@ type SiteMeshGroupResource struct {
 	client *client.Client
 }
 
+// SiteMeshGroupEmptyModel represents empty nested blocks
+type SiteMeshGroupEmptyModel struct {
+}
+
+// SiteMeshGroupFullMeshModel represents full_mesh block
+type SiteMeshGroupFullMeshModel struct {
+	ControlAndDataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"control_and_data_plane_mesh"`
+	DataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
+}
+
+// SiteMeshGroupHubMeshModel represents hub_mesh block
+type SiteMeshGroupHubMeshModel struct {
+	ControlAndDataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"control_and_data_plane_mesh"`
+	DataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
+}
+
+// SiteMeshGroupSpokeMeshModel represents spoke_mesh block
+type SiteMeshGroupSpokeMeshModel struct {
+	ControlAndDataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"control_and_data_plane_mesh"`
+	DataPlaneMesh *SiteMeshGroupEmptyModel `tfsdk:"data_plane_mesh"`
+	HubMeshGroup *SiteMeshGroupSpokeMeshHubMeshGroupModel `tfsdk:"hub_mesh_group"`
+}
+
+// SiteMeshGroupSpokeMeshHubMeshGroupModel represents hub_mesh_group block
+type SiteMeshGroupSpokeMeshHubMeshGroupModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// SiteMeshGroupVirtualSiteModel represents virtual_site block
+type SiteMeshGroupVirtualSiteModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
 type SiteMeshGroupResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +93,12 @@ type SiteMeshGroupResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	DisableReFallback *SiteMeshGroupEmptyModel `tfsdk:"disable_re_fallback"`
+	EnableReFallback *SiteMeshGroupEmptyModel `tfsdk:"enable_re_fallback"`
+	FullMesh *SiteMeshGroupFullMeshModel `tfsdk:"full_mesh"`
+	HubMesh *SiteMeshGroupHubMeshModel `tfsdk:"hub_mesh"`
+	SpokeMesh *SiteMeshGroupSpokeMeshModel `tfsdk:"spoke_mesh"`
+	VirtualSite []SiteMeshGroupVirtualSiteModel `tfsdk:"virtual_site"`
 }
 
 func (r *SiteMeshGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -335,6 +381,10 @@ func (r *SiteMeshGroupResource) Create(ctx context.Context, req resource.CreateR
 		Spec: client.SiteMeshGroupSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -390,6 +440,15 @@ func (r *SiteMeshGroupResource) Read(ctx context.Context, req resource.ReadReque
 
 	apiResource, err := r.client.GetSiteMeshGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "SiteMeshGroup not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read SiteMeshGroup: %s", err))
 		return
 	}
@@ -404,6 +463,13 @@ func (r *SiteMeshGroupResource) Read(ctx context.Context, req resource.ReadReque
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -456,6 +522,10 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 		Spec: client.SiteMeshGroupSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -480,10 +550,20 @@ func (r *SiteMeshGroupResource) Update(ctx context.Context, req resource.UpdateR
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetSiteMeshGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -507,11 +587,33 @@ func (r *SiteMeshGroupResource) Delete(ctx context.Context, req resource.DeleteR
 
 	err := r.client.DeleteSiteMeshGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "SiteMeshGroup already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete SiteMeshGroup: %s", err))
 		return
 	}
 }
 
 func (r *SiteMeshGroupResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

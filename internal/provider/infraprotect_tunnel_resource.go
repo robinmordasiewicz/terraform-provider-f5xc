@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,92 @@ type InfraprotectTunnelResource struct {
 	client *client.Client
 }
 
+// InfraprotectTunnelEmptyModel represents empty nested blocks
+type InfraprotectTunnelEmptyModel struct {
+}
+
+// InfraprotectTunnelBandwidthModel represents bandwidth block
+type InfraprotectTunnelBandwidthModel struct {
+	BandwidthMaxMb types.Int64 `tfsdk:"bandwidth_max_mb"`
+}
+
+// InfraprotectTunnelBGPInformationModel represents bgp_information block
+type InfraprotectTunnelBGPInformationModel struct {
+	HolddownTimerSeconds types.Int64 `tfsdk:"holddown_timer_seconds"`
+	Asn *InfraprotectTunnelBGPInformationAsnModel `tfsdk:"asn"`
+	NoSecret *InfraprotectTunnelEmptyModel `tfsdk:"no_secret"`
+	PeerSecretOverride *InfraprotectTunnelBGPInformationPeerSecretOverrideModel `tfsdk:"peer_secret_override"`
+	UseDefaultSecret *InfraprotectTunnelEmptyModel `tfsdk:"use_default_secret"`
+}
+
+// InfraprotectTunnelBGPInformationAsnModel represents asn block
+type InfraprotectTunnelBGPInformationAsnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// InfraprotectTunnelBGPInformationPeerSecretOverrideModel represents peer_secret_override block
+type InfraprotectTunnelBGPInformationPeerSecretOverrideModel struct {
+	BlindfoldSecretInfo *InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel represents blindfold_secret_info block
+type InfraprotectTunnelBGPInformationPeerSecretOverrideBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel represents clear_secret_info block
+type InfraprotectTunnelBGPInformationPeerSecretOverrideClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// InfraprotectTunnelFirewallRuleGroupModel represents firewall_rule_group block
+type InfraprotectTunnelFirewallRuleGroupModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// InfraprotectTunnelGreIPV4Model represents gre_ipv4 block
+type InfraprotectTunnelGreIPV4Model struct {
+	CustomerEndpointIPV4 types.String `tfsdk:"customer_endpoint_ipv4"`
+	FragmentationDisabled *InfraprotectTunnelEmptyModel `tfsdk:"fragmentation_disabled"`
+	FragmentationEnabled *InfraprotectTunnelEmptyModel `tfsdk:"fragmentation_enabled"`
+	IPV6InterconnectDisabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv6_interconnect_disabled"`
+	IPV6InterconnectEnabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv6_interconnect_enabled"`
+	KeepaliveDisabled *InfraprotectTunnelEmptyModel `tfsdk:"keepalive_disabled"`
+	KeepaliveEnabled *InfraprotectTunnelEmptyModel `tfsdk:"keepalive_enabled"`
+}
+
+// InfraprotectTunnelGreIPV6Model represents gre_ipv6 block
+type InfraprotectTunnelGreIPV6Model struct {
+	CustomerEndpointIPV6 types.String `tfsdk:"customer_endpoint_ipv6"`
+	IPV4InterconnectDisabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_disabled"`
+	IPV4InterconnectEnabled *InfraprotectTunnelEmptyModel `tfsdk:"ipv4_interconnect_enabled"`
+}
+
+// InfraprotectTunnelIPInIPModel represents ip_in_ip block
+type InfraprotectTunnelIPInIPModel struct {
+	CustomerEndpointIPV4 types.String `tfsdk:"customer_endpoint_ipv4"`
+}
+
+// InfraprotectTunnelIPV6ToIPV6Model represents ipv6_to_ipv6 block
+type InfraprotectTunnelIPV6ToIPV6Model struct {
+	CustomerEndpointIPV6 types.String `tfsdk:"customer_endpoint_ipv6"`
+}
+
+// InfraprotectTunnelTunnelLocationModel represents tunnel_location block
+type InfraprotectTunnelTunnelLocationModel struct {
+	Name types.String `tfsdk:"name"`
+	Zone1 *InfraprotectTunnelEmptyModel `tfsdk:"zone1"`
+	Zone2 *InfraprotectTunnelEmptyModel `tfsdk:"zone2"`
+}
+
 type InfraprotectTunnelResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +140,14 @@ type InfraprotectTunnelResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Bandwidth *InfraprotectTunnelBandwidthModel `tfsdk:"bandwidth"`
+	BGPInformation *InfraprotectTunnelBGPInformationModel `tfsdk:"bgp_information"`
+	FirewallRuleGroup *InfraprotectTunnelFirewallRuleGroupModel `tfsdk:"firewall_rule_group"`
+	GreIPV4 *InfraprotectTunnelGreIPV4Model `tfsdk:"gre_ipv4"`
+	GreIPV6 *InfraprotectTunnelGreIPV6Model `tfsdk:"gre_ipv6"`
+	IPInIP *InfraprotectTunnelIPInIPModel `tfsdk:"ip_in_ip"`
+	IPV6ToIPV6 *InfraprotectTunnelIPV6ToIPV6Model `tfsdk:"ipv6_to_ipv6"`
+	TunnelLocation *InfraprotectTunnelTunnelLocationModel `tfsdk:"tunnel_location"`
 }
 
 func (r *InfraprotectTunnelResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -428,6 +523,10 @@ func (r *InfraprotectTunnelResource) Create(ctx context.Context, req resource.Cr
 		Spec: client.InfraprotectTunnelSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -483,6 +582,15 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 
 	apiResource, err := r.client.GetInfraprotectTunnel(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "InfraprotectTunnel not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read InfraprotectTunnel: %s", err))
 		return
 	}
@@ -497,6 +605,13 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -549,6 +664,10 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 		Spec: client.InfraprotectTunnelSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -573,10 +692,20 @@ func (r *InfraprotectTunnelResource) Update(ctx context.Context, req resource.Up
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetInfraprotectTunnel(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -600,11 +729,33 @@ func (r *InfraprotectTunnelResource) Delete(ctx context.Context, req resource.De
 
 	err := r.client.DeleteInfraprotectTunnel(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "InfraprotectTunnel already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete InfraprotectTunnel: %s", err))
 		return
 	}
 }
 
 func (r *InfraprotectTunnelResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

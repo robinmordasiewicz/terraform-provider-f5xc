@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,618 @@ type NFVServiceResource struct {
 	client *client.Client
 }
 
+// NFVServiceEmptyModel represents empty nested blocks
+type NFVServiceEmptyModel struct {
+}
+
+// NFVServiceEnabledSSHAccessModel represents enabled_ssh_access block
+type NFVServiceEnabledSSHAccessModel struct {
+	DomainSuffix types.String `tfsdk:"domain_suffix"`
+	AdvertiseOnSLI *NFVServiceEmptyModel `tfsdk:"advertise_on_sli"`
+	AdvertiseOnSLO *NFVServiceEmptyModel `tfsdk:"advertise_on_slo"`
+	AdvertiseOnSLOSLI *NFVServiceEmptyModel `tfsdk:"advertise_on_slo_sli"`
+	NodeSSHPorts []NFVServiceEnabledSSHAccessNodeSSHPortsModel `tfsdk:"node_ssh_ports"`
+}
+
+// NFVServiceEnabledSSHAccessNodeSSHPortsModel represents node_ssh_ports block
+type NFVServiceEnabledSSHAccessNodeSSHPortsModel struct {
+	NodeName types.String `tfsdk:"node_name"`
+	SSHPort types.Int64 `tfsdk:"ssh_port"`
+}
+
+// NFVServiceF5BigIPAWSServiceModel represents f5_big_ip_aws_service block
+type NFVServiceF5BigIPAWSServiceModel struct {
+	AdminUsername types.String `tfsdk:"admin_username"`
+	SSHKey types.String `tfsdk:"ssh_key"`
+	AdminPassword *NFVServiceF5BigIPAWSServiceAdminPasswordModel `tfsdk:"admin_password"`
+	AWSTGWSiteParams *NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel `tfsdk:"aws_tgw_site_params"`
+	EndpointService *NFVServiceF5BigIPAWSServiceEndpointServiceModel `tfsdk:"endpoint_service"`
+	MarketPlaceImage *NFVServiceF5BigIPAWSServiceMarketPlaceImageModel `tfsdk:"market_place_image"`
+	Nodes []NFVServiceF5BigIPAWSServiceNodesModel `tfsdk:"nodes"`
+	Tags *NFVServiceEmptyModel `tfsdk:"tags"`
+}
+
+// NFVServiceF5BigIPAWSServiceAdminPasswordModel represents admin_password block
+type NFVServiceF5BigIPAWSServiceAdminPasswordModel struct {
+	BlindfoldSecretInfo *NFVServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// NFVServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NFVServiceF5BigIPAWSServiceAdminPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type NFVServiceF5BigIPAWSServiceAdminPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel represents aws_tgw_site_params block
+type NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel struct {
+	AWSTGWSite *NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
+}
+
+// NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel represents aws_tgw_site block
+type NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsAWSTGWSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceF5BigIPAWSServiceEndpointServiceModel represents endpoint_service block
+type NFVServiceF5BigIPAWSServiceEndpointServiceModel struct {
+	ConfiguredVip types.String `tfsdk:"configured_vip"`
+	AdvertiseOnSLOIP *NFVServiceEmptyModel `tfsdk:"advertise_on_slo_ip"`
+	AdvertiseOnSLOIPExternal *NFVServiceEmptyModel `tfsdk:"advertise_on_slo_ip_external"`
+	AutomaticVip *NFVServiceEmptyModel `tfsdk:"automatic_vip"`
+	CustomTCPPorts *NFVServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel `tfsdk:"custom_tcp_ports"`
+	CustomUDPPorts *NFVServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel `tfsdk:"custom_udp_ports"`
+	DefaultTCPPorts *NFVServiceEmptyModel `tfsdk:"default_tcp_ports"`
+	DisableAdvertiseOnSLOIP *NFVServiceEmptyModel `tfsdk:"disable_advertise_on_slo_ip"`
+	HTTPPort *NFVServiceEmptyModel `tfsdk:"http_port"`
+	HTTPSPort *NFVServiceEmptyModel `tfsdk:"https_port"`
+	NoTCPPorts *NFVServiceEmptyModel `tfsdk:"no_tcp_ports"`
+	NoUDPPorts *NFVServiceEmptyModel `tfsdk:"no_udp_ports"`
+}
+
+// NFVServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel represents custom_tcp_ports block
+type NFVServiceF5BigIPAWSServiceEndpointServiceCustomTCPPortsModel struct {
+	Ports types.List `tfsdk:"ports"`
+}
+
+// NFVServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel represents custom_udp_ports block
+type NFVServiceF5BigIPAWSServiceEndpointServiceCustomUDPPortsModel struct {
+	Ports types.List `tfsdk:"ports"`
+}
+
+// NFVServiceF5BigIPAWSServiceMarketPlaceImageModel represents market_place_image block
+type NFVServiceF5BigIPAWSServiceMarketPlaceImageModel struct {
+	Awafpayg200mbps *NFVServiceEmptyModel `tfsdk:"awafpay_g200_mbps"`
+	Awafpayg3gbps *NFVServiceEmptyModel `tfsdk:"awafpay_g3_gbps"`
+}
+
+// NFVServiceF5BigIPAWSServiceNodesModel represents nodes block
+type NFVServiceF5BigIPAWSServiceNodesModel struct {
+	AWSAzName types.String `tfsdk:"aws_az_name"`
+	NodeName types.String `tfsdk:"node_name"`
+	TunnelPrefix types.String `tfsdk:"tunnel_prefix"`
+	AutomaticPrefix *NFVServiceEmptyModel `tfsdk:"automatic_prefix"`
+	MgmtSubnet *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
+	ReservedMgmtSubnet *NFVServiceEmptyModel `tfsdk:"reserved_mgmt_subnet"`
+}
+
+// NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel represents mgmt_subnet block
+type NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel struct {
+	ExistingSubnetID types.String `tfsdk:"existing_subnet_id"`
+	SubnetParam *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel represents subnet_param block
+type NFVServiceF5BigIPAWSServiceNodesMgmtSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// NFVServiceHTTPSManagementModel represents https_management block
+type NFVServiceHTTPSManagementModel struct {
+	DomainSuffix types.String `tfsdk:"domain_suffix"`
+	HTTPSPort types.Int64 `tfsdk:"https_port"`
+	AdvertiseOnInternet *NFVServiceHTTPSManagementAdvertiseOnInternetModel `tfsdk:"advertise_on_internet"`
+	AdvertiseOnInternetDefaultVip *NFVServiceEmptyModel `tfsdk:"advertise_on_internet_default_vip"`
+	AdvertiseOnSLIVip *NFVServiceHTTPSManagementAdvertiseOnSLIVipModel `tfsdk:"advertise_on_sli_vip"`
+	AdvertiseOnSLOInternetVip *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel `tfsdk:"advertise_on_slo_internet_vip"`
+	AdvertiseOnSLOSLI *NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel `tfsdk:"advertise_on_slo_sli"`
+	AdvertiseOnSLOVip *NFVServiceHTTPSManagementAdvertiseOnSLOVipModel `tfsdk:"advertise_on_slo_vip"`
+	DefaultHTTPSPort *NFVServiceEmptyModel `tfsdk:"default_https_port"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnInternetModel represents advertise_on_internet block
+type NFVServiceHTTPSManagementAdvertiseOnInternetModel struct {
+	PublicIP *NFVServiceHTTPSManagementAdvertiseOnInternetPublicIPModel `tfsdk:"public_ip"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnInternetPublicIPModel represents public_ip block
+type NFVServiceHTTPSManagementAdvertiseOnInternetPublicIPModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipModel represents advertise_on_sli_vip block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipModel struct {
+	NoMtls *NFVServiceEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel represents tls_certificates block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *NFVServiceEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel represents private_key block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel represents tls_config block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigModel struct {
+	CustomSecurity *NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NFVServiceEmptyModel `tfsdk:"default_security"`
+	LowSecurity *NFVServiceEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *NFVServiceEmptyModel `tfsdk:"medium_security"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel represents custom_security block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel represents use_mtls block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *NFVServiceEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *NFVServiceEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel represents crl block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel represents trusted_ca block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel represents xfcc_options block
+type NFVServiceHTTPSManagementAdvertiseOnSLIVipUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel represents advertise_on_slo_internet_vip block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel struct {
+	NoMtls *NFVServiceEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel represents tls_certificates block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *NFVServiceEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel represents private_key block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel represents tls_config block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigModel struct {
+	CustomSecurity *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NFVServiceEmptyModel `tfsdk:"default_security"`
+	LowSecurity *NFVServiceEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *NFVServiceEmptyModel `tfsdk:"medium_security"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel represents custom_security block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel represents use_mtls block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *NFVServiceEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *NFVServiceEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel represents crl block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel represents trusted_ca block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel represents xfcc_options block
+type NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel represents advertise_on_slo_sli block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel struct {
+	NoMtls *NFVServiceEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel represents tls_certificates block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *NFVServiceEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel represents private_key block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel represents tls_config block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigModel struct {
+	CustomSecurity *NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NFVServiceEmptyModel `tfsdk:"default_security"`
+	LowSecurity *NFVServiceEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *NFVServiceEmptyModel `tfsdk:"medium_security"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel represents custom_security block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLITLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel represents use_mtls block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *NFVServiceEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *NFVServiceEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel represents crl block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel represents trusted_ca block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel represents xfcc_options block
+type NFVServiceHTTPSManagementAdvertiseOnSLOSLIUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipModel represents advertise_on_slo_vip block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipModel struct {
+	NoMtls *NFVServiceEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel represents tls_certificates block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *NFVServiceEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *NFVServiceEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel represents private_key block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel represents tls_config block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigModel struct {
+	CustomSecurity *NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *NFVServiceEmptyModel `tfsdk:"default_security"`
+	LowSecurity *NFVServiceEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *NFVServiceEmptyModel `tfsdk:"medium_security"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel represents custom_security block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel represents use_mtls block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *NFVServiceEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *NFVServiceEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel represents crl block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel represents trusted_ca block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel represents xfcc_options block
+type NFVServiceHTTPSManagementAdvertiseOnSLOVipUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// NFVServicePaloAltoFwServiceModel represents palo_alto_fw_service block
+type NFVServicePaloAltoFwServiceModel struct {
+	InstanceType types.String `tfsdk:"instance_type"`
+	SSHKey types.String `tfsdk:"ssh_key"`
+	Version types.String `tfsdk:"version"`
+	AutoSetup *NFVServicePaloAltoFwServiceAutoSetupModel `tfsdk:"auto_setup"`
+	AWSTGWSite *NFVServicePaloAltoFwServiceAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
+	DisablePanaroma *NFVServiceEmptyModel `tfsdk:"disable_panaroma"`
+	PanAmiBundle1 *NFVServiceEmptyModel `tfsdk:"pan_ami_bundle1"`
+	PanAmiBundle2 *NFVServiceEmptyModel `tfsdk:"pan_ami_bundle2"`
+	PanoramaServer *NFVServicePaloAltoFwServicePanoramaServerModel `tfsdk:"panorama_server"`
+	ServiceNodes *NFVServicePaloAltoFwServiceServiceNodesModel `tfsdk:"service_nodes"`
+	Tags *NFVServiceEmptyModel `tfsdk:"tags"`
+}
+
+// NFVServicePaloAltoFwServiceAutoSetupModel represents auto_setup block
+type NFVServicePaloAltoFwServiceAutoSetupModel struct {
+	AdminUsername types.String `tfsdk:"admin_username"`
+	AdminPassword *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordModel `tfsdk:"admin_password"`
+	ManualSSHKeys *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysModel `tfsdk:"manual_ssh_keys"`
+}
+
+// NFVServicePaloAltoFwServiceAutoSetupAdminPasswordModel represents admin_password block
+type NFVServicePaloAltoFwServiceAutoSetupAdminPasswordModel struct {
+	BlindfoldSecretInfo *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// NFVServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NFVServicePaloAltoFwServiceAutoSetupAdminPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type NFVServicePaloAltoFwServiceAutoSetupAdminPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysModel represents manual_ssh_keys block
+type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysModel struct {
+	PublicKey types.String `tfsdk:"public_key"`
+	PrivateKey *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel `tfsdk:"private_key"`
+}
+
+// NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel represents private_key block
+type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel struct {
+	BlindfoldSecretInfo *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NFVServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// NFVServicePaloAltoFwServiceAWSTGWSiteModel represents aws_tgw_site block
+type NFVServicePaloAltoFwServiceAWSTGWSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NFVServicePaloAltoFwServicePanoramaServerModel represents panorama_server block
+type NFVServicePaloAltoFwServicePanoramaServerModel struct {
+	DeviceGroupName types.String `tfsdk:"device_group_name"`
+	Server types.String `tfsdk:"server"`
+	TemplateStackName types.String `tfsdk:"template_stack_name"`
+	AuthorizationKey *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel `tfsdk:"authorization_key"`
+}
+
+// NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel represents authorization_key block
+type NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel struct {
+	BlindfoldSecretInfo *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel represents clear_secret_info block
+type NFVServicePaloAltoFwServicePanoramaServerAuthorizationKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// NFVServicePaloAltoFwServiceServiceNodesModel represents service_nodes block
+type NFVServicePaloAltoFwServiceServiceNodesModel struct {
+	Nodes []NFVServicePaloAltoFwServiceServiceNodesNodesModel `tfsdk:"nodes"`
+}
+
+// NFVServicePaloAltoFwServiceServiceNodesNodesModel represents nodes block
+type NFVServicePaloAltoFwServiceServiceNodesNodesModel struct {
+	AWSAzName types.String `tfsdk:"aws_az_name"`
+	NodeName types.String `tfsdk:"node_name"`
+	MgmtSubnet *NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel `tfsdk:"mgmt_subnet"`
+	ReservedMgmtSubnet *NFVServiceEmptyModel `tfsdk:"reserved_mgmt_subnet"`
+}
+
+// NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel represents mgmt_subnet block
+type NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetModel struct {
+	ExistingSubnetID types.String `tfsdk:"existing_subnet_id"`
+	SubnetParam *NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel represents subnet_param block
+type NFVServicePaloAltoFwServiceServiceNodesNodesMgmtSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
 type NFVServiceResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +666,12 @@ type NFVServiceResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	DisableHTTPSManagement *NFVServiceEmptyModel `tfsdk:"disable_https_management"`
+	DisableSSHAccess *NFVServiceEmptyModel `tfsdk:"disable_ssh_access"`
+	EnabledSSHAccess *NFVServiceEnabledSSHAccessModel `tfsdk:"enabled_ssh_access"`
+	F5BigIPAWSService *NFVServiceF5BigIPAWSServiceModel `tfsdk:"f5_big_ip_aws_service"`
+	HTTPSManagement *NFVServiceHTTPSManagementModel `tfsdk:"https_management"`
+	PaloAltoFwService *NFVServicePaloAltoFwServiceModel `tfsdk:"palo_alto_fw_service"`
 }
 
 func (r *NFVServiceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1492,6 +2111,10 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		Spec: client.NFVServiceSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1547,6 +2170,15 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 
 	apiResource, err := r.client.GetNFVService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NFVService not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NFVService: %s", err))
 		return
 	}
@@ -1561,6 +2193,13 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1613,6 +2252,10 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		Spec: client.NFVServiceSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1637,10 +2280,20 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetNFVService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1664,11 +2317,33 @@ func (r *NFVServiceResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	err := r.client.DeleteNFVService(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NFVService already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete NFVService: %s", err))
 		return
 	}
 }
 
 func (r *NFVServiceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,1529 @@ type AzureVNETSiteResource struct {
 	client *client.Client
 }
 
+// AzureVNETSiteEmptyModel represents empty nested blocks
+type AzureVNETSiteEmptyModel struct {
+}
+
+// AzureVNETSiteAdminPasswordModel represents admin_password block
+type AzureVNETSiteAdminPasswordModel struct {
+	BlindfoldSecretInfo *AzureVNETSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AzureVNETSiteAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AzureVNETSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AzureVNETSiteAdminPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AzureVNETSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type AzureVNETSiteAdminPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AzureVNETSiteAzureCredModel represents azure_cred block
+type AzureVNETSiteAzureCredModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteBlockedServicesModel represents blocked_services block
+type AzureVNETSiteBlockedServicesModel struct {
+	BlockedSevice []AzureVNETSiteBlockedServicesBlockedSeviceModel `tfsdk:"blocked_sevice"`
+}
+
+// AzureVNETSiteBlockedServicesBlockedSeviceModel represents blocked_sevice block
+type AzureVNETSiteBlockedServicesBlockedSeviceModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DNS *AzureVNETSiteEmptyModel `tfsdk:"dns"`
+	SSH *AzureVNETSiteEmptyModel `tfsdk:"ssh"`
+	WebUserInterface *AzureVNETSiteEmptyModel `tfsdk:"web_user_interface"`
+}
+
+// AzureVNETSiteCoordinatesModel represents coordinates block
+type AzureVNETSiteCoordinatesModel struct {
+	Latitude types.Int64 `tfsdk:"latitude"`
+	Longitude types.Int64 `tfsdk:"longitude"`
+}
+
+// AzureVNETSiteCustomDNSModel represents custom_dns block
+type AzureVNETSiteCustomDNSModel struct {
+	InsideNameserver types.String `tfsdk:"inside_nameserver"`
+	OutsideNameserver types.String `tfsdk:"outside_nameserver"`
+}
+
+// AzureVNETSiteIngressEgressGwModel represents ingress_egress_gw block
+type AzureVNETSiteIngressEgressGwModel struct {
+	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking *AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	ActiveEnhancedFirewallPolicies *AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
+	ActiveForwardProxyPolicies *AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies *AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
+	AzNodes []AzureVNETSiteIngressEgressGwAzNodesModel `tfsdk:"az_nodes"`
+	DcClusterGroupInsideVn *AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModel `tfsdk:"dc_cluster_group_inside_vn"`
+	DcClusterGroupOutsideVn *AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModel `tfsdk:"dc_cluster_group_outside_vn"`
+	ForwardProxyAllowAll *AzureVNETSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList *AzureVNETSiteIngressEgressGwGlobalNetworkListModel `tfsdk:"global_network_list"`
+	Hub *AzureVNETSiteIngressEgressGwHubModel `tfsdk:"hub"`
+	InsideStaticRoutes *AzureVNETSiteIngressEgressGwInsideStaticRoutesModel `tfsdk:"inside_static_routes"`
+	NoDcClusterGroup *AzureVNETSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy *AzureVNETSiteEmptyModel `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork *AzureVNETSiteEmptyModel `tfsdk:"no_global_network"`
+	NoInsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_inside_static_routes"`
+	NoNetworkPolicy *AzureVNETSiteEmptyModel `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_outside_static_routes"`
+	NotHub *AzureVNETSiteEmptyModel `tfsdk:"not_hub"`
+	OutsideStaticRoutes *AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
+	PerformanceEnhancementMode *AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+	SmConnectionPublicIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+}
+
+// AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel represents accelerated_networking block
+type AzureVNETSiteIngressEgressGwAcceleratedNetworkingModel struct {
+	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
+	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+}
+
+// AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
+type AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel struct {
+	EnhancedFirewallPolicies []AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+}
+
+// AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
+type AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
+type AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModel struct {
+	ForwardProxyPolicies []AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
+type AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel represents active_network_policies block
+type AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModel struct {
+	NetworkPolicies []AzureVNETSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
+}
+
+// AzureVNETSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
+type AzureVNETSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwAzNodesModel represents az_nodes block
+type AzureVNETSiteIngressEgressGwAzNodesModel struct {
+	AzureAz types.String `tfsdk:"azure_az"`
+	InsideSubnet *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel `tfsdk:"inside_subnet"`
+	OutsideSubnet *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel `tfsdk:"outside_subnet"`
+}
+
+// AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel represents inside_subnet block
+type AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel struct {
+	Subnet *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel represents outside_subnet block
+type AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel struct {
+	Subnet *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
+type AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModel represents dc_cluster_group_outside_vn block
+type AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwGlobalNetworkListModel represents global_network_list block
+type AzureVNETSiteIngressEgressGwGlobalNetworkListModel struct {
+	GlobalNetworkConnections []AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
+}
+
+// AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
+type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel struct {
+	SLIToGlobalDr *AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
+	SLOToGlobalDr *AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+}
+
+// AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
+type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
+	GlobalVn *AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
+type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
+type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
+	GlobalVn *AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
+type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwHubModel represents hub block
+type AzureVNETSiteIngressEgressGwHubModel struct {
+	ExpressRouteDisabled *AzureVNETSiteEmptyModel `tfsdk:"express_route_disabled"`
+	ExpressRouteEnabled *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModel `tfsdk:"express_route_enabled"`
+	SpokeVnets []AzureVNETSiteIngressEgressGwHubSpokeVnetsModel `tfsdk:"spoke_vnets"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModel represents express_route_enabled block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModel struct {
+	CustomAsn types.Int64 `tfsdk:"custom_asn"`
+	AdvertiseToRouteServer *AzureVNETSiteEmptyModel `tfsdk:"advertise_to_route_server"`
+	AutoAsn *AzureVNETSiteEmptyModel `tfsdk:"auto_asn"`
+	Connections []AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsModel `tfsdk:"connections"`
+	DoNotAdvertiseToRouteServer *AzureVNETSiteEmptyModel `tfsdk:"do_not_advertise_to_route_server"`
+	GatewaySubnet *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel `tfsdk:"gateway_subnet"`
+	RouteServerSubnet *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel `tfsdk:"route_server_subnet"`
+	SiteRegistrationOverExpressRoute *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel `tfsdk:"site_registration_over_express_route"`
+	SiteRegistrationOverInternet *AzureVNETSiteEmptyModel `tfsdk:"site_registration_over_internet"`
+	SkuErgw1az *AzureVNETSiteEmptyModel `tfsdk:"sku_ergw1az"`
+	SkuErgw2az *AzureVNETSiteEmptyModel `tfsdk:"sku_ergw2az"`
+	SkuHighPerf *AzureVNETSiteEmptyModel `tfsdk:"sku_high_perf"`
+	SkuStandard *AzureVNETSiteEmptyModel `tfsdk:"sku_standard"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsModel represents connections block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsModel struct {
+	CircuitID types.String `tfsdk:"circuit_id"`
+	Weight types.Int64 `tfsdk:"weight"`
+	Metadata *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel `tfsdk:"metadata"`
+	OtherSubscription *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel `tfsdk:"other_subscription"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel represents metadata block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel represents other_subscription block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel struct {
+	CircuitID types.String `tfsdk:"circuit_id"`
+	AuthorizedKey *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel `tfsdk:"authorized_key"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel represents authorized_key block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel struct {
+	BlindfoldSecretInfo *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel represents clear_secret_info block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel represents gateway_subnet block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel struct {
+	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
+	Subnet *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel struct {
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel represents route_server_subnet block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel struct {
+	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
+	Subnet *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel struct {
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel represents site_registration_over_express_route block
+type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel struct {
+	CloudlinkNetworkName types.String `tfsdk:"cloudlink_network_name"`
+}
+
+// AzureVNETSiteIngressEgressGwHubSpokeVnetsModel represents spoke_vnets block
+type AzureVNETSiteIngressEgressGwHubSpokeVnetsModel struct {
+	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
+	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
+	Manual *AzureVNETSiteEmptyModel `tfsdk:"manual"`
+	VNET *AzureVNETSiteIngressEgressGwHubSpokeVnetsVNETModel `tfsdk:"vnet"`
+}
+
+// AzureVNETSiteIngressEgressGwHubSpokeVnetsVNETModel represents vnet block
+type AzureVNETSiteIngressEgressGwHubSpokeVnetsVNETModel struct {
+	ResourceGroup types.String `tfsdk:"resource_group"`
+	VNETName types.String `tfsdk:"vnet_name"`
+	F5OrchestratedRouting *AzureVNETSiteEmptyModel `tfsdk:"f5_orchestrated_routing"`
+	ManualRouting *AzureVNETSiteEmptyModel `tfsdk:"manual_routing"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesModel represents inside_static_routes block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesModel struct {
+	StaticRouteList []AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel represents static_route_list block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	CustomStaticRoute *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Subnets []AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	IPV4 *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	IPV4 *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
+type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel represents outside_static_routes block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesModel struct {
+	StaticRouteList []AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel represents static_route_list block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	CustomStaticRoute *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Subnets []AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	IPV4 *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	IPV4 *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
+type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
+type AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel struct {
+	PerfModeL3Enhanced *AzureVNETSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
+	PerfModeL7Enhanced *AzureVNETSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+}
+
+// AzureVNETSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
+type AzureVNETSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel struct {
+	Jumbo *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
+	NoJumbo *AzureVNETSiteEmptyModel `tfsdk:"no_jumbo"`
+}
+
+// AzureVNETSiteIngressEgressGwArModel represents ingress_egress_gw_ar block
+type AzureVNETSiteIngressEgressGwArModel struct {
+	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking *AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	ActiveEnhancedFirewallPolicies *AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
+	ActiveForwardProxyPolicies *AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies *AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
+	DcClusterGroupInsideVn *AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModel `tfsdk:"dc_cluster_group_inside_vn"`
+	DcClusterGroupOutsideVn *AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModel `tfsdk:"dc_cluster_group_outside_vn"`
+	ForwardProxyAllowAll *AzureVNETSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList *AzureVNETSiteIngressEgressGwArGlobalNetworkListModel `tfsdk:"global_network_list"`
+	Hub *AzureVNETSiteIngressEgressGwArHubModel `tfsdk:"hub"`
+	InsideStaticRoutes *AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel `tfsdk:"inside_static_routes"`
+	NoDcClusterGroup *AzureVNETSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy *AzureVNETSiteEmptyModel `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork *AzureVNETSiteEmptyModel `tfsdk:"no_global_network"`
+	NoInsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_inside_static_routes"`
+	NoNetworkPolicy *AzureVNETSiteEmptyModel `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_outside_static_routes"`
+	Node *AzureVNETSiteIngressEgressGwArNodeModel `tfsdk:"node"`
+	NotHub *AzureVNETSiteEmptyModel `tfsdk:"not_hub"`
+	OutsideStaticRoutes *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
+	PerformanceEnhancementMode *AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+	SmConnectionPublicIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+}
+
+// AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel represents accelerated_networking block
+type AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModel struct {
+	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
+	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+}
+
+// AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
+type AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel struct {
+	EnhancedFirewallPolicies []AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+}
+
+// AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
+type AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
+type AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModel struct {
+	ForwardProxyPolicies []AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
+type AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel represents active_network_policies block
+type AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModel struct {
+	NetworkPolicies []AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
+}
+
+// AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
+type AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
+type AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModel represents dc_cluster_group_outside_vn block
+type AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwArGlobalNetworkListModel represents global_network_list block
+type AzureVNETSiteIngressEgressGwArGlobalNetworkListModel struct {
+	GlobalNetworkConnections []AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
+}
+
+// AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
+type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModel struct {
+	SLIToGlobalDr *AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
+	SLOToGlobalDr *AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+}
+
+// AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
+type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
+	GlobalVn *AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
+type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
+type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
+	GlobalVn *AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
+type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubModel represents hub block
+type AzureVNETSiteIngressEgressGwArHubModel struct {
+	ExpressRouteDisabled *AzureVNETSiteEmptyModel `tfsdk:"express_route_disabled"`
+	ExpressRouteEnabled *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModel `tfsdk:"express_route_enabled"`
+	SpokeVnets []AzureVNETSiteIngressEgressGwArHubSpokeVnetsModel `tfsdk:"spoke_vnets"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModel represents express_route_enabled block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModel struct {
+	CustomAsn types.Int64 `tfsdk:"custom_asn"`
+	AdvertiseToRouteServer *AzureVNETSiteEmptyModel `tfsdk:"advertise_to_route_server"`
+	AutoAsn *AzureVNETSiteEmptyModel `tfsdk:"auto_asn"`
+	Connections []AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel `tfsdk:"connections"`
+	DoNotAdvertiseToRouteServer *AzureVNETSiteEmptyModel `tfsdk:"do_not_advertise_to_route_server"`
+	GatewaySubnet *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel `tfsdk:"gateway_subnet"`
+	RouteServerSubnet *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel `tfsdk:"route_server_subnet"`
+	SiteRegistrationOverExpressRoute *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel `tfsdk:"site_registration_over_express_route"`
+	SiteRegistrationOverInternet *AzureVNETSiteEmptyModel `tfsdk:"site_registration_over_internet"`
+	SkuErgw1az *AzureVNETSiteEmptyModel `tfsdk:"sku_ergw1az"`
+	SkuErgw2az *AzureVNETSiteEmptyModel `tfsdk:"sku_ergw2az"`
+	SkuHighPerf *AzureVNETSiteEmptyModel `tfsdk:"sku_high_perf"`
+	SkuStandard *AzureVNETSiteEmptyModel `tfsdk:"sku_standard"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel represents connections block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel struct {
+	CircuitID types.String `tfsdk:"circuit_id"`
+	Weight types.Int64 `tfsdk:"weight"`
+	Metadata *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel `tfsdk:"metadata"`
+	OtherSubscription *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel `tfsdk:"other_subscription"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel represents metadata block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel represents other_subscription block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel struct {
+	CircuitID types.String `tfsdk:"circuit_id"`
+	AuthorizedKey *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel `tfsdk:"authorized_key"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel represents authorized_key block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel struct {
+	BlindfoldSecretInfo *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel represents clear_secret_info block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel represents gateway_subnet block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel struct {
+	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
+	Subnet *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel struct {
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel represents route_server_subnet block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel struct {
+	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
+	Subnet *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel struct {
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel represents site_registration_over_express_route block
+type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel struct {
+	CloudlinkNetworkName types.String `tfsdk:"cloudlink_network_name"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubSpokeVnetsModel represents spoke_vnets block
+type AzureVNETSiteIngressEgressGwArHubSpokeVnetsModel struct {
+	Auto *AzureVNETSiteEmptyModel `tfsdk:"auto"`
+	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
+	Manual *AzureVNETSiteEmptyModel `tfsdk:"manual"`
+	VNET *AzureVNETSiteIngressEgressGwArHubSpokeVnetsVNETModel `tfsdk:"vnet"`
+}
+
+// AzureVNETSiteIngressEgressGwArHubSpokeVnetsVNETModel represents vnet block
+type AzureVNETSiteIngressEgressGwArHubSpokeVnetsVNETModel struct {
+	ResourceGroup types.String `tfsdk:"resource_group"`
+	VNETName types.String `tfsdk:"vnet_name"`
+	F5OrchestratedRouting *AzureVNETSiteEmptyModel `tfsdk:"f5_orchestrated_routing"`
+	ManualRouting *AzureVNETSiteEmptyModel `tfsdk:"manual_routing"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel represents inside_static_routes block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesModel struct {
+	StaticRouteList []AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListModel represents static_route_list block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	CustomStaticRoute *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Subnets []AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	IPV4 *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	IPV4 *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
+type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteIngressEgressGwArNodeModel represents node block
+type AzureVNETSiteIngressEgressGwArNodeModel struct {
+	FaultDomain types.Int64 `tfsdk:"fault_domain"`
+	NodeNumber types.Int64 `tfsdk:"node_number"`
+	UpdateDomain types.Int64 `tfsdk:"update_domain"`
+	InsideSubnet *AzureVNETSiteIngressEgressGwArNodeInsideSubnetModel `tfsdk:"inside_subnet"`
+	OutsideSubnet *AzureVNETSiteIngressEgressGwArNodeOutsideSubnetModel `tfsdk:"outside_subnet"`
+}
+
+// AzureVNETSiteIngressEgressGwArNodeInsideSubnetModel represents inside_subnet block
+type AzureVNETSiteIngressEgressGwArNodeInsideSubnetModel struct {
+	Subnet *AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressEgressGwArNodeInsideSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressEgressGwArNodeOutsideSubnetModel represents outside_subnet block
+type AzureVNETSiteIngressEgressGwArNodeOutsideSubnetModel struct {
+	Subnet *AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressEgressGwArNodeOutsideSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel represents outside_static_routes block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModel struct {
+	StaticRouteList []AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModel represents static_route_list block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	CustomStaticRoute *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Subnets []AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	IPV4 *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	IPV4 *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
+type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel represents performance_enhancement_mode block
+type AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel struct {
+	PerfModeL3Enhanced *AzureVNETSiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
+	PerfModeL7Enhanced *AzureVNETSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+}
+
+// AzureVNETSiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
+type AzureVNETSiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel struct {
+	Jumbo *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
+	NoJumbo *AzureVNETSiteEmptyModel `tfsdk:"no_jumbo"`
+}
+
+// AzureVNETSiteIngressGwModel represents ingress_gw block
+type AzureVNETSiteIngressGwModel struct {
+	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking *AzureVNETSiteIngressGwAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	AzNodes []AzureVNETSiteIngressGwAzNodesModel `tfsdk:"az_nodes"`
+	PerformanceEnhancementMode *AzureVNETSiteIngressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+}
+
+// AzureVNETSiteIngressGwAcceleratedNetworkingModel represents accelerated_networking block
+type AzureVNETSiteIngressGwAcceleratedNetworkingModel struct {
+	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
+	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+}
+
+// AzureVNETSiteIngressGwAzNodesModel represents az_nodes block
+type AzureVNETSiteIngressGwAzNodesModel struct {
+	AzureAz types.String `tfsdk:"azure_az"`
+	LocalSubnet *AzureVNETSiteIngressGwAzNodesLocalSubnetModel `tfsdk:"local_subnet"`
+}
+
+// AzureVNETSiteIngressGwAzNodesLocalSubnetModel represents local_subnet block
+type AzureVNETSiteIngressGwAzNodesLocalSubnetModel struct {
+	Subnet *AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressGwAzNodesLocalSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
+type AzureVNETSiteIngressGwPerformanceEnhancementModeModel struct {
+	PerfModeL3Enhanced *AzureVNETSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
+	PerfModeL7Enhanced *AzureVNETSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+}
+
+// AzureVNETSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
+type AzureVNETSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel struct {
+	Jumbo *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
+	NoJumbo *AzureVNETSiteEmptyModel `tfsdk:"no_jumbo"`
+}
+
+// AzureVNETSiteIngressGwArModel represents ingress_gw_ar block
+type AzureVNETSiteIngressGwArModel struct {
+	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking *AzureVNETSiteIngressGwArAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	Node *AzureVNETSiteIngressGwArNodeModel `tfsdk:"node"`
+	PerformanceEnhancementMode *AzureVNETSiteIngressGwArPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+}
+
+// AzureVNETSiteIngressGwArAcceleratedNetworkingModel represents accelerated_networking block
+type AzureVNETSiteIngressGwArAcceleratedNetworkingModel struct {
+	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
+	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+}
+
+// AzureVNETSiteIngressGwArNodeModel represents node block
+type AzureVNETSiteIngressGwArNodeModel struct {
+	FaultDomain types.Int64 `tfsdk:"fault_domain"`
+	NodeNumber types.Int64 `tfsdk:"node_number"`
+	UpdateDomain types.Int64 `tfsdk:"update_domain"`
+	LocalSubnet *AzureVNETSiteIngressGwArNodeLocalSubnetModel `tfsdk:"local_subnet"`
+}
+
+// AzureVNETSiteIngressGwArNodeLocalSubnetModel represents local_subnet block
+type AzureVNETSiteIngressGwArNodeLocalSubnetModel struct {
+	Subnet *AzureVNETSiteIngressGwArNodeLocalSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteIngressGwArNodeLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteIngressGwArNodeLocalSubnetSubnetModel represents subnet block
+type AzureVNETSiteIngressGwArNodeLocalSubnetSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteIngressGwArNodeLocalSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteIngressGwArNodeLocalSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteIngressGwArPerformanceEnhancementModeModel represents performance_enhancement_mode block
+type AzureVNETSiteIngressGwArPerformanceEnhancementModeModel struct {
+	PerfModeL3Enhanced *AzureVNETSiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
+	PerfModeL7Enhanced *AzureVNETSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+}
+
+// AzureVNETSiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
+type AzureVNETSiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel struct {
+	Jumbo *AzureVNETSiteEmptyModel `tfsdk:"jumbo"`
+	NoJumbo *AzureVNETSiteEmptyModel `tfsdk:"no_jumbo"`
+}
+
+// AzureVNETSiteKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
+type AzureVNETSiteKubernetesUpgradeDrainModel struct {
+	DisableUpgradeDrain *AzureVNETSiteEmptyModel `tfsdk:"disable_upgrade_drain"`
+	EnableUpgradeDrain *AzureVNETSiteKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+}
+
+// AzureVNETSiteKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
+type AzureVNETSiteKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
+	DrainMaxUnavailableNodeCount types.Int64 `tfsdk:"drain_max_unavailable_node_count"`
+	DrainNodeTimeout types.Int64 `tfsdk:"drain_node_timeout"`
+	DisableVegaUpgradeMode *AzureVNETSiteEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
+	EnableVegaUpgradeMode *AzureVNETSiteEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
+}
+
+// AzureVNETSiteLogReceiverModel represents log_receiver block
+type AzureVNETSiteLogReceiverModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteOfflineSurvivabilityModeModel represents offline_survivability_mode block
+type AzureVNETSiteOfflineSurvivabilityModeModel struct {
+	EnableOfflineSurvivabilityMode *AzureVNETSiteEmptyModel `tfsdk:"enable_offline_survivability_mode"`
+	NoOfflineSurvivabilityMode *AzureVNETSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
+}
+
+// AzureVNETSiteOsModel represents os block
+type AzureVNETSiteOsModel struct {
+	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
+	DefaultOsVersion *AzureVNETSiteEmptyModel `tfsdk:"default_os_version"`
+}
+
+// AzureVNETSiteSwModel represents sw block
+type AzureVNETSiteSwModel struct {
+	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
+	DefaultSwVersion *AzureVNETSiteEmptyModel `tfsdk:"default_sw_version"`
+}
+
+// AzureVNETSiteVNETModel represents vnet block
+type AzureVNETSiteVNETModel struct {
+	ExistingVNET *AzureVNETSiteVNETExistingVNETModel `tfsdk:"existing_vnet"`
+	NewVNET *AzureVNETSiteVNETNewVNETModel `tfsdk:"new_vnet"`
+}
+
+// AzureVNETSiteVNETExistingVNETModel represents existing_vnet block
+type AzureVNETSiteVNETExistingVNETModel struct {
+	ResourceGroup types.String `tfsdk:"resource_group"`
+	VNETName types.String `tfsdk:"vnet_name"`
+	F5OrchestratedRouting *AzureVNETSiteEmptyModel `tfsdk:"f5_orchestrated_routing"`
+	ManualRouting *AzureVNETSiteEmptyModel `tfsdk:"manual_routing"`
+}
+
+// AzureVNETSiteVNETNewVNETModel represents new_vnet block
+type AzureVNETSiteVNETNewVNETModel struct {
+	Name types.String `tfsdk:"name"`
+	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
+	Autogenerate *AzureVNETSiteEmptyModel `tfsdk:"autogenerate"`
+}
+
+// AzureVNETSiteVoltstackClusterModel represents voltstack_cluster block
+type AzureVNETSiteVoltstackClusterModel struct {
+	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking *AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	ActiveEnhancedFirewallPolicies *AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
+	ActiveForwardProxyPolicies *AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies *AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
+	AzNodes []AzureVNETSiteVoltstackClusterAzNodesModel `tfsdk:"az_nodes"`
+	DcClusterGroup *AzureVNETSiteVoltstackClusterDcClusterGroupModel `tfsdk:"dc_cluster_group"`
+	DefaultStorage *AzureVNETSiteEmptyModel `tfsdk:"default_storage"`
+	ForwardProxyAllowAll *AzureVNETSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList *AzureVNETSiteVoltstackClusterGlobalNetworkListModel `tfsdk:"global_network_list"`
+	K8SCluster *AzureVNETSiteVoltstackClusterK8SClusterModel `tfsdk:"k8s_cluster"`
+	NoDcClusterGroup *AzureVNETSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy *AzureVNETSiteEmptyModel `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork *AzureVNETSiteEmptyModel `tfsdk:"no_global_network"`
+	NoK8SCluster *AzureVNETSiteEmptyModel `tfsdk:"no_k8s_cluster"`
+	NoNetworkPolicy *AzureVNETSiteEmptyModel `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_outside_static_routes"`
+	OutsideStaticRoutes *AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
+	SmConnectionPublicIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+	StorageClassList *AzureVNETSiteVoltstackClusterStorageClassListModel `tfsdk:"storage_class_list"`
+}
+
+// AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel represents accelerated_networking block
+type AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel struct {
+	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
+	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+}
+
+// AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
+type AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel struct {
+	EnhancedFirewallPolicies []AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+}
+
+// AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
+type AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
+type AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModel struct {
+	ForwardProxyPolicies []AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
+type AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel represents active_network_policies block
+type AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModel struct {
+	NetworkPolicies []AzureVNETSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
+}
+
+// AzureVNETSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
+type AzureVNETSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterAzNodesModel represents az_nodes block
+type AzureVNETSiteVoltstackClusterAzNodesModel struct {
+	AzureAz types.String `tfsdk:"azure_az"`
+	LocalSubnet *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel `tfsdk:"local_subnet"`
+}
+
+// AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel represents local_subnet block
+type AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel struct {
+	Subnet *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetModel represents subnet block
+type AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteVoltstackClusterDcClusterGroupModel represents dc_cluster_group block
+type AzureVNETSiteVoltstackClusterDcClusterGroupModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterGlobalNetworkListModel represents global_network_list block
+type AzureVNETSiteVoltstackClusterGlobalNetworkListModel struct {
+	GlobalNetworkConnections []AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
+}
+
+// AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
+type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel struct {
+	SLIToGlobalDr *AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
+	SLOToGlobalDr *AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+}
+
+// AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
+type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
+	GlobalVn *AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
+type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
+type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
+	GlobalVn *AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
+type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterK8SClusterModel represents k8s_cluster block
+type AzureVNETSiteVoltstackClusterK8SClusterModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel represents outside_static_routes block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesModel struct {
+	StaticRouteList []AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel represents static_route_list block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	CustomStaticRoute *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Subnets []AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	IPV4 *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	IPV4 *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
+type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteVoltstackClusterStorageClassListModel represents storage_class_list block
+type AzureVNETSiteVoltstackClusterStorageClassListModel struct {
+	StorageClasses []AzureVNETSiteVoltstackClusterStorageClassListStorageClassesModel `tfsdk:"storage_classes"`
+}
+
+// AzureVNETSiteVoltstackClusterStorageClassListStorageClassesModel represents storage_classes block
+type AzureVNETSiteVoltstackClusterStorageClassListStorageClassesModel struct {
+	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
+	StorageClassName types.String `tfsdk:"storage_class_name"`
+}
+
+// AzureVNETSiteVoltstackClusterArModel represents voltstack_cluster_ar block
+type AzureVNETSiteVoltstackClusterArModel struct {
+	AzureCertifiedHw types.String `tfsdk:"azure_certified_hw"`
+	AcceleratedNetworking *AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel `tfsdk:"accelerated_networking"`
+	ActiveEnhancedFirewallPolicies *AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
+	ActiveForwardProxyPolicies *AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies *AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
+	DcClusterGroup *AzureVNETSiteVoltstackClusterArDcClusterGroupModel `tfsdk:"dc_cluster_group"`
+	DefaultStorage *AzureVNETSiteEmptyModel `tfsdk:"default_storage"`
+	ForwardProxyAllowAll *AzureVNETSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList *AzureVNETSiteVoltstackClusterArGlobalNetworkListModel `tfsdk:"global_network_list"`
+	K8SCluster *AzureVNETSiteVoltstackClusterArK8SClusterModel `tfsdk:"k8s_cluster"`
+	NoDcClusterGroup *AzureVNETSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy *AzureVNETSiteEmptyModel `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork *AzureVNETSiteEmptyModel `tfsdk:"no_global_network"`
+	NoK8SCluster *AzureVNETSiteEmptyModel `tfsdk:"no_k8s_cluster"`
+	NoNetworkPolicy *AzureVNETSiteEmptyModel `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes *AzureVNETSiteEmptyModel `tfsdk:"no_outside_static_routes"`
+	Node *AzureVNETSiteVoltstackClusterArNodeModel `tfsdk:"node"`
+	OutsideStaticRoutes *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
+	SmConnectionPublicIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP *AzureVNETSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+	StorageClassList *AzureVNETSiteVoltstackClusterArStorageClassListModel `tfsdk:"storage_class_list"`
+}
+
+// AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel represents accelerated_networking block
+type AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel struct {
+	Disable *AzureVNETSiteEmptyModel `tfsdk:"disable"`
+	Enable *AzureVNETSiteEmptyModel `tfsdk:"enable"`
+}
+
+// AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
+type AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel struct {
+	EnhancedFirewallPolicies []AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+}
+
+// AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
+type AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
+type AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModel struct {
+	ForwardProxyPolicies []AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
+type AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel represents active_network_policies block
+type AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModel struct {
+	NetworkPolicies []AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
+}
+
+// AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
+type AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterArDcClusterGroupModel represents dc_cluster_group block
+type AzureVNETSiteVoltstackClusterArDcClusterGroupModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterArGlobalNetworkListModel represents global_network_list block
+type AzureVNETSiteVoltstackClusterArGlobalNetworkListModel struct {
+	GlobalNetworkConnections []AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
+}
+
+// AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
+type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModel struct {
+	SLIToGlobalDr *AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
+	SLOToGlobalDr *AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+}
+
+// AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
+type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
+	GlobalVn *AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
+type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
+type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
+	GlobalVn *AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
+type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterArK8SClusterModel represents k8s_cluster block
+type AzureVNETSiteVoltstackClusterArK8SClusterModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// AzureVNETSiteVoltstackClusterArNodeModel represents node block
+type AzureVNETSiteVoltstackClusterArNodeModel struct {
+	FaultDomain types.Int64 `tfsdk:"fault_domain"`
+	NodeNumber types.Int64 `tfsdk:"node_number"`
+	UpdateDomain types.Int64 `tfsdk:"update_domain"`
+	LocalSubnet *AzureVNETSiteVoltstackClusterArNodeLocalSubnetModel `tfsdk:"local_subnet"`
+}
+
+// AzureVNETSiteVoltstackClusterArNodeLocalSubnetModel represents local_subnet block
+type AzureVNETSiteVoltstackClusterArNodeLocalSubnetModel struct {
+	Subnet *AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetModel `tfsdk:"subnet"`
+	SubnetParam *AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetModel represents subnet block
+type AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+	SubnetResourceGrp types.String `tfsdk:"subnet_resource_grp"`
+	VNETResourceGroup *AzureVNETSiteEmptyModel `tfsdk:"vnet_resource_group"`
+}
+
+// AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetParamModel represents subnet_param block
+type AzureVNETSiteVoltstackClusterArNodeLocalSubnetSubnetParamModel struct {
+	IPV4 types.String `tfsdk:"ipv4"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel represents outside_static_routes block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModel struct {
+	StaticRouteList []AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModel represents static_route_list block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	CustomStaticRoute *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *AzureVNETSiteEmptyModel `tfsdk:"labels"`
+	Nexthop *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Subnets []AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	IPV4 *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	IPV4 *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
+type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AzureVNETSiteVoltstackClusterArStorageClassListModel represents storage_class_list block
+type AzureVNETSiteVoltstackClusterArStorageClassListModel struct {
+	StorageClasses []AzureVNETSiteVoltstackClusterArStorageClassListStorageClassesModel `tfsdk:"storage_classes"`
+}
+
+// AzureVNETSiteVoltstackClusterArStorageClassListStorageClassesModel represents storage_classes block
+type AzureVNETSiteVoltstackClusterArStorageClassListStorageClassesModel struct {
+	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
+	StorageClassName types.String `tfsdk:"storage_class_name"`
+}
+
 type AzureVNETSiteResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -62,6 +1586,28 @@ type AzureVNETSiteResourceModel struct {
 	TotalNodes types.Int64 `tfsdk:"total_nodes"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AdminPassword *AzureVNETSiteAdminPasswordModel `tfsdk:"admin_password"`
+	AzureCred *AzureVNETSiteAzureCredModel `tfsdk:"azure_cred"`
+	BlockAllServices *AzureVNETSiteEmptyModel `tfsdk:"block_all_services"`
+	BlockedServices *AzureVNETSiteBlockedServicesModel `tfsdk:"blocked_services"`
+	Coordinates *AzureVNETSiteCoordinatesModel `tfsdk:"coordinates"`
+	CustomDNS *AzureVNETSiteCustomDNSModel `tfsdk:"custom_dns"`
+	DefaultBlockedServices *AzureVNETSiteEmptyModel `tfsdk:"default_blocked_services"`
+	IngressEgressGw *AzureVNETSiteIngressEgressGwModel `tfsdk:"ingress_egress_gw"`
+	IngressEgressGwAr *AzureVNETSiteIngressEgressGwArModel `tfsdk:"ingress_egress_gw_ar"`
+	IngressGw *AzureVNETSiteIngressGwModel `tfsdk:"ingress_gw"`
+	IngressGwAr *AzureVNETSiteIngressGwArModel `tfsdk:"ingress_gw_ar"`
+	KubernetesUpgradeDrain *AzureVNETSiteKubernetesUpgradeDrainModel `tfsdk:"kubernetes_upgrade_drain"`
+	LogReceiver *AzureVNETSiteLogReceiverModel `tfsdk:"log_receiver"`
+	LogsStreamingDisabled *AzureVNETSiteEmptyModel `tfsdk:"logs_streaming_disabled"`
+	NoWorkerNodes *AzureVNETSiteEmptyModel `tfsdk:"no_worker_nodes"`
+	OfflineSurvivabilityMode *AzureVNETSiteOfflineSurvivabilityModeModel `tfsdk:"offline_survivability_mode"`
+	Os *AzureVNETSiteOsModel `tfsdk:"os"`
+	Sw *AzureVNETSiteSwModel `tfsdk:"sw"`
+	Tags *AzureVNETSiteEmptyModel `tfsdk:"tags"`
+	VNET *AzureVNETSiteVNETModel `tfsdk:"vnet"`
+	VoltstackCluster *AzureVNETSiteVoltstackClusterModel `tfsdk:"voltstack_cluster"`
+	VoltstackClusterAr *AzureVNETSiteVoltstackClusterArModel `tfsdk:"voltstack_cluster_ar"`
 }
 
 func (r *AzureVNETSiteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -3307,6 +4853,10 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		Spec: client.AzureVNETSiteSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -3362,6 +4912,15 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 
 	apiResource, err := r.client.GetAzureVNETSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AzureVNETSite not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AzureVNETSite: %s", err))
 		return
 	}
@@ -3376,6 +4935,13 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -3428,6 +4994,10 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 		Spec: client.AzureVNETSiteSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -3452,10 +5022,20 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetAzureVNETSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -3479,11 +5059,33 @@ func (r *AzureVNETSiteResource) Delete(ctx context.Context, req resource.DeleteR
 
 	err := r.client.DeleteAzureVNETSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AzureVNETSite already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete AzureVNETSite: %s", err))
 		return
 	}
 }
 
 func (r *AzureVNETSiteResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

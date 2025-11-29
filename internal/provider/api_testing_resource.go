@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,129 @@ type APITestingResource struct {
 	client *client.Client
 }
 
+// APITestingEmptyModel represents empty nested blocks
+type APITestingEmptyModel struct {
+}
+
+// APITestingDomainsModel represents domains block
+type APITestingDomainsModel struct {
+	AllowDestructiveMethods types.Bool `tfsdk:"allow_destructive_methods"`
+	Domain types.String `tfsdk:"domain"`
+	Credentials []APITestingDomainsCredentialsModel `tfsdk:"credentials"`
+}
+
+// APITestingDomainsCredentialsModel represents credentials block
+type APITestingDomainsCredentialsModel struct {
+	CredentialName types.String `tfsdk:"credential_name"`
+	Admin *APITestingEmptyModel `tfsdk:"admin"`
+	APIKey *APITestingDomainsCredentialsAPIKeyModel `tfsdk:"api_key"`
+	BasicAuth *APITestingDomainsCredentialsBasicAuthModel `tfsdk:"basic_auth"`
+	BearerToken *APITestingDomainsCredentialsBearerTokenModel `tfsdk:"bearer_token"`
+	LoginEndpoint *APITestingDomainsCredentialsLoginEndpointModel `tfsdk:"login_endpoint"`
+	Standard *APITestingEmptyModel `tfsdk:"standard"`
+}
+
+// APITestingDomainsCredentialsAPIKeyModel represents api_key block
+type APITestingDomainsCredentialsAPIKeyModel struct {
+	Key types.String `tfsdk:"key"`
+	Value *APITestingDomainsCredentialsAPIKeyValueModel `tfsdk:"value"`
+}
+
+// APITestingDomainsCredentialsAPIKeyValueModel represents value block
+type APITestingDomainsCredentialsAPIKeyValueModel struct {
+	BlindfoldSecretInfo *APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel represents clear_secret_info block
+type APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APITestingDomainsCredentialsBasicAuthModel represents basic_auth block
+type APITestingDomainsCredentialsBasicAuthModel struct {
+	User types.String `tfsdk:"user"`
+	Password *APITestingDomainsCredentialsBasicAuthPasswordModel `tfsdk:"password"`
+}
+
+// APITestingDomainsCredentialsBasicAuthPasswordModel represents password block
+type APITestingDomainsCredentialsBasicAuthPasswordModel struct {
+	BlindfoldSecretInfo *APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
+type APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APITestingDomainsCredentialsBearerTokenModel represents bearer_token block
+type APITestingDomainsCredentialsBearerTokenModel struct {
+	Token *APITestingDomainsCredentialsBearerTokenTokenModel `tfsdk:"token"`
+}
+
+// APITestingDomainsCredentialsBearerTokenTokenModel represents token block
+type APITestingDomainsCredentialsBearerTokenTokenModel struct {
+	BlindfoldSecretInfo *APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel represents clear_secret_info block
+type APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// APITestingDomainsCredentialsLoginEndpointModel represents login_endpoint block
+type APITestingDomainsCredentialsLoginEndpointModel struct {
+	Method types.String `tfsdk:"method"`
+	Path types.String `tfsdk:"path"`
+	TokenResponseKey types.String `tfsdk:"token_response_key"`
+	JsonPayload *APITestingDomainsCredentialsLoginEndpointJsonPayloadModel `tfsdk:"json_payload"`
+}
+
+// APITestingDomainsCredentialsLoginEndpointJsonPayloadModel represents json_payload block
+type APITestingDomainsCredentialsLoginEndpointJsonPayloadModel struct {
+	BlindfoldSecretInfo *APITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// APITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel represents blindfold_secret_info block
+type APITestingDomainsCredentialsLoginEndpointJsonPayloadBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel represents clear_secret_info block
+type APITestingDomainsCredentialsLoginEndpointJsonPayloadClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
 type APITestingResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +178,10 @@ type APITestingResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Domains []APITestingDomainsModel `tfsdk:"domains"`
+	EveryDay *APITestingEmptyModel `tfsdk:"every_day"`
+	EveryMonth *APITestingEmptyModel `tfsdk:"every_month"`
+	EveryWeek *APITestingEmptyModel `tfsdk:"every_week"`
 }
 
 func (r *APITestingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -489,6 +617,10 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 		Spec: client.APITestingSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -544,6 +676,15 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 
 	apiResource, err := r.client.GetAPITesting(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "APITesting not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read APITesting: %s", err))
 		return
 	}
@@ -558,6 +699,13 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -610,6 +758,10 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 		Spec: client.APITestingSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -634,10 +786,20 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetAPITesting(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -661,11 +823,33 @@ func (r *APITestingResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	err := r.client.DeleteAPITesting(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "APITesting already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete APITesting: %s", err))
 		return
 	}
 }
 
 func (r *APITestingResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

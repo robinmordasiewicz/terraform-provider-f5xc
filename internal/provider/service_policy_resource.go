@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,469 @@ type ServicePolicyResource struct {
 	client *client.Client
 }
 
+// ServicePolicyEmptyModel represents empty nested blocks
+type ServicePolicyEmptyModel struct {
+}
+
+// ServicePolicyAllowListModel represents allow_list block
+type ServicePolicyAllowListModel struct {
+	CountryList types.List `tfsdk:"country_list"`
+	TLSFingerprintClasses types.List `tfsdk:"tls_fingerprint_classes"`
+	TLSFingerprintValues types.List `tfsdk:"tls_fingerprint_values"`
+	AsnList *ServicePolicyAllowListAsnListModel `tfsdk:"asn_list"`
+	AsnSet []ServicePolicyAllowListAsnSetModel `tfsdk:"asn_set"`
+	DefaultActionAllow *ServicePolicyEmptyModel `tfsdk:"default_action_allow"`
+	DefaultActionDeny *ServicePolicyEmptyModel `tfsdk:"default_action_deny"`
+	DefaultActionNextPolicy *ServicePolicyEmptyModel `tfsdk:"default_action_next_policy"`
+	IPPrefixSet []ServicePolicyAllowListIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	PrefixList *ServicePolicyAllowListPrefixListModel `tfsdk:"prefix_list"`
+}
+
+// ServicePolicyAllowListAsnListModel represents asn_list block
+type ServicePolicyAllowListAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// ServicePolicyAllowListAsnSetModel represents asn_set block
+type ServicePolicyAllowListAsnSetModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ServicePolicyAllowListIPPrefixSetModel represents ip_prefix_set block
+type ServicePolicyAllowListIPPrefixSetModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ServicePolicyAllowListPrefixListModel represents prefix_list block
+type ServicePolicyAllowListPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// ServicePolicyDenyListModel represents deny_list block
+type ServicePolicyDenyListModel struct {
+	CountryList types.List `tfsdk:"country_list"`
+	TLSFingerprintClasses types.List `tfsdk:"tls_fingerprint_classes"`
+	TLSFingerprintValues types.List `tfsdk:"tls_fingerprint_values"`
+	AsnList *ServicePolicyDenyListAsnListModel `tfsdk:"asn_list"`
+	AsnSet []ServicePolicyDenyListAsnSetModel `tfsdk:"asn_set"`
+	DefaultActionAllow *ServicePolicyEmptyModel `tfsdk:"default_action_allow"`
+	DefaultActionDeny *ServicePolicyEmptyModel `tfsdk:"default_action_deny"`
+	DefaultActionNextPolicy *ServicePolicyEmptyModel `tfsdk:"default_action_next_policy"`
+	IPPrefixSet []ServicePolicyDenyListIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	PrefixList *ServicePolicyDenyListPrefixListModel `tfsdk:"prefix_list"`
+}
+
+// ServicePolicyDenyListAsnListModel represents asn_list block
+type ServicePolicyDenyListAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// ServicePolicyDenyListAsnSetModel represents asn_set block
+type ServicePolicyDenyListAsnSetModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ServicePolicyDenyListIPPrefixSetModel represents ip_prefix_set block
+type ServicePolicyDenyListIPPrefixSetModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ServicePolicyDenyListPrefixListModel represents prefix_list block
+type ServicePolicyDenyListPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// ServicePolicyRuleListModel represents rule_list block
+type ServicePolicyRuleListModel struct {
+	Rules []ServicePolicyRuleListRulesModel `tfsdk:"rules"`
+}
+
+// ServicePolicyRuleListRulesModel represents rules block
+type ServicePolicyRuleListRulesModel struct {
+	Metadata *ServicePolicyRuleListRulesMetadataModel `tfsdk:"metadata"`
+	Spec *ServicePolicyRuleListRulesSpecModel `tfsdk:"spec"`
+}
+
+// ServicePolicyRuleListRulesMetadataModel represents metadata block
+type ServicePolicyRuleListRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// ServicePolicyRuleListRulesSpecModel represents spec block
+type ServicePolicyRuleListRulesSpecModel struct {
+	Action types.String `tfsdk:"action"`
+	ClientName types.String `tfsdk:"client_name"`
+	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
+	AnyAsn *ServicePolicyEmptyModel `tfsdk:"any_asn"`
+	AnyClient *ServicePolicyEmptyModel `tfsdk:"any_client"`
+	AnyIP *ServicePolicyEmptyModel `tfsdk:"any_ip"`
+	APIGroupMatcher *ServicePolicyRuleListRulesSpecAPIGroupMatcherModel `tfsdk:"api_group_matcher"`
+	ArgMatchers []ServicePolicyRuleListRulesSpecArgMatchersModel `tfsdk:"arg_matchers"`
+	AsnList *ServicePolicyRuleListRulesSpecAsnListModel `tfsdk:"asn_list"`
+	AsnMatcher *ServicePolicyRuleListRulesSpecAsnMatcherModel `tfsdk:"asn_matcher"`
+	BodyMatcher *ServicePolicyRuleListRulesSpecBodyMatcherModel `tfsdk:"body_matcher"`
+	BotAction *ServicePolicyRuleListRulesSpecBotActionModel `tfsdk:"bot_action"`
+	ClientNameMatcher *ServicePolicyRuleListRulesSpecClientNameMatcherModel `tfsdk:"client_name_matcher"`
+	ClientSelector *ServicePolicyRuleListRulesSpecClientSelectorModel `tfsdk:"client_selector"`
+	CookieMatchers []ServicePolicyRuleListRulesSpecCookieMatchersModel `tfsdk:"cookie_matchers"`
+	DomainMatcher *ServicePolicyRuleListRulesSpecDomainMatcherModel `tfsdk:"domain_matcher"`
+	Headers []ServicePolicyRuleListRulesSpecHeadersModel `tfsdk:"headers"`
+	HTTPMethod *ServicePolicyRuleListRulesSpecHTTPMethodModel `tfsdk:"http_method"`
+	IPMatcher *ServicePolicyRuleListRulesSpecIPMatcherModel `tfsdk:"ip_matcher"`
+	IPPrefixList *ServicePolicyRuleListRulesSpecIPPrefixListModel `tfsdk:"ip_prefix_list"`
+	IPThreatCategoryList *ServicePolicyRuleListRulesSpecIPThreatCategoryListModel `tfsdk:"ip_threat_category_list"`
+	Ja4TLSFingerprint *ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel `tfsdk:"ja4_tls_fingerprint"`
+	JwtClaims []ServicePolicyRuleListRulesSpecJwtClaimsModel `tfsdk:"jwt_claims"`
+	LabelMatcher *ServicePolicyRuleListRulesSpecLabelMatcherModel `tfsdk:"label_matcher"`
+	MumAction *ServicePolicyRuleListRulesSpecMumActionModel `tfsdk:"mum_action"`
+	Path *ServicePolicyRuleListRulesSpecPathModel `tfsdk:"path"`
+	PortMatcher *ServicePolicyRuleListRulesSpecPortMatcherModel `tfsdk:"port_matcher"`
+	QueryParams []ServicePolicyRuleListRulesSpecQueryParamsModel `tfsdk:"query_params"`
+	RequestConstraints *ServicePolicyRuleListRulesSpecRequestConstraintsModel `tfsdk:"request_constraints"`
+	SegmentPolicy *ServicePolicyRuleListRulesSpecSegmentPolicyModel `tfsdk:"segment_policy"`
+	TLSFingerprintMatcher *ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
+	UserIdentityMatcher *ServicePolicyRuleListRulesSpecUserIdentityMatcherModel `tfsdk:"user_identity_matcher"`
+	WAFAction *ServicePolicyRuleListRulesSpecWAFActionModel `tfsdk:"waf_action"`
+}
+
+// ServicePolicyRuleListRulesSpecAPIGroupMatcherModel represents api_group_matcher block
+type ServicePolicyRuleListRulesSpecAPIGroupMatcherModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Match types.List `tfsdk:"match"`
+}
+
+// ServicePolicyRuleListRulesSpecArgMatchersModel represents arg_matchers block
+type ServicePolicyRuleListRulesSpecArgMatchersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
+	Item *ServicePolicyRuleListRulesSpecArgMatchersItemModel `tfsdk:"item"`
+}
+
+// ServicePolicyRuleListRulesSpecArgMatchersItemModel represents item block
+type ServicePolicyRuleListRulesSpecArgMatchersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecAsnListModel represents asn_list block
+type ServicePolicyRuleListRulesSpecAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// ServicePolicyRuleListRulesSpecAsnMatcherModel represents asn_matcher block
+type ServicePolicyRuleListRulesSpecAsnMatcherModel struct {
+	AsnSets []ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModel represents asn_sets block
+type ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// ServicePolicyRuleListRulesSpecBodyMatcherModel represents body_matcher block
+type ServicePolicyRuleListRulesSpecBodyMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecBotActionModel represents bot_action block
+type ServicePolicyRuleListRulesSpecBotActionModel struct {
+	BotSkipProcessing *ServicePolicyEmptyModel `tfsdk:"bot_skip_processing"`
+	None *ServicePolicyEmptyModel `tfsdk:"none"`
+}
+
+// ServicePolicyRuleListRulesSpecClientNameMatcherModel represents client_name_matcher block
+type ServicePolicyRuleListRulesSpecClientNameMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecClientSelectorModel represents client_selector block
+type ServicePolicyRuleListRulesSpecClientSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// ServicePolicyRuleListRulesSpecCookieMatchersModel represents cookie_matchers block
+type ServicePolicyRuleListRulesSpecCookieMatchersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
+	Item *ServicePolicyRuleListRulesSpecCookieMatchersItemModel `tfsdk:"item"`
+}
+
+// ServicePolicyRuleListRulesSpecCookieMatchersItemModel represents item block
+type ServicePolicyRuleListRulesSpecCookieMatchersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecDomainMatcherModel represents domain_matcher block
+type ServicePolicyRuleListRulesSpecDomainMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecHeadersModel represents headers block
+type ServicePolicyRuleListRulesSpecHeadersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
+	Item *ServicePolicyRuleListRulesSpecHeadersItemModel `tfsdk:"item"`
+}
+
+// ServicePolicyRuleListRulesSpecHeadersItemModel represents item block
+type ServicePolicyRuleListRulesSpecHeadersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecHTTPMethodModel represents http_method block
+type ServicePolicyRuleListRulesSpecHTTPMethodModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Methods types.List `tfsdk:"methods"`
+}
+
+// ServicePolicyRuleListRulesSpecIPMatcherModel represents ip_matcher block
+type ServicePolicyRuleListRulesSpecIPMatcherModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	PrefixSets []ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel represents prefix_sets block
+type ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// ServicePolicyRuleListRulesSpecIPPrefixListModel represents ip_prefix_list block
+type ServicePolicyRuleListRulesSpecIPPrefixListModel struct {
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+}
+
+// ServicePolicyRuleListRulesSpecIPThreatCategoryListModel represents ip_threat_category_list block
+type ServicePolicyRuleListRulesSpecIPThreatCategoryListModel struct {
+	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
+}
+
+// ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel represents ja4_tls_fingerprint block
+type ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+}
+
+// ServicePolicyRuleListRulesSpecJwtClaimsModel represents jwt_claims block
+type ServicePolicyRuleListRulesSpecJwtClaimsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
+	Item *ServicePolicyRuleListRulesSpecJwtClaimsItemModel `tfsdk:"item"`
+}
+
+// ServicePolicyRuleListRulesSpecJwtClaimsItemModel represents item block
+type ServicePolicyRuleListRulesSpecJwtClaimsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecLabelMatcherModel represents label_matcher block
+type ServicePolicyRuleListRulesSpecLabelMatcherModel struct {
+	Keys types.List `tfsdk:"keys"`
+}
+
+// ServicePolicyRuleListRulesSpecMumActionModel represents mum_action block
+type ServicePolicyRuleListRulesSpecMumActionModel struct {
+	Default *ServicePolicyEmptyModel `tfsdk:"default"`
+	SkipProcessing *ServicePolicyEmptyModel `tfsdk:"skip_processing"`
+}
+
+// ServicePolicyRuleListRulesSpecPathModel represents path block
+type ServicePolicyRuleListRulesSpecPathModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	PrefixValues types.List `tfsdk:"prefix_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	SuffixValues types.List `tfsdk:"suffix_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecPortMatcherModel represents port_matcher block
+type ServicePolicyRuleListRulesSpecPortMatcherModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Ports types.List `tfsdk:"ports"`
+}
+
+// ServicePolicyRuleListRulesSpecQueryParamsModel represents query_params block
+type ServicePolicyRuleListRulesSpecQueryParamsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Key types.String `tfsdk:"key"`
+	CheckNotPresent *ServicePolicyEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *ServicePolicyEmptyModel `tfsdk:"check_present"`
+	Item *ServicePolicyRuleListRulesSpecQueryParamsItemModel `tfsdk:"item"`
+}
+
+// ServicePolicyRuleListRulesSpecQueryParamsItemModel represents item block
+type ServicePolicyRuleListRulesSpecQueryParamsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecRequestConstraintsModel represents request_constraints block
+type ServicePolicyRuleListRulesSpecRequestConstraintsModel struct {
+	MaxCookieCountExceeds types.Int64 `tfsdk:"max_cookie_count_exceeds"`
+	MaxCookieKeySizeExceeds types.Int64 `tfsdk:"max_cookie_key_size_exceeds"`
+	MaxCookieValueSizeExceeds types.Int64 `tfsdk:"max_cookie_value_size_exceeds"`
+	MaxHeaderCountExceeds types.Int64 `tfsdk:"max_header_count_exceeds"`
+	MaxHeaderKeySizeExceeds types.Int64 `tfsdk:"max_header_key_size_exceeds"`
+	MaxHeaderValueSizeExceeds types.Int64 `tfsdk:"max_header_value_size_exceeds"`
+	MaxParameterCountExceeds types.Int64 `tfsdk:"max_parameter_count_exceeds"`
+	MaxParameterNameSizeExceeds types.Int64 `tfsdk:"max_parameter_name_size_exceeds"`
+	MaxParameterValueSizeExceeds types.Int64 `tfsdk:"max_parameter_value_size_exceeds"`
+	MaxQuerySizeExceeds types.Int64 `tfsdk:"max_query_size_exceeds"`
+	MaxRequestLineSizeExceeds types.Int64 `tfsdk:"max_request_line_size_exceeds"`
+	MaxRequestSizeExceeds types.Int64 `tfsdk:"max_request_size_exceeds"`
+	MaxURLSizeExceeds types.Int64 `tfsdk:"max_url_size_exceeds"`
+	MaxCookieCountNone *ServicePolicyEmptyModel `tfsdk:"max_cookie_count_none"`
+	MaxCookieKeySizeNone *ServicePolicyEmptyModel `tfsdk:"max_cookie_key_size_none"`
+	MaxCookieValueSizeNone *ServicePolicyEmptyModel `tfsdk:"max_cookie_value_size_none"`
+	MaxHeaderCountNone *ServicePolicyEmptyModel `tfsdk:"max_header_count_none"`
+	MaxHeaderKeySizeNone *ServicePolicyEmptyModel `tfsdk:"max_header_key_size_none"`
+	MaxHeaderValueSizeNone *ServicePolicyEmptyModel `tfsdk:"max_header_value_size_none"`
+	MaxParameterCountNone *ServicePolicyEmptyModel `tfsdk:"max_parameter_count_none"`
+	MaxParameterNameSizeNone *ServicePolicyEmptyModel `tfsdk:"max_parameter_name_size_none"`
+	MaxParameterValueSizeNone *ServicePolicyEmptyModel `tfsdk:"max_parameter_value_size_none"`
+	MaxQuerySizeNone *ServicePolicyEmptyModel `tfsdk:"max_query_size_none"`
+	MaxRequestLineSizeNone *ServicePolicyEmptyModel `tfsdk:"max_request_line_size_none"`
+	MaxRequestSizeNone *ServicePolicyEmptyModel `tfsdk:"max_request_size_none"`
+	MaxURLSizeNone *ServicePolicyEmptyModel `tfsdk:"max_url_size_none"`
+}
+
+// ServicePolicyRuleListRulesSpecSegmentPolicyModel represents segment_policy block
+type ServicePolicyRuleListRulesSpecSegmentPolicyModel struct {
+	DstAny *ServicePolicyEmptyModel `tfsdk:"dst_any"`
+	DstSegments *ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel `tfsdk:"dst_segments"`
+	IntraSegment *ServicePolicyEmptyModel `tfsdk:"intra_segment"`
+	SrcAny *ServicePolicyEmptyModel `tfsdk:"src_any"`
+	SrcSegments *ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel `tfsdk:"src_segments"`
+}
+
+// ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel represents dst_segments block
+type ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel struct {
+	Segments []ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModel `tfsdk:"segments"`
+}
+
+// ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModel represents segments block
+type ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel represents src_segments block
+type ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel struct {
+	Segments []ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModel `tfsdk:"segments"`
+}
+
+// ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModel represents segments block
+type ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
+type ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModel struct {
+	Classes types.List `tfsdk:"classes"`
+	ExactValues types.List `tfsdk:"exact_values"`
+	ExcludedValues types.List `tfsdk:"excluded_values"`
+}
+
+// ServicePolicyRuleListRulesSpecUserIdentityMatcherModel represents user_identity_matcher block
+type ServicePolicyRuleListRulesSpecUserIdentityMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+}
+
+// ServicePolicyRuleListRulesSpecWAFActionModel represents waf_action block
+type ServicePolicyRuleListRulesSpecWAFActionModel struct {
+	AppFirewallDetectionControl *ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel `tfsdk:"app_firewall_detection_control"`
+	None *ServicePolicyEmptyModel `tfsdk:"none"`
+	WAFSkipProcessing *ServicePolicyEmptyModel `tfsdk:"waf_skip_processing"`
+}
+
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel represents app_firewall_detection_control block
+type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel struct {
+	ExcludeAttackTypeContexts []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel `tfsdk:"exclude_attack_type_contexts"`
+	ExcludeBotNameContexts []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel `tfsdk:"exclude_bot_name_contexts"`
+	ExcludeSignatureContexts []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel `tfsdk:"exclude_signature_contexts"`
+	ExcludeViolationContexts []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel `tfsdk:"exclude_violation_contexts"`
+}
+
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel represents exclude_attack_type_contexts block
+type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel struct {
+	Context types.String `tfsdk:"context"`
+	ContextName types.String `tfsdk:"context_name"`
+	ExcludeAttackType types.String `tfsdk:"exclude_attack_type"`
+}
+
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel represents exclude_bot_name_contexts block
+type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel struct {
+	BotName types.String `tfsdk:"bot_name"`
+}
+
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel represents exclude_signature_contexts block
+type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel struct {
+	Context types.String `tfsdk:"context"`
+	ContextName types.String `tfsdk:"context_name"`
+	SignatureID types.Int64 `tfsdk:"signature_id"`
+}
+
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel represents exclude_violation_contexts block
+type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel struct {
+	Context types.String `tfsdk:"context"`
+	ContextName types.String `tfsdk:"context_name"`
+	ExcludeViolation types.String `tfsdk:"exclude_violation"`
+}
+
+// ServicePolicyServerNameMatcherModel represents server_name_matcher block
+type ServicePolicyServerNameMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+}
+
+// ServicePolicyServerSelectorModel represents server_selector block
+type ServicePolicyServerSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
 type ServicePolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +518,14 @@ type ServicePolicyResourceModel struct {
 	ServerName types.String `tfsdk:"server_name"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AllowAllRequests *ServicePolicyEmptyModel `tfsdk:"allow_all_requests"`
+	AllowList *ServicePolicyAllowListModel `tfsdk:"allow_list"`
+	AnyServer *ServicePolicyEmptyModel `tfsdk:"any_server"`
+	DenyAllRequests *ServicePolicyEmptyModel `tfsdk:"deny_all_requests"`
+	DenyList *ServicePolicyDenyListModel `tfsdk:"deny_list"`
+	RuleList *ServicePolicyRuleListModel `tfsdk:"rule_list"`
+	ServerNameMatcher *ServicePolicyServerNameMatcherModel `tfsdk:"server_name_matcher"`
+	ServerSelector *ServicePolicyServerSelectorModel `tfsdk:"server_selector"`
 }
 
 func (r *ServicePolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1323,6 +1795,10 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 		Spec: client.ServicePolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1378,6 +1854,15 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 
 	apiResource, err := r.client.GetServicePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ServicePolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ServicePolicy: %s", err))
 		return
 	}
@@ -1392,6 +1877,13 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1444,6 +1936,10 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 		Spec: client.ServicePolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1468,10 +1964,20 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetServicePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1495,11 +2001,33 @@ func (r *ServicePolicyResource) Delete(ctx context.Context, req resource.DeleteR
 
 	err := r.client.DeleteServicePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ServicePolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete ServicePolicy: %s", err))
 		return
 	}
 }
 
 func (r *ServicePolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

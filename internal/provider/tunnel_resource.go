@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,116 @@ type TunnelResource struct {
 	client *client.Client
 }
 
+// TunnelEmptyModel represents empty nested blocks
+type TunnelEmptyModel struct {
+}
+
+// TunnelLocalIPModel represents local_ip block
+type TunnelLocalIPModel struct {
+	Intf *TunnelLocalIPIntfModel `tfsdk:"intf"`
+	IPAddress *TunnelLocalIPIPAddressModel `tfsdk:"ip_address"`
+}
+
+// TunnelLocalIPIntfModel represents intf block
+type TunnelLocalIPIntfModel struct {
+	LocalIntf []TunnelLocalIPIntfLocalIntfModel `tfsdk:"local_intf"`
+}
+
+// TunnelLocalIPIntfLocalIntfModel represents local_intf block
+type TunnelLocalIPIntfLocalIntfModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// TunnelLocalIPIPAddressModel represents ip_address block
+type TunnelLocalIPIPAddressModel struct {
+	Auto *TunnelEmptyModel `tfsdk:"auto"`
+	IPAddress *TunnelLocalIPIPAddressIPAddressModel `tfsdk:"ip_address"`
+	VirtualNetworkType *TunnelLocalIPIPAddressVirtualNetworkTypeModel `tfsdk:"virtual_network_type"`
+}
+
+// TunnelLocalIPIPAddressIPAddressModel represents ip_address block
+type TunnelLocalIPIPAddressIPAddressModel struct {
+	IPV4 *TunnelLocalIPIPAddressIPAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *TunnelLocalIPIPAddressIPAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// TunnelLocalIPIPAddressIPAddressIPV4Model represents ipv4 block
+type TunnelLocalIPIPAddressIPAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// TunnelLocalIPIPAddressIPAddressIPV6Model represents ipv6 block
+type TunnelLocalIPIPAddressIPAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// TunnelLocalIPIPAddressVirtualNetworkTypeModel represents virtual_network_type block
+type TunnelLocalIPIPAddressVirtualNetworkTypeModel struct {
+	Public *TunnelEmptyModel `tfsdk:"public"`
+	SiteLocal *TunnelEmptyModel `tfsdk:"site_local"`
+	SiteLocalInside *TunnelEmptyModel `tfsdk:"site_local_inside"`
+}
+
+// TunnelParamsModel represents params block
+type TunnelParamsModel struct {
+	Ipsec *TunnelParamsIpsecModel `tfsdk:"ipsec"`
+}
+
+// TunnelParamsIpsecModel represents ipsec block
+type TunnelParamsIpsecModel struct {
+	IpsecPsk *TunnelParamsIpsecIpsecPskModel `tfsdk:"ipsec_psk"`
+}
+
+// TunnelParamsIpsecIpsecPskModel represents ipsec_psk block
+type TunnelParamsIpsecIpsecPskModel struct {
+	BlindfoldSecretInfo *TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *TunnelParamsIpsecIpsecPskClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel represents blindfold_secret_info block
+type TunnelParamsIpsecIpsecPskBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// TunnelParamsIpsecIpsecPskClearSecretInfoModel represents clear_secret_info block
+type TunnelParamsIpsecIpsecPskClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// TunnelRemoteIPModel represents remote_ip block
+type TunnelRemoteIPModel struct {
+	Endpoints *TunnelRemoteIPEndpointsModel `tfsdk:"endpoints"`
+	IP *TunnelRemoteIPIPModel `tfsdk:"ip"`
+}
+
+// TunnelRemoteIPEndpointsModel represents endpoints block
+type TunnelRemoteIPEndpointsModel struct {
+	Endpoints *TunnelEmptyModel `tfsdk:"endpoints"`
+}
+
+// TunnelRemoteIPIPModel represents ip block
+type TunnelRemoteIPIPModel struct {
+	IPV4 *TunnelRemoteIPIPIPV4Model `tfsdk:"ipv4"`
+	IPV6 *TunnelRemoteIPIPIPV6Model `tfsdk:"ipv6"`
+}
+
+// TunnelRemoteIPIPIPV4Model represents ipv4 block
+type TunnelRemoteIPIPIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// TunnelRemoteIPIPIPV6Model represents ipv6 block
+type TunnelRemoteIPIPIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
 type TunnelResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +165,9 @@ type TunnelResourceModel struct {
 	TunnelType types.String `tfsdk:"tunnel_type"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	LocalIP *TunnelLocalIPModel `tfsdk:"local_ip"`
+	Params *TunnelParamsModel `tfsdk:"params"`
+	RemoteIP *TunnelRemoteIPModel `tfsdk:"remote_ip"`
 }
 
 func (r *TunnelResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -435,6 +549,10 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 		Spec: client.TunnelSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -490,6 +608,15 @@ func (r *TunnelResource) Read(ctx context.Context, req resource.ReadRequest, res
 
 	apiResource, err := r.client.GetTunnel(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Tunnel not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Tunnel: %s", err))
 		return
 	}
@@ -504,6 +631,13 @@ func (r *TunnelResource) Read(ctx context.Context, req resource.ReadRequest, res
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -556,6 +690,10 @@ func (r *TunnelResource) Update(ctx context.Context, req resource.UpdateRequest,
 		Spec: client.TunnelSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -580,10 +718,20 @@ func (r *TunnelResource) Update(ctx context.Context, req resource.UpdateRequest,
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetTunnel(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -607,11 +755,33 @@ func (r *TunnelResource) Delete(ctx context.Context, req resource.DeleteRequest,
 
 	err := r.client.DeleteTunnel(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Tunnel already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Tunnel: %s", err))
 		return
 	}
 }
 
 func (r *TunnelResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

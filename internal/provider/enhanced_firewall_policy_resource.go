@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,163 @@ type EnhancedFirewallPolicyResource struct {
 	client *client.Client
 }
 
+// EnhancedFirewallPolicyEmptyModel represents empty nested blocks
+type EnhancedFirewallPolicyEmptyModel struct {
+}
+
+// EnhancedFirewallPolicyAllowedDestinationsModel represents allowed_destinations block
+type EnhancedFirewallPolicyAllowedDestinationsModel struct {
+	Prefix types.List `tfsdk:"prefix"`
+}
+
+// EnhancedFirewallPolicyAllowedSourcesModel represents allowed_sources block
+type EnhancedFirewallPolicyAllowedSourcesModel struct {
+	Prefix types.List `tfsdk:"prefix"`
+}
+
+// EnhancedFirewallPolicyDeniedDestinationsModel represents denied_destinations block
+type EnhancedFirewallPolicyDeniedDestinationsModel struct {
+	Prefix types.List `tfsdk:"prefix"`
+}
+
+// EnhancedFirewallPolicyDeniedSourcesModel represents denied_sources block
+type EnhancedFirewallPolicyDeniedSourcesModel struct {
+	Prefix types.List `tfsdk:"prefix"`
+}
+
+// EnhancedFirewallPolicyRuleListModel represents rule_list block
+type EnhancedFirewallPolicyRuleListModel struct {
+	Rules []EnhancedFirewallPolicyRuleListRulesModel `tfsdk:"rules"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesModel represents rules block
+type EnhancedFirewallPolicyRuleListRulesModel struct {
+	AdvancedAction *EnhancedFirewallPolicyRuleListRulesAdvancedActionModel `tfsdk:"advanced_action"`
+	AllDestinations *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_destinations"`
+	AllSLIVips *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_sli_vips"`
+	AllSLOVips *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_slo_vips"`
+	AllSources *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_sources"`
+	AllTCPTraffic *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_tcp_traffic"`
+	AllTraffic *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_traffic"`
+	AllUDPTraffic *EnhancedFirewallPolicyEmptyModel `tfsdk:"all_udp_traffic"`
+	Allow *EnhancedFirewallPolicyEmptyModel `tfsdk:"allow"`
+	Applications *EnhancedFirewallPolicyRuleListRulesApplicationsModel `tfsdk:"applications"`
+	Deny *EnhancedFirewallPolicyEmptyModel `tfsdk:"deny"`
+	DestinationAWSVPCIds *EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel `tfsdk:"destination_aws_vpc_ids"`
+	DestinationIPPrefixSet *EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel `tfsdk:"destination_ip_prefix_set"`
+	DestinationLabelSelector *EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel `tfsdk:"destination_label_selector"`
+	DestinationPrefixList *EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel `tfsdk:"destination_prefix_list"`
+	InsertService *EnhancedFirewallPolicyRuleListRulesInsertServiceModel `tfsdk:"insert_service"`
+	InsideDestinations *EnhancedFirewallPolicyEmptyModel `tfsdk:"inside_destinations"`
+	InsideSources *EnhancedFirewallPolicyEmptyModel `tfsdk:"inside_sources"`
+	LabelMatcher *EnhancedFirewallPolicyRuleListRulesLabelMatcherModel `tfsdk:"label_matcher"`
+	Metadata *EnhancedFirewallPolicyRuleListRulesMetadataModel `tfsdk:"metadata"`
+	OutsideDestinations *EnhancedFirewallPolicyEmptyModel `tfsdk:"outside_destinations"`
+	OutsideSources *EnhancedFirewallPolicyEmptyModel `tfsdk:"outside_sources"`
+	ProtocolPortRange *EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
+	SourceAWSVPCIds *EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel `tfsdk:"source_aws_vpc_ids"`
+	SourceIPPrefixSet *EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel `tfsdk:"source_ip_prefix_set"`
+	SourceLabelSelector *EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel `tfsdk:"source_label_selector"`
+	SourcePrefixList *EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel `tfsdk:"source_prefix_list"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesAdvancedActionModel represents advanced_action block
+type EnhancedFirewallPolicyRuleListRulesAdvancedActionModel struct {
+	Action types.String `tfsdk:"action"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesApplicationsModel represents applications block
+type EnhancedFirewallPolicyRuleListRulesApplicationsModel struct {
+	Applications types.List `tfsdk:"applications"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel represents destination_aws_vpc_ids block
+type EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel struct {
+	VPCID types.List `tfsdk:"vpc_id"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel represents destination_ip_prefix_set block
+type EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel struct {
+	Ref []EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModel represents ref block
+type EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel represents destination_label_selector block
+type EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel represents destination_prefix_list block
+type EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesInsertServiceModel represents insert_service block
+type EnhancedFirewallPolicyRuleListRulesInsertServiceModel struct {
+	NFVService *EnhancedFirewallPolicyRuleListRulesInsertServiceNFVServiceModel `tfsdk:"nfv_service"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesInsertServiceNFVServiceModel represents nfv_service block
+type EnhancedFirewallPolicyRuleListRulesInsertServiceNFVServiceModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesLabelMatcherModel represents label_matcher block
+type EnhancedFirewallPolicyRuleListRulesLabelMatcherModel struct {
+	Keys types.List `tfsdk:"keys"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesMetadataModel represents metadata block
+type EnhancedFirewallPolicyRuleListRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel represents protocol_port_range block
+type EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel struct {
+	PortRanges types.List `tfsdk:"port_ranges"`
+	Protocol types.String `tfsdk:"protocol"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel represents source_aws_vpc_ids block
+type EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel struct {
+	VPCID types.List `tfsdk:"vpc_id"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel represents source_ip_prefix_set block
+type EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel struct {
+	Ref []EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModel represents ref block
+type EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel represents source_label_selector block
+type EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel represents source_prefix_list block
+type EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
 type EnhancedFirewallPolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +211,13 @@ type EnhancedFirewallPolicyResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AllowAll *EnhancedFirewallPolicyEmptyModel `tfsdk:"allow_all"`
+	AllowedDestinations *EnhancedFirewallPolicyAllowedDestinationsModel `tfsdk:"allowed_destinations"`
+	AllowedSources *EnhancedFirewallPolicyAllowedSourcesModel `tfsdk:"allowed_sources"`
+	DeniedDestinations *EnhancedFirewallPolicyDeniedDestinationsModel `tfsdk:"denied_destinations"`
+	DeniedSources *EnhancedFirewallPolicyDeniedSourcesModel `tfsdk:"denied_sources"`
+	DenyAll *EnhancedFirewallPolicyEmptyModel `tfsdk:"deny_all"`
+	RuleList *EnhancedFirewallPolicyRuleListModel `tfsdk:"rule_list"`
 }
 
 func (r *EnhancedFirewallPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -556,6 +721,10 @@ func (r *EnhancedFirewallPolicyResource) Create(ctx context.Context, req resourc
 		Spec: client.EnhancedFirewallPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -611,6 +780,15 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 
 	apiResource, err := r.client.GetEnhancedFirewallPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "EnhancedFirewallPolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read EnhancedFirewallPolicy: %s", err))
 		return
 	}
@@ -625,6 +803,13 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -677,6 +862,10 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 		Spec: client.EnhancedFirewallPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -701,10 +890,20 @@ func (r *EnhancedFirewallPolicyResource) Update(ctx context.Context, req resourc
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetEnhancedFirewallPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -728,11 +927,33 @@ func (r *EnhancedFirewallPolicyResource) Delete(ctx context.Context, req resourc
 
 	err := r.client.DeleteEnhancedFirewallPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "EnhancedFirewallPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete EnhancedFirewallPolicy: %s", err))
 		return
 	}
 }
 
 func (r *EnhancedFirewallPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

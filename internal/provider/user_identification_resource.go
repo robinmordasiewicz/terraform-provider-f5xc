@@ -49,35 +49,35 @@ type UserIdentificationResource struct {
 type UserIdentificationEmptyModel struct {
 }
 
-// UserIdentificationRuleModel represents a single rule in the rules list
-type UserIdentificationRuleModel struct {
-	CookieName           types.String                  `tfsdk:"cookie_name"`
-	HttpHeaderName       types.String                  `tfsdk:"http_header_name"`
-	IpAndHttpHeaderName  types.String                  `tfsdk:"ip_and_http_header_name"`
-	JwtClaimName         types.String                  `tfsdk:"jwt_claim_name"`
-	QueryParamKey        types.String                  `tfsdk:"query_param_key"`
-	ClientAsn            *UserIdentificationEmptyModel `tfsdk:"client_asn"`
-	ClientCity           *UserIdentificationEmptyModel `tfsdk:"client_city"`
-	ClientCountry        *UserIdentificationEmptyModel `tfsdk:"client_country"`
-	ClientIp             *UserIdentificationEmptyModel `tfsdk:"client_ip"`
-	ClientRegion         *UserIdentificationEmptyModel `tfsdk:"client_region"`
-	IpAndJa4TlsFingerprint *UserIdentificationEmptyModel `tfsdk:"ip_and_ja4_tls_fingerprint"`
-	IpAndTlsFingerprint  *UserIdentificationEmptyModel `tfsdk:"ip_and_tls_fingerprint"`
-	Ja4TlsFingerprint    *UserIdentificationEmptyModel `tfsdk:"ja4_tls_fingerprint"`
-	None                 *UserIdentificationEmptyModel `tfsdk:"none"`
-	TlsFingerprint       *UserIdentificationEmptyModel `tfsdk:"tls_fingerprint"`
+// UserIdentificationRulesModel represents rules block
+type UserIdentificationRulesModel struct {
+	CookieName types.String `tfsdk:"cookie_name"`
+	HTTPHeaderName types.String `tfsdk:"http_header_name"`
+	IPAndHTTPHeaderName types.String `tfsdk:"ip_and_http_header_name"`
+	JwtClaimName types.String `tfsdk:"jwt_claim_name"`
+	QueryParamKey types.String `tfsdk:"query_param_key"`
+	ClientAsn *UserIdentificationEmptyModel `tfsdk:"client_asn"`
+	ClientCity *UserIdentificationEmptyModel `tfsdk:"client_city"`
+	ClientCountry *UserIdentificationEmptyModel `tfsdk:"client_country"`
+	ClientIP *UserIdentificationEmptyModel `tfsdk:"client_ip"`
+	ClientRegion *UserIdentificationEmptyModel `tfsdk:"client_region"`
+	IPAndJa4TLSFingerprint *UserIdentificationEmptyModel `tfsdk:"ip_and_ja4_tls_fingerprint"`
+	IPAndTLSFingerprint *UserIdentificationEmptyModel `tfsdk:"ip_and_tls_fingerprint"`
+	Ja4TLSFingerprint *UserIdentificationEmptyModel `tfsdk:"ja4_tls_fingerprint"`
+	None *UserIdentificationEmptyModel `tfsdk:"none"`
+	TLSFingerprint *UserIdentificationEmptyModel `tfsdk:"tls_fingerprint"`
 }
 
 type UserIdentificationResourceModel struct {
-	Name        types.String                  `tfsdk:"name"`
-	Namespace   types.String                  `tfsdk:"namespace"`
-	Annotations types.Map                     `tfsdk:"annotations"`
-	Description types.String                  `tfsdk:"description"`
-	Disable     types.Bool                    `tfsdk:"disable"`
-	Labels      types.Map                     `tfsdk:"labels"`
-	Rules       []UserIdentificationRuleModel `tfsdk:"rules"`
-	ID          types.String                  `tfsdk:"id"`
-	Timeouts    timeouts.Value                `tfsdk:"timeouts"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Rules []UserIdentificationRulesModel `tfsdk:"rules"`
 }
 
 func (r *UserIdentificationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -324,66 +324,11 @@ func (r *UserIdentificationResource) Create(ctx context.Context, req resource.Cr
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.UserIdentificationSpec{
-			Description: data.Description.ValueString(),
-		},
+		Spec: client.UserIdentificationSpec{},
 	}
 
-	// Map rules to API spec
-	if len(data.Rules) > 0 {
-		var rules []client.UserIdentificationRuleSpec
-		for _, rule := range data.Rules {
-			apiRule := client.UserIdentificationRuleSpec{}
-			// Handle string-based rule types
-			if !rule.CookieName.IsNull() && rule.CookieName.ValueString() != "" {
-				apiRule.CookieName = rule.CookieName.ValueString()
-			}
-			if !rule.HttpHeaderName.IsNull() && rule.HttpHeaderName.ValueString() != "" {
-				apiRule.HTTPHeaderName = rule.HttpHeaderName.ValueString()
-			}
-			if !rule.IpAndHttpHeaderName.IsNull() && rule.IpAndHttpHeaderName.ValueString() != "" {
-				apiRule.IPAndHTTPHeaderName = rule.IpAndHttpHeaderName.ValueString()
-			}
-			if !rule.JwtClaimName.IsNull() && rule.JwtClaimName.ValueString() != "" {
-				apiRule.JWTClaimName = rule.JwtClaimName.ValueString()
-			}
-			if !rule.QueryParamKey.IsNull() && rule.QueryParamKey.ValueString() != "" {
-				apiRule.QueryParamKey = rule.QueryParamKey.ValueString()
-			}
-			// Handle empty block rule types
-			if rule.ClientIp != nil {
-				apiRule.ClientIP = &client.EmptyRuleSpec{}
-			}
-			if rule.ClientAsn != nil {
-				apiRule.ClientASN = &client.EmptyRuleSpec{}
-			}
-			if rule.ClientCountry != nil {
-				apiRule.ClientCountry = &client.EmptyRuleSpec{}
-			}
-			if rule.ClientCity != nil {
-				apiRule.ClientCity = &client.EmptyRuleSpec{}
-			}
-			if rule.ClientRegion != nil {
-				apiRule.ClientRegion = &client.EmptyRuleSpec{}
-			}
-			if rule.TlsFingerprint != nil {
-				apiRule.TLSFingerprint = &client.EmptyRuleSpec{}
-			}
-			if rule.Ja4TlsFingerprint != nil {
-				apiRule.JA4TLSFingerprint = &client.EmptyRuleSpec{}
-			}
-			if rule.IpAndTlsFingerprint != nil {
-				apiRule.IPAndTLSFingerprint = &client.EmptyRuleSpec{}
-			}
-			if rule.IpAndJa4TlsFingerprint != nil {
-				apiRule.IPAndJA4TLSFingerprint = &client.EmptyRuleSpec{}
-			}
-			if rule.None != nil {
-				apiRule.None = &client.EmptyRuleSpec{}
-			}
-			rules = append(rules, apiRule)
-		}
-		apiResource.Spec.Rules = rules
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -441,6 +386,15 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 
 	apiResource, err := r.client.GetUserIdentification(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "UserIdentification not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read UserIdentification: %s", err))
 		return
 	}
@@ -456,76 +410,11 @@ func (r *UserIdentificationResource) Read(ctx context.Context, req resource.Read
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
-	// Read spec fields
-	if apiResource.Spec.Description != "" {
-		data.Description = types.StringValue(apiResource.Spec.Description)
-	}
-
-	// Read rules from API response
-	if len(apiResource.Spec.Rules) > 0 {
-		var rules []UserIdentificationRuleModel
-		for _, apiRule := range apiResource.Spec.Rules {
-			rule := UserIdentificationRuleModel{}
-			// Handle string-based rule types
-			if apiRule.CookieName != "" {
-				rule.CookieName = types.StringValue(apiRule.CookieName)
-			} else {
-				rule.CookieName = types.StringNull()
-			}
-			if apiRule.HTTPHeaderName != "" {
-				rule.HttpHeaderName = types.StringValue(apiRule.HTTPHeaderName)
-			} else {
-				rule.HttpHeaderName = types.StringNull()
-			}
-			if apiRule.IPAndHTTPHeaderName != "" {
-				rule.IpAndHttpHeaderName = types.StringValue(apiRule.IPAndHTTPHeaderName)
-			} else {
-				rule.IpAndHttpHeaderName = types.StringNull()
-			}
-			if apiRule.JWTClaimName != "" {
-				rule.JwtClaimName = types.StringValue(apiRule.JWTClaimName)
-			} else {
-				rule.JwtClaimName = types.StringNull()
-			}
-			if apiRule.QueryParamKey != "" {
-				rule.QueryParamKey = types.StringValue(apiRule.QueryParamKey)
-			} else {
-				rule.QueryParamKey = types.StringNull()
-			}
-			// Handle empty block rule types
-			if apiRule.ClientIP != nil {
-				rule.ClientIp = &UserIdentificationEmptyModel{}
-			}
-			if apiRule.ClientASN != nil {
-				rule.ClientAsn = &UserIdentificationEmptyModel{}
-			}
-			if apiRule.ClientCountry != nil {
-				rule.ClientCountry = &UserIdentificationEmptyModel{}
-			}
-			if apiRule.ClientCity != nil {
-				rule.ClientCity = &UserIdentificationEmptyModel{}
-			}
-			if apiRule.ClientRegion != nil {
-				rule.ClientRegion = &UserIdentificationEmptyModel{}
-			}
-			if apiRule.TLSFingerprint != nil {
-				rule.TlsFingerprint = &UserIdentificationEmptyModel{}
-			}
-			if apiRule.JA4TLSFingerprint != nil {
-				rule.Ja4TlsFingerprint = &UserIdentificationEmptyModel{}
-			}
-			if apiRule.IPAndTLSFingerprint != nil {
-				rule.IpAndTlsFingerprint = &UserIdentificationEmptyModel{}
-			}
-			if apiRule.IPAndJA4TLSFingerprint != nil {
-				rule.IpAndJa4TlsFingerprint = &UserIdentificationEmptyModel{}
-			}
-			if apiRule.None != nil {
-				rule.None = &UserIdentificationEmptyModel{}
-			}
-			rules = append(rules, rule)
-		}
-		data.Rules = rules
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
 	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
@@ -576,66 +465,11 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.UserIdentificationSpec{
-			Description: data.Description.ValueString(),
-		},
+		Spec: client.UserIdentificationSpec{},
 	}
 
-	// Map rules to API spec
-	if len(data.Rules) > 0 {
-		var rules []client.UserIdentificationRuleSpec
-		for _, rule := range data.Rules {
-			apiRule := client.UserIdentificationRuleSpec{}
-			// Handle string-based rule types
-			if !rule.CookieName.IsNull() && rule.CookieName.ValueString() != "" {
-				apiRule.CookieName = rule.CookieName.ValueString()
-			}
-			if !rule.HttpHeaderName.IsNull() && rule.HttpHeaderName.ValueString() != "" {
-				apiRule.HTTPHeaderName = rule.HttpHeaderName.ValueString()
-			}
-			if !rule.IpAndHttpHeaderName.IsNull() && rule.IpAndHttpHeaderName.ValueString() != "" {
-				apiRule.IPAndHTTPHeaderName = rule.IpAndHttpHeaderName.ValueString()
-			}
-			if !rule.JwtClaimName.IsNull() && rule.JwtClaimName.ValueString() != "" {
-				apiRule.JWTClaimName = rule.JwtClaimName.ValueString()
-			}
-			if !rule.QueryParamKey.IsNull() && rule.QueryParamKey.ValueString() != "" {
-				apiRule.QueryParamKey = rule.QueryParamKey.ValueString()
-			}
-			// Handle empty block rule types
-			if rule.ClientIp != nil {
-				apiRule.ClientIP = &client.EmptyRuleSpec{}
-			}
-			if rule.ClientAsn != nil {
-				apiRule.ClientASN = &client.EmptyRuleSpec{}
-			}
-			if rule.ClientCountry != nil {
-				apiRule.ClientCountry = &client.EmptyRuleSpec{}
-			}
-			if rule.ClientCity != nil {
-				apiRule.ClientCity = &client.EmptyRuleSpec{}
-			}
-			if rule.ClientRegion != nil {
-				apiRule.ClientRegion = &client.EmptyRuleSpec{}
-			}
-			if rule.TlsFingerprint != nil {
-				apiRule.TLSFingerprint = &client.EmptyRuleSpec{}
-			}
-			if rule.Ja4TlsFingerprint != nil {
-				apiRule.JA4TLSFingerprint = &client.EmptyRuleSpec{}
-			}
-			if rule.IpAndTlsFingerprint != nil {
-				apiRule.IPAndTLSFingerprint = &client.EmptyRuleSpec{}
-			}
-			if rule.IpAndJa4TlsFingerprint != nil {
-				apiRule.IPAndJA4TLSFingerprint = &client.EmptyRuleSpec{}
-			}
-			if rule.None != nil {
-				apiRule.None = &client.EmptyRuleSpec{}
-			}
-			rules = append(rules, apiRule)
-		}
-		apiResource.Spec.Rules = rules
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -662,10 +496,20 @@ func (r *UserIdentificationResource) Update(ctx context.Context, req resource.Up
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetUserIdentification(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -689,6 +533,14 @@ func (r *UserIdentificationResource) Delete(ctx context.Context, req resource.De
 
 	err := r.client.DeleteUserIdentification(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "UserIdentification already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete UserIdentification: %s", err))
 		return
 	}
@@ -704,7 +556,6 @@ func (r *UserIdentificationResource) ImportState(ctx context.Context, req resour
 		)
 		return
 	}
-
 	namespace := parts[0]
 	name := parts[1]
 

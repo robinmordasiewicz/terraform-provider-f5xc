@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,69 @@ type OidcProviderResource struct {
 	client *client.Client
 }
 
+// OidcProviderEmptyModel represents empty nested blocks
+type OidcProviderEmptyModel struct {
+}
+
+// OidcProviderAzureOidcSpecTypeModel represents azure_oidc_spec_type block
+type OidcProviderAzureOidcSpecTypeModel struct {
+	AuthorizationURL types.String `tfsdk:"authorization_url"`
+	BackchannelLogout types.Bool `tfsdk:"backchannel_logout"`
+	ClientID types.String `tfsdk:"client_id"`
+	ClientSecret types.String `tfsdk:"client_secret"`
+	DefaultScopes types.String `tfsdk:"default_scopes"`
+	Issuer types.String `tfsdk:"issuer"`
+	JwksURL types.String `tfsdk:"jwks_url"`
+	LogoutURL types.String `tfsdk:"logout_url"`
+	Prompt types.String `tfsdk:"prompt"`
+	TokenURL types.String `tfsdk:"token_url"`
+	UserInfoURL types.String `tfsdk:"user_info_url"`
+}
+
+// OidcProviderGoogleOidcSpecTypeModel represents google_oidc_spec_type block
+type OidcProviderGoogleOidcSpecTypeModel struct {
+	ClientID types.String `tfsdk:"client_id"`
+	ClientSecret types.String `tfsdk:"client_secret"`
+	HostedDomain types.String `tfsdk:"hosted_domain"`
+}
+
+// OidcProviderOidcV10SpecTypeModel represents oidc_v10_spec_type block
+type OidcProviderOidcV10SpecTypeModel struct {
+	AllowedClockSkew types.String `tfsdk:"allowed_clock_skew"`
+	AuthorizationURL types.String `tfsdk:"authorization_url"`
+	BackchannelLogout types.Bool `tfsdk:"backchannel_logout"`
+	ClientID types.String `tfsdk:"client_id"`
+	ClientSecret types.String `tfsdk:"client_secret"`
+	DefaultScopes types.String `tfsdk:"default_scopes"`
+	DisableUserInfo types.Bool `tfsdk:"disable_user_info"`
+	DisplayName types.String `tfsdk:"display_name"`
+	ForwardedQueryParameters types.String `tfsdk:"forwarded_query_parameters"`
+	Issuer types.String `tfsdk:"issuer"`
+	JwksURL types.String `tfsdk:"jwks_url"`
+	LogoutURL types.String `tfsdk:"logout_url"`
+	PassCurrentLocale types.Bool `tfsdk:"pass_current_locale"`
+	PassLoginHint types.Bool `tfsdk:"pass_login_hint"`
+	Prompt types.String `tfsdk:"prompt"`
+	TokenURL types.String `tfsdk:"token_url"`
+	UserInfoURL types.String `tfsdk:"user_info_url"`
+	ValidateSignatures types.Bool `tfsdk:"validate_signatures"`
+}
+
+// OidcProviderOktaOidcSpecTypeModel represents okta_oidc_spec_type block
+type OidcProviderOktaOidcSpecTypeModel struct {
+	AuthorizationURL types.String `tfsdk:"authorization_url"`
+	BackchannelLogout types.Bool `tfsdk:"backchannel_logout"`
+	ClientID types.String `tfsdk:"client_id"`
+	ClientSecret types.String `tfsdk:"client_secret"`
+	DefaultScopes types.String `tfsdk:"default_scopes"`
+	Issuer types.String `tfsdk:"issuer"`
+	JwksURL types.String `tfsdk:"jwks_url"`
+	LogoutURL types.String `tfsdk:"logout_url"`
+	Prompt types.String `tfsdk:"prompt"`
+	TokenURL types.String `tfsdk:"token_url"`
+	UserInfoURL types.String `tfsdk:"user_info_url"`
+}
+
 type OidcProviderResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +118,10 @@ type OidcProviderResourceModel struct {
 	ProviderType types.String `tfsdk:"provider_type"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AzureOidcSpecType *OidcProviderAzureOidcSpecTypeModel `tfsdk:"azure_oidc_spec_type"`
+	GoogleOidcSpecType *OidcProviderGoogleOidcSpecTypeModel `tfsdk:"google_oidc_spec_type"`
+	OidcV10SpecType *OidcProviderOidcV10SpecTypeModel `tfsdk:"oidc_v10_spec_type"`
+	OktaOidcSpecType *OidcProviderOktaOidcSpecTypeModel `tfsdk:"okta_oidc_spec_type"`
 }
 
 func (r *OidcProviderResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -443,6 +511,10 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 		Spec: client.OidcProviderSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -498,6 +570,15 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 
 	apiResource, err := r.client.GetOidcProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "OidcProvider not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read OidcProvider: %s", err))
 		return
 	}
@@ -512,6 +593,13 @@ func (r *OidcProviderResource) Read(ctx context.Context, req resource.ReadReques
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -564,6 +652,10 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 		Spec: client.OidcProviderSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -588,10 +680,20 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetOidcProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -615,11 +717,33 @@ func (r *OidcProviderResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	err := r.client.DeleteOidcProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "OidcProvider already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete OidcProvider: %s", err))
 		return
 	}
 }
 
 func (r *OidcProviderResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

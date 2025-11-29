@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
-	f5xcerrors "github.com/f5xc/terraform-provider-f5xc/internal/errors"
 	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
@@ -46,20 +45,127 @@ type NetworkConnectorResource struct {
 	client *client.Client
 }
 
+// NetworkConnectorEmptyModel represents empty nested blocks
+type NetworkConnectorEmptyModel struct {
+}
+
+// NetworkConnectorEnableForwardProxyModel represents enable_forward_proxy block
+type NetworkConnectorEnableForwardProxyModel struct {
+	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
+	MaxConnectAttempts types.Int64 `tfsdk:"max_connect_attempts"`
+	WhiteListedPorts types.List `tfsdk:"white_listed_ports"`
+	WhiteListedPrefixes types.List `tfsdk:"white_listed_prefixes"`
+	NoInterception *NetworkConnectorEmptyModel `tfsdk:"no_interception"`
+	TLSIntercept *NetworkConnectorEnableForwardProxyTLSInterceptModel `tfsdk:"tls_intercept"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptModel represents tls_intercept block
+type NetworkConnectorEnableForwardProxyTLSInterceptModel struct {
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CustomCertificate *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel `tfsdk:"custom_certificate"`
+	EnableForAllDomains *NetworkConnectorEmptyModel `tfsdk:"enable_for_all_domains"`
+	Policy *NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel `tfsdk:"policy"`
+	VolterraCertificate *NetworkConnectorEmptyModel `tfsdk:"volterra_certificate"`
+	VolterraTrustedCa *NetworkConnectorEmptyModel `tfsdk:"volterra_trusted_ca"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel represents custom_certificate block
+type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *NetworkConnectorEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *NetworkConnectorEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel represents private_key block
+type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModel struct {
+	BlindfoldSecretInfo *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel represents clear_secret_info block
+type NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel represents policy block
+type NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel struct {
+	InterceptionRules []NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel `tfsdk:"interception_rules"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel represents interception_rules block
+type NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel struct {
+	DisableInterception *NetworkConnectorEmptyModel `tfsdk:"disable_interception"`
+	DomainMatch *NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel `tfsdk:"domain_match"`
+	EnableInterception *NetworkConnectorEmptyModel `tfsdk:"enable_interception"`
+}
+
+// NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel represents domain_match block
+type NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesDomainMatchModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// NetworkConnectorSLIToGlobalDrModel represents sli_to_global_dr block
+type NetworkConnectorSLIToGlobalDrModel struct {
+	GlobalVn *NetworkConnectorSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// NetworkConnectorSLIToGlobalDrGlobalVnModel represents global_vn block
+type NetworkConnectorSLIToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// NetworkConnectorSLIToSLOSnatModel represents sli_to_slo_snat block
+type NetworkConnectorSLIToSLOSnatModel struct {
+	DefaultGwSnat *NetworkConnectorEmptyModel `tfsdk:"default_gw_snat"`
+	InterfaceIP *NetworkConnectorEmptyModel `tfsdk:"interface_ip"`
+}
+
+// NetworkConnectorSLOToGlobalDrModel represents slo_to_global_dr block
+type NetworkConnectorSLOToGlobalDrModel struct {
+	GlobalVn *NetworkConnectorSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// NetworkConnectorSLOToGlobalDrGlobalVnModel represents global_vn block
+type NetworkConnectorSLOToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type NetworkConnectorResourceModel struct {
-	Name                types.String   `tfsdk:"name"`
-	Namespace           types.String   `tfsdk:"namespace"`
-	Annotations         types.Map      `tfsdk:"annotations"`
-	Description         types.String   `tfsdk:"description"`
-	Disable             types.Bool     `tfsdk:"disable"`
-	Labels              types.Map      `tfsdk:"labels"`
-	ID                  types.String   `tfsdk:"id"`
-	Timeouts            timeouts.Value `tfsdk:"timeouts"`
-	DisableForwardProxy types.Object   `tfsdk:"disable_forward_proxy"`
-	EnableForwardProxy  types.Object   `tfsdk:"enable_forward_proxy"`
-	SliToGlobalDr       types.Object   `tfsdk:"sli_to_global_dr"`
-	SliToSloSnat        types.Object   `tfsdk:"sli_to_slo_snat"`
-	SloToGlobalDr       types.Object   `tfsdk:"slo_to_global_dr"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	DisableForwardProxy *NetworkConnectorEmptyModel `tfsdk:"disable_forward_proxy"`
+	EnableForwardProxy *NetworkConnectorEnableForwardProxyModel `tfsdk:"enable_forward_proxy"`
+	SLIToGlobalDr *NetworkConnectorSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
+	SLIToSLOSnat *NetworkConnectorSLIToSLOSnatModel `tfsdk:"sli_to_slo_snat"`
+	SLOToGlobalDr *NetworkConnectorSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
 }
 
 func (r *NetworkConnectorResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -472,6 +578,10 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		Spec: client.NetworkConnectorSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -488,22 +598,6 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 			return
 		}
 		apiResource.Metadata.Annotations = annotations
-	}
-
-	if !data.Description.IsNull() {
-		apiResource.Spec.Description = data.Description.ValueString()
-	}
-
-	// Handle disable_forward_proxy block
-	if !data.DisableForwardProxy.IsNull() {
-		apiResource.Spec.DisableForwardProxy = &client.EmptyType{}
-	}
-
-	// Handle sli_to_slo_snat block
-	if !data.SliToSloSnat.IsNull() {
-		apiResource.Spec.SliToSloSnat = &client.SliToSloSnatConfig{
-			DefaultGwSnat: &client.EmptyType{},
-		}
 	}
 
 	created, err := r.client.CreateNetworkConnector(ctx, apiResource)
@@ -543,8 +637,8 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 
 	apiResource, err := r.client.GetNetworkConnector(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// Check if resource was deleted outside of Terraform
-		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "NetworkConnector not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
@@ -566,6 +660,13 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -618,6 +719,10 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 		Spec: client.NetworkConnectorSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -636,22 +741,6 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 		apiResource.Metadata.Annotations = annotations
 	}
 
-	if !data.Description.IsNull() {
-		apiResource.Spec.Description = data.Description.ValueString()
-	}
-
-	// Handle disable_forward_proxy block
-	if !data.DisableForwardProxy.IsNull() {
-		apiResource.Spec.DisableForwardProxy = &client.EmptyType{}
-	}
-
-	// Handle sli_to_slo_snat block
-	if !data.SliToSloSnat.IsNull() {
-		apiResource.Spec.SliToSloSnat = &client.SliToSloSnatConfig{
-			DefaultGwSnat: &client.EmptyType{},
-		}
-	}
-
 	updated, err := r.client.UpdateNetworkConnector(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update NetworkConnector: %s", err))
@@ -662,9 +751,10 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise fetch it
+	// Use UID from response if available, otherwise preserve from plan
 	uid := updated.Metadata.UID
 	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
 		fetched, fetchErr := r.client.GetNetworkConnector(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 		if fetchErr == nil {
 			uid = fetched.Metadata.UID
@@ -694,9 +784,9 @@ func (r *NetworkConnectorResource) Delete(ctx context.Context, req resource.Dele
 
 	err := r.client.DeleteNetworkConnector(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// If the resource is already gone, treat as success
-		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
-			tflog.Warn(ctx, "NetworkConnector already deleted", map[string]interface{}{
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NetworkConnector already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -708,16 +798,17 @@ func (r *NetworkConnectorResource) Delete(ctx context.Context, req resource.Dele
 }
 
 func (r *NetworkConnectorResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	idParts := strings.Split(req.ID, "/")
-	if len(idParts) != 2 || idParts[0] == "" || idParts[1] == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID in format 'namespace/name', got: %s", req.ID),
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
-	namespace := idParts[0]
-	name := idParts[1]
+	namespace := parts[0]
+	name := parts[1]
 
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)

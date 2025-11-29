@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,110 @@ type ExternalConnectorResource struct {
 	client *client.Client
 }
 
+// ExternalConnectorEmptyModel represents empty nested blocks
+type ExternalConnectorEmptyModel struct {
+}
+
+// ExternalConnectorCeSiteReferenceModel represents ce_site_reference block
+type ExternalConnectorCeSiteReferenceModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ExternalConnectorIpsecModel represents ipsec block
+type ExternalConnectorIpsecModel struct {
+	IKEParameters *ExternalConnectorIpsecIKEParametersModel `tfsdk:"ike_parameters"`
+	IpsecTunnelParameters *ExternalConnectorIpsecIpsecTunnelParametersModel `tfsdk:"ipsec_tunnel_parameters"`
+}
+
+// ExternalConnectorIpsecIKEParametersModel represents ike_parameters block
+type ExternalConnectorIpsecIKEParametersModel struct {
+	RmHostname types.String `tfsdk:"rm_hostname"`
+	DpdDisabled *ExternalConnectorEmptyModel `tfsdk:"dpd_disabled"`
+	DpdKeepAliveTimer *ExternalConnectorIpsecIKEParametersDpdKeepAliveTimerModel `tfsdk:"dpd_keep_alive_timer"`
+	IKEPhase1Profile *ExternalConnectorIpsecIKEParametersIKEPhase1ProfileModel `tfsdk:"ike_phase1_profile"`
+	IKEPhase2Profile *ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModel `tfsdk:"ike_phase2_profile"`
+	Initiator *ExternalConnectorEmptyModel `tfsdk:"initiator"`
+	Responder *ExternalConnectorEmptyModel `tfsdk:"responder"`
+	RmIPAddress *ExternalConnectorIpsecIKEParametersRmIPAddressModel `tfsdk:"rm_ip_address"`
+	UseDefaultLocalIKEID *ExternalConnectorEmptyModel `tfsdk:"use_default_local_ike_id"`
+	UseDefaultRemoteIKEID *ExternalConnectorEmptyModel `tfsdk:"use_default_remote_ike_id"`
+}
+
+// ExternalConnectorIpsecIKEParametersDpdKeepAliveTimerModel represents dpd_keep_alive_timer block
+type ExternalConnectorIpsecIKEParametersDpdKeepAliveTimerModel struct {
+	Timeout types.Int64 `tfsdk:"timeout"`
+}
+
+// ExternalConnectorIpsecIKEParametersIKEPhase1ProfileModel represents ike_phase1_profile block
+type ExternalConnectorIpsecIKEParametersIKEPhase1ProfileModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModel represents ike_phase2_profile block
+type ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ExternalConnectorIpsecIKEParametersRmIPAddressModel represents rm_ip_address block
+type ExternalConnectorIpsecIKEParametersRmIPAddressModel struct {
+	IPV4 *ExternalConnectorIpsecIKEParametersRmIPAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *ExternalConnectorIpsecIKEParametersRmIPAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// ExternalConnectorIpsecIKEParametersRmIPAddressIPV4Model represents ipv4 block
+type ExternalConnectorIpsecIKEParametersRmIPAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// ExternalConnectorIpsecIKEParametersRmIPAddressIPV6Model represents ipv6 block
+type ExternalConnectorIpsecIKEParametersRmIPAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// ExternalConnectorIpsecIpsecTunnelParametersModel represents ipsec_tunnel_parameters block
+type ExternalConnectorIpsecIpsecTunnelParametersModel struct {
+	Psk types.String `tfsdk:"psk"`
+	TunnelMtu types.Int64 `tfsdk:"tunnel_mtu"`
+	PeerIPAddress *ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModel `tfsdk:"peer_ip_address"`
+	Segment *ExternalConnectorIpsecIpsecTunnelParametersSegmentModel `tfsdk:"segment"`
+	SiteLocalInsideNetwork *ExternalConnectorEmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *ExternalConnectorEmptyModel `tfsdk:"site_local_network"`
+	TunnelEps []ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModel `tfsdk:"tunnel_eps"`
+}
+
+// ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModel represents peer_ip_address block
+type ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModel struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// ExternalConnectorIpsecIpsecTunnelParametersSegmentModel represents segment block
+type ExternalConnectorIpsecIpsecTunnelParametersSegmentModel struct {
+	Refs []ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModel `tfsdk:"refs"`
+}
+
+// ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModel represents refs block
+type ExternalConnectorIpsecIpsecTunnelParametersSegmentRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModel represents tunnel_eps block
+type ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModel struct {
+	Interface types.String `tfsdk:"interface"`
+	LocalTunnelIP types.String `tfsdk:"local_tunnel_ip"`
+	Node types.String `tfsdk:"node"`
+	RemoteTunnelIP types.String `tfsdk:"remote_tunnel_ip"`
+}
+
 type ExternalConnectorResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +158,8 @@ type ExternalConnectorResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	CeSiteReference *ExternalConnectorCeSiteReferenceModel `tfsdk:"ce_site_reference"`
+	Ipsec *ExternalConnectorIpsecModel `tfsdk:"ipsec"`
 }
 
 func (r *ExternalConnectorResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -449,6 +556,10 @@ func (r *ExternalConnectorResource) Create(ctx context.Context, req resource.Cre
 		Spec: client.ExternalConnectorSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -504,6 +615,15 @@ func (r *ExternalConnectorResource) Read(ctx context.Context, req resource.ReadR
 
 	apiResource, err := r.client.GetExternalConnector(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ExternalConnector not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ExternalConnector: %s", err))
 		return
 	}
@@ -518,6 +638,13 @@ func (r *ExternalConnectorResource) Read(ctx context.Context, req resource.ReadR
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -570,6 +697,10 @@ func (r *ExternalConnectorResource) Update(ctx context.Context, req resource.Upd
 		Spec: client.ExternalConnectorSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -594,10 +725,20 @@ func (r *ExternalConnectorResource) Update(ctx context.Context, req resource.Upd
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetExternalConnector(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -621,11 +762,33 @@ func (r *ExternalConnectorResource) Delete(ctx context.Context, req resource.Del
 
 	err := r.client.DeleteExternalConnector(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ExternalConnector already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete ExternalConnector: %s", err))
 		return
 	}
 }
 
 func (r *ExternalConnectorResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

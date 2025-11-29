@@ -16,49 +16,7 @@ type NetworkConnector struct {
 
 // NetworkConnectorSpec defines the specification for NetworkConnector
 type NetworkConnectorSpec struct {
-	Description         string                    `json:"description,omitempty"`
-	DisableForwardProxy *EmptyType                `json:"disable_forward_proxy,omitempty"`
-	EnableForwardProxy  *ForwardProxyConfig       `json:"enable_forward_proxy,omitempty"`
-	SliToGlobalDr       *SliToGlobalDrConfig      `json:"sli_to_global_dr,omitempty"`
-	SliToSloSnat        *SliToSloSnatConfig       `json:"sli_to_slo_snat,omitempty"`
-	SloToGlobalDr       *SloToGlobalDrConfig      `json:"slo_to_global_dr,omitempty"`
-}
-
-// EmptyType represents an empty configuration block
-type EmptyType struct{}
-
-// ForwardProxyConfig represents forward proxy configuration
-type ForwardProxyConfig struct {
-	ConnectionTimeout    int64    `json:"connection_timeout,omitempty"`
-	MaxConnectAttempts   int64    `json:"max_connect_attempts,omitempty"`
-	WhiteListedPorts     []string `json:"white_listed_ports,omitempty"`
-	WhiteListedPrefixes  []string `json:"white_listed_prefixes,omitempty"`
-	NoInterception       *EmptyType `json:"no_interception,omitempty"`
-}
-
-// SliToGlobalDrConfig represents SLI to Global DR configuration
-type SliToGlobalDrConfig struct {
-	GlobalVn *ObjectRefType `json:"global_vn,omitempty"`
-}
-
-// SliToSloSnatConfig represents SLI to SLO SNAT configuration
-type SliToSloSnatConfig struct {
-	DefaultGwSnat *EmptyType `json:"default_gw_snat,omitempty"`
-	SnatConfig    *EmptyType `json:"snat_config,omitempty"`
-}
-
-// SloToGlobalDrConfig represents SLO to Global DR configuration
-type SloToGlobalDrConfig struct {
-	GlobalVn *ObjectRefType `json:"global_vn,omitempty"`
-}
-
-// ObjectRefType represents a reference to another object
-type ObjectRefType struct {
-	Name      string `json:"name,omitempty"`
-	Namespace string `json:"namespace,omitempty"`
-	Kind      string `json:"kind,omitempty"`
-	Tenant    string `json:"tenant,omitempty"`
-	UID       string `json:"uid,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 // CreateNetworkConnector creates a new NetworkConnector
@@ -89,20 +47,4 @@ func (c *Client) UpdateNetworkConnector(ctx context.Context, resource *NetworkCo
 func (c *Client) DeleteNetworkConnector(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/network_connectors/%s", namespace, name)
 	return c.Delete(ctx, path)
-}
-
-// NetworkConnectorListResponse is the response from listing network connectors
-type NetworkConnectorListResponse struct {
-	Items []NetworkConnector `json:"items"`
-}
-
-// ListNetworkConnectors lists all network connectors in a namespace
-func (c *Client) ListNetworkConnectors(ctx context.Context, namespace string) ([]NetworkConnector, error) {
-	var result NetworkConnectorListResponse
-	path := fmt.Sprintf("/api/config/namespaces/%s/network_connectors", namespace)
-	err := c.Get(ctx, path, &result)
-	if err != nil {
-		return nil, err
-	}
-	return result.Items, nil
 }

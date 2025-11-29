@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,110 @@ type K8SClusterResource struct {
 	client *client.Client
 }
 
+// K8SClusterEmptyModel represents empty nested blocks
+type K8SClusterEmptyModel struct {
+}
+
+// K8SClusterClusterWideAppListModel represents cluster_wide_app_list block
+type K8SClusterClusterWideAppListModel struct {
+	ClusterWideApps []K8SClusterClusterWideAppListClusterWideAppsModel `tfsdk:"cluster_wide_apps"`
+}
+
+// K8SClusterClusterWideAppListClusterWideAppsModel represents cluster_wide_apps block
+type K8SClusterClusterWideAppListClusterWideAppsModel struct {
+	ArgoCd *K8SClusterClusterWideAppListClusterWideAppsArgoCdModel `tfsdk:"argo_cd"`
+	Dashboard *K8SClusterEmptyModel `tfsdk:"dashboard"`
+	MetricsServer *K8SClusterEmptyModel `tfsdk:"metrics_server"`
+	Prometheus *K8SClusterEmptyModel `tfsdk:"prometheus"`
+}
+
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdModel represents argo_cd block
+type K8SClusterClusterWideAppListClusterWideAppsArgoCdModel struct {
+	LocalDomain *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModel `tfsdk:"local_domain"`
+}
+
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModel represents local_domain block
+type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModel struct {
+	LocalDomain types.String `tfsdk:"local_domain"`
+	Port types.Int64 `tfsdk:"port"`
+	DefaultPort *K8SClusterEmptyModel `tfsdk:"default_port"`
+	Password *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel `tfsdk:"password"`
+}
+
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel represents password block
+type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel struct {
+	BlindfoldSecretInfo *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel represents clear_secret_info block
+type K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// K8SClusterInsecureRegistryListModel represents insecure_registry_list block
+type K8SClusterInsecureRegistryListModel struct {
+	InsecureRegistries types.List `tfsdk:"insecure_registries"`
+}
+
+// K8SClusterLocalAccessConfigModel represents local_access_config block
+type K8SClusterLocalAccessConfigModel struct {
+	LocalDomain types.String `tfsdk:"local_domain"`
+	Port types.Int64 `tfsdk:"port"`
+	DefaultPort *K8SClusterEmptyModel `tfsdk:"default_port"`
+}
+
+// K8SClusterUseCustomClusterRoleBindingsModel represents use_custom_cluster_role_bindings block
+type K8SClusterUseCustomClusterRoleBindingsModel struct {
+	ClusterRoleBindings []K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel `tfsdk:"cluster_role_bindings"`
+}
+
+// K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel represents cluster_role_bindings block
+type K8SClusterUseCustomClusterRoleBindingsClusterRoleBindingsModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// K8SClusterUseCustomClusterRoleListModel represents use_custom_cluster_role_list block
+type K8SClusterUseCustomClusterRoleListModel struct {
+	ClusterRoles []K8SClusterUseCustomClusterRoleListClusterRolesModel `tfsdk:"cluster_roles"`
+}
+
+// K8SClusterUseCustomClusterRoleListClusterRolesModel represents cluster_roles block
+type K8SClusterUseCustomClusterRoleListClusterRolesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// K8SClusterUseCustomPodSecurityAdmissionModel represents use_custom_pod_security_admission block
+type K8SClusterUseCustomPodSecurityAdmissionModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// K8SClusterUseCustomPspListModel represents use_custom_psp_list block
+type K8SClusterUseCustomPspListModel struct {
+	PodSecurityPolicies []K8SClusterUseCustomPspListPodSecurityPoliciesModel `tfsdk:"pod_security_policies"`
+}
+
+// K8SClusterUseCustomPspListPodSecurityPoliciesModel represents pod_security_policies block
+type K8SClusterUseCustomPspListPodSecurityPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type K8SClusterResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +158,26 @@ type K8SClusterResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	ClusterScopedAccessDeny *K8SClusterEmptyModel `tfsdk:"cluster_scoped_access_deny"`
+	ClusterScopedAccessPermit *K8SClusterEmptyModel `tfsdk:"cluster_scoped_access_permit"`
+	ClusterWideAppList *K8SClusterClusterWideAppListModel `tfsdk:"cluster_wide_app_list"`
+	GlobalAccessEnable *K8SClusterEmptyModel `tfsdk:"global_access_enable"`
+	InsecureRegistryList *K8SClusterInsecureRegistryListModel `tfsdk:"insecure_registry_list"`
+	LocalAccessConfig *K8SClusterLocalAccessConfigModel `tfsdk:"local_access_config"`
+	NoClusterWideApps *K8SClusterEmptyModel `tfsdk:"no_cluster_wide_apps"`
+	NoGlobalAccess *K8SClusterEmptyModel `tfsdk:"no_global_access"`
+	NoInsecureRegistries *K8SClusterEmptyModel `tfsdk:"no_insecure_registries"`
+	NoLocalAccess *K8SClusterEmptyModel `tfsdk:"no_local_access"`
+	UseCustomClusterRoleBindings *K8SClusterUseCustomClusterRoleBindingsModel `tfsdk:"use_custom_cluster_role_bindings"`
+	UseCustomClusterRoleList *K8SClusterUseCustomClusterRoleListModel `tfsdk:"use_custom_cluster_role_list"`
+	UseCustomPodSecurityAdmission *K8SClusterUseCustomPodSecurityAdmissionModel `tfsdk:"use_custom_pod_security_admission"`
+	UseCustomPspList *K8SClusterUseCustomPspListModel `tfsdk:"use_custom_psp_list"`
+	UseDefaultClusterRoleBindings *K8SClusterEmptyModel `tfsdk:"use_default_cluster_role_bindings"`
+	UseDefaultClusterRoles *K8SClusterEmptyModel `tfsdk:"use_default_cluster_roles"`
+	UseDefaultPodSecurityAdmission *K8SClusterEmptyModel `tfsdk:"use_default_pod_security_admission"`
+	UseDefaultPsp *K8SClusterEmptyModel `tfsdk:"use_default_psp"`
+	Vk8sNamespaceAccessDeny *K8SClusterEmptyModel `tfsdk:"vk8s_namespace_access_deny"`
+	Vk8sNamespaceAccessPermit *K8SClusterEmptyModel `tfsdk:"vk8s_namespace_access_permit"`
 }
 
 func (r *K8SClusterResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -498,6 +623,10 @@ func (r *K8SClusterResource) Create(ctx context.Context, req resource.CreateRequ
 		Spec: client.K8SClusterSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -553,6 +682,15 @@ func (r *K8SClusterResource) Read(ctx context.Context, req resource.ReadRequest,
 
 	apiResource, err := r.client.GetK8SCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "K8SCluster not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read K8SCluster: %s", err))
 		return
 	}
@@ -567,6 +705,13 @@ func (r *K8SClusterResource) Read(ctx context.Context, req resource.ReadRequest,
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -619,6 +764,10 @@ func (r *K8SClusterResource) Update(ctx context.Context, req resource.UpdateRequ
 		Spec: client.K8SClusterSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -643,10 +792,20 @@ func (r *K8SClusterResource) Update(ctx context.Context, req resource.UpdateRequ
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetK8SCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -670,11 +829,33 @@ func (r *K8SClusterResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	err := r.client.DeleteK8SCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "K8SCluster already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete K8SCluster: %s", err))
 		return
 	}
 }
 
 func (r *K8SClusterResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

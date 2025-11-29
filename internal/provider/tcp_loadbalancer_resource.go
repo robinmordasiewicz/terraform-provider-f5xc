@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,369 @@ type TCPLoadBalancerResource struct {
 	client *client.Client
 }
 
+// TCPLoadBalancerEmptyModel represents empty nested blocks
+type TCPLoadBalancerEmptyModel struct {
+}
+
+// TCPLoadBalancerActiveServicePoliciesModel represents active_service_policies block
+type TCPLoadBalancerActiveServicePoliciesModel struct {
+	Policies []TCPLoadBalancerActiveServicePoliciesPoliciesModel `tfsdk:"policies"`
+}
+
+// TCPLoadBalancerActiveServicePoliciesPoliciesModel represents policies block
+type TCPLoadBalancerActiveServicePoliciesPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseCustomModel represents advertise_custom block
+type TCPLoadBalancerAdvertiseCustomModel struct {
+	AdvertiseWhere []TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel `tfsdk:"advertise_where"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel represents advertise_where block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	AdvertiseOnPublic *TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
+	Site *TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel `tfsdk:"site"`
+	UseDefaultPort *TCPLoadBalancerEmptyModel `tfsdk:"use_default_port"`
+	VirtualNetwork *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel `tfsdk:"virtual_network"`
+	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel `tfsdk:"virtual_site"`
+	VirtualSiteWithVip *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel `tfsdk:"virtual_site_with_vip"`
+	Vk8sService *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel `tfsdk:"vk8s_service"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel represents advertise_on_public block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel struct {
+	PublicIP *TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel represents public_ip block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel represents site block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel struct {
+	IP types.String `tfsdk:"ip"`
+	Network types.String `tfsdk:"network"`
+	Site *TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel represents virtual_network block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel struct {
+	SpecificV6Vip types.String `tfsdk:"specific_v6_vip"`
+	SpecificVip types.String `tfsdk:"specific_vip"`
+	DefaultV6Vip *TCPLoadBalancerEmptyModel `tfsdk:"default_v6_vip"`
+	DefaultVip *TCPLoadBalancerEmptyModel `tfsdk:"default_vip"`
+	VirtualNetwork *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel `tfsdk:"virtual_network"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel represents virtual_network block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
+	Network types.String `tfsdk:"network"`
+	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel represents virtual_site_with_vip block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel struct {
+	IP types.String `tfsdk:"ip"`
+	Network types.String `tfsdk:"network"`
+	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel represents virtual_site block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
+	Site *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel `tfsdk:"site"`
+	VirtualSite *TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
+type TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerAdvertiseOnPublicModel represents advertise_on_public block
+type TCPLoadBalancerAdvertiseOnPublicModel struct {
+	PublicIP *TCPLoadBalancerAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// TCPLoadBalancerAdvertiseOnPublicPublicIPModel represents public_ip block
+type TCPLoadBalancerAdvertiseOnPublicPublicIPModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerOriginPoolsWeightsModel represents origin_pools_weights block
+type TCPLoadBalancerOriginPoolsWeightsModel struct {
+	Priority types.Int64 `tfsdk:"priority"`
+	Weight types.Int64 `tfsdk:"weight"`
+	Cluster *TCPLoadBalancerOriginPoolsWeightsClusterModel `tfsdk:"cluster"`
+	EndpointSubsets *TCPLoadBalancerEmptyModel `tfsdk:"endpoint_subsets"`
+	Pool *TCPLoadBalancerOriginPoolsWeightsPoolModel `tfsdk:"pool"`
+}
+
+// TCPLoadBalancerOriginPoolsWeightsClusterModel represents cluster block
+type TCPLoadBalancerOriginPoolsWeightsClusterModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerOriginPoolsWeightsPoolModel represents pool block
+type TCPLoadBalancerOriginPoolsWeightsPoolModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPModel represents tls_tcp block
+type TCPLoadBalancerTLSTCPModel struct {
+	TLSCertParams *TCPLoadBalancerTLSTCPTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSParameters *TCPLoadBalancerTLSTCPTLSParametersModel `tfsdk:"tls_parameters"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsModel represents tls_cert_params block
+type TCPLoadBalancerTLSTCPTLSCertParamsModel struct {
+	Certificates []TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModel `tfsdk:"certificates"`
+	NoMtls *TCPLoadBalancerEmptyModel `tfsdk:"no_mtls"`
+	TLSConfig *TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModel represents certificates block
+type TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel represents tls_config block
+type TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModel struct {
+	CustomSecurity *TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *TCPLoadBalancerEmptyModel `tfsdk:"default_security"`
+	LowSecurity *TCPLoadBalancerEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *TCPLoadBalancerEmptyModel `tfsdk:"medium_security"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
+type TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel represents use_mtls block
+type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *TCPLoadBalancerEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *TCPLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel represents crl block
+type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
+type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersModel represents tls_parameters block
+type TCPLoadBalancerTLSTCPTLSParametersModel struct {
+	NoMtls *TCPLoadBalancerEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel represents tls_certificates block
+type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *TCPLoadBalancerEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *TCPLoadBalancerEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
+type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel represents tls_config block
+type TCPLoadBalancerTLSTCPTLSParametersTLSConfigModel struct {
+	CustomSecurity *TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *TCPLoadBalancerEmptyModel `tfsdk:"default_security"`
+	LowSecurity *TCPLoadBalancerEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *TCPLoadBalancerEmptyModel `tfsdk:"medium_security"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel represents custom_security block
+type TCPLoadBalancerTLSTCPTLSParametersTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel represents use_mtls block
+type TCPLoadBalancerTLSTCPTLSParametersUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *TCPLoadBalancerEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *TCPLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel represents crl block
+type TCPLoadBalancerTLSTCPTLSParametersUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel represents trusted_ca block
+type TCPLoadBalancerTLSTCPTLSParametersUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
+type TCPLoadBalancerTLSTCPTLSParametersUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertModel represents tls_tcp_auto_cert block
+type TCPLoadBalancerTLSTCPAutoCertModel struct {
+	NoMtls *TCPLoadBalancerEmptyModel `tfsdk:"no_mtls"`
+	TLSConfig *TCPLoadBalancerTLSTCPAutoCertTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *TCPLoadBalancerTLSTCPAutoCertUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertTLSConfigModel represents tls_config block
+type TCPLoadBalancerTLSTCPAutoCertTLSConfigModel struct {
+	CustomSecurity *TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *TCPLoadBalancerEmptyModel `tfsdk:"default_security"`
+	LowSecurity *TCPLoadBalancerEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *TCPLoadBalancerEmptyModel `tfsdk:"medium_security"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel represents custom_security block
+type TCPLoadBalancerTLSTCPAutoCertTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertUseMtlsModel represents use_mtls block
+type TCPLoadBalancerTLSTCPAutoCertUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *TCPLoadBalancerEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *TCPLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel represents crl block
+type TCPLoadBalancerTLSTCPAutoCertUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel represents trusted_ca block
+type TCPLoadBalancerTLSTCPAutoCertUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
+type TCPLoadBalancerTLSTCPAutoCertUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
 type TCPLoadBalancerResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -58,6 +422,26 @@ type TCPLoadBalancerResourceModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	ActiveServicePolicies *TCPLoadBalancerActiveServicePoliciesModel `tfsdk:"active_service_policies"`
+	AdvertiseCustom *TCPLoadBalancerAdvertiseCustomModel `tfsdk:"advertise_custom"`
+	AdvertiseOnPublic *TCPLoadBalancerAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
+	AdvertiseOnPublicDefaultVip *TCPLoadBalancerEmptyModel `tfsdk:"advertise_on_public_default_vip"`
+	DefaultLbWithSni *TCPLoadBalancerEmptyModel `tfsdk:"default_lb_with_sni"`
+	DoNotAdvertise *TCPLoadBalancerEmptyModel `tfsdk:"do_not_advertise"`
+	DoNotRetractCluster *TCPLoadBalancerEmptyModel `tfsdk:"do_not_retract_cluster"`
+	HashPolicyChoiceLeastActive *TCPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_least_active"`
+	HashPolicyChoiceRandom *TCPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_random"`
+	HashPolicyChoiceRoundRobin *TCPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_round_robin"`
+	HashPolicyChoiceSourceIPStickiness *TCPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_source_ip_stickiness"`
+	NoServicePolicies *TCPLoadBalancerEmptyModel `tfsdk:"no_service_policies"`
+	NoSni *TCPLoadBalancerEmptyModel `tfsdk:"no_sni"`
+	OriginPoolsWeights []TCPLoadBalancerOriginPoolsWeightsModel `tfsdk:"origin_pools_weights"`
+	RetractCluster *TCPLoadBalancerEmptyModel `tfsdk:"retract_cluster"`
+	ServicePoliciesFromNamespace *TCPLoadBalancerEmptyModel `tfsdk:"service_policies_from_namespace"`
+	Sni *TCPLoadBalancerEmptyModel `tfsdk:"sni"`
+	TCP *TCPLoadBalancerEmptyModel `tfsdk:"tcp"`
+	TLSTCP *TCPLoadBalancerTLSTCPModel `tfsdk:"tls_tcp"`
+	TLSTCPAutoCert *TCPLoadBalancerTLSTCPAutoCertModel `tfsdk:"tls_tcp_auto_cert"`
 }
 
 func (r *TCPLoadBalancerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1065,6 +1449,10 @@ func (r *TCPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		Spec: client.TCPLoadBalancerSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1120,6 +1508,15 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 
 	apiResource, err := r.client.GetTCPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "TCPLoadBalancer not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TCPLoadBalancer: %s", err))
 		return
 	}
@@ -1134,6 +1531,13 @@ func (r *TCPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1186,6 +1590,10 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		Spec: client.TCPLoadBalancerSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1210,10 +1618,20 @@ func (r *TCPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetTCPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1237,11 +1655,33 @@ func (r *TCPLoadBalancerResource) Delete(ctx context.Context, req resource.Delet
 
 	err := r.client.DeleteTCPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "TCPLoadBalancer already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete TCPLoadBalancer: %s", err))
 		return
 	}
 }
 
 func (r *TCPLoadBalancerResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

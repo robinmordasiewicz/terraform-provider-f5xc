@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,152 @@ type UDPLoadBalancerResource struct {
 	client *client.Client
 }
 
+// UDPLoadBalancerEmptyModel represents empty nested blocks
+type UDPLoadBalancerEmptyModel struct {
+}
+
+// UDPLoadBalancerAdvertiseCustomModel represents advertise_custom block
+type UDPLoadBalancerAdvertiseCustomModel struct {
+	AdvertiseWhere []UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel `tfsdk:"advertise_where"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel represents advertise_where block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	AdvertiseOnPublic *UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
+	Site *UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel `tfsdk:"site"`
+	UseDefaultPort *UDPLoadBalancerEmptyModel `tfsdk:"use_default_port"`
+	VirtualNetwork *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel `tfsdk:"virtual_network"`
+	VirtualSite *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel `tfsdk:"virtual_site"`
+	VirtualSiteWithVip *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel `tfsdk:"virtual_site_with_vip"`
+	Vk8sService *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel `tfsdk:"vk8s_service"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel represents advertise_on_public block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel struct {
+	PublicIP *UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel represents public_ip block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel represents site block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel struct {
+	IP types.String `tfsdk:"ip"`
+	Network types.String `tfsdk:"network"`
+	Site *UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel represents virtual_network block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel struct {
+	SpecificV6Vip types.String `tfsdk:"specific_v6_vip"`
+	SpecificVip types.String `tfsdk:"specific_vip"`
+	DefaultV6Vip *UDPLoadBalancerEmptyModel `tfsdk:"default_v6_vip"`
+	DefaultVip *UDPLoadBalancerEmptyModel `tfsdk:"default_vip"`
+	VirtualNetwork *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel `tfsdk:"virtual_network"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel represents virtual_network block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
+	Network types.String `tfsdk:"network"`
+	VirtualSite *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel represents virtual_site_with_vip block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel struct {
+	IP types.String `tfsdk:"ip"`
+	Network types.String `tfsdk:"network"`
+	VirtualSite *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel represents virtual_site block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
+	Site *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel `tfsdk:"site"`
+	VirtualSite *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
+type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerAdvertiseOnPublicModel represents advertise_on_public block
+type UDPLoadBalancerAdvertiseOnPublicModel struct {
+	PublicIP *UDPLoadBalancerAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// UDPLoadBalancerAdvertiseOnPublicPublicIPModel represents public_ip block
+type UDPLoadBalancerAdvertiseOnPublicPublicIPModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerOriginPoolsWeightsModel represents origin_pools_weights block
+type UDPLoadBalancerOriginPoolsWeightsModel struct {
+	Priority types.Int64 `tfsdk:"priority"`
+	Weight types.Int64 `tfsdk:"weight"`
+	Cluster *UDPLoadBalancerOriginPoolsWeightsClusterModel `tfsdk:"cluster"`
+	EndpointSubsets *UDPLoadBalancerEmptyModel `tfsdk:"endpoint_subsets"`
+	Pool *UDPLoadBalancerOriginPoolsWeightsPoolModel `tfsdk:"pool"`
+}
+
+// UDPLoadBalancerOriginPoolsWeightsClusterModel represents cluster block
+type UDPLoadBalancerOriginPoolsWeightsClusterModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerOriginPoolsWeightsPoolModel represents pool block
+type UDPLoadBalancerOriginPoolsWeightsPoolModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type UDPLoadBalancerResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -59,6 +206,15 @@ type UDPLoadBalancerResourceModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AdvertiseCustom *UDPLoadBalancerAdvertiseCustomModel `tfsdk:"advertise_custom"`
+	AdvertiseOnPublic *UDPLoadBalancerAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
+	AdvertiseOnPublicDefaultVip *UDPLoadBalancerEmptyModel `tfsdk:"advertise_on_public_default_vip"`
+	DoNotAdvertise *UDPLoadBalancerEmptyModel `tfsdk:"do_not_advertise"`
+	HashPolicyChoiceRandom *UDPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_random"`
+	HashPolicyChoiceRoundRobin *UDPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_round_robin"`
+	HashPolicyChoiceSourceIPStickiness *UDPLoadBalancerEmptyModel `tfsdk:"hash_policy_choice_source_ip_stickiness"`
+	OriginPoolsWeights []UDPLoadBalancerOriginPoolsWeightsModel `tfsdk:"origin_pools_weights"`
+	UDP *UDPLoadBalancerEmptyModel `tfsdk:"udp"`
 }
 
 func (r *UDPLoadBalancerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -594,6 +750,10 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		Spec: client.UDPLoadBalancerSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -649,6 +809,15 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 
 	apiResource, err := r.client.GetUDPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "UDPLoadBalancer not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read UDPLoadBalancer: %s", err))
 		return
 	}
@@ -663,6 +832,13 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -715,6 +891,10 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		Spec: client.UDPLoadBalancerSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -739,10 +919,20 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetUDPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -766,11 +956,33 @@ func (r *UDPLoadBalancerResource) Delete(ctx context.Context, req resource.Delet
 
 	err := r.client.DeleteUDPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "UDPLoadBalancer already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete UDPLoadBalancer: %s", err))
 		return
 	}
 }
 
 func (r *UDPLoadBalancerResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,2479 @@ type CDNLoadBalancerResource struct {
 	client *client.Client
 }
 
+// CDNLoadBalancerEmptyModel represents empty nested blocks
+type CDNLoadBalancerEmptyModel struct {
+}
+
+// CDNLoadBalancerActiveServicePoliciesModel represents active_service_policies block
+type CDNLoadBalancerActiveServicePoliciesModel struct {
+	Policies []CDNLoadBalancerActiveServicePoliciesPoliciesModel `tfsdk:"policies"`
+}
+
+// CDNLoadBalancerActiveServicePoliciesPoliciesModel represents policies block
+type CDNLoadBalancerActiveServicePoliciesPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerAPIRateLimitModel represents api_rate_limit block
+type CDNLoadBalancerAPIRateLimitModel struct {
+	APIEndpointRules []CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel `tfsdk:"api_endpoint_rules"`
+	BypassRateLimitingRules *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel `tfsdk:"bypass_rate_limiting_rules"`
+	CustomIPAllowedList *CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel `tfsdk:"custom_ip_allowed_list"`
+	IPAllowedList *CDNLoadBalancerAPIRateLimitIPAllowedListModel `tfsdk:"ip_allowed_list"`
+	NoIPAllowedList *CDNLoadBalancerEmptyModel `tfsdk:"no_ip_allowed_list"`
+	ServerURLRules []CDNLoadBalancerAPIRateLimitServerURLRulesModel `tfsdk:"server_url_rules"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel represents api_endpoint_rules block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesModel struct {
+	APIEndpointPath types.String `tfsdk:"api_endpoint_path"`
+	SpecificDomain types.String `tfsdk:"specific_domain"`
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	APIEndpointMethod *CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel `tfsdk:"api_endpoint_method"`
+	ClientMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel `tfsdk:"client_matcher"`
+	InlineRateLimiter *CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel `tfsdk:"inline_rate_limiter"`
+	RefRateLimiter *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel `tfsdk:"ref_rate_limiter"`
+	RequestMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel `tfsdk:"request_matcher"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel represents api_endpoint_method block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Methods types.List `tfsdk:"methods"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel represents client_matcher block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel struct {
+	AnyClient *CDNLoadBalancerEmptyModel `tfsdk:"any_client"`
+	AnyIP *CDNLoadBalancerEmptyModel `tfsdk:"any_ip"`
+	AsnList *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModel `tfsdk:"asn_list"`
+	AsnMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModel `tfsdk:"asn_matcher"`
+	ClientSelector *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel `tfsdk:"client_selector"`
+	IPMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel `tfsdk:"ip_matcher"`
+	IPPrefixList *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel `tfsdk:"ip_prefix_list"`
+	IPThreatCategoryList *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModel `tfsdk:"ip_threat_category_list"`
+	TLSFingerprintMatcher *CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModel represents asn_list block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModel represents asn_matcher block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModel struct {
+	AsnSets []CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel represents client_selector block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel represents ip_matcher block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	PrefixSets []CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel struct {
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModel struct {
+	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel struct {
+	Classes types.List `tfsdk:"classes"`
+	ExactValues types.List `tfsdk:"exact_values"`
+	ExcludedValues types.List `tfsdk:"excluded_values"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel represents inline_rate_limiter block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel struct {
+	Threshold types.Int64 `tfsdk:"threshold"`
+	Unit types.String `tfsdk:"unit"`
+	RefUserID *CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
+	UseHTTPLbUserID *CDNLoadBalancerEmptyModel `tfsdk:"use_http_lb_user_id"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel represents ref_rate_limiter block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel represents request_matcher block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel struct {
+	CookieMatchers []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
+	Headers []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel `tfsdk:"headers"`
+	JwtClaims []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel `tfsdk:"jwt_claims"`
+	QueryParams []CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel `tfsdk:"query_params"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel represents item block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel represents headers block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel represents item block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel represents jwt_claims block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel represents item block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJwtClaimsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel represents query_params block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Key types.String `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel represents item block
+type CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel represents bypass_rate_limiting_rules block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel struct {
+	BypassRateLimitingRules []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModel `tfsdk:"bypass_rate_limiting_rules"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModel represents bypass_rate_limiting_rules block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModel struct {
+	BasePath types.String `tfsdk:"base_path"`
+	SpecificDomain types.String `tfsdk:"specific_domain"`
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	AnyURL *CDNLoadBalancerEmptyModel `tfsdk:"any_url"`
+	APIEndpoint *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel `tfsdk:"api_endpoint"`
+	APIGroups *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModel `tfsdk:"api_groups"`
+	ClientMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModel `tfsdk:"client_matcher"`
+	RequestMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel `tfsdk:"request_matcher"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel represents api_endpoint block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel struct {
+	Methods types.List `tfsdk:"methods"`
+	Path types.String `tfsdk:"path"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModel represents api_groups block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModel struct {
+	APIGroups types.List `tfsdk:"api_groups"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModel represents client_matcher block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModel struct {
+	AnyClient *CDNLoadBalancerEmptyModel `tfsdk:"any_client"`
+	AnyIP *CDNLoadBalancerEmptyModel `tfsdk:"any_ip"`
+	AsnList *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModel `tfsdk:"asn_list"`
+	AsnMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModel `tfsdk:"asn_matcher"`
+	ClientSelector *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModel `tfsdk:"client_selector"`
+	IPMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel `tfsdk:"ip_matcher"`
+	IPPrefixList *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel `tfsdk:"ip_prefix_list"`
+	IPThreatCategoryList *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModel `tfsdk:"ip_threat_category_list"`
+	TLSFingerprintMatcher *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModel represents asn_list block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModel represents asn_matcher block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModel struct {
+	AsnSets []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModel represents client_selector block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel represents ip_matcher block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	PrefixSets []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel struct {
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModel struct {
+	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModel struct {
+	Classes types.List `tfsdk:"classes"`
+	ExactValues types.List `tfsdk:"exact_values"`
+	ExcludedValues types.List `tfsdk:"excluded_values"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel represents request_matcher block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel struct {
+	CookieMatchers []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
+	Headers []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel `tfsdk:"headers"`
+	JwtClaims []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel `tfsdk:"jwt_claims"`
+	QueryParams []CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel `tfsdk:"query_params"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel represents item block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel represents headers block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel represents item block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel represents jwt_claims block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel represents item block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJwtClaimsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel represents query_params block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Key types.String `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel represents item block
+type CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel represents custom_ip_allowed_list block
+type CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel struct {
+	RateLimiterAllowedPrefixes []CDNLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel `tfsdk:"rate_limiter_allowed_prefixes"`
+}
+
+// CDNLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel represents rate_limiter_allowed_prefixes block
+type CDNLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerAPIRateLimitIPAllowedListModel represents ip_allowed_list block
+type CDNLoadBalancerAPIRateLimitIPAllowedListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesModel represents server_url_rules block
+type CDNLoadBalancerAPIRateLimitServerURLRulesModel struct {
+	APIGroup types.String `tfsdk:"api_group"`
+	BasePath types.String `tfsdk:"base_path"`
+	SpecificDomain types.String `tfsdk:"specific_domain"`
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	ClientMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel `tfsdk:"client_matcher"`
+	InlineRateLimiter *CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel `tfsdk:"inline_rate_limiter"`
+	RefRateLimiter *CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel `tfsdk:"ref_rate_limiter"`
+	RequestMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel `tfsdk:"request_matcher"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel represents client_matcher block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel struct {
+	AnyClient *CDNLoadBalancerEmptyModel `tfsdk:"any_client"`
+	AnyIP *CDNLoadBalancerEmptyModel `tfsdk:"any_ip"`
+	AsnList *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModel `tfsdk:"asn_list"`
+	AsnMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModel `tfsdk:"asn_matcher"`
+	ClientSelector *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel `tfsdk:"client_selector"`
+	IPMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel `tfsdk:"ip_matcher"`
+	IPPrefixList *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel `tfsdk:"ip_prefix_list"`
+	IPThreatCategoryList *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModel `tfsdk:"ip_threat_category_list"`
+	TLSFingerprintMatcher *CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModel represents asn_list block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModel represents asn_matcher block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModel struct {
+	AsnSets []CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel represents client_selector block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel represents ip_matcher block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	PrefixSets []CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel struct {
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModel struct {
+	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
+type CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel struct {
+	Classes types.List `tfsdk:"classes"`
+	ExactValues types.List `tfsdk:"exact_values"`
+	ExcludedValues types.List `tfsdk:"excluded_values"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel represents inline_rate_limiter block
+type CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel struct {
+	Threshold types.Int64 `tfsdk:"threshold"`
+	Unit types.String `tfsdk:"unit"`
+	RefUserID *CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel `tfsdk:"ref_user_id"`
+	UseHTTPLbUserID *CDNLoadBalancerEmptyModel `tfsdk:"use_http_lb_user_id"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
+type CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel represents ref_rate_limiter block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel represents request_matcher block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel struct {
+	CookieMatchers []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
+	Headers []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel `tfsdk:"headers"`
+	JwtClaims []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel `tfsdk:"jwt_claims"`
+	QueryParams []CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel `tfsdk:"query_params"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel represents item block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel represents headers block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel represents item block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel represents jwt_claims block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel represents item block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJwtClaimsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel represents query_params block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Key types.String `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel represents item block
+type CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerAPISpecificationModel represents api_specification block
+type CDNLoadBalancerAPISpecificationModel struct {
+	APIDefinition *CDNLoadBalancerAPISpecificationAPIDefinitionModel `tfsdk:"api_definition"`
+	ValidationAllSpecEndpoints *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModel `tfsdk:"validation_all_spec_endpoints"`
+	ValidationCustomList *CDNLoadBalancerAPISpecificationValidationCustomListModel `tfsdk:"validation_custom_list"`
+	ValidationDisabled *CDNLoadBalancerEmptyModel `tfsdk:"validation_disabled"`
+}
+
+// CDNLoadBalancerAPISpecificationAPIDefinitionModel represents api_definition block
+type CDNLoadBalancerAPISpecificationAPIDefinitionModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModel represents validation_all_spec_endpoints block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModel struct {
+	FallThroughMode *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel `tfsdk:"fall_through_mode"`
+	Settings *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel `tfsdk:"settings"`
+	ValidationMode *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel `tfsdk:"validation_mode"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel represents fall_through_mode block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel struct {
+	FallThroughModeAllow *CDNLoadBalancerEmptyModel `tfsdk:"fall_through_mode_allow"`
+	FallThroughModeCustom *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel `tfsdk:"fall_through_mode_custom"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel represents fall_through_mode_custom block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel struct {
+	OpenAPIValidationRules []CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel `tfsdk:"open_api_validation_rules"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel represents open_api_validation_rules block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel struct {
+	APIGroup types.String `tfsdk:"api_group"`
+	BasePath types.String `tfsdk:"base_path"`
+	ActionBlock *CDNLoadBalancerEmptyModel `tfsdk:"action_block"`
+	ActionReport *CDNLoadBalancerEmptyModel `tfsdk:"action_report"`
+	ActionSkip *CDNLoadBalancerEmptyModel `tfsdk:"action_skip"`
+	APIEndpoint *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel `tfsdk:"api_endpoint"`
+	Metadata *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel `tfsdk:"metadata"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel struct {
+	Methods types.List `tfsdk:"methods"`
+	Path types.String `tfsdk:"path"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel represents metadata block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel represents settings block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel struct {
+	OversizedBodyFailValidation *CDNLoadBalancerEmptyModel `tfsdk:"oversized_body_fail_validation"`
+	OversizedBodySkipValidation *CDNLoadBalancerEmptyModel `tfsdk:"oversized_body_skip_validation"`
+	PropertyValidationSettingsCustom *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel `tfsdk:"property_validation_settings_custom"`
+	PropertyValidationSettingsDefault *CDNLoadBalancerEmptyModel `tfsdk:"property_validation_settings_default"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel represents property_validation_settings_custom block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel struct {
+	Queryparameters *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel `tfsdk:"query_parameters"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel struct {
+	AllowAdditionalParameters *CDNLoadBalancerEmptyModel `tfsdk:"allow_additional_parameters"`
+	DisallowAdditionalParameters *CDNLoadBalancerEmptyModel `tfsdk:"disallow_additional_parameters"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel represents validation_mode block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel struct {
+	ResponseValidationModeActive *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModel `tfsdk:"response_validation_mode_active"`
+	SkipResponseValidation *CDNLoadBalancerEmptyModel `tfsdk:"skip_response_validation"`
+	SkipValidation *CDNLoadBalancerEmptyModel `tfsdk:"skip_validation"`
+	ValidationModeActive *CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel `tfsdk:"validation_mode_active"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModel represents response_validation_mode_active block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModel struct {
+	ResponseValidationProperties types.List `tfsdk:"response_validation_properties"`
+	EnforcementBlock *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
+	EnforcementReport *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel represents validation_mode_active block
+type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel struct {
+	RequestValidationProperties types.List `tfsdk:"request_validation_properties"`
+	EnforcementBlock *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
+	EnforcementReport *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListModel represents validation_custom_list block
+type CDNLoadBalancerAPISpecificationValidationCustomListModel struct {
+	FallThroughMode *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel `tfsdk:"fall_through_mode"`
+	OpenAPIValidationRules []CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModel `tfsdk:"open_api_validation_rules"`
+	Settings *CDNLoadBalancerAPISpecificationValidationCustomListSettingsModel `tfsdk:"settings"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel represents fall_through_mode block
+type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel struct {
+	FallThroughModeAllow *CDNLoadBalancerEmptyModel `tfsdk:"fall_through_mode_allow"`
+	FallThroughModeCustom *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel `tfsdk:"fall_through_mode_custom"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel represents fall_through_mode_custom block
+type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel struct {
+	OpenAPIValidationRules []CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel `tfsdk:"open_api_validation_rules"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel represents open_api_validation_rules block
+type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel struct {
+	APIGroup types.String `tfsdk:"api_group"`
+	BasePath types.String `tfsdk:"base_path"`
+	ActionBlock *CDNLoadBalancerEmptyModel `tfsdk:"action_block"`
+	ActionReport *CDNLoadBalancerEmptyModel `tfsdk:"action_report"`
+	ActionSkip *CDNLoadBalancerEmptyModel `tfsdk:"action_skip"`
+	APIEndpoint *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel `tfsdk:"api_endpoint"`
+	Metadata *CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel `tfsdk:"metadata"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
+type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel struct {
+	Methods types.List `tfsdk:"methods"`
+	Path types.String `tfsdk:"path"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel represents metadata block
+type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModel represents open_api_validation_rules block
+type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModel struct {
+	APIGroup types.String `tfsdk:"api_group"`
+	BasePath types.String `tfsdk:"base_path"`
+	SpecificDomain types.String `tfsdk:"specific_domain"`
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	APIEndpoint *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel `tfsdk:"api_endpoint"`
+	Metadata *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel `tfsdk:"metadata"`
+	ValidationMode *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModel `tfsdk:"validation_mode"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
+type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel struct {
+	Methods types.List `tfsdk:"methods"`
+	Path types.String `tfsdk:"path"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel represents metadata block
+type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModel represents validation_mode block
+type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModel struct {
+	ResponseValidationModeActive *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModel `tfsdk:"response_validation_mode_active"`
+	SkipResponseValidation *CDNLoadBalancerEmptyModel `tfsdk:"skip_response_validation"`
+	SkipValidation *CDNLoadBalancerEmptyModel `tfsdk:"skip_validation"`
+	ValidationModeActive *CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel `tfsdk:"validation_mode_active"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModel represents response_validation_mode_active block
+type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModel struct {
+	ResponseValidationProperties types.List `tfsdk:"response_validation_properties"`
+	EnforcementBlock *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
+	EnforcementReport *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel represents validation_mode_active block
+type CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel struct {
+	RequestValidationProperties types.List `tfsdk:"request_validation_properties"`
+	EnforcementBlock *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
+	EnforcementReport *CDNLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListSettingsModel represents settings block
+type CDNLoadBalancerAPISpecificationValidationCustomListSettingsModel struct {
+	OversizedBodyFailValidation *CDNLoadBalancerEmptyModel `tfsdk:"oversized_body_fail_validation"`
+	OversizedBodySkipValidation *CDNLoadBalancerEmptyModel `tfsdk:"oversized_body_skip_validation"`
+	PropertyValidationSettingsCustom *CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel `tfsdk:"property_validation_settings_custom"`
+	PropertyValidationSettingsDefault *CDNLoadBalancerEmptyModel `tfsdk:"property_validation_settings_default"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel represents property_validation_settings_custom block
+type CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel struct {
+	Queryparameters *CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel `tfsdk:"query_parameters"`
+}
+
+// CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
+type CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel struct {
+	AllowAdditionalParameters *CDNLoadBalancerEmptyModel `tfsdk:"allow_additional_parameters"`
+	DisallowAdditionalParameters *CDNLoadBalancerEmptyModel `tfsdk:"disallow_additional_parameters"`
+}
+
+// CDNLoadBalancerAppFirewallModel represents app_firewall block
+type CDNLoadBalancerAppFirewallModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerBlockedClientsModel represents blocked_clients block
+type CDNLoadBalancerBlockedClientsModel struct {
+	Actions types.List `tfsdk:"actions"`
+	AsNumber types.Int64 `tfsdk:"as_number"`
+	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
+	IPPrefix types.String `tfsdk:"ip_prefix"`
+	IPV6Prefix types.String `tfsdk:"ipv6_prefix"`
+	UserIdentifier types.String `tfsdk:"user_identifier"`
+	BotSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"bot_skip_processing"`
+	HTTPHeader *CDNLoadBalancerBlockedClientsHTTPHeaderModel `tfsdk:"http_header"`
+	Metadata *CDNLoadBalancerBlockedClientsMetadataModel `tfsdk:"metadata"`
+	SkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"skip_processing"`
+	WAFSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"waf_skip_processing"`
+}
+
+// CDNLoadBalancerBlockedClientsHTTPHeaderModel represents http_header block
+type CDNLoadBalancerBlockedClientsHTTPHeaderModel struct {
+	Headers []CDNLoadBalancerBlockedClientsHTTPHeaderHeadersModel `tfsdk:"headers"`
+}
+
+// CDNLoadBalancerBlockedClientsHTTPHeaderHeadersModel represents headers block
+type CDNLoadBalancerBlockedClientsHTTPHeaderHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerBlockedClientsMetadataModel represents metadata block
+type CDNLoadBalancerBlockedClientsMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerBotDefenseModel represents bot_defense block
+type CDNLoadBalancerBotDefenseModel struct {
+	RegionalEndpoint types.String `tfsdk:"regional_endpoint"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	DisableCorsSupport *CDNLoadBalancerEmptyModel `tfsdk:"disable_cors_support"`
+	EnableCorsSupport *CDNLoadBalancerEmptyModel `tfsdk:"enable_cors_support"`
+	Policy *CDNLoadBalancerBotDefensePolicyModel `tfsdk:"policy"`
+}
+
+// CDNLoadBalancerBotDefensePolicyModel represents policy block
+type CDNLoadBalancerBotDefensePolicyModel struct {
+	JavascriptMode types.String `tfsdk:"javascript_mode"`
+	JsDownloadPath types.String `tfsdk:"js_download_path"`
+	DisableJsInsert *CDNLoadBalancerEmptyModel `tfsdk:"disable_js_insert"`
+	DisableMobileSdk *CDNLoadBalancerEmptyModel `tfsdk:"disable_mobile_sdk"`
+	JsInsertAllPages *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesModel `tfsdk:"js_insert_all_pages"`
+	JsInsertAllPagesExcept *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel `tfsdk:"js_insert_all_pages_except"`
+	JsInsertionRules *CDNLoadBalancerBotDefensePolicyJsInsertionRulesModel `tfsdk:"js_insertion_rules"`
+	MobileSdkConfig *CDNLoadBalancerBotDefensePolicyMobileSdkConfigModel `tfsdk:"mobile_sdk_config"`
+	ProtectedAppEndpoints []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsModel `tfsdk:"protected_app_endpoints"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertAllPagesModel represents js_insert_all_pages block
+type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesModel struct {
+	JavascriptLocation types.String `tfsdk:"javascript_location"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel represents js_insert_all_pages_except block
+type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel struct {
+	JavascriptLocation types.String `tfsdk:"javascript_location"`
+	ExcludeList []CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel `tfsdk:"exclude_list"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
+type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel struct {
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	Domain *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel `tfsdk:"domain"`
+	Metadata *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel `tfsdk:"metadata"`
+	Path *CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel `tfsdk:"path"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel represents domain block
+type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel represents metadata block
+type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel represents path block
+type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertionRulesModel represents js_insertion_rules block
+type CDNLoadBalancerBotDefensePolicyJsInsertionRulesModel struct {
+	ExcludeList []CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel `tfsdk:"exclude_list"`
+	Rules []CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel `tfsdk:"rules"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel represents exclude_list block
+type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel struct {
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	Domain *CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel `tfsdk:"domain"`
+	Metadata *CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel `tfsdk:"metadata"`
+	Path *CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel `tfsdk:"path"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel represents domain block
+type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel represents metadata block
+type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel represents path block
+type CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel represents rules block
+type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel struct {
+	JavascriptLocation types.String `tfsdk:"javascript_location"`
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	Domain *CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel `tfsdk:"domain"`
+	Metadata *CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel `tfsdk:"metadata"`
+	Path *CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel `tfsdk:"path"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel represents domain block
+type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel represents metadata block
+type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel represents path block
+type CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerBotDefensePolicyMobileSdkConfigModel represents mobile_sdk_config block
+type CDNLoadBalancerBotDefensePolicyMobileSdkConfigModel struct {
+	MobileIdentifier *CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel `tfsdk:"mobile_identifier"`
+}
+
+// CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel represents mobile_identifier block
+type CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel struct {
+	Headers []CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModel `tfsdk:"headers"`
+}
+
+// CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModel represents headers block
+type CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModel struct {
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel represents item block
+type CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsModel represents protected_app_endpoints block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsModel struct {
+	HTTPMethods types.List `tfsdk:"http_methods"`
+	Protocol types.String `tfsdk:"protocol"`
+	AllowGoodBots *CDNLoadBalancerEmptyModel `tfsdk:"allow_good_bots"`
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	Domain *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel `tfsdk:"domain"`
+	FlowLabel *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel `tfsdk:"flow_label"`
+	Headers []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel `tfsdk:"headers"`
+	Metadata *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel `tfsdk:"metadata"`
+	MitigateGoodBots *CDNLoadBalancerEmptyModel `tfsdk:"mitigate_good_bots"`
+	Mitigation *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel `tfsdk:"mitigation"`
+	Mobile *CDNLoadBalancerEmptyModel `tfsdk:"mobile"`
+	Path *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel `tfsdk:"path"`
+	QueryParams []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel `tfsdk:"query_params"`
+	UndefinedFlowLabel *CDNLoadBalancerEmptyModel `tfsdk:"undefined_flow_label"`
+	Web *CDNLoadBalancerEmptyModel `tfsdk:"web"`
+	WebMobile *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel `tfsdk:"web_mobile"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel represents domain block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel represents flow_label block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel struct {
+	AccountManagement *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel `tfsdk:"account_management"`
+	Authentication *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel `tfsdk:"authentication"`
+	FinancialServices *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModel `tfsdk:"financial_services"`
+	Flight *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModel `tfsdk:"flight"`
+	ProfileManagement *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModel `tfsdk:"profile_management"`
+	Search *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel `tfsdk:"search"`
+	ShoppingGiftCards *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModel `tfsdk:"shopping_gift_cards"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel represents account_management block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel struct {
+	Create *CDNLoadBalancerEmptyModel `tfsdk:"create"`
+	PasswordReset *CDNLoadBalancerEmptyModel `tfsdk:"password_reset"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel represents authentication block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel struct {
+	Login *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel `tfsdk:"login"`
+	LoginMfa *CDNLoadBalancerEmptyModel `tfsdk:"login_mfa"`
+	LoginPartner *CDNLoadBalancerEmptyModel `tfsdk:"login_partner"`
+	Logout *CDNLoadBalancerEmptyModel `tfsdk:"logout"`
+	TokenRefresh *CDNLoadBalancerEmptyModel `tfsdk:"token_refresh"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel represents login block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel struct {
+	DisableTransactionResult *CDNLoadBalancerEmptyModel `tfsdk:"disable_transaction_result"`
+	TransactionResult *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel `tfsdk:"transaction_result"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel represents transaction_result block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel struct {
+	FailureConditions []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModel `tfsdk:"failure_conditions"`
+	SuccessConditions []CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModel `tfsdk:"success_conditions"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModel represents failure_conditions block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModel struct {
+	Name types.String `tfsdk:"name"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Status types.String `tfsdk:"status"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModel represents success_conditions block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModel struct {
+	Name types.String `tfsdk:"name"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Status types.String `tfsdk:"status"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModel represents financial_services block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModel struct {
+	Apply *CDNLoadBalancerEmptyModel `tfsdk:"apply"`
+	MoneyTransfer *CDNLoadBalancerEmptyModel `tfsdk:"money_transfer"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModel represents flight block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModel struct {
+	Checkin *CDNLoadBalancerEmptyModel `tfsdk:"checkin"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModel represents profile_management block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModel struct {
+	Create *CDNLoadBalancerEmptyModel `tfsdk:"create"`
+	Update *CDNLoadBalancerEmptyModel `tfsdk:"update"`
+	View *CDNLoadBalancerEmptyModel `tfsdk:"view"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel represents search block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel struct {
+	FlightSearch *CDNLoadBalancerEmptyModel `tfsdk:"flight_search"`
+	ProductSearch *CDNLoadBalancerEmptyModel `tfsdk:"product_search"`
+	ReservationSearch *CDNLoadBalancerEmptyModel `tfsdk:"reservation_search"`
+	RoomSearch *CDNLoadBalancerEmptyModel `tfsdk:"room_search"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModel represents shopping_gift_cards block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModel struct {
+	GiftCardMakePurchaseWithGiftCard *CDNLoadBalancerEmptyModel `tfsdk:"gift_card_make_purchase_with_gift_card"`
+	GiftCardValidation *CDNLoadBalancerEmptyModel `tfsdk:"gift_card_validation"`
+	ShopAddToCart *CDNLoadBalancerEmptyModel `tfsdk:"shop_add_to_cart"`
+	ShopCheckout *CDNLoadBalancerEmptyModel `tfsdk:"shop_checkout"`
+	ShopChooseSeat *CDNLoadBalancerEmptyModel `tfsdk:"shop_choose_seat"`
+	ShopEnterDrawingSubmission *CDNLoadBalancerEmptyModel `tfsdk:"shop_enter_drawing_submission"`
+	ShopMakePayment *CDNLoadBalancerEmptyModel `tfsdk:"shop_make_payment"`
+	ShopOrder *CDNLoadBalancerEmptyModel `tfsdk:"shop_order"`
+	ShopPriceInquiry *CDNLoadBalancerEmptyModel `tfsdk:"shop_price_inquiry"`
+	ShopPromoCodeValidation *CDNLoadBalancerEmptyModel `tfsdk:"shop_promo_code_validation"`
+	ShopPurchaseGiftCard *CDNLoadBalancerEmptyModel `tfsdk:"shop_purchase_gift_card"`
+	ShopUpdateQuantity *CDNLoadBalancerEmptyModel `tfsdk:"shop_update_quantity"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel represents headers block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel represents item block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel represents metadata block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel represents mitigation block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel struct {
+	Block *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel `tfsdk:"block"`
+	Flag *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel `tfsdk:"flag"`
+	Redirect *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModel `tfsdk:"redirect"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel represents block block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel struct {
+	Body types.String `tfsdk:"body"`
+	Status types.String `tfsdk:"status"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel represents flag block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel struct {
+	AppendHeaders *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModel `tfsdk:"append_headers"`
+	NoHeaders *CDNLoadBalancerEmptyModel `tfsdk:"no_headers"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModel represents append_headers block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModel struct {
+	AutoTypeHeaderName types.String `tfsdk:"auto_type_header_name"`
+	InferenceHeaderName types.String `tfsdk:"inference_header_name"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModel represents redirect block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModel struct {
+	URI types.String `tfsdk:"uri"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel represents path block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel represents query_params block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Key types.String `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel represents item block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel represents web_mobile block
+type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel struct {
+	MobileIdentifier types.String `tfsdk:"mobile_identifier"`
+}
+
+// CDNLoadBalancerCaptchaChallengeModel represents captcha_challenge block
+type CDNLoadBalancerCaptchaChallengeModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CustomPage types.String `tfsdk:"custom_page"`
+}
+
+// CDNLoadBalancerClientSideDefenseModel represents client_side_defense block
+type CDNLoadBalancerClientSideDefenseModel struct {
+	Policy *CDNLoadBalancerClientSideDefensePolicyModel `tfsdk:"policy"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyModel represents policy block
+type CDNLoadBalancerClientSideDefensePolicyModel struct {
+	DisableJsInsert *CDNLoadBalancerEmptyModel `tfsdk:"disable_js_insert"`
+	JsInsertAllPages *CDNLoadBalancerEmptyModel `tfsdk:"js_insert_all_pages"`
+	JsInsertAllPagesExcept *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel `tfsdk:"js_insert_all_pages_except"`
+	JsInsertionRules *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModel `tfsdk:"js_insertion_rules"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel represents js_insert_all_pages_except block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel struct {
+	ExcludeList []CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel `tfsdk:"exclude_list"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel struct {
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	Domain *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel `tfsdk:"domain"`
+	Metadata *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel `tfsdk:"metadata"`
+	Path *CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel `tfsdk:"path"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel represents domain block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel represents metadata block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel represents path block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModel represents js_insertion_rules block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModel struct {
+	ExcludeList []CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel `tfsdk:"exclude_list"`
+	Rules []CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel `tfsdk:"rules"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel represents exclude_list block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel struct {
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	Domain *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel `tfsdk:"domain"`
+	Metadata *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel `tfsdk:"metadata"`
+	Path *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel `tfsdk:"path"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel represents domain block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel represents metadata block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel represents path block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel represents rules block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel struct {
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	Domain *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel `tfsdk:"domain"`
+	Metadata *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel `tfsdk:"metadata"`
+	Path *CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel `tfsdk:"path"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel represents domain block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel represents metadata block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel represents path block
+type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerCorsPolicyModel represents cors_policy block
+type CDNLoadBalancerCorsPolicyModel struct {
+	AllowCredentials types.Bool `tfsdk:"allow_credentials"`
+	AllowHeaders types.String `tfsdk:"allow_headers"`
+	AllowMethods types.String `tfsdk:"allow_methods"`
+	AllowOrigin types.List `tfsdk:"allow_origin"`
+	AllowOriginRegex types.List `tfsdk:"allow_origin_regex"`
+	Disabled types.Bool `tfsdk:"disabled"`
+	ExposeHeaders types.String `tfsdk:"expose_headers"`
+	MaximumAge types.Int64 `tfsdk:"maximum_age"`
+}
+
+// CDNLoadBalancerCsrfPolicyModel represents csrf_policy block
+type CDNLoadBalancerCsrfPolicyModel struct {
+	AllLoadBalancerDomains *CDNLoadBalancerEmptyModel `tfsdk:"all_load_balancer_domains"`
+	CustomDomainList *CDNLoadBalancerCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	Disabled *CDNLoadBalancerEmptyModel `tfsdk:"disabled"`
+}
+
+// CDNLoadBalancerCsrfPolicyCustomDomainListModel represents custom_domain_list block
+type CDNLoadBalancerCsrfPolicyCustomDomainListModel struct {
+	Domains types.List `tfsdk:"domains"`
+}
+
+// CDNLoadBalancerCustomCacheRuleModel represents custom_cache_rule block
+type CDNLoadBalancerCustomCacheRuleModel struct {
+	CDNCacheRules []CDNLoadBalancerCustomCacheRuleCDNCacheRulesModel `tfsdk:"cdn_cache_rules"`
+}
+
+// CDNLoadBalancerCustomCacheRuleCDNCacheRulesModel represents cdn_cache_rules block
+type CDNLoadBalancerCustomCacheRuleCDNCacheRulesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerDataGuardRulesModel represents data_guard_rules block
+type CDNLoadBalancerDataGuardRulesModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	ApplyDataGuard *CDNLoadBalancerEmptyModel `tfsdk:"apply_data_guard"`
+	Metadata *CDNLoadBalancerDataGuardRulesMetadataModel `tfsdk:"metadata"`
+	Path *CDNLoadBalancerDataGuardRulesPathModel `tfsdk:"path"`
+	SkipDataGuard *CDNLoadBalancerEmptyModel `tfsdk:"skip_data_guard"`
+}
+
+// CDNLoadBalancerDataGuardRulesMetadataModel represents metadata block
+type CDNLoadBalancerDataGuardRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerDataGuardRulesPathModel represents path block
+type CDNLoadBalancerDataGuardRulesPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerDdosMitigationRulesModel represents ddos_mitigation_rules block
+type CDNLoadBalancerDdosMitigationRulesModel struct {
+	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
+	Block *CDNLoadBalancerEmptyModel `tfsdk:"block"`
+	DdosClientSource *CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel `tfsdk:"ddos_client_source"`
+	IPPrefixList *CDNLoadBalancerDdosMitigationRulesIPPrefixListModel `tfsdk:"ip_prefix_list"`
+	Metadata *CDNLoadBalancerDdosMitigationRulesMetadataModel `tfsdk:"metadata"`
+}
+
+// CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel represents ddos_client_source block
+type CDNLoadBalancerDdosMitigationRulesDdosClientSourceModel struct {
+	CountryList types.List `tfsdk:"country_list"`
+	AsnList *CDNLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel `tfsdk:"asn_list"`
+	Ja4TLSFingerprintMatcher *CDNLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel `tfsdk:"ja4_tls_fingerprint_matcher"`
+	TLSFingerprintMatcher *CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
+}
+
+// CDNLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel represents asn_list block
+type CDNLoadBalancerDdosMitigationRulesDdosClientSourceAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// CDNLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel represents ja4_tls_fingerprint_matcher block
+type CDNLoadBalancerDdosMitigationRulesDdosClientSourceJa4TLSFingerprintMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+}
+
+// CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
+type CDNLoadBalancerDdosMitigationRulesDdosClientSourceTLSFingerprintMatcherModel struct {
+	Classes types.List `tfsdk:"classes"`
+	ExactValues types.List `tfsdk:"exact_values"`
+	ExcludedValues types.List `tfsdk:"excluded_values"`
+}
+
+// CDNLoadBalancerDdosMitigationRulesIPPrefixListModel represents ip_prefix_list block
+type CDNLoadBalancerDdosMitigationRulesIPPrefixListModel struct {
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+}
+
+// CDNLoadBalancerDdosMitigationRulesMetadataModel represents metadata block
+type CDNLoadBalancerDdosMitigationRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerDefaultCacheActionModel represents default_cache_action block
+type CDNLoadBalancerDefaultCacheActionModel struct {
+	CacheTtlDefault types.String `tfsdk:"cache_ttl_default"`
+	CacheTtlOverride types.String `tfsdk:"cache_ttl_override"`
+	CacheDisabled *CDNLoadBalancerEmptyModel `tfsdk:"cache_disabled"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryModel represents enable_api_discovery block
+type CDNLoadBalancerEnableAPIDiscoveryModel struct {
+	APICrawler *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModel `tfsdk:"api_crawler"`
+	APIDiscoveryFromCodeScan *CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel `tfsdk:"api_discovery_from_code_scan"`
+	CustomAPIAuthDiscovery *CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModel `tfsdk:"custom_api_auth_discovery"`
+	DefaultAPIAuthDiscovery *CDNLoadBalancerEmptyModel `tfsdk:"default_api_auth_discovery"`
+	DisableLearnFromRedirectTraffic *CDNLoadBalancerEmptyModel `tfsdk:"disable_learn_from_redirect_traffic"`
+	DiscoveredAPISettings *CDNLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel `tfsdk:"discovered_api_settings"`
+	EnableLearnFromRedirectTraffic *CDNLoadBalancerEmptyModel `tfsdk:"enable_learn_from_redirect_traffic"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModel represents api_crawler block
+type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModel struct {
+	APICrawlerConfig *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel `tfsdk:"api_crawler_config"`
+	DisableAPICrawler *CDNLoadBalancerEmptyModel `tfsdk:"disable_api_crawler"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel represents api_crawler_config block
+type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel struct {
+	Domains []CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModel `tfsdk:"domains"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModel represents domains block
+type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModel struct {
+	Domain types.String `tfsdk:"domain"`
+	SimpleLogin *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel `tfsdk:"simple_login"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel represents simple_login block
+type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel struct {
+	User types.String `tfsdk:"user"`
+	Password *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel `tfsdk:"password"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel represents password block
+type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel struct {
+	BlindfoldSecretInfo *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel represents clear_secret_info block
+type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel represents api_discovery_from_code_scan block
+type CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel struct {
+	CodeBaseIntegrations []CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel `tfsdk:"code_base_integrations"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel represents code_base_integrations block
+type CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel struct {
+	AllRepos *CDNLoadBalancerEmptyModel `tfsdk:"all_repos"`
+	CodeBaseIntegration *CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel `tfsdk:"code_base_integration"`
+	SelectedRepos *CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel `tfsdk:"selected_repos"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel represents code_base_integration block
+type CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel represents selected_repos block
+type CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel struct {
+	APICodeRepo types.List `tfsdk:"api_code_repo"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModel represents custom_api_auth_discovery block
+type CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModel struct {
+	APIDiscoveryRef *CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel `tfsdk:"api_discovery_ref"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel represents api_discovery_ref block
+type CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel represents discovered_api_settings block
+type CDNLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel struct {
+	PurgeDurationForInactiveDiscoveredApis types.Int64 `tfsdk:"purge_duration_for_inactive_discovered_apis"`
+}
+
+// CDNLoadBalancerEnableChallengeModel represents enable_challenge block
+type CDNLoadBalancerEnableChallengeModel struct {
+	CaptchaChallengeParameters *CDNLoadBalancerEnableChallengeCaptchaChallengeParametersModel `tfsdk:"captcha_challenge_parameters"`
+	DefaultCaptchaChallengeParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_captcha_challenge_parameters"`
+	DefaultJsChallengeParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_js_challenge_parameters"`
+	DefaultMitigationSettings *CDNLoadBalancerEmptyModel `tfsdk:"default_mitigation_settings"`
+	JsChallengeParameters *CDNLoadBalancerEnableChallengeJsChallengeParametersModel `tfsdk:"js_challenge_parameters"`
+	MaliciousUserMitigation *CDNLoadBalancerEnableChallengeMaliciousUserMitigationModel `tfsdk:"malicious_user_mitigation"`
+}
+
+// CDNLoadBalancerEnableChallengeCaptchaChallengeParametersModel represents captcha_challenge_parameters block
+type CDNLoadBalancerEnableChallengeCaptchaChallengeParametersModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CustomPage types.String `tfsdk:"custom_page"`
+}
+
+// CDNLoadBalancerEnableChallengeJsChallengeParametersModel represents js_challenge_parameters block
+type CDNLoadBalancerEnableChallengeJsChallengeParametersModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CustomPage types.String `tfsdk:"custom_page"`
+	JsScriptDelay types.Int64 `tfsdk:"js_script_delay"`
+}
+
+// CDNLoadBalancerEnableChallengeMaliciousUserMitigationModel represents malicious_user_mitigation block
+type CDNLoadBalancerEnableChallengeMaliciousUserMitigationModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerEnableIPReputationModel represents enable_ip_reputation block
+type CDNLoadBalancerEnableIPReputationModel struct {
+	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
+}
+
+// CDNLoadBalancerGraphqlRulesModel represents graphql_rules block
+type CDNLoadBalancerGraphqlRulesModel struct {
+	ExactPath types.String `tfsdk:"exact_path"`
+	ExactValue types.String `tfsdk:"exact_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	GraphqlSettings *CDNLoadBalancerGraphqlRulesGraphqlSettingsModel `tfsdk:"graphql_settings"`
+	Metadata *CDNLoadBalancerGraphqlRulesMetadataModel `tfsdk:"metadata"`
+	MethodGet *CDNLoadBalancerEmptyModel `tfsdk:"method_get"`
+	MethodPost *CDNLoadBalancerEmptyModel `tfsdk:"method_post"`
+}
+
+// CDNLoadBalancerGraphqlRulesGraphqlSettingsModel represents graphql_settings block
+type CDNLoadBalancerGraphqlRulesGraphqlSettingsModel struct {
+	MaxBatchedQueries types.Int64 `tfsdk:"max_batched_queries"`
+	MaxDepth types.Int64 `tfsdk:"max_depth"`
+	MaxTotalLength types.Int64 `tfsdk:"max_total_length"`
+	DisableIntrospection *CDNLoadBalancerEmptyModel `tfsdk:"disable_introspection"`
+	EnableIntrospection *CDNLoadBalancerEmptyModel `tfsdk:"enable_introspection"`
+}
+
+// CDNLoadBalancerGraphqlRulesMetadataModel represents metadata block
+type CDNLoadBalancerGraphqlRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerHTTPModel represents http block
+type CDNLoadBalancerHTTPModel struct {
+	DNSVolterraManaged types.Bool `tfsdk:"dns_volterra_managed"`
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// CDNLoadBalancerHTTPSModel represents https block
+type CDNLoadBalancerHTTPSModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	TLSCertOptions *CDNLoadBalancerHTTPSTLSCertOptionsModel `tfsdk:"tls_cert_options"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsModel represents tls_cert_options block
+type CDNLoadBalancerHTTPSTLSCertOptionsModel struct {
+	TLSCertParams *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSInlineParams *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModel `tfsdk:"tls_inline_params"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModel represents tls_cert_params block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModel struct {
+	Certificates []CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsCertificatesModel `tfsdk:"certificates"`
+	NoMtls *CDNLoadBalancerEmptyModel `tfsdk:"no_mtls"`
+	TLSConfig *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsCertificatesModel represents certificates block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsCertificatesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigModel represents tls_config block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigModel struct {
+	CustomSecurity *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *CDNLoadBalancerEmptyModel `tfsdk:"default_security"`
+	LowSecurity *CDNLoadBalancerEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *CDNLoadBalancerEmptyModel `tfsdk:"medium_security"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModel represents use_mtls block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *CDNLoadBalancerEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *CDNLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsCRLModel represents crl block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel represents trusted_ca block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModel represents tls_inline_params block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModel struct {
+	NoMtls *CDNLoadBalancerEmptyModel `tfsdk:"no_mtls"`
+	TLSCertificates []CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
+	TLSConfig *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigModel `tfsdk:"tls_config"`
+	UseMtls *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModel `tfsdk:"use_mtls"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModel represents tls_certificates block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *CDNLoadBalancerEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *CDNLoadBalancerEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModel represents private_key block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigModel represents tls_config block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigModel struct {
+	CustomSecurity *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *CDNLoadBalancerEmptyModel `tfsdk:"default_security"`
+	LowSecurity *CDNLoadBalancerEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *CDNLoadBalancerEmptyModel `tfsdk:"medium_security"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigCustomSecurityModel represents custom_security block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModel represents use_mtls block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModel struct {
+	ClientCertificateOptional types.Bool `tfsdk:"client_certificate_optional"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	CRL *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsCRLModel `tfsdk:"crl"`
+	NoCRL *CDNLoadBalancerEmptyModel `tfsdk:"no_crl"`
+	TrustedCa *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel `tfsdk:"trusted_ca"`
+	XfccDisabled *CDNLoadBalancerEmptyModel `tfsdk:"xfcc_disabled"`
+	XfccOptions *CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsCRLModel represents crl block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsCRLModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel represents trusted_ca block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsXfccOptionsModel represents xfcc_options block
+type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsXfccOptionsModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// CDNLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
+type CDNLoadBalancerHTTPSAutoCertModel struct {
+	AddHsts types.Bool `tfsdk:"add_hsts"`
+	HTTPRedirect types.Bool `tfsdk:"http_redirect"`
+	TLSConfig *CDNLoadBalancerHTTPSAutoCertTLSConfigModel `tfsdk:"tls_config"`
+}
+
+// CDNLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
+type CDNLoadBalancerHTTPSAutoCertTLSConfigModel struct {
+	TLS11Plus *CDNLoadBalancerEmptyModel `tfsdk:"tls_11_plus"`
+	TLS12Plus *CDNLoadBalancerEmptyModel `tfsdk:"tls_12_plus"`
+}
+
+// CDNLoadBalancerJsChallengeModel represents js_challenge block
+type CDNLoadBalancerJsChallengeModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CustomPage types.String `tfsdk:"custom_page"`
+	JsScriptDelay types.Int64 `tfsdk:"js_script_delay"`
+}
+
+// CDNLoadBalancerJwtValidationModel represents jwt_validation block
+type CDNLoadBalancerJwtValidationModel struct {
+	Action *CDNLoadBalancerJwtValidationActionModel `tfsdk:"action"`
+	JwksConfig *CDNLoadBalancerJwtValidationJwksConfigModel `tfsdk:"jwks_config"`
+	MandatoryClaims *CDNLoadBalancerJwtValidationMandatoryClaimsModel `tfsdk:"mandatory_claims"`
+	ReservedClaims *CDNLoadBalancerJwtValidationReservedClaimsModel `tfsdk:"reserved_claims"`
+	Target *CDNLoadBalancerJwtValidationTargetModel `tfsdk:"target"`
+	TokenLocation *CDNLoadBalancerJwtValidationTokenLocationModel `tfsdk:"token_location"`
+}
+
+// CDNLoadBalancerJwtValidationActionModel represents action block
+type CDNLoadBalancerJwtValidationActionModel struct {
+	Block *CDNLoadBalancerEmptyModel `tfsdk:"block"`
+	Report *CDNLoadBalancerEmptyModel `tfsdk:"report"`
+}
+
+// CDNLoadBalancerJwtValidationJwksConfigModel represents jwks_config block
+type CDNLoadBalancerJwtValidationJwksConfigModel struct {
+	Cleartext types.String `tfsdk:"cleartext"`
+}
+
+// CDNLoadBalancerJwtValidationMandatoryClaimsModel represents mandatory_claims block
+type CDNLoadBalancerJwtValidationMandatoryClaimsModel struct {
+	ClaimNames types.List `tfsdk:"claim_names"`
+}
+
+// CDNLoadBalancerJwtValidationReservedClaimsModel represents reserved_claims block
+type CDNLoadBalancerJwtValidationReservedClaimsModel struct {
+	Issuer types.String `tfsdk:"issuer"`
+	Audience *CDNLoadBalancerJwtValidationReservedClaimsAudienceModel `tfsdk:"audience"`
+	AudienceDisable *CDNLoadBalancerEmptyModel `tfsdk:"audience_disable"`
+	IssuerDisable *CDNLoadBalancerEmptyModel `tfsdk:"issuer_disable"`
+	ValidatePeriodDisable *CDNLoadBalancerEmptyModel `tfsdk:"validate_period_disable"`
+	ValidatePeriodEnable *CDNLoadBalancerEmptyModel `tfsdk:"validate_period_enable"`
+}
+
+// CDNLoadBalancerJwtValidationReservedClaimsAudienceModel represents audience block
+type CDNLoadBalancerJwtValidationReservedClaimsAudienceModel struct {
+	Audiences types.List `tfsdk:"audiences"`
+}
+
+// CDNLoadBalancerJwtValidationTargetModel represents target block
+type CDNLoadBalancerJwtValidationTargetModel struct {
+	AllEndpoint *CDNLoadBalancerEmptyModel `tfsdk:"all_endpoint"`
+	APIGroups *CDNLoadBalancerJwtValidationTargetAPIGroupsModel `tfsdk:"api_groups"`
+	BasePaths *CDNLoadBalancerJwtValidationTargetBasePathsModel `tfsdk:"base_paths"`
+}
+
+// CDNLoadBalancerJwtValidationTargetAPIGroupsModel represents api_groups block
+type CDNLoadBalancerJwtValidationTargetAPIGroupsModel struct {
+	APIGroups types.List `tfsdk:"api_groups"`
+}
+
+// CDNLoadBalancerJwtValidationTargetBasePathsModel represents base_paths block
+type CDNLoadBalancerJwtValidationTargetBasePathsModel struct {
+	BasePaths types.List `tfsdk:"base_paths"`
+}
+
+// CDNLoadBalancerJwtValidationTokenLocationModel represents token_location block
+type CDNLoadBalancerJwtValidationTokenLocationModel struct {
+	BearerToken *CDNLoadBalancerEmptyModel `tfsdk:"bearer_token"`
+}
+
+// CDNLoadBalancerL7DdosActionJsChallengeModel represents l7_ddos_action_js_challenge block
+type CDNLoadBalancerL7DdosActionJsChallengeModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CustomPage types.String `tfsdk:"custom_page"`
+	JsScriptDelay types.Int64 `tfsdk:"js_script_delay"`
+}
+
+// CDNLoadBalancerOriginPoolModel represents origin_pool block
+type CDNLoadBalancerOriginPoolModel struct {
+	OriginRequestTimeout types.String `tfsdk:"origin_request_timeout"`
+	MoreOriginOptions *CDNLoadBalancerOriginPoolMoreOriginOptionsModel `tfsdk:"more_origin_options"`
+	NoTLS *CDNLoadBalancerEmptyModel `tfsdk:"no_tls"`
+	OriginServers []CDNLoadBalancerOriginPoolOriginServersModel `tfsdk:"origin_servers"`
+	PublicName *CDNLoadBalancerOriginPoolPublicNameModel `tfsdk:"public_name"`
+	UseTLS *CDNLoadBalancerOriginPoolUseTLSModel `tfsdk:"use_tls"`
+}
+
+// CDNLoadBalancerOriginPoolMoreOriginOptionsModel represents more_origin_options block
+type CDNLoadBalancerOriginPoolMoreOriginOptionsModel struct {
+	EnableByteRangeRequest types.Bool `tfsdk:"enable_byte_range_request"`
+	WebsocketProxy types.Bool `tfsdk:"websocket_proxy"`
+}
+
+// CDNLoadBalancerOriginPoolOriginServersModel represents origin_servers block
+type CDNLoadBalancerOriginPoolOriginServersModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PublicIP *CDNLoadBalancerOriginPoolOriginServersPublicIPModel `tfsdk:"public_ip"`
+	PublicName *CDNLoadBalancerOriginPoolOriginServersPublicNameModel `tfsdk:"public_name"`
+}
+
+// CDNLoadBalancerOriginPoolOriginServersPublicIPModel represents public_ip block
+type CDNLoadBalancerOriginPoolOriginServersPublicIPModel struct {
+	IP types.String `tfsdk:"ip"`
+}
+
+// CDNLoadBalancerOriginPoolOriginServersPublicNameModel represents public_name block
+type CDNLoadBalancerOriginPoolOriginServersPublicNameModel struct {
+	DNSName types.String `tfsdk:"dns_name"`
+	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
+}
+
+// CDNLoadBalancerOriginPoolPublicNameModel represents public_name block
+type CDNLoadBalancerOriginPoolPublicNameModel struct {
+	DNSName types.String `tfsdk:"dns_name"`
+	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSModel represents use_tls block
+type CDNLoadBalancerOriginPoolUseTLSModel struct {
+	MaxSessionKeys types.Int64 `tfsdk:"max_session_keys"`
+	Sni types.String `tfsdk:"sni"`
+	DefaultSessionKeyCaching *CDNLoadBalancerEmptyModel `tfsdk:"default_session_key_caching"`
+	DisableSessionKeyCaching *CDNLoadBalancerEmptyModel `tfsdk:"disable_session_key_caching"`
+	DisableSni *CDNLoadBalancerEmptyModel `tfsdk:"disable_sni"`
+	NoMtls *CDNLoadBalancerEmptyModel `tfsdk:"no_mtls"`
+	SkipServerVerification *CDNLoadBalancerEmptyModel `tfsdk:"skip_server_verification"`
+	TLSConfig *CDNLoadBalancerOriginPoolUseTLSTLSConfigModel `tfsdk:"tls_config"`
+	UseHostHeaderAsSni *CDNLoadBalancerEmptyModel `tfsdk:"use_host_header_as_sni"`
+	UseMtls *CDNLoadBalancerOriginPoolUseTLSUseMtlsModel `tfsdk:"use_mtls"`
+	UseMtlsObj *CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModel `tfsdk:"use_mtls_obj"`
+	UseServerVerification *CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
+	VolterraTrustedCa *CDNLoadBalancerEmptyModel `tfsdk:"volterra_trusted_ca"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSTLSConfigModel represents tls_config block
+type CDNLoadBalancerOriginPoolUseTLSTLSConfigModel struct {
+	CustomSecurity *CDNLoadBalancerOriginPoolUseTLSTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *CDNLoadBalancerEmptyModel `tfsdk:"default_security"`
+	LowSecurity *CDNLoadBalancerEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *CDNLoadBalancerEmptyModel `tfsdk:"medium_security"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSTLSConfigCustomSecurityModel represents custom_security block
+type CDNLoadBalancerOriginPoolUseTLSTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSUseMtlsModel represents use_mtls block
+type CDNLoadBalancerOriginPoolUseTLSUseMtlsModel struct {
+	TLSCertificates []CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesModel `tfsdk:"tls_certificates"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesModel represents tls_certificates block
+type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *CDNLoadBalancerEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *CDNLoadBalancerEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel represents private_key block
+type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModel represents use_mtls_obj block
+type CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel represents use_server_verification block
+type CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModel struct {
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	TrustedCa *CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel `tfsdk:"trusted_ca"`
+}
+
+// CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel represents trusted_ca block
+type CDNLoadBalancerOriginPoolUseTLSUseServerVerificationTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerOtherSettingsModel represents other_settings block
+type CDNLoadBalancerOtherSettingsModel struct {
+	AddLocation types.Bool `tfsdk:"add_location"`
+	HeaderOptions *CDNLoadBalancerOtherSettingsHeaderOptionsModel `tfsdk:"header_options"`
+	LoggingOptions *CDNLoadBalancerOtherSettingsLoggingOptionsModel `tfsdk:"logging_options"`
+}
+
+// CDNLoadBalancerOtherSettingsHeaderOptionsModel represents header_options block
+type CDNLoadBalancerOtherSettingsHeaderOptionsModel struct {
+	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
+	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
+	RequestHeadersToAdd []CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
+	ResponseHeadersToAdd []CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+}
+
+// CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddModel represents request_headers_to_add block
+type CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueModel represents secret_value block
+type CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddModel represents response_headers_to_add block
+type CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueModel represents secret_value block
+type CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CDNLoadBalancerOtherSettingsLoggingOptionsModel represents logging_options block
+type CDNLoadBalancerOtherSettingsLoggingOptionsModel struct {
+	ClientLogOptions *CDNLoadBalancerOtherSettingsLoggingOptionsClientLogOptionsModel `tfsdk:"client_log_options"`
+	OriginLogOptions *CDNLoadBalancerOtherSettingsLoggingOptionsOriginLogOptionsModel `tfsdk:"origin_log_options"`
+}
+
+// CDNLoadBalancerOtherSettingsLoggingOptionsClientLogOptionsModel represents client_log_options block
+type CDNLoadBalancerOtherSettingsLoggingOptionsClientLogOptionsModel struct {
+	HeaderList types.List `tfsdk:"header_list"`
+}
+
+// CDNLoadBalancerOtherSettingsLoggingOptionsOriginLogOptionsModel represents origin_log_options block
+type CDNLoadBalancerOtherSettingsLoggingOptionsOriginLogOptionsModel struct {
+	HeaderList types.List `tfsdk:"header_list"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeModel represents policy_based_challenge block
+type CDNLoadBalancerPolicyBasedChallengeModel struct {
+	AlwaysEnableCaptchaChallenge *CDNLoadBalancerEmptyModel `tfsdk:"always_enable_captcha_challenge"`
+	AlwaysEnableJsChallenge *CDNLoadBalancerEmptyModel `tfsdk:"always_enable_js_challenge"`
+	CaptchaChallengeParameters *CDNLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel `tfsdk:"captcha_challenge_parameters"`
+	DefaultCaptchaChallengeParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_captcha_challenge_parameters"`
+	DefaultJsChallengeParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_js_challenge_parameters"`
+	DefaultMitigationSettings *CDNLoadBalancerEmptyModel `tfsdk:"default_mitigation_settings"`
+	DefaultTemporaryBlockingParameters *CDNLoadBalancerEmptyModel `tfsdk:"default_temporary_blocking_parameters"`
+	JsChallengeParameters *CDNLoadBalancerPolicyBasedChallengeJsChallengeParametersModel `tfsdk:"js_challenge_parameters"`
+	MaliciousUserMitigation *CDNLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel `tfsdk:"malicious_user_mitigation"`
+	NoChallenge *CDNLoadBalancerEmptyModel `tfsdk:"no_challenge"`
+	RuleList *CDNLoadBalancerPolicyBasedChallengeRuleListModel `tfsdk:"rule_list"`
+	TemporaryUserBlocking *CDNLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel `tfsdk:"temporary_user_blocking"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel represents captcha_challenge_parameters block
+type CDNLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CustomPage types.String `tfsdk:"custom_page"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeJsChallengeParametersModel represents js_challenge_parameters block
+type CDNLoadBalancerPolicyBasedChallengeJsChallengeParametersModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CustomPage types.String `tfsdk:"custom_page"`
+	JsScriptDelay types.Int64 `tfsdk:"js_script_delay"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel represents malicious_user_mitigation block
+type CDNLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListModel represents rule_list block
+type CDNLoadBalancerPolicyBasedChallengeRuleListModel struct {
+	Rules []CDNLoadBalancerPolicyBasedChallengeRuleListRulesModel `tfsdk:"rules"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesModel represents rules block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesModel struct {
+	Metadata *CDNLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel `tfsdk:"metadata"`
+	Spec *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel `tfsdk:"spec"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel represents metadata block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel represents spec block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel struct {
+	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
+	AnyAsn *CDNLoadBalancerEmptyModel `tfsdk:"any_asn"`
+	AnyClient *CDNLoadBalancerEmptyModel `tfsdk:"any_client"`
+	AnyIP *CDNLoadBalancerEmptyModel `tfsdk:"any_ip"`
+	ArgMatchers []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel `tfsdk:"arg_matchers"`
+	AsnList *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModel `tfsdk:"asn_list"`
+	AsnMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModel `tfsdk:"asn_matcher"`
+	BodyMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel `tfsdk:"body_matcher"`
+	ClientSelector *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModel `tfsdk:"client_selector"`
+	CookieMatchers []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel `tfsdk:"cookie_matchers"`
+	DisableChallenge *CDNLoadBalancerEmptyModel `tfsdk:"disable_challenge"`
+	DomainMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModel `tfsdk:"domain_matcher"`
+	EnableCaptchaChallenge *CDNLoadBalancerEmptyModel `tfsdk:"enable_captcha_challenge"`
+	EnableJavascriptChallenge *CDNLoadBalancerEmptyModel `tfsdk:"enable_javascript_challenge"`
+	Headers []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel `tfsdk:"headers"`
+	HTTPMethod *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel `tfsdk:"http_method"`
+	IPMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel `tfsdk:"ip_matcher"`
+	IPPrefixList *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel `tfsdk:"ip_prefix_list"`
+	Path *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel `tfsdk:"path"`
+	QueryParams []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel `tfsdk:"query_params"`
+	TLSFingerprintMatcher *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel represents arg_matchers block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel represents item block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModel represents asn_list block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModel represents asn_matcher block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModel struct {
+	AsnSets []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModel represents asn_sets block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel represents body_matcher block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModel represents client_selector block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel represents cookie_matchers block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel represents item block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModel represents domain_matcher block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel represents headers block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel represents item block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel represents http_method block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Methods types.List `tfsdk:"methods"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel represents ip_matcher block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	PrefixSets []CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel represents prefix_sets block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel represents ip_prefix_list block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel struct {
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel represents path block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	PrefixValues types.List `tfsdk:"prefix_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	SuffixValues types.List `tfsdk:"suffix_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel represents query_params block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Key types.String `tfsdk:"key"`
+	CheckNotPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *CDNLoadBalancerEmptyModel `tfsdk:"check_present"`
+	Item *CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel `tfsdk:"item"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel represents item block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
+type CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel struct {
+	Classes types.List `tfsdk:"classes"`
+	ExactValues types.List `tfsdk:"exact_values"`
+	ExcludedValues types.List `tfsdk:"excluded_values"`
+}
+
+// CDNLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel represents temporary_user_blocking block
+type CDNLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel struct {
+	CustomPage types.String `tfsdk:"custom_page"`
+}
+
+// CDNLoadBalancerProtectedCookiesModel represents protected_cookies block
+type CDNLoadBalancerProtectedCookiesModel struct {
+	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
+	Name types.String `tfsdk:"name"`
+	AddHttponly *CDNLoadBalancerEmptyModel `tfsdk:"add_httponly"`
+	AddSecure *CDNLoadBalancerEmptyModel `tfsdk:"add_secure"`
+	DisableTamperingProtection *CDNLoadBalancerEmptyModel `tfsdk:"disable_tampering_protection"`
+	EnableTamperingProtection *CDNLoadBalancerEmptyModel `tfsdk:"enable_tampering_protection"`
+	IgnoreHttponly *CDNLoadBalancerEmptyModel `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge *CDNLoadBalancerEmptyModel `tfsdk:"ignore_max_age"`
+	IgnoreSamesite *CDNLoadBalancerEmptyModel `tfsdk:"ignore_samesite"`
+	IgnoreSecure *CDNLoadBalancerEmptyModel `tfsdk:"ignore_secure"`
+	SamesiteLax *CDNLoadBalancerEmptyModel `tfsdk:"samesite_lax"`
+	SamesiteNone *CDNLoadBalancerEmptyModel `tfsdk:"samesite_none"`
+	SamesiteStrict *CDNLoadBalancerEmptyModel `tfsdk:"samesite_strict"`
+}
+
+// CDNLoadBalancerRateLimitModel represents rate_limit block
+type CDNLoadBalancerRateLimitModel struct {
+	CustomIPAllowedList *CDNLoadBalancerRateLimitCustomIPAllowedListModel `tfsdk:"custom_ip_allowed_list"`
+	IPAllowedList *CDNLoadBalancerRateLimitIPAllowedListModel `tfsdk:"ip_allowed_list"`
+	NoIPAllowedList *CDNLoadBalancerEmptyModel `tfsdk:"no_ip_allowed_list"`
+	NoPolicies *CDNLoadBalancerEmptyModel `tfsdk:"no_policies"`
+	Policies *CDNLoadBalancerRateLimitPoliciesModel `tfsdk:"policies"`
+	RateLimiter *CDNLoadBalancerRateLimitRateLimiterModel `tfsdk:"rate_limiter"`
+}
+
+// CDNLoadBalancerRateLimitCustomIPAllowedListModel represents custom_ip_allowed_list block
+type CDNLoadBalancerRateLimitCustomIPAllowedListModel struct {
+	RateLimiterAllowedPrefixes []CDNLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel `tfsdk:"rate_limiter_allowed_prefixes"`
+}
+
+// CDNLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel represents rate_limiter_allowed_prefixes block
+type CDNLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerRateLimitIPAllowedListModel represents ip_allowed_list block
+type CDNLoadBalancerRateLimitIPAllowedListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// CDNLoadBalancerRateLimitPoliciesModel represents policies block
+type CDNLoadBalancerRateLimitPoliciesModel struct {
+	Policies []CDNLoadBalancerRateLimitPoliciesPoliciesModel `tfsdk:"policies"`
+}
+
+// CDNLoadBalancerRateLimitPoliciesPoliciesModel represents policies block
+type CDNLoadBalancerRateLimitPoliciesPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerRateLimitRateLimiterModel represents rate_limiter block
+type CDNLoadBalancerRateLimitRateLimiterModel struct {
+	BurstMultiplier types.Int64 `tfsdk:"burst_multiplier"`
+	PeriodMultiplier types.Int64 `tfsdk:"period_multiplier"`
+	TotalNumber types.Int64 `tfsdk:"total_number"`
+	Unit types.String `tfsdk:"unit"`
+	ActionBlock *CDNLoadBalancerRateLimitRateLimiterActionBlockModel `tfsdk:"action_block"`
+	Disabled *CDNLoadBalancerEmptyModel `tfsdk:"disabled"`
+	LeakyBucket *CDNLoadBalancerEmptyModel `tfsdk:"leaky_bucket"`
+	TokenBucket *CDNLoadBalancerEmptyModel `tfsdk:"token_bucket"`
+}
+
+// CDNLoadBalancerRateLimitRateLimiterActionBlockModel represents action_block block
+type CDNLoadBalancerRateLimitRateLimiterActionBlockModel struct {
+	Hours *CDNLoadBalancerRateLimitRateLimiterActionBlockHoursModel `tfsdk:"hours"`
+	Minutes *CDNLoadBalancerRateLimitRateLimiterActionBlockMinutesModel `tfsdk:"minutes"`
+	Seconds *CDNLoadBalancerRateLimitRateLimiterActionBlockSecondsModel `tfsdk:"seconds"`
+}
+
+// CDNLoadBalancerRateLimitRateLimiterActionBlockHoursModel represents hours block
+type CDNLoadBalancerRateLimitRateLimiterActionBlockHoursModel struct {
+	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// CDNLoadBalancerRateLimitRateLimiterActionBlockMinutesModel represents minutes block
+type CDNLoadBalancerRateLimitRateLimiterActionBlockMinutesModel struct {
+	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// CDNLoadBalancerRateLimitRateLimiterActionBlockSecondsModel represents seconds block
+type CDNLoadBalancerRateLimitRateLimiterActionBlockSecondsModel struct {
+	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// CDNLoadBalancerSensitiveDataPolicyModel represents sensitive_data_policy block
+type CDNLoadBalancerSensitiveDataPolicyModel struct {
+	SensitiveDataPolicyRef *CDNLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel `tfsdk:"sensitive_data_policy_ref"`
+}
+
+// CDNLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel represents sensitive_data_policy_ref block
+type CDNLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerSlowDdosMitigationModel represents slow_ddos_mitigation block
+type CDNLoadBalancerSlowDdosMitigationModel struct {
+	RequestHeadersTimeout types.Int64 `tfsdk:"request_headers_timeout"`
+	RequestTimeout types.Int64 `tfsdk:"request_timeout"`
+	DisableRequestTimeout *CDNLoadBalancerEmptyModel `tfsdk:"disable_request_timeout"`
+}
+
+// CDNLoadBalancerTrustedClientsModel represents trusted_clients block
+type CDNLoadBalancerTrustedClientsModel struct {
+	Actions types.List `tfsdk:"actions"`
+	AsNumber types.Int64 `tfsdk:"as_number"`
+	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
+	IPPrefix types.String `tfsdk:"ip_prefix"`
+	IPV6Prefix types.String `tfsdk:"ipv6_prefix"`
+	UserIdentifier types.String `tfsdk:"user_identifier"`
+	BotSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"bot_skip_processing"`
+	HTTPHeader *CDNLoadBalancerTrustedClientsHTTPHeaderModel `tfsdk:"http_header"`
+	Metadata *CDNLoadBalancerTrustedClientsMetadataModel `tfsdk:"metadata"`
+	SkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"skip_processing"`
+	WAFSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"waf_skip_processing"`
+}
+
+// CDNLoadBalancerTrustedClientsHTTPHeaderModel represents http_header block
+type CDNLoadBalancerTrustedClientsHTTPHeaderModel struct {
+	Headers []CDNLoadBalancerTrustedClientsHTTPHeaderHeadersModel `tfsdk:"headers"`
+}
+
+// CDNLoadBalancerTrustedClientsHTTPHeaderHeadersModel represents headers block
+type CDNLoadBalancerTrustedClientsHTTPHeaderHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// CDNLoadBalancerTrustedClientsMetadataModel represents metadata block
+type CDNLoadBalancerTrustedClientsMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerUserIdentificationModel represents user_identification block
+type CDNLoadBalancerUserIdentificationModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CDNLoadBalancerWAFExclusionModel represents waf_exclusion block
+type CDNLoadBalancerWAFExclusionModel struct {
+	WAFExclusionInlineRules *CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesModel `tfsdk:"waf_exclusion_inline_rules"`
+	WAFExclusionPolicy *CDNLoadBalancerWAFExclusionWAFExclusionPolicyModel `tfsdk:"waf_exclusion_policy"`
+}
+
+// CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesModel represents waf_exclusion_inline_rules block
+type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesModel struct {
+	Rules []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModel `tfsdk:"rules"`
+}
+
+// CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModel represents rules block
+type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	ExpirationTimestamp types.String `tfsdk:"expiration_timestamp"`
+	Methods types.List `tfsdk:"methods"`
+	PathPrefix types.String `tfsdk:"path_prefix"`
+	PathRegex types.String `tfsdk:"path_regex"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+	AnyDomain *CDNLoadBalancerEmptyModel `tfsdk:"any_domain"`
+	AnyPath *CDNLoadBalancerEmptyModel `tfsdk:"any_path"`
+	AppFirewallDetectionControl *CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModel `tfsdk:"app_firewall_detection_control"`
+	Metadata *CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel `tfsdk:"metadata"`
+	WAFSkipProcessing *CDNLoadBalancerEmptyModel `tfsdk:"waf_skip_processing"`
+}
+
+// CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModel represents app_firewall_detection_control block
+type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModel struct {
+	ExcludeAttackTypeContexts []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel `tfsdk:"exclude_attack_type_contexts"`
+	ExcludeBotNameContexts []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModel `tfsdk:"exclude_bot_name_contexts"`
+	ExcludeSignatureContexts []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel `tfsdk:"exclude_signature_contexts"`
+	ExcludeViolationContexts []CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel `tfsdk:"exclude_violation_contexts"`
+}
+
+// CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel represents exclude_attack_type_contexts block
+type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel struct {
+	Context types.String `tfsdk:"context"`
+	ContextName types.String `tfsdk:"context_name"`
+	ExcludeAttackType types.String `tfsdk:"exclude_attack_type"`
+}
+
+// CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModel represents exclude_bot_name_contexts block
+type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModel struct {
+	BotName types.String `tfsdk:"bot_name"`
+}
+
+// CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel represents exclude_signature_contexts block
+type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel struct {
+	Context types.String `tfsdk:"context"`
+	ContextName types.String `tfsdk:"context_name"`
+	SignatureID types.Int64 `tfsdk:"signature_id"`
+}
+
+// CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel represents exclude_violation_contexts block
+type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel struct {
+	Context types.String `tfsdk:"context"`
+	ContextName types.String `tfsdk:"context_name"`
+	ExcludeViolation types.String `tfsdk:"exclude_violation"`
+}
+
+// CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel represents metadata block
+type CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CDNLoadBalancerWAFExclusionWAFExclusionPolicyModel represents waf_exclusion_policy block
+type CDNLoadBalancerWAFExclusionWAFExclusionPolicyModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type CDNLoadBalancerResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +2528,58 @@ type CDNLoadBalancerResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	ActiveServicePolicies *CDNLoadBalancerActiveServicePoliciesModel `tfsdk:"active_service_policies"`
+	APIRateLimit *CDNLoadBalancerAPIRateLimitModel `tfsdk:"api_rate_limit"`
+	APISpecification *CDNLoadBalancerAPISpecificationModel `tfsdk:"api_specification"`
+	AppFirewall *CDNLoadBalancerAppFirewallModel `tfsdk:"app_firewall"`
+	BlockedClients []CDNLoadBalancerBlockedClientsModel `tfsdk:"blocked_clients"`
+	BotDefense *CDNLoadBalancerBotDefenseModel `tfsdk:"bot_defense"`
+	CaptchaChallenge *CDNLoadBalancerCaptchaChallengeModel `tfsdk:"captcha_challenge"`
+	ClientSideDefense *CDNLoadBalancerClientSideDefenseModel `tfsdk:"client_side_defense"`
+	CorsPolicy *CDNLoadBalancerCorsPolicyModel `tfsdk:"cors_policy"`
+	CsrfPolicy *CDNLoadBalancerCsrfPolicyModel `tfsdk:"csrf_policy"`
+	CustomCacheRule *CDNLoadBalancerCustomCacheRuleModel `tfsdk:"custom_cache_rule"`
+	DataGuardRules []CDNLoadBalancerDataGuardRulesModel `tfsdk:"data_guard_rules"`
+	DdosMitigationRules []CDNLoadBalancerDdosMitigationRulesModel `tfsdk:"ddos_mitigation_rules"`
+	DefaultCacheAction *CDNLoadBalancerDefaultCacheActionModel `tfsdk:"default_cache_action"`
+	DefaultSensitiveDataPolicy *CDNLoadBalancerEmptyModel `tfsdk:"default_sensitive_data_policy"`
+	DisableAPIDefinition *CDNLoadBalancerEmptyModel `tfsdk:"disable_api_definition"`
+	DisableAPIDiscovery *CDNLoadBalancerEmptyModel `tfsdk:"disable_api_discovery"`
+	DisableClientSideDefense *CDNLoadBalancerEmptyModel `tfsdk:"disable_client_side_defense"`
+	DisableIPReputation *CDNLoadBalancerEmptyModel `tfsdk:"disable_ip_reputation"`
+	DisableMaliciousUserDetection *CDNLoadBalancerEmptyModel `tfsdk:"disable_malicious_user_detection"`
+	DisableRateLimit *CDNLoadBalancerEmptyModel `tfsdk:"disable_rate_limit"`
+	DisableThreatMesh *CDNLoadBalancerEmptyModel `tfsdk:"disable_threat_mesh"`
+	DisableWAF *CDNLoadBalancerEmptyModel `tfsdk:"disable_waf"`
+	EnableAPIDiscovery *CDNLoadBalancerEnableAPIDiscoveryModel `tfsdk:"enable_api_discovery"`
+	EnableChallenge *CDNLoadBalancerEnableChallengeModel `tfsdk:"enable_challenge"`
+	EnableIPReputation *CDNLoadBalancerEnableIPReputationModel `tfsdk:"enable_ip_reputation"`
+	EnableMaliciousUserDetection *CDNLoadBalancerEmptyModel `tfsdk:"enable_malicious_user_detection"`
+	EnableThreatMesh *CDNLoadBalancerEmptyModel `tfsdk:"enable_threat_mesh"`
+	GraphqlRules []CDNLoadBalancerGraphqlRulesModel `tfsdk:"graphql_rules"`
+	HTTP *CDNLoadBalancerHTTPModel `tfsdk:"http"`
+	HTTPS *CDNLoadBalancerHTTPSModel `tfsdk:"https"`
+	HTTPSAutoCert *CDNLoadBalancerHTTPSAutoCertModel `tfsdk:"https_auto_cert"`
+	JsChallenge *CDNLoadBalancerJsChallengeModel `tfsdk:"js_challenge"`
+	JwtValidation *CDNLoadBalancerJwtValidationModel `tfsdk:"jwt_validation"`
+	L7DdosActionBlock *CDNLoadBalancerEmptyModel `tfsdk:"l7_ddos_action_block"`
+	L7DdosActionDefault *CDNLoadBalancerEmptyModel `tfsdk:"l7_ddos_action_default"`
+	L7DdosActionJsChallenge *CDNLoadBalancerL7DdosActionJsChallengeModel `tfsdk:"l7_ddos_action_js_challenge"`
+	NoChallenge *CDNLoadBalancerEmptyModel `tfsdk:"no_challenge"`
+	NoServicePolicies *CDNLoadBalancerEmptyModel `tfsdk:"no_service_policies"`
+	OriginPool *CDNLoadBalancerOriginPoolModel `tfsdk:"origin_pool"`
+	OtherSettings *CDNLoadBalancerOtherSettingsModel `tfsdk:"other_settings"`
+	PolicyBasedChallenge *CDNLoadBalancerPolicyBasedChallengeModel `tfsdk:"policy_based_challenge"`
+	ProtectedCookies []CDNLoadBalancerProtectedCookiesModel `tfsdk:"protected_cookies"`
+	RateLimit *CDNLoadBalancerRateLimitModel `tfsdk:"rate_limit"`
+	SensitiveDataPolicy *CDNLoadBalancerSensitiveDataPolicyModel `tfsdk:"sensitive_data_policy"`
+	ServicePoliciesFromNamespace *CDNLoadBalancerEmptyModel `tfsdk:"service_policies_from_namespace"`
+	SlowDdosMitigation *CDNLoadBalancerSlowDdosMitigationModel `tfsdk:"slow_ddos_mitigation"`
+	SystemDefaultTimeouts *CDNLoadBalancerEmptyModel `tfsdk:"system_default_timeouts"`
+	TrustedClients []CDNLoadBalancerTrustedClientsModel `tfsdk:"trusted_clients"`
+	UserIDClientIP *CDNLoadBalancerEmptyModel `tfsdk:"user_id_client_ip"`
+	UserIdentification *CDNLoadBalancerUserIdentificationModel `tfsdk:"user_identification"`
+	WAFExclusion *CDNLoadBalancerWAFExclusionModel `tfsdk:"waf_exclusion"`
 }
 
 func (r *CDNLoadBalancerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -5625,6 +8151,10 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		Spec: client.CDNLoadBalancerSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -5680,6 +8210,15 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 
 	apiResource, err := r.client.GetCDNLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CDNLoadBalancer not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CDNLoadBalancer: %s", err))
 		return
 	}
@@ -5694,6 +8233,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -5746,6 +8292,10 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		Spec: client.CDNLoadBalancerSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -5770,10 +8320,20 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetCDNLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -5797,11 +8357,33 @@ func (r *CDNLoadBalancerResource) Delete(ctx context.Context, req resource.Delet
 
 	err := r.client.DeleteCDNLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CDNLoadBalancer already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete CDNLoadBalancer: %s", err))
 		return
 	}
 }
 
 func (r *CDNLoadBalancerResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

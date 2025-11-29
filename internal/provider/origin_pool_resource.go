@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,439 @@ type OriginPoolResource struct {
 	client *client.Client
 }
 
+// OriginPoolEmptyModel represents empty nested blocks
+type OriginPoolEmptyModel struct {
+}
+
+// OriginPoolAdvancedOptionsModel represents advanced_options block
+type OriginPoolAdvancedOptionsModel struct {
+	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
+	HTTPIdleTimeout types.Int64 `tfsdk:"http_idle_timeout"`
+	PanicThreshold types.Int64 `tfsdk:"panic_threshold"`
+	AutoHTTPConfig *OriginPoolEmptyModel `tfsdk:"auto_http_config"`
+	CircuitBreaker *OriginPoolAdvancedOptionsCircuitBreakerModel `tfsdk:"circuit_breaker"`
+	DefaultCircuitBreaker *OriginPoolEmptyModel `tfsdk:"default_circuit_breaker"`
+	DisableCircuitBreaker *OriginPoolEmptyModel `tfsdk:"disable_circuit_breaker"`
+	DisableLbSourceIPPersistance *OriginPoolEmptyModel `tfsdk:"disable_lb_source_ip_persistance"`
+	DisableOutlierDetection *OriginPoolEmptyModel `tfsdk:"disable_outlier_detection"`
+	DisableProxyProtocol *OriginPoolEmptyModel `tfsdk:"disable_proxy_protocol"`
+	DisableSubsets *OriginPoolEmptyModel `tfsdk:"disable_subsets"`
+	EnableLbSourceIPPersistance *OriginPoolEmptyModel `tfsdk:"enable_lb_source_ip_persistance"`
+	EnableSubsets *OriginPoolAdvancedOptionsEnableSubsetsModel `tfsdk:"enable_subsets"`
+	Http1Config *OriginPoolAdvancedOptionsHttp1ConfigModel `tfsdk:"http1_config"`
+	Http2Options *OriginPoolAdvancedOptionsHttp2OptionsModel `tfsdk:"http2_options"`
+	NoPanicThreshold *OriginPoolEmptyModel `tfsdk:"no_panic_threshold"`
+	OutlierDetection *OriginPoolAdvancedOptionsOutlierDetectionModel `tfsdk:"outlier_detection"`
+	ProxyProtocolV1 *OriginPoolEmptyModel `tfsdk:"proxy_protocol_v1"`
+	ProxyProtocolV2 *OriginPoolEmptyModel `tfsdk:"proxy_protocol_v2"`
+}
+
+// OriginPoolAdvancedOptionsCircuitBreakerModel represents circuit_breaker block
+type OriginPoolAdvancedOptionsCircuitBreakerModel struct {
+	ConnectionLimit types.Int64 `tfsdk:"connection_limit"`
+	MaxRequests types.Int64 `tfsdk:"max_requests"`
+	PendingRequests types.Int64 `tfsdk:"pending_requests"`
+	Priority types.String `tfsdk:"priority"`
+	Retries types.Int64 `tfsdk:"retries"`
+}
+
+// OriginPoolAdvancedOptionsEnableSubsetsModel represents enable_subsets block
+type OriginPoolAdvancedOptionsEnableSubsetsModel struct {
+	AnyEndpoint *OriginPoolEmptyModel `tfsdk:"any_endpoint"`
+	DefaultSubset *OriginPoolAdvancedOptionsEnableSubsetsDefaultSubsetModel `tfsdk:"default_subset"`
+	EndpointSubsets []OriginPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModel `tfsdk:"endpoint_subsets"`
+	FailRequest *OriginPoolEmptyModel `tfsdk:"fail_request"`
+}
+
+// OriginPoolAdvancedOptionsEnableSubsetsDefaultSubsetModel represents default_subset block
+type OriginPoolAdvancedOptionsEnableSubsetsDefaultSubsetModel struct {
+	DefaultSubset *OriginPoolEmptyModel `tfsdk:"default_subset"`
+}
+
+// OriginPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModel represents endpoint_subsets block
+type OriginPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModel struct {
+	Keys types.List `tfsdk:"keys"`
+}
+
+// OriginPoolAdvancedOptionsHttp1ConfigModel represents http1_config block
+type OriginPoolAdvancedOptionsHttp1ConfigModel struct {
+	HeaderTransformation *OriginPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// OriginPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel represents header_transformation block
+type OriginPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel struct {
+	DefaultHeaderTransformation *OriginPoolEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *OriginPoolEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *OriginPoolEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *OriginPoolEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// OriginPoolAdvancedOptionsHttp2OptionsModel represents http2_options block
+type OriginPoolAdvancedOptionsHttp2OptionsModel struct {
+	Enabled types.Bool `tfsdk:"enabled"`
+}
+
+// OriginPoolAdvancedOptionsOutlierDetectionModel represents outlier_detection block
+type OriginPoolAdvancedOptionsOutlierDetectionModel struct {
+	BaseEjectionTime types.Int64 `tfsdk:"base_ejection_time"`
+	Consecutive5xx types.Int64 `tfsdk:"consecutive_5xx"`
+	ConsecutiveGatewayFailure types.Int64 `tfsdk:"consecutive_gateway_failure"`
+	Interval types.Int64 `tfsdk:"interval"`
+	MaxEjectionPercent types.Int64 `tfsdk:"max_ejection_percent"`
+}
+
+// OriginPoolHealthcheckModel represents healthcheck block
+type OriginPoolHealthcheckModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersModel represents origin_servers block
+type OriginPoolOriginServersModel struct {
+	CbipService *OriginPoolOriginServersCbipServiceModel `tfsdk:"cbip_service"`
+	ConsulService *OriginPoolOriginServersConsulServiceModel `tfsdk:"consul_service"`
+	CustomEndpointObject *OriginPoolOriginServersCustomEndpointObjectModel `tfsdk:"custom_endpoint_object"`
+	K8SService *OriginPoolOriginServersK8SServiceModel `tfsdk:"k8s_service"`
+	Labels *OriginPoolEmptyModel `tfsdk:"labels"`
+	PrivateIP *OriginPoolOriginServersPrivateIPModel `tfsdk:"private_ip"`
+	PrivateName *OriginPoolOriginServersPrivateNameModel `tfsdk:"private_name"`
+	PublicIP *OriginPoolOriginServersPublicIPModel `tfsdk:"public_ip"`
+	PublicName *OriginPoolOriginServersPublicNameModel `tfsdk:"public_name"`
+	VnPrivateIP *OriginPoolOriginServersVnPrivateIPModel `tfsdk:"vn_private_ip"`
+	VnPrivateName *OriginPoolOriginServersVnPrivateNameModel `tfsdk:"vn_private_name"`
+}
+
+// OriginPoolOriginServersCbipServiceModel represents cbip_service block
+type OriginPoolOriginServersCbipServiceModel struct {
+	ServiceName types.String `tfsdk:"service_name"`
+}
+
+// OriginPoolOriginServersConsulServiceModel represents consul_service block
+type OriginPoolOriginServersConsulServiceModel struct {
+	ServiceName types.String `tfsdk:"service_name"`
+	InsideNetwork *OriginPoolEmptyModel `tfsdk:"inside_network"`
+	OutsideNetwork *OriginPoolEmptyModel `tfsdk:"outside_network"`
+	SiteLocator *OriginPoolOriginServersConsulServiceSiteLocatorModel `tfsdk:"site_locator"`
+	SnatPool *OriginPoolOriginServersConsulServiceSnatPoolModel `tfsdk:"snat_pool"`
+}
+
+// OriginPoolOriginServersConsulServiceSiteLocatorModel represents site_locator block
+type OriginPoolOriginServersConsulServiceSiteLocatorModel struct {
+	Site *OriginPoolOriginServersConsulServiceSiteLocatorSiteModel `tfsdk:"site"`
+	VirtualSite *OriginPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// OriginPoolOriginServersConsulServiceSiteLocatorSiteModel represents site block
+type OriginPoolOriginServersConsulServiceSiteLocatorSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel represents virtual_site block
+type OriginPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersConsulServiceSnatPoolModel represents snat_pool block
+type OriginPoolOriginServersConsulServiceSnatPoolModel struct {
+	NoSnatPool *OriginPoolEmptyModel `tfsdk:"no_snat_pool"`
+	SnatPool *OriginPoolOriginServersConsulServiceSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
+}
+
+// OriginPoolOriginServersConsulServiceSnatPoolSnatPoolModel represents snat_pool block
+type OriginPoolOriginServersConsulServiceSnatPoolSnatPoolModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// OriginPoolOriginServersCustomEndpointObjectModel represents custom_endpoint_object block
+type OriginPoolOriginServersCustomEndpointObjectModel struct {
+	Endpoint *OriginPoolOriginServersCustomEndpointObjectEndpointModel `tfsdk:"endpoint"`
+}
+
+// OriginPoolOriginServersCustomEndpointObjectEndpointModel represents endpoint block
+type OriginPoolOriginServersCustomEndpointObjectEndpointModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersK8SServiceModel represents k8s_service block
+type OriginPoolOriginServersK8SServiceModel struct {
+	Protocol types.String `tfsdk:"protocol"`
+	ServiceName types.String `tfsdk:"service_name"`
+	InsideNetwork *OriginPoolEmptyModel `tfsdk:"inside_network"`
+	OutsideNetwork *OriginPoolEmptyModel `tfsdk:"outside_network"`
+	SiteLocator *OriginPoolOriginServersK8SServiceSiteLocatorModel `tfsdk:"site_locator"`
+	SnatPool *OriginPoolOriginServersK8SServiceSnatPoolModel `tfsdk:"snat_pool"`
+	Vk8sNetworks *OriginPoolEmptyModel `tfsdk:"vk8s_networks"`
+}
+
+// OriginPoolOriginServersK8SServiceSiteLocatorModel represents site_locator block
+type OriginPoolOriginServersK8SServiceSiteLocatorModel struct {
+	Site *OriginPoolOriginServersK8SServiceSiteLocatorSiteModel `tfsdk:"site"`
+	VirtualSite *OriginPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// OriginPoolOriginServersK8SServiceSiteLocatorSiteModel represents site block
+type OriginPoolOriginServersK8SServiceSiteLocatorSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel represents virtual_site block
+type OriginPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersK8SServiceSnatPoolModel represents snat_pool block
+type OriginPoolOriginServersK8SServiceSnatPoolModel struct {
+	NoSnatPool *OriginPoolEmptyModel `tfsdk:"no_snat_pool"`
+	SnatPool *OriginPoolOriginServersK8SServiceSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
+}
+
+// OriginPoolOriginServersK8SServiceSnatPoolSnatPoolModel represents snat_pool block
+type OriginPoolOriginServersK8SServiceSnatPoolSnatPoolModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// OriginPoolOriginServersPrivateIPModel represents private_ip block
+type OriginPoolOriginServersPrivateIPModel struct {
+	IP types.String `tfsdk:"ip"`
+	InsideNetwork *OriginPoolEmptyModel `tfsdk:"inside_network"`
+	OutsideNetwork *OriginPoolEmptyModel `tfsdk:"outside_network"`
+	Segment *OriginPoolOriginServersPrivateIPSegmentModel `tfsdk:"segment"`
+	SiteLocator *OriginPoolOriginServersPrivateIPSiteLocatorModel `tfsdk:"site_locator"`
+	SnatPool *OriginPoolOriginServersPrivateIPSnatPoolModel `tfsdk:"snat_pool"`
+}
+
+// OriginPoolOriginServersPrivateIPSegmentModel represents segment block
+type OriginPoolOriginServersPrivateIPSegmentModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersPrivateIPSiteLocatorModel represents site_locator block
+type OriginPoolOriginServersPrivateIPSiteLocatorModel struct {
+	Site *OriginPoolOriginServersPrivateIPSiteLocatorSiteModel `tfsdk:"site"`
+	VirtualSite *OriginPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// OriginPoolOriginServersPrivateIPSiteLocatorSiteModel represents site block
+type OriginPoolOriginServersPrivateIPSiteLocatorSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel represents virtual_site block
+type OriginPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersPrivateIPSnatPoolModel represents snat_pool block
+type OriginPoolOriginServersPrivateIPSnatPoolModel struct {
+	NoSnatPool *OriginPoolEmptyModel `tfsdk:"no_snat_pool"`
+	SnatPool *OriginPoolOriginServersPrivateIPSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
+}
+
+// OriginPoolOriginServersPrivateIPSnatPoolSnatPoolModel represents snat_pool block
+type OriginPoolOriginServersPrivateIPSnatPoolSnatPoolModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// OriginPoolOriginServersPrivateNameModel represents private_name block
+type OriginPoolOriginServersPrivateNameModel struct {
+	DNSName types.String `tfsdk:"dns_name"`
+	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
+	InsideNetwork *OriginPoolEmptyModel `tfsdk:"inside_network"`
+	OutsideNetwork *OriginPoolEmptyModel `tfsdk:"outside_network"`
+	Segment *OriginPoolOriginServersPrivateNameSegmentModel `tfsdk:"segment"`
+	SiteLocator *OriginPoolOriginServersPrivateNameSiteLocatorModel `tfsdk:"site_locator"`
+	SnatPool *OriginPoolOriginServersPrivateNameSnatPoolModel `tfsdk:"snat_pool"`
+}
+
+// OriginPoolOriginServersPrivateNameSegmentModel represents segment block
+type OriginPoolOriginServersPrivateNameSegmentModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersPrivateNameSiteLocatorModel represents site_locator block
+type OriginPoolOriginServersPrivateNameSiteLocatorModel struct {
+	Site *OriginPoolOriginServersPrivateNameSiteLocatorSiteModel `tfsdk:"site"`
+	VirtualSite *OriginPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// OriginPoolOriginServersPrivateNameSiteLocatorSiteModel represents site block
+type OriginPoolOriginServersPrivateNameSiteLocatorSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel represents virtual_site block
+type OriginPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersPrivateNameSnatPoolModel represents snat_pool block
+type OriginPoolOriginServersPrivateNameSnatPoolModel struct {
+	NoSnatPool *OriginPoolEmptyModel `tfsdk:"no_snat_pool"`
+	SnatPool *OriginPoolOriginServersPrivateNameSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
+}
+
+// OriginPoolOriginServersPrivateNameSnatPoolSnatPoolModel represents snat_pool block
+type OriginPoolOriginServersPrivateNameSnatPoolSnatPoolModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// OriginPoolOriginServersPublicIPModel represents public_ip block
+type OriginPoolOriginServersPublicIPModel struct {
+	IP types.String `tfsdk:"ip"`
+}
+
+// OriginPoolOriginServersPublicNameModel represents public_name block
+type OriginPoolOriginServersPublicNameModel struct {
+	DNSName types.String `tfsdk:"dns_name"`
+	RefreshInterval types.Int64 `tfsdk:"refresh_interval"`
+}
+
+// OriginPoolOriginServersVnPrivateIPModel represents vn_private_ip block
+type OriginPoolOriginServersVnPrivateIPModel struct {
+	IP types.String `tfsdk:"ip"`
+	VirtualNetwork *OriginPoolOriginServersVnPrivateIPVirtualNetworkModel `tfsdk:"virtual_network"`
+}
+
+// OriginPoolOriginServersVnPrivateIPVirtualNetworkModel represents virtual_network block
+type OriginPoolOriginServersVnPrivateIPVirtualNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolOriginServersVnPrivateNameModel represents vn_private_name block
+type OriginPoolOriginServersVnPrivateNameModel struct {
+	DNSName types.String `tfsdk:"dns_name"`
+	PrivateNetwork *OriginPoolOriginServersVnPrivateNamePrivateNetworkModel `tfsdk:"private_network"`
+}
+
+// OriginPoolOriginServersVnPrivateNamePrivateNetworkModel represents private_network block
+type OriginPoolOriginServersVnPrivateNamePrivateNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolUpstreamConnPoolReuseTypeModel represents upstream_conn_pool_reuse_type block
+type OriginPoolUpstreamConnPoolReuseTypeModel struct {
+	DisableConnPoolReuse *OriginPoolEmptyModel `tfsdk:"disable_conn_pool_reuse"`
+	EnableConnPoolReuse *OriginPoolEmptyModel `tfsdk:"enable_conn_pool_reuse"`
+}
+
+// OriginPoolUseTLSModel represents use_tls block
+type OriginPoolUseTLSModel struct {
+	MaxSessionKeys types.Int64 `tfsdk:"max_session_keys"`
+	Sni types.String `tfsdk:"sni"`
+	DefaultSessionKeyCaching *OriginPoolEmptyModel `tfsdk:"default_session_key_caching"`
+	DisableSessionKeyCaching *OriginPoolEmptyModel `tfsdk:"disable_session_key_caching"`
+	DisableSni *OriginPoolEmptyModel `tfsdk:"disable_sni"`
+	NoMtls *OriginPoolEmptyModel `tfsdk:"no_mtls"`
+	SkipServerVerification *OriginPoolEmptyModel `tfsdk:"skip_server_verification"`
+	TLSConfig *OriginPoolUseTLSTLSConfigModel `tfsdk:"tls_config"`
+	UseHostHeaderAsSni *OriginPoolEmptyModel `tfsdk:"use_host_header_as_sni"`
+	UseMtls *OriginPoolUseTLSUseMtlsModel `tfsdk:"use_mtls"`
+	UseMtlsObj *OriginPoolUseTLSUseMtlsObjModel `tfsdk:"use_mtls_obj"`
+	UseServerVerification *OriginPoolUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
+	VolterraTrustedCa *OriginPoolEmptyModel `tfsdk:"volterra_trusted_ca"`
+}
+
+// OriginPoolUseTLSTLSConfigModel represents tls_config block
+type OriginPoolUseTLSTLSConfigModel struct {
+	CustomSecurity *OriginPoolUseTLSTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
+	DefaultSecurity *OriginPoolEmptyModel `tfsdk:"default_security"`
+	LowSecurity *OriginPoolEmptyModel `tfsdk:"low_security"`
+	MediumSecurity *OriginPoolEmptyModel `tfsdk:"medium_security"`
+}
+
+// OriginPoolUseTLSTLSConfigCustomSecurityModel represents custom_security block
+type OriginPoolUseTLSTLSConfigCustomSecurityModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+}
+
+// OriginPoolUseTLSUseMtlsModel represents use_mtls block
+type OriginPoolUseTLSUseMtlsModel struct {
+	TLSCertificates []OriginPoolUseTLSUseMtlsTLSCertificatesModel `tfsdk:"tls_certificates"`
+}
+
+// OriginPoolUseTLSUseMtlsTLSCertificatesModel represents tls_certificates block
+type OriginPoolUseTLSUseMtlsTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *OriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *OriginPoolEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *OriginPoolEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// OriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type OriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel represents private_key block
+type OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// OriginPoolUseTLSUseMtlsObjModel represents use_mtls_obj block
+type OriginPoolUseTLSUseMtlsObjModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// OriginPoolUseTLSUseServerVerificationModel represents use_server_verification block
+type OriginPoolUseTLSUseServerVerificationModel struct {
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	TrustedCa *OriginPoolUseTLSUseServerVerificationTrustedCaModel `tfsdk:"trusted_ca"`
+}
+
+// OriginPoolUseTLSUseServerVerificationTrustedCaModel represents trusted_ca block
+type OriginPoolUseTLSUseServerVerificationTrustedCaModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type OriginPoolResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -57,6 +491,15 @@ type OriginPoolResourceModel struct {
 	Port types.Int64 `tfsdk:"port"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AdvancedOptions *OriginPoolAdvancedOptionsModel `tfsdk:"advanced_options"`
+	AutomaticPort *OriginPoolEmptyModel `tfsdk:"automatic_port"`
+	Healthcheck []OriginPoolHealthcheckModel `tfsdk:"healthcheck"`
+	LbPort *OriginPoolEmptyModel `tfsdk:"lb_port"`
+	NoTLS *OriginPoolEmptyModel `tfsdk:"no_tls"`
+	OriginServers []OriginPoolOriginServersModel `tfsdk:"origin_servers"`
+	SameAsEndpointPort *OriginPoolEmptyModel `tfsdk:"same_as_endpoint_port"`
+	UpstreamConnPoolReuseType *OriginPoolUpstreamConnPoolReuseTypeModel `tfsdk:"upstream_conn_pool_reuse_type"`
+	UseTLS *OriginPoolUseTLSModel `tfsdk:"use_tls"`
 }
 
 func (r *OriginPoolResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1155,6 +1598,10 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 		Spec: client.OriginPoolSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1210,6 +1657,15 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 
 	apiResource, err := r.client.GetOriginPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "OriginPool not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read OriginPool: %s", err))
 		return
 	}
@@ -1224,6 +1680,13 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1276,6 +1739,10 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		Spec: client.OriginPoolSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1300,10 +1767,20 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetOriginPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1327,11 +1804,33 @@ func (r *OriginPoolResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	err := r.client.DeleteOriginPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "OriginPool already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete OriginPool: %s", err))
 		return
 	}
 }
 
 func (r *OriginPoolResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,667 @@ type GlobalLogReceiverResource struct {
 	client *client.Client
 }
 
+// GlobalLogReceiverEmptyModel represents empty nested blocks
+type GlobalLogReceiverEmptyModel struct {
+}
+
+// GlobalLogReceiverAWSCloudWatchReceiverModel represents aws_cloud_watch_receiver block
+type GlobalLogReceiverAWSCloudWatchReceiverModel struct {
+	AWSRegion types.String `tfsdk:"aws_region"`
+	GroupName types.String `tfsdk:"group_name"`
+	StreamName types.String `tfsdk:"stream_name"`
+	AWSCred *GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel `tfsdk:"aws_cred"`
+	Batch *GlobalLogReceiverAWSCloudWatchReceiverBatchModel `tfsdk:"batch"`
+	Compression *GlobalLogReceiverAWSCloudWatchReceiverCompressionModel `tfsdk:"compression"`
+}
+
+// GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel represents aws_cred block
+type GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GlobalLogReceiverAWSCloudWatchReceiverBatchModel represents batch block
+type GlobalLogReceiverAWSCloudWatchReceiverBatchModel struct {
+	MaxBytes types.Int64 `tfsdk:"max_bytes"`
+	MaxEvents types.Int64 `tfsdk:"max_events"`
+	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// GlobalLogReceiverAWSCloudWatchReceiverCompressionModel represents compression block
+type GlobalLogReceiverAWSCloudWatchReceiverCompressionModel struct {
+	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverAzureEventHubsReceiverModel represents azure_event_hubs_receiver block
+type GlobalLogReceiverAzureEventHubsReceiverModel struct {
+	Instance types.String `tfsdk:"instance"`
+	Namespace types.String `tfsdk:"namespace"`
+	ConnectionString *GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel `tfsdk:"connection_string"`
+}
+
+// GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel represents connection_string block
+type GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverAzureReceiverModel represents azure_receiver block
+type GlobalLogReceiverAzureReceiverModel struct {
+	ContainerName types.String `tfsdk:"container_name"`
+	Batch *GlobalLogReceiverAzureReceiverBatchModel `tfsdk:"batch"`
+	Compression *GlobalLogReceiverAzureReceiverCompressionModel `tfsdk:"compression"`
+	ConnectionString *GlobalLogReceiverAzureReceiverConnectionStringModel `tfsdk:"connection_string"`
+	FilenameOptions *GlobalLogReceiverAzureReceiverFilenameOptionsModel `tfsdk:"filename_options"`
+}
+
+// GlobalLogReceiverAzureReceiverBatchModel represents batch block
+type GlobalLogReceiverAzureReceiverBatchModel struct {
+	MaxBytes types.Int64 `tfsdk:"max_bytes"`
+	MaxEvents types.Int64 `tfsdk:"max_events"`
+	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// GlobalLogReceiverAzureReceiverCompressionModel represents compression block
+type GlobalLogReceiverAzureReceiverCompressionModel struct {
+	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverAzureReceiverConnectionStringModel represents connection_string block
+type GlobalLogReceiverAzureReceiverConnectionStringModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverAzureReceiverFilenameOptionsModel represents filename_options block
+type GlobalLogReceiverAzureReceiverFilenameOptionsModel struct {
+	CustomFolder types.String `tfsdk:"custom_folder"`
+	LogTypeFolder *GlobalLogReceiverEmptyModel `tfsdk:"log_type_folder"`
+	NoFolder *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
+}
+
+// GlobalLogReceiverDatadogReceiverModel represents datadog_receiver block
+type GlobalLogReceiverDatadogReceiverModel struct {
+	Endpoint types.String `tfsdk:"endpoint"`
+	Site types.String `tfsdk:"site"`
+	Batch *GlobalLogReceiverDatadogReceiverBatchModel `tfsdk:"batch"`
+	Compression *GlobalLogReceiverDatadogReceiverCompressionModel `tfsdk:"compression"`
+	DatadogAPIKey *GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel `tfsdk:"datadog_api_key"`
+	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
+	UseTLS *GlobalLogReceiverDatadogReceiverUseTLSModel `tfsdk:"use_tls"`
+}
+
+// GlobalLogReceiverDatadogReceiverBatchModel represents batch block
+type GlobalLogReceiverDatadogReceiverBatchModel struct {
+	MaxBytes types.Int64 `tfsdk:"max_bytes"`
+	MaxEvents types.Int64 `tfsdk:"max_events"`
+	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// GlobalLogReceiverDatadogReceiverCompressionModel represents compression block
+type GlobalLogReceiverDatadogReceiverCompressionModel struct {
+	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel represents datadog_api_key block
+type GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverDatadogReceiverUseTLSModel represents use_tls block
+type GlobalLogReceiverDatadogReceiverUseTLSModel struct {
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
+	MtlsEnable *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+}
+
+// GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String `tfsdk:"certificate"`
+	KeyURL *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverGCPBucketReceiverModel represents gcp_bucket_receiver block
+type GlobalLogReceiverGCPBucketReceiverModel struct {
+	Bucket types.String `tfsdk:"bucket"`
+	Batch *GlobalLogReceiverGCPBucketReceiverBatchModel `tfsdk:"batch"`
+	Compression *GlobalLogReceiverGCPBucketReceiverCompressionModel `tfsdk:"compression"`
+	FilenameOptions *GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel `tfsdk:"filename_options"`
+	GCPCred *GlobalLogReceiverGCPBucketReceiverGCPCredModel `tfsdk:"gcp_cred"`
+}
+
+// GlobalLogReceiverGCPBucketReceiverBatchModel represents batch block
+type GlobalLogReceiverGCPBucketReceiverBatchModel struct {
+	MaxBytes types.Int64 `tfsdk:"max_bytes"`
+	MaxEvents types.Int64 `tfsdk:"max_events"`
+	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// GlobalLogReceiverGCPBucketReceiverCompressionModel represents compression block
+type GlobalLogReceiverGCPBucketReceiverCompressionModel struct {
+	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel represents filename_options block
+type GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel struct {
+	CustomFolder types.String `tfsdk:"custom_folder"`
+	LogTypeFolder *GlobalLogReceiverEmptyModel `tfsdk:"log_type_folder"`
+	NoFolder *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
+}
+
+// GlobalLogReceiverGCPBucketReceiverGCPCredModel represents gcp_cred block
+type GlobalLogReceiverGCPBucketReceiverGCPCredModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GlobalLogReceiverHTTPReceiverModel represents http_receiver block
+type GlobalLogReceiverHTTPReceiverModel struct {
+	URI types.String `tfsdk:"uri"`
+	AuthBasic *GlobalLogReceiverHTTPReceiverAuthBasicModel `tfsdk:"auth_basic"`
+	AuthNone *GlobalLogReceiverEmptyModel `tfsdk:"auth_none"`
+	AuthToken *GlobalLogReceiverHTTPReceiverAuthTokenModel `tfsdk:"auth_token"`
+	Batch *GlobalLogReceiverHTTPReceiverBatchModel `tfsdk:"batch"`
+	Compression *GlobalLogReceiverHTTPReceiverCompressionModel `tfsdk:"compression"`
+	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
+	UseTLS *GlobalLogReceiverHTTPReceiverUseTLSModel `tfsdk:"use_tls"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthBasicModel represents auth_basic block
+type GlobalLogReceiverHTTPReceiverAuthBasicModel struct {
+	UserName types.String `tfsdk:"user_name"`
+	Password *GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel `tfsdk:"password"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel represents password block
+type GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthTokenModel represents auth_token block
+type GlobalLogReceiverHTTPReceiverAuthTokenModel struct {
+	Token *GlobalLogReceiverHTTPReceiverAuthTokenTokenModel `tfsdk:"token"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthTokenTokenModel represents token block
+type GlobalLogReceiverHTTPReceiverAuthTokenTokenModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverHTTPReceiverBatchModel represents batch block
+type GlobalLogReceiverHTTPReceiverBatchModel struct {
+	MaxBytes types.Int64 `tfsdk:"max_bytes"`
+	MaxEvents types.Int64 `tfsdk:"max_events"`
+	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// GlobalLogReceiverHTTPReceiverCompressionModel represents compression block
+type GlobalLogReceiverHTTPReceiverCompressionModel struct {
+	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverHTTPReceiverUseTLSModel represents use_tls block
+type GlobalLogReceiverHTTPReceiverUseTLSModel struct {
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
+	MtlsEnable *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+}
+
+// GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String `tfsdk:"certificate"`
+	KeyURL *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverKafkaReceiverModel represents kafka_receiver block
+type GlobalLogReceiverKafkaReceiverModel struct {
+	BootstrapServers types.List `tfsdk:"bootstrap_servers"`
+	KafkaTopic types.String `tfsdk:"kafka_topic"`
+	Batch *GlobalLogReceiverKafkaReceiverBatchModel `tfsdk:"batch"`
+	Compression *GlobalLogReceiverKafkaReceiverCompressionModel `tfsdk:"compression"`
+	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
+	UseTLS *GlobalLogReceiverKafkaReceiverUseTLSModel `tfsdk:"use_tls"`
+}
+
+// GlobalLogReceiverKafkaReceiverBatchModel represents batch block
+type GlobalLogReceiverKafkaReceiverBatchModel struct {
+	MaxBytes types.Int64 `tfsdk:"max_bytes"`
+	MaxEvents types.Int64 `tfsdk:"max_events"`
+	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// GlobalLogReceiverKafkaReceiverCompressionModel represents compression block
+type GlobalLogReceiverKafkaReceiverCompressionModel struct {
+	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverKafkaReceiverUseTLSModel represents use_tls block
+type GlobalLogReceiverKafkaReceiverUseTLSModel struct {
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
+	MtlsEnable *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+}
+
+// GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String `tfsdk:"certificate"`
+	KeyURL *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverNewRelicReceiverModel represents new_relic_receiver block
+type GlobalLogReceiverNewRelicReceiverModel struct {
+	APIKey *GlobalLogReceiverNewRelicReceiverAPIKeyModel `tfsdk:"api_key"`
+	Eu *GlobalLogReceiverEmptyModel `tfsdk:"eu"`
+	Us *GlobalLogReceiverEmptyModel `tfsdk:"us"`
+}
+
+// GlobalLogReceiverNewRelicReceiverAPIKeyModel represents api_key block
+type GlobalLogReceiverNewRelicReceiverAPIKeyModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverNsListModel represents ns_list block
+type GlobalLogReceiverNsListModel struct {
+	Namespaces types.List `tfsdk:"namespaces"`
+}
+
+// GlobalLogReceiverQradarReceiverModel represents qradar_receiver block
+type GlobalLogReceiverQradarReceiverModel struct {
+	URI types.String `tfsdk:"uri"`
+	Batch *GlobalLogReceiverQradarReceiverBatchModel `tfsdk:"batch"`
+	Compression *GlobalLogReceiverQradarReceiverCompressionModel `tfsdk:"compression"`
+	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
+	UseTLS *GlobalLogReceiverQradarReceiverUseTLSModel `tfsdk:"use_tls"`
+}
+
+// GlobalLogReceiverQradarReceiverBatchModel represents batch block
+type GlobalLogReceiverQradarReceiverBatchModel struct {
+	MaxBytes types.Int64 `tfsdk:"max_bytes"`
+	MaxEvents types.Int64 `tfsdk:"max_events"`
+	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// GlobalLogReceiverQradarReceiverCompressionModel represents compression block
+type GlobalLogReceiverQradarReceiverCompressionModel struct {
+	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverQradarReceiverUseTLSModel represents use_tls block
+type GlobalLogReceiverQradarReceiverUseTLSModel struct {
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
+	MtlsEnable *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+}
+
+// GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String `tfsdk:"certificate"`
+	KeyURL *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverS3ReceiverModel represents s3_receiver block
+type GlobalLogReceiverS3ReceiverModel struct {
+	AWSRegion types.String `tfsdk:"aws_region"`
+	Bucket types.String `tfsdk:"bucket"`
+	AWSCred *GlobalLogReceiverS3ReceiverAWSCredModel `tfsdk:"aws_cred"`
+	Batch *GlobalLogReceiverS3ReceiverBatchModel `tfsdk:"batch"`
+	Compression *GlobalLogReceiverS3ReceiverCompressionModel `tfsdk:"compression"`
+	FilenameOptions *GlobalLogReceiverS3ReceiverFilenameOptionsModel `tfsdk:"filename_options"`
+}
+
+// GlobalLogReceiverS3ReceiverAWSCredModel represents aws_cred block
+type GlobalLogReceiverS3ReceiverAWSCredModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GlobalLogReceiverS3ReceiverBatchModel represents batch block
+type GlobalLogReceiverS3ReceiverBatchModel struct {
+	MaxBytes types.Int64 `tfsdk:"max_bytes"`
+	MaxEvents types.Int64 `tfsdk:"max_events"`
+	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// GlobalLogReceiverS3ReceiverCompressionModel represents compression block
+type GlobalLogReceiverS3ReceiverCompressionModel struct {
+	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverS3ReceiverFilenameOptionsModel represents filename_options block
+type GlobalLogReceiverS3ReceiverFilenameOptionsModel struct {
+	CustomFolder types.String `tfsdk:"custom_folder"`
+	LogTypeFolder *GlobalLogReceiverEmptyModel `tfsdk:"log_type_folder"`
+	NoFolder *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
+}
+
+// GlobalLogReceiverSplunkReceiverModel represents splunk_receiver block
+type GlobalLogReceiverSplunkReceiverModel struct {
+	Endpoint types.String `tfsdk:"endpoint"`
+	Batch *GlobalLogReceiverSplunkReceiverBatchModel `tfsdk:"batch"`
+	Compression *GlobalLogReceiverSplunkReceiverCompressionModel `tfsdk:"compression"`
+	NoTLS *GlobalLogReceiverEmptyModel `tfsdk:"no_tls"`
+	SplunkHecToken *GlobalLogReceiverSplunkReceiverSplunkHecTokenModel `tfsdk:"splunk_hec_token"`
+	UseTLS *GlobalLogReceiverSplunkReceiverUseTLSModel `tfsdk:"use_tls"`
+}
+
+// GlobalLogReceiverSplunkReceiverBatchModel represents batch block
+type GlobalLogReceiverSplunkReceiverBatchModel struct {
+	MaxBytes types.Int64 `tfsdk:"max_bytes"`
+	MaxEvents types.Int64 `tfsdk:"max_events"`
+	TimeoutSeconds types.String `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// GlobalLogReceiverSplunkReceiverCompressionModel represents compression block
+type GlobalLogReceiverSplunkReceiverCompressionModel struct {
+	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverSplunkReceiverSplunkHecTokenModel represents splunk_hec_token block
+type GlobalLogReceiverSplunkReceiverSplunkHecTokenModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverSplunkReceiverUseTLSModel represents use_tls block
+type GlobalLogReceiverSplunkReceiverUseTLSModel struct {
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname *GlobalLogReceiverEmptyModel `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled *GlobalLogReceiverEmptyModel `tfsdk:"mtls_disabled"`
+	MtlsEnable *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCa *GlobalLogReceiverEmptyModel `tfsdk:"no_ca"`
+}
+
+// GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String `tfsdk:"certificate"`
+	KeyURL *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverSumoLogicReceiverModel represents sumo_logic_receiver block
+type GlobalLogReceiverSumoLogicReceiverModel struct {
+	URL *GlobalLogReceiverSumoLogicReceiverURLModel `tfsdk:"url"`
+}
+
+// GlobalLogReceiverSumoLogicReceiverURLModel represents url block
+type GlobalLogReceiverSumoLogicReceiverURLModel struct {
+	BlindfoldSecretInfo *GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel represents clear_secret_info block
+type GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
 type GlobalLogReceiverResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +715,25 @@ type GlobalLogReceiverResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AuditLogs *GlobalLogReceiverEmptyModel `tfsdk:"audit_logs"`
+	AWSCloudWatchReceiver *GlobalLogReceiverAWSCloudWatchReceiverModel `tfsdk:"aws_cloud_watch_receiver"`
+	AzureEventHubsReceiver *GlobalLogReceiverAzureEventHubsReceiverModel `tfsdk:"azure_event_hubs_receiver"`
+	AzureReceiver *GlobalLogReceiverAzureReceiverModel `tfsdk:"azure_receiver"`
+	DatadogReceiver *GlobalLogReceiverDatadogReceiverModel `tfsdk:"datadog_receiver"`
+	DNSLogs *GlobalLogReceiverEmptyModel `tfsdk:"dns_logs"`
+	GCPBucketReceiver *GlobalLogReceiverGCPBucketReceiverModel `tfsdk:"gcp_bucket_receiver"`
+	HTTPReceiver *GlobalLogReceiverHTTPReceiverModel `tfsdk:"http_receiver"`
+	KafkaReceiver *GlobalLogReceiverKafkaReceiverModel `tfsdk:"kafka_receiver"`
+	NewRelicReceiver *GlobalLogReceiverNewRelicReceiverModel `tfsdk:"new_relic_receiver"`
+	NsAll *GlobalLogReceiverEmptyModel `tfsdk:"ns_all"`
+	NsCurrent *GlobalLogReceiverEmptyModel `tfsdk:"ns_current"`
+	NsList *GlobalLogReceiverNsListModel `tfsdk:"ns_list"`
+	QradarReceiver *GlobalLogReceiverQradarReceiverModel `tfsdk:"qradar_receiver"`
+	RequestLogs *GlobalLogReceiverEmptyModel `tfsdk:"request_logs"`
+	S3Receiver *GlobalLogReceiverS3ReceiverModel `tfsdk:"s3_receiver"`
+	SecurityEvents *GlobalLogReceiverEmptyModel `tfsdk:"security_events"`
+	SplunkReceiver *GlobalLogReceiverSplunkReceiverModel `tfsdk:"splunk_receiver"`
+	SumoLogicReceiver *GlobalLogReceiverSumoLogicReceiverModel `tfsdk:"sumo_logic_receiver"`
 }
 
 func (r *GlobalLogReceiverResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1653,6 +2334,10 @@ func (r *GlobalLogReceiverResource) Create(ctx context.Context, req resource.Cre
 		Spec: client.GlobalLogReceiverSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1708,6 +2393,15 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 
 	apiResource, err := r.client.GetGlobalLogReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "GlobalLogReceiver not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read GlobalLogReceiver: %s", err))
 		return
 	}
@@ -1722,6 +2416,13 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1774,6 +2475,10 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		Spec: client.GlobalLogReceiverSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1798,10 +2503,20 @@ func (r *GlobalLogReceiverResource) Update(ctx context.Context, req resource.Upd
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetGlobalLogReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1825,11 +2540,33 @@ func (r *GlobalLogReceiverResource) Delete(ctx context.Context, req resource.Del
 
 	err := r.client.DeleteGlobalLogReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "GlobalLogReceiver already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete GlobalLogReceiver: %s", err))
 		return
 	}
 }
 
 func (r *GlobalLogReceiverResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

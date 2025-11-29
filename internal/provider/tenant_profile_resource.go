@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,43 @@ type TenantProfileResource struct {
 	client *client.Client
 }
 
+// TenantProfileEmptyModel represents empty nested blocks
+type TenantProfileEmptyModel struct {
+}
+
+// TenantProfileCtGroupsModel represents ct_groups block
+type TenantProfileCtGroupsModel struct {
+	Name types.String `tfsdk:"name"`
+	NamespaceRoles []TenantProfileCtGroupsNamespaceRolesModel `tfsdk:"namespace_roles"`
+}
+
+// TenantProfileCtGroupsNamespaceRolesModel represents namespace_roles block
+type TenantProfileCtGroupsNamespaceRolesModel struct {
+	Namespace types.String `tfsdk:"namespace"`
+	Role types.String `tfsdk:"role"`
+}
+
+// TenantProfileFaviconModel represents favicon block
+type TenantProfileFaviconModel struct {
+	Content types.String `tfsdk:"content"`
+	ContentType types.String `tfsdk:"content_type"`
+	AWSS3 *TenantProfileEmptyModel `tfsdk:"aws_s3"`
+}
+
+// TenantProfileLogoModel represents logo block
+type TenantProfileLogoModel struct {
+	Content types.String `tfsdk:"content"`
+	ContentType types.String `tfsdk:"content_type"`
+	AWSS3 *TenantProfileEmptyModel `tfsdk:"aws_s3"`
+}
+
+// TenantProfilePlanModel represents plan block
+type TenantProfilePlanModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type TenantProfileResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -55,6 +93,10 @@ type TenantProfileResourceModel struct {
 	SupportEmail types.String `tfsdk:"support_email"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	CtGroups []TenantProfileCtGroupsModel `tfsdk:"ct_groups"`
+	Favicon *TenantProfileFaviconModel `tfsdk:"favicon"`
+	Logo *TenantProfileLogoModel `tfsdk:"logo"`
+	Plan *TenantProfilePlanModel `tfsdk:"plan"`
 }
 
 func (r *TenantProfileResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -337,6 +379,10 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 		Spec: client.TenantProfileSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -392,6 +438,15 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 
 	apiResource, err := r.client.GetTenantProfile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "TenantProfile not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read TenantProfile: %s", err))
 		return
 	}
@@ -406,6 +461,13 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -458,6 +520,10 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 		Spec: client.TenantProfileSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -482,10 +548,20 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetTenantProfile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -509,11 +585,33 @@ func (r *TenantProfileResource) Delete(ctx context.Context, req resource.DeleteR
 
 	err := r.client.DeleteTenantProfile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "TenantProfile already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete TenantProfile: %s", err))
 		return
 	}
 }
 
 func (r *TenantProfileResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

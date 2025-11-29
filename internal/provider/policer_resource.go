@@ -260,13 +260,11 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.PolicerSpec{
-			BurstSize:                data.BurstSize.ValueInt64(),
-			CommittedInformationRate: data.CommittedInformationRate.ValueInt64(),
-			PolicerMode:              data.PolicerMode.ValueString(),
-			PolicerType:              data.PolicerType.ValueString(),
-			Description:              data.Description.ValueString(),
-		},
+		Spec: client.PolicerSpec{},
+	}
+
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -324,6 +322,15 @@ func (r *PolicerResource) Read(ctx context.Context, req resource.ReadRequest, re
 
 	apiResource, err := r.client.GetPolicer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Policer not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Policer: %s", err))
 		return
 	}
@@ -339,23 +346,11 @@ func (r *PolicerResource) Read(ctx context.Context, req resource.ReadRequest, re
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
-	// Set Spec fields from API response
-	if apiResource.Spec.BurstSize != 0 {
-		data.BurstSize = types.Int64Value(apiResource.Spec.BurstSize)
-	}
-	if apiResource.Spec.CommittedInformationRate != 0 {
-		data.CommittedInformationRate = types.Int64Value(apiResource.Spec.CommittedInformationRate)
-	}
-	// Only set policer_mode if it was configured (not just the API default)
-	if !data.PolicerMode.IsNull() && apiResource.Spec.PolicerMode != "" {
-		data.PolicerMode = types.StringValue(apiResource.Spec.PolicerMode)
-	}
-	// Only set policer_type if it was configured (not just the API default)
-	if !data.PolicerType.IsNull() && apiResource.Spec.PolicerType != "" {
-		data.PolicerType = types.StringValue(apiResource.Spec.PolicerType)
-	}
-	if apiResource.Spec.Description != "" {
-		data.Description = types.StringValue(apiResource.Spec.Description)
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
 	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
@@ -406,13 +401,11 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.PolicerSpec{
-			BurstSize:                data.BurstSize.ValueInt64(),
-			CommittedInformationRate: data.CommittedInformationRate.ValueInt64(),
-			PolicerMode:              data.PolicerMode.ValueString(),
-			PolicerType:              data.PolicerType.ValueString(),
-			Description:              data.Description.ValueString(),
-		},
+		Spec: client.PolicerSpec{},
+	}
+
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -439,10 +432,20 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetPolicer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -466,6 +469,14 @@ func (r *PolicerResource) Delete(ctx context.Context, req resource.DeleteRequest
 
 	err := r.client.DeletePolicer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Policer already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Policer: %s", err))
 		return
 	}
@@ -481,7 +492,6 @@ func (r *PolicerResource) ImportState(ctx context.Context, req resource.ImportSt
 		)
 		return
 	}
-
 	namespace := parts[0]
 	name := parts[1]
 

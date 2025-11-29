@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,221 @@ type NatPolicyResource struct {
 	client *client.Client
 }
 
+// NatPolicyEmptyModel represents empty nested blocks
+type NatPolicyEmptyModel struct {
+}
+
+// NatPolicyRulesModel represents rules block
+type NatPolicyRulesModel struct {
+	Name types.String `tfsdk:"name"`
+	Action *NatPolicyRulesActionModel `tfsdk:"action"`
+	CloudConnect *NatPolicyRulesCloudConnectModel `tfsdk:"cloud_connect"`
+	Criteria *NatPolicyRulesCriteriaModel `tfsdk:"criteria"`
+	Disable *NatPolicyEmptyModel `tfsdk:"disable"`
+	Enable *NatPolicyEmptyModel `tfsdk:"enable"`
+	NetworkInterface *NatPolicyRulesNetworkInterfaceModel `tfsdk:"network_interface"`
+	Segment *NatPolicyRulesSegmentModel `tfsdk:"segment"`
+	VirtualNetwork *NatPolicyRulesVirtualNetworkModel `tfsdk:"virtual_network"`
+}
+
+// NatPolicyRulesActionModel represents action block
+type NatPolicyRulesActionModel struct {
+	VirtualCidr types.String `tfsdk:"virtual_cidr"`
+	Dynamic *NatPolicyRulesActionDynamicModel `tfsdk:"dynamic"`
+}
+
+// NatPolicyRulesActionDynamicModel represents dynamic block
+type NatPolicyRulesActionDynamicModel struct {
+	ElasticIps *NatPolicyRulesActionDynamicElasticIpsModel `tfsdk:"elastic_ips"`
+	Pools *NatPolicyRulesActionDynamicPoolsModel `tfsdk:"pools"`
+}
+
+// NatPolicyRulesActionDynamicElasticIpsModel represents elastic_ips block
+type NatPolicyRulesActionDynamicElasticIpsModel struct {
+	Refs []NatPolicyRulesActionDynamicElasticIpsRefsModel `tfsdk:"refs"`
+}
+
+// NatPolicyRulesActionDynamicElasticIpsRefsModel represents refs block
+type NatPolicyRulesActionDynamicElasticIpsRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NatPolicyRulesActionDynamicPoolsModel represents pools block
+type NatPolicyRulesActionDynamicPoolsModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// NatPolicyRulesCloudConnectModel represents cloud_connect block
+type NatPolicyRulesCloudConnectModel struct {
+	Refs []NatPolicyRulesCloudConnectRefsModel `tfsdk:"refs"`
+}
+
+// NatPolicyRulesCloudConnectRefsModel represents refs block
+type NatPolicyRulesCloudConnectRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NatPolicyRulesCriteriaModel represents criteria block
+type NatPolicyRulesCriteriaModel struct {
+	DestinationCidr types.List `tfsdk:"destination_cidr"`
+	Protocol types.String `tfsdk:"protocol"`
+	SourceCidr types.List `tfsdk:"source_cidr"`
+	Any *NatPolicyEmptyModel `tfsdk:"any"`
+	DestinationPort *NatPolicyRulesCriteriaDestinationPortModel `tfsdk:"destination_port"`
+	Icmp *NatPolicyEmptyModel `tfsdk:"icmp"`
+	Segment *NatPolicyRulesCriteriaSegmentModel `tfsdk:"segment"`
+	SourcePort *NatPolicyRulesCriteriaSourcePortModel `tfsdk:"source_port"`
+	TCP *NatPolicyRulesCriteriaTCPModel `tfsdk:"tcp"`
+	UDP *NatPolicyRulesCriteriaUDPModel `tfsdk:"udp"`
+	VirtualNetwork *NatPolicyRulesCriteriaVirtualNetworkModel `tfsdk:"virtual_network"`
+}
+
+// NatPolicyRulesCriteriaDestinationPortModel represents destination_port block
+type NatPolicyRulesCriteriaDestinationPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+}
+
+// NatPolicyRulesCriteriaSegmentModel represents segment block
+type NatPolicyRulesCriteriaSegmentModel struct {
+	Refs []NatPolicyRulesCriteriaSegmentRefsModel `tfsdk:"refs"`
+}
+
+// NatPolicyRulesCriteriaSegmentRefsModel represents refs block
+type NatPolicyRulesCriteriaSegmentRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NatPolicyRulesCriteriaSourcePortModel represents source_port block
+type NatPolicyRulesCriteriaSourcePortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+}
+
+// NatPolicyRulesCriteriaTCPModel represents tcp block
+type NatPolicyRulesCriteriaTCPModel struct {
+	DestinationPort *NatPolicyRulesCriteriaTCPDestinationPortModel `tfsdk:"destination_port"`
+	SourcePort *NatPolicyRulesCriteriaTCPSourcePortModel `tfsdk:"source_port"`
+}
+
+// NatPolicyRulesCriteriaTCPDestinationPortModel represents destination_port block
+type NatPolicyRulesCriteriaTCPDestinationPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+}
+
+// NatPolicyRulesCriteriaTCPSourcePortModel represents source_port block
+type NatPolicyRulesCriteriaTCPSourcePortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+}
+
+// NatPolicyRulesCriteriaUDPModel represents udp block
+type NatPolicyRulesCriteriaUDPModel struct {
+	DestinationPort *NatPolicyRulesCriteriaUDPDestinationPortModel `tfsdk:"destination_port"`
+	SourcePort *NatPolicyRulesCriteriaUDPSourcePortModel `tfsdk:"source_port"`
+}
+
+// NatPolicyRulesCriteriaUDPDestinationPortModel represents destination_port block
+type NatPolicyRulesCriteriaUDPDestinationPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+}
+
+// NatPolicyRulesCriteriaUDPSourcePortModel represents source_port block
+type NatPolicyRulesCriteriaUDPSourcePortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *NatPolicyEmptyModel `tfsdk:"no_port_match"`
+}
+
+// NatPolicyRulesCriteriaVirtualNetworkModel represents virtual_network block
+type NatPolicyRulesCriteriaVirtualNetworkModel struct {
+	Refs []NatPolicyRulesCriteriaVirtualNetworkRefsModel `tfsdk:"refs"`
+}
+
+// NatPolicyRulesCriteriaVirtualNetworkRefsModel represents refs block
+type NatPolicyRulesCriteriaVirtualNetworkRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NatPolicyRulesNetworkInterfaceModel represents network_interface block
+type NatPolicyRulesNetworkInterfaceModel struct {
+	Refs []NatPolicyRulesNetworkInterfaceRefsModel `tfsdk:"refs"`
+}
+
+// NatPolicyRulesNetworkInterfaceRefsModel represents refs block
+type NatPolicyRulesNetworkInterfaceRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NatPolicyRulesSegmentModel represents segment block
+type NatPolicyRulesSegmentModel struct {
+	Refs []NatPolicyRulesSegmentRefsModel `tfsdk:"refs"`
+}
+
+// NatPolicyRulesSegmentRefsModel represents refs block
+type NatPolicyRulesSegmentRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NatPolicyRulesVirtualNetworkModel represents virtual_network block
+type NatPolicyRulesVirtualNetworkModel struct {
+	Refs []NatPolicyRulesVirtualNetworkRefsModel `tfsdk:"refs"`
+}
+
+// NatPolicyRulesVirtualNetworkRefsModel represents refs block
+type NatPolicyRulesVirtualNetworkRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NatPolicySiteModel represents site block
+type NatPolicySiteModel struct {
+	Refs []NatPolicySiteRefsModel `tfsdk:"refs"`
+}
+
+// NatPolicySiteRefsModel represents refs block
+type NatPolicySiteRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
 type NatPolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +269,8 @@ type NatPolicyResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Rules []NatPolicyRulesModel `tfsdk:"rules"`
+	Site *NatPolicySiteModel `tfsdk:"site"`
 }
 
 func (r *NatPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -712,6 +930,10 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 		Spec: client.NatPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -767,6 +989,15 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 
 	apiResource, err := r.client.GetNatPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NatPolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NatPolicy: %s", err))
 		return
 	}
@@ -781,6 +1012,13 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -833,6 +1071,10 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		Spec: client.NatPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -857,10 +1099,20 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetNatPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -884,11 +1136,33 @@ func (r *NatPolicyResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	err := r.client.DeleteNatPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NatPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete NatPolicy: %s", err))
 		return
 	}
 }
 
 func (r *NatPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

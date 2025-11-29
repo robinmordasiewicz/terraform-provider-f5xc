@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,57 @@ type BGPRoutingPolicyResource struct {
 	client *client.Client
 }
 
+// BGPRoutingPolicyEmptyModel represents empty nested blocks
+type BGPRoutingPolicyEmptyModel struct {
+}
+
+// BGPRoutingPolicyRulesModel represents rules block
+type BGPRoutingPolicyRulesModel struct {
+	Action *BGPRoutingPolicyRulesActionModel `tfsdk:"action"`
+	Match *BGPRoutingPolicyRulesMatchModel `tfsdk:"match"`
+}
+
+// BGPRoutingPolicyRulesActionModel represents action block
+type BGPRoutingPolicyRulesActionModel struct {
+	AsPath types.String `tfsdk:"as_path"`
+	LocalPreference types.Int64 `tfsdk:"local_preference"`
+	Metric types.Int64 `tfsdk:"metric"`
+	Aggregate *BGPRoutingPolicyEmptyModel `tfsdk:"aggregate"`
+	Allow *BGPRoutingPolicyEmptyModel `tfsdk:"allow"`
+	Community *BGPRoutingPolicyRulesActionCommunityModel `tfsdk:"community"`
+	Deny *BGPRoutingPolicyEmptyModel `tfsdk:"deny"`
+}
+
+// BGPRoutingPolicyRulesActionCommunityModel represents community block
+type BGPRoutingPolicyRulesActionCommunityModel struct {
+	Community types.List `tfsdk:"community"`
+}
+
+// BGPRoutingPolicyRulesMatchModel represents match block
+type BGPRoutingPolicyRulesMatchModel struct {
+	AsPath types.String `tfsdk:"as_path"`
+	Community *BGPRoutingPolicyRulesMatchCommunityModel `tfsdk:"community"`
+	IPPrefixes *BGPRoutingPolicyRulesMatchIPPrefixesModel `tfsdk:"ip_prefixes"`
+}
+
+// BGPRoutingPolicyRulesMatchCommunityModel represents community block
+type BGPRoutingPolicyRulesMatchCommunityModel struct {
+	Community types.List `tfsdk:"community"`
+}
+
+// BGPRoutingPolicyRulesMatchIPPrefixesModel represents ip_prefixes block
+type BGPRoutingPolicyRulesMatchIPPrefixesModel struct {
+	Prefixes []BGPRoutingPolicyRulesMatchIPPrefixesPrefixesModel `tfsdk:"prefixes"`
+}
+
+// BGPRoutingPolicyRulesMatchIPPrefixesPrefixesModel represents prefixes block
+type BGPRoutingPolicyRulesMatchIPPrefixesPrefixesModel struct {
+	IPPrefixes types.String `tfsdk:"ip_prefixes"`
+	EqualOrLongerThan *BGPRoutingPolicyEmptyModel `tfsdk:"equal_or_longer_than"`
+	ExactMatch *BGPRoutingPolicyEmptyModel `tfsdk:"exact_match"`
+	LongerThan *BGPRoutingPolicyEmptyModel `tfsdk:"longer_than"`
+}
+
 type BGPRoutingPolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +105,7 @@ type BGPRoutingPolicyResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Rules []BGPRoutingPolicyRulesModel `tfsdk:"rules"`
 }
 
 func (r *BGPRoutingPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -340,6 +393,10 @@ func (r *BGPRoutingPolicyResource) Create(ctx context.Context, req resource.Crea
 		Spec: client.BGPRoutingPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -395,6 +452,15 @@ func (r *BGPRoutingPolicyResource) Read(ctx context.Context, req resource.ReadRe
 
 	apiResource, err := r.client.GetBGPRoutingPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "BGPRoutingPolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read BGPRoutingPolicy: %s", err))
 		return
 	}
@@ -409,6 +475,13 @@ func (r *BGPRoutingPolicyResource) Read(ctx context.Context, req resource.ReadRe
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -461,6 +534,10 @@ func (r *BGPRoutingPolicyResource) Update(ctx context.Context, req resource.Upda
 		Spec: client.BGPRoutingPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -485,10 +562,20 @@ func (r *BGPRoutingPolicyResource) Update(ctx context.Context, req resource.Upda
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetBGPRoutingPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -512,11 +599,33 @@ func (r *BGPRoutingPolicyResource) Delete(ctx context.Context, req resource.Dele
 
 	err := r.client.DeleteBGPRoutingPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "BGPRoutingPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete BGPRoutingPolicy: %s", err))
 		return
 	}
 }
 
 func (r *BGPRoutingPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

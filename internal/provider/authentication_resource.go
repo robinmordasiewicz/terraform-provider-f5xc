@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,99 @@ type AuthenticationResource struct {
 	client *client.Client
 }
 
+// AuthenticationEmptyModel represents empty nested blocks
+type AuthenticationEmptyModel struct {
+}
+
+// AuthenticationCookieParamsModel represents cookie_params block
+type AuthenticationCookieParamsModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CookieRefreshInterval types.Int64 `tfsdk:"cookie_refresh_interval"`
+	SessionExpiry types.Int64 `tfsdk:"session_expiry"`
+	AuthHmac *AuthenticationCookieParamsAuthHmacModel `tfsdk:"auth_hmac"`
+	KmsKeyHmac *AuthenticationEmptyModel `tfsdk:"kms_key_hmac"`
+}
+
+// AuthenticationCookieParamsAuthHmacModel represents auth_hmac block
+type AuthenticationCookieParamsAuthHmacModel struct {
+	PrimKeyExpiry types.String `tfsdk:"prim_key_expiry"`
+	SecKeyExpiry types.String `tfsdk:"sec_key_expiry"`
+	PrimKey *AuthenticationCookieParamsAuthHmacPrimKeyModel `tfsdk:"prim_key"`
+	SecKey *AuthenticationCookieParamsAuthHmacSecKeyModel `tfsdk:"sec_key"`
+}
+
+// AuthenticationCookieParamsAuthHmacPrimKeyModel represents prim_key block
+type AuthenticationCookieParamsAuthHmacPrimKeyModel struct {
+	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel represents clear_secret_info block
+type AuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AuthenticationCookieParamsAuthHmacSecKeyModel represents sec_key block
+type AuthenticationCookieParamsAuthHmacSecKeyModel struct {
+	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel represents clear_secret_info block
+type AuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AuthenticationOidcAuthModel represents oidc_auth block
+type AuthenticationOidcAuthModel struct {
+	OidcClientID types.String `tfsdk:"oidc_client_id"`
+	OidcWellKnownConfigURL types.String `tfsdk:"oidc_well_known_config_url"`
+	ClientSecret *AuthenticationOidcAuthClientSecretModel `tfsdk:"client_secret"`
+	OidcAuthParams *AuthenticationOidcAuthOidcAuthParamsModel `tfsdk:"oidc_auth_params"`
+}
+
+// AuthenticationOidcAuthClientSecretModel represents client_secret block
+type AuthenticationOidcAuthClientSecretModel struct {
+	BlindfoldSecretInfo *AuthenticationOidcAuthClientSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AuthenticationOidcAuthClientSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AuthenticationOidcAuthClientSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AuthenticationOidcAuthClientSecretBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AuthenticationOidcAuthClientSecretClearSecretInfoModel represents clear_secret_info block
+type AuthenticationOidcAuthClientSecretClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AuthenticationOidcAuthOidcAuthParamsModel represents oidc_auth_params block
+type AuthenticationOidcAuthOidcAuthParamsModel struct {
+	AuthEndpointURL types.String `tfsdk:"auth_endpoint_url"`
+	EndSessionEndpointURL types.String `tfsdk:"end_session_endpoint_url"`
+	TokenEndpointURL types.String `tfsdk:"token_endpoint_url"`
+}
+
 type AuthenticationResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +147,8 @@ type AuthenticationResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	CookieParams *AuthenticationCookieParamsModel `tfsdk:"cookie_params"`
+	OidcAuth *AuthenticationOidcAuthModel `tfsdk:"oidc_auth"`
 }
 
 func (r *AuthenticationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -424,6 +520,10 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 		Spec: client.AuthenticationSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -479,6 +579,15 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 
 	apiResource, err := r.client.GetAuthentication(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Authentication not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Authentication: %s", err))
 		return
 	}
@@ -493,6 +602,13 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -545,6 +661,10 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 		Spec: client.AuthenticationSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -569,10 +689,20 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetAuthentication(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -596,11 +726,33 @@ func (r *AuthenticationResource) Delete(ctx context.Context, req resource.Delete
 
 	err := r.client.DeleteAuthentication(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Authentication already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Authentication: %s", err))
 		return
 	}
 }
 
 func (r *AuthenticationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

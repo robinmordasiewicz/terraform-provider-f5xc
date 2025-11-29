@@ -22,7 +22,7 @@ type ForwardingClassSpec struct {
 // CreateForwardingClass creates a new ForwardingClass
 func (c *Client) CreateForwardingClass(ctx context.Context, resource *ForwardingClass) (*ForwardingClass, error) {
 	var result ForwardingClass
-	path := fmt.Sprintf("/api/config/namespaces/%s/forwarding_classes", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/config/namespaces/%s/forwarding_classs", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -30,7 +30,7 @@ func (c *Client) CreateForwardingClass(ctx context.Context, resource *Forwarding
 // GetForwardingClass retrieves a ForwardingClass
 func (c *Client) GetForwardingClass(ctx context.Context, namespace, name string) (*ForwardingClass, error) {
 	var result ForwardingClass
-	path := fmt.Sprintf("/api/config/namespaces/%s/forwarding_classes/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/namespaces/%s/forwarding_classs/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -38,29 +38,13 @@ func (c *Client) GetForwardingClass(ctx context.Context, namespace, name string)
 // UpdateForwardingClass updates a ForwardingClass
 func (c *Client) UpdateForwardingClass(ctx context.Context, resource *ForwardingClass) (*ForwardingClass, error) {
 	var result ForwardingClass
-	path := fmt.Sprintf("/api/config/namespaces/%s/forwarding_classes/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/config/namespaces/%s/forwarding_classs/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteForwardingClass deletes a ForwardingClass
 func (c *Client) DeleteForwardingClass(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/config/namespaces/%s/forwarding_classes/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/namespaces/%s/forwarding_classs/%s", namespace, name)
 	return c.Delete(ctx, path)
-}
-
-// ForwardingClassListResponse is the response from listing forwarding classes
-type ForwardingClassListResponse struct {
-	Items []ForwardingClass `json:"items"`
-}
-
-// ListForwardingClasses lists all forwarding classes in a namespace
-func (c *Client) ListForwardingClasses(ctx context.Context, namespace string) ([]ForwardingClass, error) {
-	var result ForwardingClassListResponse
-	path := fmt.Sprintf("/api/config/namespaces/%s/forwarding_classes", namespace)
-	err := c.Get(ctx, path, &result)
-	if err != nil {
-		return nil, err
-	}
-	return result.Items, nil
 }

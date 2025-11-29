@@ -16,11 +16,7 @@ type Policer struct {
 
 // PolicerSpec defines the specification for Policer
 type PolicerSpec struct {
-	Description              string `json:"description,omitempty"`
-	BurstSize                int64  `json:"burst_size,omitempty"`
-	CommittedInformationRate int64  `json:"committed_information_rate,omitempty"`
-	PolicerMode              string `json:"policer_mode,omitempty"`
-	PolicerType              string `json:"policer_type,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 // CreatePolicer creates a new Policer
@@ -51,20 +47,4 @@ func (c *Client) UpdatePolicer(ctx context.Context, resource *Policer) (*Policer
 func (c *Client) DeletePolicer(ctx context.Context, namespace, name string) error {
 	path := fmt.Sprintf("/api/config/namespaces/%s/policers/%s", namespace, name)
 	return c.Delete(ctx, path)
-}
-
-// PolicerListResponse is the response from listing policers
-type PolicerListResponse struct {
-	Items []Policer `json:"items"`
-}
-
-// ListPolicers lists all policers in a namespace
-func (c *Client) ListPolicers(ctx context.Context, namespace string) ([]Policer, error) {
-	var result PolicerListResponse
-	path := fmt.Sprintf("/api/config/namespaces/%s/policers", namespace)
-	err := c.Get(ctx, path, &result)
-	if err != nil {
-		return nil, err
-	}
-	return result.Items, nil
 }

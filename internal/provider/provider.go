@@ -52,10 +52,7 @@ func (p *F5XCProvider) Schema(ctx context.Context, req provider.SchemaRequest, r
 			"built from public F5 API documentation.",
 		Attributes: map[string]schema.Attribute{
 			"api_url": schema.StringAttribute{
-				MarkdownDescription: "F5 Distributed Cloud API URL (base URL without path). " +
-					"Examples: `https://console.ves.volterra.io` or `https://<tenant>.console.ves.volterra.io`. " +
-					"The provider will automatically normalize URLs by removing trailing slashes and `/api` suffix if present. " +
-					"Defaults to `https://console.ves.volterra.io`. " +
+				MarkdownDescription: "F5 Distributed Cloud API URL. Defaults to https://console.ves.volterra.io/api. " +
 					"Can also be set via F5XC_API_URL environment variable.",
 				Optional: true,
 			},
@@ -145,18 +142,7 @@ func (p *F5XCProvider) Configure(ctx context.Context, req provider.ConfigureRequ
 
 	// Set default API URL if not provided
 	if apiURL == "" {
-		apiURL = "https://console.ves.volterra.io"
-	}
-
-	// Normalize the API URL (remove trailing slashes and /api suffix if present)
-	normalizedURL, wasNormalized := normalizeAPIURL(apiURL)
-	if wasNormalized {
-		tflog.Warn(ctx, "API URL was normalized", map[string]any{
-			"original":   apiURL,
-			"normalized": normalizedURL,
-			"hint":       "Configure F5XC_API_URL without trailing slashes or /api suffix for best results",
-		})
-		apiURL = normalizedURL
+		apiURL = "https://console.ves.volterra.io/api"
 	}
 
 	var c *client.Client

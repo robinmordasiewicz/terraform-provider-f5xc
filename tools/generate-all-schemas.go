@@ -92,6 +92,8 @@ type ResourceTemplate struct {
 	TitleCase          string
 	APIPath            string
 	APIPathPlural      string
+	APIPathItem        string // Path for single item operations (get/update/delete)
+	HasNamespaceInPath bool   // Whether API path contains namespace segment
 	Description        string
 	Attributes         []TerraformAttribute
 	OneOfGroups        map[string][]string
@@ -338,6 +340,54 @@ func parseOpenAPISpec(specFile string) (*OpenAPI3Spec, error) {
 	return &spec, nil
 }
 
+// extractAPIPath extracts the correct API path for CRUD operations from the OpenAPI spec
+// It looks for paths containing POST (create) and returns the base path pattern
+// Returns: basePath (for create/list), itemPath (for get/update/delete), hasNamespace (whether path has {namespace} segment)
+func extractAPIPath(spec *OpenAPI3Spec, resourceName string) (basePath string, itemPath string, hasNamespace bool) {
+	resourcePlural := resourceName + "s"
+
+	// Look for CRUD paths in the spec
+	for path, pathObj := range spec.Paths {
+		pathMap, ok := pathObj.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		// Check if this is a CRUD endpoint (has POST for create or GET for list)
+		_, hasPost := pathMap["post"]
+		_, hasGet := pathMap["get"]
+
+		// Look for the base path (list/create endpoint) - ends with plural resource name
+		// Pattern: /api/.../resource_names or /api/.../resource_names (with namespace)
+		if (hasPost || hasGet) && strings.HasSuffix(path, "/"+resourcePlural) {
+			// Check if path contains namespace segment
+			hasNamespace = strings.Contains(path, "{namespace}") || strings.Contains(path, "{metadata.namespace}")
+
+			// Convert {metadata.namespace} to %s for namespace substitution
+			// Convert {metadata.name} or {name} for item paths
+			basePath = path
+			if hasNamespace {
+				basePath = strings.ReplaceAll(basePath, "{metadata.namespace}", "%s")
+				basePath = strings.ReplaceAll(basePath, "{namespace}", "%s")
+			}
+
+			// Item path is base path + /{name}
+			itemPath = path + "/{name}"
+			itemPath = strings.ReplaceAll(itemPath, "{metadata.namespace}", "%s")
+			itemPath = strings.ReplaceAll(itemPath, "{namespace}", "%s")
+			itemPath = strings.ReplaceAll(itemPath, "{metadata.name}", "%s")
+			itemPath = strings.ReplaceAll(itemPath, "{name}", "%s")
+
+			return basePath, itemPath, hasNamespace
+		}
+	}
+
+	// Fallback to default pattern if no path found
+	return fmt.Sprintf("/api/config/namespaces/%%s/%s", resourcePlural),
+		   fmt.Sprintf("/api/config/namespaces/%%s/%s/%%s", resourcePlural),
+		   true
+}
+
 func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTemplate, error) {
 	// Find CreateSpecType schema
 	var createSpec SchemaDefinition
@@ -414,6 +464,9 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		return attributes[i].Name < attributes[j].Name
 	})
 
+	// Extract correct API path from OpenAPI spec first to determine if namespace is required
+	_, _, hasNamespace := extractAPIPath(spec, resourceName)
+
 	// Add standard metadata attributes in HashiCorp-compliant order:
 	// 1. ID components (name, namespace) - these form the resource ID
 	// 2. Other required args alphabetically
@@ -423,9 +476,19 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		{Name: "name", GoName: "Name", TfsdkTag: "name", Type: "string",
 			Description: fmt.Sprintf("Name of the %s. Must be unique within the namespace.", toTitleCase(resourceName)),
 			Required: true, PlanModifier: "RequiresReplace"},
-		{Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
+	}
+
+	// For resources without namespace in API path (like namespace itself), namespace is optional
+	if hasNamespace {
+		idComponentAttrs = append(idComponentAttrs, TerraformAttribute{
+			Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
 			Description: fmt.Sprintf("Namespace where the %s will be created.", toTitleCase(resourceName)),
-			Required: true, PlanModifier: "RequiresReplace"},
+			Required: true, PlanModifier: "RequiresReplace"})
+	} else {
+		idComponentAttrs = append(idComponentAttrs, TerraformAttribute{
+			Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
+			Description: fmt.Sprintf("Namespace for the %s. For this resource type, namespace should be empty or omitted.", toTitleCase(resourceName)),
+			Optional: true, Computed: true})
 	}
 
 	// Optional standard attrs will be sorted with other optionals
@@ -496,16 +559,21 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	// Generate API docs URL
 	apiDocsURL := fmt.Sprintf("https://docs.cloud.f5.com/docs/api/%s", strings.ReplaceAll(resourceName, "_", "-"))
 
+	// Extract correct API path from OpenAPI spec
+	apiPath, apiPathItem, hasNamespace := extractAPIPath(spec, resourceName)
+
 	return &ResourceTemplate{
-		Name:          resourceName,
-		TitleCase:     toTitleCase(resourceName),
-		APIPath:       fmt.Sprintf("/api/config/namespaces/%%s/%ss", resourceName),
-		APIPathPlural: resourceName + "s",
-		Description:   description,
-		Attributes:    attributes,
-		OneOfGroups:   make(map[string][]string),
-		ExampleUsage:  exampleUsage,
-		APIDocsURL:    apiDocsURL,
+		Name:               resourceName,
+		TitleCase:          toTitleCase(resourceName),
+		APIPath:            apiPath,
+		APIPathPlural:      resourceName + "s",
+		APIPathItem:        apiPathItem,
+		HasNamespaceInPath: hasNamespace,
+		Description:        description,
+		Attributes:         attributes,
+		OneOfGroups:        make(map[string][]string),
+		ExampleUsage:       exampleUsage,
+		APIDocsURL:         apiDocsURL,
 	}, nil
 }
 
@@ -1710,7 +1778,9 @@ func (p *F5XCProvider) Schema(ctx context.Context, req provider.SchemaRequest, r
 			"built from public F5 API documentation.",
 		Attributes: map[string]schema.Attribute{
 			"api_url": schema.StringAttribute{
-				MarkdownDescription: "F5 Distributed Cloud API URL. Defaults to https://console.ves.volterra.io/api. " +
+				MarkdownDescription: "F5 Distributed Cloud API URL (base URL without '/api' suffix). " +
+					"Defaults to https://console.ves.volterra.io. " +
+					"Example: https://tenant.console.ves.volterra.io (NOT https://tenant.console.ves.volterra.io/api). " +
 					"Can also be set via F5XC_API_URL environment variable.",
 				Optional: true,
 			},
@@ -1962,9 +2032,11 @@ func (r *{{.TitleCase}}Resource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "{{.Description}}",
 {{- if .Required}}
 				Required: true,
-{{- else if .Optional}}
+{{- end}}
+{{- if and .Optional (not .Required)}}
 				Optional: true,
-{{- else if .Computed}}
+{{- end}}
+{{- if .Computed}}
 				Computed: true,
 {{- end}}
 {{- if eq .Type "map"}}
@@ -2174,6 +2246,10 @@ func (r *{{.TitleCase}}Resource) Create(ctx context.Context, req resource.Create
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+{{- if not .HasNamespaceInPath}}
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(created.Metadata.Namespace)
+{{- end}}
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetUID(created.Metadata.UID)
@@ -2359,12 +2435,22 @@ func (r *{{.TitleCase}}Resource) Delete(ctx context.Context, req resource.Delete
 			})
 			return
 		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "{{.TitleCase}} delete not supported by API (501), removing from state only", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete {{.TitleCase}}: %s", err))
 		return
 	}
 }
 
 func (r *{{.TitleCase}}Resource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+{{- if .HasNamespaceInPath}}
 	// Import ID format: namespace/name
 	parts := strings.Split(req.ID, "/")
 	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
@@ -2380,6 +2466,21 @@ func (r *{{.TitleCase}}Resource) ImportState(ctx context.Context, req resource.I
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
+{{- else}}
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			"Expected import ID to be the resource name, got empty string",
+		)
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
+{{- end}}
 }
 `
 
@@ -2407,7 +2508,12 @@ type {{.TitleCase}}Spec struct {
 // Create{{.TitleCase}} creates a new {{.TitleCase}}
 func (c *Client) Create{{.TitleCase}}(ctx context.Context, resource *{{.TitleCase}}) (*{{.TitleCase}}, error) {
 	var result {{.TitleCase}}
+{{- if .HasNamespaceInPath}}
 	path := fmt.Sprintf("{{.APIPath}}", resource.Metadata.Namespace)
+{{- else}}
+	path := "{{.APIPath}}"
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
+{{- end}}
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -2415,7 +2521,12 @@ func (c *Client) Create{{.TitleCase}}(ctx context.Context, resource *{{.TitleCas
 // Get{{.TitleCase}} retrieves a {{.TitleCase}}
 func (c *Client) Get{{.TitleCase}}(ctx context.Context, namespace, name string) (*{{.TitleCase}}, error) {
 	var result {{.TitleCase}}
-	path := fmt.Sprintf("{{.APIPath}}/%s", namespace, name)
+{{- if .HasNamespaceInPath}}
+	path := fmt.Sprintf("{{.APIPathItem}}", namespace, name)
+{{- else}}
+	path := fmt.Sprintf("{{.APIPathItem}}", name)
+	_ = namespace // Namespace not required in API path for this resource
+{{- end}}
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -2423,14 +2534,24 @@ func (c *Client) Get{{.TitleCase}}(ctx context.Context, namespace, name string) 
 // Update{{.TitleCase}} updates a {{.TitleCase}}
 func (c *Client) Update{{.TitleCase}}(ctx context.Context, resource *{{.TitleCase}}) (*{{.TitleCase}}, error) {
 	var result {{.TitleCase}}
-	path := fmt.Sprintf("{{.APIPath}}/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+{{- if .HasNamespaceInPath}}
+	path := fmt.Sprintf("{{.APIPathItem}}", resource.Metadata.Namespace, resource.Metadata.Name)
+{{- else}}
+	path := fmt.Sprintf("{{.APIPathItem}}", resource.Metadata.Name)
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
+{{- end}}
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // Delete{{.TitleCase}} deletes a {{.TitleCase}}
 func (c *Client) Delete{{.TitleCase}}(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("{{.APIPath}}/%s", namespace, name)
+{{- if .HasNamespaceInPath}}
+	path := fmt.Sprintf("{{.APIPathItem}}", namespace, name)
+{{- else}}
+	path := fmt.Sprintf("{{.APIPathItem}}", name)
+	_ = namespace // Namespace not required in API path for this resource
+{{- end}}
 	return c.Delete(ctx, path)
 }
 `

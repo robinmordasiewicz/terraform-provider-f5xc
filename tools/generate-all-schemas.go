@@ -8,7 +8,7 @@
 //   Changes to this file trigger the generate.yml workflow which regenerates all
 //   provider resources from the latest OpenAPI specifications.
 //
-// Pipeline Verification: 2025-11-25T07:30 - Full regeneration test after workflow fixes #69, #72, #78
+// Pipeline Verification: 2025-11-29T04:40 - Trigger regeneration after bug fixes #272, #273, #274
 //
 // Usage: go run tools/generate-all-schemas.go [--spec-dir=/path/to/specs] [--dry-run]
 //

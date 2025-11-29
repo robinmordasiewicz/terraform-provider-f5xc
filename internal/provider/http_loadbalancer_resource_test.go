@@ -13,7 +13,6 @@ import (
 )
 
 func TestAccHTTPLoadBalancerResource_basic(t *testing.T) {
-	t.Skip("Skipping: HTTPLoadBalancer resource model missing schema fields - needs model update")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 

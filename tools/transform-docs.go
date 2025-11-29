@@ -72,6 +72,25 @@ var mixedCaseAcronyms = map[string]string{
 	"nosql":     "NoSQL",
 }
 
+// longRunningResources lists resources that have longer default timeouts (30 minutes)
+// These match LongRunningResourceTypes in internal/timeouts/timeouts.go
+var longRunningResources = map[string]bool{
+	"aws_vpc_site":       true,
+	"azure_vnet_site":    true,
+	"gcp_vpc_site":       true,
+	"aws_tgw_site":       true,
+	"voltstack_site":     true,
+	"securemesh_site":    true,
+	"securemesh_site_v2": true,
+	"k8s_cluster":        true,
+	"virtual_k8s":        true,
+}
+
+// isLongRunningResource returns true if the resource has longer default timeouts
+func isLongRunningResource(resourceName string) bool {
+	return longRunningResources[resourceName]
+}
+
 // subcategoryOverrides provides explicit category assignments for resources
 // that don't match any pattern or need a specific override
 var subcategoryOverrides = map[string]string{
@@ -810,6 +829,9 @@ func transformAnchorsOnly(filePath string, content string) error {
 
 	// Escape HTML tags in descriptions to prevent Registry markdown parser truncation
 	result = escapeHTMLTagsInContent(result)
+
+	// Enhance Timeouts section with default values (Azure RM gold standard)
+	result = enhanceTimeoutsSection(result, resourceName)
 
 	// Normalize blank lines and write
 	result = normalizeBlankLines(result)
@@ -1710,6 +1732,9 @@ func transformDoc(filePath string) error {
 	// Add "See below" links for nested blocks that have their own sections
 	result = addSeeBelowLinksForNestedBlocks(result)
 
+	// Enhance Timeouts section with default values (Azure RM gold standard)
+	result = enhanceTimeoutsSection(result, resourceName)
+
 	// Final pass: fix any remaining bare URLs not in backticks (MD034 compliance)
 	result = fixBareURLs(result)
 
@@ -2111,3 +2136,92 @@ func wrapValuesInBackticks(values string) string {
 
 // NOTE: extractNestedBlocks, generateNestedBlocksPage, and splitLargeDocument functions removed
 // Single-page rendering mode renders all content inline with H3→bold conversion for nested blocks
+
+// enhanceTimeoutsSection adds default timeout values to the Timeouts section
+// following the Azure RM gold standard format: "(Defaults to X minutes)"
+// This provides critical information for production deployments.
+//
+// Standard resources use:
+//   - Create: 10 minutes
+//   - Read: 5 minutes
+//   - Update: 10 minutes
+//   - Delete: 10 minutes
+//
+// Long-running resources (sites, clusters) use:
+//   - Create: 30 minutes
+//   - Read: 5 minutes
+//   - Update: 30 minutes
+//   - Delete: 30 minutes
+func enhanceTimeoutsSection(content, resourceName string) string {
+	isLongRunning := isLongRunningResource(resourceName)
+
+	// Default values based on internal/timeouts/timeouts.go
+	createTimeout := "10 minutes"
+	readTimeout := "5 minutes"
+	updateTimeout := "10 minutes"
+	deleteTimeout := "10 minutes"
+
+	if isLongRunning {
+		createTimeout = "30 minutes"
+		updateTimeout = "30 minutes"
+		deleteTimeout = "30 minutes"
+	}
+
+	// Timeout descriptions following Azure RM gold standard
+	timeoutDescriptions := map[string]struct {
+		defaultVal  string
+		description string
+	}{
+		"create": {createTimeout, "Used when creating the resource"},
+		"read":   {readTimeout, "Used when retrieving the resource"},
+		"update": {updateTimeout, "Used when updating the resource"},
+		"delete": {deleteTimeout, "Used when deleting the resource"},
+	}
+
+	lines := strings.Split(content, "\n")
+	var result []string
+	inTimeoutsSection := false
+
+	for _, line := range lines {
+		// Detect start of Timeouts section
+		if strings.Contains(line, "#### Timeouts") || strings.Contains(line, "### Timeouts") {
+			inTimeoutsSection = true
+			result = append(result, line)
+			continue
+		}
+
+		// Detect end of Timeouts section (next major section)
+		if inTimeoutsSection && (strings.HasPrefix(line, "## ") || strings.HasPrefix(line, "### ") || strings.HasPrefix(line, "#### ")) && !strings.Contains(line, "Timeouts") {
+			inTimeoutsSection = false
+		}
+
+		// Transform timeout attribute lines
+		if inTimeoutsSection {
+			transformed := false
+			for timeoutType, info := range timeoutDescriptions {
+				// Match patterns like:
+				// &#x2022; [`create`](#timeouts-create) - Optional String<br>...
+				// or: - `create` (String) ...
+				pattern := fmt.Sprintf("[`%s`]", timeoutType)
+				altPattern := fmt.Sprintf("`%s`", timeoutType)
+
+				if strings.Contains(line, pattern) || (strings.Contains(line, altPattern) && strings.Contains(line, "Optional")) {
+					// Build enhanced timeout line following Azure RM format
+					anchorID := fmt.Sprintf("timeouts-%s", timeoutType)
+					enhancedLine := fmt.Sprintf("&#x2022; [`%s`](#%s) - Optional String (Defaults to `%s`)<br>%s",
+						timeoutType, anchorID, info.defaultVal, info.description)
+					result = append(result, enhancedLine)
+					transformed = true
+					break
+				}
+			}
+			if !transformed {
+				result = append(result, line)
+			}
+		} else {
+			result = append(result, line)
+		}
+	}
+
+	return strings.Join(result, "\n")
+}

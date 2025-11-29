@@ -6,7 +6,6 @@ package provider
 import (
 	"context"
 	"os"
-	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -18,26 +17,6 @@ import (
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
 )
-
-// normalizeAPIURL cleans up the API URL to ensure consistent formatting.
-// It removes trailing slashes and the /api suffix if present, since API paths
-// already include the /api prefix (e.g., /api/web/namespaces).
-func normalizeAPIURL(url string) (string, bool) {
-	original := url
-
-	// Remove trailing slashes
-	url = strings.TrimRight(url, "/")
-
-	// Remove /api suffix (case-insensitive check, preserve original case in removal)
-	if strings.HasSuffix(strings.ToLower(url), "/api") {
-		url = url[:len(url)-4]
-	}
-
-	// Remove any trailing slashes that might have been before /api
-	url = strings.TrimRight(url, "/")
-
-	return url, url != original
-}
 
 // Ensure F5XCProvider satisfies various provider interfaces.
 var _ provider.Provider = &F5XCProvider{}

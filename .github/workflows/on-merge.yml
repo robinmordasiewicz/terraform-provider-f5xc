@@ -279,16 +279,36 @@ jobs:
       - name: Regenerate provider (if needed)
         if: needs.regenerate-provider.outputs.changed == 'true'
         run: |
+          echo "::group::Generate provider code"
           go run tools/generate-all-schemas.go --spec-dir=docs/specifications/api
-          # Retry go mod tidy
+          echo "::endgroup::"
+
+          # Retry logic for go mod operations (network-dependent)
           max_attempts=3
           attempt=1
           while [ $attempt -le $max_attempts ]; do
-            if go mod tidy; then break; fi
+            echo "::group::go mod tidy - Attempt $attempt of $max_attempts"
+            if go mod tidy; then
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
             attempt=$((attempt + 1))
-            [ $attempt -le $max_attempts ] && sleep $((2 ** attempt * 5))
+            if [ $attempt -le $max_attempts ]; then
+              sleep_time=$((2 ** attempt * 5))
+              echo "::warning::go mod tidy failed, retrying in ${sleep_time}s..."
+              sleep $sleep_time
+            fi
           done
-          [ $attempt -gt $max_attempts ] && exit 1
+          if [ $attempt -gt $max_attempts ]; then
+            echo "::error::go mod tidy failed after $max_attempts attempts"
+            exit 1
+          fi
+
+          # Verify build succeeds
+          echo "::group::Verify build"
+          go build -v .
+          echo "::endgroup::"
 
       - name: Regenerate documentation (if needed)
         if: needs.regenerate-docs.outputs.changed == 'true'

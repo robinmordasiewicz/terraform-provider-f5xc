@@ -49,80 +49,108 @@ type AlertPolicyResource struct {
 type AlertPolicyEmptyModel struct {
 }
 
-// AlertPolicyCustomLabelsModel represents the custom labels block
-type AlertPolicyCustomLabelsModel struct {
+// AlertPolicyNotificationParametersModel represents notification_parameters block
+type AlertPolicyNotificationParametersModel struct {
+	GroupInterval types.String `tfsdk:"group_interval"`
+	GroupWait types.String `tfsdk:"group_wait"`
+	RepeatInterval types.String `tfsdk:"repeat_interval"`
+	Custom *AlertPolicyNotificationParametersCustomModel `tfsdk:"custom"`
+	Default *AlertPolicyEmptyModel `tfsdk:"default"`
+	Individual *AlertPolicyEmptyModel `tfsdk:"individual"`
+	VesIoGroup *AlertPolicyEmptyModel `tfsdk:"ves_io_group"`
+}
+
+// AlertPolicyNotificationParametersCustomModel represents custom block
+type AlertPolicyNotificationParametersCustomModel struct {
 	Labels types.List `tfsdk:"labels"`
 }
 
-// AlertPolicyNotificationParametersModel represents notification_parameters block
-type AlertPolicyNotificationParametersModel struct {
-	GroupInterval  types.String                  `tfsdk:"group_interval"`
-	GroupWait      types.String                  `tfsdk:"group_wait"`
-	RepeatInterval types.String                  `tfsdk:"repeat_interval"`
-	Custom         *AlertPolicyCustomLabelsModel `tfsdk:"custom"`
-	Default        *AlertPolicyEmptyModel        `tfsdk:"default"`
-	Individual     *AlertPolicyEmptyModel        `tfsdk:"individual"`
-	VesIoGroup     *AlertPolicyEmptyModel        `tfsdk:"ves_io_group"`
-}
-
-// AlertPolicyReceiverModel represents a single receiver in the receivers list
-type AlertPolicyReceiverModel struct {
-	Kind      types.String `tfsdk:"kind"`
-	Name      types.String `tfsdk:"name"`
+// AlertPolicyReceiversModel represents receivers block
+type AlertPolicyReceiversModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-	UID       types.String `tfsdk:"uid"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
 }
 
-// AlertPolicyLabelMatcherModel represents label matcher blocks (alertname, group, severity)
-type AlertPolicyLabelMatcherModel struct {
+// AlertPolicyRoutesModel represents routes block
+type AlertPolicyRoutesModel struct {
+	Alertname types.String `tfsdk:"alertname"`
+	AlertnameRegex types.String `tfsdk:"alertname_regex"`
+	Any *AlertPolicyEmptyModel `tfsdk:"any"`
+	Custom *AlertPolicyRoutesCustomModel `tfsdk:"custom"`
+	DontSend *AlertPolicyEmptyModel `tfsdk:"dont_send"`
+	Group *AlertPolicyRoutesGroupModel `tfsdk:"group"`
+	NotificationParameters *AlertPolicyRoutesNotificationParametersModel `tfsdk:"notification_parameters"`
+	Send *AlertPolicyEmptyModel `tfsdk:"send"`
+	Severity *AlertPolicyRoutesSeverityModel `tfsdk:"severity"`
+}
+
+// AlertPolicyRoutesCustomModel represents custom block
+type AlertPolicyRoutesCustomModel struct {
+	Alertlabel *AlertPolicyEmptyModel `tfsdk:"alertlabel"`
+	Alertname *AlertPolicyRoutesCustomAlertnameModel `tfsdk:"alertname"`
+	Group *AlertPolicyRoutesCustomGroupModel `tfsdk:"group"`
+	Severity *AlertPolicyRoutesCustomSeverityModel `tfsdk:"severity"`
+}
+
+// AlertPolicyRoutesCustomAlertnameModel represents alertname block
+type AlertPolicyRoutesCustomAlertnameModel struct {
 	ExactMatch types.String `tfsdk:"exact_match"`
 	RegexMatch types.String `tfsdk:"regex_match"`
 }
 
-// AlertPolicyCustomMatcherModel represents the custom matcher block
-type AlertPolicyCustomMatcherModel struct {
-	Alertlabel *AlertPolicyEmptyModel        `tfsdk:"alertlabel"`
-	Alertname  *AlertPolicyLabelMatcherModel `tfsdk:"alertname"`
-	Group      *AlertPolicyLabelMatcherModel `tfsdk:"group"`
-	Severity   *AlertPolicyLabelMatcherModel `tfsdk:"severity"`
+// AlertPolicyRoutesCustomGroupModel represents group block
+type AlertPolicyRoutesCustomGroupModel struct {
+	ExactMatch types.String `tfsdk:"exact_match"`
+	RegexMatch types.String `tfsdk:"regex_match"`
 }
 
-// AlertPolicyGroupMatcherModel represents the group matcher block
-type AlertPolicyGroupMatcherModel struct {
+// AlertPolicyRoutesCustomSeverityModel represents severity block
+type AlertPolicyRoutesCustomSeverityModel struct {
+	ExactMatch types.String `tfsdk:"exact_match"`
+	RegexMatch types.String `tfsdk:"regex_match"`
+}
+
+// AlertPolicyRoutesGroupModel represents group block
+type AlertPolicyRoutesGroupModel struct {
 	Groups types.List `tfsdk:"groups"`
 }
 
-// AlertPolicySeverityMatcherModel represents the severity matcher block
-type AlertPolicySeverityMatcherModel struct {
+// AlertPolicyRoutesNotificationParametersModel represents notification_parameters block
+type AlertPolicyRoutesNotificationParametersModel struct {
+	GroupInterval types.String `tfsdk:"group_interval"`
+	GroupWait types.String `tfsdk:"group_wait"`
+	RepeatInterval types.String `tfsdk:"repeat_interval"`
+	Custom *AlertPolicyRoutesNotificationParametersCustomModel `tfsdk:"custom"`
+	Default *AlertPolicyEmptyModel `tfsdk:"default"`
+	Individual *AlertPolicyEmptyModel `tfsdk:"individual"`
+	VesIoGroup *AlertPolicyEmptyModel `tfsdk:"ves_io_group"`
+}
+
+// AlertPolicyRoutesNotificationParametersCustomModel represents custom block
+type AlertPolicyRoutesNotificationParametersCustomModel struct {
+	Labels types.List `tfsdk:"labels"`
+}
+
+// AlertPolicyRoutesSeverityModel represents severity block
+type AlertPolicyRoutesSeverityModel struct {
 	Severities types.List `tfsdk:"severities"`
 }
 
-// AlertPolicyRouteModel represents a single route in the routes list
-type AlertPolicyRouteModel struct {
-	Alertname              types.String                            `tfsdk:"alertname"`
-	AlertnameRegex         types.String                            `tfsdk:"alertname_regex"`
-	Any                    *AlertPolicyEmptyModel                  `tfsdk:"any"`
-	Custom                 *AlertPolicyCustomMatcherModel          `tfsdk:"custom"`
-	DontSend               *AlertPolicyEmptyModel                  `tfsdk:"dont_send"`
-	Group                  *AlertPolicyGroupMatcherModel           `tfsdk:"group"`
-	NotificationParameters *AlertPolicyNotificationParametersModel `tfsdk:"notification_parameters"`
-	Send                   *AlertPolicyEmptyModel                  `tfsdk:"send"`
-	Severity               *AlertPolicySeverityMatcherModel        `tfsdk:"severity"`
-}
-
 type AlertPolicyResourceModel struct {
-	Name                   types.String                            `tfsdk:"name"`
-	Namespace              types.String                            `tfsdk:"namespace"`
-	Annotations            types.Map                               `tfsdk:"annotations"`
-	Description            types.String                            `tfsdk:"description"`
-	Disable                types.Bool                              `tfsdk:"disable"`
-	Labels                 types.Map                               `tfsdk:"labels"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	NotificationParameters *AlertPolicyNotificationParametersModel `tfsdk:"notification_parameters"`
-	Receivers              []AlertPolicyReceiverModel              `tfsdk:"receivers"`
-	Routes                 []AlertPolicyRouteModel                 `tfsdk:"routes"`
-	ID                     types.String                            `tfsdk:"id"`
-	Timeouts               timeouts.Value                          `tfsdk:"timeouts"`
+	Receivers []AlertPolicyReceiversModel `tfsdk:"receivers"`
+	Routes []AlertPolicyRoutesModel `tfsdk:"routes"`
 }
 
 func (r *AlertPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -513,6 +541,10 @@ func (r *AlertPolicyResource) Create(ctx context.Context, req resource.CreateReq
 		Spec: client.AlertPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -568,6 +600,15 @@ func (r *AlertPolicyResource) Read(ctx context.Context, req resource.ReadRequest
 
 	apiResource, err := r.client.GetAlertPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AlertPolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AlertPolicy: %s", err))
 		return
 	}
@@ -582,6 +623,13 @@ func (r *AlertPolicyResource) Read(ctx context.Context, req resource.ReadRequest
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -634,6 +682,10 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 		Spec: client.AlertPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -658,10 +710,20 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetAlertPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -685,6 +747,14 @@ func (r *AlertPolicyResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	err := r.client.DeleteAlertPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AlertPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete AlertPolicy: %s", err))
 		return
 	}
@@ -700,7 +770,6 @@ func (r *AlertPolicyResource) ImportState(ctx context.Context, req resource.Impo
 		)
 		return
 	}
-
 	namespace := parts[0]
 	name := parts[1]
 

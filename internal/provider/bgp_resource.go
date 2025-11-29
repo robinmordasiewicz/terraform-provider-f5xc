@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,161 @@ type BGPResource struct {
 	client *client.Client
 }
 
+// BGPEmptyModel represents empty nested blocks
+type BGPEmptyModel struct {
+}
+
+// BGPBGPParametersModel represents bgp_parameters block
+type BGPBGPParametersModel struct {
+	Asn types.Int64 `tfsdk:"asn"`
+	IPAddress types.String `tfsdk:"ip_address"`
+	FromSite *BGPEmptyModel `tfsdk:"from_site"`
+	LocalAddress *BGPEmptyModel `tfsdk:"local_address"`
+}
+
+// BGPPeersModel represents peers block
+type BGPPeersModel struct {
+	Label types.String `tfsdk:"label"`
+	BfdDisabled *BGPEmptyModel `tfsdk:"bfd_disabled"`
+	BfdEnabled *BGPPeersBfdEnabledModel `tfsdk:"bfd_enabled"`
+	Disable *BGPEmptyModel `tfsdk:"disable"`
+	External *BGPPeersExternalModel `tfsdk:"external"`
+	Metadata *BGPPeersMetadataModel `tfsdk:"metadata"`
+	PassiveModeDisabled *BGPEmptyModel `tfsdk:"passive_mode_disabled"`
+	PassiveModeEnabled *BGPEmptyModel `tfsdk:"passive_mode_enabled"`
+	RoutingPolicies *BGPPeersRoutingPoliciesModel `tfsdk:"routing_policies"`
+}
+
+// BGPPeersBfdEnabledModel represents bfd_enabled block
+type BGPPeersBfdEnabledModel struct {
+	Multiplier types.Int64 `tfsdk:"multiplier"`
+	ReceiveIntervalMilliseconds types.Int64 `tfsdk:"receive_interval_milliseconds"`
+	TransmitIntervalMilliseconds types.Int64 `tfsdk:"transmit_interval_milliseconds"`
+}
+
+// BGPPeersExternalModel represents external block
+type BGPPeersExternalModel struct {
+	Address types.String `tfsdk:"address"`
+	AddressIPV6 types.String `tfsdk:"address_ipv6"`
+	Asn types.Int64 `tfsdk:"asn"`
+	Md5AuthKey types.String `tfsdk:"md5_auth_key"`
+	Port types.Int64 `tfsdk:"port"`
+	SubnetBeginOffset types.Int64 `tfsdk:"subnet_begin_offset"`
+	SubnetBeginOffsetV6 types.Int64 `tfsdk:"subnet_begin_offset_v6"`
+	SubnetEndOffset types.Int64 `tfsdk:"subnet_end_offset"`
+	SubnetEndOffsetV6 types.Int64 `tfsdk:"subnet_end_offset_v6"`
+	DefaultGateway *BGPEmptyModel `tfsdk:"default_gateway"`
+	DefaultGatewayV6 *BGPEmptyModel `tfsdk:"default_gateway_v6"`
+	Disable *BGPEmptyModel `tfsdk:"disable"`
+	DisableV6 *BGPEmptyModel `tfsdk:"disable_v6"`
+	ExternalConnector *BGPEmptyModel `tfsdk:"external_connector"`
+	FamilyInet *BGPPeersExternalFamilyInetModel `tfsdk:"family_inet"`
+	FromSite *BGPEmptyModel `tfsdk:"from_site"`
+	FromSiteV6 *BGPEmptyModel `tfsdk:"from_site_v6"`
+	Interface *BGPPeersExternalInterfaceModel `tfsdk:"interface"`
+	InterfaceList *BGPPeersExternalInterfaceListModel `tfsdk:"interface_list"`
+	NoAuthentication *BGPEmptyModel `tfsdk:"no_authentication"`
+}
+
+// BGPPeersExternalFamilyInetModel represents family_inet block
+type BGPPeersExternalFamilyInetModel struct {
+	Disable *BGPEmptyModel `tfsdk:"disable"`
+	Enable *BGPEmptyModel `tfsdk:"enable"`
+}
+
+// BGPPeersExternalInterfaceModel represents interface block
+type BGPPeersExternalInterfaceModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// BGPPeersExternalInterfaceListModel represents interface_list block
+type BGPPeersExternalInterfaceListModel struct {
+	Interfaces []BGPPeersExternalInterfaceListInterfacesModel `tfsdk:"interfaces"`
+}
+
+// BGPPeersExternalInterfaceListInterfacesModel represents interfaces block
+type BGPPeersExternalInterfaceListInterfacesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// BGPPeersMetadataModel represents metadata block
+type BGPPeersMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// BGPPeersRoutingPoliciesModel represents routing_policies block
+type BGPPeersRoutingPoliciesModel struct {
+	RoutePolicy []BGPPeersRoutingPoliciesRoutePolicyModel `tfsdk:"route_policy"`
+}
+
+// BGPPeersRoutingPoliciesRoutePolicyModel represents route_policy block
+type BGPPeersRoutingPoliciesRoutePolicyModel struct {
+	AllNodes *BGPEmptyModel `tfsdk:"all_nodes"`
+	Inbound *BGPEmptyModel `tfsdk:"inbound"`
+	NodeName *BGPPeersRoutingPoliciesRoutePolicyNodeNameModel `tfsdk:"node_name"`
+	ObjectRefs []BGPPeersRoutingPoliciesRoutePolicyObjectRefsModel `tfsdk:"object_refs"`
+	Outbound *BGPEmptyModel `tfsdk:"outbound"`
+}
+
+// BGPPeersRoutingPoliciesRoutePolicyNodeNameModel represents node_name block
+type BGPPeersRoutingPoliciesRoutePolicyNodeNameModel struct {
+	Node types.List `tfsdk:"node"`
+}
+
+// BGPPeersRoutingPoliciesRoutePolicyObjectRefsModel represents object_refs block
+type BGPPeersRoutingPoliciesRoutePolicyObjectRefsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// BGPWhereModel represents where block
+type BGPWhereModel struct {
+	Site *BGPWhereSiteModel `tfsdk:"site"`
+	VirtualSite *BGPWhereVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// BGPWhereSiteModel represents site block
+type BGPWhereSiteModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DisableInternetVip *BGPEmptyModel `tfsdk:"disable_internet_vip"`
+	EnableInternetVip *BGPEmptyModel `tfsdk:"enable_internet_vip"`
+	Ref []BGPWhereSiteRefModel `tfsdk:"ref"`
+}
+
+// BGPWhereSiteRefModel represents ref block
+type BGPWhereSiteRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// BGPWhereVirtualSiteModel represents virtual_site block
+type BGPWhereVirtualSiteModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DisableInternetVip *BGPEmptyModel `tfsdk:"disable_internet_vip"`
+	EnableInternetVip *BGPEmptyModel `tfsdk:"enable_internet_vip"`
+	Ref []BGPWhereVirtualSiteRefModel `tfsdk:"ref"`
+}
+
+// BGPWhereVirtualSiteRefModel represents ref block
+type BGPWhereVirtualSiteRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
 type BGPResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +209,9 @@ type BGPResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	BGPParameters *BGPBGPParametersModel `tfsdk:"bgp_parameters"`
+	Peers []BGPPeersModel `tfsdk:"peers"`
+	Where *BGPWhereModel `tfsdk:"where"`
 }
 
 func (r *BGPResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -601,6 +760,10 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 		Spec: client.BGPSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -656,6 +819,15 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 
 	apiResource, err := r.client.GetBGP(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "BGP not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read BGP: %s", err))
 		return
 	}
@@ -670,6 +842,13 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -722,6 +901,10 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		Spec: client.BGPSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -746,10 +929,20 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetBGP(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -773,11 +966,33 @@ func (r *BGPResource) Delete(ctx context.Context, req resource.DeleteRequest, re
 
 	err := r.client.DeleteBGP(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "BGP already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete BGP: %s", err))
 		return
 	}
 }
 
 func (r *BGPResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,169 @@ type NetworkPolicyViewResource struct {
 	client *client.Client
 }
 
+// NetworkPolicyViewEmptyModel represents empty nested blocks
+type NetworkPolicyViewEmptyModel struct {
+}
+
+// NetworkPolicyViewEgressRulesModel represents egress_rules block
+type NetworkPolicyViewEgressRulesModel struct {
+	Action types.String `tfsdk:"action"`
+	AdvAction *NetworkPolicyViewEgressRulesAdvActionModel `tfsdk:"adv_action"`
+	AllTCPTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_tcp_traffic"`
+	AllTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_traffic"`
+	AllUDPTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_udp_traffic"`
+	Any *NetworkPolicyViewEmptyModel `tfsdk:"any"`
+	Applications *NetworkPolicyViewEgressRulesApplicationsModel `tfsdk:"applications"`
+	InsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"inside_endpoints"`
+	IPPrefixSet *NetworkPolicyViewEgressRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	LabelMatcher *NetworkPolicyViewEgressRulesLabelMatcherModel `tfsdk:"label_matcher"`
+	LabelSelector *NetworkPolicyViewEgressRulesLabelSelectorModel `tfsdk:"label_selector"`
+	Metadata *NetworkPolicyViewEgressRulesMetadataModel `tfsdk:"metadata"`
+	OutsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"outside_endpoints"`
+	PrefixList *NetworkPolicyViewEgressRulesPrefixListModel `tfsdk:"prefix_list"`
+	ProtocolPortRange *NetworkPolicyViewEgressRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
+}
+
+// NetworkPolicyViewEgressRulesAdvActionModel represents adv_action block
+type NetworkPolicyViewEgressRulesAdvActionModel struct {
+	Action types.String `tfsdk:"action"`
+}
+
+// NetworkPolicyViewEgressRulesApplicationsModel represents applications block
+type NetworkPolicyViewEgressRulesApplicationsModel struct {
+	Applications types.List `tfsdk:"applications"`
+}
+
+// NetworkPolicyViewEgressRulesIPPrefixSetModel represents ip_prefix_set block
+type NetworkPolicyViewEgressRulesIPPrefixSetModel struct {
+	Ref []NetworkPolicyViewEgressRulesIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// NetworkPolicyViewEgressRulesIPPrefixSetRefModel represents ref block
+type NetworkPolicyViewEgressRulesIPPrefixSetRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NetworkPolicyViewEgressRulesLabelMatcherModel represents label_matcher block
+type NetworkPolicyViewEgressRulesLabelMatcherModel struct {
+	Keys types.List `tfsdk:"keys"`
+}
+
+// NetworkPolicyViewEgressRulesLabelSelectorModel represents label_selector block
+type NetworkPolicyViewEgressRulesLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// NetworkPolicyViewEgressRulesMetadataModel represents metadata block
+type NetworkPolicyViewEgressRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// NetworkPolicyViewEgressRulesPrefixListModel represents prefix_list block
+type NetworkPolicyViewEgressRulesPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// NetworkPolicyViewEgressRulesProtocolPortRangeModel represents protocol_port_range block
+type NetworkPolicyViewEgressRulesProtocolPortRangeModel struct {
+	PortRanges types.List `tfsdk:"port_ranges"`
+	Protocol types.String `tfsdk:"protocol"`
+}
+
+// NetworkPolicyViewEndpointModel represents endpoint block
+type NetworkPolicyViewEndpointModel struct {
+	Any *NetworkPolicyViewEmptyModel `tfsdk:"any"`
+	InsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"inside_endpoints"`
+	LabelSelector *NetworkPolicyViewEndpointLabelSelectorModel `tfsdk:"label_selector"`
+	OutsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"outside_endpoints"`
+	PrefixList *NetworkPolicyViewEndpointPrefixListModel `tfsdk:"prefix_list"`
+}
+
+// NetworkPolicyViewEndpointLabelSelectorModel represents label_selector block
+type NetworkPolicyViewEndpointLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// NetworkPolicyViewEndpointPrefixListModel represents prefix_list block
+type NetworkPolicyViewEndpointPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// NetworkPolicyViewIngressRulesModel represents ingress_rules block
+type NetworkPolicyViewIngressRulesModel struct {
+	Action types.String `tfsdk:"action"`
+	AdvAction *NetworkPolicyViewIngressRulesAdvActionModel `tfsdk:"adv_action"`
+	AllTCPTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_tcp_traffic"`
+	AllTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_traffic"`
+	AllUDPTraffic *NetworkPolicyViewEmptyModel `tfsdk:"all_udp_traffic"`
+	Any *NetworkPolicyViewEmptyModel `tfsdk:"any"`
+	Applications *NetworkPolicyViewIngressRulesApplicationsModel `tfsdk:"applications"`
+	InsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"inside_endpoints"`
+	IPPrefixSet *NetworkPolicyViewIngressRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	LabelMatcher *NetworkPolicyViewIngressRulesLabelMatcherModel `tfsdk:"label_matcher"`
+	LabelSelector *NetworkPolicyViewIngressRulesLabelSelectorModel `tfsdk:"label_selector"`
+	Metadata *NetworkPolicyViewIngressRulesMetadataModel `tfsdk:"metadata"`
+	OutsideEndpoints *NetworkPolicyViewEmptyModel `tfsdk:"outside_endpoints"`
+	PrefixList *NetworkPolicyViewIngressRulesPrefixListModel `tfsdk:"prefix_list"`
+	ProtocolPortRange *NetworkPolicyViewIngressRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
+}
+
+// NetworkPolicyViewIngressRulesAdvActionModel represents adv_action block
+type NetworkPolicyViewIngressRulesAdvActionModel struct {
+	Action types.String `tfsdk:"action"`
+}
+
+// NetworkPolicyViewIngressRulesApplicationsModel represents applications block
+type NetworkPolicyViewIngressRulesApplicationsModel struct {
+	Applications types.List `tfsdk:"applications"`
+}
+
+// NetworkPolicyViewIngressRulesIPPrefixSetModel represents ip_prefix_set block
+type NetworkPolicyViewIngressRulesIPPrefixSetModel struct {
+	Ref []NetworkPolicyViewIngressRulesIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// NetworkPolicyViewIngressRulesIPPrefixSetRefModel represents ref block
+type NetworkPolicyViewIngressRulesIPPrefixSetRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NetworkPolicyViewIngressRulesLabelMatcherModel represents label_matcher block
+type NetworkPolicyViewIngressRulesLabelMatcherModel struct {
+	Keys types.List `tfsdk:"keys"`
+}
+
+// NetworkPolicyViewIngressRulesLabelSelectorModel represents label_selector block
+type NetworkPolicyViewIngressRulesLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// NetworkPolicyViewIngressRulesMetadataModel represents metadata block
+type NetworkPolicyViewIngressRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// NetworkPolicyViewIngressRulesPrefixListModel represents prefix_list block
+type NetworkPolicyViewIngressRulesPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// NetworkPolicyViewIngressRulesProtocolPortRangeModel represents protocol_port_range block
+type NetworkPolicyViewIngressRulesProtocolPortRangeModel struct {
+	PortRanges types.List `tfsdk:"port_ranges"`
+	Protocol types.String `tfsdk:"protocol"`
+}
+
 type NetworkPolicyViewResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +217,9 @@ type NetworkPolicyViewResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	EgressRules []NetworkPolicyViewEgressRulesModel `tfsdk:"egress_rules"`
+	Endpoint *NetworkPolicyViewEndpointModel `tfsdk:"endpoint"`
+	IngressRules []NetworkPolicyViewIngressRulesModel `tfsdk:"ingress_rules"`
 }
 
 func (r *NetworkPolicyViewResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -563,6 +730,10 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 		Spec: client.NetworkPolicyViewSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -618,6 +789,15 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 
 	apiResource, err := r.client.GetNetworkPolicyView(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NetworkPolicyView not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NetworkPolicyView: %s", err))
 		return
 	}
@@ -632,6 +812,13 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -684,6 +871,10 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 		Spec: client.NetworkPolicyViewSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -708,10 +899,20 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetNetworkPolicyView(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -735,11 +936,33 @@ func (r *NetworkPolicyViewResource) Delete(ctx context.Context, req resource.Del
 
 	err := r.client.DeleteNetworkPolicyView(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NetworkPolicyView already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete NetworkPolicyView: %s", err))
 		return
 	}
 }
 
 func (r *NetworkPolicyViewResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

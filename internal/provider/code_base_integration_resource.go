@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,198 @@ type CodeBaseIntegrationResource struct {
 	client *client.Client
 }
 
+// CodeBaseIntegrationEmptyModel represents empty nested blocks
+type CodeBaseIntegrationEmptyModel struct {
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationModel represents code_base_integration block
+type CodeBaseIntegrationCodeBaseIntegrationModel struct {
+	AzureRepos *CodeBaseIntegrationCodeBaseIntegrationAzureReposModel `tfsdk:"azure_repos"`
+	Bitbucket *CodeBaseIntegrationCodeBaseIntegrationBitbucketModel `tfsdk:"bitbucket"`
+	BitbucketServer *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel `tfsdk:"bitbucket_server"`
+	Github *CodeBaseIntegrationCodeBaseIntegrationGithubModel `tfsdk:"github"`
+	GithubEnterprise *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel `tfsdk:"github_enterprise"`
+	Gitlab *CodeBaseIntegrationCodeBaseIntegrationGitlabModel `tfsdk:"gitlab"`
+	GitlabEnterprise *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel `tfsdk:"gitlab_enterprise"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationAzureReposModel represents azure_repos block
+type CodeBaseIntegrationCodeBaseIntegrationAzureReposModel struct {
+	AccessToken *CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel `tfsdk:"access_token"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel represents access_token block
+type CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel struct {
+	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel represents clear_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketModel represents bitbucket block
+type CodeBaseIntegrationCodeBaseIntegrationBitbucketModel struct {
+	Username types.String `tfsdk:"username"`
+	Passwd *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel `tfsdk:"passwd"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel represents passwd block
+type CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel struct {
+	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel represents clear_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel represents bitbucket_server block
+type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel struct {
+	URL types.String `tfsdk:"url"`
+	Username types.String `tfsdk:"username"`
+	VerifySSL types.Bool `tfsdk:"verify_ssl"`
+	Passwd *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel `tfsdk:"passwd"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel represents passwd block
+type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel struct {
+	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel represents clear_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubModel represents github block
+type CodeBaseIntegrationCodeBaseIntegrationGithubModel struct {
+	Username types.String `tfsdk:"username"`
+	VerifySSL types.Bool `tfsdk:"verify_ssl"`
+	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel `tfsdk:"access_token"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel represents access_token block
+type CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel struct {
+	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel represents clear_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel represents github_enterprise block
+type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	Username types.String `tfsdk:"username"`
+	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel `tfsdk:"access_token"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel represents access_token block
+type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel struct {
+	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel represents clear_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabModel represents gitlab block
+type CodeBaseIntegrationCodeBaseIntegrationGitlabModel struct {
+	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel `tfsdk:"access_token"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel represents access_token block
+type CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel struct {
+	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel represents clear_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel represents gitlab_enterprise block
+type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel struct {
+	URL types.String `tfsdk:"url"`
+	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel `tfsdk:"access_token"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel represents access_token block
+type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel struct {
+	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel represents clear_secret_info block
+type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
 type CodeBaseIntegrationResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +246,7 @@ type CodeBaseIntegrationResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	CodeBaseIntegration *CodeBaseIntegrationCodeBaseIntegrationModel `tfsdk:"code_base_integration"`
 }
 
 func (r *CodeBaseIntegrationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -594,6 +788,10 @@ func (r *CodeBaseIntegrationResource) Create(ctx context.Context, req resource.C
 		Spec: client.CodeBaseIntegrationSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -649,6 +847,15 @@ func (r *CodeBaseIntegrationResource) Read(ctx context.Context, req resource.Rea
 
 	apiResource, err := r.client.GetCodeBaseIntegration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CodeBaseIntegration not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CodeBaseIntegration: %s", err))
 		return
 	}
@@ -663,6 +870,13 @@ func (r *CodeBaseIntegrationResource) Read(ctx context.Context, req resource.Rea
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -715,6 +929,10 @@ func (r *CodeBaseIntegrationResource) Update(ctx context.Context, req resource.U
 		Spec: client.CodeBaseIntegrationSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -739,10 +957,20 @@ func (r *CodeBaseIntegrationResource) Update(ctx context.Context, req resource.U
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetCodeBaseIntegration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -766,11 +994,33 @@ func (r *CodeBaseIntegrationResource) Delete(ctx context.Context, req resource.D
 
 	err := r.client.DeleteCodeBaseIntegration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CodeBaseIntegration already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete CodeBaseIntegration: %s", err))
 		return
 	}
 }
 
 func (r *CodeBaseIntegrationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

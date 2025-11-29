@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,1947 @@ type SecuremeshSiteV2Resource struct {
 	client *client.Client
 }
 
+// SecuremeshSiteV2EmptyModel represents empty nested blocks
+type SecuremeshSiteV2EmptyModel struct {
+}
+
+// SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
+type SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel struct {
+	EnhancedFirewallPolicies []SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+}
+
+// SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
+type SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// SecuremeshSiteV2ActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
+type SecuremeshSiteV2ActiveForwardProxyPoliciesModel struct {
+	ForwardProxyPolicies []SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
+type SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// SecuremeshSiteV2AdminUserCredentialsModel represents admin_user_credentials block
+type SecuremeshSiteV2AdminUserCredentialsModel struct {
+	SSHKey types.String `tfsdk:"ssh_key"`
+	AdminPassword *SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel `tfsdk:"admin_password"`
+}
+
+// SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel represents admin_password block
+type SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel struct {
+	BlindfoldSecretInfo *SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// SecuremeshSiteV2AWSModel represents aws block
+type SecuremeshSiteV2AWSModel struct {
+	NotManaged *SecuremeshSiteV2AWSNotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2AWSNotManagedModel represents not_managed block
+type SecuremeshSiteV2AWSNotManagedModel struct {
+	NodeList []SecuremeshSiteV2AWSNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2AWSNotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2AzureModel represents azure block
+type SecuremeshSiteV2AzureModel struct {
+	NotManaged *SecuremeshSiteV2AzureNotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2AzureNotManagedModel represents not_managed block
+type SecuremeshSiteV2AzureNotManagedModel struct {
+	NodeList []SecuremeshSiteV2AzureNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2AzureNotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2BaremetalModel represents baremetal block
+type SecuremeshSiteV2BaremetalModel struct {
+	NotManaged *SecuremeshSiteV2BaremetalNotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedModel represents not_managed block
+type SecuremeshSiteV2BaremetalNotManagedModel struct {
+	NodeList []SecuremeshSiteV2BaremetalNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2BaremetalNotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2BlockedServicesModel represents blocked_services block
+type SecuremeshSiteV2BlockedServicesModel struct {
+	BlockedSevice []SecuremeshSiteV2BlockedServicesBlockedSeviceModel `tfsdk:"blocked_sevice"`
+}
+
+// SecuremeshSiteV2BlockedServicesBlockedSeviceModel represents blocked_sevice block
+type SecuremeshSiteV2BlockedServicesBlockedSeviceModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DNS *SecuremeshSiteV2EmptyModel `tfsdk:"dns"`
+	SSH *SecuremeshSiteV2EmptyModel `tfsdk:"ssh"`
+	WebUserInterface *SecuremeshSiteV2EmptyModel `tfsdk:"web_user_interface"`
+}
+
+// SecuremeshSiteV2CustomProxyModel represents custom_proxy block
+type SecuremeshSiteV2CustomProxyModel struct {
+	ProxyIPAddress types.String `tfsdk:"proxy_ip_address"`
+	ProxyPort types.Int64 `tfsdk:"proxy_port"`
+	Username types.String `tfsdk:"username"`
+	DisableReTunnel *SecuremeshSiteV2EmptyModel `tfsdk:"disable_re_tunnel"`
+	EnableReTunnel *SecuremeshSiteV2EmptyModel `tfsdk:"enable_re_tunnel"`
+	Password *SecuremeshSiteV2CustomProxyPasswordModel `tfsdk:"password"`
+}
+
+// SecuremeshSiteV2CustomProxyPasswordModel represents password block
+type SecuremeshSiteV2CustomProxyPasswordModel struct {
+	BlindfoldSecretInfo *SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel represents clear_secret_info block
+type SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// SecuremeshSiteV2CustomProxyBypassModel represents custom_proxy_bypass block
+type SecuremeshSiteV2CustomProxyBypassModel struct {
+	ProxyBypass types.List `tfsdk:"proxy_bypass"`
+}
+
+// SecuremeshSiteV2DcClusterGroupSLIModel represents dc_cluster_group_sli block
+type SecuremeshSiteV2DcClusterGroupSLIModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// SecuremeshSiteV2DcClusterGroupSLOModel represents dc_cluster_group_slo block
+type SecuremeshSiteV2DcClusterGroupSLOModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// SecuremeshSiteV2DNSNTPConfigModel represents dns_ntp_config block
+type SecuremeshSiteV2DNSNTPConfigModel struct {
+	CustomDNS *SecuremeshSiteV2DNSNTPConfigCustomDNSModel `tfsdk:"custom_dns"`
+	CustomNTP *SecuremeshSiteV2DNSNTPConfigCustomNTPModel `tfsdk:"custom_ntp"`
+	F5DNSDefault *SecuremeshSiteV2EmptyModel `tfsdk:"f5_dns_default"`
+	F5NTPDefault *SecuremeshSiteV2EmptyModel `tfsdk:"f5_ntp_default"`
+}
+
+// SecuremeshSiteV2DNSNTPConfigCustomDNSModel represents custom_dns block
+type SecuremeshSiteV2DNSNTPConfigCustomDNSModel struct {
+	DNSServers types.List `tfsdk:"dns_servers"`
+}
+
+// SecuremeshSiteV2DNSNTPConfigCustomNTPModel represents custom_ntp block
+type SecuremeshSiteV2DNSNTPConfigCustomNTPModel struct {
+	NTPServers types.List `tfsdk:"ntp_servers"`
+}
+
+// SecuremeshSiteV2EquinixModel represents equinix block
+type SecuremeshSiteV2EquinixModel struct {
+	NotManaged *SecuremeshSiteV2EquinixNotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedModel represents not_managed block
+type SecuremeshSiteV2EquinixNotManagedModel struct {
+	NodeList []SecuremeshSiteV2EquinixNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2EquinixNotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2GCPModel represents gcp block
+type SecuremeshSiteV2GCPModel struct {
+	NotManaged *SecuremeshSiteV2GCPNotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2GCPNotManagedModel represents not_managed block
+type SecuremeshSiteV2GCPNotManagedModel struct {
+	NodeList []SecuremeshSiteV2GCPNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2GCPNotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2KVMModel represents kvm block
+type SecuremeshSiteV2KVMModel struct {
+	NotManaged *SecuremeshSiteV2KVMNotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2KVMNotManagedModel represents not_managed block
+type SecuremeshSiteV2KVMNotManagedModel struct {
+	NodeList []SecuremeshSiteV2KVMNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2KVMNotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2KVMNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2KVMNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2KVMNotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2LoadBalancingModel represents load_balancing block
+type SecuremeshSiteV2LoadBalancingModel struct {
+	VipVrrpMode types.String `tfsdk:"vip_vrrp_mode"`
+}
+
+// SecuremeshSiteV2LocalVrfModel represents local_vrf block
+type SecuremeshSiteV2LocalVrfModel struct {
+	DefaultConfig *SecuremeshSiteV2EmptyModel `tfsdk:"default_config"`
+	DefaultSLIConfig *SecuremeshSiteV2EmptyModel `tfsdk:"default_sli_config"`
+	SLIConfig *SecuremeshSiteV2LocalVrfSLIConfigModel `tfsdk:"sli_config"`
+	SLOConfig *SecuremeshSiteV2LocalVrfSLOConfigModel `tfsdk:"slo_config"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigModel represents sli_config block
+type SecuremeshSiteV2LocalVrfSLIConfigModel struct {
+	Nameserver types.String `tfsdk:"nameserver"`
+	Vip types.String `tfsdk:"vip"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	NoStaticRoutes *SecuremeshSiteV2EmptyModel `tfsdk:"no_static_routes"`
+	NoV6StaticRoutes *SecuremeshSiteV2EmptyModel `tfsdk:"no_v6_static_routes"`
+	StaticRoutes *SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel `tfsdk:"static_routes"`
+	StaticV6Routes *SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel represents static_routes block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel struct {
+	StaticRoutes []SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModel `tfsdk:"static_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModel represents static_routes block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	IPAddress types.String `tfsdk:"ip_address"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	DefaultGateway *SecuremeshSiteV2EmptyModel `tfsdk:"default_gateway"`
+	NodeInterface *SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel struct {
+	List []SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
+	Node types.String `tfsdk:"node"`
+	Interface []SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel represents static_v6_routes block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel struct {
+	StaticRoutes []SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModel `tfsdk:"static_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModel represents static_routes block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	IPAddress types.String `tfsdk:"ip_address"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	DefaultGateway *SecuremeshSiteV2EmptyModel `tfsdk:"default_gateway"`
+	NodeInterface *SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel struct {
+	List []SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
+	Node types.String `tfsdk:"node"`
+	Interface []SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
+type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigModel represents slo_config block
+type SecuremeshSiteV2LocalVrfSLOConfigModel struct {
+	Nameserver types.String `tfsdk:"nameserver"`
+	Vip types.String `tfsdk:"vip"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	NoStaticRoutes *SecuremeshSiteV2EmptyModel `tfsdk:"no_static_routes"`
+	NoV6StaticRoutes *SecuremeshSiteV2EmptyModel `tfsdk:"no_v6_static_routes"`
+	StaticRoutes *SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesModel `tfsdk:"static_routes"`
+	StaticV6Routes *SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesModel represents static_routes block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesModel struct {
+	StaticRoutes []SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesModel `tfsdk:"static_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesModel represents static_routes block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	IPAddress types.String `tfsdk:"ip_address"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	DefaultGateway *SecuremeshSiteV2EmptyModel `tfsdk:"default_gateway"`
+	NodeInterface *SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceModel struct {
+	List []SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
+	Node types.String `tfsdk:"node"`
+	Interface []SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesModel represents static_v6_routes block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesModel struct {
+	StaticRoutes []SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesModel `tfsdk:"static_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesModel represents static_routes block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	IPAddress types.String `tfsdk:"ip_address"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+	DefaultGateway *SecuremeshSiteV2EmptyModel `tfsdk:"default_gateway"`
+	NodeInterface *SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceModel struct {
+	List []SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
+	Node types.String `tfsdk:"node"`
+	Interface []SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
+type SecuremeshSiteV2LocalVrfSLOConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// SecuremeshSiteV2LogReceiverModel represents log_receiver block
+type SecuremeshSiteV2LogReceiverModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// SecuremeshSiteV2NutanixModel represents nutanix block
+type SecuremeshSiteV2NutanixModel struct {
+	NotManaged *SecuremeshSiteV2NutanixNotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedModel represents not_managed block
+type SecuremeshSiteV2NutanixNotManagedModel struct {
+	NodeList []SecuremeshSiteV2NutanixNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2NutanixNotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2OCIModel represents oci block
+type SecuremeshSiteV2OCIModel struct {
+	NotManaged *SecuremeshSiteV2OCINotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2OCINotManagedModel represents not_managed block
+type SecuremeshSiteV2OCINotManagedModel struct {
+	NodeList []SecuremeshSiteV2OCINotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2OCINotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2OCINotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2OCINotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2OCINotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2OCINotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2OCINotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2OCINotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2OfflineSurvivabilityModeModel represents offline_survivability_mode block
+type SecuremeshSiteV2OfflineSurvivabilityModeModel struct {
+	EnableOfflineSurvivabilityMode *SecuremeshSiteV2EmptyModel `tfsdk:"enable_offline_survivability_mode"`
+	NoOfflineSurvivabilityMode *SecuremeshSiteV2EmptyModel `tfsdk:"no_offline_survivability_mode"`
+}
+
+// SecuremeshSiteV2OpenstackModel represents openstack block
+type SecuremeshSiteV2OpenstackModel struct {
+	NotManaged *SecuremeshSiteV2OpenstackNotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedModel represents not_managed block
+type SecuremeshSiteV2OpenstackNotManagedModel struct {
+	NodeList []SecuremeshSiteV2OpenstackNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2OpenstackNotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2PerformanceEnhancementModeModel represents performance_enhancement_mode block
+type SecuremeshSiteV2PerformanceEnhancementModeModel struct {
+	PerfModeL3Enhanced *SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
+	PerfModeL7Enhanced *SecuremeshSiteV2EmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+}
+
+// SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
+type SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModel struct {
+	Jumbo *SecuremeshSiteV2EmptyModel `tfsdk:"jumbo"`
+	NoJumbo *SecuremeshSiteV2EmptyModel `tfsdk:"no_jumbo"`
+}
+
+// SecuremeshSiteV2ReSelectModel represents re_select block
+type SecuremeshSiteV2ReSelectModel struct {
+	GeoProximity *SecuremeshSiteV2EmptyModel `tfsdk:"geo_proximity"`
+	SpecificRe *SecuremeshSiteV2ReSelectSpecificReModel `tfsdk:"specific_re"`
+}
+
+// SecuremeshSiteV2ReSelectSpecificReModel represents specific_re block
+type SecuremeshSiteV2ReSelectSpecificReModel struct {
+	PrimaryRe types.String `tfsdk:"primary_re"`
+}
+
+// SecuremeshSiteV2SiteMeshGroupOnSLOModel represents site_mesh_group_on_slo block
+type SecuremeshSiteV2SiteMeshGroupOnSLOModel struct {
+	NoSiteMeshGroup *SecuremeshSiteV2EmptyModel `tfsdk:"no_site_mesh_group"`
+	SiteMeshGroup *SecuremeshSiteV2SiteMeshGroupOnSLOSiteMeshGroupModel `tfsdk:"site_mesh_group"`
+	SmConnectionPublicIP *SecuremeshSiteV2EmptyModel `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP *SecuremeshSiteV2EmptyModel `tfsdk:"sm_connection_pvt_ip"`
+}
+
+// SecuremeshSiteV2SiteMeshGroupOnSLOSiteMeshGroupModel represents site_mesh_group block
+type SecuremeshSiteV2SiteMeshGroupOnSLOSiteMeshGroupModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// SecuremeshSiteV2SoftwareSettingsModel represents software_settings block
+type SecuremeshSiteV2SoftwareSettingsModel struct {
+	Os *SecuremeshSiteV2SoftwareSettingsOsModel `tfsdk:"os"`
+	Sw *SecuremeshSiteV2SoftwareSettingsSwModel `tfsdk:"sw"`
+}
+
+// SecuremeshSiteV2SoftwareSettingsOsModel represents os block
+type SecuremeshSiteV2SoftwareSettingsOsModel struct {
+	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
+	DefaultOsVersion *SecuremeshSiteV2EmptyModel `tfsdk:"default_os_version"`
+}
+
+// SecuremeshSiteV2SoftwareSettingsSwModel represents sw block
+type SecuremeshSiteV2SoftwareSettingsSwModel struct {
+	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
+	DefaultSwVersion *SecuremeshSiteV2EmptyModel `tfsdk:"default_sw_version"`
+}
+
+// SecuremeshSiteV2UpgradeSettingsModel represents upgrade_settings block
+type SecuremeshSiteV2UpgradeSettingsModel struct {
+	KubernetesUpgradeDrain *SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel `tfsdk:"kubernetes_upgrade_drain"`
+}
+
+// SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
+type SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel struct {
+	DisableUpgradeDrain *SecuremeshSiteV2EmptyModel `tfsdk:"disable_upgrade_drain"`
+	EnableUpgradeDrain *SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+}
+
+// SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
+type SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
+	DrainMaxUnavailableNodeCount types.Int64 `tfsdk:"drain_max_unavailable_node_count"`
+	DrainNodeTimeout types.Int64 `tfsdk:"drain_node_timeout"`
+	DisableVegaUpgradeMode *SecuremeshSiteV2EmptyModel `tfsdk:"disable_vega_upgrade_mode"`
+	EnableVegaUpgradeMode *SecuremeshSiteV2EmptyModel `tfsdk:"enable_vega_upgrade_mode"`
+}
+
+// SecuremeshSiteV2VmwareModel represents vmware block
+type SecuremeshSiteV2VmwareModel struct {
+	NotManaged *SecuremeshSiteV2VmwareNotManagedModel `tfsdk:"not_managed"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedModel represents not_managed block
+type SecuremeshSiteV2VmwareNotManagedModel struct {
+	NodeList []SecuremeshSiteV2VmwareNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListModel represents node_list block
+type SecuremeshSiteV2VmwareNotManagedNodeListModel struct {
+	Hostname types.String `tfsdk:"hostname"`
+	PublicIP types.String `tfsdk:"public_ip"`
+	Type types.String `tfsdk:"type"`
+	InterfaceList []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel represents interface_list block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel struct {
+	Description types.String `tfsdk:"description"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Name types.String `tfsdk:"name"`
+	Priority types.Int64 `tfsdk:"priority"`
+	BondInterface *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel `tfsdk:"bond_interface"`
+	DhcpClient *SecuremeshSiteV2EmptyModel `tfsdk:"dhcp_client"`
+	EthernetInterface *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	IPV6AutoConfig *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	Labels *SecuremeshSiteV2EmptyModel `tfsdk:"labels"`
+	Monitor *SecuremeshSiteV2EmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"monitor_disabled"`
+	NetworkOption *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel `tfsdk:"network_option"`
+	NoIPV4Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv4_address"`
+	NoIPV6Address *SecuremeshSiteV2EmptyModel `tfsdk:"no_ipv6_address"`
+	SiteToSiteConnectivityInterfaceDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_disabled"`
+	SiteToSiteConnectivityInterfaceEnabled *SecuremeshSiteV2EmptyModel `tfsdk:"site_to_site_connectivity_interface_enabled"`
+	StaticIP *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	VlanInterface *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVlanInterfaceModel `tfsdk:"vlan_interface"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel struct {
+	Devices types.List `tfsdk:"devices"`
+	LinkPollingInterval types.Int64 `tfsdk:"link_polling_interval"`
+	LinkUpDelay types.Int64 `tfsdk:"link_up_delay"`
+	Name types.String `tfsdk:"name"`
+	ActiveBackup *SecuremeshSiteV2EmptyModel `tfsdk:"active_backup"`
+	Lacp *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
+	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mac types.String `tfsdk:"mac"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigModel represents ipv6_auto_config block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigModel struct {
+	Host *SecuremeshSiteV2EmptyModel `tfsdk:"host"`
+	Router *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel represents router block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
+	LastAddress *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel represents stateful block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *SecuremeshSiteV2EmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel struct {
+	SiteLocalInsideNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressModel represents static_ipv6_address block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressModel struct {
+	ClusterStaticIP *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVlanInterfaceModel represents vlan_interface block
+type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
 type SecuremeshSiteV2ResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -55,6 +1997,46 @@ type SecuremeshSiteV2ResourceModel struct {
 	TunnelType types.String `tfsdk:"tunnel_type"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	ActiveEnhancedFirewallPolicies *SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
+	ActiveForwardProxyPolicies *SecuremeshSiteV2ActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
+	AdminUserCredentials *SecuremeshSiteV2AdminUserCredentialsModel `tfsdk:"admin_user_credentials"`
+	AWS *SecuremeshSiteV2AWSModel `tfsdk:"aws"`
+	Azure *SecuremeshSiteV2AzureModel `tfsdk:"azure"`
+	Baremetal *SecuremeshSiteV2BaremetalModel `tfsdk:"baremetal"`
+	BlockAllServices *SecuremeshSiteV2EmptyModel `tfsdk:"block_all_services"`
+	BlockedServices *SecuremeshSiteV2BlockedServicesModel `tfsdk:"blocked_services"`
+	CustomProxy *SecuremeshSiteV2CustomProxyModel `tfsdk:"custom_proxy"`
+	CustomProxyBypass *SecuremeshSiteV2CustomProxyBypassModel `tfsdk:"custom_proxy_bypass"`
+	DcClusterGroupSLI *SecuremeshSiteV2DcClusterGroupSLIModel `tfsdk:"dc_cluster_group_sli"`
+	DcClusterGroupSLO *SecuremeshSiteV2DcClusterGroupSLOModel `tfsdk:"dc_cluster_group_slo"`
+	DisableHA *SecuremeshSiteV2EmptyModel `tfsdk:"disable_ha"`
+	DisableURLCategorization *SecuremeshSiteV2EmptyModel `tfsdk:"disable_url_categorization"`
+	DNSNTPConfig *SecuremeshSiteV2DNSNTPConfigModel `tfsdk:"dns_ntp_config"`
+	EnableHA *SecuremeshSiteV2EmptyModel `tfsdk:"enable_ha"`
+	EnableURLCategorization *SecuremeshSiteV2EmptyModel `tfsdk:"enable_url_categorization"`
+	Equinix *SecuremeshSiteV2EquinixModel `tfsdk:"equinix"`
+	F5Proxy *SecuremeshSiteV2EmptyModel `tfsdk:"f5_proxy"`
+	GCP *SecuremeshSiteV2GCPModel `tfsdk:"gcp"`
+	KVM *SecuremeshSiteV2KVMModel `tfsdk:"kvm"`
+	LoadBalancing *SecuremeshSiteV2LoadBalancingModel `tfsdk:"load_balancing"`
+	LocalVrf *SecuremeshSiteV2LocalVrfModel `tfsdk:"local_vrf"`
+	LogReceiver *SecuremeshSiteV2LogReceiverModel `tfsdk:"log_receiver"`
+	LogsStreamingDisabled *SecuremeshSiteV2EmptyModel `tfsdk:"logs_streaming_disabled"`
+	NoForwardProxy *SecuremeshSiteV2EmptyModel `tfsdk:"no_forward_proxy"`
+	NoNetworkPolicy *SecuremeshSiteV2EmptyModel `tfsdk:"no_network_policy"`
+	NoProxyBypass *SecuremeshSiteV2EmptyModel `tfsdk:"no_proxy_bypass"`
+	NoS2SConnectivitySLI *SecuremeshSiteV2EmptyModel `tfsdk:"no_s2s_connectivity_sli"`
+	NoS2SConnectivitySLO *SecuremeshSiteV2EmptyModel `tfsdk:"no_s2s_connectivity_slo"`
+	Nutanix *SecuremeshSiteV2NutanixModel `tfsdk:"nutanix"`
+	OCI *SecuremeshSiteV2OCIModel `tfsdk:"oci"`
+	OfflineSurvivabilityMode *SecuremeshSiteV2OfflineSurvivabilityModeModel `tfsdk:"offline_survivability_mode"`
+	Openstack *SecuremeshSiteV2OpenstackModel `tfsdk:"openstack"`
+	PerformanceEnhancementMode *SecuremeshSiteV2PerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+	ReSelect *SecuremeshSiteV2ReSelectModel `tfsdk:"re_select"`
+	SiteMeshGroupOnSLO *SecuremeshSiteV2SiteMeshGroupOnSLOModel `tfsdk:"site_mesh_group_on_slo"`
+	SoftwareSettings *SecuremeshSiteV2SoftwareSettingsModel `tfsdk:"software_settings"`
+	UpgradeSettings *SecuremeshSiteV2UpgradeSettingsModel `tfsdk:"upgrade_settings"`
+	Vmware *SecuremeshSiteV2VmwareModel `tfsdk:"vmware"`
 }
 
 func (r *SecuremeshSiteV2Resource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -4302,6 +6284,10 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 		Spec: client.SecuremeshSiteV2Spec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -4357,6 +6343,15 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 
 	apiResource, err := r.client.GetSecuremeshSiteV2(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "SecuremeshSiteV2 not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read SecuremeshSiteV2: %s", err))
 		return
 	}
@@ -4371,6 +6366,13 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -4423,6 +6425,10 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 		Spec: client.SecuremeshSiteV2Spec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -4447,10 +6453,20 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetSecuremeshSiteV2(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -4474,11 +6490,33 @@ func (r *SecuremeshSiteV2Resource) Delete(ctx context.Context, req resource.Dele
 
 	err := r.client.DeleteSecuremeshSiteV2(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "SecuremeshSiteV2 already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete SecuremeshSiteV2: %s", err))
 		return
 	}
 }
 
 func (r *SecuremeshSiteV2Resource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

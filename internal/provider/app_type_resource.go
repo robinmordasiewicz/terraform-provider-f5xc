@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,27 @@ type AppTypeResource struct {
 	client *client.Client
 }
 
+// AppTypeEmptyModel represents empty nested blocks
+type AppTypeEmptyModel struct {
+}
+
+// AppTypeBusinessLogicMarkupSettingModel represents business_logic_markup_setting block
+type AppTypeBusinessLogicMarkupSettingModel struct {
+	Disable *AppTypeEmptyModel `tfsdk:"disable"`
+	DiscoveredAPISettings *AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModel `tfsdk:"discovered_api_settings"`
+	Enable *AppTypeEmptyModel `tfsdk:"enable"`
+}
+
+// AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModel represents discovered_api_settings block
+type AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModel struct {
+	PurgeDurationForInactiveDiscoveredApis types.Int64 `tfsdk:"purge_duration_for_inactive_discovered_apis"`
+}
+
+// AppTypeFeaturesModel represents features block
+type AppTypeFeaturesModel struct {
+	Type types.String `tfsdk:"type"`
+}
+
 type AppTypeResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +75,8 @@ type AppTypeResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	BusinessLogicMarkupSetting *AppTypeBusinessLogicMarkupSettingModel `tfsdk:"business_logic_markup_setting"`
+	Features []AppTypeFeaturesModel `tfsdk:"features"`
 }
 
 func (r *AppTypeResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -277,6 +301,10 @@ func (r *AppTypeResource) Create(ctx context.Context, req resource.CreateRequest
 		Spec: client.AppTypeSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -332,6 +360,15 @@ func (r *AppTypeResource) Read(ctx context.Context, req resource.ReadRequest, re
 
 	apiResource, err := r.client.GetAppType(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AppType not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AppType: %s", err))
 		return
 	}
@@ -346,6 +383,13 @@ func (r *AppTypeResource) Read(ctx context.Context, req resource.ReadRequest, re
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -398,6 +442,10 @@ func (r *AppTypeResource) Update(ctx context.Context, req resource.UpdateRequest
 		Spec: client.AppTypeSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -422,10 +470,20 @@ func (r *AppTypeResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetAppType(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -449,11 +507,33 @@ func (r *AppTypeResource) Delete(ctx context.Context, req resource.DeleteRequest
 
 	err := r.client.DeleteAppType(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AppType already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete AppType: %s", err))
 		return
 	}
 }
 
 func (r *AppTypeResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

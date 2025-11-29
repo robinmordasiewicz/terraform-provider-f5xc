@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,169 @@ type PolicyBasedRoutingResource struct {
 	client *client.Client
 }
 
+// PolicyBasedRoutingEmptyModel represents empty nested blocks
+type PolicyBasedRoutingEmptyModel struct {
+}
+
+// PolicyBasedRoutingForwardProxyPbrModel represents forward_proxy_pbr block
+type PolicyBasedRoutingForwardProxyPbrModel struct {
+	ForwardProxyPbrRules []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel `tfsdk:"forward_proxy_pbr_rules"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel represents forward_proxy_pbr_rules block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel struct {
+	AllDestinations *PolicyBasedRoutingEmptyModel `tfsdk:"all_destinations"`
+	AllSources *PolicyBasedRoutingEmptyModel `tfsdk:"all_sources"`
+	ForwardingClassList []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel `tfsdk:"forwarding_class_list"`
+	HTTPList *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel `tfsdk:"http_list"`
+	IPPrefixSet *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	LabelSelector *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel `tfsdk:"label_selector"`
+	Metadata *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel `tfsdk:"metadata"`
+	PrefixList *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel `tfsdk:"prefix_list"`
+	TLSList *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel `tfsdk:"tls_list"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel represents forwarding_class_list block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel represents http_list block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel struct {
+	HTTPList []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModel `tfsdk:"http_list"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModel represents http_list block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	PathExactValue types.String `tfsdk:"path_exact_value"`
+	PathPrefixValue types.String `tfsdk:"path_prefix_value"`
+	PathRegexValue types.String `tfsdk:"path_regex_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+	AnyPath *PolicyBasedRoutingEmptyModel `tfsdk:"any_path"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel represents ip_prefix_set block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel represents label_selector block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel represents metadata block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel represents prefix_list block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel represents tls_list block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel struct {
+	TLSList []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModel `tfsdk:"tls_list"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModel represents tls_list block
+type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// PolicyBasedRoutingForwardingClassListModel represents forwarding_class_list block
+type PolicyBasedRoutingForwardingClassListModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// PolicyBasedRoutingNetworkPbrModel represents network_pbr block
+type PolicyBasedRoutingNetworkPbrModel struct {
+	Any *PolicyBasedRoutingEmptyModel `tfsdk:"any"`
+	LabelSelector *PolicyBasedRoutingNetworkPbrLabelSelectorModel `tfsdk:"label_selector"`
+	NetworkPbrRules []PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel `tfsdk:"network_pbr_rules"`
+	PrefixList *PolicyBasedRoutingNetworkPbrPrefixListModel `tfsdk:"prefix_list"`
+}
+
+// PolicyBasedRoutingNetworkPbrLabelSelectorModel represents label_selector block
+type PolicyBasedRoutingNetworkPbrLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel represents network_pbr_rules block
+type PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel struct {
+	DNSName types.String `tfsdk:"dns_name"`
+	AllTCPTraffic *PolicyBasedRoutingEmptyModel `tfsdk:"all_tcp_traffic"`
+	AllTraffic *PolicyBasedRoutingEmptyModel `tfsdk:"all_traffic"`
+	AllUDPTraffic *PolicyBasedRoutingEmptyModel `tfsdk:"all_udp_traffic"`
+	Any *PolicyBasedRoutingEmptyModel `tfsdk:"any"`
+	Applications *PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel `tfsdk:"applications"`
+	ForwardingClassList []PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModel `tfsdk:"forwarding_class_list"`
+	IPPrefixSet *PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	Metadata *PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel `tfsdk:"metadata"`
+	PrefixList *PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel `tfsdk:"prefix_list"`
+	ProtocolPortRange *PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel `tfsdk:"protocol_port_range"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel represents applications block
+type PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel struct {
+	Applications types.List `tfsdk:"applications"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModel represents forwarding_class_list block
+type PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel represents ip_prefix_set block
+type PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel struct {
+	Ref []PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel represents ref block
+type PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel represents metadata block
+type PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel represents prefix_list block
+type PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel represents protocol_port_range block
+type PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel struct {
+	PortRanges types.List `tfsdk:"port_ranges"`
+	Protocol types.String `tfsdk:"protocol"`
+}
+
+// PolicyBasedRoutingNetworkPbrPrefixListModel represents prefix_list block
+type PolicyBasedRoutingNetworkPbrPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
 type PolicyBasedRoutingResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +217,9 @@ type PolicyBasedRoutingResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	ForwardProxyPbr *PolicyBasedRoutingForwardProxyPbrModel `tfsdk:"forward_proxy_pbr"`
+	ForwardingClassList []PolicyBasedRoutingForwardingClassListModel `tfsdk:"forwarding_class_list"`
+	NetworkPbr *PolicyBasedRoutingNetworkPbrModel `tfsdk:"network_pbr"`
 }
 
 func (r *PolicyBasedRoutingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -579,6 +746,10 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 		Spec: client.PolicyBasedRoutingSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -634,6 +805,15 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 
 	apiResource, err := r.client.GetPolicyBasedRouting(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "PolicyBasedRouting not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read PolicyBasedRouting: %s", err))
 		return
 	}
@@ -648,6 +828,13 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -700,6 +887,10 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 		Spec: client.PolicyBasedRoutingSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -724,10 +915,20 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetPolicyBasedRouting(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -751,11 +952,33 @@ func (r *PolicyBasedRoutingResource) Delete(ctx context.Context, req resource.De
 
 	err := r.client.DeletePolicyBasedRouting(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "PolicyBasedRouting already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete PolicyBasedRouting: %s", err))
 		return
 	}
 }
 
 func (r *PolicyBasedRoutingResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

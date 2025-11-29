@@ -237,21 +237,14 @@ func (r *NamespaceResource) Create(ctx context.Context, req resource.CreateReque
 
 	apiResource := &client.Namespace{
 		Metadata: client.Metadata{
-			Name: data.Name.ValueString(),
-			// Note: Namespace field is not included for namespace creation
-			// as namespaces don't belong to other namespaces in the API
+			Name:      data.Name.ValueString(),
+			Namespace: data.Namespace.ValueString(),
 		},
 		Spec: client.NamespaceSpec{},
 	}
 
-	// Set description if provided (stored in metadata)
-	if !data.Description.IsNull() && !data.Description.IsUnknown() {
+	if !data.Description.IsNull() {
 		apiResource.Metadata.Description = data.Description.ValueString()
-	}
-
-	// Set disable if provided (stored in metadata)
-	if !data.Disable.IsNull() && !data.Disable.IsUnknown() {
-		apiResource.Metadata.Disable = data.Disable.ValueBool()
 	}
 
 	if !data.Labels.IsNull() {
@@ -309,10 +302,8 @@ func (r *NamespaceResource) Read(ctx context.Context, req resource.ReadRequest, 
 
 	apiResource, err := r.client.GetNamespace(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// Check if the resource was deleted outside of Terraform (404 error)
-		// This is the standard Terraform pattern for handling externally deleted resources
-		errStr := err.Error()
-		if strings.Contains(errStr, "404") || strings.Contains(errStr, "NOT_FOUND") || strings.Contains(errStr, "not found") {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "Namespace not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
@@ -333,23 +324,13 @@ func (r *NamespaceResource) Read(ctx context.Context, req resource.ReadRequest, 
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
-	// Note: data.Namespace is preserved from state (already loaded from req.State.Get)
-	// The namespace API doesn't return a parent namespace field since namespaces
-	// are top-level objects. The configured "namespace" attribute (e.g., "system")
-	// is a Terraform convention for resource organization, not an API field.
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
-	// Read description from the API response (stored in metadata)
+	// Read description from metadata
 	if apiResource.Metadata.Description != "" {
 		data.Description = types.StringValue(apiResource.Metadata.Description)
 	} else {
 		data.Description = types.StringNull()
-	}
-
-	// Read disable from the API response (stored in metadata)
-	if apiResource.Metadata.Disable {
-		data.Disable = types.BoolValue(true)
-	} else {
-		data.Disable = types.BoolNull()
 	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
@@ -397,21 +378,14 @@ func (r *NamespaceResource) Update(ctx context.Context, req resource.UpdateReque
 
 	apiResource := &client.Namespace{
 		Metadata: client.Metadata{
-			Name: data.Name.ValueString(),
-			// Note: Namespace field is not included for namespace updates
-			// as namespaces don't belong to other namespaces in the API
+			Name:      data.Name.ValueString(),
+			Namespace: data.Namespace.ValueString(),
 		},
 		Spec: client.NamespaceSpec{},
 	}
 
-	// Set description if provided (stored in metadata)
-	if !data.Description.IsNull() && !data.Description.IsUnknown() {
+	if !data.Description.IsNull() {
 		apiResource.Metadata.Description = data.Description.ValueString()
-	}
-
-	// Set disable if provided (stored in metadata)
-	if !data.Disable.IsNull() && !data.Disable.IsUnknown() {
-		apiResource.Metadata.Disable = data.Disable.ValueBool()
 	}
 
 	if !data.Labels.IsNull() {
@@ -432,24 +406,26 @@ func (r *NamespaceResource) Update(ctx context.Context, req resource.UpdateReque
 		apiResource.Metadata.Annotations = annotations
 	}
 
-	_, err := r.client.UpdateNamespace(ctx, apiResource)
+	updated, err := r.client.UpdateNamespace(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Namespace: %s", err))
 		return
 	}
 
-	// F5XC PUT operations return an empty response, so preserve the ID from the plan
-	// data.ID is already set from req.Plan.Get() above
-
-	// Re-read the resource to get the updated UID and verify the update
-	readResource, err := r.client.GetNamespace(ctx, data.Namespace.ValueString(), data.Name.ValueString())
-	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Namespace after update: %s", err))
-		return
-	}
+	// Use plan data for ID since API response may not include metadata.name
+	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(readResource.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetNamespace(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -473,11 +449,9 @@ func (r *NamespaceResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	err := r.client.DeleteNamespace(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// Check if the resource was already deleted (404 error)
-		// This is acceptable - the desired state is achieved (resource doesn't exist)
-		errStr := err.Error()
-		if strings.Contains(errStr, "404") || strings.Contains(errStr, "NOT_FOUND") || strings.Contains(errStr, "not found") {
-			tflog.Warn(ctx, "Namespace already deleted (404), treating as successful delete", map[string]interface{}{
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Namespace already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -489,10 +463,19 @@ func (r *NamespaceResource) Delete(ctx context.Context, req resource.DeleteReque
 }
 
 func (r *NamespaceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// For namespace resources, the import ID is the namespace name
-	// We need to set both id and name to the imported value
-	// The namespace attribute is always "system" for namespace resources
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), req.ID)...)
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), req.ID)...)
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "system")...)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

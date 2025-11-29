@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,239 @@ type DiscoveryResource struct {
 	client *client.Client
 }
 
+// DiscoveryEmptyModel represents empty nested blocks
+type DiscoveryEmptyModel struct {
+}
+
+// DiscoveryDiscoveryConsulModel represents discovery_consul block
+type DiscoveryDiscoveryConsulModel struct {
+	AccessInfo *DiscoveryDiscoveryConsulAccessInfoModel `tfsdk:"access_info"`
+	PublishInfo *DiscoveryDiscoveryConsulPublishInfoModel `tfsdk:"publish_info"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoModel represents access_info block
+type DiscoveryDiscoveryConsulAccessInfoModel struct {
+	ConnectionInfo *DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel `tfsdk:"connection_info"`
+	HTTPBasicAuthInfo *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel `tfsdk:"http_basic_auth_info"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel represents connection_info block
+type DiscoveryDiscoveryConsulAccessInfoConnectionInfoModel struct {
+	APIServer types.String `tfsdk:"api_server"`
+	TLSInfo *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel `tfsdk:"tls_info"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel represents tls_info block
+type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModel struct {
+	Certificate types.String `tfsdk:"certificate"`
+	ServerName types.String `tfsdk:"server_name"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	KeyURL *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel represents key_url block
+type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel struct {
+	BlindfoldSecretInfo *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel represents clear_secret_info block
+type DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel represents http_basic_auth_info block
+type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel struct {
+	UserName types.String `tfsdk:"user_name"`
+	PasswdURL *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel `tfsdk:"passwd_url"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel represents passwd_url block
+type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel struct {
+	BlindfoldSecretInfo *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel represents clear_secret_info block
+type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// DiscoveryDiscoveryConsulPublishInfoModel represents publish_info block
+type DiscoveryDiscoveryConsulPublishInfoModel struct {
+	Disable *DiscoveryEmptyModel `tfsdk:"disable"`
+	Publish *DiscoveryEmptyModel `tfsdk:"publish"`
+}
+
+// DiscoveryDiscoveryK8SModel represents discovery_k8s block
+type DiscoveryDiscoveryK8SModel struct {
+	AccessInfo *DiscoveryDiscoveryK8SAccessInfoModel `tfsdk:"access_info"`
+	DefaultAll *DiscoveryEmptyModel `tfsdk:"default_all"`
+	NamespaceMapping *DiscoveryDiscoveryK8SNamespaceMappingModel `tfsdk:"namespace_mapping"`
+	PublishInfo *DiscoveryDiscoveryK8SPublishInfoModel `tfsdk:"publish_info"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoModel represents access_info block
+type DiscoveryDiscoveryK8SAccessInfoModel struct {
+	ConnectionInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel `tfsdk:"connection_info"`
+	Isolated *DiscoveryEmptyModel `tfsdk:"isolated"`
+	KubeconfigURL *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel `tfsdk:"kubeconfig_url"`
+	Reachable *DiscoveryEmptyModel `tfsdk:"reachable"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel represents connection_info block
+type DiscoveryDiscoveryK8SAccessInfoConnectionInfoModel struct {
+	APIServer types.String `tfsdk:"api_server"`
+	TLSInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel `tfsdk:"tls_info"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel represents tls_info block
+type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModel struct {
+	Certificate types.String `tfsdk:"certificate"`
+	ServerName types.String `tfsdk:"server_name"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	KeyURL *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel `tfsdk:"key_url"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel represents key_url block
+type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel struct {
+	BlindfoldSecretInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel represents clear_secret_info block
+type DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel represents kubeconfig_url block
+type DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModel struct {
+	BlindfoldSecretInfo *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type DiscoveryDiscoveryK8SAccessInfoKubeconfigURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel represents clear_secret_info block
+type DiscoveryDiscoveryK8SAccessInfoKubeconfigURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// DiscoveryDiscoveryK8SNamespaceMappingModel represents namespace_mapping block
+type DiscoveryDiscoveryK8SNamespaceMappingModel struct {
+	Items []DiscoveryDiscoveryK8SNamespaceMappingItemsModel `tfsdk:"items"`
+}
+
+// DiscoveryDiscoveryK8SNamespaceMappingItemsModel represents items block
+type DiscoveryDiscoveryK8SNamespaceMappingItemsModel struct {
+	Namespace types.String `tfsdk:"namespace"`
+	NamespaceRegex types.String `tfsdk:"namespace_regex"`
+}
+
+// DiscoveryDiscoveryK8SPublishInfoModel represents publish_info block
+type DiscoveryDiscoveryK8SPublishInfoModel struct {
+	Disable *DiscoveryEmptyModel `tfsdk:"disable"`
+	DNSDelegation *DiscoveryDiscoveryK8SPublishInfoDNSDelegationModel `tfsdk:"dns_delegation"`
+	Publish *DiscoveryDiscoveryK8SPublishInfoPublishModel `tfsdk:"publish"`
+	PublishFqdns *DiscoveryEmptyModel `tfsdk:"publish_fqdns"`
+}
+
+// DiscoveryDiscoveryK8SPublishInfoDNSDelegationModel represents dns_delegation block
+type DiscoveryDiscoveryK8SPublishInfoDNSDelegationModel struct {
+	DNSMode types.String `tfsdk:"dns_mode"`
+	Subdomain types.String `tfsdk:"subdomain"`
+}
+
+// DiscoveryDiscoveryK8SPublishInfoPublishModel represents publish block
+type DiscoveryDiscoveryK8SPublishInfoPublishModel struct {
+	Namespace types.String `tfsdk:"namespace"`
+}
+
+// DiscoveryWhereModel represents where block
+type DiscoveryWhereModel struct {
+	Site *DiscoveryWhereSiteModel `tfsdk:"site"`
+	VirtualNetwork *DiscoveryWhereVirtualNetworkModel `tfsdk:"virtual_network"`
+	VirtualSite *DiscoveryWhereVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// DiscoveryWhereSiteModel represents site block
+type DiscoveryWhereSiteModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DisableInternetVip *DiscoveryEmptyModel `tfsdk:"disable_internet_vip"`
+	EnableInternetVip *DiscoveryEmptyModel `tfsdk:"enable_internet_vip"`
+	Ref []DiscoveryWhereSiteRefModel `tfsdk:"ref"`
+}
+
+// DiscoveryWhereSiteRefModel represents ref block
+type DiscoveryWhereSiteRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// DiscoveryWhereVirtualNetworkModel represents virtual_network block
+type DiscoveryWhereVirtualNetworkModel struct {
+	Ref []DiscoveryWhereVirtualNetworkRefModel `tfsdk:"ref"`
+}
+
+// DiscoveryWhereVirtualNetworkRefModel represents ref block
+type DiscoveryWhereVirtualNetworkRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// DiscoveryWhereVirtualSiteModel represents virtual_site block
+type DiscoveryWhereVirtualSiteModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DisableInternetVip *DiscoveryEmptyModel `tfsdk:"disable_internet_vip"`
+	EnableInternetVip *DiscoveryEmptyModel `tfsdk:"enable_internet_vip"`
+	Ref []DiscoveryWhereVirtualSiteRefModel `tfsdk:"ref"`
+}
+
+// DiscoveryWhereVirtualSiteRefModel represents ref block
+type DiscoveryWhereVirtualSiteRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
 type DiscoveryResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +288,10 @@ type DiscoveryResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	DiscoveryConsul *DiscoveryDiscoveryConsulModel `tfsdk:"discovery_consul"`
+	DiscoveryK8S *DiscoveryDiscoveryK8SModel `tfsdk:"discovery_k8s"`
+	NoClusterID *DiscoveryEmptyModel `tfsdk:"no_cluster_id"`
+	Where *DiscoveryWhereModel `tfsdk:"where"`
 }
 
 func (r *DiscoveryResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -708,6 +946,10 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 		Spec: client.DiscoverySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -763,6 +1005,15 @@ func (r *DiscoveryResource) Read(ctx context.Context, req resource.ReadRequest, 
 
 	apiResource, err := r.client.GetDiscovery(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Discovery not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Discovery: %s", err))
 		return
 	}
@@ -777,6 +1028,13 @@ func (r *DiscoveryResource) Read(ctx context.Context, req resource.ReadRequest, 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -829,6 +1087,10 @@ func (r *DiscoveryResource) Update(ctx context.Context, req resource.UpdateReque
 		Spec: client.DiscoverySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -853,10 +1115,20 @@ func (r *DiscoveryResource) Update(ctx context.Context, req resource.UpdateReque
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetDiscovery(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -880,11 +1152,33 @@ func (r *DiscoveryResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	err := r.client.DeleteDiscovery(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Discovery already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Discovery: %s", err))
 		return
 	}
 }
 
 func (r *DiscoveryResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

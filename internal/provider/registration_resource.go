@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,197 @@ type RegistrationResource struct {
 	client *client.Client
 }
 
+// RegistrationEmptyModel represents empty nested blocks
+type RegistrationEmptyModel struct {
+}
+
+// RegistrationInfraModel represents infra block
+type RegistrationInfraModel struct {
+	AvailabilityZone types.String `tfsdk:"availability_zone"`
+	CertifiedHw types.String `tfsdk:"certified_hw"`
+	Domain types.String `tfsdk:"domain"`
+	Hostname types.String `tfsdk:"hostname"`
+	InstanceID types.String `tfsdk:"instance_id"`
+	MachineID types.String `tfsdk:"machine_id"`
+	Provider types.String `tfsdk:"provider_ref"`
+	Timestamp types.String `tfsdk:"timestamp"`
+	Zone types.String `tfsdk:"zone"`
+	HwInfo *RegistrationInfraHwInfoModel `tfsdk:"hw_info"`
+	Interfaces *RegistrationEmptyModel `tfsdk:"interfaces"`
+	InternetProxy *RegistrationInfraInternetProxyModel `tfsdk:"internet_proxy"`
+	SwInfo *RegistrationInfraSwInfoModel `tfsdk:"sw_info"`
+}
+
+// RegistrationInfraHwInfoModel represents hw_info block
+type RegistrationInfraHwInfoModel struct {
+	NumaNodes types.Int64 `tfsdk:"numa_nodes"`
+	Bios *RegistrationInfraHwInfoBiosModel `tfsdk:"bios"`
+	Board *RegistrationInfraHwInfoBoardModel `tfsdk:"board"`
+	Chassis *RegistrationInfraHwInfoChassisModel `tfsdk:"chassis"`
+	Cpu *RegistrationInfraHwInfoCpuModel `tfsdk:"cpu"`
+	Gpu *RegistrationInfraHwInfoGpuModel `tfsdk:"gpu"`
+	Kernel *RegistrationInfraHwInfoKernelModel `tfsdk:"kernel"`
+	Memory *RegistrationInfraHwInfoMemoryModel `tfsdk:"memory"`
+	Network []RegistrationInfraHwInfoNetworkModel `tfsdk:"network"`
+	Os *RegistrationInfraHwInfoOsModel `tfsdk:"os"`
+	Product *RegistrationInfraHwInfoProductModel `tfsdk:"product"`
+	Storage []RegistrationInfraHwInfoStorageModel `tfsdk:"storage"`
+	Usb []RegistrationInfraHwInfoUsbModel `tfsdk:"usb"`
+}
+
+// RegistrationInfraHwInfoBiosModel represents bios block
+type RegistrationInfraHwInfoBiosModel struct {
+	Date types.String `tfsdk:"date"`
+	Vendor types.String `tfsdk:"vendor"`
+	Version types.String `tfsdk:"version"`
+}
+
+// RegistrationInfraHwInfoBoardModel represents board block
+type RegistrationInfraHwInfoBoardModel struct {
+	AssetTag types.String `tfsdk:"asset_tag"`
+	Name types.String `tfsdk:"name"`
+	Serial types.String `tfsdk:"serial"`
+	Vendor types.String `tfsdk:"vendor"`
+	Version types.String `tfsdk:"version"`
+}
+
+// RegistrationInfraHwInfoChassisModel represents chassis block
+type RegistrationInfraHwInfoChassisModel struct {
+	AssetTag types.String `tfsdk:"asset_tag"`
+	Serial types.String `tfsdk:"serial"`
+	Type types.Int64 `tfsdk:"type"`
+	Vendor types.String `tfsdk:"vendor"`
+	Version types.String `tfsdk:"version"`
+}
+
+// RegistrationInfraHwInfoCpuModel represents cpu block
+type RegistrationInfraHwInfoCpuModel struct {
+	Cache types.Int64 `tfsdk:"cache"`
+	Cores types.Int64 `tfsdk:"cores"`
+	Cpus types.Int64 `tfsdk:"cpus"`
+	Model types.String `tfsdk:"model"`
+	Speed types.Int64 `tfsdk:"speed"`
+	Threads types.Int64 `tfsdk:"threads"`
+	Vendor types.String `tfsdk:"vendor"`
+}
+
+// RegistrationInfraHwInfoGpuModel represents gpu block
+type RegistrationInfraHwInfoGpuModel struct {
+	CudaVersion types.String `tfsdk:"cuda_version"`
+	DriverVersion types.String `tfsdk:"driver_version"`
+	GpuDevice []RegistrationInfraHwInfoGpuGpuDeviceModel `tfsdk:"gpu_device"`
+}
+
+// RegistrationInfraHwInfoGpuGpuDeviceModel represents gpu_device block
+type RegistrationInfraHwInfoGpuGpuDeviceModel struct {
+	ID types.String `tfsdk:"id"`
+	Processes types.String `tfsdk:"processes"`
+	ProductName types.String `tfsdk:"product_name"`
+}
+
+// RegistrationInfraHwInfoKernelModel represents kernel block
+type RegistrationInfraHwInfoKernelModel struct {
+	Architecture types.String `tfsdk:"architecture"`
+	Release types.String `tfsdk:"release"`
+	Version types.String `tfsdk:"version"`
+}
+
+// RegistrationInfraHwInfoMemoryModel represents memory block
+type RegistrationInfraHwInfoMemoryModel struct {
+	SizeMb types.Int64 `tfsdk:"size_mb"`
+	Speed types.Int64 `tfsdk:"speed"`
+	Type types.String `tfsdk:"type"`
+}
+
+// RegistrationInfraHwInfoNetworkModel represents network block
+type RegistrationInfraHwInfoNetworkModel struct {
+	Driver types.String `tfsdk:"driver"`
+	IPAddress types.List `tfsdk:"ip_address"`
+	LinkQuality types.String `tfsdk:"link_quality"`
+	LinkType types.String `tfsdk:"link_type"`
+	MacAddress types.String `tfsdk:"mac_address"`
+	Name types.String `tfsdk:"name"`
+	Port types.String `tfsdk:"port"`
+	Speed types.Int64 `tfsdk:"speed"`
+}
+
+// RegistrationInfraHwInfoOsModel represents os block
+type RegistrationInfraHwInfoOsModel struct {
+	Architecture types.String `tfsdk:"architecture"`
+	Name types.String `tfsdk:"name"`
+	Release types.String `tfsdk:"release"`
+	Vendor types.String `tfsdk:"vendor"`
+	Version types.String `tfsdk:"version"`
+}
+
+// RegistrationInfraHwInfoProductModel represents product block
+type RegistrationInfraHwInfoProductModel struct {
+	Name types.String `tfsdk:"name"`
+	Serial types.String `tfsdk:"serial"`
+	Vendor types.String `tfsdk:"vendor"`
+	Version types.String `tfsdk:"version"`
+}
+
+// RegistrationInfraHwInfoStorageModel represents storage block
+type RegistrationInfraHwInfoStorageModel struct {
+	Driver types.String `tfsdk:"driver"`
+	Model types.String `tfsdk:"model"`
+	Name types.String `tfsdk:"name"`
+	Serial types.String `tfsdk:"serial"`
+	SizeGb types.Int64 `tfsdk:"size_gb"`
+	Vendor types.String `tfsdk:"vendor"`
+}
+
+// RegistrationInfraHwInfoUsbModel represents usb block
+type RegistrationInfraHwInfoUsbModel struct {
+	Address types.Int64 `tfsdk:"address"`
+	BDeviceClass types.String `tfsdk:"b_device_class"`
+	BDeviceProtocol types.String `tfsdk:"b_device_protocol"`
+	BDeviceSubClass types.String `tfsdk:"b_device_sub_class"`
+	BMaxPacketSize types.Int64 `tfsdk:"b_max_packet_size"`
+	BcdDevice types.String `tfsdk:"bcd_device"`
+	BcdUsb types.String `tfsdk:"bcd_usb"`
+	Bus types.Int64 `tfsdk:"bus"`
+	Description types.String `tfsdk:"description"`
+	IManufacturer types.String `tfsdk:"i_manufacturer"`
+	IProduct types.String `tfsdk:"i_product"`
+	ISerial types.String `tfsdk:"i_serial"`
+	IDProduct types.String `tfsdk:"id_product"`
+	IDVendor types.String `tfsdk:"id_vendor"`
+	Port types.Int64 `tfsdk:"port"`
+	ProductName types.String `tfsdk:"product_name"`
+	Speed types.String `tfsdk:"speed"`
+	UsbType types.String `tfsdk:"usb_type"`
+	VendorName types.String `tfsdk:"vendor_name"`
+}
+
+// RegistrationInfraInternetProxyModel represents internet_proxy block
+type RegistrationInfraInternetProxyModel struct {
+	HTTPProxy types.String `tfsdk:"http_proxy"`
+	HTTPSProxy types.String `tfsdk:"https_proxy"`
+	NoProxy types.String `tfsdk:"no_proxy"`
+	ProxyCacertURL types.String `tfsdk:"proxy_cacert_url"`
+}
+
+// RegistrationInfraSwInfoModel represents sw_info block
+type RegistrationInfraSwInfoModel struct {
+	SwVersion types.String `tfsdk:"sw_version"`
+}
+
+// RegistrationPassportModel represents passport block
+type RegistrationPassportModel struct {
+	ClusterName types.String `tfsdk:"cluster_name"`
+	ClusterSize types.Int64 `tfsdk:"cluster_size"`
+	ClusterType types.String `tfsdk:"cluster_type"`
+	Latitude types.Int64 `tfsdk:"latitude"`
+	Longitude types.Int64 `tfsdk:"longitude"`
+	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
+	PrivateNetworkName types.String `tfsdk:"private_network_name"`
+	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
+	DefaultOsVersion *RegistrationEmptyModel `tfsdk:"default_os_version"`
+	DefaultSwVersion *RegistrationEmptyModel `tfsdk:"default_sw_version"`
+}
+
 type RegistrationResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +246,8 @@ type RegistrationResourceModel struct {
 	Token types.String `tfsdk:"token"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Infra *RegistrationInfraModel `tfsdk:"infra"`
+	Passport *RegistrationPassportModel `tfsdk:"passport"`
 }
 
 func (r *RegistrationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -749,6 +943,10 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 		Spec: client.RegistrationSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -804,6 +1002,15 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 
 	apiResource, err := r.client.GetRegistration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Registration not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Registration: %s", err))
 		return
 	}
@@ -818,6 +1025,13 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -870,6 +1084,10 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 		Spec: client.RegistrationSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -894,10 +1112,20 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetRegistration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -921,11 +1149,33 @@ func (r *RegistrationResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	err := r.client.DeleteRegistration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Registration already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Registration: %s", err))
 		return
 	}
 }
 
 func (r *RegistrationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,143 @@ type RateLimiterPolicyResource struct {
 	client *client.Client
 }
 
+// RateLimiterPolicyEmptyModel represents empty nested blocks
+type RateLimiterPolicyEmptyModel struct {
+}
+
+// RateLimiterPolicyRulesModel represents rules block
+type RateLimiterPolicyRulesModel struct {
+	Metadata *RateLimiterPolicyRulesMetadataModel `tfsdk:"metadata"`
+	Spec *RateLimiterPolicyRulesSpecModel `tfsdk:"spec"`
+}
+
+// RateLimiterPolicyRulesMetadataModel represents metadata block
+type RateLimiterPolicyRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// RateLimiterPolicyRulesSpecModel represents spec block
+type RateLimiterPolicyRulesSpecModel struct {
+	AnyAsn *RateLimiterPolicyEmptyModel `tfsdk:"any_asn"`
+	AnyCountry *RateLimiterPolicyEmptyModel `tfsdk:"any_country"`
+	AnyIP *RateLimiterPolicyEmptyModel `tfsdk:"any_ip"`
+	ApplyRateLimiter *RateLimiterPolicyEmptyModel `tfsdk:"apply_rate_limiter"`
+	AsnList *RateLimiterPolicyRulesSpecAsnListModel `tfsdk:"asn_list"`
+	AsnMatcher *RateLimiterPolicyRulesSpecAsnMatcherModel `tfsdk:"asn_matcher"`
+	BypassRateLimiter *RateLimiterPolicyEmptyModel `tfsdk:"bypass_rate_limiter"`
+	CountryList *RateLimiterPolicyRulesSpecCountryListModel `tfsdk:"country_list"`
+	CustomRateLimiter *RateLimiterPolicyRulesSpecCustomRateLimiterModel `tfsdk:"custom_rate_limiter"`
+	DomainMatcher *RateLimiterPolicyRulesSpecDomainMatcherModel `tfsdk:"domain_matcher"`
+	Headers []RateLimiterPolicyRulesSpecHeadersModel `tfsdk:"headers"`
+	HTTPMethod *RateLimiterPolicyRulesSpecHTTPMethodModel `tfsdk:"http_method"`
+	IPMatcher *RateLimiterPolicyRulesSpecIPMatcherModel `tfsdk:"ip_matcher"`
+	IPPrefixList *RateLimiterPolicyRulesSpecIPPrefixListModel `tfsdk:"ip_prefix_list"`
+	Path *RateLimiterPolicyRulesSpecPathModel `tfsdk:"path"`
+}
+
+// RateLimiterPolicyRulesSpecAsnListModel represents asn_list block
+type RateLimiterPolicyRulesSpecAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// RateLimiterPolicyRulesSpecAsnMatcherModel represents asn_matcher block
+type RateLimiterPolicyRulesSpecAsnMatcherModel struct {
+	AsnSets []RateLimiterPolicyRulesSpecAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// RateLimiterPolicyRulesSpecAsnMatcherAsnSetsModel represents asn_sets block
+type RateLimiterPolicyRulesSpecAsnMatcherAsnSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// RateLimiterPolicyRulesSpecCountryListModel represents country_list block
+type RateLimiterPolicyRulesSpecCountryListModel struct {
+	CountryCodes types.List `tfsdk:"country_codes"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+}
+
+// RateLimiterPolicyRulesSpecCustomRateLimiterModel represents custom_rate_limiter block
+type RateLimiterPolicyRulesSpecCustomRateLimiterModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// RateLimiterPolicyRulesSpecDomainMatcherModel represents domain_matcher block
+type RateLimiterPolicyRulesSpecDomainMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+}
+
+// RateLimiterPolicyRulesSpecHeadersModel represents headers block
+type RateLimiterPolicyRulesSpecHeadersModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Name types.String `tfsdk:"name"`
+	CheckNotPresent *RateLimiterPolicyEmptyModel `tfsdk:"check_not_present"`
+	CheckPresent *RateLimiterPolicyEmptyModel `tfsdk:"check_present"`
+	Item *RateLimiterPolicyRulesSpecHeadersItemModel `tfsdk:"item"`
+}
+
+// RateLimiterPolicyRulesSpecHeadersItemModel represents item block
+type RateLimiterPolicyRulesSpecHeadersItemModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// RateLimiterPolicyRulesSpecHTTPMethodModel represents http_method block
+type RateLimiterPolicyRulesSpecHTTPMethodModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Methods types.List `tfsdk:"methods"`
+}
+
+// RateLimiterPolicyRulesSpecIPMatcherModel represents ip_matcher block
+type RateLimiterPolicyRulesSpecIPMatcherModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	PrefixSets []RateLimiterPolicyRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// RateLimiterPolicyRulesSpecIPMatcherPrefixSetsModel represents prefix_sets block
+type RateLimiterPolicyRulesSpecIPMatcherPrefixSetsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// RateLimiterPolicyRulesSpecIPPrefixListModel represents ip_prefix_list block
+type RateLimiterPolicyRulesSpecIPPrefixListModel struct {
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	IPPrefixes types.List `tfsdk:"ip_prefixes"`
+}
+
+// RateLimiterPolicyRulesSpecPathModel represents path block
+type RateLimiterPolicyRulesSpecPathModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	PrefixValues types.List `tfsdk:"prefix_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+	SuffixValues types.List `tfsdk:"suffix_values"`
+	Transformers types.List `tfsdk:"transformers"`
+}
+
+// RateLimiterPolicyServerNameMatcherModel represents server_name_matcher block
+type RateLimiterPolicyServerNameMatcherModel struct {
+	ExactValues types.List `tfsdk:"exact_values"`
+	RegexValues types.List `tfsdk:"regex_values"`
+}
+
+// RateLimiterPolicyServerSelectorModel represents server_selector block
+type RateLimiterPolicyServerSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
 type RateLimiterPolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +192,10 @@ type RateLimiterPolicyResourceModel struct {
 	ServerName types.String `tfsdk:"server_name"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AnyServer *RateLimiterPolicyEmptyModel `tfsdk:"any_server"`
+	Rules []RateLimiterPolicyRulesModel `tfsdk:"rules"`
+	ServerNameMatcher *RateLimiterPolicyServerNameMatcherModel `tfsdk:"server_name_matcher"`
+	ServerSelector *RateLimiterPolicyServerSelectorModel `tfsdk:"server_selector"`
 }
 
 func (r *RateLimiterPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -555,6 +697,10 @@ func (r *RateLimiterPolicyResource) Create(ctx context.Context, req resource.Cre
 		Spec: client.RateLimiterPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -610,6 +756,15 @@ func (r *RateLimiterPolicyResource) Read(ctx context.Context, req resource.ReadR
 
 	apiResource, err := r.client.GetRateLimiterPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "RateLimiterPolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read RateLimiterPolicy: %s", err))
 		return
 	}
@@ -624,6 +779,13 @@ func (r *RateLimiterPolicyResource) Read(ctx context.Context, req resource.ReadR
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -676,6 +838,10 @@ func (r *RateLimiterPolicyResource) Update(ctx context.Context, req resource.Upd
 		Spec: client.RateLimiterPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -700,10 +866,20 @@ func (r *RateLimiterPolicyResource) Update(ctx context.Context, req resource.Upd
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetRateLimiterPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -727,11 +903,33 @@ func (r *RateLimiterPolicyResource) Delete(ctx context.Context, req resource.Del
 
 	err := r.client.DeleteRateLimiterPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "RateLimiterPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete RateLimiterPolicy: %s", err))
 		return
 	}
 }
 
 func (r *RateLimiterPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

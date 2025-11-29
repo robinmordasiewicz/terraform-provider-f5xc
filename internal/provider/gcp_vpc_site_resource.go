@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,728 @@ type GCPVPCSiteResource struct {
 	client *client.Client
 }
 
+// GCPVPCSiteEmptyModel represents empty nested blocks
+type GCPVPCSiteEmptyModel struct {
+}
+
+// GCPVPCSiteAdminPasswordModel represents admin_password block
+type GCPVPCSiteAdminPasswordModel struct {
+	BlindfoldSecretInfo *GCPVPCSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *GCPVPCSiteAdminPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// GCPVPCSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type GCPVPCSiteAdminPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// GCPVPCSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type GCPVPCSiteAdminPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// GCPVPCSiteBlockedServicesModel represents blocked_services block
+type GCPVPCSiteBlockedServicesModel struct {
+	BlockedSevice []GCPVPCSiteBlockedServicesBlockedSeviceModel `tfsdk:"blocked_sevice"`
+}
+
+// GCPVPCSiteBlockedServicesBlockedSeviceModel represents blocked_sevice block
+type GCPVPCSiteBlockedServicesBlockedSeviceModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DNS *GCPVPCSiteEmptyModel `tfsdk:"dns"`
+	SSH *GCPVPCSiteEmptyModel `tfsdk:"ssh"`
+	WebUserInterface *GCPVPCSiteEmptyModel `tfsdk:"web_user_interface"`
+}
+
+// GCPVPCSiteCloudCredentialsModel represents cloud_credentials block
+type GCPVPCSiteCloudCredentialsModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteCoordinatesModel represents coordinates block
+type GCPVPCSiteCoordinatesModel struct {
+	Latitude types.Int64 `tfsdk:"latitude"`
+	Longitude types.Int64 `tfsdk:"longitude"`
+}
+
+// GCPVPCSiteCustomDNSModel represents custom_dns block
+type GCPVPCSiteCustomDNSModel struct {
+	InsideNameserver types.String `tfsdk:"inside_nameserver"`
+	OutsideNameserver types.String `tfsdk:"outside_nameserver"`
+}
+
+// GCPVPCSiteIngressEgressGwModel represents ingress_egress_gw block
+type GCPVPCSiteIngressEgressGwModel struct {
+	GCPCertifiedHw types.String `tfsdk:"gcp_certified_hw"`
+	GCPZoneNames types.List `tfsdk:"gcp_zone_names"`
+	NodeNumber types.Int64 `tfsdk:"node_number"`
+	ActiveEnhancedFirewallPolicies *GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
+	ActiveForwardProxyPolicies *GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies *GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
+	DcClusterGroupInsideVn *GCPVPCSiteIngressEgressGwDcClusterGroupInsideVnModel `tfsdk:"dc_cluster_group_inside_vn"`
+	DcClusterGroupOutsideVn *GCPVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel `tfsdk:"dc_cluster_group_outside_vn"`
+	ForwardProxyAllowAll *GCPVPCSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList *GCPVPCSiteIngressEgressGwGlobalNetworkListModel `tfsdk:"global_network_list"`
+	InsideNetwork *GCPVPCSiteIngressEgressGwInsideNetworkModel `tfsdk:"inside_network"`
+	InsideStaticRoutes *GCPVPCSiteIngressEgressGwInsideStaticRoutesModel `tfsdk:"inside_static_routes"`
+	InsideSubnet *GCPVPCSiteIngressEgressGwInsideSubnetModel `tfsdk:"inside_subnet"`
+	NoDcClusterGroup *GCPVPCSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy *GCPVPCSiteEmptyModel `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork *GCPVPCSiteEmptyModel `tfsdk:"no_global_network"`
+	NoInsideStaticRoutes *GCPVPCSiteEmptyModel `tfsdk:"no_inside_static_routes"`
+	NoNetworkPolicy *GCPVPCSiteEmptyModel `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes *GCPVPCSiteEmptyModel `tfsdk:"no_outside_static_routes"`
+	OutsideNetwork *GCPVPCSiteIngressEgressGwOutsideNetworkModel `tfsdk:"outside_network"`
+	OutsideStaticRoutes *GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
+	OutsideSubnet *GCPVPCSiteIngressEgressGwOutsideSubnetModel `tfsdk:"outside_subnet"`
+	PerformanceEnhancementMode *GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+	SmConnectionPublicIP *GCPVPCSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP *GCPVPCSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+}
+
+// GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
+type GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel struct {
+	EnhancedFirewallPolicies []GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+}
+
+// GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
+type GCPVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
+type GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel struct {
+	ForwardProxyPolicies []GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
+type GCPVPCSiteIngressEgressGwActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel represents active_network_policies block
+type GCPVPCSiteIngressEgressGwActiveNetworkPoliciesModel struct {
+	NetworkPolicies []GCPVPCSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
+}
+
+// GCPVPCSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
+type GCPVPCSiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteIngressEgressGwDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
+type GCPVPCSiteIngressEgressGwDcClusterGroupInsideVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel represents dc_cluster_group_outside_vn block
+type GCPVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteIngressEgressGwGlobalNetworkListModel represents global_network_list block
+type GCPVPCSiteIngressEgressGwGlobalNetworkListModel struct {
+	GlobalNetworkConnections []GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
+}
+
+// GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
+type GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel struct {
+	SLIToGlobalDr *GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
+	SLOToGlobalDr *GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+}
+
+// GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
+type GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
+	GlobalVn *GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
+type GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
+type GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
+	GlobalVn *GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
+type GCPVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideNetworkModel represents inside_network block
+type GCPVPCSiteIngressEgressGwInsideNetworkModel struct {
+	ExistingNetwork *GCPVPCSiteIngressEgressGwInsideNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork *GCPVPCSiteIngressEgressGwInsideNetworkNewNetworkModel `tfsdk:"new_network"`
+	NewNetworkAutogenerate *GCPVPCSiteEmptyModel `tfsdk:"new_network_autogenerate"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideNetworkExistingNetworkModel represents existing_network block
+type GCPVPCSiteIngressEgressGwInsideNetworkExistingNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideNetworkNewNetworkModel represents new_network block
+type GCPVPCSiteIngressEgressGwInsideNetworkNewNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesModel represents inside_static_routes block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesModel struct {
+	StaticRouteList []GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel represents static_route_list block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	CustomStaticRoute *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *GCPVPCSiteEmptyModel `tfsdk:"labels"`
+	Nexthop *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Subnets []GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	IPV4 *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	IPV4 *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
+type GCPVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideSubnetModel represents inside_subnet block
+type GCPVPCSiteIngressEgressGwInsideSubnetModel struct {
+	ExistingSubnet *GCPVPCSiteIngressEgressGwInsideSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
+	NewSubnet *GCPVPCSiteIngressEgressGwInsideSubnetNewSubnetModel `tfsdk:"new_subnet"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideSubnetExistingSubnetModel represents existing_subnet block
+type GCPVPCSiteIngressEgressGwInsideSubnetExistingSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// GCPVPCSiteIngressEgressGwInsideSubnetNewSubnetModel represents new_subnet block
+type GCPVPCSiteIngressEgressGwInsideSubnetNewSubnetModel struct {
+	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideNetworkModel represents outside_network block
+type GCPVPCSiteIngressEgressGwOutsideNetworkModel struct {
+	ExistingNetwork *GCPVPCSiteIngressEgressGwOutsideNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork *GCPVPCSiteIngressEgressGwOutsideNetworkNewNetworkModel `tfsdk:"new_network"`
+	NewNetworkAutogenerate *GCPVPCSiteEmptyModel `tfsdk:"new_network_autogenerate"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideNetworkExistingNetworkModel represents existing_network block
+type GCPVPCSiteIngressEgressGwOutsideNetworkExistingNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideNetworkNewNetworkModel represents new_network block
+type GCPVPCSiteIngressEgressGwOutsideNetworkNewNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel represents outside_static_routes block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesModel struct {
+	StaticRouteList []GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel represents static_route_list block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	CustomStaticRoute *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *GCPVPCSiteEmptyModel `tfsdk:"labels"`
+	Nexthop *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Subnets []GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	IPV4 *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	IPV4 *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
+type GCPVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideSubnetModel represents outside_subnet block
+type GCPVPCSiteIngressEgressGwOutsideSubnetModel struct {
+	ExistingSubnet *GCPVPCSiteIngressEgressGwOutsideSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
+	NewSubnet *GCPVPCSiteIngressEgressGwOutsideSubnetNewSubnetModel `tfsdk:"new_subnet"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideSubnetExistingSubnetModel represents existing_subnet block
+type GCPVPCSiteIngressEgressGwOutsideSubnetExistingSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// GCPVPCSiteIngressEgressGwOutsideSubnetNewSubnetModel represents new_subnet block
+type GCPVPCSiteIngressEgressGwOutsideSubnetNewSubnetModel struct {
+	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
+type GCPVPCSiteIngressEgressGwPerformanceEnhancementModeModel struct {
+	PerfModeL3Enhanced *GCPVPCSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
+	PerfModeL7Enhanced *GCPVPCSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+}
+
+// GCPVPCSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
+type GCPVPCSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel struct {
+	Jumbo *GCPVPCSiteEmptyModel `tfsdk:"jumbo"`
+	NoJumbo *GCPVPCSiteEmptyModel `tfsdk:"no_jumbo"`
+}
+
+// GCPVPCSiteIngressGwModel represents ingress_gw block
+type GCPVPCSiteIngressGwModel struct {
+	GCPCertifiedHw types.String `tfsdk:"gcp_certified_hw"`
+	GCPZoneNames types.List `tfsdk:"gcp_zone_names"`
+	NodeNumber types.Int64 `tfsdk:"node_number"`
+	LocalNetwork *GCPVPCSiteIngressGwLocalNetworkModel `tfsdk:"local_network"`
+	LocalSubnet *GCPVPCSiteIngressGwLocalSubnetModel `tfsdk:"local_subnet"`
+	PerformanceEnhancementMode *GCPVPCSiteIngressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+}
+
+// GCPVPCSiteIngressGwLocalNetworkModel represents local_network block
+type GCPVPCSiteIngressGwLocalNetworkModel struct {
+	ExistingNetwork *GCPVPCSiteIngressGwLocalNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork *GCPVPCSiteIngressGwLocalNetworkNewNetworkModel `tfsdk:"new_network"`
+	NewNetworkAutogenerate *GCPVPCSiteEmptyModel `tfsdk:"new_network_autogenerate"`
+}
+
+// GCPVPCSiteIngressGwLocalNetworkExistingNetworkModel represents existing_network block
+type GCPVPCSiteIngressGwLocalNetworkExistingNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// GCPVPCSiteIngressGwLocalNetworkNewNetworkModel represents new_network block
+type GCPVPCSiteIngressGwLocalNetworkNewNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// GCPVPCSiteIngressGwLocalSubnetModel represents local_subnet block
+type GCPVPCSiteIngressGwLocalSubnetModel struct {
+	ExistingSubnet *GCPVPCSiteIngressGwLocalSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
+	NewSubnet *GCPVPCSiteIngressGwLocalSubnetNewSubnetModel `tfsdk:"new_subnet"`
+}
+
+// GCPVPCSiteIngressGwLocalSubnetExistingSubnetModel represents existing_subnet block
+type GCPVPCSiteIngressGwLocalSubnetExistingSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// GCPVPCSiteIngressGwLocalSubnetNewSubnetModel represents new_subnet block
+type GCPVPCSiteIngressGwLocalSubnetNewSubnetModel struct {
+	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// GCPVPCSiteIngressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
+type GCPVPCSiteIngressGwPerformanceEnhancementModeModel struct {
+	PerfModeL3Enhanced *GCPVPCSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
+	PerfModeL7Enhanced *GCPVPCSiteEmptyModel `tfsdk:"perf_mode_l7_enhanced"`
+}
+
+// GCPVPCSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
+type GCPVPCSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel struct {
+	Jumbo *GCPVPCSiteEmptyModel `tfsdk:"jumbo"`
+	NoJumbo *GCPVPCSiteEmptyModel `tfsdk:"no_jumbo"`
+}
+
+// GCPVPCSiteKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
+type GCPVPCSiteKubernetesUpgradeDrainModel struct {
+	DisableUpgradeDrain *GCPVPCSiteEmptyModel `tfsdk:"disable_upgrade_drain"`
+	EnableUpgradeDrain *GCPVPCSiteKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+}
+
+// GCPVPCSiteKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
+type GCPVPCSiteKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
+	DrainMaxUnavailableNodeCount types.Int64 `tfsdk:"drain_max_unavailable_node_count"`
+	DrainNodeTimeout types.Int64 `tfsdk:"drain_node_timeout"`
+	DisableVegaUpgradeMode *GCPVPCSiteEmptyModel `tfsdk:"disable_vega_upgrade_mode"`
+	EnableVegaUpgradeMode *GCPVPCSiteEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
+}
+
+// GCPVPCSiteLogReceiverModel represents log_receiver block
+type GCPVPCSiteLogReceiverModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteOfflineSurvivabilityModeModel represents offline_survivability_mode block
+type GCPVPCSiteOfflineSurvivabilityModeModel struct {
+	EnableOfflineSurvivabilityMode *GCPVPCSiteEmptyModel `tfsdk:"enable_offline_survivability_mode"`
+	NoOfflineSurvivabilityMode *GCPVPCSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
+}
+
+// GCPVPCSiteOsModel represents os block
+type GCPVPCSiteOsModel struct {
+	OperatingSystemVersion types.String `tfsdk:"operating_system_version"`
+	DefaultOsVersion *GCPVPCSiteEmptyModel `tfsdk:"default_os_version"`
+}
+
+// GCPVPCSitePrivateConnectivityModel represents private_connectivity block
+type GCPVPCSitePrivateConnectivityModel struct {
+	CloudLink *GCPVPCSitePrivateConnectivityCloudLinkModel `tfsdk:"cloud_link"`
+	Inside *GCPVPCSiteEmptyModel `tfsdk:"inside"`
+	Outside *GCPVPCSiteEmptyModel `tfsdk:"outside"`
+}
+
+// GCPVPCSitePrivateConnectivityCloudLinkModel represents cloud_link block
+type GCPVPCSitePrivateConnectivityCloudLinkModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteSwModel represents sw block
+type GCPVPCSiteSwModel struct {
+	VolterraSoftwareVersion types.String `tfsdk:"volterra_software_version"`
+	DefaultSwVersion *GCPVPCSiteEmptyModel `tfsdk:"default_sw_version"`
+}
+
+// GCPVPCSiteVoltstackClusterModel represents voltstack_cluster block
+type GCPVPCSiteVoltstackClusterModel struct {
+	GCPCertifiedHw types.String `tfsdk:"gcp_certified_hw"`
+	GCPZoneNames types.List `tfsdk:"gcp_zone_names"`
+	NodeNumber types.Int64 `tfsdk:"node_number"`
+	ActiveEnhancedFirewallPolicies *GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
+	ActiveForwardProxyPolicies *GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies *GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel `tfsdk:"active_network_policies"`
+	DcClusterGroup *GCPVPCSiteVoltstackClusterDcClusterGroupModel `tfsdk:"dc_cluster_group"`
+	DefaultStorage *GCPVPCSiteEmptyModel `tfsdk:"default_storage"`
+	ForwardProxyAllowAll *GCPVPCSiteEmptyModel `tfsdk:"forward_proxy_allow_all"`
+	GlobalNetworkList *GCPVPCSiteVoltstackClusterGlobalNetworkListModel `tfsdk:"global_network_list"`
+	K8SCluster *GCPVPCSiteVoltstackClusterK8SClusterModel `tfsdk:"k8s_cluster"`
+	NoDcClusterGroup *GCPVPCSiteEmptyModel `tfsdk:"no_dc_cluster_group"`
+	NoForwardProxy *GCPVPCSiteEmptyModel `tfsdk:"no_forward_proxy"`
+	NoGlobalNetwork *GCPVPCSiteEmptyModel `tfsdk:"no_global_network"`
+	NoK8SCluster *GCPVPCSiteEmptyModel `tfsdk:"no_k8s_cluster"`
+	NoNetworkPolicy *GCPVPCSiteEmptyModel `tfsdk:"no_network_policy"`
+	NoOutsideStaticRoutes *GCPVPCSiteEmptyModel `tfsdk:"no_outside_static_routes"`
+	OutsideStaticRoutes *GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel `tfsdk:"outside_static_routes"`
+	SiteLocalNetwork *GCPVPCSiteVoltstackClusterSiteLocalNetworkModel `tfsdk:"site_local_network"`
+	SiteLocalSubnet *GCPVPCSiteVoltstackClusterSiteLocalSubnetModel `tfsdk:"site_local_subnet"`
+	SmConnectionPublicIP *GCPVPCSiteEmptyModel `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP *GCPVPCSiteEmptyModel `tfsdk:"sm_connection_pvt_ip"`
+	StorageClassList *GCPVPCSiteVoltstackClusterStorageClassListModel `tfsdk:"storage_class_list"`
+}
+
+// GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
+type GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel struct {
+	EnhancedFirewallPolicies []GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+}
+
+// GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
+type GCPVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
+type GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel struct {
+	ForwardProxyPolicies []GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
+type GCPVPCSiteVoltstackClusterActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel represents active_network_policies block
+type GCPVPCSiteVoltstackClusterActiveNetworkPoliciesModel struct {
+	NetworkPolicies []GCPVPCSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
+}
+
+// GCPVPCSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
+type GCPVPCSiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteVoltstackClusterDcClusterGroupModel represents dc_cluster_group block
+type GCPVPCSiteVoltstackClusterDcClusterGroupModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteVoltstackClusterGlobalNetworkListModel represents global_network_list block
+type GCPVPCSiteVoltstackClusterGlobalNetworkListModel struct {
+	GlobalNetworkConnections []GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
+}
+
+// GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
+type GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel struct {
+	SLIToGlobalDr *GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel `tfsdk:"sli_to_global_dr"`
+	SLOToGlobalDr *GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel `tfsdk:"slo_to_global_dr"`
+}
+
+// GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel represents sli_to_global_dr block
+type GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrModel struct {
+	GlobalVn *GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel represents global_vn block
+type GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel represents slo_to_global_dr block
+type GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrModel struct {
+	GlobalVn *GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel represents global_vn block
+type GCPVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLOToGlobalDrGlobalVnModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteVoltstackClusterK8SClusterModel represents k8s_cluster block
+type GCPVPCSiteVoltstackClusterK8SClusterModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel represents outside_static_routes block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesModel struct {
+	StaticRouteList []GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel represents static_route_list block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String `tfsdk:"simple_static_route"`
+	CustomStaticRoute *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs types.List `tfsdk:"attrs"`
+	Labels *GCPVPCSiteEmptyModel `tfsdk:"labels"`
+	Nexthop *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel `tfsdk:"nexthop"`
+	Subnets []GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type types.String `tfsdk:"type"`
+	Interface []GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel `tfsdk:"interface"`
+	NexthopAddress *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	IPV4 *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model `tfsdk:"ipv4"`
+	IPV6 *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model `tfsdk:"ipv6"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model represents ipv4 block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model represents ipv6 block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIPV6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	IPV4 *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model `tfsdk:"ipv4"`
+	IPV6 *GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model `tfsdk:"ipv6"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model represents ipv4 block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV4Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model represents ipv6 block
+type GCPVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIPV6Model struct {
+	Plen types.Int64 `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// GCPVPCSiteVoltstackClusterSiteLocalNetworkModel represents site_local_network block
+type GCPVPCSiteVoltstackClusterSiteLocalNetworkModel struct {
+	ExistingNetwork *GCPVPCSiteVoltstackClusterSiteLocalNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork *GCPVPCSiteVoltstackClusterSiteLocalNetworkNewNetworkModel `tfsdk:"new_network"`
+	NewNetworkAutogenerate *GCPVPCSiteEmptyModel `tfsdk:"new_network_autogenerate"`
+}
+
+// GCPVPCSiteVoltstackClusterSiteLocalNetworkExistingNetworkModel represents existing_network block
+type GCPVPCSiteVoltstackClusterSiteLocalNetworkExistingNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// GCPVPCSiteVoltstackClusterSiteLocalNetworkNewNetworkModel represents new_network block
+type GCPVPCSiteVoltstackClusterSiteLocalNetworkNewNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// GCPVPCSiteVoltstackClusterSiteLocalSubnetModel represents site_local_subnet block
+type GCPVPCSiteVoltstackClusterSiteLocalSubnetModel struct {
+	ExistingSubnet *GCPVPCSiteVoltstackClusterSiteLocalSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
+	NewSubnet *GCPVPCSiteVoltstackClusterSiteLocalSubnetNewSubnetModel `tfsdk:"new_subnet"`
+}
+
+// GCPVPCSiteVoltstackClusterSiteLocalSubnetExistingSubnetModel represents existing_subnet block
+type GCPVPCSiteVoltstackClusterSiteLocalSubnetExistingSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// GCPVPCSiteVoltstackClusterSiteLocalSubnetNewSubnetModel represents new_subnet block
+type GCPVPCSiteVoltstackClusterSiteLocalSubnetNewSubnetModel struct {
+	PrimaryIPV4 types.String `tfsdk:"primary_ipv4"`
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// GCPVPCSiteVoltstackClusterStorageClassListModel represents storage_class_list block
+type GCPVPCSiteVoltstackClusterStorageClassListModel struct {
+	StorageClasses []GCPVPCSiteVoltstackClusterStorageClassListStorageClassesModel `tfsdk:"storage_classes"`
+}
+
+// GCPVPCSiteVoltstackClusterStorageClassListStorageClassesModel represents storage_classes block
+type GCPVPCSiteVoltstackClusterStorageClassListStorageClassesModel struct {
+	DefaultStorageClass types.Bool `tfsdk:"default_storage_class"`
+	StorageClassName types.String `tfsdk:"storage_class_name"`
+}
+
 type GCPVPCSiteResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -58,6 +781,25 @@ type GCPVPCSiteResourceModel struct {
 	SSHKey types.String `tfsdk:"ssh_key"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AdminPassword *GCPVPCSiteAdminPasswordModel `tfsdk:"admin_password"`
+	BlockAllServices *GCPVPCSiteEmptyModel `tfsdk:"block_all_services"`
+	BlockedServices *GCPVPCSiteBlockedServicesModel `tfsdk:"blocked_services"`
+	CloudCredentials *GCPVPCSiteCloudCredentialsModel `tfsdk:"cloud_credentials"`
+	Coordinates *GCPVPCSiteCoordinatesModel `tfsdk:"coordinates"`
+	CustomDNS *GCPVPCSiteCustomDNSModel `tfsdk:"custom_dns"`
+	DefaultBlockedServices *GCPVPCSiteEmptyModel `tfsdk:"default_blocked_services"`
+	GCPLabels *GCPVPCSiteEmptyModel `tfsdk:"gcp_labels"`
+	IngressEgressGw *GCPVPCSiteIngressEgressGwModel `tfsdk:"ingress_egress_gw"`
+	IngressGw *GCPVPCSiteIngressGwModel `tfsdk:"ingress_gw"`
+	KubernetesUpgradeDrain *GCPVPCSiteKubernetesUpgradeDrainModel `tfsdk:"kubernetes_upgrade_drain"`
+	LogReceiver *GCPVPCSiteLogReceiverModel `tfsdk:"log_receiver"`
+	LogsStreamingDisabled *GCPVPCSiteEmptyModel `tfsdk:"logs_streaming_disabled"`
+	OfflineSurvivabilityMode *GCPVPCSiteOfflineSurvivabilityModeModel `tfsdk:"offline_survivability_mode"`
+	Os *GCPVPCSiteOsModel `tfsdk:"os"`
+	PrivateConnectDisabled *GCPVPCSiteEmptyModel `tfsdk:"private_connect_disabled"`
+	PrivateConnectivity *GCPVPCSitePrivateConnectivityModel `tfsdk:"private_connectivity"`
+	Sw *GCPVPCSiteSwModel `tfsdk:"sw"`
+	VoltstackCluster *GCPVPCSiteVoltstackClusterModel `tfsdk:"voltstack_cluster"`
 }
 
 func (r *GCPVPCSiteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1688,6 +2430,10 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		Spec: client.GCPVPCSiteSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1743,6 +2489,15 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 
 	apiResource, err := r.client.GetGCPVPCSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "GCPVPCSite not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read GCPVPCSite: %s", err))
 		return
 	}
@@ -1757,6 +2512,13 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1809,6 +2571,10 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		Spec: client.GCPVPCSiteSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1833,10 +2599,20 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetGCPVPCSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1860,11 +2636,33 @@ func (r *GCPVPCSiteResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	err := r.client.DeleteGCPVPCSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "GCPVPCSite already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete GCPVPCSite: %s", err))
 		return
 	}
 }
 
 func (r *GCPVPCSiteResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

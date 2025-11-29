@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
-	f5xcerrors "github.com/f5xc/terraform-provider-f5xc/internal/errors"
 	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
@@ -46,21 +45,239 @@ type AlertReceiverResource struct {
 	client *client.Client
 }
 
+// AlertReceiverEmptyModel represents empty nested blocks
+type AlertReceiverEmptyModel struct {
+}
+
+// AlertReceiverEmailModel represents email block
+type AlertReceiverEmailModel struct {
+	Email types.String `tfsdk:"email"`
+}
+
+// AlertReceiverOpsgenieModel represents opsgenie block
+type AlertReceiverOpsgenieModel struct {
+	URL types.String `tfsdk:"url"`
+	APIKey *AlertReceiverOpsgenieAPIKeyModel `tfsdk:"api_key"`
+}
+
+// AlertReceiverOpsgenieAPIKeyModel represents api_key block
+type AlertReceiverOpsgenieAPIKeyModel struct {
+	BlindfoldSecretInfo *AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AlertReceiverOpsgenieAPIKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AlertReceiverOpsgenieAPIKeyClearSecretInfoModel represents clear_secret_info block
+type AlertReceiverOpsgenieAPIKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AlertReceiverPagerdutyModel represents pagerduty block
+type AlertReceiverPagerdutyModel struct {
+	URL types.String `tfsdk:"url"`
+	RoutingKey *AlertReceiverPagerdutyRoutingKeyModel `tfsdk:"routing_key"`
+}
+
+// AlertReceiverPagerdutyRoutingKeyModel represents routing_key block
+type AlertReceiverPagerdutyRoutingKeyModel struct {
+	BlindfoldSecretInfo *AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel represents clear_secret_info block
+type AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AlertReceiverSlackModel represents slack block
+type AlertReceiverSlackModel struct {
+	Channel types.String `tfsdk:"channel"`
+	URL *AlertReceiverSlackURLModel `tfsdk:"url"`
+}
+
+// AlertReceiverSlackURLModel represents url block
+type AlertReceiverSlackURLModel struct {
+	BlindfoldSecretInfo *AlertReceiverSlackURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AlertReceiverSlackURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverSlackURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AlertReceiverSlackURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AlertReceiverSlackURLClearSecretInfoModel represents clear_secret_info block
+type AlertReceiverSlackURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AlertReceiverSmsModel represents sms block
+type AlertReceiverSmsModel struct {
+	ContactNumber types.String `tfsdk:"contact_number"`
+}
+
+// AlertReceiverWebhookModel represents webhook block
+type AlertReceiverWebhookModel struct {
+	HTTPConfig *AlertReceiverWebhookHTTPConfigModel `tfsdk:"http_config"`
+	URL *AlertReceiverWebhookURLModel `tfsdk:"url"`
+}
+
+// AlertReceiverWebhookHTTPConfigModel represents http_config block
+type AlertReceiverWebhookHTTPConfigModel struct {
+	EnableHttp2 types.Bool `tfsdk:"enable_http2"`
+	FollowRedirects types.Bool `tfsdk:"follow_redirects"`
+	AuthToken *AlertReceiverWebhookHTTPConfigAuthTokenModel `tfsdk:"auth_token"`
+	BasicAuth *AlertReceiverWebhookHTTPConfigBasicAuthModel `tfsdk:"basic_auth"`
+	ClientCertObj *AlertReceiverWebhookHTTPConfigClientCertObjModel `tfsdk:"client_cert_obj"`
+	NoAuthorization *AlertReceiverEmptyModel `tfsdk:"no_authorization"`
+	NoTLS *AlertReceiverEmptyModel `tfsdk:"no_tls"`
+	UseTLS *AlertReceiverWebhookHTTPConfigUseTLSModel `tfsdk:"use_tls"`
+}
+
+// AlertReceiverWebhookHTTPConfigAuthTokenModel represents auth_token block
+type AlertReceiverWebhookHTTPConfigAuthTokenModel struct {
+	Token *AlertReceiverWebhookHTTPConfigAuthTokenTokenModel `tfsdk:"token"`
+}
+
+// AlertReceiverWebhookHTTPConfigAuthTokenTokenModel represents token block
+type AlertReceiverWebhookHTTPConfigAuthTokenTokenModel struct {
+	BlindfoldSecretInfo *AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel represents clear_secret_info block
+type AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AlertReceiverWebhookHTTPConfigBasicAuthModel represents basic_auth block
+type AlertReceiverWebhookHTTPConfigBasicAuthModel struct {
+	UserName types.String `tfsdk:"user_name"`
+	Password *AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel `tfsdk:"password"`
+}
+
+// AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel represents password block
+type AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel struct {
+	BlindfoldSecretInfo *AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
+type AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AlertReceiverWebhookHTTPConfigClientCertObjModel represents client_cert_obj block
+type AlertReceiverWebhookHTTPConfigClientCertObjModel struct {
+	UseTLSObj []AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModel `tfsdk:"use_tls_obj"`
+}
+
+// AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModel represents use_tls_obj block
+type AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AlertReceiverWebhookHTTPConfigUseTLSModel represents use_tls block
+type AlertReceiverWebhookHTTPConfigUseTLSModel struct {
+	MaxVersion types.String `tfsdk:"max_version"`
+	MinVersion types.String `tfsdk:"min_version"`
+	Sni types.String `tfsdk:"sni"`
+	DisableSni *AlertReceiverEmptyModel `tfsdk:"disable_sni"`
+	UseServerVerification *AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel `tfsdk:"use_server_verification"`
+	VolterraTrustedCa *AlertReceiverEmptyModel `tfsdk:"volterra_trusted_ca"`
+}
+
+// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel represents use_server_verification block
+type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel struct {
+	CaCertObj *AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjModel `tfsdk:"ca_cert_obj"`
+}
+
+// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjModel represents ca_cert_obj block
+type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjModel struct {
+	TrustedCa []AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjTrustedCaModel `tfsdk:"trusted_ca"`
+}
+
+// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjTrustedCaModel represents trusted_ca block
+type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCaCertObjTrustedCaModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AlertReceiverWebhookURLModel represents url block
+type AlertReceiverWebhookURLModel struct {
+	BlindfoldSecretInfo *AlertReceiverWebhookURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AlertReceiverWebhookURLClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverWebhookURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AlertReceiverWebhookURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AlertReceiverWebhookURLClearSecretInfoModel represents clear_secret_info block
+type AlertReceiverWebhookURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
 type AlertReceiverResourceModel struct {
-	Name        types.String   `tfsdk:"name"`
-	Namespace   types.String   `tfsdk:"namespace"`
-	Annotations types.Map      `tfsdk:"annotations"`
-	Description types.String   `tfsdk:"description"`
-	Disable     types.Bool     `tfsdk:"disable"`
-	Labels      types.Map      `tfsdk:"labels"`
-	ID          types.String   `tfsdk:"id"`
-	Timeouts    timeouts.Value `tfsdk:"timeouts"`
-	Email       types.Object   `tfsdk:"email"`
-	Opsgenie    types.Object   `tfsdk:"opsgenie"`
-	Pagerduty   types.Object   `tfsdk:"pagerduty"`
-	Slack       types.Object   `tfsdk:"slack"`
-	Sms         types.Object   `tfsdk:"sms"`
-	Webhook     types.Object   `tfsdk:"webhook"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Email *AlertReceiverEmailModel `tfsdk:"email"`
+	Opsgenie *AlertReceiverOpsgenieModel `tfsdk:"opsgenie"`
+	Pagerduty *AlertReceiverPagerdutyModel `tfsdk:"pagerduty"`
+	Slack *AlertReceiverSlackModel `tfsdk:"slack"`
+	Sms *AlertReceiverSmsModel `tfsdk:"sms"`
+	Webhook *AlertReceiverWebhookModel `tfsdk:"webhook"`
 }
 
 func (r *AlertReceiverResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -675,6 +892,10 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 		Spec: client.AlertReceiverSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -691,30 +912,6 @@ func (r *AlertReceiverResource) Create(ctx context.Context, req resource.CreateR
 			return
 		}
 		apiResource.Metadata.Annotations = annotations
-	}
-
-	if !data.Description.IsNull() {
-		apiResource.Spec.Description = data.Description.ValueString()
-	}
-
-	// Handle email block
-	if !data.Email.IsNull() {
-		emailAttrs := data.Email.Attributes()
-		if emailVal, ok := emailAttrs["email"]; ok && !emailVal.IsNull() {
-			apiResource.Spec.Email = &client.AlertReceiverEmail{
-				Email: emailVal.(types.String).ValueString(),
-			}
-		}
-	}
-
-	// Handle sms block
-	if !data.Sms.IsNull() {
-		smsAttrs := data.Sms.Attributes()
-		if contactNumber, ok := smsAttrs["contact_number"]; ok && !contactNumber.IsNull() {
-			apiResource.Spec.Sms = &client.AlertReceiverSms{
-				ContactNumber: contactNumber.(types.String).ValueString(),
-			}
-		}
 	}
 
 	created, err := r.client.CreateAlertReceiver(ctx, apiResource)
@@ -754,8 +951,8 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 
 	apiResource, err := r.client.GetAlertReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// Check if resource was deleted outside of Terraform
-		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "AlertReceiver not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
@@ -777,6 +974,13 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -829,6 +1033,10 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 		Spec: client.AlertReceiverSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -845,30 +1053,6 @@ func (r *AlertReceiverResource) Update(ctx context.Context, req resource.UpdateR
 			return
 		}
 		apiResource.Metadata.Annotations = annotations
-	}
-
-	if !data.Description.IsNull() {
-		apiResource.Spec.Description = data.Description.ValueString()
-	}
-
-	// Handle email block
-	if !data.Email.IsNull() {
-		emailAttrs := data.Email.Attributes()
-		if emailVal, ok := emailAttrs["email"]; ok && !emailVal.IsNull() {
-			apiResource.Spec.Email = &client.AlertReceiverEmail{
-				Email: emailVal.(types.String).ValueString(),
-			}
-		}
-	}
-
-	// Handle sms block
-	if !data.Sms.IsNull() {
-		smsAttrs := data.Sms.Attributes()
-		if contactNumber, ok := smsAttrs["contact_number"]; ok && !contactNumber.IsNull() {
-			apiResource.Spec.Sms = &client.AlertReceiverSms{
-				ContactNumber: contactNumber.(types.String).ValueString(),
-			}
-		}
 	}
 
 	updated, err := r.client.UpdateAlertReceiver(ctx, apiResource)
@@ -914,9 +1098,9 @@ func (r *AlertReceiverResource) Delete(ctx context.Context, req resource.DeleteR
 
 	err := r.client.DeleteAlertReceiver(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// If the resource is already gone, treat as success
-		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
-			tflog.Warn(ctx, "AlertReceiver already deleted", map[string]interface{}{
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AlertReceiver already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -928,16 +1112,17 @@ func (r *AlertReceiverResource) Delete(ctx context.Context, req resource.DeleteR
 }
 
 func (r *AlertReceiverResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	idParts := strings.Split(req.ID, "/")
-	if len(idParts) != 2 || idParts[0] == "" || idParts[1] == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID in format 'namespace/name', got: %s", req.ID),
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
-	namespace := idParts[0]
-	name := idParts[1]
+	namespace := parts[0]
+	name := parts[1]
 
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)

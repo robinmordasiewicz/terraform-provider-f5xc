@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,30 @@ type IKEPhase1ProfileResource struct {
 	client *client.Client
 }
 
+// IKEPhase1ProfileEmptyModel represents empty nested blocks
+type IKEPhase1ProfileEmptyModel struct {
+}
+
+// IKEPhase1ProfileIKEKeylifetimeHoursModel represents ike_keylifetime_hours block
+type IKEPhase1ProfileIKEKeylifetimeHoursModel struct {
+	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// IKEPhase1ProfileIKEKeylifetimeMinutesModel represents ike_keylifetime_minutes block
+type IKEPhase1ProfileIKEKeylifetimeMinutesModel struct {
+	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// IKEPhase1ProfileReauthTimeoutDaysModel represents reauth_timeout_days block
+type IKEPhase1ProfileReauthTimeoutDaysModel struct {
+	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// IKEPhase1ProfileReauthTimeoutHoursModel represents reauth_timeout_hours block
+type IKEPhase1ProfileReauthTimeoutHoursModel struct {
+	Duration types.Int64 `tfsdk:"duration"`
+}
+
 type IKEPhase1ProfileResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -57,6 +82,12 @@ type IKEPhase1ProfileResourceModel struct {
 	Prf types.List `tfsdk:"prf"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	IKEKeylifetimeHours *IKEPhase1ProfileIKEKeylifetimeHoursModel `tfsdk:"ike_keylifetime_hours"`
+	IKEKeylifetimeMinutes *IKEPhase1ProfileIKEKeylifetimeMinutesModel `tfsdk:"ike_keylifetime_minutes"`
+	ReauthDisabled *IKEPhase1ProfileEmptyModel `tfsdk:"reauth_disabled"`
+	ReauthTimeoutDays *IKEPhase1ProfileReauthTimeoutDaysModel `tfsdk:"reauth_timeout_days"`
+	ReauthTimeoutHours *IKEPhase1ProfileReauthTimeoutHoursModel `tfsdk:"reauth_timeout_hours"`
+	UseDefaultKeylifetime *IKEPhase1ProfileEmptyModel `tfsdk:"use_default_keylifetime"`
 }
 
 func (r *IKEPhase1ProfileResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -312,6 +343,10 @@ func (r *IKEPhase1ProfileResource) Create(ctx context.Context, req resource.Crea
 		Spec: client.IKEPhase1ProfileSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -367,6 +402,15 @@ func (r *IKEPhase1ProfileResource) Read(ctx context.Context, req resource.ReadRe
 
 	apiResource, err := r.client.GetIKEPhase1Profile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "IKEPhase1Profile not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read IKEPhase1Profile: %s", err))
 		return
 	}
@@ -381,6 +425,13 @@ func (r *IKEPhase1ProfileResource) Read(ctx context.Context, req resource.ReadRe
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -433,6 +484,10 @@ func (r *IKEPhase1ProfileResource) Update(ctx context.Context, req resource.Upda
 		Spec: client.IKEPhase1ProfileSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -457,10 +512,20 @@ func (r *IKEPhase1ProfileResource) Update(ctx context.Context, req resource.Upda
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetIKEPhase1Profile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -484,11 +549,33 @@ func (r *IKEPhase1ProfileResource) Delete(ctx context.Context, req resource.Dele
 
 	err := r.client.DeleteIKEPhase1Profile(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "IKEPhase1Profile already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete IKEPhase1Profile: %s", err))
 		return
 	}
 }
 
 func (r *IKEPhase1ProfileResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

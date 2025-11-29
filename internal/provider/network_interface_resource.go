@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,239 @@ type NetworkInterfaceResource struct {
 	client *client.Client
 }
 
+// NetworkInterfaceEmptyModel represents empty nested blocks
+type NetworkInterfaceEmptyModel struct {
+}
+
+// NetworkInterfaceDedicatedInterfaceModel represents dedicated_interface block
+type NetworkInterfaceDedicatedInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Node types.String `tfsdk:"node"`
+	Priority types.Int64 `tfsdk:"priority"`
+	Cluster *NetworkInterfaceEmptyModel `tfsdk:"cluster"`
+	IsPrimary *NetworkInterfaceEmptyModel `tfsdk:"is_primary"`
+	Monitor *NetworkInterfaceEmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *NetworkInterfaceEmptyModel `tfsdk:"monitor_disabled"`
+	NotPrimary *NetworkInterfaceEmptyModel `tfsdk:"not_primary"`
+}
+
+// NetworkInterfaceDedicatedManagementInterfaceModel represents dedicated_management_interface block
+type NetworkInterfaceDedicatedManagementInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Node types.String `tfsdk:"node"`
+	Cluster *NetworkInterfaceEmptyModel `tfsdk:"cluster"`
+}
+
+// NetworkInterfaceEthernetInterfaceModel represents ethernet_interface block
+type NetworkInterfaceEthernetInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Node types.String `tfsdk:"node"`
+	Priority types.Int64 `tfsdk:"priority"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+	Cluster *NetworkInterfaceEmptyModel `tfsdk:"cluster"`
+	DhcpClient *NetworkInterfaceEmptyModel `tfsdk:"dhcp_client"`
+	DhcpServer *NetworkInterfaceEthernetInterfaceDhcpServerModel `tfsdk:"dhcp_server"`
+	IPV6AutoConfig *NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel `tfsdk:"ipv6_auto_config"`
+	IsPrimary *NetworkInterfaceEmptyModel `tfsdk:"is_primary"`
+	Monitor *NetworkInterfaceEmptyModel `tfsdk:"monitor"`
+	MonitorDisabled *NetworkInterfaceEmptyModel `tfsdk:"monitor_disabled"`
+	NoIPV6Address *NetworkInterfaceEmptyModel `tfsdk:"no_ipv6_address"`
+	NotPrimary *NetworkInterfaceEmptyModel `tfsdk:"not_primary"`
+	SiteLocalInsideNetwork *NetworkInterfaceEmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *NetworkInterfaceEmptyModel `tfsdk:"site_local_network"`
+	StaticIP *NetworkInterfaceEthernetInterfaceStaticIPModel `tfsdk:"static_ip"`
+	StaticIPV6Address *NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel `tfsdk:"static_ipv6_address"`
+	StorageNetwork *NetworkInterfaceEmptyModel `tfsdk:"storage_network"`
+	Untagged *NetworkInterfaceEmptyModel `tfsdk:"untagged"`
+}
+
+// NetworkInterfaceEthernetInterfaceDhcpServerModel represents dhcp_server block
+type NetworkInterfaceEthernetInterfaceDhcpServerModel struct {
+	AutomaticFromEnd *NetworkInterfaceEmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *NetworkInterfaceEmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *NetworkInterfaceEmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *NetworkInterfaceEthernetInterfaceDhcpServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksModel represents dhcp_networks block
+type NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksModel struct {
+	DgwAddress types.String `tfsdk:"dgw_address"`
+	DNSAddress types.String `tfsdk:"dns_address"`
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	FirstAddress *NetworkInterfaceEmptyModel `tfsdk:"first_address"`
+	LastAddress *NetworkInterfaceEmptyModel `tfsdk:"last_address"`
+	Pools []NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksPoolsModel `tfsdk:"pools"`
+	SameAsDgw *NetworkInterfaceEmptyModel `tfsdk:"same_as_dgw"`
+}
+
+// NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksPoolsModel represents pools block
+type NetworkInterfaceEthernetInterfaceDhcpServerDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// NetworkInterfaceEthernetInterfaceDhcpServerInterfaceIPMapModel represents interface_ip_map block
+type NetworkInterfaceEthernetInterfaceDhcpServerInterfaceIPMapModel struct {
+	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel represents ipv6_auto_config block
+type NetworkInterfaceEthernetInterfaceIPV6AutoConfigModel struct {
+	Host *NetworkInterfaceEmptyModel `tfsdk:"host"`
+	Router *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterModel represents router block
+type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	DNSConfig *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
+	Stateful *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulModel `tfsdk:"stateful"`
+}
+
+// NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel represents dns_config block
+type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigModel struct {
+	ConfiguredList *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
+	LocalDNS *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel `tfsdk:"local_dns"`
+}
+
+// NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
+type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigConfiguredListModel struct {
+	DNSList types.List `tfsdk:"dns_list"`
+}
+
+// NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
+type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterDNSConfigLocalDNSModel struct {
+	ConfiguredAddress types.String `tfsdk:"configured_address"`
+	FirstAddress *NetworkInterfaceEmptyModel `tfsdk:"first_address"`
+	LastAddress *NetworkInterfaceEmptyModel `tfsdk:"last_address"`
+}
+
+// NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulModel represents stateful block
+type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulModel struct {
+	AutomaticFromEnd *NetworkInterfaceEmptyModel `tfsdk:"automatic_from_end"`
+	AutomaticFromStart *NetworkInterfaceEmptyModel `tfsdk:"automatic_from_start"`
+	DhcpNetworks []NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel `tfsdk:"dhcp_networks"`
+	FixedIPMap *NetworkInterfaceEmptyModel `tfsdk:"fixed_ip_map"`
+	InterfaceIPMap *NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel represents dhcp_networks block
+type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksModel struct {
+	NetworkPrefix types.String `tfsdk:"network_prefix"`
+	PoolSettings types.String `tfsdk:"pool_settings"`
+	Pools []NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel represents pools block
+type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulDhcpNetworksPoolsModel struct {
+	EndIP types.String `tfsdk:"end_ip"`
+	StartIP types.String `tfsdk:"start_ip"`
+}
+
+// NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
+type NetworkInterfaceEthernetInterfaceIPV6AutoConfigRouterStatefulInterfaceIPMapModel struct {
+	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceEthernetInterfaceStaticIPModel represents static_ip block
+type NetworkInterfaceEthernetInterfaceStaticIPModel struct {
+	ClusterStaticIP *NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
+type NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModel struct {
+	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel represents node_static_ip block
+type NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel represents static_ipv6_address block
+type NetworkInterfaceEthernetInterfaceStaticIPV6AddressModel struct {
+	ClusterStaticIP *NetworkInterfaceEthernetInterfaceStaticIPV6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *NetworkInterfaceEthernetInterfaceStaticIPV6AddressNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// NetworkInterfaceEthernetInterfaceStaticIPV6AddressClusterStaticIPModel represents cluster_static_ip block
+type NetworkInterfaceEthernetInterfaceStaticIPV6AddressClusterStaticIPModel struct {
+	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceEthernetInterfaceStaticIPV6AddressNodeStaticIPModel represents node_static_ip block
+type NetworkInterfaceEthernetInterfaceStaticIPV6AddressNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// NetworkInterfaceLayer2InterfaceModel represents layer2_interface block
+type NetworkInterfaceLayer2InterfaceModel struct {
+	L2sriovInterface *NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel `tfsdk:"l2sriov_interface"`
+	L2vlanInterface *NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel `tfsdk:"l2vlan_interface"`
+	L2vlanSLOInterface *NetworkInterfaceLayer2InterfaceL2vlanSLOInterfaceModel `tfsdk:"l2vlan_slo_interface"`
+}
+
+// NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel represents l2sriov_interface block
+type NetworkInterfaceLayer2InterfaceL2sriovInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+	Untagged *NetworkInterfaceEmptyModel `tfsdk:"untagged"`
+}
+
+// NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel represents l2vlan_interface block
+type NetworkInterfaceLayer2InterfaceL2vlanInterfaceModel struct {
+	Device types.String `tfsdk:"device"`
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// NetworkInterfaceLayer2InterfaceL2vlanSLOInterfaceModel represents l2vlan_slo_interface block
+type NetworkInterfaceLayer2InterfaceL2vlanSLOInterfaceModel struct {
+	VlanID types.Int64 `tfsdk:"vlan_id"`
+}
+
+// NetworkInterfaceTunnelInterfaceModel represents tunnel_interface block
+type NetworkInterfaceTunnelInterfaceModel struct {
+	Mtu types.Int64 `tfsdk:"mtu"`
+	Node types.String `tfsdk:"node"`
+	Priority types.Int64 `tfsdk:"priority"`
+	SiteLocalInsideNetwork *NetworkInterfaceEmptyModel `tfsdk:"site_local_inside_network"`
+	SiteLocalNetwork *NetworkInterfaceEmptyModel `tfsdk:"site_local_network"`
+	StaticIP *NetworkInterfaceTunnelInterfaceStaticIPModel `tfsdk:"static_ip"`
+	Tunnel *NetworkInterfaceTunnelInterfaceTunnelModel `tfsdk:"tunnel"`
+}
+
+// NetworkInterfaceTunnelInterfaceStaticIPModel represents static_ip block
+type NetworkInterfaceTunnelInterfaceStaticIPModel struct {
+	ClusterStaticIP *NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModel `tfsdk:"cluster_static_ip"`
+	NodeStaticIP *NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel `tfsdk:"node_static_ip"`
+}
+
+// NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
+type NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModel struct {
+	InterfaceIPMap *NetworkInterfaceEmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel represents node_static_ip block
+type NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModel struct {
+	DefaultGw types.String `tfsdk:"default_gw"`
+	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// NetworkInterfaceTunnelInterfaceTunnelModel represents tunnel block
+type NetworkInterfaceTunnelInterfaceTunnelModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type NetworkInterfaceResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +287,11 @@ type NetworkInterfaceResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	DedicatedInterface *NetworkInterfaceDedicatedInterfaceModel `tfsdk:"dedicated_interface"`
+	DedicatedManagementInterface *NetworkInterfaceDedicatedManagementInterfaceModel `tfsdk:"dedicated_management_interface"`
+	EthernetInterface *NetworkInterfaceEthernetInterfaceModel `tfsdk:"ethernet_interface"`
+	Layer2Interface *NetworkInterfaceLayer2InterfaceModel `tfsdk:"layer2_interface"`
+	TunnelInterface *NetworkInterfaceTunnelInterfaceModel `tfsdk:"tunnel_interface"`
 }
 
 func (r *NetworkInterfaceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -734,6 +973,10 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 		Spec: client.NetworkInterfaceSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -789,6 +1032,15 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 
 	apiResource, err := r.client.GetNetworkInterface(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NetworkInterface not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NetworkInterface: %s", err))
 		return
 	}
@@ -803,6 +1055,13 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -855,6 +1114,10 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 		Spec: client.NetworkInterfaceSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -879,10 +1142,20 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetNetworkInterface(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -906,11 +1179,33 @@ func (r *NetworkInterfaceResource) Delete(ctx context.Context, req resource.Dele
 
 	err := r.client.DeleteNetworkInterface(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NetworkInterface already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete NetworkInterface: %s", err))
 		return
 	}
 }
 
 func (r *NetworkInterfaceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

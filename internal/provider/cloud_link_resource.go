@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,113 @@ type CloudLinkResource struct {
 	client *client.Client
 }
 
+// CloudLinkEmptyModel represents empty nested blocks
+type CloudLinkEmptyModel struct {
+}
+
+// CloudLinkAWSModel represents aws block
+type CloudLinkAWSModel struct {
+	CustomAsn types.Int64 `tfsdk:"custom_asn"`
+	AWSCred *CloudLinkAWSAWSCredModel `tfsdk:"aws_cred"`
+	Byoc *CloudLinkAWSByocModel `tfsdk:"byoc"`
+}
+
+// CloudLinkAWSAWSCredModel represents aws_cred block
+type CloudLinkAWSAWSCredModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// CloudLinkAWSByocModel represents byoc block
+type CloudLinkAWSByocModel struct {
+	Connections []CloudLinkAWSByocConnectionsModel `tfsdk:"connections"`
+}
+
+// CloudLinkAWSByocConnectionsModel represents connections block
+type CloudLinkAWSByocConnectionsModel struct {
+	BGPAsn types.Int64 `tfsdk:"bgp_asn"`
+	ConnectionID types.String `tfsdk:"connection_id"`
+	Region types.String `tfsdk:"region"`
+	UserAssignedName types.String `tfsdk:"user_assigned_name"`
+	VirtualInterfaceType types.String `tfsdk:"virtual_interface_type"`
+	Vlan types.Int64 `tfsdk:"vlan"`
+	AuthKey *CloudLinkAWSByocConnectionsAuthKeyModel `tfsdk:"auth_key"`
+	IPV4 *CloudLinkAWSByocConnectionsIPV4Model `tfsdk:"ipv4"`
+	Metadata *CloudLinkAWSByocConnectionsMetadataModel `tfsdk:"metadata"`
+	SystemGeneratedName *CloudLinkEmptyModel `tfsdk:"system_generated_name"`
+	Tags *CloudLinkEmptyModel `tfsdk:"tags"`
+}
+
+// CloudLinkAWSByocConnectionsAuthKeyModel represents auth_key block
+type CloudLinkAWSByocConnectionsAuthKeyModel struct {
+	BlindfoldSecretInfo *CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel represents clear_secret_info block
+type CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CloudLinkAWSByocConnectionsIPV4Model represents ipv4 block
+type CloudLinkAWSByocConnectionsIPV4Model struct {
+	AWSRouterPeerAddress types.String `tfsdk:"aws_router_peer_address"`
+	RouterPeerAddress types.String `tfsdk:"router_peer_address"`
+}
+
+// CloudLinkAWSByocConnectionsMetadataModel represents metadata block
+type CloudLinkAWSByocConnectionsMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CloudLinkEnabledModel represents enabled block
+type CloudLinkEnabledModel struct {
+	CloudlinkNetworkName types.String `tfsdk:"cloudlink_network_name"`
+}
+
+// CloudLinkGCPModel represents gcp block
+type CloudLinkGCPModel struct {
+	Byoc *CloudLinkGCPByocModel `tfsdk:"byoc"`
+	GCPCred *CloudLinkGCPGCPCredModel `tfsdk:"gcp_cred"`
+}
+
+// CloudLinkGCPByocModel represents byoc block
+type CloudLinkGCPByocModel struct {
+	Connections []CloudLinkGCPByocConnectionsModel `tfsdk:"connections"`
+}
+
+// CloudLinkGCPByocConnectionsModel represents connections block
+type CloudLinkGCPByocConnectionsModel struct {
+	InterconnectAttachmentName types.String `tfsdk:"interconnect_attachment_name"`
+	Project types.String `tfsdk:"project"`
+	Region types.String `tfsdk:"region"`
+	Metadata *CloudLinkGCPByocConnectionsMetadataModel `tfsdk:"metadata"`
+	SameAsCredential *CloudLinkEmptyModel `tfsdk:"same_as_credential"`
+}
+
+// CloudLinkGCPByocConnectionsMetadataModel represents metadata block
+type CloudLinkGCPByocConnectionsMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// CloudLinkGCPGCPCredModel represents gcp_cred block
+type CloudLinkGCPGCPCredModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
 type CloudLinkResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +161,10 @@ type CloudLinkResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AWS *CloudLinkAWSModel `tfsdk:"aws"`
+	Disabled *CloudLinkEmptyModel `tfsdk:"disabled"`
+	Enabled *CloudLinkEnabledModel `tfsdk:"enabled"`
+	GCP *CloudLinkGCPModel `tfsdk:"gcp"`
 }
 
 func (r *CloudLinkResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -462,6 +574,10 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 		Spec: client.CloudLinkSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -517,6 +633,15 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 
 	apiResource, err := r.client.GetCloudLink(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CloudLink not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CloudLink: %s", err))
 		return
 	}
@@ -531,6 +656,13 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -583,6 +715,10 @@ func (r *CloudLinkResource) Update(ctx context.Context, req resource.UpdateReque
 		Spec: client.CloudLinkSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -607,10 +743,20 @@ func (r *CloudLinkResource) Update(ctx context.Context, req resource.UpdateReque
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetCloudLink(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -634,11 +780,33 @@ func (r *CloudLinkResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	err := r.client.DeleteCloudLink(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CloudLink already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete CloudLink: %s", err))
 		return
 	}
 }
 
 func (r *CloudLinkResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

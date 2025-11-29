@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,44 @@ type NetworkPolicyRuleResource struct {
 	client *client.Client
 }
 
+// NetworkPolicyRuleEmptyModel represents empty nested blocks
+type NetworkPolicyRuleEmptyModel struct {
+}
+
+// NetworkPolicyRuleAdvancedActionModel represents advanced_action block
+type NetworkPolicyRuleAdvancedActionModel struct {
+	Action types.String `tfsdk:"action"`
+}
+
+// NetworkPolicyRuleIPPrefixSetModel represents ip_prefix_set block
+type NetworkPolicyRuleIPPrefixSetModel struct {
+	Ref []NetworkPolicyRuleIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// NetworkPolicyRuleIPPrefixSetRefModel represents ref block
+type NetworkPolicyRuleIPPrefixSetRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// NetworkPolicyRuleLabelMatcherModel represents label_matcher block
+type NetworkPolicyRuleLabelMatcherModel struct {
+	Keys types.List `tfsdk:"keys"`
+}
+
+// NetworkPolicyRulePrefixModel represents prefix block
+type NetworkPolicyRulePrefixModel struct {
+	Prefix types.List `tfsdk:"prefix"`
+}
+
+// NetworkPolicyRulePrefixSelectorModel represents prefix_selector block
+type NetworkPolicyRulePrefixSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
 type NetworkPolicyRuleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -56,6 +95,11 @@ type NetworkPolicyRuleResourceModel struct {
 	Protocol types.String `tfsdk:"protocol"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AdvancedAction *NetworkPolicyRuleAdvancedActionModel `tfsdk:"advanced_action"`
+	IPPrefixSet *NetworkPolicyRuleIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	LabelMatcher *NetworkPolicyRuleLabelMatcherModel `tfsdk:"label_matcher"`
+	Prefix *NetworkPolicyRulePrefixModel `tfsdk:"prefix"`
+	PrefixSelector *NetworkPolicyRulePrefixSelectorModel `tfsdk:"prefix_selector"`
 }
 
 func (r *NetworkPolicyRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -336,6 +380,10 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		Spec: client.NetworkPolicyRuleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -391,6 +439,15 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 
 	apiResource, err := r.client.GetNetworkPolicyRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NetworkPolicyRule not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NetworkPolicyRule: %s", err))
 		return
 	}
@@ -405,6 +462,13 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -457,6 +521,10 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		Spec: client.NetworkPolicyRuleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -481,10 +549,20 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetNetworkPolicyRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -508,11 +586,33 @@ func (r *NetworkPolicyRuleResource) Delete(ctx context.Context, req resource.Del
 
 	err := r.client.DeleteNetworkPolicyRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "NetworkPolicyRule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete NetworkPolicyRule: %s", err))
 		return
 	}
 }
 
 func (r *NetworkPolicyRuleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

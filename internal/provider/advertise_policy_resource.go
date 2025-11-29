@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,148 @@ type AdvertisePolicyResource struct {
 	client *client.Client
 }
 
+// AdvertisePolicyEmptyModel represents empty nested blocks
+type AdvertisePolicyEmptyModel struct {
+}
+
+// AdvertisePolicyPublicIPModel represents public_ip block
+type AdvertisePolicyPublicIPModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AdvertisePolicyTLSParametersModel represents tls_parameters block
+type AdvertisePolicyTLSParametersModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+	ClientCertificateOptional *AdvertisePolicyEmptyModel `tfsdk:"client_certificate_optional"`
+	ClientCertificateRequired *AdvertisePolicyEmptyModel `tfsdk:"client_certificate_required"`
+	CommonParams *AdvertisePolicyTLSParametersCommonParamsModel `tfsdk:"common_params"`
+	NoClientCertificate *AdvertisePolicyEmptyModel `tfsdk:"no_client_certificate"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsModel represents common_params block
+type AdvertisePolicyTLSParametersCommonParamsModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaximumProtocolVersion types.String `tfsdk:"maximum_protocol_version"`
+	MinimumProtocolVersion types.String `tfsdk:"minimum_protocol_version"`
+	TLSCertificates []AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
+	ValidationParams *AdvertisePolicyTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
+type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *AdvertisePolicyEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *AdvertisePolicyEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel represents private_key block
+type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsValidationParamsModel represents validation_params block
+type AdvertisePolicyTLSParametersCommonParamsValidationParamsModel struct {
+	SkipHostnameVerification types.Bool `tfsdk:"skip_hostname_verification"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	VerifySubjectAltNames types.List `tfsdk:"verify_subject_alt_names"`
+	TrustedCa *AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel represents trusted_ca block
+type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaModel struct {
+	TrustedCaList []AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+}
+
+// AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
+type AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AdvertisePolicyWhereModel represents where block
+type AdvertisePolicyWhereModel struct {
+	Site *AdvertisePolicyWhereSiteModel `tfsdk:"site"`
+	VirtualNetwork *AdvertisePolicyWhereVirtualNetworkModel `tfsdk:"virtual_network"`
+	VirtualSite *AdvertisePolicyWhereVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// AdvertisePolicyWhereSiteModel represents site block
+type AdvertisePolicyWhereSiteModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DisableInternetVip *AdvertisePolicyEmptyModel `tfsdk:"disable_internet_vip"`
+	EnableInternetVip *AdvertisePolicyEmptyModel `tfsdk:"enable_internet_vip"`
+	Ref []AdvertisePolicyWhereSiteRefModel `tfsdk:"ref"`
+}
+
+// AdvertisePolicyWhereSiteRefModel represents ref block
+type AdvertisePolicyWhereSiteRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AdvertisePolicyWhereVirtualNetworkModel represents virtual_network block
+type AdvertisePolicyWhereVirtualNetworkModel struct {
+	Ref []AdvertisePolicyWhereVirtualNetworkRefModel `tfsdk:"ref"`
+}
+
+// AdvertisePolicyWhereVirtualNetworkRefModel represents ref block
+type AdvertisePolicyWhereVirtualNetworkRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// AdvertisePolicyWhereVirtualSiteModel represents virtual_site block
+type AdvertisePolicyWhereVirtualSiteModel struct {
+	NetworkType types.String `tfsdk:"network_type"`
+	DisableInternetVip *AdvertisePolicyEmptyModel `tfsdk:"disable_internet_vip"`
+	EnableInternetVip *AdvertisePolicyEmptyModel `tfsdk:"enable_internet_vip"`
+	Ref []AdvertisePolicyWhereVirtualSiteRefModel `tfsdk:"ref"`
+}
+
+// AdvertisePolicyWhereVirtualSiteRefModel represents ref block
+type AdvertisePolicyWhereVirtualSiteRefModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
 type AdvertisePolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -58,6 +201,9 @@ type AdvertisePolicyResourceModel struct {
 	SkipXffAppend types.Bool `tfsdk:"skip_xff_append"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	PublicIP []AdvertisePolicyPublicIPModel `tfsdk:"public_ip"`
+	TLSParameters *AdvertisePolicyTLSParametersModel `tfsdk:"tls_parameters"`
+	Where *AdvertisePolicyWhereModel `tfsdk:"where"`
 }
 
 func (r *AdvertisePolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -591,6 +737,10 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 		Spec: client.AdvertisePolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -646,6 +796,15 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 
 	apiResource, err := r.client.GetAdvertisePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AdvertisePolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AdvertisePolicy: %s", err))
 		return
 	}
@@ -660,6 +819,13 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -712,6 +878,10 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 		Spec: client.AdvertisePolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -736,10 +906,20 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetAdvertisePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -763,11 +943,33 @@ func (r *AdvertisePolicyResource) Delete(ctx context.Context, req resource.Delet
 
 	err := r.client.DeleteAdvertisePolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AdvertisePolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete AdvertisePolicy: %s", err))
 		return
 	}
 }
 
 func (r *AdvertisePolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

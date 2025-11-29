@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,114 @@ type AppFirewallResource struct {
 	client *client.Client
 }
 
+// AppFirewallEmptyModel represents empty nested blocks
+type AppFirewallEmptyModel struct {
+}
+
+// AppFirewallAiRiskBasedBlockingModel represents ai_risk_based_blocking block
+type AppFirewallAiRiskBasedBlockingModel struct {
+	HighRiskAction types.String `tfsdk:"high_risk_action"`
+	LowRiskAction types.String `tfsdk:"low_risk_action"`
+	MediumRiskAction types.String `tfsdk:"medium_risk_action"`
+}
+
+// AppFirewallAllowedResponseCodesModel represents allowed_response_codes block
+type AppFirewallAllowedResponseCodesModel struct {
+	ResponseCode types.List `tfsdk:"response_code"`
+}
+
+// AppFirewallBlockingPageModel represents blocking_page block
+type AppFirewallBlockingPageModel struct {
+	BlockingPage types.String `tfsdk:"blocking_page"`
+	ResponseCode types.String `tfsdk:"response_code"`
+}
+
+// AppFirewallBotProtectionSettingModel represents bot_protection_setting block
+type AppFirewallBotProtectionSettingModel struct {
+	GoodBotAction types.String `tfsdk:"good_bot_action"`
+	MaliciousBotAction types.String `tfsdk:"malicious_bot_action"`
+	SuspiciousBotAction types.String `tfsdk:"suspicious_bot_action"`
+}
+
+// AppFirewallCustomAnonymizationModel represents custom_anonymization block
+type AppFirewallCustomAnonymizationModel struct {
+	AnonymizationConfig []AppFirewallCustomAnonymizationAnonymizationConfigModel `tfsdk:"anonymization_config"`
+}
+
+// AppFirewallCustomAnonymizationAnonymizationConfigModel represents anonymization_config block
+type AppFirewallCustomAnonymizationAnonymizationConfigModel struct {
+	Cookie *AppFirewallCustomAnonymizationAnonymizationConfigCookieModel `tfsdk:"cookie"`
+	HTTPHeader *AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel `tfsdk:"http_header"`
+	QueryParameter *AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel `tfsdk:"query_parameter"`
+}
+
+// AppFirewallCustomAnonymizationAnonymizationConfigCookieModel represents cookie block
+type AppFirewallCustomAnonymizationAnonymizationConfigCookieModel struct {
+	CookieName types.String `tfsdk:"cookie_name"`
+}
+
+// AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel represents http_header block
+type AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel struct {
+	HeaderName types.String `tfsdk:"header_name"`
+}
+
+// AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel represents query_parameter block
+type AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel struct {
+	QueryParamName types.String `tfsdk:"query_param_name"`
+}
+
+// AppFirewallDetectionSettingsModel represents detection_settings block
+type AppFirewallDetectionSettingsModel struct {
+	BotProtectionSetting *AppFirewallDetectionSettingsBotProtectionSettingModel `tfsdk:"bot_protection_setting"`
+	DefaultBotSetting *AppFirewallEmptyModel `tfsdk:"default_bot_setting"`
+	DefaultViolationSettings *AppFirewallEmptyModel `tfsdk:"default_violation_settings"`
+	DisableStaging *AppFirewallEmptyModel `tfsdk:"disable_staging"`
+	DisableSuppression *AppFirewallEmptyModel `tfsdk:"disable_suppression"`
+	DisableThreatCampaigns *AppFirewallEmptyModel `tfsdk:"disable_threat_campaigns"`
+	EnableSuppression *AppFirewallEmptyModel `tfsdk:"enable_suppression"`
+	EnableThreatCampaigns *AppFirewallEmptyModel `tfsdk:"enable_threat_campaigns"`
+	SignatureSelectionSetting *AppFirewallDetectionSettingsSignatureSelectionSettingModel `tfsdk:"signature_selection_setting"`
+	StageNewAndUpdatedSignatures *AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModel `tfsdk:"stage_new_and_updated_signatures"`
+	StageNewSignatures *AppFirewallDetectionSettingsStageNewSignaturesModel `tfsdk:"stage_new_signatures"`
+	ViolationSettings *AppFirewallDetectionSettingsViolationSettingsModel `tfsdk:"violation_settings"`
+}
+
+// AppFirewallDetectionSettingsBotProtectionSettingModel represents bot_protection_setting block
+type AppFirewallDetectionSettingsBotProtectionSettingModel struct {
+	GoodBotAction types.String `tfsdk:"good_bot_action"`
+	MaliciousBotAction types.String `tfsdk:"malicious_bot_action"`
+	SuspiciousBotAction types.String `tfsdk:"suspicious_bot_action"`
+}
+
+// AppFirewallDetectionSettingsSignatureSelectionSettingModel represents signature_selection_setting block
+type AppFirewallDetectionSettingsSignatureSelectionSettingModel struct {
+	AttackTypeSettings *AppFirewallDetectionSettingsSignatureSelectionSettingAttackTypeSettingsModel `tfsdk:"attack_type_settings"`
+	DefaultAttackTypeSettings *AppFirewallEmptyModel `tfsdk:"default_attack_type_settings"`
+	HighMediumAccuracySignatures *AppFirewallEmptyModel `tfsdk:"high_medium_accuracy_signatures"`
+	HighMediumLowAccuracySignatures *AppFirewallEmptyModel `tfsdk:"high_medium_low_accuracy_signatures"`
+	OnlyHighAccuracySignatures *AppFirewallEmptyModel `tfsdk:"only_high_accuracy_signatures"`
+}
+
+// AppFirewallDetectionSettingsSignatureSelectionSettingAttackTypeSettingsModel represents attack_type_settings block
+type AppFirewallDetectionSettingsSignatureSelectionSettingAttackTypeSettingsModel struct {
+	DisabledAttackTypes types.List `tfsdk:"disabled_attack_types"`
+}
+
+// AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModel represents stage_new_and_updated_signatures block
+type AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModel struct {
+	StagingPeriod types.Int64 `tfsdk:"staging_period"`
+}
+
+// AppFirewallDetectionSettingsStageNewSignaturesModel represents stage_new_signatures block
+type AppFirewallDetectionSettingsStageNewSignaturesModel struct {
+	StagingPeriod types.Int64 `tfsdk:"staging_period"`
+}
+
+// AppFirewallDetectionSettingsViolationSettingsModel represents violation_settings block
+type AppFirewallDetectionSettingsViolationSettingsModel struct {
+	DisabledViolationTypes types.List `tfsdk:"disabled_violation_types"`
+}
+
 type AppFirewallResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +162,20 @@ type AppFirewallResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AiRiskBasedBlocking *AppFirewallAiRiskBasedBlockingModel `tfsdk:"ai_risk_based_blocking"`
+	AllowAllResponseCodes *AppFirewallEmptyModel `tfsdk:"allow_all_response_codes"`
+	AllowedResponseCodes *AppFirewallAllowedResponseCodesModel `tfsdk:"allowed_response_codes"`
+	Blocking *AppFirewallEmptyModel `tfsdk:"blocking"`
+	BlockingPage *AppFirewallBlockingPageModel `tfsdk:"blocking_page"`
+	BotProtectionSetting *AppFirewallBotProtectionSettingModel `tfsdk:"bot_protection_setting"`
+	CustomAnonymization *AppFirewallCustomAnonymizationModel `tfsdk:"custom_anonymization"`
+	DefaultAnonymization *AppFirewallEmptyModel `tfsdk:"default_anonymization"`
+	DefaultBotSetting *AppFirewallEmptyModel `tfsdk:"default_bot_setting"`
+	DefaultDetectionSettings *AppFirewallEmptyModel `tfsdk:"default_detection_settings"`
+	DetectionSettings *AppFirewallDetectionSettingsModel `tfsdk:"detection_settings"`
+	DisableAnonymization *AppFirewallEmptyModel `tfsdk:"disable_anonymization"`
+	Monitoring *AppFirewallEmptyModel `tfsdk:"monitoring"`
+	UseDefaultBlockingPage *AppFirewallEmptyModel `tfsdk:"use_default_blocking_page"`
 }
 
 func (r *AppFirewallResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -474,6 +597,10 @@ func (r *AppFirewallResource) Create(ctx context.Context, req resource.CreateReq
 		Spec: client.AppFirewallSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -529,6 +656,15 @@ func (r *AppFirewallResource) Read(ctx context.Context, req resource.ReadRequest
 
 	apiResource, err := r.client.GetAppFirewall(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AppFirewall not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read AppFirewall: %s", err))
 		return
 	}
@@ -543,6 +679,13 @@ func (r *AppFirewallResource) Read(ctx context.Context, req resource.ReadRequest
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -595,6 +738,10 @@ func (r *AppFirewallResource) Update(ctx context.Context, req resource.UpdateReq
 		Spec: client.AppFirewallSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -619,10 +766,20 @@ func (r *AppFirewallResource) Update(ctx context.Context, req resource.UpdateReq
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetAppFirewall(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -646,11 +803,33 @@ func (r *AppFirewallResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	err := r.client.DeleteAppFirewall(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "AppFirewall already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete AppFirewall: %s", err))
 		return
 	}
 }
 
 func (r *AppFirewallResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

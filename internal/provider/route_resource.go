@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,420 @@ type RouteResource struct {
 	client *client.Client
 }
 
+// RouteEmptyModel represents empty nested blocks
+type RouteEmptyModel struct {
+}
+
+// RouteRoutesModel represents routes block
+type RouteRoutesModel struct {
+	DisableLocationAdd types.Bool `tfsdk:"disable_location_add"`
+	RequestCookiesToRemove types.List `tfsdk:"request_cookies_to_remove"`
+	RequestHeadersToRemove types.List `tfsdk:"request_headers_to_remove"`
+	ResponseCookiesToRemove types.List `tfsdk:"response_cookies_to_remove"`
+	ResponseHeadersToRemove types.List `tfsdk:"response_headers_to_remove"`
+	BotDefenseJavascriptInjection *RouteRoutesBotDefenseJavascriptInjectionModel `tfsdk:"bot_defense_javascript_injection"`
+	InheritedBotDefenseJavascriptInjection *RouteEmptyModel `tfsdk:"inherited_bot_defense_javascript_injection"`
+	InheritedWAFExclusion *RouteEmptyModel `tfsdk:"inherited_waf_exclusion"`
+	Match []RouteRoutesMatchModel `tfsdk:"match"`
+	RequestCookiesToAdd []RouteRoutesRequestCookiesToAddModel `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd []RouteRoutesRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd []RouteRoutesResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd []RouteRoutesResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+	RouteDestination *RouteRoutesRouteDestinationModel `tfsdk:"route_destination"`
+	RouteDirectResponse *RouteRoutesRouteDirectResponseModel `tfsdk:"route_direct_response"`
+	RouteRedirect *RouteRoutesRouteRedirectModel `tfsdk:"route_redirect"`
+	ServicePolicy *RouteRoutesServicePolicyModel `tfsdk:"service_policy"`
+	WAFExclusionPolicy *RouteRoutesWAFExclusionPolicyModel `tfsdk:"waf_exclusion_policy"`
+	WAFType *RouteRoutesWAFTypeModel `tfsdk:"waf_type"`
+}
+
+// RouteRoutesBotDefenseJavascriptInjectionModel represents bot_defense_javascript_injection block
+type RouteRoutesBotDefenseJavascriptInjectionModel struct {
+	JavascriptLocation types.String `tfsdk:"javascript_location"`
+	JavascriptTags []RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsModel `tfsdk:"javascript_tags"`
+}
+
+// RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsModel represents javascript_tags block
+type RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsModel struct {
+	JavascriptURL types.String `tfsdk:"javascript_url"`
+	TagAttributes []RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModel `tfsdk:"tag_attributes"`
+}
+
+// RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModel represents tag_attributes block
+type RouteRoutesBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModel struct {
+	JavascriptTag types.String `tfsdk:"javascript_tag"`
+	TagValue types.String `tfsdk:"tag_value"`
+}
+
+// RouteRoutesMatchModel represents match block
+type RouteRoutesMatchModel struct {
+	HTTPMethod types.String `tfsdk:"http_method"`
+	Headers []RouteRoutesMatchHeadersModel `tfsdk:"headers"`
+	IncomingPort *RouteRoutesMatchIncomingPortModel `tfsdk:"incoming_port"`
+	Path *RouteRoutesMatchPathModel `tfsdk:"path"`
+	QueryParams []RouteRoutesMatchQueryParamsModel `tfsdk:"query_params"`
+}
+
+// RouteRoutesMatchHeadersModel represents headers block
+type RouteRoutesMatchHeadersModel struct {
+	Exact types.String `tfsdk:"exact"`
+	InvertMatch types.Bool `tfsdk:"invert_match"`
+	Name types.String `tfsdk:"name"`
+	Presence types.Bool `tfsdk:"presence"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// RouteRoutesMatchIncomingPortModel represents incoming_port block
+type RouteRoutesMatchIncomingPortModel struct {
+	Port types.Int64 `tfsdk:"port"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	NoPortMatch *RouteEmptyModel `tfsdk:"no_port_match"`
+}
+
+// RouteRoutesMatchPathModel represents path block
+type RouteRoutesMatchPathModel struct {
+	Path types.String `tfsdk:"path"`
+	Prefix types.String `tfsdk:"prefix"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// RouteRoutesMatchQueryParamsModel represents query_params block
+type RouteRoutesMatchQueryParamsModel struct {
+	Exact types.String `tfsdk:"exact"`
+	Key types.String `tfsdk:"key"`
+	Regex types.String `tfsdk:"regex"`
+}
+
+// RouteRoutesRequestCookiesToAddModel represents request_cookies_to_add block
+type RouteRoutesRequestCookiesToAddModel struct {
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *RouteRoutesRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// RouteRoutesRequestCookiesToAddSecretValueModel represents secret_value block
+type RouteRoutesRequestCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *RouteRoutesRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *RouteRoutesRequestCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// RouteRoutesRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type RouteRoutesRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// RouteRoutesRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type RouteRoutesRequestCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// RouteRoutesRequestHeadersToAddModel represents request_headers_to_add block
+type RouteRoutesRequestHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *RouteRoutesRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// RouteRoutesRequestHeadersToAddSecretValueModel represents secret_value block
+type RouteRoutesRequestHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *RouteRoutesRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *RouteRoutesRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// RouteRoutesRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type RouteRoutesRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// RouteRoutesRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type RouteRoutesRequestHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// RouteRoutesResponseCookiesToAddModel represents response_cookies_to_add block
+type RouteRoutesResponseCookiesToAddModel struct {
+	AddDomain types.String `tfsdk:"add_domain"`
+	AddExpiry types.String `tfsdk:"add_expiry"`
+	AddPath types.String `tfsdk:"add_path"`
+	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	AddHttponly *RouteEmptyModel `tfsdk:"add_httponly"`
+	AddPartitioned *RouteEmptyModel `tfsdk:"add_partitioned"`
+	AddSecure *RouteEmptyModel `tfsdk:"add_secure"`
+	IgnoreDomain *RouteEmptyModel `tfsdk:"ignore_domain"`
+	IgnoreExpiry *RouteEmptyModel `tfsdk:"ignore_expiry"`
+	IgnoreHttponly *RouteEmptyModel `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge *RouteEmptyModel `tfsdk:"ignore_max_age"`
+	IgnorePartitioned *RouteEmptyModel `tfsdk:"ignore_partitioned"`
+	IgnorePath *RouteEmptyModel `tfsdk:"ignore_path"`
+	IgnoreSamesite *RouteEmptyModel `tfsdk:"ignore_samesite"`
+	IgnoreSecure *RouteEmptyModel `tfsdk:"ignore_secure"`
+	IgnoreValue *RouteEmptyModel `tfsdk:"ignore_value"`
+	SamesiteLax *RouteEmptyModel `tfsdk:"samesite_lax"`
+	SamesiteNone *RouteEmptyModel `tfsdk:"samesite_none"`
+	SamesiteStrict *RouteEmptyModel `tfsdk:"samesite_strict"`
+	SecretValue *RouteRoutesResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// RouteRoutesResponseCookiesToAddSecretValueModel represents secret_value block
+type RouteRoutesResponseCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *RouteRoutesResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *RouteRoutesResponseCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// RouteRoutesResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type RouteRoutesResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// RouteRoutesResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type RouteRoutesResponseCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// RouteRoutesResponseHeadersToAddModel represents response_headers_to_add block
+type RouteRoutesResponseHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *RouteRoutesResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// RouteRoutesResponseHeadersToAddSecretValueModel represents secret_value block
+type RouteRoutesResponseHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *RouteRoutesResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *RouteRoutesResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// RouteRoutesResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type RouteRoutesResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// RouteRoutesResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type RouteRoutesResponseHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// RouteRoutesRouteDestinationModel represents route_destination block
+type RouteRoutesRouteDestinationModel struct {
+	AutoHostRewrite types.Bool `tfsdk:"auto_host_rewrite"`
+	HostRewrite types.String `tfsdk:"host_rewrite"`
+	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
+	Priority types.String `tfsdk:"priority"`
+	Timeout types.Int64 `tfsdk:"timeout"`
+	BufferPolicy *RouteRoutesRouteDestinationBufferPolicyModel `tfsdk:"buffer_policy"`
+	CorsPolicy *RouteRoutesRouteDestinationCorsPolicyModel `tfsdk:"cors_policy"`
+	CsrfPolicy *RouteRoutesRouteDestinationCsrfPolicyModel `tfsdk:"csrf_policy"`
+	Destinations []RouteRoutesRouteDestinationDestinationsModel `tfsdk:"destinations"`
+	DoNotRetractCluster *RouteEmptyModel `tfsdk:"do_not_retract_cluster"`
+	EndpointSubsets *RouteEmptyModel `tfsdk:"endpoint_subsets"`
+	HashPolicy []RouteRoutesRouteDestinationHashPolicyModel `tfsdk:"hash_policy"`
+	MirrorPolicy *RouteRoutesRouteDestinationMirrorPolicyModel `tfsdk:"mirror_policy"`
+	QueryParams *RouteRoutesRouteDestinationQueryParamsModel `tfsdk:"query_params"`
+	RegexRewrite *RouteRoutesRouteDestinationRegexRewriteModel `tfsdk:"regex_rewrite"`
+	RetractCluster *RouteEmptyModel `tfsdk:"retract_cluster"`
+	RetryPolicy *RouteRoutesRouteDestinationRetryPolicyModel `tfsdk:"retry_policy"`
+	SpdyConfig *RouteRoutesRouteDestinationSpdyConfigModel `tfsdk:"spdy_config"`
+	WebSocketConfig *RouteRoutesRouteDestinationWebSocketConfigModel `tfsdk:"web_socket_config"`
+}
+
+// RouteRoutesRouteDestinationBufferPolicyModel represents buffer_policy block
+type RouteRoutesRouteDestinationBufferPolicyModel struct {
+	Disabled types.Bool `tfsdk:"disabled"`
+	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// RouteRoutesRouteDestinationCorsPolicyModel represents cors_policy block
+type RouteRoutesRouteDestinationCorsPolicyModel struct {
+	AllowCredentials types.Bool `tfsdk:"allow_credentials"`
+	AllowHeaders types.String `tfsdk:"allow_headers"`
+	AllowMethods types.String `tfsdk:"allow_methods"`
+	AllowOrigin types.List `tfsdk:"allow_origin"`
+	AllowOriginRegex types.List `tfsdk:"allow_origin_regex"`
+	Disabled types.Bool `tfsdk:"disabled"`
+	ExposeHeaders types.String `tfsdk:"expose_headers"`
+	MaximumAge types.Int64 `tfsdk:"maximum_age"`
+}
+
+// RouteRoutesRouteDestinationCsrfPolicyModel represents csrf_policy block
+type RouteRoutesRouteDestinationCsrfPolicyModel struct {
+	AllLoadBalancerDomains *RouteEmptyModel `tfsdk:"all_load_balancer_domains"`
+	CustomDomainList *RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	Disabled *RouteEmptyModel `tfsdk:"disabled"`
+}
+
+// RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel represents custom_domain_list block
+type RouteRoutesRouteDestinationCsrfPolicyCustomDomainListModel struct {
+	Domains types.List `tfsdk:"domains"`
+}
+
+// RouteRoutesRouteDestinationDestinationsModel represents destinations block
+type RouteRoutesRouteDestinationDestinationsModel struct {
+	Priority types.Int64 `tfsdk:"priority"`
+	Weight types.Int64 `tfsdk:"weight"`
+	Cluster []RouteRoutesRouteDestinationDestinationsClusterModel `tfsdk:"cluster"`
+	EndpointSubsets *RouteEmptyModel `tfsdk:"endpoint_subsets"`
+}
+
+// RouteRoutesRouteDestinationDestinationsClusterModel represents cluster block
+type RouteRoutesRouteDestinationDestinationsClusterModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// RouteRoutesRouteDestinationHashPolicyModel represents hash_policy block
+type RouteRoutesRouteDestinationHashPolicyModel struct {
+	HeaderName types.String `tfsdk:"header_name"`
+	SourceIP types.Bool `tfsdk:"source_ip"`
+	Terminal types.Bool `tfsdk:"terminal"`
+	Cookie *RouteRoutesRouteDestinationHashPolicyCookieModel `tfsdk:"cookie"`
+}
+
+// RouteRoutesRouteDestinationHashPolicyCookieModel represents cookie block
+type RouteRoutesRouteDestinationHashPolicyCookieModel struct {
+	Name types.String `tfsdk:"name"`
+	Path types.String `tfsdk:"path"`
+	Ttl types.Int64 `tfsdk:"ttl"`
+	AddHttponly *RouteEmptyModel `tfsdk:"add_httponly"`
+	AddSecure *RouteEmptyModel `tfsdk:"add_secure"`
+	IgnoreHttponly *RouteEmptyModel `tfsdk:"ignore_httponly"`
+	IgnoreSamesite *RouteEmptyModel `tfsdk:"ignore_samesite"`
+	IgnoreSecure *RouteEmptyModel `tfsdk:"ignore_secure"`
+	SamesiteLax *RouteEmptyModel `tfsdk:"samesite_lax"`
+	SamesiteNone *RouteEmptyModel `tfsdk:"samesite_none"`
+	SamesiteStrict *RouteEmptyModel `tfsdk:"samesite_strict"`
+}
+
+// RouteRoutesRouteDestinationMirrorPolicyModel represents mirror_policy block
+type RouteRoutesRouteDestinationMirrorPolicyModel struct {
+	Cluster []RouteRoutesRouteDestinationMirrorPolicyClusterModel `tfsdk:"cluster"`
+	Percent *RouteRoutesRouteDestinationMirrorPolicyPercentModel `tfsdk:"percent"`
+}
+
+// RouteRoutesRouteDestinationMirrorPolicyClusterModel represents cluster block
+type RouteRoutesRouteDestinationMirrorPolicyClusterModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// RouteRoutesRouteDestinationMirrorPolicyPercentModel represents percent block
+type RouteRoutesRouteDestinationMirrorPolicyPercentModel struct {
+	Denominator types.String `tfsdk:"denominator"`
+	Numerator types.Int64 `tfsdk:"numerator"`
+}
+
+// RouteRoutesRouteDestinationQueryParamsModel represents query_params block
+type RouteRoutesRouteDestinationQueryParamsModel struct {
+	ReplaceParams types.String `tfsdk:"replace_params"`
+	RemoveAllParams *RouteEmptyModel `tfsdk:"remove_all_params"`
+	RetainAllParams *RouteEmptyModel `tfsdk:"retain_all_params"`
+}
+
+// RouteRoutesRouteDestinationRegexRewriteModel represents regex_rewrite block
+type RouteRoutesRouteDestinationRegexRewriteModel struct {
+	Pattern types.String `tfsdk:"pattern"`
+	Substitution types.String `tfsdk:"substitution"`
+}
+
+// RouteRoutesRouteDestinationRetryPolicyModel represents retry_policy block
+type RouteRoutesRouteDestinationRetryPolicyModel struct {
+	NumRetries types.Int64 `tfsdk:"num_retries"`
+	PerTryTimeout types.Int64 `tfsdk:"per_try_timeout"`
+	RetriableStatusCodes types.List `tfsdk:"retriable_status_codes"`
+	RetryCondition types.List `tfsdk:"retry_condition"`
+	BackOff *RouteRoutesRouteDestinationRetryPolicyBackOffModel `tfsdk:"back_off"`
+}
+
+// RouteRoutesRouteDestinationRetryPolicyBackOffModel represents back_off block
+type RouteRoutesRouteDestinationRetryPolicyBackOffModel struct {
+	BaseInterval types.Int64 `tfsdk:"base_interval"`
+	MaxInterval types.Int64 `tfsdk:"max_interval"`
+}
+
+// RouteRoutesRouteDestinationSpdyConfigModel represents spdy_config block
+type RouteRoutesRouteDestinationSpdyConfigModel struct {
+	UseSpdy types.Bool `tfsdk:"use_spdy"`
+}
+
+// RouteRoutesRouteDestinationWebSocketConfigModel represents web_socket_config block
+type RouteRoutesRouteDestinationWebSocketConfigModel struct {
+	UseWebsocket types.Bool `tfsdk:"use_websocket"`
+}
+
+// RouteRoutesRouteDirectResponseModel represents route_direct_response block
+type RouteRoutesRouteDirectResponseModel struct {
+	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+}
+
+// RouteRoutesRouteRedirectModel represents route_redirect block
+type RouteRoutesRouteRedirectModel struct {
+	HostRedirect types.String `tfsdk:"host_redirect"`
+	PathRedirect types.String `tfsdk:"path_redirect"`
+	PrefixRewrite types.String `tfsdk:"prefix_rewrite"`
+	ProtoRedirect types.String `tfsdk:"proto_redirect"`
+	ReplaceParams types.String `tfsdk:"replace_params"`
+	ResponseCode types.Int64 `tfsdk:"response_code"`
+	RemoveAllParams *RouteEmptyModel `tfsdk:"remove_all_params"`
+	RetainAllParams *RouteEmptyModel `tfsdk:"retain_all_params"`
+}
+
+// RouteRoutesServicePolicyModel represents service_policy block
+type RouteRoutesServicePolicyModel struct {
+	Disable types.Bool `tfsdk:"disable"`
+}
+
+// RouteRoutesWAFExclusionPolicyModel represents waf_exclusion_policy block
+type RouteRoutesWAFExclusionPolicyModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// RouteRoutesWAFTypeModel represents waf_type block
+type RouteRoutesWAFTypeModel struct {
+	AppFirewall *RouteRoutesWAFTypeAppFirewallModel `tfsdk:"app_firewall"`
+	DisableWAF *RouteEmptyModel `tfsdk:"disable_waf"`
+	InheritWAF *RouteEmptyModel `tfsdk:"inherit_waf"`
+}
+
+// RouteRoutesWAFTypeAppFirewallModel represents app_firewall block
+type RouteRoutesWAFTypeAppFirewallModel struct {
+	AppFirewall []RouteRoutesWAFTypeAppFirewallAppFirewallModel `tfsdk:"app_firewall"`
+}
+
+// RouteRoutesWAFTypeAppFirewallAppFirewallModel represents app_firewall block
+type RouteRoutesWAFTypeAppFirewallAppFirewallModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
 type RouteResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +468,7 @@ type RouteResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	Routes []RouteRoutesModel `tfsdk:"routes"`
 }
 
 func (r *RouteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1186,6 +1602,10 @@ func (r *RouteResource) Create(ctx context.Context, req resource.CreateRequest, 
 		Spec: client.RouteSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1241,6 +1661,15 @@ func (r *RouteResource) Read(ctx context.Context, req resource.ReadRequest, resp
 
 	apiResource, err := r.client.GetRoute(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Route not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Route: %s", err))
 		return
 	}
@@ -1255,6 +1684,13 @@ func (r *RouteResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1307,6 +1743,10 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		Spec: client.RouteSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1331,10 +1771,20 @@ func (r *RouteResource) Update(ctx context.Context, req resource.UpdateRequest, 
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetRoute(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1358,11 +1808,33 @@ func (r *RouteResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 
 	err := r.client.DeleteRoute(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Route already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Route: %s", err))
 		return
 	}
 }
 
 func (r *RouteResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

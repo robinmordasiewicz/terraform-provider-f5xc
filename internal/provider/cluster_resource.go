@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,192 @@ type ClusterResource struct {
 	client *client.Client
 }
 
+// ClusterEmptyModel represents empty nested blocks
+type ClusterEmptyModel struct {
+}
+
+// ClusterCircuitBreakerModel represents circuit_breaker block
+type ClusterCircuitBreakerModel struct {
+	ConnectionLimit types.Int64 `tfsdk:"connection_limit"`
+	MaxRequests types.Int64 `tfsdk:"max_requests"`
+	PendingRequests types.Int64 `tfsdk:"pending_requests"`
+	Priority types.String `tfsdk:"priority"`
+	Retries types.Int64 `tfsdk:"retries"`
+}
+
+// ClusterEndpointSubsetsModel represents endpoint_subsets block
+type ClusterEndpointSubsetsModel struct {
+	Keys types.List `tfsdk:"keys"`
+}
+
+// ClusterEndpointsModel represents endpoints block
+type ClusterEndpointsModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// ClusterHealthChecksModel represents health_checks block
+type ClusterHealthChecksModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// ClusterHttp1ConfigModel represents http1_config block
+type ClusterHttp1ConfigModel struct {
+	HeaderTransformation *ClusterHttp1ConfigHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// ClusterHttp1ConfigHeaderTransformationModel represents header_transformation block
+type ClusterHttp1ConfigHeaderTransformationModel struct {
+	DefaultHeaderTransformation *ClusterEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *ClusterEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *ClusterEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *ClusterEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// ClusterHttp2OptionsModel represents http2_options block
+type ClusterHttp2OptionsModel struct {
+	Enabled types.Bool `tfsdk:"enabled"`
+}
+
+// ClusterOutlierDetectionModel represents outlier_detection block
+type ClusterOutlierDetectionModel struct {
+	BaseEjectionTime types.Int64 `tfsdk:"base_ejection_time"`
+	Consecutive5xx types.Int64 `tfsdk:"consecutive_5xx"`
+	ConsecutiveGatewayFailure types.Int64 `tfsdk:"consecutive_gateway_failure"`
+	Interval types.Int64 `tfsdk:"interval"`
+	MaxEjectionPercent types.Int64 `tfsdk:"max_ejection_percent"`
+}
+
+// ClusterTLSParametersModel represents tls_parameters block
+type ClusterTLSParametersModel struct {
+	MaxSessionKeys types.Int64 `tfsdk:"max_session_keys"`
+	Sni types.String `tfsdk:"sni"`
+	CertParams *ClusterTLSParametersCertParamsModel `tfsdk:"cert_params"`
+	CommonParams *ClusterTLSParametersCommonParamsModel `tfsdk:"common_params"`
+	DefaultSessionKeyCaching *ClusterEmptyModel `tfsdk:"default_session_key_caching"`
+	DisableSessionKeyCaching *ClusterEmptyModel `tfsdk:"disable_session_key_caching"`
+	DisableSni *ClusterEmptyModel `tfsdk:"disable_sni"`
+	UseHostHeaderAsSni *ClusterEmptyModel `tfsdk:"use_host_header_as_sni"`
+}
+
+// ClusterTLSParametersCertParamsModel represents cert_params block
+type ClusterTLSParametersCertParamsModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaximumProtocolVersion types.String `tfsdk:"maximum_protocol_version"`
+	MinimumProtocolVersion types.String `tfsdk:"minimum_protocol_version"`
+	Certificates []ClusterTLSParametersCertParamsCertificatesModel `tfsdk:"certificates"`
+	ValidationParams *ClusterTLSParametersCertParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// ClusterTLSParametersCertParamsCertificatesModel represents certificates block
+type ClusterTLSParametersCertParamsCertificatesModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// ClusterTLSParametersCertParamsValidationParamsModel represents validation_params block
+type ClusterTLSParametersCertParamsValidationParamsModel struct {
+	SkipHostnameVerification types.Bool `tfsdk:"skip_hostname_verification"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	VerifySubjectAltNames types.List `tfsdk:"verify_subject_alt_names"`
+	TrustedCa *ClusterTLSParametersCertParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+}
+
+// ClusterTLSParametersCertParamsValidationParamsTrustedCaModel represents trusted_ca block
+type ClusterTLSParametersCertParamsValidationParamsTrustedCaModel struct {
+	TrustedCaList []ClusterTLSParametersCertParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+}
+
+// ClusterTLSParametersCertParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
+type ClusterTLSParametersCertParamsValidationParamsTrustedCaTrustedCaListModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// ClusterTLSParametersCommonParamsModel represents common_params block
+type ClusterTLSParametersCommonParamsModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaximumProtocolVersion types.String `tfsdk:"maximum_protocol_version"`
+	MinimumProtocolVersion types.String `tfsdk:"minimum_protocol_version"`
+	TLSCertificates []ClusterTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
+	ValidationParams *ClusterTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// ClusterTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
+type ClusterTLSParametersCommonParamsTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *ClusterEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *ClusterEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel represents private_key block
+type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// ClusterTLSParametersCommonParamsValidationParamsModel represents validation_params block
+type ClusterTLSParametersCommonParamsValidationParamsModel struct {
+	SkipHostnameVerification types.Bool `tfsdk:"skip_hostname_verification"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	VerifySubjectAltNames types.List `tfsdk:"verify_subject_alt_names"`
+	TrustedCa *ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+}
+
+// ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel represents trusted_ca block
+type ClusterTLSParametersCommonParamsValidationParamsTrustedCaModel struct {
+	TrustedCaList []ClusterTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+}
+
+// ClusterTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
+type ClusterTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// ClusterUpstreamConnPoolReuseTypeModel represents upstream_conn_pool_reuse_type block
+type ClusterUpstreamConnPoolReuseTypeModel struct {
+	DisableConnPoolReuse *ClusterEmptyModel `tfsdk:"disable_conn_pool_reuse"`
+	EnableConnPoolReuse *ClusterEmptyModel `tfsdk:"enable_conn_pool_reuse"`
+}
+
 type ClusterResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -59,6 +246,21 @@ type ClusterResourceModel struct {
 	PanicThreshold types.Int64 `tfsdk:"panic_threshold"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AutoHTTPConfig *ClusterEmptyModel `tfsdk:"auto_http_config"`
+	CircuitBreaker *ClusterCircuitBreakerModel `tfsdk:"circuit_breaker"`
+	DefaultSubset *ClusterEmptyModel `tfsdk:"default_subset"`
+	DisableProxyProtocol *ClusterEmptyModel `tfsdk:"disable_proxy_protocol"`
+	EndpointSubsets []ClusterEndpointSubsetsModel `tfsdk:"endpoint_subsets"`
+	Endpoints []ClusterEndpointsModel `tfsdk:"endpoints"`
+	HealthChecks []ClusterHealthChecksModel `tfsdk:"health_checks"`
+	Http1Config *ClusterHttp1ConfigModel `tfsdk:"http1_config"`
+	Http2Options *ClusterHttp2OptionsModel `tfsdk:"http2_options"`
+	NoPanicThreshold *ClusterEmptyModel `tfsdk:"no_panic_threshold"`
+	OutlierDetection *ClusterOutlierDetectionModel `tfsdk:"outlier_detection"`
+	ProxyProtocolV1 *ClusterEmptyModel `tfsdk:"proxy_protocol_v1"`
+	ProxyProtocolV2 *ClusterEmptyModel `tfsdk:"proxy_protocol_v2"`
+	TLSParameters *ClusterTLSParametersModel `tfsdk:"tls_parameters"`
+	UpstreamConnPoolReuseType *ClusterUpstreamConnPoolReuseTypeModel `tfsdk:"upstream_conn_pool_reuse_type"`
 }
 
 func (r *ClusterResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -735,6 +937,10 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		Spec: client.ClusterSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -790,6 +996,15 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 
 	apiResource, err := r.client.GetCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Cluster not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Cluster: %s", err))
 		return
 	}
@@ -804,6 +1019,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -856,6 +1078,10 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 		Spec: client.ClusterSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -880,10 +1106,20 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -907,11 +1143,33 @@ func (r *ClusterResource) Delete(ctx context.Context, req resource.DeleteRequest
 
 	err := r.client.DeleteCluster(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "Cluster already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Cluster: %s", err))
 		return
 	}
 }
 
 func (r *ClusterResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

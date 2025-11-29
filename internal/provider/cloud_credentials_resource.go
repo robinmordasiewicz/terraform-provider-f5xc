@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
-	f5xcerrors "github.com/f5xc/terraform-provider-f5xc/internal/errors"
 	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
@@ -46,20 +45,139 @@ type CloudCredentialsResource struct {
 	client *client.Client
 }
 
+// CloudCredentialsEmptyModel represents empty nested blocks
+type CloudCredentialsEmptyModel struct {
+}
+
+// CloudCredentialsAWSAssumeRoleModel represents aws_assume_role block
+type CloudCredentialsAWSAssumeRoleModel struct {
+	CustomExternalID types.String `tfsdk:"custom_external_id"`
+	DurationSeconds types.Int64 `tfsdk:"duration_seconds"`
+	RoleArn types.String `tfsdk:"role_arn"`
+	SessionName types.String `tfsdk:"session_name"`
+	ExternalIDIsOptional *CloudCredentialsEmptyModel `tfsdk:"external_id_is_optional"`
+	ExternalIDIsTenantID *CloudCredentialsEmptyModel `tfsdk:"external_id_is_tenant_id"`
+	SessionTags *CloudCredentialsEmptyModel `tfsdk:"session_tags"`
+}
+
+// CloudCredentialsAWSSecretKeyModel represents aws_secret_key block
+type CloudCredentialsAWSSecretKeyModel struct {
+	AccessKey types.String `tfsdk:"access_key"`
+	SecretKey *CloudCredentialsAWSSecretKeySecretKeyModel `tfsdk:"secret_key"`
+}
+
+// CloudCredentialsAWSSecretKeySecretKeyModel represents secret_key block
+type CloudCredentialsAWSSecretKeySecretKeyModel struct {
+	BlindfoldSecretInfo *CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CloudCredentialsAWSSecretKeySecretKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel represents clear_secret_info block
+type CloudCredentialsAWSSecretKeySecretKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CloudCredentialsAzureClientSecretModel represents azure_client_secret block
+type CloudCredentialsAzureClientSecretModel struct {
+	ClientID types.String `tfsdk:"client_id"`
+	SubscriptionID types.String `tfsdk:"subscription_id"`
+	TenantID types.String `tfsdk:"tenant_id"`
+	ClientSecret *CloudCredentialsAzureClientSecretClientSecretModel `tfsdk:"client_secret"`
+}
+
+// CloudCredentialsAzureClientSecretClientSecretModel represents client_secret block
+type CloudCredentialsAzureClientSecretClientSecretModel struct {
+	BlindfoldSecretInfo *CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CloudCredentialsAzureClientSecretClientSecretBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel represents clear_secret_info block
+type CloudCredentialsAzureClientSecretClientSecretClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CloudCredentialsAzurePfxCertificateModel represents azure_pfx_certificate block
+type CloudCredentialsAzurePfxCertificateModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	ClientID types.String `tfsdk:"client_id"`
+	SubscriptionID types.String `tfsdk:"subscription_id"`
+	TenantID types.String `tfsdk:"tenant_id"`
+	Password *CloudCredentialsAzurePfxCertificatePasswordModel `tfsdk:"password"`
+}
+
+// CloudCredentialsAzurePfxCertificatePasswordModel represents password block
+type CloudCredentialsAzurePfxCertificatePasswordModel struct {
+	BlindfoldSecretInfo *CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CloudCredentialsAzurePfxCertificatePasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel represents clear_secret_info block
+type CloudCredentialsAzurePfxCertificatePasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// CloudCredentialsGCPCredFileModel represents gcp_cred_file block
+type CloudCredentialsGCPCredFileModel struct {
+	CredentialFile *CloudCredentialsGCPCredFileCredentialFileModel `tfsdk:"credential_file"`
+}
+
+// CloudCredentialsGCPCredFileCredentialFileModel represents credential_file block
+type CloudCredentialsGCPCredFileCredentialFileModel struct {
+	BlindfoldSecretInfo *CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CloudCredentialsGCPCredFileCredentialFileBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel represents clear_secret_info block
+type CloudCredentialsGCPCredFileCredentialFileClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
 type CloudCredentialsResourceModel struct {
-	Name               types.String   `tfsdk:"name"`
-	Namespace          types.String   `tfsdk:"namespace"`
-	Annotations        types.Map      `tfsdk:"annotations"`
-	Description        types.String   `tfsdk:"description"`
-	Disable            types.Bool     `tfsdk:"disable"`
-	Labels             types.Map      `tfsdk:"labels"`
-	ID                 types.String   `tfsdk:"id"`
-	Timeouts           timeouts.Value `tfsdk:"timeouts"`
-	AwsAssumeRole      types.Object   `tfsdk:"aws_assume_role"`
-	AwsSecretKey       types.Object   `tfsdk:"aws_secret_key"`
-	AzureClientSecret  types.Object   `tfsdk:"azure_client_secret"`
-	AzurePfxCertificate types.Object   `tfsdk:"azure_pfx_certificate"`
-	GcpCredFile        types.Object   `tfsdk:"gcp_cred_file"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AWSAssumeRole *CloudCredentialsAWSAssumeRoleModel `tfsdk:"aws_assume_role"`
+	AWSSecretKey *CloudCredentialsAWSSecretKeyModel `tfsdk:"aws_secret_key"`
+	AzureClientSecret *CloudCredentialsAzureClientSecretModel `tfsdk:"azure_client_secret"`
+	AzurePfxCertificate *CloudCredentialsAzurePfxCertificateModel `tfsdk:"azure_pfx_certificate"`
+	GCPCredFile *CloudCredentialsGCPCredFileModel `tfsdk:"gcp_cred_file"`
 }
 
 func (r *CloudCredentialsResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -494,6 +612,10 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 		Spec: client.CloudCredentialsSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -549,8 +671,8 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 
 	apiResource, err := r.client.GetCloudCredentials(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// Check if resource was deleted outside of Terraform
-		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
 			tflog.Warn(ctx, "CloudCredentials not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
@@ -572,6 +694,13 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -624,6 +753,10 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 		Spec: client.CloudCredentialsSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -652,9 +785,10 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	// Use UID from response if available, otherwise fetch it
+	// Use UID from response if available, otherwise preserve from plan
 	uid := updated.Metadata.UID
 	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
 		fetched, fetchErr := r.client.GetCloudCredentials(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 		if fetchErr == nil {
 			uid = fetched.Metadata.UID
@@ -684,9 +818,9 @@ func (r *CloudCredentialsResource) Delete(ctx context.Context, req resource.Dele
 
 	err := r.client.DeleteCloudCredentials(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
-		// If the resource is already gone, treat as success
-		if f5xcErr, ok := err.(*f5xcerrors.F5XCError); ok && f5xcErr.IsNotFound() {
-			tflog.Warn(ctx, "CloudCredentials already deleted", map[string]interface{}{
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "CloudCredentials already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -698,16 +832,17 @@ func (r *CloudCredentialsResource) Delete(ctx context.Context, req resource.Dele
 }
 
 func (r *CloudCredentialsResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	idParts := strings.Split(req.ID, "/")
-	if len(idParts) != 2 || idParts[0] == "" || idParts[1] == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID in format 'namespace/name', got: %s", req.ID),
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
-	namespace := idParts[0]
-	name := idParts[1]
+	namespace := parts[0]
+	name := parts[1]
 
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)

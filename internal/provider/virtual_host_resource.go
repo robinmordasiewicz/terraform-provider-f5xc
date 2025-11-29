@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,510 @@ type VirtualHostResource struct {
 	client *client.Client
 }
 
+// VirtualHostEmptyModel represents empty nested blocks
+type VirtualHostEmptyModel struct {
+}
+
+// VirtualHostAdvertisePoliciesModel represents advertise_policies block
+type VirtualHostAdvertisePoliciesModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostAuthenticationModel represents authentication block
+type VirtualHostAuthenticationModel struct {
+	RedirectURL types.String `tfsdk:"redirect_url"`
+	AuthConfig []VirtualHostAuthenticationAuthConfigModel `tfsdk:"auth_config"`
+	CookieParams *VirtualHostAuthenticationCookieParamsModel `tfsdk:"cookie_params"`
+	RedirectDynamic *VirtualHostEmptyModel `tfsdk:"redirect_dynamic"`
+	UseAuthObjectConfig *VirtualHostEmptyModel `tfsdk:"use_auth_object_config"`
+}
+
+// VirtualHostAuthenticationAuthConfigModel represents auth_config block
+type VirtualHostAuthenticationAuthConfigModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostAuthenticationCookieParamsModel represents cookie_params block
+type VirtualHostAuthenticationCookieParamsModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CookieRefreshInterval types.Int64 `tfsdk:"cookie_refresh_interval"`
+	SessionExpiry types.Int64 `tfsdk:"session_expiry"`
+	AuthHmac *VirtualHostAuthenticationCookieParamsAuthHmacModel `tfsdk:"auth_hmac"`
+	KmsKeyHmac *VirtualHostEmptyModel `tfsdk:"kms_key_hmac"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHmacModel represents auth_hmac block
+type VirtualHostAuthenticationCookieParamsAuthHmacModel struct {
+	PrimKeyExpiry types.String `tfsdk:"prim_key_expiry"`
+	SecKeyExpiry types.String `tfsdk:"sec_key_expiry"`
+	PrimKey *VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyModel `tfsdk:"prim_key"`
+	SecKey *VirtualHostAuthenticationCookieParamsAuthHmacSecKeyModel `tfsdk:"sec_key"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyModel represents prim_key block
+type VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyModel struct {
+	BlindfoldSecretInfo *VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel represents clear_secret_info block
+type VirtualHostAuthenticationCookieParamsAuthHmacPrimKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHmacSecKeyModel represents sec_key block
+type VirtualHostAuthenticationCookieParamsAuthHmacSecKeyModel struct {
+	BlindfoldSecretInfo *VirtualHostAuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *VirtualHostAuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type VirtualHostAuthenticationCookieParamsAuthHmacSecKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel represents clear_secret_info block
+type VirtualHostAuthenticationCookieParamsAuthHmacSecKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// VirtualHostBufferPolicyModel represents buffer_policy block
+type VirtualHostBufferPolicyModel struct {
+	Disabled types.Bool `tfsdk:"disabled"`
+	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// VirtualHostCaptchaChallengeModel represents captcha_challenge block
+type VirtualHostCaptchaChallengeModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CustomPage types.String `tfsdk:"custom_page"`
+}
+
+// VirtualHostCoalescingOptionsModel represents coalescing_options block
+type VirtualHostCoalescingOptionsModel struct {
+	DefaultCoalescing *VirtualHostEmptyModel `tfsdk:"default_coalescing"`
+	StrictCoalescing *VirtualHostEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// VirtualHostCompressionParamsModel represents compression_params block
+type VirtualHostCompressionParamsModel struct {
+	ContentLength types.Int64 `tfsdk:"content_length"`
+	ContentType types.List `tfsdk:"content_type"`
+	DisableOnEtagHeader types.Bool `tfsdk:"disable_on_etag_header"`
+	RemoveAcceptEncodingHeader types.Bool `tfsdk:"remove_accept_encoding_header"`
+}
+
+// VirtualHostCorsPolicyModel represents cors_policy block
+type VirtualHostCorsPolicyModel struct {
+	AllowCredentials types.Bool `tfsdk:"allow_credentials"`
+	AllowHeaders types.String `tfsdk:"allow_headers"`
+	AllowMethods types.String `tfsdk:"allow_methods"`
+	AllowOrigin types.List `tfsdk:"allow_origin"`
+	AllowOriginRegex types.List `tfsdk:"allow_origin_regex"`
+	Disabled types.Bool `tfsdk:"disabled"`
+	ExposeHeaders types.String `tfsdk:"expose_headers"`
+	MaximumAge types.Int64 `tfsdk:"maximum_age"`
+}
+
+// VirtualHostCsrfPolicyModel represents csrf_policy block
+type VirtualHostCsrfPolicyModel struct {
+	AllLoadBalancerDomains *VirtualHostEmptyModel `tfsdk:"all_load_balancer_domains"`
+	CustomDomainList *VirtualHostCsrfPolicyCustomDomainListModel `tfsdk:"custom_domain_list"`
+	Disabled *VirtualHostEmptyModel `tfsdk:"disabled"`
+}
+
+// VirtualHostCsrfPolicyCustomDomainListModel represents custom_domain_list block
+type VirtualHostCsrfPolicyCustomDomainListModel struct {
+	Domains types.List `tfsdk:"domains"`
+}
+
+// VirtualHostDynamicReverseProxyModel represents dynamic_reverse_proxy block
+type VirtualHostDynamicReverseProxyModel struct {
+	ConnectionTimeout types.Int64 `tfsdk:"connection_timeout"`
+	ResolutionNetworkType types.String `tfsdk:"resolution_network_type"`
+	ResolveEndpointDynamically types.Bool `tfsdk:"resolve_endpoint_dynamically"`
+	ResolutionNetwork []VirtualHostDynamicReverseProxyResolutionNetworkModel `tfsdk:"resolution_network"`
+}
+
+// VirtualHostDynamicReverseProxyResolutionNetworkModel represents resolution_network block
+type VirtualHostDynamicReverseProxyResolutionNetworkModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostHTTPProtocolOptionsModel represents http_protocol_options block
+type VirtualHostHTTPProtocolOptionsModel struct {
+	HTTPProtocolEnableV1Only *VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
+	HTTPProtocolEnableV1V2 *VirtualHostEmptyModel `tfsdk:"http_protocol_enable_v1_v2"`
+	HTTPProtocolEnableV2Only *VirtualHostEmptyModel `tfsdk:"http_protocol_enable_v2_only"`
+}
+
+// VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
+type VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
+	HeaderTransformation *VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
+type VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel struct {
+	DefaultHeaderTransformation *VirtualHostEmptyModel `tfsdk:"default_header_transformation"`
+	LegacyHeaderTransformation *VirtualHostEmptyModel `tfsdk:"legacy_header_transformation"`
+	PreserveCaseHeaderTransformation *VirtualHostEmptyModel `tfsdk:"preserve_case_header_transformation"`
+	ProperCaseHeaderTransformation *VirtualHostEmptyModel `tfsdk:"proper_case_header_transformation"`
+}
+
+// VirtualHostJsChallengeModel represents js_challenge block
+type VirtualHostJsChallengeModel struct {
+	CookieExpiry types.Int64 `tfsdk:"cookie_expiry"`
+	CustomPage types.String `tfsdk:"custom_page"`
+	JsScriptDelay types.Int64 `tfsdk:"js_script_delay"`
+}
+
+// VirtualHostRateLimiterAllowedPrefixesModel represents rate_limiter_allowed_prefixes block
+type VirtualHostRateLimiterAllowedPrefixesModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostRequestCookiesToAddModel represents request_cookies_to_add block
+type VirtualHostRequestCookiesToAddModel struct {
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *VirtualHostRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// VirtualHostRequestCookiesToAddSecretValueModel represents secret_value block
+type VirtualHostRequestCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// VirtualHostRequestHeadersToAddModel represents request_headers_to_add block
+type VirtualHostRequestHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *VirtualHostRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// VirtualHostRequestHeadersToAddSecretValueModel represents secret_value block
+type VirtualHostRequestHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// VirtualHostResponseCookiesToAddModel represents response_cookies_to_add block
+type VirtualHostResponseCookiesToAddModel struct {
+	AddDomain types.String `tfsdk:"add_domain"`
+	AddExpiry types.String `tfsdk:"add_expiry"`
+	AddPath types.String `tfsdk:"add_path"`
+	MaxAgeValue types.Int64 `tfsdk:"max_age_value"`
+	Name types.String `tfsdk:"name"`
+	Overwrite types.Bool `tfsdk:"overwrite"`
+	Value types.String `tfsdk:"value"`
+	AddHttponly *VirtualHostEmptyModel `tfsdk:"add_httponly"`
+	AddPartitioned *VirtualHostEmptyModel `tfsdk:"add_partitioned"`
+	AddSecure *VirtualHostEmptyModel `tfsdk:"add_secure"`
+	IgnoreDomain *VirtualHostEmptyModel `tfsdk:"ignore_domain"`
+	IgnoreExpiry *VirtualHostEmptyModel `tfsdk:"ignore_expiry"`
+	IgnoreHttponly *VirtualHostEmptyModel `tfsdk:"ignore_httponly"`
+	IgnoreMaxAge *VirtualHostEmptyModel `tfsdk:"ignore_max_age"`
+	IgnorePartitioned *VirtualHostEmptyModel `tfsdk:"ignore_partitioned"`
+	IgnorePath *VirtualHostEmptyModel `tfsdk:"ignore_path"`
+	IgnoreSamesite *VirtualHostEmptyModel `tfsdk:"ignore_samesite"`
+	IgnoreSecure *VirtualHostEmptyModel `tfsdk:"ignore_secure"`
+	IgnoreValue *VirtualHostEmptyModel `tfsdk:"ignore_value"`
+	SamesiteLax *VirtualHostEmptyModel `tfsdk:"samesite_lax"`
+	SamesiteNone *VirtualHostEmptyModel `tfsdk:"samesite_none"`
+	SamesiteStrict *VirtualHostEmptyModel `tfsdk:"samesite_strict"`
+	SecretValue *VirtualHostResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// VirtualHostResponseCookiesToAddSecretValueModel represents secret_value block
+type VirtualHostResponseCookiesToAddSecretValueModel struct {
+	BlindfoldSecretInfo *VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// VirtualHostResponseHeadersToAddModel represents response_headers_to_add block
+type VirtualHostResponseHeadersToAddModel struct {
+	Append types.Bool `tfsdk:"append"`
+	Name types.String `tfsdk:"name"`
+	Value types.String `tfsdk:"value"`
+	SecretValue *VirtualHostResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
+}
+
+// VirtualHostResponseHeadersToAddSecretValueModel represents secret_value block
+type VirtualHostResponseHeadersToAddSecretValueModel struct {
+	BlindfoldSecretInfo *VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
+type VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// VirtualHostRetryPolicyModel represents retry_policy block
+type VirtualHostRetryPolicyModel struct {
+	NumRetries types.Int64 `tfsdk:"num_retries"`
+	PerTryTimeout types.Int64 `tfsdk:"per_try_timeout"`
+	RetriableStatusCodes types.List `tfsdk:"retriable_status_codes"`
+	RetryCondition types.List `tfsdk:"retry_condition"`
+	BackOff *VirtualHostRetryPolicyBackOffModel `tfsdk:"back_off"`
+}
+
+// VirtualHostRetryPolicyBackOffModel represents back_off block
+type VirtualHostRetryPolicyBackOffModel struct {
+	BaseInterval types.Int64 `tfsdk:"base_interval"`
+	MaxInterval types.Int64 `tfsdk:"max_interval"`
+}
+
+// VirtualHostRoutesModel represents routes block
+type VirtualHostRoutesModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostSensitiveDataPolicyModel represents sensitive_data_policy block
+type VirtualHostSensitiveDataPolicyModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostSlowDdosMitigationModel represents slow_ddos_mitigation block
+type VirtualHostSlowDdosMitigationModel struct {
+	RequestHeadersTimeout types.Int64 `tfsdk:"request_headers_timeout"`
+	RequestTimeout types.Int64 `tfsdk:"request_timeout"`
+	DisableRequestTimeout *VirtualHostEmptyModel `tfsdk:"disable_request_timeout"`
+}
+
+// VirtualHostTLSCertParamsModel represents tls_cert_params block
+type VirtualHostTLSCertParamsModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaximumProtocolVersion types.String `tfsdk:"maximum_protocol_version"`
+	MinimumProtocolVersion types.String `tfsdk:"minimum_protocol_version"`
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+	Certificates []VirtualHostTLSCertParamsCertificatesModel `tfsdk:"certificates"`
+	ClientCertificateOptional *VirtualHostEmptyModel `tfsdk:"client_certificate_optional"`
+	ClientCertificateRequired *VirtualHostEmptyModel `tfsdk:"client_certificate_required"`
+	NoClientCertificate *VirtualHostEmptyModel `tfsdk:"no_client_certificate"`
+	ValidationParams *VirtualHostTLSCertParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// VirtualHostTLSCertParamsCertificatesModel represents certificates block
+type VirtualHostTLSCertParamsCertificatesModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostTLSCertParamsValidationParamsModel represents validation_params block
+type VirtualHostTLSCertParamsValidationParamsModel struct {
+	SkipHostnameVerification types.Bool `tfsdk:"skip_hostname_verification"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	VerifySubjectAltNames types.List `tfsdk:"verify_subject_alt_names"`
+	TrustedCa *VirtualHostTLSCertParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+}
+
+// VirtualHostTLSCertParamsValidationParamsTrustedCaModel represents trusted_ca block
+type VirtualHostTLSCertParamsValidationParamsTrustedCaModel struct {
+	TrustedCaList []VirtualHostTLSCertParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+}
+
+// VirtualHostTLSCertParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
+type VirtualHostTLSCertParamsValidationParamsTrustedCaTrustedCaListModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostTLSParametersModel represents tls_parameters block
+type VirtualHostTLSParametersModel struct {
+	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+	ClientCertificateOptional *VirtualHostEmptyModel `tfsdk:"client_certificate_optional"`
+	ClientCertificateRequired *VirtualHostEmptyModel `tfsdk:"client_certificate_required"`
+	CommonParams *VirtualHostTLSParametersCommonParamsModel `tfsdk:"common_params"`
+	NoClientCertificate *VirtualHostEmptyModel `tfsdk:"no_client_certificate"`
+}
+
+// VirtualHostTLSParametersCommonParamsModel represents common_params block
+type VirtualHostTLSParametersCommonParamsModel struct {
+	CipherSuites types.List `tfsdk:"cipher_suites"`
+	MaximumProtocolVersion types.String `tfsdk:"maximum_protocol_version"`
+	MinimumProtocolVersion types.String `tfsdk:"minimum_protocol_version"`
+	TLSCertificates []VirtualHostTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
+	ValidationParams *VirtualHostTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// VirtualHostTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
+type VirtualHostTLSParametersCommonParamsTLSCertificatesModel struct {
+	CertificateURL types.String `tfsdk:"certificate_url"`
+	Description types.String `tfsdk:"description"`
+	CustomHashAlgorithms *VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOcspStapling *VirtualHostEmptyModel `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey *VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModel `tfsdk:"private_key"`
+	UseSystemDefaults *VirtualHostEmptyModel `tfsdk:"use_system_defaults"`
+}
+
+// VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModel represents private_key block
+type VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModel struct {
+	BlindfoldSecretInfo *VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
+type VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
+}
+
+// VirtualHostTLSParametersCommonParamsValidationParamsModel represents validation_params block
+type VirtualHostTLSParametersCommonParamsValidationParamsModel struct {
+	SkipHostnameVerification types.Bool `tfsdk:"skip_hostname_verification"`
+	TrustedCaURL types.String `tfsdk:"trusted_ca_url"`
+	VerifySubjectAltNames types.List `tfsdk:"verify_subject_alt_names"`
+	TrustedCa *VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaModel `tfsdk:"trusted_ca"`
+}
+
+// VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaModel represents trusted_ca block
+type VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaModel struct {
+	TrustedCaList []VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel `tfsdk:"trusted_ca_list"`
+}
+
+// VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel represents trusted_ca_list block
+type VirtualHostTLSParametersCommonParamsValidationParamsTrustedCaTrustedCaListModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostUserIdentificationModel represents user_identification block
+type VirtualHostUserIdentificationModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
+// VirtualHostWAFTypeModel represents waf_type block
+type VirtualHostWAFTypeModel struct {
+	AppFirewall *VirtualHostWAFTypeAppFirewallModel `tfsdk:"app_firewall"`
+	DisableWAF *VirtualHostEmptyModel `tfsdk:"disable_waf"`
+	InheritWAF *VirtualHostEmptyModel `tfsdk:"inherit_waf"`
+}
+
+// VirtualHostWAFTypeAppFirewallModel represents app_firewall block
+type VirtualHostWAFTypeAppFirewallModel struct {
+	AppFirewall []VirtualHostWAFTypeAppFirewallAppFirewallModel `tfsdk:"app_firewall"`
+}
+
+// VirtualHostWAFTypeAppFirewallAppFirewallModel represents app_firewall block
+type VirtualHostWAFTypeAppFirewallAppFirewallModel struct {
+	Kind types.String `tfsdk:"kind"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+	Uid types.String `tfsdk:"uid"`
+}
+
 type VirtualHostResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -67,6 +572,39 @@ type VirtualHostResourceModel struct {
 	ServerName types.String `tfsdk:"server_name"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AdvertisePolicies []VirtualHostAdvertisePoliciesModel `tfsdk:"advertise_policies"`
+	Authentication *VirtualHostAuthenticationModel `tfsdk:"authentication"`
+	BufferPolicy *VirtualHostBufferPolicyModel `tfsdk:"buffer_policy"`
+	CaptchaChallenge *VirtualHostCaptchaChallengeModel `tfsdk:"captcha_challenge"`
+	CoalescingOptions *VirtualHostCoalescingOptionsModel `tfsdk:"coalescing_options"`
+	CompressionParams *VirtualHostCompressionParamsModel `tfsdk:"compression_params"`
+	CorsPolicy *VirtualHostCorsPolicyModel `tfsdk:"cors_policy"`
+	CsrfPolicy *VirtualHostCsrfPolicyModel `tfsdk:"csrf_policy"`
+	CustomErrors *VirtualHostEmptyModel `tfsdk:"custom_errors"`
+	DefaultHeader *VirtualHostEmptyModel `tfsdk:"default_header"`
+	DefaultLoadBalancer *VirtualHostEmptyModel `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize *VirtualHostEmptyModel `tfsdk:"disable_path_normalize"`
+	DynamicReverseProxy *VirtualHostDynamicReverseProxyModel `tfsdk:"dynamic_reverse_proxy"`
+	EnablePathNormalize *VirtualHostEmptyModel `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions *VirtualHostHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	JsChallenge *VirtualHostJsChallengeModel `tfsdk:"js_challenge"`
+	NoAuthentication *VirtualHostEmptyModel `tfsdk:"no_authentication"`
+	NoChallenge *VirtualHostEmptyModel `tfsdk:"no_challenge"`
+	NonDefaultLoadBalancer *VirtualHostEmptyModel `tfsdk:"non_default_loadbalancer"`
+	PassThrough *VirtualHostEmptyModel `tfsdk:"pass_through"`
+	RateLimiterAllowedPrefixes []VirtualHostRateLimiterAllowedPrefixesModel `tfsdk:"rate_limiter_allowed_prefixes"`
+	RequestCookiesToAdd []VirtualHostRequestCookiesToAddModel `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd []VirtualHostRequestHeadersToAddModel `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd []VirtualHostResponseCookiesToAddModel `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd []VirtualHostResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
+	RetryPolicy *VirtualHostRetryPolicyModel `tfsdk:"retry_policy"`
+	Routes []VirtualHostRoutesModel `tfsdk:"routes"`
+	SensitiveDataPolicy []VirtualHostSensitiveDataPolicyModel `tfsdk:"sensitive_data_policy"`
+	SlowDdosMitigation *VirtualHostSlowDdosMitigationModel `tfsdk:"slow_ddos_mitigation"`
+	TLSCertParams *VirtualHostTLSCertParamsModel `tfsdk:"tls_cert_params"`
+	TLSParameters *VirtualHostTLSParametersModel `tfsdk:"tls_parameters"`
+	UserIdentification []VirtualHostUserIdentificationModel `tfsdk:"user_identification"`
+	WAFType *VirtualHostWAFTypeModel `tfsdk:"waf_type"`
 }
 
 func (r *VirtualHostResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1559,6 +2097,10 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		Spec: client.VirtualHostSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1614,6 +2156,15 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 
 	apiResource, err := r.client.GetVirtualHost(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "VirtualHost not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read VirtualHost: %s", err))
 		return
 	}
@@ -1628,6 +2179,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -1680,6 +2238,10 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		Spec: client.VirtualHostSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -1704,10 +2266,20 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetVirtualHost(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -1731,11 +2303,33 @@ func (r *VirtualHostResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	err := r.client.DeleteVirtualHost(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "VirtualHost already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete VirtualHost: %s", err))
 		return
 	}
 }
 
 func (r *VirtualHostResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

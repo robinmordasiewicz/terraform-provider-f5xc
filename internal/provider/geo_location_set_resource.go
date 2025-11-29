@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,26 +45,26 @@ type GeoLocationSetResource struct {
 	client *client.Client
 }
 
-// GeoLocationSetCustomSelectorModel represents the custom_geo_location_selector block
-type GeoLocationSetCustomSelectorModel struct {
+// GeoLocationSetEmptyModel represents empty nested blocks
+type GeoLocationSetEmptyModel struct {
+}
+
+// GeoLocationSetCustomGeoLocationSelectorModel represents custom_geo_location_selector block
+type GeoLocationSetCustomGeoLocationSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
 }
 
-// GeoLocationSetGlobalModel represents the global empty block
-type GeoLocationSetGlobalModel struct {
-}
-
 type GeoLocationSetResourceModel struct {
-	Name                      types.String                        `tfsdk:"name"`
-	Namespace                 types.String                        `tfsdk:"namespace"`
-	Annotations               types.Map                           `tfsdk:"annotations"`
-	Description               types.String                        `tfsdk:"description"`
-	Disable                   types.Bool                          `tfsdk:"disable"`
-	Labels                    types.Map                           `tfsdk:"labels"`
-	CustomGeoLocationSelector *GeoLocationSetCustomSelectorModel  `tfsdk:"custom_geo_location_selector"`
-	Global                    *GeoLocationSetGlobalModel          `tfsdk:"global"`
-	ID                        types.String                        `tfsdk:"id"`
-	Timeouts                  timeouts.Value                      `tfsdk:"timeouts"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	CustomGeoLocationSelector *GeoLocationSetCustomGeoLocationSelectorModel `tfsdk:"custom_geo_location_selector"`
+	Global *GeoLocationSetEmptyModel `tfsdk:"global"`
 }
 
 func (r *GeoLocationSetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -267,6 +268,10 @@ func (r *GeoLocationSetResource) Create(ctx context.Context, req resource.Create
 		Spec: client.GeoLocationSetSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -322,6 +327,15 @@ func (r *GeoLocationSetResource) Read(ctx context.Context, req resource.ReadRequ
 
 	apiResource, err := r.client.GetGeoLocationSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "GeoLocationSet not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read GeoLocationSet: %s", err))
 		return
 	}
@@ -336,6 +350,13 @@ func (r *GeoLocationSetResource) Read(ctx context.Context, req resource.ReadRequ
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -388,6 +409,10 @@ func (r *GeoLocationSetResource) Update(ctx context.Context, req resource.Update
 		Spec: client.GeoLocationSetSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -412,10 +437,20 @@ func (r *GeoLocationSetResource) Update(ctx context.Context, req resource.Update
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetGeoLocationSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -439,11 +474,33 @@ func (r *GeoLocationSetResource) Delete(ctx context.Context, req resource.Delete
 
 	err := r.client.DeleteGeoLocationSet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "GeoLocationSet already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete GeoLocationSet: %s", err))
 		return
 	}
 }
 
 func (r *GeoLocationSetResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

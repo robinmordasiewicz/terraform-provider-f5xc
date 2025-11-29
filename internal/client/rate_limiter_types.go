@@ -48,19 +48,3 @@ func (c *Client) DeleteRateLimiter(ctx context.Context, namespace, name string) 
 	path := fmt.Sprintf("/api/config/namespaces/%s/rate_limiters/%s", namespace, name)
 	return c.Delete(ctx, path)
 }
-
-// RateLimiterListResponse is the response from listing rate limiters
-type RateLimiterListResponse struct {
-	Items []RateLimiter `json:"items"`
-}
-
-// ListRateLimiters lists all rate limiters in a namespace
-func (c *Client) ListRateLimiters(ctx context.Context, namespace string) ([]RateLimiter, error) {
-	var result RateLimiterListResponse
-	path := fmt.Sprintf("/api/config/namespaces/%s/rate_limiters", namespace)
-	err := c.Get(ctx, path, &result)
-	if err != nil {
-		return nil, err
-	}
-	return result.Items, nil
-}

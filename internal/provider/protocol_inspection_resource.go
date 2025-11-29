@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,29 @@ type ProtocolInspectionResource struct {
 	client *client.Client
 }
 
+// ProtocolInspectionEmptyModel represents empty nested blocks
+type ProtocolInspectionEmptyModel struct {
+}
+
+// ProtocolInspectionEnableDisableComplianceChecksModel represents enable_disable_compliance_checks block
+type ProtocolInspectionEnableDisableComplianceChecksModel struct {
+	DisableComplianceChecks *ProtocolInspectionEmptyModel `tfsdk:"disable_compliance_checks"`
+	EnableComplianceChecks *ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel `tfsdk:"enable_compliance_checks"`
+}
+
+// ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel represents enable_compliance_checks block
+type ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ProtocolInspectionEnableDisableSignaturesModel represents enable_disable_signatures block
+type ProtocolInspectionEnableDisableSignaturesModel struct {
+	DisableSignature *ProtocolInspectionEmptyModel `tfsdk:"disable_signature"`
+	EnableSignature *ProtocolInspectionEmptyModel `tfsdk:"enable_signature"`
+}
+
 type ProtocolInspectionResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +78,8 @@ type ProtocolInspectionResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	EnableDisableComplianceChecks *ProtocolInspectionEnableDisableComplianceChecksModel `tfsdk:"enable_disable_compliance_checks"`
+	EnableDisableSignatures *ProtocolInspectionEnableDisableSignaturesModel `tfsdk:"enable_disable_signatures"`
 }
 
 func (r *ProtocolInspectionResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -289,6 +315,10 @@ func (r *ProtocolInspectionResource) Create(ctx context.Context, req resource.Cr
 		Spec: client.ProtocolInspectionSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -344,6 +374,15 @@ func (r *ProtocolInspectionResource) Read(ctx context.Context, req resource.Read
 
 	apiResource, err := r.client.GetProtocolInspection(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ProtocolInspection not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ProtocolInspection: %s", err))
 		return
 	}
@@ -358,6 +397,13 @@ func (r *ProtocolInspectionResource) Read(ctx context.Context, req resource.Read
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -410,6 +456,10 @@ func (r *ProtocolInspectionResource) Update(ctx context.Context, req resource.Up
 		Spec: client.ProtocolInspectionSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -434,10 +484,20 @@ func (r *ProtocolInspectionResource) Update(ctx context.Context, req resource.Up
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetProtocolInspection(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -461,11 +521,33 @@ func (r *ProtocolInspectionResource) Delete(ctx context.Context, req resource.De
 
 	err := r.client.DeleteProtocolInspection(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ProtocolInspection already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete ProtocolInspection: %s", err))
 		return
 	}
 }
 
 func (r *ProtocolInspectionResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

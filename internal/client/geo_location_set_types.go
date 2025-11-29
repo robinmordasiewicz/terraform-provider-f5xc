@@ -48,19 +48,3 @@ func (c *Client) DeleteGeoLocationSet(ctx context.Context, namespace, name strin
 	path := fmt.Sprintf("/api/config/namespaces/%s/geo_location_sets/%s", namespace, name)
 	return c.Delete(ctx, path)
 }
-
-// GeoLocationSetListResponse is the response from listing geo location sets
-type GeoLocationSetListResponse struct {
-	Items []GeoLocationSet `json:"items"`
-}
-
-// ListGeoLocationSets lists all geo location sets in a namespace
-func (c *Client) ListGeoLocationSets(ctx context.Context, namespace string) ([]GeoLocationSet, error) {
-	var result GeoLocationSetListResponse
-	path := fmt.Sprintf("/api/config/namespaces/%s/geo_location_sets", namespace)
-	err := c.Get(ctx, path, &result)
-	if err != nil {
-		return nil, err
-	}
-	return result.Items, nil
-}

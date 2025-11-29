@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,30 @@ type K8SClusterRoleBindingResource struct {
 	client *client.Client
 }
 
+// K8SClusterRoleBindingEmptyModel represents empty nested blocks
+type K8SClusterRoleBindingEmptyModel struct {
+}
+
+// K8SClusterRoleBindingK8SClusterRoleModel represents k8s_cluster_role block
+type K8SClusterRoleBindingK8SClusterRoleModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// K8SClusterRoleBindingSubjectsModel represents subjects block
+type K8SClusterRoleBindingSubjectsModel struct {
+	Group types.String `tfsdk:"group"`
+	User types.String `tfsdk:"user"`
+	ServiceAccount *K8SClusterRoleBindingSubjectsServiceAccountModel `tfsdk:"service_account"`
+}
+
+// K8SClusterRoleBindingSubjectsServiceAccountModel represents service_account block
+type K8SClusterRoleBindingSubjectsServiceAccountModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+}
+
 type K8SClusterRoleBindingResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +78,8 @@ type K8SClusterRoleBindingResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	K8SClusterRole *K8SClusterRoleBindingK8SClusterRoleModel `tfsdk:"k8s_cluster_role"`
+	Subjects []K8SClusterRoleBindingSubjectsModel `tfsdk:"subjects"`
 }
 
 func (r *K8SClusterRoleBindingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -291,6 +318,10 @@ func (r *K8SClusterRoleBindingResource) Create(ctx context.Context, req resource
 		Spec: client.K8SClusterRoleBindingSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -346,6 +377,15 @@ func (r *K8SClusterRoleBindingResource) Read(ctx context.Context, req resource.R
 
 	apiResource, err := r.client.GetK8SClusterRoleBinding(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "K8SClusterRoleBinding not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read K8SClusterRoleBinding: %s", err))
 		return
 	}
@@ -360,6 +400,13 @@ func (r *K8SClusterRoleBindingResource) Read(ctx context.Context, req resource.R
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -412,6 +459,10 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 		Spec: client.K8SClusterRoleBindingSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -436,10 +487,20 @@ func (r *K8SClusterRoleBindingResource) Update(ctx context.Context, req resource
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetK8SClusterRoleBinding(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -463,11 +524,33 @@ func (r *K8SClusterRoleBindingResource) Delete(ctx context.Context, req resource
 
 	err := r.client.DeleteK8SClusterRoleBinding(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "K8SClusterRoleBinding already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete K8SClusterRoleBinding: %s", err))
 		return
 	}
 }
 
 func (r *K8SClusterRoleBindingResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

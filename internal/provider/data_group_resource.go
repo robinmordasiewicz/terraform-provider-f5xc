@@ -45,37 +45,37 @@ type DataGroupResource struct {
 	client *client.Client
 }
 
-// DataGroupRecordsModel represents the records nested block
-type DataGroupRecordsModel struct {
+// DataGroupEmptyModel represents empty nested blocks
+type DataGroupEmptyModel struct {
 }
 
-// DataGroupAddressRecordsModel represents the address_records nested block
+// DataGroupAddressRecordsModel represents address_records block
 type DataGroupAddressRecordsModel struct {
-	Records *DataGroupRecordsModel `tfsdk:"records"`
+	Records *DataGroupEmptyModel `tfsdk:"records"`
 }
 
-// DataGroupIntegerRecordsModel represents the integer_records nested block
+// DataGroupIntegerRecordsModel represents integer_records block
 type DataGroupIntegerRecordsModel struct {
-	Records *DataGroupRecordsModel `tfsdk:"records"`
+	Records *DataGroupEmptyModel `tfsdk:"records"`
 }
 
-// DataGroupStringRecordsModel represents the string_records nested block
+// DataGroupStringRecordsModel represents string_records block
 type DataGroupStringRecordsModel struct {
-	Records *DataGroupRecordsModel `tfsdk:"records"`
+	Records *DataGroupEmptyModel `tfsdk:"records"`
 }
 
 type DataGroupResourceModel struct {
-	Name           types.String                  `tfsdk:"name"`
-	Namespace      types.String                  `tfsdk:"namespace"`
-	Annotations    types.Map                     `tfsdk:"annotations"`
-	Description    types.String                  `tfsdk:"description"`
-	Disable        types.Bool                    `tfsdk:"disable"`
-	Labels         types.Map                     `tfsdk:"labels"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
 	AddressRecords *DataGroupAddressRecordsModel `tfsdk:"address_records"`
 	IntegerRecords *DataGroupIntegerRecordsModel `tfsdk:"integer_records"`
-	StringRecords  *DataGroupStringRecordsModel  `tfsdk:"string_records"`
-	ID             types.String                  `tfsdk:"id"`
-	Timeouts       timeouts.Value                `tfsdk:"timeouts"`
+	StringRecords *DataGroupStringRecordsModel `tfsdk:"string_records"`
 }
 
 func (r *DataGroupResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -295,24 +295,11 @@ func (r *DataGroupResource) Create(ctx context.Context, req resource.CreateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataGroupSpec{
-			Description: data.Description.ValueString(),
-		},
+		Spec: client.DataGroupSpec{},
 	}
 
-	// Handle OneOf: string_records, integer_records, or address_records
-	if data.StringRecords != nil {
-		apiResource.Spec.StringRecords = &client.DataGroupStringRecords{
-			Records: map[string]string{},
-		}
-	} else if data.IntegerRecords != nil {
-		apiResource.Spec.IntegerRecords = &client.DataGroupIntegerRecords{
-			Records: map[string]string{},
-		}
-	} else if data.AddressRecords != nil {
-		apiResource.Spec.AddressRecords = &client.DataGroupAddressRecords{
-			Records: map[string]string{},
-		}
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -370,6 +357,15 @@ func (r *DataGroupResource) Read(ctx context.Context, req resource.ReadRequest, 
 
 	apiResource, err := r.client.GetDataGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "DataGroup not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read DataGroup: %s", err))
 		return
 	}
@@ -385,21 +381,11 @@ func (r *DataGroupResource) Read(ctx context.Context, req resource.ReadRequest, 
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
-	// Read spec fields
-	if apiResource.Spec.Description != "" {
-		data.Description = types.StringValue(apiResource.Spec.Description)
-	}
-
-	// Read record types from API response to preserve state
-	// Only set the record type block if it was configured (don't add nested records block)
-	if apiResource.Spec.StringRecords != nil {
-		data.StringRecords = &DataGroupStringRecordsModel{}
-	}
-	if apiResource.Spec.IntegerRecords != nil {
-		data.IntegerRecords = &DataGroupIntegerRecordsModel{}
-	}
-	if apiResource.Spec.AddressRecords != nil {
-		data.AddressRecords = &DataGroupAddressRecordsModel{}
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
 	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
@@ -450,24 +436,11 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.DataGroupSpec{
-			Description: data.Description.ValueString(),
-		},
+		Spec: client.DataGroupSpec{},
 	}
 
-	// Handle OneOf: string_records, integer_records, or address_records
-	if data.StringRecords != nil {
-		apiResource.Spec.StringRecords = &client.DataGroupStringRecords{
-			Records: map[string]string{},
-		}
-	} else if data.IntegerRecords != nil {
-		apiResource.Spec.IntegerRecords = &client.DataGroupIntegerRecords{
-			Records: map[string]string{},
-		}
-	} else if data.AddressRecords != nil {
-		apiResource.Spec.AddressRecords = &client.DataGroupAddressRecords{
-			Records: map[string]string{},
-		}
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
 	}
 
 	if !data.Labels.IsNull() {
@@ -494,10 +467,20 @@ func (r *DataGroupResource) Update(ctx context.Context, req resource.UpdateReque
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetDataGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -521,6 +504,14 @@ func (r *DataGroupResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	err := r.client.DeleteDataGroup(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "DataGroup already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete DataGroup: %s", err))
 		return
 	}
@@ -536,7 +527,6 @@ func (r *DataGroupResource) ImportState(ctx context.Context, req resource.Import
 		)
 		return
 	}
-
 	namespace := parts[0]
 	name := parts[1]
 

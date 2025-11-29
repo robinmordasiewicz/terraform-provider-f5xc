@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,40 @@ type K8SClusterRoleResource struct {
 	client *client.Client
 }
 
+// K8SClusterRoleEmptyModel represents empty nested blocks
+type K8SClusterRoleEmptyModel struct {
+}
+
+// K8SClusterRoleK8SClusterRoleSelectorModel represents k8s_cluster_role_selector block
+type K8SClusterRoleK8SClusterRoleSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// K8SClusterRolePolicyRuleListModel represents policy_rule_list block
+type K8SClusterRolePolicyRuleListModel struct {
+	PolicyRule []K8SClusterRolePolicyRuleListPolicyRuleModel `tfsdk:"policy_rule"`
+}
+
+// K8SClusterRolePolicyRuleListPolicyRuleModel represents policy_rule block
+type K8SClusterRolePolicyRuleListPolicyRuleModel struct {
+	NonResourceURLList *K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel `tfsdk:"non_resource_url_list"`
+	ResourceList *K8SClusterRolePolicyRuleListPolicyRuleResourceListModel `tfsdk:"resource_list"`
+}
+
+// K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel represents non_resource_url_list block
+type K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel struct {
+	Urls types.List `tfsdk:"urls"`
+	Verbs types.List `tfsdk:"verbs"`
+}
+
+// K8SClusterRolePolicyRuleListPolicyRuleResourceListModel represents resource_list block
+type K8SClusterRolePolicyRuleListPolicyRuleResourceListModel struct {
+	APIGroups types.List `tfsdk:"api_groups"`
+	ResourceInstances types.List `tfsdk:"resource_instances"`
+	ResourceTypes types.List `tfsdk:"resource_types"`
+	Verbs types.List `tfsdk:"verbs"`
+}
+
 type K8SClusterRoleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +89,8 @@ type K8SClusterRoleResourceModel struct {
 	Yaml types.String `tfsdk:"yaml"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	K8SClusterRoleSelector *K8SClusterRoleK8SClusterRoleSelectorModel `tfsdk:"k8s_cluster_role_selector"`
+	PolicyRuleList *K8SClusterRolePolicyRuleListModel `tfsdk:"policy_rule_list"`
 }
 
 func (r *K8SClusterRoleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -315,6 +352,10 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 		Spec: client.K8SClusterRoleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -370,6 +411,15 @@ func (r *K8SClusterRoleResource) Read(ctx context.Context, req resource.ReadRequ
 
 	apiResource, err := r.client.GetK8SClusterRole(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "K8SClusterRole not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read K8SClusterRole: %s", err))
 		return
 	}
@@ -384,6 +434,13 @@ func (r *K8SClusterRoleResource) Read(ctx context.Context, req resource.ReadRequ
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -436,6 +493,10 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 		Spec: client.K8SClusterRoleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -460,10 +521,20 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetK8SClusterRole(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -487,11 +558,33 @@ func (r *K8SClusterRoleResource) Delete(ctx context.Context, req resource.Delete
 
 	err := r.client.DeleteK8SClusterRole(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "K8SClusterRole already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete K8SClusterRole: %s", err))
 		return
 	}
 }
 
 func (r *K8SClusterRoleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

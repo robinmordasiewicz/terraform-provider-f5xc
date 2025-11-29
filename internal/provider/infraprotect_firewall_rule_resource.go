@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,54 @@ type InfraprotectFirewallRuleResource struct {
 	client *client.Client
 }
 
+// InfraprotectFirewallRuleEmptyModel represents empty nested blocks
+type InfraprotectFirewallRuleEmptyModel struct {
+}
+
+// InfraprotectFirewallRuleProtocolIcmpModel represents protocol_icmp block
+type InfraprotectFirewallRuleProtocolIcmpModel struct {
+	EchoReply types.Bool `tfsdk:"echo_reply"`
+	EchoRequest types.Bool `tfsdk:"echo_request"`
+	ParameterProblem types.Bool `tfsdk:"parameter_problem"`
+	Redirect types.Bool `tfsdk:"redirect"`
+	SourceQuench types.Bool `tfsdk:"source_quench"`
+	TimeExceeded types.Bool `tfsdk:"time_exceeded"`
+	Unreachable types.Bool `tfsdk:"unreachable"`
+}
+
+// InfraprotectFirewallRuleProtocolIcmp6Model represents protocol_icmp6 block
+type InfraprotectFirewallRuleProtocolIcmp6Model struct {
+	DestinationUnreachable types.Bool `tfsdk:"destination_unreachable"`
+	EchoReply types.Bool `tfsdk:"echo_reply"`
+	EchoRequest types.Bool `tfsdk:"echo_request"`
+	NeighborAdvertisement types.Bool `tfsdk:"neighbor_advertisement"`
+	NeighborSolicit types.Bool `tfsdk:"neighbor_solicit"`
+	PacketTooBig types.Bool `tfsdk:"packet_too_big"`
+	ParameterProblem types.Bool `tfsdk:"parameter_problem"`
+	Redirect types.Bool `tfsdk:"redirect"`
+	RouterAdvertisement types.Bool `tfsdk:"router_advertisement"`
+	RouterSolicit types.Bool `tfsdk:"router_solicit"`
+	TimeExceeded types.Bool `tfsdk:"time_exceeded"`
+}
+
+// InfraprotectFirewallRuleProtocolTCPModel represents protocol_tcp block
+type InfraprotectFirewallRuleProtocolTCPModel struct {
+	Description types.String `tfsdk:"description"`
+	DestinationPortRange types.String `tfsdk:"destination_port_range"`
+	SourcePortRange types.String `tfsdk:"source_port_range"`
+	DestinationPortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_port_all"`
+	SourcePortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_port_all"`
+}
+
+// InfraprotectFirewallRuleProtocolUDPModel represents protocol_udp block
+type InfraprotectFirewallRuleProtocolUDPModel struct {
+	Description types.String `tfsdk:"description"`
+	DestinationPortRange types.String `tfsdk:"destination_port_range"`
+	SourcePortRange types.String `tfsdk:"source_port_range"`
+	DestinationPortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_port_all"`
+	SourcePortAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_port_all"`
+}
+
 type InfraprotectFirewallRuleResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -55,6 +104,25 @@ type InfraprotectFirewallRuleResourceModel struct {
 	SourcePrefixSingle types.String `tfsdk:"source_prefix_single"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	ActionAllow *InfraprotectFirewallRuleEmptyModel `tfsdk:"action_allow"`
+	ActionDeny *InfraprotectFirewallRuleEmptyModel `tfsdk:"action_deny"`
+	DestinationPrefixAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"destination_prefix_all"`
+	FragmentsAllow *InfraprotectFirewallRuleEmptyModel `tfsdk:"fragments_allow"`
+	FragmentsDeny *InfraprotectFirewallRuleEmptyModel `tfsdk:"fragments_deny"`
+	ProtocolAh *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_ah"`
+	ProtocolAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_all"`
+	ProtocolEsp *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_esp"`
+	ProtocolGre *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_gre"`
+	ProtocolIcmp *InfraprotectFirewallRuleProtocolIcmpModel `tfsdk:"protocol_icmp"`
+	ProtocolIcmp6 *InfraprotectFirewallRuleProtocolIcmp6Model `tfsdk:"protocol_icmp6"`
+	ProtocolIPV6 *InfraprotectFirewallRuleEmptyModel `tfsdk:"protocol_ipv6"`
+	ProtocolTCP *InfraprotectFirewallRuleProtocolTCPModel `tfsdk:"protocol_tcp"`
+	ProtocolUDP *InfraprotectFirewallRuleProtocolUDPModel `tfsdk:"protocol_udp"`
+	SourcePrefixAll *InfraprotectFirewallRuleEmptyModel `tfsdk:"source_prefix_all"`
+	StateOff *InfraprotectFirewallRuleEmptyModel `tfsdk:"state_off"`
+	StateOn *InfraprotectFirewallRuleEmptyModel `tfsdk:"state_on"`
+	VersionIPV4 *InfraprotectFirewallRuleEmptyModel `tfsdk:"version_ipv4"`
+	VersionIPV6 *InfraprotectFirewallRuleEmptyModel `tfsdk:"version_ipv6"`
 }
 
 func (r *InfraprotectFirewallRuleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -433,6 +501,10 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 		Spec: client.InfraprotectFirewallRuleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -488,6 +560,15 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 
 	apiResource, err := r.client.GetInfraprotectFirewallRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "InfraprotectFirewallRule not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read InfraprotectFirewallRule: %s", err))
 		return
 	}
@@ -502,6 +583,13 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -554,6 +642,10 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 		Spec: client.InfraprotectFirewallRuleSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -578,10 +670,20 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetInfraprotectFirewallRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -605,11 +707,33 @@ func (r *InfraprotectFirewallRuleResource) Delete(ctx context.Context, req resou
 
 	err := r.client.DeleteInfraprotectFirewallRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "InfraprotectFirewallRule already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete InfraprotectFirewallRule: %s", err))
 		return
 	}
 }
 
 func (r *InfraprotectFirewallRuleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

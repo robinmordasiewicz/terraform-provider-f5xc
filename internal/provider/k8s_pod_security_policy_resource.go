@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,114 @@ type K8SPodSecurityPolicyResource struct {
 	client *client.Client
 }
 
+// K8SPodSecurityPolicyEmptyModel represents empty nested blocks
+type K8SPodSecurityPolicyEmptyModel struct {
+}
+
+// K8SPodSecurityPolicyPspSpecModel represents psp_spec block
+type K8SPodSecurityPolicyPspSpecModel struct {
+	AllowPrivilegeEscalation types.Bool `tfsdk:"allow_privilege_escalation"`
+	AllowedCsiDrivers types.List `tfsdk:"allowed_csi_drivers"`
+	AllowedFlexVolumes types.List `tfsdk:"allowed_flex_volumes"`
+	AllowedProcMounts types.List `tfsdk:"allowed_proc_mounts"`
+	AllowedUnsafeSysctls types.List `tfsdk:"allowed_unsafe_sysctls"`
+	DefaultAllowPrivilegeEscalation types.Bool `tfsdk:"default_allow_privilege_escalation"`
+	ForbiddenSysctls types.List `tfsdk:"forbidden_sysctls"`
+	HostIpc types.Bool `tfsdk:"host_ipc"`
+	HostNetwork types.Bool `tfsdk:"host_network"`
+	HostPid types.Bool `tfsdk:"host_pid"`
+	HostPortRanges types.String `tfsdk:"host_port_ranges"`
+	Privileged types.Bool `tfsdk:"privileged"`
+	ReadOnlyRootFilesystem types.Bool `tfsdk:"read_only_root_filesystem"`
+	Volumes types.List `tfsdk:"volumes"`
+	AllowedCapabilities *K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel `tfsdk:"allowed_capabilities"`
+	AllowedHostPaths []K8SPodSecurityPolicyPspSpecAllowedHostPathsModel `tfsdk:"allowed_host_paths"`
+	DefaultCapabilities *K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel `tfsdk:"default_capabilities"`
+	DropCapabilities *K8SPodSecurityPolicyPspSpecDropCapabilitiesModel `tfsdk:"drop_capabilities"`
+	FsGroupStrategyOptions *K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel `tfsdk:"fs_group_strategy_options"`
+	NoAllowedCapabilities *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_allowed_capabilities"`
+	NoDefaultCapabilities *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_default_capabilities"`
+	NoDropCapabilities *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_drop_capabilities"`
+	NoFsGroups *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_fs_groups"`
+	NoRunAsGroup *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_run_as_group"`
+	NoRunAsUser *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_run_as_user"`
+	NoRuntimeClass *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_runtime_class"`
+	NoSeLinuxOptions *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_se_linux_options"`
+	NoSupplementalGroups *K8SPodSecurityPolicyEmptyModel `tfsdk:"no_supplemental_groups"`
+	RunAsGroup *K8SPodSecurityPolicyPspSpecRunAsGroupModel `tfsdk:"run_as_group"`
+	RunAsUser *K8SPodSecurityPolicyPspSpecRunAsUserModel `tfsdk:"run_as_user"`
+	SupplementalGroups *K8SPodSecurityPolicyPspSpecSupplementalGroupsModel `tfsdk:"supplemental_groups"`
+}
+
+// K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel represents allowed_capabilities block
+type K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel struct {
+	Capabilities types.List `tfsdk:"capabilities"`
+}
+
+// K8SPodSecurityPolicyPspSpecAllowedHostPathsModel represents allowed_host_paths block
+type K8SPodSecurityPolicyPspSpecAllowedHostPathsModel struct {
+	PathPrefix types.String `tfsdk:"path_prefix"`
+	ReadOnly types.Bool `tfsdk:"read_only"`
+}
+
+// K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel represents default_capabilities block
+type K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel struct {
+	Capabilities types.List `tfsdk:"capabilities"`
+}
+
+// K8SPodSecurityPolicyPspSpecDropCapabilitiesModel represents drop_capabilities block
+type K8SPodSecurityPolicyPspSpecDropCapabilitiesModel struct {
+	Capabilities types.List `tfsdk:"capabilities"`
+}
+
+// K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel represents fs_group_strategy_options block
+type K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel struct {
+	Rule types.String `tfsdk:"rule"`
+	IDRanges []K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModel `tfsdk:"id_ranges"`
+}
+
+// K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModel represents id_ranges block
+type K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModel struct {
+	MaxID types.Int64 `tfsdk:"max_id"`
+	MinID types.Int64 `tfsdk:"min_id"`
+}
+
+// K8SPodSecurityPolicyPspSpecRunAsGroupModel represents run_as_group block
+type K8SPodSecurityPolicyPspSpecRunAsGroupModel struct {
+	Rule types.String `tfsdk:"rule"`
+	IDRanges []K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModel `tfsdk:"id_ranges"`
+}
+
+// K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModel represents id_ranges block
+type K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModel struct {
+	MaxID types.Int64 `tfsdk:"max_id"`
+	MinID types.Int64 `tfsdk:"min_id"`
+}
+
+// K8SPodSecurityPolicyPspSpecRunAsUserModel represents run_as_user block
+type K8SPodSecurityPolicyPspSpecRunAsUserModel struct {
+	Rule types.String `tfsdk:"rule"`
+	IDRanges []K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModel `tfsdk:"id_ranges"`
+}
+
+// K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModel represents id_ranges block
+type K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModel struct {
+	MaxID types.Int64 `tfsdk:"max_id"`
+	MinID types.Int64 `tfsdk:"min_id"`
+}
+
+// K8SPodSecurityPolicyPspSpecSupplementalGroupsModel represents supplemental_groups block
+type K8SPodSecurityPolicyPspSpecSupplementalGroupsModel struct {
+	Rule types.String `tfsdk:"rule"`
+	IDRanges []K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModel `tfsdk:"id_ranges"`
+}
+
+// K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModel represents id_ranges block
+type K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModel struct {
+	MaxID types.Int64 `tfsdk:"max_id"`
+	MinID types.Int64 `tfsdk:"min_id"`
+}
+
 type K8SPodSecurityPolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -54,6 +163,7 @@ type K8SPodSecurityPolicyResourceModel struct {
 	Yaml types.String `tfsdk:"yaml"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	PspSpec *K8SPodSecurityPolicyPspSpecModel `tfsdk:"psp_spec"`
 }
 
 func (r *K8SPodSecurityPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -493,6 +603,10 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 		Spec: client.K8SPodSecurityPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -548,6 +662,15 @@ func (r *K8SPodSecurityPolicyResource) Read(ctx context.Context, req resource.Re
 
 	apiResource, err := r.client.GetK8SPodSecurityPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "K8SPodSecurityPolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read K8SPodSecurityPolicy: %s", err))
 		return
 	}
@@ -562,6 +685,13 @@ func (r *K8SPodSecurityPolicyResource) Read(ctx context.Context, req resource.Re
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -614,6 +744,10 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 		Spec: client.K8SPodSecurityPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -638,10 +772,20 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetK8SPodSecurityPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -665,11 +809,33 @@ func (r *K8SPodSecurityPolicyResource) Delete(ctx context.Context, req resource.
 
 	err := r.client.DeleteK8SPodSecurityPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "K8SPodSecurityPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete K8SPodSecurityPolicy: %s", err))
 		return
 	}
 }
 
 func (r *K8SPodSecurityPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

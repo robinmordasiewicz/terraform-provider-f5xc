@@ -49,41 +49,41 @@ type MaliciousUserMitigationResource struct {
 type MaliciousUserMitigationEmptyModel struct {
 }
 
-// MaliciousUserMitigationActionModel represents the mitigation_action block
-type MaliciousUserMitigationActionModel struct {
-	BlockTemporarily    *MaliciousUserMitigationEmptyModel `tfsdk:"block_temporarily"`
-	CaptchaChallenge    *MaliciousUserMitigationEmptyModel `tfsdk:"captcha_challenge"`
+// MaliciousUserMitigationMitigationTypeModel represents mitigation_type block
+type MaliciousUserMitigationMitigationTypeModel struct {
+	Rules []MaliciousUserMitigationMitigationTypeRulesModel `tfsdk:"rules"`
+}
+
+// MaliciousUserMitigationMitigationTypeRulesModel represents rules block
+type MaliciousUserMitigationMitigationTypeRulesModel struct {
+	MitigationAction *MaliciousUserMitigationMitigationTypeRulesMitigationActionModel `tfsdk:"mitigation_action"`
+	ThreatLevel *MaliciousUserMitigationMitigationTypeRulesThreatLevelModel `tfsdk:"threat_level"`
+}
+
+// MaliciousUserMitigationMitigationTypeRulesMitigationActionModel represents mitigation_action block
+type MaliciousUserMitigationMitigationTypeRulesMitigationActionModel struct {
+	BlockTemporarily *MaliciousUserMitigationEmptyModel `tfsdk:"block_temporarily"`
+	CaptchaChallenge *MaliciousUserMitigationEmptyModel `tfsdk:"captcha_challenge"`
 	JavascriptChallenge *MaliciousUserMitigationEmptyModel `tfsdk:"javascript_challenge"`
 }
 
-// MaliciousUserMitigationThreatLevelModel represents the threat_level block
-type MaliciousUserMitigationThreatLevelModel struct {
-	High   *MaliciousUserMitigationEmptyModel `tfsdk:"high"`
-	Low    *MaliciousUserMitigationEmptyModel `tfsdk:"low"`
+// MaliciousUserMitigationMitigationTypeRulesThreatLevelModel represents threat_level block
+type MaliciousUserMitigationMitigationTypeRulesThreatLevelModel struct {
+	High *MaliciousUserMitigationEmptyModel `tfsdk:"high"`
+	Low *MaliciousUserMitigationEmptyModel `tfsdk:"low"`
 	Medium *MaliciousUserMitigationEmptyModel `tfsdk:"medium"`
 }
 
-// MaliciousUserMitigationRuleModel represents a single rule in the rules list
-type MaliciousUserMitigationRuleModel struct {
-	MitigationAction *MaliciousUserMitigationActionModel      `tfsdk:"mitigation_action"`
-	ThreatLevel      *MaliciousUserMitigationThreatLevelModel `tfsdk:"threat_level"`
-}
-
-// MaliciousUserMitigationTypeModel represents the mitigation_type block
-type MaliciousUserMitigationTypeModel struct {
-	Rules []MaliciousUserMitigationRuleModel `tfsdk:"rules"`
-}
-
 type MaliciousUserMitigationResourceModel struct {
-	Name           types.String                      `tfsdk:"name"`
-	Namespace      types.String                      `tfsdk:"namespace"`
-	Annotations    types.Map                         `tfsdk:"annotations"`
-	Description    types.String                      `tfsdk:"description"`
-	Disable        types.Bool                        `tfsdk:"disable"`
-	Labels         types.Map                         `tfsdk:"labels"`
-	MitigationType *MaliciousUserMitigationTypeModel `tfsdk:"mitigation_type"`
-	ID             types.String                      `tfsdk:"id"`
-	Timeouts       timeouts.Value                    `tfsdk:"timeouts"`
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Annotations types.Map `tfsdk:"annotations"`
+	Description types.String `tfsdk:"description"`
+	Disable types.Bool `tfsdk:"disable"`
+	Labels types.Map `tfsdk:"labels"`
+	ID types.String `tfsdk:"id"`
+	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	MitigationType *MaliciousUserMitigationMitigationTypeModel `tfsdk:"mitigation_type"`
 }
 
 func (r *MaliciousUserMitigationResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -322,6 +322,10 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 		Spec: client.MaliciousUserMitigationSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -377,6 +381,15 @@ func (r *MaliciousUserMitigationResource) Read(ctx context.Context, req resource
 
 	apiResource, err := r.client.GetMaliciousUserMitigation(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "MaliciousUserMitigation not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read MaliciousUserMitigation: %s", err))
 		return
 	}
@@ -391,6 +404,13 @@ func (r *MaliciousUserMitigationResource) Read(ctx context.Context, req resource
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -443,6 +463,10 @@ func (r *MaliciousUserMitigationResource) Update(ctx context.Context, req resour
 		Spec: client.MaliciousUserMitigationSpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -467,10 +491,20 @@ func (r *MaliciousUserMitigationResource) Update(ctx context.Context, req resour
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetMaliciousUserMitigation(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -494,6 +528,14 @@ func (r *MaliciousUserMitigationResource) Delete(ctx context.Context, req resour
 
 	err := r.client.DeleteMaliciousUserMitigation(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "MaliciousUserMitigation already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete MaliciousUserMitigation: %s", err))
 		return
 	}
@@ -509,7 +551,6 @@ func (r *MaliciousUserMitigationResource) ImportState(ctx context.Context, req r
 		)
 		return
 	}
-
 	namespace := parts[0]
 	name := parts[1]
 

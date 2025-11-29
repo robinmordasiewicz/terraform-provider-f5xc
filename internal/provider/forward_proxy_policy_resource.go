@@ -6,6 +6,7 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -44,6 +45,209 @@ type ForwardProxyPolicyResource struct {
 	client *client.Client
 }
 
+// ForwardProxyPolicyEmptyModel represents empty nested blocks
+type ForwardProxyPolicyEmptyModel struct {
+}
+
+// ForwardProxyPolicyAllowListModel represents allow_list block
+type ForwardProxyPolicyAllowListModel struct {
+	DefaultActionAllow *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_allow"`
+	DefaultActionDeny *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_deny"`
+	DefaultActionNextPolicy *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_next_policy"`
+	DestList []ForwardProxyPolicyAllowListDestListModel `tfsdk:"dest_list"`
+	HTTPList []ForwardProxyPolicyAllowListHTTPListModel `tfsdk:"http_list"`
+	TLSList []ForwardProxyPolicyAllowListTLSListModel `tfsdk:"tls_list"`
+}
+
+// ForwardProxyPolicyAllowListDestListModel represents dest_list block
+type ForwardProxyPolicyAllowListDestListModel struct {
+	IPV6Prefixes types.List `tfsdk:"ipv6_prefixes"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// ForwardProxyPolicyAllowListHTTPListModel represents http_list block
+type ForwardProxyPolicyAllowListHTTPListModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	PathExactValue types.String `tfsdk:"path_exact_value"`
+	PathPrefixValue types.String `tfsdk:"path_prefix_value"`
+	PathRegexValue types.String `tfsdk:"path_regex_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+	AnyPath *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
+}
+
+// ForwardProxyPolicyAllowListTLSListModel represents tls_list block
+type ForwardProxyPolicyAllowListTLSListModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// ForwardProxyPolicyDenyListModel represents deny_list block
+type ForwardProxyPolicyDenyListModel struct {
+	DefaultActionAllow *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_allow"`
+	DefaultActionDeny *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_deny"`
+	DefaultActionNextPolicy *ForwardProxyPolicyEmptyModel `tfsdk:"default_action_next_policy"`
+	DestList []ForwardProxyPolicyDenyListDestListModel `tfsdk:"dest_list"`
+	HTTPList []ForwardProxyPolicyDenyListHTTPListModel `tfsdk:"http_list"`
+	TLSList []ForwardProxyPolicyDenyListTLSListModel `tfsdk:"tls_list"`
+}
+
+// ForwardProxyPolicyDenyListDestListModel represents dest_list block
+type ForwardProxyPolicyDenyListDestListModel struct {
+	IPV6Prefixes types.List `tfsdk:"ipv6_prefixes"`
+	PortRanges types.String `tfsdk:"port_ranges"`
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// ForwardProxyPolicyDenyListHTTPListModel represents http_list block
+type ForwardProxyPolicyDenyListHTTPListModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	PathExactValue types.String `tfsdk:"path_exact_value"`
+	PathPrefixValue types.String `tfsdk:"path_prefix_value"`
+	PathRegexValue types.String `tfsdk:"path_regex_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+	AnyPath *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
+}
+
+// ForwardProxyPolicyDenyListTLSListModel represents tls_list block
+type ForwardProxyPolicyDenyListTLSListModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// ForwardProxyPolicyNetworkConnectorModel represents network_connector block
+type ForwardProxyPolicyNetworkConnectorModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ForwardProxyPolicyProxyLabelSelectorModel represents proxy_label_selector block
+type ForwardProxyPolicyProxyLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// ForwardProxyPolicyRuleListModel represents rule_list block
+type ForwardProxyPolicyRuleListModel struct {
+	Rules []ForwardProxyPolicyRuleListRulesModel `tfsdk:"rules"`
+}
+
+// ForwardProxyPolicyRuleListRulesModel represents rules block
+type ForwardProxyPolicyRuleListRulesModel struct {
+	Action types.String `tfsdk:"action"`
+	AllDestinations *ForwardProxyPolicyEmptyModel `tfsdk:"all_destinations"`
+	AllSources *ForwardProxyPolicyEmptyModel `tfsdk:"all_sources"`
+	DstAsnList *ForwardProxyPolicyRuleListRulesDstAsnListModel `tfsdk:"dst_asn_list"`
+	DstAsnSet *ForwardProxyPolicyRuleListRulesDstAsnSetModel `tfsdk:"dst_asn_set"`
+	DstIPPrefixSet *ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel `tfsdk:"dst_ip_prefix_set"`
+	DstLabelSelector *ForwardProxyPolicyRuleListRulesDstLabelSelectorModel `tfsdk:"dst_label_selector"`
+	DstPrefixList *ForwardProxyPolicyRuleListRulesDstPrefixListModel `tfsdk:"dst_prefix_list"`
+	HTTPList *ForwardProxyPolicyRuleListRulesHTTPListModel `tfsdk:"http_list"`
+	IPPrefixSet *ForwardProxyPolicyRuleListRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	LabelSelector *ForwardProxyPolicyRuleListRulesLabelSelectorModel `tfsdk:"label_selector"`
+	Metadata *ForwardProxyPolicyRuleListRulesMetadataModel `tfsdk:"metadata"`
+	NoHTTPConnectPort *ForwardProxyPolicyEmptyModel `tfsdk:"no_http_connect_port"`
+	PortMatcher *ForwardProxyPolicyRuleListRulesPortMatcherModel `tfsdk:"port_matcher"`
+	PrefixList *ForwardProxyPolicyRuleListRulesPrefixListModel `tfsdk:"prefix_list"`
+	TLSList *ForwardProxyPolicyRuleListRulesTLSListModel `tfsdk:"tls_list"`
+	URLCategoryList *ForwardProxyPolicyRuleListRulesURLCategoryListModel `tfsdk:"url_category_list"`
+}
+
+// ForwardProxyPolicyRuleListRulesDstAsnListModel represents dst_asn_list block
+type ForwardProxyPolicyRuleListRulesDstAsnListModel struct {
+	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// ForwardProxyPolicyRuleListRulesDstAsnSetModel represents dst_asn_set block
+type ForwardProxyPolicyRuleListRulesDstAsnSetModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel represents dst_ip_prefix_set block
+type ForwardProxyPolicyRuleListRulesDstIPPrefixSetModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ForwardProxyPolicyRuleListRulesDstLabelSelectorModel represents dst_label_selector block
+type ForwardProxyPolicyRuleListRulesDstLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// ForwardProxyPolicyRuleListRulesDstPrefixListModel represents dst_prefix_list block
+type ForwardProxyPolicyRuleListRulesDstPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// ForwardProxyPolicyRuleListRulesHTTPListModel represents http_list block
+type ForwardProxyPolicyRuleListRulesHTTPListModel struct {
+	HTTPList []ForwardProxyPolicyRuleListRulesHTTPListHTTPListModel `tfsdk:"http_list"`
+}
+
+// ForwardProxyPolicyRuleListRulesHTTPListHTTPListModel represents http_list block
+type ForwardProxyPolicyRuleListRulesHTTPListHTTPListModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	PathExactValue types.String `tfsdk:"path_exact_value"`
+	PathPrefixValue types.String `tfsdk:"path_prefix_value"`
+	PathRegexValue types.String `tfsdk:"path_regex_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+	AnyPath *ForwardProxyPolicyEmptyModel `tfsdk:"any_path"`
+}
+
+// ForwardProxyPolicyRuleListRulesIPPrefixSetModel represents ip_prefix_set block
+type ForwardProxyPolicyRuleListRulesIPPrefixSetModel struct {
+	Name types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant types.String `tfsdk:"tenant"`
+}
+
+// ForwardProxyPolicyRuleListRulesLabelSelectorModel represents label_selector block
+type ForwardProxyPolicyRuleListRulesLabelSelectorModel struct {
+	Expressions types.List `tfsdk:"expressions"`
+}
+
+// ForwardProxyPolicyRuleListRulesMetadataModel represents metadata block
+type ForwardProxyPolicyRuleListRulesMetadataModel struct {
+	Description types.String `tfsdk:"description"`
+	Name types.String `tfsdk:"name"`
+}
+
+// ForwardProxyPolicyRuleListRulesPortMatcherModel represents port_matcher block
+type ForwardProxyPolicyRuleListRulesPortMatcherModel struct {
+	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
+	Ports types.List `tfsdk:"ports"`
+}
+
+// ForwardProxyPolicyRuleListRulesPrefixListModel represents prefix_list block
+type ForwardProxyPolicyRuleListRulesPrefixListModel struct {
+	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// ForwardProxyPolicyRuleListRulesTLSListModel represents tls_list block
+type ForwardProxyPolicyRuleListRulesTLSListModel struct {
+	TLSList []ForwardProxyPolicyRuleListRulesTLSListTLSListModel `tfsdk:"tls_list"`
+}
+
+// ForwardProxyPolicyRuleListRulesTLSListTLSListModel represents tls_list block
+type ForwardProxyPolicyRuleListRulesTLSListTLSListModel struct {
+	ExactValue types.String `tfsdk:"exact_value"`
+	RegexValue types.String `tfsdk:"regex_value"`
+	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// ForwardProxyPolicyRuleListRulesURLCategoryListModel represents url_category_list block
+type ForwardProxyPolicyRuleListRulesURLCategoryListModel struct {
+	URLCategories types.List `tfsdk:"url_categories"`
+}
+
 type ForwardProxyPolicyResourceModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -53,6 +257,14 @@ type ForwardProxyPolicyResourceModel struct {
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
+	AllowAll *ForwardProxyPolicyEmptyModel `tfsdk:"allow_all"`
+	AllowList *ForwardProxyPolicyAllowListModel `tfsdk:"allow_list"`
+	AnyProxy *ForwardProxyPolicyEmptyModel `tfsdk:"any_proxy"`
+	DenyList *ForwardProxyPolicyDenyListModel `tfsdk:"deny_list"`
+	DrpHTTPConnect *ForwardProxyPolicyEmptyModel `tfsdk:"drp_http_connect"`
+	NetworkConnector *ForwardProxyPolicyNetworkConnectorModel `tfsdk:"network_connector"`
+	ProxyLabelSelector *ForwardProxyPolicyProxyLabelSelectorModel `tfsdk:"proxy_label_selector"`
+	RuleList *ForwardProxyPolicyRuleListModel `tfsdk:"rule_list"`
 }
 
 func (r *ForwardProxyPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -703,6 +915,10 @@ func (r *ForwardProxyPolicyResource) Create(ctx context.Context, req resource.Cr
 		Spec: client.ForwardProxyPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -758,6 +974,15 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 
 	apiResource, err := r.client.GetForwardProxyPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// Check if the resource was deleted outside Terraform
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ForwardProxyPolicy not found, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read ForwardProxyPolicy: %s", err))
 		return
 	}
@@ -772,6 +997,13 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 	data.ID = types.StringValue(apiResource.Metadata.Name)
 	data.Name = types.StringValue(apiResource.Metadata.Name)
 	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
+
+	// Read description from metadata
+	if apiResource.Metadata.Description != "" {
+		data.Description = types.StringValue(apiResource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(apiResource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
@@ -824,6 +1056,10 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 		Spec: client.ForwardProxyPolicySpec{},
 	}
 
+	if !data.Description.IsNull() {
+		apiResource.Metadata.Description = data.Description.ValueString()
+	}
+
 	if !data.Labels.IsNull() {
 		labels := make(map[string]string)
 		resp.Diagnostics.Append(data.Labels.ElementsAs(ctx, &labels, false)...)
@@ -848,10 +1084,20 @@ func (r *ForwardProxyPolicyResource) Update(ctx context.Context, req resource.Up
 		return
 	}
 
+	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(updated.Metadata.UID)
+	// Use UID from response if available, otherwise preserve from plan
+	uid := updated.Metadata.UID
+	if uid == "" {
+		// If API doesn't return UID, we need to fetch it
+		fetched, fetchErr := r.client.GetForwardProxyPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+		if fetchErr == nil {
+			uid = fetched.Metadata.UID
+		}
+	}
+	psd.SetUID(uid)
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -875,11 +1121,33 @@ func (r *ForwardProxyPolicyResource) Delete(ctx context.Context, req resource.De
 
 	err := r.client.DeleteForwardProxyPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
+		// If the resource is already gone, consider deletion successful (idempotent delete)
+		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
+			tflog.Warn(ctx, "ForwardProxyPolicy already deleted, removing from state", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete ForwardProxyPolicy: %s", err))
 		return
 	}
 }
 
 func (r *ForwardProxyPolicyResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+		)
+		return
+	}
+	namespace := parts[0]
+	name := parts[1]
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

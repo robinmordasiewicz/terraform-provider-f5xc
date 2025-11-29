@@ -181,16 +181,18 @@ jobs:
       run-lint: true
 
   # ===========================================================================
-  # STEP 3: Regenerate provider code (if OpenAPI specs changed - human commits only)
+  # STEP 3: Regenerate provider code (if OpenAPI specs OR generator tools changed - human commits only)
   # ===========================================================================
   regenerate-provider:
     name: Regenerate Provider
     needs: [detect-changes, build-test]
     # Only run for human commits that need provider regeneration
+    # This includes: OpenAPI spec changes OR generator tool changes (to apply bug fixes)
     if: |
       needs.detect-changes.outputs.should-process == 'true' &&
       needs.detect-changes.outputs.is-bot-commit != 'true' &&
-      needs.detect-changes.outputs.specs-changed == 'true'
+      (needs.detect-changes.outputs.specs-changed == 'true' ||
+       needs.detect-changes.outputs.tools-changed == 'true')
     uses: ./.github/workflows/_generate-provider.yml
 
   # ===========================================================================

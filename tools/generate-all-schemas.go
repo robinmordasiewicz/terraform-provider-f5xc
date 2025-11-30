@@ -1659,6 +1659,91 @@ func renderSpecMarshalCode(attrs []TerraformAttribute, indent string) string {
 					continue
 				}
 
+				// Handle list nested blocks within single nested blocks (e.g., rules within mitigation_type)
+				if nestedAttr.IsBlock && nestedAttr.NestedBlockType == "list" {
+					sb.WriteString(fmt.Sprintf("%s\tif len(data.%s.%s) > 0 {\n", indent, fieldName, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\tvar %sList []map[string]interface{}\n", indent, nestedTfsdkName))
+					sb.WriteString(fmt.Sprintf("%s\t\tfor _, listItem := range data.%s.%s {\n", indent, fieldName, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\t\tlistItemMap := make(map[string]interface{})\n", indent))
+
+					// Marshal deep nested attributes within the list items
+					for _, deepAttr := range nestedAttr.NestedAttributes {
+						deepFieldName := deepAttr.GoName
+						deepTfsdkName := deepAttr.TfsdkTag
+						deepJsonName := deepAttr.JsonName
+						if deepJsonName == "" {
+							deepJsonName = deepTfsdkName
+						}
+
+						// Handle single nested blocks within list items
+						if deepAttr.IsBlock && deepAttr.NestedBlockType == "single" {
+							sb.WriteString(fmt.Sprintf("%s\t\t\tif listItem.%s != nil {\n", indent, deepFieldName))
+							if len(deepAttr.NestedAttributes) == 0 {
+								// Empty block - just send empty map
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\tlistItemMap[\"%s\"] = map[string]interface{}{}\n", indent, deepJsonName))
+							} else {
+								// Block with nested attributes (like choice blocks)
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t%sDeepMap := make(map[string]interface{})\n", indent, deepTfsdkName))
+								for _, leafAttr := range deepAttr.NestedAttributes {
+									leafFieldName := leafAttr.GoName
+									leafTfsdkName := leafAttr.TfsdkTag
+									leafJsonName := leafAttr.JsonName
+									if leafJsonName == "" {
+										leafJsonName = leafTfsdkName
+									}
+									// Handle empty choice blocks
+									if leafAttr.IsBlock && leafAttr.NestedBlockType == "single" && len(leafAttr.NestedAttributes) == 0 {
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\tif listItem.%s.%s != nil {\n", indent, deepFieldName, leafFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t%sDeepMap[\"%s\"] = map[string]interface{}{}\n", indent, deepTfsdkName, leafJsonName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t}\n", indent))
+									} else {
+										// Handle primitive types at leaf level
+										switch leafAttr.Type {
+										case "string":
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\tif !listItem.%s.%s.IsNull() && !listItem.%s.%s.IsUnknown() {\n", indent, deepFieldName, leafFieldName, deepFieldName, leafFieldName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t%sDeepMap[\"%s\"] = listItem.%s.%s.ValueString()\n", indent, deepTfsdkName, leafJsonName, deepFieldName, leafFieldName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t}\n", indent))
+										case "int64":
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\tif !listItem.%s.%s.IsNull() && !listItem.%s.%s.IsUnknown() {\n", indent, deepFieldName, leafFieldName, deepFieldName, leafFieldName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t%sDeepMap[\"%s\"] = listItem.%s.%s.ValueInt64()\n", indent, deepTfsdkName, leafJsonName, deepFieldName, leafFieldName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t}\n", indent))
+										case "bool":
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\tif !listItem.%s.%s.IsNull() && !listItem.%s.%s.IsUnknown() {\n", indent, deepFieldName, leafFieldName, deepFieldName, leafFieldName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t%sDeepMap[\"%s\"] = listItem.%s.%s.ValueBool()\n", indent, deepTfsdkName, leafJsonName, deepFieldName, leafFieldName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t}\n", indent))
+										}
+									}
+								}
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\tlistItemMap[\"%s\"] = %sDeepMap\n", indent, deepJsonName, deepTfsdkName))
+							}
+							sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+							continue
+						}
+
+						// Handle primitive types within list items
+						switch deepAttr.Type {
+						case "string":
+							sb.WriteString(fmt.Sprintf("%s\t\t\tif !listItem.%s.IsNull() && !listItem.%s.IsUnknown() {\n", indent, deepFieldName, deepFieldName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\tlistItemMap[\"%s\"] = listItem.%s.ValueString()\n", indent, deepJsonName, deepFieldName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+						case "int64":
+							sb.WriteString(fmt.Sprintf("%s\t\t\tif !listItem.%s.IsNull() && !listItem.%s.IsUnknown() {\n", indent, deepFieldName, deepFieldName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\tlistItemMap[\"%s\"] = listItem.%s.ValueInt64()\n", indent, deepJsonName, deepFieldName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+						case "bool":
+							sb.WriteString(fmt.Sprintf("%s\t\t\tif !listItem.%s.IsNull() && !listItem.%s.IsUnknown() {\n", indent, deepFieldName, deepFieldName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\tlistItemMap[\"%s\"] = listItem.%s.ValueBool()\n", indent, deepJsonName, deepFieldName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+						}
+					}
+
+					sb.WriteString(fmt.Sprintf("%s\t\t\t%sList = append(%sList, listItemMap)\n", indent, nestedTfsdkName, nestedTfsdkName))
+					sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t%sMap[\"%s\"] = %sList\n", indent, tfsdkName, nestedJsonName, nestedTfsdkName))
+					sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+					continue
+				}
+
 				switch nestedAttr.Type {
 				case "string":
 					sb.WriteString(fmt.Sprintf("%s\tif !data.%s.%s.IsNull() && !data.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, fieldName, nestedFieldName))
@@ -1986,20 +2071,24 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 				continue
 			}
 
-			// Check if we need to read data (only for primitives - nested empty blocks
-			// are NOT read back as they're presence markers and can cause drift)
-			hasPrimitiveData := false
+			// Check if we need to read data (for primitives, lists, or nested list blocks)
+			// Nested empty blocks (choice blocks) are NOT read back as they're presence markers and can cause drift
+			hasReadableData := false
 			for _, nestedAttr := range attr.NestedAttributes {
 				switch nestedAttr.Type {
-				case "string", "int64", "bool":
-					hasPrimitiveData = true
+				case "string", "int64", "bool", "list":
+					hasReadableData = true
+				}
+				// Check for nested list blocks that need to be read
+				if nestedAttr.IsBlock && nestedAttr.NestedBlockType == "list" {
+					hasReadableData = true
 				}
 			}
 
-			// If the block contains ONLY nested empty blocks (no primitives), handle specially:
+			// If the block contains ONLY nested empty blocks (no primitives, lists, or nested list blocks), handle specially:
 			// - During Import (psd is nil): read from API to populate state
 			// - During normal Read (psd exists): preserve state to avoid drift
-			if !hasPrimitiveData {
+			if !hasReadableData {
 				sb.WriteString(fmt.Sprintf("%sif _, ok := apiResource.Spec[\"%s\"].(map[string]interface{}); ok && isImport && data.%s == nil {\n", indent, jsonName, fieldName))
 				sb.WriteString(fmt.Sprintf("%s\t// Import case: populate from API since state is nil and psd is empty\n", indent))
 				sb.WriteString(fmt.Sprintf("%s\tdata.%s = &%s%sModel{}\n", indent, fieldName, resourceTitleCase, attr.GoName))
@@ -2007,7 +2096,6 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 				sb.WriteString(fmt.Sprintf("%s// Normal Read: preserve existing state value\n", indent))
 				continue
 			}
-
 			// Unmarshal single nested block from API response map
 			// Only populate if this is an import (need full state) or user configured this block
 			sb.WriteString(fmt.Sprintf("%sif blockData, ok := apiResource.Spec[\"%s\"].(map[string]interface{}); ok && (isImport || data.%s != nil) {\n", indent, jsonName, fieldName))
@@ -2088,6 +2176,151 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 						sb.WriteString(fmt.Sprintf("%s\t\t\treturn types.ListNull(types.Int64Type)\n", indent))
 						sb.WriteString(fmt.Sprintf("%s\t\t}(),\n", indent))
 					}
+				}
+				// Handle nested list blocks within single nested blocks (e.g., rules in mitigation_type)
+				if nestedAttr.IsBlock && nestedAttr.NestedBlockType == "list" {
+					// Model type for nested list within single block: Resource + ParentBlock + NestedList + Model
+					nestedListModelType := resourceTitleCase + attr.GoName + nestedAttr.GoName + "Model"
+
+					sb.WriteString(fmt.Sprintf("%s\t\t%s: func() []%s {\n", indent, nestedFieldName, nestedListModelType))
+					sb.WriteString(fmt.Sprintf("%s\t\t\tif listData, ok := blockData[\"%s\"].([]interface{}); ok && len(listData) > 0 {\n", indent, nestedJsonName))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\tvar result []%s\n", indent, nestedListModelType))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\tfor _, item := range listData {\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif itemMap, ok := item.(map[string]interface{}); ok {\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\tresult = append(result, %s{\n", indent, nestedListModelType))
+
+					// Process nested attributes within the list items
+					for _, deepAttr := range nestedAttr.NestedAttributes {
+						deepFieldName := deepAttr.GoName
+						deepJsonName := deepAttr.JsonName
+						if deepJsonName == "" {
+							deepJsonName = deepAttr.TfsdkTag
+						}
+
+						// Handle single nested blocks within list items (like threat_level, mitigation_action)
+						if deepAttr.IsBlock && deepAttr.NestedBlockType == "single" {
+							// Model type: Resource + ParentBlock + ListBlock + DeepBlock + Model
+							deepModelType := resourceTitleCase + attr.GoName + nestedAttr.GoName + deepAttr.GoName + "Model"
+
+							if len(deepAttr.NestedAttributes) == 0 {
+								// Empty marker block - check if key exists
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() *%sEmptyModel {\n", indent, deepFieldName, resourceTitleCase))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif _, ok := itemMap[\"%s\"].(map[string]interface{}); ok {\n", indent, deepJsonName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn &%sEmptyModel{}\n", indent, resourceTitleCase))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn nil\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+							} else {
+								// Block with nested attributes
+								// Check if any leaf attributes will actually use deepMap
+								needsDeepMap := false
+								for _, checkAttr := range deepAttr.NestedAttributes {
+									// Empty single blocks and primitives use deepMap
+									if checkAttr.IsBlock && checkAttr.NestedBlockType == "single" && len(checkAttr.NestedAttributes) == 0 {
+										needsDeepMap = true
+										break
+									}
+									switch checkAttr.Type {
+									case "string", "int64", "bool":
+										needsDeepMap = true
+									}
+									if needsDeepMap {
+										break
+									}
+								}
+
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() *%s {\n", indent, deepFieldName, deepModelType))
+								if needsDeepMap {
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif deepMap, ok := itemMap[\"%s\"].(map[string]interface{}); ok {\n", indent, deepJsonName))
+								} else {
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif _, ok := itemMap[\"%s\"].(map[string]interface{}); ok {\n", indent, deepJsonName))
+								}
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn &%s{\n", indent, deepModelType))
+
+								// Handle the deepest level attributes (choice blocks like high, medium, low)
+								for _, leafAttr := range deepAttr.NestedAttributes {
+									leafFieldName := leafAttr.GoName
+									leafJsonName := leafAttr.JsonName
+									if leafJsonName == "" {
+										leafJsonName = leafAttr.TfsdkTag
+									}
+
+									if leafAttr.IsBlock && leafAttr.NestedBlockType == "single" && len(leafAttr.NestedAttributes) == 0 {
+										// Empty marker/choice block
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t%s: func() *%sEmptyModel {\n", indent, leafFieldName, resourceTitleCase))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\tif _, ok := deepMap[\"%s\"].(map[string]interface{}); ok {\n", indent, leafJsonName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\t\treturn &%sEmptyModel{}\n", indent, resourceTitleCase))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\t}\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\treturn nil\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t}(),\n", indent))
+									} else {
+										// Primitive types at the leaf level
+										switch leafAttr.Type {
+										case "string":
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t%s: func() types.String {\n", indent, leafFieldName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\tif v, ok := deepMap[\"%s\"].(string); ok && v != \"\" {\n", indent, leafJsonName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\t\treturn types.StringValue(v)\n", indent))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\t}\n", indent))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\treturn types.StringNull()\n", indent))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t}(),\n", indent))
+										case "int64":
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t%s: func() types.Int64 {\n", indent, leafFieldName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\tif v, ok := deepMap[\"%s\"].(float64); ok {\n", indent, leafJsonName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\t\treturn types.Int64Value(int64(v))\n", indent))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\t}\n", indent))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\treturn types.Int64Null()\n", indent))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t}(),\n", indent))
+										case "bool":
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t%s: func() types.Bool {\n", indent, leafFieldName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\tif v, ok := deepMap[\"%s\"].(bool); ok {\n", indent, leafJsonName))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\t\treturn types.BoolValue(v)\n", indent))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\t}\n", indent))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t\treturn types.BoolNull()\n", indent))
+											sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t\t}(),\n", indent))
+										}
+									}
+								}
+
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\t}\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn nil\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+							}
+						} else {
+							// Handle primitive types within list items
+							switch deepAttr.Type {
+							case "string":
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() types.String {\n", indent, deepFieldName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := itemMap[\"%s\"].(string); ok && v != \"\" {\n", indent, deepJsonName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn types.StringValue(v)\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.StringNull()\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+							case "int64":
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() types.Int64 {\n", indent, deepFieldName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := itemMap[\"%s\"].(float64); ok {\n", indent, deepJsonName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn types.Int64Value(int64(v))\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.Int64Null()\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+							case "bool":
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() types.Bool {\n", indent, deepFieldName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := itemMap[\"%s\"].(bool); ok {\n", indent, deepJsonName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn types.BoolValue(v)\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.BoolNull()\n", indent))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+							}
+						}
+					}
+
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t})\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\t}\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn result\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\treturn nil\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t}(),\n", indent))
 				}
 			}
 			sb.WriteString(fmt.Sprintf("%s\t}\n", indent))

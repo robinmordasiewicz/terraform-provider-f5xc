@@ -84,23 +84,31 @@ type TerraformAttribute struct {
 	IsBlock          bool
 	OneOfGroup       string
 	PlanModifier     string
-	MaxDepth         int // Track recursion depth to prevent infinite loops
+	MaxDepth         int    // Track recursion depth to prevent infinite loops
+	IsSpecField      bool   // True if this is a spec field (not metadata)
+	JsonName         string // JSON field name from OpenAPI for API marshaling
+	GoType           string // Go type for client struct generation
 }
 
 type ResourceTemplate struct {
-	Name               string
-	TitleCase          string
-	APIPath            string
-	APIPathPlural      string
-	Description        string
-	Attributes         []TerraformAttribute
-	OneOfGroups        map[string][]string
-	HasComplexSpec     bool
-	RequiredAttributes []string
-	OptionalAttributes []string
-	ComputedAttributes []string
-	ExampleUsage       string // HCL example for documentation
-	APIDocsURL         string // Link to F5 XC API documentation
+	Name                   string
+	TitleCase              string
+	APIPath                string
+	APIPathPlural          string
+	APIPathItem            string // Path for single item operations (get/update/delete)
+	HasNamespaceInPath     bool   // Whether API path contains namespace segment
+	Description            string
+	Attributes             []TerraformAttribute
+	OneOfGroups            map[string][]string
+	HasComplexSpec         bool
+	RequiredAttributes     []string
+	OptionalAttributes     []string
+	ComputedAttributes     []string
+	ExampleUsage           string // HCL example for documentation
+	APIDocsURL             string // Link to F5 XC API documentation
+	UsesBoolPlanModifier   bool   // True if any bool attribute uses a plan modifier
+	UsesInt64PlanModifier  bool   // True if any int64 attribute uses a plan modifier
+	UsesStringPlanModifier bool   // True if any string attribute uses a plan modifier
 }
 
 type GenerationResult struct {
@@ -338,6 +346,54 @@ func parseOpenAPISpec(specFile string) (*OpenAPI3Spec, error) {
 	return &spec, nil
 }
 
+// extractAPIPath extracts the correct API path for CRUD operations from the OpenAPI spec
+// It looks for paths containing POST (create) and returns the base path pattern
+// Returns: basePath (for create/list), itemPath (for get/update/delete), hasNamespace (whether path has {namespace} segment)
+func extractAPIPath(spec *OpenAPI3Spec, resourceName string) (basePath string, itemPath string, hasNamespace bool) {
+	resourcePlural := resourceName + "s"
+
+	// Look for CRUD paths in the spec
+	for path, pathObj := range spec.Paths {
+		pathMap, ok := pathObj.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		// Check if this is a CRUD endpoint (has POST for create or GET for list)
+		_, hasPost := pathMap["post"]
+		_, hasGet := pathMap["get"]
+
+		// Look for the base path (list/create endpoint) - ends with plural resource name
+		// Pattern: /api/.../resource_names or /api/.../resource_names (with namespace)
+		if (hasPost || hasGet) && strings.HasSuffix(path, "/"+resourcePlural) {
+			// Check if path contains namespace segment
+			hasNamespace = strings.Contains(path, "{namespace}") || strings.Contains(path, "{metadata.namespace}")
+
+			// Convert {metadata.namespace} to %s for namespace substitution
+			// Convert {metadata.name} or {name} for item paths
+			basePath = path
+			if hasNamespace {
+				basePath = strings.ReplaceAll(basePath, "{metadata.namespace}", "%s")
+				basePath = strings.ReplaceAll(basePath, "{namespace}", "%s")
+			}
+
+			// Item path is base path + /{name}
+			itemPath = path + "/{name}"
+			itemPath = strings.ReplaceAll(itemPath, "{metadata.namespace}", "%s")
+			itemPath = strings.ReplaceAll(itemPath, "{namespace}", "%s")
+			itemPath = strings.ReplaceAll(itemPath, "{metadata.name}", "%s")
+			itemPath = strings.ReplaceAll(itemPath, "{name}", "%s")
+
+			return basePath, itemPath, hasNamespace
+		}
+	}
+
+	// Fallback to default pattern if no path found
+	return fmt.Sprintf("/api/config/namespaces/%%s/%s", resourcePlural),
+		   fmt.Sprintf("/api/config/namespaces/%%s/%s/%%s", resourcePlural),
+		   true
+}
+
 func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTemplate, error) {
 	// Find CreateSpecType schema
 	var createSpec SchemaDefinition
@@ -414,6 +470,9 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		return attributes[i].Name < attributes[j].Name
 	})
 
+	// Extract correct API path from OpenAPI spec first to determine if namespace is required
+	_, _, hasNamespace := extractAPIPath(spec, resourceName)
+
 	// Add standard metadata attributes in HashiCorp-compliant order:
 	// 1. ID components (name, namespace) - these form the resource ID
 	// 2. Other required args alphabetically
@@ -423,9 +482,19 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		{Name: "name", GoName: "Name", TfsdkTag: "name", Type: "string",
 			Description: fmt.Sprintf("Name of the %s. Must be unique within the namespace.", toTitleCase(resourceName)),
 			Required: true, PlanModifier: "RequiresReplace"},
-		{Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
+	}
+
+	// For resources without namespace in API path (like namespace itself), namespace is optional
+	if hasNamespace {
+		idComponentAttrs = append(idComponentAttrs, TerraformAttribute{
+			Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
 			Description: fmt.Sprintf("Namespace where the %s will be created.", toTitleCase(resourceName)),
-			Required: true, PlanModifier: "RequiresReplace"},
+			Required: true, PlanModifier: "RequiresReplace"})
+	} else {
+		idComponentAttrs = append(idComponentAttrs, TerraformAttribute{
+			Name: "namespace", GoName: "Namespace", TfsdkTag: "namespace", Type: "string",
+			Description: fmt.Sprintf("Namespace for the %s. For this resource type, namespace should be empty or omitted.", toTitleCase(resourceName)),
+			Optional: true, Computed: true, PlanModifier: "UseStateForUnknown"})
 	}
 
 	// Optional standard attrs will be sorted with other optionals
@@ -496,17 +565,52 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	// Generate API docs URL
 	apiDocsURL := fmt.Sprintf("https://docs.cloud.f5.com/docs/api/%s", strings.ReplaceAll(resourceName, "_", "-"))
 
+	// Extract correct API path from OpenAPI spec
+	apiPath, apiPathItem, hasNamespace := extractAPIPath(spec, resourceName)
+
+	// Scan attributes to determine which plan modifier imports are needed
+	usesBool, usesInt64, usesString := scanPlanModifierUsage(attributes)
+
 	return &ResourceTemplate{
-		Name:          resourceName,
-		TitleCase:     toTitleCase(resourceName),
-		APIPath:       fmt.Sprintf("/api/config/namespaces/%%s/%ss", resourceName),
-		APIPathPlural: resourceName + "s",
-		Description:   description,
-		Attributes:    attributes,
-		OneOfGroups:   make(map[string][]string),
-		ExampleUsage:  exampleUsage,
-		APIDocsURL:    apiDocsURL,
+		Name:                   resourceName,
+		TitleCase:              toTitleCase(resourceName),
+		APIPath:                apiPath,
+		APIPathPlural:          resourceName + "s",
+		APIPathItem:            apiPathItem,
+		HasNamespaceInPath:     hasNamespace,
+		Description:            description,
+		Attributes:             attributes,
+		OneOfGroups:            make(map[string][]string),
+		ExampleUsage:           exampleUsage,
+		APIDocsURL:             apiDocsURL,
+		UsesBoolPlanModifier:   usesBool,
+		UsesInt64PlanModifier:  usesInt64,
+		UsesStringPlanModifier: usesString,
 	}, nil
+}
+
+// scanPlanModifierUsage recursively scans attributes to determine which plan modifier imports are needed
+func scanPlanModifierUsage(attributes []TerraformAttribute) (usesBool, usesInt64, usesString bool) {
+	for _, attr := range attributes {
+		if attr.PlanModifier != "" {
+			switch attr.Type {
+			case "bool":
+				usesBool = true
+			case "int64":
+				usesInt64 = true
+			case "string":
+				usesString = true
+			}
+		}
+		// Recursively scan nested attributes
+		if len(attr.NestedAttributes) > 0 {
+			nestedBool, nestedInt64, nestedString := scanPlanModifierUsage(attr.NestedAttributes)
+			usesBool = usesBool || nestedBool
+			usesInt64 = usesInt64 || nestedInt64
+			usesString = usesString || nestedString
+		}
+	}
+	return
 }
 
 // generateExampleUsage creates a sample HCL configuration for the resource
@@ -584,14 +688,24 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 	// Convert name to valid Terraform attribute name (lowercase with underscores)
 	tfsdkName := toSnakeCase(name)
 
+	// Handle reserved field names to avoid conflicts with standard metadata fields
+	// "description" is used for resource metadata in TF schema, so rename spec fields
+	goName := toTitleCase(name)
+	if strings.ToLower(name) == "description" {
+		goName = "DescriptionSpec"
+		tfsdkName = "description_spec"
+	}
+
 	attr := TerraformAttribute{
-		Name:       name,
-		GoName:     toTitleCase(name),
-		TfsdkTag:   tfsdkName,
-		Required:   required,
-		Optional:   !required,
-		OneOfGroup: oneOfGroup,
-		MaxDepth:   depth,
+		Name:        name,
+		GoName:      goName,
+		TfsdkTag:    tfsdkName,
+		Required:    required,
+		Optional:    !required,
+		OneOfGroup:  oneOfGroup,
+		MaxDepth:    depth,
+		IsSpecField: true,  // Attributes from OpenAPI spec are spec fields
+		JsonName:    name,  // Original OpenAPI property name for JSON marshaling
 	}
 
 	// Build description
@@ -625,12 +739,16 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 	switch schema.Type {
 	case "string":
 		attr.Type = "string"
+		attr.GoType = "string"
 	case "integer", "number":
 		attr.Type = "int64"
+		attr.GoType = "int64"
 	case "boolean":
 		attr.Type = "bool"
+		attr.GoType = "bool"
 	case "array":
 		attr.Type = "list"
+		attr.GoType = "[]interface{}" // Default, refined below
 		if schema.Items != nil {
 			itemSchema := *schema.Items
 			if itemSchema.Ref != "" {
@@ -639,12 +757,14 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 			if itemSchema.Type == "object" || len(itemSchema.Properties) > 0 {
 				attr.IsBlock = true
 				attr.NestedBlockType = "list"
+				attr.GoType = "[]map[string]interface{}"
 				// Extract nested attributes if within depth limit
 				if depth < maxNestedDepth {
 					attr.NestedAttributes = extractNestedAttributes(itemSchema, spec, depth+1)
 				}
 			} else {
 				attr.ElementType = mapSchemaType(itemSchema.Type)
+				attr.GoType = "[]" + mapSchemaTypeToGo(itemSchema.Type)
 				// Capture enum and default values from item schema for list element documentation
 				if len(itemSchema.Enum) > 0 {
 					attr.Description = formatEnumDescription(attr.Description, itemSchema.Enum)
@@ -659,6 +779,7 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 			attr.Type = "object"
 			attr.IsBlock = true
 			attr.NestedBlockType = "single"
+			attr.GoType = "map[string]interface{}"
 			// Extract nested attributes if within depth limit
 			if depth < maxNestedDepth {
 				attr.NestedAttributes = extractNestedAttributes(schema, spec, depth+1)
@@ -666,22 +787,42 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		} else if schema.AdditionalProperties != nil {
 			attr.Type = "map"
 			attr.ElementType = "string"
+			attr.GoType = "map[string]string"
 		} else {
 			attr.Type = "object"
 			attr.IsBlock = true
 			attr.NestedBlockType = "single"
+			attr.GoType = "map[string]interface{}"
 		}
 	default:
 		if len(schema.Properties) > 0 {
 			attr.Type = "object"
 			attr.IsBlock = true
 			attr.NestedBlockType = "single"
+			attr.GoType = "map[string]interface{}"
 			// Extract nested attributes if within depth limit
 			if depth < maxNestedDepth {
 				attr.NestedAttributes = extractNestedAttributes(schema, spec, depth+1)
 			}
 		} else {
 			attr.Type = "string"
+			attr.GoType = "string"
+		}
+	}
+
+	// For optional scalar attributes (string, bool, int64), mark as computed with
+	// UseStateForUnknown to prevent drift from API defaults. The API may return
+	// default values for optional fields that weren't set in the config, causing
+	// spurious plan diffs. UseStateForUnknown tells Terraform to preserve the
+	// prior state value when the config doesn't specify a value.
+	// Note: We only apply this to top-level attributes (depth == 0) because:
+	// 1. Only top-level attributes are rendered with plan modifiers in the template
+	// 2. Nested attributes inside blocks don't need this protection as the block
+	//    structure itself handles the state management
+	if depth == 0 && attr.Optional && !attr.IsBlock && !attr.Required {
+		if attr.Type == "string" || attr.Type == "bool" || attr.Type == "int64" {
+			attr.Computed = true
+			attr.PlanModifier = "UseStateForUnknown"
 		}
 	}
 
@@ -739,6 +880,20 @@ func mapSchemaType(t string) string {
 		return "bool"
 	default:
 		return "string"
+	}
+}
+
+// mapSchemaTypeToGo converts OpenAPI types to Go types for client struct generation
+func mapSchemaTypeToGo(t string) string {
+	switch t {
+	case "string":
+		return "string"
+	case "integer", "number":
+		return "int64"
+	case "boolean":
+		return "bool"
+	default:
+		return "interface{}"
 	}
 }
 
@@ -1266,15 +1421,696 @@ func toSnakeCase(s string) string {
 	return name
 }
 
+// isMetadataField returns true if the field is a metadata field (not a spec field)
+func isMetadataField(name string) bool {
+	metadataFields := map[string]bool{
+		"name":        true,
+		"namespace":   true,
+		"labels":      true,
+		"annotations": true,
+		"description": true,
+		"id":          true,
+		"timeouts":    true,
+	}
+	return metadataFields[name]
+}
+
+// filterSpecFields returns only the spec fields (non-metadata) from attributes
+func filterSpecFields(attrs []TerraformAttribute) []TerraformAttribute {
+	var specFields []TerraformAttribute
+	for _, attr := range attrs {
+		if !isMetadataField(attr.TfsdkTag) && attr.IsSpecField {
+			specFields = append(specFields, attr)
+		}
+	}
+	return specFields
+}
+
+// renderSpecStructFields generates Go struct fields for the client Spec type
+func renderSpecStructFields(attrs []TerraformAttribute, indent string) string {
+	specFields := filterSpecFields(attrs)
+	if len(specFields) == 0 {
+		return ""
+	}
+
+	var sb strings.Builder
+	for _, attr := range specFields {
+		goType := getGoClientType(attr)
+		jsonTag := attr.JsonName
+		if jsonTag == "" {
+			jsonTag = attr.TfsdkTag
+		}
+		// For nested blocks, don't use omitempty - the API needs empty objects to be sent
+		// For primitive fields, use omitempty to avoid sending zero values
+		if attr.IsBlock {
+			sb.WriteString(fmt.Sprintf("%s%s %s `json:\"%s\"`\n", indent, attr.GoName, goType, jsonTag))
+		} else {
+			sb.WriteString(fmt.Sprintf("%s%s %s `json:\"%s,omitempty\"`\n", indent, attr.GoName, goType, jsonTag))
+		}
+	}
+	return sb.String()
+}
+
+// getGoClientType returns the Go type for use in client structs
+func getGoClientType(attr TerraformAttribute) string {
+	if attr.IsBlock {
+		// Nested blocks become pointers to nested structs or slices
+		if attr.NestedBlockType == "list" {
+			return "[]map[string]interface{}"
+		}
+		return "map[string]interface{}"
+	}
+
+	switch attr.Type {
+	case "string":
+		return "string"
+	case "int64":
+		return "int64"
+	case "bool":
+		return "bool"
+	case "list":
+		if attr.ElementType == "string" {
+			return "[]string"
+		} else if attr.ElementType == "int64" {
+			return "[]int64"
+		}
+		return "[]interface{}"
+	case "map":
+		return "map[string]string"
+	default:
+		return "interface{}"
+	}
+}
+
+// renderSpecMarshalCode generates Go code to marshal spec fields from Terraform state to API struct
+func renderSpecMarshalCode(attrs []TerraformAttribute, indent string) string {
+	specFields := filterSpecFields(attrs)
+	if len(specFields) == 0 {
+		return ""
+	}
+
+	var sb strings.Builder
+	for _, attr := range specFields {
+		fieldName := attr.GoName
+		tfsdkName := attr.TfsdkTag
+		jsonName := attr.JsonName
+		if jsonName == "" {
+			jsonName = tfsdkName
+		}
+
+		if attr.IsBlock {
+			// Handle list nested blocks
+			if attr.NestedBlockType == "list" {
+				// Check if there are any attributes that need the item variable
+				// (primitives or nested blocks)
+				needsItemVar := false
+				for _, nestedAttr := range attr.NestedAttributes {
+					switch nestedAttr.Type {
+					case "string", "int64", "bool":
+						needsItemVar = true
+					}
+					// Nested blocks also need access to item
+					if nestedAttr.IsBlock {
+						needsItemVar = true
+					}
+				}
+
+				sb.WriteString(fmt.Sprintf("%sif len(data.%s) > 0 {\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\tvar %sList []map[string]interface{}\n", indent, tfsdkName))
+				if needsItemVar {
+					sb.WriteString(fmt.Sprintf("%s\tfor _, item := range data.%s {\n", indent, fieldName))
+				} else {
+					sb.WriteString(fmt.Sprintf("%s\tfor range data.%s {\n", indent, fieldName))
+				}
+				sb.WriteString(fmt.Sprintf("%s\t\titemMap := make(map[string]interface{})\n", indent))
+				// Marshal nested block fields
+				for _, nestedAttr := range attr.NestedAttributes {
+					nestedFieldName := nestedAttr.GoName
+					nestedTfsdkName := nestedAttr.TfsdkTag
+					nestedJsonName := nestedAttr.JsonName
+					if nestedJsonName == "" {
+						nestedJsonName = nestedTfsdkName
+					}
+
+					// Handle single nested blocks within list items
+					if nestedAttr.IsBlock && nestedAttr.NestedBlockType == "single" {
+						sb.WriteString(fmt.Sprintf("%s\t\tif item.%s != nil {\n", indent, nestedFieldName))
+						if len(nestedAttr.NestedAttributes) == 0 {
+							// Empty block - just send empty map
+							sb.WriteString(fmt.Sprintf("%s\t\t\titemMap[\"%s\"] = map[string]interface{}{}\n", indent, nestedJsonName))
+						} else {
+							// Block with nested attributes - marshal them
+							sb.WriteString(fmt.Sprintf("%s\t\t\t%sNestedMap := make(map[string]interface{})\n", indent, nestedTfsdkName))
+							for _, deepAttr := range nestedAttr.NestedAttributes {
+								deepFieldName := deepAttr.GoName
+								deepJsonName := deepAttr.JsonName
+								if deepJsonName == "" {
+									deepJsonName = deepAttr.TfsdkTag
+								}
+								switch deepAttr.Type {
+								case "string":
+									sb.WriteString(fmt.Sprintf("%s\t\t\tif !item.%s.%s.IsNull() && !item.%s.%s.IsUnknown() {\n", indent, nestedFieldName, deepFieldName, nestedFieldName, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t%sNestedMap[\"%s\"] = item.%s.%s.ValueString()\n", indent, nestedTfsdkName, deepJsonName, nestedFieldName, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+								case "int64":
+									sb.WriteString(fmt.Sprintf("%s\t\t\tif !item.%s.%s.IsNull() && !item.%s.%s.IsUnknown() {\n", indent, nestedFieldName, deepFieldName, nestedFieldName, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t%sNestedMap[\"%s\"] = item.%s.%s.ValueInt64()\n", indent, nestedTfsdkName, deepJsonName, nestedFieldName, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+								case "bool":
+									sb.WriteString(fmt.Sprintf("%s\t\t\tif !item.%s.%s.IsNull() && !item.%s.%s.IsUnknown() {\n", indent, nestedFieldName, deepFieldName, nestedFieldName, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t%sNestedMap[\"%s\"] = item.%s.%s.ValueBool()\n", indent, nestedTfsdkName, deepJsonName, nestedFieldName, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+								}
+							}
+							sb.WriteString(fmt.Sprintf("%s\t\t\titemMap[\"%s\"] = %sNestedMap\n", indent, nestedJsonName, nestedTfsdkName))
+						}
+						sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+						continue
+					}
+
+					switch nestedAttr.Type {
+					case "string":
+						sb.WriteString(fmt.Sprintf("%s\t\tif !item.%s.IsNull() && !item.%s.IsUnknown() {\n", indent, nestedFieldName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\titemMap[\"%s\"] = item.%s.ValueString()\n", indent, nestedJsonName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+					case "int64":
+						sb.WriteString(fmt.Sprintf("%s\t\tif !item.%s.IsNull() && !item.%s.IsUnknown() {\n", indent, nestedFieldName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\titemMap[\"%s\"] = item.%s.ValueInt64()\n", indent, nestedJsonName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+					case "bool":
+						sb.WriteString(fmt.Sprintf("%s\t\tif !item.%s.IsNull() && !item.%s.IsUnknown() {\n", indent, nestedFieldName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\titemMap[\"%s\"] = item.%s.ValueBool()\n", indent, nestedJsonName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+					}
+				}
+				sb.WriteString(fmt.Sprintf("%s\t\t%sList = append(%sList, itemMap)\n", indent, tfsdkName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tapiResource.Spec[\"%s\"] = %sList\n", indent, jsonName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+				continue
+			}
+			// Handle single nested blocks by converting model struct to map
+			sb.WriteString(fmt.Sprintf("%sif data.%s != nil {\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s\t%sMap := make(map[string]interface{})\n", indent, tfsdkName))
+			// Marshal nested block fields
+			for _, nestedAttr := range attr.NestedAttributes {
+				nestedFieldName := nestedAttr.GoName
+				nestedTfsdkName := nestedAttr.TfsdkTag
+				nestedJsonName := nestedAttr.JsonName
+				if nestedJsonName == "" {
+					nestedJsonName = nestedTfsdkName
+				}
+
+				// Handle single nested blocks within single nested blocks (not list nested blocks)
+				if nestedAttr.IsBlock && nestedAttr.NestedBlockType == "single" {
+					if len(nestedAttr.NestedAttributes) == 0 {
+						// Empty nested block - send empty map if present
+						sb.WriteString(fmt.Sprintf("%s\tif data.%s.%s != nil {\n", indent, fieldName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t%sMap[\"%s\"] = map[string]interface{}{}\n", indent, tfsdkName, nestedJsonName))
+						sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+					} else {
+						// Nested block with attributes - marshal them
+						sb.WriteString(fmt.Sprintf("%s\tif data.%s.%s != nil {\n", indent, fieldName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t%sNestedMap := make(map[string]interface{})\n", indent, nestedTfsdkName))
+						for _, deepAttr := range nestedAttr.NestedAttributes {
+							deepFieldName := deepAttr.GoName
+							deepJsonName := deepAttr.JsonName
+							if deepJsonName == "" {
+								deepJsonName = deepAttr.TfsdkTag
+							}
+							switch deepAttr.Type {
+							case "string":
+								sb.WriteString(fmt.Sprintf("%s\t\tif !data.%s.%s.%s.IsNull() && !data.%s.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, deepFieldName, fieldName, nestedFieldName, deepFieldName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t%sNestedMap[\"%s\"] = data.%s.%s.%s.ValueString()\n", indent, nestedTfsdkName, deepJsonName, fieldName, nestedFieldName, deepFieldName))
+								sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+							case "int64":
+								sb.WriteString(fmt.Sprintf("%s\t\tif !data.%s.%s.%s.IsNull() && !data.%s.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, deepFieldName, fieldName, nestedFieldName, deepFieldName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t%sNestedMap[\"%s\"] = data.%s.%s.%s.ValueInt64()\n", indent, nestedTfsdkName, deepJsonName, fieldName, nestedFieldName, deepFieldName))
+								sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+							case "bool":
+								sb.WriteString(fmt.Sprintf("%s\t\tif !data.%s.%s.%s.IsNull() && !data.%s.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, deepFieldName, fieldName, nestedFieldName, deepFieldName))
+								sb.WriteString(fmt.Sprintf("%s\t\t\t%sNestedMap[\"%s\"] = data.%s.%s.%s.ValueBool()\n", indent, nestedTfsdkName, deepJsonName, fieldName, nestedFieldName, deepFieldName))
+								sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+							}
+						}
+						sb.WriteString(fmt.Sprintf("%s\t\t%sMap[\"%s\"] = %sNestedMap\n", indent, tfsdkName, nestedJsonName, nestedTfsdkName))
+						sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+					}
+					continue
+				}
+
+				switch nestedAttr.Type {
+				case "string":
+					sb.WriteString(fmt.Sprintf("%s\tif !data.%s.%s.IsNull() && !data.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, fieldName, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\t%sMap[\"%s\"] = data.%s.%s.ValueString()\n", indent, tfsdkName, nestedTfsdkName, fieldName, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				case "int64":
+					sb.WriteString(fmt.Sprintf("%s\tif !data.%s.%s.IsNull() && !data.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, fieldName, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\t%sMap[\"%s\"] = data.%s.%s.ValueInt64()\n", indent, tfsdkName, nestedTfsdkName, fieldName, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				case "bool":
+					sb.WriteString(fmt.Sprintf("%s\tif !data.%s.%s.IsNull() && !data.%s.%s.IsUnknown() {\n", indent, fieldName, nestedFieldName, fieldName, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\t%sMap[\"%s\"] = data.%s.%s.ValueBool()\n", indent, tfsdkName, nestedTfsdkName, fieldName, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				}
+			}
+			sb.WriteString(fmt.Sprintf("%s\tapiResource.Spec[\"%s\"] = %sMap\n", indent, jsonName, tfsdkName))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			continue
+		}
+
+		switch attr.Type {
+		case "string":
+			sb.WriteString(fmt.Sprintf("%sif !data.%s.IsNull() && !data.%s.IsUnknown() {\n", indent, fieldName, fieldName))
+			sb.WriteString(fmt.Sprintf("%s\tapiResource.Spec[\"%s\"] = data.%s.ValueString()\n", indent, jsonName, fieldName))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+		case "int64":
+			sb.WriteString(fmt.Sprintf("%sif !data.%s.IsNull() && !data.%s.IsUnknown() {\n", indent, fieldName, fieldName))
+			sb.WriteString(fmt.Sprintf("%s\tapiResource.Spec[\"%s\"] = data.%s.ValueInt64()\n", indent, jsonName, fieldName))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+		case "bool":
+			sb.WriteString(fmt.Sprintf("%sif !data.%s.IsNull() && !data.%s.IsUnknown() {\n", indent, fieldName, fieldName))
+			sb.WriteString(fmt.Sprintf("%s\tapiResource.Spec[\"%s\"] = data.%s.ValueBool()\n", indent, jsonName, fieldName))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+		case "list":
+			if attr.ElementType == "string" {
+				sb.WriteString(fmt.Sprintf("%sif !data.%s.IsNull() && !data.%s.IsUnknown() {\n", indent, fieldName, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\tvar %sList []string\n", indent, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\tresp.Diagnostics.Append(data.%s.ElementsAs(ctx, &%sList, false)...)\n", indent, fieldName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\tif !resp.Diagnostics.HasError() {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\tapiResource.Spec[\"%s\"] = %sList\n", indent, jsonName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			} else if attr.ElementType == "int64" {
+				sb.WriteString(fmt.Sprintf("%sif !data.%s.IsNull() && !data.%s.IsUnknown() {\n", indent, fieldName, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\tvar %sList []int64\n", indent, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\tresp.Diagnostics.Append(data.%s.ElementsAs(ctx, &%sList, false)...)\n", indent, fieldName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\tif !resp.Diagnostics.HasError() {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\tapiResource.Spec[\"%s\"] = %sList\n", indent, jsonName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			}
+		}
+	}
+	return sb.String()
+}
+
+// renderComputedFieldsCode generates Go code to set Computed+Optional fields from API response
+// This ensures that fields with UseStateForUnknown plan modifier have known values after Create/Update
+// The varName parameter specifies the API response variable name (e.g., "created" or "updated")
+func renderComputedFieldsCode(attrs []TerraformAttribute, indent string, varName string) string {
+	specFields := filterSpecFields(attrs)
+	if len(specFields) == 0 {
+		return ""
+	}
+
+	var sb strings.Builder
+	sb.WriteString(indent + "// Set computed fields from API response\n")
+
+	for _, attr := range specFields {
+		// Only generate code for Computed+Optional scalar fields (UseStateForUnknown pattern)
+		if !attr.Computed || !attr.Optional || attr.IsBlock {
+			continue
+		}
+
+		fieldName := attr.GoName
+		jsonName := attr.JsonName
+		if jsonName == "" {
+			jsonName = attr.TfsdkTag
+		}
+
+		switch attr.Type {
+		case "bool":
+			// Only update if API returns the value; otherwise preserve plan value (from data)
+			// This prevents overwriting plan values when API doesn't return the field
+			sb.WriteString(fmt.Sprintf("%sif v, ok := %s.Spec[\"%s\"].(bool); ok {\n", indent, varName, jsonName))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.BoolValue(v)\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			sb.WriteString(fmt.Sprintf("%s// If API doesn't return the value, preserve plan value (already in data)\n", indent))
+		case "int64":
+			// Only update if API returns the value; otherwise preserve plan value (from data)
+			sb.WriteString(fmt.Sprintf("%sif v, ok := %s.Spec[\"%s\"].(float64); ok {\n", indent, varName, jsonName))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.Int64Value(int64(v))\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			sb.WriteString(fmt.Sprintf("%s// If API doesn't return the value, preserve plan value (already in data)\n", indent))
+		case "string":
+			// Only update if API returns the value; otherwise preserve plan value (from data)
+			sb.WriteString(fmt.Sprintf("%sif v, ok := %s.Spec[\"%s\"].(string); ok && v != \"\" {\n", indent, varName, jsonName))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.StringValue(v)\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			sb.WriteString(fmt.Sprintf("%s// If API doesn't return the value, preserve plan value (already in data)\n", indent))
+		}
+	}
+
+	return sb.String()
+}
+
+// renderCreateComputedFieldsCode generates code for Create method (uses "created" variable)
+func renderCreateComputedFieldsCode(attrs []TerraformAttribute, indent string) string {
+	return renderComputedFieldsCode(attrs, indent, "created")
+}
+
+// renderUpdateComputedFieldsCode generates code for Update method (uses "updated" variable)
+func renderUpdateComputedFieldsCode(attrs []TerraformAttribute, indent string) string {
+	return renderComputedFieldsCode(attrs, indent, "updated")
+}
+
+// renderSpecUnmarshalCode generates Go code to unmarshal spec fields from API response to Terraform state
+func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resourceTitleCase string) string {
+	specFields := filterSpecFields(attrs)
+	if len(specFields) == 0 {
+		return ""
+	}
+
+	var sb strings.Builder
+	for _, attr := range specFields {
+		fieldName := attr.GoName
+		jsonName := attr.JsonName
+		if jsonName == "" {
+			jsonName = attr.TfsdkTag
+		}
+
+		if attr.IsBlock {
+			// Handle list nested blocks
+			if attr.NestedBlockType == "list" {
+				tfsdkName := attr.TfsdkTag
+
+				// Check if there are any attributes that need the itemMap variable
+				// (primitives or nested blocks)
+				needsItemMap := false
+				for _, nestedAttr := range attr.NestedAttributes {
+					switch nestedAttr.Type {
+					case "string", "int64", "bool":
+						needsItemMap = true
+					}
+					// Nested blocks also need access to itemMap
+					if nestedAttr.IsBlock {
+						needsItemMap = true
+					}
+				}
+
+				sb.WriteString(fmt.Sprintf("%sif listData, ok := apiResource.Spec[\"%s\"].([]interface{}); ok && len(listData) > 0 {\n", indent, jsonName))
+				sb.WriteString(fmt.Sprintf("%s\tvar %sList []%s%sModel\n", indent, tfsdkName, resourceTitleCase, attr.GoName))
+				if needsItemMap {
+					sb.WriteString(fmt.Sprintf("%s\tfor _, item := range listData {\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\tif itemMap, ok := item.(map[string]interface{}); ok {\n", indent))
+				} else {
+					sb.WriteString(fmt.Sprintf("%s\tfor range listData {\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t{\n", indent))
+				}
+				sb.WriteString(fmt.Sprintf("%s\t\t\t%sList = append(%sList, %s%sModel{\n", indent, tfsdkName, tfsdkName, resourceTitleCase, attr.GoName))
+				// Unmarshal nested block fields
+				for _, nestedAttr := range attr.NestedAttributes {
+					nestedFieldName := nestedAttr.GoName
+					nestedJsonName := nestedAttr.JsonName
+					if nestedJsonName == "" {
+						nestedJsonName = nestedAttr.TfsdkTag
+					}
+
+					// Handle single nested blocks within list items
+					if nestedAttr.IsBlock && nestedAttr.NestedBlockType == "single" {
+						if len(nestedAttr.NestedAttributes) == 0 {
+							// Empty block - check if key exists in response
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() *%sEmptyModel {\n", indent, nestedFieldName, resourceTitleCase))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif _, ok := itemMap[\"%s\"].(map[string]interface{}); ok {\n", indent, nestedJsonName))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn &%sEmptyModel{}\n", indent, resourceTitleCase))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn nil\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t}(),\n", indent))
+						} else {
+							// Block with nested attributes - unmarshal them
+							// Model type includes parent list block name: Resource + ListBlock + NestedBlock + Model
+							nestedModelType := resourceTitleCase + attr.GoName + nestedAttr.GoName + "Model"
+
+							// Check if nested block has any primitive attributes
+							hasDeepPrimitives := false
+							for _, deepAttr := range nestedAttr.NestedAttributes {
+								switch deepAttr.Type {
+								case "string", "int64", "bool":
+									hasDeepPrimitives = true
+								}
+							}
+
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() *%s {\n", indent, nestedFieldName, nestedModelType))
+							if hasDeepPrimitives {
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif nestedMap, ok := itemMap[\"%s\"].(map[string]interface{}); ok {\n", indent, nestedJsonName))
+							} else {
+								sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif _, ok := itemMap[\"%s\"].(map[string]interface{}); ok {\n", indent, nestedJsonName))
+							}
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn &%s{\n", indent, nestedModelType))
+							for _, deepAttr := range nestedAttr.NestedAttributes {
+								deepFieldName := deepAttr.GoName
+								deepJsonName := deepAttr.JsonName
+								if deepJsonName == "" {
+									deepJsonName = deepAttr.TfsdkTag
+								}
+								switch deepAttr.Type {
+								case "string":
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() types.String {\n", indent, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := nestedMap[\"%s\"].(string); ok && v != \"\" {\n", indent, deepJsonName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn types.StringValue(v)\n", indent))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.StringNull()\n", indent))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+								case "int64":
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() types.Int64 {\n", indent, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := nestedMap[\"%s\"].(float64); ok {\n", indent, deepJsonName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn types.Int64Value(int64(v))\n", indent))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.Int64Null()\n", indent))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+								case "bool":
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() types.Bool {\n", indent, deepFieldName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := nestedMap[\"%s\"].(bool); ok {\n", indent, deepJsonName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn types.BoolValue(v)\n", indent))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.BoolNull()\n", indent))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
+								}
+							}
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t}\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn nil\n", indent))
+							sb.WriteString(fmt.Sprintf("%s\t\t\t\t}(),\n", indent))
+						}
+						continue
+					}
+
+					switch nestedAttr.Type {
+					case "string":
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() types.String {\n", indent, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif v, ok := itemMap[\"%s\"].(string); ok && v != \"\" {\n", indent, nestedJsonName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn types.StringValue(v)\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn types.StringNull()\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t}(),\n", indent))
+					case "int64":
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() types.Int64 {\n", indent, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif v, ok := itemMap[\"%s\"].(float64); ok {\n", indent, nestedJsonName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn types.Int64Value(int64(v))\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn types.Int64Null()\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t}(),\n", indent))
+					case "bool":
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() types.Bool {\n", indent, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif v, ok := itemMap[\"%s\"].(bool); ok {\n", indent, nestedJsonName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn types.BoolValue(v)\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn types.BoolNull()\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t}(),\n", indent))
+					}
+				}
+				sb.WriteString(fmt.Sprintf("%s\t\t\t})\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tdata.%s = %sList\n", indent, fieldName, tfsdkName))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+				continue
+			}
+
+			// Empty blocks (no nested attributes) use EmptyModel
+			// These are presence markers (choice blocks), so:
+			// - During Import (psd is nil): read from API to populate state
+			// - During normal Read (psd exists): preserve state to avoid drift
+			if len(attr.NestedAttributes) == 0 {
+				sb.WriteString(fmt.Sprintf("%sif _, ok := apiResource.Spec[\"%s\"].(map[string]interface{}); ok && isImport && data.%s == nil {\n", indent, jsonName, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\t// Import case: populate from API since state is nil and psd is empty\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tdata.%s = &%sEmptyModel{}\n", indent, fieldName, resourceTitleCase))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s// Normal Read: preserve existing state value\n", indent))
+				continue
+			}
+
+			// Check if we need to read data (only for primitives - nested empty blocks
+			// are NOT read back as they're presence markers and can cause drift)
+			hasPrimitiveData := false
+			for _, nestedAttr := range attr.NestedAttributes {
+				switch nestedAttr.Type {
+				case "string", "int64", "bool":
+					hasPrimitiveData = true
+				}
+			}
+
+			// If the block contains ONLY nested empty blocks (no primitives), handle specially:
+			// - During Import (psd is nil): read from API to populate state
+			// - During normal Read (psd exists): preserve state to avoid drift
+			if !hasPrimitiveData {
+				sb.WriteString(fmt.Sprintf("%sif _, ok := apiResource.Spec[\"%s\"].(map[string]interface{}); ok && isImport && data.%s == nil {\n", indent, jsonName, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\t// Import case: populate from API since state is nil and psd is empty\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tdata.%s = &%s%sModel{}\n", indent, fieldName, resourceTitleCase, attr.GoName))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s// Normal Read: preserve existing state value\n", indent))
+				continue
+			}
+
+			// Unmarshal single nested block from API response map
+			// Only populate if this is an import (need full state) or user configured this block
+			sb.WriteString(fmt.Sprintf("%sif blockData, ok := apiResource.Spec[\"%s\"].(map[string]interface{}); ok && (isImport || data.%s != nil) {\n", indent, jsonName, fieldName))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = &%s%sModel{\n", indent, fieldName, resourceTitleCase, attr.GoName))
+			// Unmarshal nested block fields
+			for _, nestedAttr := range attr.NestedAttributes {
+				nestedFieldName := nestedAttr.GoName
+				nestedJsonName := nestedAttr.JsonName
+				if nestedJsonName == "" {
+					nestedJsonName = nestedAttr.TfsdkTag
+				}
+
+				// Skip nested empty blocks - they're presence markers and should not be read back
+				// Reading them back can cause drift when API returns more options than configured
+				if nestedAttr.IsBlock && nestedAttr.NestedBlockType == "single" && len(nestedAttr.NestedAttributes) == 0 {
+					continue
+				}
+
+				switch nestedAttr.Type {
+				case "string":
+					sb.WriteString(fmt.Sprintf("%s\t\t%s: func() types.String {\n", indent, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\t\tif v, ok := blockData[\"%s\"].(string); ok && v != \"\" {\n", indent, nestedJsonName))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn types.StringValue(v)\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\treturn types.StringNull()\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t}(),\n", indent))
+				case "int64":
+					sb.WriteString(fmt.Sprintf("%s\t\t%s: func() types.Int64 {\n", indent, nestedFieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\t\tif v, ok := blockData[\"%s\"].(float64); ok {\n", indent, nestedJsonName))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn types.Int64Value(int64(v))\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\treturn types.Int64Null()\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t}(),\n", indent))
+				case "bool":
+					sb.WriteString(fmt.Sprintf("%s\t\t%s: func() types.Bool {\n", indent, nestedFieldName))
+					// For Optional nested bool fields, preserve prior state during normal Read to avoid drift
+					// This handles both Computed+Optional and Optional-only fields where API returns defaults
+					if nestedAttr.Optional {
+						sb.WriteString(fmt.Sprintf("%s\t\t\tif !isImport && data.%s != nil {\n", indent, fieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Normal Read: preserve existing state value to avoid API default drift\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn data.%s.%s\n", indent, fieldName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t// Import case: read from API\n", indent))
+					}
+					sb.WriteString(fmt.Sprintf("%s\t\t\tif v, ok := blockData[\"%s\"].(bool); ok {\n", indent, nestedJsonName))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn types.BoolValue(v)\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\treturn types.BoolNull()\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t}(),\n", indent))
+				}
+			}
+			sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			continue
+		}
+
+		switch attr.Type {
+		case "string":
+			sb.WriteString(fmt.Sprintf("%sif v, ok := apiResource.Spec[\"%s\"].(string); ok && v != \"\" {\n", indent, jsonName))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.StringValue(v)\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s} else {\n", indent))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.StringNull()\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+		case "int64":
+			// JSON numbers are float64, so we need to convert
+			// For Computed int64 fields, always set a known value after apply
+			sb.WriteString(fmt.Sprintf("%sif v, ok := apiResource.Spec[\"%s\"].(float64); ok {\n", indent, jsonName))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.Int64Value(int64(v))\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s} else {\n", indent))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.Int64Null()\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s}\n", indent))
+		case "bool":
+			// For Optional top-level bool fields, preserve prior state during normal Read
+			// This prevents drift when API returns defaults or doesn't return the field
+			if attr.Optional {
+				sb.WriteString(fmt.Sprintf("%s// Top-level Optional bool: preserve prior state to avoid API default drift\n", indent))
+				sb.WriteString(fmt.Sprintf("%sif !isImport && !data.%s.IsNull() {\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\t// Normal Read: preserve existing state value (do nothing)\n", indent))
+				sb.WriteString(fmt.Sprintf("%s} else {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t// Import case or null state: read from API\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tif v, ok := apiResource.Spec[\"%s\"].(bool); ok {\n", indent, jsonName))
+				sb.WriteString(fmt.Sprintf("%s\t\tdata.%s = types.BoolValue(v)\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\t} else {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\tdata.%s = types.BoolNull()\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			} else {
+				// Original behavior for Computed-only or Required fields
+				sb.WriteString(fmt.Sprintf("%sif v, ok := apiResource.Spec[\"%s\"].(bool); ok {\n", indent, jsonName))
+				sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.BoolValue(v)\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s} else {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.BoolNull()\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			}
+		case "list":
+			if attr.ElementType == "string" {
+				sb.WriteString(fmt.Sprintf("%sif v, ok := apiResource.Spec[\"%s\"].([]interface{}); ok && len(v) > 0 {\n", indent, jsonName))
+				sb.WriteString(fmt.Sprintf("%s\tvar %sList []string\n", indent, attr.TfsdkTag))
+				sb.WriteString(fmt.Sprintf("%s\tfor _, item := range v {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\tif s, ok := item.(string); ok {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\t\t%sList = append(%sList, s)\n", indent, attr.TfsdkTag, attr.TfsdkTag))
+				sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tlistVal, diags := types.ListValueFrom(ctx, types.StringType, %sList)\n", indent, attr.TfsdkTag))
+				sb.WriteString(fmt.Sprintf("%s\tresp.Diagnostics.Append(diags...)\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tif !resp.Diagnostics.HasError() {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\tdata.%s = listVal\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s} else {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.ListNull(types.StringType)\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			} else if attr.ElementType == "int64" {
+				sb.WriteString(fmt.Sprintf("%sif v, ok := apiResource.Spec[\"%s\"].([]interface{}); ok && len(v) > 0 {\n", indent, jsonName))
+				sb.WriteString(fmt.Sprintf("%s\tvar %sList []int64\n", indent, attr.TfsdkTag))
+				sb.WriteString(fmt.Sprintf("%s\tfor _, item := range v {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\tif n, ok := item.(float64); ok {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\t\t%sList = append(%sList, int64(n))\n", indent, attr.TfsdkTag, attr.TfsdkTag))
+				sb.WriteString(fmt.Sprintf("%s\t\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tlistVal, diags := types.ListValueFrom(ctx, types.Int64Type, %sList)\n", indent, attr.TfsdkTag))
+				sb.WriteString(fmt.Sprintf("%s\tresp.Diagnostics.Append(diags...)\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tif !resp.Diagnostics.HasError() {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\t\tdata.%s = listVal\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s\t}\n", indent))
+				sb.WriteString(fmt.Sprintf("%s} else {\n", indent))
+				sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.ListNull(types.Int64Type)\n", indent, fieldName))
+				sb.WriteString(fmt.Sprintf("%s}\n", indent))
+			}
+		}
+	}
+	return sb.String()
+}
+
 func generateResourceFile(resource *ResourceTemplate) error {
 	outputPath := filepath.Join(outputDir, resource.Name+"_resource.go")
 
 	// Create template with custom functions
 	funcMap := template.FuncMap{
-		"renderNestedAttrs":      renderNestedAttributes,
-		"renderNestedBlocks":     renderNestedBlocks,
-		"renderNestedModelTypes": renderNestedModelTypes,
-		"renderBlockFields":      renderBlockFields,
+		"renderNestedAttrs":              renderNestedAttributes,
+		"renderNestedBlocks":             renderNestedBlocks,
+		"renderNestedModelTypes":         renderNestedModelTypes,
+		"renderBlockFields":              renderBlockFields,
+		"renderSpecStructFields":         renderSpecStructFields,
+		"renderSpecMarshalCode":          renderSpecMarshalCode,
+		"renderSpecUnmarshalCode":        renderSpecUnmarshalCode,
+		"renderCreateComputedFieldsCode": renderCreateComputedFieldsCode,
+		"renderUpdateComputedFieldsCode": renderUpdateComputedFieldsCode,
+		"filterSpecFields":               filterSpecFields,
 	}
 
 	tmpl, err := template.New("resource").Funcs(funcMap).Parse(resourceTemplate)
@@ -1332,7 +2168,15 @@ func renderNestedAttributes(attrs []TerraformAttribute, indent string) string {
 		}
 
 		if attr.Type == "map" || attr.Type == "list" {
-			sb.WriteString(fmt.Sprintf("%s\t\tElementType: types.StringType,\n", indent))
+			// Map ElementType to Terraform attr type
+			elementTfType := "types.StringType"
+			switch attr.ElementType {
+			case "int64":
+				elementTfType = "types.Int64Type"
+			case "bool":
+				elementTfType = "types.BoolType"
+			}
+			sb.WriteString(fmt.Sprintf("%s\t\tElementType: %s,\n", indent, elementTfType))
 		}
 
 		sb.WriteString(fmt.Sprintf("%s\t},\n", indent))
@@ -1601,7 +2445,14 @@ func renderNestedBlocks(attrs []TerraformAttribute, indent string) string {
 func generateClientTypes(resource *ResourceTemplate) error {
 	outputPath := filepath.Join(clientDir, resource.Name+"_types.go")
 
-	tmpl, err := template.New("client").Parse(clientTemplate)
+	// Create template with custom functions for spec field generation
+	funcMap := template.FuncMap{
+		"renderSpecStructFields": func(attrs []TerraformAttribute) string {
+			return renderSpecStructFields(attrs, "\t")
+		},
+	}
+
+	tmpl, err := template.New("client").Funcs(funcMap).Parse(clientTemplate)
 	if err != nil {
 		return fmt.Errorf("template parse error: %w", err)
 	}
@@ -1710,7 +2561,9 @@ func (p *F5XCProvider) Schema(ctx context.Context, req provider.SchemaRequest, r
 			"built from public F5 API documentation.",
 		Attributes: map[string]schema.Attribute{
 			"api_url": schema.StringAttribute{
-				MarkdownDescription: "F5 Distributed Cloud API URL. Defaults to https://console.ves.volterra.io/api. " +
+				MarkdownDescription: "F5 Distributed Cloud API URL (base URL without '/api' suffix). " +
+					"Defaults to https://console.ves.volterra.io. " +
+					"Example: https://tenant.console.ves.volterra.io (NOT https://tenant.console.ves.volterra.io/api). " +
 					"Can also be set via F5XC_API_URL environment variable.",
 				Optional: true,
 			},
@@ -1905,6 +2758,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+{{- if .UsesBoolPlanModifier}}
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+{{- end}}
+{{- if .UsesInt64PlanModifier}}
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -1962,23 +2821,25 @@ func (r *{{.TitleCase}}Resource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "{{.Description}}",
 {{- if .Required}}
 				Required: true,
-{{- else if .Optional}}
+{{- end}}
+{{- if and .Optional (not .Required)}}
 				Optional: true,
-{{- else if .Computed}}
+{{- end}}
+{{- if .Computed}}
 				Computed: true,
 {{- end}}
 {{- if eq .Type "map"}}
 				ElementType: types.StringType,
 {{- end}}
 {{- if eq .Type "list"}}
-				ElementType: types.StringType,
+				ElementType: {{if eq .ElementType "int64"}}types.Int64Type{{else if eq .ElementType "bool"}}types.BoolType{{else}}types.StringType{{end}},
 {{- end}}
 {{- if .PlanModifier}}
-				PlanModifiers: []planmodifier.String{
+				PlanModifiers: []planmodifier.{{if eq .Type "string"}}String{{else if eq .Type "bool"}}Bool{{else if eq .Type "int64"}}Int64{{else if eq .Type "list"}}List{{else if eq .Type "map"}}Map{{else}}String{{end}}{
 {{- if eq .PlanModifier "RequiresReplace"}}
-					stringplanmodifier.RequiresReplace(),
+					{{if eq .Type "string"}}stringplanmodifier{{else if eq .Type "bool"}}boolplanmodifier{{else if eq .Type "int64"}}int64planmodifier{{else if eq .Type "list"}}listplanmodifier{{else if eq .Type "map"}}mapplanmodifier{{else}}stringplanmodifier{{end}}.RequiresReplace(),
 {{- else if eq .PlanModifier "UseStateForUnknown"}}
-					stringplanmodifier.UseStateForUnknown(),
+					{{if eq .Type "string"}}stringplanmodifier{{else if eq .Type "bool"}}boolplanmodifier{{else if eq .Type "int64"}}int64planmodifier{{else if eq .Type "list"}}listplanmodifier{{else if eq .Type "map"}}mapplanmodifier{{else}}stringplanmodifier{{end}}.UseStateForUnknown(),
 {{- end}}
 				},
 {{- end}}
@@ -2142,7 +3003,7 @@ func (r *{{.TitleCase}}Resource) Create(ctx context.Context, req resource.Create
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.{{.TitleCase}}Spec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2167,6 +3028,9 @@ func (r *{{.TitleCase}}Resource) Create(ctx context.Context, req resource.Create
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+{{renderSpecMarshalCode .Attributes "\t"}}
+
 	created, err := r.client.Create{{.TitleCase}}(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create {{.TitleCase}}: %s", err))
@@ -2174,9 +3038,17 @@ func (r *{{.TitleCase}}Resource) Create(ctx context.Context, req resource.Create
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+{{- if not .HasNamespaceInPath}}
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(created.Metadata.Namespace)
+{{- end}}
 
+{{renderCreateComputedFieldsCode .Attributes "\t"}}
 	psd := privatestate.NewPrivateStateData()
-	psd.SetUID(created.Metadata.UID)
+	psd.SetCustom("managed", "true")
+	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
+		"name": created.Metadata.Name,
+	})
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	tflog.Trace(ctx, "created {{.TitleCase}} resource")
@@ -2255,9 +3127,25 @@ func (r *{{.TitleCase}}Resource) Read(ctx context.Context, req resource.ReadRequ
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	psd = privatestate.NewPrivateStateData()
-	psd.SetUID(apiResource.Metadata.UID)
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	// Unmarshal spec fields from API response to Terraform state
+	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
+	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
+	_ = isImport // May be unused if resource has no blocks needing import detection
+	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
+		"isImport":     isImport,
+		"psd_is_nil":   psd == nil,
+		"managed":      psd.Metadata.Custom["managed"],
+	})
+{{renderSpecUnmarshalCode .Attributes "\t" .TitleCase}}
+
+	// Preserve or set the managed marker for future Read operations
+	newPsd := privatestate.NewPrivateStateData()
+	newPsd.SetUID(apiResource.Metadata.UID)
+	if !isImport {
+		// Preserve the managed marker if we already had it
+		newPsd.SetCustom("managed", "true")
+	}
+	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -2283,7 +3171,7 @@ func (r *{{.TitleCase}}Resource) Update(ctx context.Context, req resource.Update
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
 		},
-		Spec: client.{{.TitleCase}}Spec{},
+		Spec: make(map[string]interface{}),
 	}
 
 	if !data.Description.IsNull() {
@@ -2308,6 +3196,9 @@ func (r *{{.TitleCase}}Resource) Update(ctx context.Context, req resource.Update
 		apiResource.Metadata.Annotations = annotations
 	}
 
+	// Marshal spec fields from Terraform state to API struct
+{{renderSpecMarshalCode .Attributes "\t"}}
+
 	updated, err := r.client.Update{{.TitleCase}}(ctx, apiResource)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update {{.TitleCase}}: %s", err))
@@ -2317,6 +3208,7 @@ func (r *{{.TitleCase}}Resource) Update(ctx context.Context, req resource.Update
 	// Use plan data for ID since API response may not include metadata.name
 	data.ID = types.StringValue(data.Name.ValueString())
 
+{{renderUpdateComputedFieldsCode .Attributes "\t"}}
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
 	uid := updated.Metadata.UID
@@ -2328,6 +3220,7 @@ func (r *{{.TitleCase}}Resource) Update(ctx context.Context, req resource.Update
 		}
 	}
 	psd.SetUID(uid)
+	psd.SetCustom("managed", "true") // Preserve managed marker after Update
 	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -2359,12 +3252,22 @@ func (r *{{.TitleCase}}Resource) Delete(ctx context.Context, req resource.Delete
 			})
 			return
 		}
+		// If delete is not implemented (501), warn and remove from state
+		// Some F5 XC resources don't support deletion via API
+		if strings.Contains(err.Error(), "501") {
+			tflog.Warn(ctx, "{{.TitleCase}} delete not supported by API (501), removing from state only", map[string]interface{}{
+				"name":      data.Name.ValueString(),
+				"namespace": data.Namespace.ValueString(),
+			})
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete {{.TitleCase}}: %s", err))
 		return
 	}
 }
 
 func (r *{{.TitleCase}}Resource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+{{- if .HasNamespaceInPath}}
 	// Import ID format: namespace/name
 	parts := strings.Split(req.ID, "/")
 	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
@@ -2380,6 +3283,21 @@ func (r *{{.TitleCase}}Resource) ImportState(ctx context.Context, req resource.I
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
+{{- else}}
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
+		resp.Diagnostics.AddError(
+			"Invalid Import ID",
+			"Expected import ID to be the resource name, got empty string",
+		)
+		return
+	}
+
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
+{{- end}}
 }
 `
 
@@ -2395,19 +3313,19 @@ import (
 
 // {{.TitleCase}} represents a F5XC {{.TitleCase}}
 type {{.TitleCase}} struct {
-	Metadata Metadata       ` + "`" + `json:"metadata"` + "`" + `
-	Spec     {{.TitleCase}}Spec ` + "`" + `json:"spec"` + "`" + `
-}
-
-// {{.TitleCase}}Spec defines the specification for {{.TitleCase}}
-type {{.TitleCase}}Spec struct {
-	Description string ` + "`" + `json:"description,omitempty"` + "`" + `
+	Metadata Metadata               ` + "`" + `json:"metadata"` + "`" + `
+	Spec     map[string]interface{} ` + "`" + `json:"spec"` + "`" + `
 }
 
 // Create{{.TitleCase}} creates a new {{.TitleCase}}
 func (c *Client) Create{{.TitleCase}}(ctx context.Context, resource *{{.TitleCase}}) (*{{.TitleCase}}, error) {
 	var result {{.TitleCase}}
+{{- if .HasNamespaceInPath}}
 	path := fmt.Sprintf("{{.APIPath}}", resource.Metadata.Namespace)
+{{- else}}
+	path := "{{.APIPath}}"
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
+{{- end}}
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -2415,7 +3333,12 @@ func (c *Client) Create{{.TitleCase}}(ctx context.Context, resource *{{.TitleCas
 // Get{{.TitleCase}} retrieves a {{.TitleCase}}
 func (c *Client) Get{{.TitleCase}}(ctx context.Context, namespace, name string) (*{{.TitleCase}}, error) {
 	var result {{.TitleCase}}
-	path := fmt.Sprintf("{{.APIPath}}/%s", namespace, name)
+{{- if .HasNamespaceInPath}}
+	path := fmt.Sprintf("{{.APIPathItem}}", namespace, name)
+{{- else}}
+	path := fmt.Sprintf("{{.APIPathItem}}", name)
+	_ = namespace // Namespace not required in API path for this resource
+{{- end}}
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -2423,14 +3346,24 @@ func (c *Client) Get{{.TitleCase}}(ctx context.Context, namespace, name string) 
 // Update{{.TitleCase}} updates a {{.TitleCase}}
 func (c *Client) Update{{.TitleCase}}(ctx context.Context, resource *{{.TitleCase}}) (*{{.TitleCase}}, error) {
 	var result {{.TitleCase}}
-	path := fmt.Sprintf("{{.APIPath}}/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+{{- if .HasNamespaceInPath}}
+	path := fmt.Sprintf("{{.APIPathItem}}", resource.Metadata.Namespace, resource.Metadata.Name)
+{{- else}}
+	path := fmt.Sprintf("{{.APIPathItem}}", resource.Metadata.Name)
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
+{{- end}}
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // Delete{{.TitleCase}} deletes a {{.TitleCase}}
 func (c *Client) Delete{{.TitleCase}}(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("{{.APIPath}}/%s", namespace, name)
+{{- if .HasNamespaceInPath}}
+	path := fmt.Sprintf("{{.APIPathItem}}", namespace, name)
+{{- else}}
+	path := fmt.Sprintf("{{.APIPathItem}}", name)
+	_ = namespace // Namespace not required in API path for this resource
+{{- end}}
 	return c.Delete(ctx, path)
 }
 `
@@ -2539,7 +3472,11 @@ func (d *{{.TitleCase}}DataSource) Read(ctx context.Context, req datasource.Read
 	data.ID = types.StringValue(resource.Metadata.Name)
 	data.Name = types.StringValue(resource.Metadata.Name)
 	data.Namespace = types.StringValue(resource.Metadata.Namespace)
-	data.Description = types.StringValue(resource.Spec.Description)
+	if resource.Metadata.Description != "" {
+		data.Description = types.StringValue(resource.Metadata.Description)
+	} else {
+		data.Description = types.StringNull()
+	}
 
 	if len(resource.Metadata.Labels) > 0 {
 		labels, diags := types.MapValueFrom(ctx, types.StringType, resource.Metadata.Labels)

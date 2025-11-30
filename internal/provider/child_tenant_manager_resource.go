@@ -485,6 +485,19 @@ func (r *ChildTenantManagerResource) Read(ctx context.Context, req resource.Read
 		for _, item := range listData {
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				group_assignmentsList = append(group_assignmentsList, ChildTenantManagerGroupAssignmentsModel{
+					ChildTenantGroups: func() types.List {
+						if v, ok := itemMap["child_tenant_groups"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
 					Group: func() *ChildTenantManagerGroupAssignmentsGroupModel {
 						if nestedMap, ok := itemMap["group"].(map[string]interface{}); ok {
 							return &ChildTenantManagerGroupAssignmentsGroupModel{

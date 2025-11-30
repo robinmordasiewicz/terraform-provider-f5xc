@@ -498,11 +498,23 @@ func (r *IKEPhase2ProfileResource) Read(ctx context.Context, req resource.ReadRe
 	} else {
 		data.AuthenticationAlgos = types.ListNull(types.StringType)
 	}
-	if _, ok := apiResource.Spec["dh_group_set"].(map[string]interface{}); ok && isImport && data.DhGroupSet == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.DhGroupSet = &IKEPhase2ProfileDhGroupSetModel{}
+	if blockData, ok := apiResource.Spec["dh_group_set"].(map[string]interface{}); ok && (isImport || data.DhGroupSet != nil) {
+		data.DhGroupSet = &IKEPhase2ProfileDhGroupSetModel{
+			DhGroups: func() types.List {
+				if v, ok := blockData["dh_groups"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["disable_pfs"].(map[string]interface{}); ok && isImport && data.DisablePfs == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DisablePfs = &IKEPhase2ProfileEmptyModel{}

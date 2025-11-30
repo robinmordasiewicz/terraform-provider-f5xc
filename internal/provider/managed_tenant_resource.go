@@ -95,10 +95,11 @@ func (r *ManagedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the ManagedTenant will be created.",
-				Required: true,
+				MarkdownDescription: "Namespace for the ManagedTenant. For this resource type, namespace should be empty or omitted.",
+				Optional: true,
+				Computed: true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.UseStateForUnknown(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -358,6 +359,8 @@ func (r *ManagedTenantResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(created.Metadata.Namespace)
 
 	// Set computed fields from API response
 	if v, ok := created.Spec["tenant_id"].(string); ok && v != "" {
@@ -489,6 +492,19 @@ func (r *ManagedTenantResource) Read(ctx context.Context, req resource.ReadReque
 							}
 						}
 						return nil
+					}(),
+					ManagedTenantGroups: func() types.List {
+						if v, ok := itemMap["managed_tenant_groups"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
 					}(),
 				})
 			}
@@ -662,19 +678,17 @@ func (r *ManagedTenantResource) Delete(ctx context.Context, req resource.DeleteR
 }
 
 func (r *ManagedTenantResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: namespace/name
-	parts := strings.Split(req.ID, "/")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+			"Expected import ID to be the resource name, got empty string",
 		)
 		return
 	}
-	namespace := parts[0]
-	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

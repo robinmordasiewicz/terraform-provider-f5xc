@@ -6318,10 +6318,44 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 	// Marshal spec fields from Terraform state to API struct
 	if data.ActiveEnhancedFirewallPolicies != nil {
 		active_enhanced_firewall_policiesMap := make(map[string]interface{})
+		if len(data.ActiveEnhancedFirewallPolicies.EnhancedFirewallPolicies) > 0 {
+			var enhanced_firewall_policiesList []map[string]interface{}
+			for _, listItem := range data.ActiveEnhancedFirewallPolicies.EnhancedFirewallPolicies {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				enhanced_firewall_policiesList = append(enhanced_firewall_policiesList, listItemMap)
+			}
+			active_enhanced_firewall_policiesMap["enhanced_firewall_policies"] = enhanced_firewall_policiesList
+		}
 		apiResource.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
 	}
 	if data.ActiveForwardProxyPolicies != nil {
 		active_forward_proxy_policiesMap := make(map[string]interface{})
+		if len(data.ActiveForwardProxyPolicies.ForwardProxyPolicies) > 0 {
+			var forward_proxy_policiesList []map[string]interface{}
+			for _, listItem := range data.ActiveForwardProxyPolicies.ForwardProxyPolicies {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				forward_proxy_policiesList = append(forward_proxy_policiesList, listItemMap)
+			}
+			active_forward_proxy_policiesMap["forward_proxy_policies"] = forward_proxy_policiesList
+		}
 		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
 	}
 	if data.AdminUserCredentials != nil {
@@ -6365,6 +6399,26 @@ func (r *SecuremeshSiteV2Resource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
+		if len(data.BlockedServices.BlockedSevice) > 0 {
+			var blocked_seviceList []map[string]interface{}
+			for _, listItem := range data.BlockedServices.BlockedSevice {
+				listItemMap := make(map[string]interface{})
+				if listItem.DNS != nil {
+					listItemMap["dns"] = map[string]interface{}{}
+				}
+				if !listItem.NetworkType.IsNull() && !listItem.NetworkType.IsUnknown() {
+					listItemMap["network_type"] = listItem.NetworkType.ValueString()
+				}
+				if listItem.SSH != nil {
+					listItemMap["ssh"] = map[string]interface{}{}
+				}
+				if listItem.WebUserInterface != nil {
+					listItemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_seviceList = append(blocked_seviceList, listItemMap)
+			}
+			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
+		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.CustomProxy != nil {
@@ -6799,16 +6853,76 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && isImport && data.ActiveEnhancedFirewallPolicies == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ActiveEnhancedFirewallPolicies = &SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel{}
+	if blockData, ok := apiResource.Spec["active_enhanced_firewall_policies"].(map[string]interface{}); ok && (isImport || data.ActiveEnhancedFirewallPolicies != nil) {
+		data.ActiveEnhancedFirewallPolicies = &SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel{
+			EnhancedFirewallPolicies: func() []SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel {
+				if listData, ok := blockData["enhanced_firewall_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && isImport && data.ActiveForwardProxyPolicies == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ActiveForwardProxyPolicies = &SecuremeshSiteV2ActiveForwardProxyPoliciesModel{}
+	if blockData, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && (isImport || data.ActiveForwardProxyPolicies != nil) {
+		data.ActiveForwardProxyPolicies = &SecuremeshSiteV2ActiveForwardProxyPoliciesModel{
+			ForwardProxyPolicies: func() []SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel {
+				if listData, ok := blockData["forward_proxy_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["admin_user_credentials"].(map[string]interface{}); ok && (isImport || data.AdminUserCredentials != nil) {
 		data.AdminUserCredentials = &SecuremeshSiteV2AdminUserCredentialsModel{
 			SSHKey: func() types.String {
@@ -6839,11 +6953,47 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 		data.BlockAllServices = &SecuremeshSiteV2EmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && isImport && data.BlockedServices == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.BlockedServices = &SecuremeshSiteV2BlockedServicesModel{}
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &SecuremeshSiteV2BlockedServicesModel{
+			BlockedSevice: func() []SecuremeshSiteV2BlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecuremeshSiteV2BlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecuremeshSiteV2BlockedServicesBlockedSeviceModel{
+								DNS: func() *SecuremeshSiteV2EmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &SecuremeshSiteV2EmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *SecuremeshSiteV2EmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &SecuremeshSiteV2EmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *SecuremeshSiteV2EmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &SecuremeshSiteV2EmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["custom_proxy"].(map[string]interface{}); ok && (isImport || data.CustomProxy != nil) {
 		data.CustomProxy = &SecuremeshSiteV2CustomProxyModel{
 			ProxyIPAddress: func() types.String {
@@ -6866,11 +7016,23 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["custom_proxy_bypass"].(map[string]interface{}); ok && isImport && data.CustomProxyBypass == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.CustomProxyBypass = &SecuremeshSiteV2CustomProxyBypassModel{}
+	if blockData, ok := apiResource.Spec["custom_proxy_bypass"].(map[string]interface{}); ok && (isImport || data.CustomProxyBypass != nil) {
+		data.CustomProxyBypass = &SecuremeshSiteV2CustomProxyBypassModel{
+			ProxyBypass: func() types.List {
+				if v, ok := blockData["proxy_bypass"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["dc_cluster_group_sli"].(map[string]interface{}); ok && (isImport || data.DcClusterGroupSLI != nil) {
 		data.DcClusterGroupSLI = &SecuremeshSiteV2DcClusterGroupSLIModel{
 			Name: func() types.String {
@@ -7150,10 +7312,44 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 	// Marshal spec fields from Terraform state to API struct
 	if data.ActiveEnhancedFirewallPolicies != nil {
 		active_enhanced_firewall_policiesMap := make(map[string]interface{})
+		if len(data.ActiveEnhancedFirewallPolicies.EnhancedFirewallPolicies) > 0 {
+			var enhanced_firewall_policiesList []map[string]interface{}
+			for _, listItem := range data.ActiveEnhancedFirewallPolicies.EnhancedFirewallPolicies {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				enhanced_firewall_policiesList = append(enhanced_firewall_policiesList, listItemMap)
+			}
+			active_enhanced_firewall_policiesMap["enhanced_firewall_policies"] = enhanced_firewall_policiesList
+		}
 		apiResource.Spec["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesMap
 	}
 	if data.ActiveForwardProxyPolicies != nil {
 		active_forward_proxy_policiesMap := make(map[string]interface{})
+		if len(data.ActiveForwardProxyPolicies.ForwardProxyPolicies) > 0 {
+			var forward_proxy_policiesList []map[string]interface{}
+			for _, listItem := range data.ActiveForwardProxyPolicies.ForwardProxyPolicies {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				forward_proxy_policiesList = append(forward_proxy_policiesList, listItemMap)
+			}
+			active_forward_proxy_policiesMap["forward_proxy_policies"] = forward_proxy_policiesList
+		}
 		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
 	}
 	if data.AdminUserCredentials != nil {
@@ -7197,6 +7393,26 @@ func (r *SecuremeshSiteV2Resource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
+		if len(data.BlockedServices.BlockedSevice) > 0 {
+			var blocked_seviceList []map[string]interface{}
+			for _, listItem := range data.BlockedServices.BlockedSevice {
+				listItemMap := make(map[string]interface{})
+				if listItem.DNS != nil {
+					listItemMap["dns"] = map[string]interface{}{}
+				}
+				if !listItem.NetworkType.IsNull() && !listItem.NetworkType.IsUnknown() {
+					listItemMap["network_type"] = listItem.NetworkType.ValueString()
+				}
+				if listItem.SSH != nil {
+					listItemMap["ssh"] = map[string]interface{}{}
+				}
+				if listItem.WebUserInterface != nil {
+					listItemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_seviceList = append(blocked_seviceList, listItemMap)
+			}
+			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
+		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.CustomProxy != nil {

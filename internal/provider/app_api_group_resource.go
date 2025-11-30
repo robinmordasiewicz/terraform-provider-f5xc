@@ -589,6 +589,19 @@ func (r *AppAPIGroupResource) Read(ctx context.Context, req resource.ReadRequest
 		for _, item := range listData {
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				elementsList = append(elementsList, AppAPIGroupElementsModel{
+					Methods: func() types.List {
+						if v, ok := itemMap["methods"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
 					PathRegex: func() types.String {
 						if v, ok := itemMap["path_regex"].(string); ok && v != "" {
 							return types.StringValue(v)

@@ -685,6 +685,17 @@ func (r *CDNCacheRuleResource) Create(ctx context.Context, req resource.CreateRe
 			eligible_for_cacheNestedMap := make(map[string]interface{})
 			cache_rulesMap["eligible_for_cache"] = eligible_for_cacheNestedMap
 		}
+		if len(data.CacheRules.RuleExpressionList) > 0 {
+			var rule_expression_listList []map[string]interface{}
+			for _, listItem := range data.CacheRules.RuleExpressionList {
+				listItemMap := make(map[string]interface{})
+				if !listItem.ExpressionName.IsNull() && !listItem.ExpressionName.IsUnknown() {
+					listItemMap["expression_name"] = listItem.ExpressionName.ValueString()
+				}
+				rule_expression_listList = append(rule_expression_listList, listItemMap)
+			}
+			cache_rulesMap["rule_expression_list"] = rule_expression_listList
+		}
 		if !data.CacheRules.RuleName.IsNull() && !data.CacheRules.RuleName.IsUnknown() {
 			cache_rulesMap["rule_name"] = data.CacheRules.RuleName.ValueString()
 		}
@@ -796,6 +807,25 @@ func (r *CDNCacheRuleResource) Read(ctx context.Context, req resource.ReadReques
 	})
 	if blockData, ok := apiResource.Spec["cache_rules"].(map[string]interface{}); ok && (isImport || data.CacheRules != nil) {
 		data.CacheRules = &CDNCacheRuleCacheRulesModel{
+			RuleExpressionList: func() []CDNCacheRuleCacheRulesRuleExpressionListModel {
+				if listData, ok := blockData["rule_expression_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []CDNCacheRuleCacheRulesRuleExpressionListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, CDNCacheRuleCacheRulesRuleExpressionListModel{
+								ExpressionName: func() types.String {
+									if v, ok := itemMap["expression_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 			RuleName: func() types.String {
 				if v, ok := blockData["rule_name"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -873,6 +903,17 @@ func (r *CDNCacheRuleResource) Update(ctx context.Context, req resource.UpdateRe
 		if data.CacheRules.EligibleForCache != nil {
 			eligible_for_cacheNestedMap := make(map[string]interface{})
 			cache_rulesMap["eligible_for_cache"] = eligible_for_cacheNestedMap
+		}
+		if len(data.CacheRules.RuleExpressionList) > 0 {
+			var rule_expression_listList []map[string]interface{}
+			for _, listItem := range data.CacheRules.RuleExpressionList {
+				listItemMap := make(map[string]interface{})
+				if !listItem.ExpressionName.IsNull() && !listItem.ExpressionName.IsUnknown() {
+					listItemMap["expression_name"] = listItem.ExpressionName.ValueString()
+				}
+				rule_expression_listList = append(rule_expression_listList, listItemMap)
+			}
+			cache_rulesMap["rule_expression_list"] = rule_expression_listList
 		}
 		if !data.CacheRules.RuleName.IsNull() && !data.CacheRules.RuleName.IsUnknown() {
 			cache_rulesMap["rule_name"] = data.CacheRules.RuleName.ValueString()

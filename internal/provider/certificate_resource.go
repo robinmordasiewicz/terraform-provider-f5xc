@@ -576,11 +576,23 @@ func (r *CertificateResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["custom_hash_algorithms"].(map[string]interface{}); ok && isImport && data.CustomHashAlgorithms == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.CustomHashAlgorithms = &CertificateCustomHashAlgorithmsModel{}
+	if blockData, ok := apiResource.Spec["custom_hash_algorithms"].(map[string]interface{}); ok && (isImport || data.CustomHashAlgorithms != nil) {
+		data.CustomHashAlgorithms = &CertificateCustomHashAlgorithmsModel{
+			HashAlgorithms: func() types.List {
+				if v, ok := blockData["hash_algorithms"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOcspStapling == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DisableOcspStapling = &CertificateEmptyModel{}

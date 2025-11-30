@@ -15010,10 +15010,95 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	// Marshal spec fields from Terraform state to API struct
 	if data.ActiveServicePolicies != nil {
 		active_service_policiesMap := make(map[string]interface{})
+		if len(data.ActiveServicePolicies.Policies) > 0 {
+			var policiesList []map[string]interface{}
+			for _, listItem := range data.ActiveServicePolicies.Policies {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				policiesList = append(policiesList, listItemMap)
+			}
+			active_service_policiesMap["policies"] = policiesList
+		}
 		apiResource.Spec["active_service_policies"] = active_service_policiesMap
 	}
 	if data.AdvertiseCustom != nil {
 		advertise_customMap := make(map[string]interface{})
+		if len(data.AdvertiseCustom.AdvertiseWhere) > 0 {
+			var advertise_whereList []map[string]interface{}
+			for _, listItem := range data.AdvertiseCustom.AdvertiseWhere {
+				listItemMap := make(map[string]interface{})
+				if listItem.AdvertiseOnPublic != nil {
+					advertise_on_publicDeepMap := make(map[string]interface{})
+					listItemMap["advertise_on_public"] = advertise_on_publicDeepMap
+				}
+				if !listItem.Port.IsNull() && !listItem.Port.IsUnknown() {
+					listItemMap["port"] = listItem.Port.ValueInt64()
+				}
+				if !listItem.PortRanges.IsNull() && !listItem.PortRanges.IsUnknown() {
+					listItemMap["port_ranges"] = listItem.PortRanges.ValueString()
+				}
+				if listItem.Site != nil {
+					siteDeepMap := make(map[string]interface{})
+					if !listItem.Site.IP.IsNull() && !listItem.Site.IP.IsUnknown() {
+						siteDeepMap["ip"] = listItem.Site.IP.ValueString()
+					}
+					if !listItem.Site.Network.IsNull() && !listItem.Site.Network.IsUnknown() {
+						siteDeepMap["network"] = listItem.Site.Network.ValueString()
+					}
+					listItemMap["site"] = siteDeepMap
+				}
+				if listItem.UseDefaultPort != nil {
+					listItemMap["use_default_port"] = map[string]interface{}{}
+				}
+				if listItem.VirtualNetwork != nil {
+					virtual_networkDeepMap := make(map[string]interface{})
+					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
+					}
+					if listItem.VirtualNetwork.DefaultVip != nil {
+						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
+					}
+					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					}
+					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					}
+					listItemMap["virtual_network"] = virtual_networkDeepMap
+				}
+				if listItem.VirtualSite != nil {
+					virtual_siteDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSite.Network.IsNull() && !listItem.VirtualSite.Network.IsUnknown() {
+						virtual_siteDeepMap["network"] = listItem.VirtualSite.Network.ValueString()
+					}
+					listItemMap["virtual_site"] = virtual_siteDeepMap
+				}
+				if listItem.VirtualSiteWithVip != nil {
+					virtual_site_with_vipDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					}
+					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					}
+					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
+				}
+				if listItem.Vk8sService != nil {
+					vk8s_serviceDeepMap := make(map[string]interface{})
+					listItemMap["vk8s_service"] = vk8s_serviceDeepMap
+				}
+				advertise_whereList = append(advertise_whereList, listItemMap)
+			}
+			advertise_customMap["advertise_where"] = advertise_whereList
+		}
 		apiResource.Spec["advertise_custom"] = advertise_customMap
 	}
 	if data.AdvertiseOnPublic != nil {
@@ -15039,10 +15124,186 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.APIProtectionRules != nil {
 		api_protection_rulesMap := make(map[string]interface{})
+		if len(data.APIProtectionRules.APIEndpointRules) > 0 {
+			var api_endpoint_rulesList []map[string]interface{}
+			for _, listItem := range data.APIProtectionRules.APIEndpointRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if listItem.Action.Allow != nil {
+						actionDeepMap["allow"] = map[string]interface{}{}
+					}
+					if listItem.Action.Deny != nil {
+						actionDeepMap["deny"] = map[string]interface{}{}
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.AnyDomain != nil {
+					listItemMap["any_domain"] = map[string]interface{}{}
+				}
+				if listItem.APIEndpointMethod != nil {
+					api_endpoint_methodDeepMap := make(map[string]interface{})
+					if !listItem.APIEndpointMethod.InvertMatcher.IsNull() && !listItem.APIEndpointMethod.InvertMatcher.IsUnknown() {
+						api_endpoint_methodDeepMap["invert_matcher"] = listItem.APIEndpointMethod.InvertMatcher.ValueBool()
+					}
+					listItemMap["api_endpoint_method"] = api_endpoint_methodDeepMap
+				}
+				if !listItem.APIEndpointPath.IsNull() && !listItem.APIEndpointPath.IsUnknown() {
+					listItemMap["api_endpoint_path"] = listItem.APIEndpointPath.ValueString()
+				}
+				if listItem.ClientMatcher != nil {
+					client_matcherDeepMap := make(map[string]interface{})
+					if listItem.ClientMatcher.AnyClient != nil {
+						client_matcherDeepMap["any_client"] = map[string]interface{}{}
+					}
+					if listItem.ClientMatcher.AnyIP != nil {
+						client_matcherDeepMap["any_ip"] = map[string]interface{}{}
+					}
+					listItemMap["client_matcher"] = client_matcherDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.RequestMatcher != nil {
+					request_matcherDeepMap := make(map[string]interface{})
+					listItemMap["request_matcher"] = request_matcherDeepMap
+				}
+				if !listItem.SpecificDomain.IsNull() && !listItem.SpecificDomain.IsUnknown() {
+					listItemMap["specific_domain"] = listItem.SpecificDomain.ValueString()
+				}
+				api_endpoint_rulesList = append(api_endpoint_rulesList, listItemMap)
+			}
+			api_protection_rulesMap["api_endpoint_rules"] = api_endpoint_rulesList
+		}
+		if len(data.APIProtectionRules.APIGroupsRules) > 0 {
+			var api_groups_rulesList []map[string]interface{}
+			for _, listItem := range data.APIProtectionRules.APIGroupsRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if listItem.Action.Allow != nil {
+						actionDeepMap["allow"] = map[string]interface{}{}
+					}
+					if listItem.Action.Deny != nil {
+						actionDeepMap["deny"] = map[string]interface{}{}
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.AnyDomain != nil {
+					listItemMap["any_domain"] = map[string]interface{}{}
+				}
+				if !listItem.APIGroup.IsNull() && !listItem.APIGroup.IsUnknown() {
+					listItemMap["api_group"] = listItem.APIGroup.ValueString()
+				}
+				if !listItem.BasePath.IsNull() && !listItem.BasePath.IsUnknown() {
+					listItemMap["base_path"] = listItem.BasePath.ValueString()
+				}
+				if listItem.ClientMatcher != nil {
+					client_matcherDeepMap := make(map[string]interface{})
+					if listItem.ClientMatcher.AnyClient != nil {
+						client_matcherDeepMap["any_client"] = map[string]interface{}{}
+					}
+					if listItem.ClientMatcher.AnyIP != nil {
+						client_matcherDeepMap["any_ip"] = map[string]interface{}{}
+					}
+					listItemMap["client_matcher"] = client_matcherDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.RequestMatcher != nil {
+					request_matcherDeepMap := make(map[string]interface{})
+					listItemMap["request_matcher"] = request_matcherDeepMap
+				}
+				if !listItem.SpecificDomain.IsNull() && !listItem.SpecificDomain.IsUnknown() {
+					listItemMap["specific_domain"] = listItem.SpecificDomain.ValueString()
+				}
+				api_groups_rulesList = append(api_groups_rulesList, listItemMap)
+			}
+			api_protection_rulesMap["api_groups_rules"] = api_groups_rulesList
+		}
 		apiResource.Spec["api_protection_rules"] = api_protection_rulesMap
 	}
 	if data.APIRateLimit != nil {
 		api_rate_limitMap := make(map[string]interface{})
+		if len(data.APIRateLimit.APIEndpointRules) > 0 {
+			var api_endpoint_rulesList []map[string]interface{}
+			for _, listItem := range data.APIRateLimit.APIEndpointRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AnyDomain != nil {
+					listItemMap["any_domain"] = map[string]interface{}{}
+				}
+				if listItem.APIEndpointMethod != nil {
+					api_endpoint_methodDeepMap := make(map[string]interface{})
+					if !listItem.APIEndpointMethod.InvertMatcher.IsNull() && !listItem.APIEndpointMethod.InvertMatcher.IsUnknown() {
+						api_endpoint_methodDeepMap["invert_matcher"] = listItem.APIEndpointMethod.InvertMatcher.ValueBool()
+					}
+					listItemMap["api_endpoint_method"] = api_endpoint_methodDeepMap
+				}
+				if !listItem.APIEndpointPath.IsNull() && !listItem.APIEndpointPath.IsUnknown() {
+					listItemMap["api_endpoint_path"] = listItem.APIEndpointPath.ValueString()
+				}
+				if listItem.ClientMatcher != nil {
+					client_matcherDeepMap := make(map[string]interface{})
+					if listItem.ClientMatcher.AnyClient != nil {
+						client_matcherDeepMap["any_client"] = map[string]interface{}{}
+					}
+					if listItem.ClientMatcher.AnyIP != nil {
+						client_matcherDeepMap["any_ip"] = map[string]interface{}{}
+					}
+					listItemMap["client_matcher"] = client_matcherDeepMap
+				}
+				if listItem.InlineRateLimiter != nil {
+					inline_rate_limiterDeepMap := make(map[string]interface{})
+					if !listItem.InlineRateLimiter.Threshold.IsNull() && !listItem.InlineRateLimiter.Threshold.IsUnknown() {
+						inline_rate_limiterDeepMap["threshold"] = listItem.InlineRateLimiter.Threshold.ValueInt64()
+					}
+					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
+						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
+					}
+					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
+					}
+					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
+				}
+				if listItem.RefRateLimiter != nil {
+					ref_rate_limiterDeepMap := make(map[string]interface{})
+					if !listItem.RefRateLimiter.Name.IsNull() && !listItem.RefRateLimiter.Name.IsUnknown() {
+						ref_rate_limiterDeepMap["name"] = listItem.RefRateLimiter.Name.ValueString()
+					}
+					if !listItem.RefRateLimiter.Namespace.IsNull() && !listItem.RefRateLimiter.Namespace.IsUnknown() {
+						ref_rate_limiterDeepMap["namespace"] = listItem.RefRateLimiter.Namespace.ValueString()
+					}
+					if !listItem.RefRateLimiter.Tenant.IsNull() && !listItem.RefRateLimiter.Tenant.IsUnknown() {
+						ref_rate_limiterDeepMap["tenant"] = listItem.RefRateLimiter.Tenant.ValueString()
+					}
+					listItemMap["ref_rate_limiter"] = ref_rate_limiterDeepMap
+				}
+				if listItem.RequestMatcher != nil {
+					request_matcherDeepMap := make(map[string]interface{})
+					listItemMap["request_matcher"] = request_matcherDeepMap
+				}
+				if !listItem.SpecificDomain.IsNull() && !listItem.SpecificDomain.IsUnknown() {
+					listItemMap["specific_domain"] = listItem.SpecificDomain.ValueString()
+				}
+				api_endpoint_rulesList = append(api_endpoint_rulesList, listItemMap)
+			}
+			api_rate_limitMap["api_endpoint_rules"] = api_endpoint_rulesList
+		}
 		if data.APIRateLimit.BypassRateLimitingRules != nil {
 			bypass_rate_limiting_rulesNestedMap := make(map[string]interface{})
 			api_rate_limitMap["bypass_rate_limiting_rules"] = bypass_rate_limiting_rulesNestedMap
@@ -15057,6 +15318,66 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		if data.APIRateLimit.NoIPAllowedList != nil {
 			api_rate_limitMap["no_ip_allowed_list"] = map[string]interface{}{}
+		}
+		if len(data.APIRateLimit.ServerURLRules) > 0 {
+			var server_url_rulesList []map[string]interface{}
+			for _, listItem := range data.APIRateLimit.ServerURLRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AnyDomain != nil {
+					listItemMap["any_domain"] = map[string]interface{}{}
+				}
+				if !listItem.APIGroup.IsNull() && !listItem.APIGroup.IsUnknown() {
+					listItemMap["api_group"] = listItem.APIGroup.ValueString()
+				}
+				if !listItem.BasePath.IsNull() && !listItem.BasePath.IsUnknown() {
+					listItemMap["base_path"] = listItem.BasePath.ValueString()
+				}
+				if listItem.ClientMatcher != nil {
+					client_matcherDeepMap := make(map[string]interface{})
+					if listItem.ClientMatcher.AnyClient != nil {
+						client_matcherDeepMap["any_client"] = map[string]interface{}{}
+					}
+					if listItem.ClientMatcher.AnyIP != nil {
+						client_matcherDeepMap["any_ip"] = map[string]interface{}{}
+					}
+					listItemMap["client_matcher"] = client_matcherDeepMap
+				}
+				if listItem.InlineRateLimiter != nil {
+					inline_rate_limiterDeepMap := make(map[string]interface{})
+					if !listItem.InlineRateLimiter.Threshold.IsNull() && !listItem.InlineRateLimiter.Threshold.IsUnknown() {
+						inline_rate_limiterDeepMap["threshold"] = listItem.InlineRateLimiter.Threshold.ValueInt64()
+					}
+					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
+						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
+					}
+					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
+					}
+					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
+				}
+				if listItem.RefRateLimiter != nil {
+					ref_rate_limiterDeepMap := make(map[string]interface{})
+					if !listItem.RefRateLimiter.Name.IsNull() && !listItem.RefRateLimiter.Name.IsUnknown() {
+						ref_rate_limiterDeepMap["name"] = listItem.RefRateLimiter.Name.ValueString()
+					}
+					if !listItem.RefRateLimiter.Namespace.IsNull() && !listItem.RefRateLimiter.Namespace.IsUnknown() {
+						ref_rate_limiterDeepMap["namespace"] = listItem.RefRateLimiter.Namespace.ValueString()
+					}
+					if !listItem.RefRateLimiter.Tenant.IsNull() && !listItem.RefRateLimiter.Tenant.IsUnknown() {
+						ref_rate_limiterDeepMap["tenant"] = listItem.RefRateLimiter.Tenant.ValueString()
+					}
+					listItemMap["ref_rate_limiter"] = ref_rate_limiterDeepMap
+				}
+				if listItem.RequestMatcher != nil {
+					request_matcherDeepMap := make(map[string]interface{})
+					listItemMap["request_matcher"] = request_matcherDeepMap
+				}
+				if !listItem.SpecificDomain.IsNull() && !listItem.SpecificDomain.IsUnknown() {
+					listItemMap["specific_domain"] = listItem.SpecificDomain.ValueString()
+				}
+				server_url_rulesList = append(server_url_rulesList, listItemMap)
+			}
+			api_rate_limitMap["server_url_rules"] = server_url_rulesList
 		}
 		apiResource.Spec["api_rate_limit"] = api_rate_limitMap
 	}
@@ -15092,6 +15413,20 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		api_testingMap := make(map[string]interface{})
 		if !data.APITesting.CustomHeaderValue.IsNull() && !data.APITesting.CustomHeaderValue.IsUnknown() {
 			api_testingMap["custom_header_value"] = data.APITesting.CustomHeaderValue.ValueString()
+		}
+		if len(data.APITesting.Domains) > 0 {
+			var domainsList []map[string]interface{}
+			for _, listItem := range data.APITesting.Domains {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AllowDestructiveMethods.IsNull() && !listItem.AllowDestructiveMethods.IsUnknown() {
+					listItemMap["allow_destructive_methods"] = listItem.AllowDestructiveMethods.ValueBool()
+				}
+				if !listItem.Domain.IsNull() && !listItem.Domain.IsUnknown() {
+					listItemMap["domain"] = listItem.Domain.ValueString()
+				}
+				domainsList = append(domainsList, listItemMap)
+			}
+			api_testingMap["domains"] = domainsList
 		}
 		if data.APITesting.EveryDay != nil {
 			api_testingMap["every_day"] = map[string]interface{}{}
@@ -15411,6 +15746,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}
 			if item.DdosClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
+				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
+					var CountryListItems []string
+					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
+					if !diags.HasError() {
+						ddos_client_sourceNestedMap["country_list"] = CountryListItems
+					}
+				}
 				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
 			}
 			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
@@ -15420,6 +15762,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				ip_prefix_listNestedMap := make(map[string]interface{})
 				if !item.IPPrefixList.InvertMatch.IsNull() && !item.IPPrefixList.InvertMatch.IsUnknown() {
 					ip_prefix_listNestedMap["invert_match"] = item.IPPrefixList.InvertMatch.ValueBool()
+				}
+				if !item.IPPrefixList.IPPrefixes.IsNull() && !item.IPPrefixList.IPPrefixes.IsUnknown() {
+					var IPPrefixesItems []string
+					diags := item.IPPrefixList.IPPrefixes.ElementsAs(ctx, &IPPrefixesItems, false)
+					if !diags.HasError() {
+						ip_prefix_listNestedMap["ip_prefixes"] = IPPrefixesItems
+					}
 				}
 				itemMap["ip_prefix_list"] = ip_prefix_listNestedMap
 			}
@@ -15461,6 +15810,23 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.DefaultPool.HealthCheckPort.IsNull() && !data.DefaultPool.HealthCheckPort.IsUnknown() {
 			default_poolMap["health_check_port"] = data.DefaultPool.HealthCheckPort.ValueInt64()
 		}
+		if len(data.DefaultPool.Healthcheck) > 0 {
+			var healthcheckList []map[string]interface{}
+			for _, listItem := range data.DefaultPool.Healthcheck {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				healthcheckList = append(healthcheckList, listItemMap)
+			}
+			default_poolMap["healthcheck"] = healthcheckList
+		}
 		if data.DefaultPool.LbPort != nil {
 			default_poolMap["lb_port"] = map[string]interface{}{}
 		}
@@ -15469,6 +15835,120 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		if data.DefaultPool.NoTLS != nil {
 			default_poolMap["no_tls"] = map[string]interface{}{}
+		}
+		if len(data.DefaultPool.OriginServers) > 0 {
+			var origin_serversList []map[string]interface{}
+			for _, listItem := range data.DefaultPool.OriginServers {
+				listItemMap := make(map[string]interface{})
+				if listItem.CbipService != nil {
+					cbip_serviceDeepMap := make(map[string]interface{})
+					if !listItem.CbipService.ServiceName.IsNull() && !listItem.CbipService.ServiceName.IsUnknown() {
+						cbip_serviceDeepMap["service_name"] = listItem.CbipService.ServiceName.ValueString()
+					}
+					listItemMap["cbip_service"] = cbip_serviceDeepMap
+				}
+				if listItem.ConsulService != nil {
+					consul_serviceDeepMap := make(map[string]interface{})
+					if listItem.ConsulService.InsideNetwork != nil {
+						consul_serviceDeepMap["inside_network"] = map[string]interface{}{}
+					}
+					if listItem.ConsulService.OutsideNetwork != nil {
+						consul_serviceDeepMap["outside_network"] = map[string]interface{}{}
+					}
+					if !listItem.ConsulService.ServiceName.IsNull() && !listItem.ConsulService.ServiceName.IsUnknown() {
+						consul_serviceDeepMap["service_name"] = listItem.ConsulService.ServiceName.ValueString()
+					}
+					listItemMap["consul_service"] = consul_serviceDeepMap
+				}
+				if listItem.CustomEndpointObject != nil {
+					custom_endpoint_objectDeepMap := make(map[string]interface{})
+					listItemMap["custom_endpoint_object"] = custom_endpoint_objectDeepMap
+				}
+				if listItem.K8SService != nil {
+					k8s_serviceDeepMap := make(map[string]interface{})
+					if listItem.K8SService.InsideNetwork != nil {
+						k8s_serviceDeepMap["inside_network"] = map[string]interface{}{}
+					}
+					if listItem.K8SService.OutsideNetwork != nil {
+						k8s_serviceDeepMap["outside_network"] = map[string]interface{}{}
+					}
+					if !listItem.K8SService.Protocol.IsNull() && !listItem.K8SService.Protocol.IsUnknown() {
+						k8s_serviceDeepMap["protocol"] = listItem.K8SService.Protocol.ValueString()
+					}
+					if !listItem.K8SService.ServiceName.IsNull() && !listItem.K8SService.ServiceName.IsUnknown() {
+						k8s_serviceDeepMap["service_name"] = listItem.K8SService.ServiceName.ValueString()
+					}
+					if listItem.K8SService.Vk8sNetworks != nil {
+						k8s_serviceDeepMap["vk8s_networks"] = map[string]interface{}{}
+					}
+					listItemMap["k8s_service"] = k8s_serviceDeepMap
+				}
+				if listItem.Labels != nil {
+					listItemMap["labels"] = map[string]interface{}{}
+				}
+				if listItem.PrivateIP != nil {
+					private_ipDeepMap := make(map[string]interface{})
+					if listItem.PrivateIP.InsideNetwork != nil {
+						private_ipDeepMap["inside_network"] = map[string]interface{}{}
+					}
+					if !listItem.PrivateIP.IP.IsNull() && !listItem.PrivateIP.IP.IsUnknown() {
+						private_ipDeepMap["ip"] = listItem.PrivateIP.IP.ValueString()
+					}
+					if listItem.PrivateIP.OutsideNetwork != nil {
+						private_ipDeepMap["outside_network"] = map[string]interface{}{}
+					}
+					listItemMap["private_ip"] = private_ipDeepMap
+				}
+				if listItem.PrivateName != nil {
+					private_nameDeepMap := make(map[string]interface{})
+					if !listItem.PrivateName.DNSName.IsNull() && !listItem.PrivateName.DNSName.IsUnknown() {
+						private_nameDeepMap["dns_name"] = listItem.PrivateName.DNSName.ValueString()
+					}
+					if listItem.PrivateName.InsideNetwork != nil {
+						private_nameDeepMap["inside_network"] = map[string]interface{}{}
+					}
+					if listItem.PrivateName.OutsideNetwork != nil {
+						private_nameDeepMap["outside_network"] = map[string]interface{}{}
+					}
+					if !listItem.PrivateName.RefreshInterval.IsNull() && !listItem.PrivateName.RefreshInterval.IsUnknown() {
+						private_nameDeepMap["refresh_interval"] = listItem.PrivateName.RefreshInterval.ValueInt64()
+					}
+					listItemMap["private_name"] = private_nameDeepMap
+				}
+				if listItem.PublicIP != nil {
+					public_ipDeepMap := make(map[string]interface{})
+					if !listItem.PublicIP.IP.IsNull() && !listItem.PublicIP.IP.IsUnknown() {
+						public_ipDeepMap["ip"] = listItem.PublicIP.IP.ValueString()
+					}
+					listItemMap["public_ip"] = public_ipDeepMap
+				}
+				if listItem.PublicName != nil {
+					public_nameDeepMap := make(map[string]interface{})
+					if !listItem.PublicName.DNSName.IsNull() && !listItem.PublicName.DNSName.IsUnknown() {
+						public_nameDeepMap["dns_name"] = listItem.PublicName.DNSName.ValueString()
+					}
+					if !listItem.PublicName.RefreshInterval.IsNull() && !listItem.PublicName.RefreshInterval.IsUnknown() {
+						public_nameDeepMap["refresh_interval"] = listItem.PublicName.RefreshInterval.ValueInt64()
+					}
+					listItemMap["public_name"] = public_nameDeepMap
+				}
+				if listItem.VnPrivateIP != nil {
+					vn_private_ipDeepMap := make(map[string]interface{})
+					if !listItem.VnPrivateIP.IP.IsNull() && !listItem.VnPrivateIP.IP.IsUnknown() {
+						vn_private_ipDeepMap["ip"] = listItem.VnPrivateIP.IP.ValueString()
+					}
+					listItemMap["vn_private_ip"] = vn_private_ipDeepMap
+				}
+				if listItem.VnPrivateName != nil {
+					vn_private_nameDeepMap := make(map[string]interface{})
+					if !listItem.VnPrivateName.DNSName.IsNull() && !listItem.VnPrivateName.DNSName.IsUnknown() {
+						vn_private_nameDeepMap["dns_name"] = listItem.VnPrivateName.DNSName.ValueString()
+					}
+					listItemMap["vn_private_name"] = vn_private_nameDeepMap
+				}
+				origin_serversList = append(origin_serversList, listItemMap)
+			}
+			default_poolMap["origin_servers"] = origin_serversList
 		}
 		if !data.DefaultPool.Port.IsNull() && !data.DefaultPool.Port.IsUnknown() {
 			default_poolMap["port"] = data.DefaultPool.Port.ValueInt64()
@@ -15507,6 +15987,49 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.DefaultPoolList != nil {
 		default_pool_listMap := make(map[string]interface{})
+		if len(data.DefaultPoolList.Pools) > 0 {
+			var poolsList []map[string]interface{}
+			for _, listItem := range data.DefaultPoolList.Pools {
+				listItemMap := make(map[string]interface{})
+				if listItem.Cluster != nil {
+					clusterDeepMap := make(map[string]interface{})
+					if !listItem.Cluster.Name.IsNull() && !listItem.Cluster.Name.IsUnknown() {
+						clusterDeepMap["name"] = listItem.Cluster.Name.ValueString()
+					}
+					if !listItem.Cluster.Namespace.IsNull() && !listItem.Cluster.Namespace.IsUnknown() {
+						clusterDeepMap["namespace"] = listItem.Cluster.Namespace.ValueString()
+					}
+					if !listItem.Cluster.Tenant.IsNull() && !listItem.Cluster.Tenant.IsUnknown() {
+						clusterDeepMap["tenant"] = listItem.Cluster.Tenant.ValueString()
+					}
+					listItemMap["cluster"] = clusterDeepMap
+				}
+				if listItem.EndpointSubsets != nil {
+					listItemMap["endpoint_subsets"] = map[string]interface{}{}
+				}
+				if listItem.Pool != nil {
+					poolDeepMap := make(map[string]interface{})
+					if !listItem.Pool.Name.IsNull() && !listItem.Pool.Name.IsUnknown() {
+						poolDeepMap["name"] = listItem.Pool.Name.ValueString()
+					}
+					if !listItem.Pool.Namespace.IsNull() && !listItem.Pool.Namespace.IsUnknown() {
+						poolDeepMap["namespace"] = listItem.Pool.Namespace.ValueString()
+					}
+					if !listItem.Pool.Tenant.IsNull() && !listItem.Pool.Tenant.IsUnknown() {
+						poolDeepMap["tenant"] = listItem.Pool.Tenant.ValueString()
+					}
+					listItemMap["pool"] = poolDeepMap
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Weight.IsNull() && !listItem.Weight.IsUnknown() {
+					listItemMap["weight"] = listItem.Weight.ValueInt64()
+				}
+				poolsList = append(poolsList, listItemMap)
+			}
+			default_pool_listMap["pools"] = poolsList
+		}
 		apiResource.Spec["default_pool_list"] = default_pool_listMap
 	}
 	if len(data.DefaultRoutePools) > 0 {
@@ -16057,6 +16580,54 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.MalwareProtectionSettings != nil {
 		malware_protection_settingsMap := make(map[string]interface{})
+		if len(data.MalwareProtectionSettings.MalwareProtectionRules) > 0 {
+			var malware_protection_rulesList []map[string]interface{}
+			for _, listItem := range data.MalwareProtectionSettings.MalwareProtectionRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if listItem.Action.Block != nil {
+						actionDeepMap["block"] = map[string]interface{}{}
+					}
+					if listItem.Action.Report != nil {
+						actionDeepMap["report"] = map[string]interface{}{}
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.Domain != nil {
+					domainDeepMap := make(map[string]interface{})
+					if listItem.Domain.AnyDomain != nil {
+						domainDeepMap["any_domain"] = map[string]interface{}{}
+					}
+					listItemMap["domain"] = domainDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Path != nil {
+					pathDeepMap := make(map[string]interface{})
+					if !listItem.Path.Path.IsNull() && !listItem.Path.Path.IsUnknown() {
+						pathDeepMap["path"] = listItem.Path.Path.ValueString()
+					}
+					if !listItem.Path.Prefix.IsNull() && !listItem.Path.Prefix.IsUnknown() {
+						pathDeepMap["prefix"] = listItem.Path.Prefix.ValueString()
+					}
+					if !listItem.Path.Regex.IsNull() && !listItem.Path.Regex.IsUnknown() {
+						pathDeepMap["regex"] = listItem.Path.Regex.ValueString()
+					}
+					listItemMap["path"] = pathDeepMap
+				}
+				malware_protection_rulesList = append(malware_protection_rulesList, listItemMap)
+			}
+			malware_protection_settingsMap["malware_protection_rules"] = malware_protection_rulesList
+		}
 		apiResource.Spec["malware_protection_settings"] = malware_protection_settingsMap
 	}
 	if data.MoreOption != nil {
@@ -16102,6 +16673,147 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		if !data.MoreOption.MaxRequestHeaderSize.IsNull() && !data.MoreOption.MaxRequestHeaderSize.IsUnknown() {
 			more_optionMap["max_request_header_size"] = data.MoreOption.MaxRequestHeaderSize.ValueInt64()
 		}
+		if len(data.MoreOption.RequestCookiesToAdd) > 0 {
+			var request_cookies_to_addList []map[string]interface{}
+			for _, listItem := range data.MoreOption.RequestCookiesToAdd {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Overwrite.IsNull() && !listItem.Overwrite.IsUnknown() {
+					listItemMap["overwrite"] = listItem.Overwrite.ValueBool()
+				}
+				if listItem.SecretValue != nil {
+					secret_valueDeepMap := make(map[string]interface{})
+					listItemMap["secret_value"] = secret_valueDeepMap
+				}
+				if !listItem.Value.IsNull() && !listItem.Value.IsUnknown() {
+					listItemMap["value"] = listItem.Value.ValueString()
+				}
+				request_cookies_to_addList = append(request_cookies_to_addList, listItemMap)
+			}
+			more_optionMap["request_cookies_to_add"] = request_cookies_to_addList
+		}
+		if len(data.MoreOption.RequestHeadersToAdd) > 0 {
+			var request_headers_to_addList []map[string]interface{}
+			for _, listItem := range data.MoreOption.RequestHeadersToAdd {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Append.IsNull() && !listItem.Append.IsUnknown() {
+					listItemMap["append"] = listItem.Append.ValueBool()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.SecretValue != nil {
+					secret_valueDeepMap := make(map[string]interface{})
+					listItemMap["secret_value"] = secret_valueDeepMap
+				}
+				if !listItem.Value.IsNull() && !listItem.Value.IsUnknown() {
+					listItemMap["value"] = listItem.Value.ValueString()
+				}
+				request_headers_to_addList = append(request_headers_to_addList, listItemMap)
+			}
+			more_optionMap["request_headers_to_add"] = request_headers_to_addList
+		}
+		if len(data.MoreOption.ResponseCookiesToAdd) > 0 {
+			var response_cookies_to_addList []map[string]interface{}
+			for _, listItem := range data.MoreOption.ResponseCookiesToAdd {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AddDomain.IsNull() && !listItem.AddDomain.IsUnknown() {
+					listItemMap["add_domain"] = listItem.AddDomain.ValueString()
+				}
+				if !listItem.AddExpiry.IsNull() && !listItem.AddExpiry.IsUnknown() {
+					listItemMap["add_expiry"] = listItem.AddExpiry.ValueString()
+				}
+				if listItem.AddHttponly != nil {
+					listItemMap["add_httponly"] = map[string]interface{}{}
+				}
+				if listItem.AddPartitioned != nil {
+					listItemMap["add_partitioned"] = map[string]interface{}{}
+				}
+				if !listItem.AddPath.IsNull() && !listItem.AddPath.IsUnknown() {
+					listItemMap["add_path"] = listItem.AddPath.ValueString()
+				}
+				if listItem.AddSecure != nil {
+					listItemMap["add_secure"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreDomain != nil {
+					listItemMap["ignore_domain"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreExpiry != nil {
+					listItemMap["ignore_expiry"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreHttponly != nil {
+					listItemMap["ignore_httponly"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreMaxAge != nil {
+					listItemMap["ignore_max_age"] = map[string]interface{}{}
+				}
+				if listItem.IgnorePartitioned != nil {
+					listItemMap["ignore_partitioned"] = map[string]interface{}{}
+				}
+				if listItem.IgnorePath != nil {
+					listItemMap["ignore_path"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreSamesite != nil {
+					listItemMap["ignore_samesite"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreSecure != nil {
+					listItemMap["ignore_secure"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreValue != nil {
+					listItemMap["ignore_value"] = map[string]interface{}{}
+				}
+				if !listItem.MaxAgeValue.IsNull() && !listItem.MaxAgeValue.IsUnknown() {
+					listItemMap["max_age_value"] = listItem.MaxAgeValue.ValueInt64()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Overwrite.IsNull() && !listItem.Overwrite.IsUnknown() {
+					listItemMap["overwrite"] = listItem.Overwrite.ValueBool()
+				}
+				if listItem.SamesiteLax != nil {
+					listItemMap["samesite_lax"] = map[string]interface{}{}
+				}
+				if listItem.SamesiteNone != nil {
+					listItemMap["samesite_none"] = map[string]interface{}{}
+				}
+				if listItem.SamesiteStrict != nil {
+					listItemMap["samesite_strict"] = map[string]interface{}{}
+				}
+				if listItem.SecretValue != nil {
+					secret_valueDeepMap := make(map[string]interface{})
+					listItemMap["secret_value"] = secret_valueDeepMap
+				}
+				if !listItem.Value.IsNull() && !listItem.Value.IsUnknown() {
+					listItemMap["value"] = listItem.Value.ValueString()
+				}
+				response_cookies_to_addList = append(response_cookies_to_addList, listItemMap)
+			}
+			more_optionMap["response_cookies_to_add"] = response_cookies_to_addList
+		}
+		if len(data.MoreOption.ResponseHeadersToAdd) > 0 {
+			var response_headers_to_addList []map[string]interface{}
+			for _, listItem := range data.MoreOption.ResponseHeadersToAdd {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Append.IsNull() && !listItem.Append.IsUnknown() {
+					listItemMap["append"] = listItem.Append.ValueBool()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.SecretValue != nil {
+					secret_valueDeepMap := make(map[string]interface{})
+					listItemMap["secret_value"] = secret_valueDeepMap
+				}
+				if !listItem.Value.IsNull() && !listItem.Value.IsUnknown() {
+					listItemMap["value"] = listItem.Value.ValueString()
+				}
+				response_headers_to_addList = append(response_headers_to_addList, listItemMap)
+			}
+			more_optionMap["response_headers_to_add"] = response_headers_to_addList
+		}
 		apiResource.Spec["more_option"] = more_optionMap
 	}
 	if data.MultiLbApp != nil {
@@ -16118,6 +16830,62 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.OriginServerSubsetRuleList != nil {
 		origin_server_subset_rule_listMap := make(map[string]interface{})
+		if len(data.OriginServerSubsetRuleList.OriginServerSubsetRules) > 0 {
+			var origin_server_subset_rulesList []map[string]interface{}
+			for _, listItem := range data.OriginServerSubsetRuleList.OriginServerSubsetRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AnyAsn != nil {
+					listItemMap["any_asn"] = map[string]interface{}{}
+				}
+				if listItem.AnyIP != nil {
+					listItemMap["any_ip"] = map[string]interface{}{}
+				}
+				if listItem.AsnList != nil {
+					asn_listDeepMap := make(map[string]interface{})
+					listItemMap["asn_list"] = asn_listDeepMap
+				}
+				if listItem.AsnMatcher != nil {
+					asn_matcherDeepMap := make(map[string]interface{})
+					listItemMap["asn_matcher"] = asn_matcherDeepMap
+				}
+				if listItem.ClientSelector != nil {
+					client_selectorDeepMap := make(map[string]interface{})
+					listItemMap["client_selector"] = client_selectorDeepMap
+				}
+				if listItem.IPMatcher != nil {
+					ip_matcherDeepMap := make(map[string]interface{})
+					if !listItem.IPMatcher.InvertMatcher.IsNull() && !listItem.IPMatcher.InvertMatcher.IsUnknown() {
+						ip_matcherDeepMap["invert_matcher"] = listItem.IPMatcher.InvertMatcher.ValueBool()
+					}
+					listItemMap["ip_matcher"] = ip_matcherDeepMap
+				}
+				if listItem.IPPrefixList != nil {
+					ip_prefix_listDeepMap := make(map[string]interface{})
+					if !listItem.IPPrefixList.InvertMatch.IsNull() && !listItem.IPPrefixList.InvertMatch.IsUnknown() {
+						ip_prefix_listDeepMap["invert_match"] = listItem.IPPrefixList.InvertMatch.ValueBool()
+					}
+					listItemMap["ip_prefix_list"] = ip_prefix_listDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.None != nil {
+					listItemMap["none"] = map[string]interface{}{}
+				}
+				if listItem.OriginServerSubsetsAction != nil {
+					listItemMap["origin_server_subsets_action"] = map[string]interface{}{}
+				}
+				origin_server_subset_rulesList = append(origin_server_subset_rulesList, listItemMap)
+			}
+			origin_server_subset_rule_listMap["origin_server_subset_rules"] = origin_server_subset_rulesList
+		}
 		apiResource.Spec["origin_server_subset_rule_list"] = origin_server_subset_rule_listMap
 	}
 	if data.PolicyBasedChallenge != nil {
@@ -16283,6 +17051,60 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.RingHash != nil {
 		ring_hashMap := make(map[string]interface{})
+		if len(data.RingHash.HashPolicy) > 0 {
+			var hash_policyList []map[string]interface{}
+			for _, listItem := range data.RingHash.HashPolicy {
+				listItemMap := make(map[string]interface{})
+				if listItem.Cookie != nil {
+					cookieDeepMap := make(map[string]interface{})
+					if listItem.Cookie.AddHttponly != nil {
+						cookieDeepMap["add_httponly"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.AddSecure != nil {
+						cookieDeepMap["add_secure"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.IgnoreHttponly != nil {
+						cookieDeepMap["ignore_httponly"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.IgnoreSamesite != nil {
+						cookieDeepMap["ignore_samesite"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.IgnoreSecure != nil {
+						cookieDeepMap["ignore_secure"] = map[string]interface{}{}
+					}
+					if !listItem.Cookie.Name.IsNull() && !listItem.Cookie.Name.IsUnknown() {
+						cookieDeepMap["name"] = listItem.Cookie.Name.ValueString()
+					}
+					if !listItem.Cookie.Path.IsNull() && !listItem.Cookie.Path.IsUnknown() {
+						cookieDeepMap["path"] = listItem.Cookie.Path.ValueString()
+					}
+					if listItem.Cookie.SamesiteLax != nil {
+						cookieDeepMap["samesite_lax"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.SamesiteNone != nil {
+						cookieDeepMap["samesite_none"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.SamesiteStrict != nil {
+						cookieDeepMap["samesite_strict"] = map[string]interface{}{}
+					}
+					if !listItem.Cookie.Ttl.IsNull() && !listItem.Cookie.Ttl.IsUnknown() {
+						cookieDeepMap["ttl"] = listItem.Cookie.Ttl.ValueInt64()
+					}
+					listItemMap["cookie"] = cookieDeepMap
+				}
+				if !listItem.HeaderName.IsNull() && !listItem.HeaderName.IsUnknown() {
+					listItemMap["header_name"] = listItem.HeaderName.ValueString()
+				}
+				if !listItem.SourceIP.IsNull() && !listItem.SourceIP.IsUnknown() {
+					listItemMap["source_ip"] = listItem.SourceIP.ValueBool()
+				}
+				if !listItem.Terminal.IsNull() && !listItem.Terminal.IsUnknown() {
+					listItemMap["terminal"] = listItem.Terminal.ValueBool()
+				}
+				hash_policyList = append(hash_policyList, listItemMap)
+			}
+			ring_hashMap["hash_policy"] = hash_policyList
+		}
 		apiResource.Spec["ring_hash"] = ring_hashMap
 	}
 	if data.RoundRobin != nil {
@@ -16327,6 +17149,31 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if data.SensitiveDataDisclosureRules != nil {
 		sensitive_data_disclosure_rulesMap := make(map[string]interface{})
+		if len(data.SensitiveDataDisclosureRules.SensitiveDataTypesInResponse) > 0 {
+			var sensitive_data_types_in_responseList []map[string]interface{}
+			for _, listItem := range data.SensitiveDataDisclosureRules.SensitiveDataTypesInResponse {
+				listItemMap := make(map[string]interface{})
+				if listItem.APIEndpoint != nil {
+					api_endpointDeepMap := make(map[string]interface{})
+					if !listItem.APIEndpoint.Path.IsNull() && !listItem.APIEndpoint.Path.IsUnknown() {
+						api_endpointDeepMap["path"] = listItem.APIEndpoint.Path.ValueString()
+					}
+					listItemMap["api_endpoint"] = api_endpointDeepMap
+				}
+				if listItem.Body != nil {
+					bodyDeepMap := make(map[string]interface{})
+					listItemMap["body"] = bodyDeepMap
+				}
+				if listItem.Mask != nil {
+					listItemMap["mask"] = map[string]interface{}{}
+				}
+				if listItem.Report != nil {
+					listItemMap["report"] = map[string]interface{}{}
+				}
+				sensitive_data_types_in_responseList = append(sensitive_data_types_in_responseList, listItemMap)
+			}
+			sensitive_data_disclosure_rulesMap["sensitive_data_types_in_response"] = sensitive_data_types_in_responseList
+		}
 		apiResource.Spec["sensitive_data_disclosure_rules"] = sensitive_data_disclosure_rulesMap
 	}
 	if data.SensitiveDataPolicy != nil {
@@ -16586,16 +17433,172 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && isImport && data.ActiveServicePolicies == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ActiveServicePolicies = &HTTPLoadBalancerActiveServicePoliciesModel{}
+	if blockData, ok := apiResource.Spec["active_service_policies"].(map[string]interface{}); ok && (isImport || data.ActiveServicePolicies != nil) {
+		data.ActiveServicePolicies = &HTTPLoadBalancerActiveServicePoliciesModel{
+			Policies: func() []HTTPLoadBalancerActiveServicePoliciesPoliciesModel {
+				if listData, ok := blockData["policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerActiveServicePoliciesPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerActiveServicePoliciesPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["advertise_custom"].(map[string]interface{}); ok && isImport && data.AdvertiseCustom == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseCustom = &HTTPLoadBalancerAdvertiseCustomModel{}
+	if blockData, ok := apiResource.Spec["advertise_custom"].(map[string]interface{}); ok && (isImport || data.AdvertiseCustom != nil) {
+		data.AdvertiseCustom = &HTTPLoadBalancerAdvertiseCustomModel{
+			AdvertiseWhere: func() []HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel {
+				if listData, ok := blockData["advertise_where"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel{
+								AdvertiseOnPublic: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel {
+									if _, ok := itemMap["advertise_on_public"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel{
+										}
+									}
+									return nil
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								PortRanges: func() types.String {
+									if v, ok := itemMap["port_ranges"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Site: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel {
+									if deepMap, ok := itemMap["site"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								UseDefaultPort: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["use_default_port"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								VirtualNetwork: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
+									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
+											DefaultV6Vip: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											DefaultVip: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											SpecificV6Vip: func() types.String {
+												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SpecificVip: func() types.String {
+												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSite: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel {
+									if deepMap, ok := itemMap["virtual_site"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel{
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSiteWithVip: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Vk8sService: func() *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel {
+									if _, ok := itemMap["vk8s_service"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["advertise_on_public"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublic == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AdvertiseOnPublic = &HTTPLoadBalancerAdvertiseOnPublicModel{}
@@ -16606,16 +17609,456 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.AdvertiseOnPublicDefaultVip = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["api_protection_rules"].(map[string]interface{}); ok && isImport && data.APIProtectionRules == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.APIProtectionRules = &HTTPLoadBalancerAPIProtectionRulesModel{}
+	if blockData, ok := apiResource.Spec["api_protection_rules"].(map[string]interface{}); ok && (isImport || data.APIProtectionRules != nil) {
+		data.APIProtectionRules = &HTTPLoadBalancerAPIProtectionRulesModel{
+			APIEndpointRules: func() []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel {
+				if listData, ok := blockData["api_endpoint_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel{
+								Action: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModel{
+											Allow: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["allow"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Deny: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["deny"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIEndpointMethod: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModel {
+									if deepMap, ok := itemMap["api_endpoint_method"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								APIEndpointPath: func() types.String {
+									if v, ok := itemMap["api_endpoint_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModel{
+											AnyClient: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			APIGroupsRules: func() []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel {
+				if listData, ok := blockData["api_groups_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel{
+								Action: func() *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModel{
+											Allow: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["allow"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Deny: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["deny"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIGroup: func() types.String {
+									if v, ok := itemMap["api_group"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								BasePath: func() types.String {
+									if v, ok := itemMap["base_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModel{
+											AnyClient: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["api_rate_limit"].(map[string]interface{}); ok && isImport && data.APIRateLimit == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.APIRateLimit = &HTTPLoadBalancerAPIRateLimitModel{}
+	if blockData, ok := apiResource.Spec["api_rate_limit"].(map[string]interface{}); ok && (isImport || data.APIRateLimit != nil) {
+		data.APIRateLimit = &HTTPLoadBalancerAPIRateLimitModel{
+			APIEndpointRules: func() []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModel {
+				if listData, ok := blockData["api_endpoint_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModel{
+								AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIEndpointMethod: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel {
+									if deepMap, ok := itemMap["api_endpoint_method"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								APIEndpointPath: func() types.String {
+									if v, ok := itemMap["api_endpoint_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel{
+											AnyClient: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InlineRateLimiter: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel {
+									if deepMap, ok := itemMap["inline_rate_limiter"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel{
+											Threshold: func() types.Int64 {
+												if v, ok := deepMap["threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Unit: func() types.String {
+												if v, ok := deepMap["unit"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RefRateLimiter: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel {
+									if deepMap, ok := itemMap["ref_rate_limiter"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			ServerURLRules: func() []HTTPLoadBalancerAPIRateLimitServerURLRulesModel {
+				if listData, ok := blockData["server_url_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPIRateLimitServerURLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPIRateLimitServerURLRulesModel{
+								AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								APIGroup: func() types.String {
+									if v, ok := itemMap["api_group"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								BasePath: func() types.String {
+									if v, ok := itemMap["base_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ClientMatcher: func() *HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel {
+									if deepMap, ok := itemMap["client_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel{
+											AnyClient: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_client"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AnyIP: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_ip"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InlineRateLimiter: func() *HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel {
+									if deepMap, ok := itemMap["inline_rate_limiter"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel{
+											Threshold: func() types.Int64 {
+												if v, ok := deepMap["threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Unit: func() types.String {
+												if v, ok := deepMap["unit"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											UseHTTPLbUserID: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["use_http_lb_user_id"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RefRateLimiter: func() *HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel {
+									if deepMap, ok := itemMap["ref_rate_limiter"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								RequestMatcher: func() *HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel {
+									if _, ok := itemMap["request_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								SpecificDomain: func() types.String {
+									if v, ok := itemMap["specific_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["api_specification"].(map[string]interface{}); ok && isImport && data.APISpecification == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.APISpecification = &HTTPLoadBalancerAPISpecificationModel{}
@@ -16628,6 +18071,31 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			Domains: func() []HTTPLoadBalancerAPITestingDomainsModel {
+				if listData, ok := blockData["domains"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerAPITestingDomainsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerAPITestingDomainsModel{
+								AllowDestructiveMethods: func() types.Bool {
+									if v, ok := itemMap["allow_destructive_methods"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Domain: func() types.String {
+									if v, ok := itemMap["domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 		}
 	}
@@ -16658,6 +18126,19 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		for _, item := range listData {
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				blocked_clientsList = append(blocked_clientsList, HTTPLoadBalancerBlockedClientsModel{
+					Actions: func() types.List {
+						if v, ok := itemMap["actions"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
 					AsNumber: func() types.Int64 {
 						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
@@ -16831,6 +18312,32 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.StringNull()
 			}(),
+			AllowOrigin: func() types.List {
+				if v, ok := blockData["allow_origin"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowOriginRegex: func() types.List {
+				if v, ok := blockData["allow_origin_regex"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CorsPolicy != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
@@ -16957,8 +18464,21 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					DdosClientSource: func() *HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel {
-						if _, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["ddos_client_source"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerDdosMitigationRulesDdosClientSourceModel{
+								CountryList: func() types.List {
+									if v, ok := nestedMap["country_list"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -16977,6 +18497,19 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 										return types.BoolValue(v)
 									}
 									return types.BoolNull()
+								}(),
+								IPPrefixes: func() types.List {
+									if v, ok := nestedMap["ip_prefixes"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
 								}(),
 							}
 						}
@@ -17020,11 +18553,257 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.Int64Null()
 			}(),
+			Healthcheck: func() []HTTPLoadBalancerDefaultPoolHealthcheckModel {
+				if listData, ok := blockData["healthcheck"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerDefaultPoolHealthcheckModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerDefaultPoolHealthcheckModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 			LoadBalancerAlgorithm: func() types.String {
 				if v, ok := blockData["loadbalancer_algorithm"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			OriginServers: func() []HTTPLoadBalancerDefaultPoolOriginServersModel {
+				if listData, ok := blockData["origin_servers"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerDefaultPoolOriginServersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerDefaultPoolOriginServersModel{
+								CbipService: func() *HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModel {
+									if deepMap, ok := itemMap["cbip_service"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModel{
+											ServiceName: func() types.String {
+												if v, ok := deepMap["service_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ConsulService: func() *HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModel {
+									if deepMap, ok := itemMap["consul_service"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModel{
+											InsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["inside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											OutsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["outside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											ServiceName: func() types.String {
+												if v, ok := deepMap["service_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								CustomEndpointObject: func() *HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModel {
+									if _, ok := itemMap["custom_endpoint_object"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModel{
+										}
+									}
+									return nil
+								}(),
+								K8SService: func() *HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModel {
+									if deepMap, ok := itemMap["k8s_service"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModel{
+											InsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["inside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											OutsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["outside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Protocol: func() types.String {
+												if v, ok := deepMap["protocol"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											ServiceName: func() types.String {
+												if v, ok := deepMap["service_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Vk8sNetworks: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["vk8s_networks"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Labels: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["labels"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								PrivateIP: func() *HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModel {
+									if deepMap, ok := itemMap["private_ip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModel{
+											InsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["inside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											OutsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["outside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PrivateName: func() *HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModel {
+									if deepMap, ok := itemMap["private_name"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModel{
+											DNSName: func() types.String {
+												if v, ok := deepMap["dns_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											InsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["inside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											OutsideNetwork: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["outside_network"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											RefreshInterval: func() types.Int64 {
+												if v, ok := deepMap["refresh_interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PublicIP: func() *HTTPLoadBalancerDefaultPoolOriginServersPublicIPModel {
+									if deepMap, ok := itemMap["public_ip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersPublicIPModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PublicName: func() *HTTPLoadBalancerDefaultPoolOriginServersPublicNameModel {
+									if deepMap, ok := itemMap["public_name"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersPublicNameModel{
+											DNSName: func() types.String {
+												if v, ok := deepMap["dns_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											RefreshInterval: func() types.Int64 {
+												if v, ok := deepMap["refresh_interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VnPrivateIP: func() *HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModel {
+									if deepMap, ok := itemMap["vn_private_ip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VnPrivateName: func() *HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModel {
+									if deepMap, ok := itemMap["vn_private_name"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModel{
+											DNSName: func() types.String {
+												if v, ok := deepMap["dns_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 			Port: func() types.Int64 {
 				if v, ok := blockData["port"].(float64); ok {
@@ -17034,11 +18813,91 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["default_pool_list"].(map[string]interface{}); ok && isImport && data.DefaultPoolList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.DefaultPoolList = &HTTPLoadBalancerDefaultPoolListModel{}
+	if blockData, ok := apiResource.Spec["default_pool_list"].(map[string]interface{}); ok && (isImport || data.DefaultPoolList != nil) {
+		data.DefaultPoolList = &HTTPLoadBalancerDefaultPoolListModel{
+			Pools: func() []HTTPLoadBalancerDefaultPoolListPoolsModel {
+				if listData, ok := blockData["pools"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerDefaultPoolListPoolsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerDefaultPoolListPoolsModel{
+								Cluster: func() *HTTPLoadBalancerDefaultPoolListPoolsClusterModel {
+									if deepMap, ok := itemMap["cluster"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolListPoolsClusterModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								EndpointSubsets: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["endpoint_subsets"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								Pool: func() *HTTPLoadBalancerDefaultPoolListPoolsPoolModel {
+									if deepMap, ok := itemMap["pool"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerDefaultPoolListPoolsPoolModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Weight: func() types.Int64 {
+									if v, ok := itemMap["weight"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["default_route_pools"].([]interface{}); ok && len(listData) > 0 {
 		var default_route_poolsList []HTTPLoadBalancerDefaultRoutePoolsModel
 		for _, item := range listData {
@@ -17217,11 +19076,23 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.EnableChallenge = &HTTPLoadBalancerEnableChallengeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_ip_reputation"].(map[string]interface{}); ok && isImport && data.EnableIPReputation == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.EnableIPReputation = &HTTPLoadBalancerEnableIPReputationModel{}
+	if blockData, ok := apiResource.Spec["enable_ip_reputation"].(map[string]interface{}); ok && (isImport || data.EnableIPReputation != nil) {
+		data.EnableIPReputation = &HTTPLoadBalancerEnableIPReputationModel{
+			IPThreatCategories: func() types.List {
+				if v, ok := blockData["ip_threat_categories"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["enable_malicious_user_detection"].(map[string]interface{}); ok && isImport && data.EnableMaliciousUserDetection == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.EnableMaliciousUserDetection = &HTTPLoadBalancerEmptyModel{}
@@ -17232,11 +19103,23 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.EnableThreatMesh = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["enable_trust_client_ip_headers"].(map[string]interface{}); ok && isImport && data.EnableTrustClientIPHeaders == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.EnableTrustClientIPHeaders = &HTTPLoadBalancerEnableTrustClientIPHeadersModel{}
+	if blockData, ok := apiResource.Spec["enable_trust_client_ip_headers"].(map[string]interface{}); ok && (isImport || data.EnableTrustClientIPHeaders != nil) {
+		data.EnableTrustClientIPHeaders = &HTTPLoadBalancerEnableTrustClientIPHeadersModel{
+			ClientIPHeaders: func() types.List {
+				if v, ok := blockData["client_ip_headers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["graphql_rules"].([]interface{}); ok && len(listData) > 0 {
 		var graphql_rulesList []HTTPLoadBalancerGraphqlRulesModel
 		for _, item := range listData {
@@ -17540,11 +19423,99 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.LeastActive = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["malware_protection_settings"].(map[string]interface{}); ok && isImport && data.MalwareProtectionSettings == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.MalwareProtectionSettings = &HTTPLoadBalancerMalwareProtectionSettingsModel{}
+	if blockData, ok := apiResource.Spec["malware_protection_settings"].(map[string]interface{}); ok && (isImport || data.MalwareProtectionSettings != nil) {
+		data.MalwareProtectionSettings = &HTTPLoadBalancerMalwareProtectionSettingsModel{
+			MalwareProtectionRules: func() []HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel {
+				if listData, ok := blockData["malware_protection_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel{
+								Action: func() *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModel{
+											Block: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["block"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Report: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["report"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Domain: func() *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModel {
+									if deepMap, ok := itemMap["domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModel{
+											AnyDomain: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["any_domain"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Path: func() *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModel {
+									if deepMap, ok := itemMap["path"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Prefix: func() types.String {
+												if v, ok := deepMap["prefix"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Regex: func() types.String {
+												if v, ok := deepMap["regex"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["more_option"].(map[string]interface{}); ok && (isImport || data.MoreOption != nil) {
 		data.MoreOption = &HTTPLoadBalancerMoreOptionModel{
 			DisableDefaultErrorPages: func() types.Bool {
@@ -17570,6 +19541,324 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.Int64Null()
 			}(),
+			RequestCookiesToAdd: func() []HTTPLoadBalancerMoreOptionRequestCookiesToAddModel {
+				if listData, ok := blockData["request_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMoreOptionRequestCookiesToAddModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMoreOptionRequestCookiesToAddModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Overwrite: func() types.Bool {
+									if v, ok := itemMap["overwrite"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								SecretValue: func() *HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModel {
+									if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModel{
+										}
+									}
+									return nil
+								}(),
+								Value: func() types.String {
+									if v, ok := itemMap["value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			RequestCookiesToRemove: func() types.List {
+				if v, ok := blockData["request_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RequestHeadersToAdd: func() []HTTPLoadBalancerMoreOptionRequestHeadersToAddModel {
+				if listData, ok := blockData["request_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMoreOptionRequestHeadersToAddModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMoreOptionRequestHeadersToAddModel{
+								Append: func() types.Bool {
+									if v, ok := itemMap["append"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SecretValue: func() *HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModel {
+									if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModel{
+										}
+									}
+									return nil
+								}(),
+								Value: func() types.String {
+									if v, ok := itemMap["value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			RequestHeadersToRemove: func() types.List {
+				if v, ok := blockData["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			ResponseCookiesToAdd: func() []HTTPLoadBalancerMoreOptionResponseCookiesToAddModel {
+				if listData, ok := blockData["response_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMoreOptionResponseCookiesToAddModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMoreOptionResponseCookiesToAddModel{
+								AddDomain: func() types.String {
+									if v, ok := itemMap["add_domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AddExpiry: func() types.String {
+									if v, ok := itemMap["add_expiry"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AddHttponly: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["add_httponly"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								AddPartitioned: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["add_partitioned"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								AddPath: func() types.String {
+									if v, ok := itemMap["add_path"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								AddSecure: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["add_secure"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreDomain: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_domain"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreExpiry: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_expiry"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_httponly"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreMaxAge: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_max_age"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnorePartitioned: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_partitioned"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnorePath: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_path"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_samesite"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_secure"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								IgnoreValue: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["ignore_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								MaxAgeValue: func() types.Int64 {
+									if v, ok := itemMap["max_age_value"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Overwrite: func() types.Bool {
+									if v, ok := itemMap["overwrite"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["samesite_lax"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["samesite_none"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["samesite_strict"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								SecretValue: func() *HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModel {
+									if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModel{
+										}
+									}
+									return nil
+								}(),
+								Value: func() types.String {
+									if v, ok := itemMap["value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			ResponseCookiesToRemove: func() types.List {
+				if v, ok := blockData["response_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			ResponseHeadersToAdd: func() []HTTPLoadBalancerMoreOptionResponseHeadersToAddModel {
+				if listData, ok := blockData["response_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerMoreOptionResponseHeadersToAddModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerMoreOptionResponseHeadersToAddModel{
+								Append: func() types.Bool {
+									if v, ok := itemMap["append"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SecretValue: func() *HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModel {
+									if _, ok := itemMap["secret_value"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModel{
+										}
+									}
+									return nil
+								}(),
+								Value: func() types.String {
+									if v, ok := itemMap["value"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			ResponseHeadersToRemove: func() types.List {
+				if v, ok := blockData["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
 	if _, ok := apiResource.Spec["multi_lb_app"].(map[string]interface{}); ok && isImport && data.MultiLbApp == nil {
@@ -17587,11 +19876,113 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.NoServicePolicies = &HTTPLoadBalancerEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["origin_server_subset_rule_list"].(map[string]interface{}); ok && isImport && data.OriginServerSubsetRuleList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.OriginServerSubsetRuleList = &HTTPLoadBalancerOriginServerSubsetRuleListModel{}
+	if blockData, ok := apiResource.Spec["origin_server_subset_rule_list"].(map[string]interface{}); ok && (isImport || data.OriginServerSubsetRuleList != nil) {
+		data.OriginServerSubsetRuleList = &HTTPLoadBalancerOriginServerSubsetRuleListModel{
+			OriginServerSubsetRules: func() []HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel {
+				if listData, ok := blockData["origin_server_subset_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel{
+								AnyAsn: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_asn"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								AnyIP: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["any_ip"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								AsnList: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModel {
+									if _, ok := itemMap["asn_list"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModel{
+										}
+									}
+									return nil
+								}(),
+								AsnMatcher: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModel {
+									if _, ok := itemMap["asn_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								ClientSelector: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModel {
+									if _, ok := itemMap["client_selector"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModel{
+										}
+									}
+									return nil
+								}(),
+								IPMatcher: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModel {
+									if deepMap, ok := itemMap["ip_matcher"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixList: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModel {
+									if deepMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModel{
+											InvertMatch: func() types.Bool {
+												if v, ok := deepMap["invert_match"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								None: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["none"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								OriginServerSubsetsAction: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["origin_server_subsets_action"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["policy_based_challenge"].(map[string]interface{}); ok && isImport && data.PolicyBasedChallenge == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.PolicyBasedChallenge = &HTTPLoadBalancerPolicyBasedChallengeModel{}
@@ -17695,11 +20086,114 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.RateLimit = &HTTPLoadBalancerRateLimitModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["ring_hash"].(map[string]interface{}); ok && isImport && data.RingHash == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.RingHash = &HTTPLoadBalancerRingHashModel{}
+	if blockData, ok := apiResource.Spec["ring_hash"].(map[string]interface{}); ok && (isImport || data.RingHash != nil) {
+		data.RingHash = &HTTPLoadBalancerRingHashModel{
+			HashPolicy: func() []HTTPLoadBalancerRingHashHashPolicyModel {
+				if listData, ok := blockData["hash_policy"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerRingHashHashPolicyModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerRingHashHashPolicyModel{
+								Cookie: func() *HTTPLoadBalancerRingHashHashPolicyCookieModel {
+									if deepMap, ok := itemMap["cookie"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerRingHashHashPolicyCookieModel{
+											AddHttponly: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["add_httponly"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											AddSecure: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["add_secure"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["ignore_httponly"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["ignore_samesite"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["ignore_secure"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["samesite_lax"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["samesite_none"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
+												if _, ok := deepMap["samesite_strict"].(map[string]interface{}); ok {
+													return &HTTPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											Ttl: func() types.Int64 {
+												if v, ok := deepMap["ttl"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HeaderName: func() types.String {
+									if v, ok := itemMap["header_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SourceIP: func() types.Bool {
+									if v, ok := itemMap["source_ip"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Terminal: func() types.Bool {
+									if v, ok := itemMap["terminal"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["round_robin"].(map[string]interface{}); ok && isImport && data.RoundRobin == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.RoundRobin = &HTTPLoadBalancerEmptyModel{}
@@ -17767,11 +20261,55 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		}
 		data.Routes = routesList
 	}
-	if _, ok := apiResource.Spec["sensitive_data_disclosure_rules"].(map[string]interface{}); ok && isImport && data.SensitiveDataDisclosureRules == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.SensitiveDataDisclosureRules = &HTTPLoadBalancerSensitiveDataDisclosureRulesModel{}
+	if blockData, ok := apiResource.Spec["sensitive_data_disclosure_rules"].(map[string]interface{}); ok && (isImport || data.SensitiveDataDisclosureRules != nil) {
+		data.SensitiveDataDisclosureRules = &HTTPLoadBalancerSensitiveDataDisclosureRulesModel{
+			SensitiveDataTypesInResponse: func() []HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel {
+				if listData, ok := blockData["sensitive_data_types_in_response"].([]interface{}); ok && len(listData) > 0 {
+					var result []HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel{
+								APIEndpoint: func() *HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModel {
+									if deepMap, ok := itemMap["api_endpoint"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Body: func() *HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBodyModel {
+									if _, ok := itemMap["body"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBodyModel{
+										}
+									}
+									return nil
+								}(),
+								Mask: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["mask"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								Report: func() *HTTPLoadBalancerEmptyModel {
+									if _, ok := itemMap["report"].(map[string]interface{}); ok {
+										return &HTTPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.SensitiveDataPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.SensitiveDataPolicy = &HTTPLoadBalancerSensitiveDataPolicyModel{}
@@ -17818,6 +20356,19 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		for _, item := range listData {
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				trusted_clientsList = append(trusted_clientsList, HTTPLoadBalancerTrustedClientsModel{
+					Actions: func() types.List {
+						if v, ok := itemMap["actions"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
 					AsNumber: func() types.Int64 {
 						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
@@ -18003,10 +20554,95 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	// Marshal spec fields from Terraform state to API struct
 	if data.ActiveServicePolicies != nil {
 		active_service_policiesMap := make(map[string]interface{})
+		if len(data.ActiveServicePolicies.Policies) > 0 {
+			var policiesList []map[string]interface{}
+			for _, listItem := range data.ActiveServicePolicies.Policies {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				policiesList = append(policiesList, listItemMap)
+			}
+			active_service_policiesMap["policies"] = policiesList
+		}
 		apiResource.Spec["active_service_policies"] = active_service_policiesMap
 	}
 	if data.AdvertiseCustom != nil {
 		advertise_customMap := make(map[string]interface{})
+		if len(data.AdvertiseCustom.AdvertiseWhere) > 0 {
+			var advertise_whereList []map[string]interface{}
+			for _, listItem := range data.AdvertiseCustom.AdvertiseWhere {
+				listItemMap := make(map[string]interface{})
+				if listItem.AdvertiseOnPublic != nil {
+					advertise_on_publicDeepMap := make(map[string]interface{})
+					listItemMap["advertise_on_public"] = advertise_on_publicDeepMap
+				}
+				if !listItem.Port.IsNull() && !listItem.Port.IsUnknown() {
+					listItemMap["port"] = listItem.Port.ValueInt64()
+				}
+				if !listItem.PortRanges.IsNull() && !listItem.PortRanges.IsUnknown() {
+					listItemMap["port_ranges"] = listItem.PortRanges.ValueString()
+				}
+				if listItem.Site != nil {
+					siteDeepMap := make(map[string]interface{})
+					if !listItem.Site.IP.IsNull() && !listItem.Site.IP.IsUnknown() {
+						siteDeepMap["ip"] = listItem.Site.IP.ValueString()
+					}
+					if !listItem.Site.Network.IsNull() && !listItem.Site.Network.IsUnknown() {
+						siteDeepMap["network"] = listItem.Site.Network.ValueString()
+					}
+					listItemMap["site"] = siteDeepMap
+				}
+				if listItem.UseDefaultPort != nil {
+					listItemMap["use_default_port"] = map[string]interface{}{}
+				}
+				if listItem.VirtualNetwork != nil {
+					virtual_networkDeepMap := make(map[string]interface{})
+					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
+					}
+					if listItem.VirtualNetwork.DefaultVip != nil {
+						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
+					}
+					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					}
+					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					}
+					listItemMap["virtual_network"] = virtual_networkDeepMap
+				}
+				if listItem.VirtualSite != nil {
+					virtual_siteDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSite.Network.IsNull() && !listItem.VirtualSite.Network.IsUnknown() {
+						virtual_siteDeepMap["network"] = listItem.VirtualSite.Network.ValueString()
+					}
+					listItemMap["virtual_site"] = virtual_siteDeepMap
+				}
+				if listItem.VirtualSiteWithVip != nil {
+					virtual_site_with_vipDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					}
+					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					}
+					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
+				}
+				if listItem.Vk8sService != nil {
+					vk8s_serviceDeepMap := make(map[string]interface{})
+					listItemMap["vk8s_service"] = vk8s_serviceDeepMap
+				}
+				advertise_whereList = append(advertise_whereList, listItemMap)
+			}
+			advertise_customMap["advertise_where"] = advertise_whereList
+		}
 		apiResource.Spec["advertise_custom"] = advertise_customMap
 	}
 	if data.AdvertiseOnPublic != nil {
@@ -18032,10 +20668,186 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.APIProtectionRules != nil {
 		api_protection_rulesMap := make(map[string]interface{})
+		if len(data.APIProtectionRules.APIEndpointRules) > 0 {
+			var api_endpoint_rulesList []map[string]interface{}
+			for _, listItem := range data.APIProtectionRules.APIEndpointRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if listItem.Action.Allow != nil {
+						actionDeepMap["allow"] = map[string]interface{}{}
+					}
+					if listItem.Action.Deny != nil {
+						actionDeepMap["deny"] = map[string]interface{}{}
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.AnyDomain != nil {
+					listItemMap["any_domain"] = map[string]interface{}{}
+				}
+				if listItem.APIEndpointMethod != nil {
+					api_endpoint_methodDeepMap := make(map[string]interface{})
+					if !listItem.APIEndpointMethod.InvertMatcher.IsNull() && !listItem.APIEndpointMethod.InvertMatcher.IsUnknown() {
+						api_endpoint_methodDeepMap["invert_matcher"] = listItem.APIEndpointMethod.InvertMatcher.ValueBool()
+					}
+					listItemMap["api_endpoint_method"] = api_endpoint_methodDeepMap
+				}
+				if !listItem.APIEndpointPath.IsNull() && !listItem.APIEndpointPath.IsUnknown() {
+					listItemMap["api_endpoint_path"] = listItem.APIEndpointPath.ValueString()
+				}
+				if listItem.ClientMatcher != nil {
+					client_matcherDeepMap := make(map[string]interface{})
+					if listItem.ClientMatcher.AnyClient != nil {
+						client_matcherDeepMap["any_client"] = map[string]interface{}{}
+					}
+					if listItem.ClientMatcher.AnyIP != nil {
+						client_matcherDeepMap["any_ip"] = map[string]interface{}{}
+					}
+					listItemMap["client_matcher"] = client_matcherDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.RequestMatcher != nil {
+					request_matcherDeepMap := make(map[string]interface{})
+					listItemMap["request_matcher"] = request_matcherDeepMap
+				}
+				if !listItem.SpecificDomain.IsNull() && !listItem.SpecificDomain.IsUnknown() {
+					listItemMap["specific_domain"] = listItem.SpecificDomain.ValueString()
+				}
+				api_endpoint_rulesList = append(api_endpoint_rulesList, listItemMap)
+			}
+			api_protection_rulesMap["api_endpoint_rules"] = api_endpoint_rulesList
+		}
+		if len(data.APIProtectionRules.APIGroupsRules) > 0 {
+			var api_groups_rulesList []map[string]interface{}
+			for _, listItem := range data.APIProtectionRules.APIGroupsRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if listItem.Action.Allow != nil {
+						actionDeepMap["allow"] = map[string]interface{}{}
+					}
+					if listItem.Action.Deny != nil {
+						actionDeepMap["deny"] = map[string]interface{}{}
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.AnyDomain != nil {
+					listItemMap["any_domain"] = map[string]interface{}{}
+				}
+				if !listItem.APIGroup.IsNull() && !listItem.APIGroup.IsUnknown() {
+					listItemMap["api_group"] = listItem.APIGroup.ValueString()
+				}
+				if !listItem.BasePath.IsNull() && !listItem.BasePath.IsUnknown() {
+					listItemMap["base_path"] = listItem.BasePath.ValueString()
+				}
+				if listItem.ClientMatcher != nil {
+					client_matcherDeepMap := make(map[string]interface{})
+					if listItem.ClientMatcher.AnyClient != nil {
+						client_matcherDeepMap["any_client"] = map[string]interface{}{}
+					}
+					if listItem.ClientMatcher.AnyIP != nil {
+						client_matcherDeepMap["any_ip"] = map[string]interface{}{}
+					}
+					listItemMap["client_matcher"] = client_matcherDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.RequestMatcher != nil {
+					request_matcherDeepMap := make(map[string]interface{})
+					listItemMap["request_matcher"] = request_matcherDeepMap
+				}
+				if !listItem.SpecificDomain.IsNull() && !listItem.SpecificDomain.IsUnknown() {
+					listItemMap["specific_domain"] = listItem.SpecificDomain.ValueString()
+				}
+				api_groups_rulesList = append(api_groups_rulesList, listItemMap)
+			}
+			api_protection_rulesMap["api_groups_rules"] = api_groups_rulesList
+		}
 		apiResource.Spec["api_protection_rules"] = api_protection_rulesMap
 	}
 	if data.APIRateLimit != nil {
 		api_rate_limitMap := make(map[string]interface{})
+		if len(data.APIRateLimit.APIEndpointRules) > 0 {
+			var api_endpoint_rulesList []map[string]interface{}
+			for _, listItem := range data.APIRateLimit.APIEndpointRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AnyDomain != nil {
+					listItemMap["any_domain"] = map[string]interface{}{}
+				}
+				if listItem.APIEndpointMethod != nil {
+					api_endpoint_methodDeepMap := make(map[string]interface{})
+					if !listItem.APIEndpointMethod.InvertMatcher.IsNull() && !listItem.APIEndpointMethod.InvertMatcher.IsUnknown() {
+						api_endpoint_methodDeepMap["invert_matcher"] = listItem.APIEndpointMethod.InvertMatcher.ValueBool()
+					}
+					listItemMap["api_endpoint_method"] = api_endpoint_methodDeepMap
+				}
+				if !listItem.APIEndpointPath.IsNull() && !listItem.APIEndpointPath.IsUnknown() {
+					listItemMap["api_endpoint_path"] = listItem.APIEndpointPath.ValueString()
+				}
+				if listItem.ClientMatcher != nil {
+					client_matcherDeepMap := make(map[string]interface{})
+					if listItem.ClientMatcher.AnyClient != nil {
+						client_matcherDeepMap["any_client"] = map[string]interface{}{}
+					}
+					if listItem.ClientMatcher.AnyIP != nil {
+						client_matcherDeepMap["any_ip"] = map[string]interface{}{}
+					}
+					listItemMap["client_matcher"] = client_matcherDeepMap
+				}
+				if listItem.InlineRateLimiter != nil {
+					inline_rate_limiterDeepMap := make(map[string]interface{})
+					if !listItem.InlineRateLimiter.Threshold.IsNull() && !listItem.InlineRateLimiter.Threshold.IsUnknown() {
+						inline_rate_limiterDeepMap["threshold"] = listItem.InlineRateLimiter.Threshold.ValueInt64()
+					}
+					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
+						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
+					}
+					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
+					}
+					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
+				}
+				if listItem.RefRateLimiter != nil {
+					ref_rate_limiterDeepMap := make(map[string]interface{})
+					if !listItem.RefRateLimiter.Name.IsNull() && !listItem.RefRateLimiter.Name.IsUnknown() {
+						ref_rate_limiterDeepMap["name"] = listItem.RefRateLimiter.Name.ValueString()
+					}
+					if !listItem.RefRateLimiter.Namespace.IsNull() && !listItem.RefRateLimiter.Namespace.IsUnknown() {
+						ref_rate_limiterDeepMap["namespace"] = listItem.RefRateLimiter.Namespace.ValueString()
+					}
+					if !listItem.RefRateLimiter.Tenant.IsNull() && !listItem.RefRateLimiter.Tenant.IsUnknown() {
+						ref_rate_limiterDeepMap["tenant"] = listItem.RefRateLimiter.Tenant.ValueString()
+					}
+					listItemMap["ref_rate_limiter"] = ref_rate_limiterDeepMap
+				}
+				if listItem.RequestMatcher != nil {
+					request_matcherDeepMap := make(map[string]interface{})
+					listItemMap["request_matcher"] = request_matcherDeepMap
+				}
+				if !listItem.SpecificDomain.IsNull() && !listItem.SpecificDomain.IsUnknown() {
+					listItemMap["specific_domain"] = listItem.SpecificDomain.ValueString()
+				}
+				api_endpoint_rulesList = append(api_endpoint_rulesList, listItemMap)
+			}
+			api_rate_limitMap["api_endpoint_rules"] = api_endpoint_rulesList
+		}
 		if data.APIRateLimit.BypassRateLimitingRules != nil {
 			bypass_rate_limiting_rulesNestedMap := make(map[string]interface{})
 			api_rate_limitMap["bypass_rate_limiting_rules"] = bypass_rate_limiting_rulesNestedMap
@@ -18050,6 +20862,66 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		if data.APIRateLimit.NoIPAllowedList != nil {
 			api_rate_limitMap["no_ip_allowed_list"] = map[string]interface{}{}
+		}
+		if len(data.APIRateLimit.ServerURLRules) > 0 {
+			var server_url_rulesList []map[string]interface{}
+			for _, listItem := range data.APIRateLimit.ServerURLRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AnyDomain != nil {
+					listItemMap["any_domain"] = map[string]interface{}{}
+				}
+				if !listItem.APIGroup.IsNull() && !listItem.APIGroup.IsUnknown() {
+					listItemMap["api_group"] = listItem.APIGroup.ValueString()
+				}
+				if !listItem.BasePath.IsNull() && !listItem.BasePath.IsUnknown() {
+					listItemMap["base_path"] = listItem.BasePath.ValueString()
+				}
+				if listItem.ClientMatcher != nil {
+					client_matcherDeepMap := make(map[string]interface{})
+					if listItem.ClientMatcher.AnyClient != nil {
+						client_matcherDeepMap["any_client"] = map[string]interface{}{}
+					}
+					if listItem.ClientMatcher.AnyIP != nil {
+						client_matcherDeepMap["any_ip"] = map[string]interface{}{}
+					}
+					listItemMap["client_matcher"] = client_matcherDeepMap
+				}
+				if listItem.InlineRateLimiter != nil {
+					inline_rate_limiterDeepMap := make(map[string]interface{})
+					if !listItem.InlineRateLimiter.Threshold.IsNull() && !listItem.InlineRateLimiter.Threshold.IsUnknown() {
+						inline_rate_limiterDeepMap["threshold"] = listItem.InlineRateLimiter.Threshold.ValueInt64()
+					}
+					if !listItem.InlineRateLimiter.Unit.IsNull() && !listItem.InlineRateLimiter.Unit.IsUnknown() {
+						inline_rate_limiterDeepMap["unit"] = listItem.InlineRateLimiter.Unit.ValueString()
+					}
+					if listItem.InlineRateLimiter.UseHTTPLbUserID != nil {
+						inline_rate_limiterDeepMap["use_http_lb_user_id"] = map[string]interface{}{}
+					}
+					listItemMap["inline_rate_limiter"] = inline_rate_limiterDeepMap
+				}
+				if listItem.RefRateLimiter != nil {
+					ref_rate_limiterDeepMap := make(map[string]interface{})
+					if !listItem.RefRateLimiter.Name.IsNull() && !listItem.RefRateLimiter.Name.IsUnknown() {
+						ref_rate_limiterDeepMap["name"] = listItem.RefRateLimiter.Name.ValueString()
+					}
+					if !listItem.RefRateLimiter.Namespace.IsNull() && !listItem.RefRateLimiter.Namespace.IsUnknown() {
+						ref_rate_limiterDeepMap["namespace"] = listItem.RefRateLimiter.Namespace.ValueString()
+					}
+					if !listItem.RefRateLimiter.Tenant.IsNull() && !listItem.RefRateLimiter.Tenant.IsUnknown() {
+						ref_rate_limiterDeepMap["tenant"] = listItem.RefRateLimiter.Tenant.ValueString()
+					}
+					listItemMap["ref_rate_limiter"] = ref_rate_limiterDeepMap
+				}
+				if listItem.RequestMatcher != nil {
+					request_matcherDeepMap := make(map[string]interface{})
+					listItemMap["request_matcher"] = request_matcherDeepMap
+				}
+				if !listItem.SpecificDomain.IsNull() && !listItem.SpecificDomain.IsUnknown() {
+					listItemMap["specific_domain"] = listItem.SpecificDomain.ValueString()
+				}
+				server_url_rulesList = append(server_url_rulesList, listItemMap)
+			}
+			api_rate_limitMap["server_url_rules"] = server_url_rulesList
 		}
 		apiResource.Spec["api_rate_limit"] = api_rate_limitMap
 	}
@@ -18085,6 +20957,20 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		api_testingMap := make(map[string]interface{})
 		if !data.APITesting.CustomHeaderValue.IsNull() && !data.APITesting.CustomHeaderValue.IsUnknown() {
 			api_testingMap["custom_header_value"] = data.APITesting.CustomHeaderValue.ValueString()
+		}
+		if len(data.APITesting.Domains) > 0 {
+			var domainsList []map[string]interface{}
+			for _, listItem := range data.APITesting.Domains {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AllowDestructiveMethods.IsNull() && !listItem.AllowDestructiveMethods.IsUnknown() {
+					listItemMap["allow_destructive_methods"] = listItem.AllowDestructiveMethods.ValueBool()
+				}
+				if !listItem.Domain.IsNull() && !listItem.Domain.IsUnknown() {
+					listItemMap["domain"] = listItem.Domain.ValueString()
+				}
+				domainsList = append(domainsList, listItemMap)
+			}
+			api_testingMap["domains"] = domainsList
 		}
 		if data.APITesting.EveryDay != nil {
 			api_testingMap["every_day"] = map[string]interface{}{}
@@ -18404,6 +21290,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}
 			if item.DdosClientSource != nil {
 				ddos_client_sourceNestedMap := make(map[string]interface{})
+				if !item.DdosClientSource.CountryList.IsNull() && !item.DdosClientSource.CountryList.IsUnknown() {
+					var CountryListItems []string
+					diags := item.DdosClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
+					if !diags.HasError() {
+						ddos_client_sourceNestedMap["country_list"] = CountryListItems
+					}
+				}
 				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
 			}
 			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
@@ -18413,6 +21306,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				ip_prefix_listNestedMap := make(map[string]interface{})
 				if !item.IPPrefixList.InvertMatch.IsNull() && !item.IPPrefixList.InvertMatch.IsUnknown() {
 					ip_prefix_listNestedMap["invert_match"] = item.IPPrefixList.InvertMatch.ValueBool()
+				}
+				if !item.IPPrefixList.IPPrefixes.IsNull() && !item.IPPrefixList.IPPrefixes.IsUnknown() {
+					var IPPrefixesItems []string
+					diags := item.IPPrefixList.IPPrefixes.ElementsAs(ctx, &IPPrefixesItems, false)
+					if !diags.HasError() {
+						ip_prefix_listNestedMap["ip_prefixes"] = IPPrefixesItems
+					}
 				}
 				itemMap["ip_prefix_list"] = ip_prefix_listNestedMap
 			}
@@ -18454,6 +21354,23 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		if !data.DefaultPool.HealthCheckPort.IsNull() && !data.DefaultPool.HealthCheckPort.IsUnknown() {
 			default_poolMap["health_check_port"] = data.DefaultPool.HealthCheckPort.ValueInt64()
 		}
+		if len(data.DefaultPool.Healthcheck) > 0 {
+			var healthcheckList []map[string]interface{}
+			for _, listItem := range data.DefaultPool.Healthcheck {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				healthcheckList = append(healthcheckList, listItemMap)
+			}
+			default_poolMap["healthcheck"] = healthcheckList
+		}
 		if data.DefaultPool.LbPort != nil {
 			default_poolMap["lb_port"] = map[string]interface{}{}
 		}
@@ -18462,6 +21379,120 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		if data.DefaultPool.NoTLS != nil {
 			default_poolMap["no_tls"] = map[string]interface{}{}
+		}
+		if len(data.DefaultPool.OriginServers) > 0 {
+			var origin_serversList []map[string]interface{}
+			for _, listItem := range data.DefaultPool.OriginServers {
+				listItemMap := make(map[string]interface{})
+				if listItem.CbipService != nil {
+					cbip_serviceDeepMap := make(map[string]interface{})
+					if !listItem.CbipService.ServiceName.IsNull() && !listItem.CbipService.ServiceName.IsUnknown() {
+						cbip_serviceDeepMap["service_name"] = listItem.CbipService.ServiceName.ValueString()
+					}
+					listItemMap["cbip_service"] = cbip_serviceDeepMap
+				}
+				if listItem.ConsulService != nil {
+					consul_serviceDeepMap := make(map[string]interface{})
+					if listItem.ConsulService.InsideNetwork != nil {
+						consul_serviceDeepMap["inside_network"] = map[string]interface{}{}
+					}
+					if listItem.ConsulService.OutsideNetwork != nil {
+						consul_serviceDeepMap["outside_network"] = map[string]interface{}{}
+					}
+					if !listItem.ConsulService.ServiceName.IsNull() && !listItem.ConsulService.ServiceName.IsUnknown() {
+						consul_serviceDeepMap["service_name"] = listItem.ConsulService.ServiceName.ValueString()
+					}
+					listItemMap["consul_service"] = consul_serviceDeepMap
+				}
+				if listItem.CustomEndpointObject != nil {
+					custom_endpoint_objectDeepMap := make(map[string]interface{})
+					listItemMap["custom_endpoint_object"] = custom_endpoint_objectDeepMap
+				}
+				if listItem.K8SService != nil {
+					k8s_serviceDeepMap := make(map[string]interface{})
+					if listItem.K8SService.InsideNetwork != nil {
+						k8s_serviceDeepMap["inside_network"] = map[string]interface{}{}
+					}
+					if listItem.K8SService.OutsideNetwork != nil {
+						k8s_serviceDeepMap["outside_network"] = map[string]interface{}{}
+					}
+					if !listItem.K8SService.Protocol.IsNull() && !listItem.K8SService.Protocol.IsUnknown() {
+						k8s_serviceDeepMap["protocol"] = listItem.K8SService.Protocol.ValueString()
+					}
+					if !listItem.K8SService.ServiceName.IsNull() && !listItem.K8SService.ServiceName.IsUnknown() {
+						k8s_serviceDeepMap["service_name"] = listItem.K8SService.ServiceName.ValueString()
+					}
+					if listItem.K8SService.Vk8sNetworks != nil {
+						k8s_serviceDeepMap["vk8s_networks"] = map[string]interface{}{}
+					}
+					listItemMap["k8s_service"] = k8s_serviceDeepMap
+				}
+				if listItem.Labels != nil {
+					listItemMap["labels"] = map[string]interface{}{}
+				}
+				if listItem.PrivateIP != nil {
+					private_ipDeepMap := make(map[string]interface{})
+					if listItem.PrivateIP.InsideNetwork != nil {
+						private_ipDeepMap["inside_network"] = map[string]interface{}{}
+					}
+					if !listItem.PrivateIP.IP.IsNull() && !listItem.PrivateIP.IP.IsUnknown() {
+						private_ipDeepMap["ip"] = listItem.PrivateIP.IP.ValueString()
+					}
+					if listItem.PrivateIP.OutsideNetwork != nil {
+						private_ipDeepMap["outside_network"] = map[string]interface{}{}
+					}
+					listItemMap["private_ip"] = private_ipDeepMap
+				}
+				if listItem.PrivateName != nil {
+					private_nameDeepMap := make(map[string]interface{})
+					if !listItem.PrivateName.DNSName.IsNull() && !listItem.PrivateName.DNSName.IsUnknown() {
+						private_nameDeepMap["dns_name"] = listItem.PrivateName.DNSName.ValueString()
+					}
+					if listItem.PrivateName.InsideNetwork != nil {
+						private_nameDeepMap["inside_network"] = map[string]interface{}{}
+					}
+					if listItem.PrivateName.OutsideNetwork != nil {
+						private_nameDeepMap["outside_network"] = map[string]interface{}{}
+					}
+					if !listItem.PrivateName.RefreshInterval.IsNull() && !listItem.PrivateName.RefreshInterval.IsUnknown() {
+						private_nameDeepMap["refresh_interval"] = listItem.PrivateName.RefreshInterval.ValueInt64()
+					}
+					listItemMap["private_name"] = private_nameDeepMap
+				}
+				if listItem.PublicIP != nil {
+					public_ipDeepMap := make(map[string]interface{})
+					if !listItem.PublicIP.IP.IsNull() && !listItem.PublicIP.IP.IsUnknown() {
+						public_ipDeepMap["ip"] = listItem.PublicIP.IP.ValueString()
+					}
+					listItemMap["public_ip"] = public_ipDeepMap
+				}
+				if listItem.PublicName != nil {
+					public_nameDeepMap := make(map[string]interface{})
+					if !listItem.PublicName.DNSName.IsNull() && !listItem.PublicName.DNSName.IsUnknown() {
+						public_nameDeepMap["dns_name"] = listItem.PublicName.DNSName.ValueString()
+					}
+					if !listItem.PublicName.RefreshInterval.IsNull() && !listItem.PublicName.RefreshInterval.IsUnknown() {
+						public_nameDeepMap["refresh_interval"] = listItem.PublicName.RefreshInterval.ValueInt64()
+					}
+					listItemMap["public_name"] = public_nameDeepMap
+				}
+				if listItem.VnPrivateIP != nil {
+					vn_private_ipDeepMap := make(map[string]interface{})
+					if !listItem.VnPrivateIP.IP.IsNull() && !listItem.VnPrivateIP.IP.IsUnknown() {
+						vn_private_ipDeepMap["ip"] = listItem.VnPrivateIP.IP.ValueString()
+					}
+					listItemMap["vn_private_ip"] = vn_private_ipDeepMap
+				}
+				if listItem.VnPrivateName != nil {
+					vn_private_nameDeepMap := make(map[string]interface{})
+					if !listItem.VnPrivateName.DNSName.IsNull() && !listItem.VnPrivateName.DNSName.IsUnknown() {
+						vn_private_nameDeepMap["dns_name"] = listItem.VnPrivateName.DNSName.ValueString()
+					}
+					listItemMap["vn_private_name"] = vn_private_nameDeepMap
+				}
+				origin_serversList = append(origin_serversList, listItemMap)
+			}
+			default_poolMap["origin_servers"] = origin_serversList
 		}
 		if !data.DefaultPool.Port.IsNull() && !data.DefaultPool.Port.IsUnknown() {
 			default_poolMap["port"] = data.DefaultPool.Port.ValueInt64()
@@ -18500,6 +21531,49 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.DefaultPoolList != nil {
 		default_pool_listMap := make(map[string]interface{})
+		if len(data.DefaultPoolList.Pools) > 0 {
+			var poolsList []map[string]interface{}
+			for _, listItem := range data.DefaultPoolList.Pools {
+				listItemMap := make(map[string]interface{})
+				if listItem.Cluster != nil {
+					clusterDeepMap := make(map[string]interface{})
+					if !listItem.Cluster.Name.IsNull() && !listItem.Cluster.Name.IsUnknown() {
+						clusterDeepMap["name"] = listItem.Cluster.Name.ValueString()
+					}
+					if !listItem.Cluster.Namespace.IsNull() && !listItem.Cluster.Namespace.IsUnknown() {
+						clusterDeepMap["namespace"] = listItem.Cluster.Namespace.ValueString()
+					}
+					if !listItem.Cluster.Tenant.IsNull() && !listItem.Cluster.Tenant.IsUnknown() {
+						clusterDeepMap["tenant"] = listItem.Cluster.Tenant.ValueString()
+					}
+					listItemMap["cluster"] = clusterDeepMap
+				}
+				if listItem.EndpointSubsets != nil {
+					listItemMap["endpoint_subsets"] = map[string]interface{}{}
+				}
+				if listItem.Pool != nil {
+					poolDeepMap := make(map[string]interface{})
+					if !listItem.Pool.Name.IsNull() && !listItem.Pool.Name.IsUnknown() {
+						poolDeepMap["name"] = listItem.Pool.Name.ValueString()
+					}
+					if !listItem.Pool.Namespace.IsNull() && !listItem.Pool.Namespace.IsUnknown() {
+						poolDeepMap["namespace"] = listItem.Pool.Namespace.ValueString()
+					}
+					if !listItem.Pool.Tenant.IsNull() && !listItem.Pool.Tenant.IsUnknown() {
+						poolDeepMap["tenant"] = listItem.Pool.Tenant.ValueString()
+					}
+					listItemMap["pool"] = poolDeepMap
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Weight.IsNull() && !listItem.Weight.IsUnknown() {
+					listItemMap["weight"] = listItem.Weight.ValueInt64()
+				}
+				poolsList = append(poolsList, listItemMap)
+			}
+			default_pool_listMap["pools"] = poolsList
+		}
 		apiResource.Spec["default_pool_list"] = default_pool_listMap
 	}
 	if len(data.DefaultRoutePools) > 0 {
@@ -19050,6 +22124,54 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.MalwareProtectionSettings != nil {
 		malware_protection_settingsMap := make(map[string]interface{})
+		if len(data.MalwareProtectionSettings.MalwareProtectionRules) > 0 {
+			var malware_protection_rulesList []map[string]interface{}
+			for _, listItem := range data.MalwareProtectionSettings.MalwareProtectionRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if listItem.Action.Block != nil {
+						actionDeepMap["block"] = map[string]interface{}{}
+					}
+					if listItem.Action.Report != nil {
+						actionDeepMap["report"] = map[string]interface{}{}
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.Domain != nil {
+					domainDeepMap := make(map[string]interface{})
+					if listItem.Domain.AnyDomain != nil {
+						domainDeepMap["any_domain"] = map[string]interface{}{}
+					}
+					listItemMap["domain"] = domainDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Path != nil {
+					pathDeepMap := make(map[string]interface{})
+					if !listItem.Path.Path.IsNull() && !listItem.Path.Path.IsUnknown() {
+						pathDeepMap["path"] = listItem.Path.Path.ValueString()
+					}
+					if !listItem.Path.Prefix.IsNull() && !listItem.Path.Prefix.IsUnknown() {
+						pathDeepMap["prefix"] = listItem.Path.Prefix.ValueString()
+					}
+					if !listItem.Path.Regex.IsNull() && !listItem.Path.Regex.IsUnknown() {
+						pathDeepMap["regex"] = listItem.Path.Regex.ValueString()
+					}
+					listItemMap["path"] = pathDeepMap
+				}
+				malware_protection_rulesList = append(malware_protection_rulesList, listItemMap)
+			}
+			malware_protection_settingsMap["malware_protection_rules"] = malware_protection_rulesList
+		}
 		apiResource.Spec["malware_protection_settings"] = malware_protection_settingsMap
 	}
 	if data.MoreOption != nil {
@@ -19095,6 +22217,147 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		if !data.MoreOption.MaxRequestHeaderSize.IsNull() && !data.MoreOption.MaxRequestHeaderSize.IsUnknown() {
 			more_optionMap["max_request_header_size"] = data.MoreOption.MaxRequestHeaderSize.ValueInt64()
 		}
+		if len(data.MoreOption.RequestCookiesToAdd) > 0 {
+			var request_cookies_to_addList []map[string]interface{}
+			for _, listItem := range data.MoreOption.RequestCookiesToAdd {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Overwrite.IsNull() && !listItem.Overwrite.IsUnknown() {
+					listItemMap["overwrite"] = listItem.Overwrite.ValueBool()
+				}
+				if listItem.SecretValue != nil {
+					secret_valueDeepMap := make(map[string]interface{})
+					listItemMap["secret_value"] = secret_valueDeepMap
+				}
+				if !listItem.Value.IsNull() && !listItem.Value.IsUnknown() {
+					listItemMap["value"] = listItem.Value.ValueString()
+				}
+				request_cookies_to_addList = append(request_cookies_to_addList, listItemMap)
+			}
+			more_optionMap["request_cookies_to_add"] = request_cookies_to_addList
+		}
+		if len(data.MoreOption.RequestHeadersToAdd) > 0 {
+			var request_headers_to_addList []map[string]interface{}
+			for _, listItem := range data.MoreOption.RequestHeadersToAdd {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Append.IsNull() && !listItem.Append.IsUnknown() {
+					listItemMap["append"] = listItem.Append.ValueBool()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.SecretValue != nil {
+					secret_valueDeepMap := make(map[string]interface{})
+					listItemMap["secret_value"] = secret_valueDeepMap
+				}
+				if !listItem.Value.IsNull() && !listItem.Value.IsUnknown() {
+					listItemMap["value"] = listItem.Value.ValueString()
+				}
+				request_headers_to_addList = append(request_headers_to_addList, listItemMap)
+			}
+			more_optionMap["request_headers_to_add"] = request_headers_to_addList
+		}
+		if len(data.MoreOption.ResponseCookiesToAdd) > 0 {
+			var response_cookies_to_addList []map[string]interface{}
+			for _, listItem := range data.MoreOption.ResponseCookiesToAdd {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AddDomain.IsNull() && !listItem.AddDomain.IsUnknown() {
+					listItemMap["add_domain"] = listItem.AddDomain.ValueString()
+				}
+				if !listItem.AddExpiry.IsNull() && !listItem.AddExpiry.IsUnknown() {
+					listItemMap["add_expiry"] = listItem.AddExpiry.ValueString()
+				}
+				if listItem.AddHttponly != nil {
+					listItemMap["add_httponly"] = map[string]interface{}{}
+				}
+				if listItem.AddPartitioned != nil {
+					listItemMap["add_partitioned"] = map[string]interface{}{}
+				}
+				if !listItem.AddPath.IsNull() && !listItem.AddPath.IsUnknown() {
+					listItemMap["add_path"] = listItem.AddPath.ValueString()
+				}
+				if listItem.AddSecure != nil {
+					listItemMap["add_secure"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreDomain != nil {
+					listItemMap["ignore_domain"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreExpiry != nil {
+					listItemMap["ignore_expiry"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreHttponly != nil {
+					listItemMap["ignore_httponly"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreMaxAge != nil {
+					listItemMap["ignore_max_age"] = map[string]interface{}{}
+				}
+				if listItem.IgnorePartitioned != nil {
+					listItemMap["ignore_partitioned"] = map[string]interface{}{}
+				}
+				if listItem.IgnorePath != nil {
+					listItemMap["ignore_path"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreSamesite != nil {
+					listItemMap["ignore_samesite"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreSecure != nil {
+					listItemMap["ignore_secure"] = map[string]interface{}{}
+				}
+				if listItem.IgnoreValue != nil {
+					listItemMap["ignore_value"] = map[string]interface{}{}
+				}
+				if !listItem.MaxAgeValue.IsNull() && !listItem.MaxAgeValue.IsUnknown() {
+					listItemMap["max_age_value"] = listItem.MaxAgeValue.ValueInt64()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Overwrite.IsNull() && !listItem.Overwrite.IsUnknown() {
+					listItemMap["overwrite"] = listItem.Overwrite.ValueBool()
+				}
+				if listItem.SamesiteLax != nil {
+					listItemMap["samesite_lax"] = map[string]interface{}{}
+				}
+				if listItem.SamesiteNone != nil {
+					listItemMap["samesite_none"] = map[string]interface{}{}
+				}
+				if listItem.SamesiteStrict != nil {
+					listItemMap["samesite_strict"] = map[string]interface{}{}
+				}
+				if listItem.SecretValue != nil {
+					secret_valueDeepMap := make(map[string]interface{})
+					listItemMap["secret_value"] = secret_valueDeepMap
+				}
+				if !listItem.Value.IsNull() && !listItem.Value.IsUnknown() {
+					listItemMap["value"] = listItem.Value.ValueString()
+				}
+				response_cookies_to_addList = append(response_cookies_to_addList, listItemMap)
+			}
+			more_optionMap["response_cookies_to_add"] = response_cookies_to_addList
+		}
+		if len(data.MoreOption.ResponseHeadersToAdd) > 0 {
+			var response_headers_to_addList []map[string]interface{}
+			for _, listItem := range data.MoreOption.ResponseHeadersToAdd {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Append.IsNull() && !listItem.Append.IsUnknown() {
+					listItemMap["append"] = listItem.Append.ValueBool()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.SecretValue != nil {
+					secret_valueDeepMap := make(map[string]interface{})
+					listItemMap["secret_value"] = secret_valueDeepMap
+				}
+				if !listItem.Value.IsNull() && !listItem.Value.IsUnknown() {
+					listItemMap["value"] = listItem.Value.ValueString()
+				}
+				response_headers_to_addList = append(response_headers_to_addList, listItemMap)
+			}
+			more_optionMap["response_headers_to_add"] = response_headers_to_addList
+		}
 		apiResource.Spec["more_option"] = more_optionMap
 	}
 	if data.MultiLbApp != nil {
@@ -19111,6 +22374,62 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.OriginServerSubsetRuleList != nil {
 		origin_server_subset_rule_listMap := make(map[string]interface{})
+		if len(data.OriginServerSubsetRuleList.OriginServerSubsetRules) > 0 {
+			var origin_server_subset_rulesList []map[string]interface{}
+			for _, listItem := range data.OriginServerSubsetRuleList.OriginServerSubsetRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AnyAsn != nil {
+					listItemMap["any_asn"] = map[string]interface{}{}
+				}
+				if listItem.AnyIP != nil {
+					listItemMap["any_ip"] = map[string]interface{}{}
+				}
+				if listItem.AsnList != nil {
+					asn_listDeepMap := make(map[string]interface{})
+					listItemMap["asn_list"] = asn_listDeepMap
+				}
+				if listItem.AsnMatcher != nil {
+					asn_matcherDeepMap := make(map[string]interface{})
+					listItemMap["asn_matcher"] = asn_matcherDeepMap
+				}
+				if listItem.ClientSelector != nil {
+					client_selectorDeepMap := make(map[string]interface{})
+					listItemMap["client_selector"] = client_selectorDeepMap
+				}
+				if listItem.IPMatcher != nil {
+					ip_matcherDeepMap := make(map[string]interface{})
+					if !listItem.IPMatcher.InvertMatcher.IsNull() && !listItem.IPMatcher.InvertMatcher.IsUnknown() {
+						ip_matcherDeepMap["invert_matcher"] = listItem.IPMatcher.InvertMatcher.ValueBool()
+					}
+					listItemMap["ip_matcher"] = ip_matcherDeepMap
+				}
+				if listItem.IPPrefixList != nil {
+					ip_prefix_listDeepMap := make(map[string]interface{})
+					if !listItem.IPPrefixList.InvertMatch.IsNull() && !listItem.IPPrefixList.InvertMatch.IsUnknown() {
+						ip_prefix_listDeepMap["invert_match"] = listItem.IPPrefixList.InvertMatch.ValueBool()
+					}
+					listItemMap["ip_prefix_list"] = ip_prefix_listDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.None != nil {
+					listItemMap["none"] = map[string]interface{}{}
+				}
+				if listItem.OriginServerSubsetsAction != nil {
+					listItemMap["origin_server_subsets_action"] = map[string]interface{}{}
+				}
+				origin_server_subset_rulesList = append(origin_server_subset_rulesList, listItemMap)
+			}
+			origin_server_subset_rule_listMap["origin_server_subset_rules"] = origin_server_subset_rulesList
+		}
 		apiResource.Spec["origin_server_subset_rule_list"] = origin_server_subset_rule_listMap
 	}
 	if data.PolicyBasedChallenge != nil {
@@ -19276,6 +22595,60 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.RingHash != nil {
 		ring_hashMap := make(map[string]interface{})
+		if len(data.RingHash.HashPolicy) > 0 {
+			var hash_policyList []map[string]interface{}
+			for _, listItem := range data.RingHash.HashPolicy {
+				listItemMap := make(map[string]interface{})
+				if listItem.Cookie != nil {
+					cookieDeepMap := make(map[string]interface{})
+					if listItem.Cookie.AddHttponly != nil {
+						cookieDeepMap["add_httponly"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.AddSecure != nil {
+						cookieDeepMap["add_secure"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.IgnoreHttponly != nil {
+						cookieDeepMap["ignore_httponly"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.IgnoreSamesite != nil {
+						cookieDeepMap["ignore_samesite"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.IgnoreSecure != nil {
+						cookieDeepMap["ignore_secure"] = map[string]interface{}{}
+					}
+					if !listItem.Cookie.Name.IsNull() && !listItem.Cookie.Name.IsUnknown() {
+						cookieDeepMap["name"] = listItem.Cookie.Name.ValueString()
+					}
+					if !listItem.Cookie.Path.IsNull() && !listItem.Cookie.Path.IsUnknown() {
+						cookieDeepMap["path"] = listItem.Cookie.Path.ValueString()
+					}
+					if listItem.Cookie.SamesiteLax != nil {
+						cookieDeepMap["samesite_lax"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.SamesiteNone != nil {
+						cookieDeepMap["samesite_none"] = map[string]interface{}{}
+					}
+					if listItem.Cookie.SamesiteStrict != nil {
+						cookieDeepMap["samesite_strict"] = map[string]interface{}{}
+					}
+					if !listItem.Cookie.Ttl.IsNull() && !listItem.Cookie.Ttl.IsUnknown() {
+						cookieDeepMap["ttl"] = listItem.Cookie.Ttl.ValueInt64()
+					}
+					listItemMap["cookie"] = cookieDeepMap
+				}
+				if !listItem.HeaderName.IsNull() && !listItem.HeaderName.IsUnknown() {
+					listItemMap["header_name"] = listItem.HeaderName.ValueString()
+				}
+				if !listItem.SourceIP.IsNull() && !listItem.SourceIP.IsUnknown() {
+					listItemMap["source_ip"] = listItem.SourceIP.ValueBool()
+				}
+				if !listItem.Terminal.IsNull() && !listItem.Terminal.IsUnknown() {
+					listItemMap["terminal"] = listItem.Terminal.ValueBool()
+				}
+				hash_policyList = append(hash_policyList, listItemMap)
+			}
+			ring_hashMap["hash_policy"] = hash_policyList
+		}
 		apiResource.Spec["ring_hash"] = ring_hashMap
 	}
 	if data.RoundRobin != nil {
@@ -19320,6 +22693,31 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if data.SensitiveDataDisclosureRules != nil {
 		sensitive_data_disclosure_rulesMap := make(map[string]interface{})
+		if len(data.SensitiveDataDisclosureRules.SensitiveDataTypesInResponse) > 0 {
+			var sensitive_data_types_in_responseList []map[string]interface{}
+			for _, listItem := range data.SensitiveDataDisclosureRules.SensitiveDataTypesInResponse {
+				listItemMap := make(map[string]interface{})
+				if listItem.APIEndpoint != nil {
+					api_endpointDeepMap := make(map[string]interface{})
+					if !listItem.APIEndpoint.Path.IsNull() && !listItem.APIEndpoint.Path.IsUnknown() {
+						api_endpointDeepMap["path"] = listItem.APIEndpoint.Path.ValueString()
+					}
+					listItemMap["api_endpoint"] = api_endpointDeepMap
+				}
+				if listItem.Body != nil {
+					bodyDeepMap := make(map[string]interface{})
+					listItemMap["body"] = bodyDeepMap
+				}
+				if listItem.Mask != nil {
+					listItemMap["mask"] = map[string]interface{}{}
+				}
+				if listItem.Report != nil {
+					listItemMap["report"] = map[string]interface{}{}
+				}
+				sensitive_data_types_in_responseList = append(sensitive_data_types_in_responseList, listItemMap)
+			}
+			sensitive_data_disclosure_rulesMap["sensitive_data_types_in_response"] = sensitive_data_types_in_responseList
+		}
 		apiResource.Spec["sensitive_data_disclosure_rules"] = sensitive_data_disclosure_rulesMap
 	}
 	if data.SensitiveDataPolicy != nil {

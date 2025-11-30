@@ -460,16 +460,53 @@ func (r *SecretPolicyRuleResource) Read(ctx context.Context, req resource.ReadRe
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && isImport && data.ClientNameMatcher == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ClientNameMatcher = &SecretPolicyRuleClientNameMatcherModel{}
+	if blockData, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && (isImport || data.ClientNameMatcher != nil) {
+		data.ClientNameMatcher = &SecretPolicyRuleClientNameMatcherModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["client_selector"].(map[string]interface{}); ok && isImport && data.ClientSelector == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ClientSelector = &SecretPolicyRuleClientSelectorModel{}
+	if blockData, ok := apiResource.Spec["client_selector"].(map[string]interface{}); ok && (isImport || data.ClientSelector != nil) {
+		data.ClientSelector = &SecretPolicyRuleClientSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
 	} else {

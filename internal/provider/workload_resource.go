@@ -12848,12 +12848,125 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 			configurationNestedMap := make(map[string]interface{})
 			jobMap["configuration"] = configurationNestedMap
 		}
+		if len(data.Job.Containers) > 0 {
+			var containersList []map[string]interface{}
+			for _, listItem := range data.Job.Containers {
+				listItemMap := make(map[string]interface{})
+				if listItem.CustomFlavor != nil {
+					custom_flavorDeepMap := make(map[string]interface{})
+					if !listItem.CustomFlavor.Name.IsNull() && !listItem.CustomFlavor.Name.IsUnknown() {
+						custom_flavorDeepMap["name"] = listItem.CustomFlavor.Name.ValueString()
+					}
+					if !listItem.CustomFlavor.Namespace.IsNull() && !listItem.CustomFlavor.Namespace.IsUnknown() {
+						custom_flavorDeepMap["namespace"] = listItem.CustomFlavor.Namespace.ValueString()
+					}
+					if !listItem.CustomFlavor.Tenant.IsNull() && !listItem.CustomFlavor.Tenant.IsUnknown() {
+						custom_flavorDeepMap["tenant"] = listItem.CustomFlavor.Tenant.ValueString()
+					}
+					listItemMap["custom_flavor"] = custom_flavorDeepMap
+				}
+				if listItem.DefaultFlavor != nil {
+					listItemMap["default_flavor"] = map[string]interface{}{}
+				}
+				if !listItem.Flavor.IsNull() && !listItem.Flavor.IsUnknown() {
+					listItemMap["flavor"] = listItem.Flavor.ValueString()
+				}
+				if listItem.Image != nil {
+					imageDeepMap := make(map[string]interface{})
+					if !listItem.Image.Name.IsNull() && !listItem.Image.Name.IsUnknown() {
+						imageDeepMap["name"] = listItem.Image.Name.ValueString()
+					}
+					if listItem.Image.Public != nil {
+						imageDeepMap["public"] = map[string]interface{}{}
+					}
+					if !listItem.Image.PullPolicy.IsNull() && !listItem.Image.PullPolicy.IsUnknown() {
+						imageDeepMap["pull_policy"] = listItem.Image.PullPolicy.ValueString()
+					}
+					listItemMap["image"] = imageDeepMap
+				}
+				if !listItem.InitContainer.IsNull() && !listItem.InitContainer.IsUnknown() {
+					listItemMap["init_container"] = listItem.InitContainer.ValueBool()
+				}
+				if listItem.LivenessCheck != nil {
+					liveness_checkDeepMap := make(map[string]interface{})
+					if !listItem.LivenessCheck.HealthyThreshold.IsNull() && !listItem.LivenessCheck.HealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["healthy_threshold"] = listItem.LivenessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.LivenessCheck.InitialDelay.IsNull() && !listItem.LivenessCheck.InitialDelay.IsUnknown() {
+						liveness_checkDeepMap["initial_delay"] = listItem.LivenessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Interval.IsNull() && !listItem.LivenessCheck.Interval.IsUnknown() {
+						liveness_checkDeepMap["interval"] = listItem.LivenessCheck.Interval.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Timeout.IsNull() && !listItem.LivenessCheck.Timeout.IsUnknown() {
+						liveness_checkDeepMap["timeout"] = listItem.LivenessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.LivenessCheck.UnhealthyThreshold.IsNull() && !listItem.LivenessCheck.UnhealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["unhealthy_threshold"] = listItem.LivenessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["liveness_check"] = liveness_checkDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.ReadinessCheck != nil {
+					readiness_checkDeepMap := make(map[string]interface{})
+					if !listItem.ReadinessCheck.HealthyThreshold.IsNull() && !listItem.ReadinessCheck.HealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["healthy_threshold"] = listItem.ReadinessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.InitialDelay.IsNull() && !listItem.ReadinessCheck.InitialDelay.IsUnknown() {
+						readiness_checkDeepMap["initial_delay"] = listItem.ReadinessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Interval.IsNull() && !listItem.ReadinessCheck.Interval.IsUnknown() {
+						readiness_checkDeepMap["interval"] = listItem.ReadinessCheck.Interval.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Timeout.IsNull() && !listItem.ReadinessCheck.Timeout.IsUnknown() {
+						readiness_checkDeepMap["timeout"] = listItem.ReadinessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.UnhealthyThreshold.IsNull() && !listItem.ReadinessCheck.UnhealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["unhealthy_threshold"] = listItem.ReadinessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["readiness_check"] = readiness_checkDeepMap
+				}
+				containersList = append(containersList, listItemMap)
+			}
+			jobMap["containers"] = containersList
+		}
 		if data.Job.DeployOptions != nil {
 			deploy_optionsNestedMap := make(map[string]interface{})
 			jobMap["deploy_options"] = deploy_optionsNestedMap
 		}
 		if !data.Job.NumReplicas.IsNull() && !data.Job.NumReplicas.IsUnknown() {
 			jobMap["num_replicas"] = data.Job.NumReplicas.ValueInt64()
+		}
+		if len(data.Job.Volumes) > 0 {
+			var volumesList []map[string]interface{}
+			for _, listItem := range data.Job.Volumes {
+				listItemMap := make(map[string]interface{})
+				if listItem.EmptyDir != nil {
+					empty_dirDeepMap := make(map[string]interface{})
+					if !listItem.EmptyDir.SizeLimit.IsNull() && !listItem.EmptyDir.SizeLimit.IsUnknown() {
+						empty_dirDeepMap["size_limit"] = listItem.EmptyDir.SizeLimit.ValueInt64()
+					}
+					listItemMap["empty_dir"] = empty_dirDeepMap
+				}
+				if listItem.HostPath != nil {
+					host_pathDeepMap := make(map[string]interface{})
+					if !listItem.HostPath.Path.IsNull() && !listItem.HostPath.Path.IsUnknown() {
+						host_pathDeepMap["path"] = listItem.HostPath.Path.ValueString()
+					}
+					listItemMap["host_path"] = host_pathDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.PersistentVolume != nil {
+					persistent_volumeDeepMap := make(map[string]interface{})
+					listItemMap["persistent_volume"] = persistent_volumeDeepMap
+				}
+				volumesList = append(volumesList, listItemMap)
+			}
+			jobMap["volumes"] = volumesList
 		}
 		apiResource.Spec["job"] = jobMap
 	}
@@ -12867,6 +12980,90 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 			configurationNestedMap := make(map[string]interface{})
 			serviceMap["configuration"] = configurationNestedMap
 		}
+		if len(data.Service.Containers) > 0 {
+			var containersList []map[string]interface{}
+			for _, listItem := range data.Service.Containers {
+				listItemMap := make(map[string]interface{})
+				if listItem.CustomFlavor != nil {
+					custom_flavorDeepMap := make(map[string]interface{})
+					if !listItem.CustomFlavor.Name.IsNull() && !listItem.CustomFlavor.Name.IsUnknown() {
+						custom_flavorDeepMap["name"] = listItem.CustomFlavor.Name.ValueString()
+					}
+					if !listItem.CustomFlavor.Namespace.IsNull() && !listItem.CustomFlavor.Namespace.IsUnknown() {
+						custom_flavorDeepMap["namespace"] = listItem.CustomFlavor.Namespace.ValueString()
+					}
+					if !listItem.CustomFlavor.Tenant.IsNull() && !listItem.CustomFlavor.Tenant.IsUnknown() {
+						custom_flavorDeepMap["tenant"] = listItem.CustomFlavor.Tenant.ValueString()
+					}
+					listItemMap["custom_flavor"] = custom_flavorDeepMap
+				}
+				if listItem.DefaultFlavor != nil {
+					listItemMap["default_flavor"] = map[string]interface{}{}
+				}
+				if !listItem.Flavor.IsNull() && !listItem.Flavor.IsUnknown() {
+					listItemMap["flavor"] = listItem.Flavor.ValueString()
+				}
+				if listItem.Image != nil {
+					imageDeepMap := make(map[string]interface{})
+					if !listItem.Image.Name.IsNull() && !listItem.Image.Name.IsUnknown() {
+						imageDeepMap["name"] = listItem.Image.Name.ValueString()
+					}
+					if listItem.Image.Public != nil {
+						imageDeepMap["public"] = map[string]interface{}{}
+					}
+					if !listItem.Image.PullPolicy.IsNull() && !listItem.Image.PullPolicy.IsUnknown() {
+						imageDeepMap["pull_policy"] = listItem.Image.PullPolicy.ValueString()
+					}
+					listItemMap["image"] = imageDeepMap
+				}
+				if !listItem.InitContainer.IsNull() && !listItem.InitContainer.IsUnknown() {
+					listItemMap["init_container"] = listItem.InitContainer.ValueBool()
+				}
+				if listItem.LivenessCheck != nil {
+					liveness_checkDeepMap := make(map[string]interface{})
+					if !listItem.LivenessCheck.HealthyThreshold.IsNull() && !listItem.LivenessCheck.HealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["healthy_threshold"] = listItem.LivenessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.LivenessCheck.InitialDelay.IsNull() && !listItem.LivenessCheck.InitialDelay.IsUnknown() {
+						liveness_checkDeepMap["initial_delay"] = listItem.LivenessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Interval.IsNull() && !listItem.LivenessCheck.Interval.IsUnknown() {
+						liveness_checkDeepMap["interval"] = listItem.LivenessCheck.Interval.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Timeout.IsNull() && !listItem.LivenessCheck.Timeout.IsUnknown() {
+						liveness_checkDeepMap["timeout"] = listItem.LivenessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.LivenessCheck.UnhealthyThreshold.IsNull() && !listItem.LivenessCheck.UnhealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["unhealthy_threshold"] = listItem.LivenessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["liveness_check"] = liveness_checkDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.ReadinessCheck != nil {
+					readiness_checkDeepMap := make(map[string]interface{})
+					if !listItem.ReadinessCheck.HealthyThreshold.IsNull() && !listItem.ReadinessCheck.HealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["healthy_threshold"] = listItem.ReadinessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.InitialDelay.IsNull() && !listItem.ReadinessCheck.InitialDelay.IsUnknown() {
+						readiness_checkDeepMap["initial_delay"] = listItem.ReadinessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Interval.IsNull() && !listItem.ReadinessCheck.Interval.IsUnknown() {
+						readiness_checkDeepMap["interval"] = listItem.ReadinessCheck.Interval.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Timeout.IsNull() && !listItem.ReadinessCheck.Timeout.IsUnknown() {
+						readiness_checkDeepMap["timeout"] = listItem.ReadinessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.UnhealthyThreshold.IsNull() && !listItem.ReadinessCheck.UnhealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["unhealthy_threshold"] = listItem.ReadinessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["readiness_check"] = readiness_checkDeepMap
+				}
+				containersList = append(containersList, listItemMap)
+			}
+			serviceMap["containers"] = containersList
+		}
 		if data.Service.DeployOptions != nil {
 			deploy_optionsNestedMap := make(map[string]interface{})
 			serviceMap["deploy_options"] = deploy_optionsNestedMap
@@ -12876,6 +13073,35 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 		}
 		if data.Service.ScaleToZero != nil {
 			serviceMap["scale_to_zero"] = map[string]interface{}{}
+		}
+		if len(data.Service.Volumes) > 0 {
+			var volumesList []map[string]interface{}
+			for _, listItem := range data.Service.Volumes {
+				listItemMap := make(map[string]interface{})
+				if listItem.EmptyDir != nil {
+					empty_dirDeepMap := make(map[string]interface{})
+					if !listItem.EmptyDir.SizeLimit.IsNull() && !listItem.EmptyDir.SizeLimit.IsUnknown() {
+						empty_dirDeepMap["size_limit"] = listItem.EmptyDir.SizeLimit.ValueInt64()
+					}
+					listItemMap["empty_dir"] = empty_dirDeepMap
+				}
+				if listItem.HostPath != nil {
+					host_pathDeepMap := make(map[string]interface{})
+					if !listItem.HostPath.Path.IsNull() && !listItem.HostPath.Path.IsUnknown() {
+						host_pathDeepMap["path"] = listItem.HostPath.Path.ValueString()
+					}
+					listItemMap["host_path"] = host_pathDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.PersistentVolume != nil {
+					persistent_volumeDeepMap := make(map[string]interface{})
+					listItemMap["persistent_volume"] = persistent_volumeDeepMap
+				}
+				volumesList = append(volumesList, listItemMap)
+			}
+			serviceMap["volumes"] = volumesList
 		}
 		apiResource.Spec["service"] = serviceMap
 	}
@@ -12933,6 +13159,90 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 			configurationNestedMap := make(map[string]interface{})
 			stateful_serviceMap["configuration"] = configurationNestedMap
 		}
+		if len(data.StatefulService.Containers) > 0 {
+			var containersList []map[string]interface{}
+			for _, listItem := range data.StatefulService.Containers {
+				listItemMap := make(map[string]interface{})
+				if listItem.CustomFlavor != nil {
+					custom_flavorDeepMap := make(map[string]interface{})
+					if !listItem.CustomFlavor.Name.IsNull() && !listItem.CustomFlavor.Name.IsUnknown() {
+						custom_flavorDeepMap["name"] = listItem.CustomFlavor.Name.ValueString()
+					}
+					if !listItem.CustomFlavor.Namespace.IsNull() && !listItem.CustomFlavor.Namespace.IsUnknown() {
+						custom_flavorDeepMap["namespace"] = listItem.CustomFlavor.Namespace.ValueString()
+					}
+					if !listItem.CustomFlavor.Tenant.IsNull() && !listItem.CustomFlavor.Tenant.IsUnknown() {
+						custom_flavorDeepMap["tenant"] = listItem.CustomFlavor.Tenant.ValueString()
+					}
+					listItemMap["custom_flavor"] = custom_flavorDeepMap
+				}
+				if listItem.DefaultFlavor != nil {
+					listItemMap["default_flavor"] = map[string]interface{}{}
+				}
+				if !listItem.Flavor.IsNull() && !listItem.Flavor.IsUnknown() {
+					listItemMap["flavor"] = listItem.Flavor.ValueString()
+				}
+				if listItem.Image != nil {
+					imageDeepMap := make(map[string]interface{})
+					if !listItem.Image.Name.IsNull() && !listItem.Image.Name.IsUnknown() {
+						imageDeepMap["name"] = listItem.Image.Name.ValueString()
+					}
+					if listItem.Image.Public != nil {
+						imageDeepMap["public"] = map[string]interface{}{}
+					}
+					if !listItem.Image.PullPolicy.IsNull() && !listItem.Image.PullPolicy.IsUnknown() {
+						imageDeepMap["pull_policy"] = listItem.Image.PullPolicy.ValueString()
+					}
+					listItemMap["image"] = imageDeepMap
+				}
+				if !listItem.InitContainer.IsNull() && !listItem.InitContainer.IsUnknown() {
+					listItemMap["init_container"] = listItem.InitContainer.ValueBool()
+				}
+				if listItem.LivenessCheck != nil {
+					liveness_checkDeepMap := make(map[string]interface{})
+					if !listItem.LivenessCheck.HealthyThreshold.IsNull() && !listItem.LivenessCheck.HealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["healthy_threshold"] = listItem.LivenessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.LivenessCheck.InitialDelay.IsNull() && !listItem.LivenessCheck.InitialDelay.IsUnknown() {
+						liveness_checkDeepMap["initial_delay"] = listItem.LivenessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Interval.IsNull() && !listItem.LivenessCheck.Interval.IsUnknown() {
+						liveness_checkDeepMap["interval"] = listItem.LivenessCheck.Interval.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Timeout.IsNull() && !listItem.LivenessCheck.Timeout.IsUnknown() {
+						liveness_checkDeepMap["timeout"] = listItem.LivenessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.LivenessCheck.UnhealthyThreshold.IsNull() && !listItem.LivenessCheck.UnhealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["unhealthy_threshold"] = listItem.LivenessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["liveness_check"] = liveness_checkDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.ReadinessCheck != nil {
+					readiness_checkDeepMap := make(map[string]interface{})
+					if !listItem.ReadinessCheck.HealthyThreshold.IsNull() && !listItem.ReadinessCheck.HealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["healthy_threshold"] = listItem.ReadinessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.InitialDelay.IsNull() && !listItem.ReadinessCheck.InitialDelay.IsUnknown() {
+						readiness_checkDeepMap["initial_delay"] = listItem.ReadinessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Interval.IsNull() && !listItem.ReadinessCheck.Interval.IsUnknown() {
+						readiness_checkDeepMap["interval"] = listItem.ReadinessCheck.Interval.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Timeout.IsNull() && !listItem.ReadinessCheck.Timeout.IsUnknown() {
+						readiness_checkDeepMap["timeout"] = listItem.ReadinessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.UnhealthyThreshold.IsNull() && !listItem.ReadinessCheck.UnhealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["unhealthy_threshold"] = listItem.ReadinessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["readiness_check"] = readiness_checkDeepMap
+				}
+				containersList = append(containersList, listItemMap)
+			}
+			stateful_serviceMap["containers"] = containersList
+		}
 		if data.StatefulService.DeployOptions != nil {
 			deploy_optionsNestedMap := make(map[string]interface{})
 			stateful_serviceMap["deploy_options"] = deploy_optionsNestedMap
@@ -12940,8 +13250,48 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 		if !data.StatefulService.NumReplicas.IsNull() && !data.StatefulService.NumReplicas.IsUnknown() {
 			stateful_serviceMap["num_replicas"] = data.StatefulService.NumReplicas.ValueInt64()
 		}
+		if len(data.StatefulService.PersistentVolumes) > 0 {
+			var persistent_volumesList []map[string]interface{}
+			for _, listItem := range data.StatefulService.PersistentVolumes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.PersistentVolume != nil {
+					persistent_volumeDeepMap := make(map[string]interface{})
+					listItemMap["persistent_volume"] = persistent_volumeDeepMap
+				}
+				persistent_volumesList = append(persistent_volumesList, listItemMap)
+			}
+			stateful_serviceMap["persistent_volumes"] = persistent_volumesList
+		}
 		if data.StatefulService.ScaleToZero != nil {
 			stateful_serviceMap["scale_to_zero"] = map[string]interface{}{}
+		}
+		if len(data.StatefulService.Volumes) > 0 {
+			var volumesList []map[string]interface{}
+			for _, listItem := range data.StatefulService.Volumes {
+				listItemMap := make(map[string]interface{})
+				if listItem.EmptyDir != nil {
+					empty_dirDeepMap := make(map[string]interface{})
+					if !listItem.EmptyDir.SizeLimit.IsNull() && !listItem.EmptyDir.SizeLimit.IsUnknown() {
+						empty_dirDeepMap["size_limit"] = listItem.EmptyDir.SizeLimit.ValueInt64()
+					}
+					listItemMap["empty_dir"] = empty_dirDeepMap
+				}
+				if listItem.HostPath != nil {
+					host_pathDeepMap := make(map[string]interface{})
+					if !listItem.HostPath.Path.IsNull() && !listItem.HostPath.Path.IsUnknown() {
+						host_pathDeepMap["path"] = listItem.HostPath.Path.ValueString()
+					}
+					listItemMap["host_path"] = host_pathDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				volumesList = append(volumesList, listItemMap)
+			}
+			stateful_serviceMap["volumes"] = volumesList
 		}
 		apiResource.Spec["stateful_service"] = stateful_serviceMap
 	}
@@ -13051,21 +13401,447 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 	})
 	if blockData, ok := apiResource.Spec["job"].(map[string]interface{}); ok && (isImport || data.Job != nil) {
 		data.Job = &WorkloadJobModel{
+			Containers: func() []WorkloadJobContainersModel {
+				if listData, ok := blockData["containers"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadJobContainersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadJobContainersModel{
+								CustomFlavor: func() *WorkloadJobContainersCustomFlavorModel {
+									if deepMap, ok := itemMap["custom_flavor"].(map[string]interface{}); ok {
+										return &WorkloadJobContainersCustomFlavorModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DefaultFlavor: func() *WorkloadEmptyModel {
+									if _, ok := itemMap["default_flavor"].(map[string]interface{}); ok {
+										return &WorkloadEmptyModel{}
+									}
+									return nil
+								}(),
+								Flavor: func() types.String {
+									if v, ok := itemMap["flavor"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Image: func() *WorkloadJobContainersImageModel {
+									if deepMap, ok := itemMap["image"].(map[string]interface{}); ok {
+										return &WorkloadJobContainersImageModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Public: func() *WorkloadEmptyModel {
+												if _, ok := deepMap["public"].(map[string]interface{}); ok {
+													return &WorkloadEmptyModel{}
+												}
+												return nil
+											}(),
+											PullPolicy: func() types.String {
+												if v, ok := deepMap["pull_policy"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InitContainer: func() types.Bool {
+									if v, ok := itemMap["init_container"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								LivenessCheck: func() *WorkloadJobContainersLivenessCheckModel {
+									if deepMap, ok := itemMap["liveness_check"].(map[string]interface{}); ok {
+										return &WorkloadJobContainersLivenessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReadinessCheck: func() *WorkloadJobContainersReadinessCheckModel {
+									if deepMap, ok := itemMap["readiness_check"].(map[string]interface{}); ok {
+										return &WorkloadJobContainersReadinessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 			NumReplicas: func() types.Int64 {
 				if v, ok := blockData["num_replicas"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
+			Volumes: func() []WorkloadJobVolumesModel {
+				if listData, ok := blockData["volumes"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadJobVolumesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadJobVolumesModel{
+								EmptyDir: func() *WorkloadJobVolumesEmptyDirModel {
+									if deepMap, ok := itemMap["empty_dir"].(map[string]interface{}); ok {
+										return &WorkloadJobVolumesEmptyDirModel{
+											SizeLimit: func() types.Int64 {
+												if v, ok := deepMap["size_limit"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HostPath: func() *WorkloadJobVolumesHostPathModel {
+									if deepMap, ok := itemMap["host_path"].(map[string]interface{}); ok {
+										return &WorkloadJobVolumesHostPathModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PersistentVolume: func() *WorkloadJobVolumesPersistentVolumeModel {
+									if _, ok := itemMap["persistent_volume"].(map[string]interface{}); ok {
+										return &WorkloadJobVolumesPersistentVolumeModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["service"].(map[string]interface{}); ok && (isImport || data.Service != nil) {
 		data.Service = &WorkloadServiceModel{
+			Containers: func() []WorkloadServiceContainersModel {
+				if listData, ok := blockData["containers"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadServiceContainersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadServiceContainersModel{
+								CustomFlavor: func() *WorkloadServiceContainersCustomFlavorModel {
+									if deepMap, ok := itemMap["custom_flavor"].(map[string]interface{}); ok {
+										return &WorkloadServiceContainersCustomFlavorModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DefaultFlavor: func() *WorkloadEmptyModel {
+									if _, ok := itemMap["default_flavor"].(map[string]interface{}); ok {
+										return &WorkloadEmptyModel{}
+									}
+									return nil
+								}(),
+								Flavor: func() types.String {
+									if v, ok := itemMap["flavor"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Image: func() *WorkloadServiceContainersImageModel {
+									if deepMap, ok := itemMap["image"].(map[string]interface{}); ok {
+										return &WorkloadServiceContainersImageModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Public: func() *WorkloadEmptyModel {
+												if _, ok := deepMap["public"].(map[string]interface{}); ok {
+													return &WorkloadEmptyModel{}
+												}
+												return nil
+											}(),
+											PullPolicy: func() types.String {
+												if v, ok := deepMap["pull_policy"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InitContainer: func() types.Bool {
+									if v, ok := itemMap["init_container"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								LivenessCheck: func() *WorkloadServiceContainersLivenessCheckModel {
+									if deepMap, ok := itemMap["liveness_check"].(map[string]interface{}); ok {
+										return &WorkloadServiceContainersLivenessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReadinessCheck: func() *WorkloadServiceContainersReadinessCheckModel {
+									if deepMap, ok := itemMap["readiness_check"].(map[string]interface{}); ok {
+										return &WorkloadServiceContainersReadinessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 			NumReplicas: func() types.Int64 {
 				if v, ok := blockData["num_replicas"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			Volumes: func() []WorkloadServiceVolumesModel {
+				if listData, ok := blockData["volumes"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadServiceVolumesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadServiceVolumesModel{
+								EmptyDir: func() *WorkloadServiceVolumesEmptyDirModel {
+									if deepMap, ok := itemMap["empty_dir"].(map[string]interface{}); ok {
+										return &WorkloadServiceVolumesEmptyDirModel{
+											SizeLimit: func() types.Int64 {
+												if v, ok := deepMap["size_limit"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HostPath: func() *WorkloadServiceVolumesHostPathModel {
+									if deepMap, ok := itemMap["host_path"].(map[string]interface{}); ok {
+										return &WorkloadServiceVolumesHostPathModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PersistentVolume: func() *WorkloadServiceVolumesPersistentVolumeModel {
+									if _, ok := itemMap["persistent_volume"].(map[string]interface{}); ok {
+										return &WorkloadServiceVolumesPersistentVolumeModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 		}
 	}
@@ -13086,11 +13862,243 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 	}
 	if blockData, ok := apiResource.Spec["stateful_service"].(map[string]interface{}); ok && (isImport || data.StatefulService != nil) {
 		data.StatefulService = &WorkloadStatefulServiceModel{
+			Containers: func() []WorkloadStatefulServiceContainersModel {
+				if listData, ok := blockData["containers"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadStatefulServiceContainersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadStatefulServiceContainersModel{
+								CustomFlavor: func() *WorkloadStatefulServiceContainersCustomFlavorModel {
+									if deepMap, ok := itemMap["custom_flavor"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceContainersCustomFlavorModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DefaultFlavor: func() *WorkloadEmptyModel {
+									if _, ok := itemMap["default_flavor"].(map[string]interface{}); ok {
+										return &WorkloadEmptyModel{}
+									}
+									return nil
+								}(),
+								Flavor: func() types.String {
+									if v, ok := itemMap["flavor"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Image: func() *WorkloadStatefulServiceContainersImageModel {
+									if deepMap, ok := itemMap["image"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceContainersImageModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Public: func() *WorkloadEmptyModel {
+												if _, ok := deepMap["public"].(map[string]interface{}); ok {
+													return &WorkloadEmptyModel{}
+												}
+												return nil
+											}(),
+											PullPolicy: func() types.String {
+												if v, ok := deepMap["pull_policy"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								InitContainer: func() types.Bool {
+									if v, ok := itemMap["init_container"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								LivenessCheck: func() *WorkloadStatefulServiceContainersLivenessCheckModel {
+									if deepMap, ok := itemMap["liveness_check"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceContainersLivenessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReadinessCheck: func() *WorkloadStatefulServiceContainersReadinessCheckModel {
+									if deepMap, ok := itemMap["readiness_check"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceContainersReadinessCheckModel{
+											HealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["healthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											InitialDelay: func() types.Int64 {
+												if v, ok := deepMap["initial_delay"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Interval: func() types.Int64 {
+												if v, ok := deepMap["interval"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											Timeout: func() types.Int64 {
+												if v, ok := deepMap["timeout"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											UnhealthyThreshold: func() types.Int64 {
+												if v, ok := deepMap["unhealthy_threshold"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 			NumReplicas: func() types.Int64 {
 				if v, ok := blockData["num_replicas"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			PersistentVolumes: func() []WorkloadStatefulServicePersistentVolumesModel {
+				if listData, ok := blockData["persistent_volumes"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadStatefulServicePersistentVolumesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadStatefulServicePersistentVolumesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								PersistentVolume: func() *WorkloadStatefulServicePersistentVolumesPersistentVolumeModel {
+									if _, ok := itemMap["persistent_volume"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServicePersistentVolumesPersistentVolumeModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			Volumes: func() []WorkloadStatefulServiceVolumesModel {
+				if listData, ok := blockData["volumes"].([]interface{}); ok && len(listData) > 0 {
+					var result []WorkloadStatefulServiceVolumesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, WorkloadStatefulServiceVolumesModel{
+								EmptyDir: func() *WorkloadStatefulServiceVolumesEmptyDirModel {
+									if deepMap, ok := itemMap["empty_dir"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceVolumesEmptyDirModel{
+											SizeLimit: func() types.Int64 {
+												if v, ok := deepMap["size_limit"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HostPath: func() *WorkloadStatefulServiceVolumesHostPathModel {
+									if deepMap, ok := itemMap["host_path"].(map[string]interface{}); ok {
+										return &WorkloadStatefulServiceVolumesHostPathModel{
+											Path: func() types.String {
+												if v, ok := deepMap["path"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 		}
 	}
@@ -13161,12 +14169,125 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 			configurationNestedMap := make(map[string]interface{})
 			jobMap["configuration"] = configurationNestedMap
 		}
+		if len(data.Job.Containers) > 0 {
+			var containersList []map[string]interface{}
+			for _, listItem := range data.Job.Containers {
+				listItemMap := make(map[string]interface{})
+				if listItem.CustomFlavor != nil {
+					custom_flavorDeepMap := make(map[string]interface{})
+					if !listItem.CustomFlavor.Name.IsNull() && !listItem.CustomFlavor.Name.IsUnknown() {
+						custom_flavorDeepMap["name"] = listItem.CustomFlavor.Name.ValueString()
+					}
+					if !listItem.CustomFlavor.Namespace.IsNull() && !listItem.CustomFlavor.Namespace.IsUnknown() {
+						custom_flavorDeepMap["namespace"] = listItem.CustomFlavor.Namespace.ValueString()
+					}
+					if !listItem.CustomFlavor.Tenant.IsNull() && !listItem.CustomFlavor.Tenant.IsUnknown() {
+						custom_flavorDeepMap["tenant"] = listItem.CustomFlavor.Tenant.ValueString()
+					}
+					listItemMap["custom_flavor"] = custom_flavorDeepMap
+				}
+				if listItem.DefaultFlavor != nil {
+					listItemMap["default_flavor"] = map[string]interface{}{}
+				}
+				if !listItem.Flavor.IsNull() && !listItem.Flavor.IsUnknown() {
+					listItemMap["flavor"] = listItem.Flavor.ValueString()
+				}
+				if listItem.Image != nil {
+					imageDeepMap := make(map[string]interface{})
+					if !listItem.Image.Name.IsNull() && !listItem.Image.Name.IsUnknown() {
+						imageDeepMap["name"] = listItem.Image.Name.ValueString()
+					}
+					if listItem.Image.Public != nil {
+						imageDeepMap["public"] = map[string]interface{}{}
+					}
+					if !listItem.Image.PullPolicy.IsNull() && !listItem.Image.PullPolicy.IsUnknown() {
+						imageDeepMap["pull_policy"] = listItem.Image.PullPolicy.ValueString()
+					}
+					listItemMap["image"] = imageDeepMap
+				}
+				if !listItem.InitContainer.IsNull() && !listItem.InitContainer.IsUnknown() {
+					listItemMap["init_container"] = listItem.InitContainer.ValueBool()
+				}
+				if listItem.LivenessCheck != nil {
+					liveness_checkDeepMap := make(map[string]interface{})
+					if !listItem.LivenessCheck.HealthyThreshold.IsNull() && !listItem.LivenessCheck.HealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["healthy_threshold"] = listItem.LivenessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.LivenessCheck.InitialDelay.IsNull() && !listItem.LivenessCheck.InitialDelay.IsUnknown() {
+						liveness_checkDeepMap["initial_delay"] = listItem.LivenessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Interval.IsNull() && !listItem.LivenessCheck.Interval.IsUnknown() {
+						liveness_checkDeepMap["interval"] = listItem.LivenessCheck.Interval.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Timeout.IsNull() && !listItem.LivenessCheck.Timeout.IsUnknown() {
+						liveness_checkDeepMap["timeout"] = listItem.LivenessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.LivenessCheck.UnhealthyThreshold.IsNull() && !listItem.LivenessCheck.UnhealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["unhealthy_threshold"] = listItem.LivenessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["liveness_check"] = liveness_checkDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.ReadinessCheck != nil {
+					readiness_checkDeepMap := make(map[string]interface{})
+					if !listItem.ReadinessCheck.HealthyThreshold.IsNull() && !listItem.ReadinessCheck.HealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["healthy_threshold"] = listItem.ReadinessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.InitialDelay.IsNull() && !listItem.ReadinessCheck.InitialDelay.IsUnknown() {
+						readiness_checkDeepMap["initial_delay"] = listItem.ReadinessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Interval.IsNull() && !listItem.ReadinessCheck.Interval.IsUnknown() {
+						readiness_checkDeepMap["interval"] = listItem.ReadinessCheck.Interval.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Timeout.IsNull() && !listItem.ReadinessCheck.Timeout.IsUnknown() {
+						readiness_checkDeepMap["timeout"] = listItem.ReadinessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.UnhealthyThreshold.IsNull() && !listItem.ReadinessCheck.UnhealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["unhealthy_threshold"] = listItem.ReadinessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["readiness_check"] = readiness_checkDeepMap
+				}
+				containersList = append(containersList, listItemMap)
+			}
+			jobMap["containers"] = containersList
+		}
 		if data.Job.DeployOptions != nil {
 			deploy_optionsNestedMap := make(map[string]interface{})
 			jobMap["deploy_options"] = deploy_optionsNestedMap
 		}
 		if !data.Job.NumReplicas.IsNull() && !data.Job.NumReplicas.IsUnknown() {
 			jobMap["num_replicas"] = data.Job.NumReplicas.ValueInt64()
+		}
+		if len(data.Job.Volumes) > 0 {
+			var volumesList []map[string]interface{}
+			for _, listItem := range data.Job.Volumes {
+				listItemMap := make(map[string]interface{})
+				if listItem.EmptyDir != nil {
+					empty_dirDeepMap := make(map[string]interface{})
+					if !listItem.EmptyDir.SizeLimit.IsNull() && !listItem.EmptyDir.SizeLimit.IsUnknown() {
+						empty_dirDeepMap["size_limit"] = listItem.EmptyDir.SizeLimit.ValueInt64()
+					}
+					listItemMap["empty_dir"] = empty_dirDeepMap
+				}
+				if listItem.HostPath != nil {
+					host_pathDeepMap := make(map[string]interface{})
+					if !listItem.HostPath.Path.IsNull() && !listItem.HostPath.Path.IsUnknown() {
+						host_pathDeepMap["path"] = listItem.HostPath.Path.ValueString()
+					}
+					listItemMap["host_path"] = host_pathDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.PersistentVolume != nil {
+					persistent_volumeDeepMap := make(map[string]interface{})
+					listItemMap["persistent_volume"] = persistent_volumeDeepMap
+				}
+				volumesList = append(volumesList, listItemMap)
+			}
+			jobMap["volumes"] = volumesList
 		}
 		apiResource.Spec["job"] = jobMap
 	}
@@ -13180,6 +14301,90 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 			configurationNestedMap := make(map[string]interface{})
 			serviceMap["configuration"] = configurationNestedMap
 		}
+		if len(data.Service.Containers) > 0 {
+			var containersList []map[string]interface{}
+			for _, listItem := range data.Service.Containers {
+				listItemMap := make(map[string]interface{})
+				if listItem.CustomFlavor != nil {
+					custom_flavorDeepMap := make(map[string]interface{})
+					if !listItem.CustomFlavor.Name.IsNull() && !listItem.CustomFlavor.Name.IsUnknown() {
+						custom_flavorDeepMap["name"] = listItem.CustomFlavor.Name.ValueString()
+					}
+					if !listItem.CustomFlavor.Namespace.IsNull() && !listItem.CustomFlavor.Namespace.IsUnknown() {
+						custom_flavorDeepMap["namespace"] = listItem.CustomFlavor.Namespace.ValueString()
+					}
+					if !listItem.CustomFlavor.Tenant.IsNull() && !listItem.CustomFlavor.Tenant.IsUnknown() {
+						custom_flavorDeepMap["tenant"] = listItem.CustomFlavor.Tenant.ValueString()
+					}
+					listItemMap["custom_flavor"] = custom_flavorDeepMap
+				}
+				if listItem.DefaultFlavor != nil {
+					listItemMap["default_flavor"] = map[string]interface{}{}
+				}
+				if !listItem.Flavor.IsNull() && !listItem.Flavor.IsUnknown() {
+					listItemMap["flavor"] = listItem.Flavor.ValueString()
+				}
+				if listItem.Image != nil {
+					imageDeepMap := make(map[string]interface{})
+					if !listItem.Image.Name.IsNull() && !listItem.Image.Name.IsUnknown() {
+						imageDeepMap["name"] = listItem.Image.Name.ValueString()
+					}
+					if listItem.Image.Public != nil {
+						imageDeepMap["public"] = map[string]interface{}{}
+					}
+					if !listItem.Image.PullPolicy.IsNull() && !listItem.Image.PullPolicy.IsUnknown() {
+						imageDeepMap["pull_policy"] = listItem.Image.PullPolicy.ValueString()
+					}
+					listItemMap["image"] = imageDeepMap
+				}
+				if !listItem.InitContainer.IsNull() && !listItem.InitContainer.IsUnknown() {
+					listItemMap["init_container"] = listItem.InitContainer.ValueBool()
+				}
+				if listItem.LivenessCheck != nil {
+					liveness_checkDeepMap := make(map[string]interface{})
+					if !listItem.LivenessCheck.HealthyThreshold.IsNull() && !listItem.LivenessCheck.HealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["healthy_threshold"] = listItem.LivenessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.LivenessCheck.InitialDelay.IsNull() && !listItem.LivenessCheck.InitialDelay.IsUnknown() {
+						liveness_checkDeepMap["initial_delay"] = listItem.LivenessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Interval.IsNull() && !listItem.LivenessCheck.Interval.IsUnknown() {
+						liveness_checkDeepMap["interval"] = listItem.LivenessCheck.Interval.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Timeout.IsNull() && !listItem.LivenessCheck.Timeout.IsUnknown() {
+						liveness_checkDeepMap["timeout"] = listItem.LivenessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.LivenessCheck.UnhealthyThreshold.IsNull() && !listItem.LivenessCheck.UnhealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["unhealthy_threshold"] = listItem.LivenessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["liveness_check"] = liveness_checkDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.ReadinessCheck != nil {
+					readiness_checkDeepMap := make(map[string]interface{})
+					if !listItem.ReadinessCheck.HealthyThreshold.IsNull() && !listItem.ReadinessCheck.HealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["healthy_threshold"] = listItem.ReadinessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.InitialDelay.IsNull() && !listItem.ReadinessCheck.InitialDelay.IsUnknown() {
+						readiness_checkDeepMap["initial_delay"] = listItem.ReadinessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Interval.IsNull() && !listItem.ReadinessCheck.Interval.IsUnknown() {
+						readiness_checkDeepMap["interval"] = listItem.ReadinessCheck.Interval.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Timeout.IsNull() && !listItem.ReadinessCheck.Timeout.IsUnknown() {
+						readiness_checkDeepMap["timeout"] = listItem.ReadinessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.UnhealthyThreshold.IsNull() && !listItem.ReadinessCheck.UnhealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["unhealthy_threshold"] = listItem.ReadinessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["readiness_check"] = readiness_checkDeepMap
+				}
+				containersList = append(containersList, listItemMap)
+			}
+			serviceMap["containers"] = containersList
+		}
 		if data.Service.DeployOptions != nil {
 			deploy_optionsNestedMap := make(map[string]interface{})
 			serviceMap["deploy_options"] = deploy_optionsNestedMap
@@ -13189,6 +14394,35 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 		}
 		if data.Service.ScaleToZero != nil {
 			serviceMap["scale_to_zero"] = map[string]interface{}{}
+		}
+		if len(data.Service.Volumes) > 0 {
+			var volumesList []map[string]interface{}
+			for _, listItem := range data.Service.Volumes {
+				listItemMap := make(map[string]interface{})
+				if listItem.EmptyDir != nil {
+					empty_dirDeepMap := make(map[string]interface{})
+					if !listItem.EmptyDir.SizeLimit.IsNull() && !listItem.EmptyDir.SizeLimit.IsUnknown() {
+						empty_dirDeepMap["size_limit"] = listItem.EmptyDir.SizeLimit.ValueInt64()
+					}
+					listItemMap["empty_dir"] = empty_dirDeepMap
+				}
+				if listItem.HostPath != nil {
+					host_pathDeepMap := make(map[string]interface{})
+					if !listItem.HostPath.Path.IsNull() && !listItem.HostPath.Path.IsUnknown() {
+						host_pathDeepMap["path"] = listItem.HostPath.Path.ValueString()
+					}
+					listItemMap["host_path"] = host_pathDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.PersistentVolume != nil {
+					persistent_volumeDeepMap := make(map[string]interface{})
+					listItemMap["persistent_volume"] = persistent_volumeDeepMap
+				}
+				volumesList = append(volumesList, listItemMap)
+			}
+			serviceMap["volumes"] = volumesList
 		}
 		apiResource.Spec["service"] = serviceMap
 	}
@@ -13246,6 +14480,90 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 			configurationNestedMap := make(map[string]interface{})
 			stateful_serviceMap["configuration"] = configurationNestedMap
 		}
+		if len(data.StatefulService.Containers) > 0 {
+			var containersList []map[string]interface{}
+			for _, listItem := range data.StatefulService.Containers {
+				listItemMap := make(map[string]interface{})
+				if listItem.CustomFlavor != nil {
+					custom_flavorDeepMap := make(map[string]interface{})
+					if !listItem.CustomFlavor.Name.IsNull() && !listItem.CustomFlavor.Name.IsUnknown() {
+						custom_flavorDeepMap["name"] = listItem.CustomFlavor.Name.ValueString()
+					}
+					if !listItem.CustomFlavor.Namespace.IsNull() && !listItem.CustomFlavor.Namespace.IsUnknown() {
+						custom_flavorDeepMap["namespace"] = listItem.CustomFlavor.Namespace.ValueString()
+					}
+					if !listItem.CustomFlavor.Tenant.IsNull() && !listItem.CustomFlavor.Tenant.IsUnknown() {
+						custom_flavorDeepMap["tenant"] = listItem.CustomFlavor.Tenant.ValueString()
+					}
+					listItemMap["custom_flavor"] = custom_flavorDeepMap
+				}
+				if listItem.DefaultFlavor != nil {
+					listItemMap["default_flavor"] = map[string]interface{}{}
+				}
+				if !listItem.Flavor.IsNull() && !listItem.Flavor.IsUnknown() {
+					listItemMap["flavor"] = listItem.Flavor.ValueString()
+				}
+				if listItem.Image != nil {
+					imageDeepMap := make(map[string]interface{})
+					if !listItem.Image.Name.IsNull() && !listItem.Image.Name.IsUnknown() {
+						imageDeepMap["name"] = listItem.Image.Name.ValueString()
+					}
+					if listItem.Image.Public != nil {
+						imageDeepMap["public"] = map[string]interface{}{}
+					}
+					if !listItem.Image.PullPolicy.IsNull() && !listItem.Image.PullPolicy.IsUnknown() {
+						imageDeepMap["pull_policy"] = listItem.Image.PullPolicy.ValueString()
+					}
+					listItemMap["image"] = imageDeepMap
+				}
+				if !listItem.InitContainer.IsNull() && !listItem.InitContainer.IsUnknown() {
+					listItemMap["init_container"] = listItem.InitContainer.ValueBool()
+				}
+				if listItem.LivenessCheck != nil {
+					liveness_checkDeepMap := make(map[string]interface{})
+					if !listItem.LivenessCheck.HealthyThreshold.IsNull() && !listItem.LivenessCheck.HealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["healthy_threshold"] = listItem.LivenessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.LivenessCheck.InitialDelay.IsNull() && !listItem.LivenessCheck.InitialDelay.IsUnknown() {
+						liveness_checkDeepMap["initial_delay"] = listItem.LivenessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Interval.IsNull() && !listItem.LivenessCheck.Interval.IsUnknown() {
+						liveness_checkDeepMap["interval"] = listItem.LivenessCheck.Interval.ValueInt64()
+					}
+					if !listItem.LivenessCheck.Timeout.IsNull() && !listItem.LivenessCheck.Timeout.IsUnknown() {
+						liveness_checkDeepMap["timeout"] = listItem.LivenessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.LivenessCheck.UnhealthyThreshold.IsNull() && !listItem.LivenessCheck.UnhealthyThreshold.IsUnknown() {
+						liveness_checkDeepMap["unhealthy_threshold"] = listItem.LivenessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["liveness_check"] = liveness_checkDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.ReadinessCheck != nil {
+					readiness_checkDeepMap := make(map[string]interface{})
+					if !listItem.ReadinessCheck.HealthyThreshold.IsNull() && !listItem.ReadinessCheck.HealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["healthy_threshold"] = listItem.ReadinessCheck.HealthyThreshold.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.InitialDelay.IsNull() && !listItem.ReadinessCheck.InitialDelay.IsUnknown() {
+						readiness_checkDeepMap["initial_delay"] = listItem.ReadinessCheck.InitialDelay.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Interval.IsNull() && !listItem.ReadinessCheck.Interval.IsUnknown() {
+						readiness_checkDeepMap["interval"] = listItem.ReadinessCheck.Interval.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.Timeout.IsNull() && !listItem.ReadinessCheck.Timeout.IsUnknown() {
+						readiness_checkDeepMap["timeout"] = listItem.ReadinessCheck.Timeout.ValueInt64()
+					}
+					if !listItem.ReadinessCheck.UnhealthyThreshold.IsNull() && !listItem.ReadinessCheck.UnhealthyThreshold.IsUnknown() {
+						readiness_checkDeepMap["unhealthy_threshold"] = listItem.ReadinessCheck.UnhealthyThreshold.ValueInt64()
+					}
+					listItemMap["readiness_check"] = readiness_checkDeepMap
+				}
+				containersList = append(containersList, listItemMap)
+			}
+			stateful_serviceMap["containers"] = containersList
+		}
 		if data.StatefulService.DeployOptions != nil {
 			deploy_optionsNestedMap := make(map[string]interface{})
 			stateful_serviceMap["deploy_options"] = deploy_optionsNestedMap
@@ -13253,8 +14571,48 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 		if !data.StatefulService.NumReplicas.IsNull() && !data.StatefulService.NumReplicas.IsUnknown() {
 			stateful_serviceMap["num_replicas"] = data.StatefulService.NumReplicas.ValueInt64()
 		}
+		if len(data.StatefulService.PersistentVolumes) > 0 {
+			var persistent_volumesList []map[string]interface{}
+			for _, listItem := range data.StatefulService.PersistentVolumes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.PersistentVolume != nil {
+					persistent_volumeDeepMap := make(map[string]interface{})
+					listItemMap["persistent_volume"] = persistent_volumeDeepMap
+				}
+				persistent_volumesList = append(persistent_volumesList, listItemMap)
+			}
+			stateful_serviceMap["persistent_volumes"] = persistent_volumesList
+		}
 		if data.StatefulService.ScaleToZero != nil {
 			stateful_serviceMap["scale_to_zero"] = map[string]interface{}{}
+		}
+		if len(data.StatefulService.Volumes) > 0 {
+			var volumesList []map[string]interface{}
+			for _, listItem := range data.StatefulService.Volumes {
+				listItemMap := make(map[string]interface{})
+				if listItem.EmptyDir != nil {
+					empty_dirDeepMap := make(map[string]interface{})
+					if !listItem.EmptyDir.SizeLimit.IsNull() && !listItem.EmptyDir.SizeLimit.IsUnknown() {
+						empty_dirDeepMap["size_limit"] = listItem.EmptyDir.SizeLimit.ValueInt64()
+					}
+					listItemMap["empty_dir"] = empty_dirDeepMap
+				}
+				if listItem.HostPath != nil {
+					host_pathDeepMap := make(map[string]interface{})
+					if !listItem.HostPath.Path.IsNull() && !listItem.HostPath.Path.IsUnknown() {
+						host_pathDeepMap["path"] = listItem.HostPath.Path.ValueString()
+					}
+					listItemMap["host_path"] = host_pathDeepMap
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				volumesList = append(volumesList, listItemMap)
+			}
+			stateful_serviceMap["volumes"] = volumesList
 		}
 		apiResource.Spec["stateful_service"] = stateful_serviceMap
 	}

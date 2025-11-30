@@ -663,6 +663,19 @@ func (r *WAFExclusionPolicyResource) Read(ctx context.Context, req resource.Read
 						}
 						return nil
 					}(),
+					Methods: func() types.List {
+						if v, ok := itemMap["methods"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
 					PathPrefix: func() types.String {
 						if v, ok := itemMap["path_prefix"].(string); ok && v != "" {
 							return types.StringValue(v)

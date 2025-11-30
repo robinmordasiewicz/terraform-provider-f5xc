@@ -523,18 +523,22 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
-	// For resources without namespace in API path, namespace is computed from API response
-	data.Namespace = types.StringValue(created.Metadata.Namespace)
 
 	// Set computed fields from API response
 	if v, ok := created.Spec["company_name"].(string); ok && v != "" {
 		data.CompanyName = types.StringValue(v)
+	} else if data.CompanyName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.CompanyName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["domain"].(string); ok && v != "" {
 		data.Domain = types.StringValue(v)
+	} else if data.Domain.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Domain = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -931,12 +935,18 @@ func (r *ChildTenantResource) Update(ctx context.Context, req resource.UpdateReq
 	// Set computed fields from API response
 	if v, ok := updated.Spec["company_name"].(string); ok && v != "" {
 		data.CompanyName = types.StringValue(v)
+	} else if data.CompanyName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.CompanyName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["domain"].(string); ok && v != "" {
 		data.Domain = types.StringValue(v)
+	} else if data.Domain.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Domain = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -996,17 +1006,19 @@ func (r *ChildTenantResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *ChildTenantResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: name (no namespace for this resource type)
-	name := req.ID
-	if name == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			"Expected import ID to be the resource name, got empty string",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
+	namespace := parts[0]
+	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

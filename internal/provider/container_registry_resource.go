@@ -404,16 +404,25 @@ func (r *ContainerRegistryResource) Create(ctx context.Context, req resource.Cre
 	// Set computed fields from API response
 	if v, ok := created.Spec["email"].(string); ok && v != "" {
 		data.Email = types.StringValue(v)
+	} else if data.Email.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Email = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["registry"].(string); ok && v != "" {
 		data.Registry = types.StringValue(v)
+	} else if data.Registry.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Registry = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["user_name"].(string); ok && v != "" {
 		data.UserName = types.StringValue(v)
+	} else if data.UserName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.UserName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -638,16 +647,25 @@ func (r *ContainerRegistryResource) Update(ctx context.Context, req resource.Upd
 	// Set computed fields from API response
 	if v, ok := updated.Spec["email"].(string); ok && v != "" {
 		data.Email = types.StringValue(v)
+	} else if data.Email.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Email = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["registry"].(string); ok && v != "" {
 		data.Registry = types.StringValue(v)
+	} else if data.Registry.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Registry = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["user_name"].(string); ok && v != "" {
 		data.UserName = types.StringValue(v)
+	} else if data.UserName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.UserName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

@@ -347,8 +347,11 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 	// Set computed fields from API response
 	if v, ok := created.Spec["mode"].(string); ok && v != "" {
 		data.Mode = types.StringValue(v)
+	} else if data.Mode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Mode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -582,8 +585,11 @@ func (r *AddressAllocatorResource) Update(ctx context.Context, req resource.Upda
 	// Set computed fields from API response
 	if v, ok := updated.Spec["mode"].(string); ok && v != "" {
 		data.Mode = types.StringValue(v)
+	} else if data.Mode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Mode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

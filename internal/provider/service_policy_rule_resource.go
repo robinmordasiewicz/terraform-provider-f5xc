@@ -1821,16 +1821,25 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	// Set computed fields from API response
 	if v, ok := created.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
+	} else if data.Action.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Action = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["client_name"].(string); ok && v != "" {
 		data.ClientName = types.StringValue(v)
+	} else if data.ClientName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ClientName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["expiration_timestamp"].(string); ok && v != "" {
 		data.ExpirationTimestamp = types.StringValue(v)
+	} else if data.ExpirationTimestamp.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ExpirationTimestamp = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2836,16 +2845,25 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	// Set computed fields from API response
 	if v, ok := updated.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
+	} else if data.Action.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Action = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["client_name"].(string); ok && v != "" {
 		data.ClientName = types.StringValue(v)
+	} else if data.ClientName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ClientName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["expiration_timestamp"].(string); ok && v != "" {
 		data.ExpirationTimestamp = types.StringValue(v)
+	} else if data.ExpirationTimestamp.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ExpirationTimestamp = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

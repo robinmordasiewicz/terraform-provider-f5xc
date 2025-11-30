@@ -80,10 +80,11 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the APICredential will be created.",
-				Required: true,
+				MarkdownDescription: "Namespace for the APICredential. For this resource type, namespace should be empty or omitted.",
+				Optional: true,
+				Computed: true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.UseStateForUnknown(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -327,20 +328,32 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 	// Set computed fields from API response
 	if v, ok := created.Spec["password"].(string); ok && v != "" {
 		data.Password = types.StringValue(v)
+	} else if data.Password.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Password = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["type"].(string); ok && v != "" {
 		data.Type = types.StringValue(v)
+	} else if data.Type.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Type = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["virtual_k8s_name"].(string); ok && v != "" {
 		data.VirtualK8SName = types.StringValue(v)
+	} else if data.VirtualK8SName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VirtualK8SName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["virtual_k8s_namespace"].(string); ok && v != "" {
 		data.VirtualK8SNamespace = types.StringValue(v)
+	} else if data.VirtualK8SNamespace.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VirtualK8SNamespace = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -541,20 +554,32 @@ func (r *APICredentialResource) Update(ctx context.Context, req resource.UpdateR
 	// Set computed fields from API response
 	if v, ok := updated.Spec["password"].(string); ok && v != "" {
 		data.Password = types.StringValue(v)
+	} else if data.Password.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Password = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["type"].(string); ok && v != "" {
 		data.Type = types.StringValue(v)
+	} else if data.Type.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Type = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["virtual_k8s_name"].(string); ok && v != "" {
 		data.VirtualK8SName = types.StringValue(v)
+	} else if data.VirtualK8SName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VirtualK8SName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["virtual_k8s_namespace"].(string); ok && v != "" {
 		data.VirtualK8SNamespace = types.StringValue(v)
+	} else if data.VirtualK8SNamespace.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VirtualK8SNamespace = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

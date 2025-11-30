@@ -399,44 +399,74 @@ func (r *ContactResource) Create(ctx context.Context, req resource.CreateRequest
 	// Set computed fields from API response
 	if v, ok := created.Spec["address1"].(string); ok && v != "" {
 		data.Address1 = types.StringValue(v)
+	} else if data.Address1.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address1 = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["address2"].(string); ok && v != "" {
 		data.Address2 = types.StringValue(v)
+	} else if data.Address2.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address2 = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["city"].(string); ok && v != "" {
 		data.City = types.StringValue(v)
+	} else if data.City.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.City = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["contact_type"].(string); ok && v != "" {
 		data.ContactType = types.StringValue(v)
+	} else if data.ContactType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ContactType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["country"].(string); ok && v != "" {
 		data.Country = types.StringValue(v)
+	} else if data.Country.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Country = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["county"].(string); ok && v != "" {
 		data.County = types.StringValue(v)
+	} else if data.County.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.County = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["phone_number"].(string); ok && v != "" {
 		data.PhoneNumber = types.StringValue(v)
+	} else if data.PhoneNumber.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PhoneNumber = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["state"].(string); ok && v != "" {
 		data.State = types.StringValue(v)
+	} else if data.State.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.State = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["state_code"].(string); ok && v != "" {
 		data.StateCode = types.StringValue(v)
+	} else if data.StateCode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.StateCode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["zip_code"].(string); ok && v != "" {
 		data.ZipCode = types.StringValue(v)
+	} else if data.ZipCode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ZipCode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -685,44 +715,74 @@ func (r *ContactResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Set computed fields from API response
 	if v, ok := updated.Spec["address1"].(string); ok && v != "" {
 		data.Address1 = types.StringValue(v)
+	} else if data.Address1.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address1 = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["address2"].(string); ok && v != "" {
 		data.Address2 = types.StringValue(v)
+	} else if data.Address2.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address2 = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["city"].(string); ok && v != "" {
 		data.City = types.StringValue(v)
+	} else if data.City.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.City = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["contact_type"].(string); ok && v != "" {
 		data.ContactType = types.StringValue(v)
+	} else if data.ContactType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ContactType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["country"].(string); ok && v != "" {
 		data.Country = types.StringValue(v)
+	} else if data.Country.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Country = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["county"].(string); ok && v != "" {
 		data.County = types.StringValue(v)
+	} else if data.County.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.County = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["phone_number"].(string); ok && v != "" {
 		data.PhoneNumber = types.StringValue(v)
+	} else if data.PhoneNumber.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PhoneNumber = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["state"].(string); ok && v != "" {
 		data.State = types.StringValue(v)
+	} else if data.State.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.State = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["state_code"].(string); ok && v != "" {
 		data.StateCode = types.StringValue(v)
+	} else if data.StateCode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.StateCode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["zip_code"].(string); ok && v != "" {
 		data.ZipCode = types.StringValue(v)
+	} else if data.ZipCode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ZipCode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

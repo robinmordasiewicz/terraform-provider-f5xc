@@ -1199,28 +1199,46 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 	// Set computed fields from API response
 	if v, ok := created.Spec["connection_timeout"].(float64); ok {
 		data.ConnectionTimeout = types.Int64Value(int64(v))
+	} else if data.ConnectionTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectionTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["endpoint_selection"].(string); ok && v != "" {
 		data.EndpointSelection = types.StringValue(v)
+	} else if data.EndpointSelection.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EndpointSelection = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["fallback_policy"].(string); ok && v != "" {
 		data.FallbackPolicy = types.StringValue(v)
+	} else if data.FallbackPolicy.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.FallbackPolicy = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["http_idle_timeout"].(float64); ok {
 		data.HTTPIdleTimeout = types.Int64Value(int64(v))
+	} else if data.HTTPIdleTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.HTTPIdleTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
 		data.LoadBalancerAlgorithm = types.StringValue(v)
+	} else if data.LoadBalancerAlgorithm.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.LoadBalancerAlgorithm = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["panic_threshold"].(float64); ok {
 		data.PanicThreshold = types.Int64Value(int64(v))
+	} else if data.PanicThreshold.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PanicThreshold = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1849,28 +1867,46 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Set computed fields from API response
 	if v, ok := updated.Spec["connection_timeout"].(float64); ok {
 		data.ConnectionTimeout = types.Int64Value(int64(v))
+	} else if data.ConnectionTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectionTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["endpoint_selection"].(string); ok && v != "" {
 		data.EndpointSelection = types.StringValue(v)
+	} else if data.EndpointSelection.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EndpointSelection = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["fallback_policy"].(string); ok && v != "" {
 		data.FallbackPolicy = types.StringValue(v)
+	} else if data.FallbackPolicy.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.FallbackPolicy = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["http_idle_timeout"].(float64); ok {
 		data.HTTPIdleTimeout = types.Int64Value(int64(v))
+	} else if data.HTTPIdleTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.HTTPIdleTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
 		data.LoadBalancerAlgorithm = types.StringValue(v)
+	} else if data.LoadBalancerAlgorithm.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.LoadBalancerAlgorithm = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["panic_threshold"].(float64); ok {
 		data.PanicThreshold = types.Int64Value(int64(v))
+	} else if data.PanicThreshold.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PanicThreshold = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

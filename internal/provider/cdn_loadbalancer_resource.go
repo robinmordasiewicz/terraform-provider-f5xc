@@ -9245,7 +9245,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				blocked_clientsList = append(blocked_clientsList, CDNLoadBalancerBlockedClientsModel{
 					AsNumber: func() types.Int64 {
-						if v, ok := itemMap["as_number"].(float64); ok {
+						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -9693,19 +9693,19 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
 							return &CDNLoadBalancerGraphqlRulesGraphqlSettingsModel{
 								MaxBatchedQueries: func() types.Int64 {
-									if v, ok := nestedMap["max_batched_queries"].(float64); ok {
+									if v, ok := nestedMap["max_batched_queries"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								MaxDepth: func() types.Int64 {
-									if v, ok := nestedMap["max_depth"].(float64); ok {
+									if v, ok := nestedMap["max_depth"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								MaxTotalLength: func() types.Int64 {
-									if v, ok := nestedMap["max_total_length"].(float64); ok {
+									if v, ok := nestedMap["max_total_length"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -9988,7 +9988,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return nil
 					}(),
 					MaxAgeValue: func() types.Int64 {
-						if v, ok := itemMap["max_age_value"].(float64); ok {
+						if v, ok := itemMap["max_age_value"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -10064,7 +10064,7 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				trusted_clientsList = append(trusted_clientsList, CDNLoadBalancerTrustedClientsModel{
 					AsNumber: func() types.Int64 {
-						if v, ok := itemMap["as_number"].(float64); ok {
+						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()

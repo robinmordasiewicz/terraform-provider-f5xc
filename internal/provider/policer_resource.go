@@ -328,20 +328,32 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 	// Set computed fields from API response
 	if v, ok := created.Spec["burst_size"].(float64); ok {
 		data.BurstSize = types.Int64Value(int64(v))
+	} else if data.BurstSize.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.BurstSize = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["committed_information_rate"].(float64); ok {
 		data.CommittedInformationRate = types.Int64Value(int64(v))
+	} else if data.CommittedInformationRate.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.CommittedInformationRate = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["policer_mode"].(string); ok && v != "" {
 		data.PolicerMode = types.StringValue(v)
+	} else if data.PolicerMode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PolicerMode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["policer_type"].(string); ok && v != "" {
 		data.PolicerType = types.StringValue(v)
+	} else if data.PolicerType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PolicerType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -542,20 +554,32 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Set computed fields from API response
 	if v, ok := updated.Spec["burst_size"].(float64); ok {
 		data.BurstSize = types.Int64Value(int64(v))
+	} else if data.BurstSize.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.BurstSize = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["committed_information_rate"].(float64); ok {
 		data.CommittedInformationRate = types.Int64Value(int64(v))
+	} else if data.CommittedInformationRate.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.CommittedInformationRate = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["policer_mode"].(string); ok && v != "" {
 		data.PolicerMode = types.StringValue(v)
+	} else if data.PolicerMode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PolicerMode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["policer_type"].(string); ok && v != "" {
 		data.PolicerType = types.StringValue(v)
+	} else if data.PolicerType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PolicerType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

@@ -1904,8 +1904,11 @@ func (r *ServicePolicyResource) Create(ctx context.Context, req resource.CreateR
 	// Set computed fields from API response
 	if v, ok := created.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
+	} else if data.ServerName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2188,8 +2191,11 @@ func (r *ServicePolicyResource) Update(ctx context.Context, req resource.UpdateR
 	// Set computed fields from API response
 	if v, ok := updated.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
+	} else if data.ServerName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

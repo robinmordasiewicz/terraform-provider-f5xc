@@ -3179,32 +3179,53 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	// Set computed fields from API response
 	if v, ok := created.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
+	} else if data.Address.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["aws_region"].(string); ok && v != "" {
 		data.AWSRegion = types.StringValue(v)
+	} else if data.AWSRegion.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AWSRegion = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["disk_size"].(float64); ok {
 		data.DiskSize = types.Int64Value(int64(v))
+	} else if data.DiskSize.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DiskSize = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["instance_type"].(string); ok && v != "" {
 		data.InstanceType = types.StringValue(v)
+	} else if data.InstanceType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.InstanceType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["nodes_per_az"].(float64); ok {
 		data.NodesPerAz = types.Int64Value(int64(v))
+	} else if data.NodesPerAz.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.NodesPerAz = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["ssh_key"].(string); ok && v != "" {
 		data.SSHKey = types.StringValue(v)
+	} else if data.SSHKey.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SSHKey = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["total_nodes"].(float64); ok {
 		data.TotalNodes = types.Int64Value(int64(v))
+	} else if data.TotalNodes.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TotalNodes = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -4151,32 +4172,53 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 	// Set computed fields from API response
 	if v, ok := updated.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
+	} else if data.Address.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["aws_region"].(string); ok && v != "" {
 		data.AWSRegion = types.StringValue(v)
+	} else if data.AWSRegion.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AWSRegion = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["disk_size"].(float64); ok {
 		data.DiskSize = types.Int64Value(int64(v))
+	} else if data.DiskSize.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DiskSize = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["instance_type"].(string); ok && v != "" {
 		data.InstanceType = types.StringValue(v)
+	} else if data.InstanceType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.InstanceType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["nodes_per_az"].(float64); ok {
 		data.NodesPerAz = types.Int64Value(int64(v))
+	} else if data.NodesPerAz.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.NodesPerAz = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["ssh_key"].(string); ok && v != "" {
 		data.SSHKey = types.StringValue(v)
+	} else if data.SSHKey.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SSHKey = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["total_nodes"].(float64); ok {
 		data.TotalNodes = types.Int64Value(int64(v))
+	} else if data.TotalNodes.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TotalNodes = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

@@ -539,8 +539,11 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 	// Set computed fields from API response
 	if v, ok := created.Spec["max_validity_duration"].(string); ok && v != "" {
 		data.MaxValidityDuration = types.StringValue(v)
+	} else if data.MaxValidityDuration.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.MaxValidityDuration = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -796,8 +799,11 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 	// Set computed fields from API response
 	if v, ok := updated.Spec["max_validity_duration"].(string); ok && v != "" {
 		data.MaxValidityDuration = types.StringValue(v)
+	} else if data.MaxValidityDuration.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.MaxValidityDuration = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

@@ -329,16 +329,25 @@ func (r *Srv6NetworkSliceResource) Create(ctx context.Context, req resource.Crea
 	// Set computed fields from API response
 	if v, ok := created.Spec["connect_to_access_networks"].(bool); ok {
 		data.ConnectToAccessNetworks = types.BoolValue(v)
+	} else if data.ConnectToAccessNetworks.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectToAccessNetworks = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["connect_to_enterprise_networks"].(bool); ok {
 		data.ConnectToEnterpriseNetworks = types.BoolValue(v)
+	} else if data.ConnectToEnterpriseNetworks.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectToEnterpriseNetworks = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["connect_to_internet"].(bool); ok {
 		data.ConnectToInternet = types.BoolValue(v)
+	} else if data.ConnectToInternet.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectToInternet = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -571,16 +580,25 @@ func (r *Srv6NetworkSliceResource) Update(ctx context.Context, req resource.Upda
 	// Set computed fields from API response
 	if v, ok := updated.Spec["connect_to_access_networks"].(bool); ok {
 		data.ConnectToAccessNetworks = types.BoolValue(v)
+	} else if data.ConnectToAccessNetworks.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectToAccessNetworks = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["connect_to_enterprise_networks"].(bool); ok {
 		data.ConnectToEnterpriseNetworks = types.BoolValue(v)
+	} else if data.ConnectToEnterpriseNetworks.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectToEnterpriseNetworks = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["connect_to_internet"].(bool); ok {
 		data.ConnectToInternet = types.BoolValue(v)
+	} else if data.ConnectToInternet.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectToInternet = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

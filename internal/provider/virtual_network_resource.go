@@ -441,8 +441,11 @@ func (r *VirtualNetworkResource) Create(ctx context.Context, req resource.Create
 	// Set computed fields from API response
 	if v, ok := created.Spec["legacy_type"].(string); ok && v != "" {
 		data.LegacyType = types.StringValue(v)
+	} else if data.LegacyType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.LegacyType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -693,8 +696,11 @@ func (r *VirtualNetworkResource) Update(ctx context.Context, req resource.Update
 	// Set computed fields from API response
 	if v, ok := updated.Spec["legacy_type"].(string); ok && v != "" {
 		data.LegacyType = types.StringValue(v)
+	} else if data.LegacyType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.LegacyType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

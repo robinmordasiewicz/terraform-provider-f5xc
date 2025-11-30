@@ -291,8 +291,11 @@ func (r *CertificateChainResource) Create(ctx context.Context, req resource.Crea
 	// Set computed fields from API response
 	if v, ok := created.Spec["certificate_url"].(string); ok && v != "" {
 		data.CertificateURL = types.StringValue(v)
+	} else if data.CertificateURL.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.CertificateURL = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -469,8 +472,11 @@ func (r *CertificateChainResource) Update(ctx context.Context, req resource.Upda
 	// Set computed fields from API response
 	if v, ok := updated.Spec["certificate_url"].(string); ok && v != "" {
 		data.CertificateURL = types.StringValue(v)
+	} else if data.CertificateURL.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.CertificateURL = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

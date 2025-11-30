@@ -425,12 +425,18 @@ func (r *SecretPolicyResource) Create(ctx context.Context, req resource.CreateRe
 	// Set computed fields from API response
 	if v, ok := created.Spec["allow_f5xc"].(bool); ok {
 		data.AllowF5xc = types.BoolValue(v)
+	} else if data.AllowF5xc.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AllowF5xc = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["decrypt_cache_timeout"].(string); ok && v != "" {
 		data.DecryptCacheTimeout = types.StringValue(v)
+	} else if data.DecryptCacheTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DecryptCacheTimeout = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -630,12 +636,18 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 	// Set computed fields from API response
 	if v, ok := updated.Spec["allow_f5xc"].(bool); ok {
 		data.AllowF5xc = types.BoolValue(v)
+	} else if data.AllowF5xc.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AllowF5xc = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["decrypt_cache_timeout"].(string); ok && v != "" {
 		data.DecryptCacheTimeout = types.StringValue(v)
+	} else if data.DecryptCacheTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DecryptCacheTimeout = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

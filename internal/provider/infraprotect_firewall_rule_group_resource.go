@@ -291,8 +291,11 @@ func (r *InfraprotectFirewallRuleGroupResource) Create(ctx context.Context, req 
 	// Set computed fields from API response
 	if v, ok := created.Spec["firewall_rule_group_name"].(string); ok && v != "" {
 		data.FirewallRuleGroupName = types.StringValue(v)
+	} else if data.FirewallRuleGroupName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.FirewallRuleGroupName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -469,8 +472,11 @@ func (r *InfraprotectFirewallRuleGroupResource) Update(ctx context.Context, req 
 	// Set computed fields from API response
 	if v, ok := updated.Spec["firewall_rule_group_name"].(string); ok && v != "" {
 		data.FirewallRuleGroupName = types.StringValue(v)
+	} else if data.FirewallRuleGroupName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.FirewallRuleGroupName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

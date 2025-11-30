@@ -663,12 +663,18 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 	// Set computed fields from API response
 	if v, ok := created.Spec["load_balancing_mode"].(string); ok && v != "" {
 		data.LoadBalancingMode = types.StringValue(v)
+	} else if data.LoadBalancingMode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.LoadBalancingMode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["ttl"].(float64); ok {
 		data.Ttl = types.Int64Value(int64(v))
+	} else if data.Ttl.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Ttl = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -955,12 +961,18 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 	// Set computed fields from API response
 	if v, ok := updated.Spec["load_balancing_mode"].(string); ok && v != "" {
 		data.LoadBalancingMode = types.StringValue(v)
+	} else if data.LoadBalancingMode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.LoadBalancingMode = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["ttl"].(float64); ok {
 		data.Ttl = types.Int64Value(int64(v))
+	} else if data.Ttl.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Ttl = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

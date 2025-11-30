@@ -878,24 +878,39 @@ func (r *AdvertisePolicyResource) Create(ctx context.Context, req resource.Creat
 	// Set computed fields from API response
 	if v, ok := created.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
+	} else if data.Address.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
+	} else if data.Port.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Port = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["port_ranges"].(string); ok && v != "" {
 		data.PortRanges = types.StringValue(v)
+	} else if data.PortRanges.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PortRanges = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
+	} else if data.Protocol.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Protocol = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["skip_xff_append"].(bool); ok {
 		data.SkipXffAppend = types.BoolValue(v)
+	} else if data.SkipXffAppend.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SkipXffAppend = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1228,24 +1243,39 @@ func (r *AdvertisePolicyResource) Update(ctx context.Context, req resource.Updat
 	// Set computed fields from API response
 	if v, ok := updated.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
+	} else if data.Address.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
+	} else if data.Port.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Port = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["port_ranges"].(string); ok && v != "" {
 		data.PortRanges = types.StringValue(v)
+	} else if data.PortRanges.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PortRanges = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
+	} else if data.Protocol.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Protocol = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["skip_xff_append"].(bool); ok {
 		data.SkipXffAppend = types.BoolValue(v)
+	} else if data.SkipXffAppend.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SkipXffAppend = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

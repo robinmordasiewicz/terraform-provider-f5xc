@@ -460,12 +460,18 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	// Set computed fields from API response
 	if v, ok := created.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
+	} else if data.Action.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Action = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
+	} else if data.Protocol.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Protocol = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -725,12 +731,18 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	// Set computed fields from API response
 	if v, ok := updated.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
+	} else if data.Action.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Action = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
+	} else if data.Protocol.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Protocol = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

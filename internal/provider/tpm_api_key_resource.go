@@ -357,8 +357,11 @@ func (r *TpmAPIKeyResource) Create(ctx context.Context, req resource.CreateReque
 	// Set computed fields from API response
 	if v, ok := created.Spec["need_mtls"].(bool); ok {
 		data.NeedMtls = types.BoolValue(v)
+	} else if data.NeedMtls.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.NeedMtls = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -604,8 +607,11 @@ func (r *TpmAPIKeyResource) Update(ctx context.Context, req resource.UpdateReque
 	// Set computed fields from API response
 	if v, ok := updated.Spec["need_mtls"].(bool); ok {
 		data.NeedMtls = types.BoolValue(v)
+	} else if data.NeedMtls.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.NeedMtls = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

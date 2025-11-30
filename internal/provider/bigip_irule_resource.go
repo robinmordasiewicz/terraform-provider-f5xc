@@ -315,16 +315,25 @@ func (r *BigIPIruleResource) Create(ctx context.Context, req resource.CreateRequ
 	// Set computed fields from API response
 	if v, ok := created.Spec["code"].(string); ok && v != "" {
 		data.Code = types.StringValue(v)
+	} else if data.Code.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Code = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["irule_name"].(string); ok && v != "" {
 		data.IruleName = types.StringValue(v)
+	} else if data.IruleName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.IruleName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["source"].(string); ok && v != "" {
 		data.Source = types.StringValue(v)
+	} else if data.Source.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Source = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -517,16 +526,25 @@ func (r *BigIPIruleResource) Update(ctx context.Context, req resource.UpdateRequ
 	// Set computed fields from API response
 	if v, ok := updated.Spec["code"].(string); ok && v != "" {
 		data.Code = types.StringValue(v)
+	} else if data.Code.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Code = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["irule_name"].(string); ok && v != "" {
 		data.IruleName = types.StringValue(v)
+	} else if data.IruleName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.IruleName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["source"].(string); ok && v != "" {
 		data.Source = types.StringValue(v)
+	} else if data.Source.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Source = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

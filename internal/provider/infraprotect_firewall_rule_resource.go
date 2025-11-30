@@ -711,12 +711,18 @@ func (r *InfraprotectFirewallRuleResource) Create(ctx context.Context, req resou
 	// Set computed fields from API response
 	if v, ok := created.Spec["destination_prefix_single"].(string); ok && v != "" {
 		data.DestinationPrefixSingle = types.StringValue(v)
+	} else if data.DestinationPrefixSingle.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DestinationPrefixSingle = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["source_prefix_single"].(string); ok && v != "" {
 		data.SourcePrefixSingle = types.StringValue(v)
+	} else if data.SourcePrefixSingle.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SourcePrefixSingle = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1386,12 +1392,18 @@ func (r *InfraprotectFirewallRuleResource) Update(ctx context.Context, req resou
 	// Set computed fields from API response
 	if v, ok := updated.Spec["destination_prefix_single"].(string); ok && v != "" {
 		data.DestinationPrefixSingle = types.StringValue(v)
+	} else if data.DestinationPrefixSingle.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DestinationPrefixSingle = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["source_prefix_single"].(string); ok && v != "" {
 		data.SourcePrefixSingle = types.StringValue(v)
+	} else if data.SourcePrefixSingle.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SourcePrefixSingle = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

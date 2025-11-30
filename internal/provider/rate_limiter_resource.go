@@ -585,7 +585,7 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 						return nil
 					}(),
 					BurstMultiplier: func() types.Int64 {
-						if v, ok := itemMap["burst_multiplier"].(float64); ok {
+						if v, ok := itemMap["burst_multiplier"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -603,7 +603,7 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 						return nil
 					}(),
 					PeriodMultiplier: func() types.Int64 {
-						if v, ok := itemMap["period_multiplier"].(float64); ok {
+						if v, ok := itemMap["period_multiplier"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -615,7 +615,7 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 						return nil
 					}(),
 					TotalNumber: func() types.Int64 {
-						if v, ok := itemMap["total_number"].(float64); ok {
+						if v, ok := itemMap["total_number"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()

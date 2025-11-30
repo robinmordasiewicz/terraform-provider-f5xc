@@ -680,24 +680,39 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 	// Set computed fields from API response
 	if v, ok := created.Spec["dns_name"].(string); ok && v != "" {
 		data.DNSName = types.StringValue(v)
+	} else if data.DNSName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DNSName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["health_check_port"].(float64); ok {
 		data.HealthCheckPort = types.Int64Value(int64(v))
+	} else if data.HealthCheckPort.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.HealthCheckPort = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["ip"].(string); ok && v != "" {
 		data.IP = types.StringValue(v)
+	} else if data.IP.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.IP = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
+	} else if data.Port.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Port = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
+	} else if data.Protocol.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Protocol = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1005,24 +1020,39 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 	// Set computed fields from API response
 	if v, ok := updated.Spec["dns_name"].(string); ok && v != "" {
 		data.DNSName = types.StringValue(v)
+	} else if data.DNSName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DNSName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["health_check_port"].(float64); ok {
 		data.HealthCheckPort = types.Int64Value(int64(v))
+	} else if data.HealthCheckPort.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.HealthCheckPort = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["ip"].(string); ok && v != "" {
 		data.IP = types.StringValue(v)
+	} else if data.IP.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.IP = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
+	} else if data.Port.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Port = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["protocol"].(string); ok && v != "" {
 		data.Protocol = types.StringValue(v)
+	} else if data.Protocol.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Protocol = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

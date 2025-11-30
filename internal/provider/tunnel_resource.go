@@ -624,8 +624,11 @@ func (r *TunnelResource) Create(ctx context.Context, req resource.CreateRequest,
 	// Set computed fields from API response
 	if v, ok := created.Spec["tunnel_type"].(string); ok && v != "" {
 		data.TunnelType = types.StringValue(v)
+	} else if data.TunnelType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TunnelType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -849,8 +852,11 @@ func (r *TunnelResource) Update(ctx context.Context, req resource.UpdateRequest,
 	// Set computed fields from API response
 	if v, ok := updated.Spec["tunnel_type"].(string); ok && v != "" {
 		data.TunnelType = types.StringValue(v)
+	} else if data.TunnelType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TunnelType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

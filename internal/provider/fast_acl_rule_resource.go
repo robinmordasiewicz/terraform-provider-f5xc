@@ -658,7 +658,7 @@ func (r *FastACLRuleResource) Read(ctx context.Context, req resource.ReadRequest
 						return nil
 					}(),
 					UserDefined: func() types.Int64 {
-						if v, ok := itemMap["user_defined"].(float64); ok {
+						if v, ok := itemMap["user_defined"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()

@@ -2769,40 +2769,67 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	// Set computed fields from API response
 	if v, ok := created.Spec["add_location"].(bool); ok {
 		data.AddLocation = types.BoolValue(v)
+	} else if data.AddLocation.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AddLocation = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["append_server_name"].(string); ok && v != "" {
 		data.AppendServerName = types.StringValue(v)
+	} else if data.AppendServerName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AppendServerName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["connection_idle_timeout"].(float64); ok {
 		data.ConnectionIdleTimeout = types.Int64Value(int64(v))
+	} else if data.ConnectionIdleTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectionIdleTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["disable_default_error_pages"].(bool); ok {
 		data.DisableDefaultErrorPages = types.BoolValue(v)
+	} else if data.DisableDefaultErrorPages.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DisableDefaultErrorPages = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["disable_dns_resolve"].(bool); ok {
 		data.DisableDNSResolve = types.BoolValue(v)
+	} else if data.DisableDNSResolve.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DisableDNSResolve = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["idle_timeout"].(float64); ok {
 		data.IdleTimeout = types.Int64Value(int64(v))
+	} else if data.IdleTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.IdleTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["max_request_header_size"].(float64); ok {
 		data.MaxRequestHeaderSize = types.Int64Value(int64(v))
+	} else if data.MaxRequestHeaderSize.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.MaxRequestHeaderSize = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["proxy"].(string); ok && v != "" {
 		data.Proxy = types.StringValue(v)
+	} else if data.Proxy.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Proxy = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
+	} else if data.ServerName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -3425,7 +3452,7 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 						return nil
 					}(),
 					MaxAgeValue: func() types.Int64 {
-						if v, ok := itemMap["max_age_value"].(float64); ok {
+						if v, ok := itemMap["max_age_value"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -4457,40 +4484,67 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	// Set computed fields from API response
 	if v, ok := updated.Spec["add_location"].(bool); ok {
 		data.AddLocation = types.BoolValue(v)
+	} else if data.AddLocation.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AddLocation = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["append_server_name"].(string); ok && v != "" {
 		data.AppendServerName = types.StringValue(v)
+	} else if data.AppendServerName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AppendServerName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["connection_idle_timeout"].(float64); ok {
 		data.ConnectionIdleTimeout = types.Int64Value(int64(v))
+	} else if data.ConnectionIdleTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectionIdleTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["disable_default_error_pages"].(bool); ok {
 		data.DisableDefaultErrorPages = types.BoolValue(v)
+	} else if data.DisableDefaultErrorPages.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DisableDefaultErrorPages = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["disable_dns_resolve"].(bool); ok {
 		data.DisableDNSResolve = types.BoolValue(v)
+	} else if data.DisableDNSResolve.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DisableDNSResolve = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["idle_timeout"].(float64); ok {
 		data.IdleTimeout = types.Int64Value(int64(v))
+	} else if data.IdleTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.IdleTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["max_request_header_size"].(float64); ok {
 		data.MaxRequestHeaderSize = types.Int64Value(int64(v))
+	} else if data.MaxRequestHeaderSize.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.MaxRequestHeaderSize = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["proxy"].(string); ok && v != "" {
 		data.Proxy = types.StringValue(v)
+	} else if data.Proxy.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Proxy = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
+	} else if data.ServerName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

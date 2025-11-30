@@ -334,8 +334,11 @@ func (r *InfraprotectAsnPrefixResource) Create(ctx context.Context, req resource
 	// Set computed fields from API response
 	if v, ok := created.Spec["prefix"].(string); ok && v != "" {
 		data.Prefix = types.StringValue(v)
+	} else if data.Prefix.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Prefix = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -547,8 +550,11 @@ func (r *InfraprotectAsnPrefixResource) Update(ctx context.Context, req resource
 	// Set computed fields from API response
 	if v, ok := updated.Spec["prefix"].(string); ok && v != "" {
 		data.Prefix = types.StringValue(v)
+	} else if data.Prefix.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Prefix = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

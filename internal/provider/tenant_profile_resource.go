@@ -480,12 +480,18 @@ func (r *TenantProfileResource) Create(ctx context.Context, req resource.CreateR
 	// Set computed fields from API response
 	if v, ok := created.Spec["enable_support_access"].(bool); ok {
 		data.EnableSupportAccess = types.BoolValue(v)
+	} else if data.EnableSupportAccess.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EnableSupportAccess = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["support_email"].(string); ok && v != "" {
 		data.SupportEmail = types.StringValue(v)
+	} else if data.SupportEmail.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SupportEmail = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -796,12 +802,18 @@ func (r *TenantProfileResource) Update(ctx context.Context, req resource.UpdateR
 	// Set computed fields from API response
 	if v, ok := updated.Spec["enable_support_access"].(bool); ok {
 		data.EnableSupportAccess = types.BoolValue(v)
+	} else if data.EnableSupportAccess.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EnableSupportAccess = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["support_email"].(string); ok && v != "" {
 		data.SupportEmail = types.StringValue(v)
+	} else if data.SupportEmail.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SupportEmail = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

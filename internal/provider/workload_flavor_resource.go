@@ -316,16 +316,25 @@ func (r *WorkloadFlavorResource) Create(ctx context.Context, req resource.Create
 	// Set computed fields from API response
 	if v, ok := created.Spec["ephemeral_storage"].(string); ok && v != "" {
 		data.EphemeralStorage = types.StringValue(v)
+	} else if data.EphemeralStorage.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EphemeralStorage = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["memory"].(string); ok && v != "" {
 		data.Memory = types.StringValue(v)
+	} else if data.Memory.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Memory = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["vcpus"].(float64); ok {
 		data.Vcpus = types.Int64Value(int64(v))
+	} else if data.Vcpus.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Vcpus = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -518,16 +527,25 @@ func (r *WorkloadFlavorResource) Update(ctx context.Context, req resource.Update
 	// Set computed fields from API response
 	if v, ok := updated.Spec["ephemeral_storage"].(string); ok && v != "" {
 		data.EphemeralStorage = types.StringValue(v)
+	} else if data.EphemeralStorage.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EphemeralStorage = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["memory"].(string); ok && v != "" {
 		data.Memory = types.StringValue(v)
+	} else if data.Memory.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Memory = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["vcpus"].(float64); ok {
 		data.Vcpus = types.Int64Value(int64(v))
+	} else if data.Vcpus.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Vcpus = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan

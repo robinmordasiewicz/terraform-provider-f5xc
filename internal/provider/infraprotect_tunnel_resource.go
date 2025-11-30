@@ -777,11 +777,77 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 	}
 	if blockData, ok := apiResource.Spec["bgp_information"].(map[string]interface{}); ok && (isImport || data.BGPInformation != nil) {
 		data.BGPInformation = &InfraprotectTunnelBGPInformationModel{
+			Asn: func() *InfraprotectTunnelBGPInformationAsnModel {
+				if !isImport && data.BGPInformation != nil && data.BGPInformation.Asn != nil {
+					// Normal Read: preserve existing state value
+					return data.BGPInformation.Asn
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["asn"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelBGPInformationAsnModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			HolddownTimerSeconds: func() types.Int64 {
 				if v, ok := blockData["holddown_timer_seconds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			NoSecret: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.BGPInformation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BGPInformation.NoSecret
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_secret"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
+			}(),
+			PeerSecretOverride: func() *InfraprotectTunnelBGPInformationPeerSecretOverrideModel {
+				if !isImport && data.BGPInformation != nil && data.BGPInformation.PeerSecretOverride != nil {
+					// Normal Read: preserve existing state value
+					return data.BGPInformation.PeerSecretOverride
+				}
+				// Import case: read from API
+				if _, ok := blockData["peer_secret_override"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelBGPInformationPeerSecretOverrideModel{
+					}
+				}
+				return nil
+			}(),
+			UseDefaultSecret: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.BGPInformation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BGPInformation.UseDefaultSecret
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_default_secret"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -815,6 +881,78 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 				}
 				return types.StringNull()
 			}(),
+			FragmentationDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIPV4 != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.GreIPV4.FragmentationDisabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["fragmentation_disabled"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
+			}(),
+			FragmentationEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIPV4 != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.GreIPV4.FragmentationEnabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["fragmentation_enabled"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
+			}(),
+			IPV6InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIPV4 != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.GreIPV4.IPV6InterconnectDisabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["ipv6_interconnect_disabled"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
+			}(),
+			IPV6InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIPV4 != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.GreIPV4.IPV6InterconnectEnabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["ipv6_interconnect_enabled"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
+			}(),
+			KeepaliveDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIPV4 != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.GreIPV4.KeepaliveDisabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["keepalive_disabled"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
+			}(),
+			KeepaliveEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIPV4 != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.GreIPV4.KeepaliveEnabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["keepalive_enabled"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["gre_ipv6"].(map[string]interface{}); ok && (isImport || data.GreIPV6 != nil) {
@@ -824,6 +962,30 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			IPV4InterconnectDisabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIPV6 != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.GreIPV6.IPV4InterconnectDisabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["ipv4_interconnect_disabled"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
+			}(),
+			IPV4InterconnectEnabled: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.GreIPV6 != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.GreIPV6.IPV4InterconnectEnabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["ipv4_interconnect_enabled"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -854,6 +1016,30 @@ func (r *InfraprotectTunnelResource) Read(ctx context.Context, req resource.Read
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			Zone1: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.TunnelLocation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TunnelLocation.Zone1
+				}
+				// Import case: read from API
+				if _, ok := blockData["zone1"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
+			}(),
+			Zone2: func() *InfraprotectTunnelEmptyModel {
+				if !isImport && data.TunnelLocation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TunnelLocation.Zone2
+				}
+				// Import case: read from API
+				if _, ok := blockData["zone2"].(map[string]interface{}); ok {
+					return &InfraprotectTunnelEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}

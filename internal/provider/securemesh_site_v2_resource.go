@@ -6925,6 +6925,18 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if blockData, ok := apiResource.Spec["admin_user_credentials"].(map[string]interface{}); ok && (isImport || data.AdminUserCredentials != nil) {
 		data.AdminUserCredentials = &SecuremeshSiteV2AdminUserCredentialsModel{
+			AdminPassword: func() *SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel {
+				if !isImport && data.AdminUserCredentials != nil && data.AdminUserCredentials.AdminPassword != nil {
+					// Normal Read: preserve existing state value
+					return data.AdminUserCredentials.AdminPassword
+				}
+				// Import case: read from API
+				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel{
+					}
+				}
+				return nil
+			}(),
 			SSHKey: func() types.String {
 				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -6996,6 +7008,42 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if blockData, ok := apiResource.Spec["custom_proxy"].(map[string]interface{}); ok && (isImport || data.CustomProxy != nil) {
 		data.CustomProxy = &SecuremeshSiteV2CustomProxyModel{
+			DisableReTunnel: func() *SecuremeshSiteV2EmptyModel {
+				if !isImport && data.CustomProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomProxy.DisableReTunnel
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_re_tunnel"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2EmptyModel{}
+				}
+				return nil
+			}(),
+			EnableReTunnel: func() *SecuremeshSiteV2EmptyModel {
+				if !isImport && data.CustomProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomProxy.EnableReTunnel
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_re_tunnel"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2EmptyModel{}
+				}
+				return nil
+			}(),
+			Password: func() *SecuremeshSiteV2CustomProxyPasswordModel {
+				if !isImport && data.CustomProxy != nil && data.CustomProxy.Password != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomProxy.Password
+				}
+				// Import case: read from API
+				if _, ok := blockData["password"].(map[string]interface{}); ok {
+					return &SecuremeshSiteV2CustomProxyPasswordModel{
+					}
+				}
+				return nil
+			}(),
 			ProxyIPAddress: func() types.String {
 				if v, ok := blockData["proxy_ip_address"].(string); ok && v != "" {
 					return types.StringValue(v)

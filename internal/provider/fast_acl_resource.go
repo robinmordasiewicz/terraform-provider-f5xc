@@ -1119,6 +1119,30 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 	}
 	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.ReACL != nil) {
 		data.ReACL = &FastACLReACLModel{
+			AllPublicVips: func() *FastACLEmptyModel {
+				if !isImport && data.ReACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.ReACL.AllPublicVips
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_public_vips"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultTenantVip: func() *FastACLEmptyModel {
+				if !isImport && data.ReACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.ReACL.DefaultTenantVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
 			FastACLRules: func() []FastACLReACLFastACLRulesModel {
 				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
 					var result []FastACLReACLFastACLRulesModel
@@ -1178,10 +1202,40 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 				}
 				return nil
 			}(),
+			SelectedTenantVip: func() *FastACLReACLSelectedTenantVipModel {
+				if !isImport && data.ReACL != nil && data.ReACL.SelectedTenantVip != nil {
+					// Normal Read: preserve existing state value
+					return data.ReACL.SelectedTenantVip
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["selected_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLReACLSelectedTenantVipModel{
+						DefaultTenantVip: func() types.Bool {
+							if v, ok := nestedBlockData["default_tenant_vip"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["site_acl"].(map[string]interface{}); ok && (isImport || data.SiteACL != nil) {
 		data.SiteACL = &FastACLSiteACLModel{
+			AllServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.AllServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
 			FastACLRules: func() []FastACLSiteACLFastACLRulesModel {
 				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
 					var result []FastACLSiteACLFastACLRulesModel
@@ -1238,6 +1292,54 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 						}
 					}
 					return result
+				}
+				return nil
+			}(),
+			InsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			InterfaceServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InterfaceServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.OutsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			VipServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.VipServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["vip_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
 				}
 				return nil
 			}(),

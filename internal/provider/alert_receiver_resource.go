@@ -1096,6 +1096,18 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 	}
 	if blockData, ok := apiResource.Spec["opsgenie"].(map[string]interface{}); ok && (isImport || data.Opsgenie != nil) {
 		data.Opsgenie = &AlertReceiverOpsgenieModel{
+			APIKey: func() *AlertReceiverOpsgenieAPIKeyModel {
+				if !isImport && data.Opsgenie != nil && data.Opsgenie.APIKey != nil {
+					// Normal Read: preserve existing state value
+					return data.Opsgenie.APIKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["api_key"].(map[string]interface{}); ok {
+					return &AlertReceiverOpsgenieAPIKeyModel{
+					}
+				}
+				return nil
+			}(),
 			URL: func() types.String {
 				if v, ok := blockData["url"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1106,6 +1118,18 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 	}
 	if blockData, ok := apiResource.Spec["pagerduty"].(map[string]interface{}); ok && (isImport || data.Pagerduty != nil) {
 		data.Pagerduty = &AlertReceiverPagerdutyModel{
+			RoutingKey: func() *AlertReceiverPagerdutyRoutingKeyModel {
+				if !isImport && data.Pagerduty != nil && data.Pagerduty.RoutingKey != nil {
+					// Normal Read: preserve existing state value
+					return data.Pagerduty.RoutingKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["routing_key"].(map[string]interface{}); ok {
+					return &AlertReceiverPagerdutyRoutingKeyModel{
+					}
+				}
+				return nil
+			}(),
 			URL: func() types.String {
 				if v, ok := blockData["url"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1121,6 +1145,18 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			URL: func() *AlertReceiverSlackURLModel {
+				if !isImport && data.Slack != nil && data.Slack.URL != nil {
+					// Normal Read: preserve existing state value
+					return data.Slack.URL
+				}
+				// Import case: read from API
+				if _, ok := blockData["url"].(map[string]interface{}); ok {
+					return &AlertReceiverSlackURLModel{
+					}
+				}
+				return nil
 			}(),
 		}
 	}

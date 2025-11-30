@@ -885,6 +885,48 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 	})
 	if blockData, ok := apiResource.Spec["a_pool"].(map[string]interface{}); ok && (isImport || data.APool != nil) {
 		data.APool = &DNSLbPoolAPoolModel{
+			DisableHealthCheck: func() *DNSLbPoolEmptyModel {
+				if !isImport && data.APool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APool.DisableHealthCheck
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_health_check"].(map[string]interface{}); ok {
+					return &DNSLbPoolEmptyModel{}
+				}
+				return nil
+			}(),
+			HealthCheck: func() *DNSLbPoolAPoolHealthCheckModel {
+				if !isImport && data.APool != nil && data.APool.HealthCheck != nil {
+					// Normal Read: preserve existing state value
+					return data.APool.HealthCheck
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["health_check"].(map[string]interface{}); ok {
+					return &DNSLbPoolAPoolHealthCheckModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			MaxAnswers: func() types.Int64 {
 				if v, ok := blockData["max_answers"].(float64); ok {
 					return types.Int64Value(int64(v))

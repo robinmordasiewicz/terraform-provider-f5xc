@@ -3543,11 +3543,47 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["direct_connect_enabled"].(map[string]interface{}); ok && (isImport || data.DirectConnectEnabled != nil) {
 		data.DirectConnectEnabled = &AWSVPCSiteDirectConnectEnabledModel{
+			AutoAsn: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.AutoAsn
+				}
+				// Import case: read from API
+				if _, ok := blockData["auto_asn"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			CustomAsn: func() types.Int64 {
 				if v, ok := blockData["custom_asn"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			HostedVifs: func() *AWSVPCSiteDirectConnectEnabledHostedVifsModel {
+				if !isImport && data.DirectConnectEnabled != nil && data.DirectConnectEnabled.HostedVifs != nil {
+					// Normal Read: preserve existing state value
+					return data.DirectConnectEnabled.HostedVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["hosted_vifs"].(map[string]interface{}); ok {
+					return &AWSVPCSiteDirectConnectEnabledHostedVifsModel{
+					}
+				}
+				return nil
+			}(),
+			StandardVifs: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.StandardVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["standard_vifs"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -3598,6 +3634,66 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["ingress_egress_gw"].(map[string]interface{}); ok && (isImport || data.IngressEgressGw != nil) {
 		data.IngressEgressGw = &AWSVPCSiteIngressEgressGwModel{
+			ActiveEnhancedFirewallPolicies: func() *AWSVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *AWSVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *AWSVPCSiteIngressEgressGwActiveNetworkPoliciesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			AllowedVipPort: func() *AWSVPCSiteIngressEgressGwAllowedVipPortModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPort != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.AllowedVipPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwAllowedVipPortModel{
+					}
+				}
+				return nil
+			}(),
+			AllowedVipPortSLI: func() *AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AllowedVipPortSLI != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.AllowedVipPortSLI
+				}
+				// Import case: read from API
+				if _, ok := blockData["allowed_vip_port_sli"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwAllowedVipPortSLIModel{
+					}
+				}
+				return nil
+			}(),
 			AWSCertifiedHw: func() types.String {
 				if v, ok := blockData["aws_certified_hw"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -3668,10 +3764,238 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
+			DcClusterGroupInsideVn: func() *AWSVPCSiteIngressEgressGwDcClusterGroupInsideVnModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.DcClusterGroupInsideVn != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.DcClusterGroupInsideVn
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group_inside_vn"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwDcClusterGroupInsideVnModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DcClusterGroupOutsideVn: func() *AWSVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.DcClusterGroupOutsideVn != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.DcClusterGroupOutsideVn
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group_outside_vn"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwDcClusterGroupOutsideVnModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *AWSVPCSiteIngressEgressGwGlobalNetworkListModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			InsideStaticRoutes: func() *AWSVPCSiteIngressEgressGwInsideStaticRoutesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.InsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.InsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwInsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			NoDcClusterGroup: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoDcClusterGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoInsideStaticRoutes: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoInsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_inside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoOutsideStaticRoutes: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.NoOutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideStaticRoutes: func() *AWSVPCSiteIngressEgressGwOutsideStaticRoutesModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.OutsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.OutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwOutsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			PerformanceEnhancementMode: func() *AWSVPCSiteIngressEgressGwPerformanceEnhancementModeModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.PerformanceEnhancementMode != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.PerformanceEnhancementMode
+				}
+				// Import case: read from API
+				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressEgressGwPerformanceEnhancementModeModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.IngressEgressGw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.IngressEgressGw.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
 		data.IngressGw = &AWSVPCSiteIngressGwModel{
+			AllowedVipPort: func() *AWSVPCSiteIngressGwAllowedVipPortModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.AllowedVipPort != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.AllowedVipPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressGwAllowedVipPortModel{
+					}
+				}
+				return nil
+			}(),
 			AWSCertifiedHw: func() types.String {
 				if v, ok := blockData["aws_certified_hw"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -3707,6 +4031,18 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 						}
 					}
 					return result
+				}
+				return nil
+			}(),
+			PerformanceEnhancementMode: func() *AWSVPCSiteIngressGwPerformanceEnhancementModeModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.PerformanceEnhancementMode != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.PerformanceEnhancementMode
+				}
+				// Import case: read from API
+				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
+					return &AWSVPCSiteIngressGwPerformanceEnhancementModeModel{
+					}
 				}
 				return nil
 			}(),
@@ -3761,6 +4097,18 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
 		data.Os = &AWSVPCSiteOsModel{
+			DefaultOsVersion: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.Os != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Os.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			OperatingSystemVersion: func() types.String {
 				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -3776,6 +4124,18 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &AWSVPCSiteSwModel{
+			DefaultSwVersion: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.Sw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Sw.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			VolterraSoftwareVersion: func() types.String {
 				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -3791,6 +4151,54 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["voltstack_cluster"].(map[string]interface{}); ok && (isImport || data.VoltstackCluster != nil) {
 		data.VoltstackCluster = &AWSVPCSiteVoltstackClusterModel{
+			ActiveEnhancedFirewallPolicies: func() *AWSVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *AWSVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *AWSVPCSiteVoltstackClusterActiveNetworkPoliciesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			AllowedVipPort: func() *AWSVPCSiteVoltstackClusterAllowedVipPortModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AllowedVipPort != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.AllowedVipPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["allowed_vip_port"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterAllowedVipPortModel{
+					}
+				}
+				return nil
+			}(),
 			AWSCertifiedHw: func() types.String {
 				if v, ok := blockData["aws_certified_hw"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -3829,10 +4237,250 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
+			DcClusterGroup: func() *AWSVPCSiteVoltstackClusterDcClusterGroupModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.DcClusterGroup != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.DcClusterGroup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["dc_cluster_group"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterDcClusterGroupModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DefaultStorage: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.DefaultStorage
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_storage"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *AWSVPCSiteVoltstackClusterGlobalNetworkListModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			K8SCluster: func() *AWSVPCSiteVoltstackClusterK8SClusterModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.K8SCluster != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.K8SCluster
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["k8s_cluster"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterK8SClusterModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoDcClusterGroup: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoDcClusterGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoK8SCluster: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoK8SCluster
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_k8s_cluster"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoOutsideStaticRoutes: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.NoOutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideStaticRoutes: func() *AWSVPCSiteVoltstackClusterOutsideStaticRoutesModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.OutsideStaticRoutes != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.OutsideStaticRoutes
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterOutsideStaticRoutesModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *AWSVPCSiteEmptyModel {
+				if !isImport && data.VoltstackCluster != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.VoltstackCluster.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &AWSVPCSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			StorageClassList: func() *AWSVPCSiteVoltstackClusterStorageClassListModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.StorageClassList != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.StorageClassList
+				}
+				// Import case: read from API
+				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVoltstackClusterStorageClassListModel{
+					}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["vpc"].(map[string]interface{}); ok && (isImport || data.VPC != nil) {
 		data.VPC = &AWSVPCSiteVPCModel{
+			NewVPC: func() *AWSVPCSiteVPCNewVPCModel {
+				if !isImport && data.VPC != nil && data.VPC.NewVPC != nil {
+					// Normal Read: preserve existing state value
+					return data.VPC.NewVPC
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["new_vpc"].(map[string]interface{}); ok {
+					return &AWSVPCSiteVPCNewVPCModel{
+						NameTag: func() types.String {
+							if v, ok := nestedBlockData["name_tag"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						PrimaryIPV4: func() types.String {
+							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			VPCID: func() types.String {
 				if v, ok := blockData["vpc_id"].(string); ok && v != "" {
 					return types.StringValue(v)

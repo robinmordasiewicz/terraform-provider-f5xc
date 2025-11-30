@@ -9559,6 +9559,67 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				return nil
 			}(),
+			BypassRateLimitingRules: func() *CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.BypassRateLimitingRules != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.BypassRateLimitingRules
+				}
+				// Import case: read from API
+				if _, ok := blockData["bypass_rate_limiting_rules"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModel{
+					}
+				}
+				return nil
+			}(),
+			CustomIPAllowedList: func() *CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.CustomIPAllowedList != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.CustomIPAllowedList
+				}
+				// Import case: read from API
+				if _, ok := blockData["custom_ip_allowed_list"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerAPIRateLimitCustomIPAllowedListModel{
+					}
+				}
+				return nil
+			}(),
+			IPAllowedList: func() *CDNLoadBalancerAPIRateLimitIPAllowedListModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.IPAllowedList != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.IPAllowedList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["ip_allowed_list"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerAPIRateLimitIPAllowedListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoIPAllowedList: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.APIRateLimit != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APIRateLimit.NoIPAllowedList
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_ip_allowed_list"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			ServerURLRules: func() []CDNLoadBalancerAPIRateLimitServerURLRulesModel {
 				if listData, ok := blockData["server_url_rules"].([]interface{}); ok && len(listData) > 0 {
 					var result []CDNLoadBalancerAPIRateLimitServerURLRulesModel
@@ -9800,6 +9861,54 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &CDNLoadBalancerBotDefenseModel{
+			DisableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BotDefense.DisableCorsSupport
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnableCorsSupport: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BotDefense.EnableCorsSupport
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			Policy: func() *CDNLoadBalancerBotDefensePolicyModel {
+				if !isImport && data.BotDefense != nil && data.BotDefense.Policy != nil {
+					// Normal Read: preserve existing state value
+					return data.BotDefense.Policy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["policy"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerBotDefensePolicyModel{
+						JavascriptMode: func() types.String {
+							if v, ok := nestedBlockData["javascript_mode"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						JsDownloadPath: func() types.String {
+							if v, ok := nestedBlockData["js_download_path"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			RegionalEndpoint: func() types.String {
 				if v, ok := blockData["regional_endpoint"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -10124,6 +10233,18 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	}
 	if blockData, ok := apiResource.Spec["default_cache_action"].(map[string]interface{}); ok && (isImport || data.DefaultCacheAction != nil) {
 		data.DefaultCacheAction = &CDNLoadBalancerDefaultCacheActionModel{
+			CacheDisabled: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.DefaultCacheAction != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultCacheAction.CacheDisabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["cache_disabled"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			CacheTtlDefault: func() types.String {
 				if v, ok := blockData["cache_ttl_default"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -10376,6 +10497,18 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				return types.BoolNull()
 			}(),
+			TLSCertOptions: func() *CDNLoadBalancerHTTPSTLSCertOptionsModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.TLSCertOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.TLSCertOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_cert_options"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerHTTPSTLSCertOptionsModel{
+					}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["https_auto_cert"].(map[string]interface{}); ok && (isImport || data.HTTPSAutoCert != nil) {
@@ -10401,6 +10534,18 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			TLSConfig: func() *CDNLoadBalancerHTTPSAutoCertTLSConfigModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.TLSConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.TLSConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerHTTPSAutoCertTLSConfigModel{
+					}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -10475,6 +10620,42 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["origin_pool"].(map[string]interface{}); ok && (isImport || data.OriginPool != nil) {
 		data.OriginPool = &CDNLoadBalancerOriginPoolModel{
+			MoreOriginOptions: func() *CDNLoadBalancerOriginPoolMoreOriginOptionsModel {
+				if !isImport && data.OriginPool != nil && data.OriginPool.MoreOriginOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.OriginPool.MoreOriginOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["more_origin_options"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOriginPoolMoreOriginOptionsModel{
+						EnableByteRangeRequest: func() types.Bool {
+							if v, ok := nestedBlockData["enable_byte_range_request"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						WebsocketProxy: func() types.Bool {
+							if v, ok := nestedBlockData["websocket_proxy"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoTLS: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.OriginPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.OriginPool.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			OriginRequestTimeout: func() types.String {
 				if v, ok := blockData["origin_request_timeout"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -10532,6 +10713,54 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				}
 				return nil
 			}(),
+			PublicName: func() *CDNLoadBalancerOriginPoolPublicNameModel {
+				if !isImport && data.OriginPool != nil && data.OriginPool.PublicName != nil {
+					// Normal Read: preserve existing state value
+					return data.OriginPool.PublicName
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["public_name"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOriginPoolPublicNameModel{
+						DNSName: func() types.String {
+							if v, ok := nestedBlockData["dns_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						RefreshInterval: func() types.Int64 {
+							if v, ok := nestedBlockData["refresh_interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			UseTLS: func() *CDNLoadBalancerOriginPoolUseTLSModel {
+				if !isImport && data.OriginPool != nil && data.OriginPool.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.OriginPool.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOriginPoolUseTLSModel{
+						MaxSessionKeys: func() types.Int64 {
+							if v, ok := nestedBlockData["max_session_keys"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Sni: func() types.String {
+							if v, ok := nestedBlockData["sni"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["other_settings"].(map[string]interface{}); ok && (isImport || data.OtherSettings != nil) {
@@ -10546,6 +10775,56 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			HeaderOptions: func() *CDNLoadBalancerOtherSettingsHeaderOptionsModel {
+				if !isImport && data.OtherSettings != nil && data.OtherSettings.HeaderOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.OtherSettings.HeaderOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["header_options"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOtherSettingsHeaderOptionsModel{
+						RequestHeadersToRemove: func() types.List {
+							if v, ok := nestedBlockData["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						ResponseHeadersToRemove: func() types.List {
+							if v, ok := nestedBlockData["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			LoggingOptions: func() *CDNLoadBalancerOtherSettingsLoggingOptionsModel {
+				if !isImport && data.OtherSettings != nil && data.OtherSettings.LoggingOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.OtherSettings.LoggingOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["logging_options"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerOtherSettingsLoggingOptionsModel{
+					}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -10659,6 +10938,18 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
 		data.SlowDdosMitigation = &CDNLoadBalancerSlowDdosMitigationModel{
+			DisableRequestTimeout: func() *CDNLoadBalancerEmptyModel {
+				if !isImport && data.SlowDdosMitigation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SlowDdosMitigation.DisableRequestTimeout
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
+					return &CDNLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))

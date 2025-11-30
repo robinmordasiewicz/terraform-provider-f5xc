@@ -996,6 +996,18 @@ func (r *K8SClusterResource) Read(ctx context.Context, req resource.ReadRequest,
 	}
 	if blockData, ok := apiResource.Spec["local_access_config"].(map[string]interface{}); ok && (isImport || data.LocalAccessConfig != nil) {
 		data.LocalAccessConfig = &K8SClusterLocalAccessConfigModel{
+			DefaultPort: func() *K8SClusterEmptyModel {
+				if !isImport && data.LocalAccessConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.LocalAccessConfig.DefaultPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_port"].(map[string]interface{}); ok {
+					return &K8SClusterEmptyModel{}
+				}
+				return nil
+			}(),
 			LocalDomain: func() types.String {
 				if v, ok := blockData["local_domain"].(string); ok && v != "" {
 					return types.StringValue(v)

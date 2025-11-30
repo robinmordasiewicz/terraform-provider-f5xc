@@ -650,6 +650,30 @@ func (r *FastACLRuleResource) Read(ctx context.Context, req resource.ReadRequest
 	})
 	if blockData, ok := apiResource.Spec["action"].(map[string]interface{}); ok && (isImport || data.Action != nil) {
 		data.Action = &FastACLRuleActionModel{
+			PolicerAction: func() *FastACLRuleActionPolicerActionModel {
+				if !isImport && data.Action != nil && data.Action.PolicerAction != nil {
+					// Normal Read: preserve existing state value
+					return data.Action.PolicerAction
+				}
+				// Import case: read from API
+				if _, ok := blockData["policer_action"].(map[string]interface{}); ok {
+					return &FastACLRuleActionPolicerActionModel{
+					}
+				}
+				return nil
+			}(),
+			ProtocolPolicerAction: func() *FastACLRuleActionProtocolPolicerActionModel {
+				if !isImport && data.Action != nil && data.Action.ProtocolPolicerAction != nil {
+					// Normal Read: preserve existing state value
+					return data.Action.ProtocolPolicerAction
+				}
+				// Import case: read from API
+				if _, ok := blockData["protocol_policer_action"].(map[string]interface{}); ok {
+					return &FastACLRuleActionProtocolPolicerActionModel{
+					}
+				}
+				return nil
+			}(),
 			SimpleAction: func() types.String {
 				if v, ok := blockData["simple_action"].(string); ok && v != "" {
 					return types.StringValue(v)

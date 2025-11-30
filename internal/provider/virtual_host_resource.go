@@ -3077,11 +3077,65 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return nil
 			}(),
+			CookieParams: func() *VirtualHostAuthenticationCookieParamsModel {
+				if !isImport && data.Authentication != nil && data.Authentication.CookieParams != nil {
+					// Normal Read: preserve existing state value
+					return data.Authentication.CookieParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["cookie_params"].(map[string]interface{}); ok {
+					return &VirtualHostAuthenticationCookieParamsModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CookieRefreshInterval: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_refresh_interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						SessionExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["session_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			RedirectDynamic: func() *VirtualHostEmptyModel {
+				if !isImport && data.Authentication != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Authentication.RedirectDynamic
+				}
+				// Import case: read from API
+				if _, ok := blockData["redirect_dynamic"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
 			RedirectURL: func() types.String {
 				if v, ok := blockData["redirect_url"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			UseAuthObjectConfig: func() *VirtualHostEmptyModel {
+				if !isImport && data.Authentication != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Authentication.UseAuthObjectConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_auth_object_config"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -3766,6 +3820,30 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if blockData, ok := apiResource.Spec["retry_policy"].(map[string]interface{}); ok && (isImport || data.RetryPolicy != nil) {
 		data.RetryPolicy = &VirtualHostRetryPolicyModel{
+			BackOff: func() *VirtualHostRetryPolicyBackOffModel {
+				if !isImport && data.RetryPolicy != nil && data.RetryPolicy.BackOff != nil {
+					// Normal Read: preserve existing state value
+					return data.RetryPolicy.BackOff
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["back_off"].(map[string]interface{}); ok {
+					return &VirtualHostRetryPolicyBackOffModel{
+						BaseInterval: func() types.Int64 {
+							if v, ok := nestedBlockData["base_interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxInterval: func() types.Int64 {
+							if v, ok := nestedBlockData["max_interval"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			NumRetries: func() types.Int64 {
 				if v, ok := blockData["num_retries"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -3888,6 +3966,18 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
 		data.SlowDdosMitigation = &VirtualHostSlowDdosMitigationModel{
+			DisableRequestTimeout: func() *VirtualHostEmptyModel {
+				if !isImport && data.SlowDdosMitigation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SlowDdosMitigation.DisableRequestTimeout
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -3960,6 +4050,30 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return types.ListNull(types.StringType)
 			}(),
+			ClientCertificateOptional: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSCertParams != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSCertParams.ClientCertificateOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_optional"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			ClientCertificateRequired: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSCertParams != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSCertParams.ClientCertificateRequired
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_required"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
 			MaximumProtocolVersion: func() types.String {
 				if v, ok := blockData["maximum_protocol_version"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -3971,6 +4085,55 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			NoClientCertificate: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSCertParams != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSCertParams.NoClientCertificate
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_client_certificate"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			ValidationParams: func() *VirtualHostTLSCertParamsValidationParamsModel {
+				if !isImport && data.TLSCertParams != nil && data.TLSCertParams.ValidationParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSCertParams.ValidationParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["validation_params"].(map[string]interface{}); ok {
+					return &VirtualHostTLSCertParamsValidationParamsModel{
+						SkipHostnameVerification: func() types.Bool {
+							if v, ok := nestedBlockData["skip_hostname_verification"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						VerifySubjectAltNames: func() types.List {
+							if v, ok := nestedBlockData["verify_subject_alt_names"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
 			}(),
 			XfccHeaderElements: func() types.List {
 				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
@@ -3989,6 +4152,79 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
 		data.TLSParameters = &VirtualHostTLSParametersModel{
+			ClientCertificateOptional: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_optional"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			ClientCertificateRequired: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateRequired
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_required"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
+			CommonParams: func() *VirtualHostTLSParametersCommonParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CommonParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CommonParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["common_params"].(map[string]interface{}); ok {
+					return &VirtualHostTLSParametersCommonParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoClientCertificate: func() *VirtualHostEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.NoClientCertificate
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_client_certificate"].(map[string]interface{}); ok {
+					return &VirtualHostEmptyModel{}
+				}
+				return nil
+			}(),
 			XfccHeaderElements: func() types.List {
 				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
 					var items []string

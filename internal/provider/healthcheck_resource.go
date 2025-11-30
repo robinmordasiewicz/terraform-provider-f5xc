@@ -591,6 +591,18 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return types.ListNull(types.StringType)
 			}(),
+			Headers: func() *HealthcheckEmptyModel {
+				if !isImport && data.HTTPHealthCheck != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPHealthCheck.Headers
+				}
+				// Import case: read from API
+				if _, ok := blockData["headers"].(map[string]interface{}); ok {
+					return &HealthcheckEmptyModel{}
+				}
+				return nil
+			}(),
 			HostHeader: func() types.String {
 				if v, ok := blockData["host_header"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -626,6 +638,18 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			UseOriginServerName: func() *HealthcheckEmptyModel {
+				if !isImport && data.HTTPHealthCheck != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPHealthCheck.UseOriginServerName
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_origin_server_name"].(map[string]interface{}); ok {
+					return &HealthcheckEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}

@@ -13401,6 +13401,18 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 	})
 	if blockData, ok := apiResource.Spec["job"].(map[string]interface{}); ok && (isImport || data.Job != nil) {
 		data.Job = &WorkloadJobModel{
+			Configuration: func() *WorkloadJobConfigurationModel {
+				if !isImport && data.Job != nil && data.Job.Configuration != nil {
+					// Normal Read: preserve existing state value
+					return data.Job.Configuration
+				}
+				// Import case: read from API
+				if _, ok := blockData["configuration"].(map[string]interface{}); ok {
+					return &WorkloadJobConfigurationModel{
+					}
+				}
+				return nil
+			}(),
 			Containers: func() []WorkloadJobContainersModel {
 				if listData, ok := blockData["containers"].([]interface{}); ok && len(listData) > 0 {
 					var result []WorkloadJobContainersModel
@@ -13562,6 +13574,18 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 				}
 				return nil
 			}(),
+			DeployOptions: func() *WorkloadJobDeployOptionsModel {
+				if !isImport && data.Job != nil && data.Job.DeployOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.Job.DeployOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["deploy_options"].(map[string]interface{}); ok {
+					return &WorkloadJobDeployOptionsModel{
+					}
+				}
+				return nil
+			}(),
 			NumReplicas: func() types.Int64 {
 				if v, ok := blockData["num_replicas"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -13624,6 +13648,30 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 	}
 	if blockData, ok := apiResource.Spec["service"].(map[string]interface{}); ok && (isImport || data.Service != nil) {
 		data.Service = &WorkloadServiceModel{
+			AdvertiseOptions: func() *WorkloadServiceAdvertiseOptionsModel {
+				if !isImport && data.Service != nil && data.Service.AdvertiseOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.Service.AdvertiseOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_options"].(map[string]interface{}); ok {
+					return &WorkloadServiceAdvertiseOptionsModel{
+					}
+				}
+				return nil
+			}(),
+			Configuration: func() *WorkloadServiceConfigurationModel {
+				if !isImport && data.Service != nil && data.Service.Configuration != nil {
+					// Normal Read: preserve existing state value
+					return data.Service.Configuration
+				}
+				// Import case: read from API
+				if _, ok := blockData["configuration"].(map[string]interface{}); ok {
+					return &WorkloadServiceConfigurationModel{
+					}
+				}
+				return nil
+			}(),
 			Containers: func() []WorkloadServiceContainersModel {
 				if listData, ok := blockData["containers"].([]interface{}); ok && len(listData) > 0 {
 					var result []WorkloadServiceContainersModel
@@ -13785,11 +13833,35 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 				}
 				return nil
 			}(),
+			DeployOptions: func() *WorkloadServiceDeployOptionsModel {
+				if !isImport && data.Service != nil && data.Service.DeployOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.Service.DeployOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["deploy_options"].(map[string]interface{}); ok {
+					return &WorkloadServiceDeployOptionsModel{
+					}
+				}
+				return nil
+			}(),
 			NumReplicas: func() types.Int64 {
 				if v, ok := blockData["num_replicas"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			ScaleToZero: func() *WorkloadEmptyModel {
+				if !isImport && data.Service != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Service.ScaleToZero
+				}
+				// Import case: read from API
+				if _, ok := blockData["scale_to_zero"].(map[string]interface{}); ok {
+					return &WorkloadEmptyModel{}
+				}
+				return nil
 			}(),
 			Volumes: func() []WorkloadServiceVolumesModel {
 				if listData, ok := blockData["volumes"].([]interface{}); ok && len(listData) > 0 {
@@ -13847,6 +13919,116 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 	}
 	if blockData, ok := apiResource.Spec["simple_service"].(map[string]interface{}); ok && (isImport || data.SimpleService != nil) {
 		data.SimpleService = &WorkloadSimpleServiceModel{
+			Configuration: func() *WorkloadSimpleServiceConfigurationModel {
+				if !isImport && data.SimpleService != nil && data.SimpleService.Configuration != nil {
+					// Normal Read: preserve existing state value
+					return data.SimpleService.Configuration
+				}
+				// Import case: read from API
+				if _, ok := blockData["configuration"].(map[string]interface{}); ok {
+					return &WorkloadSimpleServiceConfigurationModel{
+					}
+				}
+				return nil
+			}(),
+			Container: func() *WorkloadSimpleServiceContainerModel {
+				if !isImport && data.SimpleService != nil && data.SimpleService.Container != nil {
+					// Normal Read: preserve existing state value
+					return data.SimpleService.Container
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["container"].(map[string]interface{}); ok {
+					return &WorkloadSimpleServiceContainerModel{
+						Args: func() types.List {
+							if v, ok := nestedBlockData["args"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						Command: func() types.List {
+							if v, ok := nestedBlockData["command"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						Flavor: func() types.String {
+							if v, ok := nestedBlockData["flavor"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						InitContainer: func() types.Bool {
+							if v, ok := nestedBlockData["init_container"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Disabled: func() *WorkloadEmptyModel {
+				if !isImport && data.SimpleService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SimpleService.Disabled
+				}
+				// Import case: read from API
+				if _, ok := blockData["disabled"].(map[string]interface{}); ok {
+					return &WorkloadEmptyModel{}
+				}
+				return nil
+			}(),
+			DoNotAdvertise: func() *WorkloadEmptyModel {
+				if !isImport && data.SimpleService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SimpleService.DoNotAdvertise
+				}
+				// Import case: read from API
+				if _, ok := blockData["do_not_advertise"].(map[string]interface{}); ok {
+					return &WorkloadEmptyModel{}
+				}
+				return nil
+			}(),
+			Enabled: func() *WorkloadSimpleServiceEnabledModel {
+				if !isImport && data.SimpleService != nil && data.SimpleService.Enabled != nil {
+					// Normal Read: preserve existing state value
+					return data.SimpleService.Enabled
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["enabled"].(map[string]interface{}); ok {
+					return &WorkloadSimpleServiceEnabledModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			ScaleToZero: func() types.Bool {
 				if !isImport && data.SimpleService != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
@@ -13858,10 +14040,65 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 				}
 				return types.BoolNull()
 			}(),
+			SimpleAdvertise: func() *WorkloadSimpleServiceSimpleAdvertiseModel {
+				if !isImport && data.SimpleService != nil && data.SimpleService.SimpleAdvertise != nil {
+					// Normal Read: preserve existing state value
+					return data.SimpleService.SimpleAdvertise
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["simple_advertise"].(map[string]interface{}); ok {
+					return &WorkloadSimpleServiceSimpleAdvertiseModel{
+						Domains: func() types.List {
+							if v, ok := nestedBlockData["domains"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						ServicePort: func() types.Int64 {
+							if v, ok := nestedBlockData["service_port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["stateful_service"].(map[string]interface{}); ok && (isImport || data.StatefulService != nil) {
 		data.StatefulService = &WorkloadStatefulServiceModel{
+			AdvertiseOptions: func() *WorkloadStatefulServiceAdvertiseOptionsModel {
+				if !isImport && data.StatefulService != nil && data.StatefulService.AdvertiseOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.StatefulService.AdvertiseOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_options"].(map[string]interface{}); ok {
+					return &WorkloadStatefulServiceAdvertiseOptionsModel{
+					}
+				}
+				return nil
+			}(),
+			Configuration: func() *WorkloadStatefulServiceConfigurationModel {
+				if !isImport && data.StatefulService != nil && data.StatefulService.Configuration != nil {
+					// Normal Read: preserve existing state value
+					return data.StatefulService.Configuration
+				}
+				// Import case: read from API
+				if _, ok := blockData["configuration"].(map[string]interface{}); ok {
+					return &WorkloadStatefulServiceConfigurationModel{
+					}
+				}
+				return nil
+			}(),
 			Containers: func() []WorkloadStatefulServiceContainersModel {
 				if listData, ok := blockData["containers"].([]interface{}); ok && len(listData) > 0 {
 					var result []WorkloadStatefulServiceContainersModel
@@ -14023,6 +14260,18 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 				}
 				return nil
 			}(),
+			DeployOptions: func() *WorkloadStatefulServiceDeployOptionsModel {
+				if !isImport && data.StatefulService != nil && data.StatefulService.DeployOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.StatefulService.DeployOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["deploy_options"].(map[string]interface{}); ok {
+					return &WorkloadStatefulServiceDeployOptionsModel{
+					}
+				}
+				return nil
+			}(),
 			NumReplicas: func() types.Int64 {
 				if v, ok := blockData["num_replicas"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -14052,6 +14301,18 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 						}
 					}
 					return result
+				}
+				return nil
+			}(),
+			ScaleToZero: func() *WorkloadEmptyModel {
+				if !isImport && data.StatefulService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.StatefulService.ScaleToZero
+				}
+				// Import case: read from API
+				if _, ok := blockData["scale_to_zero"].(map[string]interface{}); ok {
+					return &WorkloadEmptyModel{}
 				}
 				return nil
 			}(),

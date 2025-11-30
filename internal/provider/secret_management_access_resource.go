@@ -1305,6 +1305,18 @@ func (r *SecretManagementAccessResource) Read(ctx context.Context, req resource.
 	})
 	if blockData, ok := apiResource.Spec["access_info"].(map[string]interface{}); ok && (isImport || data.AccessInfo != nil) {
 		data.AccessInfo = &SecretManagementAccessAccessInfoModel{
+			RestAuthInfo: func() *SecretManagementAccessAccessInfoRestAuthInfoModel {
+				if !isImport && data.AccessInfo != nil && data.AccessInfo.RestAuthInfo != nil {
+					// Normal Read: preserve existing state value
+					return data.AccessInfo.RestAuthInfo
+				}
+				// Import case: read from API
+				if _, ok := blockData["rest_auth_info"].(map[string]interface{}); ok {
+					return &SecretManagementAccessAccessInfoRestAuthInfoModel{
+					}
+				}
+				return nil
+			}(),
 			Scheme: func() types.String {
 				if v, ok := blockData["scheme"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -1316,6 +1328,42 @@ func (r *SecretManagementAccessResource) Read(ctx context.Context, req resource.
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			TLSConfig: func() *SecretManagementAccessAccessInfoTLSConfigModel {
+				if !isImport && data.AccessInfo != nil && data.AccessInfo.TLSConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.AccessInfo.TLSConfig
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tls_config"].(map[string]interface{}); ok {
+					return &SecretManagementAccessAccessInfoTLSConfigModel{
+						MaxSessionKeys: func() types.Int64 {
+							if v, ok := nestedBlockData["max_session_keys"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Sni: func() types.String {
+							if v, ok := nestedBlockData["sni"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			VaultAuthInfo: func() *SecretManagementAccessAccessInfoVaultAuthInfoModel {
+				if !isImport && data.AccessInfo != nil && data.AccessInfo.VaultAuthInfo != nil {
+					// Normal Read: preserve existing state value
+					return data.AccessInfo.VaultAuthInfo
+				}
+				// Import case: read from API
+				if _, ok := blockData["vault_auth_info"].(map[string]interface{}); ok {
+					return &SecretManagementAccessAccessInfoVaultAuthInfoModel{
+					}
+				}
+				return nil
 			}(),
 		}
 	}

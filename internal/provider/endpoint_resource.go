@@ -836,6 +836,31 @@ func (r *EndpointResource) Read(ctx context.Context, req resource.ReadRequest, r
 				}
 				return types.StringNull()
 			}(),
+			ServiceSelector: func() *EndpointServiceInfoServiceSelectorModel {
+				if !isImport && data.ServiceInfo != nil && data.ServiceInfo.ServiceSelector != nil {
+					// Normal Read: preserve existing state value
+					return data.ServiceInfo.ServiceSelector
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["service_selector"].(map[string]interface{}); ok {
+					return &EndpointServiceInfoServiceSelectorModel{
+						Expressions: func() types.List {
+							if v, ok := nestedBlockData["expressions"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
 	if _, ok := apiResource.Spec["snat_pool"].(map[string]interface{}); ok && isImport && data.SnatPool == nil {

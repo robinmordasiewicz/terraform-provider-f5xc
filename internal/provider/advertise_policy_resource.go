@@ -1046,6 +1046,79 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 	}
 	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
 		data.TLSParameters = &AdvertisePolicyTLSParametersModel{
+			ClientCertificateOptional: func() *AdvertisePolicyEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_optional"].(map[string]interface{}); ok {
+					return &AdvertisePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			ClientCertificateRequired: func() *AdvertisePolicyEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.ClientCertificateRequired
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_certificate_required"].(map[string]interface{}); ok {
+					return &AdvertisePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			CommonParams: func() *AdvertisePolicyTLSParametersCommonParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CommonParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CommonParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["common_params"].(map[string]interface{}); ok {
+					return &AdvertisePolicyTLSParametersCommonParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoClientCertificate: func() *AdvertisePolicyEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.NoClientCertificate
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_client_certificate"].(map[string]interface{}); ok {
+					return &AdvertisePolicyEmptyModel{}
+				}
+				return nil
+			}(),
 			XfccHeaderElements: func() types.List {
 				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
 					var items []string

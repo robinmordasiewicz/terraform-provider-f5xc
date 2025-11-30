@@ -52,33 +52,33 @@ resource "f5xc_voltshare_admin_policy" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the VoltshareAdminPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the VoltshareAdminPolicy. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the VoltshareAdminPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the VoltshareAdminPolicy will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`author_restrictions`](#author-restrictions) - Optional Block<br>User Matcher. user_matcher contains contains the allow/deny list of users/authors<br>See [Author Restrictions](#author-restrictions) below for details.
+<a id="author-restrictions"></a>&#x2022; [`author_restrictions`](#author-restrictions) - Optional Block<br>User Matcher. user_matcher contains contains the allow/deny list of users/authors<br>See [Author Restrictions](#author-restrictions) below for details.
 
-&#x2022; [`max_validity_duration`](#max-validity-duration) - Optional String<br>Maximum Duration for Validity. max_validity_duration contains the maximum amount of time a secret from any users from this team/tenant is valid. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)
+<a id="max-validity-duration"></a>&#x2022; [`max_validity_duration`](#max-validity-duration) - Optional String<br>Maximum Duration for Validity. max_validity_duration contains the maximum amount of time a secret from any users from this team/tenant is valid. Value for this parameter is a string ending in the suffix 's' (indicating seconds), suffix 'm' (indicating minutes) or suffix 'h' (indicating hours)
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; [`user_restrictions`](#user-restrictions) - Optional Block<br>Per Team Decryption Policy. user_restrictions contains per tenant/team list of allowed/disallowed users with whom a secret can be shared using F5XC VoltShare<br>See [User Restrictions](#user-restrictions) below for details.
+<a id="user-restrictions"></a>&#x2022; [`user_restrictions`](#user-restrictions) - Optional Block<br>Per Team Decryption Policy. user_restrictions contains per tenant/team list of allowed/disallowed users with whom a secret can be shared using F5XC VoltShare<br>See [User Restrictions](#user-restrictions) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -86,105 +86,105 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`author_restrictions`](#author-restrictions) block supports the following:
 
-&#x2022; [`allow_all`](#author-restrictions-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="author-restrictions-allow-all"></a>&#x2022; [`allow_all`](#author-restrictions-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`allow_list`](#author-restrictions-allow-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Allow List](#author-restrictions-allow-list) below.
+<a id="author-restrictions-allow-list"></a>&#x2022; [`allow_list`](#author-restrictions-allow-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Allow List](#author-restrictions-allow-list) below.
 
-&#x2022; [`deny_all`](#author-restrictions-deny-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="author-restrictions-deny-all"></a>&#x2022; [`deny_all`](#author-restrictions-deny-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`deny_list`](#author-restrictions-deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#author-restrictions-deny-list) below.
+<a id="author-restrictions-deny-list"></a>&#x2022; [`deny_list`](#author-restrictions-deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#author-restrictions-deny-list) below.
 
 #### Author Restrictions Allow List
 
 An [`allow_list`](#author-restrictions-allow-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
-&#x2022; [`custom_list`](#author-restrictions-allow-list-custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-allow-list-custom-list) below.
+<a id="author-restrictions-allow-list-custom-list"></a>&#x2022; [`custom_list`](#author-restrictions-allow-list-custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-allow-list-custom-list) below.
 
 #### Author Restrictions Allow List Custom List
 
 A [`custom_list`](#author-restrictions-allow-list-custom-list) block (within [`author_restrictions.allow_list`](#author-restrictions-allow-list)) supports the following:
 
-&#x2022; [`exact_value`](#author-restrictions-allow-list-custom-list-exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
+<a id="author-restrictions-allow-list-custom-list-exact-value"></a>&#x2022; [`exact_value`](#author-restrictions-allow-list-custom-list-exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
 
-&#x2022; [`regex_pattern`](#author-restrictions-allow-list-custom-list-regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
+<a id="author-restrictions-allow-list-custom-list-regex-pattern"></a>&#x2022; [`regex_pattern`](#author-restrictions-allow-list-custom-list-regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
 
 #### Author Restrictions Deny List
 
 A [`deny_list`](#author-restrictions-deny-list) block (within [`author_restrictions`](#author-restrictions)) supports the following:
 
-&#x2022; [`custom_list`](#author-restrictions-deny-list-custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-deny-list-custom-list) below.
+<a id="author-restrictions-deny-list-custom-list"></a>&#x2022; [`custom_list`](#author-restrictions-deny-list-custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#author-restrictions-deny-list-custom-list) below.
 
 #### Author Restrictions Deny List Custom List
 
 A [`custom_list`](#author-restrictions-deny-list-custom-list) block (within [`author_restrictions.deny_list`](#author-restrictions-deny-list)) supports the following:
 
-&#x2022; [`exact_value`](#author-restrictions-deny-list-custom-list-exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
+<a id="author-restrictions-deny-list-custom-list-exact-value"></a>&#x2022; [`exact_value`](#author-restrictions-deny-list-custom-list-exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
 
-&#x2022; [`regex_pattern`](#author-restrictions-deny-list-custom-list-regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
+<a id="author-restrictions-deny-list-custom-list-regex-pattern"></a>&#x2022; [`regex_pattern`](#author-restrictions-deny-list-custom-list-regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 #### User Restrictions
 
 An [`user_restrictions`](#user-restrictions) block supports the following:
 
-&#x2022; [`all_tenants`](#user-restrictions-all-tenants) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="user-restrictions-all-tenants"></a>&#x2022; [`all_tenants`](#user-restrictions-all-tenants) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`individual_users`](#user-restrictions-individual-users) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="user-restrictions-individual-users"></a>&#x2022; [`individual_users`](#user-restrictions-individual-users) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`tenant`](#user-restrictions-tenant) - Optional String<br>Team/Tenant. Team/Tenant for which this rule is valid
+<a id="user-restrictions-tenant"></a>&#x2022; [`tenant`](#user-restrictions-tenant) - Optional String<br>Team/Tenant. Team/Tenant for which this rule is valid
 
-&#x2022; [`user_restrictions`](#user-restrictions-user-restrictions) - Optional Block<br>User Matcher. user_matcher contains contains the allow/deny list of users/authors<br>See [User Restrictions](#user-restrictions-user-restrictions) below.
+<a id="user-restrictions-user-restrictions"></a>&#x2022; [`user_restrictions`](#user-restrictions-user-restrictions) - Optional Block<br>User Matcher. user_matcher contains contains the allow/deny list of users/authors<br>See [User Restrictions](#user-restrictions-user-restrictions) below.
 
 #### User Restrictions User Restrictions
 
 An [`user_restrictions`](#user-restrictions-user-restrictions) block (within [`user_restrictions`](#user-restrictions)) supports the following:
 
-&#x2022; [`allow_all`](#user-restrictions-user-restrictions-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="user-restrictions-user-restrictions-allow-all"></a>&#x2022; [`allow_all`](#user-restrictions-user-restrictions-allow-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`allow_list`](#user-restrictions-user-restrictions-allow-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Allow List](#user-restrictions-user-restrictions-allow-list) below.
+<a id="user-restrictions-user-restrictions-allow-list"></a>&#x2022; [`allow_list`](#user-restrictions-user-restrictions-allow-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Allow List](#user-restrictions-user-restrictions-allow-list) below.
 
-&#x2022; [`deny_all`](#user-restrictions-user-restrictions-deny-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="user-restrictions-user-restrictions-deny-all"></a>&#x2022; [`deny_all`](#user-restrictions-user-restrictions-deny-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`deny_list`](#user-restrictions-user-restrictions-deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#user-restrictions-user-restrictions-deny-list) below.
+<a id="user-restrictions-user-restrictions-deny-list"></a>&#x2022; [`deny_list`](#user-restrictions-user-restrictions-deny-list) - Optional Block<br>Custom List. Custom List contains user customized list of matcher values<br>See [Deny List](#user-restrictions-user-restrictions-deny-list) below.
 
 #### User Restrictions User Restrictions Allow List
 
 An [`allow_list`](#user-restrictions-user-restrictions-allow-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
-&#x2022; [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-allow-list-custom-list) below.
+<a id="user-restrictions-user-restrictions-allow-list-custom-list"></a>&#x2022; [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-allow-list-custom-list) below.
 
 #### User Restrictions User Restrictions Allow List Custom List
 
 A [`custom_list`](#user-restrictions-user-restrictions-allow-list-custom-list) block (within [`user_restrictions.user_restrictions.allow_list`](#user-restrictions-user-restrictions-allow-list)) supports the following:
 
-&#x2022; [`exact_value`](#user-restrictions-user-restrictions-allow-list-custom-list-exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
+<a id="user-restrictions-user-restrictions-allow-list-custom-list-exact-value"></a>&#x2022; [`exact_value`](#user-restrictions-user-restrictions-allow-list-custom-list-exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
 
-&#x2022; [`regex_pattern`](#user-restrictions-user-restrictions-allow-list-custom-list-regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
+<a id="user-restrictions-user-restrictions-allow-list-custom-list-regex-pattern"></a>&#x2022; [`regex_pattern`](#user-restrictions-user-restrictions-allow-list-custom-list-regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
 
 #### User Restrictions User Restrictions Deny List
 
 A [`deny_list`](#user-restrictions-user-restrictions-deny-list) block (within [`user_restrictions.user_restrictions`](#user-restrictions-user-restrictions)) supports the following:
 
-&#x2022; [`custom_list`](#user-restrictions-user-restrictions-deny-list-custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-deny-list-custom-list) below.
+<a id="user-restrictions-user-restrictions-deny-list-custom-list"></a>&#x2022; [`custom_list`](#user-restrictions-user-restrictions-deny-list-custom-list) - Optional Block<br>List of User Id(s). List of user id(s)<br>See [Custom List](#user-restrictions-user-restrictions-deny-list-custom-list) below.
 
 #### User Restrictions User Restrictions Deny List Custom List
 
 A [`custom_list`](#user-restrictions-user-restrictions-deny-list-custom-list) block (within [`user_restrictions.user_restrictions.deny_list`](#user-restrictions-user-restrictions-deny-list)) supports the following:
 
-&#x2022; [`exact_value`](#user-restrictions-user-restrictions-deny-list-custom-list-exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
+<a id="user-restrictions-user-restrictions-deny-list-custom-list-exact-value"></a>&#x2022; [`exact_value`](#user-restrictions-user-restrictions-deny-list-custom-list-exact-value) - Optional String<br>Exact User Id. exact_match contains user_id to match against
 
-&#x2022; [`regex_pattern`](#user-restrictions-user-restrictions-deny-list-custom-list-regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
+<a id="user-restrictions-user-restrictions-deny-list-custom-list-regex-pattern"></a>&#x2022; [`regex_pattern`](#user-restrictions-user-restrictions-deny-list-custom-list-regex-pattern) - Optional String<br>Regex For User Id. regex_values contains a regex pattern to match against
 
 ## Import
 

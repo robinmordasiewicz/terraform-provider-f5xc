@@ -34,18 +34,18 @@ data "f5xc_cluster" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the Cluster
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Cluster
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Cluster exists
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Cluster exists
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations applied to this resource
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations applied to this resource
 
-&#x2022; [`description`](#description) - Optional String<br>Description of the Cluster
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the Cluster
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels applied to this resource
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels applied to this resource

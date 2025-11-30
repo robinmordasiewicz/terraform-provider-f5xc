@@ -52,45 +52,45 @@ resource "f5xc_ike_phase1_profile" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the IKEPhase1Profile. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the IKEPhase1Profile. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the IKEPhase1Profile will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the IKEPhase1Profile will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`authentication_algos`](#authentication-algos) - Optional List  Defaults to `AUTH_ALG_DEFAULT`<br>Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`<br>Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the AES-gcm or AES-ccm encryption algorithms
+<a id="authentication-algos"></a>&#x2022; [`authentication_algos`](#authentication-algos) - Optional List  Defaults to `AUTH_ALG_DEFAULT`<br>Possible values are `AUTH_ALG_DEFAULT`, `SHA256_HMAC`, `SHA384_HMAC`, `SHA512_HMAC`, `AUTH_ALG_NONE`<br>Authentication Algorithms. Choose one or more Authentication Algorithm. Use None option when using the AES-gcm or AES-ccm encryption algorithms
 
-&#x2022; [`dh_group`](#dh-group) - Optional List  Defaults to `DH_GROUP_DEFAULT`<br>Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`<br>Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile
+<a id="dh-group"></a>&#x2022; [`dh_group`](#dh-group) - Optional List  Defaults to `DH_GROUP_DEFAULT`<br>Possible values are `DH_GROUP_DEFAULT`, `DH_GROUP_14`, `DH_GROUP_15`, `DH_GROUP_16`, `DH_GROUP_17`, `DH_GROUP_18`, `DH_GROUP_19`, `DH_GROUP_20`, `DH_GROUP_21`, `DH_GROUP_26`<br>Diffie Hellman Groups. Choose the acceptable Diffie Hellman (DH) Group or Groups that you are willing to accept as part of this profile
 
-&#x2022; [`encryption_algos`](#encryption-algos) - Optional List  Defaults to `ENC_ALG_DEFAULT`<br>Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`<br>Configure Encryption Algorithms. Choose one or more encryption algorithms
-
--> **One of the following:**
-&#x2022; [`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
-<br><br>&#x2022; [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
-<br><br>&#x2022; [`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
-
-&#x2022; [`prf`](#prf) - Optional List  Defaults to `PRF_DEFAULT`<br>Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`<br>PseudoRandomFunction. Select PseudoRandomFunction for IKE SA
+<a id="encryption-algos"></a>&#x2022; [`encryption_algos`](#encryption-algos) - Optional List  Defaults to `ENC_ALG_DEFAULT`<br>Possible values are `ENC_ALG_DEFAULT`, `AES128_CBC`, `AES192_CBC`, `AES256_CBC`, `TRIPLE_DES_CBC`, `AES128_GCM`, `AES192_GCM`, `AES256_GCM`<br>Configure Encryption Algorithms. Choose one or more encryption algorithms
 
 -> **One of the following:**
-&#x2022; [`reauth_disabled`](#reauth-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`reauth_timeout_days`](#reauth-timeout-days) - Optional Block<br>Days. Set Duration in days<br>See [Reauth Timeout Days](#reauth-timeout-days) below for details.
-<br><br>&#x2022; [`reauth_timeout_hours`](#reauth-timeout-hours) - Optional Block<br>Hours. Input Hours<br>See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
+&#x2022; <a id="ike-keylifetime-hours"></a>[`ike_keylifetime_hours`](#ike-keylifetime-hours) - Optional Block<br>Hours. Input Hours<br>See [Ike Keylifetime Hours](#ike-keylifetime-hours) below for details.
+<br><br>&#x2022; <a id="ike-keylifetime-minutes"></a>[`ike_keylifetime_minutes`](#ike-keylifetime-minutes) - Optional Block<br>Minutes. Set IKE Key Lifetime in minutes<br>See [Ike Keylifetime Minutes](#ike-keylifetime-minutes) below for details.
+<br><br>&#x2022; <a id="use-default-keylifetime"></a>[`use_default_keylifetime`](#use-default-keylifetime) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="prf"></a>&#x2022; [`prf`](#prf) - Optional List  Defaults to `PRF_DEFAULT`<br>Possible values are `PRF_DEFAULT`, `PRFSHA256`, `PRFSHA384`, `PRFSHA512`<br>PseudoRandomFunction. Select PseudoRandomFunction for IKE SA
+
+-> **One of the following:**
+&#x2022; <a id="reauth-disabled"></a>[`reauth_disabled`](#reauth-disabled) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="reauth-timeout-days"></a>[`reauth_timeout_days`](#reauth-timeout-days) - Optional Block<br>Days. Set Duration in days<br>See [Reauth Timeout Days](#reauth-timeout-days) below for details.
+<br><br>&#x2022; <a id="reauth-timeout-hours"></a>[`reauth_timeout_hours`](#reauth-timeout-hours) - Optional Block<br>Hours. Input Hours<br>See [Reauth Timeout Hours](#reauth-timeout-hours) below for details.
+
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -98,37 +98,37 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`ike_keylifetime_hours`](#ike-keylifetime-hours) block supports the following:
 
-&#x2022; [`duration`](#ike-keylifetime-hours-duration) - Optional Number<br>Duration
+<a id="ike-keylifetime-hours-duration"></a>&#x2022; [`duration`](#ike-keylifetime-hours-duration) - Optional Number<br>Duration
 
 #### Ike Keylifetime Minutes
 
 An [`ike_keylifetime_minutes`](#ike-keylifetime-minutes) block supports the following:
 
-&#x2022; [`duration`](#ike-keylifetime-minutes-duration) - Optional Number<br>Duration
+<a id="ike-keylifetime-minutes-duration"></a>&#x2022; [`duration`](#ike-keylifetime-minutes-duration) - Optional Number<br>Duration
 
 #### Reauth Timeout Days
 
 A [`reauth_timeout_days`](#reauth-timeout-days) block supports the following:
 
-&#x2022; [`duration`](#reauth-timeout-days-duration) - Optional Number<br>Duration
+<a id="reauth-timeout-days-duration"></a>&#x2022; [`duration`](#reauth-timeout-days-duration) - Optional Number<br>Duration
 
 #### Reauth Timeout Hours
 
 A [`reauth_timeout_hours`](#reauth-timeout-hours) block supports the following:
 
-&#x2022; [`duration`](#reauth-timeout-hours-duration) - Optional Number<br>Duration
+<a id="reauth-timeout-hours-duration"></a>&#x2022; [`duration`](#reauth-timeout-hours-duration) - Optional Number<br>Duration
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

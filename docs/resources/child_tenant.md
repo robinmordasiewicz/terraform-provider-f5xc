@@ -52,39 +52,39 @@ resource "f5xc_child_tenant" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the ChildTenant. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ChildTenant. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ChildTenant will be created
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the ChildTenant. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 
-&#x2022; [`child_tenant_manager`](#child-tenant-manager) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Child Tenant Manager](#child-tenant-manager) below for details.
+<a id="child-tenant-manager"></a>&#x2022; [`child_tenant_manager`](#child-tenant-manager) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Child Tenant Manager](#child-tenant-manager) below for details.
 
-&#x2022; [`company_name`](#company-name) - Optional String<br>Company Name. Company name (enterprise only)
+<a id="company-name"></a>&#x2022; [`company_name`](#company-name) - Optional String<br>Company Name. Company name (enterprise only)
 
-&#x2022; [`contact_detail`](#contact-detail) - Optional Block<br>Contact. Instance of one single contact that can be used to communicate with customers. Depending on contact type we use these details to send general communication (regular, physical mail) or invoices<br>See [Contact Detail](#contact-detail) below for details.
+<a id="contact-detail"></a>&#x2022; [`contact_detail`](#contact-detail) - Optional Block<br>Contact. Instance of one single contact that can be used to communicate with customers. Depending on contact type we use these details to send general communication (regular, physical mail) or invoices<br>See [Contact Detail](#contact-detail) below for details.
 
-&#x2022; [`customer_info`](#customer-info) - Optional Block<br>Customer Info. Optional details for the new child tenant<br>See [Customer Info](#customer-info) below for details.
+<a id="customer-info"></a>&#x2022; [`customer_info`](#customer-info) - Optional Block<br>Customer Info. Optional details for the new child tenant<br>See [Customer Info](#customer-info) below for details.
 
-&#x2022; [`domain`](#domain) - Optional String<br>Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io
+<a id="domain"></a>&#x2022; [`domain`](#domain) - Optional String<br>Domain. Text string that will be used for the subdomain of the new Child Tenant. This will be where users will directly log into the new Child Tenant. example domain.console.ves.volterra.io
 
-&#x2022; [`tenant_profile`](#tenant-profile) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Tenant Profile](#tenant-profile) below for details.
+<a id="tenant-profile"></a>&#x2022; [`tenant_profile`](#tenant-profile) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Tenant Profile](#tenant-profile) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -92,69 +92,69 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`child_tenant_manager`](#child-tenant-manager) block supports the following:
 
-&#x2022; [`name`](#child-tenant-manager-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="child-tenant-manager-name"></a>&#x2022; [`name`](#child-tenant-manager-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#child-tenant-manager-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="child-tenant-manager-namespace"></a>&#x2022; [`namespace`](#child-tenant-manager-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#child-tenant-manager-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="child-tenant-manager-tenant"></a>&#x2022; [`tenant`](#child-tenant-manager-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Contact Detail
 
 A [`contact_detail`](#contact-detail) block supports the following:
 
-&#x2022; [`address1`](#contact-detail-address1) - Optional String<br>Address Line 1
+<a id="contact-detail-address1"></a>&#x2022; [`address1`](#contact-detail-address1) - Optional String<br>Address Line 1
 
-&#x2022; [`address2`](#contact-detail-address2) - Optional String<br>Address Line 2
+<a id="contact-detail-address2"></a>&#x2022; [`address2`](#contact-detail-address2) - Optional String<br>Address Line 2
 
-&#x2022; [`city`](#contact-detail-city) - Optional String<br>City
+<a id="contact-detail-city"></a>&#x2022; [`city`](#contact-detail-city) - Optional String<br>City
 
-&#x2022; [`contact_type`](#contact-detail-contact-type) - Optional String  Defaults to `MAILING`<br>Possible values are `MAILING`, `BILLING`, `PAYMENT`<br>Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)
+<a id="contact-detail-contact-type"></a>&#x2022; [`contact_type`](#contact-detail-contact-type) - Optional String  Defaults to `MAILING`<br>Possible values are `MAILING`, `BILLING`, `PAYMENT`<br>Contact Type. Determines the contact type Indicates snail mail address (used for correspondence) Indicates billing address (this address will appear on invoices) Indicates contact used for a payment method (this address is used when charging a payment method)
 
-&#x2022; [`country`](#contact-detail-country) - Optional String<br>Country
+<a id="contact-detail-country"></a>&#x2022; [`country`](#contact-detail-country) - Optional String<br>Country
 
-&#x2022; [`county`](#contact-detail-county) - Optional String<br>County
+<a id="contact-detail-county"></a>&#x2022; [`county`](#contact-detail-county) - Optional String<br>County
 
-&#x2022; [`phone_number`](#contact-detail-phone-number) - Optional String<br>Phone Number
+<a id="contact-detail-phone-number"></a>&#x2022; [`phone_number`](#contact-detail-phone-number) - Optional String<br>Phone Number
 
-&#x2022; [`state`](#contact-detail-state) - Optional String<br>State
+<a id="contact-detail-state"></a>&#x2022; [`state`](#contact-detail-state) - Optional String<br>State
 
-&#x2022; [`state_code`](#contact-detail-state-code) - Optional String<br>State Code
+<a id="contact-detail-state-code"></a>&#x2022; [`state_code`](#contact-detail-state-code) - Optional String<br>State Code
 
-&#x2022; [`zip_code`](#contact-detail-zip-code) - Optional String<br>ZIP code
+<a id="contact-detail-zip-code"></a>&#x2022; [`zip_code`](#contact-detail-zip-code) - Optional String<br>ZIP code
 
 #### Customer Info
 
 A [`customer_info`](#customer-info) block supports the following:
 
-&#x2022; [`additional_info`](#customer-info-additional-info) - Optional String<br>Additional Info. Use this field for any additional information about the new child tenant
+<a id="customer-info-additional-info"></a>&#x2022; [`additional_info`](#customer-info-additional-info) - Optional String<br>Additional Info. Use this field for any additional information about the new child tenant
 
-&#x2022; [`email`](#customer-info-email) - Optional String<br>Email
+<a id="customer-info-email"></a>&#x2022; [`email`](#customer-info-email) - Optional String<br>Email
 
-&#x2022; [`first_name`](#customer-info-first-name) - Optional String<br>First Name
+<a id="customer-info-first-name"></a>&#x2022; [`first_name`](#customer-info-first-name) - Optional String<br>First Name
 
-&#x2022; [`last_name`](#customer-info-last-name) - Optional String<br>Last Name
+<a id="customer-info-last-name"></a>&#x2022; [`last_name`](#customer-info-last-name) - Optional String<br>Last Name
 
 #### Tenant Profile
 
 A [`tenant_profile`](#tenant-profile) block supports the following:
 
-&#x2022; [`name`](#tenant-profile-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="tenant-profile-name"></a>&#x2022; [`name`](#tenant-profile-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#tenant-profile-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="tenant-profile-namespace"></a>&#x2022; [`namespace`](#tenant-profile-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#tenant-profile-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-profile-tenant"></a>&#x2022; [`tenant`](#tenant-profile-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

@@ -52,33 +52,33 @@ resource "f5xc_quota" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the Quota. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Quota. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Quota will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Quota will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`api_limits`](#api-limits) - Optional Block<br>API Limits. API Limits defines ratelimit parameters for an API at the stdlib service The key of the api_limits map is rpc FQN e.g. 'ves.io.schema.advertise_policy.API.Create'
+<a id="api-limits"></a>&#x2022; [`api_limits`](#api-limits) - Optional Block<br>API Limits. API Limits defines ratelimit parameters for an API at the stdlib service The key of the api_limits map is rpc FQN e.g. 'ves.io.schema.advertise_policy.API.Create'
 
-&#x2022; [`object_limits`](#object-limits) - Optional Block<br>Object Limits. Object Limits define maximum number of instances that can be present per object kind for the tenant The key of the object_limits map is object kind e.g. 'virtual_host'
+<a id="object-limits"></a>&#x2022; [`object_limits`](#object-limits) - Optional Block<br>Object Limits. Object Limits define maximum number of instances that can be present per object kind for the tenant The key of the object_limits map is object kind e.g. 'virtual_host'
 
-&#x2022; [`resource_limits`](#resource-limits) - Optional Block<br>Resource Limits. Resource Limits define maximum value of resources in the appropriate units that can be present. The key of the resource limits is the resource name
+<a id="resource-limits"></a>&#x2022; [`resource_limits`](#resource-limits) - Optional Block<br>Resource Limits. Resource Limits define maximum value of resources in the appropriate units that can be present. The key of the resource limits is the resource name
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -86,13 +86,13 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

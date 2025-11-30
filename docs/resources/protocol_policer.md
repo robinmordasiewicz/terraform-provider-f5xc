@@ -52,29 +52,29 @@ resource "f5xc_protocol_policer" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the ProtocolPolicer. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ProtocolPolicer. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ProtocolPolicer will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ProtocolPolicer will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`protocol_policer`](#protocol-policer) - Optional Block<br>Protocol Policer. List of L4 protocol match condition and associated traffic rate limits<br>See [Protocol Policer](#protocol-policer) below for details.
+<a id="protocol-policer"></a>&#x2022; [`protocol_policer`](#protocol-policer) - Optional Block<br>Protocol Policer. List of L4 protocol match condition and associated traffic rate limits<br>See [Protocol Policer](#protocol-policer) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -82,59 +82,59 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`protocol_policer`](#protocol-policer) block supports the following:
 
-&#x2022; [`policer`](#protocol-policer-policer) - Optional Block<br>Policer. Reference to policer object to apply traffic rate limits<br>See [Policer](#protocol-policer-policer) below.
+<a id="protocol-policer-policer"></a>&#x2022; [`policer`](#protocol-policer-policer) - Optional Block<br>Policer. Reference to policer object to apply traffic rate limits<br>See [Policer](#protocol-policer-policer) below.
 
-&#x2022; [`protocol`](#protocol-policer-protocol) - Optional Block<br>Protocol Type. Protocol and protocol specific flags to be matched in packet<br>See [Protocol](#protocol-policer-protocol) below.
+<a id="protocol-policer-protocol"></a>&#x2022; [`protocol`](#protocol-policer-protocol) - Optional Block<br>Protocol Type. Protocol and protocol specific flags to be matched in packet<br>See [Protocol](#protocol-policer-protocol) below.
 
 #### Protocol Policer Policer
 
 A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
-&#x2022; [`kind`](#protocol-policer-policer-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="protocol-policer-policer-kind"></a>&#x2022; [`kind`](#protocol-policer-policer-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#protocol-policer-policer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="protocol-policer-policer-name"></a>&#x2022; [`name`](#protocol-policer-policer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#protocol-policer-policer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="protocol-policer-policer-namespace"></a>&#x2022; [`namespace`](#protocol-policer-policer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#protocol-policer-policer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="protocol-policer-policer-tenant"></a>&#x2022; [`tenant`](#protocol-policer-policer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#protocol-policer-policer-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="protocol-policer-policer-uid"></a>&#x2022; [`uid`](#protocol-policer-policer-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Protocol Policer Protocol
 
 A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
-&#x2022; [`dns`](#protocol-policer-protocol-dns) - Optional Block<br>DNS Packets. Match all DNS packets inclusing UDP and TCP
+<a id="protocol-policer-protocol-dns"></a>&#x2022; [`dns`](#protocol-policer-protocol-dns) - Optional Block<br>DNS Packets. Match all DNS packets inclusing UDP and TCP
 
-&#x2022; [`icmp`](#protocol-policer-protocol-icmp) - Optional Block<br>ICMP Packet Type. ICMP message type to match in packet<br>See [ICMP](#protocol-policer-protocol-icmp) below.
+<a id="protocol-policer-protocol-icmp"></a>&#x2022; [`icmp`](#protocol-policer-protocol-icmp) - Optional Block<br>ICMP Packet Type. ICMP message type to match in packet<br>See [ICMP](#protocol-policer-protocol-icmp) below.
 
-&#x2022; [`tcp`](#protocol-policer-protocol-tcp) - Optional Block<br>TCP Packet Type. Specification of TCP flag to be matched in a TCP packet<br>See [TCP](#protocol-policer-protocol-tcp) below.
+<a id="protocol-policer-protocol-tcp"></a>&#x2022; [`tcp`](#protocol-policer-protocol-tcp) - Optional Block<br>TCP Packet Type. Specification of TCP flag to be matched in a TCP packet<br>See [TCP](#protocol-policer-protocol-tcp) below.
 
-&#x2022; [`udp`](#protocol-policer-protocol-udp) - Optional Block<br>UDP Packets. Match all UDP packets
+<a id="protocol-policer-protocol-udp"></a>&#x2022; [`udp`](#protocol-policer-protocol-udp) - Optional Block<br>UDP Packets. Match all UDP packets
 
 #### Protocol Policer Protocol ICMP
 
 An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
-&#x2022; [`type`](#protocol-policer-protocol-icmp-type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
+<a id="protocol-policer-protocol-icmp-type"></a>&#x2022; [`type`](#protocol-policer-protocol-icmp-type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>ICMP type. ICMP message type to be matched in packet
 
 #### Protocol Policer Protocol TCP
 
 A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
 
-&#x2022; [`flags`](#protocol-policer-protocol-tcp-flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
+<a id="protocol-policer-protocol-tcp-flags"></a>&#x2022; [`flags`](#protocol-policer-protocol-tcp-flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>TCP flags. TCP flag to be matched in a TCP packet
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

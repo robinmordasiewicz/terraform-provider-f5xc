@@ -52,40 +52,40 @@ resource "f5xc_network_firewall" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the NetworkFirewall. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the NetworkFirewall. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NetworkFirewall will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the NetworkFirewall will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
-<br><br>&#x2022; [`active_network_policies`](#active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
-<br><br>&#x2022; [`disable_network_policy`](#disable-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="active-enhanced-firewall-policies"></a>[`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
+<br><br>&#x2022; <a id="active-network-policies"></a>[`active_network_policies`](#active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
+<br><br>&#x2022; <a id="disable-network-policy"></a>[`disable_network_policy`](#disable-network-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; [`active_fast_acls`](#active-fast-acls) - Optional Block<br>Active Fast ACL(s). List of Fast ACL(s)<br>See [Active Fast Acls](#active-fast-acls) below for details.
-<br><br>&#x2022; [`disable_fast_acl`](#disable-fast-acl) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="active-fast-acls"></a>[`active_fast_acls`](#active-fast-acls) - Optional Block<br>Active Fast ACL(s). List of Fast ACL(s)<br>See [Active Fast Acls](#active-fast-acls) below for details.
+<br><br>&#x2022; <a id="disable-fast-acl"></a>[`disable_fast_acl`](#disable-fast-acl) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; [`active_forward_proxy_policies`](#active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
-<br><br>&#x2022; [`disable_forward_proxy_policy`](#disable-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="active-forward-proxy-policies"></a>[`active_forward_proxy_policies`](#active-forward-proxy-policies) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
+<br><br>&#x2022; <a id="disable-forward-proxy-policy"></a>[`disable_forward_proxy_policy`](#disable-forward-proxy-policy) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -93,77 +93,77 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) block supports the following:
 
-&#x2022; [`enhanced_firewall_policies`](#active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
+<a id="active-enhanced-firewall-policies-enhanced-firewall-policies"></a>&#x2022; [`enhanced_firewall_policies`](#active-enhanced-firewall-policies-enhanced-firewall-policies) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#active-enhanced-firewall-policies-enhanced-firewall-policies) below.
 
 #### Active Enhanced Firewall Policies Enhanced Firewall Policies
 
 An [`enhanced_firewall_policies`](#active-enhanced-firewall-policies-enhanced-firewall-policies) block (within [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies)) supports the following:
 
-&#x2022; [`name`](#active-enhanced-firewall-policies-enhanced-firewall-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="active-enhanced-firewall-policies-enhanced-firewall-policies-name"></a>&#x2022; [`name`](#active-enhanced-firewall-policies-enhanced-firewall-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#active-enhanced-firewall-policies-enhanced-firewall-policies-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="active-enhanced-firewall-policies-enhanced-firewall-policies-namespace"></a>&#x2022; [`namespace`](#active-enhanced-firewall-policies-enhanced-firewall-policies-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#active-enhanced-firewall-policies-enhanced-firewall-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="active-enhanced-firewall-policies-enhanced-firewall-policies-tenant"></a>&#x2022; [`tenant`](#active-enhanced-firewall-policies-enhanced-firewall-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Active Fast Acls
 
 An [`active_fast_acls`](#active-fast-acls) block supports the following:
 
-&#x2022; [`fast_acls`](#active-fast-acls-fast-acls) - Optional Block<br>Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall<br>See [Fast Acls](#active-fast-acls-fast-acls) below.
+<a id="active-fast-acls-fast-acls"></a>&#x2022; [`fast_acls`](#active-fast-acls-fast-acls) - Optional Block<br>Fast ACL(s). Ordered List of Fast ACL(s) active for this network firewall<br>See [Fast Acls](#active-fast-acls-fast-acls) below.
 
 #### Active Fast Acls Fast Acls
 
 A [`fast_acls`](#active-fast-acls-fast-acls) block (within [`active_fast_acls`](#active-fast-acls)) supports the following:
 
-&#x2022; [`name`](#active-fast-acls-fast-acls-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="active-fast-acls-fast-acls-name"></a>&#x2022; [`name`](#active-fast-acls-fast-acls-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#active-fast-acls-fast-acls-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="active-fast-acls-fast-acls-namespace"></a>&#x2022; [`namespace`](#active-fast-acls-fast-acls-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#active-fast-acls-fast-acls-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="active-fast-acls-fast-acls-tenant"></a>&#x2022; [`tenant`](#active-fast-acls-fast-acls-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Active Forward Proxy Policies
 
 An [`active_forward_proxy_policies`](#active-forward-proxy-policies) block supports the following:
 
-&#x2022; [`forward_proxy_policies`](#active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
+<a id="active-forward-proxy-policies-forward-proxy-policies"></a>&#x2022; [`forward_proxy_policies`](#active-forward-proxy-policies-forward-proxy-policies) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#active-forward-proxy-policies-forward-proxy-policies) below.
 
 #### Active Forward Proxy Policies Forward Proxy Policies
 
 A [`forward_proxy_policies`](#active-forward-proxy-policies-forward-proxy-policies) block (within [`active_forward_proxy_policies`](#active-forward-proxy-policies)) supports the following:
 
-&#x2022; [`name`](#active-forward-proxy-policies-forward-proxy-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="active-forward-proxy-policies-forward-proxy-policies-name"></a>&#x2022; [`name`](#active-forward-proxy-policies-forward-proxy-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#active-forward-proxy-policies-forward-proxy-policies-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="active-forward-proxy-policies-forward-proxy-policies-namespace"></a>&#x2022; [`namespace`](#active-forward-proxy-policies-forward-proxy-policies-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#active-forward-proxy-policies-forward-proxy-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="active-forward-proxy-policies-forward-proxy-policies-tenant"></a>&#x2022; [`tenant`](#active-forward-proxy-policies-forward-proxy-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Active Network Policies
 
 An [`active_network_policies`](#active-network-policies) block supports the following:
 
-&#x2022; [`network_policies`](#active-network-policies-network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#active-network-policies-network-policies) below.
+<a id="active-network-policies-network-policies"></a>&#x2022; [`network_policies`](#active-network-policies-network-policies) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#active-network-policies-network-policies) below.
 
 #### Active Network Policies Network Policies
 
 A [`network_policies`](#active-network-policies-network-policies) block (within [`active_network_policies`](#active-network-policies)) supports the following:
 
-&#x2022; [`name`](#active-network-policies-network-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="active-network-policies-network-policies-name"></a>&#x2022; [`name`](#active-network-policies-network-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#active-network-policies-network-policies-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="active-network-policies-network-policies-namespace"></a>&#x2022; [`namespace`](#active-network-policies-network-policies-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#active-network-policies-network-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="active-network-policies-network-policies-tenant"></a>&#x2022; [`tenant`](#active-network-policies-network-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

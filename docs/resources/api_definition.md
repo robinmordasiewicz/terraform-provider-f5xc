@@ -45,39 +45,39 @@ resource "f5xc_api_definition" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the APIDefinition. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the APIDefinition. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the APIDefinition will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the APIDefinition will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) - Optional Block<br>API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory<br>See [API Inventory Exclusion List](#api-inventory-exclusion-list) below for details.
+<a id="api-inventory-exclusion-list"></a>&#x2022; [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) - Optional Block<br>API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory<br>See [API Inventory Exclusion List](#api-inventory-exclusion-list) below for details.
 
-&#x2022; [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) - Optional Block<br>API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list<br>See [API Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
+<a id="api-inventory-inclusion-list"></a>&#x2022; [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) - Optional Block<br>API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list<br>See [API Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
 
 -> **One of the following:**
-&#x2022; [`mixed_schema_origin`](#mixed-schema-origin) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`strict_schema_origin`](#strict-schema-origin) - Optional Block<br>Empty. This can be used for messages where no values are needed
+&#x2022; <a id="mixed-schema-origin"></a>[`mixed_schema_origin`](#mixed-schema-origin) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="strict-schema-origin"></a>[`strict_schema_origin`](#strict-schema-origin) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`non_api_endpoints`](#non-api-endpoints) - Optional Block<br>API Discovery Exclusion List. List of Non-API Endpoints<br>See [Non API Endpoints](#non-api-endpoints) below for details.
+<a id="non-api-endpoints"></a>&#x2022; [`non_api_endpoints`](#non-api-endpoints) - Optional Block<br>API Discovery Exclusion List. List of Non-API Endpoints<br>See [Non API Endpoints](#non-api-endpoints) below for details.
 
-&#x2022; [`swagger_specs`](#swagger-specs) - Optional List<br>File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API
+<a id="swagger-specs"></a>&#x2022; [`swagger_specs`](#swagger-specs) - Optional List<br>File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -85,37 +85,37 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block supports the following:
 
-&#x2022; [`method`](#api-inventory-exclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="api-inventory-exclusion-list-method"></a>&#x2022; [`method`](#api-inventory-exclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
-&#x2022; [`path`](#api-inventory-exclusion-list-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
+<a id="api-inventory-exclusion-list-path"></a>&#x2022; [`path`](#api-inventory-exclusion-list-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
 #### API Inventory Inclusion List
 
 An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block supports the following:
 
-&#x2022; [`method`](#api-inventory-inclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="api-inventory-inclusion-list-method"></a>&#x2022; [`method`](#api-inventory-inclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
-&#x2022; [`path`](#api-inventory-inclusion-list-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
+<a id="api-inventory-inclusion-list-path"></a>&#x2022; [`path`](#api-inventory-inclusion-list-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
 #### Non API Endpoints
 
 A [`non_api_endpoints`](#non-api-endpoints) block supports the following:
 
-&#x2022; [`method`](#non-api-endpoints-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="non-api-endpoints-method"></a>&#x2022; [`method`](#non-api-endpoints-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
-&#x2022; [`path`](#non-api-endpoints-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
+<a id="non-api-endpoints-path"></a>&#x2022; [`path`](#non-api-endpoints-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

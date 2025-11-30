@@ -52,32 +52,32 @@ resource "f5xc_k8s_cluster_role" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the K8SClusterRole. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the K8SClusterRole. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the K8SClusterRole will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the K8SClusterRole will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; [`k8s_cluster_role_selector`](#k8s-cluster-role-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [K8s Cluster Role Selector](#k8s-cluster-role-selector) below for details.
-<br><br>&#x2022; [`policy_rule_list`](#policy-rule-list) - Optional Block<br>Policy Rule List. List of rules for role permissions<br>See [Policy Rule List](#policy-rule-list) below for details.
-<br><br>&#x2022; [`yaml`](#yaml) - Optional String<br>K8s YAML. K8s YAML for ClusterRole
+&#x2022; <a id="k8s-cluster-role-selector"></a>[`k8s_cluster_role_selector`](#k8s-cluster-role-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [K8s Cluster Role Selector](#k8s-cluster-role-selector) below for details.
+<br><br>&#x2022; <a id="policy-rule-list"></a>[`policy_rule_list`](#policy-rule-list) - Optional Block<br>Policy Rule List. List of rules for role permissions<br>See [Policy Rule List](#policy-rule-list) below for details.
+<br><br>&#x2022; <a id="yaml"></a>[`yaml`](#yaml) - Optional String<br>K8s YAML. K8s YAML for ClusterRole
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -85,53 +85,53 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`k8s_cluster_role_selector`](#k8s-cluster-role-selector) block supports the following:
 
-&#x2022; [`expressions`](#k8s-cluster-role-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="k8s-cluster-role-selector-expressions"></a>&#x2022; [`expressions`](#k8s-cluster-role-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
 
 #### Policy Rule List
 
 A [`policy_rule_list`](#policy-rule-list) block supports the following:
 
-&#x2022; [`policy_rule`](#policy-rule-list-policy-rule) - Optional Block<br>Policy Rules. List of rules for role permissions<br>See [Policy Rule](#policy-rule-list-policy-rule) below.
+<a id="policy-rule-list-policy-rule"></a>&#x2022; [`policy_rule`](#policy-rule-list-policy-rule) - Optional Block<br>Policy Rules. List of rules for role permissions<br>See [Policy Rule](#policy-rule-list-policy-rule) below.
 
 #### Policy Rule List Policy Rule
 
 A [`policy_rule`](#policy-rule-list-policy-rule) block (within [`policy_rule_list`](#policy-rule-list)) supports the following:
 
-&#x2022; [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource<br>See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
+<a id="policy-rule-list-policy-rule-non-resource-url-list"></a>&#x2022; [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) - Optional Block<br>List of Non Resource URL(s). permissions for URL(s) that do not represent K8s resource<br>See [Non Resource URL List](#policy-rule-list-policy-rule-non-resource-url-list) below.
 
-&#x2022; [`resource_list`](#policy-rule-list-policy-rule-resource-list) - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
+<a id="policy-rule-list-policy-rule-resource-list"></a>&#x2022; [`resource_list`](#policy-rule-list-policy-rule-resource-list) - Optional Block<br>Resource List. List of resources in terms of API groups/resource types/resource instances and verbs allowed<br>See [Resource List](#policy-rule-list-policy-rule-resource-list) below.
 
 #### Policy Rule List Policy Rule Non Resource URL List
 
 A [`non_resource_url_list`](#policy-rule-list-policy-rule-non-resource-url-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
-&#x2022; [`urls`](#policy-rule-list-policy-rule-non-resource-url-list-urls) - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex
+<a id="policy-rule-list-policy-rule-non-resource-url-list-urls"></a>&#x2022; [`urls`](#policy-rule-list-policy-rule-non-resource-url-list-urls) - Optional List<br>Non Resource URL(s). allowed URL(s) that do not represent any K8s resource. URL can be suffix or regex
 
-&#x2022; [`verbs`](#policy-rule-list-policy-rule-non-resource-url-list-verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations
+<a id="policy-rule-list-policy-rule-non-resource-url-list-verbs"></a>&#x2022; [`verbs`](#policy-rule-list-policy-rule-non-resource-url-list-verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use VerbAll for all operations
 
 #### Policy Rule List Policy Rule Resource List
 
 A [`resource_list`](#policy-rule-list-policy-rule-resource-list) block (within [`policy_rule_list.policy_rule`](#policy-rule-list-policy-rule)) supports the following:
 
-&#x2022; [`api_groups`](#policy-rule-list-policy-rule-resource-list-api-groups) - Optional List<br>API Groups. Allowed list of API group that contains resources, all resources of a given API group
+<a id="policy-rule-list-policy-rule-resource-list-api-groups"></a>&#x2022; [`api_groups`](#policy-rule-list-policy-rule-resource-list-api-groups) - Optional List<br>API Groups. Allowed list of API group that contains resources, all resources of a given API group
 
-&#x2022; [`resource_instances`](#policy-rule-list-policy-rule-resource-list-resource-instances) - Optional List<br>Resource Instances. Allowed list of resource instances within the resource types
+<a id="policy-rule-list-policy-rule-resource-list-resource-instances"></a>&#x2022; [`resource_instances`](#policy-rule-list-policy-rule-resource-list-resource-instances) - Optional List<br>Resource Instances. Allowed list of resource instances within the resource types
 
-&#x2022; [`resource_types`](#policy-rule-list-policy-rule-resource-list-resource-types) - Optional List<br>Resource Types. Allowed list of resource types within the API groups
+<a id="policy-rule-list-policy-rule-resource-list-resource-types"></a>&#x2022; [`resource_types`](#policy-rule-list-policy-rule-resource-list-resource-types) - Optional List<br>Resource Types. Allowed list of resource types within the API groups
 
-&#x2022; [`verbs`](#policy-rule-list-policy-rule-resource-list-verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations
+<a id="policy-rule-list-policy-rule-resource-list-verbs"></a>&#x2022; [`verbs`](#policy-rule-list-policy-rule-resource-list-verbs) - Optional List<br>Allowed Verbs. Allowed list of verbs(operations) on resources. Use * for all operations
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

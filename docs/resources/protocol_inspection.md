@@ -52,33 +52,33 @@ resource "f5xc_protocol_inspection" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the ProtocolInspection. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ProtocolInspection. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ProtocolInspection will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ProtocolInspection will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`action`](#action) - Optional String  Defaults to `ALLOW`<br>Possible values are `ALLOW`, `DENY`, `DROP`<br>Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic
+<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `ALLOW`<br>Possible values are `ALLOW`, `DENY`, `DROP`<br>Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic
 
-&#x2022; [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) - Optional Block<br>Enable/Disable Compliance Checks. x-required Enable Disable Compliance Checks Choice<br>See [Enable Disable Compliance Checks](#enable-disable-compliance-checks) below for details.
+<a id="enable-disable-compliance-checks"></a>&#x2022; [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) - Optional Block<br>Enable/Disable Compliance Checks. x-required Enable Disable Compliance Checks Choice<br>See [Enable Disable Compliance Checks](#enable-disable-compliance-checks) below for details.
 
-&#x2022; [`enable_disable_signatures`](#enable-disable-signatures) - Optional Block<br>Enable/Disable Signatures Choice. x-required Enable Disable Signature Choice<br>See [Enable Disable Signatures](#enable-disable-signatures) below for details.
+<a id="enable-disable-signatures"></a>&#x2022; [`enable_disable_signatures`](#enable-disable-signatures) - Optional Block<br>Enable/Disable Signatures Choice. x-required Enable Disable Signature Choice<br>See [Enable Disable Signatures](#enable-disable-signatures) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -86,39 +86,39 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block supports the following:
 
-&#x2022; [`disable_compliance_checks`](#enable-disable-compliance-checks-disable-compliance-checks) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-disable-compliance-checks-disable-compliance-checks"></a>&#x2022; [`disable_compliance_checks`](#enable-disable-compliance-checks-disable-compliance-checks) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
+<a id="enable-disable-compliance-checks-enable-compliance-checks"></a>&#x2022; [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#enable-disable-compliance-checks-enable-compliance-checks) below.
 
 #### Enable Disable Compliance Checks Enable Compliance Checks
 
 An [`enable_compliance_checks`](#enable-disable-compliance-checks-enable-compliance-checks) block (within [`enable_disable_compliance_checks`](#enable-disable-compliance-checks)) supports the following:
 
-&#x2022; [`name`](#enable-disable-compliance-checks-enable-compliance-checks-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="enable-disable-compliance-checks-enable-compliance-checks-name"></a>&#x2022; [`name`](#enable-disable-compliance-checks-enable-compliance-checks-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#enable-disable-compliance-checks-enable-compliance-checks-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="enable-disable-compliance-checks-enable-compliance-checks-namespace"></a>&#x2022; [`namespace`](#enable-disable-compliance-checks-enable-compliance-checks-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#enable-disable-compliance-checks-enable-compliance-checks-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="enable-disable-compliance-checks-enable-compliance-checks-tenant"></a>&#x2022; [`tenant`](#enable-disable-compliance-checks-enable-compliance-checks-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Enable Disable Signatures
 
 An [`enable_disable_signatures`](#enable-disable-signatures) block supports the following:
 
-&#x2022; [`disable_signature`](#enable-disable-signatures-disable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-disable-signatures-disable-signature"></a>&#x2022; [`disable_signature`](#enable-disable-signatures-disable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`enable_signature`](#enable-disable-signatures-enable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="enable-disable-signatures-enable-signature"></a>&#x2022; [`enable_signature`](#enable-disable-signatures-enable-signature) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

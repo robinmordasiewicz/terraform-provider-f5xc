@@ -52,35 +52,35 @@ resource "f5xc_fast_acl_rule" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the FastACLRule. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the FastACLRule. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the FastACLRule will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the FastACLRule will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`action`](#action) - Optional Block<br>Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic<br>See [Action](#action) below for details.
+<a id="action"></a>&#x2022; [`action`](#action) - Optional Block<br>Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic<br>See [Action](#action) below for details.
 
 -> **One of the following:**
-&#x2022; [`ip_prefix_set`](#ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#ip-prefix-set) below for details.
-<br><br>&#x2022; [`prefix`](#prefix) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#prefix) below for details.
+&#x2022; <a id="ip-prefix-set"></a>[`ip_prefix_set`](#ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#ip-prefix-set) below for details.
+<br><br>&#x2022; <a id="prefix"></a>[`prefix`](#prefix) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#prefix) below for details.
 
-&#x2022; [`port`](#port) - Optional Block<br>Source Ports. L4 port numbers to match<br>See [Port](#port) below for details.
+<a id="port"></a>&#x2022; [`port`](#port) - Optional Block<br>Source Ports. L4 port numbers to match<br>See [Port](#port) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -88,99 +88,99 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`action`](#action) block supports the following:
 
-&#x2022; [`policer_action`](#action-policer-action) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#action-policer-action) below.
+<a id="action-policer-action"></a>&#x2022; [`policer_action`](#action-policer-action) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#action-policer-action) below.
 
-&#x2022; [`protocol_policer_action`](#action-protocol-policer-action) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#action-protocol-policer-action) below.
+<a id="action-protocol-policer-action"></a>&#x2022; [`protocol_policer_action`](#action-protocol-policer-action) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#action-protocol-policer-action) below.
 
-&#x2022; [`simple_action`](#action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
+<a id="action-simple-action"></a>&#x2022; [`simple_action`](#action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
 
 #### Action Policer Action
 
 A [`policer_action`](#action-policer-action) block (within [`action`](#action)) supports the following:
 
-&#x2022; [`ref`](#action-policer-action-ref) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#action-policer-action-ref) below.
+<a id="action-policer-action-ref"></a>&#x2022; [`ref`](#action-policer-action-ref) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#action-policer-action-ref) below.
 
 #### Action Policer Action Ref
 
 A [`ref`](#action-policer-action-ref) block (within [`action.policer_action`](#action-policer-action)) supports the following:
 
-&#x2022; [`kind`](#action-policer-action-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="action-policer-action-ref-kind"></a>&#x2022; [`kind`](#action-policer-action-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#action-policer-action-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="action-policer-action-ref-name"></a>&#x2022; [`name`](#action-policer-action-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#action-policer-action-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="action-policer-action-ref-namespace"></a>&#x2022; [`namespace`](#action-policer-action-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#action-policer-action-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="action-policer-action-ref-tenant"></a>&#x2022; [`tenant`](#action-policer-action-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#action-policer-action-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="action-policer-action-ref-uid"></a>&#x2022; [`uid`](#action-policer-action-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Action Protocol Policer Action
 
 A [`protocol_policer_action`](#action-protocol-policer-action) block (within [`action`](#action)) supports the following:
 
-&#x2022; [`ref`](#action-protocol-policer-action-ref) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#action-protocol-policer-action-ref) below.
+<a id="action-protocol-policer-action-ref"></a>&#x2022; [`ref`](#action-protocol-policer-action-ref) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#action-protocol-policer-action-ref) below.
 
 #### Action Protocol Policer Action Ref
 
 A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol_policer_action`](#action-protocol-policer-action)) supports the following:
 
-&#x2022; [`kind`](#action-protocol-policer-action-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="action-protocol-policer-action-ref-kind"></a>&#x2022; [`kind`](#action-protocol-policer-action-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#action-protocol-policer-action-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="action-protocol-policer-action-ref-name"></a>&#x2022; [`name`](#action-protocol-policer-action-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#action-protocol-policer-action-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="action-protocol-policer-action-ref-namespace"></a>&#x2022; [`namespace`](#action-protocol-policer-action-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#action-protocol-policer-action-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="action-protocol-policer-action-ref-tenant"></a>&#x2022; [`tenant`](#action-protocol-policer-action-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#action-protocol-policer-action-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="action-protocol-policer-action-ref-uid"></a>&#x2022; [`uid`](#action-protocol-policer-action-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### IP Prefix Set
 
 An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
-&#x2022; [`ref`](#ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
+<a id="ip-prefix-set-ref"></a>&#x2022; [`ref`](#ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
 
 #### IP Prefix Set Ref
 
 A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
 
-&#x2022; [`kind`](#ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-&#x2022; [`name`](#ip-prefix-set-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="ip-prefix-set-ref-name"></a>&#x2022; [`name`](#ip-prefix-set-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#ip-prefix-set-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="ip-prefix-set-ref-namespace"></a>&#x2022; [`namespace`](#ip-prefix-set-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#ip-prefix-set-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#ip-prefix-set-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
-&#x2022; [`uid`](#ip-prefix-set-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#ip-prefix-set-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
 
 #### Port
 
 A [`port`](#port) block supports the following:
 
-&#x2022; [`all`](#port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="port-all"></a>&#x2022; [`all`](#port-all) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`dns`](#port-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="port-dns"></a>&#x2022; [`dns`](#port-dns) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`user_defined`](#port-user-defined) - Optional Number<br>User defined port. Matches the user defined port
+<a id="port-user-defined"></a>&#x2022; [`user_defined`](#port-user-defined) - Optional Number<br>User defined port. Matches the user defined port
 
 #### Prefix
 
 A [`prefix`](#prefix) block supports the following:
 
-&#x2022; [`prefix`](#prefix-prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
+<a id="prefix-prefix"></a>&#x2022; [`prefix`](#prefix-prefix) - Optional List<br>Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

@@ -18,7 +18,7 @@ GO=go
 GOFMT=gofmt
 GOLINT=golangci-lint
 
-.PHONY: all build test lint fmt clean clean-generated regenerate generate docs install help
+.PHONY: all build test lint fmt clean clean-generated regenerate generate docs install help sweep sweep-dry-run testacc
 
 # Default target
 all: generate build lint test docs
@@ -31,16 +31,24 @@ help:
 	@echo "  make              - Generate, build, lint, test, and generate docs"
 	@echo "  make build        - Build the provider binary"
 	@echo "  make test         - Run tests"
+	@echo "  make testacc      - Run acceptance tests (requires F5XC credentials)"
 	@echo "  make lint         - Run linters"
 	@echo "  make fmt          - Format Go code"
 	@echo "  make generate     - Generate resources from OpenAPI specs"
 	@echo "  make docs         - Generate Terraform documentation"
 	@echo "  make clean        - Remove build artifacts"
 	@echo "  make install      - Install provider locally"
+	@echo "  make sweep        - Clean up orphaned test resources (requires F5XC credentials)"
+	@echo "  make sweep-resource RESOURCE=f5xc_namespace - Sweep specific resource type"
 	@echo ""
 	@echo "Environment Variables:"
 	@echo "  SPEC_DIR          - Directory containing OpenAPI specs (default: /tmp)"
 	@echo "  F5XC_SPEC_DIR     - Alternative env var for spec directory"
+	@echo ""
+	@echo "For acceptance tests and sweepers, set one of:"
+	@echo "  F5XC_API_URL + F5XC_API_P12_FILE + F5XC_P12_PASSWORD (P12 auth)"
+	@echo "  F5XC_API_URL + F5XC_API_CERT + F5XC_API_KEY (PEM auth)"
+	@echo "  F5XC_API_URL + F5XC_API_TOKEN (Token auth)"
 
 # Build the provider
 build:
@@ -112,6 +120,35 @@ install: build
 	@echo "Installing provider locally..."
 	mkdir -p ~/.terraform.d/plugins/registry.terraform.io/f5xc/f5xc/$(VERSION)/$(GOOS)_$(GOARCH)
 	cp $(BINARY_NAME) ~/.terraform.d/plugins/registry.terraform.io/f5xc/f5xc/$(VERSION)/$(GOOS)_$(GOARCH)/
+
+# Acceptance testing and cleanup
+testacc:
+	@echo "Running acceptance tests..."
+	TF_ACC=1 $(GO) test -v -timeout 120m ./internal/provider/...
+
+# Sweep test resources - clean up orphaned resources from failed tests
+# Usage: make sweep
+# Environment variables required:
+#   - F5XC_API_URL: F5 XC API URL
+#   - F5XC_API_P12_FILE and F5XC_P12_PASSWORD (for P12 auth)
+#   - OR F5XC_API_CERT and F5XC_API_KEY (for PEM auth)
+#   - OR F5XC_API_TOKEN (for token auth)
+sweep:
+	@echo "Sweeping test resources with prefix 'tf-acc-test-' or 'tf-test-'..."
+	@echo "This will delete all matching resources from F5 XC."
+	@echo ""
+	TF_ACC=1 $(GO) test ./internal/acctest -v -sweep=all -timeout 30m
+
+# Sweep specific resource type
+# Usage: make sweep-resource RESOURCE=f5xc_namespace
+sweep-resource:
+	@if [ -z "$(RESOURCE)" ]; then \
+		echo "Error: RESOURCE variable not set"; \
+		echo "Usage: make sweep-resource RESOURCE=f5xc_namespace"; \
+		exit 1; \
+	fi
+	@echo "Sweeping $(RESOURCE) resources..."
+	TF_ACC=1 $(GO) test ./internal/acctest -v -sweep=$(RESOURCE) -timeout 30m
 
 # CI targets
 .PHONY: ci ci-lint ci-test ci-build ci-generate

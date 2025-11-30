@@ -759,6 +759,48 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 	})
 	if blockData, ok := apiResource.Spec["aws"].(map[string]interface{}); ok && (isImport || data.AWS != nil) {
 		data.AWS = &CloudLinkAWSModel{
+			AWSCred: func() *CloudLinkAWSAWSCredModel {
+				if !isImport && data.AWS != nil && data.AWS.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.AWS.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &CloudLinkAWSAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Byoc: func() *CloudLinkAWSByocModel {
+				if !isImport && data.AWS != nil && data.AWS.Byoc != nil {
+					// Normal Read: preserve existing state value
+					return data.AWS.Byoc
+				}
+				// Import case: read from API
+				if _, ok := blockData["byoc"].(map[string]interface{}); ok {
+					return &CloudLinkAWSByocModel{
+					}
+				}
+				return nil
+			}(),
 			CustomAsn: func() types.Int64 {
 				if v, ok := blockData["custom_asn"].(float64); ok {
 					return types.Int64Value(int64(v))

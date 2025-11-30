@@ -792,6 +792,36 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.Int64Null()
 			}(),
+			NoInterception: func() *NetworkConnectorEmptyModel {
+				if !isImport && data.EnableForwardProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.EnableForwardProxy.NoInterception
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_interception"].(map[string]interface{}); ok {
+					return &NetworkConnectorEmptyModel{}
+				}
+				return nil
+			}(),
+			TLSIntercept: func() *NetworkConnectorEnableForwardProxyTLSInterceptModel {
+				if !isImport && data.EnableForwardProxy != nil && data.EnableForwardProxy.TLSIntercept != nil {
+					// Normal Read: preserve existing state value
+					return data.EnableForwardProxy.TLSIntercept
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tls_intercept"].(map[string]interface{}); ok {
+					return &NetworkConnectorEnableForwardProxyTLSInterceptModel{
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			WhiteListedPorts: func() types.List {
 				if v, ok := blockData["white_listed_ports"].([]interface{}); ok && len(v) > 0 {
 					var items []int64

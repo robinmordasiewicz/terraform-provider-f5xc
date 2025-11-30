@@ -2928,6 +2928,18 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["dynamic_proxy"].(map[string]interface{}); ok && (isImport || data.DynamicProxy != nil) {
 		data.DynamicProxy = &ProxyDynamicProxyModel{
+			DisableDNSMasquerade: func() *ProxyEmptyModel {
+				if !isImport && data.DynamicProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DynamicProxy.DisableDNSMasquerade
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_dns_masquerade"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
+			}(),
 			Domains: func() types.List {
 				if v, ok := blockData["domains"].([]interface{}); ok && len(v) > 0 {
 					var items []string
@@ -2940,6 +2952,60 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 					return listVal
 				}
 				return types.ListNull(types.StringType)
+			}(),
+			EnableDNSMasquerade: func() *ProxyEmptyModel {
+				if !isImport && data.DynamicProxy != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DynamicProxy.EnableDNSMasquerade
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_dns_masquerade"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
+			}(),
+			HTTPProxy: func() *ProxyDynamicProxyHTTPProxyModel {
+				if !isImport && data.DynamicProxy != nil && data.DynamicProxy.HTTPProxy != nil {
+					// Normal Read: preserve existing state value
+					return data.DynamicProxy.HTTPProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["http_proxy"].(map[string]interface{}); ok {
+					return &ProxyDynamicProxyHTTPProxyModel{
+					}
+				}
+				return nil
+			}(),
+			HTTPSProxy: func() *ProxyDynamicProxyHTTPSProxyModel {
+				if !isImport && data.DynamicProxy != nil && data.DynamicProxy.HTTPSProxy != nil {
+					// Normal Read: preserve existing state value
+					return data.DynamicProxy.HTTPSProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["https_proxy"].(map[string]interface{}); ok {
+					return &ProxyDynamicProxyHTTPSProxyModel{
+					}
+				}
+				return nil
+			}(),
+			SniProxy: func() *ProxyDynamicProxySniProxyModel {
+				if !isImport && data.DynamicProxy != nil && data.DynamicProxy.SniProxy != nil {
+					// Normal Read: preserve existing state value
+					return data.DynamicProxy.SniProxy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["sni_proxy"].(map[string]interface{}); ok {
+					return &ProxyDynamicProxySniProxyModel{
+						IdleTimeout: func() types.Int64 {
+							if v, ok := nestedBlockData["idle_timeout"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -3031,11 +3097,83 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	}
 	if blockData, ok := apiResource.Spec["tls_intercept"].(map[string]interface{}); ok && (isImport || data.TLSIntercept != nil) {
 		data.TLSIntercept = &ProxyTLSInterceptModel{
+			CustomCertificate: func() *ProxyTLSInterceptCustomCertificateModel {
+				if !isImport && data.TLSIntercept != nil && data.TLSIntercept.CustomCertificate != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSIntercept.CustomCertificate
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["custom_certificate"].(map[string]interface{}); ok {
+					return &ProxyTLSInterceptCustomCertificateModel{
+						CertificateURL: func() types.String {
+							if v, ok := nestedBlockData["certificate_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						DescriptionSpec: func() types.String {
+							if v, ok := nestedBlockData["description"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			EnableForAllDomains: func() *ProxyEmptyModel {
+				if !isImport && data.TLSIntercept != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSIntercept.EnableForAllDomains
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_for_all_domains"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
+			}(),
+			Policy: func() *ProxyTLSInterceptPolicyModel {
+				if !isImport && data.TLSIntercept != nil && data.TLSIntercept.Policy != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSIntercept.Policy
+				}
+				// Import case: read from API
+				if _, ok := blockData["policy"].(map[string]interface{}); ok {
+					return &ProxyTLSInterceptPolicyModel{
+					}
+				}
+				return nil
+			}(),
 			TrustedCaURL: func() types.String {
 				if v, ok := blockData["trusted_ca_url"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			VolterraCertificate: func() *ProxyEmptyModel {
+				if !isImport && data.TLSIntercept != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSIntercept.VolterraCertificate
+				}
+				// Import case: read from API
+				if _, ok := blockData["volterra_certificate"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
+			}(),
+			VolterraTrustedCa: func() *ProxyEmptyModel {
+				if !isImport && data.TLSIntercept != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSIntercept.VolterraTrustedCa
+				}
+				// Import case: read from API
+				if _, ok := blockData["volterra_trusted_ca"].(map[string]interface{}); ok {
+					return &ProxyEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}

@@ -2515,6 +2515,48 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	})
 	if blockData, ok := apiResource.Spec["aws_parameters"].(map[string]interface{}); ok && (isImport || data.AWSParameters != nil) {
 		data.AWSParameters = &AWSTGWSiteAWSParametersModel{
+			AdminPassword: func() *AWSTGWSiteAWSParametersAdminPasswordModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.AdminPassword != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.AdminPassword
+				}
+				// Import case: read from API
+				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
+					return &AWSTGWSiteAWSParametersAdminPasswordModel{
+					}
+				}
+				return nil
+			}(),
+			AWSCred: func() *AWSTGWSiteAWSParametersAWSCredModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &AWSTGWSiteAWSParametersAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			AWSRegion: func() types.String {
 				if v, ok := blockData["aws_region"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -2585,11 +2627,101 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return nil
 			}(),
+			CustomSecurityGroup: func() *AWSTGWSiteAWSParametersCustomSecurityGroupModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.CustomSecurityGroup != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.CustomSecurityGroup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["custom_security_group"].(map[string]interface{}); ok {
+					return &AWSTGWSiteAWSParametersCustomSecurityGroupModel{
+						InsideSecurityGroupID: func() types.String {
+							if v, ok := nestedBlockData["inside_security_group_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						OutsideSecurityGroupID: func() types.String {
+							if v, ok := nestedBlockData["outside_security_group_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DisableInternetVip: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.DisableInternetVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_internet_vip"].(map[string]interface{}); ok {
+					return &AWSTGWSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			DiskSize: func() types.Int64 {
 				if v, ok := blockData["disk_size"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			EnableInternetVip: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.EnableInternetVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_internet_vip"].(map[string]interface{}); ok {
+					return &AWSTGWSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ExistingTGW: func() *AWSTGWSiteAWSParametersExistingTGWModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.ExistingTGW != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.ExistingTGW
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["existing_tgw"].(map[string]interface{}); ok {
+					return &AWSTGWSiteAWSParametersExistingTGWModel{
+						TGWAsn: func() types.Int64 {
+							if v, ok := nestedBlockData["tgw_asn"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TGWID: func() types.String {
+							if v, ok := nestedBlockData["tgw_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						VolterraSiteAsn: func() types.Int64 {
+							if v, ok := nestedBlockData["volterra_site_asn"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			F5xcSecurityGroup: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.F5xcSecurityGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["f5xc_security_group"].(map[string]interface{}); ok {
+					return &AWSTGWSiteEmptyModel{}
+				}
+				return nil
 			}(),
 			InstanceType: func() types.String {
 				if v, ok := blockData["instance_type"].(string); ok && v != "" {
@@ -2597,17 +2729,95 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
+			NewTGW: func() *AWSTGWSiteAWSParametersNewTGWModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.NewTGW != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.NewTGW
+				}
+				// Import case: read from API
+				if _, ok := blockData["new_tgw"].(map[string]interface{}); ok {
+					return &AWSTGWSiteAWSParametersNewTGWModel{
+					}
+				}
+				return nil
+			}(),
+			NewVPC: func() *AWSTGWSiteAWSParametersNewVPCModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.NewVPC != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.NewVPC
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["new_vpc"].(map[string]interface{}); ok {
+					return &AWSTGWSiteAWSParametersNewVPCModel{
+						NameTag: func() types.String {
+							if v, ok := nestedBlockData["name_tag"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						PrimaryIPV4: func() types.String {
+							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoWorkerNodes: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.NoWorkerNodes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_worker_nodes"].(map[string]interface{}); ok {
+					return &AWSTGWSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			NodesPerAz: func() types.Int64 {
 				if v, ok := blockData["nodes_per_az"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
+			ReservedTGWCidr: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.ReservedTGWCidr
+				}
+				// Import case: read from API
+				if _, ok := blockData["reserved_tgw_cidr"].(map[string]interface{}); ok {
+					return &AWSTGWSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			SSHKey: func() types.String {
 				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			TGWCidr: func() *AWSTGWSiteAWSParametersTGWCidrModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCidr != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.TGWCidr
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tgw_cidr"].(map[string]interface{}); ok {
+					return &AWSTGWSiteAWSParametersTGWCidrModel{
+						IPV4: func() types.String {
+							if v, ok := nestedBlockData["ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
 			}(),
 			TotalNodes: func() types.Int64 {
 				if v, ok := blockData["total_nodes"].(float64); ok {
@@ -2713,11 +2923,47 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["direct_connect_enabled"].(map[string]interface{}); ok && (isImport || data.DirectConnectEnabled != nil) {
 		data.DirectConnectEnabled = &AWSTGWSiteDirectConnectEnabledModel{
+			AutoAsn: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.AutoAsn
+				}
+				// Import case: read from API
+				if _, ok := blockData["auto_asn"].(map[string]interface{}); ok {
+					return &AWSTGWSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			CustomAsn: func() types.Int64 {
 				if v, ok := blockData["custom_asn"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			HostedVifs: func() *AWSTGWSiteDirectConnectEnabledHostedVifsModel {
+				if !isImport && data.DirectConnectEnabled != nil && data.DirectConnectEnabled.HostedVifs != nil {
+					// Normal Read: preserve existing state value
+					return data.DirectConnectEnabled.HostedVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["hosted_vifs"].(map[string]interface{}); ok {
+					return &AWSTGWSiteDirectConnectEnabledHostedVifsModel{
+					}
+				}
+				return nil
+			}(),
+			StandardVifs: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.StandardVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["standard_vifs"].(map[string]interface{}); ok {
+					return &AWSTGWSiteEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -2760,6 +3006,18 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
 		data.Os = &AWSTGWSiteOsModel{
+			DefaultOsVersion: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.Os != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Os.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &AWSTGWSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			OperatingSystemVersion: func() types.String {
 				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -2780,6 +3038,18 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &AWSTGWSiteSwModel{
+			DefaultSwVersion: func() *AWSTGWSiteEmptyModel {
+				if !isImport && data.Sw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Sw.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &AWSTGWSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			VolterraSoftwareVersion: func() types.String {
 				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
 					return types.StringValue(v)

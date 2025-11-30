@@ -17944,6 +17944,67 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
+			BypassRateLimitingRules: func() *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.BypassRateLimitingRules != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.BypassRateLimitingRules
+				}
+				// Import case: read from API
+				if _, ok := blockData["bypass_rate_limiting_rules"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModel{
+					}
+				}
+				return nil
+			}(),
+			CustomIPAllowedList: func() *HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.CustomIPAllowedList != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.CustomIPAllowedList
+				}
+				// Import case: read from API
+				if _, ok := blockData["custom_ip_allowed_list"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModel{
+					}
+				}
+				return nil
+			}(),
+			IPAllowedList: func() *HTTPLoadBalancerAPIRateLimitIPAllowedListModel {
+				if !isImport && data.APIRateLimit != nil && data.APIRateLimit.IPAllowedList != nil {
+					// Normal Read: preserve existing state value
+					return data.APIRateLimit.IPAllowedList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["ip_allowed_list"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerAPIRateLimitIPAllowedListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoIPAllowedList: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.APIRateLimit != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APIRateLimit.NoIPAllowedList
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_ip_allowed_list"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			ServerURLRules: func() []HTTPLoadBalancerAPIRateLimitServerURLRulesModel {
 				if listData, ok := blockData["server_url_rules"].([]interface{}); ok && len(listData) > 0 {
 					var result []HTTPLoadBalancerAPIRateLimitServerURLRulesModel
@@ -18097,6 +18158,42 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
+			EveryDay: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.APITesting != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APITesting.EveryDay
+				}
+				// Import case: read from API
+				if _, ok := blockData["every_day"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EveryMonth: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.APITesting != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APITesting.EveryMonth
+				}
+				// Import case: read from API
+				if _, ok := blockData["every_month"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EveryWeek: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.APITesting != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.APITesting.EveryWeek
+				}
+				// Import case: read from API
+				if _, ok := blockData["every_week"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["app_firewall"].(map[string]interface{}); ok && (isImport || data.AppFirewall != nil) {
@@ -18220,6 +18317,54 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &HTTPLoadBalancerBotDefenseModel{
+			DisableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BotDefense.DisableCorsSupport
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_cors_support"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnableCorsSupport: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BotDefense.EnableCorsSupport
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_cors_support"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			Policy: func() *HTTPLoadBalancerBotDefensePolicyModel {
+				if !isImport && data.BotDefense != nil && data.BotDefense.Policy != nil {
+					// Normal Read: preserve existing state value
+					return data.BotDefense.Policy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["policy"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerBotDefensePolicyModel{
+						JavascriptMode: func() types.String {
+							if v, ok := nestedBlockData["javascript_mode"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						JsDownloadPath: func() types.String {
+							if v, ok := nestedBlockData["js_download_path"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			RegionalEndpoint: func() types.String {
 				if v, ok := blockData["regional_endpoint"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -18267,6 +18412,66 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["cookie_stickiness"].(map[string]interface{}); ok && (isImport || data.CookieStickiness != nil) {
 		data.CookieStickiness = &HTTPLoadBalancerCookieStickinessModel{
+			AddHttponly: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.AddHttponly
+				}
+				// Import case: read from API
+				if _, ok := blockData["add_httponly"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			AddSecure: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.AddSecure
+				}
+				// Import case: read from API
+				if _, ok := blockData["add_secure"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.IgnoreHttponly
+				}
+				// Import case: read from API
+				if _, ok := blockData["ignore_httponly"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.IgnoreSamesite
+				}
+				// Import case: read from API
+				if _, ok := blockData["ignore_samesite"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.IgnoreSecure
+				}
+				// Import case: read from API
+				if _, ok := blockData["ignore_secure"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			Name: func() types.String {
 				if v, ok := blockData["name"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -18278,6 +18483,42 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.SamesiteLax
+				}
+				// Import case: read from API
+				if _, ok := blockData["samesite_lax"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.SamesiteNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["samesite_none"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.CookieStickiness != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieStickiness.SamesiteStrict
+				}
+				// Import case: read from API
+				if _, ok := blockData["samesite_strict"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
 			}(),
 			Ttl: func() types.Int64 {
 				if v, ok := blockData["ttl"].(float64); ok {
@@ -18541,6 +18782,48 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if blockData, ok := apiResource.Spec["default_pool"].(map[string]interface{}); ok && (isImport || data.DefaultPool != nil) {
 		data.DefaultPool = &HTTPLoadBalancerDefaultPoolModel{
+			AdvancedOptions: func() *HTTPLoadBalancerDefaultPoolAdvancedOptionsModel {
+				if !isImport && data.DefaultPool != nil && data.DefaultPool.AdvancedOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.DefaultPool.AdvancedOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["advanced_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerDefaultPoolAdvancedOptionsModel{
+						ConnectionTimeout: func() types.Int64 {
+							if v, ok := nestedBlockData["connection_timeout"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						HTTPIdleTimeout: func() types.Int64 {
+							if v, ok := nestedBlockData["http_idle_timeout"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						PanicThreshold: func() types.Int64 {
+							if v, ok := nestedBlockData["panic_threshold"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AutomaticPort: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.DefaultPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultPool.AutomaticPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["automatic_port"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			EndpointSelection: func() types.String {
 				if v, ok := blockData["endpoint_selection"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -18584,11 +18867,35 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return nil
 			}(),
+			LbPort: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.DefaultPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultPool.LbPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["lb_port"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			LoadBalancerAlgorithm: func() types.String {
 				if v, ok := blockData["loadbalancer_algorithm"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			NoTLS: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.DefaultPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultPool.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
 			}(),
 			OriginServers: func() []HTTPLoadBalancerDefaultPoolOriginServersModel {
 				if listData, ok := blockData["origin_servers"].([]interface{}); ok && len(listData) > 0 {
@@ -18810,6 +19117,84 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			SameAsEndpointPort: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.DefaultPool != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DefaultPool.SameAsEndpointPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["same_as_endpoint_port"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			UpstreamConnPoolReuseType: func() *HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModel {
+				if !isImport && data.DefaultPool != nil && data.DefaultPool.UpstreamConnPoolReuseType != nil {
+					// Normal Read: preserve existing state value
+					return data.DefaultPool.UpstreamConnPoolReuseType
+				}
+				// Import case: read from API
+				if _, ok := blockData["upstream_conn_pool_reuse_type"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModel{
+					}
+				}
+				return nil
+			}(),
+			UseTLS: func() *HTTPLoadBalancerDefaultPoolUseTLSModel {
+				if !isImport && data.DefaultPool != nil && data.DefaultPool.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.DefaultPool.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerDefaultPoolUseTLSModel{
+						MaxSessionKeys: func() types.Int64 {
+							if v, ok := nestedBlockData["max_session_keys"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						Sni: func() types.String {
+							if v, ok := nestedBlockData["sni"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ViewInternal: func() *HTTPLoadBalancerDefaultPoolViewInternalModel {
+				if !isImport && data.DefaultPool != nil && data.DefaultPool.ViewInternal != nil {
+					// Normal Read: preserve existing state value
+					return data.DefaultPool.ViewInternal
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["view_internal"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerDefaultPoolViewInternalModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -19256,11 +19641,83 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.StringNull()
 			}(),
+			CoalescingOptions: func() *HTTPLoadBalancerHTTPSCoalescingOptionsModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.CoalescingOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.CoalescingOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["coalescing_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSCoalescingOptionsModel{
+					}
+				}
+				return nil
+			}(),
 			ConnectionIdleTimeout: func() types.Int64 {
 				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			DefaultHeader: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.DefaultHeader
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_header"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultLoadBalancer: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.DefaultLoadBalancer
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_loadbalancer"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DisablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.DisablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.EnablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			HTTPProtocolOptions: func() *HTTPLoadBalancerHTTPSHTTPProtocolOptionsModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.HTTPProtocolOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.HTTPProtocolOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["http_protocol_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSHTTPProtocolOptionsModel{
+					}
+				}
+				return nil
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
@@ -19272,6 +19729,30 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			NonDefaultLoadBalancer: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.NonDefaultLoadBalancer
+				}
+				// Import case: read from API
+				if _, ok := blockData["non_default_loadbalancer"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			PassThrough: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPS != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPS.PassThrough
+				}
+				// Import case: read from API
+				if _, ok := blockData["pass_through"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
 			}(),
 			Port: func() types.Int64 {
 				if v, ok := blockData["port"].(float64); ok {
@@ -19290,6 +19771,30 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			TLSCertParams: func() *HTTPLoadBalancerHTTPSTLSCertParamsModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.TLSCertParams != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.TLSCertParams
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_cert_params"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSTLSCertParamsModel{
+					}
+				}
+				return nil
+			}(),
+			TLSParameters: func() *HTTPLoadBalancerHTTPSTLSParametersModel {
+				if !isImport && data.HTTPS != nil && data.HTTPS.TLSParameters != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPS.TLSParameters
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_parameters"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSTLSParametersModel{
+					}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -19312,11 +19817,83 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.StringNull()
 			}(),
+			CoalescingOptions: func() *HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.CoalescingOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.CoalescingOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["coalescing_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel{
+					}
+				}
+				return nil
+			}(),
 			ConnectionIdleTimeout: func() types.Int64 {
 				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			DefaultHeader: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.DefaultHeader
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_header"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultLoadBalancer: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.DefaultLoadBalancer
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_loadbalancer"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DisablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.DisablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.EnablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			HTTPProtocolOptions: func() *HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.HTTPProtocolOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.HTTPProtocolOptions
+				}
+				// Import case: read from API
+				if _, ok := blockData["http_protocol_options"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel{
+					}
+				}
+				return nil
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
@@ -19328,6 +19905,42 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			NoMtls: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.NoMtls
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_mtls"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			NonDefaultLoadBalancer: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.NonDefaultLoadBalancer
+				}
+				// Import case: read from API
+				if _, ok := blockData["non_default_loadbalancer"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			PassThrough: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.HTTPSAutoCert != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSAutoCert.PassThrough
+				}
+				// Import case: read from API
+				if _, ok := blockData["pass_through"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
 			}(),
 			Port: func() types.Int64 {
 				if v, ok := blockData["port"].(float64); ok {
@@ -19346,6 +19959,42 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			TLSConfig: func() *HTTPLoadBalancerHTTPSAutoCertTLSConfigModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.TLSConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.TLSConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["tls_config"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSAutoCertTLSConfigModel{
+					}
+				}
+				return nil
+			}(),
+			UseMtls: func() *HTTPLoadBalancerHTTPSAutoCertUseMtlsModel {
+				if !isImport && data.HTTPSAutoCert != nil && data.HTTPSAutoCert.UseMtls != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSAutoCert.UseMtls
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_mtls"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerHTTPSAutoCertUseMtlsModel{
+						ClientCertificateOptional: func() types.Bool {
+							if v, ok := nestedBlockData["client_certificate_optional"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -19410,6 +20059,192 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if blockData, ok := apiResource.Spec["l7_ddos_protection"].(map[string]interface{}); ok && (isImport || data.L7DdosProtection != nil) {
 		data.L7DdosProtection = &HTTPLoadBalancerL7DdosProtectionModel{
+			ClientsideActionCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionCaptchaChallenge != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.ClientsideActionCaptchaChallenge
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["clientside_action_captcha_challenge"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionClientsideActionCaptchaChallengeModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CustomPage: func() types.String {
+							if v, ok := nestedBlockData["custom_page"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ClientsideActionJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.ClientsideActionJsChallenge != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.ClientsideActionJsChallenge
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["clientside_action_js_challenge"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionClientsideActionJsChallengeModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CustomPage: func() types.String {
+							if v, ok := nestedBlockData["custom_page"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						JsScriptDelay: func() types.Int64 {
+							if v, ok := nestedBlockData["js_script_delay"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ClientsideActionNone: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DdosProtection != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.L7DdosProtection.ClientsideActionNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["clientside_action_none"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DdosPolicyCustom: func() *HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.DdosPolicyCustom != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.DdosPolicyCustom
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["ddos_policy_custom"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionDdosPolicyCustomModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DdosPolicyNone: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DdosProtection != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.L7DdosProtection.DdosPolicyNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["ddos_policy_none"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultRpsThreshold: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DdosProtection != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.L7DdosProtection.DefaultRpsThreshold
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_rps_threshold"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			MitigationBlock: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.L7DdosProtection != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.L7DdosProtection.MitigationBlock
+				}
+				// Import case: read from API
+				if _, ok := blockData["mitigation_block"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			MitigationCaptchaChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationCaptchaChallenge != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.MitigationCaptchaChallenge
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["mitigation_captcha_challenge"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionMitigationCaptchaChallengeModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CustomPage: func() types.String {
+							if v, ok := nestedBlockData["custom_page"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			MitigationJsChallenge: func() *HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel {
+				if !isImport && data.L7DdosProtection != nil && data.L7DdosProtection.MitigationJsChallenge != nil {
+					// Normal Read: preserve existing state value
+					return data.L7DdosProtection.MitigationJsChallenge
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["mitigation_js_challenge"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerL7DdosProtectionMitigationJsChallengeModel{
+						CookieExpiry: func() types.Int64 {
+							if v, ok := nestedBlockData["cookie_expiry"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						CustomPage: func() types.String {
+							if v, ok := nestedBlockData["custom_page"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						JsScriptDelay: func() types.Int64 {
+							if v, ok := nestedBlockData["js_script_delay"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			RpsThreshold: func() types.Int64 {
 				if v, ok := blockData["rps_threshold"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -19518,6 +20353,85 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if blockData, ok := apiResource.Spec["more_option"].(map[string]interface{}); ok && (isImport || data.MoreOption != nil) {
 		data.MoreOption = &HTTPLoadBalancerMoreOptionModel{
+			BufferPolicy: func() *HTTPLoadBalancerMoreOptionBufferPolicyModel {
+				if !isImport && data.MoreOption != nil && data.MoreOption.BufferPolicy != nil {
+					// Normal Read: preserve existing state value
+					return data.MoreOption.BufferPolicy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["buffer_policy"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerMoreOptionBufferPolicyModel{
+						Disabled: func() types.Bool {
+							if v, ok := nestedBlockData["disabled"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						MaxRequestBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_request_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			CompressionParams: func() *HTTPLoadBalancerMoreOptionCompressionParamsModel {
+				if !isImport && data.MoreOption != nil && data.MoreOption.CompressionParams != nil {
+					// Normal Read: preserve existing state value
+					return data.MoreOption.CompressionParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["compression_params"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerMoreOptionCompressionParamsModel{
+						ContentLength: func() types.Int64 {
+							if v, ok := nestedBlockData["content_length"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ContentType: func() types.List {
+							if v, ok := nestedBlockData["content_type"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						DisableOnEtagHeader: func() types.Bool {
+							if v, ok := nestedBlockData["disable_on_etag_header"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+						RemoveAcceptEncodingHeader: func() types.Bool {
+							if v, ok := nestedBlockData["remove_accept_encoding_header"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			CustomErrors: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.MoreOption != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.MoreOption.CustomErrors
+				}
+				// Import case: read from API
+				if _, ok := blockData["custom_errors"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			DisableDefaultErrorPages: func() types.Bool {
 				if !isImport && data.MoreOption != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
@@ -19528,6 +20442,30 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			DisablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.MoreOption != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.MoreOption.DisablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
+			EnablePathNormalize: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.MoreOption != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.MoreOption.EnablePathNormalize
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_path_normalize"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
 			}(),
 			IdleTimeout: func() types.Int64 {
 				if v, ok := blockData["idle_timeout"].(float64); ok {
@@ -20327,6 +21265,18 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDdosMitigation != nil) {
 		data.SlowDdosMitigation = &HTTPLoadBalancerSlowDdosMitigationModel{
+			DisableRequestTimeout: func() *HTTPLoadBalancerEmptyModel {
+				if !isImport && data.SlowDdosMitigation != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SlowDdosMitigation.DisableRequestTimeout
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_request_timeout"].(map[string]interface{}); ok {
+					return &HTTPLoadBalancerEmptyModel{}
+				}
+				return nil
+			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))

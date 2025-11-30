@@ -1145,6 +1145,43 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 	}
 	if blockData, ok := apiResource.Spec["network_pbr"].(map[string]interface{}); ok && (isImport || data.NetworkPbr != nil) {
 		data.NetworkPbr = &PolicyBasedRoutingNetworkPbrModel{
+			Any: func() *PolicyBasedRoutingEmptyModel {
+				if !isImport && data.NetworkPbr != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.NetworkPbr.Any
+				}
+				// Import case: read from API
+				if _, ok := blockData["any"].(map[string]interface{}); ok {
+					return &PolicyBasedRoutingEmptyModel{}
+				}
+				return nil
+			}(),
+			LabelSelector: func() *PolicyBasedRoutingNetworkPbrLabelSelectorModel {
+				if !isImport && data.NetworkPbr != nil && data.NetworkPbr.LabelSelector != nil {
+					// Normal Read: preserve existing state value
+					return data.NetworkPbr.LabelSelector
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["label_selector"].(map[string]interface{}); ok {
+					return &PolicyBasedRoutingNetworkPbrLabelSelectorModel{
+						Expressions: func() types.List {
+							if v, ok := nestedBlockData["expressions"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
 			NetworkPbrRules: func() []PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel {
 				if listData, ok := blockData["network_pbr_rules"].([]interface{}); ok && len(listData) > 0 {
 					var result []PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel
@@ -1238,6 +1275,31 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 						}
 					}
 					return result
+				}
+				return nil
+			}(),
+			PrefixList: func() *PolicyBasedRoutingNetworkPbrPrefixListModel {
+				if !isImport && data.NetworkPbr != nil && data.NetworkPbr.PrefixList != nil {
+					// Normal Read: preserve existing state value
+					return data.NetworkPbr.PrefixList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["prefix_list"].(map[string]interface{}); ok {
+					return &PolicyBasedRoutingNetworkPbrPrefixListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
 				}
 				return nil
 			}(),

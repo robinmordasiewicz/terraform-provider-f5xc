@@ -2448,6 +2448,42 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["enabled_ssh_access"].(map[string]interface{}); ok && (isImport || data.EnabledSSHAccess != nil) {
 		data.EnabledSSHAccess = &NFVServiceEnabledSSHAccessModel{
+			AdvertiseOnSLI: func() *NFVServiceEmptyModel {
+				if !isImport && data.EnabledSSHAccess != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.EnabledSSHAccess.AdvertiseOnSLI
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_sli"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLO: func() *NFVServiceEmptyModel {
+				if !isImport && data.EnabledSSHAccess != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.EnabledSSHAccess.AdvertiseOnSLO
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOSLI: func() *NFVServiceEmptyModel {
+				if !isImport && data.EnabledSSHAccess != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.EnabledSSHAccess.AdvertiseOnSLOSLI
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
+			}(),
 			DomainSuffix: func() types.String {
 				if v, ok := blockData["domain_suffix"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -2483,11 +2519,65 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 	}
 	if blockData, ok := apiResource.Spec["f5_big_ip_aws_service"].(map[string]interface{}); ok && (isImport || data.F5BigIPAWSService != nil) {
 		data.F5BigIPAWSService = &NFVServiceF5BigIPAWSServiceModel{
+			AdminPassword: func() *NFVServiceF5BigIPAWSServiceAdminPasswordModel {
+				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.AdminPassword != nil {
+					// Normal Read: preserve existing state value
+					return data.F5BigIPAWSService.AdminPassword
+				}
+				// Import case: read from API
+				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
+					return &NFVServiceF5BigIPAWSServiceAdminPasswordModel{
+					}
+				}
+				return nil
+			}(),
 			AdminUsername: func() types.String {
 				if v, ok := blockData["admin_username"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			AWSTGWSiteParams: func() *NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel {
+				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.AWSTGWSiteParams != nil {
+					// Normal Read: preserve existing state value
+					return data.F5BigIPAWSService.AWSTGWSiteParams
+				}
+				// Import case: read from API
+				if _, ok := blockData["aws_tgw_site_params"].(map[string]interface{}); ok {
+					return &NFVServiceF5BigIPAWSServiceAWSTGWSiteParamsModel{
+					}
+				}
+				return nil
+			}(),
+			EndpointService: func() *NFVServiceF5BigIPAWSServiceEndpointServiceModel {
+				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.EndpointService != nil {
+					// Normal Read: preserve existing state value
+					return data.F5BigIPAWSService.EndpointService
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["endpoint_service"].(map[string]interface{}); ok {
+					return &NFVServiceF5BigIPAWSServiceEndpointServiceModel{
+						ConfiguredVip: func() types.String {
+							if v, ok := nestedBlockData["configured_vip"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			MarketPlaceImage: func() *NFVServiceF5BigIPAWSServiceMarketPlaceImageModel {
+				if !isImport && data.F5BigIPAWSService != nil && data.F5BigIPAWSService.MarketPlaceImage != nil {
+					// Normal Read: preserve existing state value
+					return data.F5BigIPAWSService.MarketPlaceImage
+				}
+				// Import case: read from API
+				if _, ok := blockData["market_place_image"].(map[string]interface{}); ok {
+					return &NFVServiceF5BigIPAWSServiceMarketPlaceImageModel{
+					}
+				}
+				return nil
 			}(),
 			Nodes: func() []NFVServiceF5BigIPAWSServiceNodesModel {
 				if listData, ok := blockData["nodes"].([]interface{}); ok && len(listData) > 0 {
@@ -2551,10 +2641,106 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
+			Tags: func() *NFVServiceEmptyModel {
+				if !isImport && data.F5BigIPAWSService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.F5BigIPAWSService.Tags
+				}
+				// Import case: read from API
+				if _, ok := blockData["tags"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["https_management"].(map[string]interface{}); ok && (isImport || data.HTTPSManagement != nil) {
 		data.HTTPSManagement = &NFVServiceHTTPSManagementModel{
+			AdvertiseOnInternet: func() *NFVServiceHTTPSManagementAdvertiseOnInternetModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnInternet != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnInternet
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
+					return &NFVServiceHTTPSManagementAdvertiseOnInternetModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnInternetDefaultVip: func() *NFVServiceEmptyModel {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSManagement.AdvertiseOnInternetDefaultVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_internet_default_vip"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLIVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLIVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLIVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
+					return &NFVServiceHTTPSManagementAdvertiseOnSLIVipModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOInternetVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOInternetVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
+					return &NFVServiceHTTPSManagementAdvertiseOnSLOInternetVipModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOSLI: func() *NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOSLI
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
+					return &NFVServiceHTTPSManagementAdvertiseOnSLOSLIModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOVip: func() *NFVServiceHTTPSManagementAdvertiseOnSLOVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
+					return &NFVServiceHTTPSManagementAdvertiseOnSLOVipModel{
+					}
+				}
+				return nil
+			}(),
+			DefaultHTTPSPort: func() *NFVServiceEmptyModel {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSManagement.DefaultHTTPSPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_https_port"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
+			}(),
 			DomainSuffix: func() types.String {
 				if v, ok := blockData["domain_suffix"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -2571,17 +2757,155 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 	}
 	if blockData, ok := apiResource.Spec["palo_alto_fw_service"].(map[string]interface{}); ok && (isImport || data.PaloAltoFwService != nil) {
 		data.PaloAltoFwService = &NFVServicePaloAltoFwServiceModel{
+			AutoSetup: func() *NFVServicePaloAltoFwServiceAutoSetupModel {
+				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.AutoSetup != nil {
+					// Normal Read: preserve existing state value
+					return data.PaloAltoFwService.AutoSetup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["auto_setup"].(map[string]interface{}); ok {
+					return &NFVServicePaloAltoFwServiceAutoSetupModel{
+						AdminUsername: func() types.String {
+							if v, ok := nestedBlockData["admin_username"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AWSTGWSite: func() *NFVServicePaloAltoFwServiceAWSTGWSiteModel {
+				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.AWSTGWSite != nil {
+					// Normal Read: preserve existing state value
+					return data.PaloAltoFwService.AWSTGWSite
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_tgw_site"].(map[string]interface{}); ok {
+					return &NFVServicePaloAltoFwServiceAWSTGWSiteModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DisablePanaroma: func() *NFVServiceEmptyModel {
+				if !isImport && data.PaloAltoFwService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PaloAltoFwService.DisablePanaroma
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_panaroma"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
+			}(),
 			InstanceType: func() types.String {
 				if v, ok := blockData["instance_type"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
+			PanAmiBundle1: func() *NFVServiceEmptyModel {
+				if !isImport && data.PaloAltoFwService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PaloAltoFwService.PanAmiBundle1
+				}
+				// Import case: read from API
+				if _, ok := blockData["pan_ami_bundle1"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
+			}(),
+			PanAmiBundle2: func() *NFVServiceEmptyModel {
+				if !isImport && data.PaloAltoFwService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PaloAltoFwService.PanAmiBundle2
+				}
+				// Import case: read from API
+				if _, ok := blockData["pan_ami_bundle2"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
+			}(),
+			PanoramaServer: func() *NFVServicePaloAltoFwServicePanoramaServerModel {
+				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.PanoramaServer != nil {
+					// Normal Read: preserve existing state value
+					return data.PaloAltoFwService.PanoramaServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["panorama_server"].(map[string]interface{}); ok {
+					return &NFVServicePaloAltoFwServicePanoramaServerModel{
+						DeviceGroupName: func() types.String {
+							if v, ok := nestedBlockData["device_group_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Server: func() types.String {
+							if v, ok := nestedBlockData["server"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						TemplateStackName: func() types.String {
+							if v, ok := nestedBlockData["template_stack_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			ServiceNodes: func() *NFVServicePaloAltoFwServiceServiceNodesModel {
+				if !isImport && data.PaloAltoFwService != nil && data.PaloAltoFwService.ServiceNodes != nil {
+					// Normal Read: preserve existing state value
+					return data.PaloAltoFwService.ServiceNodes
+				}
+				// Import case: read from API
+				if _, ok := blockData["service_nodes"].(map[string]interface{}); ok {
+					return &NFVServicePaloAltoFwServiceServiceNodesModel{
+					}
+				}
+				return nil
+			}(),
 			SSHKey: func() types.String {
 				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			Tags: func() *NFVServiceEmptyModel {
+				if !isImport && data.PaloAltoFwService != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.PaloAltoFwService.Tags
+				}
+				// Import case: read from API
+				if _, ok := blockData["tags"].(map[string]interface{}); ok {
+					return &NFVServiceEmptyModel{}
+				}
+				return nil
 			}(),
 			Version: func() types.String {
 				if v, ok := blockData["version"].(string); ok && v != "" {

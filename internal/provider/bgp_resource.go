@@ -1010,11 +1010,35 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 				}
 				return types.Int64Null()
 			}(),
+			FromSite: func() *BGPEmptyModel {
+				if !isImport && data.BGPParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BGPParameters.FromSite
+				}
+				// Import case: read from API
+				if _, ok := blockData["from_site"].(map[string]interface{}); ok {
+					return &BGPEmptyModel{}
+				}
+				return nil
+			}(),
 			IPAddress: func() types.String {
 				if v, ok := blockData["ip_address"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			LocalAddress: func() *BGPEmptyModel {
+				if !isImport && data.BGPParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.BGPParameters.LocalAddress
+				}
+				// Import case: read from API
+				if _, ok := blockData["local_address"].(map[string]interface{}); ok {
+					return &BGPEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}

@@ -1080,11 +1080,35 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 				}
 				return types.StringNull()
 			}(),
+			DestinationPortAll: func() *InfraprotectFirewallRuleEmptyModel {
+				if !isImport && data.ProtocolTCP != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.ProtocolTCP.DestinationPortAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["destination_port_all"].(map[string]interface{}); ok {
+					return &InfraprotectFirewallRuleEmptyModel{}
+				}
+				return nil
+			}(),
 			DestinationPortRange: func() types.String {
 				if v, ok := blockData["destination_port_range"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			SourcePortAll: func() *InfraprotectFirewallRuleEmptyModel {
+				if !isImport && data.ProtocolTCP != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.ProtocolTCP.SourcePortAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["source_port_all"].(map[string]interface{}); ok {
+					return &InfraprotectFirewallRuleEmptyModel{}
+				}
+				return nil
 			}(),
 			SourcePortRange: func() types.String {
 				if v, ok := blockData["source_port_range"].(string); ok && v != "" {
@@ -1102,11 +1126,35 @@ func (r *InfraprotectFirewallRuleResource) Read(ctx context.Context, req resourc
 				}
 				return types.StringNull()
 			}(),
+			DestinationPortAll: func() *InfraprotectFirewallRuleEmptyModel {
+				if !isImport && data.ProtocolUDP != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.ProtocolUDP.DestinationPortAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["destination_port_all"].(map[string]interface{}); ok {
+					return &InfraprotectFirewallRuleEmptyModel{}
+				}
+				return nil
+			}(),
 			DestinationPortRange: func() types.String {
 				if v, ok := blockData["destination_port_range"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			SourcePortAll: func() *InfraprotectFirewallRuleEmptyModel {
+				if !isImport && data.ProtocolUDP != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.ProtocolUDP.SourcePortAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["source_port_all"].(map[string]interface{}); ok {
+					return &InfraprotectFirewallRuleEmptyModel{}
+				}
+				return nil
 			}(),
 			SourcePortRange: func() types.String {
 				if v, ok := blockData["source_port_range"].(string); ok && v != "" {

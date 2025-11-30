@@ -1555,6 +1555,116 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
 		data.TLSParameters = &ClusterTLSParametersModel{
+			CertParams: func() *ClusterTLSParametersCertParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CertParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CertParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["cert_params"].(map[string]interface{}); ok {
+					return &ClusterTLSParametersCertParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			CommonParams: func() *ClusterTLSParametersCommonParamsModel {
+				if !isImport && data.TLSParameters != nil && data.TLSParameters.CommonParams != nil {
+					// Normal Read: preserve existing state value
+					return data.TLSParameters.CommonParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["common_params"].(map[string]interface{}); ok {
+					return &ClusterTLSParametersCommonParamsModel{
+						CipherSuites: func() types.List {
+							if v, ok := nestedBlockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+						MaximumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["maximum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						MinimumProtocolVersion: func() types.String {
+							if v, ok := nestedBlockData["minimum_protocol_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DefaultSessionKeyCaching: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.DefaultSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_session_key_caching"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSessionKeyCaching: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.DisableSessionKeyCaching
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_session_key_caching"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
+			DisableSni: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.DisableSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_sni"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
+			}(),
 			MaxSessionKeys: func() types.Int64 {
 				if v, ok := blockData["max_session_keys"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -1566,6 +1676,18 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			UseHostHeaderAsSni: func() *ClusterEmptyModel {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.TLSParameters.UseHostHeaderAsSni
+				}
+				// Import case: read from API
+				if _, ok := blockData["use_host_header_as_sni"].(map[string]interface{}); ok {
+					return &ClusterEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}

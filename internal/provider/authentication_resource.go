@@ -702,6 +702,30 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 	})
 	if blockData, ok := apiResource.Spec["cookie_params"].(map[string]interface{}); ok && (isImport || data.CookieParams != nil) {
 		data.CookieParams = &AuthenticationCookieParamsModel{
+			AuthHmac: func() *AuthenticationCookieParamsAuthHmacModel {
+				if !isImport && data.CookieParams != nil && data.CookieParams.AuthHmac != nil {
+					// Normal Read: preserve existing state value
+					return data.CookieParams.AuthHmac
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["auth_hmac"].(map[string]interface{}); ok {
+					return &AuthenticationCookieParamsAuthHmacModel{
+						PrimKeyExpiry: func() types.String {
+							if v, ok := nestedBlockData["prim_key_expiry"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						SecKeyExpiry: func() types.String {
+							if v, ok := nestedBlockData["sec_key_expiry"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			CookieExpiry: func() types.Int64 {
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -714,6 +738,18 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 				}
 				return types.Int64Null()
 			}(),
+			KmsKeyHmac: func() *AuthenticationEmptyModel {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CookieParams.KmsKeyHmac
+				}
+				// Import case: read from API
+				if _, ok := blockData["kms_key_hmac"].(map[string]interface{}); ok {
+					return &AuthenticationEmptyModel{}
+				}
+				return nil
+			}(),
 			SessionExpiry: func() types.Int64 {
 				if v, ok := blockData["session_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -724,6 +760,48 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 	}
 	if blockData, ok := apiResource.Spec["oidc_auth"].(map[string]interface{}); ok && (isImport || data.OidcAuth != nil) {
 		data.OidcAuth = &AuthenticationOidcAuthModel{
+			ClientSecret: func() *AuthenticationOidcAuthClientSecretModel {
+				if !isImport && data.OidcAuth != nil && data.OidcAuth.ClientSecret != nil {
+					// Normal Read: preserve existing state value
+					return data.OidcAuth.ClientSecret
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
+					return &AuthenticationOidcAuthClientSecretModel{
+					}
+				}
+				return nil
+			}(),
+			OidcAuthParams: func() *AuthenticationOidcAuthOidcAuthParamsModel {
+				if !isImport && data.OidcAuth != nil && data.OidcAuth.OidcAuthParams != nil {
+					// Normal Read: preserve existing state value
+					return data.OidcAuth.OidcAuthParams
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["oidc_auth_params"].(map[string]interface{}); ok {
+					return &AuthenticationOidcAuthOidcAuthParamsModel{
+						AuthEndpointURL: func() types.String {
+							if v, ok := nestedBlockData["auth_endpoint_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						EndSessionEndpointURL: func() types.String {
+							if v, ok := nestedBlockData["end_session_endpoint_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						TokenEndpointURL: func() types.String {
+							if v, ok := nestedBlockData["token_endpoint_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			OidcClientID: func() types.String {
 				if v, ok := blockData["oidc_client_id"].(string); ok && v != "" {
 					return types.StringValue(v)

@@ -807,6 +807,30 @@ func (r *CDNCacheRuleResource) Read(ctx context.Context, req resource.ReadReques
 	})
 	if blockData, ok := apiResource.Spec["cache_rules"].(map[string]interface{}); ok && (isImport || data.CacheRules != nil) {
 		data.CacheRules = &CDNCacheRuleCacheRulesModel{
+			CacheBypass: func() *CDNCacheRuleEmptyModel {
+				if !isImport && data.CacheRules != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CacheRules.CacheBypass
+				}
+				// Import case: read from API
+				if _, ok := blockData["cache_bypass"].(map[string]interface{}); ok {
+					return &CDNCacheRuleEmptyModel{}
+				}
+				return nil
+			}(),
+			EligibleForCache: func() *CDNCacheRuleCacheRulesEligibleForCacheModel {
+				if !isImport && data.CacheRules != nil && data.CacheRules.EligibleForCache != nil {
+					// Normal Read: preserve existing state value
+					return data.CacheRules.EligibleForCache
+				}
+				// Import case: read from API
+				if _, ok := blockData["eligible_for_cache"].(map[string]interface{}); ok {
+					return &CDNCacheRuleCacheRulesEligibleForCacheModel{
+					}
+				}
+				return nil
+			}(),
 			RuleExpressionList: func() []CDNCacheRuleCacheRulesRuleExpressionListModel {
 				if listData, ok := blockData["rule_expression_list"].([]interface{}); ok && len(listData) > 0 {
 					var result []CDNCacheRuleCacheRulesRuleExpressionListModel

@@ -3002,11 +3002,35 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				}
 				return types.Int64Null()
 			}(),
+			MaxCookieCountNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxCookieCountNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_cookie_count_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
+			}(),
 			MaxCookieKeySizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_cookie_key_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			MaxCookieKeySizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxCookieKeySizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_cookie_key_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
 			}(),
 			MaxCookieValueSizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_cookie_value_size_exceeds"].(float64); ok {
@@ -3014,11 +3038,35 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				}
 				return types.Int64Null()
 			}(),
+			MaxCookieValueSizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxCookieValueSizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_cookie_value_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
+			}(),
 			MaxHeaderCountExceeds: func() types.Int64 {
 				if v, ok := blockData["max_header_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			MaxHeaderCountNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxHeaderCountNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_header_count_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
 			}(),
 			MaxHeaderKeySizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_header_key_size_exceeds"].(float64); ok {
@@ -3026,11 +3074,35 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				}
 				return types.Int64Null()
 			}(),
+			MaxHeaderKeySizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxHeaderKeySizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_header_key_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
+			}(),
 			MaxHeaderValueSizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_header_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			MaxHeaderValueSizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxHeaderValueSizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_header_value_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
 			}(),
 			MaxParameterCountExceeds: func() types.Int64 {
 				if v, ok := blockData["max_parameter_count_exceeds"].(float64); ok {
@@ -3038,11 +3110,35 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				}
 				return types.Int64Null()
 			}(),
+			MaxParameterCountNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxParameterCountNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_parameter_count_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
+			}(),
 			MaxParameterNameSizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_parameter_name_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			MaxParameterNameSizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxParameterNameSizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_parameter_name_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
 			}(),
 			MaxParameterValueSizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_parameter_value_size_exceeds"].(float64); ok {
@@ -3050,11 +3146,35 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				}
 				return types.Int64Null()
 			}(),
+			MaxParameterValueSizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxParameterValueSizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_parameter_value_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
+			}(),
 			MaxQuerySizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_query_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			MaxQuerySizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxQuerySizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_query_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
 			}(),
 			MaxRequestLineSizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_request_line_size_exceeds"].(float64); ok {
@@ -3062,17 +3182,53 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				}
 				return types.Int64Null()
 			}(),
+			MaxRequestLineSizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxRequestLineSizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_request_line_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
+			}(),
 			MaxRequestSizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_request_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
+			MaxRequestSizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxRequestSizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_request_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
+			}(),
 			MaxURLSizeExceeds: func() types.Int64 {
 				if v, ok := blockData["max_url_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			MaxURLSizeNone: func() *ServicePolicyRuleEmptyModel {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.RequestConstraints.MaxURLSizeNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["max_url_size_none"].(map[string]interface{}); ok {
+					return &ServicePolicyRuleEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}

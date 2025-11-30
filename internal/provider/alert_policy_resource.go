@@ -781,6 +781,43 @@ func (r *AlertPolicyResource) Read(ctx context.Context, req resource.ReadRequest
 	})
 	if blockData, ok := apiResource.Spec["notification_parameters"].(map[string]interface{}); ok && (isImport || data.NotificationParameters != nil) {
 		data.NotificationParameters = &AlertPolicyNotificationParametersModel{
+			Custom: func() *AlertPolicyNotificationParametersCustomModel {
+				if !isImport && data.NotificationParameters != nil && data.NotificationParameters.Custom != nil {
+					// Normal Read: preserve existing state value
+					return data.NotificationParameters.Custom
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["custom"].(map[string]interface{}); ok {
+					return &AlertPolicyNotificationParametersCustomModel{
+						Labels: func() types.List {
+							if v, ok := nestedBlockData["labels"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Default: func() *AlertPolicyEmptyModel {
+				if !isImport && data.NotificationParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.NotificationParameters.Default
+				}
+				// Import case: read from API
+				if _, ok := blockData["default"].(map[string]interface{}); ok {
+					return &AlertPolicyEmptyModel{}
+				}
+				return nil
+			}(),
 			GroupInterval: func() types.String {
 				if v, ok := blockData["group_interval"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -793,11 +830,35 @@ func (r *AlertPolicyResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return types.StringNull()
 			}(),
+			Individual: func() *AlertPolicyEmptyModel {
+				if !isImport && data.NotificationParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.NotificationParameters.Individual
+				}
+				// Import case: read from API
+				if _, ok := blockData["individual"].(map[string]interface{}); ok {
+					return &AlertPolicyEmptyModel{}
+				}
+				return nil
+			}(),
 			RepeatInterval: func() types.String {
 				if v, ok := blockData["repeat_interval"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			VesIoGroup: func() *AlertPolicyEmptyModel {
+				if !isImport && data.NotificationParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.NotificationParameters.VesIoGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["ves_io_group"].(map[string]interface{}); ok {
+					return &AlertPolicyEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}

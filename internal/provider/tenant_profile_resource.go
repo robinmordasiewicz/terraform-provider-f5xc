@@ -603,6 +603,18 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 	}
 	if blockData, ok := apiResource.Spec["favicon"].(map[string]interface{}); ok && (isImport || data.Favicon != nil) {
 		data.Favicon = &TenantProfileFaviconModel{
+			AWSS3: func() *TenantProfileEmptyModel {
+				if !isImport && data.Favicon != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Favicon.AWSS3
+				}
+				// Import case: read from API
+				if _, ok := blockData["aws_s3"].(map[string]interface{}); ok {
+					return &TenantProfileEmptyModel{}
+				}
+				return nil
+			}(),
 			Content: func() types.String {
 				if v, ok := blockData["content"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -619,6 +631,18 @@ func (r *TenantProfileResource) Read(ctx context.Context, req resource.ReadReque
 	}
 	if blockData, ok := apiResource.Spec["logo"].(map[string]interface{}); ok && (isImport || data.Logo != nil) {
 		data.Logo = &TenantProfileLogoModel{
+			AWSS3: func() *TenantProfileEmptyModel {
+				if !isImport && data.Logo != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Logo.AWSS3
+				}
+				// Import case: read from API
+				if _, ok := blockData["aws_s3"].(map[string]interface{}); ok {
+					return &TenantProfileEmptyModel{}
+				}
+				return nil
+			}(),
 			Content: func() types.String {
 				if v, ok := blockData["content"].(string); ok && v != "" {
 					return types.StringValue(v)

@@ -610,6 +610,84 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return types.Int64Null()
 			}(),
+			TCPServer: func() *LogReceiverSyslogTCPServerModel {
+				if !isImport && data.Syslog != nil && data.Syslog.TCPServer != nil {
+					// Normal Read: preserve existing state value
+					return data.Syslog.TCPServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tcp_server"].(map[string]interface{}); ok {
+					return &LogReceiverSyslogTCPServerModel{
+						Port: func() types.Int64 {
+							if v, ok := nestedBlockData["port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ServerName: func() types.String {
+							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			TLSServer: func() *LogReceiverSyslogTLSServerModel {
+				if !isImport && data.Syslog != nil && data.Syslog.TLSServer != nil {
+					// Normal Read: preserve existing state value
+					return data.Syslog.TLSServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tls_server"].(map[string]interface{}); ok {
+					return &LogReceiverSyslogTLSServerModel{
+						Port: func() types.Int64 {
+							if v, ok := nestedBlockData["port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ServerName: func() types.String {
+							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						TrustedCaURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			UDPServer: func() *LogReceiverSyslogUDPServerModel {
+				if !isImport && data.Syslog != nil && data.Syslog.UDPServer != nil {
+					// Normal Read: preserve existing state value
+					return data.Syslog.UDPServer
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["udp_server"].(map[string]interface{}); ok {
+					return &LogReceiverSyslogUDPServerModel{
+						Port: func() types.Int64 {
+							if v, ok := nestedBlockData["port"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						ServerName: func() types.String {
+							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
 

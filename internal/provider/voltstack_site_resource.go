@@ -5597,6 +5597,42 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 	}
 	if blockData, ok := apiResource.Spec["custom_network_config"].(map[string]interface{}); ok && (isImport || data.CustomNetworkConfig != nil) {
 		data.CustomNetworkConfig = &VoltstackSiteCustomNetworkConfigModel{
+			ActiveEnhancedFirewallPolicies: func() *VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
 			BGPPeerAddress: func() types.String {
 				if v, ok := blockData["bgp_peer_address"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -5608,6 +5644,114 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			DefaultConfig: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultInterfaceConfig: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultInterfaceConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_interface_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultSLIConfig: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultSLIConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sli_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *VoltstackSiteCustomNetworkConfigGlobalNetworkListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			InterfaceList: func() *VoltstackSiteCustomNetworkConfigInterfaceListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.InterfaceList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.InterfaceList
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigInterfaceListModel{
+					}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
 			}(),
 			OutsideNameserver: func() types.String {
 				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
@@ -5626,6 +5770,54 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			SLIConfig: func() *VoltstackSiteCustomNetworkConfigSLIConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLIConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLIConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["sli_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigSLIConfigModel{
+					}
+				}
+				return nil
+			}(),
+			SLOConfig: func() *VoltstackSiteCustomNetworkConfigSLOConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLOConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLOConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["slo_config"].(map[string]interface{}); ok {
+					return &VoltstackSiteCustomNetworkConfigSLOConfigModel{
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
 			}(),
 			TunnelDeadTimeout: func() types.Int64 {
 				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
@@ -5816,6 +6008,18 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
 		data.Os = &VoltstackSiteOsModel{
+			DefaultOsVersion: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.Os != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Os.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			OperatingSystemVersion: func() types.String {
 				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -5861,6 +6065,18 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 	}
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &VoltstackSiteSwModel{
+			DefaultSwVersion: func() *VoltstackSiteEmptyModel {
+				if !isImport && data.Sw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Sw.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &VoltstackSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			VolterraSoftwareVersion: func() types.String {
 				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
 					return types.StringValue(v)

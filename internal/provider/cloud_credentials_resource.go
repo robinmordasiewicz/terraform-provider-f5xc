@@ -834,6 +834,30 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.Int64Null()
 			}(),
+			ExternalIDIsOptional: func() *CloudCredentialsEmptyModel {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSAssumeRole.ExternalIDIsOptional
+				}
+				// Import case: read from API
+				if _, ok := blockData["external_id_is_optional"].(map[string]interface{}); ok {
+					return &CloudCredentialsEmptyModel{}
+				}
+				return nil
+			}(),
+			ExternalIDIsTenantID: func() *CloudCredentialsEmptyModel {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSAssumeRole.ExternalIDIsTenantID
+				}
+				// Import case: read from API
+				if _, ok := blockData["external_id_is_tenant_id"].(map[string]interface{}); ok {
+					return &CloudCredentialsEmptyModel{}
+				}
+				return nil
+			}(),
 			RoleArn: func() types.String {
 				if v, ok := blockData["role_arn"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -846,6 +870,18 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.StringNull()
 			}(),
+			SessionTags: func() *CloudCredentialsEmptyModel {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSAssumeRole.SessionTags
+				}
+				// Import case: read from API
+				if _, ok := blockData["session_tags"].(map[string]interface{}); ok {
+					return &CloudCredentialsEmptyModel{}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["aws_secret_key"].(map[string]interface{}); ok && (isImport || data.AWSSecretKey != nil) {
@@ -856,6 +892,18 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.StringNull()
 			}(),
+			SecretKey: func() *CloudCredentialsAWSSecretKeySecretKeyModel {
+				if !isImport && data.AWSSecretKey != nil && data.AWSSecretKey.SecretKey != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSSecretKey.SecretKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["secret_key"].(map[string]interface{}); ok {
+					return &CloudCredentialsAWSSecretKeySecretKeyModel{
+					}
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["azure_client_secret"].(map[string]interface{}); ok && (isImport || data.AzureClientSecret != nil) {
@@ -865,6 +913,18 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			ClientSecret: func() *CloudCredentialsAzureClientSecretClientSecretModel {
+				if !isImport && data.AzureClientSecret != nil && data.AzureClientSecret.ClientSecret != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureClientSecret.ClientSecret
+				}
+				// Import case: read from API
+				if _, ok := blockData["client_secret"].(map[string]interface{}); ok {
+					return &CloudCredentialsAzureClientSecretClientSecretModel{
+					}
+				}
+				return nil
 			}(),
 			SubscriptionID: func() types.String {
 				if v, ok := blockData["subscription_id"].(string); ok && v != "" {
@@ -893,6 +953,18 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			Password: func() *CloudCredentialsAzurePfxCertificatePasswordModel {
+				if !isImport && data.AzurePfxCertificate != nil && data.AzurePfxCertificate.Password != nil {
+					// Normal Read: preserve existing state value
+					return data.AzurePfxCertificate.Password
+				}
+				// Import case: read from API
+				if _, ok := blockData["password"].(map[string]interface{}); ok {
+					return &CloudCredentialsAzurePfxCertificatePasswordModel{
+					}
+				}
+				return nil
 			}(),
 			SubscriptionID: func() types.String {
 				if v, ok := blockData["subscription_id"].(string); ok && v != "" {

@@ -2234,6 +2234,90 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["https_management"].(map[string]interface{}); ok && (isImport || data.HTTPSManagement != nil) {
 		data.HTTPSManagement = &APMHTTPSManagementModel{
+			AdvertiseOnInternet: func() *APMHTTPSManagementAdvertiseOnInternetModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnInternet != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnInternet
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_internet"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnInternetModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnInternetDefaultVip: func() *APMEmptyModel {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSManagement.AdvertiseOnInternetDefaultVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_internet_default_vip"].(map[string]interface{}); ok {
+					return &APMEmptyModel{}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLIVip: func() *APMHTTPSManagementAdvertiseOnSLIVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLIVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLIVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_sli_vip"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLIVipModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOInternetVip: func() *APMHTTPSManagementAdvertiseOnSLOInternetVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOInternetVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOInternetVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_internet_vip"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLOInternetVipModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOSLI: func() *APMHTTPSManagementAdvertiseOnSLOSLIModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOSLI != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOSLI
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_sli"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLOSLIModel{
+					}
+				}
+				return nil
+			}(),
+			AdvertiseOnSLOVip: func() *APMHTTPSManagementAdvertiseOnSLOVipModel {
+				if !isImport && data.HTTPSManagement != nil && data.HTTPSManagement.AdvertiseOnSLOVip != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPSManagement.AdvertiseOnSLOVip
+				}
+				// Import case: read from API
+				if _, ok := blockData["advertise_on_slo_vip"].(map[string]interface{}); ok {
+					return &APMHTTPSManagementAdvertiseOnSLOVipModel{
+					}
+				}
+				return nil
+			}(),
+			DefaultHTTPSPort: func() *APMEmptyModel {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPSManagement.DefaultHTTPSPort
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_https_port"].(map[string]interface{}); ok {
+					return &APMEmptyModel{}
+				}
+				return nil
+			}(),
 			DomainSuffix: func() types.String {
 				if v, ok := blockData["domain_suffix"].(string); ok && v != "" {
 					return types.StringValue(v)

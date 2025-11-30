@@ -1208,11 +1208,77 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 				}
 				return types.StringNull()
 			}(),
+			HwInfo: func() *RegistrationInfraHwInfoModel {
+				if !isImport && data.Infra != nil && data.Infra.HwInfo != nil {
+					// Normal Read: preserve existing state value
+					return data.Infra.HwInfo
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["hw_info"].(map[string]interface{}); ok {
+					return &RegistrationInfraHwInfoModel{
+						NumaNodes: func() types.Int64 {
+							if v, ok := nestedBlockData["numa_nodes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
 			InstanceID: func() types.String {
 				if v, ok := blockData["instance_id"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			Interfaces: func() *RegistrationEmptyModel {
+				if !isImport && data.Infra != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Infra.Interfaces
+				}
+				// Import case: read from API
+				if _, ok := blockData["interfaces"].(map[string]interface{}); ok {
+					return &RegistrationEmptyModel{}
+				}
+				return nil
+			}(),
+			InternetProxy: func() *RegistrationInfraInternetProxyModel {
+				if !isImport && data.Infra != nil && data.Infra.InternetProxy != nil {
+					// Normal Read: preserve existing state value
+					return data.Infra.InternetProxy
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["internet_proxy"].(map[string]interface{}); ok {
+					return &RegistrationInfraInternetProxyModel{
+						HTTPProxy: func() types.String {
+							if v, ok := nestedBlockData["http_proxy"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						HTTPSProxy: func() types.String {
+							if v, ok := nestedBlockData["https_proxy"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						NoProxy: func() types.String {
+							if v, ok := nestedBlockData["no_proxy"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						ProxyCacertURL: func() types.String {
+							if v, ok := nestedBlockData["proxy_cacert_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
 			}(),
 			MachineID: func() types.String {
 				if v, ok := blockData["machine_id"].(string); ok && v != "" {
@@ -1225,6 +1291,24 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			SwInfo: func() *RegistrationInfraSwInfoModel {
+				if !isImport && data.Infra != nil && data.Infra.SwInfo != nil {
+					// Normal Read: preserve existing state value
+					return data.Infra.SwInfo
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["sw_info"].(map[string]interface{}); ok {
+					return &RegistrationInfraSwInfoModel{
+						SwVersion: func() types.String {
+							if v, ok := nestedBlockData["sw_version"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
 			}(),
 			Timestamp: func() types.String {
 				if v, ok := blockData["timestamp"].(string); ok && v != "" {
@@ -1259,6 +1343,30 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			DefaultOsVersion: func() *RegistrationEmptyModel {
+				if !isImport && data.Passport != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Passport.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &RegistrationEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultSwVersion: func() *RegistrationEmptyModel {
+				if !isImport && data.Passport != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Passport.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &RegistrationEmptyModel{}
+				}
+				return nil
 			}(),
 			Latitude: func() types.Int64 {
 				if v, ok := blockData["latitude"].(float64); ok {

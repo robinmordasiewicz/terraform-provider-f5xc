@@ -2572,6 +2572,222 @@ func (r *SecuremeshSiteResource) Read(ctx context.Context, req resource.ReadRequ
 	}
 	if blockData, ok := apiResource.Spec["custom_network_config"].(map[string]interface{}); ok && (isImport || data.CustomNetworkConfig != nil) {
 		data.CustomNetworkConfig = &SecuremeshSiteCustomNetworkConfigModel{
+			ActiveEnhancedFirewallPolicies: func() *SecuremeshSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveForwardProxyPolicies: func() *SecuremeshSiteCustomNetworkConfigActiveForwardProxyPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveForwardProxyPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigActiveForwardProxyPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			ActiveNetworkPolicies: func() *SecuremeshSiteCustomNetworkConfigActiveNetworkPoliciesModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.ActiveNetworkPolicies
+				}
+				// Import case: read from API
+				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigActiveNetworkPoliciesModel{
+					}
+				}
+				return nil
+			}(),
+			DefaultConfig: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultInterfaceConfig: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultInterfaceConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_interface_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultSLIConfig: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.DefaultSLIConfig
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sli_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ForwardProxyAllowAll: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.ForwardProxyAllowAll
+				}
+				// Import case: read from API
+				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			GlobalNetworkList: func() *SecuremeshSiteCustomNetworkConfigGlobalNetworkListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.GlobalNetworkList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.GlobalNetworkList
+				}
+				// Import case: read from API
+				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigGlobalNetworkListModel{
+					}
+				}
+				return nil
+			}(),
+			InterfaceList: func() *SecuremeshSiteCustomNetworkConfigInterfaceListModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.InterfaceList != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.InterfaceList
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigInterfaceListModel{
+					}
+				}
+				return nil
+			}(),
+			NoForwardProxy: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoForwardProxy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoGlobalNetwork: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoGlobalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NoNetworkPolicy: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.NoNetworkPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SLIConfig: func() *SecuremeshSiteCustomNetworkConfigSLIConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLIConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLIConfig
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["sli_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigSLIConfigModel{
+						Nameserver: func() types.String {
+							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Vip: func() types.String {
+							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			SLOConfig: func() *SecuremeshSiteCustomNetworkConfigSLOConfigModel {
+				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLOConfig != nil {
+					// Normal Read: preserve existing state value
+					return data.CustomNetworkConfig.SLOConfig
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["slo_config"].(map[string]interface{}); ok {
+					return &SecuremeshSiteCustomNetworkConfigSLOConfigModel{
+						Nameserver: func() types.String {
+							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Vip: func() types.String {
+							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			SmConnectionPublicIP: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPublicIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SmConnectionPvtIP: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.CustomNetworkConfig.SmConnectionPvtIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			TunnelDeadTimeout: func() types.Int64 {
 				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -2662,6 +2878,18 @@ func (r *SecuremeshSiteResource) Read(ctx context.Context, req resource.ReadRequ
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["os"].(map[string]interface{}); ok && (isImport || data.Os != nil) {
 		data.Os = &SecuremeshSiteOsModel{
+			DefaultOsVersion: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.Os != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Os.DefaultOsVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_os_version"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			OperatingSystemVersion: func() types.String {
 				if v, ok := blockData["operating_system_version"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -2677,6 +2905,18 @@ func (r *SecuremeshSiteResource) Read(ctx context.Context, req resource.ReadRequ
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &SecuremeshSiteSwModel{
+			DefaultSwVersion: func() *SecuremeshSiteEmptyModel {
+				if !isImport && data.Sw != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.Sw.DefaultSwVersion
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_sw_version"].(map[string]interface{}); ok {
+					return &SecuremeshSiteEmptyModel{}
+				}
+				return nil
+			}(),
 			VolterraSoftwareVersion: func() types.String {
 				if v, ok := blockData["volterra_software_version"].(string); ok && v != "" {
 					return types.StringValue(v)

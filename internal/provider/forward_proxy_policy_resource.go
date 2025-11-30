@@ -1330,6 +1330,42 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["allow_list"].(map[string]interface{}); ok && (isImport || data.AllowList != nil) {
 		data.AllowList = &ForwardProxyPolicyAllowListModel{
+			DefaultActionAllow: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionAllow
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_allow"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionDeny: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionDeny
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_deny"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionNextPolicy: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionNextPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_next_policy"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
 			DestList: func() []ForwardProxyPolicyAllowListDestListModel {
 				if listData, ok := blockData["dest_list"].([]interface{}); ok && len(listData) > 0 {
 					var result []ForwardProxyPolicyAllowListDestListModel
@@ -1444,6 +1480,42 @@ func (r *ForwardProxyPolicyResource) Read(ctx context.Context, req resource.Read
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["deny_list"].(map[string]interface{}); ok && (isImport || data.DenyList != nil) {
 		data.DenyList = &ForwardProxyPolicyDenyListModel{
+			DefaultActionAllow: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionAllow
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_allow"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionDeny: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionDeny
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_deny"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionNextPolicy: func() *ForwardProxyPolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionNextPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_next_policy"].(map[string]interface{}); ok {
+					return &ForwardProxyPolicyEmptyModel{}
+				}
+				return nil
+			}(),
 			DestList: func() []ForwardProxyPolicyDenyListDestListModel {
 				if listData, ok := blockData["dest_list"].([]interface{}); ok && len(listData) > 0 {
 					var result []ForwardProxyPolicyDenyListDestListModel

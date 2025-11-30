@@ -2117,6 +2117,31 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["allow_list"].(map[string]interface{}); ok && (isImport || data.AllowList != nil) {
 		data.AllowList = &ServicePolicyAllowListModel{
+			AsnList: func() *ServicePolicyAllowListAsnListModel {
+				if !isImport && data.AllowList != nil && data.AllowList.AsnList != nil {
+					// Normal Read: preserve existing state value
+					return data.AllowList.AsnList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["asn_list"].(map[string]interface{}); ok {
+					return &ServicePolicyAllowListAsnListModel{
+						AsNumbers: func() types.List {
+							if v, ok := nestedBlockData["as_numbers"].([]interface{}); ok && len(v) > 0 {
+								var items []int64
+								for _, item := range v {
+									if n, ok := item.(float64); ok {
+										items = append(items, int64(n))
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+								return listVal
+							}
+							return types.ListNull(types.Int64Type)
+						}(),
+					}
+				}
+				return nil
+			}(),
 			AsnSet: func() []ServicePolicyAllowListAsnSetModel {
 				if listData, ok := blockData["asn_set"].([]interface{}); ok && len(listData) > 0 {
 					var result []ServicePolicyAllowListAsnSetModel
@@ -2161,6 +2186,42 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				return types.ListNull(types.StringType)
 			}(),
+			DefaultActionAllow: func() *ServicePolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionAllow
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_allow"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionDeny: func() *ServicePolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionDeny
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_deny"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionNextPolicy: func() *ServicePolicyEmptyModel {
+				if !isImport && data.AllowList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AllowList.DefaultActionNextPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_next_policy"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
 			IPPrefixSet: func() []ServicePolicyAllowListIPPrefixSetModel {
 				if listData, ok := blockData["ip_prefix_set"].([]interface{}); ok && len(listData) > 0 {
 					var result []ServicePolicyAllowListIPPrefixSetModel
@@ -2189,6 +2250,31 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 						}
 					}
 					return result
+				}
+				return nil
+			}(),
+			PrefixList: func() *ServicePolicyAllowListPrefixListModel {
+				if !isImport && data.AllowList != nil && data.AllowList.PrefixList != nil {
+					// Normal Read: preserve existing state value
+					return data.AllowList.PrefixList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["prefix_list"].(map[string]interface{}); ok {
+					return &ServicePolicyAllowListPrefixListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
 				}
 				return nil
 			}(),
@@ -2232,6 +2318,31 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["deny_list"].(map[string]interface{}); ok && (isImport || data.DenyList != nil) {
 		data.DenyList = &ServicePolicyDenyListModel{
+			AsnList: func() *ServicePolicyDenyListAsnListModel {
+				if !isImport && data.DenyList != nil && data.DenyList.AsnList != nil {
+					// Normal Read: preserve existing state value
+					return data.DenyList.AsnList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["asn_list"].(map[string]interface{}); ok {
+					return &ServicePolicyDenyListAsnListModel{
+						AsNumbers: func() types.List {
+							if v, ok := nestedBlockData["as_numbers"].([]interface{}); ok && len(v) > 0 {
+								var items []int64
+								for _, item := range v {
+									if n, ok := item.(float64); ok {
+										items = append(items, int64(n))
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+								return listVal
+							}
+							return types.ListNull(types.Int64Type)
+						}(),
+					}
+				}
+				return nil
+			}(),
 			AsnSet: func() []ServicePolicyDenyListAsnSetModel {
 				if listData, ok := blockData["asn_set"].([]interface{}); ok && len(listData) > 0 {
 					var result []ServicePolicyDenyListAsnSetModel
@@ -2276,6 +2387,42 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 				}
 				return types.ListNull(types.StringType)
 			}(),
+			DefaultActionAllow: func() *ServicePolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionAllow
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_allow"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionDeny: func() *ServicePolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionDeny
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_deny"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultActionNextPolicy: func() *ServicePolicyEmptyModel {
+				if !isImport && data.DenyList != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DenyList.DefaultActionNextPolicy
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_action_next_policy"].(map[string]interface{}); ok {
+					return &ServicePolicyEmptyModel{}
+				}
+				return nil
+			}(),
 			IPPrefixSet: func() []ServicePolicyDenyListIPPrefixSetModel {
 				if listData, ok := blockData["ip_prefix_set"].([]interface{}); ok && len(listData) > 0 {
 					var result []ServicePolicyDenyListIPPrefixSetModel
@@ -2304,6 +2451,31 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 						}
 					}
 					return result
+				}
+				return nil
+			}(),
+			PrefixList: func() *ServicePolicyDenyListPrefixListModel {
+				if !isImport && data.DenyList != nil && data.DenyList.PrefixList != nil {
+					// Normal Read: preserve existing state value
+					return data.DenyList.PrefixList
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["prefix_list"].(map[string]interface{}); ok {
+					return &ServicePolicyDenyListPrefixListModel{
+						Prefixes: func() types.List {
+							if v, ok := nestedBlockData["prefixes"].([]interface{}); ok && len(v) > 0 {
+								var items []string
+								for _, item := range v {
+									if s, ok := item.(string); ok {
+										items = append(items, s)
+									}
+								}
+								listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+								return listVal
+							}
+							return types.ListNull(types.StringType)
+						}(),
+					}
 				}
 				return nil
 			}(),

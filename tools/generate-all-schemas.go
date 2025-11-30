@@ -2167,8 +2167,9 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 				// These should be preserved from prior state during normal Read, and populated on Import
 				if nestedAttr.IsBlock && nestedAttr.NestedBlockType == "single" && len(nestedAttr.NestedAttributes) == 0 {
 					sb.WriteString(fmt.Sprintf("%s\t\t%s: func() *%sEmptyModel {\n", indent, nestedFieldName, resourceTitleCase))
-					sb.WriteString(fmt.Sprintf("%s\t\t\tif !isImport && data.%s != nil && data.%s.%s != nil {\n", indent, fieldName, fieldName, nestedFieldName))
-					sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Normal Read: preserve existing state value\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\tif !isImport && data.%s != nil {\n", indent, fieldName))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Normal Read: preserve existing state value (even if nil)\n", indent))
+					sb.WriteString(fmt.Sprintf("%s\t\t\t\t// This prevents API returning empty objects from overwriting user's 'not configured' intent\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn data.%s.%s\n", indent, fieldName, nestedFieldName))
 					sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t\t// Import case: read from API\n", indent))

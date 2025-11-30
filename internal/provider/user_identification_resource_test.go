@@ -1,4 +1,4 @@
-// Copyright (c) F5, Inc.
+// Copyright (c) F5XC Community
 // SPDX-License-Identifier: MPL-2.0
 
 package provider_test
@@ -18,6 +18,13 @@ import (
 	"github.com/f5xc/terraform-provider-f5xc/internal/acctest"
 )
 
+// =============================================================================
+// USER_IDENTIFICATION RESOURCE ACCEPTANCE TESTS
+//
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// (namespace DELETE API returns 501 Not Implemented)
+// =============================================================================
+
 // testAccUserIdentificationImportStateIdFunc returns a function that generates the import ID
 func testAccUserIdentificationImportStateIdFunc(resourceName string) resource.ImportStateIdFunc {
 	return func(s *terraform.State) (string, error) {
@@ -33,27 +40,23 @@ func testAccUserIdentificationImportStateIdFunc(resourceName string) resource.Im
 
 // TestAccUserIdentificationResource_basic tests basic user_identification creation
 func TestAccUserIdentificationResource_basic(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-basic")
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_basic(nsName, uiName),
+				Config: testAccUserIdentificationConfig_basicSystem(uiName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckUserIdentificationExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", uiName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -70,29 +73,24 @@ func TestAccUserIdentificationResource_basic(t *testing.T) {
 
 // TestAccUserIdentificationResource_allAttributes tests user_identification with all attributes
 func TestAccUserIdentificationResource_allAttributes(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-all")
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_allAttributes(nsName, uiName),
+				Config: testAccUserIdentificationConfig_allAttributesSystem(uiName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckUserIdentificationExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", uiName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "description", "Test user identification with all attributes"),
-					resource.TestCheckResourceAttr(resourceName, "disable", "false"),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
 					resource.TestCheckResourceAttr(resourceName, "labels.team", "security"),
 					resource.TestCheckResourceAttr(resourceName, "annotations.purpose", "testing"),
@@ -112,23 +110,19 @@ func TestAccUserIdentificationResource_allAttributes(t *testing.T) {
 
 // TestAccUserIdentificationResource_updateLabels tests updating labels
 func TestAccUserIdentificationResource_updateLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-lbl")
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_withLabels(nsName, uiName, map[string]string{
+				Config: testAccUserIdentificationConfig_withLabelsSystem(uiName, map[string]string{
 					"environment": "dev",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -137,7 +131,7 @@ func TestAccUserIdentificationResource_updateLabels(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccUserIdentificationResourceConfig_withLabels(nsName, uiName, map[string]string{
+				Config: testAccUserIdentificationConfig_withLabelsSystem(uiName, map[string]string{
 					"environment": "prod",
 					"team":        "platform",
 				}),
@@ -153,30 +147,26 @@ func TestAccUserIdentificationResource_updateLabels(t *testing.T) {
 
 // TestAccUserIdentificationResource_updateDescription tests updating description
 func TestAccUserIdentificationResource_updateDescription(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-desc")
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_withDescription(nsName, uiName, "Initial description"),
+				Config: testAccUserIdentificationConfig_withDescriptionSystem(uiName, "Initial description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckUserIdentificationExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Initial description"),
 				),
 			},
 			{
-				Config: testAccUserIdentificationResourceConfig_withDescription(nsName, uiName, "Updated description"),
+				Config: testAccUserIdentificationConfig_withDescriptionSystem(uiName, "Updated description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckUserIdentificationExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Updated description"),
@@ -188,23 +178,19 @@ func TestAccUserIdentificationResource_updateDescription(t *testing.T) {
 
 // TestAccUserIdentificationResource_updateAnnotations tests updating annotations
 func TestAccUserIdentificationResource_updateAnnotations(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-ann")
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_withAnnotations(nsName, uiName, map[string]string{
+				Config: testAccUserIdentificationConfig_withAnnotationsSystem(uiName, map[string]string{
 					"version": "v1",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -213,7 +199,7 @@ func TestAccUserIdentificationResource_updateAnnotations(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccUserIdentificationResourceConfig_withAnnotations(nsName, uiName, map[string]string{
+				Config: testAccUserIdentificationConfig_withAnnotationsSystem(uiName, map[string]string{
 					"version": "v2",
 					"owner":   "security-team",
 				}),
@@ -229,23 +215,19 @@ func TestAccUserIdentificationResource_updateAnnotations(t *testing.T) {
 
 // TestAccUserIdentificationResource_disappears tests resource deletion outside of Terraform
 func TestAccUserIdentificationResource_disappears(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-disap")
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_basic(nsName, uiName),
+				Config: testAccUserIdentificationConfig_basicSystem(uiName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckUserIdentificationExists(resourceName),
 					acctest.CheckUserIdentificationDisappears(resourceName),
@@ -258,25 +240,21 @@ func TestAccUserIdentificationResource_disappears(t *testing.T) {
 
 // TestAccUserIdentificationResource_emptyPlan tests that no changes are detected after apply
 func TestAccUserIdentificationResource_emptyPlan(t *testing.T) {
-	nsName := acctest.RandomName("user-id-emp")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_allAttributes(nsName, uiName),
+				Config: testAccUserIdentificationConfig_allAttributesSystem(uiName),
 			},
 			{
-				Config:             testAccUserIdentificationResourceConfig_allAttributes(nsName, uiName),
+				Config:             testAccUserIdentificationConfig_allAttributesSystem(uiName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -286,23 +264,19 @@ func TestAccUserIdentificationResource_emptyPlan(t *testing.T) {
 
 // TestAccUserIdentificationResource_planChecks tests plan-time validation
 func TestAccUserIdentificationResource_planChecks(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-plnchk")
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_basic(nsName, uiName),
+				Config: testAccUserIdentificationConfig_basicSystem(uiName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionCreate),
@@ -315,23 +289,19 @@ func TestAccUserIdentificationResource_planChecks(t *testing.T) {
 
 // TestAccUserIdentificationResource_knownValues tests that computed values are known after apply
 func TestAccUserIdentificationResource_knownValues(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-known")
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_basic(nsName, uiName),
+				Config: testAccUserIdentificationConfig_basicSystem(uiName),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(
 						resourceName,
@@ -346,7 +316,7 @@ func TestAccUserIdentificationResource_knownValues(t *testing.T) {
 					statecheck.ExpectKnownValue(
 						resourceName,
 						tfjsonpath.New("namespace"),
-						knownvalue.StringExact(nsName),
+						knownvalue.StringExact("system"),
 					),
 				},
 			},
@@ -356,21 +326,17 @@ func TestAccUserIdentificationResource_knownValues(t *testing.T) {
 
 // TestAccUserIdentificationResource_invalidName tests validation for invalid name
 func TestAccUserIdentificationResource_invalidName(t *testing.T) {
-	nsName := acctest.RandomName("user-id-inv")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	uiName := "INVALID_NAME_WITH_UPPERCASE"
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccUserIdentificationResourceConfig_basic(nsName, uiName),
+				Config:      testAccUserIdentificationConfig_basicSystem(uiName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|name)`),
 			},
 		},
@@ -379,21 +345,17 @@ func TestAccUserIdentificationResource_invalidName(t *testing.T) {
 
 // TestAccUserIdentificationResource_nameTooLong tests validation for name exceeding max length
 func TestAccUserIdentificationResource_nameTooLong(t *testing.T) {
-	nsName := acctest.RandomName("user-id-long")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	uiName := acctest.RandomName("this-name-is-way-too-long-and-exceeds-maximum-length-allowed-for-names-in-f5xc")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccUserIdentificationResourceConfig_basic(nsName, uiName),
+				Config:      testAccUserIdentificationConfig_basicSystem(uiName),
 				ExpectError: regexp.MustCompile(`(?i)(too long|length|maximum|characters)`),
 			},
 		},
@@ -402,20 +364,15 @@ func TestAccUserIdentificationResource_nameTooLong(t *testing.T) {
 
 // TestAccUserIdentificationResource_emptyName tests validation for empty name
 func TestAccUserIdentificationResource_emptyName(t *testing.T) {
-	nsName := acctest.RandomName("user-id-empty")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccUserIdentificationResourceConfig_basic(nsName, ""),
+				Config:      testAccUserIdentificationConfig_basicSystem(""),
 				ExpectError: regexp.MustCompile(`(?i)(empty|required|blank|must)`),
 			},
 		},
@@ -424,31 +381,27 @@ func TestAccUserIdentificationResource_emptyName(t *testing.T) {
 
 // TestAccUserIdentificationResource_requiresReplace tests that name/namespace changes require replace
 func TestAccUserIdentificationResource_requiresReplace(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-rep")
 	uiName1 := acctest.RandomName("ui1")
 	uiName2 := acctest.RandomName("ui2")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_basic(nsName, uiName1),
+				Config: testAccUserIdentificationConfig_basicSystem(uiName1),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckUserIdentificationExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", uiName1),
 				),
 			},
 			{
-				Config: testAccUserIdentificationResourceConfig_basic(nsName, uiName2),
+				Config: testAccUserIdentificationConfig_basicSystem(uiName2),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionDestroyBeforeCreate),
@@ -461,27 +414,23 @@ func TestAccUserIdentificationResource_requiresReplace(t *testing.T) {
 
 // TestAccUserIdentificationResource_identificationRules tests user identification with rules
 func TestAccUserIdentificationResource_identificationRules(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_user_identification.test"
-	nsName := acctest.RandomName("user-id-rules")
 	uiName := acctest.RandomName("ui")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckUserIdentificationDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccUserIdentificationResourceConfig_withRules(nsName, uiName),
+				Config: testAccUserIdentificationConfig_withRulesSystem(uiName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckUserIdentificationExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", uiName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 				),
 			},
 			{
@@ -495,46 +444,28 @@ func TestAccUserIdentificationResource_identificationRules(t *testing.T) {
 	})
 }
 
-// Test configurations
+// =============================================================================
+// CONFIG HELPERS - Use "system" namespace
+// =============================================================================
 
-func testAccUserIdentificationResourceConfig_basic(nsName, uiName string) string {
+func testAccUserIdentificationConfig_basicSystem(uiName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_user_identification" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
 
   rules {
     client_ip {}
   }
 }
-`, nsName, uiName)
+`, uiName)
 }
 
-func testAccUserIdentificationResourceConfig_allAttributes(nsName, uiName string) string {
+func testAccUserIdentificationConfig_allAttributesSystem(uiName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_user_identification" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   description = "Test user identification with all attributes"
   disable     = false
 
@@ -551,115 +482,75 @@ resource "f5xc_user_identification" "test" {
     client_ip {}
   }
 }
-`, nsName, uiName)
+`, uiName)
 }
 
-func testAccUserIdentificationResourceConfig_withLabels(nsName, uiName string, labels map[string]string) string {
+func testAccUserIdentificationConfig_withLabelsSystem(uiName string, labels map[string]string) string {
 	labelsStr := ""
 	for k, v := range labels {
 		labelsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_user_identification" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
 
   labels = {
-%[3]s  }
+%[2]s  }
 
   rules {
     client_ip {}
   }
 }
-`, nsName, uiName, labelsStr)
+`, uiName, labelsStr)
 }
 
-func testAccUserIdentificationResourceConfig_withDescription(nsName, uiName, description string) string {
+func testAccUserIdentificationConfig_withDescriptionSystem(uiName, description string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_user_identification" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
-  description = %[3]q
+  name        = %[1]q
+  namespace   = "system"
+  description = %[2]q
 
   rules {
     client_ip {}
   }
 }
-`, nsName, uiName, description)
+`, uiName, description)
 }
 
-func testAccUserIdentificationResourceConfig_withAnnotations(nsName, uiName string, annotations map[string]string) string {
+func testAccUserIdentificationConfig_withAnnotationsSystem(uiName string, annotations map[string]string) string {
 	annotationsStr := ""
 	for k, v := range annotations {
 		annotationsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_user_identification" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
 
   annotations = {
-%[3]s  }
+%[2]s  }
 
   rules {
     client_ip {}
   }
 }
-`, nsName, uiName, annotationsStr)
+`, uiName, annotationsStr)
 }
 
-func testAccUserIdentificationResourceConfig_withRules(nsName, uiName string) string {
+func testAccUserIdentificationConfig_withRulesSystem(uiName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_user_identification" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   description = "User identification with identification rules"
 
   rules {
     client_ip {}
   }
 }
-`, nsName, uiName)
+`, uiName)
 }

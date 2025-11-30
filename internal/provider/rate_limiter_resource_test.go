@@ -1,4 +1,4 @@
-// Copyright (c) F5, Inc.
+// Copyright (c) F5XC Community
 // SPDX-License-Identifier: MPL-2.0
 
 package provider_test
@@ -18,6 +18,13 @@ import (
 	"github.com/f5xc/terraform-provider-f5xc/internal/acctest"
 )
 
+// =============================================================================
+// RATE_LIMITER RESOURCE ACCEPTANCE TESTS
+//
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// (namespace DELETE API returns 501 Not Implemented)
+// =============================================================================
+
 // testAccRateLimiterImportStateIdFunc returns a function that generates the import ID
 func testAccRateLimiterImportStateIdFunc(resourceName string) resource.ImportStateIdFunc {
 	return func(s *terraform.State) (string, error) {
@@ -33,27 +40,23 @@ func testAccRateLimiterImportStateIdFunc(resourceName string) resource.ImportSta
 
 // TestAccRateLimiterResource_basic tests basic rate_limiter creation
 func TestAccRateLimiterResource_basic(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-basic")
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_basic(nsName, rlName),
+				Config: testAccRateLimiterConfig_basicSystem(rlName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckRateLimiterExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rlName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -70,29 +73,24 @@ func TestAccRateLimiterResource_basic(t *testing.T) {
 
 // TestAccRateLimiterResource_allAttributes tests rate_limiter with all attributes
 func TestAccRateLimiterResource_allAttributes(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-all")
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_allAttributes(nsName, rlName),
+				Config: testAccRateLimiterConfig_allAttributesSystem(rlName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckRateLimiterExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rlName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "description", "Test rate limiter with all attributes"),
-					resource.TestCheckResourceAttr(resourceName, "disable", "false"),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
 					resource.TestCheckResourceAttr(resourceName, "labels.team", "engineering"),
 					resource.TestCheckResourceAttr(resourceName, "annotations.purpose", "testing"),
@@ -112,23 +110,19 @@ func TestAccRateLimiterResource_allAttributes(t *testing.T) {
 
 // TestAccRateLimiterResource_updateLabels tests updating labels
 func TestAccRateLimiterResource_updateLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-lbl")
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_withLabels(nsName, rlName, map[string]string{
+				Config: testAccRateLimiterConfig_withLabelsSystem(rlName, map[string]string{
 					"environment": "dev",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -137,7 +131,7 @@ func TestAccRateLimiterResource_updateLabels(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccRateLimiterResourceConfig_withLabels(nsName, rlName, map[string]string{
+				Config: testAccRateLimiterConfig_withLabelsSystem(rlName, map[string]string{
 					"environment": "prod",
 					"team":        "platform",
 				}),
@@ -153,30 +147,26 @@ func TestAccRateLimiterResource_updateLabels(t *testing.T) {
 
 // TestAccRateLimiterResource_updateDescription tests updating description
 func TestAccRateLimiterResource_updateDescription(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-desc")
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_withDescription(nsName, rlName, "Initial description"),
+				Config: testAccRateLimiterConfig_withDescriptionSystem(rlName, "Initial description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckRateLimiterExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Initial description"),
 				),
 			},
 			{
-				Config: testAccRateLimiterResourceConfig_withDescription(nsName, rlName, "Updated description"),
+				Config: testAccRateLimiterConfig_withDescriptionSystem(rlName, "Updated description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckRateLimiterExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Updated description"),
@@ -188,23 +178,19 @@ func TestAccRateLimiterResource_updateDescription(t *testing.T) {
 
 // TestAccRateLimiterResource_updateAnnotations tests updating annotations
 func TestAccRateLimiterResource_updateAnnotations(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-ann")
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_withAnnotations(nsName, rlName, map[string]string{
+				Config: testAccRateLimiterConfig_withAnnotationsSystem(rlName, map[string]string{
 					"version": "v1",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -213,7 +199,7 @@ func TestAccRateLimiterResource_updateAnnotations(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccRateLimiterResourceConfig_withAnnotations(nsName, rlName, map[string]string{
+				Config: testAccRateLimiterConfig_withAnnotationsSystem(rlName, map[string]string{
 					"version": "v2",
 					"owner":   "security-team",
 				}),
@@ -229,23 +215,19 @@ func TestAccRateLimiterResource_updateAnnotations(t *testing.T) {
 
 // TestAccRateLimiterResource_disappears tests resource deletion outside of Terraform
 func TestAccRateLimiterResource_disappears(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-disap")
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_basic(nsName, rlName),
+				Config: testAccRateLimiterConfig_basicSystem(rlName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckRateLimiterExists(resourceName),
 					acctest.CheckRateLimiterDisappears(resourceName),
@@ -258,25 +240,21 @@ func TestAccRateLimiterResource_disappears(t *testing.T) {
 
 // TestAccRateLimiterResource_emptyPlan tests that no changes are detected after apply
 func TestAccRateLimiterResource_emptyPlan(t *testing.T) {
-	nsName := acctest.RandomName("rate-limiter-emp")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_allAttributes(nsName, rlName),
+				Config: testAccRateLimiterConfig_allAttributesSystem(rlName),
 			},
 			{
-				Config:             testAccRateLimiterResourceConfig_allAttributes(nsName, rlName),
+				Config:             testAccRateLimiterConfig_allAttributesSystem(rlName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -286,23 +264,19 @@ func TestAccRateLimiterResource_emptyPlan(t *testing.T) {
 
 // TestAccRateLimiterResource_planChecks tests plan-time validation
 func TestAccRateLimiterResource_planChecks(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-plnchk")
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_basic(nsName, rlName),
+				Config: testAccRateLimiterConfig_basicSystem(rlName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionCreate),
@@ -315,23 +289,19 @@ func TestAccRateLimiterResource_planChecks(t *testing.T) {
 
 // TestAccRateLimiterResource_knownValues tests that computed values are known after apply
 func TestAccRateLimiterResource_knownValues(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-known")
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_basic(nsName, rlName),
+				Config: testAccRateLimiterConfig_basicSystem(rlName),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(
 						resourceName,
@@ -346,7 +316,7 @@ func TestAccRateLimiterResource_knownValues(t *testing.T) {
 					statecheck.ExpectKnownValue(
 						resourceName,
 						tfjsonpath.New("namespace"),
-						knownvalue.StringExact(nsName),
+						knownvalue.StringExact("system"),
 					),
 				},
 			},
@@ -356,21 +326,17 @@ func TestAccRateLimiterResource_knownValues(t *testing.T) {
 
 // TestAccRateLimiterResource_invalidName tests validation for invalid name
 func TestAccRateLimiterResource_invalidName(t *testing.T) {
-	nsName := acctest.RandomName("rate-limiter-inv")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	rlName := "INVALID_NAME_WITH_UPPERCASE"
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccRateLimiterResourceConfig_basic(nsName, rlName),
+				Config:      testAccRateLimiterConfig_basicSystem(rlName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|name)`),
 			},
 		},
@@ -379,21 +345,17 @@ func TestAccRateLimiterResource_invalidName(t *testing.T) {
 
 // TestAccRateLimiterResource_nameTooLong tests validation for name exceeding max length
 func TestAccRateLimiterResource_nameTooLong(t *testing.T) {
-	nsName := acctest.RandomName("rate-limiter-long")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	rlName := acctest.RandomName("this-name-is-way-too-long-and-exceeds-maximum-length-allowed-for-names-in-f5xc")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccRateLimiterResourceConfig_basic(nsName, rlName),
+				Config:      testAccRateLimiterConfig_basicSystem(rlName),
 				ExpectError: regexp.MustCompile(`(?i)(too long|length|maximum|characters)`),
 			},
 		},
@@ -402,20 +364,15 @@ func TestAccRateLimiterResource_nameTooLong(t *testing.T) {
 
 // TestAccRateLimiterResource_emptyName tests validation for empty name
 func TestAccRateLimiterResource_emptyName(t *testing.T) {
-	nsName := acctest.RandomName("rate-limiter-empty")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccRateLimiterResourceConfig_basic(nsName, ""),
+				Config:      testAccRateLimiterConfig_basicSystem(""),
 				ExpectError: regexp.MustCompile(`(?i)(empty|required|blank|must)`),
 			},
 		},
@@ -424,31 +381,27 @@ func TestAccRateLimiterResource_emptyName(t *testing.T) {
 
 // TestAccRateLimiterResource_requiresReplace tests that name/namespace changes require replace
 func TestAccRateLimiterResource_requiresReplace(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-rep")
 	rlName1 := acctest.RandomName("rl1")
 	rlName2 := acctest.RandomName("rl2")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_basic(nsName, rlName1),
+				Config: testAccRateLimiterConfig_basicSystem(rlName1),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckRateLimiterExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rlName1),
 				),
 			},
 			{
-				Config: testAccRateLimiterResourceConfig_basic(nsName, rlName2),
+				Config: testAccRateLimiterConfig_basicSystem(rlName2),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionDestroyBeforeCreate),
@@ -461,27 +414,23 @@ func TestAccRateLimiterResource_requiresReplace(t *testing.T) {
 
 // TestAccRateLimiterResource_rateLimitValues tests rate limit configuration with limits block
 func TestAccRateLimiterResource_rateLimitValues(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_rate_limiter.test"
-	nsName := acctest.RandomName("rate-limiter-limits")
 	rlName := acctest.RandomName("rl")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckRateLimiterDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccRateLimiterResourceConfig_withLimits(nsName, rlName),
+				Config: testAccRateLimiterConfig_withLimitsSystem(rlName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckRateLimiterExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rlName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "limits.0.total_number", "100"),
 					resource.TestCheckResourceAttr(resourceName, "limits.0.unit", "MINUTE"),
 				),
@@ -497,42 +446,24 @@ func TestAccRateLimiterResource_rateLimitValues(t *testing.T) {
 	})
 }
 
-// Test configurations
+// =============================================================================
+// CONFIG HELPERS - Use "system" namespace
+// =============================================================================
 
-func testAccRateLimiterResourceConfig_basic(nsName, rlName string) string {
+func testAccRateLimiterConfig_basicSystem(rlName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_rate_limiter" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
 }
-`, nsName, rlName)
+`, rlName)
 }
 
-func testAccRateLimiterResourceConfig_allAttributes(nsName, rlName string) string {
+func testAccRateLimiterConfig_allAttributesSystem(rlName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_rate_limiter" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   description = "Test rate limiter with all attributes"
   disable     = false
 
@@ -545,98 +476,58 @@ resource "f5xc_rate_limiter" "test" {
     purpose = "testing"
   }
 }
-`, nsName, rlName)
+`, rlName)
 }
 
-func testAccRateLimiterResourceConfig_withLabels(nsName, rlName string, labels map[string]string) string {
+func testAccRateLimiterConfig_withLabelsSystem(rlName string, labels map[string]string) string {
 	labelsStr := ""
 	for k, v := range labels {
 		labelsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_rate_limiter" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
 
   labels = {
-%[3]s  }
+%[2]s  }
 }
-`, nsName, rlName, labelsStr)
+`, rlName, labelsStr)
 }
 
-func testAccRateLimiterResourceConfig_withDescription(nsName, rlName, description string) string {
+func testAccRateLimiterConfig_withDescriptionSystem(rlName, description string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_rate_limiter" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
-  description = %[3]q
+  name        = %[1]q
+  namespace   = "system"
+  description = %[2]q
 }
-`, nsName, rlName, description)
+`, rlName, description)
 }
 
-func testAccRateLimiterResourceConfig_withAnnotations(nsName, rlName string, annotations map[string]string) string {
+func testAccRateLimiterConfig_withAnnotationsSystem(rlName string, annotations map[string]string) string {
 	annotationsStr := ""
 	for k, v := range annotations {
 		annotationsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_rate_limiter" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
 
   annotations = {
-%[3]s  }
+%[2]s  }
 }
-`, nsName, rlName, annotationsStr)
+`, rlName, annotationsStr)
 }
 
-func testAccRateLimiterResourceConfig_withLimits(nsName, rlName string) string {
+func testAccRateLimiterConfig_withLimitsSystem(rlName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_rate_limiter" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   description = "Rate limiter with limits configuration"
 
   limits {
@@ -648,5 +539,5 @@ resource "f5xc_rate_limiter" "test" {
     leaky_bucket {}
   }
 }
-`, nsName, rlName)
+`, rlName)
 }

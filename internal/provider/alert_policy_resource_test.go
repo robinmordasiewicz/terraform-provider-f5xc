@@ -18,6 +18,13 @@ import (
 	"github.com/f5xc/terraform-provider-f5xc/internal/acctest"
 )
 
+// =============================================================================
+// ALERT POLICY RESOURCE ACCEPTANCE TESTS
+//
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// (namespace DELETE API returns 501 Not Implemented)
+// =============================================================================
+
 // testAccAlertPolicyImportStateIdFunc returns a function that generates the import ID
 func testAccAlertPolicyImportStateIdFunc(resourceName string) resource.ImportStateIdFunc {
 	return func(s *terraform.State) (string, error) {
@@ -33,27 +40,23 @@ func testAccAlertPolicyImportStateIdFunc(resourceName string) resource.ImportSta
 
 // TestAccAlertPolicyResource_basic tests basic alert_policy creation
 func TestAccAlertPolicyResource_basic(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-basic")
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_basic(nsName, apName),
+				Config: testAccAlertPolicyConfig_basicSystem(apName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertPolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", apName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -70,27 +73,23 @@ func TestAccAlertPolicyResource_basic(t *testing.T) {
 
 // TestAccAlertPolicyResource_allAttributes tests alert_policy with all attributes
 func TestAccAlertPolicyResource_allAttributes(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-all")
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_allAttributes(nsName, apName),
+				Config: testAccAlertPolicyConfig_allAttributesSystem(apName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertPolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", apName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "description", "Test alert policy with all attributes"),
 					resource.TestCheckResourceAttr(resourceName, "disable", "false"),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
@@ -112,23 +111,19 @@ func TestAccAlertPolicyResource_allAttributes(t *testing.T) {
 
 // TestAccAlertPolicyResource_updateLabels tests updating labels
 func TestAccAlertPolicyResource_updateLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-lbl")
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_withLabels(nsName, apName, map[string]string{
+				Config: testAccAlertPolicyConfig_withLabelsSystem(apName, map[string]string{
 					"environment": "dev",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -137,7 +132,7 @@ func TestAccAlertPolicyResource_updateLabels(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccAlertPolicyResourceConfig_withLabels(nsName, apName, map[string]string{
+				Config: testAccAlertPolicyConfig_withLabelsSystem(apName, map[string]string{
 					"environment": "prod",
 					"team":        "platform",
 				}),
@@ -153,30 +148,26 @@ func TestAccAlertPolicyResource_updateLabels(t *testing.T) {
 
 // TestAccAlertPolicyResource_updateDescription tests updating description
 func TestAccAlertPolicyResource_updateDescription(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-desc")
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_withDescription(nsName, apName, "Initial description"),
+				Config: testAccAlertPolicyConfig_withDescriptionSystem(apName, "Initial description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertPolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Initial description"),
 				),
 			},
 			{
-				Config: testAccAlertPolicyResourceConfig_withDescription(nsName, apName, "Updated description"),
+				Config: testAccAlertPolicyConfig_withDescriptionSystem(apName, "Updated description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertPolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Updated description"),
@@ -188,23 +179,19 @@ func TestAccAlertPolicyResource_updateDescription(t *testing.T) {
 
 // TestAccAlertPolicyResource_updateAnnotations tests updating annotations
 func TestAccAlertPolicyResource_updateAnnotations(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-ann")
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_withAnnotations(nsName, apName, map[string]string{
+				Config: testAccAlertPolicyConfig_withAnnotationsSystem(apName, map[string]string{
 					"version": "v1",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -213,7 +200,7 @@ func TestAccAlertPolicyResource_updateAnnotations(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccAlertPolicyResourceConfig_withAnnotations(nsName, apName, map[string]string{
+				Config: testAccAlertPolicyConfig_withAnnotationsSystem(apName, map[string]string{
 					"version": "v2",
 					"owner":   "ops-team",
 				}),
@@ -229,23 +216,19 @@ func TestAccAlertPolicyResource_updateAnnotations(t *testing.T) {
 
 // TestAccAlertPolicyResource_disappears tests resource deletion outside of Terraform
 func TestAccAlertPolicyResource_disappears(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-disap")
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_basic(nsName, apName),
+				Config: testAccAlertPolicyConfig_basicSystem(apName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertPolicyExists(resourceName),
 					acctest.CheckAlertPolicyDisappears(resourceName),
@@ -258,25 +241,21 @@ func TestAccAlertPolicyResource_disappears(t *testing.T) {
 
 // TestAccAlertPolicyResource_emptyPlan tests that no changes are detected after apply
 func TestAccAlertPolicyResource_emptyPlan(t *testing.T) {
-	nsName := acctest.RandomName("alert-pol-emp")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_allAttributes(nsName, apName),
+				Config: testAccAlertPolicyConfig_allAttributesSystem(apName),
 			},
 			{
-				Config:             testAccAlertPolicyResourceConfig_allAttributes(nsName, apName),
+				Config:             testAccAlertPolicyConfig_allAttributesSystem(apName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -286,23 +265,19 @@ func TestAccAlertPolicyResource_emptyPlan(t *testing.T) {
 
 // TestAccAlertPolicyResource_planChecks tests plan-time validation
 func TestAccAlertPolicyResource_planChecks(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-plnchk")
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_basic(nsName, apName),
+				Config: testAccAlertPolicyConfig_basicSystem(apName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionCreate),
@@ -315,23 +290,19 @@ func TestAccAlertPolicyResource_planChecks(t *testing.T) {
 
 // TestAccAlertPolicyResource_knownValues tests that computed values are known after apply
 func TestAccAlertPolicyResource_knownValues(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-known")
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_basic(nsName, apName),
+				Config: testAccAlertPolicyConfig_basicSystem(apName),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(
 						resourceName,
@@ -346,7 +317,7 @@ func TestAccAlertPolicyResource_knownValues(t *testing.T) {
 					statecheck.ExpectKnownValue(
 						resourceName,
 						tfjsonpath.New("namespace"),
-						knownvalue.StringExact(nsName),
+						knownvalue.StringExact("system"),
 					),
 				},
 			},
@@ -356,21 +327,17 @@ func TestAccAlertPolicyResource_knownValues(t *testing.T) {
 
 // TestAccAlertPolicyResource_invalidName tests validation for invalid name
 func TestAccAlertPolicyResource_invalidName(t *testing.T) {
-	nsName := acctest.RandomName("alert-pol-inv")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	apName := "INVALID_NAME_WITH_UPPERCASE"
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccAlertPolicyResourceConfig_basic(nsName, apName),
+				Config:      testAccAlertPolicyConfig_basicSystem(apName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|name)`),
 			},
 		},
@@ -379,21 +346,17 @@ func TestAccAlertPolicyResource_invalidName(t *testing.T) {
 
 // TestAccAlertPolicyResource_nameTooLong tests validation for name exceeding max length
 func TestAccAlertPolicyResource_nameTooLong(t *testing.T) {
-	nsName := acctest.RandomName("alert-pol-long")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	apName := acctest.RandomName("this-name-is-way-too-long-and-exceeds-maximum-length-allowed-for-names-in-f5xc")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccAlertPolicyResourceConfig_basic(nsName, apName),
+				Config:      testAccAlertPolicyConfig_basicSystem(apName),
 				ExpectError: regexp.MustCompile(`(?i)(too long|length|maximum|characters)`),
 			},
 		},
@@ -402,53 +365,44 @@ func TestAccAlertPolicyResource_nameTooLong(t *testing.T) {
 
 // TestAccAlertPolicyResource_emptyName tests validation for empty name
 func TestAccAlertPolicyResource_emptyName(t *testing.T) {
-	nsName := acctest.RandomName("alert-pol-empty")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccAlertPolicyResourceConfig_basic(nsName, ""),
+				Config:      testAccAlertPolicyConfig_basicSystem(""),
 				ExpectError: regexp.MustCompile(`(?i)(empty|required|blank|must)`),
 			},
 		},
 	})
 }
 
-// TestAccAlertPolicyResource_requiresReplace tests that name/namespace changes require replace
+// TestAccAlertPolicyResource_requiresReplace tests that name changes require replace
 func TestAccAlertPolicyResource_requiresReplace(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-rep")
 	apName1 := acctest.RandomName("ap1")
 	apName2 := acctest.RandomName("ap2")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_basic(nsName, apName1),
+				Config: testAccAlertPolicyConfig_basicSystem(apName1),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertPolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", apName1),
 				),
 			},
 			{
-				Config: testAccAlertPolicyResourceConfig_basic(nsName, apName2),
+				Config: testAccAlertPolicyConfig_basicSystem(apName2),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionDestroyBeforeCreate),
@@ -461,27 +415,23 @@ func TestAccAlertPolicyResource_requiresReplace(t *testing.T) {
 
 // TestAccAlertPolicyResource_alertSettings tests alert policy with specific settings
 func TestAccAlertPolicyResource_alertSettings(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_alert_policy.test"
-	nsName := acctest.RandomName("alert-pol-settings")
 	apName := acctest.RandomName("ap")
 
-	resource.Test(t, resource.TestCase{
+	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertPolicyDestroyed,
-		ExternalProviders: map[string]resource.ExternalProvider{
-			"time": {
-				Source:            "hashicorp/time",
-				VersionConstraint: "~> 0.9",
-			},
-		},
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertPolicyResourceConfig_withSettings(nsName, apName),
+				Config: testAccAlertPolicyConfig_withSettingsSystem(apName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertPolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", apName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "description", "Alert policy with specific settings"),
 				),
 			},
@@ -496,42 +446,24 @@ func TestAccAlertPolicyResource_alertSettings(t *testing.T) {
 	})
 }
 
-// Test configurations
+// =============================================================================
+// CONFIG HELPERS - Use "system" namespace
+// =============================================================================
 
-func testAccAlertPolicyResourceConfig_basic(nsName, apName string) string {
+func testAccAlertPolicyConfig_basicSystem(apName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_alert_policy" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
 }
-`, nsName, apName)
+`, apName)
 }
 
-func testAccAlertPolicyResourceConfig_allAttributes(nsName, apName string) string {
+func testAccAlertPolicyConfig_allAttributesSystem(apName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_alert_policy" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   description = "Test alert policy with all attributes"
   disable     = false
 
@@ -544,103 +476,63 @@ resource "f5xc_alert_policy" "test" {
     purpose = "testing"
   }
 }
-`, nsName, apName)
+`, apName)
 }
 
-func testAccAlertPolicyResourceConfig_withLabels(nsName, apName string, labels map[string]string) string {
+func testAccAlertPolicyConfig_withLabelsSystem(apName string, labels map[string]string) string {
 	labelsStr := ""
 	for k, v := range labels {
 		labelsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_alert_policy" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
 
   labels = {
-%[3]s  }
+%[2]s  }
 }
-`, nsName, apName, labelsStr)
+`, apName, labelsStr)
 }
 
-func testAccAlertPolicyResourceConfig_withDescription(nsName, apName, description string) string {
+func testAccAlertPolicyConfig_withDescriptionSystem(apName, description string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_alert_policy" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
-  description = %[3]q
+  name        = %[1]q
+  namespace   = "system"
+  description = %[2]q
 }
-`, nsName, apName, description)
+`, apName, description)
 }
 
-func testAccAlertPolicyResourceConfig_withAnnotations(nsName, apName string, annotations map[string]string) string {
+func testAccAlertPolicyConfig_withAnnotationsSystem(apName string, annotations map[string]string) string {
 	annotationsStr := ""
 	for k, v := range annotations {
 		annotationsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_alert_policy" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name       = %[1]q
+  namespace  = "system"
 
   annotations = {
-%[3]s  }
+%[2]s  }
 }
-`, nsName, apName, annotationsStr)
+`, apName, annotationsStr)
 }
 
-func testAccAlertPolicyResourceConfig_withSettings(nsName, apName string) string {
+func testAccAlertPolicyConfig_withSettingsSystem(apName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_alert_policy" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   description = "Alert policy with specific settings"
 
   labels = {
     alert-type = "monitoring"
   }
 }
-`, nsName, apName)
+`, apName)
 }

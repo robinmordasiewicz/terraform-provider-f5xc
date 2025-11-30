@@ -1,9 +1,33 @@
 // Copyright (c) F5XC Community
 // SPDX-License-Identifier: MPL-2.0
 
-// Package acctest provides acceptance test utilities including test resource sweepers.
-// Sweepers are used to clean up orphaned test resources that may remain after
-// test failures or interruptions.
+// Package acctest provides acceptance test utilities including test resource cleanup.
+//
+// # Resource Cleanup Approaches
+//
+// This package provides two complementary approaches to test resource cleanup:
+//
+// ## 1. Tracked Cleanup (RECOMMENDED for multi-user environments)
+//
+// The ResourceTracker tracks specific resources created during a test run and only
+// cleans up those exact resources. This is SAFE for environments where multiple
+// users may be running tests against the same F5 XC tenant.
+//
+// Usage in tests:
+//
+//	func TestAccMyResource(t *testing.T) {
+//	    tracker := acctest.GetTracker()
+//	    resourceName := acctest.RandomName("myresource")
+//	    tracker.TrackResource("f5xc_my_resource", resourceName, namespace)
+//	    defer acctest.CleanupTracked()  // Only deletes resources WE created
+//	    // ... test logic ...
+//	}
+//
+// ## 2. Prefix-Based Sweepers (for orphaned resource cleanup)
+//
+// Sweepers delete ALL resources matching test prefixes (tf-acc-test-*, tf-test-*).
+// Use this ONLY when you need to clean up orphaned resources from crashed tests
+// or when you're certain no other users are running tests.
 //
 // Usage:
 //
@@ -12,6 +36,10 @@
 // Or via Makefile:
 //
 //	make sweep
+//
+// WARNING: Prefix-based sweepers will delete ANY resource matching the test prefix,
+// including resources created by other users running tests against the same tenant.
+// Use CleanupTracked() for safe multi-user cleanup.
 package acctest
 
 import (

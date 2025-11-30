@@ -38,8 +38,15 @@ help:
 	@echo "  make docs         - Generate Terraform documentation"
 	@echo "  make clean        - Remove build artifacts"
 	@echo "  make install      - Install provider locally"
-	@echo "  make sweep        - Clean up orphaned test resources (requires F5XC credentials)"
+	@echo ""
+	@echo "Test Resource Cleanup:"
+	@echo "  make sweep        - Clean up ALL orphaned test resources (prefix-based)"
+	@echo "                      WARNING: Deletes any resource with tf-acc-test-* or tf-test-* prefix"
+	@echo "                      Use only when no other users are running tests on the same tenant"
 	@echo "  make sweep-resource RESOURCE=f5xc_namespace - Sweep specific resource type"
+	@echo ""
+	@echo "  For SAFE multi-user cleanup, use CleanupTracked() in your test code:"
+	@echo "    defer acctest.CleanupTracked()  // Only deletes resources THIS test created"
 	@echo ""
 	@echo "Environment Variables:"
 	@echo "  SPEC_DIR          - Directory containing OpenAPI specs (default: /tmp)"
@@ -127,6 +134,10 @@ testacc:
 	TF_ACC=1 $(GO) test -v -timeout 120m ./internal/provider/...
 
 # Sweep test resources - clean up orphaned resources from failed tests
+# WARNING: This will delete ALL resources matching test prefixes, including
+# resources created by other users. For safe multi-user cleanup, use
+# CleanupTracked() in your test code instead.
+#
 # Usage: make sweep
 # Environment variables required:
 #   - F5XC_API_URL: F5 XC API URL
@@ -134,8 +145,11 @@ testacc:
 #   - OR F5XC_API_CERT and F5XC_API_KEY (for PEM auth)
 #   - OR F5XC_API_TOKEN (for token auth)
 sweep:
-	@echo "Sweeping test resources with prefix 'tf-acc-test-' or 'tf-test-'..."
-	@echo "This will delete all matching resources from F5 XC."
+	@echo "⚠️  WARNING: Prefix-based sweep - will delete ALL test resources!"
+	@echo "Sweeping resources with prefix 'tf-acc-test-' or 'tf-test-'..."
+	@echo "This may delete resources created by other users on the same tenant."
+	@echo ""
+	@echo "For SAFE multi-user cleanup, use CleanupTracked() in your tests."
 	@echo ""
 	TF_ACC=1 $(GO) test ./internal/acctest -v -sweep=all -timeout 30m
 

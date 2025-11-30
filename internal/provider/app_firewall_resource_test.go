@@ -28,12 +28,12 @@ func TestAccAppFirewallResource_basic(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_app_firewall"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccAppFirewallConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckAppFirewallExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 					resource.TestCheckResourceAttrSet(resourceName, "namespace"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
@@ -66,12 +66,12 @@ func TestAccAppFirewallResource_withLabels(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_app_firewall"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccAppFirewallConfig_withLabels(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckAppFirewallExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Test application firewall"),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
@@ -97,12 +97,12 @@ func TestAccAppFirewallResource_blocking(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_app_firewall"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccAppFirewallConfig_blocking(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckAppFirewallExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 				),
 			},
@@ -125,12 +125,12 @@ func TestAccAppFirewallResource_monitoring(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_app_firewall"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccAppFirewallConfig_monitoring(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckAppFirewallExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 				),
 			},
@@ -153,12 +153,12 @@ func TestAccAppFirewallResource_disappears(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_app_firewall"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccAppFirewallConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckAppFirewallExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					acctest.CheckAppFirewallDisappears(resourceName),
 				),
 				ExpectNonEmptyPlan: true,
@@ -182,12 +182,12 @@ func TestAccAppFirewallResource_emptyPlan(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_app_firewall"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccAppFirewallConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckAppFirewallExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 				),
 			},
 			{

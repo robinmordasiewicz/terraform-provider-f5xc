@@ -28,12 +28,12 @@ func TestAccServicePolicyResource_basic(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_service_policy"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccServicePolicyConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckServicePolicyExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 					resource.TestCheckResourceAttrSet(resourceName, "namespace"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
@@ -66,12 +66,12 @@ func TestAccServicePolicyResource_withLabels(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_service_policy"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccServicePolicyConfig_withLabels(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckServicePolicyExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Test service policy"),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
@@ -97,12 +97,12 @@ func TestAccServicePolicyResource_denyAll(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_service_policy"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccServicePolicyConfig_denyAll(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckServicePolicyExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 				),
 			},
@@ -125,12 +125,12 @@ func TestAccServicePolicyResource_allowList(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_service_policy"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccServicePolicyConfig_allowList(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckServicePolicyExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 				),
 			},
@@ -153,12 +153,12 @@ func TestAccServicePolicyResource_disappears(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_service_policy"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccServicePolicyConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckServicePolicyExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 					acctest.CheckServicePolicyDisappears(resourceName),
 				),
 				ExpectNonEmptyPlan: true,
@@ -182,12 +182,12 @@ func TestAccServicePolicyResource_emptyPlan(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_service_policy"),
 		Steps: []resource.TestStep{
 			{
 				Config: testAccServicePolicyConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckServicePolicyExists(resourceName),
+					acctest.CheckResourceExists(resourceName),
 				),
 			},
 			{

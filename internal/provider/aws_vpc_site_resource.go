@@ -2736,6 +2736,26 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
+		if len(data.BlockedServices.BlockedSevice) > 0 {
+			var blocked_seviceList []map[string]interface{}
+			for _, listItem := range data.BlockedServices.BlockedSevice {
+				listItemMap := make(map[string]interface{})
+				if listItem.DNS != nil {
+					listItemMap["dns"] = map[string]interface{}{}
+				}
+				if !listItem.NetworkType.IsNull() && !listItem.NetworkType.IsUnknown() {
+					listItemMap["network_type"] = listItem.NetworkType.ValueString()
+				}
+				if listItem.SSH != nil {
+					listItemMap["ssh"] = map[string]interface{}{}
+				}
+				if listItem.WebUserInterface != nil {
+					listItemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_seviceList = append(blocked_seviceList, listItemMap)
+			}
+			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
+		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.Coordinates != nil {
@@ -2852,6 +2872,41 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.IngressEgressGw.AWSCertifiedHw.IsNull() && !data.IngressEgressGw.AWSCertifiedHw.IsUnknown() {
 			ingress_egress_gwMap["aws_certified_hw"] = data.IngressEgressGw.AWSCertifiedHw.ValueString()
 		}
+		if len(data.IngressEgressGw.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.IngressEgressGw.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.InsideSubnet != nil {
+					inside_subnetDeepMap := make(map[string]interface{})
+					if !listItem.InsideSubnet.ExistingSubnetID.IsNull() && !listItem.InsideSubnet.ExistingSubnetID.IsUnknown() {
+						inside_subnetDeepMap["existing_subnet_id"] = listItem.InsideSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["inside_subnet"] = inside_subnetDeepMap
+				}
+				if listItem.OutsideSubnet != nil {
+					outside_subnetDeepMap := make(map[string]interface{})
+					if !listItem.OutsideSubnet.ExistingSubnetID.IsNull() && !listItem.OutsideSubnet.ExistingSubnetID.IsUnknown() {
+						outside_subnetDeepMap["existing_subnet_id"] = listItem.OutsideSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["outside_subnet"] = outside_subnetDeepMap
+				}
+				if listItem.ReservedInsideSubnet != nil {
+					listItemMap["reserved_inside_subnet"] = map[string]interface{}{}
+				}
+				if listItem.WorkloadSubnet != nil {
+					workload_subnetDeepMap := make(map[string]interface{})
+					if !listItem.WorkloadSubnet.ExistingSubnetID.IsNull() && !listItem.WorkloadSubnet.ExistingSubnetID.IsUnknown() {
+						workload_subnetDeepMap["existing_subnet_id"] = listItem.WorkloadSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["workload_subnet"] = workload_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			ingress_egress_gwMap["az_nodes"] = az_nodesList
+		}
 		if data.IngressEgressGw.DcClusterGroupInsideVn != nil {
 			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
 			if !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsUnknown() {
@@ -2931,6 +2986,24 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		if !data.IngressGw.AWSCertifiedHw.IsNull() && !data.IngressGw.AWSCertifiedHw.IsUnknown() {
 			ingress_gwMap["aws_certified_hw"] = data.IngressGw.AWSCertifiedHw.ValueString()
+		}
+		if len(data.IngressGw.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.IngressGw.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.LocalSubnet != nil {
+					local_subnetDeepMap := make(map[string]interface{})
+					if !listItem.LocalSubnet.ExistingSubnetID.IsNull() && !listItem.LocalSubnet.ExistingSubnetID.IsUnknown() {
+						local_subnetDeepMap["existing_subnet_id"] = listItem.LocalSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["local_subnet"] = local_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			ingress_gwMap["az_nodes"] = az_nodesList
 		}
 		if data.IngressGw.PerformanceEnhancementMode != nil {
 			performance_enhancement_modeNestedMap := make(map[string]interface{})
@@ -3057,6 +3130,24 @@ func (r *AWSVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		}
 		if !data.VoltstackCluster.AWSCertifiedHw.IsNull() && !data.VoltstackCluster.AWSCertifiedHw.IsUnknown() {
 			voltstack_clusterMap["aws_certified_hw"] = data.VoltstackCluster.AWSCertifiedHw.ValueString()
+		}
+		if len(data.VoltstackCluster.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.VoltstackCluster.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.LocalSubnet != nil {
+					local_subnetDeepMap := make(map[string]interface{})
+					if !listItem.LocalSubnet.ExistingSubnetID.IsNull() && !listItem.LocalSubnet.ExistingSubnetID.IsUnknown() {
+						local_subnetDeepMap["existing_subnet_id"] = listItem.LocalSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["local_subnet"] = local_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			voltstack_clusterMap["az_nodes"] = az_nodesList
 		}
 		if data.VoltstackCluster.DcClusterGroup != nil {
 			dc_cluster_groupNestedMap := make(map[string]interface{})
@@ -3351,11 +3442,47 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.BlockAllServices = &AWSVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && isImport && data.BlockedServices == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.BlockedServices = &AWSVPCSiteBlockedServicesModel{}
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &AWSVPCSiteBlockedServicesModel{
+			BlockedSevice: func() []AWSVPCSiteBlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []AWSVPCSiteBlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AWSVPCSiteBlockedServicesBlockedSeviceModel{
+								DNS: func() *AWSVPCSiteEmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &AWSVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *AWSVPCSiteEmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &AWSVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *AWSVPCSiteEmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &AWSVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &AWSVPCSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
@@ -3477,6 +3604,70 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
+			AzNodes: func() []AWSVPCSiteIngressEgressGwAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AWSVPCSiteIngressEgressGwAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AWSVPCSiteIngressEgressGwAzNodesModel{
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								InsideSubnet: func() *AWSVPCSiteIngressEgressGwAzNodesInsideSubnetModel {
+									if deepMap, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteIngressEgressGwAzNodesInsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								OutsideSubnet: func() *AWSVPCSiteIngressEgressGwAzNodesOutsideSubnetModel {
+									if deepMap, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteIngressEgressGwAzNodesOutsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ReservedInsideSubnet: func() *AWSVPCSiteEmptyModel {
+									if _, ok := itemMap["reserved_inside_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WorkloadSubnet: func() *AWSVPCSiteIngressEgressGwAzNodesWorkloadSubnetModel {
+									if deepMap, ok := itemMap["workload_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteIngressEgressGwAzNodesWorkloadSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
@@ -3486,6 +3677,38 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			AzNodes: func() []AWSVPCSiteIngressGwAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AWSVPCSiteIngressGwAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AWSVPCSiteIngressGwAzNodesModel{
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								LocalSubnet: func() *AWSVPCSiteIngressGwAzNodesLocalSubnetModel {
+									if deepMap, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteIngressGwAzNodesLocalSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 		}
 	}
@@ -3573,6 +3796,38 @@ func (r *AWSVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			AzNodes: func() []AWSVPCSiteVoltstackClusterAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AWSVPCSiteVoltstackClusterAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AWSVPCSiteVoltstackClusterAzNodesModel{
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								LocalSubnet: func() *AWSVPCSiteVoltstackClusterAzNodesLocalSubnetModel {
+									if deepMap, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
+										return &AWSVPCSiteVoltstackClusterAzNodesLocalSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 		}
 	}
@@ -3728,6 +3983,26 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
+		if len(data.BlockedServices.BlockedSevice) > 0 {
+			var blocked_seviceList []map[string]interface{}
+			for _, listItem := range data.BlockedServices.BlockedSevice {
+				listItemMap := make(map[string]interface{})
+				if listItem.DNS != nil {
+					listItemMap["dns"] = map[string]interface{}{}
+				}
+				if !listItem.NetworkType.IsNull() && !listItem.NetworkType.IsUnknown() {
+					listItemMap["network_type"] = listItem.NetworkType.ValueString()
+				}
+				if listItem.SSH != nil {
+					listItemMap["ssh"] = map[string]interface{}{}
+				}
+				if listItem.WebUserInterface != nil {
+					listItemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_seviceList = append(blocked_seviceList, listItemMap)
+			}
+			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
+		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.Coordinates != nil {
@@ -3844,6 +4119,41 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		if !data.IngressEgressGw.AWSCertifiedHw.IsNull() && !data.IngressEgressGw.AWSCertifiedHw.IsUnknown() {
 			ingress_egress_gwMap["aws_certified_hw"] = data.IngressEgressGw.AWSCertifiedHw.ValueString()
 		}
+		if len(data.IngressEgressGw.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.IngressEgressGw.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.InsideSubnet != nil {
+					inside_subnetDeepMap := make(map[string]interface{})
+					if !listItem.InsideSubnet.ExistingSubnetID.IsNull() && !listItem.InsideSubnet.ExistingSubnetID.IsUnknown() {
+						inside_subnetDeepMap["existing_subnet_id"] = listItem.InsideSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["inside_subnet"] = inside_subnetDeepMap
+				}
+				if listItem.OutsideSubnet != nil {
+					outside_subnetDeepMap := make(map[string]interface{})
+					if !listItem.OutsideSubnet.ExistingSubnetID.IsNull() && !listItem.OutsideSubnet.ExistingSubnetID.IsUnknown() {
+						outside_subnetDeepMap["existing_subnet_id"] = listItem.OutsideSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["outside_subnet"] = outside_subnetDeepMap
+				}
+				if listItem.ReservedInsideSubnet != nil {
+					listItemMap["reserved_inside_subnet"] = map[string]interface{}{}
+				}
+				if listItem.WorkloadSubnet != nil {
+					workload_subnetDeepMap := make(map[string]interface{})
+					if !listItem.WorkloadSubnet.ExistingSubnetID.IsNull() && !listItem.WorkloadSubnet.ExistingSubnetID.IsUnknown() {
+						workload_subnetDeepMap["existing_subnet_id"] = listItem.WorkloadSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["workload_subnet"] = workload_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			ingress_egress_gwMap["az_nodes"] = az_nodesList
+		}
 		if data.IngressEgressGw.DcClusterGroupInsideVn != nil {
 			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
 			if !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGw.DcClusterGroupInsideVn.Name.IsUnknown() {
@@ -3923,6 +4233,24 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		if !data.IngressGw.AWSCertifiedHw.IsNull() && !data.IngressGw.AWSCertifiedHw.IsUnknown() {
 			ingress_gwMap["aws_certified_hw"] = data.IngressGw.AWSCertifiedHw.ValueString()
+		}
+		if len(data.IngressGw.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.IngressGw.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.LocalSubnet != nil {
+					local_subnetDeepMap := make(map[string]interface{})
+					if !listItem.LocalSubnet.ExistingSubnetID.IsNull() && !listItem.LocalSubnet.ExistingSubnetID.IsUnknown() {
+						local_subnetDeepMap["existing_subnet_id"] = listItem.LocalSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["local_subnet"] = local_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			ingress_gwMap["az_nodes"] = az_nodesList
 		}
 		if data.IngressGw.PerformanceEnhancementMode != nil {
 			performance_enhancement_modeNestedMap := make(map[string]interface{})
@@ -4049,6 +4377,24 @@ func (r *AWSVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		}
 		if !data.VoltstackCluster.AWSCertifiedHw.IsNull() && !data.VoltstackCluster.AWSCertifiedHw.IsUnknown() {
 			voltstack_clusterMap["aws_certified_hw"] = data.VoltstackCluster.AWSCertifiedHw.ValueString()
+		}
+		if len(data.VoltstackCluster.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.VoltstackCluster.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.LocalSubnet != nil {
+					local_subnetDeepMap := make(map[string]interface{})
+					if !listItem.LocalSubnet.ExistingSubnetID.IsNull() && !listItem.LocalSubnet.ExistingSubnetID.IsUnknown() {
+						local_subnetDeepMap["existing_subnet_id"] = listItem.LocalSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["local_subnet"] = local_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			voltstack_clusterMap["az_nodes"] = az_nodesList
 		}
 		if data.VoltstackCluster.DcClusterGroup != nil {
 			dc_cluster_groupNestedMap := make(map[string]interface{})

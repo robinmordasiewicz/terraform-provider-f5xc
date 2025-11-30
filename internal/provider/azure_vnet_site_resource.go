@@ -4959,6 +4959,26 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
+		if len(data.BlockedServices.BlockedSevice) > 0 {
+			var blocked_seviceList []map[string]interface{}
+			for _, listItem := range data.BlockedServices.BlockedSevice {
+				listItemMap := make(map[string]interface{})
+				if listItem.DNS != nil {
+					listItemMap["dns"] = map[string]interface{}{}
+				}
+				if !listItem.NetworkType.IsNull() && !listItem.NetworkType.IsUnknown() {
+					listItemMap["network_type"] = listItem.NetworkType.ValueString()
+				}
+				if listItem.SSH != nil {
+					listItemMap["ssh"] = map[string]interface{}{}
+				}
+				if listItem.WebUserInterface != nil {
+					listItemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_seviceList = append(blocked_seviceList, listItemMap)
+			}
+			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
+		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.Coordinates != nil {
@@ -5002,6 +5022,25 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if data.IngressEgressGw.ActiveNetworkPolicies != nil {
 			active_network_policiesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if len(data.IngressEgressGw.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.IngressEgressGw.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
+					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
+				}
+				if listItem.InsideSubnet != nil {
+					inside_subnetDeepMap := make(map[string]interface{})
+					listItemMap["inside_subnet"] = inside_subnetDeepMap
+				}
+				if listItem.OutsideSubnet != nil {
+					outside_subnetDeepMap := make(map[string]interface{})
+					listItemMap["outside_subnet"] = outside_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			ingress_egress_gwMap["az_nodes"] = az_nodesList
 		}
 		if !data.IngressEgressGw.AzureCertifiedHw.IsNull() && !data.IngressEgressGw.AzureCertifiedHw.IsUnknown() {
 			ingress_egress_gwMap["azure_certified_hw"] = data.IngressEgressGw.AzureCertifiedHw.ValueString()
@@ -5202,6 +5241,21 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			accelerated_networkingNestedMap := make(map[string]interface{})
 			ingress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
 		}
+		if len(data.IngressGw.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.IngressGw.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
+					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
+				}
+				if listItem.LocalSubnet != nil {
+					local_subnetDeepMap := make(map[string]interface{})
+					listItemMap["local_subnet"] = local_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			ingress_gwMap["az_nodes"] = az_nodesList
+		}
 		if !data.IngressGw.AzureCertifiedHw.IsNull() && !data.IngressGw.AzureCertifiedHw.IsUnknown() {
 			ingress_gwMap["azure_certified_hw"] = data.IngressGw.AzureCertifiedHw.ValueString()
 		}
@@ -5352,6 +5406,21 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		if data.VoltstackCluster.ActiveNetworkPolicies != nil {
 			active_network_policiesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if len(data.VoltstackCluster.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.VoltstackCluster.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
+					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
+				}
+				if listItem.LocalSubnet != nil {
+					local_subnetDeepMap := make(map[string]interface{})
+					listItemMap["local_subnet"] = local_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			voltstack_clusterMap["az_nodes"] = az_nodesList
 		}
 		if !data.VoltstackCluster.AzureCertifiedHw.IsNull() && !data.VoltstackCluster.AzureCertifiedHw.IsUnknown() {
 			voltstack_clusterMap["azure_certified_hw"] = data.VoltstackCluster.AzureCertifiedHw.ValueString()
@@ -5756,11 +5825,47 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 		data.BlockAllServices = &AzureVNETSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && isImport && data.BlockedServices == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.BlockedServices = &AzureVNETSiteBlockedServicesModel{}
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &AzureVNETSiteBlockedServicesModel{
+			BlockedSevice: func() []AzureVNETSiteBlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []AzureVNETSiteBlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AzureVNETSiteBlockedServicesBlockedSeviceModel{
+								DNS: func() *AzureVNETSiteEmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &AzureVNETSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *AzureVNETSiteEmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &AzureVNETSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *AzureVNETSiteEmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &AzureVNETSiteEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &AzureVNETSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
@@ -5800,6 +5905,39 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["ingress_egress_gw"].(map[string]interface{}); ok && (isImport || data.IngressEgressGw != nil) {
 		data.IngressEgressGw = &AzureVNETSiteIngressEgressGwModel{
+			AzNodes: func() []AzureVNETSiteIngressEgressGwAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AzureVNETSiteIngressEgressGwAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AzureVNETSiteIngressEgressGwAzNodesModel{
+								AzureAz: func() types.String {
+									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								InsideSubnet: func() *AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel {
+									if _, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
+										return &AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel{
+										}
+									}
+									return nil
+								}(),
+								OutsideSubnet: func() *AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel {
+									if _, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
+										return &AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 			AzureCertifiedHw: func() types.String {
 				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -5820,6 +5958,32 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 	}
 	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
 		data.IngressGw = &AzureVNETSiteIngressGwModel{
+			AzNodes: func() []AzureVNETSiteIngressGwAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AzureVNETSiteIngressGwAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AzureVNETSiteIngressGwAzNodesModel{
+								AzureAz: func() types.String {
+									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								LocalSubnet: func() *AzureVNETSiteIngressGwAzNodesLocalSubnetModel {
+									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
+										return &AzureVNETSiteIngressGwAzNodesLocalSubnetModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 			AzureCertifiedHw: func() types.String {
 				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -5912,6 +6076,32 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["voltstack_cluster"].(map[string]interface{}); ok && (isImport || data.VoltstackCluster != nil) {
 		data.VoltstackCluster = &AzureVNETSiteVoltstackClusterModel{
+			AzNodes: func() []AzureVNETSiteVoltstackClusterAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []AzureVNETSiteVoltstackClusterAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AzureVNETSiteVoltstackClusterAzNodesModel{
+								AzureAz: func() types.String {
+									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								LocalSubnet: func() *AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel {
+									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
+										return &AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 			AzureCertifiedHw: func() types.String {
 				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -6082,6 +6272,26 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
+		if len(data.BlockedServices.BlockedSevice) > 0 {
+			var blocked_seviceList []map[string]interface{}
+			for _, listItem := range data.BlockedServices.BlockedSevice {
+				listItemMap := make(map[string]interface{})
+				if listItem.DNS != nil {
+					listItemMap["dns"] = map[string]interface{}{}
+				}
+				if !listItem.NetworkType.IsNull() && !listItem.NetworkType.IsUnknown() {
+					listItemMap["network_type"] = listItem.NetworkType.ValueString()
+				}
+				if listItem.SSH != nil {
+					listItemMap["ssh"] = map[string]interface{}{}
+				}
+				if listItem.WebUserInterface != nil {
+					listItemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_seviceList = append(blocked_seviceList, listItemMap)
+			}
+			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
+		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.Coordinates != nil {
@@ -6125,6 +6335,25 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 		if data.IngressEgressGw.ActiveNetworkPolicies != nil {
 			active_network_policiesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if len(data.IngressEgressGw.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.IngressEgressGw.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
+					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
+				}
+				if listItem.InsideSubnet != nil {
+					inside_subnetDeepMap := make(map[string]interface{})
+					listItemMap["inside_subnet"] = inside_subnetDeepMap
+				}
+				if listItem.OutsideSubnet != nil {
+					outside_subnetDeepMap := make(map[string]interface{})
+					listItemMap["outside_subnet"] = outside_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			ingress_egress_gwMap["az_nodes"] = az_nodesList
 		}
 		if !data.IngressEgressGw.AzureCertifiedHw.IsNull() && !data.IngressEgressGw.AzureCertifiedHw.IsUnknown() {
 			ingress_egress_gwMap["azure_certified_hw"] = data.IngressEgressGw.AzureCertifiedHw.ValueString()
@@ -6325,6 +6554,21 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 			accelerated_networkingNestedMap := make(map[string]interface{})
 			ingress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
 		}
+		if len(data.IngressGw.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.IngressGw.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
+					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
+				}
+				if listItem.LocalSubnet != nil {
+					local_subnetDeepMap := make(map[string]interface{})
+					listItemMap["local_subnet"] = local_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			ingress_gwMap["az_nodes"] = az_nodesList
+		}
 		if !data.IngressGw.AzureCertifiedHw.IsNull() && !data.IngressGw.AzureCertifiedHw.IsUnknown() {
 			ingress_gwMap["azure_certified_hw"] = data.IngressGw.AzureCertifiedHw.ValueString()
 		}
@@ -6475,6 +6719,21 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 		if data.VoltstackCluster.ActiveNetworkPolicies != nil {
 			active_network_policiesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if len(data.VoltstackCluster.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.VoltstackCluster.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
+					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
+				}
+				if listItem.LocalSubnet != nil {
+					local_subnetDeepMap := make(map[string]interface{})
+					listItemMap["local_subnet"] = local_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			voltstack_clusterMap["az_nodes"] = az_nodesList
 		}
 		if !data.VoltstackCluster.AzureCertifiedHw.IsNull() && !data.VoltstackCluster.AzureCertifiedHw.IsUnknown() {
 			voltstack_clusterMap["azure_certified_hw"] = data.VoltstackCluster.AzureCertifiedHw.ValueString()

@@ -400,6 +400,23 @@ func (r *ReportConfigResource) Create(ctx context.Context, req resource.CreateRe
 	// Marshal spec fields from Terraform state to API struct
 	if data.ReportRecipients != nil {
 		report_recipientsMap := make(map[string]interface{})
+		if len(data.ReportRecipients.UserGroups) > 0 {
+			var user_groupsList []map[string]interface{}
+			for _, listItem := range data.ReportRecipients.UserGroups {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				user_groupsList = append(user_groupsList, listItemMap)
+			}
+			report_recipientsMap["user_groups"] = user_groupsList
+		}
 		apiResource.Spec["report_recipients"] = report_recipientsMap
 	}
 	if data.Waap != nil {
@@ -544,11 +561,41 @@ func (r *ReportConfigResource) Read(ctx context.Context, req resource.ReadReques
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["report_recipients"].(map[string]interface{}); ok && isImport && data.ReportRecipients == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ReportRecipients = &ReportConfigReportRecipientsModel{}
+	if blockData, ok := apiResource.Spec["report_recipients"].(map[string]interface{}); ok && (isImport || data.ReportRecipients != nil) {
+		data.ReportRecipients = &ReportConfigReportRecipientsModel{
+			UserGroups: func() []ReportConfigReportRecipientsUserGroupsModel {
+				if listData, ok := blockData["user_groups"].([]interface{}); ok && len(listData) > 0 {
+					var result []ReportConfigReportRecipientsUserGroupsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ReportConfigReportRecipientsUserGroupsModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["waap"].(map[string]interface{}); ok && isImport && data.Waap == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.Waap = &ReportConfigWaapModel{}
@@ -617,6 +664,23 @@ func (r *ReportConfigResource) Update(ctx context.Context, req resource.UpdateRe
 	// Marshal spec fields from Terraform state to API struct
 	if data.ReportRecipients != nil {
 		report_recipientsMap := make(map[string]interface{})
+		if len(data.ReportRecipients.UserGroups) > 0 {
+			var user_groupsList []map[string]interface{}
+			for _, listItem := range data.ReportRecipients.UserGroups {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				user_groupsList = append(user_groupsList, listItemMap)
+			}
+			report_recipientsMap["user_groups"] = user_groupsList
+		}
 		apiResource.Spec["report_recipients"] = report_recipientsMap
 	}
 	if data.Waap != nil {

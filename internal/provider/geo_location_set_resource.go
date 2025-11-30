@@ -403,11 +403,23 @@ func (r *GeoLocationSetResource) Read(ctx context.Context, req resource.ReadRequ
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["custom_geo_location_selector"].(map[string]interface{}); ok && isImport && data.CustomGeoLocationSelector == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.CustomGeoLocationSelector = &GeoLocationSetCustomGeoLocationSelectorModel{}
+	if blockData, ok := apiResource.Spec["custom_geo_location_selector"].(map[string]interface{}); ok && (isImport || data.CustomGeoLocationSelector != nil) {
+		data.CustomGeoLocationSelector = &GeoLocationSetCustomGeoLocationSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["global"].(map[string]interface{}); ok && isImport && data.Global == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.Global = &GeoLocationSetEmptyModel{}

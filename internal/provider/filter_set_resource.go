@@ -390,6 +390,13 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 			}
 			if item.StringField != nil {
 				string_fieldNestedMap := make(map[string]interface{})
+				if !item.StringField.FieldValues.IsNull() && !item.StringField.FieldValues.IsUnknown() {
+					var FieldValuesItems []string
+					diags := item.StringField.FieldValues.ElementsAs(ctx, &FieldValuesItems, false)
+					if !diags.HasError() {
+						string_fieldNestedMap["field_values"] = FieldValuesItems
+					}
+				}
 				itemMap["string_field"] = string_fieldNestedMap
 			}
 			filter_fieldsList = append(filter_fieldsList, itemMap)
@@ -548,8 +555,21 @@ func (r *FilterSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 						return nil
 					}(),
 					StringField: func() *FilterSetFilterFieldsStringFieldModel {
-						if _, ok := itemMap["string_field"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["string_field"].(map[string]interface{}); ok {
 							return &FilterSetFilterFieldsStringFieldModel{
+								FieldValues: func() types.List {
+									if v, ok := nestedMap["field_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -648,6 +668,13 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 			}
 			if item.StringField != nil {
 				string_fieldNestedMap := make(map[string]interface{})
+				if !item.StringField.FieldValues.IsNull() && !item.StringField.FieldValues.IsUnknown() {
+					var FieldValuesItems []string
+					diags := item.StringField.FieldValues.ElementsAs(ctx, &FieldValuesItems, false)
+					if !diags.HasError() {
+						string_fieldNestedMap["field_values"] = FieldValuesItems
+					}
+				}
 				itemMap["string_field"] = string_fieldNestedMap
 			}
 			filter_fieldsList = append(filter_fieldsList, itemMap)

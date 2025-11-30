@@ -414,11 +414,23 @@ func (r *VirtualSiteResource) Read(ctx context.Context, req resource.ReadRequest
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["site_selector"].(map[string]interface{}); ok && isImport && data.SiteSelector == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.SiteSelector = &VirtualSiteSiteSelectorModel{}
+	if blockData, ok := apiResource.Spec["site_selector"].(map[string]interface{}); ok && (isImport || data.SiteSelector != nil) {
+		data.SiteSelector = &VirtualSiteSiteSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["site_type"].(string); ok && v != "" {
 		data.SiteType = types.StringValue(v)
 	} else {

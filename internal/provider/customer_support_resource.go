@@ -770,6 +770,19 @@ func (r *CustomerSupportResource) Read(ctx context.Context, req resource.ReadReq
 		for _, item := range listData {
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				commentsList = append(commentsList, CustomerSupportCommentsModel{
+					AttachmentIds: func() types.List {
+						if v, ok := itemMap["attachment_ids"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
 					AuthorEmail: func() types.String {
 						if v, ok := itemMap["author_email"].(string); ok && v != "" {
 							return types.StringValue(v)

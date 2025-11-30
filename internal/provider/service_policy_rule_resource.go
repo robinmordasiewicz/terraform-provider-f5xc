@@ -1482,6 +1482,27 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
@@ -1497,6 +1518,29 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.AsnMatcher != nil {
 		asn_matcherMap := make(map[string]interface{})
+		if len(data.AsnMatcher.AsnSets) > 0 {
+			var asn_setsList []map[string]interface{}
+			for _, listItem := range data.AsnMatcher.AsnSets {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				asn_setsList = append(asn_setsList, listItemMap)
+			}
+			asn_matcherMap["asn_sets"] = asn_setsList
+		}
 		apiResource.Spec["asn_matcher"] = asn_matcherMap
 	}
 	if data.BodyMatcher != nil {
@@ -1536,6 +1580,27 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
@@ -1564,6 +1629,27 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
@@ -1584,6 +1670,29 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		ip_matcherMap := make(map[string]interface{})
 		if !data.IPMatcher.InvertMatcher.IsNull() && !data.IPMatcher.InvertMatcher.IsUnknown() {
 			ip_matcherMap["invert_matcher"] = data.IPMatcher.InvertMatcher.ValueBool()
+		}
+		if len(data.IPMatcher.PrefixSets) > 0 {
+			var prefix_setsList []map[string]interface{}
+			for _, listItem := range data.IPMatcher.PrefixSets {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				prefix_setsList = append(prefix_setsList, listItemMap)
+			}
+			ip_matcherMap["prefix_sets"] = prefix_setsList
 		}
 		apiResource.Spec["ip_matcher"] = ip_matcherMap
 	}
@@ -1617,6 +1726,27 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
@@ -1669,6 +1799,27 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Key.IsNull() && !item.Key.IsUnknown() {
@@ -1961,6 +2112,19 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				}
 				return types.BoolNull()
 			}(),
+			Match: func() types.List {
+				if v, ok := blockData["match"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
 	if listData, ok := apiResource.Spec["arg_matchers"].([]interface{}); ok && len(listData) > 0 {
@@ -1987,8 +2151,47 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 						return types.BoolNull()
 					}(),
 					Item: func() *ServicePolicyRuleArgMatchersItemModel {
-						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["item"].(map[string]interface{}); ok {
 							return &ServicePolicyRuleArgMatchersItemModel{
+								ExactValues: func() types.List {
+									if v, ok := nestedMap["exact_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								RegexValues: func() types.List {
+									if v, ok := nestedMap["regex_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								Transformers: func() types.List {
+									if v, ok := nestedMap["transformers"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -2004,36 +2207,165 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		}
 		data.ArgMatchers = arg_matchersList
 	}
-	if _, ok := apiResource.Spec["asn_list"].(map[string]interface{}); ok && isImport && data.AsnList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.AsnList = &ServicePolicyRuleAsnListModel{}
+	if blockData, ok := apiResource.Spec["asn_list"].(map[string]interface{}); ok && (isImport || data.AsnList != nil) {
+		data.AsnList = &ServicePolicyRuleAsnListModel{
+			AsNumbers: func() types.List {
+				if v, ok := blockData["as_numbers"].([]interface{}); ok && len(v) > 0 {
+					var items []int64
+					for _, item := range v {
+						if n, ok := item.(float64); ok {
+							items = append(items, int64(n))
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+					return listVal
+				}
+				return types.ListNull(types.Int64Type)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["asn_matcher"].(map[string]interface{}); ok && isImport && data.AsnMatcher == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.AsnMatcher = &ServicePolicyRuleAsnMatcherModel{}
+	if blockData, ok := apiResource.Spec["asn_matcher"].(map[string]interface{}); ok && (isImport || data.AsnMatcher != nil) {
+		data.AsnMatcher = &ServicePolicyRuleAsnMatcherModel{
+			AsnSets: func() []ServicePolicyRuleAsnMatcherAsnSetsModel {
+				if listData, ok := blockData["asn_sets"].([]interface{}); ok && len(listData) > 0 {
+					var result []ServicePolicyRuleAsnMatcherAsnSetsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ServicePolicyRuleAsnMatcherAsnSetsModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["body_matcher"].(map[string]interface{}); ok && isImport && data.BodyMatcher == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.BodyMatcher = &ServicePolicyRuleBodyMatcherModel{}
+	if blockData, ok := apiResource.Spec["body_matcher"].(map[string]interface{}); ok && (isImport || data.BodyMatcher != nil) {
+		data.BodyMatcher = &ServicePolicyRuleBodyMatcherModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Transformers: func() types.List {
+				if v, ok := blockData["transformers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["bot_action"].(map[string]interface{}); ok && isImport && data.BotAction == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.BotAction = &ServicePolicyRuleBotActionModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && isImport && data.ClientNameMatcher == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ClientNameMatcher = &ServicePolicyRuleClientNameMatcherModel{}
+	if blockData, ok := apiResource.Spec["client_name_matcher"].(map[string]interface{}); ok && (isImport || data.ClientNameMatcher != nil) {
+		data.ClientNameMatcher = &ServicePolicyRuleClientNameMatcherModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["client_selector"].(map[string]interface{}); ok && isImport && data.ClientSelector == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ClientSelector = &ServicePolicyRuleClientSelectorModel{}
+	if blockData, ok := apiResource.Spec["client_selector"].(map[string]interface{}); ok && (isImport || data.ClientSelector != nil) {
+		data.ClientSelector = &ServicePolicyRuleClientSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["cookie_matchers"].([]interface{}); ok && len(listData) > 0 {
 		var cookie_matchersList []ServicePolicyRuleCookieMatchersModel
 		for _, item := range listData {
@@ -2058,8 +2390,47 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 						return types.BoolNull()
 					}(),
 					Item: func() *ServicePolicyRuleCookieMatchersItemModel {
-						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["item"].(map[string]interface{}); ok {
 							return &ServicePolicyRuleCookieMatchersItemModel{
+								ExactValues: func() types.List {
+									if v, ok := nestedMap["exact_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								RegexValues: func() types.List {
+									if v, ok := nestedMap["regex_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								Transformers: func() types.List {
+									if v, ok := nestedMap["transformers"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -2075,11 +2446,36 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		}
 		data.CookieMatchers = cookie_matchersList
 	}
-	if _, ok := apiResource.Spec["domain_matcher"].(map[string]interface{}); ok && isImport && data.DomainMatcher == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.DomainMatcher = &ServicePolicyRuleDomainMatcherModel{}
+	if blockData, ok := apiResource.Spec["domain_matcher"].(map[string]interface{}); ok && (isImport || data.DomainMatcher != nil) {
+		data.DomainMatcher = &ServicePolicyRuleDomainMatcherModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["headers"].([]interface{}); ok && len(listData) > 0 {
 		var headersList []ServicePolicyRuleHeadersModel
 		for _, item := range listData {
@@ -2104,8 +2500,47 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 						return types.BoolNull()
 					}(),
 					Item: func() *ServicePolicyRuleHeadersItemModel {
-						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["item"].(map[string]interface{}); ok {
 							return &ServicePolicyRuleHeadersItemModel{
+								ExactValues: func() types.List {
+									if v, ok := nestedMap["exact_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								RegexValues: func() types.List {
+									if v, ok := nestedMap["regex_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								Transformers: func() types.List {
+									if v, ok := nestedMap["transformers"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -2134,6 +2569,19 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				}
 				return types.BoolNull()
 			}(),
+			Methods: func() types.List {
+				if v, ok := blockData["methods"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["ip_matcher"].(map[string]interface{}); ok && (isImport || data.IPMatcher != nil) {
@@ -2148,6 +2596,49 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			PrefixSets: func() []ServicePolicyRuleIPMatcherPrefixSetsModel {
+				if listData, ok := blockData["prefix_sets"].([]interface{}); ok && len(listData) > 0 {
+					var result []ServicePolicyRuleIPMatcherPrefixSetsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ServicePolicyRuleIPMatcherPrefixSetsModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 		}
 	}
@@ -2164,18 +2655,55 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				}
 				return types.BoolNull()
 			}(),
+			IPPrefixes: func() types.List {
+				if v, ok := blockData["ip_prefixes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["ip_threat_category_list"].(map[string]interface{}); ok && isImport && data.IPThreatCategoryList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.IPThreatCategoryList = &ServicePolicyRuleIPThreatCategoryListModel{}
+	if blockData, ok := apiResource.Spec["ip_threat_category_list"].(map[string]interface{}); ok && (isImport || data.IPThreatCategoryList != nil) {
+		data.IPThreatCategoryList = &ServicePolicyRuleIPThreatCategoryListModel{
+			IPThreatCategories: func() types.List {
+				if v, ok := blockData["ip_threat_categories"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["ja4_tls_fingerprint"].(map[string]interface{}); ok && isImport && data.Ja4TLSFingerprint == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.Ja4TLSFingerprint = &ServicePolicyRuleJa4TLSFingerprintModel{}
+	if blockData, ok := apiResource.Spec["ja4_tls_fingerprint"].(map[string]interface{}); ok && (isImport || data.Ja4TLSFingerprint != nil) {
+		data.Ja4TLSFingerprint = &ServicePolicyRuleJa4TLSFingerprintModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["jwt_claims"].([]interface{}); ok && len(listData) > 0 {
 		var jwt_claimsList []ServicePolicyRuleJwtClaimsModel
 		for _, item := range listData {
@@ -2200,8 +2728,47 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 						return types.BoolNull()
 					}(),
 					Item: func() *ServicePolicyRuleJwtClaimsItemModel {
-						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["item"].(map[string]interface{}); ok {
 							return &ServicePolicyRuleJwtClaimsItemModel{
+								ExactValues: func() types.List {
+									if v, ok := nestedMap["exact_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								RegexValues: func() types.List {
+									if v, ok := nestedMap["regex_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								Transformers: func() types.List {
+									if v, ok := nestedMap["transformers"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -2217,11 +2784,23 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		}
 		data.JwtClaims = jwt_claimsList
 	}
-	if _, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && isImport && data.LabelMatcher == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.LabelMatcher = &ServicePolicyRuleLabelMatcherModel{}
+	if blockData, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && (isImport || data.LabelMatcher != nil) {
+		data.LabelMatcher = &ServicePolicyRuleLabelMatcherModel{
+			Keys: func() types.List {
+				if v, ok := blockData["keys"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["mum_action"].(map[string]interface{}); ok && isImport && data.MumAction == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.MumAction = &ServicePolicyRuleMumActionModel{}
@@ -2229,6 +2808,19 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["path"].(map[string]interface{}); ok && (isImport || data.Path != nil) {
 		data.Path = &ServicePolicyRulePathModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.Path != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
@@ -2239,6 +2831,58 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			PrefixValues: func() types.List {
+				if v, ok := blockData["prefix_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			SuffixValues: func() types.List {
+				if v, ok := blockData["suffix_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Transformers: func() types.List {
+				if v, ok := blockData["transformers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 		}
 	}
@@ -2254,6 +2898,19 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			Ports: func() types.List {
+				if v, ok := blockData["ports"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 		}
 	}
@@ -2281,8 +2938,47 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 						return types.BoolNull()
 					}(),
 					Item: func() *ServicePolicyRuleQueryParamsItemModel {
-						if _, ok := itemMap["item"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["item"].(map[string]interface{}); ok {
 							return &ServicePolicyRuleQueryParamsItemModel{
+								ExactValues: func() types.List {
+									if v, ok := nestedMap["exact_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								RegexValues: func() types.List {
+									if v, ok := nestedMap["regex_values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
+								Transformers: func() types.List {
+									if v, ok := nestedMap["transformers"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -2385,11 +3081,49 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.SegmentPolicy = &ServicePolicyRuleSegmentPolicyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["tls_fingerprint_matcher"].(map[string]interface{}); ok && isImport && data.TLSFingerprintMatcher == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.TLSFingerprintMatcher = &ServicePolicyRuleTLSFingerprintMatcherModel{}
+	if blockData, ok := apiResource.Spec["tls_fingerprint_matcher"].(map[string]interface{}); ok && (isImport || data.TLSFingerprintMatcher != nil) {
+		data.TLSFingerprintMatcher = &ServicePolicyRuleTLSFingerprintMatcherModel{
+			Classes: func() types.List {
+				if v, ok := blockData["classes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			ExcludedValues: func() types.List {
+				if v, ok := blockData["excluded_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["waf_action"].(map[string]interface{}); ok && isImport && data.WAFAction == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.WAFAction = &ServicePolicyRuleWAFActionModel{}
@@ -2505,6 +3239,27 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
@@ -2520,6 +3275,29 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.AsnMatcher != nil {
 		asn_matcherMap := make(map[string]interface{})
+		if len(data.AsnMatcher.AsnSets) > 0 {
+			var asn_setsList []map[string]interface{}
+			for _, listItem := range data.AsnMatcher.AsnSets {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				asn_setsList = append(asn_setsList, listItemMap)
+			}
+			asn_matcherMap["asn_sets"] = asn_setsList
+		}
 		apiResource.Spec["asn_matcher"] = asn_matcherMap
 	}
 	if data.BodyMatcher != nil {
@@ -2559,6 +3337,27 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
@@ -2587,6 +3386,27 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
@@ -2607,6 +3427,29 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		ip_matcherMap := make(map[string]interface{})
 		if !data.IPMatcher.InvertMatcher.IsNull() && !data.IPMatcher.InvertMatcher.IsUnknown() {
 			ip_matcherMap["invert_matcher"] = data.IPMatcher.InvertMatcher.ValueBool()
+		}
+		if len(data.IPMatcher.PrefixSets) > 0 {
+			var prefix_setsList []map[string]interface{}
+			for _, listItem := range data.IPMatcher.PrefixSets {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				prefix_setsList = append(prefix_setsList, listItemMap)
+			}
+			ip_matcherMap["prefix_sets"] = prefix_setsList
 		}
 		apiResource.Spec["ip_matcher"] = ip_matcherMap
 	}
@@ -2640,6 +3483,27 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Name.IsNull() && !item.Name.IsUnknown() {
@@ -2692,6 +3556,27 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.Item != nil {
 				itemNestedMap := make(map[string]interface{})
+				if !item.Item.ExactValues.IsNull() && !item.Item.ExactValues.IsUnknown() {
+					var ExactValuesItems []string
+					diags := item.Item.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["exact_values"] = ExactValuesItems
+					}
+				}
+				if !item.Item.RegexValues.IsNull() && !item.Item.RegexValues.IsUnknown() {
+					var RegexValuesItems []string
+					diags := item.Item.RegexValues.ElementsAs(ctx, &RegexValuesItems, false)
+					if !diags.HasError() {
+						itemNestedMap["regex_values"] = RegexValuesItems
+					}
+				}
+				if !item.Item.Transformers.IsNull() && !item.Item.Transformers.IsUnknown() {
+					var TransformersItems []string
+					diags := item.Item.Transformers.ElementsAs(ctx, &TransformersItems, false)
+					if !diags.HasError() {
+						itemNestedMap["transformers"] = TransformersItems
+					}
+				}
 				itemMap["item"] = itemNestedMap
 			}
 			if !item.Key.IsNull() && !item.Key.IsUnknown() {

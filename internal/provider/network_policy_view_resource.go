@@ -781,6 +781,13 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.Applications != nil {
 				applicationsNestedMap := make(map[string]interface{})
+				if !item.Applications.Applications.IsNull() && !item.Applications.Applications.IsUnknown() {
+					var ApplicationsItems []string
+					diags := item.Applications.Applications.ElementsAs(ctx, &ApplicationsItems, false)
+					if !diags.HasError() {
+						applicationsNestedMap["applications"] = ApplicationsItems
+					}
+				}
 				itemMap["applications"] = applicationsNestedMap
 			}
 			if item.InsideEndpoints != nil {
@@ -792,10 +799,24 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.LabelMatcher != nil {
 				label_matcherNestedMap := make(map[string]interface{})
+				if !item.LabelMatcher.Keys.IsNull() && !item.LabelMatcher.Keys.IsUnknown() {
+					var KeysItems []string
+					diags := item.LabelMatcher.Keys.ElementsAs(ctx, &KeysItems, false)
+					if !diags.HasError() {
+						label_matcherNestedMap["keys"] = KeysItems
+					}
+				}
 				itemMap["label_matcher"] = label_matcherNestedMap
 			}
 			if item.LabelSelector != nil {
 				label_selectorNestedMap := make(map[string]interface{})
+				if !item.LabelSelector.Expressions.IsNull() && !item.LabelSelector.Expressions.IsUnknown() {
+					var ExpressionsItems []string
+					diags := item.LabelSelector.Expressions.ElementsAs(ctx, &ExpressionsItems, false)
+					if !diags.HasError() {
+						label_selectorNestedMap["expressions"] = ExpressionsItems
+					}
+				}
 				itemMap["label_selector"] = label_selectorNestedMap
 			}
 			if item.Metadata != nil {
@@ -813,10 +834,24 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.PrefixList != nil {
 				prefix_listNestedMap := make(map[string]interface{})
+				if !item.PrefixList.Prefixes.IsNull() && !item.PrefixList.Prefixes.IsUnknown() {
+					var PrefixesItems []string
+					diags := item.PrefixList.Prefixes.ElementsAs(ctx, &PrefixesItems, false)
+					if !diags.HasError() {
+						prefix_listNestedMap["prefixes"] = PrefixesItems
+					}
+				}
 				itemMap["prefix_list"] = prefix_listNestedMap
 			}
 			if item.ProtocolPortRange != nil {
 				protocol_port_rangeNestedMap := make(map[string]interface{})
+				if !item.ProtocolPortRange.PortRanges.IsNull() && !item.ProtocolPortRange.PortRanges.IsUnknown() {
+					var PortRangesItems []string
+					diags := item.ProtocolPortRange.PortRanges.ElementsAs(ctx, &PortRangesItems, false)
+					if !diags.HasError() {
+						protocol_port_rangeNestedMap["port_ranges"] = PortRangesItems
+					}
+				}
 				if !item.ProtocolPortRange.Protocol.IsNull() && !item.ProtocolPortRange.Protocol.IsUnknown() {
 					protocol_port_rangeNestedMap["protocol"] = item.ProtocolPortRange.Protocol.ValueString()
 				}
@@ -875,6 +910,13 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.Applications != nil {
 				applicationsNestedMap := make(map[string]interface{})
+				if !item.Applications.Applications.IsNull() && !item.Applications.Applications.IsUnknown() {
+					var ApplicationsItems []string
+					diags := item.Applications.Applications.ElementsAs(ctx, &ApplicationsItems, false)
+					if !diags.HasError() {
+						applicationsNestedMap["applications"] = ApplicationsItems
+					}
+				}
 				itemMap["applications"] = applicationsNestedMap
 			}
 			if item.InsideEndpoints != nil {
@@ -886,10 +928,24 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.LabelMatcher != nil {
 				label_matcherNestedMap := make(map[string]interface{})
+				if !item.LabelMatcher.Keys.IsNull() && !item.LabelMatcher.Keys.IsUnknown() {
+					var KeysItems []string
+					diags := item.LabelMatcher.Keys.ElementsAs(ctx, &KeysItems, false)
+					if !diags.HasError() {
+						label_matcherNestedMap["keys"] = KeysItems
+					}
+				}
 				itemMap["label_matcher"] = label_matcherNestedMap
 			}
 			if item.LabelSelector != nil {
 				label_selectorNestedMap := make(map[string]interface{})
+				if !item.LabelSelector.Expressions.IsNull() && !item.LabelSelector.Expressions.IsUnknown() {
+					var ExpressionsItems []string
+					diags := item.LabelSelector.Expressions.ElementsAs(ctx, &ExpressionsItems, false)
+					if !diags.HasError() {
+						label_selectorNestedMap["expressions"] = ExpressionsItems
+					}
+				}
 				itemMap["label_selector"] = label_selectorNestedMap
 			}
 			if item.Metadata != nil {
@@ -907,10 +963,24 @@ func (r *NetworkPolicyViewResource) Create(ctx context.Context, req resource.Cre
 			}
 			if item.PrefixList != nil {
 				prefix_listNestedMap := make(map[string]interface{})
+				if !item.PrefixList.Prefixes.IsNull() && !item.PrefixList.Prefixes.IsUnknown() {
+					var PrefixesItems []string
+					diags := item.PrefixList.Prefixes.ElementsAs(ctx, &PrefixesItems, false)
+					if !diags.HasError() {
+						prefix_listNestedMap["prefixes"] = PrefixesItems
+					}
+				}
 				itemMap["prefix_list"] = prefix_listNestedMap
 			}
 			if item.ProtocolPortRange != nil {
 				protocol_port_rangeNestedMap := make(map[string]interface{})
+				if !item.ProtocolPortRange.PortRanges.IsNull() && !item.ProtocolPortRange.PortRanges.IsUnknown() {
+					var PortRangesItems []string
+					diags := item.ProtocolPortRange.PortRanges.ElementsAs(ctx, &PortRangesItems, false)
+					if !diags.HasError() {
+						protocol_port_rangeNestedMap["port_ranges"] = PortRangesItems
+					}
+				}
 				if !item.ProtocolPortRange.Protocol.IsNull() && !item.ProtocolPortRange.Protocol.IsUnknown() {
 					protocol_port_rangeNestedMap["protocol"] = item.ProtocolPortRange.Protocol.ValueString()
 				}
@@ -1073,8 +1143,21 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 						return nil
 					}(),
 					Applications: func() *NetworkPolicyViewEgressRulesApplicationsModel {
-						if _, ok := itemMap["applications"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["applications"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewEgressRulesApplicationsModel{
+								Applications: func() types.List {
+									if v, ok := nestedMap["applications"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -1093,15 +1176,41 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 						return nil
 					}(),
 					LabelMatcher: func() *NetworkPolicyViewEgressRulesLabelMatcherModel {
-						if _, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewEgressRulesLabelMatcherModel{
+								Keys: func() types.List {
+									if v, ok := nestedMap["keys"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
 					}(),
 					LabelSelector: func() *NetworkPolicyViewEgressRulesLabelSelectorModel {
-						if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["label_selector"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewEgressRulesLabelSelectorModel{
+								Expressions: func() types.List {
+									if v, ok := nestedMap["expressions"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -1132,8 +1241,21 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 						return nil
 					}(),
 					PrefixList: func() *NetworkPolicyViewEgressRulesPrefixListModel {
-						if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewEgressRulesPrefixListModel{
+								Prefixes: func() types.List {
+									if v, ok := nestedMap["prefixes"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -1141,6 +1263,19 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 					ProtocolPortRange: func() *NetworkPolicyViewEgressRulesProtocolPortRangeModel {
 						if nestedMap, ok := itemMap["protocol_port_range"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewEgressRulesProtocolPortRangeModel{
+								PortRanges: func() types.List {
+									if v, ok := nestedMap["port_ranges"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 								Protocol: func() types.String {
 									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -1210,8 +1345,21 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 						return nil
 					}(),
 					Applications: func() *NetworkPolicyViewIngressRulesApplicationsModel {
-						if _, ok := itemMap["applications"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["applications"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewIngressRulesApplicationsModel{
+								Applications: func() types.List {
+									if v, ok := nestedMap["applications"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -1230,15 +1378,41 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 						return nil
 					}(),
 					LabelMatcher: func() *NetworkPolicyViewIngressRulesLabelMatcherModel {
-						if _, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["label_matcher"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewIngressRulesLabelMatcherModel{
+								Keys: func() types.List {
+									if v, ok := nestedMap["keys"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
 					}(),
 					LabelSelector: func() *NetworkPolicyViewIngressRulesLabelSelectorModel {
-						if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["label_selector"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewIngressRulesLabelSelectorModel{
+								Expressions: func() types.List {
+									if v, ok := nestedMap["expressions"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -1269,8 +1443,21 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 						return nil
 					}(),
 					PrefixList: func() *NetworkPolicyViewIngressRulesPrefixListModel {
-						if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewIngressRulesPrefixListModel{
+								Prefixes: func() types.List {
+									if v, ok := nestedMap["prefixes"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -1278,6 +1465,19 @@ func (r *NetworkPolicyViewResource) Read(ctx context.Context, req resource.ReadR
 					ProtocolPortRange: func() *NetworkPolicyViewIngressRulesProtocolPortRangeModel {
 						if nestedMap, ok := itemMap["protocol_port_range"].(map[string]interface{}); ok {
 							return &NetworkPolicyViewIngressRulesProtocolPortRangeModel{
+								PortRanges: func() types.List {
+									if v, ok := nestedMap["port_ranges"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 								Protocol: func() types.String {
 									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
 										return types.StringValue(v)
@@ -1382,6 +1582,13 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.Applications != nil {
 				applicationsNestedMap := make(map[string]interface{})
+				if !item.Applications.Applications.IsNull() && !item.Applications.Applications.IsUnknown() {
+					var ApplicationsItems []string
+					diags := item.Applications.Applications.ElementsAs(ctx, &ApplicationsItems, false)
+					if !diags.HasError() {
+						applicationsNestedMap["applications"] = ApplicationsItems
+					}
+				}
 				itemMap["applications"] = applicationsNestedMap
 			}
 			if item.InsideEndpoints != nil {
@@ -1393,10 +1600,24 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.LabelMatcher != nil {
 				label_matcherNestedMap := make(map[string]interface{})
+				if !item.LabelMatcher.Keys.IsNull() && !item.LabelMatcher.Keys.IsUnknown() {
+					var KeysItems []string
+					diags := item.LabelMatcher.Keys.ElementsAs(ctx, &KeysItems, false)
+					if !diags.HasError() {
+						label_matcherNestedMap["keys"] = KeysItems
+					}
+				}
 				itemMap["label_matcher"] = label_matcherNestedMap
 			}
 			if item.LabelSelector != nil {
 				label_selectorNestedMap := make(map[string]interface{})
+				if !item.LabelSelector.Expressions.IsNull() && !item.LabelSelector.Expressions.IsUnknown() {
+					var ExpressionsItems []string
+					diags := item.LabelSelector.Expressions.ElementsAs(ctx, &ExpressionsItems, false)
+					if !diags.HasError() {
+						label_selectorNestedMap["expressions"] = ExpressionsItems
+					}
+				}
 				itemMap["label_selector"] = label_selectorNestedMap
 			}
 			if item.Metadata != nil {
@@ -1414,10 +1635,24 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.PrefixList != nil {
 				prefix_listNestedMap := make(map[string]interface{})
+				if !item.PrefixList.Prefixes.IsNull() && !item.PrefixList.Prefixes.IsUnknown() {
+					var PrefixesItems []string
+					diags := item.PrefixList.Prefixes.ElementsAs(ctx, &PrefixesItems, false)
+					if !diags.HasError() {
+						prefix_listNestedMap["prefixes"] = PrefixesItems
+					}
+				}
 				itemMap["prefix_list"] = prefix_listNestedMap
 			}
 			if item.ProtocolPortRange != nil {
 				protocol_port_rangeNestedMap := make(map[string]interface{})
+				if !item.ProtocolPortRange.PortRanges.IsNull() && !item.ProtocolPortRange.PortRanges.IsUnknown() {
+					var PortRangesItems []string
+					diags := item.ProtocolPortRange.PortRanges.ElementsAs(ctx, &PortRangesItems, false)
+					if !diags.HasError() {
+						protocol_port_rangeNestedMap["port_ranges"] = PortRangesItems
+					}
+				}
 				if !item.ProtocolPortRange.Protocol.IsNull() && !item.ProtocolPortRange.Protocol.IsUnknown() {
 					protocol_port_rangeNestedMap["protocol"] = item.ProtocolPortRange.Protocol.ValueString()
 				}
@@ -1476,6 +1711,13 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.Applications != nil {
 				applicationsNestedMap := make(map[string]interface{})
+				if !item.Applications.Applications.IsNull() && !item.Applications.Applications.IsUnknown() {
+					var ApplicationsItems []string
+					diags := item.Applications.Applications.ElementsAs(ctx, &ApplicationsItems, false)
+					if !diags.HasError() {
+						applicationsNestedMap["applications"] = ApplicationsItems
+					}
+				}
 				itemMap["applications"] = applicationsNestedMap
 			}
 			if item.InsideEndpoints != nil {
@@ -1487,10 +1729,24 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.LabelMatcher != nil {
 				label_matcherNestedMap := make(map[string]interface{})
+				if !item.LabelMatcher.Keys.IsNull() && !item.LabelMatcher.Keys.IsUnknown() {
+					var KeysItems []string
+					diags := item.LabelMatcher.Keys.ElementsAs(ctx, &KeysItems, false)
+					if !diags.HasError() {
+						label_matcherNestedMap["keys"] = KeysItems
+					}
+				}
 				itemMap["label_matcher"] = label_matcherNestedMap
 			}
 			if item.LabelSelector != nil {
 				label_selectorNestedMap := make(map[string]interface{})
+				if !item.LabelSelector.Expressions.IsNull() && !item.LabelSelector.Expressions.IsUnknown() {
+					var ExpressionsItems []string
+					diags := item.LabelSelector.Expressions.ElementsAs(ctx, &ExpressionsItems, false)
+					if !diags.HasError() {
+						label_selectorNestedMap["expressions"] = ExpressionsItems
+					}
+				}
 				itemMap["label_selector"] = label_selectorNestedMap
 			}
 			if item.Metadata != nil {
@@ -1508,10 +1764,24 @@ func (r *NetworkPolicyViewResource) Update(ctx context.Context, req resource.Upd
 			}
 			if item.PrefixList != nil {
 				prefix_listNestedMap := make(map[string]interface{})
+				if !item.PrefixList.Prefixes.IsNull() && !item.PrefixList.Prefixes.IsUnknown() {
+					var PrefixesItems []string
+					diags := item.PrefixList.Prefixes.ElementsAs(ctx, &PrefixesItems, false)
+					if !diags.HasError() {
+						prefix_listNestedMap["prefixes"] = PrefixesItems
+					}
+				}
 				itemMap["prefix_list"] = prefix_listNestedMap
 			}
 			if item.ProtocolPortRange != nil {
 				protocol_port_rangeNestedMap := make(map[string]interface{})
+				if !item.ProtocolPortRange.PortRanges.IsNull() && !item.ProtocolPortRange.PortRanges.IsUnknown() {
+					var PortRangesItems []string
+					diags := item.ProtocolPortRange.PortRanges.ElementsAs(ctx, &PortRangesItems, false)
+					if !diags.HasError() {
+						protocol_port_rangeNestedMap["port_ranges"] = PortRangesItems
+					}
+				}
 				if !item.ProtocolPortRange.Protocol.IsNull() && !item.ProtocolPortRange.Protocol.IsUnknown() {
 					protocol_port_rangeNestedMap["protocol"] = item.ProtocolPortRange.Protocol.ValueString()
 				}

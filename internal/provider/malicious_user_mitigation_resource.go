@@ -347,6 +347,40 @@ func (r *MaliciousUserMitigationResource) Create(ctx context.Context, req resour
 	// Marshal spec fields from Terraform state to API struct
 	if data.MitigationType != nil {
 		mitigation_typeMap := make(map[string]interface{})
+		if len(data.MitigationType.Rules) > 0 {
+			var rulesList []map[string]interface{}
+			for _, listItem := range data.MitigationType.Rules {
+				listItemMap := make(map[string]interface{})
+				if listItem.MitigationAction != nil {
+					mitigation_actionDeepMap := make(map[string]interface{})
+					if listItem.MitigationAction.BlockTemporarily != nil {
+						mitigation_actionDeepMap["block_temporarily"] = map[string]interface{}{}
+					}
+					if listItem.MitigationAction.CaptchaChallenge != nil {
+						mitigation_actionDeepMap["captcha_challenge"] = map[string]interface{}{}
+					}
+					if listItem.MitigationAction.JavascriptChallenge != nil {
+						mitigation_actionDeepMap["javascript_challenge"] = map[string]interface{}{}
+					}
+					listItemMap["mitigation_action"] = mitigation_actionDeepMap
+				}
+				if listItem.ThreatLevel != nil {
+					threat_levelDeepMap := make(map[string]interface{})
+					if listItem.ThreatLevel.High != nil {
+						threat_levelDeepMap["high"] = map[string]interface{}{}
+					}
+					if listItem.ThreatLevel.Low != nil {
+						threat_levelDeepMap["low"] = map[string]interface{}{}
+					}
+					if listItem.ThreatLevel.Medium != nil {
+						threat_levelDeepMap["medium"] = map[string]interface{}{}
+					}
+					listItemMap["threat_level"] = threat_levelDeepMap
+				}
+				rulesList = append(rulesList, listItemMap)
+			}
+			mitigation_typeMap["rules"] = rulesList
+		}
 		apiResource.Spec["mitigation_type"] = mitigation_typeMap
 	}
 
@@ -453,11 +487,73 @@ func (r *MaliciousUserMitigationResource) Read(ctx context.Context, req resource
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["mitigation_type"].(map[string]interface{}); ok && isImport && data.MitigationType == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.MitigationType = &MaliciousUserMitigationMitigationTypeModel{}
+	if blockData, ok := apiResource.Spec["mitigation_type"].(map[string]interface{}); ok && (isImport || data.MitigationType != nil) {
+		data.MitigationType = &MaliciousUserMitigationMitigationTypeModel{
+			Rules: func() []MaliciousUserMitigationMitigationTypeRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []MaliciousUserMitigationMitigationTypeRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, MaliciousUserMitigationMitigationTypeRulesModel{
+								MitigationAction: func() *MaliciousUserMitigationMitigationTypeRulesMitigationActionModel {
+									if deepMap, ok := itemMap["mitigation_action"].(map[string]interface{}); ok {
+										return &MaliciousUserMitigationMitigationTypeRulesMitigationActionModel{
+											BlockTemporarily: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["block_temporarily"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+											CaptchaChallenge: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["captcha_challenge"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+											JavascriptChallenge: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["javascript_challenge"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ThreatLevel: func() *MaliciousUserMitigationMitigationTypeRulesThreatLevelModel {
+									if deepMap, ok := itemMap["threat_level"].(map[string]interface{}); ok {
+										return &MaliciousUserMitigationMitigationTypeRulesThreatLevelModel{
+											High: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["high"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+											Low: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["low"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+											Medium: func() *MaliciousUserMitigationEmptyModel {
+												if _, ok := deepMap["medium"].(map[string]interface{}); ok {
+													return &MaliciousUserMitigationEmptyModel{}
+												}
+												return nil
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 
 
 	// Preserve or set the managed marker for future Read operations
@@ -521,6 +617,40 @@ func (r *MaliciousUserMitigationResource) Update(ctx context.Context, req resour
 	// Marshal spec fields from Terraform state to API struct
 	if data.MitigationType != nil {
 		mitigation_typeMap := make(map[string]interface{})
+		if len(data.MitigationType.Rules) > 0 {
+			var rulesList []map[string]interface{}
+			for _, listItem := range data.MitigationType.Rules {
+				listItemMap := make(map[string]interface{})
+				if listItem.MitigationAction != nil {
+					mitigation_actionDeepMap := make(map[string]interface{})
+					if listItem.MitigationAction.BlockTemporarily != nil {
+						mitigation_actionDeepMap["block_temporarily"] = map[string]interface{}{}
+					}
+					if listItem.MitigationAction.CaptchaChallenge != nil {
+						mitigation_actionDeepMap["captcha_challenge"] = map[string]interface{}{}
+					}
+					if listItem.MitigationAction.JavascriptChallenge != nil {
+						mitigation_actionDeepMap["javascript_challenge"] = map[string]interface{}{}
+					}
+					listItemMap["mitigation_action"] = mitigation_actionDeepMap
+				}
+				if listItem.ThreatLevel != nil {
+					threat_levelDeepMap := make(map[string]interface{})
+					if listItem.ThreatLevel.High != nil {
+						threat_levelDeepMap["high"] = map[string]interface{}{}
+					}
+					if listItem.ThreatLevel.Low != nil {
+						threat_levelDeepMap["low"] = map[string]interface{}{}
+					}
+					if listItem.ThreatLevel.Medium != nil {
+						threat_levelDeepMap["medium"] = map[string]interface{}{}
+					}
+					listItemMap["threat_level"] = threat_levelDeepMap
+				}
+				rulesList = append(rulesList, listItemMap)
+			}
+			mitigation_typeMap["rules"] = rulesList
+		}
 		apiResource.Spec["mitigation_type"] = mitigation_typeMap
 	}
 

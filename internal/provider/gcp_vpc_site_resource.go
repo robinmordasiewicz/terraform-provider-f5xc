@@ -2507,6 +2507,26 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
+		if len(data.BlockedServices.BlockedSevice) > 0 {
+			var blocked_seviceList []map[string]interface{}
+			for _, listItem := range data.BlockedServices.BlockedSevice {
+				listItemMap := make(map[string]interface{})
+				if listItem.DNS != nil {
+					listItemMap["dns"] = map[string]interface{}{}
+				}
+				if !listItem.NetworkType.IsNull() && !listItem.NetworkType.IsUnknown() {
+					listItemMap["network_type"] = listItem.NetworkType.ValueString()
+				}
+				if listItem.SSH != nil {
+					listItemMap["ssh"] = map[string]interface{}{}
+				}
+				if listItem.WebUserInterface != nil {
+					listItemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_seviceList = append(blocked_seviceList, listItemMap)
+			}
+			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
+		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.CloudCredentials != nil {
@@ -3032,11 +3052,47 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.BlockAllServices = &GCPVPCSiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && isImport && data.BlockedServices == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.BlockedServices = &GCPVPCSiteBlockedServicesModel{}
+	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
+		data.BlockedServices = &GCPVPCSiteBlockedServicesModel{
+			BlockedSevice: func() []GCPVPCSiteBlockedServicesBlockedSeviceModel {
+				if listData, ok := blockData["blocked_sevice"].([]interface{}); ok && len(listData) > 0 {
+					var result []GCPVPCSiteBlockedServicesBlockedSeviceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, GCPVPCSiteBlockedServicesBlockedSeviceModel{
+								DNS: func() *GCPVPCSiteEmptyModel {
+									if _, ok := itemMap["dns"].(map[string]interface{}); ok {
+										return &GCPVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								NetworkType: func() types.String {
+									if v, ok := itemMap["network_type"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSH: func() *GCPVPCSiteEmptyModel {
+									if _, ok := itemMap["ssh"].(map[string]interface{}); ok {
+										return &GCPVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WebUserInterface: func() *GCPVPCSiteEmptyModel {
+									if _, ok := itemMap["web_user_interface"].(map[string]interface{}); ok {
+										return &GCPVPCSiteEmptyModel{}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["cloud_credentials"].(map[string]interface{}); ok && (isImport || data.CloudCredentials != nil) {
 		data.CloudCredentials = &GCPVPCSiteCloudCredentialsModel{
 			Name: func() types.String {
@@ -3109,6 +3165,19 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			NodeNumber: func() types.Int64 {
 				if v, ok := blockData["node_number"].(float64); ok {
 					return types.Int64Value(int64(v))
@@ -3124,6 +3193,19 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 			NodeNumber: func() types.Int64 {
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -3207,6 +3289,19 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 			NodeNumber: func() types.Int64 {
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -3335,6 +3430,26 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
+		if len(data.BlockedServices.BlockedSevice) > 0 {
+			var blocked_seviceList []map[string]interface{}
+			for _, listItem := range data.BlockedServices.BlockedSevice {
+				listItemMap := make(map[string]interface{})
+				if listItem.DNS != nil {
+					listItemMap["dns"] = map[string]interface{}{}
+				}
+				if !listItem.NetworkType.IsNull() && !listItem.NetworkType.IsUnknown() {
+					listItemMap["network_type"] = listItem.NetworkType.ValueString()
+				}
+				if listItem.SSH != nil {
+					listItemMap["ssh"] = map[string]interface{}{}
+				}
+				if listItem.WebUserInterface != nil {
+					listItemMap["web_user_interface"] = map[string]interface{}{}
+				}
+				blocked_seviceList = append(blocked_seviceList, listItemMap)
+			}
+			blocked_servicesMap["blocked_sevice"] = blocked_seviceList
+		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
 	if data.CloudCredentials != nil {

@@ -771,6 +771,59 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 	// Marshal spec fields from Terraform state to API struct
 	if data.ForwardProxyPbr != nil {
 		forward_proxy_pbrMap := make(map[string]interface{})
+		if len(data.ForwardProxyPbr.ForwardProxyPbrRules) > 0 {
+			var forward_proxy_pbr_rulesList []map[string]interface{}
+			for _, listItem := range data.ForwardProxyPbr.ForwardProxyPbrRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AllDestinations != nil {
+					listItemMap["all_destinations"] = map[string]interface{}{}
+				}
+				if listItem.AllSources != nil {
+					listItemMap["all_sources"] = map[string]interface{}{}
+				}
+				if listItem.HTTPList != nil {
+					http_listDeepMap := make(map[string]interface{})
+					listItemMap["http_list"] = http_listDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					if !listItem.IPPrefixSet.Name.IsNull() && !listItem.IPPrefixSet.Name.IsUnknown() {
+						ip_prefix_setDeepMap["name"] = listItem.IPPrefixSet.Name.ValueString()
+					}
+					if !listItem.IPPrefixSet.Namespace.IsNull() && !listItem.IPPrefixSet.Namespace.IsUnknown() {
+						ip_prefix_setDeepMap["namespace"] = listItem.IPPrefixSet.Namespace.ValueString()
+					}
+					if !listItem.IPPrefixSet.Tenant.IsNull() && !listItem.IPPrefixSet.Tenant.IsUnknown() {
+						ip_prefix_setDeepMap["tenant"] = listItem.IPPrefixSet.Tenant.ValueString()
+					}
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.LabelSelector != nil {
+					label_selectorDeepMap := make(map[string]interface{})
+					listItemMap["label_selector"] = label_selectorDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.PrefixList != nil {
+					prefix_listDeepMap := make(map[string]interface{})
+					listItemMap["prefix_list"] = prefix_listDeepMap
+				}
+				if listItem.TLSList != nil {
+					tls_listDeepMap := make(map[string]interface{})
+					listItemMap["tls_list"] = tls_listDeepMap
+				}
+				forward_proxy_pbr_rulesList = append(forward_proxy_pbr_rulesList, listItemMap)
+			}
+			forward_proxy_pbrMap["forward_proxy_pbr_rules"] = forward_proxy_pbr_rulesList
+		}
 		apiResource.Spec["forward_proxy_pbr"] = forward_proxy_pbrMap
 	}
 	if len(data.ForwardingClassList) > 0 {
@@ -798,6 +851,58 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 		if data.NetworkPbr.LabelSelector != nil {
 			label_selectorNestedMap := make(map[string]interface{})
 			network_pbrMap["label_selector"] = label_selectorNestedMap
+		}
+		if len(data.NetworkPbr.NetworkPbrRules) > 0 {
+			var network_pbr_rulesList []map[string]interface{}
+			for _, listItem := range data.NetworkPbr.NetworkPbrRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AllTCPTraffic != nil {
+					listItemMap["all_tcp_traffic"] = map[string]interface{}{}
+				}
+				if listItem.AllTraffic != nil {
+					listItemMap["all_traffic"] = map[string]interface{}{}
+				}
+				if listItem.AllUDPTraffic != nil {
+					listItemMap["all_udp_traffic"] = map[string]interface{}{}
+				}
+				if listItem.Any != nil {
+					listItemMap["any"] = map[string]interface{}{}
+				}
+				if listItem.Applications != nil {
+					applicationsDeepMap := make(map[string]interface{})
+					listItemMap["applications"] = applicationsDeepMap
+				}
+				if !listItem.DNSName.IsNull() && !listItem.DNSName.IsUnknown() {
+					listItemMap["dns_name"] = listItem.DNSName.ValueString()
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.PrefixList != nil {
+					prefix_listDeepMap := make(map[string]interface{})
+					listItemMap["prefix_list"] = prefix_listDeepMap
+				}
+				if listItem.ProtocolPortRange != nil {
+					protocol_port_rangeDeepMap := make(map[string]interface{})
+					if !listItem.ProtocolPortRange.Protocol.IsNull() && !listItem.ProtocolPortRange.Protocol.IsUnknown() {
+						protocol_port_rangeDeepMap["protocol"] = listItem.ProtocolPortRange.Protocol.ValueString()
+					}
+					listItemMap["protocol_port_range"] = protocol_port_rangeDeepMap
+				}
+				network_pbr_rulesList = append(network_pbr_rulesList, listItemMap)
+			}
+			network_pbrMap["network_pbr_rules"] = network_pbr_rulesList
 		}
 		if data.NetworkPbr.PrefixList != nil {
 			prefix_listNestedMap := make(map[string]interface{})
@@ -909,11 +1014,107 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["forward_proxy_pbr"].(map[string]interface{}); ok && isImport && data.ForwardProxyPbr == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ForwardProxyPbr = &PolicyBasedRoutingForwardProxyPbrModel{}
+	if blockData, ok := apiResource.Spec["forward_proxy_pbr"].(map[string]interface{}); ok && (isImport || data.ForwardProxyPbr != nil) {
+		data.ForwardProxyPbr = &PolicyBasedRoutingForwardProxyPbrModel{
+			ForwardProxyPbrRules: func() []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel {
+				if listData, ok := blockData["forward_proxy_pbr_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel{
+								AllDestinations: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_destinations"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								AllSources: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_sources"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								HTTPList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel {
+									if _, ok := itemMap["http_list"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel{
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel {
+									if deepMap, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LabelSelector: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel {
+									if _, ok := itemMap["label_selector"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel{
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PrefixList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel {
+									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel{
+										}
+									}
+									return nil
+								}(),
+								TLSList: func() *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel {
+									if _, ok := itemMap["tls_list"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["forwarding_class_list"].([]interface{}); ok && len(listData) > 0 {
 		var forwarding_class_listList []PolicyBasedRoutingForwardingClassListModel
 		for _, item := range listData {
@@ -942,11 +1143,106 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 		}
 		data.ForwardingClassList = forwarding_class_listList
 	}
-	if _, ok := apiResource.Spec["network_pbr"].(map[string]interface{}); ok && isImport && data.NetworkPbr == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.NetworkPbr = &PolicyBasedRoutingNetworkPbrModel{}
+	if blockData, ok := apiResource.Spec["network_pbr"].(map[string]interface{}); ok && (isImport || data.NetworkPbr != nil) {
+		data.NetworkPbr = &PolicyBasedRoutingNetworkPbrModel{
+			NetworkPbrRules: func() []PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel {
+				if listData, ok := blockData["network_pbr_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel{
+								AllTCPTraffic: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_tcp_traffic"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								AllTraffic: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_traffic"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								AllUDPTraffic: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["all_udp_traffic"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								Any: func() *PolicyBasedRoutingEmptyModel {
+									if _, ok := itemMap["any"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingEmptyModel{}
+									}
+									return nil
+								}(),
+								Applications: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel {
+									if _, ok := itemMap["applications"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel{
+										}
+									}
+									return nil
+								}(),
+								DNSName: func() types.String {
+									if v, ok := itemMap["dns_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								IPPrefixSet: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel{
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PrefixList: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel {
+									if _, ok := itemMap["prefix_list"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel{
+										}
+									}
+									return nil
+								}(),
+								ProtocolPortRange: func() *PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel {
+									if deepMap, ok := itemMap["protocol_port_range"].(map[string]interface{}); ok {
+										return &PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel{
+											Protocol: func() types.String {
+												if v, ok := deepMap["protocol"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 
 
 	// Preserve or set the managed marker for future Read operations
@@ -1010,6 +1306,59 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 	// Marshal spec fields from Terraform state to API struct
 	if data.ForwardProxyPbr != nil {
 		forward_proxy_pbrMap := make(map[string]interface{})
+		if len(data.ForwardProxyPbr.ForwardProxyPbrRules) > 0 {
+			var forward_proxy_pbr_rulesList []map[string]interface{}
+			for _, listItem := range data.ForwardProxyPbr.ForwardProxyPbrRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AllDestinations != nil {
+					listItemMap["all_destinations"] = map[string]interface{}{}
+				}
+				if listItem.AllSources != nil {
+					listItemMap["all_sources"] = map[string]interface{}{}
+				}
+				if listItem.HTTPList != nil {
+					http_listDeepMap := make(map[string]interface{})
+					listItemMap["http_list"] = http_listDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					if !listItem.IPPrefixSet.Name.IsNull() && !listItem.IPPrefixSet.Name.IsUnknown() {
+						ip_prefix_setDeepMap["name"] = listItem.IPPrefixSet.Name.ValueString()
+					}
+					if !listItem.IPPrefixSet.Namespace.IsNull() && !listItem.IPPrefixSet.Namespace.IsUnknown() {
+						ip_prefix_setDeepMap["namespace"] = listItem.IPPrefixSet.Namespace.ValueString()
+					}
+					if !listItem.IPPrefixSet.Tenant.IsNull() && !listItem.IPPrefixSet.Tenant.IsUnknown() {
+						ip_prefix_setDeepMap["tenant"] = listItem.IPPrefixSet.Tenant.ValueString()
+					}
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.LabelSelector != nil {
+					label_selectorDeepMap := make(map[string]interface{})
+					listItemMap["label_selector"] = label_selectorDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.PrefixList != nil {
+					prefix_listDeepMap := make(map[string]interface{})
+					listItemMap["prefix_list"] = prefix_listDeepMap
+				}
+				if listItem.TLSList != nil {
+					tls_listDeepMap := make(map[string]interface{})
+					listItemMap["tls_list"] = tls_listDeepMap
+				}
+				forward_proxy_pbr_rulesList = append(forward_proxy_pbr_rulesList, listItemMap)
+			}
+			forward_proxy_pbrMap["forward_proxy_pbr_rules"] = forward_proxy_pbr_rulesList
+		}
 		apiResource.Spec["forward_proxy_pbr"] = forward_proxy_pbrMap
 	}
 	if len(data.ForwardingClassList) > 0 {
@@ -1037,6 +1386,58 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 		if data.NetworkPbr.LabelSelector != nil {
 			label_selectorNestedMap := make(map[string]interface{})
 			network_pbrMap["label_selector"] = label_selectorNestedMap
+		}
+		if len(data.NetworkPbr.NetworkPbrRules) > 0 {
+			var network_pbr_rulesList []map[string]interface{}
+			for _, listItem := range data.NetworkPbr.NetworkPbrRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AllTCPTraffic != nil {
+					listItemMap["all_tcp_traffic"] = map[string]interface{}{}
+				}
+				if listItem.AllTraffic != nil {
+					listItemMap["all_traffic"] = map[string]interface{}{}
+				}
+				if listItem.AllUDPTraffic != nil {
+					listItemMap["all_udp_traffic"] = map[string]interface{}{}
+				}
+				if listItem.Any != nil {
+					listItemMap["any"] = map[string]interface{}{}
+				}
+				if listItem.Applications != nil {
+					applicationsDeepMap := make(map[string]interface{})
+					listItemMap["applications"] = applicationsDeepMap
+				}
+				if !listItem.DNSName.IsNull() && !listItem.DNSName.IsUnknown() {
+					listItemMap["dns_name"] = listItem.DNSName.ValueString()
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.PrefixList != nil {
+					prefix_listDeepMap := make(map[string]interface{})
+					listItemMap["prefix_list"] = prefix_listDeepMap
+				}
+				if listItem.ProtocolPortRange != nil {
+					protocol_port_rangeDeepMap := make(map[string]interface{})
+					if !listItem.ProtocolPortRange.Protocol.IsNull() && !listItem.ProtocolPortRange.Protocol.IsUnknown() {
+						protocol_port_rangeDeepMap["protocol"] = listItem.ProtocolPortRange.Protocol.ValueString()
+					}
+					listItemMap["protocol_port_range"] = protocol_port_rangeDeepMap
+				}
+				network_pbr_rulesList = append(network_pbr_rulesList, listItemMap)
+			}
+			network_pbrMap["network_pbr_rules"] = network_pbr_rulesList
 		}
 		if data.NetworkPbr.PrefixList != nil {
 			prefix_listNestedMap := make(map[string]interface{})

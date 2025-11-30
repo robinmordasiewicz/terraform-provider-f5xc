@@ -613,6 +613,29 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		if !data.APool.MaxAnswers.IsNull() && !data.APool.MaxAnswers.IsUnknown() {
 			a_poolMap["max_answers"] = data.APool.MaxAnswers.ValueInt64()
 		}
+		if len(data.APool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.APool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Disable.IsNull() && !listItem.Disable.IsUnknown() {
+					listItemMap["disable"] = listItem.Disable.ValueBool()
+				}
+				if !listItem.IPEndpoint.IsNull() && !listItem.IPEndpoint.IsUnknown() {
+					listItemMap["ip_endpoint"] = listItem.IPEndpoint.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			a_poolMap["members"] = membersList
+		}
 		apiResource.Spec["a_pool"] = a_poolMap
 	}
 	if data.AaaaPool != nil {
@@ -620,10 +643,53 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		if !data.AaaaPool.MaxAnswers.IsNull() && !data.AaaaPool.MaxAnswers.IsUnknown() {
 			aaaa_poolMap["max_answers"] = data.AaaaPool.MaxAnswers.ValueInt64()
 		}
+		if len(data.AaaaPool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.AaaaPool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Disable.IsNull() && !listItem.Disable.IsUnknown() {
+					listItemMap["disable"] = listItem.Disable.ValueBool()
+				}
+				if !listItem.IPEndpoint.IsNull() && !listItem.IPEndpoint.IsUnknown() {
+					listItemMap["ip_endpoint"] = listItem.IPEndpoint.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			aaaa_poolMap["members"] = membersList
+		}
 		apiResource.Spec["aaaa_pool"] = aaaa_poolMap
 	}
 	if data.CnamePool != nil {
 		cname_poolMap := make(map[string]interface{})
+		if len(data.CnamePool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.CnamePool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Domain.IsNull() && !listItem.Domain.IsUnknown() {
+					listItemMap["domain"] = listItem.Domain.ValueString()
+				}
+				if !listItem.FinalTranslation.IsNull() && !listItem.FinalTranslation.IsUnknown() {
+					listItemMap["final_translation"] = listItem.FinalTranslation.ValueBool()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			cname_poolMap["members"] = membersList
+		}
 		apiResource.Spec["cname_pool"] = cname_poolMap
 	}
 	if data.MxPool != nil {
@@ -631,12 +697,61 @@ func (r *DNSLbPoolResource) Create(ctx context.Context, req resource.CreateReque
 		if !data.MxPool.MaxAnswers.IsNull() && !data.MxPool.MaxAnswers.IsUnknown() {
 			mx_poolMap["max_answers"] = data.MxPool.MaxAnswers.ValueInt64()
 		}
+		if len(data.MxPool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.MxPool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Domain.IsNull() && !listItem.Domain.IsUnknown() {
+					listItemMap["domain"] = listItem.Domain.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			mx_poolMap["members"] = membersList
+		}
 		apiResource.Spec["mx_pool"] = mx_poolMap
 	}
 	if data.SrvPool != nil {
 		srv_poolMap := make(map[string]interface{})
 		if !data.SrvPool.MaxAnswers.IsNull() && !data.SrvPool.MaxAnswers.IsUnknown() {
 			srv_poolMap["max_answers"] = data.SrvPool.MaxAnswers.ValueInt64()
+		}
+		if len(data.SrvPool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.SrvPool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.FinalTranslation.IsNull() && !listItem.FinalTranslation.IsUnknown() {
+					listItemMap["final_translation"] = listItem.FinalTranslation.ValueBool()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Port.IsNull() && !listItem.Port.IsUnknown() {
+					listItemMap["port"] = listItem.Port.ValueInt64()
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				if !listItem.Target.IsNull() && !listItem.Target.IsUnknown() {
+					listItemMap["target"] = listItem.Target.ValueString()
+				}
+				if !listItem.Weight.IsNull() && !listItem.Weight.IsUnknown() {
+					listItemMap["weight"] = listItem.Weight.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			srv_poolMap["members"] = membersList
 		}
 		apiResource.Spec["srv_pool"] = srv_poolMap
 	}
@@ -776,6 +891,49 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 				}
 				return types.Int64Null()
 			}(),
+			Members: func() []DNSLbPoolAPoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolAPoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolAPoolMembersModel{
+								Disable: func() types.Bool {
+									if v, ok := itemMap["disable"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								IPEndpoint: func() types.String {
+									if v, ok := itemMap["ip_endpoint"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["aaaa_pool"].(map[string]interface{}); ok && (isImport || data.AaaaPool != nil) {
@@ -786,13 +944,92 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 				}
 				return types.Int64Null()
 			}(),
+			Members: func() []DNSLbPoolAaaaPoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolAaaaPoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolAaaaPoolMembersModel{
+								Disable: func() types.Bool {
+									if v, ok := itemMap["disable"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								IPEndpoint: func() types.String {
+									if v, ok := itemMap["ip_endpoint"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["cname_pool"].(map[string]interface{}); ok && isImport && data.CnamePool == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.CnamePool = &DNSLbPoolCnamePoolModel{}
+	if blockData, ok := apiResource.Spec["cname_pool"].(map[string]interface{}); ok && (isImport || data.CnamePool != nil) {
+		data.CnamePool = &DNSLbPoolCnamePoolModel{
+			Members: func() []DNSLbPoolCnamePoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolCnamePoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolCnamePoolMembersModel{
+								Domain: func() types.String {
+									if v, ok := itemMap["domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								FinalTranslation: func() types.Bool {
+									if v, ok := itemMap["final_translation"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["mx_pool"].(map[string]interface{}); ok && (isImport || data.MxPool != nil) {
 		data.MxPool = &DNSLbPoolMxPoolModel{
 			MaxAnswers: func() types.Int64 {
@@ -800,6 +1037,43 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			Members: func() []DNSLbPoolMxPoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolMxPoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolMxPoolMembersModel{
+								Domain: func() types.String {
+									if v, ok := itemMap["domain"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 		}
 	}
@@ -810,6 +1084,61 @@ func (r *DNSLbPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			Members: func() []DNSLbPoolSrvPoolMembersModel {
+				if listData, ok := blockData["members"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLbPoolSrvPoolMembersModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLbPoolSrvPoolMembersModel{
+								FinalTranslation: func() types.Bool {
+									if v, ok := itemMap["final_translation"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Priority: func() types.Int64 {
+									if v, ok := itemMap["priority"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Ratio: func() types.Int64 {
+									if v, ok := itemMap["ratio"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Target: func() types.String {
+									if v, ok := itemMap["target"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Weight: func() types.Int64 {
+									if v, ok := itemMap["weight"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 		}
 	}
@@ -910,6 +1239,29 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		if !data.APool.MaxAnswers.IsNull() && !data.APool.MaxAnswers.IsUnknown() {
 			a_poolMap["max_answers"] = data.APool.MaxAnswers.ValueInt64()
 		}
+		if len(data.APool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.APool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Disable.IsNull() && !listItem.Disable.IsUnknown() {
+					listItemMap["disable"] = listItem.Disable.ValueBool()
+				}
+				if !listItem.IPEndpoint.IsNull() && !listItem.IPEndpoint.IsUnknown() {
+					listItemMap["ip_endpoint"] = listItem.IPEndpoint.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			a_poolMap["members"] = membersList
+		}
 		apiResource.Spec["a_pool"] = a_poolMap
 	}
 	if data.AaaaPool != nil {
@@ -917,10 +1269,53 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		if !data.AaaaPool.MaxAnswers.IsNull() && !data.AaaaPool.MaxAnswers.IsUnknown() {
 			aaaa_poolMap["max_answers"] = data.AaaaPool.MaxAnswers.ValueInt64()
 		}
+		if len(data.AaaaPool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.AaaaPool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Disable.IsNull() && !listItem.Disable.IsUnknown() {
+					listItemMap["disable"] = listItem.Disable.ValueBool()
+				}
+				if !listItem.IPEndpoint.IsNull() && !listItem.IPEndpoint.IsUnknown() {
+					listItemMap["ip_endpoint"] = listItem.IPEndpoint.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			aaaa_poolMap["members"] = membersList
+		}
 		apiResource.Spec["aaaa_pool"] = aaaa_poolMap
 	}
 	if data.CnamePool != nil {
 		cname_poolMap := make(map[string]interface{})
+		if len(data.CnamePool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.CnamePool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Domain.IsNull() && !listItem.Domain.IsUnknown() {
+					listItemMap["domain"] = listItem.Domain.ValueString()
+				}
+				if !listItem.FinalTranslation.IsNull() && !listItem.FinalTranslation.IsUnknown() {
+					listItemMap["final_translation"] = listItem.FinalTranslation.ValueBool()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			cname_poolMap["members"] = membersList
+		}
 		apiResource.Spec["cname_pool"] = cname_poolMap
 	}
 	if data.MxPool != nil {
@@ -928,12 +1323,61 @@ func (r *DNSLbPoolResource) Update(ctx context.Context, req resource.UpdateReque
 		if !data.MxPool.MaxAnswers.IsNull() && !data.MxPool.MaxAnswers.IsUnknown() {
 			mx_poolMap["max_answers"] = data.MxPool.MaxAnswers.ValueInt64()
 		}
+		if len(data.MxPool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.MxPool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Domain.IsNull() && !listItem.Domain.IsUnknown() {
+					listItemMap["domain"] = listItem.Domain.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			mx_poolMap["members"] = membersList
+		}
 		apiResource.Spec["mx_pool"] = mx_poolMap
 	}
 	if data.SrvPool != nil {
 		srv_poolMap := make(map[string]interface{})
 		if !data.SrvPool.MaxAnswers.IsNull() && !data.SrvPool.MaxAnswers.IsUnknown() {
 			srv_poolMap["max_answers"] = data.SrvPool.MaxAnswers.ValueInt64()
+		}
+		if len(data.SrvPool.Members) > 0 {
+			var membersList []map[string]interface{}
+			for _, listItem := range data.SrvPool.Members {
+				listItemMap := make(map[string]interface{})
+				if !listItem.FinalTranslation.IsNull() && !listItem.FinalTranslation.IsUnknown() {
+					listItemMap["final_translation"] = listItem.FinalTranslation.ValueBool()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Port.IsNull() && !listItem.Port.IsUnknown() {
+					listItemMap["port"] = listItem.Port.ValueInt64()
+				}
+				if !listItem.Priority.IsNull() && !listItem.Priority.IsUnknown() {
+					listItemMap["priority"] = listItem.Priority.ValueInt64()
+				}
+				if !listItem.Ratio.IsNull() && !listItem.Ratio.IsUnknown() {
+					listItemMap["ratio"] = listItem.Ratio.ValueInt64()
+				}
+				if !listItem.Target.IsNull() && !listItem.Target.IsUnknown() {
+					listItemMap["target"] = listItem.Target.ValueString()
+				}
+				if !listItem.Weight.IsNull() && !listItem.Weight.IsUnknown() {
+					listItemMap["weight"] = listItem.Weight.ValueInt64()
+				}
+				membersList = append(membersList, listItemMap)
+			}
+			srv_poolMap["members"] = membersList
 		}
 		apiResource.Spec["srv_pool"] = srv_poolMap
 	}

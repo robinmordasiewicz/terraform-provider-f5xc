@@ -2623,6 +2623,23 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Marshal spec fields from Terraform state to API struct
 	if data.ActiveForwardProxyPolicies != nil {
 		active_forward_proxy_policiesMap := make(map[string]interface{})
+		if len(data.ActiveForwardProxyPolicies.ForwardProxyPolicies) > 0 {
+			var forward_proxy_policiesList []map[string]interface{}
+			for _, listItem := range data.ActiveForwardProxyPolicies.ForwardProxyPolicies {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				forward_proxy_policiesList = append(forward_proxy_policiesList, listItemMap)
+			}
+			active_forward_proxy_policiesMap["forward_proxy_policies"] = forward_proxy_policiesList
+		}
 		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
 	}
 	if data.DoNotAdvertise != nil {
@@ -2692,6 +2709,37 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 	if data.SiteVirtualSites != nil {
 		site_virtual_sitesMap := make(map[string]interface{})
+		if len(data.SiteVirtualSites.AdvertiseWhere) > 0 {
+			var advertise_whereList []map[string]interface{}
+			for _, listItem := range data.SiteVirtualSites.AdvertiseWhere {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Port.IsNull() && !listItem.Port.IsUnknown() {
+					listItemMap["port"] = listItem.Port.ValueInt64()
+				}
+				if listItem.Site != nil {
+					siteDeepMap := make(map[string]interface{})
+					if !listItem.Site.IP.IsNull() && !listItem.Site.IP.IsUnknown() {
+						siteDeepMap["ip"] = listItem.Site.IP.ValueString()
+					}
+					if !listItem.Site.Network.IsNull() && !listItem.Site.Network.IsUnknown() {
+						siteDeepMap["network"] = listItem.Site.Network.ValueString()
+					}
+					listItemMap["site"] = siteDeepMap
+				}
+				if listItem.UseDefaultPort != nil {
+					listItemMap["use_default_port"] = map[string]interface{}{}
+				}
+				if listItem.VirtualSite != nil {
+					virtual_siteDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSite.Network.IsNull() && !listItem.VirtualSite.Network.IsUnknown() {
+						virtual_siteDeepMap["network"] = listItem.VirtualSite.Network.ValueString()
+					}
+					listItemMap["virtual_site"] = virtual_siteDeepMap
+				}
+				advertise_whereList = append(advertise_whereList, listItemMap)
+			}
+			site_virtual_sitesMap["advertise_where"] = advertise_whereList
+		}
 		apiResource.Spec["site_virtual_sites"] = site_virtual_sitesMap
 	}
 	if data.TLSIntercept != nil {
@@ -2838,21 +2886,63 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && isImport && data.ActiveForwardProxyPolicies == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ActiveForwardProxyPolicies = &ProxyActiveForwardProxyPoliciesModel{}
+	if blockData, ok := apiResource.Spec["active_forward_proxy_policies"].(map[string]interface{}); ok && (isImport || data.ActiveForwardProxyPolicies != nil) {
+		data.ActiveForwardProxyPolicies = &ProxyActiveForwardProxyPoliciesModel{
+			ForwardProxyPolicies: func() []ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel {
+				if listData, ok := blockData["forward_proxy_policies"].([]interface{}); ok && len(listData) > 0 {
+					var result []ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ProxyActiveForwardProxyPoliciesForwardProxyPoliciesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["do_not_advertise"].(map[string]interface{}); ok && isImport && data.DoNotAdvertise == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DoNotAdvertise = &ProxyEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["dynamic_proxy"].(map[string]interface{}); ok && isImport && data.DynamicProxy == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.DynamicProxy = &ProxyDynamicProxyModel{}
+	if blockData, ok := apiResource.Spec["dynamic_proxy"].(map[string]interface{}); ok && (isImport || data.DynamicProxy != nil) {
+		data.DynamicProxy = &ProxyDynamicProxyModel{
+			Domains: func() types.List {
+				if v, ok := blockData["domains"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["http_proxy"].(map[string]interface{}); ok && isImport && data.HTTPProxy == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.HTTPProxy = &ProxyHTTPProxyModel{}
@@ -2878,11 +2968,67 @@ func (r *ProxyResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.SiteLocalNetwork = &ProxyEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["site_virtual_sites"].(map[string]interface{}); ok && isImport && data.SiteVirtualSites == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.SiteVirtualSites = &ProxySiteVirtualSitesModel{}
+	if blockData, ok := apiResource.Spec["site_virtual_sites"].(map[string]interface{}); ok && (isImport || data.SiteVirtualSites != nil) {
+		data.SiteVirtualSites = &ProxySiteVirtualSitesModel{
+			AdvertiseWhere: func() []ProxySiteVirtualSitesAdvertiseWhereModel {
+				if listData, ok := blockData["advertise_where"].([]interface{}); ok && len(listData) > 0 {
+					var result []ProxySiteVirtualSitesAdvertiseWhereModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, ProxySiteVirtualSitesAdvertiseWhereModel{
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Site: func() *ProxySiteVirtualSitesAdvertiseWhereSiteModel {
+									if deepMap, ok := itemMap["site"].(map[string]interface{}); ok {
+										return &ProxySiteVirtualSitesAdvertiseWhereSiteModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								UseDefaultPort: func() *ProxyEmptyModel {
+									if _, ok := itemMap["use_default_port"].(map[string]interface{}); ok {
+										return &ProxyEmptyModel{}
+									}
+									return nil
+								}(),
+								VirtualSite: func() *ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel {
+									if deepMap, ok := itemMap["virtual_site"].(map[string]interface{}); ok {
+										return &ProxySiteVirtualSitesAdvertiseWhereVirtualSiteModel{
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["tls_intercept"].(map[string]interface{}); ok && (isImport || data.TLSIntercept != nil) {
 		data.TLSIntercept = &ProxyTLSInterceptModel{
 			TrustedCaURL: func() types.String {
@@ -2961,6 +3107,23 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Marshal spec fields from Terraform state to API struct
 	if data.ActiveForwardProxyPolicies != nil {
 		active_forward_proxy_policiesMap := make(map[string]interface{})
+		if len(data.ActiveForwardProxyPolicies.ForwardProxyPolicies) > 0 {
+			var forward_proxy_policiesList []map[string]interface{}
+			for _, listItem := range data.ActiveForwardProxyPolicies.ForwardProxyPolicies {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				forward_proxy_policiesList = append(forward_proxy_policiesList, listItemMap)
+			}
+			active_forward_proxy_policiesMap["forward_proxy_policies"] = forward_proxy_policiesList
+		}
 		apiResource.Spec["active_forward_proxy_policies"] = active_forward_proxy_policiesMap
 	}
 	if data.DoNotAdvertise != nil {
@@ -3030,6 +3193,37 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 	if data.SiteVirtualSites != nil {
 		site_virtual_sitesMap := make(map[string]interface{})
+		if len(data.SiteVirtualSites.AdvertiseWhere) > 0 {
+			var advertise_whereList []map[string]interface{}
+			for _, listItem := range data.SiteVirtualSites.AdvertiseWhere {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Port.IsNull() && !listItem.Port.IsUnknown() {
+					listItemMap["port"] = listItem.Port.ValueInt64()
+				}
+				if listItem.Site != nil {
+					siteDeepMap := make(map[string]interface{})
+					if !listItem.Site.IP.IsNull() && !listItem.Site.IP.IsUnknown() {
+						siteDeepMap["ip"] = listItem.Site.IP.ValueString()
+					}
+					if !listItem.Site.Network.IsNull() && !listItem.Site.Network.IsUnknown() {
+						siteDeepMap["network"] = listItem.Site.Network.ValueString()
+					}
+					listItemMap["site"] = siteDeepMap
+				}
+				if listItem.UseDefaultPort != nil {
+					listItemMap["use_default_port"] = map[string]interface{}{}
+				}
+				if listItem.VirtualSite != nil {
+					virtual_siteDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSite.Network.IsNull() && !listItem.VirtualSite.Network.IsUnknown() {
+						virtual_siteDeepMap["network"] = listItem.VirtualSite.Network.ValueString()
+					}
+					listItemMap["virtual_site"] = virtual_siteDeepMap
+				}
+				advertise_whereList = append(advertise_whereList, listItemMap)
+			}
+			site_virtual_sitesMap["advertise_where"] = advertise_whereList
+		}
 		apiResource.Spec["site_virtual_sites"] = site_virtual_sitesMap
 	}
 	if data.TLSIntercept != nil {

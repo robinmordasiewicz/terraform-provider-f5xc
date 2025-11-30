@@ -2188,12 +2188,26 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 				if !item.ARecord.Name.IsNull() && !item.ARecord.Name.IsUnknown() {
 					a_recordNestedMap["name"] = item.ARecord.Name.ValueString()
 				}
+				if !item.ARecord.Values.IsNull() && !item.ARecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.ARecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						a_recordNestedMap["values"] = ValuesItems
+					}
+				}
 				itemMap["a_record"] = a_recordNestedMap
 			}
 			if item.AaaaRecord != nil {
 				aaaa_recordNestedMap := make(map[string]interface{})
 				if !item.AaaaRecord.Name.IsNull() && !item.AaaaRecord.Name.IsUnknown() {
 					aaaa_recordNestedMap["name"] = item.AaaaRecord.Name.ValueString()
+				}
+				if !item.AaaaRecord.Values.IsNull() && !item.AaaaRecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.AaaaRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						aaaa_recordNestedMap["values"] = ValuesItems
+					}
 				}
 				itemMap["aaaa_record"] = aaaa_recordNestedMap
 			}
@@ -2305,12 +2319,26 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 				if !item.NsRecord.Name.IsNull() && !item.NsRecord.Name.IsUnknown() {
 					ns_recordNestedMap["name"] = item.NsRecord.Name.ValueString()
 				}
+				if !item.NsRecord.Values.IsNull() && !item.NsRecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.NsRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						ns_recordNestedMap["values"] = ValuesItems
+					}
+				}
 				itemMap["ns_record"] = ns_recordNestedMap
 			}
 			if item.PtrRecord != nil {
 				ptr_recordNestedMap := make(map[string]interface{})
 				if !item.PtrRecord.Name.IsNull() && !item.PtrRecord.Name.IsUnknown() {
 					ptr_recordNestedMap["name"] = item.PtrRecord.Name.ValueString()
+				}
+				if !item.PtrRecord.Values.IsNull() && !item.PtrRecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.PtrRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						ptr_recordNestedMap["values"] = ValuesItems
+					}
 				}
 				itemMap["ptr_record"] = ptr_recordNestedMap
 			}
@@ -2342,6 +2370,13 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 				txt_recordNestedMap := make(map[string]interface{})
 				if !item.TxtRecord.Name.IsNull() && !item.TxtRecord.Name.IsUnknown() {
 					txt_recordNestedMap["name"] = item.TxtRecord.Name.ValueString()
+				}
+				if !item.TxtRecord.Values.IsNull() && !item.TxtRecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.TxtRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						txt_recordNestedMap["values"] = ValuesItems
+					}
 				}
 				itemMap["txt_record"] = txt_recordNestedMap
 			}
@@ -2528,6 +2563,19 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 									}
 									return types.StringNull()
 								}(),
+								Values: func() types.List {
+									if v, ok := nestedMap["values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -2540,6 +2588,19 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 										return types.StringValue(v)
 									}
 									return types.StringNull()
+								}(),
+								Values: func() types.List {
+									if v, ok := nestedMap["values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
 								}(),
 							}
 						}
@@ -2747,6 +2808,19 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 									}
 									return types.StringNull()
 								}(),
+								Values: func() types.List {
+									if v, ok := nestedMap["values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -2759,6 +2833,19 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 										return types.StringValue(v)
 									}
 									return types.StringNull()
+								}(),
+								Values: func() types.List {
+									if v, ok := nestedMap["values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
 								}(),
 							}
 						}
@@ -2817,6 +2904,19 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 										return types.StringValue(v)
 									}
 									return types.StringNull()
+								}(),
+								Values: func() types.List {
+									if v, ok := nestedMap["values"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
 								}(),
 							}
 						}
@@ -2981,12 +3081,26 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 				if !item.ARecord.Name.IsNull() && !item.ARecord.Name.IsUnknown() {
 					a_recordNestedMap["name"] = item.ARecord.Name.ValueString()
 				}
+				if !item.ARecord.Values.IsNull() && !item.ARecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.ARecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						a_recordNestedMap["values"] = ValuesItems
+					}
+				}
 				itemMap["a_record"] = a_recordNestedMap
 			}
 			if item.AaaaRecord != nil {
 				aaaa_recordNestedMap := make(map[string]interface{})
 				if !item.AaaaRecord.Name.IsNull() && !item.AaaaRecord.Name.IsUnknown() {
 					aaaa_recordNestedMap["name"] = item.AaaaRecord.Name.ValueString()
+				}
+				if !item.AaaaRecord.Values.IsNull() && !item.AaaaRecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.AaaaRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						aaaa_recordNestedMap["values"] = ValuesItems
+					}
 				}
 				itemMap["aaaa_record"] = aaaa_recordNestedMap
 			}
@@ -3098,12 +3212,26 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 				if !item.NsRecord.Name.IsNull() && !item.NsRecord.Name.IsUnknown() {
 					ns_recordNestedMap["name"] = item.NsRecord.Name.ValueString()
 				}
+				if !item.NsRecord.Values.IsNull() && !item.NsRecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.NsRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						ns_recordNestedMap["values"] = ValuesItems
+					}
+				}
 				itemMap["ns_record"] = ns_recordNestedMap
 			}
 			if item.PtrRecord != nil {
 				ptr_recordNestedMap := make(map[string]interface{})
 				if !item.PtrRecord.Name.IsNull() && !item.PtrRecord.Name.IsUnknown() {
 					ptr_recordNestedMap["name"] = item.PtrRecord.Name.ValueString()
+				}
+				if !item.PtrRecord.Values.IsNull() && !item.PtrRecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.PtrRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						ptr_recordNestedMap["values"] = ValuesItems
+					}
 				}
 				itemMap["ptr_record"] = ptr_recordNestedMap
 			}
@@ -3135,6 +3263,13 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 				txt_recordNestedMap := make(map[string]interface{})
 				if !item.TxtRecord.Name.IsNull() && !item.TxtRecord.Name.IsUnknown() {
 					txt_recordNestedMap["name"] = item.TxtRecord.Name.ValueString()
+				}
+				if !item.TxtRecord.Values.IsNull() && !item.TxtRecord.Values.IsUnknown() {
+					var ValuesItems []string
+					diags := item.TxtRecord.Values.ElementsAs(ctx, &ValuesItems, false)
+					if !diags.HasError() {
+						txt_recordNestedMap["values"] = ValuesItems
+					}
 				}
 				itemMap["txt_record"] = txt_recordNestedMap
 			}

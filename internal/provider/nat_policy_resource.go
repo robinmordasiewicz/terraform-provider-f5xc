@@ -970,8 +970,22 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 			}
 			if item.Criteria != nil {
 				criteriaNestedMap := make(map[string]interface{})
+				if !item.Criteria.DestinationCidr.IsNull() && !item.Criteria.DestinationCidr.IsUnknown() {
+					var DestinationCidrItems []string
+					diags := item.Criteria.DestinationCidr.ElementsAs(ctx, &DestinationCidrItems, false)
+					if !diags.HasError() {
+						criteriaNestedMap["destination_cidr"] = DestinationCidrItems
+					}
+				}
 				if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
 					criteriaNestedMap["protocol"] = item.Criteria.Protocol.ValueString()
+				}
+				if !item.Criteria.SourceCidr.IsNull() && !item.Criteria.SourceCidr.IsUnknown() {
+					var SourceCidrItems []string
+					diags := item.Criteria.SourceCidr.ElementsAs(ctx, &SourceCidrItems, false)
+					if !diags.HasError() {
+						criteriaNestedMap["source_cidr"] = SourceCidrItems
+					}
 				}
 				itemMap["criteria"] = criteriaNestedMap
 			}
@@ -1002,6 +1016,29 @@ func (r *NatPolicyResource) Create(ctx context.Context, req resource.CreateReque
 	}
 	if data.Site != nil {
 		siteMap := make(map[string]interface{})
+		if len(data.Site.Refs) > 0 {
+			var refsList []map[string]interface{}
+			for _, listItem := range data.Site.Refs {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				refsList = append(refsList, listItemMap)
+			}
+			siteMap["refs"] = refsList
+		}
 		apiResource.Spec["site"] = siteMap
 	}
 
@@ -1136,11 +1173,37 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 					Criteria: func() *NatPolicyRulesCriteriaModel {
 						if nestedMap, ok := itemMap["criteria"].(map[string]interface{}); ok {
 							return &NatPolicyRulesCriteriaModel{
+								DestinationCidr: func() types.List {
+									if v, ok := nestedMap["destination_cidr"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 								Protocol: func() types.String {
 									if v, ok := nestedMap["protocol"].(string); ok && v != "" {
 										return types.StringValue(v)
 									}
 									return types.StringNull()
+								}(),
+								SourceCidr: func() types.List {
+									if v, ok := nestedMap["source_cidr"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
 								}(),
 							}
 						}
@@ -1190,11 +1253,53 @@ func (r *NatPolicyResource) Read(ctx context.Context, req resource.ReadRequest, 
 		}
 		data.Rules = rulesList
 	}
-	if _, ok := apiResource.Spec["site"].(map[string]interface{}); ok && isImport && data.Site == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.Site = &NatPolicySiteModel{}
+	if blockData, ok := apiResource.Spec["site"].(map[string]interface{}); ok && (isImport || data.Site != nil) {
+		data.Site = &NatPolicySiteModel{
+			Refs: func() []NatPolicySiteRefsModel {
+				if listData, ok := blockData["refs"].([]interface{}); ok && len(listData) > 0 {
+					var result []NatPolicySiteRefsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NatPolicySiteRefsModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 
 
 	// Preserve or set the managed marker for future Read operations
@@ -1273,8 +1378,22 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 			}
 			if item.Criteria != nil {
 				criteriaNestedMap := make(map[string]interface{})
+				if !item.Criteria.DestinationCidr.IsNull() && !item.Criteria.DestinationCidr.IsUnknown() {
+					var DestinationCidrItems []string
+					diags := item.Criteria.DestinationCidr.ElementsAs(ctx, &DestinationCidrItems, false)
+					if !diags.HasError() {
+						criteriaNestedMap["destination_cidr"] = DestinationCidrItems
+					}
+				}
 				if !item.Criteria.Protocol.IsNull() && !item.Criteria.Protocol.IsUnknown() {
 					criteriaNestedMap["protocol"] = item.Criteria.Protocol.ValueString()
+				}
+				if !item.Criteria.SourceCidr.IsNull() && !item.Criteria.SourceCidr.IsUnknown() {
+					var SourceCidrItems []string
+					diags := item.Criteria.SourceCidr.ElementsAs(ctx, &SourceCidrItems, false)
+					if !diags.HasError() {
+						criteriaNestedMap["source_cidr"] = SourceCidrItems
+					}
 				}
 				itemMap["criteria"] = criteriaNestedMap
 			}
@@ -1305,6 +1424,29 @@ func (r *NatPolicyResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 	if data.Site != nil {
 		siteMap := make(map[string]interface{})
+		if len(data.Site.Refs) > 0 {
+			var refsList []map[string]interface{}
+			for _, listItem := range data.Site.Refs {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				refsList = append(refsList, listItemMap)
+			}
+			siteMap["refs"] = refsList
+		}
 		apiResource.Spec["site"] = siteMap
 	}
 

@@ -670,6 +670,35 @@ func (r *AppFirewallResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if data.CustomAnonymization != nil {
 		custom_anonymizationMap := make(map[string]interface{})
+		if len(data.CustomAnonymization.AnonymizationConfig) > 0 {
+			var anonymization_configList []map[string]interface{}
+			for _, listItem := range data.CustomAnonymization.AnonymizationConfig {
+				listItemMap := make(map[string]interface{})
+				if listItem.Cookie != nil {
+					cookieDeepMap := make(map[string]interface{})
+					if !listItem.Cookie.CookieName.IsNull() && !listItem.Cookie.CookieName.IsUnknown() {
+						cookieDeepMap["cookie_name"] = listItem.Cookie.CookieName.ValueString()
+					}
+					listItemMap["cookie"] = cookieDeepMap
+				}
+				if listItem.HTTPHeader != nil {
+					http_headerDeepMap := make(map[string]interface{})
+					if !listItem.HTTPHeader.HeaderName.IsNull() && !listItem.HTTPHeader.HeaderName.IsUnknown() {
+						http_headerDeepMap["header_name"] = listItem.HTTPHeader.HeaderName.ValueString()
+					}
+					listItemMap["http_header"] = http_headerDeepMap
+				}
+				if listItem.QueryParameter != nil {
+					query_parameterDeepMap := make(map[string]interface{})
+					if !listItem.QueryParameter.QueryParamName.IsNull() && !listItem.QueryParameter.QueryParamName.IsUnknown() {
+						query_parameterDeepMap["query_param_name"] = listItem.QueryParameter.QueryParamName.ValueString()
+					}
+					listItemMap["query_parameter"] = query_parameterDeepMap
+				}
+				anonymization_configList = append(anonymization_configList, listItemMap)
+			}
+			custom_anonymizationMap["anonymization_config"] = anonymization_configList
+		}
 		apiResource.Spec["custom_anonymization"] = custom_anonymizationMap
 	}
 	if data.DefaultAnonymization != nil {
@@ -887,11 +916,23 @@ func (r *AppFirewallResource) Read(ctx context.Context, req resource.ReadRequest
 		data.AllowAllResponseCodes = &AppFirewallEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["allowed_response_codes"].(map[string]interface{}); ok && isImport && data.AllowedResponseCodes == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.AllowedResponseCodes = &AppFirewallAllowedResponseCodesModel{}
+	if blockData, ok := apiResource.Spec["allowed_response_codes"].(map[string]interface{}); ok && (isImport || data.AllowedResponseCodes != nil) {
+		data.AllowedResponseCodes = &AppFirewallAllowedResponseCodesModel{
+			ResponseCode: func() types.List {
+				if v, ok := blockData["response_code"].([]interface{}); ok && len(v) > 0 {
+					var items []int64
+					for _, item := range v {
+						if n, ok := item.(float64); ok {
+							items = append(items, int64(n))
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+					return listVal
+				}
+				return types.ListNull(types.Int64Type)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["blocking"].(map[string]interface{}); ok && isImport && data.Blocking == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.Blocking = &AppFirewallEmptyModel{}
@@ -935,11 +976,62 @@ func (r *AppFirewallResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["custom_anonymization"].(map[string]interface{}); ok && isImport && data.CustomAnonymization == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.CustomAnonymization = &AppFirewallCustomAnonymizationModel{}
+	if blockData, ok := apiResource.Spec["custom_anonymization"].(map[string]interface{}); ok && (isImport || data.CustomAnonymization != nil) {
+		data.CustomAnonymization = &AppFirewallCustomAnonymizationModel{
+			AnonymizationConfig: func() []AppFirewallCustomAnonymizationAnonymizationConfigModel {
+				if listData, ok := blockData["anonymization_config"].([]interface{}); ok && len(listData) > 0 {
+					var result []AppFirewallCustomAnonymizationAnonymizationConfigModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, AppFirewallCustomAnonymizationAnonymizationConfigModel{
+								Cookie: func() *AppFirewallCustomAnonymizationAnonymizationConfigCookieModel {
+									if deepMap, ok := itemMap["cookie"].(map[string]interface{}); ok {
+										return &AppFirewallCustomAnonymizationAnonymizationConfigCookieModel{
+											CookieName: func() types.String {
+												if v, ok := deepMap["cookie_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								HTTPHeader: func() *AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel {
+									if deepMap, ok := itemMap["http_header"].(map[string]interface{}); ok {
+										return &AppFirewallCustomAnonymizationAnonymizationConfigHTTPHeaderModel{
+											HeaderName: func() types.String {
+												if v, ok := deepMap["header_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								QueryParameter: func() *AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel {
+									if deepMap, ok := itemMap["query_parameter"].(map[string]interface{}); ok {
+										return &AppFirewallCustomAnonymizationAnonymizationConfigQueryParameterModel{
+											QueryParamName: func() types.String {
+												if v, ok := deepMap["query_param_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["default_anonymization"].(map[string]interface{}); ok && isImport && data.DefaultAnonymization == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DefaultAnonymization = &AppFirewallEmptyModel{}
@@ -1086,6 +1178,35 @@ func (r *AppFirewallResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if data.CustomAnonymization != nil {
 		custom_anonymizationMap := make(map[string]interface{})
+		if len(data.CustomAnonymization.AnonymizationConfig) > 0 {
+			var anonymization_configList []map[string]interface{}
+			for _, listItem := range data.CustomAnonymization.AnonymizationConfig {
+				listItemMap := make(map[string]interface{})
+				if listItem.Cookie != nil {
+					cookieDeepMap := make(map[string]interface{})
+					if !listItem.Cookie.CookieName.IsNull() && !listItem.Cookie.CookieName.IsUnknown() {
+						cookieDeepMap["cookie_name"] = listItem.Cookie.CookieName.ValueString()
+					}
+					listItemMap["cookie"] = cookieDeepMap
+				}
+				if listItem.HTTPHeader != nil {
+					http_headerDeepMap := make(map[string]interface{})
+					if !listItem.HTTPHeader.HeaderName.IsNull() && !listItem.HTTPHeader.HeaderName.IsUnknown() {
+						http_headerDeepMap["header_name"] = listItem.HTTPHeader.HeaderName.ValueString()
+					}
+					listItemMap["http_header"] = http_headerDeepMap
+				}
+				if listItem.QueryParameter != nil {
+					query_parameterDeepMap := make(map[string]interface{})
+					if !listItem.QueryParameter.QueryParamName.IsNull() && !listItem.QueryParameter.QueryParamName.IsUnknown() {
+						query_parameterDeepMap["query_param_name"] = listItem.QueryParameter.QueryParamName.ValueString()
+					}
+					listItemMap["query_parameter"] = query_parameterDeepMap
+				}
+				anonymization_configList = append(anonymization_configList, listItemMap)
+			}
+			custom_anonymizationMap["anonymization_config"] = anonymization_configList
+		}
 		apiResource.Spec["custom_anonymization"] = custom_anonymizationMap
 	}
 	if data.DefaultAnonymization != nil {

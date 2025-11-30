@@ -2183,6 +2183,29 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if data.Authentication != nil {
 		authenticationMap := make(map[string]interface{})
+		if len(data.Authentication.AuthConfig) > 0 {
+			var auth_configList []map[string]interface{}
+			for _, listItem := range data.Authentication.AuthConfig {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				auth_configList = append(auth_configList, listItemMap)
+			}
+			authenticationMap["auth_config"] = auth_configList
+		}
 		if data.Authentication.CookieParams != nil {
 			cookie_paramsNestedMap := make(map[string]interface{})
 			if !data.Authentication.CookieParams.CookieExpiry.IsNull() && !data.Authentication.CookieParams.CookieExpiry.IsUnknown() {
@@ -2313,6 +2336,29 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		dynamic_reverse_proxyMap := make(map[string]interface{})
 		if !data.DynamicReverseProxy.ConnectionTimeout.IsNull() && !data.DynamicReverseProxy.ConnectionTimeout.IsUnknown() {
 			dynamic_reverse_proxyMap["connection_timeout"] = data.DynamicReverseProxy.ConnectionTimeout.ValueInt64()
+		}
+		if len(data.DynamicReverseProxy.ResolutionNetwork) > 0 {
+			var resolution_networkList []map[string]interface{}
+			for _, listItem := range data.DynamicReverseProxy.ResolutionNetwork {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				resolution_networkList = append(resolution_networkList, listItemMap)
+			}
+			dynamic_reverse_proxyMap["resolution_network"] = resolution_networkList
 		}
 		if !data.DynamicReverseProxy.ResolutionNetworkType.IsNull() && !data.DynamicReverseProxy.ResolutionNetworkType.IsUnknown() {
 			dynamic_reverse_proxyMap["resolution_network_type"] = data.DynamicReverseProxy.ResolutionNetworkType.ValueString()
@@ -2642,6 +2688,29 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if data.TLSCertParams != nil {
 		tls_cert_paramsMap := make(map[string]interface{})
+		if len(data.TLSCertParams.Certificates) > 0 {
+			var certificatesList []map[string]interface{}
+			for _, listItem := range data.TLSCertParams.Certificates {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				certificatesList = append(certificatesList, listItemMap)
+			}
+			tls_cert_paramsMap["certificates"] = certificatesList
+		}
 		if data.TLSCertParams.ClientCertificateOptional != nil {
 			tls_cert_paramsMap["client_certificate_optional"] = map[string]interface{}{}
 		}
@@ -2965,6 +3034,49 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if blockData, ok := apiResource.Spec["authentication"].(map[string]interface{}); ok && (isImport || data.Authentication != nil) {
 		data.Authentication = &VirtualHostAuthenticationModel{
+			AuthConfig: func() []VirtualHostAuthenticationAuthConfigModel {
+				if listData, ok := blockData["auth_config"].([]interface{}); ok && len(listData) > 0 {
+					var result []VirtualHostAuthenticationAuthConfigModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VirtualHostAuthenticationAuthConfigModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 			RedirectURL: func() types.String {
 				if v, ok := blockData["redirect_url"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -3023,6 +3135,19 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return types.Int64Null()
 			}(),
+			ContentType: func() types.List {
+				if v, ok := blockData["content_type"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			DisableOnEtagHeader: func() types.Bool {
 				if !isImport && data.CompressionParams != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
@@ -3071,6 +3196,32 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			AllowOrigin: func() types.List {
+				if v, ok := blockData["allow_origin"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowOriginRegex: func() types.List {
+				if v, ok := blockData["allow_origin_regex"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CorsPolicy != nil {
@@ -3144,6 +3295,49 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
+			}(),
+			ResolutionNetwork: func() []VirtualHostDynamicReverseProxyResolutionNetworkModel {
+				if listData, ok := blockData["resolution_network"].([]interface{}); ok && len(listData) > 0 {
+					var result []VirtualHostDynamicReverseProxyResolutionNetworkModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VirtualHostDynamicReverseProxyResolutionNetworkModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 			ResolutionNetworkType: func() types.String {
 				if v, ok := blockData["resolution_network_type"].(string); ok && v != "" {
@@ -3584,6 +3778,32 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return types.Int64Null()
 			}(),
+			RetriableStatusCodes: func() types.List {
+				if v, ok := blockData["retriable_status_codes"].([]interface{}); ok && len(v) > 0 {
+					var items []int64
+					for _, item := range v {
+						if n, ok := item.(float64); ok {
+							items = append(items, int64(n))
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+					return listVal
+				}
+				return types.ListNull(types.Int64Type)
+			}(),
+			RetryCondition: func() types.List {
+				if v, ok := blockData["retry_condition"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
@@ -3684,6 +3904,62 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if blockData, ok := apiResource.Spec["tls_cert_params"].(map[string]interface{}); ok && (isImport || data.TLSCertParams != nil) {
 		data.TLSCertParams = &VirtualHostTLSCertParamsModel{
+			Certificates: func() []VirtualHostTLSCertParamsCertificatesModel {
+				if listData, ok := blockData["certificates"].([]interface{}); ok && len(listData) > 0 {
+					var result []VirtualHostTLSCertParamsCertificatesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, VirtualHostTLSCertParamsCertificatesModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			CipherSuites: func() types.List {
+				if v, ok := blockData["cipher_suites"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			MaximumProtocolVersion: func() types.String {
 				if v, ok := blockData["maximum_protocol_version"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -3696,13 +3972,38 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return types.StringNull()
 			}(),
+			XfccHeaderElements: func() types.List {
+				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && isImport && data.TLSParameters == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.TLSParameters = &VirtualHostTLSParametersModel{}
+	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
+		data.TLSParameters = &VirtualHostTLSParametersModel{
+			XfccHeaderElements: func() types.List {
+				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
 		var user_identificationList []VirtualHostUserIdentificationModel
 		for _, item := range listData {
@@ -3897,6 +4198,29 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if data.Authentication != nil {
 		authenticationMap := make(map[string]interface{})
+		if len(data.Authentication.AuthConfig) > 0 {
+			var auth_configList []map[string]interface{}
+			for _, listItem := range data.Authentication.AuthConfig {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				auth_configList = append(auth_configList, listItemMap)
+			}
+			authenticationMap["auth_config"] = auth_configList
+		}
 		if data.Authentication.CookieParams != nil {
 			cookie_paramsNestedMap := make(map[string]interface{})
 			if !data.Authentication.CookieParams.CookieExpiry.IsNull() && !data.Authentication.CookieParams.CookieExpiry.IsUnknown() {
@@ -4027,6 +4351,29 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		dynamic_reverse_proxyMap := make(map[string]interface{})
 		if !data.DynamicReverseProxy.ConnectionTimeout.IsNull() && !data.DynamicReverseProxy.ConnectionTimeout.IsUnknown() {
 			dynamic_reverse_proxyMap["connection_timeout"] = data.DynamicReverseProxy.ConnectionTimeout.ValueInt64()
+		}
+		if len(data.DynamicReverseProxy.ResolutionNetwork) > 0 {
+			var resolution_networkList []map[string]interface{}
+			for _, listItem := range data.DynamicReverseProxy.ResolutionNetwork {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				resolution_networkList = append(resolution_networkList, listItemMap)
+			}
+			dynamic_reverse_proxyMap["resolution_network"] = resolution_networkList
 		}
 		if !data.DynamicReverseProxy.ResolutionNetworkType.IsNull() && !data.DynamicReverseProxy.ResolutionNetworkType.IsUnknown() {
 			dynamic_reverse_proxyMap["resolution_network_type"] = data.DynamicReverseProxy.ResolutionNetworkType.ValueString()
@@ -4356,6 +4703,29 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if data.TLSCertParams != nil {
 		tls_cert_paramsMap := make(map[string]interface{})
+		if len(data.TLSCertParams.Certificates) > 0 {
+			var certificatesList []map[string]interface{}
+			for _, listItem := range data.TLSCertParams.Certificates {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				certificatesList = append(certificatesList, listItemMap)
+			}
+			tls_cert_paramsMap["certificates"] = certificatesList
+		}
 		if data.TLSCertParams.ClientCertificateOptional != nil {
 			tls_cert_paramsMap["client_certificate_optional"] = map[string]interface{}{}
 		}

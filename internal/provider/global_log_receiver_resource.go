@@ -2985,6 +2985,19 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 	}
 	if blockData, ok := apiResource.Spec["kafka_receiver"].(map[string]interface{}); ok && (isImport || data.KafkaReceiver != nil) {
 		data.KafkaReceiver = &GlobalLogReceiverKafkaReceiverModel{
+			BootstrapServers: func() types.List {
+				if v, ok := blockData["bootstrap_servers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			KafkaTopic: func() types.String {
 				if v, ok := blockData["kafka_topic"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -3008,11 +3021,23 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 		data.NsCurrent = &GlobalLogReceiverEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["ns_list"].(map[string]interface{}); ok && isImport && data.NsList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.NsList = &GlobalLogReceiverNsListModel{}
+	if blockData, ok := apiResource.Spec["ns_list"].(map[string]interface{}); ok && (isImport || data.NsList != nil) {
+		data.NsList = &GlobalLogReceiverNsListModel{
+			Namespaces: func() types.List {
+				if v, ok := blockData["namespaces"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["qradar_receiver"].(map[string]interface{}); ok && (isImport || data.QradarReceiver != nil) {
 		data.QradarReceiver = &GlobalLogReceiverQradarReceiverModel{
 			URI: func() types.String {

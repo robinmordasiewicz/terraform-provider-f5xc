@@ -54,8 +54,6 @@ resource "f5xc_cloud_connect" "example" {
 
 &#x2022; [`name`](#name) - Required String<br>Name of the CloudConnect. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the CloudConnect will be created
-
 &#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 &#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -63,6 +61,8 @@ resource "f5xc_cloud_connect" "example" {
 &#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
 &#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+
+&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the CloudConnect. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 

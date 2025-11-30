@@ -1741,24 +1741,34 @@ func renderComputedFieldsCode(attrs []TerraformAttribute, indent string, varName
 
 		switch attr.Type {
 		case "bool":
-			// Only update if API returns the value; otherwise preserve plan value (from data)
-			// This prevents overwriting plan values when API doesn't return the field
+			// Set value if API returns it; otherwise handle based on plan value:
+			// - If plan was unknown, set to null (resolves unknown state after apply)
+			// - If plan had a value, preserve it (user specified this value)
 			sb.WriteString(fmt.Sprintf("%sif v, ok := %s.Spec[\"%s\"].(bool); ok {\n", indent, varName, jsonName))
 			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.BoolValue(v)\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s} else if data.%s.IsUnknown() {\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s\t// API didn't return value and plan was unknown - set to null\n", indent))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.BoolNull()\n", indent, fieldName))
 			sb.WriteString(fmt.Sprintf("%s}\n", indent))
-			sb.WriteString(fmt.Sprintf("%s// If API doesn't return the value, preserve plan value (already in data)\n", indent))
+			sb.WriteString(fmt.Sprintf("%s// If plan had a value, preserve it\n", indent))
 		case "int64":
-			// Only update if API returns the value; otherwise preserve plan value (from data)
+			// Set value if API returns it; otherwise handle based on plan value
 			sb.WriteString(fmt.Sprintf("%sif v, ok := %s.Spec[\"%s\"].(float64); ok {\n", indent, varName, jsonName))
 			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.Int64Value(int64(v))\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s} else if data.%s.IsUnknown() {\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s\t// API didn't return value and plan was unknown - set to null\n", indent))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.Int64Null()\n", indent, fieldName))
 			sb.WriteString(fmt.Sprintf("%s}\n", indent))
-			sb.WriteString(fmt.Sprintf("%s// If API doesn't return the value, preserve plan value (already in data)\n", indent))
+			sb.WriteString(fmt.Sprintf("%s// If plan had a value, preserve it\n", indent))
 		case "string":
-			// Only update if API returns the value; otherwise preserve plan value (from data)
+			// Set value if API returns it; otherwise handle based on plan value
 			sb.WriteString(fmt.Sprintf("%sif v, ok := %s.Spec[\"%s\"].(string); ok && v != \"\" {\n", indent, varName, jsonName))
 			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.StringValue(v)\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s} else if data.%s.IsUnknown() {\n", indent, fieldName))
+			sb.WriteString(fmt.Sprintf("%s\t// API didn't return value and plan was unknown - set to null\n", indent))
+			sb.WriteString(fmt.Sprintf("%s\tdata.%s = types.StringNull()\n", indent, fieldName))
 			sb.WriteString(fmt.Sprintf("%s}\n", indent))
-			sb.WriteString(fmt.Sprintf("%s// If API doesn't return the value, preserve plan value (already in data)\n", indent))
+			sb.WriteString(fmt.Sprintf("%s// If plan had a value, preserve it\n", indent))
 		}
 	}
 
@@ -1830,7 +1840,8 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 					// Handle single nested blocks within list items
 					if nestedAttr.IsBlock && nestedAttr.NestedBlockType == "single" {
 						if len(nestedAttr.NestedAttributes) == 0 {
-							// Empty block - check if key exists in response
+							// Empty block (marker block) - check if key exists in API response
+							// Always include if API returns it, even if empty - user may have explicitly configured it
 							sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() *%sEmptyModel {\n", indent, nestedFieldName, resourceTitleCase))
 							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif _, ok := itemMap[\"%s\"].(map[string]interface{}); ok {\n", indent, nestedJsonName))
 							sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn &%sEmptyModel{}\n", indent, resourceTitleCase))
@@ -1873,8 +1884,10 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.StringNull()\n", indent))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t}(),\n", indent))
 								case "int64":
+									// Only set non-zero values to avoid drift from API defaults
+									// Zero typically means "not set" for optional fields like refresh_interval
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t%s: func() types.Int64 {\n", indent, deepFieldName))
-									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := nestedMap[\"%s\"].(float64); ok {\n", indent, deepJsonName))
+									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\tif v, ok := nestedMap[\"%s\"].(float64); ok && v != 0 {\n", indent, deepJsonName))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t\treturn types.Int64Value(int64(v))\n", indent))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\t}\n", indent))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\t\t\treturn types.Int64Null()\n", indent))
@@ -1905,8 +1918,9 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn types.StringNull()\n", indent))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\t}(),\n", indent))
 					case "int64":
+						// Only set non-zero values to avoid drift from API defaults
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\t%s: func() types.Int64 {\n", indent, nestedFieldName))
-						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif v, ok := itemMap[\"%s\"].(float64); ok {\n", indent, nestedJsonName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\tif v, ok := itemMap[\"%s\"].(float64); ok && v != 0 {\n", indent, nestedJsonName))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t\treturn types.Int64Value(int64(v))\n", indent))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t}\n", indent))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\t\treturn types.Int64Null()\n", indent))

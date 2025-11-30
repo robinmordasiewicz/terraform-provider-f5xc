@@ -776,7 +776,6 @@ func (r *NetworkPolicyRuleResource) Delete(ctx context.Context, req resource.Del
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteNetworkPolicyRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

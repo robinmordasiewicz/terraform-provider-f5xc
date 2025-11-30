@@ -734,7 +734,6 @@ func (r *VirtualNetworkResource) Delete(ctx context.Context, req resource.Delete
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteVirtualNetwork(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

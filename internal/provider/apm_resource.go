@@ -2425,7 +2425,6 @@ func (r *APMResource) Delete(ctx context.Context, req resource.DeleteRequest, re
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteAPM(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

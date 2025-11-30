@@ -764,7 +764,6 @@ func (r *BotDefenseAppInfrastructureResource) Delete(ctx context.Context, req re
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteBotDefenseAppInfrastructure(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

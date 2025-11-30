@@ -3791,7 +3791,6 @@ func (r *GCPVPCSiteResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteGCPVPCSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

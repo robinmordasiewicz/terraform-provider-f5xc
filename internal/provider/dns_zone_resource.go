@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -50,188 +49,198 @@ type DNSZoneResource struct {
 type DNSZoneEmptyModel struct {
 }
 
-// DNSZoneDefaultRrSetGroupModel represents default_rr_set_group block
-type DNSZoneDefaultRrSetGroupModel struct {
+// DNSZonePrimaryModel represents primary block
+type DNSZonePrimaryModel struct {
+	AllowHTTPLbManagedRecords types.Bool `tfsdk:"allow_http_lb_managed_records"`
+	DefaultRrSetGroup []DNSZonePrimaryDefaultRrSetGroupModel `tfsdk:"default_rr_set_group"`
+	DefaultSoaParameters *DNSZoneEmptyModel `tfsdk:"default_soa_parameters"`
+	DnssecMode *DNSZonePrimaryDnssecModeModel `tfsdk:"dnssec_mode"`
+	RrSetGroup []DNSZonePrimaryRrSetGroupModel `tfsdk:"rr_set_group"`
+	SoaParameters *DNSZonePrimarySoaParametersModel `tfsdk:"soa_parameters"`
+}
+
+// DNSZonePrimaryDefaultRrSetGroupModel represents default_rr_set_group block
+type DNSZonePrimaryDefaultRrSetGroupModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Ttl types.Int64 `tfsdk:"ttl"`
-	ARecord *DNSZoneDefaultRrSetGroupARecordModel `tfsdk:"a_record"`
-	AaaaRecord *DNSZoneDefaultRrSetGroupAaaaRecordModel `tfsdk:"aaaa_record"`
-	AfsdbRecord *DNSZoneDefaultRrSetGroupAfsdbRecordModel `tfsdk:"afsdb_record"`
-	AliasRecord *DNSZoneDefaultRrSetGroupAliasRecordModel `tfsdk:"alias_record"`
-	CaaRecord *DNSZoneDefaultRrSetGroupCaaRecordModel `tfsdk:"caa_record"`
-	CdsRecord *DNSZoneDefaultRrSetGroupCdsRecordModel `tfsdk:"cds_record"`
-	CertRecord *DNSZoneDefaultRrSetGroupCertRecordModel `tfsdk:"cert_record"`
-	CnameRecord *DNSZoneDefaultRrSetGroupCnameRecordModel `tfsdk:"cname_record"`
-	DsRecord *DNSZoneDefaultRrSetGroupDsRecordModel `tfsdk:"ds_record"`
-	Eui48Record *DNSZoneDefaultRrSetGroupEui48RecordModel `tfsdk:"eui48_record"`
-	Eui64Record *DNSZoneDefaultRrSetGroupEui64RecordModel `tfsdk:"eui64_record"`
-	LbRecord *DNSZoneDefaultRrSetGroupLbRecordModel `tfsdk:"lb_record"`
-	LocRecord *DNSZoneDefaultRrSetGroupLocRecordModel `tfsdk:"loc_record"`
-	MxRecord *DNSZoneDefaultRrSetGroupMxRecordModel `tfsdk:"mx_record"`
-	NaptrRecord *DNSZoneDefaultRrSetGroupNaptrRecordModel `tfsdk:"naptr_record"`
-	NsRecord *DNSZoneDefaultRrSetGroupNsRecordModel `tfsdk:"ns_record"`
-	PtrRecord *DNSZoneDefaultRrSetGroupPtrRecordModel `tfsdk:"ptr_record"`
-	SrvRecord *DNSZoneDefaultRrSetGroupSrvRecordModel `tfsdk:"srv_record"`
-	SshfpRecord *DNSZoneDefaultRrSetGroupSshfpRecordModel `tfsdk:"sshfp_record"`
-	TlsaRecord *DNSZoneDefaultRrSetGroupTlsaRecordModel `tfsdk:"tlsa_record"`
-	TxtRecord *DNSZoneDefaultRrSetGroupTxtRecordModel `tfsdk:"txt_record"`
+	ARecord *DNSZonePrimaryDefaultRrSetGroupARecordModel `tfsdk:"a_record"`
+	AaaaRecord *DNSZonePrimaryDefaultRrSetGroupAaaaRecordModel `tfsdk:"aaaa_record"`
+	AfsdbRecord *DNSZonePrimaryDefaultRrSetGroupAfsdbRecordModel `tfsdk:"afsdb_record"`
+	AliasRecord *DNSZonePrimaryDefaultRrSetGroupAliasRecordModel `tfsdk:"alias_record"`
+	CaaRecord *DNSZonePrimaryDefaultRrSetGroupCaaRecordModel `tfsdk:"caa_record"`
+	CdsRecord *DNSZonePrimaryDefaultRrSetGroupCdsRecordModel `tfsdk:"cds_record"`
+	CertRecord *DNSZonePrimaryDefaultRrSetGroupCertRecordModel `tfsdk:"cert_record"`
+	CnameRecord *DNSZonePrimaryDefaultRrSetGroupCnameRecordModel `tfsdk:"cname_record"`
+	DsRecord *DNSZonePrimaryDefaultRrSetGroupDsRecordModel `tfsdk:"ds_record"`
+	Eui48Record *DNSZonePrimaryDefaultRrSetGroupEui48RecordModel `tfsdk:"eui48_record"`
+	Eui64Record *DNSZonePrimaryDefaultRrSetGroupEui64RecordModel `tfsdk:"eui64_record"`
+	LbRecord *DNSZonePrimaryDefaultRrSetGroupLbRecordModel `tfsdk:"lb_record"`
+	LocRecord *DNSZonePrimaryDefaultRrSetGroupLocRecordModel `tfsdk:"loc_record"`
+	MxRecord *DNSZonePrimaryDefaultRrSetGroupMxRecordModel `tfsdk:"mx_record"`
+	NaptrRecord *DNSZonePrimaryDefaultRrSetGroupNaptrRecordModel `tfsdk:"naptr_record"`
+	NsRecord *DNSZonePrimaryDefaultRrSetGroupNsRecordModel `tfsdk:"ns_record"`
+	PtrRecord *DNSZonePrimaryDefaultRrSetGroupPtrRecordModel `tfsdk:"ptr_record"`
+	SrvRecord *DNSZonePrimaryDefaultRrSetGroupSrvRecordModel `tfsdk:"srv_record"`
+	SshfpRecord *DNSZonePrimaryDefaultRrSetGroupSshfpRecordModel `tfsdk:"sshfp_record"`
+	TlsaRecord *DNSZonePrimaryDefaultRrSetGroupTlsaRecordModel `tfsdk:"tlsa_record"`
+	TxtRecord *DNSZonePrimaryDefaultRrSetGroupTxtRecordModel `tfsdk:"txt_record"`
 }
 
-// DNSZoneDefaultRrSetGroupARecordModel represents a_record block
-type DNSZoneDefaultRrSetGroupARecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupARecordModel represents a_record block
+type DNSZonePrimaryDefaultRrSetGroupARecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupAaaaRecordModel represents aaaa_record block
-type DNSZoneDefaultRrSetGroupAaaaRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupAaaaRecordModel represents aaaa_record block
+type DNSZonePrimaryDefaultRrSetGroupAaaaRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupAfsdbRecordModel represents afsdb_record block
-type DNSZoneDefaultRrSetGroupAfsdbRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupAfsdbRecordModel represents afsdb_record block
+type DNSZonePrimaryDefaultRrSetGroupAfsdbRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupAfsdbRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupAfsdbRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupAfsdbRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupAfsdbRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupAfsdbRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupAfsdbRecordValuesModel struct {
 	Hostname types.String `tfsdk:"hostname"`
 	Subtype types.String `tfsdk:"subtype"`
 }
 
-// DNSZoneDefaultRrSetGroupAliasRecordModel represents alias_record block
-type DNSZoneDefaultRrSetGroupAliasRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupAliasRecordModel represents alias_record block
+type DNSZonePrimaryDefaultRrSetGroupAliasRecordModel struct {
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneDefaultRrSetGroupCaaRecordModel represents caa_record block
-type DNSZoneDefaultRrSetGroupCaaRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCaaRecordModel represents caa_record block
+type DNSZonePrimaryDefaultRrSetGroupCaaRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupCaaRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupCaaRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupCaaRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupCaaRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCaaRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupCaaRecordValuesModel struct {
 	Flags types.Int64 `tfsdk:"flags"`
 	Tag types.String `tfsdk:"tag"`
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneDefaultRrSetGroupCdsRecordModel represents cds_record block
-type DNSZoneDefaultRrSetGroupCdsRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCdsRecordModel represents cds_record block
+type DNSZonePrimaryDefaultRrSetGroupCdsRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupCdsRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupCdsRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupCdsRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesModel struct {
 	DsKeyAlgorithm types.String `tfsdk:"ds_key_algorithm"`
 	KeyTag types.Int64 `tfsdk:"key_tag"`
-	Sha1Digest *DNSZoneDefaultRrSetGroupCdsRecordValuesSha1DigestModel `tfsdk:"sha1_digest"`
-	Sha256Digest *DNSZoneDefaultRrSetGroupCdsRecordValuesSha256DigestModel `tfsdk:"sha256_digest"`
-	Sha384Digest *DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
+	Sha1Digest *DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesSha1DigestModel `tfsdk:"sha1_digest"`
+	Sha256Digest *DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesSha256DigestModel `tfsdk:"sha256_digest"`
+	Sha384Digest *DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
 }
 
-// DNSZoneDefaultRrSetGroupCdsRecordValuesSha1DigestModel represents sha1_digest block
-type DNSZoneDefaultRrSetGroupCdsRecordValuesSha1DigestModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesSha1DigestModel represents sha1_digest block
+type DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesSha1DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneDefaultRrSetGroupCdsRecordValuesSha256DigestModel represents sha256_digest block
-type DNSZoneDefaultRrSetGroupCdsRecordValuesSha256DigestModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesSha256DigestModel represents sha256_digest block
+type DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesSha256DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModel represents sha384_digest block
-type DNSZoneDefaultRrSetGroupCdsRecordValuesSha384DigestModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesSha384DigestModel represents sha384_digest block
+type DNSZonePrimaryDefaultRrSetGroupCdsRecordValuesSha384DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneDefaultRrSetGroupCertRecordModel represents cert_record block
-type DNSZoneDefaultRrSetGroupCertRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCertRecordModel represents cert_record block
+type DNSZonePrimaryDefaultRrSetGroupCertRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupCertRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupCertRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupCertRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupCertRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCertRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupCertRecordValuesModel struct {
 	Algorithm types.String `tfsdk:"algorithm"`
 	CertKeyTag types.Int64 `tfsdk:"cert_key_tag"`
 	CertType types.String `tfsdk:"cert_type"`
 	Certificate types.String `tfsdk:"certificate"`
 }
 
-// DNSZoneDefaultRrSetGroupCnameRecordModel represents cname_record block
-type DNSZoneDefaultRrSetGroupCnameRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupCnameRecordModel represents cname_record block
+type DNSZonePrimaryDefaultRrSetGroupCnameRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneDefaultRrSetGroupDsRecordModel represents ds_record block
-type DNSZoneDefaultRrSetGroupDsRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupDsRecordModel represents ds_record block
+type DNSZonePrimaryDefaultRrSetGroupDsRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupDsRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupDsRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupDsRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupDsRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupDsRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupDsRecordValuesModel struct {
 	DsKeyAlgorithm types.String `tfsdk:"ds_key_algorithm"`
 	KeyTag types.Int64 `tfsdk:"key_tag"`
-	Sha1Digest *DNSZoneDefaultRrSetGroupDsRecordValuesSha1DigestModel `tfsdk:"sha1_digest"`
-	Sha256Digest *DNSZoneDefaultRrSetGroupDsRecordValuesSha256DigestModel `tfsdk:"sha256_digest"`
-	Sha384Digest *DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
+	Sha1Digest *DNSZonePrimaryDefaultRrSetGroupDsRecordValuesSha1DigestModel `tfsdk:"sha1_digest"`
+	Sha256Digest *DNSZonePrimaryDefaultRrSetGroupDsRecordValuesSha256DigestModel `tfsdk:"sha256_digest"`
+	Sha384Digest *DNSZonePrimaryDefaultRrSetGroupDsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
 }
 
-// DNSZoneDefaultRrSetGroupDsRecordValuesSha1DigestModel represents sha1_digest block
-type DNSZoneDefaultRrSetGroupDsRecordValuesSha1DigestModel struct {
+// DNSZonePrimaryDefaultRrSetGroupDsRecordValuesSha1DigestModel represents sha1_digest block
+type DNSZonePrimaryDefaultRrSetGroupDsRecordValuesSha1DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneDefaultRrSetGroupDsRecordValuesSha256DigestModel represents sha256_digest block
-type DNSZoneDefaultRrSetGroupDsRecordValuesSha256DigestModel struct {
+// DNSZonePrimaryDefaultRrSetGroupDsRecordValuesSha256DigestModel represents sha256_digest block
+type DNSZonePrimaryDefaultRrSetGroupDsRecordValuesSha256DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModel represents sha384_digest block
-type DNSZoneDefaultRrSetGroupDsRecordValuesSha384DigestModel struct {
+// DNSZonePrimaryDefaultRrSetGroupDsRecordValuesSha384DigestModel represents sha384_digest block
+type DNSZonePrimaryDefaultRrSetGroupDsRecordValuesSha384DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneDefaultRrSetGroupEui48RecordModel represents eui48_record block
-type DNSZoneDefaultRrSetGroupEui48RecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupEui48RecordModel represents eui48_record block
+type DNSZonePrimaryDefaultRrSetGroupEui48RecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneDefaultRrSetGroupEui64RecordModel represents eui64_record block
-type DNSZoneDefaultRrSetGroupEui64RecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupEui64RecordModel represents eui64_record block
+type DNSZonePrimaryDefaultRrSetGroupEui64RecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneDefaultRrSetGroupLbRecordModel represents lb_record block
-type DNSZoneDefaultRrSetGroupLbRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupLbRecordModel represents lb_record block
+type DNSZonePrimaryDefaultRrSetGroupLbRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Value *DNSZoneDefaultRrSetGroupLbRecordValueModel `tfsdk:"value"`
+	Value *DNSZonePrimaryDefaultRrSetGroupLbRecordValueModel `tfsdk:"value"`
 }
 
-// DNSZoneDefaultRrSetGroupLbRecordValueModel represents value block
-type DNSZoneDefaultRrSetGroupLbRecordValueModel struct {
+// DNSZonePrimaryDefaultRrSetGroupLbRecordValueModel represents value block
+type DNSZonePrimaryDefaultRrSetGroupLbRecordValueModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant types.String `tfsdk:"tenant"`
 }
 
-// DNSZoneDefaultRrSetGroupLocRecordModel represents loc_record block
-type DNSZoneDefaultRrSetGroupLocRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupLocRecordModel represents loc_record block
+type DNSZonePrimaryDefaultRrSetGroupLocRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupLocRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupLocRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupLocRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupLocRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupLocRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupLocRecordValuesModel struct {
 	Altitude types.Int64 `tfsdk:"altitude"`
 	HorizontalPrecision types.Int64 `tfsdk:"horizontal_precision"`
 	LatitudeDegree types.Int64 `tfsdk:"latitude_degree"`
@@ -246,26 +255,26 @@ type DNSZoneDefaultRrSetGroupLocRecordValuesModel struct {
 	VerticalPrecision types.Int64 `tfsdk:"vertical_precision"`
 }
 
-// DNSZoneDefaultRrSetGroupMxRecordModel represents mx_record block
-type DNSZoneDefaultRrSetGroupMxRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupMxRecordModel represents mx_record block
+type DNSZonePrimaryDefaultRrSetGroupMxRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupMxRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupMxRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupMxRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupMxRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupMxRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupMxRecordValuesModel struct {
 	Domain types.String `tfsdk:"domain"`
 	Priority types.Int64 `tfsdk:"priority"`
 }
 
-// DNSZoneDefaultRrSetGroupNaptrRecordModel represents naptr_record block
-type DNSZoneDefaultRrSetGroupNaptrRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupNaptrRecordModel represents naptr_record block
+type DNSZonePrimaryDefaultRrSetGroupNaptrRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupNaptrRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupNaptrRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupNaptrRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupNaptrRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupNaptrRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupNaptrRecordValuesModel struct {
 	Flags types.String `tfsdk:"flags"`
 	Order types.Int64 `tfsdk:"order"`
 	Preference types.Int64 `tfsdk:"preference"`
@@ -274,275 +283,275 @@ type DNSZoneDefaultRrSetGroupNaptrRecordValuesModel struct {
 	Service types.String `tfsdk:"service"`
 }
 
-// DNSZoneDefaultRrSetGroupNsRecordModel represents ns_record block
-type DNSZoneDefaultRrSetGroupNsRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupNsRecordModel represents ns_record block
+type DNSZonePrimaryDefaultRrSetGroupNsRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupPtrRecordModel represents ptr_record block
-type DNSZoneDefaultRrSetGroupPtrRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupPtrRecordModel represents ptr_record block
+type DNSZonePrimaryDefaultRrSetGroupPtrRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupSrvRecordModel represents srv_record block
-type DNSZoneDefaultRrSetGroupSrvRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupSrvRecordModel represents srv_record block
+type DNSZonePrimaryDefaultRrSetGroupSrvRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupSrvRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupSrvRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupSrvRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupSrvRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupSrvRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupSrvRecordValuesModel struct {
 	Port types.Int64 `tfsdk:"port"`
 	Priority types.Int64 `tfsdk:"priority"`
 	Target types.String `tfsdk:"target"`
 	Weight types.Int64 `tfsdk:"weight"`
 }
 
-// DNSZoneDefaultRrSetGroupSshfpRecordModel represents sshfp_record block
-type DNSZoneDefaultRrSetGroupSshfpRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupSshfpRecordModel represents sshfp_record block
+type DNSZonePrimaryDefaultRrSetGroupSshfpRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupSshfpRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupSshfpRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupSshfpRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupSshfpRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupSshfpRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupSshfpRecordValuesModel struct {
 	Algorithm types.String `tfsdk:"algorithm"`
-	Sha1Fingerprint *DNSZoneDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModel `tfsdk:"sha1_fingerprint"`
-	Sha256Fingerprint *DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel `tfsdk:"sha256_fingerprint"`
+	Sha1Fingerprint *DNSZonePrimaryDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModel `tfsdk:"sha1_fingerprint"`
+	Sha256Fingerprint *DNSZonePrimaryDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel `tfsdk:"sha256_fingerprint"`
 }
 
-// DNSZoneDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModel represents sha1_fingerprint block
-type DNSZoneDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModel struct {
+// DNSZonePrimaryDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModel represents sha1_fingerprint block
+type DNSZonePrimaryDefaultRrSetGroupSshfpRecordValuesSha1FingerprintModel struct {
 	Fingerprint types.String `tfsdk:"fingerprint"`
 }
 
-// DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel represents sha256_fingerprint block
-type DNSZoneDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel struct {
+// DNSZonePrimaryDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel represents sha256_fingerprint block
+type DNSZonePrimaryDefaultRrSetGroupSshfpRecordValuesSha256FingerprintModel struct {
 	Fingerprint types.String `tfsdk:"fingerprint"`
 }
 
-// DNSZoneDefaultRrSetGroupTlsaRecordModel represents tlsa_record block
-type DNSZoneDefaultRrSetGroupTlsaRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupTlsaRecordModel represents tlsa_record block
+type DNSZonePrimaryDefaultRrSetGroupTlsaRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneDefaultRrSetGroupTlsaRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryDefaultRrSetGroupTlsaRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneDefaultRrSetGroupTlsaRecordValuesModel represents values block
-type DNSZoneDefaultRrSetGroupTlsaRecordValuesModel struct {
+// DNSZonePrimaryDefaultRrSetGroupTlsaRecordValuesModel represents values block
+type DNSZonePrimaryDefaultRrSetGroupTlsaRecordValuesModel struct {
 	CertificateAssociationData types.String `tfsdk:"certificate_association_data"`
 	CertificateUsage types.String `tfsdk:"certificate_usage"`
 	MatchingType types.String `tfsdk:"matching_type"`
 	Selector types.String `tfsdk:"selector"`
 }
 
-// DNSZoneDefaultRrSetGroupTxtRecordModel represents txt_record block
-type DNSZoneDefaultRrSetGroupTxtRecordModel struct {
+// DNSZonePrimaryDefaultRrSetGroupTxtRecordModel represents txt_record block
+type DNSZonePrimaryDefaultRrSetGroupTxtRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneDnssecModeModel represents dnssec_mode block
-type DNSZoneDnssecModeModel struct {
+// DNSZonePrimaryDnssecModeModel represents dnssec_mode block
+type DNSZonePrimaryDnssecModeModel struct {
 	Disable *DNSZoneEmptyModel `tfsdk:"disable"`
 	Enable *DNSZoneEmptyModel `tfsdk:"enable"`
 }
 
-// DNSZoneRrSetGroupModel represents rr_set_group block
-type DNSZoneRrSetGroupModel struct {
-	Metadata *DNSZoneRrSetGroupMetadataModel `tfsdk:"metadata"`
-	RrSet []DNSZoneRrSetGroupRrSetModel `tfsdk:"rr_set"`
+// DNSZonePrimaryRrSetGroupModel represents rr_set_group block
+type DNSZonePrimaryRrSetGroupModel struct {
+	Metadata *DNSZonePrimaryRrSetGroupMetadataModel `tfsdk:"metadata"`
+	RrSet []DNSZonePrimaryRrSetGroupRrSetModel `tfsdk:"rr_set"`
 }
 
-// DNSZoneRrSetGroupMetadataModel represents metadata block
-type DNSZoneRrSetGroupMetadataModel struct {
+// DNSZonePrimaryRrSetGroupMetadataModel represents metadata block
+type DNSZonePrimaryRrSetGroupMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name types.String `tfsdk:"name"`
 }
 
-// DNSZoneRrSetGroupRrSetModel represents rr_set block
-type DNSZoneRrSetGroupRrSetModel struct {
+// DNSZonePrimaryRrSetGroupRrSetModel represents rr_set block
+type DNSZonePrimaryRrSetGroupRrSetModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Ttl types.Int64 `tfsdk:"ttl"`
-	ARecord *DNSZoneRrSetGroupRrSetARecordModel `tfsdk:"a_record"`
-	AaaaRecord *DNSZoneRrSetGroupRrSetAaaaRecordModel `tfsdk:"aaaa_record"`
-	AfsdbRecord *DNSZoneRrSetGroupRrSetAfsdbRecordModel `tfsdk:"afsdb_record"`
-	AliasRecord *DNSZoneRrSetGroupRrSetAliasRecordModel `tfsdk:"alias_record"`
-	CaaRecord *DNSZoneRrSetGroupRrSetCaaRecordModel `tfsdk:"caa_record"`
-	CdsRecord *DNSZoneRrSetGroupRrSetCdsRecordModel `tfsdk:"cds_record"`
-	CertRecord *DNSZoneRrSetGroupRrSetCertRecordModel `tfsdk:"cert_record"`
-	CnameRecord *DNSZoneRrSetGroupRrSetCnameRecordModel `tfsdk:"cname_record"`
-	DsRecord *DNSZoneRrSetGroupRrSetDsRecordModel `tfsdk:"ds_record"`
-	Eui48Record *DNSZoneRrSetGroupRrSetEui48RecordModel `tfsdk:"eui48_record"`
-	Eui64Record *DNSZoneRrSetGroupRrSetEui64RecordModel `tfsdk:"eui64_record"`
-	LbRecord *DNSZoneRrSetGroupRrSetLbRecordModel `tfsdk:"lb_record"`
-	LocRecord *DNSZoneRrSetGroupRrSetLocRecordModel `tfsdk:"loc_record"`
-	MxRecord *DNSZoneRrSetGroupRrSetMxRecordModel `tfsdk:"mx_record"`
-	NaptrRecord *DNSZoneRrSetGroupRrSetNaptrRecordModel `tfsdk:"naptr_record"`
-	NsRecord *DNSZoneRrSetGroupRrSetNsRecordModel `tfsdk:"ns_record"`
-	PtrRecord *DNSZoneRrSetGroupRrSetPtrRecordModel `tfsdk:"ptr_record"`
-	SrvRecord *DNSZoneRrSetGroupRrSetSrvRecordModel `tfsdk:"srv_record"`
-	SshfpRecord *DNSZoneRrSetGroupRrSetSshfpRecordModel `tfsdk:"sshfp_record"`
-	TlsaRecord *DNSZoneRrSetGroupRrSetTlsaRecordModel `tfsdk:"tlsa_record"`
-	TxtRecord *DNSZoneRrSetGroupRrSetTxtRecordModel `tfsdk:"txt_record"`
+	ARecord *DNSZonePrimaryRrSetGroupRrSetARecordModel `tfsdk:"a_record"`
+	AaaaRecord *DNSZonePrimaryRrSetGroupRrSetAaaaRecordModel `tfsdk:"aaaa_record"`
+	AfsdbRecord *DNSZonePrimaryRrSetGroupRrSetAfsdbRecordModel `tfsdk:"afsdb_record"`
+	AliasRecord *DNSZonePrimaryRrSetGroupRrSetAliasRecordModel `tfsdk:"alias_record"`
+	CaaRecord *DNSZonePrimaryRrSetGroupRrSetCaaRecordModel `tfsdk:"caa_record"`
+	CdsRecord *DNSZonePrimaryRrSetGroupRrSetCdsRecordModel `tfsdk:"cds_record"`
+	CertRecord *DNSZonePrimaryRrSetGroupRrSetCertRecordModel `tfsdk:"cert_record"`
+	CnameRecord *DNSZonePrimaryRrSetGroupRrSetCnameRecordModel `tfsdk:"cname_record"`
+	DsRecord *DNSZonePrimaryRrSetGroupRrSetDsRecordModel `tfsdk:"ds_record"`
+	Eui48Record *DNSZonePrimaryRrSetGroupRrSetEui48RecordModel `tfsdk:"eui48_record"`
+	Eui64Record *DNSZonePrimaryRrSetGroupRrSetEui64RecordModel `tfsdk:"eui64_record"`
+	LbRecord *DNSZonePrimaryRrSetGroupRrSetLbRecordModel `tfsdk:"lb_record"`
+	LocRecord *DNSZonePrimaryRrSetGroupRrSetLocRecordModel `tfsdk:"loc_record"`
+	MxRecord *DNSZonePrimaryRrSetGroupRrSetMxRecordModel `tfsdk:"mx_record"`
+	NaptrRecord *DNSZonePrimaryRrSetGroupRrSetNaptrRecordModel `tfsdk:"naptr_record"`
+	NsRecord *DNSZonePrimaryRrSetGroupRrSetNsRecordModel `tfsdk:"ns_record"`
+	PtrRecord *DNSZonePrimaryRrSetGroupRrSetPtrRecordModel `tfsdk:"ptr_record"`
+	SrvRecord *DNSZonePrimaryRrSetGroupRrSetSrvRecordModel `tfsdk:"srv_record"`
+	SshfpRecord *DNSZonePrimaryRrSetGroupRrSetSshfpRecordModel `tfsdk:"sshfp_record"`
+	TlsaRecord *DNSZonePrimaryRrSetGroupRrSetTlsaRecordModel `tfsdk:"tlsa_record"`
+	TxtRecord *DNSZonePrimaryRrSetGroupRrSetTxtRecordModel `tfsdk:"txt_record"`
 }
 
-// DNSZoneRrSetGroupRrSetARecordModel represents a_record block
-type DNSZoneRrSetGroupRrSetARecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetARecordModel represents a_record block
+type DNSZonePrimaryRrSetGroupRrSetARecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetAaaaRecordModel represents aaaa_record block
-type DNSZoneRrSetGroupRrSetAaaaRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetAaaaRecordModel represents aaaa_record block
+type DNSZonePrimaryRrSetGroupRrSetAaaaRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetAfsdbRecordModel represents afsdb_record block
-type DNSZoneRrSetGroupRrSetAfsdbRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetAfsdbRecordModel represents afsdb_record block
+type DNSZonePrimaryRrSetGroupRrSetAfsdbRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetAfsdbRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetAfsdbRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetAfsdbRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetAfsdbRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetAfsdbRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetAfsdbRecordValuesModel struct {
 	Hostname types.String `tfsdk:"hostname"`
 	Subtype types.String `tfsdk:"subtype"`
 }
 
-// DNSZoneRrSetGroupRrSetAliasRecordModel represents alias_record block
-type DNSZoneRrSetGroupRrSetAliasRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetAliasRecordModel represents alias_record block
+type DNSZonePrimaryRrSetGroupRrSetAliasRecordModel struct {
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneRrSetGroupRrSetCaaRecordModel represents caa_record block
-type DNSZoneRrSetGroupRrSetCaaRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCaaRecordModel represents caa_record block
+type DNSZonePrimaryRrSetGroupRrSetCaaRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetCaaRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetCaaRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetCaaRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetCaaRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCaaRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetCaaRecordValuesModel struct {
 	Flags types.Int64 `tfsdk:"flags"`
 	Tag types.String `tfsdk:"tag"`
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneRrSetGroupRrSetCdsRecordModel represents cds_record block
-type DNSZoneRrSetGroupRrSetCdsRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCdsRecordModel represents cds_record block
+type DNSZonePrimaryRrSetGroupRrSetCdsRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetCdsRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetCdsRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetCdsRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesModel struct {
 	DsKeyAlgorithm types.String `tfsdk:"ds_key_algorithm"`
 	KeyTag types.Int64 `tfsdk:"key_tag"`
-	Sha1Digest *DNSZoneRrSetGroupRrSetCdsRecordValuesSha1DigestModel `tfsdk:"sha1_digest"`
-	Sha256Digest *DNSZoneRrSetGroupRrSetCdsRecordValuesSha256DigestModel `tfsdk:"sha256_digest"`
-	Sha384Digest *DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
+	Sha1Digest *DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesSha1DigestModel `tfsdk:"sha1_digest"`
+	Sha256Digest *DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesSha256DigestModel `tfsdk:"sha256_digest"`
+	Sha384Digest *DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
 }
 
-// DNSZoneRrSetGroupRrSetCdsRecordValuesSha1DigestModel represents sha1_digest block
-type DNSZoneRrSetGroupRrSetCdsRecordValuesSha1DigestModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesSha1DigestModel represents sha1_digest block
+type DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesSha1DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneRrSetGroupRrSetCdsRecordValuesSha256DigestModel represents sha256_digest block
-type DNSZoneRrSetGroupRrSetCdsRecordValuesSha256DigestModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesSha256DigestModel represents sha256_digest block
+type DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesSha256DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModel represents sha384_digest block
-type DNSZoneRrSetGroupRrSetCdsRecordValuesSha384DigestModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesSha384DigestModel represents sha384_digest block
+type DNSZonePrimaryRrSetGroupRrSetCdsRecordValuesSha384DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneRrSetGroupRrSetCertRecordModel represents cert_record block
-type DNSZoneRrSetGroupRrSetCertRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCertRecordModel represents cert_record block
+type DNSZonePrimaryRrSetGroupRrSetCertRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetCertRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetCertRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetCertRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetCertRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCertRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetCertRecordValuesModel struct {
 	Algorithm types.String `tfsdk:"algorithm"`
 	CertKeyTag types.Int64 `tfsdk:"cert_key_tag"`
 	CertType types.String `tfsdk:"cert_type"`
 	Certificate types.String `tfsdk:"certificate"`
 }
 
-// DNSZoneRrSetGroupRrSetCnameRecordModel represents cname_record block
-type DNSZoneRrSetGroupRrSetCnameRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetCnameRecordModel represents cname_record block
+type DNSZonePrimaryRrSetGroupRrSetCnameRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneRrSetGroupRrSetDsRecordModel represents ds_record block
-type DNSZoneRrSetGroupRrSetDsRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetDsRecordModel represents ds_record block
+type DNSZonePrimaryRrSetGroupRrSetDsRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetDsRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetDsRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetDsRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetDsRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetDsRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetDsRecordValuesModel struct {
 	DsKeyAlgorithm types.String `tfsdk:"ds_key_algorithm"`
 	KeyTag types.Int64 `tfsdk:"key_tag"`
-	Sha1Digest *DNSZoneRrSetGroupRrSetDsRecordValuesSha1DigestModel `tfsdk:"sha1_digest"`
-	Sha256Digest *DNSZoneRrSetGroupRrSetDsRecordValuesSha256DigestModel `tfsdk:"sha256_digest"`
-	Sha384Digest *DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
+	Sha1Digest *DNSZonePrimaryRrSetGroupRrSetDsRecordValuesSha1DigestModel `tfsdk:"sha1_digest"`
+	Sha256Digest *DNSZonePrimaryRrSetGroupRrSetDsRecordValuesSha256DigestModel `tfsdk:"sha256_digest"`
+	Sha384Digest *DNSZonePrimaryRrSetGroupRrSetDsRecordValuesSha384DigestModel `tfsdk:"sha384_digest"`
 }
 
-// DNSZoneRrSetGroupRrSetDsRecordValuesSha1DigestModel represents sha1_digest block
-type DNSZoneRrSetGroupRrSetDsRecordValuesSha1DigestModel struct {
+// DNSZonePrimaryRrSetGroupRrSetDsRecordValuesSha1DigestModel represents sha1_digest block
+type DNSZonePrimaryRrSetGroupRrSetDsRecordValuesSha1DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneRrSetGroupRrSetDsRecordValuesSha256DigestModel represents sha256_digest block
-type DNSZoneRrSetGroupRrSetDsRecordValuesSha256DigestModel struct {
+// DNSZonePrimaryRrSetGroupRrSetDsRecordValuesSha256DigestModel represents sha256_digest block
+type DNSZonePrimaryRrSetGroupRrSetDsRecordValuesSha256DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModel represents sha384_digest block
-type DNSZoneRrSetGroupRrSetDsRecordValuesSha384DigestModel struct {
+// DNSZonePrimaryRrSetGroupRrSetDsRecordValuesSha384DigestModel represents sha384_digest block
+type DNSZonePrimaryRrSetGroupRrSetDsRecordValuesSha384DigestModel struct {
 	Digest types.String `tfsdk:"digest"`
 }
 
-// DNSZoneRrSetGroupRrSetEui48RecordModel represents eui48_record block
-type DNSZoneRrSetGroupRrSetEui48RecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetEui48RecordModel represents eui48_record block
+type DNSZonePrimaryRrSetGroupRrSetEui48RecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneRrSetGroupRrSetEui64RecordModel represents eui64_record block
-type DNSZoneRrSetGroupRrSetEui64RecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetEui64RecordModel represents eui64_record block
+type DNSZonePrimaryRrSetGroupRrSetEui64RecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
 }
 
-// DNSZoneRrSetGroupRrSetLbRecordModel represents lb_record block
-type DNSZoneRrSetGroupRrSetLbRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetLbRecordModel represents lb_record block
+type DNSZonePrimaryRrSetGroupRrSetLbRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Value *DNSZoneRrSetGroupRrSetLbRecordValueModel `tfsdk:"value"`
+	Value *DNSZonePrimaryRrSetGroupRrSetLbRecordValueModel `tfsdk:"value"`
 }
 
-// DNSZoneRrSetGroupRrSetLbRecordValueModel represents value block
-type DNSZoneRrSetGroupRrSetLbRecordValueModel struct {
+// DNSZonePrimaryRrSetGroupRrSetLbRecordValueModel represents value block
+type DNSZonePrimaryRrSetGroupRrSetLbRecordValueModel struct {
 	Name types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant types.String `tfsdk:"tenant"`
 }
 
-// DNSZoneRrSetGroupRrSetLocRecordModel represents loc_record block
-type DNSZoneRrSetGroupRrSetLocRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetLocRecordModel represents loc_record block
+type DNSZonePrimaryRrSetGroupRrSetLocRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetLocRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetLocRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetLocRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetLocRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetLocRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetLocRecordValuesModel struct {
 	Altitude types.Int64 `tfsdk:"altitude"`
 	HorizontalPrecision types.Int64 `tfsdk:"horizontal_precision"`
 	LatitudeDegree types.Int64 `tfsdk:"latitude_degree"`
@@ -557,26 +566,26 @@ type DNSZoneRrSetGroupRrSetLocRecordValuesModel struct {
 	VerticalPrecision types.Int64 `tfsdk:"vertical_precision"`
 }
 
-// DNSZoneRrSetGroupRrSetMxRecordModel represents mx_record block
-type DNSZoneRrSetGroupRrSetMxRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetMxRecordModel represents mx_record block
+type DNSZonePrimaryRrSetGroupRrSetMxRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetMxRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetMxRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetMxRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetMxRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetMxRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetMxRecordValuesModel struct {
 	Domain types.String `tfsdk:"domain"`
 	Priority types.Int64 `tfsdk:"priority"`
 }
 
-// DNSZoneRrSetGroupRrSetNaptrRecordModel represents naptr_record block
-type DNSZoneRrSetGroupRrSetNaptrRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetNaptrRecordModel represents naptr_record block
+type DNSZonePrimaryRrSetGroupRrSetNaptrRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetNaptrRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetNaptrRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetNaptrRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetNaptrRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetNaptrRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetNaptrRecordValuesModel struct {
 	Flags types.String `tfsdk:"flags"`
 	Order types.Int64 `tfsdk:"order"`
 	Preference types.Int64 `tfsdk:"preference"`
@@ -585,82 +594,109 @@ type DNSZoneRrSetGroupRrSetNaptrRecordValuesModel struct {
 	Service types.String `tfsdk:"service"`
 }
 
-// DNSZoneRrSetGroupRrSetNsRecordModel represents ns_record block
-type DNSZoneRrSetGroupRrSetNsRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetNsRecordModel represents ns_record block
+type DNSZonePrimaryRrSetGroupRrSetNsRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetPtrRecordModel represents ptr_record block
-type DNSZoneRrSetGroupRrSetPtrRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetPtrRecordModel represents ptr_record block
+type DNSZonePrimaryRrSetGroupRrSetPtrRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetSrvRecordModel represents srv_record block
-type DNSZoneRrSetGroupRrSetSrvRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetSrvRecordModel represents srv_record block
+type DNSZonePrimaryRrSetGroupRrSetSrvRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetSrvRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetSrvRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetSrvRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetSrvRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetSrvRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetSrvRecordValuesModel struct {
 	Port types.Int64 `tfsdk:"port"`
 	Priority types.Int64 `tfsdk:"priority"`
 	Target types.String `tfsdk:"target"`
 	Weight types.Int64 `tfsdk:"weight"`
 }
 
-// DNSZoneRrSetGroupRrSetSshfpRecordModel represents sshfp_record block
-type DNSZoneRrSetGroupRrSetSshfpRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetSshfpRecordModel represents sshfp_record block
+type DNSZonePrimaryRrSetGroupRrSetSshfpRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetSshfpRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetSshfpRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetSshfpRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetSshfpRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetSshfpRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetSshfpRecordValuesModel struct {
 	Algorithm types.String `tfsdk:"algorithm"`
-	Sha1Fingerprint *DNSZoneRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModel `tfsdk:"sha1_fingerprint"`
-	Sha256Fingerprint *DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel `tfsdk:"sha256_fingerprint"`
+	Sha1Fingerprint *DNSZonePrimaryRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModel `tfsdk:"sha1_fingerprint"`
+	Sha256Fingerprint *DNSZonePrimaryRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel `tfsdk:"sha256_fingerprint"`
 }
 
-// DNSZoneRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModel represents sha1_fingerprint block
-type DNSZoneRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModel struct {
+// DNSZonePrimaryRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModel represents sha1_fingerprint block
+type DNSZonePrimaryRrSetGroupRrSetSshfpRecordValuesSha1FingerprintModel struct {
 	Fingerprint types.String `tfsdk:"fingerprint"`
 }
 
-// DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel represents sha256_fingerprint block
-type DNSZoneRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel struct {
+// DNSZonePrimaryRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel represents sha256_fingerprint block
+type DNSZonePrimaryRrSetGroupRrSetSshfpRecordValuesSha256FingerprintModel struct {
 	Fingerprint types.String `tfsdk:"fingerprint"`
 }
 
-// DNSZoneRrSetGroupRrSetTlsaRecordModel represents tlsa_record block
-type DNSZoneRrSetGroupRrSetTlsaRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetTlsaRecordModel represents tlsa_record block
+type DNSZonePrimaryRrSetGroupRrSetTlsaRecordModel struct {
 	Name types.String `tfsdk:"name"`
-	Values []DNSZoneRrSetGroupRrSetTlsaRecordValuesModel `tfsdk:"values"`
+	Values []DNSZonePrimaryRrSetGroupRrSetTlsaRecordValuesModel `tfsdk:"values"`
 }
 
-// DNSZoneRrSetGroupRrSetTlsaRecordValuesModel represents values block
-type DNSZoneRrSetGroupRrSetTlsaRecordValuesModel struct {
+// DNSZonePrimaryRrSetGroupRrSetTlsaRecordValuesModel represents values block
+type DNSZonePrimaryRrSetGroupRrSetTlsaRecordValuesModel struct {
 	CertificateAssociationData types.String `tfsdk:"certificate_association_data"`
 	CertificateUsage types.String `tfsdk:"certificate_usage"`
 	MatchingType types.String `tfsdk:"matching_type"`
 	Selector types.String `tfsdk:"selector"`
 }
 
-// DNSZoneRrSetGroupRrSetTxtRecordModel represents txt_record block
-type DNSZoneRrSetGroupRrSetTxtRecordModel struct {
+// DNSZonePrimaryRrSetGroupRrSetTxtRecordModel represents txt_record block
+type DNSZonePrimaryRrSetGroupRrSetTxtRecordModel struct {
 	Name types.String `tfsdk:"name"`
 	Values types.List `tfsdk:"values"`
 }
 
-// DNSZoneSoaParametersModel represents soa_parameters block
-type DNSZoneSoaParametersModel struct {
+// DNSZonePrimarySoaParametersModel represents soa_parameters block
+type DNSZonePrimarySoaParametersModel struct {
 	Expire types.Int64 `tfsdk:"expire"`
 	NegativeTtl types.Int64 `tfsdk:"negative_ttl"`
 	Refresh types.Int64 `tfsdk:"refresh"`
 	Retry types.Int64 `tfsdk:"retry"`
 	Ttl types.Int64 `tfsdk:"ttl"`
+}
+
+// DNSZoneSecondaryModel represents secondary block
+type DNSZoneSecondaryModel struct {
+	PrimaryServers types.List `tfsdk:"primary_servers"`
+	TsigKeyAlgorithm types.String `tfsdk:"tsig_key_algorithm"`
+	TsigKeyName types.String `tfsdk:"tsig_key_name"`
+	TsigKeyValue *DNSZoneSecondaryTsigKeyValueModel `tfsdk:"tsig_key_value"`
+}
+
+// DNSZoneSecondaryTsigKeyValueModel represents tsig_key_value block
+type DNSZoneSecondaryTsigKeyValueModel struct {
+	BlindfoldSecretInfo *DNSZoneSecondaryTsigKeyValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo *DNSZoneSecondaryTsigKeyValueClearSecretInfoModel `tfsdk:"clear_secret_info"`
+}
+
+// DNSZoneSecondaryTsigKeyValueBlindfoldSecretInfoModel represents blindfold_secret_info block
+type DNSZoneSecondaryTsigKeyValueBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location types.String `tfsdk:"location"`
+	StoreProvider types.String `tfsdk:"store_provider"`
+}
+
+// DNSZoneSecondaryTsigKeyValueClearSecretInfoModel represents clear_secret_info block
+type DNSZoneSecondaryTsigKeyValueClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL types.String `tfsdk:"url"`
 }
 
 type DNSZoneResourceModel struct {
@@ -671,13 +707,9 @@ type DNSZoneResourceModel struct {
 	Disable types.Bool `tfsdk:"disable"`
 	Labels types.Map `tfsdk:"labels"`
 	ID types.String `tfsdk:"id"`
-	AllowHTTPLbManagedRecords types.Bool `tfsdk:"allow_http_lb_managed_records"`
 	Timeouts timeouts.Value `tfsdk:"timeouts"`
-	DefaultRrSetGroup []DNSZoneDefaultRrSetGroupModel `tfsdk:"default_rr_set_group"`
-	DefaultSoaParameters *DNSZoneEmptyModel `tfsdk:"default_soa_parameters"`
-	DnssecMode *DNSZoneDnssecModeModel `tfsdk:"dnssec_mode"`
-	RrSetGroup []DNSZoneRrSetGroupModel `tfsdk:"rr_set_group"`
-	SoaParameters *DNSZoneSoaParametersModel `tfsdk:"soa_parameters"`
+	Primary *DNSZonePrimaryModel `tfsdk:"primary"`
+	Secondary *DNSZoneSecondaryModel `tfsdk:"secondary"`
 }
 
 func (r *DNSZoneResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -687,7 +719,7 @@ func (r *DNSZoneResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_zoneSchemaVersion,
-		MarkdownDescription: "Manages a DNSZone resource in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNSZone. Must be unique within the namespace.",
@@ -734,14 +766,6 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"allow_http_lb_managed_records": schema.BoolAttribute{
-				MarkdownDescription: "Option to allow user-created HTTP, TCP, and CDN load balancer related resource records to be automatically managed in a protected RRset.",
-				Optional: true,
-				Computed: true,
-				PlanModifiers: []planmodifier.Bool{
-					boolplanmodifier.UseStateForUnknown(),
-				},
-			},
 		},
 		Blocks: map[string]schema.Block{
 			"timeouts": timeouts.Block(ctx, timeouts.Opts{
@@ -750,805 +774,169 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Update: true,
 				Delete: true,
 			}),
-			"default_rr_set_group": schema.ListNestedBlock{
-				MarkdownDescription: "Add and manage DNS resource record sets part of Default set group.",
-				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-						"description_spec": schema.StringAttribute{
-							MarkdownDescription: "Comment.",
-							Optional: true,
-						},
-						"ttl": schema.Int64Attribute{
-							MarkdownDescription: "Time to live.",
-							Optional: true,
-						},
-					},
-					Blocks: map[string]schema.Block{
-						"a_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSAResourceRecord. A Records",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-								"values": schema.ListAttribute{
-									MarkdownDescription: "IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1",
-									Optional: true,
-									ElementType: types.StringType,
-								},
-							},
-						},
-						"aaaa_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSAAAAResourceRecord. RecordSet for AAAA Records",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-								"values": schema.ListAttribute{
-									MarkdownDescription: "IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334",
-									Optional: true,
-									ElementType: types.StringType,
-								},
-							},
-						},
-						"afsdb_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS AFSDB Record. DNS AFSDB Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "AFSDB Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"hostname": schema.StringAttribute{
-												MarkdownDescription: "Hostname. Server name of the AFS cell database server or the DCE name server.",
-												Optional: true,
-											},
-											"subtype": schema.StringAttribute{
-												MarkdownDescription: "AFSDB Record Subtype. AFS Volume Location Server or DCE Authentication Server. - NONE: NONE - AFSVolumeLocationServer: AFS Volume Location Server - DCEAuthenticationServer: DCE Authentication Server. Possible values are `NONE`, `AFSVolumeLocationServer`, `DCEAuthenticationServer`.",
-												Optional: true,
-											},
-										},
-									},
-								},
-							},
-						},
-						"alias_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSAliasResourceRecord.",
-							Attributes: map[string]schema.Attribute{
-								"value": schema.StringAttribute{
-									MarkdownDescription: "Domain. A valid domain name, for example: example.com",
-									Optional: true,
-								},
-							},
-						},
-						"caa_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSCAAResourceRecord.",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "CAA Record Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"flags": schema.Int64Attribute{
-												MarkdownDescription: "Flags. This flag should be an integer between 0 and 255.",
-												Optional: true,
-											},
-											"tag": schema.StringAttribute{
-												MarkdownDescription: "Tag. 'issuewild', 'iodef']",
-												Optional: true,
-											},
-											"value": schema.StringAttribute{
-												MarkdownDescription: "Value.",
-												Optional: true,
-											},
-										},
-									},
-								},
-							},
-						},
-						"cds_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS CDS Record. DNS CDS Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "DS Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"ds_key_algorithm": schema.StringAttribute{
-												MarkdownDescription: "DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448. Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`.",
-												Optional: true,
-											},
-											"key_tag": schema.Int64Attribute{
-												MarkdownDescription: "Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"sha1_digest": schema.SingleNestedBlock{
-												MarkdownDescription: "SHA1 Digest.",
-												Attributes: map[string]schema.Attribute{
-													"digest": schema.StringAttribute{
-														MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-														Optional: true,
-													},
-												},
-											},
-											"sha256_digest": schema.SingleNestedBlock{
-												MarkdownDescription: "SHA256 Digest.",
-												Attributes: map[string]schema.Attribute{
-													"digest": schema.StringAttribute{
-														MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-														Optional: true,
-													},
-												},
-											},
-											"sha384_digest": schema.SingleNestedBlock{
-												MarkdownDescription: "SHA384 Digest.",
-												Attributes: map[string]schema.Attribute{
-													"digest": schema.StringAttribute{
-														MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-														Optional: true,
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-						"cert_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS CERT Record. DNS CERT Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "CERT Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"algorithm": schema.StringAttribute{
-												MarkdownDescription: "CERT Algorithm. CERT algorithm value must be compatible with the specified algorithm. - RESERVEDALGORITHM: RESERVEDALGORITHM - RSAMD5: RSAMD5 - DH: DH - DSASHA1: DSASHA1 - ECC: ECC - RSASHA1ALGORITHM: RSA-SHA1 - INDIRECT: INDIRECT - PRIVATEDNS: PRIVATEDNS - PRIVATEOID: PRIVATEOID. Possible values are `RESERVEDALGORITHM`, `RSAMD5`, `DH`, `DSASHA1`, `ECC`, `RSASHA1ALGORITHM`, `INDIRECT`, `PRIVATEDNS`, `PRIVATEOID`. Defaults to `RESERVEDALGORITHM`.",
-												Optional: true,
-											},
-											"cert_key_tag": schema.Int64Attribute{
-												MarkdownDescription: "Key Tag.",
-												Optional: true,
-											},
-											"cert_type": schema.StringAttribute{
-												MarkdownDescription: "CERT Type. CERT type value must be compatible with the specified types. - INVALIDCERTTYPE: INVALIDCERTTYPE - PKIX: PKIX - SPKI: SPKI - PGP: PGP - IPKIX: IPKIX - ISPKI: ISPKI - IPGP: IPGP - ACPKIX: ACPKIX - IACPKIX: IACPKIX - URI_: URI - OID: OID. Possible values are `INVALIDCERTTYPE`, `PKIX`, `SPKI`, `PGP`, `IPKIX`, `ISPKI`, `IPGP`, `ACPKIX`, `IACPKIX`, `URI_`, `OID`. Defaults to `INVALIDCERTTYPE`.",
-												Optional: true,
-											},
-											"certificate": schema.StringAttribute{
-												MarkdownDescription: "Certificate. Certificate in base 64 format.",
-												Optional: true,
-											},
-										},
-									},
-								},
-							},
-						},
-						"cname_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSCNAMEResourceRecord.",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-								"value": schema.StringAttribute{
-									MarkdownDescription: "Domain.",
-									Optional: true,
-								},
-							},
-						},
-						"ds_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS DS Record. DNS DS Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "DS Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"ds_key_algorithm": schema.StringAttribute{
-												MarkdownDescription: "DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448. Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`.",
-												Optional: true,
-											},
-											"key_tag": schema.Int64Attribute{
-												MarkdownDescription: "Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"sha1_digest": schema.SingleNestedBlock{
-												MarkdownDescription: "SHA1 Digest.",
-												Attributes: map[string]schema.Attribute{
-													"digest": schema.StringAttribute{
-														MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-														Optional: true,
-													},
-												},
-											},
-											"sha256_digest": schema.SingleNestedBlock{
-												MarkdownDescription: "SHA256 Digest.",
-												Attributes: map[string]schema.Attribute{
-													"digest": schema.StringAttribute{
-														MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-														Optional: true,
-													},
-												},
-											},
-											"sha384_digest": schema.SingleNestedBlock{
-												MarkdownDescription: "SHA384 Digest.",
-												Attributes: map[string]schema.Attribute{
-													"digest": schema.StringAttribute{
-														MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-														Optional: true,
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-						"eui48_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS EUI48 Record. DNS EUI48 Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-								"value": schema.StringAttribute{
-									MarkdownDescription: "EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab",
-									Optional: true,
-								},
-							},
-						},
-						"eui64_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS EUI64 Record. DNS EUI64 Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-								"value": schema.StringAttribute{
-									MarkdownDescription: "EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef",
-									Optional: true,
-								},
-							},
-						},
-						"lb_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS Load Balancer Record. DNS Load Balancer Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"value": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
-											Optional: true,
-										},
-										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
-											Optional: true,
-										},
-										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
-											Optional: true,
-										},
-									},
-								},
-							},
-						},
-						"loc_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS LOC Record. DNS LOC Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "LOC Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"altitude": schema.Int64Attribute{
-												MarkdownDescription: "Altitude. Altitude in meters",
-												Optional: true,
-											},
-											"horizontal_precision": schema.Int64Attribute{
-												MarkdownDescription: "Horizontal Precision. Horizontal Precision in meters",
-												Optional: true,
-											},
-											"latitude_degree": schema.Int64Attribute{
-												MarkdownDescription: "Latitude degree. Latitude degree, an integer between 0 and 90, including 0 and 90",
-												Optional: true,
-											},
-											"latitude_hemisphere": schema.StringAttribute{
-												MarkdownDescription: "Latitude hemisphere. Latitude hemisphere can only be N or S - N: North Hemisphere - S: South Hemisphere. Possible values are `N`, `S`. Defaults to `N`.",
-												Optional: true,
-											},
-											"latitude_minute": schema.Int64Attribute{
-												MarkdownDescription: "Latitude minute. Latitude minute, an integer between 0 and 59, including 0 and 59",
-												Optional: true,
-											},
-											"latitude_second": schema.Int64Attribute{
-												MarkdownDescription: "Latitude second. Latitude second, an decimal between 0 and 59.999, including 0 and 59.999",
-												Optional: true,
-											},
-											"location_diameter": schema.Int64Attribute{
-												MarkdownDescription: "Size. Diameter of a sphere enclosing the described entity, in meters",
-												Optional: true,
-											},
-											"longitude_degree": schema.Int64Attribute{
-												MarkdownDescription: "Longitude degree. Longitude degree, an integer between 0 and 180, including 0 and 180",
-												Optional: true,
-											},
-											"longitude_hemisphere": schema.StringAttribute{
-												MarkdownDescription: "Longitude hemisphere. Longitude hemisphere can only be E or W - E: East Hemisphere - W: West Hemisphere. Possible values are `E`, `W`. Defaults to `E`.",
-												Optional: true,
-											},
-											"longitude_minute": schema.Int64Attribute{
-												MarkdownDescription: "Longitude minute. Longitude minute, an integer between 0 and 59, including 0 and 59",
-												Optional: true,
-											},
-											"longitude_second": schema.Int64Attribute{
-												MarkdownDescription: "Longitude second. Longitude second, an decimal between 0 and 59.999, including 0 and 59.999",
-												Optional: true,
-											},
-											"vertical_precision": schema.Int64Attribute{
-												MarkdownDescription: "Vertical Precision. Vertical Precision in meters",
-												Optional: true,
-											},
-										},
-									},
-								},
-							},
-						},
-						"mx_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSMXResourceRecord.",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "MX Record Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"domain": schema.StringAttribute{
-												MarkdownDescription: "Domain. Mail exchanger domain name, please provide the full hostname, for example: mail.example.com",
-												Optional: true,
-											},
-											"priority": schema.Int64Attribute{
-												MarkdownDescription: "Priority. Mail exchanger priority code",
-												Optional: true,
-											},
-										},
-									},
-								},
-							},
-						},
-						"naptr_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS NAPTR Record. DNS NAPTR Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "NAPTR Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"flags": schema.StringAttribute{
-												MarkdownDescription: "Flags. Flag to control aspects of the rewriting and interpretation of the fields in the record. At this time only four flags, S/A/U/P, are defined.",
-												Optional: true,
-											},
-											"order": schema.Int64Attribute{
-												MarkdownDescription: "Order. Order in which the NAPTR records must be processed. A lower number indicates a higher preference.",
-												Optional: true,
-											},
-											"preference": schema.Int64Attribute{
-												MarkdownDescription: "Preference. Preference when records have the same order. A lower number indicates a higher preference.",
-												Optional: true,
-											},
-											"regexp": schema.StringAttribute{
-												MarkdownDescription: "Regular Expression. Regular expression to construct the next domain name to lookup.",
-												Optional: true,
-											},
-											"replacement": schema.StringAttribute{
-												MarkdownDescription: "Replacement. The next NAME to query for NAPTR, SRV, or address records depending on the value of the flags field.",
-												Optional: true,
-											},
-											"service": schema.StringAttribute{
-												MarkdownDescription: "Protocol Resolution Service. Specifies the service(s) available down this rewrite path.",
-												Optional: true,
-											},
-										},
-									},
-								},
-							},
-						},
-						"ns_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSNSResourceRecord.",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-								"values": schema.ListAttribute{
-									MarkdownDescription: "Name Servers.",
-									Optional: true,
-									ElementType: types.StringType,
-								},
-							},
-						},
-						"ptr_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSPTRResourceRecord.",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-								"values": schema.ListAttribute{
-									MarkdownDescription: "Domain Name.",
-									Optional: true,
-									ElementType: types.StringType,
-								},
-							},
-						},
-						"srv_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSSRVResourceRecord.",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "SRV Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"port": schema.Int64Attribute{
-												MarkdownDescription: "Port. Port on which the service can be found",
-												Optional: true,
-											},
-											"priority": schema.Int64Attribute{
-												MarkdownDescription: "Priority. Priority of the target. A lower number indicates a higher preference.",
-												Optional: true,
-											},
-											"target": schema.StringAttribute{
-												MarkdownDescription: "Target. Hostname of the machine providing the service",
-												Optional: true,
-											},
-											"weight": schema.Int64Attribute{
-												MarkdownDescription: "Weight. Weight of the target. A higher number indicates a higher preference.",
-												Optional: true,
-											},
-										},
-									},
-								},
-							},
-						},
-						"sshfp_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS SSHFP Record. DNS SSHFP Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "SSHFP Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"algorithm": schema.StringAttribute{
-												MarkdownDescription: "SSHFP Algorithm. SSHFP algorithm value must be compatible with the specified algorithm. - UNSPECIFIEDALGORITHM: UNSPECIFIEDALGORITHM - RSA: RSA - DSA: DSA - ECDSA: ECDSA - Ed25519: Ed25519 - Ed448: Ed448. Possible values are `UNSPECIFIEDALGORITHM`, `RSA`, `DSA`, `ECDSA`, `Ed25519`, `Ed448`. Defaults to `UNSPECIFIEDALGORITHM`.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"sha1_fingerprint": schema.SingleNestedBlock{
-												MarkdownDescription: "SHA1 Fingerprint.",
-												Attributes: map[string]schema.Attribute{
-													"fingerprint": schema.StringAttribute{
-														MarkdownDescription: "Fingerprint. The 'fingerprint' is the DS key and the actual contents of the DS record.",
-														Optional: true,
-													},
-												},
-											},
-											"sha256_fingerprint": schema.SingleNestedBlock{
-												MarkdownDescription: "SHA256 Fingerprint.",
-												Attributes: map[string]schema.Attribute{
-													"fingerprint": schema.StringAttribute{
-														MarkdownDescription: "Fingerprint. The 'fingerprint' is the DS key and the actual contents of the DS record.",
-														Optional: true,
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-						"tlsa_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS TLSA Record. DNS TLSA Record",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"values": schema.ListNestedBlock{
-									MarkdownDescription: "TLSA Value.",
-									NestedObject: schema.NestedBlockObject{
-										Attributes: map[string]schema.Attribute{
-											"certificate_association_data": schema.StringAttribute{
-												MarkdownDescription: "Certificate Association Data. The actual data to be matched given the settings of the other fields.",
-												Optional: true,
-											},
-											"certificate_usage": schema.StringAttribute{
-												MarkdownDescription: "TLSA Record Certificate Usage. - CertificateAuthorityConstraint: Certificate Authority Constraint - ServiceCertificateConstraint: Service Certificate Constraint - TrustAnchorAssertion: Trust Anchor Assertion - DomainIssuedCertificate: Domain Issued Certificate. Possible values are `CertificateAuthorityConstraint`, `ServiceCertificateConstraint`, `TrustAnchorAssertion`, `DomainIssuedCertificate`. Defaults to `CertificateAuthorityConstraint`.",
-												Optional: true,
-											},
-											"matching_type": schema.StringAttribute{
-												MarkdownDescription: "TLSA Record Matching Type. - NoHash: No Hash - SHA256: SHA-256 - SHA512: SHA-512. Possible values are `NoHash`, `SHA256`, `SHA512`. Defaults to `NoHash`.",
-												Optional: true,
-											},
-											"selector": schema.StringAttribute{
-												MarkdownDescription: "TLSA Record Selector. - FullCertificate: Full Certificate - UseSubjectPublicKey: Use Subject Public Key. Possible values are `FullCertificate`, `UseSubjectPublicKey`. Defaults to `FullCertificate`.",
-												Optional: true,
-											},
-										},
-									},
-								},
-							},
-						},
-						"txt_record": schema.SingleNestedBlock{
-							MarkdownDescription: "DNSTXTResourceRecord.",
-							Attributes: map[string]schema.Attribute{
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain.",
-									Optional: true,
-								},
-								"values": schema.ListAttribute{
-									MarkdownDescription: "Text.",
-									Optional: true,
-									ElementType: types.StringType,
-								},
-							},
-						},
-					},
-
-				},
-			},
-			"default_soa_parameters": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_soa_parameters, soa_parameters] Empty. This can be used for messages where no values are needed",
-			},
-			"dnssec_mode": schema.SingleNestedBlock{
-				MarkdownDescription: "Disable.",
+			"primary": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: primary, secondary] PrimaryDNSCreateSpecType.",
 				Attributes: map[string]schema.Attribute{
+					"allow_http_lb_managed_records": schema.BoolAttribute{
+						MarkdownDescription: "Option to allow user-created HTTP, TCP, and CDN load balancer related resource records to be automatically managed in a protected RRset.",
+						Optional: true,
+					},
 				},
 				Blocks: map[string]schema.Block{
-					"disable": schema.SingleNestedBlock{
-						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
-					},
-					"enable": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable. DNSSEC enable",
-					},
-				},
-
-			},
-			"rr_set_group": schema.ListNestedBlock{
-				MarkdownDescription: "Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5.",
-				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-					},
-					Blocks: map[string]schema.Block{
-						"metadata": schema.SingleNestedBlock{
-							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+					"default_rr_set_group": schema.ListNestedBlock{
+						MarkdownDescription: "Add and manage DNS resource record sets part of Default set group.",
+						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
-									MarkdownDescription: "Description. Human readable description.",
+									MarkdownDescription: "Comment.",
 									Optional: true,
 								},
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+								"ttl": schema.Int64Attribute{
+									MarkdownDescription: "Time to live.",
 									Optional: true,
 								},
 							},
-						},
-						"rr_set": schema.ListNestedBlock{
-							MarkdownDescription: "Resource Record Sets. Collection of DNS resource record sets",
-							NestedObject: schema.NestedBlockObject{
-								Attributes: map[string]schema.Attribute{
-									"description_spec": schema.StringAttribute{
-										MarkdownDescription: "Comment.",
-										Optional: true,
-									},
-									"ttl": schema.Int64Attribute{
-										MarkdownDescription: "Time to live.",
-										Optional: true,
+							Blocks: map[string]schema.Block{
+								"a_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSAResourceRecord. A Records",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+										"values": schema.ListAttribute{
+											MarkdownDescription: "IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1",
+											Optional: true,
+											ElementType: types.StringType,
+										},
 									},
 								},
-								Blocks: map[string]schema.Block{
-									"a_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSAResourceRecord. A Records",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-											"values": schema.ListAttribute{
-												MarkdownDescription: "IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1",
-												Optional: true,
-												ElementType: types.StringType,
-											},
+								"aaaa_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSAAAAResourceRecord. RecordSet for AAAA Records",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+										"values": schema.ListAttribute{
+											MarkdownDescription: "IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+											Optional: true,
+											ElementType: types.StringType,
 										},
 									},
-									"aaaa_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSAAAAResourceRecord. RecordSet for AAAA Records",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-											"values": schema.ListAttribute{
-												MarkdownDescription: "IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334",
-												Optional: true,
-												ElementType: types.StringType,
-											},
+								},
+								"afsdb_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS AFSDB Record. DNS AFSDB Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
 										},
 									},
-									"afsdb_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS AFSDB Record. DNS AFSDB Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "AFSDB Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"hostname": schema.StringAttribute{
-															MarkdownDescription: "Hostname. Server name of the AFS cell database server or the DCE name server.",
-															Optional: true,
-														},
-														"subtype": schema.StringAttribute{
-															MarkdownDescription: "AFSDB Record Subtype. AFS Volume Location Server or DCE Authentication Server. - NONE: NONE - AFSVolumeLocationServer: AFS Volume Location Server - DCEAuthenticationServer: DCE Authentication Server. Possible values are `NONE`, `AFSVolumeLocationServer`, `DCEAuthenticationServer`.",
-															Optional: true,
-														},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "AFSDB Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"hostname": schema.StringAttribute{
+														MarkdownDescription: "Hostname. Server name of the AFS cell database server or the DCE name server.",
+														Optional: true,
+													},
+													"subtype": schema.StringAttribute{
+														MarkdownDescription: "AFSDB Record Subtype. AFS Volume Location Server or DCE Authentication Server. - NONE: NONE - AFSVolumeLocationServer: AFS Volume Location Server - DCEAuthenticationServer: DCE Authentication Server. Possible values are `NONE`, `AFSVolumeLocationServer`, `DCEAuthenticationServer`.",
+														Optional: true,
 													},
 												},
 											},
 										},
 									},
-									"alias_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSAliasResourceRecord.",
-										Attributes: map[string]schema.Attribute{
-											"value": schema.StringAttribute{
-												MarkdownDescription: "Domain. A valid domain name, for example: example.com",
-												Optional: true,
-											},
+								},
+								"alias_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSAliasResourceRecord.",
+									Attributes: map[string]schema.Attribute{
+										"value": schema.StringAttribute{
+											MarkdownDescription: "Domain. A valid domain name, for example: example.com",
+											Optional: true,
 										},
 									},
-									"caa_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSCAAResourceRecord.",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
+								},
+								"caa_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSCAAResourceRecord.",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
 										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "CAA Record Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"flags": schema.Int64Attribute{
-															MarkdownDescription: "Flags. This flag should be an integer between 0 and 255.",
-															Optional: true,
-														},
-														"tag": schema.StringAttribute{
-															MarkdownDescription: "Tag. 'issuewild', 'iodef']",
-															Optional: true,
-														},
-														"value": schema.StringAttribute{
-															MarkdownDescription: "Value.",
-															Optional: true,
-														},
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "CAA Record Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"flags": schema.Int64Attribute{
+														MarkdownDescription: "Flags. This flag should be an integer between 0 and 255.",
+														Optional: true,
+													},
+													"tag": schema.StringAttribute{
+														MarkdownDescription: "Tag. 'issuewild', 'iodef']",
+														Optional: true,
+													},
+													"value": schema.StringAttribute{
+														MarkdownDescription: "Value.",
+														Optional: true,
 													},
 												},
 											},
 										},
 									},
-									"cds_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS CDS Record. DNS CDS Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
+								},
+								"cds_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS CDS Record. DNS CDS Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
 										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "DS Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"ds_key_algorithm": schema.StringAttribute{
-															MarkdownDescription: "DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448. Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`.",
-															Optional: true,
-														},
-														"key_tag": schema.Int64Attribute{
-															MarkdownDescription: "Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record.",
-															Optional: true,
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "DS Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"ds_key_algorithm": schema.StringAttribute{
+														MarkdownDescription: "DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448. Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`.",
+														Optional: true,
+													},
+													"key_tag": schema.Int64Attribute{
+														MarkdownDescription: "Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"sha1_digest": schema.SingleNestedBlock{
+														MarkdownDescription: "SHA1 Digest.",
+														Attributes: map[string]schema.Attribute{
+															"digest": schema.StringAttribute{
+																MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																Optional: true,
+															},
 														},
 													},
-													Blocks: map[string]schema.Block{
-														"sha1_digest": schema.SingleNestedBlock{
-															MarkdownDescription: "SHA1 Digest.",
-															Attributes: map[string]schema.Attribute{
-																"digest": schema.StringAttribute{
-																	MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-																	Optional: true,
-																},
+													"sha256_digest": schema.SingleNestedBlock{
+														MarkdownDescription: "SHA256 Digest.",
+														Attributes: map[string]schema.Attribute{
+															"digest": schema.StringAttribute{
+																MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																Optional: true,
 															},
 														},
-														"sha256_digest": schema.SingleNestedBlock{
-															MarkdownDescription: "SHA256 Digest.",
-															Attributes: map[string]schema.Attribute{
-																"digest": schema.StringAttribute{
-																	MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-																	Optional: true,
-																},
-															},
-														},
-														"sha384_digest": schema.SingleNestedBlock{
-															MarkdownDescription: "SHA384 Digest.",
-															Attributes: map[string]schema.Attribute{
-																"digest": schema.StringAttribute{
-																	MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-																	Optional: true,
-																},
+													},
+													"sha384_digest": schema.SingleNestedBlock{
+														MarkdownDescription: "SHA384 Digest.",
+														Attributes: map[string]schema.Attribute{
+															"digest": schema.StringAttribute{
+																MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																Optional: true,
 															},
 														},
 													},
@@ -1556,101 +944,393 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 											},
 										},
 									},
-									"cert_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS CERT Record. DNS CERT Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
+								},
+								"cert_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS CERT Record. DNS CERT Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "CERT Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"algorithm": schema.StringAttribute{
+														MarkdownDescription: "CERT Algorithm. CERT algorithm value must be compatible with the specified algorithm. - RESERVEDALGORITHM: RESERVEDALGORITHM - RSAMD5: RSAMD5 - DH: DH - DSASHA1: DSASHA1 - ECC: ECC - RSASHA1ALGORITHM: RSA-SHA1 - INDIRECT: INDIRECT - PRIVATEDNS: PRIVATEDNS - PRIVATEOID: PRIVATEOID. Possible values are `RESERVEDALGORITHM`, `RSAMD5`, `DH`, `DSASHA1`, `ECC`, `RSASHA1ALGORITHM`, `INDIRECT`, `PRIVATEDNS`, `PRIVATEOID`. Defaults to `RESERVEDALGORITHM`.",
+														Optional: true,
+													},
+													"cert_key_tag": schema.Int64Attribute{
+														MarkdownDescription: "Key Tag.",
+														Optional: true,
+													},
+													"cert_type": schema.StringAttribute{
+														MarkdownDescription: "CERT Type. CERT type value must be compatible with the specified types. - INVALIDCERTTYPE: INVALIDCERTTYPE - PKIX: PKIX - SPKI: SPKI - PGP: PGP - IPKIX: IPKIX - ISPKI: ISPKI - IPGP: IPGP - ACPKIX: ACPKIX - IACPKIX: IACPKIX - URI_: URI - OID: OID. Possible values are `INVALIDCERTTYPE`, `PKIX`, `SPKI`, `PGP`, `IPKIX`, `ISPKI`, `IPGP`, `ACPKIX`, `IACPKIX`, `URI_`, `OID`. Defaults to `INVALIDCERTTYPE`.",
+														Optional: true,
+													},
+													"certificate": schema.StringAttribute{
+														MarkdownDescription: "Certificate. Certificate in base 64 format.",
+														Optional: true,
+													},
+												},
 											},
 										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "CERT Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"algorithm": schema.StringAttribute{
-															MarkdownDescription: "CERT Algorithm. CERT algorithm value must be compatible with the specified algorithm. - RESERVEDALGORITHM: RESERVEDALGORITHM - RSAMD5: RSAMD5 - DH: DH - DSASHA1: DSASHA1 - ECC: ECC - RSASHA1ALGORITHM: RSA-SHA1 - INDIRECT: INDIRECT - PRIVATEDNS: PRIVATEDNS - PRIVATEOID: PRIVATEOID. Possible values are `RESERVEDALGORITHM`, `RSAMD5`, `DH`, `DSASHA1`, `ECC`, `RSASHA1ALGORITHM`, `INDIRECT`, `PRIVATEDNS`, `PRIVATEOID`. Defaults to `RESERVEDALGORITHM`.",
-															Optional: true,
+									},
+								},
+								"cname_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSCNAMEResourceRecord.",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+										"value": schema.StringAttribute{
+											MarkdownDescription: "Domain.",
+											Optional: true,
+										},
+									},
+								},
+								"ds_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS DS Record. DNS DS Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "DS Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"ds_key_algorithm": schema.StringAttribute{
+														MarkdownDescription: "DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448. Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`.",
+														Optional: true,
+													},
+													"key_tag": schema.Int64Attribute{
+														MarkdownDescription: "Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"sha1_digest": schema.SingleNestedBlock{
+														MarkdownDescription: "SHA1 Digest.",
+														Attributes: map[string]schema.Attribute{
+															"digest": schema.StringAttribute{
+																MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																Optional: true,
+															},
 														},
-														"cert_key_tag": schema.Int64Attribute{
-															MarkdownDescription: "Key Tag.",
-															Optional: true,
+													},
+													"sha256_digest": schema.SingleNestedBlock{
+														MarkdownDescription: "SHA256 Digest.",
+														Attributes: map[string]schema.Attribute{
+															"digest": schema.StringAttribute{
+																MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																Optional: true,
+															},
 														},
-														"cert_type": schema.StringAttribute{
-															MarkdownDescription: "CERT Type. CERT type value must be compatible with the specified types. - INVALIDCERTTYPE: INVALIDCERTTYPE - PKIX: PKIX - SPKI: SPKI - PGP: PGP - IPKIX: IPKIX - ISPKI: ISPKI - IPGP: IPGP - ACPKIX: ACPKIX - IACPKIX: IACPKIX - URI_: URI - OID: OID. Possible values are `INVALIDCERTTYPE`, `PKIX`, `SPKI`, `PGP`, `IPKIX`, `ISPKI`, `IPGP`, `ACPKIX`, `IACPKIX`, `URI_`, `OID`. Defaults to `INVALIDCERTTYPE`.",
-															Optional: true,
-														},
-														"certificate": schema.StringAttribute{
-															MarkdownDescription: "Certificate. Certificate in base 64 format.",
-															Optional: true,
+													},
+													"sha384_digest": schema.SingleNestedBlock{
+														MarkdownDescription: "SHA384 Digest.",
+														Attributes: map[string]schema.Attribute{
+															"digest": schema.StringAttribute{
+																MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																Optional: true,
+															},
 														},
 													},
 												},
 											},
 										},
 									},
-									"cname_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSCNAMEResourceRecord.",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-											"value": schema.StringAttribute{
-												MarkdownDescription: "Domain.",
-												Optional: true,
+								},
+								"eui48_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS EUI48 Record. DNS EUI48 Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+										"value": schema.StringAttribute{
+											MarkdownDescription: "EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab",
+											Optional: true,
+										},
+									},
+								},
+								"eui64_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS EUI64 Record. DNS EUI64 Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+										"value": schema.StringAttribute{
+											MarkdownDescription: "EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef",
+											Optional: true,
+										},
+									},
+								},
+								"lb_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS Load Balancer Record. DNS Load Balancer Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain.",
+											Optional: true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"value": schema.SingleNestedBlock{
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											Attributes: map[string]schema.Attribute{
+												"name": schema.StringAttribute{
+													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													Optional: true,
+												},
+												"namespace": schema.StringAttribute{
+													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													Optional: true,
+												},
+												"tenant": schema.StringAttribute{
+													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													Optional: true,
+												},
 											},
 										},
 									},
-									"ds_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS DS Record. DNS DS Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
+								},
+								"loc_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS LOC Record. DNS LOC Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "LOC Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"altitude": schema.Int64Attribute{
+														MarkdownDescription: "Altitude. Altitude in meters",
+														Optional: true,
+													},
+													"horizontal_precision": schema.Int64Attribute{
+														MarkdownDescription: "Horizontal Precision. Horizontal Precision in meters",
+														Optional: true,
+													},
+													"latitude_degree": schema.Int64Attribute{
+														MarkdownDescription: "Latitude degree. Latitude degree, an integer between 0 and 90, including 0 and 90",
+														Optional: true,
+													},
+													"latitude_hemisphere": schema.StringAttribute{
+														MarkdownDescription: "Latitude hemisphere. Latitude hemisphere can only be N or S - N: North Hemisphere - S: South Hemisphere. Possible values are `N`, `S`. Defaults to `N`.",
+														Optional: true,
+													},
+													"latitude_minute": schema.Int64Attribute{
+														MarkdownDescription: "Latitude minute. Latitude minute, an integer between 0 and 59, including 0 and 59",
+														Optional: true,
+													},
+													"latitude_second": schema.Int64Attribute{
+														MarkdownDescription: "Latitude second. Latitude second, an decimal between 0 and 59.999, including 0 and 59.999",
+														Optional: true,
+													},
+													"location_diameter": schema.Int64Attribute{
+														MarkdownDescription: "Size. Diameter of a sphere enclosing the described entity, in meters",
+														Optional: true,
+													},
+													"longitude_degree": schema.Int64Attribute{
+														MarkdownDescription: "Longitude degree. Longitude degree, an integer between 0 and 180, including 0 and 180",
+														Optional: true,
+													},
+													"longitude_hemisphere": schema.StringAttribute{
+														MarkdownDescription: "Longitude hemisphere. Longitude hemisphere can only be E or W - E: East Hemisphere - W: West Hemisphere. Possible values are `E`, `W`. Defaults to `E`.",
+														Optional: true,
+													},
+													"longitude_minute": schema.Int64Attribute{
+														MarkdownDescription: "Longitude minute. Longitude minute, an integer between 0 and 59, including 0 and 59",
+														Optional: true,
+													},
+													"longitude_second": schema.Int64Attribute{
+														MarkdownDescription: "Longitude second. Longitude second, an decimal between 0 and 59.999, including 0 and 59.999",
+														Optional: true,
+													},
+													"vertical_precision": schema.Int64Attribute{
+														MarkdownDescription: "Vertical Precision. Vertical Precision in meters",
+														Optional: true,
+													},
+												},
 											},
 										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "DS Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"ds_key_algorithm": schema.StringAttribute{
-															MarkdownDescription: "DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448. Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`.",
-															Optional: true,
-														},
-														"key_tag": schema.Int64Attribute{
-															MarkdownDescription: "Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record.",
-															Optional: true,
+									},
+								},
+								"mx_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSMXResourceRecord.",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "MX Record Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"domain": schema.StringAttribute{
+														MarkdownDescription: "Domain. Mail exchanger domain name, please provide the full hostname, for example: mail.example.com",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. Mail exchanger priority code",
+														Optional: true,
+													},
+												},
+											},
+										},
+									},
+								},
+								"naptr_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS NAPTR Record. DNS NAPTR Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "NAPTR Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"flags": schema.StringAttribute{
+														MarkdownDescription: "Flags. Flag to control aspects of the rewriting and interpretation of the fields in the record. At this time only four flags, S/A/U/P, are defined.",
+														Optional: true,
+													},
+													"order": schema.Int64Attribute{
+														MarkdownDescription: "Order. Order in which the NAPTR records must be processed. A lower number indicates a higher preference.",
+														Optional: true,
+													},
+													"preference": schema.Int64Attribute{
+														MarkdownDescription: "Preference. Preference when records have the same order. A lower number indicates a higher preference.",
+														Optional: true,
+													},
+													"regexp": schema.StringAttribute{
+														MarkdownDescription: "Regular Expression. Regular expression to construct the next domain name to lookup.",
+														Optional: true,
+													},
+													"replacement": schema.StringAttribute{
+														MarkdownDescription: "Replacement. The next NAME to query for NAPTR, SRV, or address records depending on the value of the flags field.",
+														Optional: true,
+													},
+													"service": schema.StringAttribute{
+														MarkdownDescription: "Protocol Resolution Service. Specifies the service(s) available down this rewrite path.",
+														Optional: true,
+													},
+												},
+											},
+										},
+									},
+								},
+								"ns_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSNSResourceRecord.",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+										"values": schema.ListAttribute{
+											MarkdownDescription: "Name Servers.",
+											Optional: true,
+											ElementType: types.StringType,
+										},
+									},
+								},
+								"ptr_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSPTRResourceRecord.",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+										"values": schema.ListAttribute{
+											MarkdownDescription: "Domain Name.",
+											Optional: true,
+											ElementType: types.StringType,
+										},
+									},
+								},
+								"srv_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSSRVResourceRecord.",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "SRV Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"port": schema.Int64Attribute{
+														MarkdownDescription: "Port. Port on which the service can be found",
+														Optional: true,
+													},
+													"priority": schema.Int64Attribute{
+														MarkdownDescription: "Priority. Priority of the target. A lower number indicates a higher preference.",
+														Optional: true,
+													},
+													"target": schema.StringAttribute{
+														MarkdownDescription: "Target. Hostname of the machine providing the service",
+														Optional: true,
+													},
+													"weight": schema.Int64Attribute{
+														MarkdownDescription: "Weight. Weight of the target. A higher number indicates a higher preference.",
+														Optional: true,
+													},
+												},
+											},
+										},
+									},
+								},
+								"sshfp_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS SSHFP Record. DNS SSHFP Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "SSHFP Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"algorithm": schema.StringAttribute{
+														MarkdownDescription: "SSHFP Algorithm. SSHFP algorithm value must be compatible with the specified algorithm. - UNSPECIFIEDALGORITHM: UNSPECIFIEDALGORITHM - RSA: RSA - DSA: DSA - ECDSA: ECDSA - Ed25519: Ed25519 - Ed448: Ed448. Possible values are `UNSPECIFIEDALGORITHM`, `RSA`, `DSA`, `ECDSA`, `Ed25519`, `Ed448`. Defaults to `UNSPECIFIEDALGORITHM`.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"sha1_fingerprint": schema.SingleNestedBlock{
+														MarkdownDescription: "SHA1 Fingerprint.",
+														Attributes: map[string]schema.Attribute{
+															"fingerprint": schema.StringAttribute{
+																MarkdownDescription: "Fingerprint. The 'fingerprint' is the DS key and the actual contents of the DS record.",
+																Optional: true,
+															},
 														},
 													},
-													Blocks: map[string]schema.Block{
-														"sha1_digest": schema.SingleNestedBlock{
-															MarkdownDescription: "SHA1 Digest.",
-															Attributes: map[string]schema.Attribute{
-																"digest": schema.StringAttribute{
-																	MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-																	Optional: true,
-																},
-															},
-														},
-														"sha256_digest": schema.SingleNestedBlock{
-															MarkdownDescription: "SHA256 Digest.",
-															Attributes: map[string]schema.Attribute{
-																"digest": schema.StringAttribute{
-																	MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-																	Optional: true,
-																},
-															},
-														},
-														"sha384_digest": schema.SingleNestedBlock{
-															MarkdownDescription: "SHA384 Digest.",
-															Attributes: map[string]schema.Attribute{
-																"digest": schema.StringAttribute{
-																	MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
-																	Optional: true,
-																},
+													"sha256_fingerprint": schema.SingleNestedBlock{
+														MarkdownDescription: "SHA256 Fingerprint.",
+														Attributes: map[string]schema.Attribute{
+															"fingerprint": schema.StringAttribute{
+																MarkdownDescription: "Fingerprint. The 'fingerprint' is the DS key and the actual contents of the DS record.",
+																Optional: true,
 															},
 														},
 													},
@@ -1658,289 +1338,154 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 											},
 										},
 									},
-									"eui48_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS EUI48 Record. DNS EUI48 Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-											"value": schema.StringAttribute{
-												MarkdownDescription: "EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab",
-												Optional: true,
+								},
+								"tlsa_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNS TLSA Record. DNS TLSA Record",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"values": schema.ListNestedBlock{
+											MarkdownDescription: "TLSA Value.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"certificate_association_data": schema.StringAttribute{
+														MarkdownDescription: "Certificate Association Data. The actual data to be matched given the settings of the other fields.",
+														Optional: true,
+													},
+													"certificate_usage": schema.StringAttribute{
+														MarkdownDescription: "TLSA Record Certificate Usage. - CertificateAuthorityConstraint: Certificate Authority Constraint - ServiceCertificateConstraint: Service Certificate Constraint - TrustAnchorAssertion: Trust Anchor Assertion - DomainIssuedCertificate: Domain Issued Certificate. Possible values are `CertificateAuthorityConstraint`, `ServiceCertificateConstraint`, `TrustAnchorAssertion`, `DomainIssuedCertificate`. Defaults to `CertificateAuthorityConstraint`.",
+														Optional: true,
+													},
+													"matching_type": schema.StringAttribute{
+														MarkdownDescription: "TLSA Record Matching Type. - NoHash: No Hash - SHA256: SHA-256 - SHA512: SHA-512. Possible values are `NoHash`, `SHA256`, `SHA512`. Defaults to `NoHash`.",
+														Optional: true,
+													},
+													"selector": schema.StringAttribute{
+														MarkdownDescription: "TLSA Record Selector. - FullCertificate: Full Certificate - UseSubjectPublicKey: Use Subject Public Key. Possible values are `FullCertificate`, `UseSubjectPublicKey`. Defaults to `FullCertificate`.",
+														Optional: true,
+													},
+												},
 											},
 										},
 									},
-									"eui64_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS EUI64 Record. DNS EUI64 Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-											"value": schema.StringAttribute{
-												MarkdownDescription: "EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef",
-												Optional: true,
-											},
+								},
+								"txt_record": schema.SingleNestedBlock{
+									MarkdownDescription: "DNSTXTResourceRecord.",
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain.",
+											Optional: true,
+										},
+										"values": schema.ListAttribute{
+											MarkdownDescription: "Text.",
+											Optional: true,
+											ElementType: types.StringType,
 										},
 									},
-									"lb_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS Load Balancer Record. DNS Load Balancer Record",
+								},
+							},
+						},
+					},
+					"default_soa_parameters": schema.SingleNestedBlock{
+						MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+					},
+					"dnssec_mode": schema.SingleNestedBlock{
+						MarkdownDescription: "Disable.",
+						Attributes: map[string]schema.Attribute{
+						},
+						Blocks: map[string]schema.Block{
+							"disable": schema.SingleNestedBlock{
+								MarkdownDescription: "Empty. This can be used for messages where no values are needed",
+							},
+							"enable": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable. DNSSEC enable",
+							},
+						},
+					},
+					"rr_set_group": schema.ListNestedBlock{
+						MarkdownDescription: "Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5.",
+						NestedObject: schema.NestedBlockObject{
+							Attributes: map[string]schema.Attribute{
+							},
+							Blocks: map[string]schema.Block{
+								"metadata": schema.SingleNestedBlock{
+									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+									Attributes: map[string]schema.Attribute{
+										"description_spec": schema.StringAttribute{
+											MarkdownDescription: "Description. Human readable description.",
+											Optional: true,
+										},
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+											Optional: true,
+										},
+									},
+								},
+								"rr_set": schema.ListNestedBlock{
+									MarkdownDescription: "Resource Record Sets. Collection of DNS resource record sets",
+									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain.",
+											"description_spec": schema.StringAttribute{
+												MarkdownDescription: "Comment.",
+												Optional: true,
+											},
+											"ttl": schema.Int64Attribute{
+												MarkdownDescription: "Time to live.",
 												Optional: true,
 											},
 										},
 										Blocks: map[string]schema.Block{
-											"value": schema.SingleNestedBlock{
-												MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											"a_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSAResourceRecord. A Records",
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														MarkdownDescription: "Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain.",
 														Optional: true,
 													},
-													"namespace": schema.StringAttribute{
-														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													"values": schema.ListAttribute{
+														MarkdownDescription: "IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1",
+														Optional: true,
+														ElementType: types.StringType,
+													},
+												},
+											},
+											"aaaa_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSAAAAResourceRecord. RecordSet for AAAA Records",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain.",
 														Optional: true,
 													},
-													"tenant": schema.StringAttribute{
-														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													"values": schema.ListAttribute{
+														MarkdownDescription: "IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+														Optional: true,
+														ElementType: types.StringType,
+													},
+												},
+											},
+											"afsdb_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS AFSDB Record. DNS AFSDB Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain.",
 														Optional: true,
 													},
 												},
-											},
-										},
-									},
-									"loc_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS LOC Record. DNS LOC Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "LOC Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"altitude": schema.Int64Attribute{
-															MarkdownDescription: "Altitude. Altitude in meters",
-															Optional: true,
-														},
-														"horizontal_precision": schema.Int64Attribute{
-															MarkdownDescription: "Horizontal Precision. Horizontal Precision in meters",
-															Optional: true,
-														},
-														"latitude_degree": schema.Int64Attribute{
-															MarkdownDescription: "Latitude degree. Latitude degree, an integer between 0 and 90, including 0 and 90",
-															Optional: true,
-														},
-														"latitude_hemisphere": schema.StringAttribute{
-															MarkdownDescription: "Latitude hemisphere. Latitude hemisphere can only be N or S - N: North Hemisphere - S: South Hemisphere. Possible values are `N`, `S`. Defaults to `N`.",
-															Optional: true,
-														},
-														"latitude_minute": schema.Int64Attribute{
-															MarkdownDescription: "Latitude minute. Latitude minute, an integer between 0 and 59, including 0 and 59",
-															Optional: true,
-														},
-														"latitude_second": schema.Int64Attribute{
-															MarkdownDescription: "Latitude second. Latitude second, an decimal between 0 and 59.999, including 0 and 59.999",
-															Optional: true,
-														},
-														"location_diameter": schema.Int64Attribute{
-															MarkdownDescription: "Size. Diameter of a sphere enclosing the described entity, in meters",
-															Optional: true,
-														},
-														"longitude_degree": schema.Int64Attribute{
-															MarkdownDescription: "Longitude degree. Longitude degree, an integer between 0 and 180, including 0 and 180",
-															Optional: true,
-														},
-														"longitude_hemisphere": schema.StringAttribute{
-															MarkdownDescription: "Longitude hemisphere. Longitude hemisphere can only be E or W - E: East Hemisphere - W: West Hemisphere. Possible values are `E`, `W`. Defaults to `E`.",
-															Optional: true,
-														},
-														"longitude_minute": schema.Int64Attribute{
-															MarkdownDescription: "Longitude minute. Longitude minute, an integer between 0 and 59, including 0 and 59",
-															Optional: true,
-														},
-														"longitude_second": schema.Int64Attribute{
-															MarkdownDescription: "Longitude second. Longitude second, an decimal between 0 and 59.999, including 0 and 59.999",
-															Optional: true,
-														},
-														"vertical_precision": schema.Int64Attribute{
-															MarkdownDescription: "Vertical Precision. Vertical Precision in meters",
-															Optional: true,
-														},
-													},
-												},
-											},
-										},
-									},
-									"mx_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSMXResourceRecord.",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "MX Record Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"domain": schema.StringAttribute{
-															MarkdownDescription: "Domain. Mail exchanger domain name, please provide the full hostname, for example: mail.example.com",
-															Optional: true,
-														},
-														"priority": schema.Int64Attribute{
-															MarkdownDescription: "Priority. Mail exchanger priority code",
-															Optional: true,
-														},
-													},
-												},
-											},
-										},
-									},
-									"naptr_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS NAPTR Record. DNS NAPTR Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "NAPTR Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"flags": schema.StringAttribute{
-															MarkdownDescription: "Flags. Flag to control aspects of the rewriting and interpretation of the fields in the record. At this time only four flags, S/A/U/P, are defined.",
-															Optional: true,
-														},
-														"order": schema.Int64Attribute{
-															MarkdownDescription: "Order. Order in which the NAPTR records must be processed. A lower number indicates a higher preference.",
-															Optional: true,
-														},
-														"preference": schema.Int64Attribute{
-															MarkdownDescription: "Preference. Preference when records have the same order. A lower number indicates a higher preference.",
-															Optional: true,
-														},
-														"regexp": schema.StringAttribute{
-															MarkdownDescription: "Regular Expression. Regular expression to construct the next domain name to lookup.",
-															Optional: true,
-														},
-														"replacement": schema.StringAttribute{
-															MarkdownDescription: "Replacement. The next NAME to query for NAPTR, SRV, or address records depending on the value of the flags field.",
-															Optional: true,
-														},
-														"service": schema.StringAttribute{
-															MarkdownDescription: "Protocol Resolution Service. Specifies the service(s) available down this rewrite path.",
-															Optional: true,
-														},
-													},
-												},
-											},
-										},
-									},
-									"ns_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSNSResourceRecord.",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-											"values": schema.ListAttribute{
-												MarkdownDescription: "Name Servers.",
-												Optional: true,
-												ElementType: types.StringType,
-											},
-										},
-									},
-									"ptr_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSPTRResourceRecord.",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-											"values": schema.ListAttribute{
-												MarkdownDescription: "Domain Name.",
-												Optional: true,
-												ElementType: types.StringType,
-											},
-										},
-									},
-									"srv_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSSRVResourceRecord.",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "SRV Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"port": schema.Int64Attribute{
-															MarkdownDescription: "Port. Port on which the service can be found",
-															Optional: true,
-														},
-														"priority": schema.Int64Attribute{
-															MarkdownDescription: "Priority. Priority of the target. A lower number indicates a higher preference.",
-															Optional: true,
-														},
-														"target": schema.StringAttribute{
-															MarkdownDescription: "Target. Hostname of the machine providing the service",
-															Optional: true,
-														},
-														"weight": schema.Int64Attribute{
-															MarkdownDescription: "Weight. Weight of the target. A higher number indicates a higher preference.",
-															Optional: true,
-														},
-													},
-												},
-											},
-										},
-									},
-									"sshfp_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS SSHFP Record. DNS SSHFP Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "SSHFP Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"algorithm": schema.StringAttribute{
-															MarkdownDescription: "SSHFP Algorithm. SSHFP algorithm value must be compatible with the specified algorithm. - UNSPECIFIEDALGORITHM: UNSPECIFIEDALGORITHM - RSA: RSA - DSA: DSA - ECDSA: ECDSA - Ed25519: Ed25519 - Ed448: Ed448. Possible values are `UNSPECIFIEDALGORITHM`, `RSA`, `DSA`, `ECDSA`, `Ed25519`, `Ed448`. Defaults to `UNSPECIFIEDALGORITHM`.",
-															Optional: true,
-														},
-													},
-													Blocks: map[string]schema.Block{
-														"sha1_fingerprint": schema.SingleNestedBlock{
-															MarkdownDescription: "SHA1 Fingerprint.",
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "AFSDB Value.",
+														NestedObject: schema.NestedBlockObject{
 															Attributes: map[string]schema.Attribute{
-																"fingerprint": schema.StringAttribute{
-																	MarkdownDescription: "Fingerprint. The 'fingerprint' is the DS key and the actual contents of the DS record.",
+																"hostname": schema.StringAttribute{
+																	MarkdownDescription: "Hostname. Server name of the AFS cell database server or the DCE name server.",
 																	Optional: true,
 																},
-															},
-														},
-														"sha256_fingerprint": schema.SingleNestedBlock{
-															MarkdownDescription: "SHA256 Fingerprint.",
-															Attributes: map[string]schema.Attribute{
-																"fingerprint": schema.StringAttribute{
-																	MarkdownDescription: "Fingerprint. The 'fingerprint' is the DS key and the actual contents of the DS record.",
+																"subtype": schema.StringAttribute{
+																	MarkdownDescription: "AFSDB Record Subtype. AFS Volume Location Server or DCE Authentication Server. - NONE: NONE - AFSVolumeLocationServer: AFS Volume Location Server - DCEAuthenticationServer: DCE Authentication Server. Possible values are `NONE`, `AFSVolumeLocationServer`, `DCEAuthenticationServer`.",
 																	Optional: true,
 																},
 															},
@@ -1948,53 +1493,541 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 													},
 												},
 											},
-										},
-									},
-									"tlsa_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNS TLSA Record. DNS TLSA Record",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
+											"alias_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSAliasResourceRecord.",
+												Attributes: map[string]schema.Attribute{
+													"value": schema.StringAttribute{
+														MarkdownDescription: "Domain. A valid domain name, for example: example.com",
+														Optional: true,
+													},
+												},
 											},
-										},
-										Blocks: map[string]schema.Block{
-											"values": schema.ListNestedBlock{
-												MarkdownDescription: "TLSA Value.",
-												NestedObject: schema.NestedBlockObject{
-													Attributes: map[string]schema.Attribute{
-														"certificate_association_data": schema.StringAttribute{
-															MarkdownDescription: "Certificate Association Data. The actual data to be matched given the settings of the other fields.",
-															Optional: true,
-														},
-														"certificate_usage": schema.StringAttribute{
-															MarkdownDescription: "TLSA Record Certificate Usage. - CertificateAuthorityConstraint: Certificate Authority Constraint - ServiceCertificateConstraint: Service Certificate Constraint - TrustAnchorAssertion: Trust Anchor Assertion - DomainIssuedCertificate: Domain Issued Certificate. Possible values are `CertificateAuthorityConstraint`, `ServiceCertificateConstraint`, `TrustAnchorAssertion`, `DomainIssuedCertificate`. Defaults to `CertificateAuthorityConstraint`.",
-															Optional: true,
-														},
-														"matching_type": schema.StringAttribute{
-															MarkdownDescription: "TLSA Record Matching Type. - NoHash: No Hash - SHA256: SHA-256 - SHA512: SHA-512. Possible values are `NoHash`, `SHA256`, `SHA512`. Defaults to `NoHash`.",
-															Optional: true,
-														},
-														"selector": schema.StringAttribute{
-															MarkdownDescription: "TLSA Record Selector. - FullCertificate: Full Certificate - UseSubjectPublicKey: Use Subject Public Key. Possible values are `FullCertificate`, `UseSubjectPublicKey`. Defaults to `FullCertificate`.",
-															Optional: true,
+											"caa_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSCAAResourceRecord.",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "CAA Record Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"flags": schema.Int64Attribute{
+																	MarkdownDescription: "Flags. This flag should be an integer between 0 and 255.",
+																	Optional: true,
+																},
+																"tag": schema.StringAttribute{
+																	MarkdownDescription: "Tag. 'issuewild', 'iodef']",
+																	Optional: true,
+																},
+																"value": schema.StringAttribute{
+																	MarkdownDescription: "Value.",
+																	Optional: true,
+																},
+															},
 														},
 													},
 												},
 											},
-										},
-									},
-									"txt_record": schema.SingleNestedBlock{
-										MarkdownDescription: "DNSTXTResourceRecord.",
-										Attributes: map[string]schema.Attribute{
-											"name": schema.StringAttribute{
-												MarkdownDescription: "Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain.",
-												Optional: true,
+											"cds_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS CDS Record. DNS CDS Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "DS Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"ds_key_algorithm": schema.StringAttribute{
+																	MarkdownDescription: "DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448. Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`.",
+																	Optional: true,
+																},
+																"key_tag": schema.Int64Attribute{
+																	MarkdownDescription: "Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record.",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"sha1_digest": schema.SingleNestedBlock{
+																	MarkdownDescription: "SHA1 Digest.",
+																	Attributes: map[string]schema.Attribute{
+																		"digest": schema.StringAttribute{
+																			MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																			Optional: true,
+																		},
+																	},
+																},
+																"sha256_digest": schema.SingleNestedBlock{
+																	MarkdownDescription: "SHA256 Digest.",
+																	Attributes: map[string]schema.Attribute{
+																		"digest": schema.StringAttribute{
+																			MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																			Optional: true,
+																		},
+																	},
+																},
+																"sha384_digest": schema.SingleNestedBlock{
+																	MarkdownDescription: "SHA384 Digest.",
+																	Attributes: map[string]schema.Attribute{
+																		"digest": schema.StringAttribute{
+																			MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
 											},
-											"values": schema.ListAttribute{
-												MarkdownDescription: "Text.",
-												Optional: true,
-												ElementType: types.StringType,
+											"cert_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS CERT Record. DNS CERT Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "CERT Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"algorithm": schema.StringAttribute{
+																	MarkdownDescription: "CERT Algorithm. CERT algorithm value must be compatible with the specified algorithm. - RESERVEDALGORITHM: RESERVEDALGORITHM - RSAMD5: RSAMD5 - DH: DH - DSASHA1: DSASHA1 - ECC: ECC - RSASHA1ALGORITHM: RSA-SHA1 - INDIRECT: INDIRECT - PRIVATEDNS: PRIVATEDNS - PRIVATEOID: PRIVATEOID. Possible values are `RESERVEDALGORITHM`, `RSAMD5`, `DH`, `DSASHA1`, `ECC`, `RSASHA1ALGORITHM`, `INDIRECT`, `PRIVATEDNS`, `PRIVATEOID`. Defaults to `RESERVEDALGORITHM`.",
+																	Optional: true,
+																},
+																"cert_key_tag": schema.Int64Attribute{
+																	MarkdownDescription: "Key Tag.",
+																	Optional: true,
+																},
+																"cert_type": schema.StringAttribute{
+																	MarkdownDescription: "CERT Type. CERT type value must be compatible with the specified types. - INVALIDCERTTYPE: INVALIDCERTTYPE - PKIX: PKIX - SPKI: SPKI - PGP: PGP - IPKIX: IPKIX - ISPKI: ISPKI - IPGP: IPGP - ACPKIX: ACPKIX - IACPKIX: IACPKIX - URI_: URI - OID: OID. Possible values are `INVALIDCERTTYPE`, `PKIX`, `SPKI`, `PGP`, `IPKIX`, `ISPKI`, `IPGP`, `ACPKIX`, `IACPKIX`, `URI_`, `OID`. Defaults to `INVALIDCERTTYPE`.",
+																	Optional: true,
+																},
+																"certificate": schema.StringAttribute{
+																	MarkdownDescription: "Certificate. Certificate in base 64 format.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+											"cname_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSCNAMEResourceRecord.",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+													"value": schema.StringAttribute{
+														MarkdownDescription: "Domain.",
+														Optional: true,
+													},
+												},
+											},
+											"ds_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS DS Record. DNS DS Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "DS Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"ds_key_algorithm": schema.StringAttribute{
+																	MarkdownDescription: "DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448. Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`.",
+																	Optional: true,
+																},
+																"key_tag": schema.Int64Attribute{
+																	MarkdownDescription: "Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record.",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"sha1_digest": schema.SingleNestedBlock{
+																	MarkdownDescription: "SHA1 Digest.",
+																	Attributes: map[string]schema.Attribute{
+																		"digest": schema.StringAttribute{
+																			MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																			Optional: true,
+																		},
+																	},
+																},
+																"sha256_digest": schema.SingleNestedBlock{
+																	MarkdownDescription: "SHA256 Digest.",
+																	Attributes: map[string]schema.Attribute{
+																		"digest": schema.StringAttribute{
+																			MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																			Optional: true,
+																		},
+																	},
+																},
+																"sha384_digest": schema.SingleNestedBlock{
+																	MarkdownDescription: "SHA384 Digest.",
+																	Attributes: map[string]schema.Attribute{
+																		"digest": schema.StringAttribute{
+																			MarkdownDescription: "Digest. The 'digest' is the DS key and the actual contents of the DS record.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
+											"eui48_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS EUI48 Record. DNS EUI48 Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+													"value": schema.StringAttribute{
+														MarkdownDescription: "EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab",
+														Optional: true,
+													},
+												},
+											},
+											"eui64_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS EUI64 Record. DNS EUI64 Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+													"value": schema.StringAttribute{
+														MarkdownDescription: "EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef",
+														Optional: true,
+													},
+												},
+											},
+											"lb_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS Load Balancer Record. DNS Load Balancer Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"value": schema.SingleNestedBlock{
+														MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+														Attributes: map[string]schema.Attribute{
+															"name": schema.StringAttribute{
+																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																Optional: true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																Optional: true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																Optional: true,
+															},
+														},
+													},
+												},
+											},
+											"loc_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS LOC Record. DNS LOC Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "LOC Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"altitude": schema.Int64Attribute{
+																	MarkdownDescription: "Altitude. Altitude in meters",
+																	Optional: true,
+																},
+																"horizontal_precision": schema.Int64Attribute{
+																	MarkdownDescription: "Horizontal Precision. Horizontal Precision in meters",
+																	Optional: true,
+																},
+																"latitude_degree": schema.Int64Attribute{
+																	MarkdownDescription: "Latitude degree. Latitude degree, an integer between 0 and 90, including 0 and 90",
+																	Optional: true,
+																},
+																"latitude_hemisphere": schema.StringAttribute{
+																	MarkdownDescription: "Latitude hemisphere. Latitude hemisphere can only be N or S - N: North Hemisphere - S: South Hemisphere. Possible values are `N`, `S`. Defaults to `N`.",
+																	Optional: true,
+																},
+																"latitude_minute": schema.Int64Attribute{
+																	MarkdownDescription: "Latitude minute. Latitude minute, an integer between 0 and 59, including 0 and 59",
+																	Optional: true,
+																},
+																"latitude_second": schema.Int64Attribute{
+																	MarkdownDescription: "Latitude second. Latitude second, an decimal between 0 and 59.999, including 0 and 59.999",
+																	Optional: true,
+																},
+																"location_diameter": schema.Int64Attribute{
+																	MarkdownDescription: "Size. Diameter of a sphere enclosing the described entity, in meters",
+																	Optional: true,
+																},
+																"longitude_degree": schema.Int64Attribute{
+																	MarkdownDescription: "Longitude degree. Longitude degree, an integer between 0 and 180, including 0 and 180",
+																	Optional: true,
+																},
+																"longitude_hemisphere": schema.StringAttribute{
+																	MarkdownDescription: "Longitude hemisphere. Longitude hemisphere can only be E or W - E: East Hemisphere - W: West Hemisphere. Possible values are `E`, `W`. Defaults to `E`.",
+																	Optional: true,
+																},
+																"longitude_minute": schema.Int64Attribute{
+																	MarkdownDescription: "Longitude minute. Longitude minute, an integer between 0 and 59, including 0 and 59",
+																	Optional: true,
+																},
+																"longitude_second": schema.Int64Attribute{
+																	MarkdownDescription: "Longitude second. Longitude second, an decimal between 0 and 59.999, including 0 and 59.999",
+																	Optional: true,
+																},
+																"vertical_precision": schema.Int64Attribute{
+																	MarkdownDescription: "Vertical Precision. Vertical Precision in meters",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+											"mx_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSMXResourceRecord.",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "MX Record Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"domain": schema.StringAttribute{
+																	MarkdownDescription: "Domain. Mail exchanger domain name, please provide the full hostname, for example: mail.example.com",
+																	Optional: true,
+																},
+																"priority": schema.Int64Attribute{
+																	MarkdownDescription: "Priority. Mail exchanger priority code",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+											"naptr_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS NAPTR Record. DNS NAPTR Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "NAPTR Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"flags": schema.StringAttribute{
+																	MarkdownDescription: "Flags. Flag to control aspects of the rewriting and interpretation of the fields in the record. At this time only four flags, S/A/U/P, are defined.",
+																	Optional: true,
+																},
+																"order": schema.Int64Attribute{
+																	MarkdownDescription: "Order. Order in which the NAPTR records must be processed. A lower number indicates a higher preference.",
+																	Optional: true,
+																},
+																"preference": schema.Int64Attribute{
+																	MarkdownDescription: "Preference. Preference when records have the same order. A lower number indicates a higher preference.",
+																	Optional: true,
+																},
+																"regexp": schema.StringAttribute{
+																	MarkdownDescription: "Regular Expression. Regular expression to construct the next domain name to lookup.",
+																	Optional: true,
+																},
+																"replacement": schema.StringAttribute{
+																	MarkdownDescription: "Replacement. The next NAME to query for NAPTR, SRV, or address records depending on the value of the flags field.",
+																	Optional: true,
+																},
+																"service": schema.StringAttribute{
+																	MarkdownDescription: "Protocol Resolution Service. Specifies the service(s) available down this rewrite path.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+											"ns_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSNSResourceRecord.",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+													"values": schema.ListAttribute{
+														MarkdownDescription: "Name Servers.",
+														Optional: true,
+														ElementType: types.StringType,
+													},
+												},
+											},
+											"ptr_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSPTRResourceRecord.",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+													"values": schema.ListAttribute{
+														MarkdownDescription: "Domain Name.",
+														Optional: true,
+														ElementType: types.StringType,
+													},
+												},
+											},
+											"srv_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSSRVResourceRecord.",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "SRV Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"port": schema.Int64Attribute{
+																	MarkdownDescription: "Port. Port on which the service can be found",
+																	Optional: true,
+																},
+																"priority": schema.Int64Attribute{
+																	MarkdownDescription: "Priority. Priority of the target. A lower number indicates a higher preference.",
+																	Optional: true,
+																},
+																"target": schema.StringAttribute{
+																	MarkdownDescription: "Target. Hostname of the machine providing the service",
+																	Optional: true,
+																},
+																"weight": schema.Int64Attribute{
+																	MarkdownDescription: "Weight. Weight of the target. A higher number indicates a higher preference.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+											"sshfp_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS SSHFP Record. DNS SSHFP Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "SSHFP Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"algorithm": schema.StringAttribute{
+																	MarkdownDescription: "SSHFP Algorithm. SSHFP algorithm value must be compatible with the specified algorithm. - UNSPECIFIEDALGORITHM: UNSPECIFIEDALGORITHM - RSA: RSA - DSA: DSA - ECDSA: ECDSA - Ed25519: Ed25519 - Ed448: Ed448. Possible values are `UNSPECIFIEDALGORITHM`, `RSA`, `DSA`, `ECDSA`, `Ed25519`, `Ed448`. Defaults to `UNSPECIFIEDALGORITHM`.",
+																	Optional: true,
+																},
+															},
+															Blocks: map[string]schema.Block{
+																"sha1_fingerprint": schema.SingleNestedBlock{
+																	MarkdownDescription: "SHA1 Fingerprint.",
+																	Attributes: map[string]schema.Attribute{
+																		"fingerprint": schema.StringAttribute{
+																			MarkdownDescription: "Fingerprint. The 'fingerprint' is the DS key and the actual contents of the DS record.",
+																			Optional: true,
+																		},
+																	},
+																},
+																"sha256_fingerprint": schema.SingleNestedBlock{
+																	MarkdownDescription: "SHA256 Fingerprint.",
+																	Attributes: map[string]schema.Attribute{
+																		"fingerprint": schema.StringAttribute{
+																			MarkdownDescription: "Fingerprint. The 'fingerprint' is the DS key and the actual contents of the DS record.",
+																			Optional: true,
+																		},
+																	},
+																},
+															},
+														},
+													},
+												},
+											},
+											"tlsa_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNS TLSA Record. DNS TLSA Record",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+												},
+												Blocks: map[string]schema.Block{
+													"values": schema.ListNestedBlock{
+														MarkdownDescription: "TLSA Value.",
+														NestedObject: schema.NestedBlockObject{
+															Attributes: map[string]schema.Attribute{
+																"certificate_association_data": schema.StringAttribute{
+																	MarkdownDescription: "Certificate Association Data. The actual data to be matched given the settings of the other fields.",
+																	Optional: true,
+																},
+																"certificate_usage": schema.StringAttribute{
+																	MarkdownDescription: "TLSA Record Certificate Usage. - CertificateAuthorityConstraint: Certificate Authority Constraint - ServiceCertificateConstraint: Service Certificate Constraint - TrustAnchorAssertion: Trust Anchor Assertion - DomainIssuedCertificate: Domain Issued Certificate. Possible values are `CertificateAuthorityConstraint`, `ServiceCertificateConstraint`, `TrustAnchorAssertion`, `DomainIssuedCertificate`. Defaults to `CertificateAuthorityConstraint`.",
+																	Optional: true,
+																},
+																"matching_type": schema.StringAttribute{
+																	MarkdownDescription: "TLSA Record Matching Type. - NoHash: No Hash - SHA256: SHA-256 - SHA512: SHA-512. Possible values are `NoHash`, `SHA256`, `SHA512`. Defaults to `NoHash`.",
+																	Optional: true,
+																},
+																"selector": schema.StringAttribute{
+																	MarkdownDescription: "TLSA Record Selector. - FullCertificate: Full Certificate - UseSubjectPublicKey: Use Subject Public Key. Possible values are `FullCertificate`, `UseSubjectPublicKey`. Defaults to `FullCertificate`.",
+																	Optional: true,
+																},
+															},
+														},
+													},
+												},
+											},
+											"txt_record": schema.SingleNestedBlock{
+												MarkdownDescription: "DNSTXTResourceRecord.",
+												Attributes: map[string]schema.Attribute{
+													"name": schema.StringAttribute{
+														MarkdownDescription: "Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain.",
+														Optional: true,
+													},
+													"values": schema.ListAttribute{
+														MarkdownDescription: "Text.",
+														Optional: true,
+														ElementType: types.StringType,
+													},
+												},
 											},
 										},
 									},
@@ -2002,31 +2035,88 @@ func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest
 							},
 						},
 					},
-
+					"soa_parameters": schema.SingleNestedBlock{
+						MarkdownDescription: "SOARecordParameterConfig.",
+						Attributes: map[string]schema.Attribute{
+							"expire": schema.Int64Attribute{
+								MarkdownDescription: "Expire. expire value indicates when secondary nameservers should stop answering request for this zone if primary does not respond",
+								Optional: true,
+							},
+							"negative_ttl": schema.Int64Attribute{
+								MarkdownDescription: "Negative TTL. negative ttl value indicates how long to cache non-existent resource record for this zone",
+								Optional: true,
+							},
+							"refresh": schema.Int64Attribute{
+								MarkdownDescription: "Refresh interval. refresh value indicates when secondary nameservers should query for the SOA record to detect zone changes",
+								Optional: true,
+							},
+							"retry": schema.Int64Attribute{
+								MarkdownDescription: "Retry Interval. retry value indicates when secondary nameservers should retry to request the serial number if primary does not respond",
+								Optional: true,
+							},
+							"ttl": schema.Int64Attribute{
+								MarkdownDescription: "TTL. SOA record time to live (in seconds)",
+								Optional: true,
+							},
+						},
+					},
 				},
+
 			},
-			"soa_parameters": schema.SingleNestedBlock{
-				MarkdownDescription: "SOARecordParameterConfig.",
+			"secondary": schema.SingleNestedBlock{
+				MarkdownDescription: "SecondaryDNSCreateSpecType.",
 				Attributes: map[string]schema.Attribute{
-					"expire": schema.Int64Attribute{
-						MarkdownDescription: "Expire. expire value indicates when secondary nameservers should stop answering request for this zone if primary does not respond",
+					"primary_servers": schema.ListAttribute{
+						MarkdownDescription: "DNS Primary Server IP.",
+						Optional: true,
+						ElementType: types.StringType,
+					},
+					"tsig_key_algorithm": schema.StringAttribute{
+						MarkdownDescription: "TSIG Key Algorithm. TSIG key value must be compatible with the specified algorithm - UNDEFINED: UNDEFINED - HMAC_MD5: HMAC_MD5 - HMAC_SHA1: HMAC_SHA1 - HMAC_SHA224: HMAC_SHA224 - HMAC_SHA256: HMAC_SHA256 - HMAC_SHA384: HMAC_SHA384 - HMAC_SHA512: HMAC_SHA512. Possible values are `HMAC_MD5`, `UNDEFINED`, `HMAC_SHA1`, `HMAC_SHA224`, `HMAC_SHA256`, `HMAC_SHA384`, `HMAC_SHA512`. Defaults to `UNDEFINED`.",
 						Optional: true,
 					},
-					"negative_ttl": schema.Int64Attribute{
-						MarkdownDescription: "Negative TTL. negative ttl value indicates how long to cache non-existent resource record for this zone",
+					"tsig_key_name": schema.StringAttribute{
+						MarkdownDescription: "TSIG Key Name. TSIG key name as used in TSIG protocol extension",
 						Optional: true,
 					},
-					"refresh": schema.Int64Attribute{
-						MarkdownDescription: "Refresh interval. refresh value indicates when secondary nameservers should query for the SOA record to detect zone changes",
-						Optional: true,
-					},
-					"retry": schema.Int64Attribute{
-						MarkdownDescription: "Retry Interval. retry value indicates when secondary nameservers should retry to request the serial number if primary does not respond",
-						Optional: true,
-					},
-					"ttl": schema.Int64Attribute{
-						MarkdownDescription: "TTL. SOA record time to live (in seconds)",
-						Optional: true,
+				},
+				Blocks: map[string]schema.Block{
+					"tsig_key_value": schema.SingleNestedBlock{
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						Attributes: map[string]schema.Attribute{
+						},
+						Blocks: map[string]schema.Block{
+							"blindfold_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								Attributes: map[string]schema.Attribute{
+									"decryption_provider": schema.StringAttribute{
+										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+										Optional: true,
+									},
+									"location": schema.StringAttribute{
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										Optional: true,
+									},
+									"store_provider": schema.StringAttribute{
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										Optional: true,
+									},
+								},
+							},
+							"clear_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+								Attributes: map[string]schema.Attribute{
+									"provider_ref": schema.StringAttribute{
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										Optional: true,
+									},
+									"url": schema.StringAttribute{
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										Optional: true,
+									},
+								},
+							},
+						},
 					},
 				},
 
@@ -2179,229 +2269,52 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.DefaultRrSetGroup) > 0 {
-		var default_rr_set_groupList []map[string]interface{}
-		for _, item := range data.DefaultRrSetGroup {
-			itemMap := make(map[string]interface{})
-			if item.ARecord != nil {
-				a_recordNestedMap := make(map[string]interface{})
-				if !item.ARecord.Name.IsNull() && !item.ARecord.Name.IsUnknown() {
-					a_recordNestedMap["name"] = item.ARecord.Name.ValueString()
-				}
-				itemMap["a_record"] = a_recordNestedMap
-			}
-			if item.AaaaRecord != nil {
-				aaaa_recordNestedMap := make(map[string]interface{})
-				if !item.AaaaRecord.Name.IsNull() && !item.AaaaRecord.Name.IsUnknown() {
-					aaaa_recordNestedMap["name"] = item.AaaaRecord.Name.ValueString()
-				}
-				itemMap["aaaa_record"] = aaaa_recordNestedMap
-			}
-			if item.AfsdbRecord != nil {
-				afsdb_recordNestedMap := make(map[string]interface{})
-				if !item.AfsdbRecord.Name.IsNull() && !item.AfsdbRecord.Name.IsUnknown() {
-					afsdb_recordNestedMap["name"] = item.AfsdbRecord.Name.ValueString()
-				}
-				itemMap["afsdb_record"] = afsdb_recordNestedMap
-			}
-			if item.AliasRecord != nil {
-				alias_recordNestedMap := make(map[string]interface{})
-				if !item.AliasRecord.Value.IsNull() && !item.AliasRecord.Value.IsUnknown() {
-					alias_recordNestedMap["value"] = item.AliasRecord.Value.ValueString()
-				}
-				itemMap["alias_record"] = alias_recordNestedMap
-			}
-			if item.CaaRecord != nil {
-				caa_recordNestedMap := make(map[string]interface{})
-				if !item.CaaRecord.Name.IsNull() && !item.CaaRecord.Name.IsUnknown() {
-					caa_recordNestedMap["name"] = item.CaaRecord.Name.ValueString()
-				}
-				itemMap["caa_record"] = caa_recordNestedMap
-			}
-			if item.CdsRecord != nil {
-				cds_recordNestedMap := make(map[string]interface{})
-				if !item.CdsRecord.Name.IsNull() && !item.CdsRecord.Name.IsUnknown() {
-					cds_recordNestedMap["name"] = item.CdsRecord.Name.ValueString()
-				}
-				itemMap["cds_record"] = cds_recordNestedMap
-			}
-			if item.CertRecord != nil {
-				cert_recordNestedMap := make(map[string]interface{})
-				if !item.CertRecord.Name.IsNull() && !item.CertRecord.Name.IsUnknown() {
-					cert_recordNestedMap["name"] = item.CertRecord.Name.ValueString()
-				}
-				itemMap["cert_record"] = cert_recordNestedMap
-			}
-			if item.CnameRecord != nil {
-				cname_recordNestedMap := make(map[string]interface{})
-				if !item.CnameRecord.Name.IsNull() && !item.CnameRecord.Name.IsUnknown() {
-					cname_recordNestedMap["name"] = item.CnameRecord.Name.ValueString()
-				}
-				if !item.CnameRecord.Value.IsNull() && !item.CnameRecord.Value.IsUnknown() {
-					cname_recordNestedMap["value"] = item.CnameRecord.Value.ValueString()
-				}
-				itemMap["cname_record"] = cname_recordNestedMap
-			}
-			if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
-				itemMap["description"] = item.DescriptionSpec.ValueString()
-			}
-			if item.DsRecord != nil {
-				ds_recordNestedMap := make(map[string]interface{})
-				if !item.DsRecord.Name.IsNull() && !item.DsRecord.Name.IsUnknown() {
-					ds_recordNestedMap["name"] = item.DsRecord.Name.ValueString()
-				}
-				itemMap["ds_record"] = ds_recordNestedMap
-			}
-			if item.Eui48Record != nil {
-				eui48_recordNestedMap := make(map[string]interface{})
-				if !item.Eui48Record.Name.IsNull() && !item.Eui48Record.Name.IsUnknown() {
-					eui48_recordNestedMap["name"] = item.Eui48Record.Name.ValueString()
-				}
-				if !item.Eui48Record.Value.IsNull() && !item.Eui48Record.Value.IsUnknown() {
-					eui48_recordNestedMap["value"] = item.Eui48Record.Value.ValueString()
-				}
-				itemMap["eui48_record"] = eui48_recordNestedMap
-			}
-			if item.Eui64Record != nil {
-				eui64_recordNestedMap := make(map[string]interface{})
-				if !item.Eui64Record.Name.IsNull() && !item.Eui64Record.Name.IsUnknown() {
-					eui64_recordNestedMap["name"] = item.Eui64Record.Name.ValueString()
-				}
-				if !item.Eui64Record.Value.IsNull() && !item.Eui64Record.Value.IsUnknown() {
-					eui64_recordNestedMap["value"] = item.Eui64Record.Value.ValueString()
-				}
-				itemMap["eui64_record"] = eui64_recordNestedMap
-			}
-			if item.LbRecord != nil {
-				lb_recordNestedMap := make(map[string]interface{})
-				if !item.LbRecord.Name.IsNull() && !item.LbRecord.Name.IsUnknown() {
-					lb_recordNestedMap["name"] = item.LbRecord.Name.ValueString()
-				}
-				itemMap["lb_record"] = lb_recordNestedMap
-			}
-			if item.LocRecord != nil {
-				loc_recordNestedMap := make(map[string]interface{})
-				if !item.LocRecord.Name.IsNull() && !item.LocRecord.Name.IsUnknown() {
-					loc_recordNestedMap["name"] = item.LocRecord.Name.ValueString()
-				}
-				itemMap["loc_record"] = loc_recordNestedMap
-			}
-			if item.MxRecord != nil {
-				mx_recordNestedMap := make(map[string]interface{})
-				if !item.MxRecord.Name.IsNull() && !item.MxRecord.Name.IsUnknown() {
-					mx_recordNestedMap["name"] = item.MxRecord.Name.ValueString()
-				}
-				itemMap["mx_record"] = mx_recordNestedMap
-			}
-			if item.NaptrRecord != nil {
-				naptr_recordNestedMap := make(map[string]interface{})
-				if !item.NaptrRecord.Name.IsNull() && !item.NaptrRecord.Name.IsUnknown() {
-					naptr_recordNestedMap["name"] = item.NaptrRecord.Name.ValueString()
-				}
-				itemMap["naptr_record"] = naptr_recordNestedMap
-			}
-			if item.NsRecord != nil {
-				ns_recordNestedMap := make(map[string]interface{})
-				if !item.NsRecord.Name.IsNull() && !item.NsRecord.Name.IsUnknown() {
-					ns_recordNestedMap["name"] = item.NsRecord.Name.ValueString()
-				}
-				itemMap["ns_record"] = ns_recordNestedMap
-			}
-			if item.PtrRecord != nil {
-				ptr_recordNestedMap := make(map[string]interface{})
-				if !item.PtrRecord.Name.IsNull() && !item.PtrRecord.Name.IsUnknown() {
-					ptr_recordNestedMap["name"] = item.PtrRecord.Name.ValueString()
-				}
-				itemMap["ptr_record"] = ptr_recordNestedMap
-			}
-			if item.SrvRecord != nil {
-				srv_recordNestedMap := make(map[string]interface{})
-				if !item.SrvRecord.Name.IsNull() && !item.SrvRecord.Name.IsUnknown() {
-					srv_recordNestedMap["name"] = item.SrvRecord.Name.ValueString()
-				}
-				itemMap["srv_record"] = srv_recordNestedMap
-			}
-			if item.SshfpRecord != nil {
-				sshfp_recordNestedMap := make(map[string]interface{})
-				if !item.SshfpRecord.Name.IsNull() && !item.SshfpRecord.Name.IsUnknown() {
-					sshfp_recordNestedMap["name"] = item.SshfpRecord.Name.ValueString()
-				}
-				itemMap["sshfp_record"] = sshfp_recordNestedMap
-			}
-			if item.TlsaRecord != nil {
-				tlsa_recordNestedMap := make(map[string]interface{})
-				if !item.TlsaRecord.Name.IsNull() && !item.TlsaRecord.Name.IsUnknown() {
-					tlsa_recordNestedMap["name"] = item.TlsaRecord.Name.ValueString()
-				}
-				itemMap["tlsa_record"] = tlsa_recordNestedMap
-			}
-			if !item.Ttl.IsNull() && !item.Ttl.IsUnknown() {
-				itemMap["ttl"] = item.Ttl.ValueInt64()
-			}
-			if item.TxtRecord != nil {
-				txt_recordNestedMap := make(map[string]interface{})
-				if !item.TxtRecord.Name.IsNull() && !item.TxtRecord.Name.IsUnknown() {
-					txt_recordNestedMap["name"] = item.TxtRecord.Name.ValueString()
-				}
-				itemMap["txt_record"] = txt_recordNestedMap
-			}
-			default_rr_set_groupList = append(default_rr_set_groupList, itemMap)
+	if data.Primary != nil {
+		primaryMap := make(map[string]interface{})
+		if !data.Primary.AllowHTTPLbManagedRecords.IsNull() && !data.Primary.AllowHTTPLbManagedRecords.IsUnknown() {
+			primaryMap["allow_http_lb_managed_records"] = data.Primary.AllowHTTPLbManagedRecords.ValueBool()
 		}
-		apiResource.Spec["default_rr_set_group"] = default_rr_set_groupList
+		if data.Primary.DefaultSoaParameters != nil {
+			primaryMap["default_soa_parameters"] = map[string]interface{}{}
+		}
+		if data.Primary.DnssecMode != nil {
+			dnssec_modeNestedMap := make(map[string]interface{})
+			primaryMap["dnssec_mode"] = dnssec_modeNestedMap
+		}
+		if data.Primary.SoaParameters != nil {
+			soa_parametersNestedMap := make(map[string]interface{})
+			if !data.Primary.SoaParameters.Expire.IsNull() && !data.Primary.SoaParameters.Expire.IsUnknown() {
+				soa_parametersNestedMap["expire"] = data.Primary.SoaParameters.Expire.ValueInt64()
+			}
+			if !data.Primary.SoaParameters.NegativeTtl.IsNull() && !data.Primary.SoaParameters.NegativeTtl.IsUnknown() {
+				soa_parametersNestedMap["negative_ttl"] = data.Primary.SoaParameters.NegativeTtl.ValueInt64()
+			}
+			if !data.Primary.SoaParameters.Refresh.IsNull() && !data.Primary.SoaParameters.Refresh.IsUnknown() {
+				soa_parametersNestedMap["refresh"] = data.Primary.SoaParameters.Refresh.ValueInt64()
+			}
+			if !data.Primary.SoaParameters.Retry.IsNull() && !data.Primary.SoaParameters.Retry.IsUnknown() {
+				soa_parametersNestedMap["retry"] = data.Primary.SoaParameters.Retry.ValueInt64()
+			}
+			if !data.Primary.SoaParameters.Ttl.IsNull() && !data.Primary.SoaParameters.Ttl.IsUnknown() {
+				soa_parametersNestedMap["ttl"] = data.Primary.SoaParameters.Ttl.ValueInt64()
+			}
+			primaryMap["soa_parameters"] = soa_parametersNestedMap
+		}
+		apiResource.Spec["primary"] = primaryMap
 	}
-	if data.DefaultSoaParameters != nil {
-		default_soa_parametersMap := make(map[string]interface{})
-		apiResource.Spec["default_soa_parameters"] = default_soa_parametersMap
-	}
-	if data.DnssecMode != nil {
-		dnssec_modeMap := make(map[string]interface{})
-		if data.DnssecMode.Disable != nil {
-			dnssec_modeMap["disable"] = map[string]interface{}{}
+	if data.Secondary != nil {
+		secondaryMap := make(map[string]interface{})
+		if !data.Secondary.TsigKeyAlgorithm.IsNull() && !data.Secondary.TsigKeyAlgorithm.IsUnknown() {
+			secondaryMap["tsig_key_algorithm"] = data.Secondary.TsigKeyAlgorithm.ValueString()
 		}
-		if data.DnssecMode.Enable != nil {
-			dnssec_modeMap["enable"] = map[string]interface{}{}
+		if !data.Secondary.TsigKeyName.IsNull() && !data.Secondary.TsigKeyName.IsUnknown() {
+			secondaryMap["tsig_key_name"] = data.Secondary.TsigKeyName.ValueString()
 		}
-		apiResource.Spec["dnssec_mode"] = dnssec_modeMap
-	}
-	if len(data.RrSetGroup) > 0 {
-		var rr_set_groupList []map[string]interface{}
-		for _, item := range data.RrSetGroup {
-			itemMap := make(map[string]interface{})
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
-				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
-				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			rr_set_groupList = append(rr_set_groupList, itemMap)
+		if data.Secondary.TsigKeyValue != nil {
+			tsig_key_valueNestedMap := make(map[string]interface{})
+			secondaryMap["tsig_key_value"] = tsig_key_valueNestedMap
 		}
-		apiResource.Spec["rr_set_group"] = rr_set_groupList
-	}
-	if data.SoaParameters != nil {
-		soa_parametersMap := make(map[string]interface{})
-		if !data.SoaParameters.Expire.IsNull() && !data.SoaParameters.Expire.IsUnknown() {
-			soa_parametersMap["expire"] = data.SoaParameters.Expire.ValueInt64()
-		}
-		if !data.SoaParameters.NegativeTtl.IsNull() && !data.SoaParameters.NegativeTtl.IsUnknown() {
-			soa_parametersMap["negative_ttl"] = data.SoaParameters.NegativeTtl.ValueInt64()
-		}
-		if !data.SoaParameters.Refresh.IsNull() && !data.SoaParameters.Refresh.IsUnknown() {
-			soa_parametersMap["refresh"] = data.SoaParameters.Refresh.ValueInt64()
-		}
-		if !data.SoaParameters.Retry.IsNull() && !data.SoaParameters.Retry.IsUnknown() {
-			soa_parametersMap["retry"] = data.SoaParameters.Retry.ValueInt64()
-		}
-		if !data.SoaParameters.Ttl.IsNull() && !data.SoaParameters.Ttl.IsUnknown() {
-			soa_parametersMap["ttl"] = data.SoaParameters.Ttl.ValueInt64()
-		}
-		apiResource.Spec["soa_parameters"] = soa_parametersMap
-	}
-	if !data.AllowHTTPLbManagedRecords.IsNull() && !data.AllowHTTPLbManagedRecords.IsUnknown() {
-		apiResource.Spec["allow_http_lb_managed_records"] = data.AllowHTTPLbManagedRecords.ValueBool()
+		apiResource.Spec["secondary"] = secondaryMap
 	}
 
 
@@ -2414,13 +2327,6 @@ func (r *DNSZoneResource) Create(ctx context.Context, req resource.CreateRequest
 	data.ID = types.StringValue(created.Metadata.Name)
 
 	// Set computed fields from API response
-	if v, ok := created.Spec["allow_http_lb_managed_records"].(bool); ok {
-		data.AllowHTTPLbManagedRecords = types.BoolValue(v)
-	} else if data.AllowHTTPLbManagedRecords.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.AllowHTTPLbManagedRecords = types.BoolNull()
-	}
-	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2514,401 +2420,35 @@ func (r *DNSZoneResource) Read(ctx context.Context, req resource.ReadRequest, re
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if listData, ok := apiResource.Spec["default_rr_set_group"].([]interface{}); ok && len(listData) > 0 {
-		var default_rr_set_groupList []DNSZoneDefaultRrSetGroupModel
-		for _, item := range listData {
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				default_rr_set_groupList = append(default_rr_set_groupList, DNSZoneDefaultRrSetGroupModel{
-					ARecord: func() *DNSZoneDefaultRrSetGroupARecordModel {
-						if nestedMap, ok := itemMap["a_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupARecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					AaaaRecord: func() *DNSZoneDefaultRrSetGroupAaaaRecordModel {
-						if nestedMap, ok := itemMap["aaaa_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupAaaaRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					AfsdbRecord: func() *DNSZoneDefaultRrSetGroupAfsdbRecordModel {
-						if nestedMap, ok := itemMap["afsdb_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupAfsdbRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					AliasRecord: func() *DNSZoneDefaultRrSetGroupAliasRecordModel {
-						if nestedMap, ok := itemMap["alias_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupAliasRecordModel{
-								Value: func() types.String {
-									if v, ok := nestedMap["value"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					CaaRecord: func() *DNSZoneDefaultRrSetGroupCaaRecordModel {
-						if nestedMap, ok := itemMap["caa_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupCaaRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					CdsRecord: func() *DNSZoneDefaultRrSetGroupCdsRecordModel {
-						if nestedMap, ok := itemMap["cds_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupCdsRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					CertRecord: func() *DNSZoneDefaultRrSetGroupCertRecordModel {
-						if nestedMap, ok := itemMap["cert_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupCertRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					CnameRecord: func() *DNSZoneDefaultRrSetGroupCnameRecordModel {
-						if nestedMap, ok := itemMap["cname_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupCnameRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								Value: func() types.String {
-									if v, ok := nestedMap["value"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					DescriptionSpec: func() types.String {
-						if v, ok := itemMap["description"].(string); ok && v != "" {
-							return types.StringValue(v)
-						}
-						return types.StringNull()
-					}(),
-					DsRecord: func() *DNSZoneDefaultRrSetGroupDsRecordModel {
-						if nestedMap, ok := itemMap["ds_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupDsRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					Eui48Record: func() *DNSZoneDefaultRrSetGroupEui48RecordModel {
-						if nestedMap, ok := itemMap["eui48_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupEui48RecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								Value: func() types.String {
-									if v, ok := nestedMap["value"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					Eui64Record: func() *DNSZoneDefaultRrSetGroupEui64RecordModel {
-						if nestedMap, ok := itemMap["eui64_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupEui64RecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								Value: func() types.String {
-									if v, ok := nestedMap["value"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					LbRecord: func() *DNSZoneDefaultRrSetGroupLbRecordModel {
-						if nestedMap, ok := itemMap["lb_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupLbRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					LocRecord: func() *DNSZoneDefaultRrSetGroupLocRecordModel {
-						if nestedMap, ok := itemMap["loc_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupLocRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					MxRecord: func() *DNSZoneDefaultRrSetGroupMxRecordModel {
-						if nestedMap, ok := itemMap["mx_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupMxRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					NaptrRecord: func() *DNSZoneDefaultRrSetGroupNaptrRecordModel {
-						if nestedMap, ok := itemMap["naptr_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupNaptrRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					NsRecord: func() *DNSZoneDefaultRrSetGroupNsRecordModel {
-						if nestedMap, ok := itemMap["ns_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupNsRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					PtrRecord: func() *DNSZoneDefaultRrSetGroupPtrRecordModel {
-						if nestedMap, ok := itemMap["ptr_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupPtrRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					SrvRecord: func() *DNSZoneDefaultRrSetGroupSrvRecordModel {
-						if nestedMap, ok := itemMap["srv_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupSrvRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					SshfpRecord: func() *DNSZoneDefaultRrSetGroupSshfpRecordModel {
-						if nestedMap, ok := itemMap["sshfp_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupSshfpRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					TlsaRecord: func() *DNSZoneDefaultRrSetGroupTlsaRecordModel {
-						if nestedMap, ok := itemMap["tlsa_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupTlsaRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					Ttl: func() types.Int64 {
-						if v, ok := itemMap["ttl"].(float64); ok && v != 0 {
-							return types.Int64Value(int64(v))
-						}
-						return types.Int64Null()
-					}(),
-					TxtRecord: func() *DNSZoneDefaultRrSetGroupTxtRecordModel {
-						if nestedMap, ok := itemMap["txt_record"].(map[string]interface{}); ok {
-							return &DNSZoneDefaultRrSetGroupTxtRecordModel{
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-				})
-			}
-		}
-		data.DefaultRrSetGroup = default_rr_set_groupList
-	}
-	if _, ok := apiResource.Spec["default_soa_parameters"].(map[string]interface{}); ok && isImport && data.DefaultSoaParameters == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.DefaultSoaParameters = &DNSZoneEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["dnssec_mode"].(map[string]interface{}); ok && isImport && data.DnssecMode == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.DnssecMode = &DNSZoneDnssecModeModel{}
-	}
-	// Normal Read: preserve existing state value
-	if listData, ok := apiResource.Spec["rr_set_group"].([]interface{}); ok && len(listData) > 0 {
-		var rr_set_groupList []DNSZoneRrSetGroupModel
-		for _, item := range listData {
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				rr_set_groupList = append(rr_set_groupList, DNSZoneRrSetGroupModel{
-					Metadata: func() *DNSZoneRrSetGroupMetadataModel {
-						if nestedMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
-							return &DNSZoneRrSetGroupMetadataModel{
-								DescriptionSpec: func() types.String {
-									if v, ok := nestedMap["description"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								Name: func() types.String {
-									if v, ok := nestedMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-				})
-			}
-		}
-		data.RrSetGroup = rr_set_groupList
-	}
-	if blockData, ok := apiResource.Spec["soa_parameters"].(map[string]interface{}); ok && (isImport || data.SoaParameters != nil) {
-		data.SoaParameters = &DNSZoneSoaParametersModel{
-			Expire: func() types.Int64 {
-				if v, ok := blockData["expire"].(float64); ok {
-					return types.Int64Value(int64(v))
+	if blockData, ok := apiResource.Spec["primary"].(map[string]interface{}); ok && (isImport || data.Primary != nil) {
+		data.Primary = &DNSZonePrimaryModel{
+			AllowHTTPLbManagedRecords: func() types.Bool {
+				if !isImport && data.Primary != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Primary.AllowHTTPLbManagedRecords
 				}
-				return types.Int64Null()
-			}(),
-			NegativeTtl: func() types.Int64 {
-				if v, ok := blockData["negative_ttl"].(float64); ok {
-					return types.Int64Value(int64(v))
+				// Import case: read from API
+				if v, ok := blockData["allow_http_lb_managed_records"].(bool); ok {
+					return types.BoolValue(v)
 				}
-				return types.Int64Null()
-			}(),
-			Refresh: func() types.Int64 {
-				if v, ok := blockData["refresh"].(float64); ok {
-					return types.Int64Value(int64(v))
-				}
-				return types.Int64Null()
-			}(),
-			Retry: func() types.Int64 {
-				if v, ok := blockData["retry"].(float64); ok {
-					return types.Int64Value(int64(v))
-				}
-				return types.Int64Null()
-			}(),
-			Ttl: func() types.Int64 {
-				if v, ok := blockData["ttl"].(float64); ok {
-					return types.Int64Value(int64(v))
-				}
-				return types.Int64Null()
+				return types.BoolNull()
 			}(),
 		}
 	}
-	// Top-level Optional bool: preserve prior state to avoid API default drift
-	if !isImport && !data.AllowHTTPLbManagedRecords.IsNull() {
-		// Normal Read: preserve existing state value (do nothing)
-	} else {
-		// Import case or null state: read from API
-		if v, ok := apiResource.Spec["allow_http_lb_managed_records"].(bool); ok {
-			data.AllowHTTPLbManagedRecords = types.BoolValue(v)
-		} else {
-			data.AllowHTTPLbManagedRecords = types.BoolNull()
+	if blockData, ok := apiResource.Spec["secondary"].(map[string]interface{}); ok && (isImport || data.Secondary != nil) {
+		data.Secondary = &DNSZoneSecondaryModel{
+			TsigKeyAlgorithm: func() types.String {
+				if v, ok := blockData["tsig_key_algorithm"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TsigKeyName: func() types.String {
+				if v, ok := blockData["tsig_key_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
 		}
 	}
 
@@ -2972,229 +2512,52 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.DefaultRrSetGroup) > 0 {
-		var default_rr_set_groupList []map[string]interface{}
-		for _, item := range data.DefaultRrSetGroup {
-			itemMap := make(map[string]interface{})
-			if item.ARecord != nil {
-				a_recordNestedMap := make(map[string]interface{})
-				if !item.ARecord.Name.IsNull() && !item.ARecord.Name.IsUnknown() {
-					a_recordNestedMap["name"] = item.ARecord.Name.ValueString()
-				}
-				itemMap["a_record"] = a_recordNestedMap
-			}
-			if item.AaaaRecord != nil {
-				aaaa_recordNestedMap := make(map[string]interface{})
-				if !item.AaaaRecord.Name.IsNull() && !item.AaaaRecord.Name.IsUnknown() {
-					aaaa_recordNestedMap["name"] = item.AaaaRecord.Name.ValueString()
-				}
-				itemMap["aaaa_record"] = aaaa_recordNestedMap
-			}
-			if item.AfsdbRecord != nil {
-				afsdb_recordNestedMap := make(map[string]interface{})
-				if !item.AfsdbRecord.Name.IsNull() && !item.AfsdbRecord.Name.IsUnknown() {
-					afsdb_recordNestedMap["name"] = item.AfsdbRecord.Name.ValueString()
-				}
-				itemMap["afsdb_record"] = afsdb_recordNestedMap
-			}
-			if item.AliasRecord != nil {
-				alias_recordNestedMap := make(map[string]interface{})
-				if !item.AliasRecord.Value.IsNull() && !item.AliasRecord.Value.IsUnknown() {
-					alias_recordNestedMap["value"] = item.AliasRecord.Value.ValueString()
-				}
-				itemMap["alias_record"] = alias_recordNestedMap
-			}
-			if item.CaaRecord != nil {
-				caa_recordNestedMap := make(map[string]interface{})
-				if !item.CaaRecord.Name.IsNull() && !item.CaaRecord.Name.IsUnknown() {
-					caa_recordNestedMap["name"] = item.CaaRecord.Name.ValueString()
-				}
-				itemMap["caa_record"] = caa_recordNestedMap
-			}
-			if item.CdsRecord != nil {
-				cds_recordNestedMap := make(map[string]interface{})
-				if !item.CdsRecord.Name.IsNull() && !item.CdsRecord.Name.IsUnknown() {
-					cds_recordNestedMap["name"] = item.CdsRecord.Name.ValueString()
-				}
-				itemMap["cds_record"] = cds_recordNestedMap
-			}
-			if item.CertRecord != nil {
-				cert_recordNestedMap := make(map[string]interface{})
-				if !item.CertRecord.Name.IsNull() && !item.CertRecord.Name.IsUnknown() {
-					cert_recordNestedMap["name"] = item.CertRecord.Name.ValueString()
-				}
-				itemMap["cert_record"] = cert_recordNestedMap
-			}
-			if item.CnameRecord != nil {
-				cname_recordNestedMap := make(map[string]interface{})
-				if !item.CnameRecord.Name.IsNull() && !item.CnameRecord.Name.IsUnknown() {
-					cname_recordNestedMap["name"] = item.CnameRecord.Name.ValueString()
-				}
-				if !item.CnameRecord.Value.IsNull() && !item.CnameRecord.Value.IsUnknown() {
-					cname_recordNestedMap["value"] = item.CnameRecord.Value.ValueString()
-				}
-				itemMap["cname_record"] = cname_recordNestedMap
-			}
-			if !item.DescriptionSpec.IsNull() && !item.DescriptionSpec.IsUnknown() {
-				itemMap["description"] = item.DescriptionSpec.ValueString()
-			}
-			if item.DsRecord != nil {
-				ds_recordNestedMap := make(map[string]interface{})
-				if !item.DsRecord.Name.IsNull() && !item.DsRecord.Name.IsUnknown() {
-					ds_recordNestedMap["name"] = item.DsRecord.Name.ValueString()
-				}
-				itemMap["ds_record"] = ds_recordNestedMap
-			}
-			if item.Eui48Record != nil {
-				eui48_recordNestedMap := make(map[string]interface{})
-				if !item.Eui48Record.Name.IsNull() && !item.Eui48Record.Name.IsUnknown() {
-					eui48_recordNestedMap["name"] = item.Eui48Record.Name.ValueString()
-				}
-				if !item.Eui48Record.Value.IsNull() && !item.Eui48Record.Value.IsUnknown() {
-					eui48_recordNestedMap["value"] = item.Eui48Record.Value.ValueString()
-				}
-				itemMap["eui48_record"] = eui48_recordNestedMap
-			}
-			if item.Eui64Record != nil {
-				eui64_recordNestedMap := make(map[string]interface{})
-				if !item.Eui64Record.Name.IsNull() && !item.Eui64Record.Name.IsUnknown() {
-					eui64_recordNestedMap["name"] = item.Eui64Record.Name.ValueString()
-				}
-				if !item.Eui64Record.Value.IsNull() && !item.Eui64Record.Value.IsUnknown() {
-					eui64_recordNestedMap["value"] = item.Eui64Record.Value.ValueString()
-				}
-				itemMap["eui64_record"] = eui64_recordNestedMap
-			}
-			if item.LbRecord != nil {
-				lb_recordNestedMap := make(map[string]interface{})
-				if !item.LbRecord.Name.IsNull() && !item.LbRecord.Name.IsUnknown() {
-					lb_recordNestedMap["name"] = item.LbRecord.Name.ValueString()
-				}
-				itemMap["lb_record"] = lb_recordNestedMap
-			}
-			if item.LocRecord != nil {
-				loc_recordNestedMap := make(map[string]interface{})
-				if !item.LocRecord.Name.IsNull() && !item.LocRecord.Name.IsUnknown() {
-					loc_recordNestedMap["name"] = item.LocRecord.Name.ValueString()
-				}
-				itemMap["loc_record"] = loc_recordNestedMap
-			}
-			if item.MxRecord != nil {
-				mx_recordNestedMap := make(map[string]interface{})
-				if !item.MxRecord.Name.IsNull() && !item.MxRecord.Name.IsUnknown() {
-					mx_recordNestedMap["name"] = item.MxRecord.Name.ValueString()
-				}
-				itemMap["mx_record"] = mx_recordNestedMap
-			}
-			if item.NaptrRecord != nil {
-				naptr_recordNestedMap := make(map[string]interface{})
-				if !item.NaptrRecord.Name.IsNull() && !item.NaptrRecord.Name.IsUnknown() {
-					naptr_recordNestedMap["name"] = item.NaptrRecord.Name.ValueString()
-				}
-				itemMap["naptr_record"] = naptr_recordNestedMap
-			}
-			if item.NsRecord != nil {
-				ns_recordNestedMap := make(map[string]interface{})
-				if !item.NsRecord.Name.IsNull() && !item.NsRecord.Name.IsUnknown() {
-					ns_recordNestedMap["name"] = item.NsRecord.Name.ValueString()
-				}
-				itemMap["ns_record"] = ns_recordNestedMap
-			}
-			if item.PtrRecord != nil {
-				ptr_recordNestedMap := make(map[string]interface{})
-				if !item.PtrRecord.Name.IsNull() && !item.PtrRecord.Name.IsUnknown() {
-					ptr_recordNestedMap["name"] = item.PtrRecord.Name.ValueString()
-				}
-				itemMap["ptr_record"] = ptr_recordNestedMap
-			}
-			if item.SrvRecord != nil {
-				srv_recordNestedMap := make(map[string]interface{})
-				if !item.SrvRecord.Name.IsNull() && !item.SrvRecord.Name.IsUnknown() {
-					srv_recordNestedMap["name"] = item.SrvRecord.Name.ValueString()
-				}
-				itemMap["srv_record"] = srv_recordNestedMap
-			}
-			if item.SshfpRecord != nil {
-				sshfp_recordNestedMap := make(map[string]interface{})
-				if !item.SshfpRecord.Name.IsNull() && !item.SshfpRecord.Name.IsUnknown() {
-					sshfp_recordNestedMap["name"] = item.SshfpRecord.Name.ValueString()
-				}
-				itemMap["sshfp_record"] = sshfp_recordNestedMap
-			}
-			if item.TlsaRecord != nil {
-				tlsa_recordNestedMap := make(map[string]interface{})
-				if !item.TlsaRecord.Name.IsNull() && !item.TlsaRecord.Name.IsUnknown() {
-					tlsa_recordNestedMap["name"] = item.TlsaRecord.Name.ValueString()
-				}
-				itemMap["tlsa_record"] = tlsa_recordNestedMap
-			}
-			if !item.Ttl.IsNull() && !item.Ttl.IsUnknown() {
-				itemMap["ttl"] = item.Ttl.ValueInt64()
-			}
-			if item.TxtRecord != nil {
-				txt_recordNestedMap := make(map[string]interface{})
-				if !item.TxtRecord.Name.IsNull() && !item.TxtRecord.Name.IsUnknown() {
-					txt_recordNestedMap["name"] = item.TxtRecord.Name.ValueString()
-				}
-				itemMap["txt_record"] = txt_recordNestedMap
-			}
-			default_rr_set_groupList = append(default_rr_set_groupList, itemMap)
+	if data.Primary != nil {
+		primaryMap := make(map[string]interface{})
+		if !data.Primary.AllowHTTPLbManagedRecords.IsNull() && !data.Primary.AllowHTTPLbManagedRecords.IsUnknown() {
+			primaryMap["allow_http_lb_managed_records"] = data.Primary.AllowHTTPLbManagedRecords.ValueBool()
 		}
-		apiResource.Spec["default_rr_set_group"] = default_rr_set_groupList
+		if data.Primary.DefaultSoaParameters != nil {
+			primaryMap["default_soa_parameters"] = map[string]interface{}{}
+		}
+		if data.Primary.DnssecMode != nil {
+			dnssec_modeNestedMap := make(map[string]interface{})
+			primaryMap["dnssec_mode"] = dnssec_modeNestedMap
+		}
+		if data.Primary.SoaParameters != nil {
+			soa_parametersNestedMap := make(map[string]interface{})
+			if !data.Primary.SoaParameters.Expire.IsNull() && !data.Primary.SoaParameters.Expire.IsUnknown() {
+				soa_parametersNestedMap["expire"] = data.Primary.SoaParameters.Expire.ValueInt64()
+			}
+			if !data.Primary.SoaParameters.NegativeTtl.IsNull() && !data.Primary.SoaParameters.NegativeTtl.IsUnknown() {
+				soa_parametersNestedMap["negative_ttl"] = data.Primary.SoaParameters.NegativeTtl.ValueInt64()
+			}
+			if !data.Primary.SoaParameters.Refresh.IsNull() && !data.Primary.SoaParameters.Refresh.IsUnknown() {
+				soa_parametersNestedMap["refresh"] = data.Primary.SoaParameters.Refresh.ValueInt64()
+			}
+			if !data.Primary.SoaParameters.Retry.IsNull() && !data.Primary.SoaParameters.Retry.IsUnknown() {
+				soa_parametersNestedMap["retry"] = data.Primary.SoaParameters.Retry.ValueInt64()
+			}
+			if !data.Primary.SoaParameters.Ttl.IsNull() && !data.Primary.SoaParameters.Ttl.IsUnknown() {
+				soa_parametersNestedMap["ttl"] = data.Primary.SoaParameters.Ttl.ValueInt64()
+			}
+			primaryMap["soa_parameters"] = soa_parametersNestedMap
+		}
+		apiResource.Spec["primary"] = primaryMap
 	}
-	if data.DefaultSoaParameters != nil {
-		default_soa_parametersMap := make(map[string]interface{})
-		apiResource.Spec["default_soa_parameters"] = default_soa_parametersMap
-	}
-	if data.DnssecMode != nil {
-		dnssec_modeMap := make(map[string]interface{})
-		if data.DnssecMode.Disable != nil {
-			dnssec_modeMap["disable"] = map[string]interface{}{}
+	if data.Secondary != nil {
+		secondaryMap := make(map[string]interface{})
+		if !data.Secondary.TsigKeyAlgorithm.IsNull() && !data.Secondary.TsigKeyAlgorithm.IsUnknown() {
+			secondaryMap["tsig_key_algorithm"] = data.Secondary.TsigKeyAlgorithm.ValueString()
 		}
-		if data.DnssecMode.Enable != nil {
-			dnssec_modeMap["enable"] = map[string]interface{}{}
+		if !data.Secondary.TsigKeyName.IsNull() && !data.Secondary.TsigKeyName.IsUnknown() {
+			secondaryMap["tsig_key_name"] = data.Secondary.TsigKeyName.ValueString()
 		}
-		apiResource.Spec["dnssec_mode"] = dnssec_modeMap
-	}
-	if len(data.RrSetGroup) > 0 {
-		var rr_set_groupList []map[string]interface{}
-		for _, item := range data.RrSetGroup {
-			itemMap := make(map[string]interface{})
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
-				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
-				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			rr_set_groupList = append(rr_set_groupList, itemMap)
+		if data.Secondary.TsigKeyValue != nil {
+			tsig_key_valueNestedMap := make(map[string]interface{})
+			secondaryMap["tsig_key_value"] = tsig_key_valueNestedMap
 		}
-		apiResource.Spec["rr_set_group"] = rr_set_groupList
-	}
-	if data.SoaParameters != nil {
-		soa_parametersMap := make(map[string]interface{})
-		if !data.SoaParameters.Expire.IsNull() && !data.SoaParameters.Expire.IsUnknown() {
-			soa_parametersMap["expire"] = data.SoaParameters.Expire.ValueInt64()
-		}
-		if !data.SoaParameters.NegativeTtl.IsNull() && !data.SoaParameters.NegativeTtl.IsUnknown() {
-			soa_parametersMap["negative_ttl"] = data.SoaParameters.NegativeTtl.ValueInt64()
-		}
-		if !data.SoaParameters.Refresh.IsNull() && !data.SoaParameters.Refresh.IsUnknown() {
-			soa_parametersMap["refresh"] = data.SoaParameters.Refresh.ValueInt64()
-		}
-		if !data.SoaParameters.Retry.IsNull() && !data.SoaParameters.Retry.IsUnknown() {
-			soa_parametersMap["retry"] = data.SoaParameters.Retry.ValueInt64()
-		}
-		if !data.SoaParameters.Ttl.IsNull() && !data.SoaParameters.Ttl.IsUnknown() {
-			soa_parametersMap["ttl"] = data.SoaParameters.Ttl.ValueInt64()
-		}
-		apiResource.Spec["soa_parameters"] = soa_parametersMap
-	}
-	if !data.AllowHTTPLbManagedRecords.IsNull() && !data.AllowHTTPLbManagedRecords.IsUnknown() {
-		apiResource.Spec["allow_http_lb_managed_records"] = data.AllowHTTPLbManagedRecords.ValueBool()
+		apiResource.Spec["secondary"] = secondaryMap
 	}
 
 
@@ -3208,13 +2571,6 @@ func (r *DNSZoneResource) Update(ctx context.Context, req resource.UpdateRequest
 	data.ID = types.StringValue(data.Name.ValueString())
 
 	// Set computed fields from API response
-	if v, ok := updated.Spec["allow_http_lb_managed_records"].(bool); ok {
-		data.AllowHTTPLbManagedRecords = types.BoolValue(v)
-	} else if data.AllowHTTPLbManagedRecords.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.AllowHTTPLbManagedRecords = types.BoolNull()
-	}
-	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -3248,7 +2604,6 @@ func (r *DNSZoneResource) Delete(ctx context.Context, req resource.DeleteRequest
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteDNSZone(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

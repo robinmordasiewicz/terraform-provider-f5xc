@@ -568,7 +568,6 @@ func (r *MaliciousUserMitigationResource) Delete(ctx context.Context, req resour
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteMaliciousUserMitigation(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

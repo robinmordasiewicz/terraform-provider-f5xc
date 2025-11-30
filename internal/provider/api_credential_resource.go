@@ -80,11 +80,10 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace for the APICredential. For this resource type, namespace should be empty or omitted.",
-				Optional: true,
-				Computed: true,
+				MarkdownDescription: "Namespace where the APICredential will be created.",
+				Required: true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -613,7 +612,6 @@ func (r *APICredentialResource) Delete(ctx context.Context, req resource.DeleteR
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteAPICredential(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

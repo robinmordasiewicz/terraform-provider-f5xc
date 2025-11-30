@@ -833,7 +833,6 @@ func (r *RateLimiterResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteRateLimiter(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

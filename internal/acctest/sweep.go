@@ -228,10 +228,14 @@ func sweepNamespaces(_ string) error {
 			continue
 		}
 
+		// Apply rate limiting before delete operation
+		WaitBeforeCleanup()
+
 		log.Printf("[INFO] Deleting namespace: %s", name)
 
 		deleteCtx, deleteCancel := context.WithTimeout(ctx, 60*time.Second)
-		err := c.DeleteNamespace(deleteCtx, "system", name)
+		// Use cascade delete for namespaces (standard DELETE returns 501)
+		err := c.CascadeDeleteNamespace(deleteCtx, name)
 		deleteCancel()
 
 		if err != nil {
@@ -297,6 +301,9 @@ func sweepHTTPLoadbalancers(_ string) error {
 				continue
 			}
 
+			// Apply rate limiting before delete operation
+			WaitBeforeCleanup()
+
 			log.Printf("[INFO] Deleting HTTP load balancer: %s/%s", ns, name)
 
 			deleteCtx, deleteCancel := context.WithTimeout(ctx, 60*time.Second)
@@ -357,6 +364,9 @@ func sweepOriginPools(_ string) error {
 			if !isTestResource(name) {
 				continue
 			}
+
+			// Apply rate limiting before delete operation
+			WaitBeforeCleanup()
 
 			log.Printf("[INFO] Deleting origin pool: %s/%s", ns, name)
 
@@ -419,6 +429,9 @@ func sweepHealthchecks(_ string) error {
 				continue
 			}
 
+			// Apply rate limiting before delete operation
+			WaitBeforeCleanup()
+
 			log.Printf("[INFO] Deleting healthcheck: %s/%s", ns, name)
 
 			deleteCtx, deleteCancel := context.WithTimeout(ctx, 60*time.Second)
@@ -479,6 +492,9 @@ func sweepAppFirewalls(_ string) error {
 			if !isTestResource(name) {
 				continue
 			}
+
+			// Apply rate limiting before delete operation
+			WaitBeforeCleanup()
 
 			log.Printf("[INFO] Deleting app firewall: %s/%s", ns, name)
 
@@ -541,6 +557,9 @@ func sweepServicePolicies(_ string) error {
 				continue
 			}
 
+			// Apply rate limiting before delete operation
+			WaitBeforeCleanup()
+
 			log.Printf("[INFO] Deleting service policy: %s/%s", ns, name)
 
 			deleteCtx, deleteCancel := context.WithTimeout(ctx, 60*time.Second)
@@ -601,6 +620,9 @@ func sweepIPPrefixSets(_ string) error {
 			if !isTestResource(name) {
 				continue
 			}
+
+			// Apply rate limiting before delete operation
+			WaitBeforeCleanup()
 
 			log.Printf("[INFO] Deleting IP prefix set: %s/%s", ns, name)
 
@@ -663,6 +685,9 @@ func sweepRateLimiters(_ string) error {
 				continue
 			}
 
+			// Apply rate limiting before delete operation
+			WaitBeforeCleanup()
+
 			log.Printf("[INFO] Deleting rate limiter: %s/%s", ns, name)
 
 			deleteCtx, deleteCancel := context.WithTimeout(ctx, 60*time.Second)
@@ -724,6 +749,9 @@ func sweepUserIdentifications(_ string) error {
 				continue
 			}
 
+			// Apply rate limiting before delete operation
+			WaitBeforeCleanup()
+
 			log.Printf("[INFO] Deleting user identification: %s/%s", ns, name)
 
 			deleteCtx, deleteCancel := context.WithTimeout(ctx, 60*time.Second)
@@ -784,6 +812,9 @@ func sweepMaliciousUserMitigations(_ string) error {
 			if !isTestResource(name) {
 				continue
 			}
+
+			// Apply rate limiting before delete operation
+			WaitBeforeCleanup()
 
 			log.Printf("[INFO] Deleting malicious user mitigation: %s/%s", ns, name)
 

@@ -50,29 +50,29 @@ resource "f5xc_malicious_user_mitigation" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the MaliciousUserMitigation. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the MaliciousUserMitigation. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the MaliciousUserMitigation will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the MaliciousUserMitigation will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`mitigation_type`](#mitigation-type) - Optional Block<br>Malicious User Mitigation Settings. Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user. The settings defined in malicious user mitigation specify what mitigation actions to take for user determined to be at different threat levels<br>See [Mitigation Type](#mitigation-type) below for details.
+<a id="mitigation-type"></a>&#x2022; [`mitigation_type`](#mitigation-type) - Optional Block<br>Malicious User Mitigation Settings. Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user. The settings defined in malicious user mitigation specify what mitigation actions to take for user determined to be at different threat levels<br>See [Mitigation Type](#mitigation-type) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -80,47 +80,47 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`mitigation_type`](#mitigation-type) block supports the following:
 
-&#x2022; [`rules`](#mitigation-type-rules) - Optional Block<br>Rules. Define the threat levels and the corresponding mitigation actions to be taken<br>See [Rules](#mitigation-type-rules) below.
+<a id="mitigation-type-rules"></a>&#x2022; [`rules`](#mitigation-type-rules) - Optional Block<br>Rules. Define the threat levels and the corresponding mitigation actions to be taken<br>See [Rules](#mitigation-type-rules) below.
 
 #### Mitigation Type Rules
 
 A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigation-type)) supports the following:
 
-&#x2022; [`mitigation_action`](#mitigation-type-rules-mitigation-action) - Optional Block<br>Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user<br>See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
+<a id="mitigation-type-rules-mitigation-action"></a>&#x2022; [`mitigation_action`](#mitigation-type-rules-mitigation-action) - Optional Block<br>Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user<br>See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
 
-&#x2022; [`threat_level`](#mitigation-type-rules-threat-level) - Optional Block<br>Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation<br>See [Threat Level](#mitigation-type-rules-threat-level) below.
+<a id="mitigation-type-rules-threat-level"></a>&#x2022; [`threat_level`](#mitigation-type-rules-threat-level) - Optional Block<br>Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation<br>See [Threat Level](#mitigation-type-rules-threat-level) below.
 
 #### Mitigation Type Rules Mitigation Action
 
 A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
-&#x2022; [`block_temporarily`](#mitigation-type-rules-mitigation-action-block-temporarily) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-mitigation-action-block-temporarily"></a>&#x2022; [`block_temporarily`](#mitigation-type-rules-mitigation-action-block-temporarily) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`captcha_challenge`](#mitigation-type-rules-mitigation-action-captcha-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-mitigation-action-captcha-challenge"></a>&#x2022; [`captcha_challenge`](#mitigation-type-rules-mitigation-action-captcha-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`javascript_challenge`](#mitigation-type-rules-mitigation-action-javascript-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-mitigation-action-javascript-challenge"></a>&#x2022; [`javascript_challenge`](#mitigation-type-rules-mitigation-action-javascript-challenge) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Mitigation Type Rules Threat Level
 
 A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
-&#x2022; [`high`](#mitigation-type-rules-threat-level-high) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-threat-level-high"></a>&#x2022; [`high`](#mitigation-type-rules-threat-level-high) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`low`](#mitigation-type-rules-threat-level-low) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-threat-level-low"></a>&#x2022; [`low`](#mitigation-type-rules-threat-level-low) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`medium`](#mitigation-type-rules-threat-level-medium) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="mitigation-type-rules-threat-level-medium"></a>&#x2022; [`medium`](#mitigation-type-rules-threat-level-medium) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

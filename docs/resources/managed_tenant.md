@@ -48,31 +48,31 @@ resource "f5xc_managed_tenant" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the ManagedTenant. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ManagedTenant. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ManagedTenant will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ManagedTenant will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`groups`](#groups) - Optional Block<br>Group Mapping. List of local user group association to user groups in the managed tenant specified in the tenant_choice<br>See [Groups](#groups) below for details.
+<a id="groups"></a>&#x2022; [`groups`](#groups) - Optional Block<br>Group Mapping. List of local user group association to user groups in the managed tenant specified in the tenant_choice<br>See [Groups](#groups) below for details.
 
-&#x2022; [`tenant_id`](#tenant-id) - Optional String<br>Managed Tenant ID. Specify the Tenant ID of the existing tenant which needs to be managed. User can select Tenant ID from dropdown if managed tenant has already configured delegated access or manually input the Tenant ID if managed tenant configuration will happen in future
+<a id="tenant-id"></a>&#x2022; [`tenant_id`](#tenant-id) - Optional String<br>Managed Tenant ID. Specify the Tenant ID of the existing tenant which needs to be managed. User can select Tenant ID from dropdown if managed tenant has already configured delegated access or manually input the Tenant ID if managed tenant configuration will happen in future
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -80,31 +80,31 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`groups`](#groups) block supports the following:
 
-&#x2022; [`group`](#groups-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Group](#groups-group) below.
+<a id="groups-group"></a>&#x2022; [`group`](#groups-group) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Group](#groups-group) below.
 
-&#x2022; [`managed_tenant_groups`](#groups-managed-tenant-groups) - Optional List<br>Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user
+<a id="groups-managed-tenant-groups"></a>&#x2022; [`managed_tenant_groups`](#groups-managed-tenant-groups) - Optional List<br>Managed Tenant Groups. List of group names in managed tenant (MT). Note - To properly establish access, admin of managed tenant need to create corresponding Allowed Tenant configuration object with access to use same group names. Once it's setup, when user from original tenant access managed tenant, underlying roles from managed tenant will be applied to user
 
 #### Groups Group
 
 A [`group`](#groups-group) block (within [`groups`](#groups)) supports the following:
 
-&#x2022; [`name`](#groups-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="groups-group-name"></a>&#x2022; [`name`](#groups-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#groups-group-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="groups-group-namespace"></a>&#x2022; [`namespace`](#groups-group-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#groups-group-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="groups-group-tenant"></a>&#x2022; [`tenant`](#groups-group-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

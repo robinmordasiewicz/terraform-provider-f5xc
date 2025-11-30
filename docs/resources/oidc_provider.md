@@ -52,35 +52,35 @@ resource "f5xc_oidc_provider" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the OidcProvider. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the OidcProvider. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the OidcProvider will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the OidcProvider will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; [`azure_oidc_spec_type`](#azure-oidc-spec-type) - Optional Block<br>Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider<br>See [Azure Oidc Spec Type](#azure-oidc-spec-type) below for details.
-<br><br>&#x2022; [`google_oidc_spec_type`](#google-oidc-spec-type) - Optional Block<br>Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider<br>See [Google Oidc Spec Type](#google-oidc-spec-type) below for details.
-<br><br>&#x2022; [`oidc_v10_spec_type`](#oidc-v10-spec-type) - Optional Block<br>OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider<br>See [Oidc V10 Spec Type](#oidc-v10-spec-type) below for details.
-<br><br>&#x2022; [`okta_oidc_spec_type`](#okta-oidc-spec-type) - Optional Block<br>Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider<br>See [Okta Oidc Spec Type](#okta-oidc-spec-type) below for details.
+&#x2022; <a id="azure-oidc-spec-type"></a>[`azure_oidc_spec_type`](#azure-oidc-spec-type) - Optional Block<br>Azure OIDC Spec Type. AzureOIDCSpecType specifies the attributes required to configure Azure provider<br>See [Azure Oidc Spec Type](#azure-oidc-spec-type) below for details.
+<br><br>&#x2022; <a id="google-oidc-spec-type"></a>[`google_oidc_spec_type`](#google-oidc-spec-type) - Optional Block<br>Google OIDC Spec Type. GoogleOIDCSpecType specifies the attributes required to configure google provider<br>See [Google Oidc Spec Type](#google-oidc-spec-type) below for details.
+<br><br>&#x2022; <a id="oidc-v10-spec-type"></a>[`oidc_v10_spec_type`](#oidc-v10-spec-type) - Optional Block<br>OpenID Connect v1.0 Spec Type. OIDCV10SpecType specifies the attributes required to configure OIDC provider<br>See [Oidc V10 Spec Type](#oidc-v10-spec-type) below for details.
+<br><br>&#x2022; <a id="okta-oidc-spec-type"></a>[`okta_oidc_spec_type`](#okta-oidc-spec-type) - Optional Block<br>Okta OpenID Connect Spec Type. OKTAOIDCSpecType specifies the attributes required to configure okta OIDC provider<br>See [Okta Oidc Spec Type](#okta-oidc-spec-type) below for details.
 
-&#x2022; [`provider_type`](#provider-type) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`<br>Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC
+<a id="provider-type"></a>&#x2022; [`provider_type`](#provider-type) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `GOOGLE`, `AZURE`, `OKTA`<br>Provider Type. Types of OIDC providers Default provider. use this for standard OpenIDConnect v1.0 Authenticate with Google OIDC Authenticate with Azure OIDC Authenticate with Okta OIDC
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -88,115 +88,115 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`azure_oidc_spec_type`](#azure-oidc-spec-type) block supports the following:
 
-&#x2022; [`authorization_url`](#azure-oidc-spec-type-authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
+<a id="azure-oidc-spec-type-authorization-url"></a>&#x2022; [`authorization_url`](#azure-oidc-spec-type-authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
 
-&#x2022; [`backchannel_logout`](#azure-oidc-spec-type-backchannel-logout) - Optional Bool<br>Backchannel Logout. Does the external IDP support backchannel logout?
+<a id="azure-oidc-spec-type-backchannel-logout"></a>&#x2022; [`backchannel_logout`](#azure-oidc-spec-type-backchannel-logout) - Optional Bool<br>Backchannel Logout. Does the external IDP support backchannel logout?
 
-&#x2022; [`client_id`](#azure-oidc-spec-type-client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with azure provider. REQUIRED field
+<a id="azure-oidc-spec-type-client-id"></a>&#x2022; [`client_id`](#azure-oidc-spec-type-client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with azure provider. REQUIRED field
 
-&#x2022; [`client_secret`](#azure-oidc-spec-type-client-secret) - Optional String<br>Client Secret. Secret of the OIDC application registered with azure provider
+<a id="azure-oidc-spec-type-client-secret"></a>&#x2022; [`client_secret`](#azure-oidc-spec-type-client-secret) - Optional String<br>Client Secret. Secret of the OIDC application registered with azure provider
 
-&#x2022; [`default_scopes`](#azure-oidc-spec-type-default-scopes) - Optional String<br>Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed
+<a id="azure-oidc-spec-type-default-scopes"></a>&#x2022; [`default_scopes`](#azure-oidc-spec-type-default-scopes) - Optional String<br>Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed
 
-&#x2022; [`issuer`](#azure-oidc-spec-type-issuer) - Optional String<br>Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed
+<a id="azure-oidc-spec-type-issuer"></a>&#x2022; [`issuer`](#azure-oidc-spec-type-issuer) - Optional String<br>Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed
 
-&#x2022; [`jwks_url`](#azure-oidc-spec-type-jwks-url) - Optional String<br>JWKS URL. URL where identity provider keys in JWK format are stored
+<a id="azure-oidc-spec-type-jwks-url"></a>&#x2022; [`jwks_url`](#azure-oidc-spec-type-jwks-url) - Optional String<br>JWKS URL. URL where identity provider keys in JWK format are stored
 
-&#x2022; [`logout_url`](#azure-oidc-spec-type-logout-url) - Optional String<br>Logout URL. Logout URL specified in your OIDC application
+<a id="azure-oidc-spec-type-logout-url"></a>&#x2022; [`logout_url`](#azure-oidc-spec-type-logout-url) - Optional String<br>Logout URL. Logout URL specified in your OIDC application
 
-&#x2022; [`prompt`](#azure-oidc-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
+<a id="azure-oidc-spec-type-prompt"></a>&#x2022; [`prompt`](#azure-oidc-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
 
-&#x2022; [`token_url`](#azure-oidc-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
+<a id="azure-oidc-spec-type-token-url"></a>&#x2022; [`token_url`](#azure-oidc-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 
-&#x2022; [`user_info_url`](#azure-oidc-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
+<a id="azure-oidc-spec-type-user-info-url"></a>&#x2022; [`user_info_url`](#azure-oidc-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
 
 #### Google Oidc Spec Type
 
 A [`google_oidc_spec_type`](#google-oidc-spec-type) block supports the following:
 
-&#x2022; [`client_id`](#google-oidc-spec-type-client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field
+<a id="google-oidc-spec-type-client-id"></a>&#x2022; [`client_id`](#google-oidc-spec-type-client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with google provider. REQUIRED field
 
-&#x2022; [`client_secret`](#google-oidc-spec-type-client-secret) - Optional String<br>Client Secret. Secret of the OIDC application registered with google provider
+<a id="google-oidc-spec-type-client-secret"></a>&#x2022; [`client_secret`](#google-oidc-spec-type-client-secret) - Optional String<br>Client Secret. Secret of the OIDC application registered with google provider
 
-&#x2022; [`hosted_domain`](#google-oidc-spec-type-hosted-domain) - Optional String<br>Hosted Domain. set hosted domain to restrict user input on login form to use email address from this email domain. for example, setting value company.com will enforce user email input to have only username@company.com leave empty if no restriction is required for email address. ie for example allow user@company1.com and user@company2.com
+<a id="google-oidc-spec-type-hosted-domain"></a>&#x2022; [`hosted_domain`](#google-oidc-spec-type-hosted-domain) - Optional String<br>Hosted Domain. set hosted domain to restrict user input on login form to use email address from this email domain. for example, setting value company.com will enforce user email input to have only username@company.com leave empty if no restriction is required for email address. ie for example allow user@company1.com and user@company2.com
 
 #### Oidc V10 Spec Type
 
 An [`oidc_v10_spec_type`](#oidc-v10-spec-type) block supports the following:
 
-&#x2022; [`allowed_clock_skew`](#oidc-v10-spec-type-allowed-clock-skew) - Optional String  Defaults to `zero`<br>Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens
+<a id="oidc-v10-spec-type-allowed-clock-skew"></a>&#x2022; [`allowed_clock_skew`](#oidc-v10-spec-type-allowed-clock-skew) - Optional String  Defaults to `zero`<br>Allowed Clock Skew. Clock skew in seconds that is tolerated when validating identity provider tokens
 
-&#x2022; [`authorization_url`](#oidc-v10-spec-type-authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
+<a id="oidc-v10-spec-type-authorization-url"></a>&#x2022; [`authorization_url`](#oidc-v10-spec-type-authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
 
-&#x2022; [`backchannel_logout`](#oidc-v10-spec-type-backchannel-logout) - Optional Bool<br>Backchannel Logout. Does the external IDP support backchannel logout?
+<a id="oidc-v10-spec-type-backchannel-logout"></a>&#x2022; [`backchannel_logout`](#oidc-v10-spec-type-backchannel-logout) - Optional Bool<br>Backchannel Logout. Does the external IDP support backchannel logout?
 
-&#x2022; [`client_id`](#oidc-v10-spec-type-client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with your identity/OIDC provider
+<a id="oidc-v10-spec-type-client-id"></a>&#x2022; [`client_id`](#oidc-v10-spec-type-client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with your identity/OIDC provider
 
-&#x2022; [`client_secret`](#oidc-v10-spec-type-client-secret) - Optional String<br>Client Secret. Secret of the OIDC application registered with your identity/OIDC provider
+<a id="oidc-v10-spec-type-client-secret"></a>&#x2022; [`client_secret`](#oidc-v10-spec-type-client-secret) - Optional String<br>Client Secret. Secret of the OIDC application registered with your identity/OIDC provider
 
-&#x2022; [`default_scopes`](#oidc-v10-spec-type-default-scopes) - Optional String<br>Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed
+<a id="oidc-v10-spec-type-default-scopes"></a>&#x2022; [`default_scopes`](#oidc-v10-spec-type-default-scopes) - Optional String<br>Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed
 
-&#x2022; [`disable_user_info`](#oidc-v10-spec-type-disable-user-info) - Optional Bool<br>Disable User Info. Disable fetching of user info information
+<a id="oidc-v10-spec-type-disable-user-info"></a>&#x2022; [`disable_user_info`](#oidc-v10-spec-type-disable-user-info) - Optional Bool<br>Disable User Info. Disable fetching of user info information
 
-&#x2022; [`display_name`](#oidc-v10-spec-type-display-name) - Optional String<br>Display Name. Friendly name for identity provider
+<a id="oidc-v10-spec-type-display-name"></a>&#x2022; [`display_name`](#oidc-v10-spec-type-display-name) - Optional String<br>Display Name. Friendly name for identity provider
 
-&#x2022; [`forwarded_query_parameters`](#oidc-v10-spec-type-forwarded-query-parameters) - Optional String<br>Forwarded Query Parameters. Non OpenID Connect/OAuth standard query parameters to be forwarded to external IDP from the initial application request to Authorization Endpoint. Multiple parameters can be entered, separated by comma (,)
+<a id="oidc-v10-spec-type-forwarded-query-parameters"></a>&#x2022; [`forwarded_query_parameters`](#oidc-v10-spec-type-forwarded-query-parameters) - Optional String<br>Forwarded Query Parameters. Non OpenID Connect/OAuth standard query parameters to be forwarded to external IDP from the initial application request to Authorization Endpoint. Multiple parameters can be entered, separated by comma (,)
 
-&#x2022; [`issuer`](#oidc-v10-spec-type-issuer) - Optional String<br>Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed
+<a id="oidc-v10-spec-type-issuer"></a>&#x2022; [`issuer`](#oidc-v10-spec-type-issuer) - Optional String<br>Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed
 
-&#x2022; [`jwks_url`](#oidc-v10-spec-type-jwks-url) - Optional String<br>JWKS URL. URL where identity provider keys in JWK format are stored
+<a id="oidc-v10-spec-type-jwks-url"></a>&#x2022; [`jwks_url`](#oidc-v10-spec-type-jwks-url) - Optional String<br>JWKS URL. URL where identity provider keys in JWK format are stored
 
-&#x2022; [`logout_url`](#oidc-v10-spec-type-logout-url) - Optional String<br>Logout URL. Logout URL specified in your OIDC application
+<a id="oidc-v10-spec-type-logout-url"></a>&#x2022; [`logout_url`](#oidc-v10-spec-type-logout-url) - Optional String<br>Logout URL. Logout URL specified in your OIDC application
 
-&#x2022; [`pass_current_locale`](#oidc-v10-spec-type-pass-current-locale) - Optional Bool<br>Pass Current Locale. Pass the current locale to the identity provider
+<a id="oidc-v10-spec-type-pass-current-locale"></a>&#x2022; [`pass_current_locale`](#oidc-v10-spec-type-pass-current-locale) - Optional Bool<br>Pass Current Locale. Pass the current locale to the identity provider
 
-&#x2022; [`pass_login_hint`](#oidc-v10-spec-type-pass-login-hint) - Optional Bool<br>Pass Login Hint. Pass login_hint to identity provider
+<a id="oidc-v10-spec-type-pass-login-hint"></a>&#x2022; [`pass_login_hint`](#oidc-v10-spec-type-pass-login-hint) - Optional Bool<br>Pass Login Hint. Pass login_hint to identity provider
 
-&#x2022; [`prompt`](#oidc-v10-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
+<a id="oidc-v10-spec-type-prompt"></a>&#x2022; [`prompt`](#oidc-v10-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
 
-&#x2022; [`token_url`](#oidc-v10-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
+<a id="oidc-v10-spec-type-token-url"></a>&#x2022; [`token_url`](#oidc-v10-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 
-&#x2022; [`user_info_url`](#oidc-v10-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
+<a id="oidc-v10-spec-type-user-info-url"></a>&#x2022; [`user_info_url`](#oidc-v10-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
 
-&#x2022; [`validate_signatures`](#oidc-v10-spec-type-validate-signatures) - Optional Bool<br>Validate Signatures. Enable/disable signature validation of external IDP signatures
+<a id="oidc-v10-spec-type-validate-signatures"></a>&#x2022; [`validate_signatures`](#oidc-v10-spec-type-validate-signatures) - Optional Bool<br>Validate Signatures. Enable/disable signature validation of external IDP signatures
 
 #### Okta Oidc Spec Type
 
 An [`okta_oidc_spec_type`](#okta-oidc-spec-type) block supports the following:
 
-&#x2022; [`authorization_url`](#okta-oidc-spec-type-authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
+<a id="okta-oidc-spec-type-authorization-url"></a>&#x2022; [`authorization_url`](#okta-oidc-spec-type-authorization-url) - Optional String<br>Authorization URL. The authorization URL of your OIDC application
 
-&#x2022; [`backchannel_logout`](#okta-oidc-spec-type-backchannel-logout) - Optional Bool<br>Backchannel Logout. Does the external IDP support backchannel logout?
+<a id="okta-oidc-spec-type-backchannel-logout"></a>&#x2022; [`backchannel_logout`](#okta-oidc-spec-type-backchannel-logout) - Optional Bool<br>Backchannel Logout. Does the external IDP support backchannel logout?
 
-&#x2022; [`client_id`](#okta-oidc-spec-type-client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with azure provider
+<a id="okta-oidc-spec-type-client-id"></a>&#x2022; [`client_id`](#okta-oidc-spec-type-client-id) - Optional String<br>Client ID. Client ID of the OIDC application registered with azure provider
 
-&#x2022; [`client_secret`](#okta-oidc-spec-type-client-secret) - Optional String<br>Client Secret. Secret of the OIDC application registered with azure provider
+<a id="okta-oidc-spec-type-client-secret"></a>&#x2022; [`client_secret`](#okta-oidc-spec-type-client-secret) - Optional String<br>Client Secret. Secret of the OIDC application registered with azure provider
 
-&#x2022; [`default_scopes`](#okta-oidc-spec-type-default-scopes) - Optional String<br>Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed
+<a id="okta-oidc-spec-type-default-scopes"></a>&#x2022; [`default_scopes`](#okta-oidc-spec-type-default-scopes) - Optional String<br>Default Scopes. The scopes to be sent when asking for authorization. It can be a space-separated list of scopes. The recommendation is to set the default scopes as 'openid profile email' and is to add additional scopes if needed
 
-&#x2022; [`issuer`](#okta-oidc-spec-type-issuer) - Optional String<br>Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed
+<a id="okta-oidc-spec-type-issuer"></a>&#x2022; [`issuer`](#okta-oidc-spec-type-issuer) - Optional String<br>Issuer. The issuer identifier for the issuer of the response. If not provided, no validation will be performed
 
-&#x2022; [`jwks_url`](#okta-oidc-spec-type-jwks-url) - Optional String<br>JWKS URL. URL where identity provider keys in JWK format are stored
+<a id="okta-oidc-spec-type-jwks-url"></a>&#x2022; [`jwks_url`](#okta-oidc-spec-type-jwks-url) - Optional String<br>JWKS URL. URL where identity provider keys in JWK format are stored
 
-&#x2022; [`logout_url`](#okta-oidc-spec-type-logout-url) - Optional String<br>Logout URL. Logout URL specified in your OIDC application
+<a id="okta-oidc-spec-type-logout-url"></a>&#x2022; [`logout_url`](#okta-oidc-spec-type-logout-url) - Optional String<br>Logout URL. Logout URL specified in your OIDC application
 
-&#x2022; [`prompt`](#okta-oidc-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
+<a id="okta-oidc-spec-type-prompt"></a>&#x2022; [`prompt`](#okta-oidc-spec-type-prompt) - Optional String<br>Possible values are `UNSPECIFIED`, `NONE`, `CONSENT`, `LOGIN`, `SELECT_ACCOUNT`<br>Prompt Type. Type of prompt authorization server for end-user reauthentication and consent default value for no prompt. when this is set, no prompt parameter will be set on authorization request. The Authorization Server will not display any authentication or consent user interface page. The Authorization Server prompts the End-User for consent before returning information to the Client The Authorization Server prompts the End-User for reauthentication. The Authorization Server prompts the End-User to select a user account. This enables an End-User who has multiple accounts at the Authorization Server to select amongst the multiple accounts that they might have current sessions for
 
-&#x2022; [`token_url`](#okta-oidc-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
+<a id="okta-oidc-spec-type-token-url"></a>&#x2022; [`token_url`](#okta-oidc-spec-type-token-url) - Optional String<br>Token URL. The token URL of your OIDC application
 
-&#x2022; [`user_info_url`](#okta-oidc-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
+<a id="okta-oidc-spec-type-user-info-url"></a>&#x2022; [`user_info_url`](#okta-oidc-spec-type-user-info-url) - Optional String<br>User Info URL. The User Info URL specified in your OIDC application
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

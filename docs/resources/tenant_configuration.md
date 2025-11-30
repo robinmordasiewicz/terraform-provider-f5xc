@@ -52,33 +52,33 @@ resource "f5xc_tenant_configuration" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the TenantConfiguration. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the TenantConfiguration. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TenantConfiguration will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the TenantConfiguration will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`basic_configuration`](#basic-configuration) - Optional Block<br>BasicConfiguration<br>See [Basic Configuration](#basic-configuration) below for details.
+<a id="basic-configuration"></a>&#x2022; [`basic_configuration`](#basic-configuration) - Optional Block<br>BasicConfiguration<br>See [Basic Configuration](#basic-configuration) below for details.
 
-&#x2022; [`brute_force_detection_settings`](#brute-force-detection-settings) - Optional Block<br>BruteForceDetectionSettings<br>See [Brute Force Detection Settings](#brute-force-detection-settings) below for details.
+<a id="brute-force-detection-settings"></a>&#x2022; [`brute_force_detection_settings`](#brute-force-detection-settings) - Optional Block<br>BruteForceDetectionSettings<br>See [Brute Force Detection Settings](#brute-force-detection-settings) below for details.
 
-&#x2022; [`password_policy`](#password-policy) - Optional Block<br>PasswordPolicy<br>See [Password Policy](#password-policy) below for details.
+<a id="password-policy"></a>&#x2022; [`password_policy`](#password-policy) - Optional Block<br>PasswordPolicy<br>See [Password Policy](#password-policy) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -86,45 +86,45 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`basic_configuration`](#basic-configuration) block supports the following:
 
-&#x2022; [`display_name`](#basic-configuration-display-name) - Optional String<br>Display Name. Tenant display name in the login screen
+<a id="basic-configuration-display-name"></a>&#x2022; [`display_name`](#basic-configuration-display-name) - Optional String<br>Display Name. Tenant display name in the login screen
 
 #### Brute Force Detection Settings
 
 A [`brute_force_detection_settings`](#brute-force-detection-settings) block supports the following:
 
-&#x2022; [`max_login_failures`](#brute-force-detection-settings-max-login-failures) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
+<a id="brute-force-detection-settings-max-login-failures"></a>&#x2022; [`max_login_failures`](#brute-force-detection-settings-max-login-failures) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
 
 #### Password Policy
 
 A [`password_policy`](#password-policy) block supports the following:
 
-&#x2022; [`digits`](#password-policy-digits) - Optional Number<br>Min Number Of Digits. The number of digits required to be in the password string
+<a id="password-policy-digits"></a>&#x2022; [`digits`](#password-policy-digits) - Optional Number<br>Min Number Of Digits. The number of digits required to be in the password string
 
-&#x2022; [`expire_password`](#password-policy-expire-password) - Optional Number<br>Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password
+<a id="password-policy-expire-password"></a>&#x2022; [`expire_password`](#password-policy-expire-password) - Optional Number<br>Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password
 
-&#x2022; [`lowercase_characters`](#password-policy-lowercase-characters) - Optional Number<br>Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string
+<a id="password-policy-lowercase-characters"></a>&#x2022; [`lowercase_characters`](#password-policy-lowercase-characters) - Optional Number<br>Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string
 
-&#x2022; [`minimum_length`](#password-policy-minimum-length) - Optional Number<br>Minimum Length. Minimum length of password
+<a id="password-policy-minimum-length"></a>&#x2022; [`minimum_length`](#password-policy-minimum-length) - Optional Number<br>Minimum Length. Minimum length of password
 
-&#x2022; [`not_recently_used`](#password-policy-not-recently-used) - Optional Number<br>Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password
+<a id="password-policy-not-recently-used"></a>&#x2022; [`not_recently_used`](#password-policy-not-recently-used) - Optional Number<br>Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password
 
-&#x2022; [`not_username`](#password-policy-not-username) - Optional Bool<br>Not Username. When set, the password is not allowed to be the same as the username
+<a id="password-policy-not-username"></a>&#x2022; [`not_username`](#password-policy-not-username) - Optional Bool<br>Not Username. When set, the password is not allowed to be the same as the username
 
-&#x2022; [`special_characters`](#password-policy-special-characters) - Optional Number<br>Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string
+<a id="password-policy-special-characters"></a>&#x2022; [`special_characters`](#password-policy-special-characters) - Optional Number<br>Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string
 
-&#x2022; [`uppercase_characters`](#password-policy-uppercase-characters) - Optional Number<br>Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string
+<a id="password-policy-uppercase-characters"></a>&#x2022; [`uppercase_characters`](#password-policy-uppercase-characters) - Optional Number<br>Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

@@ -52,29 +52,29 @@ resource "f5xc_bgp_routing_policy" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the BGPRoutingPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the BGPRoutingPolicy. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the BGPRoutingPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the BGPRoutingPolicy will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`rules`](#rules) - Optional Block<br>Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom<br>See [Rules](#rules) below for details.
+<a id="rules"></a>&#x2022; [`rules`](#rules) - Optional Block<br>Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom<br>See [Rules](#rules) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -82,79 +82,79 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`rules`](#rules) block supports the following:
 
-&#x2022; [`action`](#rules-action) - Optional Block<br>BGP Route Action. Action to be enforced if the BGP route matches the rule<br>See [Action](#rules-action) below.
+<a id="rules-action"></a>&#x2022; [`action`](#rules-action) - Optional Block<br>BGP Route Action. Action to be enforced if the BGP route matches the rule<br>See [Action](#rules-action) below.
 
-&#x2022; [`match`](#rules-match) - Optional Block<br>BGP Route Match. Predicates which have to match information in route for action to be applied<br>See [Match](#rules-match) below.
+<a id="rules-match"></a>&#x2022; [`match`](#rules-match) - Optional Block<br>BGP Route Match. Predicates which have to match information in route for action to be applied<br>See [Match](#rules-match) below.
 
 #### Rules Action
 
 An [`action`](#rules-action) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`aggregate`](#rules-action-aggregate) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-action-aggregate"></a>&#x2022; [`aggregate`](#rules-action-aggregate) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`allow`](#rules-action-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-action-allow"></a>&#x2022; [`allow`](#rules-action-allow) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`as_path`](#rules-action-as-path) - Optional String<br>AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic
+<a id="rules-action-as-path"></a>&#x2022; [`as_path`](#rules-action-as-path) - Optional String<br>AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic
 
-&#x2022; [`community`](#rules-action-community) - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-action-community) below.
+<a id="rules-action-community"></a>&#x2022; [`community`](#rules-action-community) - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-action-community) below.
 
-&#x2022; [`deny`](#rules-action-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-action-deny"></a>&#x2022; [`deny`](#rules-action-deny) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`local_preference`](#rules-action-local-preference) - Optional Number<br>Local preference. BGP Local Preference is generally used to influence outgoing traffic
+<a id="rules-action-local-preference"></a>&#x2022; [`local_preference`](#rules-action-local-preference) - Optional Number<br>Local preference. BGP Local Preference is generally used to influence outgoing traffic
 
-&#x2022; [`metric`](#rules-action-metric) - Optional Number<br>MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS
+<a id="rules-action-metric"></a>&#x2022; [`metric`](#rules-action-metric) - Optional Number<br>MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS
 
 #### Rules Action Community
 
 A [`community`](#rules-action-community) block (within [`rules.action`](#rules-action)) supports the following:
 
-&#x2022; [`community`](#rules-action-community-community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
+<a id="rules-action-community-community"></a>&#x2022; [`community`](#rules-action-community-community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
 
 #### Rules Match
 
 A [`match`](#rules-match) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`as_path`](#rules-match-as-path) - Optional String<br>AS path to match. AS path can also be a regex, which will be matched against route information
+<a id="rules-match-as-path"></a>&#x2022; [`as_path`](#rules-match-as-path) - Optional String<br>AS path to match. AS path can also be a regex, which will be matched against route information
 
-&#x2022; [`community`](#rules-match-community) - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-match-community) below.
+<a id="rules-match-community"></a>&#x2022; [`community`](#rules-match-community) - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-match-community) below.
 
-&#x2022; [`ip_prefixes`](#rules-match-ip-prefixes) - Optional Block<br>BGP Prefix List. List of IP prefix and prefix length range match condition<br>See [IP Prefixes](#rules-match-ip-prefixes) below.
+<a id="rules-match-ip-prefixes"></a>&#x2022; [`ip_prefixes`](#rules-match-ip-prefixes) - Optional Block<br>BGP Prefix List. List of IP prefix and prefix length range match condition<br>See [IP Prefixes](#rules-match-ip-prefixes) below.
 
 #### Rules Match Community
 
 A [`community`](#rules-match-community) block (within [`rules.match`](#rules-match)) supports the following:
 
-&#x2022; [`community`](#rules-match-community-community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
+<a id="rules-match-community-community"></a>&#x2022; [`community`](#rules-match-community-community) - Optional List<br>BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
 
 #### Rules Match IP Prefixes
 
 An [`ip_prefixes`](#rules-match-ip-prefixes) block (within [`rules.match`](#rules-match)) supports the following:
 
-&#x2022; [`prefixes`](#rules-match-ip-prefixes-prefixes) - Optional Block<br>Prefix list. List of IP prefix<br>See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
+<a id="rules-match-ip-prefixes-prefixes"></a>&#x2022; [`prefixes`](#rules-match-ip-prefixes-prefixes) - Optional Block<br>Prefix list. List of IP prefix<br>See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
 
 #### Rules Match IP Prefixes Prefixes
 
 A [`prefixes`](#rules-match-ip-prefixes-prefixes) block (within [`rules.match.ip_prefixes`](#rules-match-ip-prefixes)) supports the following:
 
-&#x2022; [`equal_or_longer_than`](#rules-match-ip-prefixes-prefixes-equal-or-longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-match-ip-prefixes-prefixes-equal-or-longer-than"></a>&#x2022; [`equal_or_longer_than`](#rules-match-ip-prefixes-prefixes-equal-or-longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`exact_match`](#rules-match-ip-prefixes-prefixes-exact-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-match-ip-prefixes-prefixes-exact-match"></a>&#x2022; [`exact_match`](#rules-match-ip-prefixes-prefixes-exact-match) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`ip_prefixes`](#rules-match-ip-prefixes-prefixes-ip-prefixes) - Optional String<br>IP Prefix. IP prefix to match on BGP route
+<a id="rules-match-ip-prefixes-prefixes-ip-prefixes"></a>&#x2022; [`ip_prefixes`](#rules-match-ip-prefixes-prefixes-ip-prefixes) - Optional String<br>IP Prefix. IP prefix to match on BGP route
 
-&#x2022; [`longer_than`](#rules-match-ip-prefixes-prefixes-longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="rules-match-ip-prefixes-prefixes-longer-than"></a>&#x2022; [`longer_than`](#rules-match-ip-prefixes-prefixes-longer-than) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

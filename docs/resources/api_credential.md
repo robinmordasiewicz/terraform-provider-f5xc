@@ -47,35 +47,35 @@ resource "f5xc_api_credential" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the APICredential. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the APICredential. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the APICredential will be created
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the APICredential. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 
-&#x2022; [`password`](#password) - Optional String<br>Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain
+<a id="password"></a>&#x2022; [`password`](#password) - Optional String<br>Password. Password is used for generating an API certificate P12 bundle user can use to protect access to it. this password will not be saved/persisted anywhere in the system. Applicable for credential type API_CERTIFICATE Users have to use this password when they use the certificate, e.g. in curl or while adding to key chain
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; [`type`](#type) - Optional String  Defaults to `API_CERTIFICATE`<br>Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`<br>Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential)
+<a id="type"></a>&#x2022; [`type`](#type) - Optional String  Defaults to `API_CERTIFICATE`<br>Possible values are `API_CERTIFICATE`, `KUBE_CONFIG`, `API_TOKEN`, `SERVICE_API_TOKEN`, `SERVICE_API_CERTIFICATE`, `SERVICE_KUBE_CONFIG`, `SITE_GLOBAL_KUBE_CONFIG`, `SCIM_API_TOKEN`, `SERVICE_SITE_GLOBAL_KUBE_CONFIG`<br>Credential Type. Types of API credential given when requesting credentials from volterra F5XC user certificate to access F5XC public API using mTLS using self credential (my credential) Kubernetes config file to access Virtual Kubernetes API in Volterra using self credential (my credential) API token to access F5XC public API using self credential (my credential) API token for service credentials using service user credential (service credential) API certificate for service credentials using service user credential (service credential) Service Credential kubeconfig using service user credential (service credential) Kubeconfig for accessing Site via Global Controller using self credential (my credential) Token for the SCIM public APIs used to sync users and groups with the F5XC platform. External identity provider's SCIM client can use this token as Bearer token with Authorization header Service Credential Kubeconfig for accessing Site via Global Controller using service user credential (service credential)
 
-&#x2022; [`virtual_k8s_name`](#virtual-k8s-name) - Optional String<br>vK8s Cluster. Name of virtual K8s cluster. Applicable for KUBE_CONFIG
+<a id="virtual-k8s-name"></a>&#x2022; [`virtual_k8s_name`](#virtual-k8s-name) - Optional String<br>vK8s Cluster. Name of virtual K8s cluster. Applicable for KUBE_CONFIG
 
-&#x2022; [`virtual_k8s_namespace`](#virtual-k8s-namespace) - Optional String<br>vK8s Namespace. Namespace of virtual K8s cluster. Applicable for KUBE_CONFIG
+<a id="virtual-k8s-namespace"></a>&#x2022; [`virtual_k8s_namespace`](#virtual-k8s-namespace) - Optional String<br>vK8s Namespace. Namespace of virtual K8s cluster. Applicable for KUBE_CONFIG
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -83,13 +83,13 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

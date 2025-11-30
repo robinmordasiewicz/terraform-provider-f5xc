@@ -52,42 +52,42 @@ resource "f5xc_forwarding_class" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the ForwardingClass. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ForwardingClass. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ForwardingClass will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ForwardingClass will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; [`dscp`](#dscp) - Optional Block<br>DSCP Marking setting. DSCP marking setting as per RFC 2475<br>See [Dscp](#dscp) below for details.
-<br><br>&#x2022; [`no_marking`](#no-marking) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`tos_value`](#tos-value) - Optional Number<br>TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low
+&#x2022; <a id="dscp"></a>[`dscp`](#dscp) - Optional Block<br>DSCP Marking setting. DSCP marking setting as per RFC 2475<br>See [Dscp](#dscp) below for details.
+<br><br>&#x2022; <a id="no-marking"></a>[`no_marking`](#no-marking) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="tos-value"></a>[`tos_value`](#tos-value) - Optional Number<br>TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low
 
 -> **One of the following:**
-&#x2022; [`dscp_based_queue`](#dscp-based-queue) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`queue_id_to_use`](#queue-id-to-use) - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
+&#x2022; <a id="dscp-based-queue"></a>[`dscp_based_queue`](#dscp-based-queue) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="queue-id-to-use"></a>[`queue_id_to_use`](#queue-id-to-use) - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
 
-&#x2022; [`interface_group`](#interface-group) - Optional String  Defaults to `ANY_AVAILABLE_INTERFACE`<br>Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`<br>Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3
+<a id="interface-group"></a>&#x2022; [`interface_group`](#interface-group) - Optional String  Defaults to `ANY_AVAILABLE_INTERFACE`<br>Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`<br>Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3
 
 -> **One of the following:**
-&#x2022; [`no_policer`](#no-policer) - Optional Block<br>Empty. This can be used for messages where no values are needed
-<br><br>&#x2022; [`policer`](#policer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Policer](#policer) below for details.
+&#x2022; <a id="no-policer"></a>[`no_policer`](#no-policer) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<br><br>&#x2022; <a id="policer"></a>[`policer`](#policer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Policer](#policer) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -95,31 +95,31 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`dscp`](#dscp) block supports the following:
 
-&#x2022; [`drop_precedence`](#dscp-drop-precedence) - Optional String  Defaults to `DSCP_AF_FAKE`<br>Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`<br>DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer
+<a id="dscp-drop-precedence"></a>&#x2022; [`drop_precedence`](#dscp-drop-precedence) - Optional String  Defaults to `DSCP_AF_FAKE`<br>Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`<br>DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer
 
-&#x2022; [`dscp_class`](#dscp-dscp-class) - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
+<a id="dscp-dscp-class"></a>&#x2022; [`dscp_class`](#dscp-dscp-class) - Optional String  Defaults to `DSCP_BEST_EFFORT`<br>Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`<br>Precedence Level Values. DSCP Precedence Level Values Best Effort service will get any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended
 
 #### Policer
 
 A [`policer`](#policer) block supports the following:
 
-&#x2022; [`name`](#policer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="policer-name"></a>&#x2022; [`name`](#policer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#policer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="policer-namespace"></a>&#x2022; [`namespace`](#policer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#policer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="policer-tenant"></a>&#x2022; [`tenant`](#policer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

@@ -44,29 +44,29 @@ resource "f5xc_usb_policy" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the UsbPolicy. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the UsbPolicy. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the UsbPolicy will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the UsbPolicy will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`allowed_devices`](#allowed-devices) - Optional Block<br>Allowed USB devices. List of allowed USB devices<br>See [Allowed Devices](#allowed-devices) below for details.
+<a id="allowed-devices"></a>&#x2022; [`allowed_devices`](#allowed-devices) - Optional Block<br>Allowed USB devices. List of allowed USB devices<br>See [Allowed Devices](#allowed-devices) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -74,29 +74,29 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`allowed_devices`](#allowed-devices) block supports the following:
 
-&#x2022; [`b_device_class`](#allowed-devices-b-device-class) - Optional String<br>Class. The class of this device
+<a id="allowed-devices-b-device-class"></a>&#x2022; [`b_device_class`](#allowed-devices-b-device-class) - Optional String<br>Class. The class of this device
 
-&#x2022; [`b_device_protocol`](#allowed-devices-b-device-protocol) - Optional String<br>Protocol. The protocol (within the sub-class) of this device
+<a id="allowed-devices-b-device-protocol"></a>&#x2022; [`b_device_protocol`](#allowed-devices-b-device-protocol) - Optional String<br>Protocol. The protocol (within the sub-class) of this device
 
-&#x2022; [`b_device_sub_class`](#allowed-devices-b-device-sub-class) - Optional String<br>Subclass. The sub-class (within the class) of this device
+<a id="allowed-devices-b-device-sub-class"></a>&#x2022; [`b_device_sub_class`](#allowed-devices-b-device-sub-class) - Optional String<br>Subclass. The sub-class (within the class) of this device
 
-&#x2022; [`i_serial`](#allowed-devices-i-serial) - Optional String<br>iSerialNumber. Index of Serial Number String Descriptor
+<a id="allowed-devices-i-serial"></a>&#x2022; [`i_serial`](#allowed-devices-i-serial) - Optional String<br>iSerialNumber. Index of Serial Number String Descriptor
 
-&#x2022; [`id_product`](#allowed-devices-id-product) - Optional String<br>Product ID. Product ID (Assigned by Manufacturer) in hex
+<a id="allowed-devices-id-product"></a>&#x2022; [`id_product`](#allowed-devices-id-product) - Optional String<br>Product ID. Product ID (Assigned by Manufacturer) in hex
 
-&#x2022; [`id_vendor`](#allowed-devices-id-vendor) - Optional String<br>Vendor ID. Vendor ID (Assigned by USB Org) in hex
+<a id="allowed-devices-id-vendor"></a>&#x2022; [`id_vendor`](#allowed-devices-id-vendor) - Optional String<br>Vendor ID. Vendor ID (Assigned by USB Org) in hex
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

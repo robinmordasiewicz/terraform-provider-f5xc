@@ -52,34 +52,34 @@ resource "f5xc_app_api_group" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the AppAPIGroup. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the AppAPIGroup. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the AppAPIGroup will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the AppAPIGroup will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; [`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>API Group Scope BIGIP Virtual Server. Set the scope of the API Group to a specific BIGIP Virtual Server<br>See [Bigip Virtual Server](#bigip-virtual-server) below for details.
-<br><br>&#x2022; [`cdn_loadbalancer`](#cdn-loadbalancer) - Optional Block<br>API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer<br>See [CDN Loadbalancer](#cdn-loadbalancer) below for details.
-<br><br>&#x2022; [`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer<br>See [HTTP Loadbalancer](#http-loadbalancer) below for details.
+&#x2022; <a id="bigip-virtual-server"></a>[`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>API Group Scope BIGIP Virtual Server. Set the scope of the API Group to a specific BIGIP Virtual Server<br>See [Bigip Virtual Server](#bigip-virtual-server) below for details.
+<br><br>&#x2022; <a id="cdn-loadbalancer"></a>[`cdn_loadbalancer`](#cdn-loadbalancer) - Optional Block<br>API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer<br>See [CDN Loadbalancer](#cdn-loadbalancer) below for details.
+<br><br>&#x2022; <a id="http-loadbalancer"></a>[`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer<br>See [HTTP Loadbalancer](#http-loadbalancer) below for details.
 
-&#x2022; [`elements`](#elements) - Optional Block<br>API Group Elements. List of API group elements with methods and path regex for matching requests<br>See [Elements](#elements) below for details.
+<a id="elements"></a>&#x2022; [`elements`](#elements) - Optional Block<br>API Group Elements. List of API group elements with methods and path regex for matching requests<br>See [Elements](#elements) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -87,69 +87,69 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
 
-&#x2022; [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Bigip Virtual Server](#bigip-virtual-server-bigip-virtual-server) below.
+<a id="bigip-virtual-server-bigip-virtual-server"></a>&#x2022; [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Bigip Virtual Server](#bigip-virtual-server-bigip-virtual-server) below.
 
 #### Bigip Virtual Server Bigip Virtual Server
 
 A [`bigip_virtual_server`](#bigip-virtual-server-bigip-virtual-server) block (within [`bigip_virtual_server`](#bigip-virtual-server)) supports the following:
 
-&#x2022; [`name`](#bigip-virtual-server-bigip-virtual-server-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="bigip-virtual-server-bigip-virtual-server-name"></a>&#x2022; [`name`](#bigip-virtual-server-bigip-virtual-server-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#bigip-virtual-server-bigip-virtual-server-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="bigip-virtual-server-bigip-virtual-server-namespace"></a>&#x2022; [`namespace`](#bigip-virtual-server-bigip-virtual-server-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#bigip-virtual-server-bigip-virtual-server-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="bigip-virtual-server-bigip-virtual-server-tenant"></a>&#x2022; [`tenant`](#bigip-virtual-server-bigip-virtual-server-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### CDN Loadbalancer
 
 A [`cdn_loadbalancer`](#cdn-loadbalancer) block supports the following:
 
-&#x2022; [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CDN Loadbalancer](#cdn-loadbalancer-cdn-loadbalancer) below.
+<a id="cdn-loadbalancer-cdn-loadbalancer"></a>&#x2022; [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CDN Loadbalancer](#cdn-loadbalancer-cdn-loadbalancer) below.
 
 #### CDN Loadbalancer CDN Loadbalancer
 
 A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_loadbalancer`](#cdn-loadbalancer)) supports the following:
 
-&#x2022; [`name`](#cdn-loadbalancer-cdn-loadbalancer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="cdn-loadbalancer-cdn-loadbalancer-name"></a>&#x2022; [`name`](#cdn-loadbalancer-cdn-loadbalancer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#cdn-loadbalancer-cdn-loadbalancer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="cdn-loadbalancer-cdn-loadbalancer-namespace"></a>&#x2022; [`namespace`](#cdn-loadbalancer-cdn-loadbalancer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#cdn-loadbalancer-cdn-loadbalancer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="cdn-loadbalancer-cdn-loadbalancer-tenant"></a>&#x2022; [`tenant`](#cdn-loadbalancer-cdn-loadbalancer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Elements
 
 An [`elements`](#elements) block supports the following:
 
-&#x2022; [`methods`](#elements-methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list
+<a id="elements-methods"></a>&#x2022; [`methods`](#elements-methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list
 
-&#x2022; [`path_regex`](#elements-path-regex) - Optional String<br>Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex
+<a id="elements-path-regex"></a>&#x2022; [`path_regex`](#elements-path-regex) - Optional String<br>Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex
 
 #### HTTP Loadbalancer
 
 A [`http_loadbalancer`](#http-loadbalancer) block supports the following:
 
-&#x2022; [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [HTTP Loadbalancer](#http-loadbalancer-http-loadbalancer) below.
+<a id="http-loadbalancer-http-loadbalancer"></a>&#x2022; [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [HTTP Loadbalancer](#http-loadbalancer-http-loadbalancer) below.
 
 #### HTTP Loadbalancer HTTP Loadbalancer
 
 A [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) block (within [`http_loadbalancer`](#http-loadbalancer)) supports the following:
 
-&#x2022; [`name`](#http-loadbalancer-http-loadbalancer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="http-loadbalancer-http-loadbalancer-name"></a>&#x2022; [`name`](#http-loadbalancer-http-loadbalancer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#http-loadbalancer-http-loadbalancer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="http-loadbalancer-http-loadbalancer-namespace"></a>&#x2022; [`namespace`](#http-loadbalancer-http-loadbalancer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#http-loadbalancer-http-loadbalancer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="http-loadbalancer-http-loadbalancer-tenant"></a>&#x2022; [`tenant`](#http-loadbalancer-http-loadbalancer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

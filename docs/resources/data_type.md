@@ -52,35 +52,35 @@ resource "f5xc_data_type" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the DataType. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the DataType. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the DataType will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the DataType will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach
+<a id="compliances"></a>&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach
 
-&#x2022; [`is_pii`](#is-pii) - Optional Bool<br>Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)
+<a id="is-pii"></a>&#x2022; [`is_pii`](#is-pii) - Optional Bool<br>Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)
 
-&#x2022; [`is_sensitive_data`](#is-sensitive-data) - Optional Bool<br>Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type
+<a id="is-sensitive-data"></a>&#x2022; [`is_sensitive_data`](#is-sensitive-data) - Optional Bool<br>Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type
 
-&#x2022; [`rules`](#rules) - Optional Block<br>Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response<br>See [Rules](#rules) below for details.
+<a id="rules"></a>&#x2022; [`rules`](#rules) - Optional Block<br>Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response<br>See [Rules](#rules) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -88,95 +88,95 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`rules`](#rules) block supports the following:
 
-&#x2022; [`key_pattern`](#rules-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-pattern) below.
+<a id="rules-key-pattern"></a>&#x2022; [`key_pattern`](#rules-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-pattern) below.
 
-&#x2022; [`key_value_pattern`](#rules-key-value-pattern) - Optional Block<br>Key & Value Pattern. Search for specific key & value patterns in the specified sections<br>See [Key Value Pattern](#rules-key-value-pattern) below.
+<a id="rules-key-value-pattern"></a>&#x2022; [`key_value_pattern`](#rules-key-value-pattern) - Optional Block<br>Key & Value Pattern. Search for specific key & value patterns in the specified sections<br>See [Key Value Pattern](#rules-key-value-pattern) below.
 
-&#x2022; [`value_pattern`](#rules-value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-value-pattern) below.
+<a id="rules-value-pattern"></a>&#x2022; [`value_pattern`](#rules-value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-value-pattern) below.
 
 #### Rules Key Pattern
 
 A [`key_pattern`](#rules-key-pattern) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`exact_values`](#rules-key-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-pattern-exact-values) below.
+<a id="rules-key-pattern-exact-values"></a>&#x2022; [`exact_values`](#rules-key-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-pattern-exact-values) below.
 
-&#x2022; [`regex_value`](#rules-key-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+<a id="rules-key-pattern-regex-value"></a>&#x2022; [`regex_value`](#rules-key-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-&#x2022; [`substring_value`](#rules-key-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+<a id="rules-key-pattern-substring-value"></a>&#x2022; [`substring_value`](#rules-key-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Key Pattern Exact Values
 
 An [`exact_values`](#rules-key-pattern-exact-values) block (within [`rules.key_pattern`](#rules-key-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#rules-key-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
+<a id="rules-key-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-key-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Key Value Pattern
 
 A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`key_pattern`](#rules-key-value-pattern-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
+<a id="rules-key-value-pattern-key-pattern"></a>&#x2022; [`key_pattern`](#rules-key-value-pattern-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
 
-&#x2022; [`value_pattern`](#rules-key-value-pattern-value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
+<a id="rules-key-value-pattern-value-pattern"></a>&#x2022; [`value_pattern`](#rules-key-value-pattern-value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
 
 #### Rules Key Value Pattern Key Pattern
 
 A [`key_pattern`](#rules-key-value-pattern-key-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
+<a id="rules-key-value-pattern-key-pattern-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-key-pattern-exact-values) below.
 
-&#x2022; [`regex_value`](#rules-key-value-pattern-key-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+<a id="rules-key-value-pattern-key-pattern-regex-value"></a>&#x2022; [`regex_value`](#rules-key-value-pattern-key-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-&#x2022; [`substring_value`](#rules-key-value-pattern-key-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+<a id="rules-key-value-pattern-key-pattern-substring-value"></a>&#x2022; [`substring_value`](#rules-key-value-pattern-key-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Key Value Pattern Key Pattern Exact Values
 
 An [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values) block (within [`rules.key_value_pattern.key_pattern`](#rules-key-value-pattern-key-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
+<a id="rules-key-value-pattern-key-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-key-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Key Value Pattern Value Pattern
 
 A [`value_pattern`](#rules-key-value-pattern-value-pattern) block (within [`rules.key_value_pattern`](#rules-key-value-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
+<a id="rules-key-value-pattern-value-pattern-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-key-value-pattern-value-pattern-exact-values) below.
 
-&#x2022; [`regex_value`](#rules-key-value-pattern-value-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+<a id="rules-key-value-pattern-value-pattern-regex-value"></a>&#x2022; [`regex_value`](#rules-key-value-pattern-value-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-&#x2022; [`substring_value`](#rules-key-value-pattern-value-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+<a id="rules-key-value-pattern-value-pattern-substring-value"></a>&#x2022; [`substring_value`](#rules-key-value-pattern-value-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Key Value Pattern Value Pattern Exact Values
 
 An [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values) block (within [`rules.key_value_pattern.value_pattern`](#rules-key-value-pattern-value-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
+<a id="rules-key-value-pattern-value-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-key-value-pattern-value-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 #### Rules Value Pattern
 
 A [`value_pattern`](#rules-value-pattern) block (within [`rules`](#rules)) supports the following:
 
-&#x2022; [`exact_values`](#rules-value-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-value-pattern-exact-values) below.
+<a id="rules-value-pattern-exact-values"></a>&#x2022; [`exact_values`](#rules-value-pattern-exact-values) - Optional Block<br>Exact Values. List of exact values to match<br>See [Exact Values](#rules-value-pattern-exact-values) below.
 
-&#x2022; [`regex_value`](#rules-value-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
+<a id="rules-value-pattern-regex-value"></a>&#x2022; [`regex_value`](#rules-value-pattern-regex-value) - Optional String<br>Regex Value. Search for values matching this regular expression
 
-&#x2022; [`substring_value`](#rules-value-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
+<a id="rules-value-pattern-substring-value"></a>&#x2022; [`substring_value`](#rules-value-pattern-substring-value) - Optional String<br>Substring Search. Search for values that include this substring
 
 #### Rules Value Pattern Exact Values
 
 An [`exact_values`](#rules-value-pattern-exact-values) block (within [`rules.value_pattern`](#rules-value-pattern)) supports the following:
 
-&#x2022; [`exact_values`](#rules-value-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
+<a id="rules-value-pattern-exact-values-exact-values"></a>&#x2022; [`exact_values`](#rules-value-pattern-exact-values-exact-values) - Optional List<br>Exact Values. List of exact values to match
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 ## Import
 

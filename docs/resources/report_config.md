@@ -52,31 +52,31 @@ resource "f5xc_report_config" "example" {
 
 ### Metadata Argument Reference
 
-&#x2022; [`name`](#name) - Required String<br>Name of the ReportConfig. Must be unique within the namespace
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the ReportConfig. Must be unique within the namespace
 
-&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ReportConfig will be created
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the ReportConfig will be created
 
-&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
+<a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
-&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
-&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+<a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
-&#x2022; [`report_recipients`](#report-recipients) - Optional Block<br>Report recipients. Report recipients<br>See [Report Recipients](#report-recipients) below for details.
+<a id="report-recipients"></a>&#x2022; [`report_recipients`](#report-recipients) - Optional Block<br>Report recipients. Report recipients<br>See [Report Recipients](#report-recipients) below for details.
 
-&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-&#x2022; [`waap`](#waap) - Optional Block<br>Report Type Waap. Report Type Waap<br>See [Waap](#waap) below for details.
+<a id="waap"></a>&#x2022; [`waap`](#waap) - Optional Block<br>Report Type Waap. Report Type Waap<br>See [Waap](#waap) below for details.
 
 ### Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
+<a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
 
@@ -84,71 +84,71 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`report_recipients`](#report-recipients) block supports the following:
 
-&#x2022; [`user_groups`](#report-recipients-user-groups) - Optional Block<br>User Groups. Select one or more user groups, to which the report should be sent via email<br>See [User Groups](#report-recipients-user-groups) below.
+<a id="report-recipients-user-groups"></a>&#x2022; [`user_groups`](#report-recipients-user-groups) - Optional Block<br>User Groups. Select one or more user groups, to which the report should be sent via email<br>See [User Groups](#report-recipients-user-groups) below.
 
 #### Report Recipients User Groups
 
 An [`user_groups`](#report-recipients-user-groups) block (within [`report_recipients`](#report-recipients)) supports the following:
 
-&#x2022; [`name`](#report-recipients-user-groups-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="report-recipients-user-groups-name"></a>&#x2022; [`name`](#report-recipients-user-groups-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
 
-&#x2022; [`namespace`](#report-recipients-user-groups-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="report-recipients-user-groups-namespace"></a>&#x2022; [`namespace`](#report-recipients-user-groups-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
 
-&#x2022; [`tenant`](#report-recipients-user-groups-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="report-recipients-user-groups-tenant"></a>&#x2022; [`tenant`](#report-recipients-user-groups-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
 
 #### Timeouts
 
 A [`timeouts`](#timeouts) block supports the following:
 
-&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
+<a id="timeouts-create"></a>&#x2022; [`create`](#timeouts-create) - Optional String (Defaults to `10 minutes`)<br>Used when creating the resource
 
-&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
+<a id="timeouts-delete"></a>&#x2022; [`delete`](#timeouts-delete) - Optional String (Defaults to `10 minutes`)<br>Used when deleting the resource
 
-&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
+<a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
-&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+<a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
 #### Waap
 
 A [`waap`](#waap) block supports the following:
 
-&#x2022; [`current_namespace`](#waap-current-namespace) - Optional Block<br>Empty. This can be used for messages where no values are needed
+<a id="waap-current-namespace"></a>&#x2022; [`current_namespace`](#waap-current-namespace) - Optional Block<br>Empty. This can be used for messages where no values are needed
 
-&#x2022; [`daily`](#waap-daily) - Optional Block<br>Report Frequency Daily. create report daily<br>See [Daily](#waap-daily) below.
+<a id="waap-daily"></a>&#x2022; [`daily`](#waap-daily) - Optional Block<br>Report Frequency Daily. create report daily<br>See [Daily](#waap-daily) below.
 
-&#x2022; [`monthly`](#waap-monthly) - Optional Block<br>Report Frequency Monthly. create report monthly<br>See [Monthly](#waap-monthly) below.
+<a id="waap-monthly"></a>&#x2022; [`monthly`](#waap-monthly) - Optional Block<br>Report Frequency Monthly. create report monthly<br>See [Monthly](#waap-monthly) below.
 
-&#x2022; [`namespaces`](#waap-namespaces) - Optional Block<br>Namespaces. namespaces<br>See [Namespaces](#waap-namespaces) below.
+<a id="waap-namespaces"></a>&#x2022; [`namespaces`](#waap-namespaces) - Optional Block<br>Namespaces. namespaces<br>See [Namespaces](#waap-namespaces) below.
 
-&#x2022; [`weekly`](#waap-weekly) - Optional Block<br>Report Frequency Weekly. create report weekly<br>See [Weekly](#waap-weekly) below.
+<a id="waap-weekly"></a>&#x2022; [`weekly`](#waap-weekly) - Optional Block<br>Report Frequency Weekly. create report weekly<br>See [Weekly](#waap-weekly) below.
 
 #### Waap Daily
 
 A [`daily`](#waap-daily) block (within [`waap`](#waap)) supports the following:
 
-&#x2022; [`report_generation_time`](#waap-daily-report-generation-time) - Optional String<br>Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
+<a id="waap-daily-report-generation-time"></a>&#x2022; [`report_generation_time`](#waap-daily-report-generation-time) - Optional String<br>Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
 
 #### Waap Monthly
 
 A [`monthly`](#waap-monthly) block (within [`waap`](#waap)) supports the following:
 
-&#x2022; [`date`](#waap-monthly-date) - Optional String  Defaults to `DATE_NONE`<br>Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST`<br>Report Generation Date. report generation date Indicates field not being set Create report on Last day of month
+<a id="waap-monthly-date"></a>&#x2022; [`date`](#waap-monthly-date) - Optional String  Defaults to `DATE_NONE`<br>Possible values are `DATE_NONE`, `DATE_ONE`, `DATE_TWO`, `DATE_THREE`, `DATE_FOUR`, `DATE_FIVE`, `DATE_SIX`, `DATE_SEVEN`, `DATE_EIGHT`, `DATE_NINE`, `DATE_TEN`, `DATE_ELEVEN`, `DATE_TWELVE`, `DATE_THIRTEEN`, `DATE_FOURTEEN`, `DATE_FIFTEEN`, `DATE_SIXTEEN`, `DATE_SEVENTEEN`, `DATE_EIGHTEEN`, `DATE_NINETEEN`, `DATE_TWENTY`, `DATE_TWENTYONE`, `DATE_TWENTYTWO`, `DATE_TWENTYTHREE`, `DATE_TWENTYFOUR`, `DATE_TWENTYFIVE`, `DATE_TWENTYSIX`, `DATE_TWENTYSEVEN`, `DATE_TWENTYEIGHT`, `DATE_LAST`<br>Report Generation Date. report generation date Indicates field not being set Create report on Last day of month
 
-&#x2022; [`report_generation_time`](#waap-monthly-report-generation-time) - Optional String<br>Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
+<a id="waap-monthly-report-generation-time"></a>&#x2022; [`report_generation_time`](#waap-monthly-report-generation-time) - Optional String<br>Time Report is Generated. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
 
 #### Waap Namespaces
 
 A [`namespaces`](#waap-namespaces) block (within [`waap`](#waap)) supports the following:
 
-&#x2022; [`namespaces`](#waap-namespaces-namespaces) - Optional List<br>Namespaces. list of namespaces for which user wants to generate report
+<a id="waap-namespaces-namespaces"></a>&#x2022; [`namespaces`](#waap-namespaces-namespaces) - Optional List<br>Namespaces. list of namespaces for which user wants to generate report
 
 #### Waap Weekly
 
 A [`weekly`](#waap-weekly) block (within [`waap`](#waap)) supports the following:
 
-&#x2022; [`day`](#waap-weekly-day) - Optional String  Defaults to `WEEKDAY_NONE`<br>Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY`<br>Report Generation Weekday. report generation weekday Indicates field not being set
+<a id="waap-weekly-day"></a>&#x2022; [`day`](#waap-weekly-day) - Optional String  Defaults to `WEEKDAY_NONE`<br>Possible values are `WEEKDAY_NONE`, `WEEKDAY_MONDAY`, `WEEKDAY_TUESDAY`, `WEEKDAY_WEDNESDAY`, `WEEKDAY_THURSDAY`, `WEEKDAY_FRIDAY`, `WEEKDAY_SATURDAY`, `WEEKDAY_SUNDAY`<br>Report Generation Weekday. report generation weekday Indicates field not being set
 
-&#x2022; [`report_generation_time`](#waap-weekly-report-generation-time) - Optional String<br>Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
+<a id="waap-weekly-report-generation-time"></a>&#x2022; [`report_generation_time`](#waap-weekly-report-generation-time) - Optional String<br>Report Generation Time. Times are in UTC time. Generating reports may be delayed up to 30 minutes from the time set
 
 ## Import
 

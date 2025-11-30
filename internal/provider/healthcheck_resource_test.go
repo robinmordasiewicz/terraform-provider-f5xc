@@ -46,7 +46,6 @@ import (
 // -----------------------------------------------------------------------------
 
 func TestAccHealthcheckResource_basic(t *testing.T) {
-	t.Skip("Skipping: healthcheck generator does not marshal spec fields (healthy_threshold, timeout, etc.) to API request - requires generator enhancement")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 

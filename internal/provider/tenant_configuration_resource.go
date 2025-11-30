@@ -724,7 +724,6 @@ func (r *TenantConfigurationResource) Delete(ctx context.Context, req resource.D
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteTenantConfiguration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

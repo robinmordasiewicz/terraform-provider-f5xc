@@ -450,24 +450,39 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 	// Set computed fields from API response
 	if v, ok := created.Spec["healthy_threshold"].(float64); ok {
 		data.HealthyThreshold = types.Int64Value(int64(v))
+	} else if data.HealthyThreshold.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.HealthyThreshold = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["interval"].(float64); ok {
 		data.Interval = types.Int64Value(int64(v))
+	} else if data.Interval.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Interval = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["jitter_percent"].(float64); ok {
 		data.JitterPercent = types.Int64Value(int64(v))
+	} else if data.JitterPercent.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.JitterPercent = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["timeout"].(float64); ok {
 		data.Timeout = types.Int64Value(int64(v))
+	} else if data.Timeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Timeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["unhealthy_threshold"].(float64); ok {
 		data.UnhealthyThreshold = types.Int64Value(int64(v))
+	} else if data.UnhealthyThreshold.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.UnhealthyThreshold = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -757,24 +772,39 @@ func (r *HealthcheckResource) Update(ctx context.Context, req resource.UpdateReq
 	// Set computed fields from API response
 	if v, ok := updated.Spec["healthy_threshold"].(float64); ok {
 		data.HealthyThreshold = types.Int64Value(int64(v))
+	} else if data.HealthyThreshold.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.HealthyThreshold = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["interval"].(float64); ok {
 		data.Interval = types.Int64Value(int64(v))
+	} else if data.Interval.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Interval = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["jitter_percent"].(float64); ok {
 		data.JitterPercent = types.Int64Value(int64(v))
+	} else if data.JitterPercent.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.JitterPercent = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["timeout"].(float64); ok {
 		data.Timeout = types.Int64Value(int64(v))
+	} else if data.Timeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Timeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["unhealthy_threshold"].(float64); ok {
 		data.UnhealthyThreshold = types.Int64Value(int64(v))
+	} else if data.UnhealthyThreshold.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.UnhealthyThreshold = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -808,7 +838,6 @@ func (r *HealthcheckResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteHealthcheck(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

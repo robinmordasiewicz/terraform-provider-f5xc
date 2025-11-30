@@ -509,7 +509,6 @@ func (r *SegmentResource) Delete(ctx context.Context, req resource.DeleteRequest
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteSegment(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

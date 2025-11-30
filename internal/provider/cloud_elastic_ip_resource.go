@@ -357,8 +357,11 @@ func (r *CloudElasticIPResource) Create(ctx context.Context, req resource.Create
 	// Set computed fields from API response
 	if v, ok := created.Spec["count"].(float64); ok {
 		data.Count = types.Int64Value(int64(v))
+	} else if data.Count.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Count = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -598,8 +601,11 @@ func (r *CloudElasticIPResource) Update(ctx context.Context, req resource.Update
 	// Set computed fields from API response
 	if v, ok := updated.Spec["count"].(float64); ok {
 		data.Count = types.Int64Value(int64(v))
+	} else if data.Count.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Count = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -633,7 +639,6 @@ func (r *CloudElasticIPResource) Delete(ctx context.Context, req resource.Delete
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteCloudElasticIP(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

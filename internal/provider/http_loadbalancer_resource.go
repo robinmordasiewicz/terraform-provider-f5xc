@@ -16488,8 +16488,11 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	// Set computed fields from API response
 	if v, ok := created.Spec["add_location"].(bool); ok {
 		data.AddLocation = types.BoolValue(v)
+	} else if data.AddLocation.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AddLocation = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -16656,7 +16659,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				blocked_clientsList = append(blocked_clientsList, HTTPLoadBalancerBlockedClientsModel{
 					AsNumber: func() types.Int64 {
-						if v, ok := itemMap["as_number"].(float64); ok {
+						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -17098,13 +17101,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					Priority: func() types.Int64 {
-						if v, ok := itemMap["priority"].(float64); ok {
+						if v, ok := itemMap["priority"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
 					}(),
 					Weight: func() types.Int64 {
-						if v, ok := itemMap["weight"].(float64); ok {
+						if v, ok := itemMap["weight"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -17261,19 +17264,19 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel{
 								MaxBatchedQueries: func() types.Int64 {
-									if v, ok := nestedMap["max_batched_queries"].(float64); ok {
+									if v, ok := nestedMap["max_batched_queries"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								MaxDepth: func() types.Int64 {
-									if v, ok := nestedMap["max_depth"].(float64); ok {
+									if v, ok := nestedMap["max_depth"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								MaxTotalLength: func() types.Int64 {
-									if v, ok := nestedMap["max_total_length"].(float64); ok {
+									if v, ok := nestedMap["max_total_length"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -17648,7 +17651,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					MaxAgeValue: func() types.Int64 {
-						if v, ok := itemMap["max_age_value"].(float64); ok {
+						if v, ok := itemMap["max_age_value"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -17816,7 +17819,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				trusted_clientsList = append(trusted_clientsList, HTTPLoadBalancerTrustedClientsModel{
 					AsNumber: func() types.Int64 {
-						if v, ok := itemMap["as_number"].(float64); ok {
+						if v, ok := itemMap["as_number"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -19479,8 +19482,11 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	// Set computed fields from API response
 	if v, ok := updated.Spec["add_location"].(bool); ok {
 		data.AddLocation = types.BoolValue(v)
+	} else if data.AddLocation.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.AddLocation = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -19514,7 +19520,6 @@ func (r *HTTPLoadBalancerResource) Delete(ctx context.Context, req resource.Dele
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteHTTPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

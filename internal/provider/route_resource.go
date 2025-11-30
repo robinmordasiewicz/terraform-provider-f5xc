@@ -1892,7 +1892,7 @@ func (r *RouteResource) Read(ctx context.Context, req resource.ReadRequest, resp
 									return types.StringNull()
 								}(),
 								Timeout: func() types.Int64 {
-									if v, ok := nestedMap["timeout"].(float64); ok {
+									if v, ok := nestedMap["timeout"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -1911,7 +1911,7 @@ func (r *RouteResource) Read(ctx context.Context, req resource.ReadRequest, resp
 									return types.StringNull()
 								}(),
 								ResponseCode: func() types.Int64 {
-									if v, ok := nestedMap["response_code"].(float64); ok {
+									if v, ok := nestedMap["response_code"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -1954,7 +1954,7 @@ func (r *RouteResource) Read(ctx context.Context, req resource.ReadRequest, resp
 									return types.StringNull()
 								}(),
 								ResponseCode: func() types.Int64 {
-									if v, ok := nestedMap["response_code"].(float64); ok {
+									if v, ok := nestedMap["response_code"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -2218,7 +2218,6 @@ func (r *RouteResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteRoute(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

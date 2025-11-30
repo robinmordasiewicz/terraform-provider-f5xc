@@ -1033,19 +1033,19 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 						if nestedMap, ok := itemMap["bfd_enabled"].(map[string]interface{}); ok {
 							return &BGPPeersBfdEnabledModel{
 								Multiplier: func() types.Int64 {
-									if v, ok := nestedMap["multiplier"].(float64); ok {
+									if v, ok := nestedMap["multiplier"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								ReceiveIntervalMilliseconds: func() types.Int64 {
-									if v, ok := nestedMap["receive_interval_milliseconds"].(float64); ok {
+									if v, ok := nestedMap["receive_interval_milliseconds"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								TransmitIntervalMilliseconds: func() types.Int64 {
-									if v, ok := nestedMap["transmit_interval_milliseconds"].(float64); ok {
+									if v, ok := nestedMap["transmit_interval_milliseconds"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -1076,7 +1076,7 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 									return types.StringNull()
 								}(),
 								Asn: func() types.Int64 {
-									if v, ok := nestedMap["asn"].(float64); ok {
+									if v, ok := nestedMap["asn"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -1088,31 +1088,31 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 									return types.StringNull()
 								}(),
 								Port: func() types.Int64 {
-									if v, ok := nestedMap["port"].(float64); ok {
+									if v, ok := nestedMap["port"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								SubnetBeginOffset: func() types.Int64 {
-									if v, ok := nestedMap["subnet_begin_offset"].(float64); ok {
+									if v, ok := nestedMap["subnet_begin_offset"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								SubnetBeginOffsetV6: func() types.Int64 {
-									if v, ok := nestedMap["subnet_begin_offset_v6"].(float64); ok {
+									if v, ok := nestedMap["subnet_begin_offset_v6"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								SubnetEndOffset: func() types.Int64 {
-									if v, ok := nestedMap["subnet_end_offset"].(float64); ok {
+									if v, ok := nestedMap["subnet_end_offset"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								SubnetEndOffsetV6: func() types.Int64 {
-									if v, ok := nestedMap["subnet_end_offset_v6"].(float64); ok {
+									if v, ok := nestedMap["subnet_end_offset_v6"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -1396,7 +1396,6 @@ func (r *BGPResource) Delete(ctx context.Context, req resource.DeleteRequest, re
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteBGP(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

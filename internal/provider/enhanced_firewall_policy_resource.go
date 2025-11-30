@@ -1045,7 +1045,6 @@ func (r *EnhancedFirewallPolicyResource) Delete(ctx context.Context, req resourc
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteEnhancedFirewallPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

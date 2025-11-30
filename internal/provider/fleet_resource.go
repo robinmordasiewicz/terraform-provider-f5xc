@@ -3167,20 +3167,32 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Set computed fields from API response
 	if v, ok := created.Spec["enable_default_fleet_config_download"].(bool); ok {
 		data.EnableDefaultFleetConfigDownload = types.BoolValue(v)
+	} else if data.EnableDefaultFleetConfigDownload.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EnableDefaultFleetConfigDownload = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["fleet_label"].(string); ok && v != "" {
 		data.FleetLabel = types.StringValue(v)
+	} else if data.FleetLabel.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.FleetLabel = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["operating_system_version"].(string); ok && v != "" {
 		data.OperatingSystemVersion = types.StringValue(v)
+	} else if data.OperatingSystemVersion.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.OperatingSystemVersion = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["volterra_software_version"].(string); ok && v != "" {
 		data.VolterraSoftwareVersion = types.StringValue(v)
+	} else if data.VolterraSoftwareVersion.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VolterraSoftwareVersion = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -4113,20 +4125,32 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Set computed fields from API response
 	if v, ok := updated.Spec["enable_default_fleet_config_download"].(bool); ok {
 		data.EnableDefaultFleetConfigDownload = types.BoolValue(v)
+	} else if data.EnableDefaultFleetConfigDownload.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EnableDefaultFleetConfigDownload = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["fleet_label"].(string); ok && v != "" {
 		data.FleetLabel = types.StringValue(v)
+	} else if data.FleetLabel.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.FleetLabel = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["operating_system_version"].(string); ok && v != "" {
 		data.OperatingSystemVersion = types.StringValue(v)
+	} else if data.OperatingSystemVersion.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.OperatingSystemVersion = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["volterra_software_version"].(string); ok && v != "" {
 		data.VolterraSoftwareVersion = types.StringValue(v)
+	} else if data.VolterraSoftwareVersion.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VolterraSoftwareVersion = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -4160,7 +4184,6 @@ func (r *FleetResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteFleet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

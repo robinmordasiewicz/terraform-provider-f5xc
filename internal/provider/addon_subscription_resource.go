@@ -401,8 +401,11 @@ func (r *AddonSubscriptionResource) Create(ctx context.Context, req resource.Cre
 	// Set computed fields from API response
 	if v, ok := created.Spec["status"].(string); ok && v != "" {
 		data.Status = types.StringValue(v)
+	} else if data.Status.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Status = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -637,8 +640,11 @@ func (r *AddonSubscriptionResource) Update(ctx context.Context, req resource.Upd
 	// Set computed fields from API response
 	if v, ok := updated.Spec["status"].(string); ok && v != "" {
 		data.Status = types.StringValue(v)
+	} else if data.Status.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Status = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -672,7 +678,6 @@ func (r *AddonSubscriptionResource) Delete(ctx context.Context, req resource.Del
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteAddonSubscription(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

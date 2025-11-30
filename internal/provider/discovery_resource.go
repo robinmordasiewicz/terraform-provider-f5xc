@@ -1046,8 +1046,11 @@ func (r *DiscoveryResource) Create(ctx context.Context, req resource.CreateReque
 	// Set computed fields from API response
 	if v, ok := created.Spec["cluster_id"].(string); ok && v != "" {
 		data.ClusterID = types.StringValue(v)
+	} else if data.ClusterID.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ClusterID = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1301,8 +1304,11 @@ func (r *DiscoveryResource) Update(ctx context.Context, req resource.UpdateReque
 	// Set computed fields from API response
 	if v, ok := updated.Spec["cluster_id"].(string); ok && v != "" {
 		data.ClusterID = types.StringValue(v)
+	} else if data.ClusterID.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ClusterID = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1336,7 +1342,6 @@ func (r *DiscoveryResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteDiscovery(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

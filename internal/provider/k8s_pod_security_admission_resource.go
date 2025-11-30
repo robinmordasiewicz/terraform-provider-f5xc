@@ -617,7 +617,6 @@ func (r *K8SPodSecurityAdmissionResource) Delete(ctx context.Context, req resour
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteK8SPodSecurityAdmission(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

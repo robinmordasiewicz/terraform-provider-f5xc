@@ -774,8 +774,11 @@ func (r *RateLimiterPolicyResource) Create(ctx context.Context, req resource.Cre
 	// Set computed fields from API response
 	if v, ok := created.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
+	} else if data.ServerName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1037,8 +1040,11 @@ func (r *RateLimiterPolicyResource) Update(ctx context.Context, req resource.Upd
 	// Set computed fields from API response
 	if v, ok := updated.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
+	} else if data.ServerName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1072,7 +1078,6 @@ func (r *RateLimiterPolicyResource) Delete(ctx context.Context, req resource.Del
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteRateLimiterPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

@@ -291,8 +291,11 @@ func (r *TrustedCaListResource) Create(ctx context.Context, req resource.CreateR
 	// Set computed fields from API response
 	if v, ok := created.Spec["trusted_ca_url"].(string); ok && v != "" {
 		data.TrustedCaURL = types.StringValue(v)
+	} else if data.TrustedCaURL.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TrustedCaURL = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -469,8 +472,11 @@ func (r *TrustedCaListResource) Update(ctx context.Context, req resource.UpdateR
 	// Set computed fields from API response
 	if v, ok := updated.Spec["trusted_ca_url"].(string); ok && v != "" {
 		data.TrustedCaURL = types.StringValue(v)
+	} else if data.TrustedCaURL.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TrustedCaURL = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -504,7 +510,6 @@ func (r *TrustedCaListResource) Delete(ctx context.Context, req resource.DeleteR
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteTrustedCaList(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

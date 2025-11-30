@@ -501,12 +501,18 @@ func (r *CminstanceResource) Create(ctx context.Context, req resource.CreateRequ
 	// Set computed fields from API response
 	if v, ok := created.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
+	} else if data.Port.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Port = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["username"].(string); ok && v != "" {
 		data.Username = types.StringValue(v)
+	} else if data.Username.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Username = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -772,12 +778,18 @@ func (r *CminstanceResource) Update(ctx context.Context, req resource.UpdateRequ
 	// Set computed fields from API response
 	if v, ok := updated.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
+	} else if data.Port.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Port = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["username"].(string); ok && v != "" {
 		data.Username = types.StringValue(v)
+	} else if data.Username.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Username = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -811,7 +823,6 @@ func (r *CminstanceResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteCminstance(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

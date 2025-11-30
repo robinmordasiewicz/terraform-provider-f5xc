@@ -1084,8 +1084,11 @@ func (r *RegistrationResource) Create(ctx context.Context, req resource.CreateRe
 	// Set computed fields from API response
 	if v, ok := created.Spec["token"].(string); ok && v != "" {
 		data.Token = types.StringValue(v)
+	} else if data.Token.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Token = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1470,8 +1473,11 @@ func (r *RegistrationResource) Update(ctx context.Context, req resource.UpdateRe
 	// Set computed fields from API response
 	if v, ok := updated.Spec["token"].(string); ok && v != "" {
 		data.Token = types.StringValue(v)
+	} else if data.Token.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Token = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1505,7 +1511,6 @@ func (r *RegistrationResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteRegistration(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

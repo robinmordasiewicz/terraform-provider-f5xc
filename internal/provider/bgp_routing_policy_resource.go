@@ -563,13 +563,13 @@ func (r *BGPRoutingPolicyResource) Read(ctx context.Context, req resource.ReadRe
 									return types.StringNull()
 								}(),
 								LocalPreference: func() types.Int64 {
-									if v, ok := nestedMap["local_preference"].(float64); ok {
+									if v, ok := nestedMap["local_preference"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
 								}(),
 								Metric: func() types.Int64 {
-									if v, ok := nestedMap["metric"].(float64); ok {
+									if v, ok := nestedMap["metric"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -730,7 +730,6 @@ func (r *BGPRoutingPolicyResource) Delete(ctx context.Context, req resource.Dele
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteBGPRoutingPolicy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

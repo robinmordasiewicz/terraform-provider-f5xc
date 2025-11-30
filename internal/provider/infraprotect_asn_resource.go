@@ -312,8 +312,11 @@ func (r *InfraprotectAsnResource) Create(ctx context.Context, req resource.Creat
 	// Set computed fields from API response
 	if v, ok := created.Spec["asn"].(float64); ok {
 		data.Asn = types.Int64Value(int64(v))
+	} else if data.Asn.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Asn = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -508,8 +511,11 @@ func (r *InfraprotectAsnResource) Update(ctx context.Context, req resource.Updat
 	// Set computed fields from API response
 	if v, ok := updated.Spec["asn"].(float64); ok {
 		data.Asn = types.Int64Value(int64(v))
+	} else if data.Asn.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Asn = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -543,7 +549,6 @@ func (r *InfraprotectAsnResource) Delete(ctx context.Context, req resource.Delet
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteInfraprotectAsn(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

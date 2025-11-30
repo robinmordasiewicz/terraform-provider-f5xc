@@ -918,24 +918,39 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	// Set computed fields from API response
 	if v, ok := created.Spec["dns_volterra_managed"].(bool); ok {
 		data.DNSVolterraManaged = types.BoolValue(v)
+	} else if data.DNSVolterraManaged.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DNSVolterraManaged = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["enable_per_packet_load_balancing"].(bool); ok {
 		data.EnablePerPacketLoadBalancing = types.BoolValue(v)
+	} else if data.EnablePerPacketLoadBalancing.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EnablePerPacketLoadBalancing = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["idle_timeout"].(float64); ok {
 		data.IdleTimeout = types.Int64Value(int64(v))
+	} else if data.IdleTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.IdleTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["listen_port"].(float64); ok {
 		data.ListenPort = types.Int64Value(int64(v))
+	} else if data.ListenPort.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ListenPort = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["port_ranges"].(string); ok && v != "" {
 		data.PortRanges = types.StringValue(v)
+	} else if data.PortRanges.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PortRanges = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1141,13 +1156,13 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return nil
 					}(),
 					Priority: func() types.Int64 {
-						if v, ok := itemMap["priority"].(float64); ok {
+						if v, ok := itemMap["priority"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
 					}(),
 					Weight: func() types.Int64 {
-						if v, ok := itemMap["weight"].(float64); ok {
+						if v, ok := itemMap["weight"].(float64); ok && v != 0 {
 							return types.Int64Value(int64(v))
 						}
 						return types.Int64Null()
@@ -1384,24 +1399,39 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	// Set computed fields from API response
 	if v, ok := updated.Spec["dns_volterra_managed"].(bool); ok {
 		data.DNSVolterraManaged = types.BoolValue(v)
+	} else if data.DNSVolterraManaged.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DNSVolterraManaged = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["enable_per_packet_load_balancing"].(bool); ok {
 		data.EnablePerPacketLoadBalancing = types.BoolValue(v)
+	} else if data.EnablePerPacketLoadBalancing.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EnablePerPacketLoadBalancing = types.BoolNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["idle_timeout"].(float64); ok {
 		data.IdleTimeout = types.Int64Value(int64(v))
+	} else if data.IdleTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.IdleTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["listen_port"].(float64); ok {
 		data.ListenPort = types.Int64Value(int64(v))
+	} else if data.ListenPort.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ListenPort = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["port_ranges"].(string); ok && v != "" {
 		data.PortRanges = types.StringValue(v)
+	} else if data.PortRanges.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PortRanges = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1435,7 +1465,6 @@ func (r *UDPLoadBalancerResource) Delete(ctx context.Context, req resource.Delet
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteUDPLoadBalancer(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

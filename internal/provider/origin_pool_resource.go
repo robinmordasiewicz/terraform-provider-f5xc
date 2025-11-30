@@ -1951,20 +1951,32 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 	// Set computed fields from API response
 	if v, ok := created.Spec["endpoint_selection"].(string); ok && v != "" {
 		data.EndpointSelection = types.StringValue(v)
+	} else if data.EndpointSelection.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EndpointSelection = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["health_check_port"].(float64); ok {
 		data.HealthCheckPort = types.Int64Value(int64(v))
+	} else if data.HealthCheckPort.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.HealthCheckPort = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
 		data.LoadBalancerAlgorithm = types.StringValue(v)
+	} else if data.LoadBalancerAlgorithm.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.LoadBalancerAlgorithm = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
+	} else if data.Port.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Port = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2209,7 +2221,7 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 									return types.StringNull()
 								}(),
 								RefreshInterval: func() types.Int64 {
-									if v, ok := nestedMap["refresh_interval"].(float64); ok {
+									if v, ok := nestedMap["refresh_interval"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -2241,7 +2253,7 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 									return types.StringNull()
 								}(),
 								RefreshInterval: func() types.Int64 {
-									if v, ok := nestedMap["refresh_interval"].(float64); ok {
+									if v, ok := nestedMap["refresh_interval"].(float64); ok && v != 0 {
 										return types.Int64Value(int64(v))
 									}
 									return types.Int64Null()
@@ -2702,20 +2714,32 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 	// Set computed fields from API response
 	if v, ok := updated.Spec["endpoint_selection"].(string); ok && v != "" {
 		data.EndpointSelection = types.StringValue(v)
+	} else if data.EndpointSelection.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EndpointSelection = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["health_check_port"].(float64); ok {
 		data.HealthCheckPort = types.Int64Value(int64(v))
+	} else if data.HealthCheckPort.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.HealthCheckPort = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["loadbalancer_algorithm"].(string); ok && v != "" {
 		data.LoadBalancerAlgorithm = types.StringValue(v)
+	} else if data.LoadBalancerAlgorithm.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.LoadBalancerAlgorithm = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["port"].(float64); ok {
 		data.Port = types.Int64Value(int64(v))
+	} else if data.Port.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Port = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2749,7 +2773,6 @@ func (r *OriginPoolResource) Delete(ctx context.Context, req resource.DeleteRequ
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteOriginPool(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

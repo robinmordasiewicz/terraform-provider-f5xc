@@ -13303,7 +13303,6 @@ func (r *WorkloadResource) Delete(ctx context.Context, req resource.DeleteReques
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteWorkload(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

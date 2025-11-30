@@ -477,8 +477,8 @@ func (r *NamespaceResource) Delete(ctx context.Context, req resource.DeleteReque
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
-	err := r.client.DeleteNamespace(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	// Namespace requires cascade_delete endpoint (standard DELETE returns 501)
+	err := r.client.CascadeDeleteNamespace(ctx, data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {

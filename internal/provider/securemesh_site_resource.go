@@ -2307,12 +2307,18 @@ func (r *SecuremeshSiteResource) Create(ctx context.Context, req resource.Create
 	// Set computed fields from API response
 	if v, ok := created.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
+	} else if data.Address.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["volterra_certified_hw"].(string); ok && v != "" {
 		data.VolterraCertifiedHw = types.StringValue(v)
+	} else if data.VolterraCertifiedHw.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VolterraCertifiedHw = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -2856,12 +2862,18 @@ func (r *SecuremeshSiteResource) Update(ctx context.Context, req resource.Update
 	// Set computed fields from API response
 	if v, ok := updated.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
+	} else if data.Address.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Address = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["volterra_certified_hw"].(string); ok && v != "" {
 		data.VolterraCertifiedHw = types.StringValue(v)
+	} else if data.VolterraCertifiedHw.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VolterraCertifiedHw = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -2895,7 +2907,6 @@ func (r *SecuremeshSiteResource) Delete(ctx context.Context, req resource.Delete
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteSecuremeshSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

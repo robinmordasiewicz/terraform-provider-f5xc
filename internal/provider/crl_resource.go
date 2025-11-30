@@ -355,20 +355,32 @@ func (r *CRLResource) Create(ctx context.Context, req resource.CreateRequest, re
 	// Set computed fields from API response
 	if v, ok := created.Spec["refresh_interval"].(float64); ok {
 		data.RefreshInterval = types.Int64Value(int64(v))
+	} else if data.RefreshInterval.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.RefreshInterval = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["server_address"].(string); ok && v != "" {
 		data.ServerAddress = types.StringValue(v)
+	} else if data.ServerAddress.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerAddress = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["server_port"].(float64); ok {
 		data.ServerPort = types.Int64Value(int64(v))
+	} else if data.ServerPort.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerPort = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["timeout"].(float64); ok {
 		data.Timeout = types.Int64Value(int64(v))
+	} else if data.Timeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Timeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -586,20 +598,32 @@ func (r *CRLResource) Update(ctx context.Context, req resource.UpdateRequest, re
 	// Set computed fields from API response
 	if v, ok := updated.Spec["refresh_interval"].(float64); ok {
 		data.RefreshInterval = types.Int64Value(int64(v))
+	} else if data.RefreshInterval.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.RefreshInterval = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["server_address"].(string); ok && v != "" {
 		data.ServerAddress = types.StringValue(v)
+	} else if data.ServerAddress.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerAddress = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["server_port"].(float64); ok {
 		data.ServerPort = types.Int64Value(int64(v))
+	} else if data.ServerPort.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ServerPort = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["timeout"].(float64); ok {
 		data.Timeout = types.Int64Value(int64(v))
+	} else if data.Timeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Timeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -633,7 +657,6 @@ func (r *CRLResource) Delete(ctx context.Context, req resource.DeleteRequest, re
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteCRL(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

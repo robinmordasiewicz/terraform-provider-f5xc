@@ -340,8 +340,11 @@ func (r *AllowedTenantResource) Create(ctx context.Context, req resource.CreateR
 	// Set computed fields from API response
 	if v, ok := created.Spec["tenant_id"].(string); ok && v != "" {
 		data.TenantID = types.StringValue(v)
+	} else if data.TenantID.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TenantID = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -563,8 +566,11 @@ func (r *AllowedTenantResource) Update(ctx context.Context, req resource.UpdateR
 	// Set computed fields from API response
 	if v, ok := updated.Spec["tenant_id"].(string); ok && v != "" {
 		data.TenantID = types.StringValue(v)
+	} else if data.TenantID.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TenantID = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -598,7 +604,6 @@ func (r *AllowedTenantResource) Delete(ctx context.Context, req resource.DeleteR
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteAllowedTenant(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

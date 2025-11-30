@@ -471,12 +471,18 @@ func (r *BotDefenseAppInfrastructureResource) Create(ctx context.Context, req re
 	// Set computed fields from API response
 	if v, ok := created.Spec["environment_type"].(string); ok && v != "" {
 		data.EnvironmentType = types.StringValue(v)
+	} else if data.EnvironmentType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EnvironmentType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["traffic_type"].(string); ok && v != "" {
 		data.TrafficType = types.StringValue(v)
+	} else if data.TrafficType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TrafficType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -713,12 +719,18 @@ func (r *BotDefenseAppInfrastructureResource) Update(ctx context.Context, req re
 	// Set computed fields from API response
 	if v, ok := updated.Spec["environment_type"].(string); ok && v != "" {
 		data.EnvironmentType = types.StringValue(v)
+	} else if data.EnvironmentType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.EnvironmentType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["traffic_type"].(string); ok && v != "" {
 		data.TrafficType = types.StringValue(v)
+	} else if data.TrafficType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TrafficType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -752,7 +764,6 @@ func (r *BotDefenseAppInfrastructureResource) Delete(ctx context.Context, req re
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteBotDefenseAppInfrastructure(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

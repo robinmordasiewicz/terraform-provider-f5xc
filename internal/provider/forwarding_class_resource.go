@@ -414,16 +414,25 @@ func (r *ForwardingClassResource) Create(ctx context.Context, req resource.Creat
 	// Set computed fields from API response
 	if v, ok := created.Spec["interface_group"].(string); ok && v != "" {
 		data.InterfaceGroup = types.StringValue(v)
+	} else if data.InterfaceGroup.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.InterfaceGroup = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["queue_id_to_use"].(string); ok && v != "" {
 		data.QueueIDToUse = types.StringValue(v)
+	} else if data.QueueIDToUse.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.QueueIDToUse = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["tos_value"].(float64); ok {
 		data.TosValue = types.Int64Value(int64(v))
+	} else if data.TosValue.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TosValue = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -704,16 +713,25 @@ func (r *ForwardingClassResource) Update(ctx context.Context, req resource.Updat
 	// Set computed fields from API response
 	if v, ok := updated.Spec["interface_group"].(string); ok && v != "" {
 		data.InterfaceGroup = types.StringValue(v)
+	} else if data.InterfaceGroup.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.InterfaceGroup = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["queue_id_to_use"].(string); ok && v != "" {
 		data.QueueIDToUse = types.StringValue(v)
+	} else if data.QueueIDToUse.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.QueueIDToUse = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["tos_value"].(float64); ok {
 		data.TosValue = types.Int64Value(int64(v))
+	} else if data.TosValue.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.TosValue = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -747,7 +765,6 @@ func (r *ForwardingClassResource) Delete(ctx context.Context, req resource.Delet
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteForwardingClass(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

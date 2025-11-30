@@ -699,8 +699,11 @@ func (r *OidcProviderResource) Create(ctx context.Context, req resource.CreateRe
 	// Set computed fields from API response
 	if v, ok := created.Spec["provider_type"].(string); ok && v != "" {
 		data.ProviderType = types.StringValue(v)
+	} else if data.ProviderType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ProviderType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -1331,8 +1334,11 @@ func (r *OidcProviderResource) Update(ctx context.Context, req resource.UpdateRe
 	// Set computed fields from API response
 	if v, ok := updated.Spec["provider_type"].(string); ok && v != "" {
 		data.ProviderType = types.StringValue(v)
+	} else if data.ProviderType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ProviderType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -1366,7 +1372,6 @@ func (r *OidcProviderResource) Delete(ctx context.Context, req resource.DeleteRe
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteOidcProvider(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

@@ -303,12 +303,18 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Set computed fields from API response
 	if v, ok := created.Spec["description"].(string); ok && v != "" {
 		data.DescriptionSpec = types.StringValue(v)
+	} else if data.DescriptionSpec.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DescriptionSpec = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["irule"].(string); ok && v != "" {
 		data.Irule = types.StringValue(v)
+	} else if data.Irule.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Irule = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -493,12 +499,18 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Set computed fields from API response
 	if v, ok := updated.Spec["description"].(string); ok && v != "" {
 		data.DescriptionSpec = types.StringValue(v)
+	} else if data.DescriptionSpec.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.DescriptionSpec = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["irule"].(string); ok && v != "" {
 		data.Irule = types.StringValue(v)
+	} else if data.Irule.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Irule = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -532,7 +544,6 @@ func (r *IruleResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteIrule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

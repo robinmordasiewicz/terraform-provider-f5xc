@@ -2740,8 +2740,11 @@ func (r *ProxyResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// Set computed fields from API response
 	if v, ok := created.Spec["connection_timeout"].(float64); ok {
 		data.ConnectionTimeout = types.Int64Value(int64(v))
+	} else if data.ConnectionTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectionTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -3076,8 +3079,11 @@ func (r *ProxyResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	// Set computed fields from API response
 	if v, ok := updated.Spec["connection_timeout"].(float64); ok {
 		data.ConnectionTimeout = types.Int64Value(int64(v))
+	} else if data.ConnectionTimeout.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.ConnectionTimeout = types.Int64Null()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -3111,7 +3117,6 @@ func (r *ProxyResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteProxy(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

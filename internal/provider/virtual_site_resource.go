@@ -316,8 +316,11 @@ func (r *VirtualSiteResource) Create(ctx context.Context, req resource.CreateReq
 	// Set computed fields from API response
 	if v, ok := created.Spec["site_type"].(string); ok && v != "" {
 		data.SiteType = types.StringValue(v)
+	} else if data.SiteType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SiteType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -503,8 +506,11 @@ func (r *VirtualSiteResource) Update(ctx context.Context, req resource.UpdateReq
 	// Set computed fields from API response
 	if v, ok := updated.Spec["site_type"].(string); ok && v != "" {
 		data.SiteType = types.StringValue(v)
+	} else if data.SiteType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.SiteType = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -538,7 +544,6 @@ func (r *VirtualSiteResource) Delete(ctx context.Context, req resource.DeleteReq
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteVirtualSite(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)

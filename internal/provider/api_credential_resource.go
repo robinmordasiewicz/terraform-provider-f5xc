@@ -323,24 +323,38 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	data.ID = types.StringValue(created.Metadata.Name)
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(created.Metadata.Namespace)
 
 	// Set computed fields from API response
 	if v, ok := created.Spec["password"].(string); ok && v != "" {
 		data.Password = types.StringValue(v)
+	} else if data.Password.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Password = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["type"].(string); ok && v != "" {
 		data.Type = types.StringValue(v)
+	} else if data.Type.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Type = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["virtual_k8s_name"].(string); ok && v != "" {
 		data.VirtualK8SName = types.StringValue(v)
+	} else if data.VirtualK8SName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VirtualK8SName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := created.Spec["virtual_k8s_namespace"].(string); ok && v != "" {
 		data.VirtualK8SNamespace = types.StringValue(v)
+	} else if data.VirtualK8SNamespace.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VirtualK8SNamespace = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -541,20 +555,32 @@ func (r *APICredentialResource) Update(ctx context.Context, req resource.UpdateR
 	// Set computed fields from API response
 	if v, ok := updated.Spec["password"].(string); ok && v != "" {
 		data.Password = types.StringValue(v)
+	} else if data.Password.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Password = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["type"].(string); ok && v != "" {
 		data.Type = types.StringValue(v)
+	} else if data.Type.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Type = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["virtual_k8s_name"].(string); ok && v != "" {
 		data.VirtualK8SName = types.StringValue(v)
+	} else if data.VirtualK8SName.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VirtualK8SName = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 	if v, ok := updated.Spec["virtual_k8s_namespace"].(string); ok && v != "" {
 		data.VirtualK8SNamespace = types.StringValue(v)
+	} else if data.VirtualK8SNamespace.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.VirtualK8SNamespace = types.StringNull()
 	}
-	// If API doesn't return the value, preserve plan value (already in data)
+	// If plan had a value, preserve it
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from response if available, otherwise preserve from plan
@@ -588,7 +614,6 @@ func (r *APICredentialResource) Delete(ctx context.Context, req resource.DeleteR
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-
 	err := r.client.DeleteAPICredential(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)
@@ -614,19 +639,17 @@ func (r *APICredentialResource) Delete(ctx context.Context, req resource.DeleteR
 }
 
 func (r *APICredentialResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: namespace/name
-	parts := strings.Split(req.ID, "/")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+			"Expected import ID to be the resource name, got empty string",
 		)
 		return
 	}
-	namespace := parts[0]
-	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

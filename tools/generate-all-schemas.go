@@ -1580,6 +1580,25 @@ func renderSpecMarshalCode(attrs []TerraformAttribute, indent string) string {
 									sb.WriteString(fmt.Sprintf("%s\t\t\tif !item.%s.%s.IsNull() && !item.%s.%s.IsUnknown() {\n", indent, nestedFieldName, deepFieldName, nestedFieldName, deepFieldName))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t\t%sNestedMap[\"%s\"] = item.%s.%s.ValueBool()\n", indent, nestedTfsdkName, deepJsonName, nestedFieldName, deepFieldName))
 									sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+								case "list":
+									// Handle list types inside single nested blocks within list items
+									if deepAttr.ElementType == "string" {
+										sb.WriteString(fmt.Sprintf("%s\t\t\tif !item.%s.%s.IsNull() && !item.%s.%s.IsUnknown() {\n", indent, nestedFieldName, deepFieldName, nestedFieldName, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\tvar %sItems []string\n", indent, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\tdiags := item.%s.%s.ElementsAs(ctx, &%sItems, false)\n", indent, nestedFieldName, deepFieldName, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\tif !diags.HasError() {\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t%sNestedMap[\"%s\"] = %sItems\n", indent, nestedTfsdkName, deepJsonName, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t}\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+									} else if deepAttr.ElementType == "int64" {
+										sb.WriteString(fmt.Sprintf("%s\t\t\tif !item.%s.%s.IsNull() && !item.%s.%s.IsUnknown() {\n", indent, nestedFieldName, deepFieldName, nestedFieldName, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\tvar %sItems []int64\n", indent, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\tdiags := item.%s.%s.ElementsAs(ctx, &%sItems, false)\n", indent, nestedFieldName, deepFieldName, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\tif !diags.HasError() {\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t\t%sNestedMap[\"%s\"] = %sItems\n", indent, nestedTfsdkName, deepJsonName, deepFieldName))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t\t}\n", indent))
+										sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+									}
 								}
 							}
 							sb.WriteString(fmt.Sprintf("%s\t\t\titemMap[\"%s\"] = %sNestedMap\n", indent, nestedJsonName, nestedTfsdkName))

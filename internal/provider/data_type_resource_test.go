@@ -486,7 +486,9 @@ resource "f5xc_data_type" "test" {
   is_pii    = true
 
   rules {
-    any_pattern {}
+    key_pattern {
+      substring_value = "test"
+    }
   }
 }
 `, name)
@@ -511,7 +513,9 @@ resource "f5xc_data_type" "test" {
   }
 
   rules {
-    any_pattern {}
+    key_pattern {
+      substring_value = "test"
+    }
   }
 }
 `, name)
@@ -533,7 +537,9 @@ resource "f5xc_data_type" "test" {
 %[2]s  }
 
   rules {
-    any_pattern {}
+    key_pattern {
+      substring_value = "test"
+    }
   }
 }
 `, name, labelsStr)
@@ -548,7 +554,9 @@ resource "f5xc_data_type" "test" {
   is_pii      = true
 
   rules {
-    any_pattern {}
+    key_pattern {
+      substring_value = "test"
+    }
   }
 }
 `, name, description)
@@ -570,7 +578,9 @@ resource "f5xc_data_type" "test" {
 %[2]s  }
 
   rules {
-    any_pattern {}
+    key_pattern {
+      substring_value = "test"
+    }
   }
 }
 `, name, annotationsStr)
@@ -585,7 +595,9 @@ resource "f5xc_data_type" "test" {
   is_sensitive_data = %[3]t
 
   rules {
-    any_pattern {}
+    key_pattern {
+      substring_value = "test"
+    }
   }
 }
 `, name, isPii, isSensitive)

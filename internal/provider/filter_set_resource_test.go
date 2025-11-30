@@ -399,8 +399,7 @@ func testAccFilterSetImportStateIdFunc(resourceName string) resource.ImportState
 func testAccFilterSetResource_basic(nsName, fsName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -420,8 +419,7 @@ resource "f5xc_filter_set" "test" {
 func testAccFilterSetResource_allAttributes(nsName, fsName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -456,8 +454,7 @@ func testAccFilterSetResource_withLabels(nsName, fsName string, labels map[strin
 
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -480,8 +477,7 @@ resource "f5xc_filter_set" "test" {
 func testAccFilterSetResource_withDescription(nsName, fsName, description string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -507,8 +503,7 @@ func testAccFilterSetResource_withAnnotations(nsName, fsName string, annotations
 
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -531,8 +526,7 @@ resource "f5xc_filter_set" "test" {
 func testAccFilterSetResource_filterFields(nsName, fsName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {

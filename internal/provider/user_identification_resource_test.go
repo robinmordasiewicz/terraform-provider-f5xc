@@ -500,8 +500,7 @@ func TestAccUserIdentificationResource_identificationRules(t *testing.T) {
 func testAccUserIdentificationResourceConfig_basic(nsName, uiName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -524,8 +523,7 @@ resource "f5xc_user_identification" "test" {
 func testAccUserIdentificationResourceConfig_allAttributes(nsName, uiName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -564,8 +562,7 @@ func testAccUserIdentificationResourceConfig_withLabels(nsName, uiName string, l
 
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -591,8 +588,7 @@ resource "f5xc_user_identification" "test" {
 func testAccUserIdentificationResourceConfig_withDescription(nsName, uiName, description string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -621,8 +617,7 @@ func testAccUserIdentificationResourceConfig_withAnnotations(nsName, uiName stri
 
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -648,8 +643,7 @@ resource "f5xc_user_identification" "test" {
 func testAccUserIdentificationResourceConfig_withRules(nsName, uiName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {

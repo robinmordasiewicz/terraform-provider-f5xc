@@ -446,8 +446,7 @@ func testAccDataGroupImportStateIdFunc(resourceName string) resource.ImportState
 func testAccDataGroupConfig_namespaceBase(nsName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 # Wait for namespace to be ready before creating data_group

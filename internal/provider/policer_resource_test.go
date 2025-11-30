@@ -456,8 +456,7 @@ func testAccPolicerImportStateIdFunc(resourceName string) resource.ImportStateId
 func testAccPolicerConfig_namespaceBase(nsName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 # Wait for namespace to be ready before creating policer

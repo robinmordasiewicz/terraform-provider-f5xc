@@ -679,9 +679,9 @@ func TestAccIPPrefixSetResource_ipv4Prefixes(t *testing.T) {
 					acctest.CheckIPPrefixSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 					resource.TestCheckResourceAttr(resourceName, "ipv4_prefixes.0.ipv4_prefix", "10.0.0.0/8"),
-					resource.TestCheckResourceAttr(resourceName, "ipv4_prefixes.0.description", "Private Class A"),
+					resource.TestCheckResourceAttr(resourceName, "ipv4_prefixes.0.description_spec", "Private Class A"),
 					resource.TestCheckResourceAttr(resourceName, "ipv4_prefixes.1.ipv4_prefix", "192.168.0.0/16"),
-					resource.TestCheckResourceAttr(resourceName, "ipv4_prefixes.1.description", "Private Class C"),
+					resource.TestCheckResourceAttr(resourceName, "ipv4_prefixes.1.description_spec", "Private Class C"),
 				),
 			},
 			// Import verification
@@ -705,8 +705,7 @@ func testAccIPPrefixSetResourceConfig_basic(nsName, name string) string {
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -722,7 +721,7 @@ resource "f5xc_ip_prefix_set" "test" {
 
   ipv4_prefixes {
     ipv4_prefix = "10.0.0.0/8"
-    description = "Test prefix"
+    description_spec = "Test prefix"
   }
 }
 `, nsName, name))
@@ -733,8 +732,7 @@ func testAccIPPrefixSetResourceConfig_allAttributes(nsName, name string) string 
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -760,7 +758,7 @@ resource "f5xc_ip_prefix_set" "test" {
 
   ipv4_prefixes {
     ipv4_prefix = "10.0.0.0/8"
-    description = "Private Class A"
+    description_spec = "Private Class A"
   }
 }
 `, nsName, name))
@@ -771,8 +769,7 @@ func testAccIPPrefixSetResourceConfig_withLabels(nsName, name, environment, mana
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -793,7 +790,7 @@ resource "f5xc_ip_prefix_set" "test" {
 
   ipv4_prefixes {
     ipv4_prefix = "10.0.0.0/8"
-    description = "Test prefix"
+    description_spec = "Test prefix"
   }
 }
 `, nsName, name, environment, managedBy))
@@ -804,8 +801,7 @@ func testAccIPPrefixSetResourceConfig_withDescription(nsName, name, description 
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -822,7 +818,7 @@ resource "f5xc_ip_prefix_set" "test" {
 
   ipv4_prefixes {
     ipv4_prefix = "10.0.0.0/8"
-    description = "Test prefix"
+    description_spec = "Test prefix"
   }
 }
 `, nsName, name, description))
@@ -833,8 +829,7 @@ func testAccIPPrefixSetResourceConfig_withAnnotations(nsName, name, value1, valu
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -855,7 +850,7 @@ resource "f5xc_ip_prefix_set" "test" {
 
   ipv4_prefixes {
     ipv4_prefix = "10.0.0.0/8"
-    description = "Test prefix"
+    description_spec = "Test prefix"
   }
 }
 `, nsName, name, value1, value2))
@@ -866,8 +861,7 @@ func testAccIPPrefixSetResourceConfig_withIPv4Prefixes(nsName, name string) stri
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -883,12 +877,12 @@ resource "f5xc_ip_prefix_set" "test" {
 
   ipv4_prefixes {
     ipv4_prefix = "10.0.0.0/8"
-    description = "Private Class A"
+    description_spec = "Private Class A"
   }
 
   ipv4_prefixes {
     ipv4_prefix = "192.168.0.0/16"
-    description = "Private Class C"
+    description_spec = "Private Class C"
   }
 }
 `, nsName, name))

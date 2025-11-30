@@ -403,8 +403,7 @@ func testAccForwardingClassImportStateIdFunc(resourceName string) resource.Impor
 func testAccForwardingClassResource_basic(nsName, fcName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -423,8 +422,7 @@ resource "f5xc_forwarding_class" "test" {
 func testAccForwardingClassResource_allAttributes(nsName, fcName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -458,8 +456,7 @@ func testAccForwardingClassResource_withLabels(nsName, fcName string, labels map
 
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -481,8 +478,7 @@ resource "f5xc_forwarding_class" "test" {
 func testAccForwardingClassResource_withDescription(nsName, fcName, description string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -507,8 +503,7 @@ func testAccForwardingClassResource_withAnnotations(nsName, fcName string, annot
 
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -530,8 +525,7 @@ resource "f5xc_forwarding_class" "test" {
 func testAccForwardingClassResource_qosSettings(nsName, fcName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {

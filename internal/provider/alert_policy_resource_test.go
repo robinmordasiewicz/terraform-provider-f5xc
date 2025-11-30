@@ -501,8 +501,7 @@ func TestAccAlertPolicyResource_alertSettings(t *testing.T) {
 func testAccAlertPolicyResourceConfig_basic(nsName, apName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -521,8 +520,7 @@ resource "f5xc_alert_policy" "test" {
 func testAccAlertPolicyResourceConfig_allAttributes(nsName, apName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -557,8 +555,7 @@ func testAccAlertPolicyResourceConfig_withLabels(nsName, apName string, labels m
 
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -580,8 +577,7 @@ resource "f5xc_alert_policy" "test" {
 func testAccAlertPolicyResourceConfig_withDescription(nsName, apName, description string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -606,8 +602,7 @@ func testAccAlertPolicyResourceConfig_withAnnotations(nsName, apName string, ann
 
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -629,8 +624,7 @@ resource "f5xc_alert_policy" "test" {
 func testAccAlertPolicyResourceConfig_withSettings(nsName, apName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {

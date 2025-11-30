@@ -705,8 +705,7 @@ func testAccBGPAsnSetResourceConfig_basic(nsName, name string) string {
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -730,8 +729,7 @@ func testAccBGPAsnSetResourceConfig_allAttributes(nsName, name string) string {
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -765,8 +763,7 @@ func testAccBGPAsnSetResourceConfig_withLabels(nsName, name, environment, manage
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -793,8 +790,7 @@ func testAccBGPAsnSetResourceConfig_withDescription(nsName, name, description st
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -817,8 +813,7 @@ func testAccBGPAsnSetResourceConfig_withAnnotations(nsName, name, value1, value2
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {
@@ -845,8 +840,7 @@ func testAccBGPAsnSetResourceConfig_withASNumbers(nsName, name string) string {
 		acctest.ProviderConfig(),
 		fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "time_sleep" "wait_for_namespace" {

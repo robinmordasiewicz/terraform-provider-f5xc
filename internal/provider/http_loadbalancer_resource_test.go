@@ -21,20 +21,22 @@ func TestAccHTTPLoadBalancerResource_basic(t *testing.T) {
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-test-lb")
+	nsName := acctest.RandomName("tf-test-ns")
 	resourceName := "f5xc_http_loadbalancer.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_http_loadbalancer"),
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
-				Config: testAccHTTPLoadBalancerResourceConfig_basic(rName),
+				Config: testAccHTTPLoadBalancerResourceConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
+					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -62,7 +64,7 @@ func TestAccHTTPLoadBalancerResource_basic(t *testing.T) {
 			},
 			// Update testing
 			{
-				Config: testAccHTTPLoadBalancerResourceConfig_updated(rName),
+				Config: testAccHTTPLoadBalancerResourceConfig_updated(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -79,15 +81,17 @@ func TestAccHTTPLoadBalancerResource_withDomains(t *testing.T) {
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-test-lb-domain")
+	nsName := acctest.RandomName("tf-test-ns")
 	resourceName := "f5xc_http_loadbalancer.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_http_loadbalancer"),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccHTTPLoadBalancerResourceConfig_withDomains(rName),
+				Config: testAccHTTPLoadBalancerResourceConfig_withDomains(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -104,15 +108,17 @@ func TestAccHTTPLoadBalancerResource_disappears(t *testing.T) {
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-test-lb-disappear")
+	nsName := acctest.RandomName("tf-test-ns")
 	resourceName := "f5xc_http_loadbalancer.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_http_loadbalancer"),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccHTTPLoadBalancerResourceConfig_basic(rName),
+				Config: testAccHTTPLoadBalancerResourceConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					// In a real test, you would delete the resource via API here
@@ -124,13 +130,29 @@ func TestAccHTTPLoadBalancerResource_disappears(t *testing.T) {
 	})
 }
 
-func testAccHTTPLoadBalancerResourceConfig_basic(name string) string {
+// testAccHTTPLoadBalancerConfig_namespaceBase returns the namespace configuration
+func testAccHTTPLoadBalancerConfig_namespaceBase(nsName string) string {
+	return fmt.Sprintf(`
+resource "f5xc_namespace" "test" {
+  name = %[1]q
+}
+
+resource "time_sleep" "wait_for_namespace" {
+  depends_on      = [f5xc_namespace.test]
+  create_duration = "5s"
+}
+`, nsName)
+}
+
+func testAccHTTPLoadBalancerResourceConfig_basic(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
+		testAccHTTPLoadBalancerConfig_namespaceBase(nsName),
 		fmt.Sprintf(`
 resource "f5xc_http_loadbalancer" "test" {
-  name      = %[1]q
-  namespace = "system"
+  depends_on = [time_sleep.wait_for_namespace]
+  name       = %[1]q
+  namespace  = f5xc_namespace.test.name
 
   labels = {
     environment = "test"
@@ -148,13 +170,15 @@ resource "f5xc_http_loadbalancer" "test" {
 `, name))
 }
 
-func testAccHTTPLoadBalancerResourceConfig_updated(name string) string {
+func testAccHTTPLoadBalancerResourceConfig_updated(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
+		testAccHTTPLoadBalancerConfig_namespaceBase(nsName),
 		fmt.Sprintf(`
 resource "f5xc_http_loadbalancer" "test" {
-  name      = %[1]q
-  namespace = "system"
+  depends_on = [time_sleep.wait_for_namespace]
+  name       = %[1]q
+  namespace  = f5xc_namespace.test.name
 
   labels = {
     environment = "staging"
@@ -177,12 +201,15 @@ resource "f5xc_http_loadbalancer" "test" {
 `, name))
 }
 
-func testAccHTTPLoadBalancerResourceConfig_withDomains(name string) string {
+func testAccHTTPLoadBalancerResourceConfig_withDomains(nsName, name string) string {
 	return acctest.ConfigCompose(
 		acctest.ProviderConfig(),
+		testAccHTTPLoadBalancerConfig_namespaceBase(nsName),
 		fmt.Sprintf(`
 resource "f5xc_http_loadbalancer" "test" {
-  name = %[1]q
+  depends_on = [time_sleep.wait_for_namespace]
+  name       = %[1]q
+  namespace  = f5xc_namespace.test.name
 
   labels = {
     environment = "test"

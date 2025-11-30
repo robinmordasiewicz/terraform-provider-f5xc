@@ -405,8 +405,7 @@ func testAccAlertReceiverImportStateIdFunc(resourceName string) resource.ImportS
 func testAccAlertReceiverConfig_basic(nsName, rName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "f5xc_alert_receiver" "test" {
@@ -424,8 +423,7 @@ resource "f5xc_alert_receiver" "test" {
 func testAccAlertReceiverConfig_allAttributes(nsName, rName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "f5xc_alert_receiver" "test" {
@@ -452,8 +450,7 @@ resource "f5xc_alert_receiver" "test" {
 func testAccAlertReceiverConfig_withLabels(nsName, rName, labelValue string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "f5xc_alert_receiver" "test" {
@@ -475,8 +472,7 @@ resource "f5xc_alert_receiver" "test" {
 func testAccAlertReceiverConfig_withAnnotations(nsName, rName, annotationValue string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "f5xc_alert_receiver" "test" {
@@ -498,8 +494,7 @@ resource "f5xc_alert_receiver" "test" {
 func testAccAlertReceiverConfig_email(nsName, rName string) string {
 	return fmt.Sprintf(`
 resource "f5xc_namespace" "test" {
-  name      = %[1]q
-  namespace = "system"
+  name = %[1]q
 }
 
 resource "f5xc_alert_receiver" "test" {

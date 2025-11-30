@@ -76,7 +76,6 @@ func TestAccHTTPLoadBalancerResource_basic(t *testing.T) {
 }
 
 func TestAccHTTPLoadBalancerResource_withDomains(t *testing.T) {
-	t.Skip("Skipping: http_loadbalancer generator does not marshal spec fields (domains, load_balancer_type, etc.) to API request - requires generator enhancement")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -103,7 +102,6 @@ func TestAccHTTPLoadBalancerResource_withDomains(t *testing.T) {
 }
 
 func TestAccHTTPLoadBalancerResource_disappears(t *testing.T) {
-	t.Skip("Skipping: http_loadbalancer generator does not marshal spec fields (domains, load_balancer_type, etc.) to API request - requires generator enhancement")
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
@@ -219,6 +217,12 @@ resource "f5xc_http_loadbalancer" "test" {
     "app.example.com",
     "api.example.com"
   ]
+
+  http {
+    port = 80
+  }
+
+  advertise_on_public_default_vip {}
 }
 `, name))
 }

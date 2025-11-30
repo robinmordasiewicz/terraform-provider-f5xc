@@ -15,6 +15,7 @@ import (
 
 // =============================================================================
 // TEST: Basic app_firewall creation with default detection settings
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccAppFirewallResource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -22,7 +23,6 @@ func TestAccAppFirewallResource_basic(t *testing.T) {
 
 	resourceName := "f5xc_app_firewall.test"
 	rName := acctest.RandomName("tf-test-waf")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -31,11 +31,11 @@ func TestAccAppFirewallResource_basic(t *testing.T) {
 		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAppFirewallConfig_basic(nsName, rName),
+				Config: testAccAppFirewallConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAppFirewallExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttrSet(resourceName, "namespace"),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -53,6 +53,7 @@ func TestAccAppFirewallResource_basic(t *testing.T) {
 
 // =============================================================================
 // TEST: App firewall with labels and description
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccAppFirewallResource_withLabels(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -60,7 +61,6 @@ func TestAccAppFirewallResource_withLabels(t *testing.T) {
 
 	resourceName := "f5xc_app_firewall.test"
 	rName := acctest.RandomName("tf-test-waf")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -69,7 +69,7 @@ func TestAccAppFirewallResource_withLabels(t *testing.T) {
 		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAppFirewallConfig_withLabels(nsName, rName),
+				Config: testAccAppFirewallConfig_withLabelsSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAppFirewallExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -84,6 +84,7 @@ func TestAccAppFirewallResource_withLabels(t *testing.T) {
 
 // =============================================================================
 // TEST: App firewall with blocking mode
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccAppFirewallResource_blocking(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -91,7 +92,6 @@ func TestAccAppFirewallResource_blocking(t *testing.T) {
 
 	resourceName := "f5xc_app_firewall.test"
 	rName := acctest.RandomName("tf-test-waf")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -100,7 +100,7 @@ func TestAccAppFirewallResource_blocking(t *testing.T) {
 		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAppFirewallConfig_blocking(nsName, rName),
+				Config: testAccAppFirewallConfig_blockingSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAppFirewallExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -112,6 +112,7 @@ func TestAccAppFirewallResource_blocking(t *testing.T) {
 
 // =============================================================================
 // TEST: App firewall with monitoring mode
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccAppFirewallResource_monitoring(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -119,7 +120,6 @@ func TestAccAppFirewallResource_monitoring(t *testing.T) {
 
 	resourceName := "f5xc_app_firewall.test"
 	rName := acctest.RandomName("tf-test-waf")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -128,7 +128,7 @@ func TestAccAppFirewallResource_monitoring(t *testing.T) {
 		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAppFirewallConfig_monitoring(nsName, rName),
+				Config: testAccAppFirewallConfig_monitoringSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAppFirewallExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -140,6 +140,7 @@ func TestAccAppFirewallResource_monitoring(t *testing.T) {
 
 // =============================================================================
 // TEST: Resource disappears (deleted outside Terraform)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccAppFirewallResource_disappears(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -147,7 +148,6 @@ func TestAccAppFirewallResource_disappears(t *testing.T) {
 
 	resourceName := "f5xc_app_firewall.test"
 	rName := acctest.RandomName("tf-test-waf")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -156,7 +156,7 @@ func TestAccAppFirewallResource_disappears(t *testing.T) {
 		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAppFirewallConfig_basic(nsName, rName),
+				Config: testAccAppFirewallConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAppFirewallExists(resourceName),
 					acctest.CheckAppFirewallDisappears(resourceName),
@@ -169,6 +169,7 @@ func TestAccAppFirewallResource_disappears(t *testing.T) {
 
 // =============================================================================
 // TEST: Empty plan after apply (no drift)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccAppFirewallResource_emptyPlan(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -176,7 +177,6 @@ func TestAccAppFirewallResource_emptyPlan(t *testing.T) {
 
 	resourceName := "f5xc_app_firewall.test"
 	rName := acctest.RandomName("tf-test-waf")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -185,13 +185,13 @@ func TestAccAppFirewallResource_emptyPlan(t *testing.T) {
 		CheckDestroy:             acctest.CheckAppFirewallDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAppFirewallConfig_basic(nsName, rName),
+				Config: testAccAppFirewallConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAppFirewallExists(resourceName),
 				),
 			},
 			{
-				Config:             testAccAppFirewallConfig_basic(nsName, rName),
+				Config:             testAccAppFirewallConfig_basicSystem(rName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -218,29 +218,13 @@ func testAccAppFirewallImportStateIdFunc(resourceName string) resource.ImportSta
 // CONFIG HELPERS
 // =============================================================================
 
-// testAccAppFirewallConfig_namespaceBase returns the namespace configuration
-func testAccAppFirewallConfig_namespaceBase(nsName string) string {
+// testAccAppFirewallConfig_basicSystem uses the "system" namespace
+// to avoid creating test namespaces (namespace DELETE returns 501)
+func testAccAppFirewallConfig_basicSystem(name string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-# Wait for namespace to be ready before creating app_firewall
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-`, nsName)
-}
-
-func testAccAppFirewallConfig_basic(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccAppFirewallConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
 resource "f5xc_app_firewall" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   # Use default detection settings for simplicity
   default_detection_settings {}
@@ -260,17 +244,14 @@ resource "f5xc_app_firewall" "test" {
   # Use default anonymization
   default_anonymization {}
 }
-`, name))
+`, name)
 }
 
-func testAccAppFirewallConfig_withLabels(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccAppFirewallConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccAppFirewallConfig_withLabelsSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_app_firewall" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
   name        = %[1]q
-  namespace   = f5xc_namespace.test.name
+  namespace   = "system"
   description = "Test application firewall"
 
   labels = {
@@ -296,17 +277,14 @@ resource "f5xc_app_firewall" "test" {
   # Use default anonymization
   default_anonymization {}
 }
-`, name))
+`, name)
 }
 
-func testAccAppFirewallConfig_blocking(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccAppFirewallConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccAppFirewallConfig_blockingSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_app_firewall" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   # Use default detection settings
   default_detection_settings {}
@@ -326,17 +304,14 @@ resource "f5xc_app_firewall" "test" {
   # Use default anonymization
   default_anonymization {}
 }
-`, name))
+`, name)
 }
 
-func testAccAppFirewallConfig_monitoring(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccAppFirewallConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccAppFirewallConfig_monitoringSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_app_firewall" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   # Use default detection settings
   default_detection_settings {}
@@ -356,5 +331,5 @@ resource "f5xc_app_firewall" "test" {
   # Use default anonymization
   default_anonymization {}
 }
-`, name))
+`, name)
 }

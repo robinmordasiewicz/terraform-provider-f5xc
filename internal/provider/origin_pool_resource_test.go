@@ -15,6 +15,7 @@ import (
 
 // =============================================================================
 // TEST: Basic origin_pool creation with public_name origin
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccOriginPoolResource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -22,20 +23,18 @@ func TestAccOriginPoolResource_basic(t *testing.T) {
 
 	resourceName := "f5xc_origin_pool.test"
 	rName := acctest.RandomName("tf-test-op")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccOriginPoolConfig_basic(nsName, rName),
+				Config: testAccOriginPoolConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckOriginPoolExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttrSet(resourceName, "namespace"),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 					resource.TestCheckResourceAttr(resourceName, "port", "443"),
 				),
@@ -54,20 +53,22 @@ func TestAccOriginPoolResource_basic(t *testing.T) {
 
 // =============================================================================
 // TEST: Origin pool with labels and description
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccOriginPoolResource_withLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_origin_pool.test"
 	rName := acctest.RandomName("tf-test-op")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccOriginPoolConfig_withLabels(nsName, rName),
+				Config: testAccOriginPoolConfig_withLabelsSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckOriginPoolExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -82,27 +83,29 @@ func TestAccOriginPoolResource_withLabels(t *testing.T) {
 
 // =============================================================================
 // TEST: Update labels
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccOriginPoolResource_updateLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_origin_pool.test"
 	rName := acctest.RandomName("tf-test-op")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccOriginPoolConfig_labelsUpdate(nsName, rName, "dev"),
+				Config: testAccOriginPoolConfig_labelsUpdateSystem(rName, "dev"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckOriginPoolExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "dev"),
 				),
 			},
 			{
-				Config: testAccOriginPoolConfig_labelsUpdate(nsName, rName, "prod"),
+				Config: testAccOriginPoolConfig_labelsUpdateSystem(rName, "prod"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckOriginPoolExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "prod"),
@@ -114,20 +117,22 @@ func TestAccOriginPoolResource_updateLabels(t *testing.T) {
 
 // =============================================================================
 // TEST: Resource disappears (deleted outside Terraform)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccOriginPoolResource_disappears(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_origin_pool.test"
 	rName := acctest.RandomName("tf-test-op")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccOriginPoolConfig_basic(nsName, rName),
+				Config: testAccOriginPoolConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckOriginPoolExists(resourceName),
 					acctest.CheckOriginPoolDisappears(resourceName),
@@ -140,26 +145,28 @@ func TestAccOriginPoolResource_disappears(t *testing.T) {
 
 // =============================================================================
 // TEST: Empty plan after apply (no drift)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccOriginPoolResource_emptyPlan(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_origin_pool.test"
 	rName := acctest.RandomName("tf-test-op")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccOriginPoolConfig_basic(nsName, rName),
+				Config: testAccOriginPoolConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckOriginPoolExists(resourceName),
 				),
 			},
 			{
-				Config:             testAccOriginPoolConfig_basic(nsName, rName),
+				Config:             testAccOriginPoolConfig_basicSystem(rName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -183,32 +190,14 @@ func testAccOriginPoolImportStateIdFunc(resourceName string) resource.ImportStat
 }
 
 // =============================================================================
-// CONFIG HELPERS
+// CONFIG HELPERS - Use "system" namespace
 // =============================================================================
 
-// testAccOriginPoolConfig_namespaceBase returns the namespace configuration
-func testAccOriginPoolConfig_namespaceBase(nsName string) string {
+func testAccOriginPoolConfig_basicSystem(name string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-# Wait for namespace to be ready before creating origin_pool
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-`, nsName)
-}
-
-func testAccOriginPoolConfig_basic(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccOriginPoolConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
 resource "f5xc_origin_pool" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   port = 443
 
@@ -222,17 +211,14 @@ resource "f5xc_origin_pool" "test" {
   no_tls {}
   same_as_endpoint_port {}
 }
-`, name))
+`, name)
 }
 
-func testAccOriginPoolConfig_withLabels(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccOriginPoolConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccOriginPoolConfig_withLabelsSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_origin_pool" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
   name        = %[1]q
-  namespace   = f5xc_namespace.test.name
+  namespace   = "system"
   description = "Test origin pool"
 
   port = 443
@@ -252,17 +238,14 @@ resource "f5xc_origin_pool" "test" {
   no_tls {}
   same_as_endpoint_port {}
 }
-`, name))
+`, name)
 }
 
-func testAccOriginPoolConfig_labelsUpdate(nsName, name, env string) string {
-	return acctest.ConfigCompose(
-		testAccOriginPoolConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccOriginPoolConfig_labelsUpdateSystem(name, env string) string {
+	return fmt.Sprintf(`
 resource "f5xc_origin_pool" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   port = 443
 
@@ -280,5 +263,5 @@ resource "f5xc_origin_pool" "test" {
   no_tls {}
   same_as_endpoint_port {}
 }
-`, name, env))
+`, name, env)
 }

@@ -15,6 +15,7 @@ import (
 
 // =============================================================================
 // TEST: Basic service_policy creation with allow_all_requests
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccServicePolicyResource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -22,20 +23,18 @@ func TestAccServicePolicyResource_basic(t *testing.T) {
 
 	resourceName := "f5xc_service_policy.test"
 	rName := acctest.RandomName("tf-test-sp")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccServicePolicyConfig_basic(nsName, rName),
+				Config: testAccServicePolicyConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckServicePolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttrSet(resourceName, "namespace"),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -53,6 +52,7 @@ func TestAccServicePolicyResource_basic(t *testing.T) {
 
 // =============================================================================
 // TEST: Service policy with labels and description
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccServicePolicyResource_withLabels(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -60,16 +60,14 @@ func TestAccServicePolicyResource_withLabels(t *testing.T) {
 
 	resourceName := "f5xc_service_policy.test"
 	rName := acctest.RandomName("tf-test-sp")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccServicePolicyConfig_withLabels(nsName, rName),
+				Config: testAccServicePolicyConfig_withLabelsSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckServicePolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -84,6 +82,7 @@ func TestAccServicePolicyResource_withLabels(t *testing.T) {
 
 // =============================================================================
 // TEST: Service policy with deny_all_requests
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccServicePolicyResource_denyAll(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -91,16 +90,14 @@ func TestAccServicePolicyResource_denyAll(t *testing.T) {
 
 	resourceName := "f5xc_service_policy.test"
 	rName := acctest.RandomName("tf-test-sp")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccServicePolicyConfig_denyAll(nsName, rName),
+				Config: testAccServicePolicyConfig_denyAllSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckServicePolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -112,6 +109,7 @@ func TestAccServicePolicyResource_denyAll(t *testing.T) {
 
 // =============================================================================
 // TEST: Service policy with allow_list
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccServicePolicyResource_allowList(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -119,16 +117,14 @@ func TestAccServicePolicyResource_allowList(t *testing.T) {
 
 	resourceName := "f5xc_service_policy.test"
 	rName := acctest.RandomName("tf-test-sp")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccServicePolicyConfig_allowList(nsName, rName),
+				Config: testAccServicePolicyConfig_allowListSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckServicePolicyExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -140,6 +136,7 @@ func TestAccServicePolicyResource_allowList(t *testing.T) {
 
 // =============================================================================
 // TEST: Resource disappears (deleted outside Terraform)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccServicePolicyResource_disappears(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -147,16 +144,14 @@ func TestAccServicePolicyResource_disappears(t *testing.T) {
 
 	resourceName := "f5xc_service_policy.test"
 	rName := acctest.RandomName("tf-test-sp")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccServicePolicyConfig_basic(nsName, rName),
+				Config: testAccServicePolicyConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckServicePolicyExists(resourceName),
 					acctest.CheckServicePolicyDisappears(resourceName),
@@ -169,6 +164,7 @@ func TestAccServicePolicyResource_disappears(t *testing.T) {
 
 // =============================================================================
 // TEST: Empty plan after apply (no drift)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccServicePolicyResource_emptyPlan(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
@@ -176,22 +172,20 @@ func TestAccServicePolicyResource_emptyPlan(t *testing.T) {
 
 	resourceName := "f5xc_service_policy.test"
 	rName := acctest.RandomName("tf-test-sp")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckServicePolicyDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccServicePolicyConfig_basic(nsName, rName),
+				Config: testAccServicePolicyConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckServicePolicyExists(resourceName),
 				),
 			},
 			{
-				Config:             testAccServicePolicyConfig_basic(nsName, rName),
+				Config:             testAccServicePolicyConfig_basicSystem(rName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -215,32 +209,14 @@ func testAccServicePolicyImportStateIdFunc(resourceName string) resource.ImportS
 }
 
 // =============================================================================
-// CONFIG HELPERS
+// CONFIG HELPERS - Use "system" namespace
 // =============================================================================
 
-// testAccServicePolicyConfig_namespaceBase returns the namespace configuration
-func testAccServicePolicyConfig_namespaceBase(nsName string) string {
+func testAccServicePolicyConfig_basicSystem(name string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-# Wait for namespace to be ready before creating service_policy
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-`, nsName)
-}
-
-func testAccServicePolicyConfig_basic(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccServicePolicyConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
 resource "f5xc_service_policy" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   # Allow all requests - simplest policy
   allow_all_requests {}
@@ -248,17 +224,14 @@ resource "f5xc_service_policy" "test" {
   # Apply to any server
   any_server {}
 }
-`, name))
+`, name)
 }
 
-func testAccServicePolicyConfig_withLabels(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccServicePolicyConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccServicePolicyConfig_withLabelsSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_service_policy" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
   name        = %[1]q
-  namespace   = f5xc_namespace.test.name
+  namespace   = "system"
   description = "Test service policy"
 
   labels = {
@@ -272,17 +245,14 @@ resource "f5xc_service_policy" "test" {
   # Apply to any server
   any_server {}
 }
-`, name))
+`, name)
 }
 
-func testAccServicePolicyConfig_denyAll(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccServicePolicyConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccServicePolicyConfig_denyAllSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_service_policy" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   # Deny all requests
   deny_all_requests {}
@@ -290,17 +260,14 @@ resource "f5xc_service_policy" "test" {
   # Apply to any server
   any_server {}
 }
-`, name))
+`, name)
 }
 
-func testAccServicePolicyConfig_allowList(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccServicePolicyConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccServicePolicyConfig_allowListSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_service_policy" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   # Allow list with IP prefix
   allow_list {
@@ -313,5 +280,5 @@ resource "f5xc_service_policy" "test" {
   # Apply to any server
   any_server {}
 }
-`, name))
+`, name)
 }

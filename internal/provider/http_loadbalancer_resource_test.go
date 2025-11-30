@@ -13,84 +13,95 @@ import (
 	"github.com/f5xc/terraform-provider-f5xc/internal/acctest"
 )
 
+// =============================================================================
+// TEST: Basic http_loadbalancer creation
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccHTTPLoadBalancerResource_basic(t *testing.T) {
-	// UseStateForUnknown enhancement added for optional scalar fields (bool, string, int64)
-	// This should prevent drift from API defaults like add_location, etc.
-	// Note: Empty marker blocks (disable_*) may still cause issues as they're nested blocks
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-test-lb")
-	nsName := acctest.RandomName("tf-test-ns")
 	resourceName := "f5xc_http_loadbalancer.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_http_loadbalancer"),
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
-				Config: testAccHTTPLoadBalancerResourceConfig_basic(nsName, rName),
+				Config: testAccHTTPLoadBalancerConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
 			// ImportState testing
-			// Note: ImportStateVerifyIgnore includes fields that the API returns but weren't
-			// in the original config. During normal Read, these are preserved as empty to avoid
-			// drift, but during Import they are populated from the API.
 			{
 				ResourceName:      resourceName,
 				ImportState:       true,
 				ImportStateVerify: true,
-				ImportStateIdFunc: func(s *terraform.State) (string, error) {
-					rs, ok := s.RootModule().Resources[resourceName]
-					if !ok {
-						return "", fmt.Errorf("resource not found: %s", resourceName)
-					}
-					return fmt.Sprintf("%s/%s", rs.Primary.Attributes["namespace"], rs.Primary.Attributes["name"]), nil
-				},
+				ImportStateIdFunc: testAccHTTPLoadBalancerImportStateIdFunc(resourceName),
 				ImportStateVerifyIgnore: []string{
-					// These fields are populated during Import from API but preserved empty
-					// during normal Read to avoid drift on unconfigured blocks
+					"timeouts",
 					"http.dns_volterra_managed",
 					"l7_ddos_protection",
 				},
 			},
-			// Update testing
+		},
+	})
+}
+
+// =============================================================================
+// TEST: HTTP loadbalancer with labels and description
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
+func TestAccHTTPLoadBalancerResource_withLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
+	rName := acctest.RandomName("tf-test-lb")
+	resourceName := "f5xc_http_loadbalancer.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_http_loadbalancer"),
+		Steps: []resource.TestStep{
 			{
-				Config: testAccHTTPLoadBalancerResourceConfig_updated(nsName, rName),
+				Config: testAccHTTPLoadBalancerConfig_withLabelsSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttr(resourceName, "labels.environment", "staging"),
+					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
+					resource.TestCheckResourceAttr(resourceName, "labels.team", "platform"),
 				),
 			},
 		},
 	})
 }
 
+// =============================================================================
+// TEST: HTTP loadbalancer with multiple domains
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccHTTPLoadBalancerResource_withDomains(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
 	rName := acctest.RandomName("tf-test-lb-domain")
-	nsName := acctest.RandomName("tf-test-ns")
 	resourceName := "f5xc_http_loadbalancer.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_http_loadbalancer"),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccHTTPLoadBalancerResourceConfig_withDomains(nsName, rName),
+				Config: testAccHTTPLoadBalancerConfig_withDomainsSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -101,56 +112,95 @@ func TestAccHTTPLoadBalancerResource_withDomains(t *testing.T) {
 	})
 }
 
-func TestAccHTTPLoadBalancerResource_disappears(t *testing.T) {
+// =============================================================================
+// TEST: Update labels
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
+func TestAccHTTPLoadBalancerResource_updateLabels(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
 
-	rName := acctest.RandomName("tf-test-lb-disappear")
-	nsName := acctest.RandomName("tf-test-ns")
+	rName := acctest.RandomName("tf-test-lb")
 	resourceName := "f5xc_http_loadbalancer.test"
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_http_loadbalancer"),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccHTTPLoadBalancerResourceConfig_basic(nsName, rName),
+				Config: testAccHTTPLoadBalancerConfig_labelsUpdateSystem(rName, "dev"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
-					// In a real test, you would delete the resource via API here
-					// and verify Terraform handles the disappearance gracefully
+					resource.TestCheckResourceAttr(resourceName, "labels.environment", "dev"),
 				),
-				ExpectNonEmptyPlan: true,
+			},
+			{
+				Config: testAccHTTPLoadBalancerConfig_labelsUpdateSystem(rName, "prod"),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckResourceExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "labels.environment", "prod"),
+				),
 			},
 		},
 	})
 }
 
-// testAccHTTPLoadBalancerConfig_namespaceBase returns the namespace configuration
-func testAccHTTPLoadBalancerConfig_namespaceBase(nsName string) string {
+// =============================================================================
+// TEST: Empty plan after apply (no drift)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
+func TestAccHTTPLoadBalancerResource_emptyPlan(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
+	rName := acctest.RandomName("tf-test-lb")
+	resourceName := "f5xc_http_loadbalancer.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_http_loadbalancer"),
+		Steps: []resource.TestStep{
+			{
+				Config: testAccHTTPLoadBalancerConfig_basicSystem(rName),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckResourceExists(resourceName),
+				),
+			},
+			{
+				Config:             testAccHTTPLoadBalancerConfig_basicSystem(rName),
+				PlanOnly:           true,
+				ExpectNonEmptyPlan: false,
+			},
+		},
+	})
+}
+
+// =============================================================================
+// HELPER: Import state ID function
+// =============================================================================
+func testAccHTTPLoadBalancerImportStateIdFunc(resourceName string) resource.ImportStateIdFunc {
+	return func(s *terraform.State) (string, error) {
+		rs, ok := s.RootModule().Resources[resourceName]
+		if !ok {
+			return "", fmt.Errorf("resource not found: %s", resourceName)
+		}
+		namespace := rs.Primary.Attributes["namespace"]
+		name := rs.Primary.Attributes["name"]
+		return fmt.Sprintf("%s/%s", namespace, name), nil
+	}
+}
+
+// =============================================================================
+// CONFIG HELPERS - Use "system" namespace
+// =============================================================================
+
+func testAccHTTPLoadBalancerConfig_basicSystem(name string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-`, nsName)
-}
-
-func testAccHTTPLoadBalancerResourceConfig_basic(nsName, name string) string {
-	return acctest.ConfigCompose(
-		acctest.ProviderConfig(),
-		testAccHTTPLoadBalancerConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
 resource "f5xc_http_loadbalancer" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   labels = {
     environment = "test"
@@ -165,27 +215,19 @@ resource "f5xc_http_loadbalancer" "test" {
 
   advertise_on_public_default_vip {}
 }
-`, name))
+`, name)
 }
 
-func testAccHTTPLoadBalancerResourceConfig_updated(nsName, name string) string {
-	return acctest.ConfigCompose(
-		acctest.ProviderConfig(),
-		testAccHTTPLoadBalancerConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccHTTPLoadBalancerConfig_withLabelsSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_http_loadbalancer" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   labels = {
-    environment = "staging"
+    environment = "test"
+    team        = "platform"
     managed_by  = "terraform"
-    updated     = "true"
-  }
-
-  annotations = {
-    "description" = "Updated HTTP Load Balancer"
   }
 
   domains = ["test.example.com"]
@@ -196,18 +238,14 @@ resource "f5xc_http_loadbalancer" "test" {
 
   advertise_on_public_default_vip {}
 }
-`, name))
+`, name)
 }
 
-func testAccHTTPLoadBalancerResourceConfig_withDomains(nsName, name string) string {
-	return acctest.ConfigCompose(
-		acctest.ProviderConfig(),
-		testAccHTTPLoadBalancerConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccHTTPLoadBalancerConfig_withDomainsSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_http_loadbalancer" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
   name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  namespace  = "system"
 
   labels = {
     environment = "test"
@@ -224,5 +262,27 @@ resource "f5xc_http_loadbalancer" "test" {
 
   advertise_on_public_default_vip {}
 }
-`, name))
+`, name)
+}
+
+func testAccHTTPLoadBalancerConfig_labelsUpdateSystem(name, env string) string {
+	return fmt.Sprintf(`
+resource "f5xc_http_loadbalancer" "test" {
+  name       = %[1]q
+  namespace  = "system"
+
+  labels = {
+    environment = %[2]q
+    managed_by  = "terraform"
+  }
+
+  domains = ["test.example.com"]
+
+  http {
+    port = 80
+  }
+
+  advertise_on_public_default_vip {}
+}
+`, name, env)
 }

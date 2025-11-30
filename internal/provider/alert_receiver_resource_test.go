@@ -18,12 +18,13 @@ import (
 	"github.com/f5xc/terraform-provider-f5xc/internal/acctest"
 )
 
+// NOTE: alert_receiver tests use system namespace to avoid namespace propagation delays
+// that cause intermittent test failures when creating resources in newly-created namespaces.
+
 // TestAccAlertReceiverResource_basic tests the basic creation and deletion of an alert_receiver resource
 func TestAccAlertReceiverResource_basic(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	resourceName := "f5xc_alert_receiver.test"
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -31,11 +32,11 @@ func TestAccAlertReceiverResource_basic(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_basic(nsName, rName),
+				Config: testAccAlertReceiverConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -52,10 +53,8 @@ func TestAccAlertReceiverResource_basic(t *testing.T) {
 
 // TestAccAlertReceiverResource_allAttributes tests alert_receiver with all common attributes
 func TestAccAlertReceiverResource_allAttributes(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	resourceName := "f5xc_alert_receiver.test"
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -63,11 +62,11 @@ func TestAccAlertReceiverResource_allAttributes(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_allAttributes(nsName, rName),
+				Config: testAccAlertReceiverConfig_allAttributes(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "labels.env", "test"),
 					resource.TestCheckResourceAttr(resourceName, "labels.managed_by", "terraform"),
 					resource.TestCheckResourceAttr(resourceName, "annotations.purpose", "acceptance-testing"),
@@ -79,10 +78,8 @@ func TestAccAlertReceiverResource_allAttributes(t *testing.T) {
 
 // TestAccAlertReceiverResource_updateLabels tests updating labels on an existing resource
 func TestAccAlertReceiverResource_updateLabels(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	resourceName := "f5xc_alert_receiver.test"
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -90,14 +87,14 @@ func TestAccAlertReceiverResource_updateLabels(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_withLabels(nsName, rName, "initial"),
+				Config: testAccAlertReceiverConfig_withLabels(rName, "initial"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.env", "initial"),
 				),
 			},
 			{
-				Config: testAccAlertReceiverConfig_withLabels(nsName, rName, "updated"),
+				Config: testAccAlertReceiverConfig_withLabels(rName, "updated"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.env", "updated"),
@@ -109,10 +106,8 @@ func TestAccAlertReceiverResource_updateLabels(t *testing.T) {
 
 // TestAccAlertReceiverResource_updateDescription tests updating description
 func TestAccAlertReceiverResource_updateDescription(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	resourceName := "f5xc_alert_receiver.test"
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -120,13 +115,13 @@ func TestAccAlertReceiverResource_updateDescription(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_basic(nsName, rName),
+				Config: testAccAlertReceiverConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 				),
 			},
 			{
-				Config: testAccAlertReceiverConfig_allAttributes(nsName, rName),
+				Config: testAccAlertReceiverConfig_allAttributes(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.env", "test"),
@@ -138,10 +133,8 @@ func TestAccAlertReceiverResource_updateDescription(t *testing.T) {
 
 // TestAccAlertReceiverResource_updateAnnotations tests updating annotations
 func TestAccAlertReceiverResource_updateAnnotations(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	resourceName := "f5xc_alert_receiver.test"
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -149,14 +142,14 @@ func TestAccAlertReceiverResource_updateAnnotations(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_withAnnotations(nsName, rName, "initial-purpose"),
+				Config: testAccAlertReceiverConfig_withAnnotations(rName, "initial-purpose"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "annotations.purpose", "initial-purpose"),
 				),
 			},
 			{
-				Config: testAccAlertReceiverConfig_withAnnotations(nsName, rName, "updated-purpose"),
+				Config: testAccAlertReceiverConfig_withAnnotations(rName, "updated-purpose"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "annotations.purpose", "updated-purpose"),
@@ -168,10 +161,8 @@ func TestAccAlertReceiverResource_updateAnnotations(t *testing.T) {
 
 // TestAccAlertReceiverResource_disappears tests behavior when resource is deleted outside Terraform
 func TestAccAlertReceiverResource_disappears(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	resourceName := "f5xc_alert_receiver.test"
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -179,7 +170,7 @@ func TestAccAlertReceiverResource_disappears(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_basic(nsName, rName),
+				Config: testAccAlertReceiverConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 					acctest.CheckAlertReceiverDisappears(resourceName),
@@ -192,10 +183,8 @@ func TestAccAlertReceiverResource_disappears(t *testing.T) {
 
 // TestAccAlertReceiverResource_emptyPlan tests that no changes occur when configuration hasn't changed
 func TestAccAlertReceiverResource_emptyPlan(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	resourceName := "f5xc_alert_receiver.test"
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -203,13 +192,13 @@ func TestAccAlertReceiverResource_emptyPlan(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_basic(nsName, rName),
+				Config: testAccAlertReceiverConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 				),
 			},
 			{
-				Config:             testAccAlertReceiverConfig_basic(nsName, rName),
+				Config:             testAccAlertReceiverConfig_basic(rName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -219,9 +208,7 @@ func TestAccAlertReceiverResource_emptyPlan(t *testing.T) {
 
 // TestAccAlertReceiverResource_planChecks tests plan check functionality
 func TestAccAlertReceiverResource_planChecks(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -229,7 +216,7 @@ func TestAccAlertReceiverResource_planChecks(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_basic(nsName, rName),
+				Config: testAccAlertReceiverConfig_basic(rName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction("f5xc_alert_receiver.test", plancheck.ResourceActionCreate),
@@ -237,7 +224,7 @@ func TestAccAlertReceiverResource_planChecks(t *testing.T) {
 				},
 			},
 			{
-				Config: testAccAlertReceiverConfig_withLabels(nsName, rName, "newlabel"),
+				Config: testAccAlertReceiverConfig_withLabels(rName, "newlabel"),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction("f5xc_alert_receiver.test", plancheck.ResourceActionUpdate),
@@ -250,9 +237,7 @@ func TestAccAlertReceiverResource_planChecks(t *testing.T) {
 
 // TestAccAlertReceiverResource_knownValues tests expected attribute values using state checks
 func TestAccAlertReceiverResource_knownValues(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -260,7 +245,7 @@ func TestAccAlertReceiverResource_knownValues(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_basic(nsName, rName),
+				Config: testAccAlertReceiverConfig_basic(rName),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(
 						"f5xc_alert_receiver.test",
@@ -270,7 +255,7 @@ func TestAccAlertReceiverResource_knownValues(t *testing.T) {
 					statecheck.ExpectKnownValue(
 						"f5xc_alert_receiver.test",
 						tfjsonpath.New("namespace"),
-						knownvalue.StringExact(nsName),
+						knownvalue.StringExact("system"),
 					),
 					statecheck.CompareValuePairs(
 						"f5xc_alert_receiver.test",
@@ -287,9 +272,7 @@ func TestAccAlertReceiverResource_knownValues(t *testing.T) {
 
 // TestAccAlertReceiverResource_invalidName tests validation of invalid resource names
 func TestAccAlertReceiverResource_invalidName(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	rName := "INVALID_NAME_WITH_CAPS"
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -297,7 +280,7 @@ func TestAccAlertReceiverResource_invalidName(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccAlertReceiverConfig_basic(nsName, rName),
+				Config:      testAccAlertReceiverConfig_basic(rName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|cannot|validation)`),
 			},
 		},
@@ -306,9 +289,7 @@ func TestAccAlertReceiverResource_invalidName(t *testing.T) {
 
 // TestAccAlertReceiverResource_nameTooLong tests validation of names exceeding maximum length
 func TestAccAlertReceiverResource_nameTooLong(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	rName := "this-name-is-way-too-long-and-exceeds-the-maximum-allowed-length-for-f5xc-resources-which-should-trigger-validation-error"
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -316,7 +297,7 @@ func TestAccAlertReceiverResource_nameTooLong(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccAlertReceiverConfig_basic(nsName, rName),
+				Config:      testAccAlertReceiverConfig_basic(rName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|cannot|too long|length|validation)`),
 			},
 		},
@@ -325,16 +306,13 @@ func TestAccAlertReceiverResource_nameTooLong(t *testing.T) {
 
 // TestAccAlertReceiverResource_emptyName tests validation of empty resource names
 func TestAccAlertReceiverResource_emptyName(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
-	nsName := acctest.RandomName("tf-acc-test-ns")
-
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccAlertReceiverConfig_basic(nsName, ""),
+				Config:      testAccAlertReceiverConfig_basic(""),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|cannot|empty|required|validation)`),
 			},
 		},
@@ -343,10 +321,8 @@ func TestAccAlertReceiverResource_emptyName(t *testing.T) {
 
 // TestAccAlertReceiverResource_requiresReplace tests that name changes trigger resource replacement
 func TestAccAlertReceiverResource_requiresReplace(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
 	rNameUpdated := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -354,14 +330,14 @@ func TestAccAlertReceiverResource_requiresReplace(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_basic(nsName, rName),
+				Config: testAccAlertReceiverConfig_basic(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists("f5xc_alert_receiver.test"),
 					resource.TestCheckResourceAttr("f5xc_alert_receiver.test", "name", rName),
 				),
 			},
 			{
-				Config: testAccAlertReceiverConfig_basic(nsName, rNameUpdated),
+				Config: testAccAlertReceiverConfig_basic(rNameUpdated),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction("f5xc_alert_receiver.test", plancheck.ResourceActionDestroyBeforeCreate),
@@ -378,10 +354,8 @@ func TestAccAlertReceiverResource_requiresReplace(t *testing.T) {
 
 // TestAccAlertReceiverResource_emailConfig tests alert_receiver with email configuration
 func TestAccAlertReceiverResource_emailConfig(t *testing.T) {
-	t.Skip("Skipping: alert_receiver API returns NOT_FOUND in custom namespaces - needs system namespace investigation")
 	resourceName := "f5xc_alert_receiver.test"
 	rName := acctest.RandomName("tf-acc-test-alertrecv")
-	nsName := acctest.RandomName("tf-acc-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
@@ -389,11 +363,11 @@ func TestAccAlertReceiverResource_emailConfig(t *testing.T) {
 		CheckDestroy:             acctest.CheckAlertReceiverDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccAlertReceiverConfig_email(nsName, rName),
+				Config: testAccAlertReceiverConfig_email(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckAlertReceiverExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "email.email", "alerts@example.com"),
 				),
 			},
@@ -416,34 +390,27 @@ func testAccAlertReceiverImportStateIdFunc(resourceName string) resource.ImportS
 
 // Configuration functions
 
-func testAccAlertReceiverConfig_basic(nsName, rName string) string {
-	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
+// NOTE: alert_receiver tests use system namespace to avoid namespace propagation delays
+// that cause intermittent test failures when creating resources in newly-created namespaces.
 
+func testAccAlertReceiverConfig_basic(rName string) string {
+	return fmt.Sprintf(`
 resource "f5xc_alert_receiver" "test" {
-  depends_on = [f5xc_namespace.test]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   email {
     email = "test@example.com"
   }
 }
-`, nsName, rName)
+`, rName)
 }
 
-func testAccAlertReceiverConfig_allAttributes(nsName, rName string) string {
+func testAccAlertReceiverConfig_allAttributes(rName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
 resource "f5xc_alert_receiver" "test" {
-  depends_on = [f5xc_namespace.test]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   labels = {
     env        = "test"
@@ -458,67 +425,52 @@ resource "f5xc_alert_receiver" "test" {
     email = "test@example.com"
   }
 }
-`, nsName, rName)
+`, rName)
 }
 
-func testAccAlertReceiverConfig_withLabels(nsName, rName, labelValue string) string {
+func testAccAlertReceiverConfig_withLabels(rName, labelValue string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
 resource "f5xc_alert_receiver" "test" {
-  depends_on = [f5xc_namespace.test]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   labels = {
-    env = %[3]q
+    env = %[2]q
   }
 
   email {
     email = "test@example.com"
   }
 }
-`, nsName, rName, labelValue)
+`, rName, labelValue)
 }
 
-func testAccAlertReceiverConfig_withAnnotations(nsName, rName, annotationValue string) string {
+func testAccAlertReceiverConfig_withAnnotations(rName, annotationValue string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
 resource "f5xc_alert_receiver" "test" {
-  depends_on = [f5xc_namespace.test]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   annotations = {
-    purpose = %[3]q
+    purpose = %[2]q
   }
 
   email {
     email = "test@example.com"
   }
 }
-`, nsName, rName, annotationValue)
+`, rName, annotationValue)
 }
 
-func testAccAlertReceiverConfig_email(nsName, rName string) string {
+func testAccAlertReceiverConfig_email(rName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
 resource "f5xc_alert_receiver" "test" {
-  depends_on = [f5xc_namespace.test]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   email {
     email = "alerts@example.com"
   }
 }
-`, nsName, rName)
+`, rName)
 }

@@ -9,7 +9,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-testing/config"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
 	"github.com/hashicorp/terraform-plugin-testing/plancheck"
@@ -20,25 +19,29 @@ import (
 	"github.com/f5xc/terraform-provider-f5xc/internal/acctest"
 )
 
-// TestAccFilterSetResource_basic tests basic filter_set creation
+// =============================================================================
+// TEST: Basic filter_set creation
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_basic(t *testing.T) {
 	t.Skip("Skipping: filter_set API returns BAD_REQUEST - API spec investigation needed")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_basic(nsName, fsName),
+				Config: testAccFilterSetResource_basicSystem(fsName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckFilterSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", fsName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -55,24 +58,28 @@ func TestAccFilterSetResource_basic(t *testing.T) {
 	})
 }
 
-// TestAccFilterSetResource_allAttributes tests filter_set with all optional attributes
+// =============================================================================
+// TEST: All attributes set
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_allAttributes(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_allAttributes(nsName, fsName),
+				Config: testAccFilterSetResource_allAttributesSystem(fsName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckFilterSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", fsName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "description", "Test filter_set with all attributes"),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
 					resource.TestCheckResourceAttr(resourceName, "labels.team", "engineering"),
@@ -83,27 +90,31 @@ func TestAccFilterSetResource_allAttributes(t *testing.T) {
 	})
 }
 
-// TestAccFilterSetResource_updateLabels tests updating labels
+// =============================================================================
+// TEST: Update labels
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_updateLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_withLabels(nsName, fsName, map[string]string{"env": "dev"}),
+				Config: testAccFilterSetResource_withLabelsSystem(fsName, map[string]string{"env": "dev"}),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckFilterSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.env", "dev"),
 				),
 			},
 			{
-				Config: testAccFilterSetResource_withLabels(nsName, fsName, map[string]string{"env": "prod", "tier": "frontend"}),
+				Config: testAccFilterSetResource_withLabelsSystem(fsName, map[string]string{"env": "prod", "tier": "frontend"}),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr(resourceName, "labels.env", "prod"),
 					resource.TestCheckResourceAttr(resourceName, "labels.tier", "frontend"),
@@ -113,27 +124,31 @@ func TestAccFilterSetResource_updateLabels(t *testing.T) {
 	})
 }
 
-// TestAccFilterSetResource_updateDescription tests updating description
+// =============================================================================
+// TEST: Update description
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_updateDescription(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_withDescription(nsName, fsName, "Initial description"),
+				Config: testAccFilterSetResource_withDescriptionSystem(fsName, "Initial description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckFilterSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Initial description"),
 				),
 			},
 			{
-				Config: testAccFilterSetResource_withDescription(nsName, fsName, "Updated description"),
+				Config: testAccFilterSetResource_withDescriptionSystem(fsName, "Updated description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr(resourceName, "description", "Updated description"),
 				),
@@ -142,27 +157,31 @@ func TestAccFilterSetResource_updateDescription(t *testing.T) {
 	})
 }
 
-// TestAccFilterSetResource_updateAnnotations tests updating annotations
+// =============================================================================
+// TEST: Update annotations
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_updateAnnotations(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_withAnnotations(nsName, fsName, map[string]string{"key1": "value1"}),
+				Config: testAccFilterSetResource_withAnnotationsSystem(fsName, map[string]string{"key1": "value1"}),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckFilterSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "annotations.key1", "value1"),
 				),
 			},
 			{
-				Config: testAccFilterSetResource_withAnnotations(nsName, fsName, map[string]string{"key1": "updated", "key2": "value2"}),
+				Config: testAccFilterSetResource_withAnnotationsSystem(fsName, map[string]string{"key1": "updated", "key2": "value2"}),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr(resourceName, "annotations.key1", "updated"),
 					resource.TestCheckResourceAttr(resourceName, "annotations.key2", "value2"),
@@ -172,20 +191,24 @@ func TestAccFilterSetResource_updateAnnotations(t *testing.T) {
 	})
 }
 
-// TestAccFilterSetResource_disappears tests that Terraform handles external deletion
+// =============================================================================
+// TEST: Resource disappears (deleted outside Terraform)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_disappears(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_basic(nsName, fsName),
+				Config: testAccFilterSetResource_basicSystem(fsName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckFilterSetExists(resourceName),
 					acctest.CheckFilterSetDisappears(resourceName),
@@ -196,22 +219,26 @@ func TestAccFilterSetResource_disappears(t *testing.T) {
 	})
 }
 
-// TestAccFilterSetResource_emptyPlan tests that re-applying the same config produces no changes
+// =============================================================================
+// TEST: Empty plan after apply (no drift)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_emptyPlan(t *testing.T) {
-	nsName := acctest.RandomName("tf-ns-fs")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_basic(nsName, fsName),
+				Config: testAccFilterSetResource_basicSystem(fsName),
 			},
 			{
-				Config:             testAccFilterSetResource_basic(nsName, fsName),
+				Config:             testAccFilterSetResource_basicSystem(fsName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -219,20 +246,24 @@ func TestAccFilterSetResource_emptyPlan(t *testing.T) {
 	})
 }
 
-// TestAccFilterSetResource_planChecks tests plan-time checks
+// =============================================================================
+// TEST: Plan checks for create and update
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_planChecks(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_basic(nsName, fsName),
+				Config: testAccFilterSetResource_basicSystem(fsName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionCreate),
@@ -241,7 +272,7 @@ func TestAccFilterSetResource_planChecks(t *testing.T) {
 				},
 			},
 			{
-				Config: testAccFilterSetResource_withDescription(nsName, fsName, "Updated for plan check"),
+				Config: testAccFilterSetResource_withDescriptionSystem(fsName, "Updated for plan check"),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionUpdate),
@@ -252,48 +283,61 @@ func TestAccFilterSetResource_planChecks(t *testing.T) {
 	})
 }
 
-// TestAccFilterSetResource_knownValues tests state check values
+// =============================================================================
+// TEST: Known values using statecheck
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_knownValues(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_basic(nsName, fsName),
+				Config: testAccFilterSetResource_basicSystem(fsName),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("name"), knownvalue.StringExact(fsName)),
-					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("namespace"), knownvalue.StringExact(nsName)),
+					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("namespace"), knownvalue.StringExact("system")),
 				},
 			},
 		},
 	})
 }
 
-// TestAccFilterSetResource_invalidName tests validation of invalid names
+// =============================================================================
+// TEST: Invalid name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_invalidName(t *testing.T) {
-	nsName := acctest.RandomName("tf-ns-fs")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccFilterSetResource_basic(nsName, "Invalid_Name_With_Underscore"),
+				Config:      testAccFilterSetResource_basicSystem("Invalid_Name_With_Underscore"),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|validation|must)`),
 			},
 		},
 	})
 }
 
-// TestAccFilterSetResource_nameTooLong tests validation of names exceeding max length
+// =============================================================================
+// TEST: Name too long (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_nameTooLong(t *testing.T) {
-	nsName := acctest.RandomName("tf-ns-fs")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	longName := strings.Repeat("a", 65) // Exceeds typical 63 character limit
 
 	resource.ParallelTest(t, resource.TestCase{
@@ -301,51 +345,59 @@ func TestAccFilterSetResource_nameTooLong(t *testing.T) {
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccFilterSetResource_basic(nsName, longName),
+				Config:      testAccFilterSetResource_basicSystem(longName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|validation|too long|length|must)`),
 			},
 		},
 	})
 }
 
-// TestAccFilterSetResource_emptyName tests validation of empty names
+// =============================================================================
+// TEST: Empty name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_emptyName(t *testing.T) {
-	nsName := acctest.RandomName("tf-ns-fs")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccFilterSetResource_basic(nsName, ""),
+				Config:      testAccFilterSetResource_basicSystem(""),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|validation|empty|required|must)`),
 			},
 		},
 	})
 }
 
-// TestAccFilterSetResource_requiresReplace tests that name change requires replacement
+// =============================================================================
+// TEST: RequiresReplace on name change
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_requiresReplace(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 	newFsName := acctest.RandomName("tf-fs-new")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_basic(nsName, fsName),
+				Config: testAccFilterSetResource_basicSystem(fsName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckFilterSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", fsName),
 				),
 			},
 			{
-				Config: testAccFilterSetResource_basic(nsName, newFsName),
+				Config: testAccFilterSetResource_basicSystem(newFsName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionDestroyBeforeCreate),
@@ -356,20 +408,24 @@ func TestAccFilterSetResource_requiresReplace(t *testing.T) {
 	})
 }
 
-// TestAccFilterSetResource_filterFields tests the filter_fields nested block
+// =============================================================================
+// TEST: With filter_fields nested block
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccFilterSetResource_filterFields(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_filter_set.test"
-	nsName := acctest.RandomName("tf-ns-fs")
 	fsName := acctest.RandomName("tf-fs")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckFilterSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccFilterSetResource_filterFields(nsName, fsName),
+				Config: testAccFilterSetResource_filterFieldsSystem(fsName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckFilterSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", fsName),
@@ -381,9 +437,8 @@ func TestAccFilterSetResource_filterFields(t *testing.T) {
 }
 
 // =============================================================================
-// TEST CONFIGURATION HELPERS
+// HELPER: Import state ID function
 // =============================================================================
-
 func testAccFilterSetImportStateIdFunc(resourceName string) resource.ImportStateIdFunc {
 	return func(s *terraform.State) (string, error) {
 		rs, ok := s.RootModule().Resources[resourceName]
@@ -396,41 +451,25 @@ func testAccFilterSetImportStateIdFunc(resourceName string) resource.ImportState
 	}
 }
 
-func testAccFilterSetResource_basic(nsName, fsName string) string {
+// =============================================================================
+// CONFIG HELPERS - Use "system" namespace
+// =============================================================================
+
+func testAccFilterSetResource_basicSystem(fsName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_filter_set" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   context_key = "dashboard"
 }
-`, nsName, fsName)
+`, fsName)
 }
 
-func testAccFilterSetResource_allAttributes(nsName, fsName string) string {
+func testAccFilterSetResource_allAttributesSystem(fsName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_filter_set" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   description = "Test filter_set with all attributes"
   context_key = "dashboard"
 
@@ -443,106 +482,63 @@ resource "f5xc_filter_set" "test" {
     purpose = "acceptance-testing"
   }
 }
-`, nsName, fsName)
+`, fsName)
 }
 
-func testAccFilterSetResource_withLabels(nsName, fsName string, labels map[string]string) string {
+func testAccFilterSetResource_withLabelsSystem(fsName string, labels map[string]string) string {
 	labelsHCL := ""
 	for k, v := range labels {
 		labelsHCL += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_filter_set" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   context_key = "dashboard"
 
   labels = {
-%[3]s  }
+%[2]s  }
 }
-`, nsName, fsName, labelsHCL)
+`, fsName, labelsHCL)
 }
 
-func testAccFilterSetResource_withDescription(nsName, fsName, description string) string {
+func testAccFilterSetResource_withDescriptionSystem(fsName, description string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_filter_set" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
-  description = %[3]q
+  name        = %[1]q
+  namespace   = "system"
+  description = %[2]q
   context_key = "dashboard"
 }
-`, nsName, fsName, description)
+`, fsName, description)
 }
 
-func testAccFilterSetResource_withAnnotations(nsName, fsName string, annotations map[string]string) string {
+func testAccFilterSetResource_withAnnotationsSystem(fsName string, annotations map[string]string) string {
 	annotationsHCL := ""
 	for k, v := range annotations {
 		annotationsHCL += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_filter_set" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   context_key = "dashboard"
 
   annotations = {
-%[3]s  }
+%[2]s  }
 }
-`, nsName, fsName, annotationsHCL)
+`, fsName, annotationsHCL)
 }
 
-func testAccFilterSetResource_filterFields(nsName, fsName string) string {
+func testAccFilterSetResource_filterFieldsSystem(fsName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_filter_set" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   context_key = "dashboard"
   description = "Filter set with filter fields"
 }
-`, nsName, fsName)
+`, fsName)
 }
-
-// Ensure config.TestStepConfigFunc is used
-var _ config.TestStepConfigFunc = nil

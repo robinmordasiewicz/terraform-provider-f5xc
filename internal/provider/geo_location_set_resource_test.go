@@ -21,25 +21,27 @@ import (
 
 // =============================================================================
 // TEST: Basic geo_location_set creation
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_basic(t *testing.T) {
 	t.Skip("Skipping: geo_location_set API endpoint not available in staging environment (returns 404)")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_geo_location_set.test"
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_basic(nsName, rName),
+				Config: testAccGeoLocationSetConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckGeoLocationSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttrSet(resourceName, "namespace"),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -57,20 +59,22 @@ func TestAccGeoLocationSetResource_basic(t *testing.T) {
 
 // =============================================================================
 // TEST: All attributes set
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_allAttributes(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_geo_location_set.test"
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_allAttributes(nsName, rName),
+				Config: testAccGeoLocationSetConfig_allAttributesSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckGeoLocationSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -86,20 +90,22 @@ func TestAccGeoLocationSetResource_allAttributes(t *testing.T) {
 
 // =============================================================================
 // TEST: Update labels
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_updateLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_geo_location_set.test"
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_withLabels(nsName, rName, map[string]string{
+				Config: testAccGeoLocationSetConfig_withLabelsSystem(rName, map[string]string{
 					"environment": "dev",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -108,7 +114,7 @@ func TestAccGeoLocationSetResource_updateLabels(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccGeoLocationSetConfig_withLabels(nsName, rName, map[string]string{
+				Config: testAccGeoLocationSetConfig_withLabelsSystem(rName, map[string]string{
 					"environment": "prod",
 					"team":        "platform",
 				}),
@@ -124,27 +130,29 @@ func TestAccGeoLocationSetResource_updateLabels(t *testing.T) {
 
 // =============================================================================
 // TEST: Update description
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_updateDescription(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_geo_location_set.test"
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_withDescription(nsName, rName, "Initial description"),
+				Config: testAccGeoLocationSetConfig_withDescriptionSystem(rName, "Initial description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckGeoLocationSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Initial description"),
 				),
 			},
 			{
-				Config: testAccGeoLocationSetConfig_withDescription(nsName, rName, "Updated description"),
+				Config: testAccGeoLocationSetConfig_withDescriptionSystem(rName, "Updated description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckGeoLocationSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Updated description"),
@@ -156,20 +164,22 @@ func TestAccGeoLocationSetResource_updateDescription(t *testing.T) {
 
 // =============================================================================
 // TEST: Update annotations
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_updateAnnotations(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_geo_location_set.test"
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_withAnnotations(nsName, rName, map[string]string{
+				Config: testAccGeoLocationSetConfig_withAnnotationsSystem(rName, map[string]string{
 					"owner": "team-a",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -178,7 +188,7 @@ func TestAccGeoLocationSetResource_updateAnnotations(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccGeoLocationSetConfig_withAnnotations(nsName, rName, map[string]string{
+				Config: testAccGeoLocationSetConfig_withAnnotationsSystem(rName, map[string]string{
 					"owner":   "team-b",
 					"project": "alpha",
 				}),
@@ -194,20 +204,22 @@ func TestAccGeoLocationSetResource_updateAnnotations(t *testing.T) {
 
 // =============================================================================
 // TEST: Resource disappears (deleted outside Terraform)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_disappears(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_geo_location_set.test"
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_basic(nsName, rName),
+				Config: testAccGeoLocationSetConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckGeoLocationSetExists(resourceName),
 					acctest.CheckGeoLocationSetDisappears(resourceName),
@@ -220,26 +232,28 @@ func TestAccGeoLocationSetResource_disappears(t *testing.T) {
 
 // =============================================================================
 // TEST: Empty plan after apply (no drift)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_emptyPlan(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_geo_location_set.test"
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_allAttributes(nsName, rName),
+				Config: testAccGeoLocationSetConfig_allAttributesSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckGeoLocationSetExists(resourceName),
 				),
 			},
 			{
-				Config:             testAccGeoLocationSetConfig_allAttributes(nsName, rName),
+				Config:             testAccGeoLocationSetConfig_allAttributesSystem(rName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -249,19 +263,21 @@ func TestAccGeoLocationSetResource_emptyPlan(t *testing.T) {
 
 // =============================================================================
 // TEST: Plan checks for create
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_planChecks(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_basic(nsName, rName),
+				Config: testAccGeoLocationSetConfig_basicSystem(rName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction("f5xc_geo_location_set.test", plancheck.ResourceActionCreate),
@@ -274,20 +290,22 @@ func TestAccGeoLocationSetResource_planChecks(t *testing.T) {
 
 // =============================================================================
 // TEST: Known values using statecheck
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_knownValues(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_geo_location_set.test"
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_basic(nsName, rName),
+				Config: testAccGeoLocationSetConfig_basicSystem(rName),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(
 						resourceName,
@@ -307,18 +325,19 @@ func TestAccGeoLocationSetResource_knownValues(t *testing.T) {
 
 // =============================================================================
 // TEST: Invalid name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_invalidName(t *testing.T) {
-	nsName := acctest.RandomName("tf-test-ns")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccGeoLocationSetConfig_basic(nsName, "Invalid_Name_With_Uppercase"),
+				Config:      testAccGeoLocationSetConfig_basicSystem("Invalid_Name_With_Uppercase"),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|validation|name)`),
 			},
 		},
@@ -327,19 +346,21 @@ func TestAccGeoLocationSetResource_invalidName(t *testing.T) {
 
 // =============================================================================
 // TEST: Name too long (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_nameTooLong(t *testing.T) {
-	nsName := acctest.RandomName("tf-test-ns")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	longName := strings.Repeat("a", 256)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccGeoLocationSetConfig_basic(nsName, longName),
+				Config:      testAccGeoLocationSetConfig_basicSystem(longName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|validation|length|long|name)`),
 			},
 		},
@@ -348,18 +369,19 @@ func TestAccGeoLocationSetResource_nameTooLong(t *testing.T) {
 
 // =============================================================================
 // TEST: Empty name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_emptyName(t *testing.T) {
-	nsName := acctest.RandomName("tf-test-ns")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccGeoLocationSetConfig_basic(nsName, ""),
+				Config:      testAccGeoLocationSetConfig_basicSystem(""),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|validation|empty|required|name)`),
 			},
 		},
@@ -368,27 +390,29 @@ func TestAccGeoLocationSetResource_emptyName(t *testing.T) {
 
 // =============================================================================
 // TEST: RequiresReplace on name change
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_requiresReplace(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	rName1 := acctest.RandomName("tf-test-geoloc")
 	rName2 := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_basic(nsName, rName1),
+				Config: testAccGeoLocationSetConfig_basicSystem(rName1),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckGeoLocationSetExists("f5xc_geo_location_set.test"),
 					resource.TestCheckResourceAttr("f5xc_geo_location_set.test", "name", rName1),
 				),
 			},
 			{
-				Config: testAccGeoLocationSetConfig_basic(nsName, rName2),
+				Config: testAccGeoLocationSetConfig_basicSystem(rName2),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction("f5xc_geo_location_set.test", plancheck.ResourceActionDestroyBeforeCreate),
@@ -401,20 +425,22 @@ func TestAccGeoLocationSetResource_requiresReplace(t *testing.T) {
 
 // =============================================================================
 // TEST: With custom_geo_location_selector block
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccGeoLocationSetResource_customSelector(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_geo_location_set.test"
 	rName := acctest.RandomName("tf-test-geoloc")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckGeoLocationSetDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGeoLocationSetConfig_withCustomSelector(nsName, rName),
+				Config: testAccGeoLocationSetConfig_withCustomSelectorSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckGeoLocationSetExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -440,45 +466,23 @@ func testAccGeoLocationSetImportStateIdFunc(resourceName string) resource.Import
 }
 
 // =============================================================================
-// CONFIG HELPERS
+// CONFIG HELPERS - Use "system" namespace
 // =============================================================================
 
-// testAccGeoLocationSetConfig_namespaceBase returns the namespace configuration
-func testAccGeoLocationSetConfig_namespaceBase(nsName string) string {
+func testAccGeoLocationSetConfig_basicSystem(name string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-# Wait for namespace to be ready before creating geo_location_set
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-`, nsName)
-}
-
-func testAccGeoLocationSetConfig_basic(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccGeoLocationSetConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
 resource "f5xc_geo_location_set" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 }
-`, name),
-	)
+`, name)
 }
 
-func testAccGeoLocationSetConfig_allAttributes(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccGeoLocationSetConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccGeoLocationSetConfig_allAttributesSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_geo_location_set" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
   name        = %[1]q
-  namespace   = f5xc_namespace.test.name
+  namespace   = "system"
   description = "Test geo location set description"
 
   labels = {
@@ -490,79 +494,62 @@ resource "f5xc_geo_location_set" "test" {
     owner = "terraform"
   }
 }
-`, name),
-	)
+`, name)
 }
 
-func testAccGeoLocationSetConfig_withLabels(nsName, name string, labels map[string]string) string {
+func testAccGeoLocationSetConfig_withLabelsSystem(name string, labels map[string]string) string {
 	labelsStr := ""
 	for k, v := range labels {
 		labelsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
-	return acctest.ConfigCompose(
-		testAccGeoLocationSetConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+	return fmt.Sprintf(`
 resource "f5xc_geo_location_set" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   labels = {
 %[2]s  }
 }
-`, name, labelsStr),
-	)
+`, name, labelsStr)
 }
 
-func testAccGeoLocationSetConfig_withDescription(nsName, name, description string) string {
-	return acctest.ConfigCompose(
-		testAccGeoLocationSetConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccGeoLocationSetConfig_withDescriptionSystem(name, description string) string {
+	return fmt.Sprintf(`
 resource "f5xc_geo_location_set" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
   name        = %[1]q
-  namespace   = f5xc_namespace.test.name
+  namespace   = "system"
   description = %[2]q
 }
-`, name, description),
-	)
+`, name, description)
 }
 
-func testAccGeoLocationSetConfig_withAnnotations(nsName, name string, annotations map[string]string) string {
+func testAccGeoLocationSetConfig_withAnnotationsSystem(name string, annotations map[string]string) string {
 	annotationsStr := ""
 	for k, v := range annotations {
 		annotationsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
-	return acctest.ConfigCompose(
-		testAccGeoLocationSetConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+	return fmt.Sprintf(`
 resource "f5xc_geo_location_set" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   annotations = {
 %[2]s  }
 }
-`, name, annotationsStr),
-	)
+`, name, annotationsStr)
 }
 
-func testAccGeoLocationSetConfig_withCustomSelector(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccGeoLocationSetConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccGeoLocationSetConfig_withCustomSelectorSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_geo_location_set" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   custom_geo_location_selector {
     expressions = ["ves.io/country in (US, CA)"]
   }
 }
-`, name),
-	)
+`, name)
 }

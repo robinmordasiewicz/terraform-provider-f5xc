@@ -21,24 +21,26 @@ import (
 
 // =============================================================================
 // TEST: Basic policer creation
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_basic(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_policer.test"
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_basic(nsName, rName),
+				Config: testAccPolicerConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckPolicerExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttrSet(resourceName, "namespace"),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -56,20 +58,22 @@ func TestAccPolicerResource_basic(t *testing.T) {
 
 // =============================================================================
 // TEST: All attributes set including policer-specific fields
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_allAttributes(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_policer.test"
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_allAttributes(nsName, rName),
+				Config: testAccPolicerConfig_allAttributesSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckPolicerExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -85,20 +89,22 @@ func TestAccPolicerResource_allAttributes(t *testing.T) {
 
 // =============================================================================
 // TEST: Update labels
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_updateLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_policer.test"
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_withLabels(nsName, rName, map[string]string{
+				Config: testAccPolicerConfig_withLabelsSystem(rName, map[string]string{
 					"environment": "dev",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -107,7 +113,7 @@ func TestAccPolicerResource_updateLabels(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccPolicerConfig_withLabels(nsName, rName, map[string]string{
+				Config: testAccPolicerConfig_withLabelsSystem(rName, map[string]string{
 					"environment": "prod",
 					"team":        "platform",
 				}),
@@ -123,27 +129,29 @@ func TestAccPolicerResource_updateLabels(t *testing.T) {
 
 // =============================================================================
 // TEST: Update description
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_updateDescription(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_policer.test"
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_withDescription(nsName, rName, "Initial description"),
+				Config: testAccPolicerConfig_withDescriptionSystem(rName, "Initial description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckPolicerExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Initial description"),
 				),
 			},
 			{
-				Config: testAccPolicerConfig_withDescription(nsName, rName, "Updated description"),
+				Config: testAccPolicerConfig_withDescriptionSystem(rName, "Updated description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckPolicerExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Updated description"),
@@ -155,20 +163,22 @@ func TestAccPolicerResource_updateDescription(t *testing.T) {
 
 // =============================================================================
 // TEST: Update annotations
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_updateAnnotations(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_policer.test"
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_withAnnotations(nsName, rName, map[string]string{
+				Config: testAccPolicerConfig_withAnnotationsSystem(rName, map[string]string{
 					"owner": "team-a",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -177,7 +187,7 @@ func TestAccPolicerResource_updateAnnotations(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccPolicerConfig_withAnnotations(nsName, rName, map[string]string{
+				Config: testAccPolicerConfig_withAnnotationsSystem(rName, map[string]string{
 					"owner":   "team-b",
 					"project": "alpha",
 				}),
@@ -193,20 +203,22 @@ func TestAccPolicerResource_updateAnnotations(t *testing.T) {
 
 // =============================================================================
 // TEST: Resource disappears (deleted outside Terraform)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_disappears(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_policer.test"
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_basic(nsName, rName),
+				Config: testAccPolicerConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckPolicerExists(resourceName),
 					acctest.CheckPolicerDisappears(resourceName),
@@ -219,26 +231,28 @@ func TestAccPolicerResource_disappears(t *testing.T) {
 
 // =============================================================================
 // TEST: Empty plan after apply (no drift)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_emptyPlan(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_policer.test"
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_allAttributes(nsName, rName),
+				Config: testAccPolicerConfig_allAttributesSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckPolicerExists(resourceName),
 				),
 			},
 			{
-				Config:             testAccPolicerConfig_allAttributes(nsName, rName),
+				Config:             testAccPolicerConfig_allAttributesSystem(rName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -248,19 +262,21 @@ func TestAccPolicerResource_emptyPlan(t *testing.T) {
 
 // =============================================================================
 // TEST: Plan checks for create
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_planChecks(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_basic(nsName, rName),
+				Config: testAccPolicerConfig_basicSystem(rName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction("f5xc_policer.test", plancheck.ResourceActionCreate),
@@ -273,20 +289,22 @@ func TestAccPolicerResource_planChecks(t *testing.T) {
 
 // =============================================================================
 // TEST: Known values using statecheck
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_knownValues(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_policer.test"
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_basic(nsName, rName),
+				Config: testAccPolicerConfig_basicSystem(rName),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(
 						resourceName,
@@ -306,18 +324,19 @@ func TestAccPolicerResource_knownValues(t *testing.T) {
 
 // =============================================================================
 // TEST: Invalid name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_invalidName(t *testing.T) {
-	nsName := acctest.RandomName("tf-test-ns")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccPolicerConfig_basic(nsName, "Invalid_Name_With_Uppercase"),
+				Config:      testAccPolicerConfig_basicSystem("Invalid_Name_With_Uppercase"),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|validation|name)`),
 			},
 		},
@@ -326,19 +345,21 @@ func TestAccPolicerResource_invalidName(t *testing.T) {
 
 // =============================================================================
 // TEST: Name too long (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_nameTooLong(t *testing.T) {
-	nsName := acctest.RandomName("tf-test-ns")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	longName := strings.Repeat("a", 256)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccPolicerConfig_basic(nsName, longName),
+				Config:      testAccPolicerConfig_basicSystem(longName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|validation|length|long|name)`),
 			},
 		},
@@ -347,18 +368,19 @@ func TestAccPolicerResource_nameTooLong(t *testing.T) {
 
 // =============================================================================
 // TEST: Empty name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_emptyName(t *testing.T) {
-	nsName := acctest.RandomName("tf-test-ns")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccPolicerConfig_basic(nsName, ""),
+				Config:      testAccPolicerConfig_basicSystem(""),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|validation|empty|required|name)`),
 			},
 		},
@@ -367,27 +389,29 @@ func TestAccPolicerResource_emptyName(t *testing.T) {
 
 // =============================================================================
 // TEST: RequiresReplace on name change
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_requiresReplace(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	rName1 := acctest.RandomName("tf-test-policer")
 	rName2 := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_basic(nsName, rName1),
+				Config: testAccPolicerConfig_basicSystem(rName1),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckPolicerExists("f5xc_policer.test"),
 					resource.TestCheckResourceAttr("f5xc_policer.test", "name", rName1),
 				),
 			},
 			{
-				Config: testAccPolicerConfig_basic(nsName, rName2),
+				Config: testAccPolicerConfig_basicSystem(rName2),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction("f5xc_policer.test", plancheck.ResourceActionDestroyBeforeCreate),
@@ -400,20 +424,22 @@ func TestAccPolicerResource_requiresReplace(t *testing.T) {
 
 // =============================================================================
 // TEST: Policer-specific attributes (burst_size, committed_information_rate)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccPolicerResource_rateLimits(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_policer.test"
 	rName := acctest.RandomName("tf-test-policer")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckPolicerDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPolicerConfig_withRateLimits(nsName, rName, 10000, 5000),
+				Config: testAccPolicerConfig_withRateLimitsSystem(rName, 10000, 5000),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckPolicerExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -422,7 +448,7 @@ func TestAccPolicerResource_rateLimits(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccPolicerConfig_withRateLimits(nsName, rName, 20000, 10000),
+				Config: testAccPolicerConfig_withRateLimitsSystem(rName, 20000, 10000),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckPolicerExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "committed_information_rate", "20000"),
@@ -449,47 +475,25 @@ func testAccPolicerImportStateIdFunc(resourceName string) resource.ImportStateId
 }
 
 // =============================================================================
-// CONFIG HELPERS
+// CONFIG HELPERS - Use "system" namespace
 // =============================================================================
 
-// testAccPolicerConfig_namespaceBase returns the namespace configuration
-func testAccPolicerConfig_namespaceBase(nsName string) string {
+func testAccPolicerConfig_basicSystem(name string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-# Wait for namespace to be ready before creating policer
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-`, nsName)
-}
-
-func testAccPolicerConfig_basic(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccPolicerConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
 resource "f5xc_policer" "test" {
-  depends_on                 = [time_sleep.wait_for_namespace]
   name                       = %[1]q
-  namespace                  = f5xc_namespace.test.name
+  namespace                  = "system"
   committed_information_rate = 10000
   burst_size                 = 5000
 }
-`, name),
-	)
+`, name)
 }
 
-func testAccPolicerConfig_allAttributes(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccPolicerConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccPolicerConfig_allAttributesSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_policer" "test" {
-  depends_on                 = [time_sleep.wait_for_namespace]
   name                       = %[1]q
-  namespace                  = f5xc_namespace.test.name
+  namespace                  = "system"
   description                = "Test policer description"
   committed_information_rate = 10000
   burst_size                 = 5000
@@ -503,77 +507,66 @@ resource "f5xc_policer" "test" {
     owner = "terraform"
   }
 }
-`, name),
-	)
+`, name)
 }
 
-func testAccPolicerConfig_withLabels(nsName, name string, labels map[string]string) string {
+func testAccPolicerConfig_withLabelsSystem(name string, labels map[string]string) string {
 	labelsStr := ""
 	for k, v := range labels {
 		labelsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
-	return acctest.ConfigCompose(
-		testAccPolicerConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+	return fmt.Sprintf(`
 resource "f5xc_policer" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  name                       = %[1]q
+  namespace                  = "system"
+  committed_information_rate = 10000
+  burst_size                 = 5000
 
   labels = {
 %[2]s  }
 }
-`, name, labelsStr),
-	)
+`, name, labelsStr)
 }
 
-func testAccPolicerConfig_withDescription(nsName, name, description string) string {
-	return acctest.ConfigCompose(
-		testAccPolicerConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccPolicerConfig_withDescriptionSystem(name, description string) string {
+	return fmt.Sprintf(`
 resource "f5xc_policer" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[1]q
-  namespace   = f5xc_namespace.test.name
-  description = %[2]q
+  name                       = %[1]q
+  namespace                  = "system"
+  description                = %[2]q
+  committed_information_rate = 10000
+  burst_size                 = 5000
 }
-`, name, description),
-	)
+`, name, description)
 }
 
-func testAccPolicerConfig_withAnnotations(nsName, name string, annotations map[string]string) string {
+func testAccPolicerConfig_withAnnotationsSystem(name string, annotations map[string]string) string {
 	annotationsStr := ""
 	for k, v := range annotations {
 		annotationsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
-	return acctest.ConfigCompose(
-		testAccPolicerConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+	return fmt.Sprintf(`
 resource "f5xc_policer" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[1]q
-  namespace  = f5xc_namespace.test.name
+  name                       = %[1]q
+  namespace                  = "system"
+  committed_information_rate = 10000
+  burst_size                 = 5000
 
   annotations = {
 %[2]s  }
 }
-`, name, annotationsStr),
-	)
+`, name, annotationsStr)
 }
 
-func testAccPolicerConfig_withRateLimits(nsName, name string, cir, burstSize int) string {
-	return acctest.ConfigCompose(
-		testAccPolicerConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccPolicerConfig_withRateLimitsSystem(name string, cir, burstSize int) string {
+	return fmt.Sprintf(`
 resource "f5xc_policer" "test" {
-  depends_on                 = [time_sleep.wait_for_namespace]
   name                       = %[1]q
-  namespace                  = f5xc_namespace.test.name
+  namespace                  = "system"
   committed_information_rate = %[2]d
   burst_size                 = %[3]d
 }
-`, name, cir, burstSize),
-	)
+`, name, cir, burstSize)
 }

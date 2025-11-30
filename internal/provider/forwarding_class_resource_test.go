@@ -9,7 +9,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-testing/config"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
 	"github.com/hashicorp/terraform-plugin-testing/plancheck"
@@ -20,25 +19,29 @@ import (
 	"github.com/f5xc/terraform-provider-f5xc/internal/acctest"
 )
 
-// TestAccForwardingClassResource_basic tests basic forwarding_class creation
+// =============================================================================
+// TEST: Basic forwarding_class creation
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_basic(t *testing.T) {
 	t.Skip("Skipping: forwarding_class API endpoint not available in staging environment (returns 404)")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_basic(nsName, fcName),
+				Config: testAccForwardingClassResource_basicSystem(fcName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckForwardingClassExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", fcName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -55,24 +58,28 @@ func TestAccForwardingClassResource_basic(t *testing.T) {
 	})
 }
 
-// TestAccForwardingClassResource_allAttributes tests forwarding_class with all optional attributes
+// =============================================================================
+// TEST: All attributes set
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_allAttributes(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_allAttributes(nsName, fcName),
+				Config: testAccForwardingClassResource_allAttributesSystem(fcName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckForwardingClassExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", fcName),
-					resource.TestCheckResourceAttr(resourceName, "namespace", nsName),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttr(resourceName, "description", "Test forwarding_class with all attributes"),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
 					resource.TestCheckResourceAttr(resourceName, "labels.team", "engineering"),
@@ -83,27 +90,31 @@ func TestAccForwardingClassResource_allAttributes(t *testing.T) {
 	})
 }
 
-// TestAccForwardingClassResource_updateLabels tests updating labels
+// =============================================================================
+// TEST: Update labels
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_updateLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_withLabels(nsName, fcName, map[string]string{"env": "dev"}),
+				Config: testAccForwardingClassResource_withLabelsSystem(fcName, map[string]string{"env": "dev"}),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckForwardingClassExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.env", "dev"),
 				),
 			},
 			{
-				Config: testAccForwardingClassResource_withLabels(nsName, fcName, map[string]string{"env": "prod", "tier": "frontend"}),
+				Config: testAccForwardingClassResource_withLabelsSystem(fcName, map[string]string{"env": "prod", "tier": "frontend"}),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr(resourceName, "labels.env", "prod"),
 					resource.TestCheckResourceAttr(resourceName, "labels.tier", "frontend"),
@@ -113,27 +124,31 @@ func TestAccForwardingClassResource_updateLabels(t *testing.T) {
 	})
 }
 
-// TestAccForwardingClassResource_updateDescription tests updating description
+// =============================================================================
+// TEST: Update description
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_updateDescription(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_withDescription(nsName, fcName, "Initial description"),
+				Config: testAccForwardingClassResource_withDescriptionSystem(fcName, "Initial description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckForwardingClassExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Initial description"),
 				),
 			},
 			{
-				Config: testAccForwardingClassResource_withDescription(nsName, fcName, "Updated description"),
+				Config: testAccForwardingClassResource_withDescriptionSystem(fcName, "Updated description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr(resourceName, "description", "Updated description"),
 				),
@@ -142,27 +157,31 @@ func TestAccForwardingClassResource_updateDescription(t *testing.T) {
 	})
 }
 
-// TestAccForwardingClassResource_updateAnnotations tests updating annotations
+// =============================================================================
+// TEST: Update annotations
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_updateAnnotations(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_withAnnotations(nsName, fcName, map[string]string{"key1": "value1"}),
+				Config: testAccForwardingClassResource_withAnnotationsSystem(fcName, map[string]string{"key1": "value1"}),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckForwardingClassExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "annotations.key1", "value1"),
 				),
 			},
 			{
-				Config: testAccForwardingClassResource_withAnnotations(nsName, fcName, map[string]string{"key1": "updated", "key2": "value2"}),
+				Config: testAccForwardingClassResource_withAnnotationsSystem(fcName, map[string]string{"key1": "updated", "key2": "value2"}),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr(resourceName, "annotations.key1", "updated"),
 					resource.TestCheckResourceAttr(resourceName, "annotations.key2", "value2"),
@@ -172,20 +191,24 @@ func TestAccForwardingClassResource_updateAnnotations(t *testing.T) {
 	})
 }
 
-// TestAccForwardingClassResource_disappears tests that Terraform handles external deletion
+// =============================================================================
+// TEST: Resource disappears (deleted outside Terraform)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_disappears(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_basic(nsName, fcName),
+				Config: testAccForwardingClassResource_basicSystem(fcName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckForwardingClassExists(resourceName),
 					acctest.CheckForwardingClassDisappears(resourceName),
@@ -196,22 +219,26 @@ func TestAccForwardingClassResource_disappears(t *testing.T) {
 	})
 }
 
-// TestAccForwardingClassResource_emptyPlan tests that re-applying the same config produces no changes
+// =============================================================================
+// TEST: Empty plan after apply (no drift)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_emptyPlan(t *testing.T) {
-	nsName := acctest.RandomName("tf-ns-fc")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_basic(nsName, fcName),
+				Config: testAccForwardingClassResource_basicSystem(fcName),
 			},
 			{
-				Config:             testAccForwardingClassResource_basic(nsName, fcName),
+				Config:             testAccForwardingClassResource_basicSystem(fcName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -219,20 +246,24 @@ func TestAccForwardingClassResource_emptyPlan(t *testing.T) {
 	})
 }
 
-// TestAccForwardingClassResource_planChecks tests plan-time checks
+// =============================================================================
+// TEST: Plan checks for create
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_planChecks(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_basic(nsName, fcName),
+				Config: testAccForwardingClassResource_basicSystem(fcName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionCreate),
@@ -241,7 +272,7 @@ func TestAccForwardingClassResource_planChecks(t *testing.T) {
 				},
 			},
 			{
-				Config: testAccForwardingClassResource_withDescription(nsName, fcName, "Updated for plan check"),
+				Config: testAccForwardingClassResource_withDescriptionSystem(fcName, "Updated for plan check"),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionUpdate),
@@ -252,103 +283,121 @@ func TestAccForwardingClassResource_planChecks(t *testing.T) {
 	})
 }
 
-// TestAccForwardingClassResource_knownValues tests state check values
+// =============================================================================
+// TEST: Known values using statecheck
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_knownValues(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_basic(nsName, fcName),
+				Config: testAccForwardingClassResource_basicSystem(fcName),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("name"), knownvalue.StringExact(fcName)),
-					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("namespace"), knownvalue.StringExact(nsName)),
+					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("namespace"), knownvalue.StringExact("system")),
 				},
 			},
 		},
 	})
 }
 
-// TestAccForwardingClassResource_invalidName tests validation of invalid names
+// =============================================================================
+// TEST: Invalid name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_invalidName(t *testing.T) {
-	nsName := acctest.RandomName("tf-ns-fc")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccForwardingClassResource_basic(nsName, "Invalid_Name_With_Underscore"),
+				Config:      testAccForwardingClassResource_basicSystem("Invalid_Name_With_Underscore"),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|validation|must)`),
 			},
 		},
 	})
 }
 
-// TestAccForwardingClassResource_nameTooLong tests validation of names exceeding max length
+// =============================================================================
+// TEST: Name too long (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_nameTooLong(t *testing.T) {
-	nsName := acctest.RandomName("tf-ns-fc")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	longName := strings.Repeat("a", 65) // Exceeds typical 63 character limit
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccForwardingClassResource_basic(nsName, longName),
+				Config:      testAccForwardingClassResource_basicSystem(longName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|validation|too long|length|must)`),
 			},
 		},
 	})
 }
 
-// TestAccForwardingClassResource_emptyName tests validation of empty names
+// =============================================================================
+// TEST: Empty name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_emptyName(t *testing.T) {
-	nsName := acctest.RandomName("tf-ns-fc")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccForwardingClassResource_basic(nsName, ""),
+				Config:      testAccForwardingClassResource_basicSystem(""),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|validation|empty|required|must)`),
 			},
 		},
 	})
 }
 
-// TestAccForwardingClassResource_requiresReplace tests that name change requires replacement
+// =============================================================================
+// TEST: RequiresReplace on name change
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_requiresReplace(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 	newFcName := acctest.RandomName("tf-fc-new")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_basic(nsName, fcName),
+				Config: testAccForwardingClassResource_basicSystem(fcName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckForwardingClassExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", fcName),
 				),
 			},
 			{
-				Config: testAccForwardingClassResource_basic(nsName, newFcName),
+				Config: testAccForwardingClassResource_basicSystem(newFcName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionDestroyBeforeCreate),
@@ -359,20 +408,24 @@ func TestAccForwardingClassResource_requiresReplace(t *testing.T) {
 	})
 }
 
-// TestAccForwardingClassResource_qosSettings tests the QoS settings (tos_value)
+// =============================================================================
+// TEST: QoS settings (tos_value)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
+// =============================================================================
 func TestAccForwardingClassResource_qosSettings(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_forwarding_class.test"
-	nsName := acctest.RandomName("tf-ns-fc")
 	fcName := acctest.RandomName("tf-fc")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckForwardingClassDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccForwardingClassResource_qosSettings(nsName, fcName),
+				Config: testAccForwardingClassResource_qosSettingsSystem(fcName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckForwardingClassExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", fcName),
@@ -385,9 +438,8 @@ func TestAccForwardingClassResource_qosSettings(t *testing.T) {
 }
 
 // =============================================================================
-// TEST CONFIGURATION HELPERS
+// HELPER: Import state ID function
 // =============================================================================
-
 func testAccForwardingClassImportStateIdFunc(resourceName string) resource.ImportStateIdFunc {
 	return func(s *terraform.State) (string, error) {
 		rs, ok := s.RootModule().Resources[resourceName]
@@ -400,40 +452,24 @@ func testAccForwardingClassImportStateIdFunc(resourceName string) resource.Impor
 	}
 }
 
-func testAccForwardingClassResource_basic(nsName, fcName string) string {
+// =============================================================================
+// CONFIG HELPERS - Use "system" namespace
+// =============================================================================
+
+func testAccForwardingClassResource_basicSystem(fcName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_forwarding_class" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 }
-`, nsName, fcName)
+`, fcName)
 }
 
-func testAccForwardingClassResource_allAttributes(nsName, fcName string) string {
+func testAccForwardingClassResource_allAttributesSystem(fcName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_forwarding_class" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   description = "Test forwarding_class with all attributes"
 
   labels = {
@@ -445,103 +481,60 @@ resource "f5xc_forwarding_class" "test" {
     purpose = "acceptance-testing"
   }
 }
-`, nsName, fcName)
+`, fcName)
 }
 
-func testAccForwardingClassResource_withLabels(nsName, fcName string, labels map[string]string) string {
+func testAccForwardingClassResource_withLabelsSystem(fcName string, labels map[string]string) string {
 	labelsHCL := ""
 	for k, v := range labels {
 		labelsHCL += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_forwarding_class" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   labels = {
-%[3]s  }
+%[2]s  }
 }
-`, nsName, fcName, labelsHCL)
+`, fcName, labelsHCL)
 }
 
-func testAccForwardingClassResource_withDescription(nsName, fcName, description string) string {
+func testAccForwardingClassResource_withDescriptionSystem(fcName, description string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_forwarding_class" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
-  description = %[3]q
+  name        = %[1]q
+  namespace   = "system"
+  description = %[2]q
 }
-`, nsName, fcName, description)
+`, fcName, description)
 }
 
-func testAccForwardingClassResource_withAnnotations(nsName, fcName string, annotations map[string]string) string {
+func testAccForwardingClassResource_withAnnotationsSystem(fcName string, annotations map[string]string) string {
 	annotationsHCL := ""
 	for k, v := range annotations {
 		annotationsHCL += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_forwarding_class" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[2]q
-  namespace  = f5xc_namespace.test.name
+  name      = %[1]q
+  namespace = "system"
 
   annotations = {
-%[3]s  }
+%[2]s  }
 }
-`, nsName, fcName, annotationsHCL)
+`, fcName, annotationsHCL)
 }
 
-func testAccForwardingClassResource_qosSettings(nsName, fcName string) string {
+func testAccForwardingClassResource_qosSettingsSystem(fcName string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-
 resource "f5xc_forwarding_class" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
-  name        = %[2]q
-  namespace   = f5xc_namespace.test.name
+  name        = %[1]q
+  namespace   = "system"
   description = "Forwarding class with QoS settings"
   tos_value   = 40
 }
-`, nsName, fcName)
+`, fcName)
 }
-
-// Ensure config.TestStepConfigFunc is used
-var _ config.TestStepConfigFunc = nil

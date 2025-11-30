@@ -21,25 +21,27 @@ import (
 
 // =============================================================================
 // TEST: Basic data_type creation
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_basic(t *testing.T) {
 	t.Skip("Skipping: data_type API returns BAD_REQUEST - API spec investigation needed")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_data_type.test"
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_basic(nsName, rName),
+				Config: testAccDataTypeConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckDataTypeExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
-					resource.TestCheckResourceAttrSet(resourceName, "namespace"),
+					resource.TestCheckResourceAttr(resourceName, "namespace", "system"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
 				),
 			},
@@ -57,20 +59,22 @@ func TestAccDataTypeResource_basic(t *testing.T) {
 
 // =============================================================================
 // TEST: All attributes set
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_allAttributes(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_data_type.test"
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_allAttributes(nsName, rName),
+				Config: testAccDataTypeConfig_allAttributesSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckDataTypeExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -86,20 +90,22 @@ func TestAccDataTypeResource_allAttributes(t *testing.T) {
 
 // =============================================================================
 // TEST: Update labels
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_updateLabels(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_data_type.test"
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_withLabels(nsName, rName, map[string]string{
+				Config: testAccDataTypeConfig_withLabelsSystem(rName, map[string]string{
 					"environment": "dev",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -108,7 +114,7 @@ func TestAccDataTypeResource_updateLabels(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccDataTypeConfig_withLabels(nsName, rName, map[string]string{
+				Config: testAccDataTypeConfig_withLabelsSystem(rName, map[string]string{
 					"environment": "prod",
 					"team":        "platform",
 				}),
@@ -124,27 +130,29 @@ func TestAccDataTypeResource_updateLabels(t *testing.T) {
 
 // =============================================================================
 // TEST: Update description
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_updateDescription(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_data_type.test"
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_withDescription(nsName, rName, "Initial description"),
+				Config: testAccDataTypeConfig_withDescriptionSystem(rName, "Initial description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckDataTypeExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Initial description"),
 				),
 			},
 			{
-				Config: testAccDataTypeConfig_withDescription(nsName, rName, "Updated description"),
+				Config: testAccDataTypeConfig_withDescriptionSystem(rName, "Updated description"),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckDataTypeExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Updated description"),
@@ -156,20 +164,22 @@ func TestAccDataTypeResource_updateDescription(t *testing.T) {
 
 // =============================================================================
 // TEST: Update annotations
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_updateAnnotations(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_data_type.test"
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_withAnnotations(nsName, rName, map[string]string{
+				Config: testAccDataTypeConfig_withAnnotationsSystem(rName, map[string]string{
 					"owner": "team-a",
 				}),
 				Check: resource.ComposeAggregateTestCheckFunc(
@@ -178,7 +188,7 @@ func TestAccDataTypeResource_updateAnnotations(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccDataTypeConfig_withAnnotations(nsName, rName, map[string]string{
+				Config: testAccDataTypeConfig_withAnnotationsSystem(rName, map[string]string{
 					"owner":   "team-b",
 					"project": "alpha",
 				}),
@@ -194,20 +204,22 @@ func TestAccDataTypeResource_updateAnnotations(t *testing.T) {
 
 // =============================================================================
 // TEST: Resource disappears (deleted outside Terraform)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_disappears(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_data_type.test"
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_basic(nsName, rName),
+				Config: testAccDataTypeConfig_basicSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckDataTypeExists(resourceName),
 					acctest.CheckDataTypeDisappears(resourceName),
@@ -220,26 +232,28 @@ func TestAccDataTypeResource_disappears(t *testing.T) {
 
 // =============================================================================
 // TEST: Empty plan after apply (no drift)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_emptyPlan(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_data_type.test"
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_allAttributes(nsName, rName),
+				Config: testAccDataTypeConfig_allAttributesSystem(rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckDataTypeExists(resourceName),
 				),
 			},
 			{
-				Config:             testAccDataTypeConfig_allAttributes(nsName, rName),
+				Config:             testAccDataTypeConfig_allAttributesSystem(rName),
 				PlanOnly:           true,
 				ExpectNonEmptyPlan: false,
 			},
@@ -249,19 +263,21 @@ func TestAccDataTypeResource_emptyPlan(t *testing.T) {
 
 // =============================================================================
 // TEST: Plan checks for create
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_planChecks(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_basic(nsName, rName),
+				Config: testAccDataTypeConfig_basicSystem(rName),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction("f5xc_data_type.test", plancheck.ResourceActionCreate),
@@ -274,20 +290,22 @@ func TestAccDataTypeResource_planChecks(t *testing.T) {
 
 // =============================================================================
 // TEST: Known values using statecheck
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_knownValues(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_data_type.test"
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_basic(nsName, rName),
+				Config: testAccDataTypeConfig_basicSystem(rName),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(
 						resourceName,
@@ -307,18 +325,19 @@ func TestAccDataTypeResource_knownValues(t *testing.T) {
 
 // =============================================================================
 // TEST: Invalid name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_invalidName(t *testing.T) {
-	nsName := acctest.RandomName("tf-test-ns")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccDataTypeConfig_basic(nsName, "Invalid_Name_With_Uppercase"),
+				Config:      testAccDataTypeConfig_basicSystem("Invalid_Name_With_Uppercase"),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|validation|name)`),
 			},
 		},
@@ -327,19 +346,21 @@ func TestAccDataTypeResource_invalidName(t *testing.T) {
 
 // =============================================================================
 // TEST: Name too long (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_nameTooLong(t *testing.T) {
-	nsName := acctest.RandomName("tf-test-ns")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	longName := strings.Repeat("a", 256)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccDataTypeConfig_basic(nsName, longName),
+				Config:      testAccDataTypeConfig_basicSystem(longName),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|validation|length|long|name)`),
 			},
 		},
@@ -348,18 +369,19 @@ func TestAccDataTypeResource_nameTooLong(t *testing.T) {
 
 // =============================================================================
 // TEST: Empty name (validation error)
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_emptyName(t *testing.T) {
-	nsName := acctest.RandomName("tf-test-ns")
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config:      testAccDataTypeConfig_basic(nsName, ""),
+				Config:      testAccDataTypeConfig_basicSystem(""),
 				ExpectError: regexp.MustCompile(`(?i)(invalid|must|validation|empty|required|name)`),
 			},
 		},
@@ -368,27 +390,29 @@ func TestAccDataTypeResource_emptyName(t *testing.T) {
 
 // =============================================================================
 // TEST: RequiresReplace on name change
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_requiresReplace(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	rName1 := acctest.RandomName("tf-test-datatype")
 	rName2 := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_basic(nsName, rName1),
+				Config: testAccDataTypeConfig_basicSystem(rName1),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckDataTypeExists("f5xc_data_type.test"),
 					resource.TestCheckResourceAttr("f5xc_data_type.test", "name", rName1),
 				),
 			},
 			{
-				Config: testAccDataTypeConfig_basic(nsName, rName2),
+				Config: testAccDataTypeConfig_basicSystem(rName2),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction("f5xc_data_type.test", plancheck.ResourceActionDestroyBeforeCreate),
@@ -401,20 +425,22 @@ func TestAccDataTypeResource_requiresReplace(t *testing.T) {
 
 // =============================================================================
 // TEST: With PII and sensitive data flags
+// Uses "system" namespace to avoid creating test namespaces that can't be deleted
 // =============================================================================
 func TestAccDataTypeResource_piiFlags(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
 	resourceName := "f5xc_data_type.test"
 	rName := acctest.RandomName("tf-test-datatype")
-	nsName := acctest.RandomName("tf-test-ns")
 
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
-		ExternalProviders:        acctest.ExternalProviders,
 		CheckDestroy:             acctest.CheckDataTypeDestroyed,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccDataTypeConfig_withPiiFlags(nsName, rName, true, true),
+				Config: testAccDataTypeConfig_withPiiFlagsSystem(rName, true, true),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckDataTypeExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
@@ -423,7 +449,7 @@ func TestAccDataTypeResource_piiFlags(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccDataTypeConfig_withPiiFlags(nsName, rName, false, false),
+				Config: testAccDataTypeConfig_withPiiFlagsSystem(rName, false, false),
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckDataTypeExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "is_pii", "false"),
@@ -450,46 +476,24 @@ func testAccDataTypeImportStateIdFunc(resourceName string) resource.ImportStateI
 }
 
 // =============================================================================
-// CONFIG HELPERS
+// CONFIG HELPERS - Use "system" namespace
 // =============================================================================
 
-// testAccDataTypeConfig_namespaceBase returns the namespace configuration
-func testAccDataTypeConfig_namespaceBase(nsName string) string {
+func testAccDataTypeConfig_basicSystem(name string) string {
 	return fmt.Sprintf(`
-resource "f5xc_namespace" "test" {
-  name = %[1]q
-}
-
-# Wait for namespace to be ready before creating data_type
-resource "time_sleep" "wait_for_namespace" {
-  depends_on      = [f5xc_namespace.test]
-  create_duration = "5s"
-}
-`, nsName)
-}
-
-func testAccDataTypeConfig_basic(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccDataTypeConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
 resource "f5xc_data_type" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[1]q
-  namespace  = f5xc_namespace.test.name
-  is_pii     = true
+  name      = %[1]q
+  namespace = "system"
+  is_pii    = true
 }
-`, name),
-	)
+`, name)
 }
 
-func testAccDataTypeConfig_allAttributes(nsName, name string) string {
-	return acctest.ConfigCompose(
-		testAccDataTypeConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccDataTypeConfig_allAttributesSystem(name string) string {
+	return fmt.Sprintf(`
 resource "f5xc_data_type" "test" {
-  depends_on        = [time_sleep.wait_for_namespace]
   name              = %[1]q
-  namespace         = f5xc_namespace.test.name
+  namespace         = "system"
   description       = "Test data type description"
   is_pii            = true
   is_sensitive_data = true
@@ -503,80 +507,63 @@ resource "f5xc_data_type" "test" {
     owner = "terraform"
   }
 }
-`, name),
-	)
+`, name)
 }
 
-func testAccDataTypeConfig_withLabels(nsName, name string, labels map[string]string) string {
+func testAccDataTypeConfig_withLabelsSystem(name string, labels map[string]string) string {
 	labelsStr := ""
 	for k, v := range labels {
 		labelsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
-	return acctest.ConfigCompose(
-		testAccDataTypeConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+	return fmt.Sprintf(`
 resource "f5xc_data_type" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[1]q
-  namespace  = f5xc_namespace.test.name
-  is_pii     = true
+  name      = %[1]q
+  namespace = "system"
+  is_pii    = true
 
   labels = {
 %[2]s  }
 }
-`, name, labelsStr),
-	)
+`, name, labelsStr)
 }
 
-func testAccDataTypeConfig_withDescription(nsName, name, description string) string {
-	return acctest.ConfigCompose(
-		testAccDataTypeConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccDataTypeConfig_withDescriptionSystem(name, description string) string {
+	return fmt.Sprintf(`
 resource "f5xc_data_type" "test" {
-  depends_on  = [time_sleep.wait_for_namespace]
   name        = %[1]q
-  namespace   = f5xc_namespace.test.name
+  namespace   = "system"
   description = %[2]q
   is_pii      = true
 }
-`, name, description),
-	)
+`, name, description)
 }
 
-func testAccDataTypeConfig_withAnnotations(nsName, name string, annotations map[string]string) string {
+func testAccDataTypeConfig_withAnnotationsSystem(name string, annotations map[string]string) string {
 	annotationsStr := ""
 	for k, v := range annotations {
 		annotationsStr += fmt.Sprintf("    %s = %q\n", k, v)
 	}
 
-	return acctest.ConfigCompose(
-		testAccDataTypeConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+	return fmt.Sprintf(`
 resource "f5xc_data_type" "test" {
-  depends_on = [time_sleep.wait_for_namespace]
-  name       = %[1]q
-  namespace  = f5xc_namespace.test.name
-  is_pii     = true
+  name      = %[1]q
+  namespace = "system"
+  is_pii    = true
 
   annotations = {
 %[2]s  }
 }
-`, name, annotationsStr),
-	)
+`, name, annotationsStr)
 }
 
-func testAccDataTypeConfig_withPiiFlags(nsName, name string, isPii, isSensitive bool) string {
-	return acctest.ConfigCompose(
-		testAccDataTypeConfig_namespaceBase(nsName),
-		fmt.Sprintf(`
+func testAccDataTypeConfig_withPiiFlagsSystem(name string, isPii, isSensitive bool) string {
+	return fmt.Sprintf(`
 resource "f5xc_data_type" "test" {
-  depends_on        = [time_sleep.wait_for_namespace]
   name              = %[1]q
-  namespace         = f5xc_namespace.test.name
+  namespace         = "system"
   is_pii            = %[2]t
   is_sensitive_data = %[3]t
 }
-`, name, isPii, isSensitive),
-	)
+`, name, isPii, isSensitive)
 }

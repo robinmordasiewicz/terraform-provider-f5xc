@@ -28,12 +28,12 @@ func TestAccOriginPoolResource_basic(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_origin_pool"),
+		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccOriginPoolConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckResourceExists(resourceName),
+					acctest.CheckOriginPoolExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 					resource.TestCheckResourceAttrSet(resourceName, "namespace"),
 					resource.TestCheckResourceAttrSet(resourceName, "id"),
@@ -64,12 +64,12 @@ func TestAccOriginPoolResource_withLabels(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_origin_pool"),
+		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccOriginPoolConfig_withLabels(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckResourceExists(resourceName),
+					acctest.CheckOriginPoolExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "name", rName),
 					resource.TestCheckResourceAttr(resourceName, "description", "Test origin pool"),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "test"),
@@ -92,19 +92,19 @@ func TestAccOriginPoolResource_updateLabels(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_origin_pool"),
+		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccOriginPoolConfig_labelsUpdate(nsName, rName, "dev"),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckResourceExists(resourceName),
+					acctest.CheckOriginPoolExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "dev"),
 				),
 			},
 			{
 				Config: testAccOriginPoolConfig_labelsUpdate(nsName, rName, "prod"),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckResourceExists(resourceName),
+					acctest.CheckOriginPoolExists(resourceName),
 					resource.TestCheckResourceAttr(resourceName, "labels.environment", "prod"),
 				),
 			},
@@ -124,12 +124,12 @@ func TestAccOriginPoolResource_disappears(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_origin_pool"),
+		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccOriginPoolConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckResourceExists(resourceName),
+					acctest.CheckOriginPoolExists(resourceName),
 					acctest.CheckOriginPoolDisappears(resourceName),
 				),
 				ExpectNonEmptyPlan: true,
@@ -150,12 +150,12 @@ func TestAccOriginPoolResource_emptyPlan(t *testing.T) {
 		PreCheck:                 func() { acctest.PreCheck(t) },
 		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
 		ExternalProviders:        acctest.ExternalProviders,
-		CheckDestroy:             acctest.CheckResourceDestroyed("f5xc_origin_pool"),
+		CheckDestroy:             acctest.CheckOriginPoolDestroyed,
 		Steps: []resource.TestStep{
 			{
 				Config: testAccOriginPoolConfig_basic(nsName, rName),
 				Check: resource.ComposeAggregateTestCheckFunc(
-					acctest.CheckResourceExists(resourceName),
+					acctest.CheckOriginPoolExists(resourceName),
 				),
 			},
 			{

@@ -1044,11 +1044,23 @@ func (r *AdvertisePolicyResource) Read(ctx context.Context, req resource.ReadReq
 		}
 		data.PublicIP = public_ipList
 	}
-	if _, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && isImport && data.TLSParameters == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.TLSParameters = &AdvertisePolicyTLSParametersModel{}
+	if blockData, ok := apiResource.Spec["tls_parameters"].(map[string]interface{}); ok && (isImport || data.TLSParameters != nil) {
+		data.TLSParameters = &AdvertisePolicyTLSParametersModel{
+			XfccHeaderElements: func() types.List {
+				if v, ok := blockData["xfcc_header_elements"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["where"].(map[string]interface{}); ok && isImport && data.Where == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.Where = &AdvertisePolicyWhereModel{}

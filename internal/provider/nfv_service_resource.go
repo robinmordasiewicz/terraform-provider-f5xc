@@ -2156,6 +2156,20 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		if !data.EnabledSSHAccess.DomainSuffix.IsNull() && !data.EnabledSSHAccess.DomainSuffix.IsUnknown() {
 			enabled_ssh_accessMap["domain_suffix"] = data.EnabledSSHAccess.DomainSuffix.ValueString()
 		}
+		if len(data.EnabledSSHAccess.NodeSSHPorts) > 0 {
+			var node_ssh_portsList []map[string]interface{}
+			for _, listItem := range data.EnabledSSHAccess.NodeSSHPorts {
+				listItemMap := make(map[string]interface{})
+				if !listItem.NodeName.IsNull() && !listItem.NodeName.IsUnknown() {
+					listItemMap["node_name"] = listItem.NodeName.ValueString()
+				}
+				if !listItem.SSHPort.IsNull() && !listItem.SSHPort.IsUnknown() {
+					listItemMap["ssh_port"] = listItem.SSHPort.ValueInt64()
+				}
+				node_ssh_portsList = append(node_ssh_portsList, listItemMap)
+			}
+			enabled_ssh_accessMap["node_ssh_ports"] = node_ssh_portsList
+		}
 		apiResource.Spec["enabled_ssh_access"] = enabled_ssh_accessMap
 	}
 	if data.F5BigIPAWSService != nil {
@@ -2181,6 +2195,36 @@ func (r *NFVServiceResource) Create(ctx context.Context, req resource.CreateRequ
 		if data.F5BigIPAWSService.MarketPlaceImage != nil {
 			market_place_imageNestedMap := make(map[string]interface{})
 			f5_big_ip_aws_serviceMap["market_place_image"] = market_place_imageNestedMap
+		}
+		if len(data.F5BigIPAWSService.Nodes) > 0 {
+			var nodesList []map[string]interface{}
+			for _, listItem := range data.F5BigIPAWSService.Nodes {
+				listItemMap := make(map[string]interface{})
+				if listItem.AutomaticPrefix != nil {
+					listItemMap["automatic_prefix"] = map[string]interface{}{}
+				}
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.MgmtSubnet != nil {
+					mgmt_subnetDeepMap := make(map[string]interface{})
+					if !listItem.MgmtSubnet.ExistingSubnetID.IsNull() && !listItem.MgmtSubnet.ExistingSubnetID.IsUnknown() {
+						mgmt_subnetDeepMap["existing_subnet_id"] = listItem.MgmtSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["mgmt_subnet"] = mgmt_subnetDeepMap
+				}
+				if !listItem.NodeName.IsNull() && !listItem.NodeName.IsUnknown() {
+					listItemMap["node_name"] = listItem.NodeName.ValueString()
+				}
+				if listItem.ReservedMgmtSubnet != nil {
+					listItemMap["reserved_mgmt_subnet"] = map[string]interface{}{}
+				}
+				if !listItem.TunnelPrefix.IsNull() && !listItem.TunnelPrefix.IsUnknown() {
+					listItemMap["tunnel_prefix"] = listItem.TunnelPrefix.ValueString()
+				}
+				nodesList = append(nodesList, listItemMap)
+			}
+			f5_big_ip_aws_serviceMap["nodes"] = nodesList
 		}
 		if !data.F5BigIPAWSService.SSHKey.IsNull() && !data.F5BigIPAWSService.SSHKey.IsUnknown() {
 			f5_big_ip_aws_serviceMap["ssh_key"] = data.F5BigIPAWSService.SSHKey.ValueString()
@@ -2410,6 +2454,31 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				}
 				return types.StringNull()
 			}(),
+			NodeSSHPorts: func() []NFVServiceEnabledSSHAccessNodeSSHPortsModel {
+				if listData, ok := blockData["node_ssh_ports"].([]interface{}); ok && len(listData) > 0 {
+					var result []NFVServiceEnabledSSHAccessNodeSSHPortsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NFVServiceEnabledSSHAccessNodeSSHPortsModel{
+								NodeName: func() types.String {
+									if v, ok := itemMap["node_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								SSHPort: func() types.Int64 {
+									if v, ok := itemMap["ssh_port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
 		}
 	}
 	if blockData, ok := apiResource.Spec["f5_big_ip_aws_service"].(map[string]interface{}); ok && (isImport || data.F5BigIPAWSService != nil) {
@@ -2419,6 +2488,62 @@ func (r *NFVServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			Nodes: func() []NFVServiceF5BigIPAWSServiceNodesModel {
+				if listData, ok := blockData["nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []NFVServiceF5BigIPAWSServiceNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NFVServiceF5BigIPAWSServiceNodesModel{
+								AutomaticPrefix: func() *NFVServiceEmptyModel {
+									if _, ok := itemMap["automatic_prefix"].(map[string]interface{}); ok {
+										return &NFVServiceEmptyModel{}
+									}
+									return nil
+								}(),
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								MgmtSubnet: func() *NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel {
+									if deepMap, ok := itemMap["mgmt_subnet"].(map[string]interface{}); ok {
+										return &NFVServiceF5BigIPAWSServiceNodesMgmtSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								NodeName: func() types.String {
+									if v, ok := itemMap["node_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReservedMgmtSubnet: func() *NFVServiceEmptyModel {
+									if _, ok := itemMap["reserved_mgmt_subnet"].(map[string]interface{}); ok {
+										return &NFVServiceEmptyModel{}
+									}
+									return nil
+								}(),
+								TunnelPrefix: func() types.String {
+									if v, ok := itemMap["tunnel_prefix"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
 			}(),
 			SSHKey: func() types.String {
 				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
@@ -2549,6 +2674,20 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		if !data.EnabledSSHAccess.DomainSuffix.IsNull() && !data.EnabledSSHAccess.DomainSuffix.IsUnknown() {
 			enabled_ssh_accessMap["domain_suffix"] = data.EnabledSSHAccess.DomainSuffix.ValueString()
 		}
+		if len(data.EnabledSSHAccess.NodeSSHPorts) > 0 {
+			var node_ssh_portsList []map[string]interface{}
+			for _, listItem := range data.EnabledSSHAccess.NodeSSHPorts {
+				listItemMap := make(map[string]interface{})
+				if !listItem.NodeName.IsNull() && !listItem.NodeName.IsUnknown() {
+					listItemMap["node_name"] = listItem.NodeName.ValueString()
+				}
+				if !listItem.SSHPort.IsNull() && !listItem.SSHPort.IsUnknown() {
+					listItemMap["ssh_port"] = listItem.SSHPort.ValueInt64()
+				}
+				node_ssh_portsList = append(node_ssh_portsList, listItemMap)
+			}
+			enabled_ssh_accessMap["node_ssh_ports"] = node_ssh_portsList
+		}
 		apiResource.Spec["enabled_ssh_access"] = enabled_ssh_accessMap
 	}
 	if data.F5BigIPAWSService != nil {
@@ -2574,6 +2713,36 @@ func (r *NFVServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 		if data.F5BigIPAWSService.MarketPlaceImage != nil {
 			market_place_imageNestedMap := make(map[string]interface{})
 			f5_big_ip_aws_serviceMap["market_place_image"] = market_place_imageNestedMap
+		}
+		if len(data.F5BigIPAWSService.Nodes) > 0 {
+			var nodesList []map[string]interface{}
+			for _, listItem := range data.F5BigIPAWSService.Nodes {
+				listItemMap := make(map[string]interface{})
+				if listItem.AutomaticPrefix != nil {
+					listItemMap["automatic_prefix"] = map[string]interface{}{}
+				}
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.MgmtSubnet != nil {
+					mgmt_subnetDeepMap := make(map[string]interface{})
+					if !listItem.MgmtSubnet.ExistingSubnetID.IsNull() && !listItem.MgmtSubnet.ExistingSubnetID.IsUnknown() {
+						mgmt_subnetDeepMap["existing_subnet_id"] = listItem.MgmtSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["mgmt_subnet"] = mgmt_subnetDeepMap
+				}
+				if !listItem.NodeName.IsNull() && !listItem.NodeName.IsUnknown() {
+					listItemMap["node_name"] = listItem.NodeName.ValueString()
+				}
+				if listItem.ReservedMgmtSubnet != nil {
+					listItemMap["reserved_mgmt_subnet"] = map[string]interface{}{}
+				}
+				if !listItem.TunnelPrefix.IsNull() && !listItem.TunnelPrefix.IsUnknown() {
+					listItemMap["tunnel_prefix"] = listItem.TunnelPrefix.ValueString()
+				}
+				nodesList = append(nodesList, listItemMap)
+			}
+			f5_big_ip_aws_serviceMap["nodes"] = nodesList
 		}
 		if !data.F5BigIPAWSService.SSHKey.IsNull() && !data.F5BigIPAWSService.SSHKey.IsUnknown() {
 			f5_big_ip_aws_serviceMap["ssh_key"] = data.F5BigIPAWSService.SSHKey.ValueString()

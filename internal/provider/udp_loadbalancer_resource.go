@@ -797,6 +797,74 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	// Marshal spec fields from Terraform state to API struct
 	if data.AdvertiseCustom != nil {
 		advertise_customMap := make(map[string]interface{})
+		if len(data.AdvertiseCustom.AdvertiseWhere) > 0 {
+			var advertise_whereList []map[string]interface{}
+			for _, listItem := range data.AdvertiseCustom.AdvertiseWhere {
+				listItemMap := make(map[string]interface{})
+				if listItem.AdvertiseOnPublic != nil {
+					advertise_on_publicDeepMap := make(map[string]interface{})
+					listItemMap["advertise_on_public"] = advertise_on_publicDeepMap
+				}
+				if !listItem.Port.IsNull() && !listItem.Port.IsUnknown() {
+					listItemMap["port"] = listItem.Port.ValueInt64()
+				}
+				if !listItem.PortRanges.IsNull() && !listItem.PortRanges.IsUnknown() {
+					listItemMap["port_ranges"] = listItem.PortRanges.ValueString()
+				}
+				if listItem.Site != nil {
+					siteDeepMap := make(map[string]interface{})
+					if !listItem.Site.IP.IsNull() && !listItem.Site.IP.IsUnknown() {
+						siteDeepMap["ip"] = listItem.Site.IP.ValueString()
+					}
+					if !listItem.Site.Network.IsNull() && !listItem.Site.Network.IsUnknown() {
+						siteDeepMap["network"] = listItem.Site.Network.ValueString()
+					}
+					listItemMap["site"] = siteDeepMap
+				}
+				if listItem.UseDefaultPort != nil {
+					listItemMap["use_default_port"] = map[string]interface{}{}
+				}
+				if listItem.VirtualNetwork != nil {
+					virtual_networkDeepMap := make(map[string]interface{})
+					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
+					}
+					if listItem.VirtualNetwork.DefaultVip != nil {
+						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
+					}
+					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					}
+					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					}
+					listItemMap["virtual_network"] = virtual_networkDeepMap
+				}
+				if listItem.VirtualSite != nil {
+					virtual_siteDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSite.Network.IsNull() && !listItem.VirtualSite.Network.IsUnknown() {
+						virtual_siteDeepMap["network"] = listItem.VirtualSite.Network.ValueString()
+					}
+					listItemMap["virtual_site"] = virtual_siteDeepMap
+				}
+				if listItem.VirtualSiteWithVip != nil {
+					virtual_site_with_vipDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					}
+					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					}
+					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
+				}
+				if listItem.Vk8sService != nil {
+					vk8s_serviceDeepMap := make(map[string]interface{})
+					listItemMap["vk8s_service"] = vk8s_serviceDeepMap
+				}
+				advertise_whereList = append(advertise_whereList, listItemMap)
+			}
+			advertise_customMap["advertise_where"] = advertise_whereList
+		}
 		apiResource.Spec["advertise_custom"] = advertise_customMap
 	}
 	if data.AdvertiseOnPublic != nil {
@@ -1044,11 +1112,137 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["advertise_custom"].(map[string]interface{}); ok && isImport && data.AdvertiseCustom == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.AdvertiseCustom = &UDPLoadBalancerAdvertiseCustomModel{}
+	if blockData, ok := apiResource.Spec["advertise_custom"].(map[string]interface{}); ok && (isImport || data.AdvertiseCustom != nil) {
+		data.AdvertiseCustom = &UDPLoadBalancerAdvertiseCustomModel{
+			AdvertiseWhere: func() []UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel {
+				if listData, ok := blockData["advertise_where"].([]interface{}); ok && len(listData) > 0 {
+					var result []UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel{
+								AdvertiseOnPublic: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel {
+									if _, ok := itemMap["advertise_on_public"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel{
+										}
+									}
+									return nil
+								}(),
+								Port: func() types.Int64 {
+									if v, ok := itemMap["port"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								PortRanges: func() types.String {
+									if v, ok := itemMap["port_ranges"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Site: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel {
+									if deepMap, ok := itemMap["site"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								UseDefaultPort: func() *UDPLoadBalancerEmptyModel {
+									if _, ok := itemMap["use_default_port"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerEmptyModel{}
+									}
+									return nil
+								}(),
+								VirtualNetwork: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel {
+									if deepMap, ok := itemMap["virtual_network"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel{
+											DefaultV6Vip: func() *UDPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_v6_vip"].(map[string]interface{}); ok {
+													return &UDPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											DefaultVip: func() *UDPLoadBalancerEmptyModel {
+												if _, ok := deepMap["default_vip"].(map[string]interface{}); ok {
+													return &UDPLoadBalancerEmptyModel{}
+												}
+												return nil
+											}(),
+											SpecificV6Vip: func() types.String {
+												if v, ok := deepMap["specific_v6_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SpecificVip: func() types.String {
+												if v, ok := deepMap["specific_vip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSite: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel {
+									if deepMap, ok := itemMap["virtual_site"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel{
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								VirtualSiteWithVip: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel {
+									if deepMap, ok := itemMap["virtual_site_with_vip"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVipModel{
+											IP: func() types.String {
+												if v, ok := deepMap["ip"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Network: func() types.String {
+												if v, ok := deepMap["network"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Vk8sService: func() *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel {
+									if _, ok := itemMap["vk8s_service"].(map[string]interface{}); ok {
+										return &UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["advertise_on_public"].(map[string]interface{}); ok && isImport && data.AdvertiseOnPublic == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AdvertiseOnPublic = &UDPLoadBalancerAdvertiseOnPublicModel{}
@@ -1277,6 +1471,74 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	// Marshal spec fields from Terraform state to API struct
 	if data.AdvertiseCustom != nil {
 		advertise_customMap := make(map[string]interface{})
+		if len(data.AdvertiseCustom.AdvertiseWhere) > 0 {
+			var advertise_whereList []map[string]interface{}
+			for _, listItem := range data.AdvertiseCustom.AdvertiseWhere {
+				listItemMap := make(map[string]interface{})
+				if listItem.AdvertiseOnPublic != nil {
+					advertise_on_publicDeepMap := make(map[string]interface{})
+					listItemMap["advertise_on_public"] = advertise_on_publicDeepMap
+				}
+				if !listItem.Port.IsNull() && !listItem.Port.IsUnknown() {
+					listItemMap["port"] = listItem.Port.ValueInt64()
+				}
+				if !listItem.PortRanges.IsNull() && !listItem.PortRanges.IsUnknown() {
+					listItemMap["port_ranges"] = listItem.PortRanges.ValueString()
+				}
+				if listItem.Site != nil {
+					siteDeepMap := make(map[string]interface{})
+					if !listItem.Site.IP.IsNull() && !listItem.Site.IP.IsUnknown() {
+						siteDeepMap["ip"] = listItem.Site.IP.ValueString()
+					}
+					if !listItem.Site.Network.IsNull() && !listItem.Site.Network.IsUnknown() {
+						siteDeepMap["network"] = listItem.Site.Network.ValueString()
+					}
+					listItemMap["site"] = siteDeepMap
+				}
+				if listItem.UseDefaultPort != nil {
+					listItemMap["use_default_port"] = map[string]interface{}{}
+				}
+				if listItem.VirtualNetwork != nil {
+					virtual_networkDeepMap := make(map[string]interface{})
+					if listItem.VirtualNetwork.DefaultV6Vip != nil {
+						virtual_networkDeepMap["default_v6_vip"] = map[string]interface{}{}
+					}
+					if listItem.VirtualNetwork.DefaultVip != nil {
+						virtual_networkDeepMap["default_vip"] = map[string]interface{}{}
+					}
+					if !listItem.VirtualNetwork.SpecificV6Vip.IsNull() && !listItem.VirtualNetwork.SpecificV6Vip.IsUnknown() {
+						virtual_networkDeepMap["specific_v6_vip"] = listItem.VirtualNetwork.SpecificV6Vip.ValueString()
+					}
+					if !listItem.VirtualNetwork.SpecificVip.IsNull() && !listItem.VirtualNetwork.SpecificVip.IsUnknown() {
+						virtual_networkDeepMap["specific_vip"] = listItem.VirtualNetwork.SpecificVip.ValueString()
+					}
+					listItemMap["virtual_network"] = virtual_networkDeepMap
+				}
+				if listItem.VirtualSite != nil {
+					virtual_siteDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSite.Network.IsNull() && !listItem.VirtualSite.Network.IsUnknown() {
+						virtual_siteDeepMap["network"] = listItem.VirtualSite.Network.ValueString()
+					}
+					listItemMap["virtual_site"] = virtual_siteDeepMap
+				}
+				if listItem.VirtualSiteWithVip != nil {
+					virtual_site_with_vipDeepMap := make(map[string]interface{})
+					if !listItem.VirtualSiteWithVip.IP.IsNull() && !listItem.VirtualSiteWithVip.IP.IsUnknown() {
+						virtual_site_with_vipDeepMap["ip"] = listItem.VirtualSiteWithVip.IP.ValueString()
+					}
+					if !listItem.VirtualSiteWithVip.Network.IsNull() && !listItem.VirtualSiteWithVip.Network.IsUnknown() {
+						virtual_site_with_vipDeepMap["network"] = listItem.VirtualSiteWithVip.Network.ValueString()
+					}
+					listItemMap["virtual_site_with_vip"] = virtual_site_with_vipDeepMap
+				}
+				if listItem.Vk8sService != nil {
+					vk8s_serviceDeepMap := make(map[string]interface{})
+					listItemMap["vk8s_service"] = vk8s_serviceDeepMap
+				}
+				advertise_whereList = append(advertise_whereList, listItemMap)
+			}
+			advertise_customMap["advertise_where"] = advertise_whereList
+		}
 		apiResource.Spec["advertise_custom"] = advertise_customMap
 	}
 	if data.AdvertiseOnPublic != nil {

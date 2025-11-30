@@ -1864,6 +1864,58 @@ func (r *RouteResource) Read(ctx context.Context, req resource.ReadRequest, resp
 						}
 						return nil
 					}(),
+					RequestCookiesToRemove: func() types.List {
+						if v, ok := itemMap["request_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					RequestHeadersToRemove: func() types.List {
+						if v, ok := itemMap["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					ResponseCookiesToRemove: func() types.List {
+						if v, ok := itemMap["response_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
+					ResponseHeadersToRemove: func() types.List {
+						if v, ok := itemMap["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
 					RouteDestination: func() *RouteRoutesRouteDestinationModel {
 						if nestedMap, ok := itemMap["route_destination"].(map[string]interface{}); ok {
 							return &RouteRoutesRouteDestinationModel{

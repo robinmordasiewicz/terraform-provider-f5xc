@@ -2871,6 +2871,33 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 	if data.BondDeviceList != nil {
 		bond_device_listMap := make(map[string]interface{})
+		if len(data.BondDeviceList.BondDevices) > 0 {
+			var bond_devicesList []map[string]interface{}
+			for _, listItem := range data.BondDeviceList.BondDevices {
+				listItemMap := make(map[string]interface{})
+				if listItem.ActiveBackup != nil {
+					listItemMap["active_backup"] = map[string]interface{}{}
+				}
+				if listItem.Lacp != nil {
+					lacpDeepMap := make(map[string]interface{})
+					if !listItem.Lacp.Rate.IsNull() && !listItem.Lacp.Rate.IsUnknown() {
+						lacpDeepMap["rate"] = listItem.Lacp.Rate.ValueInt64()
+					}
+					listItemMap["lacp"] = lacpDeepMap
+				}
+				if !listItem.LinkPollingInterval.IsNull() && !listItem.LinkPollingInterval.IsUnknown() {
+					listItemMap["link_polling_interval"] = listItem.LinkPollingInterval.ValueInt64()
+				}
+				if !listItem.LinkUpDelay.IsNull() && !listItem.LinkUpDelay.IsUnknown() {
+					listItemMap["link_up_delay"] = listItem.LinkUpDelay.ValueInt64()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				bond_devicesList = append(bond_devicesList, listItemMap)
+			}
+			bond_device_listMap["bond_devices"] = bond_devicesList
+		}
 		apiResource.Spec["bond_device_list"] = bond_device_listMap
 	}
 	if data.DcClusterGroup != nil {
@@ -2917,6 +2944,27 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 	if data.DeviceList != nil {
 		device_listMap := make(map[string]interface{})
+		if len(data.DeviceList.Devices) > 0 {
+			var devicesList []map[string]interface{}
+			for _, listItem := range data.DeviceList.Devices {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.NetworkDevice != nil {
+					network_deviceDeepMap := make(map[string]interface{})
+					if !listItem.NetworkDevice.Use.IsNull() && !listItem.NetworkDevice.Use.IsUnknown() {
+						network_deviceDeepMap["use"] = listItem.NetworkDevice.Use.ValueString()
+					}
+					listItemMap["network_device"] = network_deviceDeepMap
+				}
+				if !listItem.Owner.IsNull() && !listItem.Owner.IsUnknown() {
+					listItemMap["owner"] = listItem.Owner.ValueString()
+				}
+				devicesList = append(devicesList, listItemMap)
+			}
+			device_listMap["devices"] = devicesList
+		}
 		apiResource.Spec["device_list"] = device_listMap
 	}
 	if data.DisableGpu != nil {
@@ -2973,6 +3021,23 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 	if data.InterfaceList != nil {
 		interface_listMap := make(map[string]interface{})
+		if len(data.InterfaceList.Interfaces) > 0 {
+			var interfacesList []map[string]interface{}
+			for _, listItem := range data.InterfaceList.Interfaces {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				interfacesList = append(interfacesList, listItemMap)
+			}
+			interface_listMap["interfaces"] = interfacesList
+		}
 		apiResource.Spec["interface_list"] = interface_listMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
@@ -3111,22 +3176,238 @@ func (r *FleetResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 	if data.SriovInterfaces != nil {
 		sriov_interfacesMap := make(map[string]interface{})
+		if len(data.SriovInterfaces.SriovInterface) > 0 {
+			var sriov_interfaceList []map[string]interface{}
+			for _, listItem := range data.SriovInterfaces.SriovInterface {
+				listItemMap := make(map[string]interface{})
+				if !listItem.InterfaceName.IsNull() && !listItem.InterfaceName.IsUnknown() {
+					listItemMap["interface_name"] = listItem.InterfaceName.ValueString()
+				}
+				if !listItem.NumberOfVfioVfs.IsNull() && !listItem.NumberOfVfioVfs.IsUnknown() {
+					listItemMap["number_of_vfio_vfs"] = listItem.NumberOfVfioVfs.ValueInt64()
+				}
+				if !listItem.NumberOfVfs.IsNull() && !listItem.NumberOfVfs.IsUnknown() {
+					listItemMap["number_of_vfs"] = listItem.NumberOfVfs.ValueInt64()
+				}
+				sriov_interfaceList = append(sriov_interfaceList, listItemMap)
+			}
+			sriov_interfacesMap["sriov_interface"] = sriov_interfaceList
+		}
 		apiResource.Spec["sriov_interfaces"] = sriov_interfacesMap
 	}
 	if data.StorageClassList != nil {
 		storage_class_listMap := make(map[string]interface{})
+		if len(data.StorageClassList.StorageClasses) > 0 {
+			var storage_classesList []map[string]interface{}
+			for _, listItem := range data.StorageClassList.StorageClasses {
+				listItemMap := make(map[string]interface{})
+				if listItem.AdvancedStorageParameters != nil {
+					listItemMap["advanced_storage_parameters"] = map[string]interface{}{}
+				}
+				if !listItem.AllowVolumeExpansion.IsNull() && !listItem.AllowVolumeExpansion.IsUnknown() {
+					listItemMap["allow_volume_expansion"] = listItem.AllowVolumeExpansion.ValueBool()
+				}
+				if listItem.CustomStorage != nil {
+					custom_storageDeepMap := make(map[string]interface{})
+					if !listItem.CustomStorage.Yaml.IsNull() && !listItem.CustomStorage.Yaml.IsUnknown() {
+						custom_storageDeepMap["yaml"] = listItem.CustomStorage.Yaml.ValueString()
+					}
+					listItemMap["custom_storage"] = custom_storageDeepMap
+				}
+				if !listItem.DefaultStorageClass.IsNull() && !listItem.DefaultStorageClass.IsUnknown() {
+					listItemMap["default_storage_class"] = listItem.DefaultStorageClass.ValueBool()
+				}
+				if !listItem.DescriptionSpec.IsNull() && !listItem.DescriptionSpec.IsUnknown() {
+					listItemMap["description"] = listItem.DescriptionSpec.ValueString()
+				}
+				if listItem.HpeStorage != nil {
+					hpe_storageDeepMap := make(map[string]interface{})
+					if !listItem.HpeStorage.AllowMutations.IsNull() && !listItem.HpeStorage.AllowMutations.IsUnknown() {
+						hpe_storageDeepMap["allow_mutations"] = listItem.HpeStorage.AllowMutations.ValueString()
+					}
+					if !listItem.HpeStorage.AllowOverrides.IsNull() && !listItem.HpeStorage.AllowOverrides.IsUnknown() {
+						hpe_storageDeepMap["allow_overrides"] = listItem.HpeStorage.AllowOverrides.ValueString()
+					}
+					if !listItem.HpeStorage.DedupeEnabled.IsNull() && !listItem.HpeStorage.DedupeEnabled.IsUnknown() {
+						hpe_storageDeepMap["dedupe_enabled"] = listItem.HpeStorage.DedupeEnabled.ValueBool()
+					}
+					if !listItem.HpeStorage.DescriptionSpec.IsNull() && !listItem.HpeStorage.DescriptionSpec.IsUnknown() {
+						hpe_storageDeepMap["description"] = listItem.HpeStorage.DescriptionSpec.ValueString()
+					}
+					if !listItem.HpeStorage.DestroyOnDelete.IsNull() && !listItem.HpeStorage.DestroyOnDelete.IsUnknown() {
+						hpe_storageDeepMap["destroy_on_delete"] = listItem.HpeStorage.DestroyOnDelete.ValueBool()
+					}
+					if !listItem.HpeStorage.Encrypted.IsNull() && !listItem.HpeStorage.Encrypted.IsUnknown() {
+						hpe_storageDeepMap["encrypted"] = listItem.HpeStorage.Encrypted.ValueBool()
+					}
+					if !listItem.HpeStorage.Folder.IsNull() && !listItem.HpeStorage.Folder.IsUnknown() {
+						hpe_storageDeepMap["folder"] = listItem.HpeStorage.Folder.ValueString()
+					}
+					if !listItem.HpeStorage.LimitIops.IsNull() && !listItem.HpeStorage.LimitIops.IsUnknown() {
+						hpe_storageDeepMap["limit_iops"] = listItem.HpeStorage.LimitIops.ValueString()
+					}
+					if !listItem.HpeStorage.LimitMbps.IsNull() && !listItem.HpeStorage.LimitMbps.IsUnknown() {
+						hpe_storageDeepMap["limit_mbps"] = listItem.HpeStorage.LimitMbps.ValueString()
+					}
+					if !listItem.HpeStorage.PerformancePolicy.IsNull() && !listItem.HpeStorage.PerformancePolicy.IsUnknown() {
+						hpe_storageDeepMap["performance_policy"] = listItem.HpeStorage.PerformancePolicy.ValueString()
+					}
+					if !listItem.HpeStorage.Pool.IsNull() && !listItem.HpeStorage.Pool.IsUnknown() {
+						hpe_storageDeepMap["pool"] = listItem.HpeStorage.Pool.ValueString()
+					}
+					if !listItem.HpeStorage.ProtectionTemplate.IsNull() && !listItem.HpeStorage.ProtectionTemplate.IsUnknown() {
+						hpe_storageDeepMap["protection_template"] = listItem.HpeStorage.ProtectionTemplate.ValueString()
+					}
+					if !listItem.HpeStorage.SecretName.IsNull() && !listItem.HpeStorage.SecretName.IsUnknown() {
+						hpe_storageDeepMap["secret_name"] = listItem.HpeStorage.SecretName.ValueString()
+					}
+					if !listItem.HpeStorage.SecretNamespace.IsNull() && !listItem.HpeStorage.SecretNamespace.IsUnknown() {
+						hpe_storageDeepMap["secret_namespace"] = listItem.HpeStorage.SecretNamespace.ValueString()
+					}
+					if !listItem.HpeStorage.SyncOnDetach.IsNull() && !listItem.HpeStorage.SyncOnDetach.IsUnknown() {
+						hpe_storageDeepMap["sync_on_detach"] = listItem.HpeStorage.SyncOnDetach.ValueBool()
+					}
+					if !listItem.HpeStorage.Thick.IsNull() && !listItem.HpeStorage.Thick.IsUnknown() {
+						hpe_storageDeepMap["thick"] = listItem.HpeStorage.Thick.ValueBool()
+					}
+					listItemMap["hpe_storage"] = hpe_storageDeepMap
+				}
+				if listItem.NetappTrident != nil {
+					netapp_tridentDeepMap := make(map[string]interface{})
+					if listItem.NetappTrident.Selector != nil {
+						netapp_tridentDeepMap["selector"] = map[string]interface{}{}
+					}
+					if !listItem.NetappTrident.StoragePools.IsNull() && !listItem.NetappTrident.StoragePools.IsUnknown() {
+						netapp_tridentDeepMap["storage_pools"] = listItem.NetappTrident.StoragePools.ValueString()
+					}
+					listItemMap["netapp_trident"] = netapp_tridentDeepMap
+				}
+				if listItem.PureServiceOrchestrator != nil {
+					pure_service_orchestratorDeepMap := make(map[string]interface{})
+					if !listItem.PureServiceOrchestrator.Backend.IsNull() && !listItem.PureServiceOrchestrator.Backend.IsUnknown() {
+						pure_service_orchestratorDeepMap["backend"] = listItem.PureServiceOrchestrator.Backend.ValueString()
+					}
+					if !listItem.PureServiceOrchestrator.BandwidthLimit.IsNull() && !listItem.PureServiceOrchestrator.BandwidthLimit.IsUnknown() {
+						pure_service_orchestratorDeepMap["bandwidth_limit"] = listItem.PureServiceOrchestrator.BandwidthLimit.ValueString()
+					}
+					if !listItem.PureServiceOrchestrator.IopsLimit.IsNull() && !listItem.PureServiceOrchestrator.IopsLimit.IsUnknown() {
+						pure_service_orchestratorDeepMap["iops_limit"] = listItem.PureServiceOrchestrator.IopsLimit.ValueInt64()
+					}
+					listItemMap["pure_service_orchestrator"] = pure_service_orchestratorDeepMap
+				}
+				if !listItem.ReclaimPolicy.IsNull() && !listItem.ReclaimPolicy.IsUnknown() {
+					listItemMap["reclaim_policy"] = listItem.ReclaimPolicy.ValueString()
+				}
+				if !listItem.StorageClassName.IsNull() && !listItem.StorageClassName.IsUnknown() {
+					listItemMap["storage_class_name"] = listItem.StorageClassName.ValueString()
+				}
+				if !listItem.StorageDevice.IsNull() && !listItem.StorageDevice.IsUnknown() {
+					listItemMap["storage_device"] = listItem.StorageDevice.ValueString()
+				}
+				storage_classesList = append(storage_classesList, listItemMap)
+			}
+			storage_class_listMap["storage_classes"] = storage_classesList
+		}
 		apiResource.Spec["storage_class_list"] = storage_class_listMap
 	}
 	if data.StorageDeviceList != nil {
 		storage_device_listMap := make(map[string]interface{})
+		if len(data.StorageDeviceList.StorageDevices) > 0 {
+			var storage_devicesList []map[string]interface{}
+			for _, listItem := range data.StorageDeviceList.StorageDevices {
+				listItemMap := make(map[string]interface{})
+				if listItem.AdvancedAdvancedParameters != nil {
+					listItemMap["advanced_advanced_parameters"] = map[string]interface{}{}
+				}
+				if listItem.CustomStorage != nil {
+					listItemMap["custom_storage"] = map[string]interface{}{}
+				}
+				if listItem.HpeStorage != nil {
+					hpe_storageDeepMap := make(map[string]interface{})
+					if !listItem.HpeStorage.APIServerPort.IsNull() && !listItem.HpeStorage.APIServerPort.IsUnknown() {
+						hpe_storageDeepMap["api_server_port"] = listItem.HpeStorage.APIServerPort.ValueInt64()
+					}
+					if !listItem.HpeStorage.IscsiChapUser.IsNull() && !listItem.HpeStorage.IscsiChapUser.IsUnknown() {
+						hpe_storageDeepMap["iscsi_chap_user"] = listItem.HpeStorage.IscsiChapUser.ValueString()
+					}
+					if !listItem.HpeStorage.StorageServerIPAddress.IsNull() && !listItem.HpeStorage.StorageServerIPAddress.IsUnknown() {
+						hpe_storageDeepMap["storage_server_ip_address"] = listItem.HpeStorage.StorageServerIPAddress.ValueString()
+					}
+					if !listItem.HpeStorage.StorageServerName.IsNull() && !listItem.HpeStorage.StorageServerName.IsUnknown() {
+						hpe_storageDeepMap["storage_server_name"] = listItem.HpeStorage.StorageServerName.ValueString()
+					}
+					if !listItem.HpeStorage.Username.IsNull() && !listItem.HpeStorage.Username.IsUnknown() {
+						hpe_storageDeepMap["username"] = listItem.HpeStorage.Username.ValueString()
+					}
+					listItemMap["hpe_storage"] = hpe_storageDeepMap
+				}
+				if listItem.NetappTrident != nil {
+					netapp_tridentDeepMap := make(map[string]interface{})
+					listItemMap["netapp_trident"] = netapp_tridentDeepMap
+				}
+				if listItem.PureServiceOrchestrator != nil {
+					pure_service_orchestratorDeepMap := make(map[string]interface{})
+					if !listItem.PureServiceOrchestrator.ClusterID.IsNull() && !listItem.PureServiceOrchestrator.ClusterID.IsUnknown() {
+						pure_service_orchestratorDeepMap["cluster_id"] = listItem.PureServiceOrchestrator.ClusterID.ValueString()
+					}
+					if !listItem.PureServiceOrchestrator.EnableStorageTopology.IsNull() && !listItem.PureServiceOrchestrator.EnableStorageTopology.IsUnknown() {
+						pure_service_orchestratorDeepMap["enable_storage_topology"] = listItem.PureServiceOrchestrator.EnableStorageTopology.ValueBool()
+					}
+					if !listItem.PureServiceOrchestrator.EnableStrictTopology.IsNull() && !listItem.PureServiceOrchestrator.EnableStrictTopology.IsUnknown() {
+						pure_service_orchestratorDeepMap["enable_strict_topology"] = listItem.PureServiceOrchestrator.EnableStrictTopology.ValueBool()
+					}
+					listItemMap["pure_service_orchestrator"] = pure_service_orchestratorDeepMap
+				}
+				if !listItem.StorageDevice.IsNull() && !listItem.StorageDevice.IsUnknown() {
+					listItemMap["storage_device"] = listItem.StorageDevice.ValueString()
+				}
+				storage_devicesList = append(storage_devicesList, listItemMap)
+			}
+			storage_device_listMap["storage_devices"] = storage_devicesList
+		}
 		apiResource.Spec["storage_device_list"] = storage_device_listMap
 	}
 	if data.StorageInterfaceList != nil {
 		storage_interface_listMap := make(map[string]interface{})
+		if len(data.StorageInterfaceList.Interfaces) > 0 {
+			var interfacesList []map[string]interface{}
+			for _, listItem := range data.StorageInterfaceList.Interfaces {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				interfacesList = append(interfacesList, listItemMap)
+			}
+			storage_interface_listMap["interfaces"] = interfacesList
+		}
 		apiResource.Spec["storage_interface_list"] = storage_interface_listMap
 	}
 	if data.StorageStaticRoutes != nil {
 		storage_static_routesMap := make(map[string]interface{})
+		if len(data.StorageStaticRoutes.StorageRoutes) > 0 {
+			var storage_routesList []map[string]interface{}
+			for _, listItem := range data.StorageStaticRoutes.StorageRoutes {
+				listItemMap := make(map[string]interface{})
+				if listItem.Labels != nil {
+					listItemMap["labels"] = map[string]interface{}{}
+				}
+				if listItem.Nexthop != nil {
+					nexthopDeepMap := make(map[string]interface{})
+					if !listItem.Nexthop.Type.IsNull() && !listItem.Nexthop.Type.IsUnknown() {
+						nexthopDeepMap["type"] = listItem.Nexthop.Type.ValueString()
+					}
+					listItemMap["nexthop"] = nexthopDeepMap
+				}
+				storage_routesList = append(storage_routesList, listItemMap)
+			}
+			storage_static_routesMap["storage_routes"] = storage_routesList
+		}
 		apiResource.Spec["storage_static_routes"] = storage_static_routesMap
 	}
 	if data.UsbPolicy != nil {
@@ -3325,11 +3606,60 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		}
 		data.BlockedServices = blocked_servicesList
 	}
-	if _, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && isImport && data.BondDeviceList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.BondDeviceList = &FleetBondDeviceListModel{}
+	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
+		data.BondDeviceList = &FleetBondDeviceListModel{
+			BondDevices: func() []FleetBondDeviceListBondDevicesModel {
+				if listData, ok := blockData["bond_devices"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetBondDeviceListBondDevicesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetBondDeviceListBondDevicesModel{
+								ActiveBackup: func() *FleetEmptyModel {
+									if _, ok := itemMap["active_backup"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								Lacp: func() *FleetBondDeviceListBondDevicesLacpModel {
+									if deepMap, ok := itemMap["lacp"].(map[string]interface{}); ok {
+										return &FleetBondDeviceListBondDevicesLacpModel{
+											Rate: func() types.Int64 {
+												if v, ok := deepMap["rate"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								LinkPollingInterval: func() types.Int64 {
+									if v, ok := itemMap["link_polling_interval"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								LinkUpDelay: func() types.Int64 {
+									if v, ok := itemMap["link_up_delay"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["dc_cluster_group"].(map[string]interface{}); ok && (isImport || data.DcClusterGroup != nil) {
 		data.DcClusterGroup = &FleetDcClusterGroupModel{
 			Name: func() types.String {
@@ -3394,11 +3724,48 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.DenyAllUsb = &FleetEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["device_list"].(map[string]interface{}); ok && isImport && data.DeviceList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.DeviceList = &FleetDeviceListModel{}
+	if blockData, ok := apiResource.Spec["device_list"].(map[string]interface{}); ok && (isImport || data.DeviceList != nil) {
+		data.DeviceList = &FleetDeviceListModel{
+			Devices: func() []FleetDeviceListDevicesModel {
+				if listData, ok := blockData["devices"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetDeviceListDevicesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetDeviceListDevicesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								NetworkDevice: func() *FleetDeviceListDevicesNetworkDeviceModel {
+									if deepMap, ok := itemMap["network_device"].(map[string]interface{}); ok {
+										return &FleetDeviceListDevicesNetworkDeviceModel{
+											Use: func() types.String {
+												if v, ok := deepMap["use"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Owner: func() types.String {
+									if v, ok := itemMap["owner"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["disable_gpu"].(map[string]interface{}); ok && isImport && data.DisableGpu == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DisableGpu = &FleetEmptyModel{}
@@ -3481,11 +3848,41 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		}
 		data.InsideVirtualNetwork = inside_virtual_networkList
 	}
-	if _, ok := apiResource.Spec["interface_list"].(map[string]interface{}); ok && isImport && data.InterfaceList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.InterfaceList = &FleetInterfaceListModel{}
+	if blockData, ok := apiResource.Spec["interface_list"].(map[string]interface{}); ok && (isImport || data.InterfaceList != nil) {
+		data.InterfaceList = &FleetInterfaceListModel{
+			Interfaces: func() []FleetInterfaceListInterfacesModel {
+				if listData, ok := blockData["interfaces"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetInterfaceListInterfacesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetInterfaceListInterfacesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.KubernetesUpgradeDrain = &FleetKubernetesUpgradeDrainModel{}
@@ -3668,31 +4065,435 @@ func (r *FleetResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		data.PerformanceEnhancementMode = &FleetPerformanceEnhancementModeModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["sriov_interfaces"].(map[string]interface{}); ok && isImport && data.SriovInterfaces == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.SriovInterfaces = &FleetSriovInterfacesModel{}
+	if blockData, ok := apiResource.Spec["sriov_interfaces"].(map[string]interface{}); ok && (isImport || data.SriovInterfaces != nil) {
+		data.SriovInterfaces = &FleetSriovInterfacesModel{
+			SriovInterface: func() []FleetSriovInterfacesSriovInterfaceModel {
+				if listData, ok := blockData["sriov_interface"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetSriovInterfacesSriovInterfaceModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetSriovInterfacesSriovInterfaceModel{
+								InterfaceName: func() types.String {
+									if v, ok := itemMap["interface_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								NumberOfVfioVfs: func() types.Int64 {
+									if v, ok := itemMap["number_of_vfio_vfs"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+								NumberOfVfs: func() types.Int64 {
+									if v, ok := itemMap["number_of_vfs"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["storage_class_list"].(map[string]interface{}); ok && isImport && data.StorageClassList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.StorageClassList = &FleetStorageClassListModel{}
+	if blockData, ok := apiResource.Spec["storage_class_list"].(map[string]interface{}); ok && (isImport || data.StorageClassList != nil) {
+		data.StorageClassList = &FleetStorageClassListModel{
+			StorageClasses: func() []FleetStorageClassListStorageClassesModel {
+				if listData, ok := blockData["storage_classes"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetStorageClassListStorageClassesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetStorageClassListStorageClassesModel{
+								AdvancedStorageParameters: func() *FleetEmptyModel {
+									if _, ok := itemMap["advanced_storage_parameters"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								AllowVolumeExpansion: func() types.Bool {
+									if v, ok := itemMap["allow_volume_expansion"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								CustomStorage: func() *FleetStorageClassListStorageClassesCustomStorageModel {
+									if deepMap, ok := itemMap["custom_storage"].(map[string]interface{}); ok {
+										return &FleetStorageClassListStorageClassesCustomStorageModel{
+											Yaml: func() types.String {
+												if v, ok := deepMap["yaml"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								DefaultStorageClass: func() types.Bool {
+									if v, ok := itemMap["default_storage_class"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+								DescriptionSpec: func() types.String {
+									if v, ok := itemMap["description"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								HpeStorage: func() *FleetStorageClassListStorageClassesHpeStorageModel {
+									if deepMap, ok := itemMap["hpe_storage"].(map[string]interface{}); ok {
+										return &FleetStorageClassListStorageClassesHpeStorageModel{
+											AllowMutations: func() types.String {
+												if v, ok := deepMap["allow_mutations"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											AllowOverrides: func() types.String {
+												if v, ok := deepMap["allow_overrides"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											DedupeEnabled: func() types.Bool {
+												if v, ok := deepMap["dedupe_enabled"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											DestroyOnDelete: func() types.Bool {
+												if v, ok := deepMap["destroy_on_delete"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											Encrypted: func() types.Bool {
+												if v, ok := deepMap["encrypted"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											Folder: func() types.String {
+												if v, ok := deepMap["folder"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											LimitIops: func() types.String {
+												if v, ok := deepMap["limit_iops"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											LimitMbps: func() types.String {
+												if v, ok := deepMap["limit_mbps"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											PerformancePolicy: func() types.String {
+												if v, ok := deepMap["performance_policy"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Pool: func() types.String {
+												if v, ok := deepMap["pool"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											ProtectionTemplate: func() types.String {
+												if v, ok := deepMap["protection_template"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SecretName: func() types.String {
+												if v, ok := deepMap["secret_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SecretNamespace: func() types.String {
+												if v, ok := deepMap["secret_namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											SyncOnDetach: func() types.Bool {
+												if v, ok := deepMap["sync_on_detach"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											Thick: func() types.Bool {
+												if v, ok := deepMap["thick"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								NetappTrident: func() *FleetStorageClassListStorageClassesNetappTridentModel {
+									if deepMap, ok := itemMap["netapp_trident"].(map[string]interface{}); ok {
+										return &FleetStorageClassListStorageClassesNetappTridentModel{
+											Selector: func() *FleetEmptyModel {
+												if _, ok := deepMap["selector"].(map[string]interface{}); ok {
+													return &FleetEmptyModel{}
+												}
+												return nil
+											}(),
+											StoragePools: func() types.String {
+												if v, ok := deepMap["storage_pools"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								PureServiceOrchestrator: func() *FleetStorageClassListStorageClassesPureServiceOrchestratorModel {
+									if deepMap, ok := itemMap["pure_service_orchestrator"].(map[string]interface{}); ok {
+										return &FleetStorageClassListStorageClassesPureServiceOrchestratorModel{
+											Backend: func() types.String {
+												if v, ok := deepMap["backend"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											BandwidthLimit: func() types.String {
+												if v, ok := deepMap["bandwidth_limit"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											IopsLimit: func() types.Int64 {
+												if v, ok := deepMap["iops_limit"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ReclaimPolicy: func() types.String {
+									if v, ok := itemMap["reclaim_policy"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								StorageClassName: func() types.String {
+									if v, ok := itemMap["storage_class_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								StorageDevice: func() types.String {
+									if v, ok := itemMap["storage_device"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["storage_device_list"].(map[string]interface{}); ok && isImport && data.StorageDeviceList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.StorageDeviceList = &FleetStorageDeviceListModel{}
+	if blockData, ok := apiResource.Spec["storage_device_list"].(map[string]interface{}); ok && (isImport || data.StorageDeviceList != nil) {
+		data.StorageDeviceList = &FleetStorageDeviceListModel{
+			StorageDevices: func() []FleetStorageDeviceListStorageDevicesModel {
+				if listData, ok := blockData["storage_devices"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetStorageDeviceListStorageDevicesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetStorageDeviceListStorageDevicesModel{
+								AdvancedAdvancedParameters: func() *FleetEmptyModel {
+									if _, ok := itemMap["advanced_advanced_parameters"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								CustomStorage: func() *FleetEmptyModel {
+									if _, ok := itemMap["custom_storage"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								HpeStorage: func() *FleetStorageDeviceListStorageDevicesHpeStorageModel {
+									if deepMap, ok := itemMap["hpe_storage"].(map[string]interface{}); ok {
+										return &FleetStorageDeviceListStorageDevicesHpeStorageModel{
+											APIServerPort: func() types.Int64 {
+												if v, ok := deepMap["api_server_port"].(float64); ok {
+													return types.Int64Value(int64(v))
+												}
+												return types.Int64Null()
+											}(),
+											IscsiChapUser: func() types.String {
+												if v, ok := deepMap["iscsi_chap_user"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											StorageServerIPAddress: func() types.String {
+												if v, ok := deepMap["storage_server_ip_address"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											StorageServerName: func() types.String {
+												if v, ok := deepMap["storage_server_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Username: func() types.String {
+												if v, ok := deepMap["username"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								NetappTrident: func() *FleetStorageDeviceListStorageDevicesNetappTridentModel {
+									if _, ok := itemMap["netapp_trident"].(map[string]interface{}); ok {
+										return &FleetStorageDeviceListStorageDevicesNetappTridentModel{
+										}
+									}
+									return nil
+								}(),
+								PureServiceOrchestrator: func() *FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel {
+									if deepMap, ok := itemMap["pure_service_orchestrator"].(map[string]interface{}); ok {
+										return &FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModel{
+											ClusterID: func() types.String {
+												if v, ok := deepMap["cluster_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											EnableStorageTopology: func() types.Bool {
+												if v, ok := deepMap["enable_storage_topology"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+											EnableStrictTopology: func() types.Bool {
+												if v, ok := deepMap["enable_strict_topology"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								StorageDevice: func() types.String {
+									if v, ok := itemMap["storage_device"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["storage_interface_list"].(map[string]interface{}); ok && isImport && data.StorageInterfaceList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.StorageInterfaceList = &FleetStorageInterfaceListModel{}
+	if blockData, ok := apiResource.Spec["storage_interface_list"].(map[string]interface{}); ok && (isImport || data.StorageInterfaceList != nil) {
+		data.StorageInterfaceList = &FleetStorageInterfaceListModel{
+			Interfaces: func() []FleetStorageInterfaceListInterfacesModel {
+				if listData, ok := blockData["interfaces"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetStorageInterfaceListInterfacesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetStorageInterfaceListInterfacesModel{
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["storage_static_routes"].(map[string]interface{}); ok && isImport && data.StorageStaticRoutes == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.StorageStaticRoutes = &FleetStorageStaticRoutesModel{}
+	if blockData, ok := apiResource.Spec["storage_static_routes"].(map[string]interface{}); ok && (isImport || data.StorageStaticRoutes != nil) {
+		data.StorageStaticRoutes = &FleetStorageStaticRoutesModel{
+			StorageRoutes: func() []FleetStorageStaticRoutesStorageRoutesModel {
+				if listData, ok := blockData["storage_routes"].([]interface{}); ok && len(listData) > 0 {
+					var result []FleetStorageStaticRoutesStorageRoutesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FleetStorageStaticRoutesStorageRoutesModel{
+								Labels: func() *FleetEmptyModel {
+									if _, ok := itemMap["labels"].(map[string]interface{}); ok {
+										return &FleetEmptyModel{}
+									}
+									return nil
+								}(),
+								Nexthop: func() *FleetStorageStaticRoutesStorageRoutesNexthopModel {
+									if deepMap, ok := itemMap["nexthop"].(map[string]interface{}); ok {
+										return &FleetStorageStaticRoutesStorageRoutesNexthopModel{
+											Type: func() types.String {
+												if v, ok := deepMap["type"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["usb_policy"].(map[string]interface{}); ok && (isImport || data.UsbPolicy != nil) {
 		data.UsbPolicy = &FleetUsbPolicyModel{
 			Name: func() types.String {
@@ -3828,6 +4629,33 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 	if data.BondDeviceList != nil {
 		bond_device_listMap := make(map[string]interface{})
+		if len(data.BondDeviceList.BondDevices) > 0 {
+			var bond_devicesList []map[string]interface{}
+			for _, listItem := range data.BondDeviceList.BondDevices {
+				listItemMap := make(map[string]interface{})
+				if listItem.ActiveBackup != nil {
+					listItemMap["active_backup"] = map[string]interface{}{}
+				}
+				if listItem.Lacp != nil {
+					lacpDeepMap := make(map[string]interface{})
+					if !listItem.Lacp.Rate.IsNull() && !listItem.Lacp.Rate.IsUnknown() {
+						lacpDeepMap["rate"] = listItem.Lacp.Rate.ValueInt64()
+					}
+					listItemMap["lacp"] = lacpDeepMap
+				}
+				if !listItem.LinkPollingInterval.IsNull() && !listItem.LinkPollingInterval.IsUnknown() {
+					listItemMap["link_polling_interval"] = listItem.LinkPollingInterval.ValueInt64()
+				}
+				if !listItem.LinkUpDelay.IsNull() && !listItem.LinkUpDelay.IsUnknown() {
+					listItemMap["link_up_delay"] = listItem.LinkUpDelay.ValueInt64()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				bond_devicesList = append(bond_devicesList, listItemMap)
+			}
+			bond_device_listMap["bond_devices"] = bond_devicesList
+		}
 		apiResource.Spec["bond_device_list"] = bond_device_listMap
 	}
 	if data.DcClusterGroup != nil {
@@ -3874,6 +4702,27 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 	if data.DeviceList != nil {
 		device_listMap := make(map[string]interface{})
+		if len(data.DeviceList.Devices) > 0 {
+			var devicesList []map[string]interface{}
+			for _, listItem := range data.DeviceList.Devices {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if listItem.NetworkDevice != nil {
+					network_deviceDeepMap := make(map[string]interface{})
+					if !listItem.NetworkDevice.Use.IsNull() && !listItem.NetworkDevice.Use.IsUnknown() {
+						network_deviceDeepMap["use"] = listItem.NetworkDevice.Use.ValueString()
+					}
+					listItemMap["network_device"] = network_deviceDeepMap
+				}
+				if !listItem.Owner.IsNull() && !listItem.Owner.IsUnknown() {
+					listItemMap["owner"] = listItem.Owner.ValueString()
+				}
+				devicesList = append(devicesList, listItemMap)
+			}
+			device_listMap["devices"] = devicesList
+		}
 		apiResource.Spec["device_list"] = device_listMap
 	}
 	if data.DisableGpu != nil {
@@ -3930,6 +4779,23 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 	if data.InterfaceList != nil {
 		interface_listMap := make(map[string]interface{})
+		if len(data.InterfaceList.Interfaces) > 0 {
+			var interfacesList []map[string]interface{}
+			for _, listItem := range data.InterfaceList.Interfaces {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				interfacesList = append(interfacesList, listItemMap)
+			}
+			interface_listMap["interfaces"] = interfacesList
+		}
 		apiResource.Spec["interface_list"] = interface_listMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
@@ -4068,22 +4934,238 @@ func (r *FleetResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 	if data.SriovInterfaces != nil {
 		sriov_interfacesMap := make(map[string]interface{})
+		if len(data.SriovInterfaces.SriovInterface) > 0 {
+			var sriov_interfaceList []map[string]interface{}
+			for _, listItem := range data.SriovInterfaces.SriovInterface {
+				listItemMap := make(map[string]interface{})
+				if !listItem.InterfaceName.IsNull() && !listItem.InterfaceName.IsUnknown() {
+					listItemMap["interface_name"] = listItem.InterfaceName.ValueString()
+				}
+				if !listItem.NumberOfVfioVfs.IsNull() && !listItem.NumberOfVfioVfs.IsUnknown() {
+					listItemMap["number_of_vfio_vfs"] = listItem.NumberOfVfioVfs.ValueInt64()
+				}
+				if !listItem.NumberOfVfs.IsNull() && !listItem.NumberOfVfs.IsUnknown() {
+					listItemMap["number_of_vfs"] = listItem.NumberOfVfs.ValueInt64()
+				}
+				sriov_interfaceList = append(sriov_interfaceList, listItemMap)
+			}
+			sriov_interfacesMap["sriov_interface"] = sriov_interfaceList
+		}
 		apiResource.Spec["sriov_interfaces"] = sriov_interfacesMap
 	}
 	if data.StorageClassList != nil {
 		storage_class_listMap := make(map[string]interface{})
+		if len(data.StorageClassList.StorageClasses) > 0 {
+			var storage_classesList []map[string]interface{}
+			for _, listItem := range data.StorageClassList.StorageClasses {
+				listItemMap := make(map[string]interface{})
+				if listItem.AdvancedStorageParameters != nil {
+					listItemMap["advanced_storage_parameters"] = map[string]interface{}{}
+				}
+				if !listItem.AllowVolumeExpansion.IsNull() && !listItem.AllowVolumeExpansion.IsUnknown() {
+					listItemMap["allow_volume_expansion"] = listItem.AllowVolumeExpansion.ValueBool()
+				}
+				if listItem.CustomStorage != nil {
+					custom_storageDeepMap := make(map[string]interface{})
+					if !listItem.CustomStorage.Yaml.IsNull() && !listItem.CustomStorage.Yaml.IsUnknown() {
+						custom_storageDeepMap["yaml"] = listItem.CustomStorage.Yaml.ValueString()
+					}
+					listItemMap["custom_storage"] = custom_storageDeepMap
+				}
+				if !listItem.DefaultStorageClass.IsNull() && !listItem.DefaultStorageClass.IsUnknown() {
+					listItemMap["default_storage_class"] = listItem.DefaultStorageClass.ValueBool()
+				}
+				if !listItem.DescriptionSpec.IsNull() && !listItem.DescriptionSpec.IsUnknown() {
+					listItemMap["description"] = listItem.DescriptionSpec.ValueString()
+				}
+				if listItem.HpeStorage != nil {
+					hpe_storageDeepMap := make(map[string]interface{})
+					if !listItem.HpeStorage.AllowMutations.IsNull() && !listItem.HpeStorage.AllowMutations.IsUnknown() {
+						hpe_storageDeepMap["allow_mutations"] = listItem.HpeStorage.AllowMutations.ValueString()
+					}
+					if !listItem.HpeStorage.AllowOverrides.IsNull() && !listItem.HpeStorage.AllowOverrides.IsUnknown() {
+						hpe_storageDeepMap["allow_overrides"] = listItem.HpeStorage.AllowOverrides.ValueString()
+					}
+					if !listItem.HpeStorage.DedupeEnabled.IsNull() && !listItem.HpeStorage.DedupeEnabled.IsUnknown() {
+						hpe_storageDeepMap["dedupe_enabled"] = listItem.HpeStorage.DedupeEnabled.ValueBool()
+					}
+					if !listItem.HpeStorage.DescriptionSpec.IsNull() && !listItem.HpeStorage.DescriptionSpec.IsUnknown() {
+						hpe_storageDeepMap["description"] = listItem.HpeStorage.DescriptionSpec.ValueString()
+					}
+					if !listItem.HpeStorage.DestroyOnDelete.IsNull() && !listItem.HpeStorage.DestroyOnDelete.IsUnknown() {
+						hpe_storageDeepMap["destroy_on_delete"] = listItem.HpeStorage.DestroyOnDelete.ValueBool()
+					}
+					if !listItem.HpeStorage.Encrypted.IsNull() && !listItem.HpeStorage.Encrypted.IsUnknown() {
+						hpe_storageDeepMap["encrypted"] = listItem.HpeStorage.Encrypted.ValueBool()
+					}
+					if !listItem.HpeStorage.Folder.IsNull() && !listItem.HpeStorage.Folder.IsUnknown() {
+						hpe_storageDeepMap["folder"] = listItem.HpeStorage.Folder.ValueString()
+					}
+					if !listItem.HpeStorage.LimitIops.IsNull() && !listItem.HpeStorage.LimitIops.IsUnknown() {
+						hpe_storageDeepMap["limit_iops"] = listItem.HpeStorage.LimitIops.ValueString()
+					}
+					if !listItem.HpeStorage.LimitMbps.IsNull() && !listItem.HpeStorage.LimitMbps.IsUnknown() {
+						hpe_storageDeepMap["limit_mbps"] = listItem.HpeStorage.LimitMbps.ValueString()
+					}
+					if !listItem.HpeStorage.PerformancePolicy.IsNull() && !listItem.HpeStorage.PerformancePolicy.IsUnknown() {
+						hpe_storageDeepMap["performance_policy"] = listItem.HpeStorage.PerformancePolicy.ValueString()
+					}
+					if !listItem.HpeStorage.Pool.IsNull() && !listItem.HpeStorage.Pool.IsUnknown() {
+						hpe_storageDeepMap["pool"] = listItem.HpeStorage.Pool.ValueString()
+					}
+					if !listItem.HpeStorage.ProtectionTemplate.IsNull() && !listItem.HpeStorage.ProtectionTemplate.IsUnknown() {
+						hpe_storageDeepMap["protection_template"] = listItem.HpeStorage.ProtectionTemplate.ValueString()
+					}
+					if !listItem.HpeStorage.SecretName.IsNull() && !listItem.HpeStorage.SecretName.IsUnknown() {
+						hpe_storageDeepMap["secret_name"] = listItem.HpeStorage.SecretName.ValueString()
+					}
+					if !listItem.HpeStorage.SecretNamespace.IsNull() && !listItem.HpeStorage.SecretNamespace.IsUnknown() {
+						hpe_storageDeepMap["secret_namespace"] = listItem.HpeStorage.SecretNamespace.ValueString()
+					}
+					if !listItem.HpeStorage.SyncOnDetach.IsNull() && !listItem.HpeStorage.SyncOnDetach.IsUnknown() {
+						hpe_storageDeepMap["sync_on_detach"] = listItem.HpeStorage.SyncOnDetach.ValueBool()
+					}
+					if !listItem.HpeStorage.Thick.IsNull() && !listItem.HpeStorage.Thick.IsUnknown() {
+						hpe_storageDeepMap["thick"] = listItem.HpeStorage.Thick.ValueBool()
+					}
+					listItemMap["hpe_storage"] = hpe_storageDeepMap
+				}
+				if listItem.NetappTrident != nil {
+					netapp_tridentDeepMap := make(map[string]interface{})
+					if listItem.NetappTrident.Selector != nil {
+						netapp_tridentDeepMap["selector"] = map[string]interface{}{}
+					}
+					if !listItem.NetappTrident.StoragePools.IsNull() && !listItem.NetappTrident.StoragePools.IsUnknown() {
+						netapp_tridentDeepMap["storage_pools"] = listItem.NetappTrident.StoragePools.ValueString()
+					}
+					listItemMap["netapp_trident"] = netapp_tridentDeepMap
+				}
+				if listItem.PureServiceOrchestrator != nil {
+					pure_service_orchestratorDeepMap := make(map[string]interface{})
+					if !listItem.PureServiceOrchestrator.Backend.IsNull() && !listItem.PureServiceOrchestrator.Backend.IsUnknown() {
+						pure_service_orchestratorDeepMap["backend"] = listItem.PureServiceOrchestrator.Backend.ValueString()
+					}
+					if !listItem.PureServiceOrchestrator.BandwidthLimit.IsNull() && !listItem.PureServiceOrchestrator.BandwidthLimit.IsUnknown() {
+						pure_service_orchestratorDeepMap["bandwidth_limit"] = listItem.PureServiceOrchestrator.BandwidthLimit.ValueString()
+					}
+					if !listItem.PureServiceOrchestrator.IopsLimit.IsNull() && !listItem.PureServiceOrchestrator.IopsLimit.IsUnknown() {
+						pure_service_orchestratorDeepMap["iops_limit"] = listItem.PureServiceOrchestrator.IopsLimit.ValueInt64()
+					}
+					listItemMap["pure_service_orchestrator"] = pure_service_orchestratorDeepMap
+				}
+				if !listItem.ReclaimPolicy.IsNull() && !listItem.ReclaimPolicy.IsUnknown() {
+					listItemMap["reclaim_policy"] = listItem.ReclaimPolicy.ValueString()
+				}
+				if !listItem.StorageClassName.IsNull() && !listItem.StorageClassName.IsUnknown() {
+					listItemMap["storage_class_name"] = listItem.StorageClassName.ValueString()
+				}
+				if !listItem.StorageDevice.IsNull() && !listItem.StorageDevice.IsUnknown() {
+					listItemMap["storage_device"] = listItem.StorageDevice.ValueString()
+				}
+				storage_classesList = append(storage_classesList, listItemMap)
+			}
+			storage_class_listMap["storage_classes"] = storage_classesList
+		}
 		apiResource.Spec["storage_class_list"] = storage_class_listMap
 	}
 	if data.StorageDeviceList != nil {
 		storage_device_listMap := make(map[string]interface{})
+		if len(data.StorageDeviceList.StorageDevices) > 0 {
+			var storage_devicesList []map[string]interface{}
+			for _, listItem := range data.StorageDeviceList.StorageDevices {
+				listItemMap := make(map[string]interface{})
+				if listItem.AdvancedAdvancedParameters != nil {
+					listItemMap["advanced_advanced_parameters"] = map[string]interface{}{}
+				}
+				if listItem.CustomStorage != nil {
+					listItemMap["custom_storage"] = map[string]interface{}{}
+				}
+				if listItem.HpeStorage != nil {
+					hpe_storageDeepMap := make(map[string]interface{})
+					if !listItem.HpeStorage.APIServerPort.IsNull() && !listItem.HpeStorage.APIServerPort.IsUnknown() {
+						hpe_storageDeepMap["api_server_port"] = listItem.HpeStorage.APIServerPort.ValueInt64()
+					}
+					if !listItem.HpeStorage.IscsiChapUser.IsNull() && !listItem.HpeStorage.IscsiChapUser.IsUnknown() {
+						hpe_storageDeepMap["iscsi_chap_user"] = listItem.HpeStorage.IscsiChapUser.ValueString()
+					}
+					if !listItem.HpeStorage.StorageServerIPAddress.IsNull() && !listItem.HpeStorage.StorageServerIPAddress.IsUnknown() {
+						hpe_storageDeepMap["storage_server_ip_address"] = listItem.HpeStorage.StorageServerIPAddress.ValueString()
+					}
+					if !listItem.HpeStorage.StorageServerName.IsNull() && !listItem.HpeStorage.StorageServerName.IsUnknown() {
+						hpe_storageDeepMap["storage_server_name"] = listItem.HpeStorage.StorageServerName.ValueString()
+					}
+					if !listItem.HpeStorage.Username.IsNull() && !listItem.HpeStorage.Username.IsUnknown() {
+						hpe_storageDeepMap["username"] = listItem.HpeStorage.Username.ValueString()
+					}
+					listItemMap["hpe_storage"] = hpe_storageDeepMap
+				}
+				if listItem.NetappTrident != nil {
+					netapp_tridentDeepMap := make(map[string]interface{})
+					listItemMap["netapp_trident"] = netapp_tridentDeepMap
+				}
+				if listItem.PureServiceOrchestrator != nil {
+					pure_service_orchestratorDeepMap := make(map[string]interface{})
+					if !listItem.PureServiceOrchestrator.ClusterID.IsNull() && !listItem.PureServiceOrchestrator.ClusterID.IsUnknown() {
+						pure_service_orchestratorDeepMap["cluster_id"] = listItem.PureServiceOrchestrator.ClusterID.ValueString()
+					}
+					if !listItem.PureServiceOrchestrator.EnableStorageTopology.IsNull() && !listItem.PureServiceOrchestrator.EnableStorageTopology.IsUnknown() {
+						pure_service_orchestratorDeepMap["enable_storage_topology"] = listItem.PureServiceOrchestrator.EnableStorageTopology.ValueBool()
+					}
+					if !listItem.PureServiceOrchestrator.EnableStrictTopology.IsNull() && !listItem.PureServiceOrchestrator.EnableStrictTopology.IsUnknown() {
+						pure_service_orchestratorDeepMap["enable_strict_topology"] = listItem.PureServiceOrchestrator.EnableStrictTopology.ValueBool()
+					}
+					listItemMap["pure_service_orchestrator"] = pure_service_orchestratorDeepMap
+				}
+				if !listItem.StorageDevice.IsNull() && !listItem.StorageDevice.IsUnknown() {
+					listItemMap["storage_device"] = listItem.StorageDevice.ValueString()
+				}
+				storage_devicesList = append(storage_devicesList, listItemMap)
+			}
+			storage_device_listMap["storage_devices"] = storage_devicesList
+		}
 		apiResource.Spec["storage_device_list"] = storage_device_listMap
 	}
 	if data.StorageInterfaceList != nil {
 		storage_interface_listMap := make(map[string]interface{})
+		if len(data.StorageInterfaceList.Interfaces) > 0 {
+			var interfacesList []map[string]interface{}
+			for _, listItem := range data.StorageInterfaceList.Interfaces {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				interfacesList = append(interfacesList, listItemMap)
+			}
+			storage_interface_listMap["interfaces"] = interfacesList
+		}
 		apiResource.Spec["storage_interface_list"] = storage_interface_listMap
 	}
 	if data.StorageStaticRoutes != nil {
 		storage_static_routesMap := make(map[string]interface{})
+		if len(data.StorageStaticRoutes.StorageRoutes) > 0 {
+			var storage_routesList []map[string]interface{}
+			for _, listItem := range data.StorageStaticRoutes.StorageRoutes {
+				listItemMap := make(map[string]interface{})
+				if listItem.Labels != nil {
+					listItemMap["labels"] = map[string]interface{}{}
+				}
+				if listItem.Nexthop != nil {
+					nexthopDeepMap := make(map[string]interface{})
+					if !listItem.Nexthop.Type.IsNull() && !listItem.Nexthop.Type.IsUnknown() {
+						nexthopDeepMap["type"] = listItem.Nexthop.Type.ValueString()
+					}
+					listItemMap["nexthop"] = nexthopDeepMap
+				}
+				storage_routesList = append(storage_routesList, listItemMap)
+			}
+			storage_static_routesMap["storage_routes"] = storage_routesList
+		}
 		apiResource.Spec["storage_static_routes"] = storage_static_routesMap
 	}
 	if data.UsbPolicy != nil {

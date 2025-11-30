@@ -913,16 +913,53 @@ func (r *RateLimiterPolicyResource) Read(ctx context.Context, req resource.ReadR
 		}
 		data.Rules = rulesList
 	}
-	if _, ok := apiResource.Spec["server_name_matcher"].(map[string]interface{}); ok && isImport && data.ServerNameMatcher == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ServerNameMatcher = &RateLimiterPolicyServerNameMatcherModel{}
+	if blockData, ok := apiResource.Spec["server_name_matcher"].(map[string]interface{}); ok && (isImport || data.ServerNameMatcher != nil) {
+		data.ServerNameMatcher = &RateLimiterPolicyServerNameMatcherModel{
+			ExactValues: func() types.List {
+				if v, ok := blockData["exact_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			RegexValues: func() types.List {
+				if v, ok := blockData["regex_values"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["server_selector"].(map[string]interface{}); ok && isImport && data.ServerSelector == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ServerSelector = &RateLimiterPolicyServerSelectorModel{}
+	if blockData, ok := apiResource.Spec["server_selector"].(map[string]interface{}); ok && (isImport || data.ServerSelector != nil) {
+		data.ServerSelector = &RateLimiterPolicyServerSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["server_name"].(string); ok && v != "" {
 		data.ServerName = types.StringValue(v)
 	} else {

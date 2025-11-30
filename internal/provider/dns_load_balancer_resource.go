@@ -627,6 +627,69 @@ func (r *DNSLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	}
 	if data.RuleList != nil {
 		rule_listMap := make(map[string]interface{})
+		if len(data.RuleList.Rules) > 0 {
+			var rulesList []map[string]interface{}
+			for _, listItem := range data.RuleList.Rules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AsnList != nil {
+					asn_listDeepMap := make(map[string]interface{})
+					listItemMap["asn_list"] = asn_listDeepMap
+				}
+				if listItem.AsnMatcher != nil {
+					asn_matcherDeepMap := make(map[string]interface{})
+					listItemMap["asn_matcher"] = asn_matcherDeepMap
+				}
+				if listItem.GeoLocationLabelSelector != nil {
+					geo_location_label_selectorDeepMap := make(map[string]interface{})
+					listItemMap["geo_location_label_selector"] = geo_location_label_selectorDeepMap
+				}
+				if listItem.GeoLocationSet != nil {
+					geo_location_setDeepMap := make(map[string]interface{})
+					if !listItem.GeoLocationSet.Name.IsNull() && !listItem.GeoLocationSet.Name.IsUnknown() {
+						geo_location_setDeepMap["name"] = listItem.GeoLocationSet.Name.ValueString()
+					}
+					if !listItem.GeoLocationSet.Namespace.IsNull() && !listItem.GeoLocationSet.Namespace.IsUnknown() {
+						geo_location_setDeepMap["namespace"] = listItem.GeoLocationSet.Namespace.ValueString()
+					}
+					if !listItem.GeoLocationSet.Tenant.IsNull() && !listItem.GeoLocationSet.Tenant.IsUnknown() {
+						geo_location_setDeepMap["tenant"] = listItem.GeoLocationSet.Tenant.ValueString()
+					}
+					listItemMap["geo_location_set"] = geo_location_setDeepMap
+				}
+				if listItem.IPPrefixList != nil {
+					ip_prefix_listDeepMap := make(map[string]interface{})
+					if !listItem.IPPrefixList.InvertMatch.IsNull() && !listItem.IPPrefixList.InvertMatch.IsUnknown() {
+						ip_prefix_listDeepMap["invert_match"] = listItem.IPPrefixList.InvertMatch.ValueBool()
+					}
+					listItemMap["ip_prefix_list"] = ip_prefix_listDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					if !listItem.IPPrefixSet.InvertMatcher.IsNull() && !listItem.IPPrefixSet.InvertMatcher.IsUnknown() {
+						ip_prefix_setDeepMap["invert_matcher"] = listItem.IPPrefixSet.InvertMatcher.ValueBool()
+					}
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Pool != nil {
+					poolDeepMap := make(map[string]interface{})
+					if !listItem.Pool.Name.IsNull() && !listItem.Pool.Name.IsUnknown() {
+						poolDeepMap["name"] = listItem.Pool.Name.ValueString()
+					}
+					if !listItem.Pool.Namespace.IsNull() && !listItem.Pool.Namespace.IsUnknown() {
+						poolDeepMap["namespace"] = listItem.Pool.Namespace.ValueString()
+					}
+					if !listItem.Pool.Tenant.IsNull() && !listItem.Pool.Tenant.IsUnknown() {
+						poolDeepMap["tenant"] = listItem.Pool.Tenant.ValueString()
+					}
+					listItemMap["pool"] = poolDeepMap
+				}
+				if !listItem.Score.IsNull() && !listItem.Score.IsUnknown() {
+					listItemMap["score"] = listItem.Score.ValueInt64()
+				}
+				rulesList = append(rulesList, listItemMap)
+			}
+			rule_listMap["rules"] = rulesList
+		}
 		apiResource.Spec["rule_list"] = rule_listMap
 	}
 	if !data.RecordType.IsNull() && !data.RecordType.IsUnknown() {
@@ -770,11 +833,126 @@ func (r *DNSLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.ResponseCache = &DNSLoadBalancerResponseCacheModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && isImport && data.RuleList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.RuleList = &DNSLoadBalancerRuleListModel{}
+	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
+		data.RuleList = &DNSLoadBalancerRuleListModel{
+			Rules: func() []DNSLoadBalancerRuleListRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []DNSLoadBalancerRuleListRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, DNSLoadBalancerRuleListRulesModel{
+								AsnList: func() *DNSLoadBalancerRuleListRulesAsnListModel {
+									if _, ok := itemMap["asn_list"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesAsnListModel{
+										}
+									}
+									return nil
+								}(),
+								AsnMatcher: func() *DNSLoadBalancerRuleListRulesAsnMatcherModel {
+									if _, ok := itemMap["asn_matcher"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesAsnMatcherModel{
+										}
+									}
+									return nil
+								}(),
+								GeoLocationLabelSelector: func() *DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel {
+									if _, ok := itemMap["geo_location_label_selector"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel{
+										}
+									}
+									return nil
+								}(),
+								GeoLocationSet: func() *DNSLoadBalancerRuleListRulesGeoLocationSetModel {
+									if deepMap, ok := itemMap["geo_location_set"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesGeoLocationSetModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixList: func() *DNSLoadBalancerRuleListRulesIPPrefixListModel {
+									if deepMap, ok := itemMap["ip_prefix_list"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesIPPrefixListModel{
+											InvertMatch: func() types.Bool {
+												if v, ok := deepMap["invert_match"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *DNSLoadBalancerRuleListRulesIPPrefixSetModel {
+									if deepMap, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesIPPrefixSetModel{
+											InvertMatcher: func() types.Bool {
+												if v, ok := deepMap["invert_matcher"].(bool); ok {
+													return types.BoolValue(v)
+												}
+												return types.BoolNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Pool: func() *DNSLoadBalancerRuleListRulesPoolModel {
+									if deepMap, ok := itemMap["pool"].(map[string]interface{}); ok {
+										return &DNSLoadBalancerRuleListRulesPoolModel{
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Namespace: func() types.String {
+												if v, ok := deepMap["namespace"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Tenant: func() types.String {
+												if v, ok := deepMap["tenant"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Score: func() types.Int64 {
+									if v, ok := itemMap["score"].(float64); ok {
+										return types.Int64Value(int64(v))
+									}
+									return types.Int64Null()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["record_type"].(string); ok && v != "" {
 		data.RecordType = types.StringValue(v)
 	} else {
@@ -879,6 +1057,69 @@ func (r *DNSLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	}
 	if data.RuleList != nil {
 		rule_listMap := make(map[string]interface{})
+		if len(data.RuleList.Rules) > 0 {
+			var rulesList []map[string]interface{}
+			for _, listItem := range data.RuleList.Rules {
+				listItemMap := make(map[string]interface{})
+				if listItem.AsnList != nil {
+					asn_listDeepMap := make(map[string]interface{})
+					listItemMap["asn_list"] = asn_listDeepMap
+				}
+				if listItem.AsnMatcher != nil {
+					asn_matcherDeepMap := make(map[string]interface{})
+					listItemMap["asn_matcher"] = asn_matcherDeepMap
+				}
+				if listItem.GeoLocationLabelSelector != nil {
+					geo_location_label_selectorDeepMap := make(map[string]interface{})
+					listItemMap["geo_location_label_selector"] = geo_location_label_selectorDeepMap
+				}
+				if listItem.GeoLocationSet != nil {
+					geo_location_setDeepMap := make(map[string]interface{})
+					if !listItem.GeoLocationSet.Name.IsNull() && !listItem.GeoLocationSet.Name.IsUnknown() {
+						geo_location_setDeepMap["name"] = listItem.GeoLocationSet.Name.ValueString()
+					}
+					if !listItem.GeoLocationSet.Namespace.IsNull() && !listItem.GeoLocationSet.Namespace.IsUnknown() {
+						geo_location_setDeepMap["namespace"] = listItem.GeoLocationSet.Namespace.ValueString()
+					}
+					if !listItem.GeoLocationSet.Tenant.IsNull() && !listItem.GeoLocationSet.Tenant.IsUnknown() {
+						geo_location_setDeepMap["tenant"] = listItem.GeoLocationSet.Tenant.ValueString()
+					}
+					listItemMap["geo_location_set"] = geo_location_setDeepMap
+				}
+				if listItem.IPPrefixList != nil {
+					ip_prefix_listDeepMap := make(map[string]interface{})
+					if !listItem.IPPrefixList.InvertMatch.IsNull() && !listItem.IPPrefixList.InvertMatch.IsUnknown() {
+						ip_prefix_listDeepMap["invert_match"] = listItem.IPPrefixList.InvertMatch.ValueBool()
+					}
+					listItemMap["ip_prefix_list"] = ip_prefix_listDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					if !listItem.IPPrefixSet.InvertMatcher.IsNull() && !listItem.IPPrefixSet.InvertMatcher.IsUnknown() {
+						ip_prefix_setDeepMap["invert_matcher"] = listItem.IPPrefixSet.InvertMatcher.ValueBool()
+					}
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Pool != nil {
+					poolDeepMap := make(map[string]interface{})
+					if !listItem.Pool.Name.IsNull() && !listItem.Pool.Name.IsUnknown() {
+						poolDeepMap["name"] = listItem.Pool.Name.ValueString()
+					}
+					if !listItem.Pool.Namespace.IsNull() && !listItem.Pool.Namespace.IsUnknown() {
+						poolDeepMap["namespace"] = listItem.Pool.Namespace.ValueString()
+					}
+					if !listItem.Pool.Tenant.IsNull() && !listItem.Pool.Tenant.IsUnknown() {
+						poolDeepMap["tenant"] = listItem.Pool.Tenant.ValueString()
+					}
+					listItemMap["pool"] = poolDeepMap
+				}
+				if !listItem.Score.IsNull() && !listItem.Score.IsUnknown() {
+					listItemMap["score"] = listItem.Score.ValueInt64()
+				}
+				rulesList = append(rulesList, listItemMap)
+			}
+			rule_listMap["rules"] = rulesList
+		}
 		apiResource.Spec["rule_list"] = rule_listMap
 	}
 	if !data.RecordType.IsNull() && !data.RecordType.IsUnknown() {

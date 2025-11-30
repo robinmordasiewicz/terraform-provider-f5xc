@@ -420,6 +420,29 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	}
 	if data.IPPrefixSet != nil {
 		ip_prefix_setMap := make(map[string]interface{})
+		if len(data.IPPrefixSet.Ref) > 0 {
+			var refList []map[string]interface{}
+			for _, listItem := range data.IPPrefixSet.Ref {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				refList = append(refList, listItemMap)
+			}
+			ip_prefix_setMap["ref"] = refList
+		}
 		apiResource.Spec["ip_prefix_set"] = ip_prefix_setMap
 	}
 	if data.LabelMatcher != nil {
@@ -575,16 +598,70 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["ip_prefix_set"].(map[string]interface{}); ok && isImport && data.IPPrefixSet == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.IPPrefixSet = &NetworkPolicyRuleIPPrefixSetModel{}
+	if blockData, ok := apiResource.Spec["ip_prefix_set"].(map[string]interface{}); ok && (isImport || data.IPPrefixSet != nil) {
+		data.IPPrefixSet = &NetworkPolicyRuleIPPrefixSetModel{
+			Ref: func() []NetworkPolicyRuleIPPrefixSetRefModel {
+				if listData, ok := blockData["ref"].([]interface{}); ok && len(listData) > 0 {
+					var result []NetworkPolicyRuleIPPrefixSetRefModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, NetworkPolicyRuleIPPrefixSetRefModel{
+								Kind: func() types.String {
+									if v, ok := itemMap["kind"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Name: func() types.String {
+									if v, ok := itemMap["name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Namespace: func() types.String {
+									if v, ok := itemMap["namespace"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Tenant: func() types.String {
+									if v, ok := itemMap["tenant"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								Uid: func() types.String {
+									if v, ok := itemMap["uid"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && isImport && data.LabelMatcher == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.LabelMatcher = &NetworkPolicyRuleLabelMatcherModel{}
+	if blockData, ok := apiResource.Spec["label_matcher"].(map[string]interface{}); ok && (isImport || data.LabelMatcher != nil) {
+		data.LabelMatcher = &NetworkPolicyRuleLabelMatcherModel{
+			Keys: func() types.List {
+				if v, ok := blockData["keys"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["ports"].([]interface{}); ok && len(v) > 0 {
 		var portsList []string
 		for _, item := range v {
@@ -600,16 +677,40 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	} else {
 		data.Ports = types.ListNull(types.StringType)
 	}
-	if _, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && isImport && data.Prefix == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.Prefix = &NetworkPolicyRulePrefixModel{}
+	if blockData, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && (isImport || data.Prefix != nil) {
+		data.Prefix = &NetworkPolicyRulePrefixModel{
+			Prefix: func() types.List {
+				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["prefix_selector"].(map[string]interface{}); ok && isImport && data.PrefixSelector == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.PrefixSelector = &NetworkPolicyRulePrefixSelectorModel{}
+	if blockData, ok := apiResource.Spec["prefix_selector"].(map[string]interface{}); ok && (isImport || data.PrefixSelector != nil) {
+		data.PrefixSelector = &NetworkPolicyRulePrefixSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["action"].(string); ok && v != "" {
 		data.Action = types.StringValue(v)
 	} else {
@@ -690,6 +791,29 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	}
 	if data.IPPrefixSet != nil {
 		ip_prefix_setMap := make(map[string]interface{})
+		if len(data.IPPrefixSet.Ref) > 0 {
+			var refList []map[string]interface{}
+			for _, listItem := range data.IPPrefixSet.Ref {
+				listItemMap := make(map[string]interface{})
+				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
+					listItemMap["kind"] = listItem.Kind.ValueString()
+				}
+				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
+					listItemMap["name"] = listItem.Name.ValueString()
+				}
+				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
+					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				}
+				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
+					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				}
+				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
+					listItemMap["uid"] = listItem.Uid.ValueString()
+				}
+				refList = append(refList, listItemMap)
+			}
+			ip_prefix_setMap["ref"] = refList
+		}
 		apiResource.Spec["ip_prefix_set"] = ip_prefix_setMap
 	}
 	if data.LabelMatcher != nil {

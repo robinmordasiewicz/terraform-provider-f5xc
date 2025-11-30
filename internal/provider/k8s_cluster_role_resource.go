@@ -385,6 +385,22 @@ func (r *K8SClusterRoleResource) Create(ctx context.Context, req resource.Create
 	}
 	if data.PolicyRuleList != nil {
 		policy_rule_listMap := make(map[string]interface{})
+		if len(data.PolicyRuleList.PolicyRule) > 0 {
+			var policy_ruleList []map[string]interface{}
+			for _, listItem := range data.PolicyRuleList.PolicyRule {
+				listItemMap := make(map[string]interface{})
+				if listItem.NonResourceURLList != nil {
+					non_resource_url_listDeepMap := make(map[string]interface{})
+					listItemMap["non_resource_url_list"] = non_resource_url_listDeepMap
+				}
+				if listItem.ResourceList != nil {
+					resource_listDeepMap := make(map[string]interface{})
+					listItemMap["resource_list"] = resource_listDeepMap
+				}
+				policy_ruleList = append(policy_ruleList, listItemMap)
+			}
+			policy_rule_listMap["policy_rule"] = policy_ruleList
+		}
 		apiResource.Spec["policy_rule_list"] = policy_rule_listMap
 	}
 	if !data.Yaml.IsNull() && !data.Yaml.IsUnknown() {
@@ -501,16 +517,54 @@ func (r *K8SClusterRoleResource) Read(ctx context.Context, req resource.ReadRequ
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["k8s_cluster_role_selector"].(map[string]interface{}); ok && isImport && data.K8SClusterRoleSelector == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.K8SClusterRoleSelector = &K8SClusterRoleK8SClusterRoleSelectorModel{}
+	if blockData, ok := apiResource.Spec["k8s_cluster_role_selector"].(map[string]interface{}); ok && (isImport || data.K8SClusterRoleSelector != nil) {
+		data.K8SClusterRoleSelector = &K8SClusterRoleK8SClusterRoleSelectorModel{
+			Expressions: func() types.List {
+				if v, ok := blockData["expressions"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["policy_rule_list"].(map[string]interface{}); ok && isImport && data.PolicyRuleList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.PolicyRuleList = &K8SClusterRolePolicyRuleListModel{}
+	if blockData, ok := apiResource.Spec["policy_rule_list"].(map[string]interface{}); ok && (isImport || data.PolicyRuleList != nil) {
+		data.PolicyRuleList = &K8SClusterRolePolicyRuleListModel{
+			PolicyRule: func() []K8SClusterRolePolicyRuleListPolicyRuleModel {
+				if listData, ok := blockData["policy_rule"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SClusterRolePolicyRuleListPolicyRuleModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SClusterRolePolicyRuleListPolicyRuleModel{
+								NonResourceURLList: func() *K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel {
+									if _, ok := itemMap["non_resource_url_list"].(map[string]interface{}); ok {
+										return &K8SClusterRolePolicyRuleListPolicyRuleNonResourceURLListModel{
+										}
+									}
+									return nil
+								}(),
+								ResourceList: func() *K8SClusterRolePolicyRuleListPolicyRuleResourceListModel {
+									if _, ok := itemMap["resource_list"].(map[string]interface{}); ok {
+										return &K8SClusterRolePolicyRuleListPolicyRuleResourceListModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["yaml"].(string); ok && v != "" {
 		data.Yaml = types.StringValue(v)
 	} else {
@@ -583,6 +637,22 @@ func (r *K8SClusterRoleResource) Update(ctx context.Context, req resource.Update
 	}
 	if data.PolicyRuleList != nil {
 		policy_rule_listMap := make(map[string]interface{})
+		if len(data.PolicyRuleList.PolicyRule) > 0 {
+			var policy_ruleList []map[string]interface{}
+			for _, listItem := range data.PolicyRuleList.PolicyRule {
+				listItemMap := make(map[string]interface{})
+				if listItem.NonResourceURLList != nil {
+					non_resource_url_listDeepMap := make(map[string]interface{})
+					listItemMap["non_resource_url_list"] = non_resource_url_listDeepMap
+				}
+				if listItem.ResourceList != nil {
+					resource_listDeepMap := make(map[string]interface{})
+					listItemMap["resource_list"] = resource_listDeepMap
+				}
+				policy_ruleList = append(policy_ruleList, listItemMap)
+			}
+			policy_rule_listMap["policy_rule"] = policy_ruleList
+		}
 		apiResource.Spec["policy_rule_list"] = policy_rule_listMap
 	}
 	if !data.Yaml.IsNull() && !data.Yaml.IsUnknown() {

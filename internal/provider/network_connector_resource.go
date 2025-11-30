@@ -792,6 +792,32 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 				}
 				return types.Int64Null()
 			}(),
+			WhiteListedPorts: func() types.List {
+				if v, ok := blockData["white_listed_ports"].([]interface{}); ok && len(v) > 0 {
+					var items []int64
+					for _, item := range v {
+						if n, ok := item.(float64); ok {
+							items = append(items, int64(n))
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.Int64Type, items)
+					return listVal
+				}
+				return types.ListNull(types.Int64Type)
+			}(),
+			WhiteListedPrefixes: func() types.List {
+				if v, ok := blockData["white_listed_prefixes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 		}
 	}
 	if _, ok := apiResource.Spec["sli_to_global_dr"].(map[string]interface{}); ok && isImport && data.SLIToGlobalDr == nil {

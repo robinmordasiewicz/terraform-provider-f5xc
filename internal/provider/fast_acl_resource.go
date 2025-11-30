@@ -897,6 +897,39 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		if data.ReACL.DefaultTenantVip != nil {
 			re_aclMap["default_tenant_vip"] = map[string]interface{}{}
 		}
+		if len(data.ReACL.FastACLRules) > 0 {
+			var fast_acl_rulesList []map[string]interface{}
+			for _, listItem := range data.ReACL.FastACLRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if !listItem.Action.SimpleAction.IsNull() && !listItem.Action.SimpleAction.IsUnknown() {
+						actionDeepMap["simple_action"] = listItem.Action.SimpleAction.ValueString()
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Prefix != nil {
+					prefixDeepMap := make(map[string]interface{})
+					listItemMap["prefix"] = prefixDeepMap
+				}
+				fast_acl_rulesList = append(fast_acl_rulesList, listItemMap)
+			}
+			re_aclMap["fast_acl_rules"] = fast_acl_rulesList
+		}
 		if data.ReACL.SelectedTenantVip != nil {
 			selected_tenant_vipNestedMap := make(map[string]interface{})
 			if !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsNull() && !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsUnknown() {
@@ -910,6 +943,39 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 		site_aclMap := make(map[string]interface{})
 		if data.SiteACL.AllServices != nil {
 			site_aclMap["all_services"] = map[string]interface{}{}
+		}
+		if len(data.SiteACL.FastACLRules) > 0 {
+			var fast_acl_rulesList []map[string]interface{}
+			for _, listItem := range data.SiteACL.FastACLRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if !listItem.Action.SimpleAction.IsNull() && !listItem.Action.SimpleAction.IsUnknown() {
+						actionDeepMap["simple_action"] = listItem.Action.SimpleAction.ValueString()
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Prefix != nil {
+					prefixDeepMap := make(map[string]interface{})
+					listItemMap["prefix"] = prefixDeepMap
+				}
+				fast_acl_rulesList = append(fast_acl_rulesList, listItemMap)
+			}
+			site_aclMap["fast_acl_rules"] = fast_acl_rulesList
 		}
 		if data.SiteACL.InsideNetwork != nil {
 			site_aclMap["inside_network"] = map[string]interface{}{}
@@ -1051,16 +1117,132 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && isImport && data.ReACL == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.ReACL = &FastACLReACLModel{}
+	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.ReACL != nil) {
+		data.ReACL = &FastACLReACLModel{
+			FastACLRules: func() []FastACLReACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLReACLFastACLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FastACLReACLFastACLRulesModel{
+								Action: func() *FastACLReACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLReACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *FastACLReACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLReACLFastACLRulesIPPrefixSetModel{
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *FastACLReACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLReACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Prefix: func() *FastACLReACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLReACLFastACLRulesPrefixModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["site_acl"].(map[string]interface{}); ok && isImport && data.SiteACL == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.SiteACL = &FastACLSiteACLModel{}
+	if blockData, ok := apiResource.Spec["site_acl"].(map[string]interface{}); ok && (isImport || data.SiteACL != nil) {
+		data.SiteACL = &FastACLSiteACLModel{
+			FastACLRules: func() []FastACLSiteACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLSiteACLFastACLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FastACLSiteACLFastACLRulesModel{
+								Action: func() *FastACLSiteACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *FastACLSiteACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesIPPrefixSetModel{
+										}
+									}
+									return nil
+								}(),
+								Metadata: func() *FastACLSiteACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Prefix: func() *FastACLSiteACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesPrefixModel{
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 
 
 	// Preserve or set the managed marker for future Read operations
@@ -1143,6 +1325,39 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 		if data.ReACL.DefaultTenantVip != nil {
 			re_aclMap["default_tenant_vip"] = map[string]interface{}{}
 		}
+		if len(data.ReACL.FastACLRules) > 0 {
+			var fast_acl_rulesList []map[string]interface{}
+			for _, listItem := range data.ReACL.FastACLRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if !listItem.Action.SimpleAction.IsNull() && !listItem.Action.SimpleAction.IsUnknown() {
+						actionDeepMap["simple_action"] = listItem.Action.SimpleAction.ValueString()
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Prefix != nil {
+					prefixDeepMap := make(map[string]interface{})
+					listItemMap["prefix"] = prefixDeepMap
+				}
+				fast_acl_rulesList = append(fast_acl_rulesList, listItemMap)
+			}
+			re_aclMap["fast_acl_rules"] = fast_acl_rulesList
+		}
 		if data.ReACL.SelectedTenantVip != nil {
 			selected_tenant_vipNestedMap := make(map[string]interface{})
 			if !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsNull() && !data.ReACL.SelectedTenantVip.DefaultTenantVip.IsUnknown() {
@@ -1156,6 +1371,39 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 		site_aclMap := make(map[string]interface{})
 		if data.SiteACL.AllServices != nil {
 			site_aclMap["all_services"] = map[string]interface{}{}
+		}
+		if len(data.SiteACL.FastACLRules) > 0 {
+			var fast_acl_rulesList []map[string]interface{}
+			for _, listItem := range data.SiteACL.FastACLRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if !listItem.Action.SimpleAction.IsNull() && !listItem.Action.SimpleAction.IsUnknown() {
+						actionDeepMap["simple_action"] = listItem.Action.SimpleAction.ValueString()
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Prefix != nil {
+					prefixDeepMap := make(map[string]interface{})
+					listItemMap["prefix"] = prefixDeepMap
+				}
+				fast_acl_rulesList = append(fast_acl_rulesList, listItemMap)
+			}
+			site_aclMap["fast_acl_rules"] = fast_acl_rulesList
 		}
 		if data.SiteACL.InsideNetwork != nil {
 			site_aclMap["inside_network"] = map[string]interface{}{}

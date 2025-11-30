@@ -639,6 +639,20 @@ func (r *K8SPodSecurityPolicyResource) Create(ctx context.Context, req resource.
 			allowed_capabilitiesNestedMap := make(map[string]interface{})
 			psp_specMap["allowed_capabilities"] = allowed_capabilitiesNestedMap
 		}
+		if len(data.PspSpec.AllowedHostPaths) > 0 {
+			var allowed_host_pathsList []map[string]interface{}
+			for _, listItem := range data.PspSpec.AllowedHostPaths {
+				listItemMap := make(map[string]interface{})
+				if !listItem.PathPrefix.IsNull() && !listItem.PathPrefix.IsUnknown() {
+					listItemMap["path_prefix"] = listItem.PathPrefix.ValueString()
+				}
+				if !listItem.ReadOnly.IsNull() && !listItem.ReadOnly.IsUnknown() {
+					listItemMap["read_only"] = listItem.ReadOnly.ValueBool()
+				}
+				allowed_host_pathsList = append(allowed_host_pathsList, listItemMap)
+			}
+			psp_specMap["allowed_host_paths"] = allowed_host_pathsList
+		}
 		if !data.PspSpec.DefaultAllowPrivilegeEscalation.IsNull() && !data.PspSpec.DefaultAllowPrivilegeEscalation.IsUnknown() {
 			psp_specMap["default_allow_privilege_escalation"] = data.PspSpec.DefaultAllowPrivilegeEscalation.ValueBool()
 		}
@@ -852,6 +866,83 @@ func (r *K8SPodSecurityPolicyResource) Read(ctx context.Context, req resource.Re
 				}
 				return types.BoolNull()
 			}(),
+			AllowedCsiDrivers: func() types.List {
+				if v, ok := blockData["allowed_csi_drivers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowedFlexVolumes: func() types.List {
+				if v, ok := blockData["allowed_flex_volumes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowedHostPaths: func() []K8SPodSecurityPolicyPspSpecAllowedHostPathsModel {
+				if listData, ok := blockData["allowed_host_paths"].([]interface{}); ok && len(listData) > 0 {
+					var result []K8SPodSecurityPolicyPspSpecAllowedHostPathsModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, K8SPodSecurityPolicyPspSpecAllowedHostPathsModel{
+								PathPrefix: func() types.String {
+									if v, ok := itemMap["path_prefix"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								ReadOnly: func() types.Bool {
+									if v, ok := itemMap["read_only"].(bool); ok {
+										return types.BoolValue(v)
+									}
+									return types.BoolNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			AllowedProcMounts: func() types.List {
+				if v, ok := blockData["allowed_proc_mounts"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			AllowedUnsafeSysctls: func() types.List {
+				if v, ok := blockData["allowed_unsafe_sysctls"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			DefaultAllowPrivilegeEscalation: func() types.Bool {
 				if !isImport && data.PspSpec != nil {
 					// Normal Read: preserve existing state value to avoid API default drift
@@ -862,6 +953,19 @@ func (r *K8SPodSecurityPolicyResource) Read(ctx context.Context, req resource.Re
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			ForbiddenSysctls: func() types.List {
+				if v, ok := blockData["forbidden_sysctls"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 			HostIpc: func() types.Bool {
 				if !isImport && data.PspSpec != nil {
@@ -923,6 +1027,19 @@ func (r *K8SPodSecurityPolicyResource) Read(ctx context.Context, req resource.Re
 					return types.BoolValue(v)
 				}
 				return types.BoolNull()
+			}(),
+			Volumes: func() types.List {
+				if v, ok := blockData["volumes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 		}
 	}
@@ -1000,6 +1117,20 @@ func (r *K8SPodSecurityPolicyResource) Update(ctx context.Context, req resource.
 		if data.PspSpec.AllowedCapabilities != nil {
 			allowed_capabilitiesNestedMap := make(map[string]interface{})
 			psp_specMap["allowed_capabilities"] = allowed_capabilitiesNestedMap
+		}
+		if len(data.PspSpec.AllowedHostPaths) > 0 {
+			var allowed_host_pathsList []map[string]interface{}
+			for _, listItem := range data.PspSpec.AllowedHostPaths {
+				listItemMap := make(map[string]interface{})
+				if !listItem.PathPrefix.IsNull() && !listItem.PathPrefix.IsUnknown() {
+					listItemMap["path_prefix"] = listItem.PathPrefix.ValueString()
+				}
+				if !listItem.ReadOnly.IsNull() && !listItem.ReadOnly.IsUnknown() {
+					listItemMap["read_only"] = listItem.ReadOnly.ValueBool()
+				}
+				allowed_host_pathsList = append(allowed_host_pathsList, listItemMap)
+			}
+			psp_specMap["allowed_host_paths"] = allowed_host_pathsList
 		}
 		if !data.PspSpec.DefaultAllowPrivilegeEscalation.IsNull() && !data.PspSpec.DefaultAllowPrivilegeEscalation.IsUnknown() {
 			psp_specMap["default_allow_privilege_escalation"] = data.PspSpec.DefaultAllowPrivilegeEscalation.ValueBool()

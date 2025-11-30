@@ -457,11 +457,23 @@ func (r *Ike2Resource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["dh_group_set"].(map[string]interface{}); ok && isImport && data.DhGroupSet == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.DhGroupSet = &Ike2DhGroupSetModel{}
+	if blockData, ok := apiResource.Spec["dh_group_set"].(map[string]interface{}); ok && (isImport || data.DhGroupSet != nil) {
+		data.DhGroupSet = &Ike2DhGroupSetModel{
+			DhGroups: func() types.List {
+				if v, ok := blockData["dh_groups"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["disable_pfs"].(map[string]interface{}); ok && isImport && data.DisablePfs == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.DisablePfs = &Ike2EmptyModel{}

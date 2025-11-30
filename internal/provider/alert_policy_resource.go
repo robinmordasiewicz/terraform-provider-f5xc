@@ -635,6 +635,13 @@ func (r *AlertPolicyResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			if item.Group != nil {
 				groupNestedMap := make(map[string]interface{})
+				if !item.Group.Groups.IsNull() && !item.Group.Groups.IsUnknown() {
+					var GroupsItems []string
+					diags := item.Group.Groups.ElementsAs(ctx, &GroupsItems, false)
+					if !diags.HasError() {
+						groupNestedMap["groups"] = GroupsItems
+					}
+				}
 				itemMap["group"] = groupNestedMap
 			}
 			if item.NotificationParameters != nil {
@@ -655,6 +662,13 @@ func (r *AlertPolicyResource) Create(ctx context.Context, req resource.CreateReq
 			}
 			if item.Severity != nil {
 				severityNestedMap := make(map[string]interface{})
+				if !item.Severity.Severities.IsNull() && !item.Severity.Severities.IsUnknown() {
+					var SeveritiesItems []string
+					diags := item.Severity.Severities.ElementsAs(ctx, &SeveritiesItems, false)
+					if !diags.HasError() {
+						severityNestedMap["severities"] = SeveritiesItems
+					}
+				}
 				itemMap["severity"] = severityNestedMap
 			}
 			routesList = append(routesList, itemMap)
@@ -864,8 +878,21 @@ func (r *AlertPolicyResource) Read(ctx context.Context, req resource.ReadRequest
 						return nil
 					}(),
 					Group: func() *AlertPolicyRoutesGroupModel {
-						if _, ok := itemMap["group"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["group"].(map[string]interface{}); ok {
 							return &AlertPolicyRoutesGroupModel{
+								Groups: func() types.List {
+									if v, ok := nestedMap["groups"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -902,8 +929,21 @@ func (r *AlertPolicyResource) Read(ctx context.Context, req resource.ReadRequest
 						return nil
 					}(),
 					Severity: func() *AlertPolicyRoutesSeverityModel {
-						if _, ok := itemMap["severity"].(map[string]interface{}); ok {
+						if nestedMap, ok := itemMap["severity"].(map[string]interface{}); ok {
 							return &AlertPolicyRoutesSeverityModel{
+								Severities: func() types.List {
+									if v, ok := nestedMap["severities"].([]interface{}); ok && len(v) > 0 {
+										var items []string
+										for _, item := range v {
+											if s, ok := item.(string); ok {
+												items = append(items, s)
+											}
+										}
+										listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+										return listVal
+									}
+									return types.ListNull(types.StringType)
+								}(),
 							}
 						}
 						return nil
@@ -1045,6 +1085,13 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 			}
 			if item.Group != nil {
 				groupNestedMap := make(map[string]interface{})
+				if !item.Group.Groups.IsNull() && !item.Group.Groups.IsUnknown() {
+					var GroupsItems []string
+					diags := item.Group.Groups.ElementsAs(ctx, &GroupsItems, false)
+					if !diags.HasError() {
+						groupNestedMap["groups"] = GroupsItems
+					}
+				}
 				itemMap["group"] = groupNestedMap
 			}
 			if item.NotificationParameters != nil {
@@ -1065,6 +1112,13 @@ func (r *AlertPolicyResource) Update(ctx context.Context, req resource.UpdateReq
 			}
 			if item.Severity != nil {
 				severityNestedMap := make(map[string]interface{})
+				if !item.Severity.Severities.IsNull() && !item.Severity.Severities.IsUnknown() {
+					var SeveritiesItems []string
+					diags := item.Severity.Severities.ElementsAs(ctx, &SeveritiesItems, false)
+					if !diags.HasError() {
+						severityNestedMap["severities"] = SeveritiesItems
+					}
+				}
 				itemMap["severity"] = severityNestedMap
 			}
 			routesList = append(routesList, itemMap)

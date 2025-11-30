@@ -578,6 +578,19 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 	})
 	if blockData, ok := apiResource.Spec["http_health_check"].(map[string]interface{}); ok && (isImport || data.HTTPHealthCheck != nil) {
 		data.HTTPHealthCheck = &HealthcheckHTTPHealthCheckModel{
+			ExpectedStatusCodes: func() types.List {
+				if v, ok := blockData["expected_status_codes"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			HostHeader: func() types.String {
 				if v, ok := blockData["host_header"].(string); ok && v != "" {
 					return types.StringValue(v)
@@ -589,6 +602,19 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			RequestHeadersToRemove: func() types.List {
+				if v, ok := blockData["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 			UseHttp2: func() types.Bool {
 				if !isImport && data.HTTPHealthCheck != nil {

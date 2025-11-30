@@ -559,6 +559,19 @@ func (r *VirtualNetworkResource) Read(ctx context.Context, req resource.ReadRequ
 		for _, item := range listData {
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				static_routesList = append(static_routesList, VirtualNetworkStaticRoutesModel{
+					Attrs: func() types.List {
+						if v, ok := itemMap["attrs"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
 					DefaultGateway: func() *VirtualNetworkEmptyModel {
 						if _, ok := itemMap["default_gateway"].(map[string]interface{}); ok {
 							return &VirtualNetworkEmptyModel{}
@@ -570,6 +583,19 @@ func (r *VirtualNetworkResource) Read(ctx context.Context, req resource.ReadRequ
 							return types.StringValue(v)
 						}
 						return types.StringNull()
+					}(),
+					IPPrefixes: func() types.List {
+						if v, ok := itemMap["ip_prefixes"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
 					}(),
 					NodeInterface: func() *VirtualNetworkStaticRoutesNodeInterfaceModel {
 						if _, ok := itemMap["node_interface"].(map[string]interface{}); ok {

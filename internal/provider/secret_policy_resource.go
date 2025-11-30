@@ -404,6 +404,34 @@ func (r *SecretPolicyResource) Create(ctx context.Context, req resource.CreateRe
 	// Marshal spec fields from Terraform state to API struct
 	if data.RuleList != nil {
 		rule_listMap := make(map[string]interface{})
+		if len(data.RuleList.Rules) > 0 {
+			var rulesList []map[string]interface{}
+			for _, listItem := range data.RuleList.Rules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Spec != nil {
+					specDeepMap := make(map[string]interface{})
+					if !listItem.Spec.Action.IsNull() && !listItem.Spec.Action.IsUnknown() {
+						specDeepMap["action"] = listItem.Spec.Action.ValueString()
+					}
+					if !listItem.Spec.ClientName.IsNull() && !listItem.Spec.ClientName.IsUnknown() {
+						specDeepMap["client_name"] = listItem.Spec.ClientName.ValueString()
+					}
+					listItemMap["spec"] = specDeepMap
+				}
+				rulesList = append(rulesList, listItemMap)
+			}
+			rule_listMap["rules"] = rulesList
+		}
 		apiResource.Spec["rule_list"] = rule_listMap
 	}
 	if !data.AllowF5xc.IsNull() && !data.AllowF5xc.IsUnknown() {
@@ -530,11 +558,61 @@ func (r *SecretPolicyResource) Read(ctx context.Context, req resource.ReadReques
 		"psd_is_nil":   psd == nil,
 		"managed":      psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && isImport && data.RuleList == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.RuleList = &SecretPolicyRuleListModel{}
+	if blockData, ok := apiResource.Spec["rule_list"].(map[string]interface{}); ok && (isImport || data.RuleList != nil) {
+		data.RuleList = &SecretPolicyRuleListModel{
+			Rules: func() []SecretPolicyRuleListRulesModel {
+				if listData, ok := blockData["rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []SecretPolicyRuleListRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SecretPolicyRuleListRulesModel{
+								Metadata: func() *SecretPolicyRuleListRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &SecretPolicyRuleListRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Spec: func() *SecretPolicyRuleListRulesSpecModel {
+									if deepMap, ok := itemMap["spec"].(map[string]interface{}); ok {
+										return &SecretPolicyRuleListRulesSpecModel{
+											Action: func() types.String {
+												if v, ok := deepMap["action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											ClientName: func() types.String {
+												if v, ok := deepMap["client_name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
-	// Normal Read: preserve existing state value
 	// Top-level Optional bool: preserve prior state to avoid API default drift
 	if !isImport && !data.AllowF5xc.IsNull() {
 		// Normal Read: preserve existing state value (do nothing)
@@ -614,6 +692,34 @@ func (r *SecretPolicyResource) Update(ctx context.Context, req resource.UpdateRe
 	// Marshal spec fields from Terraform state to API struct
 	if data.RuleList != nil {
 		rule_listMap := make(map[string]interface{})
+		if len(data.RuleList.Rules) > 0 {
+			var rulesList []map[string]interface{}
+			for _, listItem := range data.RuleList.Rules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Spec != nil {
+					specDeepMap := make(map[string]interface{})
+					if !listItem.Spec.Action.IsNull() && !listItem.Spec.Action.IsUnknown() {
+						specDeepMap["action"] = listItem.Spec.Action.ValueString()
+					}
+					if !listItem.Spec.ClientName.IsNull() && !listItem.Spec.ClientName.IsUnknown() {
+						specDeepMap["client_name"] = listItem.Spec.ClientName.ValueString()
+					}
+					listItemMap["spec"] = specDeepMap
+				}
+				rulesList = append(rulesList, listItemMap)
+			}
+			rule_listMap["rules"] = rulesList
+		}
 		apiResource.Spec["rule_list"] = rule_listMap
 	}
 	if !data.AllowF5xc.IsNull() && !data.AllowF5xc.IsUnknown() {

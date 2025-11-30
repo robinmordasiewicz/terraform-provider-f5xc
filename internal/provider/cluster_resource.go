@@ -1383,9 +1383,22 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["endpoint_subsets"].([]interface{}); ok && len(listData) > 0 {
 		var endpoint_subsetsList []ClusterEndpointSubsetsModel
-		for range listData {
-			{
+		for _, item := range listData {
+			if itemMap, ok := item.(map[string]interface{}); ok {
 				endpoint_subsetsList = append(endpoint_subsetsList, ClusterEndpointSubsetsModel{
+					Keys: func() types.List {
+						if v, ok := itemMap["keys"].([]interface{}); ok && len(v) > 0 {
+							var items []string
+							for _, item := range v {
+								if s, ok := item.(string); ok {
+									items = append(items, s)
+								}
+							}
+							listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+							return listVal
+						}
+						return types.ListNull(types.StringType)
+					}(),
 				})
 			}
 		}

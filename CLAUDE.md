@@ -445,6 +445,50 @@ git commit -m "docs: update namespace"
 - `examples/resources/*/*.tf` - Generated example Terraform files
 - `examples/data-sources/*/*.tf` - Generated example Terraform files
 
+#### Layer 1b: Preview Lint for Generated Code (Local)
+
+**Location**: `.pre-commit-config.yaml` + `scripts/lint-generated-preview.sh`
+
+**What it does**: When generator tools or OpenAPI specs are modified, this hook:
+1. Temporarily runs the generator to produce output
+2. Lints the generated artifacts with golangci-lint
+3. Restores the original generated files (does NOT commit them)
+4. Reports linting errors before they reach CI/CD
+
+**Why this exists**: Catches linting errors early in the development cycle without violating the constitution. Generated files are never committed by this hook - it only previews what CI/CD will produce.
+
+**How it works**:
+```bash
+# Modify a generator tool
+vim tools/generate-all-schemas.go
+
+# Stage the generator change
+git add tools/generate-all-schemas.go
+git commit -m "fix(generator): improve schema handling"
+
+# ✅ lint-generated-preview runs:
+# 1. Saves current state of generated files
+# 2. Runs the generator
+# 3. Lints the generated output
+# 4. Restores original generated files
+# 5. Reports pass/fail
+
+# If linting fails:
+# ❌ PREVIEW LINT FAILED
+# Linting errors in generated code:
+# [list of errors]
+# Fix the generator before committing!
+```
+
+**Triggers**:
+- Changes to `tools/generate-all-schemas.go`
+- Changes to OpenAPI specs in `docs/specifications/api/`
+
+**Requirements**:
+- OpenAPI specs must exist in `docs/specifications/api/`
+- `golangci-lint` must be installed
+- If requirements aren't met, the hook skips gracefully
+
 #### Layer 2: CI/CD Checks (Remote)
 
 **Location**: `.github/workflows/ci.yml` → `check-constitution` job

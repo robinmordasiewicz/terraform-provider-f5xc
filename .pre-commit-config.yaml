@@ -113,6 +113,23 @@ repos:
           )$
 
   # =============================================================================
+  # Preview lint for generated code
+  # When generators change, preview what they'll produce and lint it early
+  # This catches linting errors before they reach CI/CD without committing
+  # generated files (which would violate the constitution)
+  # =============================================================================
+  - repo: local
+    hooks:
+      - id: lint-generated-preview
+        name: Preview lint generated code
+        entry: scripts/lint-generated-preview.sh
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [pre-commit]
+        # Run after standard linting but before constitution check
+
+  # =============================================================================
   # CLAUDE.md Constitution Enforcement
   # =============================================================================
   - repo: local
